@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/28771Substituteawayletbindingintacticmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html">Substitute away let binding in tactic mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189317888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189317888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189317888">Donald Sebastian Leung (Feb 28 2020 at 15:09)</a>:</h4>
+<p>Suppose I have a context of the following form (not sure how to type the turnstile in Lean):</p>
+<div class="codehilite"><pre><span></span>x := &lt;some_term&gt;
+|- &lt;some_goal_involving_x&gt;
+</pre></div>
+
+
+<p>How do I substitute the value of <code>x</code> into the goal (or hypotheses mentioning <code>x</code>)? <code>rw x</code> does not seem to work.</p>
+
+<a name="189323610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323610">Kevin Buzzard (Feb 28 2020 at 16:08)</a>:</h4>
+<p>If you defined <code>x</code> using <code>let</code> then you might be able to write <code>change [what you want the goal to be]</code>. If you have defined it using <code>set x := blah using hx</code> then you can probably just <code>rw hx</code>.</p>
+
+<a name="189323681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323681">Donald Sebastian Leung (Feb 28 2020 at 16:09)</a>:</h4>
+<p>So would <code>set x := &lt;some_term&gt;</code> be a better option here?</p>
+
+<a name="189323695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323695">Kevin Buzzard (Feb 28 2020 at 16:09)</a>:</h4>
+<p>PS turnstile is <code>\|-</code>. If you copy and paste a turnstile into a Lean file and then hover over it then there's a high chance that it will tell you the keyboard shortcut.</p>
+
+<a name="189323718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323718">Kevin Buzzard (Feb 28 2020 at 16:09)</a>:</h4>
+<p>I always use <code>set</code> rather than <code>let</code> but then again I find <code>let</code> quite confusing and I always work in tactic mode.</p>
+
+<a name="189323746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323746">Kevin Buzzard (Feb 28 2020 at 16:09)</a>:</h4>
+<p>The <code>change</code> tactic changes a goal to a defeq goal</p>
+
+<a name="189323866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189323866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189323866">Kevin Buzzard (Feb 28 2020 at 16:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">,</span>
+  <span class="n">change</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">,</span>
+  <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>So n is definitionally equal to 3 and so the change tactic works.</p>
+
+<a name="189324547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189324547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189324547">Donald Sebastian Leung (Feb 28 2020 at 16:19)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Substitute.20away.20let.20binding.20in.20tactic.20mode/near/189323610" title="#narrow/stream/113489-new-members/topic/Substitute.20away.20let.20binding.20in.20tactic.20mode/near/189323610">said</a>:</p>
+<blockquote>
+<p>If you defined <code>x</code> using <code>let</code> then you might be able to write <code>change [what you want the goal to be]</code>. If you have defined it using <code>set x := blah using hx</code> then you can probably just <code>rw hx</code>.</p>
+</blockquote>
+<p>Thank you - <code>set x := &lt;some_term&gt; with hx</code> (and then <code>rw hx</code> later on) worked for me</p>
+
+<a name="189328078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Substitute%20away%20let%20binding%20in%20tactic%20mode/near/189328078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28771Substituteawayletbindingintacticmode.html#189328078">Gabriel Ebner (Feb 28 2020 at 16:56)</a>:</h4>
+<p>Another way to rewrite a let definition <code>x</code> by its value is <code>dsimp [x]</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

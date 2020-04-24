@@ -1,0 +1,249 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/01963universeunification.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html">universe unification</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173535931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173535931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173535931">Cyril Cohen (Aug 19 2019 at 11:24)</a>:</h4>
+<p>Dear all (and in particular meta-programming experts <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> , <span class="user-mention" data-user-id="110596">@Rob Lewis</span> , <span class="user-mention" data-user-id="110026">@Simon Hudon</span> , <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, and whoever I might have forgotten ), I am still writing the so called parametricity tactic, and I am facing the following problem.</p>
+<p>Since parametricity translations  generate new relations, I end up generating new universes. The best way I found to do so is to create lots of meta universes. When I am facing a definition, I simply unify the inferred type of the translation of the body with the translation of the type, and then I turn all remaining meta-universes into parameter universe, and I am done.</p>
+<p>When doing the same for inductive types, what I would like to do is<br>
+1. I compute the translated type for the inductive, and replace every remaining meta universes by parameter universes<br>
+2. in each constructor type replace the translated <code>const</code> of my new inductive name (which does not belong to the current environment yet) by a <code>local_const</code> representing the translated inductive type.<br>
+3. I launch typechecking in order to unify redundant meta-universes<br>
+4. I fix the return sort of the inductive type by computing max + 1 of the sort of the type of every constructor.<br>
+Unfortunately I am stuck at step 3... I tried many things: <code>type_check</code>, <code>infer_type</code> followed by <code>unify</code>, <code>to_expr (pexpr.of_expr e)</code>, first making a lambda out of my ad-hock inductive <code>local_const</code>, every time followed by <code>instatiate_mvars</code>... And so far I am still stuck...</p>
+<p>Would you know of a primitive, already-written meta function, technique or methodology that would ease my pain?<br>
+Best wishes!</p>
+
+<a name="173536715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173536715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173536715">Cyril Cohen (Aug 19 2019 at 11:37)</a>:</h4>
+<p>I think I just managed, but at the price of exploring the return type of every constructor by hand, picking the list of arguments to the inductive type and performing individual type-checking with the list of abstract parameters, doing all the substitutions by hand... which seems to me redundant with what lean elaborate is capable of...</p>
+
+<a name="173537461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173537461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173537461">Cyril Cohen (Aug 19 2019 at 11:51)</a>:</h4>
+<p>and my manual check is so slow that I timeout on the translation of <code>list</code>...</p>
+
+<a name="173537638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173537638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173537638">Simon Hudon (Aug 19 2019 at 11:55)</a>:</h4>
+<p>Is it possible to have a look at your code? That would make things a bit easier to follow</p>
+
+<a name="173538694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173538694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173538694">Cyril Cohen (Aug 19 2019 at 12:12)</a>:</h4>
+<blockquote>
+<p>Is it possible to have a look at your code? That would make things a bit easier to follow</p>
+</blockquote>
+<p>It's a moving target right now... I will show you as soon as it is a bit stable (I think tomorrow morning CEST)</p>
+
+<a name="173538957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173538957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173538957">Simon Hudon (Aug 19 2019 at 12:17)</a>:</h4>
+<p>Until then, for me, the way I handle the universes is by creating the universe parameters by hand. I calculate ahead of time how many universes a construction is going to take and I make the parameters. I try to avoid type checking in the middle of program because it's slow but also, <code>type_check</code> seems like a more superficial type check and doesn't catch every problem.</p>
+
+<a name="173539046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173539046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173539046">Simon Hudon (Aug 19 2019 at 12:18)</a>:</h4>
+<p><code>mk_mapp</code> and <code>mk_app</code> might be good tools to put in your toolbox though. When you have a definition that you're trying to apply to arguments, it will do the type checking and unification for you</p>
+
+<a name="173539465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173539465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173539465">Rob Lewis (Aug 19 2019 at 12:25)</a>:</h4>
+<p>Yeah, it's tough to make a suggestion without seeing the code. My intuition is that <code>unify</code> followed by <code>instantiate_mvars</code> should work. It's normally willing to match universe mvars. If I'm understanding your description right, this is kind of similar to what you're trying to do, right?</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span>
+<span class="n">do</span> <span class="n">l</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+   <span class="n">m</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">c</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">tt</span> <span class="bp">`</span><span class="n">list</span> <span class="o">[</span><span class="n">l</span><span class="o">],</span>
+   <span class="k">let</span> <span class="n">d</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">tt</span> <span class="bp">`</span><span class="n">list</span> <span class="o">[</span><span class="n">m</span><span class="o">],</span>
+   <span class="n">trace</span> <span class="n">c</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">,</span> <span class="n">trace</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">,</span>
+   <span class="n">unify</span> <span class="n">c</span> <span class="n">d</span><span class="o">,</span>
+   <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">instantiate_mvars</span> <span class="n">c</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+   <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">instantiate_mvars</span> <span class="n">d</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span>
+</pre></div>
+
+<a name="173539565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173539565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173539565">Rob Lewis (Aug 19 2019 at 12:26)</a>:</h4>
+<blockquote>
+<p><code>type_check</code> seems like a more superficial type check and doesn't catch every problem.</p>
+</blockquote>
+<p><code>infer_type</code> is superficial, but I thought <code>type_check</code> checks the entire term, no? Which is why it can be expensive sometimes.</p>
+
+<a name="173539699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173539699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173539699">Simon Hudon (Aug 19 2019 at 12:29)</a>:</h4>
+<p>I've had trouble with type check in the past where I would <code>type_check</code> just before adding a declaration, <code>type_check</code> would succeed but the declaration would fail for typing reason (if I remember correctly, some meta vars had not been unified yet)</p>
+
+<a name="173543055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173543055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173543055">Cyril Cohen (Aug 19 2019 at 13:23)</a>:</h4>
+<p>here is a self contained example:</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="c">/-</span><span class="cm"> fill in with some stuff here to trigger universe meta variable unification -/</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
+<a name="173548729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173548729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173548729">Rob Lewis (Aug 19 2019 at 14:37)</a>:</h4>
+<p>This is trickier than I expected. If you can build enough of the <code>pexpr</code> structure of <code>t</code>, you can use that to force the universe levels to unify.</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>But this does feel like a gap in the API.</p>
+
+<a name="173551194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173551194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173551194">Simon Hudon (Aug 19 2019 at 15:09)</a>:</h4>
+<p>Have you tried <code>mk_mapp</code>?</p>
+
+<a name="173552539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173552539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173552539">Cyril Cohen (Aug 19 2019 at 15:26)</a>:</h4>
+<blockquote>
+<p>Have you tried <code>mk_mapp</code>?</p>
+</blockquote>
+<p>I can't because I already have a big term so it would involve rebuilding the whole term (and a lot of time I guess)... moreover <code>mk_app</code> takes a name and <code>list expr</code> instead of an <code>expr</code> and a <code>list expr</code></p>
+
+<a name="173552637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173552637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173552637">Cyril Cohen (Aug 19 2019 at 15:27)</a>:</h4>
+<blockquote>
+<p>This is trickier than I expected. If you can build enough of the <code>pexpr</code> structure of <code>t</code>, you can use that to force the universe levels to unify.</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>But this does feel like a gap in the API.</p>
+</blockquote>
+<p>My use-case is to do this unification on a big term that I already generated by some other means, so it is not appropriate to rebuild a skeleton and unify with it... I wouldn't know how to build such a skeleton...</p>
+
+<a name="173552719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173552719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173552719">Cyril Cohen (Aug 19 2019 at 15:28)</a>:</h4>
+<p>And I tried converting to a pexpr and back, it does not work...</p>
+
+<a name="173553237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173553237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173553237">Rob Lewis (Aug 19 2019 at 15:34)</a>:</h4>
+<p>Would it make sense to build that big term as a pexpr and elaborate it at the end? Or do you need more control over the universe levels than that allows?</p>
+
+<a name="173554392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173554392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173554392">Rob Lewis (Aug 19 2019 at 15:45)</a>:</h4>
+<p>Actually, you should be able to build the pexpr skeleton automatically. I don't think this is 100% right, but I need to run in a sec.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">pexpr_skeleton</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">pexpr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">var</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">sort</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="n">i</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">return</span> <span class="err">$</span> <span class="n">sort</span> <span class="n">i</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">const</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">const</span> <span class="n">a</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">app</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_explicit</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a</span><span class="o">)</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">elet</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">elet</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">macro</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">macro</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">a_1</span><span class="bp">.</span><span class="n">mmap</span> <span class="n">pexpr_skeleton</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="n">pe</span> <span class="err">←</span> <span class="n">pexpr_skeleton</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">to_expr</span> <span class="n">pe</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
+<a name="173554523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173554523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173554523">Rob Lewis (Aug 19 2019 at 15:47)</a>:</h4>
+<p>(Yes, there should be a better way to do this.)</p>
+
+<a name="173554826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173554826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173554826">Simon Hudon (Aug 19 2019 at 15:50)</a>:</h4>
+<p>I'm not sure if that will work. Have you tried it? Without using the <code>@</code> macro, the elaborator will think the type parameters are regular terms, will try to elaborate the type parameter using their types and the whole thing will fail.</p>
+
+<a name="173554946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173554946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173554946">Rob Lewis (Aug 19 2019 at 15:52)</a>:</h4>
+<p>All applications use the <code>mk_explicit</code> macro, which inserts <code>@</code> everywhere.</p>
+
+<a name="173554964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173554964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173554964">Rob Lewis (Aug 19 2019 at 15:52)</a>:</h4>
+<p>It works on this example anyway.</p>
+
+<a name="173555148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173555148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173555148">Simon Hudon (Aug 19 2019 at 15:55)</a>:</h4>
+<blockquote>
+<p>All applications use the <code>mk_explicit</code> macro, which inserts <code>@</code> everywhere.</p>
+</blockquote>
+<p>I don't understand the syntax tree as well as I thought then. How do you get it to not use <code>mk_explicit</code>?</p>
+
+<a name="173555247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173555247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173555247">Rob Lewis (Aug 19 2019 at 15:56)</a>:</h4>
+<p>Sorry, I phrased that badly. All applications created by <code>pexpr_skeleton</code> use it. <code>| (app a a_1) := app &lt;$&gt; (pexpr.mk_explicit &lt;$&gt; pexpr_skeleton a) &lt;*&gt; pexpr_skeleton a_1</code></p>
+
+<a name="173555332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173555332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173555332">Rob Lewis (Aug 19 2019 at 15:57)</a>:</h4>
+<p>The goal is that this should be a <code>pexpr</code> with the same structure as the input expr, except each universe is a meta universe.</p>
+
+<a name="173555426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173555426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173555426">Simon Hudon (Aug 19 2019 at 15:58)</a>:</h4>
+<p>Ah! I missed that! Thanks!</p>
+
+<a name="173632019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173632019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173632019">Cyril Cohen (Aug 20 2019 at 06:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> thanks for your suggestion! It works in some cases, and for other cases the manual typechecking works better...<br>
+While trying to unify I had a new problem, I will post it in a different thread though.</p>
+
+<a name="173632096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173632096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173632096">Cyril Cohen (Aug 20 2019 at 06:18)</a>:</h4>
+<p>cf <a href="#narrow/stream/113488-general/topic/unify.20fails.20in.20the.20presence.20of.20binders" title="#narrow/stream/113488-general/topic/unify.20fails.20in.20the.20presence.20of.20binders">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify.20fails.20in.20the.20presence.20of.20binders</a></p>
+
+<a name="173666931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173666931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173666931">Rob Lewis (Aug 20 2019 at 15:11)</a>:</h4>
+<p>Here's a slight update that might fix some of the cases where it didn't work. (I noticed this while trying to investigate the other thread.)</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">pexpr_skeleton</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">pexpr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">var</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">sort</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sort</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">mk_meta_univ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">const</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">const</span> <span class="n">a</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">p</span><span class="bp">@</span><span class="o">(</span><span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">infer_type</span> <span class="n">p</span> <span class="bp">&gt;&gt;=</span> <span class="n">pexpr_skeleton</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">p</span><span class="bp">@</span><span class="o">(</span><span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">infer_type</span> <span class="n">p</span> <span class="bp">&gt;&gt;=</span> <span class="n">pexpr_skeleton</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">app</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_explicit</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a</span><span class="o">)</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">elet</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">elet</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">macro</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">macro</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">a_1</span><span class="bp">.</span><span class="n">mmap</span> <span class="n">pexpr_skeleton</span>
+</pre></div>
+
+<a name="173669029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173669029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173669029">Cyril Cohen (Aug 20 2019 at 15:39)</a>:</h4>
+<blockquote>
+<p>Here's a slight update that might fix some of the cases where it didn't work. (I noticed this while trying to investigate the other thread.)</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">pexpr_skeleton</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">pexpr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">var</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">sort</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sort</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">mk_meta_univ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">const</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="err">$</span> <span class="n">const</span> <span class="n">a</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">p</span><span class="bp">@</span><span class="o">(</span><span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mvar</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">infer_type</span> <span class="n">p</span> <span class="bp">&gt;&gt;=</span> <span class="n">pexpr_skeleton</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">p</span><span class="bp">@</span><span class="o">(</span><span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">local_const</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">infer_type</span> <span class="n">p</span> <span class="bp">&gt;&gt;=</span> <span class="n">pexpr_skeleton</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">app</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_explicit</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a</span><span class="o">)</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">lam</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">pi</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">elet</span> <span class="n">a</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="n">a_3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">elet</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_1</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_2</span> <span class="bp">&lt;*&gt;</span> <span class="n">pexpr_skeleton</span> <span class="n">a_3</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">macro</span> <span class="n">a</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">macro</span> <span class="n">a</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">a_1</span><span class="bp">.</span><span class="n">mmap</span> <span class="n">pexpr_skeleton</span>
+</pre></div>
+
+
+</blockquote>
+<p>it still does not fix my other usecases...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

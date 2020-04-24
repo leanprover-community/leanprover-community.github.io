@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html">Triggering reduction of ifthenelse in case analysis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189315709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189315709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189315709">Donald Sebastian Leung (Feb 28 2020 at 14:44)</a>:</h4>
+<p>In part of a proof involving real and natural numbers, I defined a natural number <code>n</code> as follows: <code>let n : ℕ := if N &lt; 0 then 0 else int.nat_abs (some (exists_floor N) + 1)</code>. Note here that <code>N</code> is a real number. I then perform case analysis on <code>N &lt; 0</code> and expected <code>n</code> to reduce to <code>0</code> in the case where the inequality holds and <code>int.nat_abs (some (exists_floor N) + 1)</code> in the other case. However, in both cases, I still have <code>n : ℕ := ite (N &lt; 0) 0 (int.nat_abs (some _ + 1))</code>. How do I trigger reduction for <code>n</code>?</p>
+
+<a name="189316161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189316161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189316161">Reid Barton (Feb 28 2020 at 14:50)</a>:</h4>
+<p>Well, it's not a "reduction" in the sense of definitional equality. You can rewrite using <code>if_pos</code>/<code>if_neg</code>.</p>
+
+<a name="189316201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189316201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189316201">Reid Barton (Feb 28 2020 at 14:51)</a>:</h4>
+<p>Or more likely you should try <code>split_ifs</code> instead where you used case analysis.</p>
+
+<a name="189316251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189316251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189316251">Reid Barton (Feb 28 2020 at 14:51)</a>:</h4>
+<p>Which is just a more automated way of doing the same thing.</p>
+
+<a name="189316515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189316515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189316515">Donald Sebastian Leung (Feb 28 2020 at 14:54)</a>:</h4>
+<p>Hmmm ... I tried <code>split_ifs at *</code> (with the definition of <code>n</code> in my context as shown above) and Lean complained that there are no if-then-else expressions to split. Why might that be?</p>
+
+<a name="189319388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189319388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189319388">Reid Barton (Feb 28 2020 at 15:25)</a>:</h4>
+<p>Oh, when the <code>if</code> is in the body of a <code>let</code> I don't know if there is a convenient way.</p>
+
+<a name="189324670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Triggering%20reduction%20of%20ifthenelse%20in%20case%20analysis/near/189324670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58931Triggeringreductionofifthenelseincaseanalysis.html#189324670">Donald Sebastian Leung (Feb 28 2020 at 16:20)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/Triggering.20reduction.20of.20ifthenelse.20in.20case.20analysis/near/189316161" title="#narrow/stream/113489-new-members/topic/Triggering.20reduction.20of.20ifthenelse.20in.20case.20analysis/near/189316161">said</a>:</p>
+<blockquote>
+<p>Well, it's not a "reduction" in the sense of definitional equality. You can rewrite using <code>if_pos</code>/<code>if_neg</code>.</p>
+</blockquote>
+<p>Thanks, <code>rw if_pos</code>/<code>rw if_neg</code> worked for me after I solved the issue involving a <code>let</code> binding</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

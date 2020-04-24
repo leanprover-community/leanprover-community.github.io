@@ -1,0 +1,99 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/30525Functionthattakesapair.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html">Function that takes a pair</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183399471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183399471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183399471">Iocta (Dec 13 2019 at 20:54)</a>:</h4>
+<p>I'm getting started. The tutorial wants me to write a function <code>def curry (α β γ : Type) (f : α × β → γ) : α → β → γ  := sorry</code> but I'm not sure the syntax for writing a function that it would take as an argument. </p>
+<p>I tried</p>
+<div class="codehilite"><pre><span></span>def g : ℕ  ×  ℕ -&gt;  ℕ := λ x y, x + y
+#eval g (5, 3)
+</pre></div>
+
+
+<p>but it doesn't seem to like that: "failed to synthesize type class instance".</p>
+
+<a name="183399791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183399791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183399791">YH (Dec 13 2019 at 20:58)</a>:</h4>
+<div class="codehilite"><pre><span></span>def g : ℕ  ×  ℕ -&gt;  ℕ := λ ⟨x, y⟩, x + y
+#eval g (5, 3)
+</pre></div>
+
+<a name="183399908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183399908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183399908">Iocta (Dec 13 2019 at 21:00)</a>:</h4>
+<p>Thanks.</p>
+
+<a name="183400802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183400802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183400802">Kevin Buzzard (Dec 13 2019 at 21:09)</a>:</h4>
+<p>YH's trick used to confuse me when I was beginning. It's a clever and important trick, but you can also do this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span>  <span class="bp">×</span>  <span class="bp">ℕ</span> <span class="bp">-&gt;</span>  <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">xy</span><span class="o">,</span> <span class="n">xy</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">xy</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
+<a name="183400984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183400984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183400984">Kevin Buzzard (Dec 13 2019 at 21:11)</a>:</h4>
+<p>Either way, the point is that <code>ℕ  ×  ℕ</code> is one type, so <code>λ x y,</code> can't be the way to start. That's why you got the error.</p>
+
+<a name="183401098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183401098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183401098">Kevin Buzzard (Dec 13 2019 at 21:12)</a>:</h4>
+<p>As a professional mathematician who knew essentially nothing about functional programming when I started, I took a while to get the hang of all this basic stuff; on the other hand computer science undergraduates with a Haskell background find the whole thing trivial.</p>
+
+<a name="183401797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183401797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183401797">Iocta (Dec 13 2019 at 21:21)</a>:</h4>
+<p>I see. I am checking out Lean after watching your recent talk on youtube. :-)</p>
+
+<a name="183405566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183405566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183405566">Kevin Buzzard (Dec 13 2019 at 22:03)</a>:</h4>
+<p>Great! When you're finished with Theorem Proving In Lean you could try the natural number game</p>
+
+<a name="183405853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183405853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183405853">Bryan Gin-ge Chen (Dec 13 2019 at 22:06)</a>:</h4>
+<p>A while back as a demo for some other stuff, I made <a href="https://observablehq.com/@bryangingechen/stepping-through-currying-in-lean" target="_blank" title="https://observablehq.com/@bryangingechen/stepping-through-currying-in-lean">a little interactive walkthrough</a> about currying and uncurrying in Lean. Not sure if it's pitched at the right level (it assumes that you're OK with Lean's basic syntax), but you might find it helpful nonetheless.</p>
+
+<a name="183425559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183425559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183425559">Johan Commelin (Dec 14 2019 at 05:36)</a>:</h4>
+<p>Whoow! <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> That's really fantastic! The way you walk through interactively writing the code, see the tactic state (and expected types), and have your explanation right below. Really really great!</p>
+
+<a name="183429427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183429427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183429427">Kevin Buzzard (Dec 14 2019 at 07:43)</a>:</h4>
+<p>What does</p>
+<div class="codehilite"><pre><span></span>To use it yourself, add footer: stepEditor(steps, index) to the options object of leanEditor, where steps is an array of objects (see below) and index (optional, set to 0 by default) is the starting index.
+</pre></div>
+
+
+<p>mean? I am reading it as meaning "before you go any further, change an option in a place which you don't understand (the "options object of leanEditor").</p>
+
+<a name="183429601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183429601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183429601">Bryan Gin-ge Chen (Dec 14 2019 at 07:49)</a>:</h4>
+<p>Sorry, those are instructions for people who would want to use this function in another Observable notebook. I ought to to make that more clear.</p>
+
+<a name="183430809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183430809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183430809">Kevin Buzzard (Dec 14 2019 at 08:25)</a>:</h4>
+<p>Bryan I would happily promote these little notebooks on Twitter. I have followers who are in to little "gimmicky" stuff like this. Maybe you should send me a random list of cool little things you've done and I can shout them out. I still have under 1000 followers but it slowly goes up and I'm trying to figure out what works well in the ecosystem there; I suspect that this stuff might.</p>
+
+<a name="183431249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183431249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183431249">Bryan Gin-ge Chen (Dec 14 2019 at 08:38)</a>:</h4>
+<p>Thanks Kevin, feel free to share any or all of the notebooks in <a href="https://observablehq.com/collection/@bryangingechen/lean" target="_blank" title="https://observablehq.com/collection/@bryangingechen/lean">this "collection"</a>. <span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> also has several neat tools / templates for Lean notebooks <a href="https://observablehq.com/@kappelmann" target="_blank" title="https://observablehq.com/@kappelmann">here</a>.</p>
+<p>I haven't had much time for Twitter recently, but my account is <a href="https://twitter.com/blockspins" target="_blank" title="https://twitter.com/blockspins">here</a>. To be honest, at the moment I'd prefer to fix up my notebooks a bit more before making any kind of publicity push, as there are still lots of things I could do to make the editor more user friendly.</p>
+
+<a name="183446695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183446695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183446695">Kevin Buzzard (Dec 14 2019 at 15:58)</a>:</h4>
+<p>In the walkthrough linked to above, why not (a) delete all the stuff about how you made it and just make it a stand-alone thing with a link to a "how I did it" page, and (b) add a 15th page with the formalised sorried examples such as <code>uncurry add' = add</code> and <code>curry uncurry = id</code>so the user doesn't have to figure out how to formalise the statements? If they're interested they will figure out some more questions on their own after they've done the easier job of filling in the sorrys</p>
+
+<a name="183448732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Function%20that%20takes%20a%20pair/near/183448732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30525Functionthattakesapair.html#183448732">Bryan Gin-ge Chen (Dec 14 2019 at 16:49)</a>:</h4>
+<p>Great suggestions! I'll try to implement them soon.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

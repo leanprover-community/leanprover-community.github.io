@@ -1,0 +1,93 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/79175subtypeswithequivalentproperties.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html">subtypes with equivalent properties</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="167499233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167499233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167499233">Jean Lo (Jun 06 2019 at 16:50)</a>:</h4>
+<p>This grew out of attempts at implementing things related to what was discussed in <a href="#narrow/stream/113489-new-members/topic/gluing.20functions" title="#narrow/stream/113489-new-members/topic/gluing.20functions">another thread</a>, but I think it's generic enough that I should ask separately:</p>
+<p>What is the (correct?) way of moving between subtypes of the same type defined by equivalent (but not definitionally equal)? For instance,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- i think these are different types.</span>
+<span class="n">def</span> <span class="n">f₁</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span>   <span class="o">}</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="mi">1</span>
+<span class="n">def</span> <span class="n">f₂</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">}</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="mi">1</span>
+
+<span class="c1">-- is there a non-awkward way of stating &amp; invoking</span>
+<span class="c1">-- theorems like this?</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">f₁</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f₂</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>(context: if I glued two partial functions, I get a partial function (still of the same type! like <code>α →. β</code>) whose domain is provably equal as a set to the union of the domains of the two functions I was gluing. Now I'm interested in having a statement for this gluing thing that instead takes two functions (say <code>f g : α → β</code>) and two sets (<code>u v: set α</code>), producing a function from <code>subtype (u ∪ v)</code> — and now this seems like a tremendously bad idea, because if I do this sort of thing two or three times I wind up with a whole bunch of subtypes that all disagree with each other. Does there already exist a way of making this not-painful?)</p>
+
+<a name="167509291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167509291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167509291">Chris Hughes (Jun 06 2019 at 18:39)</a>:</h4>
+<p><code>equiv.subtype_congr_prop</code>. You can rewrite with the proof that the predicates are equal, but this <code>equiv</code> gives better defeq</p>
+
+<a name="167513400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513400">Jean Lo (Jun 06 2019 at 19:17)</a>:</h4>
+<p>Oh, how does this work in practice? I choose a subtype to state the theorem for, then I invoke <code>subtype_congr_prop</code> every time I want to apply it to a term of another subtype with an equivalent prop?</p>
+
+<a name="167513587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513587">Kevin Buzzard (Jun 06 2019 at 19:19)</a>:</h4>
+<p>Chris says yes -- choose one of them and always use that one</p>
+
+<a name="167513635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513635">Jean Lo (Jun 06 2019 at 19:20)</a>:</h4>
+<p>great, thanks for the help!</p>
+
+<a name="167513707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513707">Mario Carneiro (Jun 06 2019 at 19:20)</a>:</h4>
+<p>My inclination is to agree that this is a bad idea and you should stick with roption. You will actually get a bunch of subtypes of subtypes, and there are functions to deal with it, but it's not very convenient</p>
+
+<a name="167515144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167515144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167515144">Jean Lo (Jun 06 2019 at 19:36)</a>:</h4>
+<p>I agree that <code>roption</code> is the right formulation for the stuff about gluing functions.</p>
+<p>But at the same time I also want to write down things about partial functions from vector spaces and topologies and stuff, where the relevant lemmas in mathlib seem to usually be stated in terms of <em>'make a subtype out of a set (, the library code automatically puts the appropriate structure on it,) then work on that'.</em> For example, my interest in being able to do gluing began with wanting to construct piecewise functions with the pasting lemma (<code>continuous_subtype_is_closed_cover</code>) , and currently to do that I seem to have to:</p>
+<ul>
+<li>define several partial functions, possibly by defining a (total) function, do <code>pfun.lift</code>, then <code>pfun.restrict</code> it onto the domain I want.</li>
+<li>glue them together.</li>
+<li>make the glued-together (partial) function a (total) function again</li>
+<li>use some sort of <code>glue_eq</code> lemma, together with <code>pfun.as_subtype</code>, to put together the hypotheses <code>(f_cont  : ∀i, continuous (λ(x : subtype (c i)), f x.val))</code></li>
+</ul>
+<p>before I can actually invoke the lemma. I guess it's to be expected that manipulating concrete examples like this is going to be tedious, but I still get the feeling that there's an amount of passing-back-and-forth-between-different-ways-of-writing-things that can possibly be avoided through some abstraction that I don't know yet.</p>
+
+<a name="167516518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167516518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167516518">Mario Carneiro (Jun 06 2019 at 19:54)</a>:</h4>
+<p>Isn't there a pasting lemma that uses <code>if</code>?</p>
+
+<a name="167550037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167550037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167550037">Jean Lo (Jun 07 2019 at 05:54)</a>:</h4>
+<p>yeah, <code>continuous_if</code>; it takes care of the case where the function is just defined piecewise as an <code>ite</code>. But surely I'd still want to be able to do the same thing with any family of functions glued together (given a locally finite closed cover etc.) ?</p>
+
+<a name="167550255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167550255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167550255">Johannes Hölzl (Jun 07 2019 at 05:58)</a>:</h4>
+<p>Then use <code>continuous_subtype_is_closed_cover
+</code></p>
+
+<a name="167550557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167550557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167550557">Jean Lo (Jun 07 2019 at 06:03)</a>:</h4>
+<p>yeah. <code>continuous_subtype_is_closed_cover</code> wants a total function together with proofs that its restrictions to functions from subtypes are continuous, and I was wondering whether there's a good way to feed it a bunch of functions from subtypes (or pfuns)  and have it give me the continuity of the glued-together function that I wanted :D</p>
+
+<a name="167551567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167551567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167551567">Johannes Hölzl (Jun 07 2019 at 06:24)</a>:</h4>
+<p>Maybe you need to think it from the other side (which is obviously the same but sometimes makes a mental difference). You want to prove <code>continuous G</code> (where <code>G</code> is your glued-together function). Then you apply <code>continuous_subtype_is_closed_cover C</code>, and get the statement that for each <code>c</code> in <code>C</code> you need to prove <code>continuous (fn x:subtype c, G (coe x))</code>. But now you can rewrite <code>(fn x:subtype c, G (coe x))</code> into something your like more.</p>
+
+<a name="167551694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167551694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167551694">Johannes Hölzl (Jun 07 2019 at 06:27)</a>:</h4>
+<p>The trick is that we now talk about <code>G (coe x)</code> where <code>coe x</code> gives us enough information to rewrite <code>G (coe x) = f_c (coe_2 x)</code> where <code>c</code> is the index into our cover, and <code>coe_2</code> now may coerce from the cover into another set, the set where <code>f_c</code> is defined on.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

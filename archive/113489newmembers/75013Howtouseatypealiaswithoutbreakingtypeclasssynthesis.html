@@ -1,0 +1,272 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html">How to use a type alias without breaking typeclass synthesis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179036569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179036569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179036569">Marko Grdinić (Oct 25 2019 at 09:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">History</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">HistoryToActions</span> <span class="o">({</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">})</span> <span class="n">Action</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="o">[])</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟩</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">x</span> <span class="bp">::</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">actions</span><span class="bp">.</span><span class="n">later</span><span class="bp">.</span><span class="n">drop</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="k">in</span> <span class="bp">⟨</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟩</span>
+
+<span class="kn">structure</span> <span class="n">Particle</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="bp">::</span>
+    <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">probability</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">infosets</span> <span class="o">:</span> <span class="n">Infosets</span> <span class="n">ha</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">is_updateable</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This piece of code typechecks as written above, but when I replace <code>{die // die ∈ dice} × list {i // ∃ v, claims.read i = v}</code> with <code>History</code> in <code>ha</code>'s type, I get an error that it cannot synthesize the typeclass instances for <code>(infosets : Infosets ha)</code>. The particular typeclass instance is <code>has_lt History</code>. What should I do here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">History</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">unfold</span> <span class="n">History</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Also, it occurred to me that I could try providing it directly, but I am not sure which tactic to use here. Even if this could work, I'd prefer it if I could instruct the compiler to inline the alias rather than doing this.</p>
+<p>Sorry about not giving a simplified example - I gave it a shot, but there are a lot of hierarchies that I do not know how to pare down without significant effort.</p>
+
+<a name="179036676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179036676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179036676">Rob Lewis (Oct 25 2019 at 10:00)</a>:</h4>
+<p><code>instance : has_lt History := by {unfold History, apply_instance}</code></p>
+
+<a name="179036694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179036694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179036694">Rob Lewis (Oct 25 2019 at 10:00)</a>:</h4>
+<p>Alternatively, <code>@[derive has_lt] def History : Type* := ...</code></p>
+
+<a name="179036833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179036833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179036833">Marko Grdinić (Oct 25 2019 at 10:03)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="179044693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179044693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179044693">Marko Grdinić (Oct 25 2019 at 12:29)</a>:</h4>
+<div class="codehilite"><pre><span></span>maximum class-instance resolution depth has been reached (the limit can be increased by setting option &#39;class.instance_max_depth&#39;) (the class-instance resolution trace can be visualized by setting option &#39;trace.class_instances&#39;)
+</pre></div>
+
+
+<p>The advice worked for my previous problem, but now I am running into this issue. I am not even sure for which typeclass instance it is looking for. How do I find that out? I tried turning on the trace, but the instance it is looking for there should be available, so I am thinking it should be something else.</p>
+
+<a name="179045550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179045550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179045550">Marko Grdinić (Oct 25 2019 at 12:41)</a>:</h4>
+<p>Also, is it possible to derive <code>decidable_rel</code> using the first form? Something like...<code>@[derive has_lt, derive decidable_rel] def Die := {die // die ∈ dice}</code>? The issue with <code>decidable_rel</code> is that it depends on <code>has_lt</code>.</p>
+
+<a name="179047641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179047641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179047641">Marko Grdinić (Oct 25 2019 at 13:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_lt</span><span class="o">]</span> <span class="n">def</span> <span class="n">Die</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_lt</span><span class="o">]</span> <span class="n">def</span> <span class="n">PastClaims</span> <span class="o">:=</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_lt</span><span class="o">]</span> <span class="n">def</span> <span class="n">History</span> <span class="o">:=</span> <span class="n">Die</span> <span class="bp">×</span> <span class="n">PastClaims</span>
+</pre></div>
+
+
+<p>I need <code>decidable_rel</code> for these 3, but forget about the previous question for a bit. I thought I would be able to do it once I made up my mind, but now that I am trying I find I have absolutely no idea how Lean deals with decidability of propositions. I am not even sure how it would work for regular nats and not these slightly more complex structures.</p>
+<p>How should I do this? I could use some good examples of how <code>decidable_rel</code> works.</p>
+
+<a name="179048436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179048436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179048436">Kevin Buzzard (Oct 25 2019 at 13:20)</a>:</h4>
+<p>It's impossible to debug a max class instance error without a fully working example demonstrating the error.</p>
+
+<a name="179048469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179048469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179048469">Kevin Buzzard (Oct 25 2019 at 13:21)</a>:</h4>
+<p>You can turn certain traces on and look at debug output, but you have to know what you're looking for.</p>
+
+<a name="179048797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179048797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179048797">Marko Grdinić (Oct 25 2019 at 13:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<p>I see. Well in this case, I am sure that the problem is because it is looking for the missing <code>decidable_rel</code> for <code>History</code>. I managed to track it down by using <code>@</code> on the offending function and manually checking all the arguments.</p>
+
+<a name="179048937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179048937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179048937">Kevin Buzzard (Oct 25 2019 at 13:27)</a>:</h4>
+<p>Type class inference is complicated and is going to be one of the big changes in Lean 4. There are people here who know how to work with what we have, and no doubt they could sort out your specific problem if any of them had the time, but we have also been collecting lists of when typeclass inference fails or works badly, and the devs are going to see if they can come up with something better in Lean 4. It's being implemented right now, is my understanding.</p>
+
+<a name="179049201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049201">Rob Lewis (Oct 25 2019 at 13:30)</a>:</h4>
+<p><code>History</code> isn't a relation, is it? You can't give it a <code>decidable_rel</code> instance.</p>
+
+<a name="179049254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049254">Rob Lewis (Oct 25 2019 at 13:31)</a>:</h4>
+<p>You might be able to derive decidable equality. <code>@[derive [has_lt, decidable_eq]]</code>. You'd need this to be successful on <code>Die</code> and <code>PastClaims</code> first to have any hope on <code>History</code>.</p>
+
+<a name="179049378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049378">Marko Grdinić (Oct 25 2019 at 13:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> </p>
+<blockquote>
+<p><code>History</code> isn't a relation, is it? You can't give it a <code>decidable_rel</code> instance.</p>
+</blockquote>
+<p>No, I meant for the <code>a &lt; b</code> where <code>a b : History</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">History_decidable_rel</span> <span class="o">[</span><span class="n">x</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">History</span><span class="o">]</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="n">x</span><span class="bp">.</span><span class="n">lt</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Something like this.</p>
+
+<a name="179049723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049723">Marko Grdinić (Oct 25 2019 at 13:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="o">[</span><span class="n">has_lt</span><span class="o">,</span> <span class="n">decidable_eq</span><span class="o">]]</span> <span class="n">def</span> <span class="n">Die</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="o">[</span><span class="n">has_lt</span><span class="o">,</span> <span class="n">decidable_eq</span><span class="o">]]</span> <span class="n">def</span> <span class="n">PastClaims</span> <span class="o">:=</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="o">[</span><span class="n">has_lt</span><span class="o">,</span> <span class="n">decidable_eq</span><span class="o">]]</span> <span class="n">def</span> <span class="n">History</span> <span class="o">:=</span> <span class="n">Die</span> <span class="bp">×</span> <span class="n">PastClaims</span>
+</pre></div>
+
+
+<p>This works for me. But <code>decidable_rel</code> is tricky in that it needs to be passed the specific <code>has_lt</code> instance by hand. That is how it was in the few places where I used it. So just putting <code>@[derive [has_lt, decidable_rel]] def Die := {die // die ∈ dice}</code> fails for me.</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  decidable_rel Die
+term
+  Die
+has type
+  Type : Type 1
+but is expected to have type
+  ?m_1 → ?m_1 → Prop : Sort (max ? 1)
+</pre></div>
+
+
+<p>It seems this mechanism is passing it <code>Die</code> directly rather than the less-than function for <code>Die</code>.</p>
+
+<a name="179049926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049926">Marko Grdinić (Oct 25 2019 at 13:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">response</span> <span class="o">{</span><span class="n">ℍ</span> <span class="err">𝔸</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lt</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">ℍ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_rel</span> <span class="n">lt</span><span class="bp">.</span><span class="n">lt</span><span class="o">]</span>
+</pre></div>
+
+
+<p>I have a bunch of functions like this one where I declare that a type has <code>has_lt</code> and then also that the relation is decidable.</p>
+
+<a name="179049931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049931">Rob Lewis (Oct 25 2019 at 13:38)</a>:</h4>
+<p>Ah. Yeah, the derive handler definitely won't work for that. You'll need to define it manually and unfold enough so that <code>apply_instance</code> sees the decidability. Something like <code>instance History_decidable_rel : decidable_rel ((&lt;) : History -&gt; History -&gt; Prop) := ...</code></p>
+
+<a name="179049979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179049979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179049979">Rob Lewis (Oct 25 2019 at 13:39)</a>:</h4>
+<p>Where <code>...</code> does some unfolding and then calls <code>apply_instance</code>.</p>
+
+<a name="179050614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179050614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179050614">Marko Grdinić (Oct 25 2019 at 13:47)</a>:</h4>
+<p>I am following your advice.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">nat_decidable_rel</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span>
+        <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+        <span class="n">apply_instance</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>As a sanity check this does work for nats.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_lt</span><span class="o">]</span> <span class="n">def</span> <span class="n">Die</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span>
+<span class="kn">instance</span> <span class="n">Die_decidable_rel</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Die</span> <span class="bp">→</span> <span class="n">Die</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span>
+        <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+        <span class="n">apply_instance</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>Tactic State
+1 goal
+a b : Die
+⊢ decidable (a &lt; b)
+dudo.lean:29:8: error
+tactic.mk_instance failed to generate instance for
+  decidable (a &lt; b)
+state:
+a b : Die
+⊢ decidable (a &lt; b)
+</pre></div>
+
+
+<p>For <code>Die</code> not so much. It cannot find the instance. I am trying to see whether I can get it to so it only compares the first argument (which is a nat), but I cannot unfold <code>has_lt.lt</code> here. What should I do?</p>
+
+<a name="179052977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179052977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179052977">Marko Grdinić (Oct 25 2019 at 14:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Die</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span>
+<span class="kn">instance</span> <span class="n">Die_has_lt</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">Die</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="k">fun</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="bp">.</span><span class="n">val</span> <span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="n">Die_decidable_rel</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Die</span> <span class="bp">→</span> <span class="n">Die</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_instance</span>
+</pre></div>
+
+
+<p>I get it now. I won't be sure until I go over the subtype, but it seems that the default <code>has_lt</code> was not good for my use case. I should be able to make this work now.</p>
+
+<a name="179053250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053250">Marko Grdinić (Oct 25 2019 at 14:17)</a>:</h4>
+<p>Hmmm...I can't find anything on <code>has_lt</code> for subtypes in the core library's <code>init.data.subtype</code> folder. There is no much there. Is it somewhere else? If so, where?</p>
+
+<a name="179053416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053416">Marko Grdinić (Oct 25 2019 at 14:19)</a>:</h4>
+<p>Is there any way to track down the instance that is being inferred?</p>
+
+<a name="179053560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053560">Reid Barton (Oct 25 2019 at 14:20)</a>:</h4>
+<blockquote>
+<p>Hmmm...I can't find anything on <code>has_lt</code> for subtypes in the core library's <code>init.data.subtype</code> folder. There is no much there. Is it somewhere else? If so, where?</p>
+</blockquote>
+<p>Are you using mathlib?</p>
+
+<a name="179053904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053904">Reid Barton (Oct 25 2019 at 14:24)</a>:</h4>
+<p>A bit convoluted, but you can write, for example,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">nat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>which will print <code>nat.has_lt</code>, then</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_lt</span>
+</pre></div>
+
+
+<p>which will output something you don't care about, but now you can use jump-to-definition on <code>nat.has_lt</code></p>
+
+<a name="179054616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054616">Marko Grdinić (Oct 25 2019 at 14:33)</a>:</h4>
+<p>Apparently, the function is <code>preorder.to_has_lt</code>. </p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_le</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_lt</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+</pre></div>
+
+
+<p>When I try to track it down by Ctrl + left click, it just puts me at the class definition. I am not sure where to go from there.</p>
+
+<a name="179054713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054713">Reid Barton (Oct 25 2019 at 14:34)</a>:</h4>
+<p>Ah, in that case try <code>set_option pp.all true</code> before the <code>#print</code>, and try to guess where the actual instance is, or post the output here</p>
+
+<a name="179054967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054967">Reid Barton (Oct 25 2019 at 14:37)</a>:</h4>
+<p><code>preorder.to_has_lt</code> extracts the <code>has_lt</code> instance from a <code>preorder</code> instance</p>
+
+<a name="179055046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055046">Reid Barton (Oct 25 2019 at 14:38)</a>:</h4>
+<p>it's automatically generated by that <code>class preorder</code> declaration</p>
+
+<a name="179055264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055264">Marko Grdinić (Oct 25 2019 at 14:40)</a>:</h4>
+<p>Ah, I see. So that is why I get sent to the typeclass definition. I guess the question now becomes of how to track down where the subtype is declared as a preorder.</p>
+
+<a name="179055484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055484">Marko Grdinić (Oct 25 2019 at 14:42)</a>:</h4>
+<p>Then I would be able to find the implementation of <code>has_lt</code> for it. What would be the best way to do this?</p>
+
+<a name="179057791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179057791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179057791">Kevin Buzzard (Oct 25 2019 at 15:06)</a>:</h4>
+<p>Are you talking about why nat is a preorder? You can just use the trick Reid showed you again:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">preorder</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">x</span> <span class="c1">-- partial_order.to_preorder ℕ</span>
+</pre></div>
+
+
+<p>The preorder on nat comes from the partial order on nat.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

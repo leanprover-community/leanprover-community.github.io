@@ -1,0 +1,88 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40361Custominduction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40361Custominduction.html">Custom induction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173687879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Custom%20induction/near/173687879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40361Custominduction.html#173687879">Daniel Fabian (Aug 20 2019 at 19:26)</a>:</h4>
+<p>Good evening,</p>
+<p>As an exercise, I'm trying to formalize a piece of math that I have around Cartesian products. Because I need to know each component involved in the product, I don't think I can rely on the built-in notion of Cartesian products. E.g. <code>Nat * Nat * Nat</code> is not the same as <code>(Nat * Nat) * Nat</code> or <code>Nat * (Nat * Nat)</code> w.r.t. the theorems I want to talk about.</p>
+<p>To formalize that, I tried to do it using a heterogeneous list and attach a count to get pretty much the same behavior as a Cartesian product. Here's my code I'm playing with:</p>
+<div class="codehilite"><pre><span></span>universe u
+inductive h_list : Type (u+1)
+| nil
+| cons {α : Type u} (h:α) (t:h_list) : h_list
+
+namespace h_list
+
+notation h :: t := cons h t
+
+notation `[` l:(foldr `, ` (h t, cons h t) nil `]`) := l
+
+def length : h_list → ℕ
+| [] := 0
+| (cons _ t) := 1 + t.length
+
+def append : h_list → h_list → h_list
+| [] ys := ys
+| (x::xs) ys := x :: (append xs ys)
+
+instance h_list_has_append : has_append h_list := ⟨append⟩
+
+#check 3 :: &quot;hello&quot; :: nil
+#check [&#39;a&#39;, &quot;bee&quot;, 3]
+end h_list
+
+def tuple (n : ℕ) := { l : h_list // l.length = n }
+namespace tuple
+open h_list
+
+def cons {α n} : α → tuple n → tuple (n + 1)
+| h ⟨t, h_n⟩ := ⟨h :: t, by {unfold length, rw[h_n], simp}⟩
+
+def singleton {α} : α → tuple 1
+| x := ⟨[x], by unfold length⟩
+
+def append {n m} : tuple n → tuple m → tuple (n + m)
+| ⟨l, h_n⟩ ⟨r, h_m⟩ := ⟨l ++ r, sorry⟩
+
+notation `[` l:(foldr ` ⊗ ` (h t, cons h t) nil `]`) := l
+
+infix ` ⊗ `:30 := append
+#check append
+end tuple
+
+#check tuple.cons
+#check ℕ × nat × ℤ × int
+#check (1, 3, 4)
+#check prod
+</pre></div>
+
+
+<p>In the bit of sorry, I would like to show the property by induction on <code>l</code>. When I try to use the built-in tactic, the IH is wrong; it is only getting smaller w.r.t. <code>l</code> and not also <code>n</code>. Similarly induction on <code>n</code> doesn't work either. </p>
+<p>Do I understand correctly, that I need to prove a different kind of induction principle to do this kind of induction and then call the <code>induction</code> tactic with <code>using</code>?</p>
+<p>Alternatively, is there some much less clunky way to achieve what I want?</p>
+<p>Thanks Dany</p>
+
+<a name="173688491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Custom%20induction/near/173688491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40361Custominduction.html#173688491">Simon Hudon (Aug 20 2019 at 19:35)</a>:</h4>
+<p>Your code strikes me as having a lot of dependent types. If you need them to be this dependent, you might find all that you need in <code>data.vector</code>. Your <code>tuple</code> construction can be defined as <code>def tuple (n : nat) := vector (Σ t : Type u, t) n</code>. </p>
+<p>You might find that reasoning in terms of <code>list (Σ t : Type u, t)</code> will be good enough for most of your theorems. Having the length in the type gets very annoying when the length varies</p>
+
+<a name="173688904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Custom%20induction/near/173688904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40361Custominduction.html#173688904">Daniel Fabian (Aug 20 2019 at 19:40)</a>:</h4>
+<p>Ok, thanks for the hints</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

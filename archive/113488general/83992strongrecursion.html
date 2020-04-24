@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/83992strongrecursion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/83992strongrecursion.html">strong recursion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187159462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strong%20recursion/near/187159462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83992strongrecursion.html#187159462">Johan Commelin (Feb 01 2020 at 11:51)</a>:</h4>
+<p>Should I PR the following to mathlib:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">nat</span>
+<span class="kn">universe</span> <span class="kn">variables</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span><span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">X</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="n">X</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">strong_recursion_aux</span> <span class="o">:</span>
+  <span class="bp">Π</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">X</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span> <span class="n">absurd</span> <span class="n">h</span> <span class="o">(</span><span class="n">not_lt_zero</span> <span class="bp">_</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">h</span><span class="o">,</span>
+<span class="o">(</span><span class="n">lt_or_eq_of_le</span> <span class="o">(</span><span class="n">le_of_lt_succ</span> <span class="n">h</span><span class="o">))</span><span class="bp">.</span><span class="n">by_cases</span>
+  <span class="o">(</span><span class="n">strong_recursion_aux</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">f</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span><span class="o">,</span> <span class="n">strong_recursion_aux</span> <span class="n">n</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">lt_of_lt_of_le</span> <span class="n">k</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">le_of_eq</span> <span class="n">e</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">strong_recursion</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">strong_recursion_aux</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">n</span> <span class="err">$</span> <span class="n">n</span><span class="bp">.</span><span class="n">lt_succ_self</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">strong_recursion_aux_lt</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nat</span><span class="bp">.</span><span class="n">strong_recursion_aux</span> <span class="n">f</span> <span class="n">n</span> <span class="n">m</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">strong_recursion</span> <span class="n">f</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">add_right_comm</span><span class="o">]</span> <span class="kn">using</span> <span class="n">nat</span><span class="bp">.</span><span class="n">exists_eq_add_of_lt</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">hm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">k</span><span class="o">,</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">ih</span> <span class="n">hm</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">dif_pos</span> <span class="n">hm</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">strong_recursion_apply</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">strong_recursion</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">strong_recursion</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_recursion_aux</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">dite</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">dif_neg</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">n</span><span class="o">)],</span>
+  <span class="k">show</span> <span class="n">dite</span> <span class="o">(</span><span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">dif_pos</span> <span class="n">rfl</span><span class="o">],</span>
+  <span class="n">refine</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">funext</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">strong_recursion_aux_lt</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">nat</span>
+</pre></div>
+
+
+<p>I wasn't able to prove these statements about <code>nat.strong_rec_on</code>, and that one is locked into core.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

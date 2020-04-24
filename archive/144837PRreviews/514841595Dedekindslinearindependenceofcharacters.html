@@ -1,0 +1,835 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html">#1595 Dedekind's linear independence of characters</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178820002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178820002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178820002">Kenny Lau (Oct 23 2019 at 03:40)</a>:</h4>
+<p>here I provided a version of linear independence that might be more useful (to mathematicians at least):</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">linear_independent_iff&#39;</span> <span class="o">:</span> <span class="n">linear_independent</span> <span class="n">R</span> <span class="n">v</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">R</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">v</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="178820010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178820010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178820010">Kenny Lau (Oct 23 2019 at 03:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> what do you think?</p>
+
+<a name="178822826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178822826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178822826">Scott Morrison (Oct 23 2019 at 05:01)</a>:</h4>
+<p>That definitely belongs in mathlib! :-)</p>
+
+<a name="178824197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178824197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178824197">Johan Commelin (Oct 23 2019 at 05:41)</a>:</h4>
+<p>Oh wow! A PR by Kenny!</p>
+
+<a name="178824272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178824272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178824272">Johan Commelin (Oct 23 2019 at 05:43)</a>:</h4>
+<p>And yes, that <code>iff'</code> looks really useful</p>
+
+<a name="178826118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826118">Scott Morrison (Oct 23 2019 at 06:30)</a>:</h4>
+<p>Nicely done proof. It never even occurred to me you only needed a monoid in this argument, rather than a group.</p>
+
+<a name="178826285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826285">Kenny Lau (Oct 23 2019 at 06:34)</a>:</h4>
+<p>you actually only need an integral domain</p>
+
+<a name="178826290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826290">Kenny Lau (Oct 23 2019 at 06:34)</a>:</h4>
+<p>proof: I changed <code>field</code> to <code>integral_domain</code> and Lean didn't complain</p>
+
+<a name="178826381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826381">Kenny Lau (Oct 23 2019 at 06:36)</a>:</h4>
+<p>I cannot remove commutativity yet</p>
+
+<a name="178826542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826542">Kenny Lau (Oct 23 2019 at 06:40)</a>:</h4>
+<p>all sources I consulted used fields</p>
+
+<a name="178826658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826658">Kenny Lau (Oct 23 2019 at 06:42)</a>:</h4>
+<p><a href="https://stacks.math.columbia.edu/tag/0CKK" target="_blank" title="https://stacks.math.columbia.edu/tag/0CKK">https://stacks.math.columbia.edu/tag/0CKK</a></p>
+
+<a name="178826662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826662">Kenny Lau (Oct 23 2019 at 06:42)</a>:</h4>
+<p>I'll note that the proof of Lemma 9.13.2 is wrong (or maybe I misinterpreted it)</p>
+
+<a name="178826682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826682">Kenny Lau (Oct 23 2019 at 06:43)</a>:</h4>
+<p>my proposed proof: if a1 ... an are such that sum ai^e = 0 for every e, then (x-a1)(x-a2)...(x-an) = x^n, so ai = 0</p>
+
+<a name="178826779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826779">Kenny Lau (Oct 23 2019 at 06:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> am I right?</p>
+
+<a name="178826789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826789">Johan Commelin (Oct 23 2019 at 06:45)</a>:</h4>
+<p>Right with what?</p>
+
+<a name="178826792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826792">Kenny Lau (Oct 23 2019 at 06:45)</a>:</h4>
+<p>that the proof of Lemma 9.13.2 is wrong</p>
+
+<a name="178826794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826794">Johan Commelin (Oct 23 2019 at 06:46)</a>:</h4>
+<p>I don't see the <code>integral_domain</code> on the PR page yet</p>
+
+<a name="178826859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826859">Kenny Lau (Oct 23 2019 at 06:47)</a>:</h4>
+<p>and my new proof didn't even use the fact that a1 ... an are pairwise distinct</p>
+
+<a name="178826872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826872">Johan Commelin (Oct 23 2019 at 06:47)</a>:</h4>
+<p>What if <code>n = 1</code> and <code>a_1 = 0</code>?</p>
+
+<a name="178826874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826874">Kenny Lau (Oct 23 2019 at 06:47)</a>:</h4>
+<p>then 0^0 = 1</p>
+
+<a name="178826878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826878">Johan Commelin (Oct 23 2019 at 06:47)</a>:</h4>
+<p>Aah, ok</p>
+
+<a name="178826880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826880">Kenny Lau (Oct 23 2019 at 06:47)</a>:</h4>
+<p>this is the only interpretation that makes the theorem right even</p>
+
+<a name="178826881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826881">Kevin Buzzard (Oct 23 2019 at 06:47)</a>:</h4>
+<p>If they're not pairwise distinct then what's stopping n=p and all the a_i being the same and characteristic p?</p>
+
+<a name="178826923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826923">Kenny Lau (Oct 23 2019 at 06:48)</a>:</h4>
+<p>oh no I was implicitly assuming char 0 for my Newton shenanigans</p>
+
+<a name="178826925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826925">Kevin Buzzard (Oct 23 2019 at 06:48)</a>:</h4>
+<p>I agree that I don't understand the stacks proof</p>
+
+<a name="178826958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178826958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178826958">Kevin Buzzard (Oct 23 2019 at 06:49)</a>:</h4>
+<p>I also agree it's easy in char 0</p>
+
+<a name="178827003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827003">Johan Commelin (Oct 23 2019 at 06:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Why don't you formalise the new proof (-;</p>
+
+<a name="178827006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827006">Kenny Lau (Oct 23 2019 at 06:50)</a>:</h4>
+<blockquote>
+<p>I don't see the <code>integral_domain</code> on the PR page yet</p>
+</blockquote>
+<p>done</p>
+
+<a name="178827008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827008">Kevin Buzzard (Oct 23 2019 at 06:50)</a>:</h4>
+<p>I also agree that field can be weakened to ID because every ID is a subring of a field.</p>
+
+<a name="178827018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827018">Kenny Lau (Oct 23 2019 at 06:51)</a>:</h4>
+<p>do you have a counter-example with division rings?</p>
+
+<a name="178827021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827021">Kenny Lau (Oct 23 2019 at 06:51)</a>:</h4>
+<p>and commutative rings?</p>
+
+<a name="178827023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827023">Johan Commelin (Oct 23 2019 at 06:51)</a>:</h4>
+<p>I guess I need to wake up. What's wrong with the stacks proof?</p>
+
+<a name="178827029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827029">Kevin Buzzard (Oct 23 2019 at 06:51)</a>:</h4>
+<p>no lambdas</p>
+
+<a name="178827042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827042">Kevin Buzzard (Oct 23 2019 at 06:51)</a>:</h4>
+<p>can you fix it?</p>
+
+<a name="178827090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827090">Johan Commelin (Oct 23 2019 at 06:52)</a>:</h4>
+<p>All lambdas = 1?</p>
+
+<a name="178827092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827092">Kenny Lau (Oct 23 2019 at 06:52)</a>:</h4>
+<p>that's not what linear indep says</p>
+
+<a name="178827107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827107">Kenny Lau (Oct 23 2019 at 06:52)</a>:</h4>
+<p>wait I need to wake up</p>
+
+<a name="178827111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827111">Kevin Buzzard (Oct 23 2019 at 06:52)</a>:</h4>
+<p>wait I'm see-sawing here. All lambdas =1 :D</p>
+
+<a name="178827124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827124">Kenny Lau (Oct 23 2019 at 06:53)</a>:</h4>
+<p>I messed up with the logic :P I thought it needs to be all lambdas</p>
+
+<a name="178827132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827132">Johan Commelin (Oct 23 2019 at 06:53)</a>:</h4>
+<p>Anyways, the lemma is going to be false for general comm rings</p>
+
+<a name="178827182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827182">Johan Commelin (Oct 23 2019 at 06:54)</a>:</h4>
+<p>The Dedekind lin.indep. lemma</p>
+
+<a name="178827186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827186">Kenny Lau (Oct 23 2019 at 06:54)</a>:</h4>
+<p>do you have a counter example?</p>
+
+<a name="178827189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827189">Johan Commelin (Oct 23 2019 at 06:54)</a>:</h4>
+<p>Take Z/4Z, and lamda_i = 2, and a character that maps things to powers of 2</p>
+
+<a name="178827197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827197">Kenny Lau (Oct 23 2019 at 06:54)</a>:</h4>
+<p>ok cool</p>
+
+<a name="178827198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827198">Kenny Lau (Oct 23 2019 at 06:54)</a>:</h4>
+<p>now for division rings :P</p>
+
+<a name="178827205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827205">Johan Commelin (Oct 23 2019 at 06:55)</a>:</h4>
+<p>Or maybe non-comm integral domains?</p>
+
+<a name="178827213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827213">Kenny Lau (Oct 23 2019 at 06:55)</a>:</h4>
+<p>sure</p>
+
+<a name="178827214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827214">Kevin Buzzard (Oct 23 2019 at 06:55)</a>:</h4>
+<p>do they exist?</p>
+
+<a name="178827217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827217">Kenny Lau (Oct 23 2019 at 06:55)</a>:</h4>
+<p>right, they're called domains :P</p>
+
+<a name="178827218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827218">Johan Commelin (Oct 23 2019 at 06:55)</a>:</h4>
+<p>They don't have a name. So no.</p>
+
+<a name="178827231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827231">Johan Commelin (Oct 23 2019 at 06:55)</a>:</h4>
+<p>I was brought up with <code>domain</code> = <code>commutative domain</code></p>
+
+<a name="178827282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827282">Kevin Buzzard (Oct 23 2019 at 06:56)</a>:</h4>
+<p>I was brought up with ring = commutative ring</p>
+
+<a name="178827285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827285">Kenny Lau (Oct 23 2019 at 06:56)</a>:</h4>
+<p>at least not in Lean</p>
+
+<a name="178827321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827321">Kenny Lau (Oct 23 2019 at 06:57)</a>:</h4>
+<p>I'm staring at the quaternions</p>
+
+<a name="178827323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827323">Kevin Buzzard (Oct 23 2019 at 06:57)</a>:</h4>
+<p>don't do that</p>
+
+<a name="178827324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827324">Kenny Lau (Oct 23 2019 at 06:57)</a>:</h4>
+<p>I'm 50% sure there are other reasons that make it true there</p>
+
+<a name="178827394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827394">Kevin Buzzard (Oct 23 2019 at 06:58)</a>:</h4>
+<p>Try some universal counterexample and see what happens</p>
+
+<a name="178827417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827417">Kevin Buzzard (Oct 23 2019 at 06:59)</a>:</h4>
+<p>i.e. just take some random characters into some free non-comm ring and then quotient out by all the relations</p>
+
+<a name="178827422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827422">Kevin Buzzard (Oct 23 2019 at 06:59)</a>:</h4>
+<p>forcing all the sums to be 0</p>
+
+<a name="178827430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827430">Kevin Buzzard (Oct 23 2019 at 06:59)</a>:</h4>
+<p>and you have to hope that the a_i remain distinct</p>
+
+<a name="178827432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827432">Kevin Buzzard (Oct 23 2019 at 06:59)</a>:</h4>
+<p>or get a feeling as to why this isn't happening</p>
+
+<a name="178827443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827443">Kenny Lau (Oct 23 2019 at 07:00)</a>:</h4>
+<p>that won't give us a counterexample with H</p>
+
+<a name="178827483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827483">Johan Commelin (Oct 23 2019 at 07:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> can you include lemma 13.2 in your PR?</p>
+
+<a name="178827490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827490">Kevin Buzzard (Oct 23 2019 at 07:00)</a>:</h4>
+<p>Oh do you actually care specifically about H?</p>
+
+<a name="178827492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827492">Johan Commelin (Oct 23 2019 at 07:00)</a>:</h4>
+<p>It's a little ingredient in Galois theory</p>
+
+<a name="178827497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827497">Kenny Lau (Oct 23 2019 at 07:00)</a>:</h4>
+<p>I don't think I ever used that lemma in Galois theory; how?</p>
+
+<a name="178827508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827508">Johan Commelin (Oct 23 2019 at 07:01)</a>:</h4>
+<p>Last time I thought about it, I remember using independence of characters</p>
+
+<a name="178827510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827510">Kenny Lau (Oct 23 2019 at 07:01)</a>:</h4>
+<blockquote>
+<p>Oh do you actually care specifically about H?</p>
+</blockquote>
+<p>or finite central simple division rings over fields</p>
+
+<a name="178827529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827529">Kenny Lau (Oct 23 2019 at 07:01)</a>:</h4>
+<p>yeah but I don't remember using 13.2</p>
+
+<a name="178827588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827588">Johan Commelin (Oct 23 2019 at 07:02)</a>:</h4>
+<p>Yeah, actually 13.3 and 13.4 are more useful</p>
+
+<a name="178827591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827591">Johan Commelin (Oct 23 2019 at 07:02)</a>:</h4>
+<p>But they should maybe not go in this PR</p>
+
+<a name="178827607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827607">Kevin Buzzard (Oct 23 2019 at 07:02)</a>:</h4>
+<p>9.13.3 for Hilbert 90 and 9.14.4 to prove adeles of K = adeles of Q tensor K ;-)</p>
+
+<a name="178827613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827613">Johan Commelin (Oct 23 2019 at 07:03)</a>:</h4>
+<p>Now I need to pull myself away from Lean, and do some other stuff...</p>
+
+<a name="178827620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178827620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178827620">Kevin Buzzard (Oct 23 2019 at 07:03)</a>:</h4>
+<p>ha yes I'd better get back to this grant proposal review ;-)</p>
+
+<a name="178828023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178828023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178828023">Kenny Lau (Oct 23 2019 at 07:12)</a>:</h4>
+<p>(j-k) (1,i,-1,-i) + (k-i) (1,j,-1,-j) + (i-j) (1,k,-1,-k) = 0</p>
+
+<a name="178828114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178828114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178828114">Kenny Lau (Oct 23 2019 at 07:15)</a>:</h4>
+<p>conjecture: if a division ring satisfies Dedekind's linear independence of characters, then it is a field.</p>
+
+<a name="178829167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829167">Kevin Buzzard (Oct 23 2019 at 07:36)</a>:</h4>
+<p>Ha ha</p>
+
+<a name="178829181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829181">Kevin Buzzard (Oct 23 2019 at 07:36)</a>:</h4>
+<p>Sounds like a respectable MO question</p>
+
+<a name="178829189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829189">Johan Commelin (Oct 23 2019 at 07:36)</a>:</h4>
+<p>Better have a formalisation ready...</p>
+
+<a name="178829197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829197">Johan Commelin (Oct 23 2019 at 07:36)</a>:</h4>
+<p>Then you can post an answer by Lean after a day (-;</p>
+
+<a name="178829211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829211">Kevin Buzzard (Oct 23 2019 at 07:37)</a>:</h4>
+<p>Although Swinnerton-Dyer would have criticised your use of the word "conjecture" there</p>
+
+<a name="178829224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829224">Kevin Buzzard (Oct 23 2019 at 07:37)</a>:</h4>
+<p>He once bemoaned to me the fact that nowadays anyone can come up with a question and call it a conjecture</p>
+
+<a name="178829269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829269">Kevin Buzzard (Oct 23 2019 at 07:38)</a>:</h4>
+<p>Whereas in the old days, conjectures were things which were undoubtedly true but which we just hadn't proved yet</p>
+
+<a name="178829298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829298">Kevin Buzzard (Oct 23 2019 at 07:39)</a>:</h4>
+<p>It is not a coincidence that shortly after this conversation I released a paper called "questions about slopes of modular forms"</p>
+
+<a name="178829530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829530">Kevin Buzzard (Oct 23 2019 at 07:43)</a>:</h4>
+<p>Wait, (j-k)i+(k-i)j+(i-j)k isn't 0</p>
+
+<a name="178829632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829632">Kenny Lau (Oct 23 2019 at 07:44)</a>:</h4>
+<p>oh</p>
+
+<a name="178829679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829679">Kenny Lau (Oct 23 2019 at 07:45)</a>:</h4>
+<p>it was supposed be 1, (k-i)/(j-k), (i-j)/(j-k)</p>
+
+<a name="178829692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829692">Kenny Lau (Oct 23 2019 at 07:45)</a>:</h4>
+<p>but oh well that's right division for you</p>
+
+<a name="178829747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829747">Kenny Lau (Oct 23 2019 at 07:46)</a>:</h4>
+<p>I mean you have 3 vectors in H^2</p>
+
+<a name="178829787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178829787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178829787">Kenny Lau (Oct 23 2019 at 07:47)</a>:</h4>
+<blockquote>
+<p>Although Swinnerton-Dyer would have criticised your use of the word "conjecture" there</p>
+</blockquote>
+<p>oh no I thought BSD were 3 persons</p>
+
+<a name="178830029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830029">Johan Commelin (Oct 23 2019 at 07:50)</a>:</h4>
+<p>You should pay more attention to the length of the dashes and hyphens</p>
+
+<a name="178830040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830040">Johan Commelin (Oct 23 2019 at 07:50)</a>:</h4>
+<p>It is Birch–Swinnerton-Dyer</p>
+
+<a name="178830061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830061">Johan Commelin (Oct 23 2019 at 07:51)</a>:</h4>
+<p>Or <code>Birch--Swinnerton-Dyer</code> in TeX</p>
+
+<a name="178830176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830176">Kenny Lau (Oct 23 2019 at 07:53)</a>:</h4>
+<p>1+a+b=0<br>
+i+aj+bk=0<br>
+a+b=-1<br>
+aj+bk=-i<br>
+aj+bj=-j<br>
+b(k-j)=j-i<br>
+b=(j-i)/(k-j)<br>
+a=-1-b=(i-k)/(k-j)</p>
+
+<a name="178830365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830365">Johan Commelin (Oct 23 2019 at 07:56)</a>:</h4>
+<p>Does Lean even know the quaternions? I don't think so.</p>
+
+<a name="178830372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830372">Kenny Lau (Oct 23 2019 at 07:56)</a>:</h4>
+<p>(k-j)^2 = -2, so 1/(k-j) = (j-k)/2<br>
+b=(j-i)(j-k)/2 = -1-i-k-j<br>
+a = -1-b = i+j+k</p>
+
+<a name="178830392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830392">Kenny Lau (Oct 23 2019 at 07:56)</a>:</h4>
+<p>so 1 (1,i,-1,-i) + (i+j+k) (1,j,-1,-j) + (-1-i-j-k) (1,k,-1,-k) = 0</p>
+
+<a name="178830426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830426">Kenny Lau (Oct 23 2019 at 07:57)</a>:</h4>
+<p>how to find a symmetric solution</p>
+
+<a name="178830749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830749">Kevin Buzzard (Oct 23 2019 at 08:00)</a>:</h4>
+<p>There might not be one I guess</p>
+
+<a name="178830791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830791">Kevin Buzzard (Oct 23 2019 at 08:01)</a>:</h4>
+<p>There's no nonzero symmetric solution in the reals to x+y+z=0</p>
+
+<a name="178830883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830883">Kenny Lau (Oct 23 2019 at 08:02)</a>:</h4>
+<p>bummer</p>
+
+<a name="178830949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178830949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178830949">Kevin Buzzard (Oct 23 2019 at 08:03)</a>:</h4>
+<p>I'm still not sure your algebra's right but I agree that there's a solution. It's 8 linear equations in 12 real variables</p>
+
+<a name="178831024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831024">Kenny Lau (Oct 23 2019 at 08:04)</a>:</h4>
+<p>well (-1,-i) = (1,i) so it's really irrelevant</p>
+
+<a name="178831033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831033">Kenny Lau (Oct 23 2019 at 08:04)</a>:</h4>
+<p>you just need to solve a(1,i) + b(1,j) + c(1,k) = 0</p>
+
+<a name="178831038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831038">Kevin Buzzard (Oct 23 2019 at 08:04)</a>:</h4>
+<p>That's why only 8 equations</p>
+
+<a name="178831046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831046">Kenny Lau (Oct 23 2019 at 08:04)</a>:</h4>
+<p>oh</p>
+
+<a name="178831079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831079">Kenny Lau (Oct 23 2019 at 08:05)</a>:</h4>
+<p>which (online/offline) calculator knows about quaternions? I can't get WA to work</p>
+
+<a name="178831105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831105">Kevin Buzzard (Oct 23 2019 at 08:05)</a>:</h4>
+<p>What's wrong with my existence proof? ;-)</p>
+
+<a name="178831112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831112">Kevin Buzzard (Oct 23 2019 at 08:05)</a>:</h4>
+<p>Who cares what the answer is</p>
+
+<a name="178831218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831218">Kevin Buzzard (Oct 23 2019 at 08:07)</a>:</h4>
+<p>That's an exercise for the reader</p>
+
+<a name="178831311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831311">Kevin Buzzard (Oct 23 2019 at 08:08)</a>:</h4>
+<p>There will be a symmetry in the space of all solutions but perhaps not in any one individual solution</p>
+
+<a name="178831341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831341">Kenny Lau (Oct 23 2019 at 08:09)</a>:</h4>
+<p>what does Aut(H/R) look like?</p>
+
+<a name="178831348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831348">Kenny Lau (Oct 23 2019 at 08:09)</a>:</h4>
+<p>there's somehow an element of order 3</p>
+
+<a name="178831752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831752">Johan Commelin (Oct 23 2019 at 08:15)</a>:</h4>
+<blockquote>
+<p>what does Aut(H/R) look like?</p>
+</blockquote>
+<p>Isn't that SO_3?</p>
+
+<a name="178831759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178831759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178831759">Johan Commelin (Oct 23 2019 at 08:15)</a>:</h4>
+<p>That's what the phycisists use all the time, right?</p>
+
+<a name="178857466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178857466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178857466">Kenny Lau (Oct 23 2019 at 14:14)</a>:</h4>
+<p>so Galois theory fails badly :P</p>
+
+<a name="178864778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178864778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178864778">Kevin Buzzard (Oct 23 2019 at 15:24)</a>:</h4>
+<blockquote>
+<p>I was brought up with ring = commutative ring</p>
+</blockquote>
+<p>You can see why now.</p>
+
+<a name="178926166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178926166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178926166">Kenny Lau (Oct 24 2019 at 07:03)</a>:</h4>
+<p>Oh no this can be generalized to vector spaces using the same proof</p>
+
+<a name="178926193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178926193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178926193">Kenny Lau (Oct 24 2019 at 07:04)</a>:</h4>
+<p>per K. Conrad</p>
+
+<a name="178926208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178926208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178926208">Kenny Lau (Oct 24 2019 at 07:04)</a>:</h4>
+<p>Lemma 2.12 of <a href="https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf" target="_blank" title="https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf">https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf</a></p>
+
+<a name="178950165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178950165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178950165">Kevin Buzzard (Oct 24 2019 at 13:16)</a>:</h4>
+<p>non-abelian Hilbert 90 is true -- H^1(Gal(L/K),GL_n(L))=1</p>
+
+<a name="178952760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178952760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178952760">Kenny Lau (Oct 24 2019 at 13:46)</a>:</h4>
+<p>why?</p>
+
+<a name="178963278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178963278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178963278">Kevin Buzzard (Oct 24 2019 at 15:23)</a>:</h4>
+<p>Because every L-semilinear action on a finite-dimensional L-vector space comes from a K-linear action on a subspace</p>
+
+<a name="178968350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178968350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178968350">Kenny Lau (Oct 24 2019 at 16:09)</a>:</h4>
+<p>oh wow so Galois descent is just saying that H^1(G,GL(L,n)) = 0?</p>
+
+<a name="178968646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178968646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178968646">Kenny Lau (Oct 24 2019 at 16:13)</a>:</h4>
+<p>so let's say we have a crossed homomorphism f: G -&gt; GL(L,n); we need to find A in GL(L,n) such that f(g)(v) = g(A(A^-1 v))? but that's just saying f(g)(v)=g(v)? I'm slightly confused</p>
+
+<a name="178968716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178968716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178968716">Kenny Lau (Oct 24 2019 at 16:14)</a>:</h4>
+<p>I'm not sure how G acts on GL(L,n)</p>
+
+<a name="178968831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178968831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178968831">Johan Commelin (Oct 24 2019 at 16:15)</a>:</h4>
+<p>It acts on the entries of the matrices. I think that's the action you want</p>
+
+<a name="178969108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178969108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178969108">Kenny Lau (Oct 24 2019 at 16:18)</a>:</h4>
+<p>so g(φ)(v) = g(φ(v))</p>
+
+<a name="178969120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178969120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178969120">Kenny Lau (Oct 24 2019 at 16:18)</a>:</h4>
+<p>and (g(φ) φ^-1)(v) = g(v)?</p>
+
+<a name="178971410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178971410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178971410">Reid Barton (Oct 24 2019 at 16:43)</a>:</h4>
+<blockquote>
+<p>so g(φ)(v) = g(φ(v))</p>
+</blockquote>
+<p>I don't think this is right. g(φ(v)) = g(φ)(g(v))</p>
+
+<a name="178971482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178971482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178971482">Reid Barton (Oct 24 2019 at 16:43)</a>:</h4>
+<p>Unless I'm confused, which is very possible</p>
+
+<a name="178971549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178971549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178971549">Reid Barton (Oct 24 2019 at 16:44)</a>:</h4>
+<p>You're writing G for Gal(L/K) right?</p>
+
+<a name="178973818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178973818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178973818">Kenny Lau (Oct 24 2019 at 17:07)</a>:</h4>
+<p>yes</p>
+
+<a name="178974522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178974522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178974522">Kevin Buzzard (Oct 24 2019 at 17:14)</a>:</h4>
+<p>You want f(g)=g(A)/A or whatever your convention is in the nonabelian case</p>
+
+<a name="178974540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178974540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178974540">Kevin Buzzard (Oct 24 2019 at 17:15)</a>:</h4>
+<p>A is a matrix with coefficients in L and Galois is acting on the matrix entries</p>
+
+<a name="178974639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178974639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178974639">Kevin Buzzard (Oct 24 2019 at 17:15)</a>:</h4>
+<p>and one way of constructing it is noticing that some explicit formula for A works...as long as it gives an invertible matrix</p>
+
+<a name="178975731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178975731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178975731">Kenny Lau (Oct 24 2019 at 17:25)</a>:</h4>
+<p>ok so Galois descent gives us an L-basis {e1 ... en} of L^n where the action of G is trivial, so f(g)(sum vi ei) = sum g(vi) ei, so f(g)(φ(v)) = φ(g(v)), so f(g)(v) = φ(g(φ^-1(v))) and this φ or φ^-1 should be what we want?</p>
+
+<a name="178979196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178979196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178979196">Kenny Lau (Oct 24 2019 at 18:00)</a>:</h4>
+<p>Anyway, should I include 2.12?</p>
+
+<a name="178983451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/178983451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#178983451">Johan Commelin (Oct 24 2019 at 18:39)</a>:</h4>
+<p>Which 2.12?</p>
+
+<a name="179018410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179018410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179018410">Kenny Lau (Oct 25 2019 at 03:09)</a>:</h4>
+<p>Lemma 2.12 of <a href="https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf" target="_blank" title="https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf">https://kconrad.math.uconn.edu/blurbs/galoistheory/galoisdescent.pdf</a></p>
+
+<a name="179018455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179018455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179018455">Kenny Lau (Oct 25 2019 at 03:10)</a>:</h4>
+<p>monoid homomorphisms G-&gt;L are linearly-V independent given any vector space V over L</p>
+
+<a name="179020192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020192">Johan Commelin (Oct 25 2019 at 04:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Sure, why not. The proof is a 1-liner <span aria-label="grimacing" class="emoji emoji-1f62c" role="img" title="grimacing">:grimacing:</span> <br>
+More seriously. If you it is in fact true that it only requires 7 tiny modifications of the current proof, I think you should do it. However, there is a little issue. Because it's not going to be true for arbitrary modules over an ID. So you can't reuse proofs. It will be true for free modules over an ID (maybe projective, or whatever), but I don't think mathlib knows what that means. So you might end up with two longish proofs that are really very similar.</p>
+
+<a name="179020238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020238">Kenny Lau (Oct 25 2019 at 04:06)</a>:</h4>
+<p>then maybe I should state it as separate theorems</p>
+
+<a name="179020257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020257">Kenny Lau (Oct 25 2019 at 04:07)</a>:</h4>
+<p>it works over torsion-free modules</p>
+
+<a name="179020267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020267">Kenny Lau (Oct 25 2019 at 04:07)</a>:</h4>
+<p>the crucial step is av = 0 =&gt; a = 0 or v = 0</p>
+
+<a name="179020273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020273">Kenny Lau (Oct 25 2019 at 04:08)</a>:</h4>
+<p>which reminds me that we should define torsion in mathlib and prove that it's left exact</p>
+
+<a name="179020328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020328">Kenny Lau (Oct 25 2019 at 04:09)</a>:</h4>
+<p>which reminds me that group cohomology hasn't been done</p>
+
+<a name="179020336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020336">Kenny Lau (Oct 25 2019 at 04:09)</a>:</h4>
+<p>hey I can do a lot if I do a PhD in mathlib :P</p>
+
+<a name="179020541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020541">Johan Commelin (Oct 25 2019 at 04:15)</a>:</h4>
+<p>So the correct thing would be: define torsion-free. prove the theorem for such modules. state some nice corollaries.<br>
+But that's a whole bunch of work. So you can also leave it like this, and add a remark/todo that says "once we have torsion-free modules, generalize to those".</p>
+
+<a name="179020642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179020642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179020642">Kenny Lau (Oct 25 2019 at 04:18)</a>:</h4>
+<p>yeah let's just leave it there</p>
+
+<a name="179027334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179027334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179027334">Kevin Buzzard (Oct 25 2019 at 07:19)</a>:</h4>
+<blockquote>
+<p>which reminds me that group cohomology hasn't been done</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="243895">@Shenyang Wu</span> 's MSc project is on group cohomology, but my experience with my MSc projects is that they don't end up in mathlib unless you make it clear early on that this is part of the deal.</p>
+
+<a name="179027396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179027396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179027396">Kevin Buzzard (Oct 25 2019 at 07:20)</a>:</h4>
+<blockquote>
+<p>hey I can do a lot if I do a PhD in mathlib :P</p>
+</blockquote>
+<p>I feel like I could supervise 10 PhD students right now. I'm serious. It's very different to maths, where I felt that if I took on more than around 1 student per year then I would have difficulty coming up with appropriate projects for them.</p>
+
+<a name="179120209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120209">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>I was having a look at this proof, in particular thinking about how to make term mode proofs more comprehensible to mortals like me.</p>
+
+<a name="179120220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120220">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>This is a pretty fun theorem, not just a tedious lemma, and so I think it's worth a little thought on what we'd like theorems like this to look like.</p>
+
+<a name="179120221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120221">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>(I don't at all mean to hold this PR up --- I'm happy if we hit merge right now.)</p>
+
+<a name="179120272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120272">Scott Morrison (Oct 26 2019 at 10:37)</a>:</h4>
+<p>One place I get stuck reading a proof like this is that I can't inspect the types of variables. For example, in the line </p>
+<div class="codehilite"><pre><span></span>(λ s, finset.induction_on s (λ g hg i, false.elim) $ λ a s has ih g hg,
+</pre></div>
+
+
+<p>how do I work out what <code>a</code>, <code>s</code>, <code>has</code>, <code>ih</code>, <code>g</code>, and <code>hg</code> are? I can guess from the names, or do a little work to deduce them. But I don't know how to ask the editor for much help. Hovering the mouse over <code>hg</code> just gives me the extremely unhelpful tooltip for the <code>exact</code> tactic.</p>
+
+<a name="179120320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120320">Scott Morrison (Oct 26 2019 at 10:38)</a>:</h4>
+<p>If we were in tactic mode, of course, I'd have no trouble here: I'd insert the cursor between tactic invocations, and inspect the tactic state.</p>
+
+<a name="179120329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120329">Scott Morrison (Oct 26 2019 at 10:39)</a>:</h4>
+<p>(I was actually thinking about trying to "document" this proof, without changing Kenny's code at all, just inserting some comments, but found it pretty painful because of this issue.)</p>
+
+<a name="179120438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120438">Scott Morrison (Oct 26 2019 at 10:43)</a>:</h4>
+<p>In fact, my efforts to turn the proof into a tactic style proof have so far been failing. :-(</p>
+
+<a name="179120479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120479">Scott Morrison (Oct 26 2019 at 10:44)</a>:</h4>
+<p>I thought since it's just a big chain of <code>have X : Y, from Z, ..., P</code>, it should have been easy, but I get weird errors <code>function expected at a, term has type i \mem s</code>...</p>
+
+<a name="179120551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120551">Kevin Buzzard (Oct 26 2019 at 10:46)</a>:</h4>
+<p>What happens if you replace stuff by <code>_</code>s?</p>
+
+<a name="179121025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121025">Scott Morrison (Oct 26 2019 at 11:01)</a>:</h4>
+<p>I guess that works just fine. :-)</p>
+
+<a name="179121033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121033">Scott Morrison (Oct 26 2019 at 11:01)</a>:</h4>
+<p>Somehow I'm averse to an inspection technique that involves "delete a big chunk of Kenny's nice proof". :-)</p>
+
+<a name="179121226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121226">Scott Morrison (Oct 26 2019 at 11:06)</a>:</h4>
+<p>The underscore method also has the significant failing that Lean is often too clever, and can work out the value of the underscore by itself, so doesn't tell you anything.</p>
+
+<a name="179121227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121227">Scott Morrison (Oct 26 2019 at 11:06)</a>:</h4>
+<p>(Yes, I know this means that Lean is smarter than I am.)</p>
+
+<a name="179121447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121447">Bryan Gin-ge Chen (Oct 26 2019 at 11:13)</a>:</h4>
+<p>Putting <code>{! !}</code> around an expression and using the "Infer type" hole command often works better. It should be possible to set up some keyboard shortcuts to make this easier...</p>
+
+<a name="179121495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121495">Scott Morrison (Oct 26 2019 at 11:14)</a>:</h4>
+<p>What do people think of this as a patch to Kenny's proof:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Dedekind&#39;s linear independence of characters -/</span>
+<span class="c1">-- See, for example, Keith Conrad&#39;s note https://kconrad.math.uconn.edu/blurbs/galoistheory/linearchar.pdf</span>
+<span class="kn">theorem</span> <span class="n">linear_independent_monoid_hom</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">L</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">linear_independent</span> <span class="bp">_</span> <span class="n">L</span> <span class="o">(</span><span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">G</span> <span class="bp">→*</span> <span class="n">L</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">))</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec_eq</span> <span class="o">(</span><span class="n">G</span> <span class="bp">→*</span> <span class="n">L</span><span class="o">)</span><span class="bp">;</span>
+   <span class="n">letI</span> <span class="o">:</span> <span class="n">mul_action</span> <span class="n">L</span> <span class="n">L</span> <span class="o">:=</span> <span class="n">distrib_mul_action</span><span class="bp">.</span><span class="n">to_mul_action</span> <span class="n">L</span> <span class="n">L</span><span class="bp">;</span>
+<span class="c1">-- We prove linear independence by showing that only the trivial linear combination vanishes.</span>
+<span class="n">exact</span> <span class="n">linear_independent_iff&#39;</span><span class="bp">.</span><span class="mi">2</span>
+<span class="c1">-- To do this, we use `finset` induction,</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">g</span> <span class="n">hg</span> <span class="n">i</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">s</span> <span class="n">has</span> <span class="n">ih</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span>
+<span class="c1">-- Here</span>
+<span class="c1">-- * `a` is a new character we will insert into the `finset` of characters `s`,</span>
+<span class="c1">-- * `ih` is the fact that only the trivial linear combination of characters in `s` is zero</span>
+<span class="c1">-- * `hg` is the fact that `g` are the coefficients of a linear combination summing to zero</span>
+<span class="c1">-- and it remains to prove that `g` vanishes on `insert a s`.</span>
+
+<span class="c1">-- We now make the key calculation:</span>
+<span class="c1">-- For any character `i` in the original `finset`, we have `g i • i = g i • a` as functions on the monoid `G`.</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">his</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span>
+  <span class="c1">-- We prove these expressions are equal by showing</span>
+  <span class="c1">-- the differences of their values on each monoid element `x` is zero</span>
+  <span class="n">eq_of_sub_eq_zero</span> <span class="err">$</span> <span class="n">ih</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="n">g</span> <span class="n">j</span> <span class="bp">*</span> <span class="n">j</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">g</span> <span class="n">j</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="k">calc</span>
+    <span class="c1">-- After that, it&#39;s just a chase scene.</span>
+          <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">((</span><span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span><span class="o">)</span> <span class="err">•</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">))</span> <span class="n">y</span>
+        <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">pi</span><span class="bp">.</span><span class="n">finset_sum_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">sub_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="bp">-</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_sub_distrib</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">))</span>
+          <span class="bp">-</span> <span class="o">(</span><span class="n">g</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_sub_add_left_eq_sub</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_insert</span> <span class="n">has</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_insert</span> <span class="n">has</span><span class="o">]</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span> <span class="bp">-</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">i</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span>
+      <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_sub</span><span class="bp">.</span><span class="n">sub</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">i</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]))</span>
+        <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="n">mul_left_comm</span><span class="o">])</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span>
+          <span class="bp">-</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">))</span> <span class="n">y</span> <span class="o">:</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">pi</span><span class="bp">.</span><span class="n">finset_sum_apply</span><span class="o">,</span> <span class="n">pi</span><span class="bp">.</span><span class="n">finset_sum_apply</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mul_sum</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">-</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">hg</span><span class="bp">;</span> <span class="n">refl</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_zero</span><span class="o">,</span> <span class="n">sub_zero</span><span class="o">])</span>
+    <span class="n">i</span>
+    <span class="n">his</span><span class="o">,</span>
+<span class="c1">-- On the other hand, since `a` is not already in `s`, for any character `i ∈ s`</span>
+<span class="c1">-- there is some element of the monoid on which it differs from `a`.</span>
+<span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→*</span> <span class="n">L</span><span class="o">,</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">y</span><span class="o">,</span> <span class="n">i</span> <span class="n">y</span> <span class="bp">≠</span> <span class="n">a</span> <span class="n">y</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">his</span><span class="o">,</span>
+  <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hia</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hy</span><span class="o">,</span> <span class="n">h</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">has</span> <span class="err">$</span> <span class="n">hia</span> <span class="bp">▸</span> <span class="n">his</span><span class="o">,</span>
+<span class="c1">-- From these two facts we deduce that `g` actually vanishes on `s`,</span>
+<span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">his</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">h2</span> <span class="n">i</span> <span class="n">his</span> <span class="k">in</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">i</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">a</span> <span class="n">y</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_fun</span> <span class="o">(</span><span class="n">h1</span> <span class="n">i</span> <span class="n">his</span><span class="o">)</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">or</span><span class="bp">.</span><span class="n">resolve_right</span> <span class="o">(</span><span class="n">mul_eq_zero</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_sub</span><span class="o">,</span> <span class="n">sub_eq_zero</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span><span class="o">)</span> <span class="o">(</span><span class="n">sub_ne_zero_of_ne</span> <span class="n">hy</span><span class="o">),</span>
+<span class="c1">-- And so, using the fact that the linear combination over `s` and over `insert a s` both vanish,</span>
+<span class="c1">-- we deduce that `g a = 0`.</span>
+<span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="k">calc</span>
+  <span class="n">g</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">(</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="n">a</span> <span class="err">•</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">a</span><span class="bp">.</span><span class="n">map_one</span><span class="bp">;</span> <span class="n">refl</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">g</span> <span class="n">i</span> <span class="err">•</span> <span class="n">i</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">L</span><span class="o">))</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">begin</span>
+      <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_single</span> <span class="n">a</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">his</span> <span class="n">hia</span><span class="o">,</span> <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_insert</span> <span class="n">at</span> <span class="n">his</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h3</span> <span class="n">i</span> <span class="o">(</span><span class="n">his</span><span class="bp">.</span><span class="n">resolve_left</span> <span class="n">hia</span><span class="o">),</span> <span class="n">zero_smul</span><span class="o">]</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">haas</span><span class="o">,</span> <span class="n">exfalso</span><span class="o">,</span> <span class="n">apply</span> <span class="n">haas</span><span class="o">,</span> <span class="n">exact</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_insert_self</span> <span class="n">a</span> <span class="n">s</span> <span class="o">}</span>
+    <span class="kn">end</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">hg</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+<span class="c1">-- Now we&#39;re done; the last two facts together imply that `g` vanishes on every element of `insert a s`.</span>
+<span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">forall_mem_insert</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">h4</span><span class="o">,</span> <span class="n">h3</span><span class="bp">⟩</span><span class="o">)</span>
+</pre></div>
+
+
+<p>(This is identical to Kenny's proof, except I added all the comments, and in two places replaced a <code>λ x</code> with a <code>λ x : G</code> to make sure the type was clear.)</p>
+
+<a name="179121503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121503">Scott Morrison (Oct 26 2019 at 11:14)</a>:</h4>
+<p>Is this actually better?</p>
+
+<a name="179121510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121510">Scott Morrison (Oct 26 2019 at 11:15)</a>:</h4>
+<p>I probably should replace the flippant comment about the actual calculation, but I also need to think about the flight I have to catch shortly. :-)</p>
+
+<a name="179121562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121562">Bryan Gin-ge Chen (Oct 26 2019 at 11:16)</a>:</h4>
+<p>I'd love it if more proofs in mathlib were documented this way. PR it!</p>
+
+<a name="179121577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121577">Scott Morrison (Oct 26 2019 at 11:17)</a>:</h4>
+<p>This is actually on an active PR. Perhaps <span class="user-mention" data-user-id="110064">@Kenny Lau</span>  wouldn't mind if I just pushed to his PR?</p>
+
+<a name="179121636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179121636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179121636">Bryan Gin-ge Chen (Oct 26 2019 at 11:19)</a>:</h4>
+<p>Oh, but the PR is marked as ready-to-merge already. I don't know what the etiquette is here.</p>
+
+<a name="179122034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179122034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179122034">Scott Morrison (Oct 26 2019 at 11:30)</a>:</h4>
+<p>Oops, yeah, I pushed, and then noticed the ready-to-merge.</p>
+
+<a name="179129352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179129352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179129352">Kenny Lau (Oct 26 2019 at 15:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> thanks!</p>
+
+<a name="179141318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179141318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179141318">Mario Carneiro (Oct 26 2019 at 20:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> A trick I use to view the tactic state in term mode without deleting anything is to insert <code>by {}; exact</code>. The <code>{}</code> will cause an error because the goal isn't closed, and it will show the tactic state at that point</p>
+
+<a name="179141382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179141382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179141382">Mario Carneiro (Oct 26 2019 at 20:59)</a>:</h4>
+<p>You can also use <code>by let :=</code> to capture what comes after and display it</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

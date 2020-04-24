@@ -1,0 +1,103 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/91501uliftinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html">ulift instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="168140776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168140776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168140776">Kenny Lau (Jun 14 2019 at 14:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">has_le</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_le</span> <span class="o">(</span><span class="n">ulift</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">down</span> <span class="bp">≤</span> <span class="n">y</span><span class="bp">.</span><span class="n">down</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">preorder</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">ulift</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">le_refl</span> <span class="n">x</span><span class="bp">.</span><span class="n">down</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">le_trans</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">has_le</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">partial_order</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">ulift</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span> <span class="n">hyx</span><span class="o">,</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">ext</span> <span class="n">x</span> <span class="n">y</span> <span class="err">$</span> <span class="n">le_antisymm</span> <span class="n">hxy</span> <span class="n">hyx</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">le_trans</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">ulift</span><span class="bp">.</span><span class="n">preorder</span> <span class="o">}</span>
+</pre></div>
+
+<a name="168140790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168140790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168140790">Kenny Lau (Jun 14 2019 at 14:42)</a>:</h4>
+<p>can we automate this? is it worth it?</p>
+
+<a name="168142577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168142577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168142577">Reid Barton (Jun 14 2019 at 15:02)</a>:</h4>
+<p>It should be pretty much the same as <code>pi_instances</code> I think</p>
+
+<a name="168145382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168145382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168145382">Kevin Buzzard (Jun 14 2019 at 15:33)</a>:</h4>
+<p>You are a mathematician. Why do you need more than one universe?</p>
+
+<a name="168145954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168145954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168145954">Chris Hughes (Jun 14 2019 at 15:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> didn't you use more than one universe to do valuations?</p>
+
+<a name="168146595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168146595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168146595">Kevin Buzzard (Jun 14 2019 at 15:46)</a>:</h4>
+<p>That's only because I was young and naive when writing that part of the code.</p>
+
+<a name="168146716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168146716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168146716">Kevin Buzzard (Jun 14 2019 at 15:47)</a>:</h4>
+<p>And in fact IIRC I spent a whole lot of time wrestling with a lemma which showed that any valuation on a ring taking values in a group in some random universe was equivalent to a valuation taking valuations in the same universe as the ring.</p>
+
+<a name="168153640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168153640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168153640">Chris Hughes (Jun 14 2019 at 17:10)</a>:</h4>
+<p>Would it have been easier to not use universes?</p>
+
+<a name="168154316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154316">Kevin Buzzard (Jun 14 2019 at 17:19)</a>:</h4>
+<p>If we had made a blanket decision to only use one universe, <em>or</em> if we had decided to ignore Mario, then we would have had to write strictly less code. We had some structure <code>valuation (R : Type u)</code> which had a field <code>Gamma : Type v</code> except that Mario said that we'd run into trouble if we did it like that, so we went for <code>Gamma : Type u</code> and then, at his suggestion, spent some time writing code which given a valuation on R (type u) taking values in Gamma (Type v) produced an equivalent valuation taking values in some other Gamma' (Type u). The type <code>Spv R</code> was equivalence classes of valuations, so doing it all this way we were truly universe-polymorphic. However we never needed this extra polymorphism power.</p>
+<p>What I am however unclear about is exactly how much was saved. Because I think that even if we'd stuck to Gamma : Type u we would have had issues with equivalence relations on things that "weren't sets" (in my model of this stuff) and might well have had to write some sort of code to fix this anyway (assuming that we wanted everything to live in Type u)</p>
+
+<a name="168154581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154581">Chris Hughes (Jun 14 2019 at 17:23)</a>:</h4>
+<p>But <code>valuation (R : Type u) : Type (u+1)</code>, so to actually not use universes you'd need to do more than stick to <code>Gamma : Type u</code></p>
+
+<a name="168154675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154675">Kevin Buzzard (Jun 14 2019 at 17:24)</a>:</h4>
+<p>Right but that just means that the class of all valuations isn't a set. I'm not bothered by that. I know what is a set and what is a class, and I don't need anything else. I won't be putting anything classy into a setty hole.</p>
+
+<a name="168154731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154731">Kevin Buzzard (Jun 14 2019 at 17:25)</a>:</h4>
+<p>My general point is that I am not interested in what computer scientists think mathematics is, I am interested in what mathematicians think mathematics is, and they know how to do everything with just one universe.</p>
+
+<a name="168154977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154977">Chris Hughes (Jun 14 2019 at 17:28)</a>:</h4>
+<p>I don't know enough ZFC to be sure exactly what you can do with classes, but I think I remember a set of the form <code>{x | ∃ Γ : Type, p Γ x}</code>, which I don't think you can do in ZFC.</p>
+
+<a name="168271164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168271164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168271164">Mario Carneiro (Jun 16 2019 at 22:57)</a>:</h4>
+<p>You can do that in ZFC</p>
+
+<a name="168271206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168271206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168271206">Mario Carneiro (Jun 16 2019 at 22:58)</a>:</h4>
+<p>there are no classes involved there, that is just an unbounded quantification</p>
+
+<a name="168271417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168271417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168271417">Kenny Lau (Jun 16 2019 at 23:04)</a>:</h4>
+<p>yeah this is a bit problematic for type theory</p>
+
+<a name="168271485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168271485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168271485">Mario Carneiro (Jun 16 2019 at 23:07)</a>:</h4>
+<p>In most cases where I have seen this come up, you can prove that the existential quantification is equivalent to some predicative formulation, from which it follows that it is also equivalent to <code>{x | ∃ Γ : Type u, p Γ x}</code> for arbitrary <code>u</code> not in the original definition</p>
+
+<a name="168271791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168271791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168271791">Reid Barton (Jun 16 2019 at 23:16)</a>:</h4>
+<p>By "not in the original definition", do you mean bigger than everything else that appears?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

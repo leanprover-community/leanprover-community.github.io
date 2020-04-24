@@ -1,0 +1,614 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90385Typeclassesagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html">Type classes again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="167264211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167264211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167264211">Sebastien Gouezel (Jun 04 2019 at 07:08)</a>:</h4>
+<p>Trying to fix the <code>normed_space</code> issue, I ran into a weird behavior of typeclass resolution. The definition is now</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">normed_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">normed_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">β</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">vector_space</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">norm_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span><span class="n">β</span><span class="o">),</span> <span class="n">norm</span> <span class="o">(</span><span class="n">a</span> <span class="err">•</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">has_norm</span><span class="bp">.</span><span class="n">norm</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Then, to define a normed space structure on the space of continuous linear maps between two normed spaces, I write</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">to_normed_group</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">normed_group</span><span class="bp">.</span><span class="n">of_core</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">op_norm_zero_iff</span><span class="o">,</span> <span class="n">op_norm_triangle</span><span class="o">,</span> <span class="n">op_norm_neg</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">to_normed_space</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">op_norm_smul</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>The surprising behavior is that Lean can not infer the normed group structure on <code>E →L[k] (F × G)</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">to_normed_group_prod</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">to_normed_group</span>
+</pre></div>
+
+
+<p>works, but using <code>by apply_instance</code> instead of <code>continuous_linear_map.to_normed_group</code> fails. I can register this instance by hand as I just did, and then everything works fine, but I am afraid this shows there is something wrong with my definitions.</p>
+
+<a name="167266754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167266754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167266754">Sebastien Gouezel (Jun 04 2019 at 07:47)</a>:</h4>
+<p>If I try with <code>apply_instance</code>, the context is</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
+<span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_3</span><span class="o">,</span>
+<span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_4</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="n">k</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">F</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_5</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">F</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">G</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">G</span>
+<span class="err">⊢</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and in the instance search trace I find the line</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
+
+
+<p>I don't understand what is going on...</p>
+
+<a name="167267018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267018">Sebastien Gouezel (Jun 04 2019 at 07:50)</a>:</h4>
+<p>Crap, universe issues: if I put all of them in <code>Type</code>, everything works...</p>
+
+<a name="167267097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267097">Kevin Buzzard (Jun 04 2019 at 07:51)</a>:</h4>
+<p>Try changing <code>Type*</code> to <code>Type u</code> in some places, if you want to remain polymorphic. That sometimes changes things.</p>
+
+<a name="167267161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267161">Kevin Buzzard (Jun 04 2019 at 07:52)</a>:</h4>
+<p>I have no proper understanding of why this helps, but apparently it changes elaboration. This might be an unrelated issue though of course.</p>
+
+<a name="167267169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267169">Sebastien Gouezel (Jun 04 2019 at 07:52)</a>:</h4>
+<p>I just tried this, but the problem remains.</p>
+
+<a name="167267182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267182">Kevin Buzzard (Jun 04 2019 at 07:52)</a>:</h4>
+<p>Well spotted though; universe problems are hard to debug.</p>
+
+<a name="167267322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267322">Kevin Buzzard (Jun 04 2019 at 07:54)</a>:</h4>
+<p>I have in the past suggested that mathematicians would be better off working in only one universe -- after all, that's how mathematics of this nature actually works in practice. Since when did any mathematician ever want to consider two normed fields in two different universes? Universes are for people wrestling with categories in a serious way, not for people doing "normal" mathematics like this.</p>
+
+<a name="167267337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267337">Kevin Buzzard (Jun 04 2019 at 07:54)</a>:</h4>
+<p>I don't necessarily mean <code>Type</code>, but I'm suggesting <code>Type u</code> for everything.</p>
+
+<a name="167267389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267389">Kevin Buzzard (Jun 04 2019 at 07:55)</a>:</h4>
+<p>The CS guys like this "maximally universe polymorphic" approach but I have never seen a benefit when doing this kind of mathematics. Are these issues present in Isabelle/HOL?</p>
+
+<a name="167267486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267486">Kevin Buzzard (Jun 04 2019 at 07:56)</a>:</h4>
+<p>If Lean struggles with them, and we don't actually need them, then this is an argument for just using one universe.</p>
+
+<a name="167267530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267530">Kevin Buzzard (Jun 04 2019 at 07:57)</a>:</h4>
+<p>What is done in Coq? Does anyone know?</p>
+
+<a name="167267840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267840">Sebastien Gouezel (Jun 04 2019 at 08:01)</a>:</h4>
+<p>I agree with this (almost: I would be ready to have the field <code>k</code> in some universe -- think of the real numbers, they are in <code>Type</code> -- and the vector spaces in another one -- but in my example it doesn't work, they really all need to be in the same universe). I haven't seen any benefit of universe polymorphism either, and these issues don't exist in Isabelle. We really need the CS guys either to make it better, or to grant us the right to use only one universe :)</p>
+
+<a name="167268035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268035">Johan Commelin (Jun 04 2019 at 08:03)</a>:</h4>
+<p>Linear equivalences between vector spaces are currently not universe polymorphic... so it's not like you can't have non-universe polymorphic stuff in mathlib. It works like a virus though</p>
+
+<a name="167268157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268157">Johan Commelin (Jun 04 2019 at 08:04)</a>:</h4>
+<p>I fear that the <code>ℚ_[ℓ]</code>-vector space that rolls out of étale cohomology will not live in <code>Type</code>.</p>
+
+<a name="167268180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268180">Johan Commelin (Jun 04 2019 at 08:04)</a>:</h4>
+<p>I would still like to be able to apply general theorems to it.</p>
+
+<a name="167268241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268241">Johan Commelin (Jun 04 2019 at 08:05)</a>:</h4>
+<p>Currently mathlib makes it hard for me to express that it is isomorphic to its double dual... (assuming that this cohomology group is fin.dim., which is often the case).</p>
+
+<a name="167268309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268309">Sebastien Gouezel (Jun 04 2019 at 08:06)</a>:</h4>
+<p>Just for the record, with <code>pp.all</code> I have in the context</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span>
+</pre></div>
+
+
+<p>and the line that fails in instance search, if I read the trace correctly, is</p>
+<div class="codehilite"><pre><span></span>[class_instances] (1) ?x_36 : @normed_space.{u uG} k G (@nondiscrete_normed_field.to_normed_field.{u} k _inst_1) _inst_6 := _inst_7
+failed is_def_eq
+</pre></div>
+
+
+<p>This is really a mystery to me...</p>
+
+<a name="167268338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268338">Johan Commelin (Jun 04 2019 at 08:07)</a>:</h4>
+<p>That's really crazy...</p>
+
+<a name="167268361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268361">Keeley Hoek (Jun 04 2019 at 08:07)</a>:</h4>
+<p>Is this the same reluctance to unify universe metavariables that makes you have to specify the category_theory morphism universe sometimes?</p>
+
+<a name="167268425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268425">Reid Barton (Jun 04 2019 at 08:08)</a>:</h4>
+<p>So the category theory one I understand</p>
+
+<a name="167268584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268584">Reid Barton (Jun 04 2019 at 08:10)</a>:</h4>
+<p>The issue there is that, just like how in group theory we only talk about <code>G : Type u</code> and rely on the type class system to find <code>[group G]</code>, in category theory we talk about <code>C : Type u</code> and rely on the type class system to find <code>[category C]</code>. But there is a difference, because <code>category</code> has a second universe parameter <code>v</code> which is not determined by <code>C</code>. If you're unlucky it might also not be determined by whatever context is requiring the <code>category</code> instance and then Lean will refuse to "guess" <code>v</code> for you.</p>
+
+<a name="167268618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268618">Reid Barton (Jun 04 2019 at 08:11)</a>:</h4>
+<p>In that case you might need to add a <code>.{v}</code> somewhere.</p>
+
+<a name="167268744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268744">Reid Barton (Jun 04 2019 at 08:13)</a>:</h4>
+<p>When I saw Sebastien's tactic state my first thought was that there is some problem about universe variables, but I don't understand what the problem was. It looks as though there is just a bug.</p>
+
+<a name="167269587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167269587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167269587">Reid Barton (Jun 04 2019 at 08:26)</a>:</h4>
+<blockquote>
+<p>I agree with this (almost: I would be ready to have the field <code>k</code> in some universe -- think of the real numbers, they are in <code>Type</code> -- and the vector spaces in another one -- but in my example it doesn't work, they really all need to be in the same universe). I haven't seen any benefit of universe polymorphism either, and these issues don't exist in Isabelle. We really need the CS guys either to make it better, or to grant us the right to use only one universe :)</p>
+</blockquote>
+<p>I like the "<code>Type u</code> for everything" approach for all the parts of math that don't routinely use universes even in informal presentations.<br>
+For cases where you want to work over some particular base field in <code>Type</code> there's always <code>ulift</code>. If <code>ulift real</code> isn't already a field then we can have someone go and make <code>algebra/ulift_instances</code>.</p>
+
+<a name="167269733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167269733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167269733">Keeley Hoek (Jun 04 2019 at 08:29)</a>:</h4>
+<p>What actually is the point of <code>Type u</code> not being in <code>Type u+2</code></p>
+
+<a name="167270038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270038">Kevin Buzzard (Jun 04 2019 at 08:34)</a>:</h4>
+<blockquote>
+<p>I fear that the <code>ℚ_[ℓ]</code>-vector space that rolls out of étale cohomology will not live in <code>Type</code>.</p>
+</blockquote>
+<p>Removing my computer science hat completely, you sound like you just said "I fear that the etale cohomology groups are not sets", to which I reply "Johan that is complete nonsense, of course they're sets! What are you talking about?"</p>
+
+<a name="167270353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270353">Reid Barton (Jun 04 2019 at 08:38)</a>:</h4>
+<p>I think Johan means that the étale site of X is not small, but only essentially small. It's not clear what the best way to formalize this is--but informally we just pretend there's no difference at all.</p>
+
+<a name="167270471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270471">Johan Commelin (Jun 04 2019 at 08:39)</a>:</h4>
+<p>I don't like have <code>ulift ℤ</code> and <code>ulift ℝ</code> all over the place... it's quite ugly. Otoh, battling universe issues is also ugly. I hope that we can jump between the two horns of this bull.</p>
+
+<a name="167270713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270713">Kevin Buzzard (Jun 04 2019 at 08:42)</a>:</h4>
+<blockquote>
+<p>The issue there is that, just like how in group theory we only talk about <code>G : Type u</code> and rely on the type class system to find <code>[group G]</code>, in category theory we talk about <code>C : Type u</code> and rely on the type class system to find <code>[category C]</code>. But there is a difference, because <code>category</code> has a second universe parameter <code>v</code> which is not determined by <code>C</code>. If you're unlucky it might also not be determined by whatever context is requiring the <code>category</code> instance and then Lean will refuse to "guess" <code>v</code> for you.</p>
+</blockquote>
+<p>My way of thinking about this completely solves this issue. Every category that I run into as a "normal mathematician" who is not explicitly trying to prove theorems about categories but is instead just using them as a tool to do "normal mathematics", is either a category where the class of all objects is a set (e.g. a diagram category), or a category where the class of all objects is not a set, but Hom(X,Y) is a set for all objects X and Y (e.g. the categories of sets, groups, rings, vector spaces over a field, schemes, topological spaces, insert arbitrary sane mathematical object here i.e. not "category"). So in all of "normal mathematics" there are only two things: small categories and big categories. In both cases v is determined by u. Mathematicians use these two kinds of categories in different ways too; diagram categories are for taking limits, all the other categories are for giving us a unified language for managing data and theorems, giving us a general language such as "adjoint functor" to save pen when we're trying to say what we want to say. </p>
+<p>So the extension of my "just use one universe" argument to the category theory situation is "if you want to make the category of perfectoid spaces, make it a "category of the second kind" with just one universe parameter u, and have X : Type u and Hom(X,Y) : Type u. One universe, doing the thing which the ZFC universe was invented to solve". Problem solved. Not as universe polymorphic as some people like -- <em>but it works in Lean and it is enough for mathematicians</em>. </p>
+<p>Sure if you want to develop some theories about higher categories or whatever then feel free to wrestle with universes; I am not saying that all of the maths everyone does should stick to one universe. But I want to argue that for "normal" mathematics, being universe polymorphic is <em>actively bad</em>. It is bad because things don't work. It is bad because normal mathematicians say "why are you assuming the existence of universes?". I have no good answer to this question. I want to start a campaign for one universe.</p>
+
+<a name="167270902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270902">Kevin Buzzard (Jun 04 2019 at 08:45)</a>:</h4>
+<blockquote>
+<p>I think Johan means that the étale site of X is not small, but only essentially small. It's not clear what the best way to formalize this is--but informally we just pretend there's no difference at all.</p>
+</blockquote>
+<p>I must understand all the mathematics here. How do we define the constant sheaf Z/nZ on the etale site? Insert definition here. It's a sheaf. H^0 is then in Type, right?</p>
+
+<a name="167271017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167271017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167271017">Kevin Buzzard (Jun 04 2019 at 08:46)</a>:</h4>
+<p>There are various ways of defining the higher H^i. Can't I just take some cohomologically trivial cover and then do some Cech-like thing? Is there really an issue here?</p>
+
+<a name="167271433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167271433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167271433">Neil Strickland (Jun 04 2019 at 08:51)</a>:</h4>
+<p>I don't really buy this.  It's a basic part of the formalism that any ring <code>R</code> is isomorphic to the ring of global sections of the structure sheaf on the Zariski site for <code>R</code>.  But under the natural framework of definitions, the latter ring will be in a higher universe.  You can probably avoid that, by some argument showing that it is sufficient to consider <code>R</code>-algebras of finite presentation, which can be specified by finite lists of elements of <code>R</code>.  But that will take some work.  However, there is some real mathematical content here: we have no right to expect that the obvious definition of etale cohomology does not lead to Russell-type paradoxes, and the reasons behind that are essentially the same as the universe considerations that we are discussing.</p>
+
+<a name="167273439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273439">Reid Barton (Jun 04 2019 at 09:16)</a>:</h4>
+<p>Neil said basically what I was going to but just to spell out this "natural framework":<br>
+Etale cohomology is an instance of sheaf cohomology, which we can define for any site. If F is a sheaf on a site (C, J) then H^0(F) is the limit of F over C^{op}. In general if we allow C to be a large category then H^0(F) might really be too big to be a set even if all the values of F are sets.<br>
+Now in etale cohomology two things happen which each independently prevent this from occurring.</p>
+<ul>
+<li>The etale site of X has a terminal object (X itself) which means that H^0(F) is (isomorphic to) F(X). But we should regard this as a theorem, not a definition. Moreover we still have to do something about the higher H^i(F).</li>
+<li>The etale site of X is essentially small (by the kind of cardinality arguments Neil mentioned) and therefore we can compute all the H^i(F) by replacing the etale site by an equivalent small category. Again there are theorems involved here (these cardinality arguments, and the fact that cohomology is unchanged under an equivalence of sites) but perhaps it's most ergonomic to define etale cohomology as the sheaf cohomology over a genuinely small category equivalent to the etale site of X.</li>
+</ul>
+
+<a name="167273625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273625">Johan Commelin (Jun 04 2019 at 09:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> As mathematicians, we have <code>Type u ⊆ Type (u+1)</code>. Hence you're definition can spit out something in <code>Type (u+1)</code> but you can later prove that it actually lives in a smaller universe. We can't do that in Lean <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="167273825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273825">Kevin Buzzard (Jun 04 2019 at 09:21)</a>:</h4>
+<p>Conrad has thought hard about these issues and might have opinions on "the best way to do it". I'll see what he thinks. It will probably just be the "replace by an equivalent small category" argument.</p>
+
+<a name="167273968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273968">Kevin Buzzard (Jun 04 2019 at 09:23)</a>:</h4>
+<p>I do think it's essential to prove that cohomology groups are in the right universe. Wait -- this is orthogonal to the underlying issue, isn't it? If I'm prepared once and for all to do some work (which should be done!) to prove that my cohomology groups are sets (which is one way of thinking about it with a ZFC perspective) then this is all just fine still; I still don't ever need more than one universe. I'm aware there's an issue, but I don't think universe polymorphism is the way to solve it; I think what Reid is saying is the way to solve it. This is hence not an argument for multiple universes.</p>
+
+<a name="167274185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274185">Johan Commelin (Jun 04 2019 at 09:26)</a>:</h4>
+<p>It's not yet clear to me how we can define <code>H^i_et</code> to be in <code>Type</code> and also make it interact nicely with the sheaf cohomology machinery. The answer is probably to have comparison isomorphisms all over the place. And once we get sufficiently annoyed by them, we try to write a tactic that hides them for us.</p>
+
+<a name="167274229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274229">Johan Commelin (Jun 04 2019 at 09:27)</a>:</h4>
+<blockquote>
+<p>I do think it's essential to prove that cohomology groups are in the right universe.</p>
+</blockquote>
+<p>In Lean you cannot <em>prove</em> this. You have to make a definition, and that is the place where you have to get it right. If you mess up... bad luck.</p>
+
+<a name="167274329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274329">Johan Commelin (Jun 04 2019 at 09:29)</a>:</h4>
+<p>But maybe we will have <code>norm_ulift</code> (-;</p>
+
+<a name="167274836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274836">Reid Barton (Jun 04 2019 at 09:36)</a>:</h4>
+<p>I totally agree that having a field <code>k</code> and two <code>k</code>-algebras <code>R</code> and <code>S</code> and an <code>S</code>-module <code>M</code> all living in different universes is not sustainable and mathlib is probably close to exhausting the material for which it makes sense. If universes are causing any difficulty then just put everything in a single <code>Type u</code>. Kevin I'm not sure whether your "one universe" is <code>Type u</code> for a "fixed" <code>u</code> or genuinely <code>Type</code>--if the latter then I'm more skeptical.<br>
+The reason we have two parameters in category theory is just to avoid duplication between small and large categories. We have definitions with up to four category parameters, I think, so there would be a lot of combinations.</p>
+
+<a name="167275023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167275023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167275023">Johan Commelin (Jun 04 2019 at 09:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> But your problem didn't go away if you put everything in <code>Type u</code>, right? Only putting everything in <code>Type</code> worked, iirc...</p>
+
+<a name="167275473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167275473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167275473">Sebastien Gouezel (Jun 04 2019 at 09:43)</a>:</h4>
+<p>It works fine if everything is in <code>Type u</code>. If the field is in <code>Type u</code> and the normed spaces are in <code>Type v</code>, it doesn't.</p>
+
+<a name="167283353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167283353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167283353">Mario Carneiro (Jun 04 2019 at 11:41)</a>:</h4>
+<p>Coming back to the original question, is there a MWE?</p>
+
+<a name="167309447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167309447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167309447">Kevin Buzzard (Jun 04 2019 at 16:05)</a>:</h4>
+<p>From Brian:</p>
+<blockquote>
+<p>You don’t mean “equivalent to the etale site” (that can and should have arbitrarily huge disjoint unions in it), but rather the sheaf theory on such a more limited site is naturally equivalent (via restriction) to the sheaf theory on the actual small etale site. </p>
+<p>This latter sheaf theory has no set-theoretic issues (in terms of Hom-sets being sets, etc.) because the sheaf theory only needs a “base” for the topology to determine objects up to unique isomorphisms and maps between objects.  So if for a scheme X you consider just affine schemes E equipped with an etale map f members U of a chosen base of Zariski open affines in X (to make it more “concrete”) then there’s a set of such triples (E, U, f) for which any triple is isomorphic to one of those, and if you throw in all finitely iterated fiber products among these then those objects and maps among them form a site and its sheaf theory is naturally equivalent to the one on X, so in that way you’ll get all the data you need to do the sheaf theory without set-theoretic issues.  The sheaf theory on the small etale site (etale X-schemes and etale covers thereof) is all that is needed for any of the foundational theorems and applications thereof (e.g., Weil II, etc.) that I have ever seen.</p>
+<p>In EGA there is the important theorem that if Spec(B) —&gt; Spec(A) is etale, then Zariski-locally B looks “standard-etale” (i.e., (A[X]/(f))[1/f’]_h  for some monic f and some h in A[X]), but in the Stacks Project this is improved to avoid needing to Zariski-localize upstairs.  Same with smooth maps between affines.  Maybe that would be useful to you? </p>
+<p>Brian</p>
+</blockquote>
+
+<a name="167317206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167317206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167317206">Sebastien Gouezel (Jun 04 2019 at 17:31)</a>:</h4>
+<p>No MWE, it depends on two many modifications to mathlib. Once <a href="https://github.com/leanprover-community/mathlib/issues/1085" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1085">#1085</a> is merged, I will PR a branch with the workaround and showing the issue.</p>
+
+<a name="167317375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167317375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167317375">Patrick Massot (Jun 04 2019 at 17:33)</a>:</h4>
+<p>I'm working on it, but probably won't have time to finish before dinner, and then I need to bring one of my daughter to a spectacle...</p>
+
+<a name="167340123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167340123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167340123">Jeremy Avigad (Jun 04 2019 at 22:15)</a>:</h4>
+<p>While we are on the topic of universes, I'll point to a problem that I recently came across. When I was in Edinburgh, Marijn Heule wrote me and me that Donald Knuth had written him with a question about the Mycielskian (<a href="https://en.wikipedia.org/wiki/Mycielskian" target="_blank" title="https://en.wikipedia.org/wiki/Mycielskian">https://en.wikipedia.org/wiki/Mycielskian</a>). Knuth remarked that he thought the construction would be hard to carry out in an interactive theorem prover like Coq. So, I tried it. Knuth was wrong; the construction is routine and the formalization did not take long at all. It is here: <a href="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815" target="_blank" title="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815">https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815</a>.</p>
+<p>There were a few issues I wanted to raise here. First, I made the constructions computable, since it would be a shame if we could not compute with finite graphs. But I ultimately decided it is a mistake to use <code>fintype</code>s, and if I ever get back to this, I'll rewrite the constructions to avoid them. The problem is that if <code>α</code> is a <code>fintype</code>, then <code>card α = card α</code> is not necessarily provable by reflexivity, since there is an implicit dependence on the list of elements that is inferred. This actually comes up; rewrites can fail since different ways of getting a term lead to different instances. I think the right way to go is to use <code>finset</code>s instead.</p>
+<p>Second, a silly calculation in <code>nat</code> was much harder than it should have been: <a href="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L162-L168" target="_blank" title="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L162-L168">https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L162-L168</a>.  (<span class="user-mention" data-user-id="116585">@Seul Baek</span> I can show you some examples where the <code>omega</code> tactic gets confused.) I have been meaning to experiment some more before passing it off to all of you, but I will be interested in hearing if any of you can make the calculation more automatic.</p>
+<p>Finally (and this is the place where universes come in), I said that a graph is k-colorable if there exists a type α of cardinality k and a coloring of the graph with elements from alpha. But I could not get the key proof to work without naming universes explicitly: <a href="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L125-L126" target="_blank" title="https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L125-L126">https://gist.github.com/avigad/6c1b7a2b771ac561425f50ffd69a4815#file-mycielskian-lean-L125-L126</a>. I messed around with proof terms and tactics for a while before resorting to that. I have been meaning to come back to it and experiment some more, but I am teaching a summer school workshop that has been absorbing all my energy. (I have ~25 really great undergraduates from all over, coming from math, computer science, and philosophy.) Anyhow, if anyone can tell me what I am doing wrong and why I need the universe annotations, I'd be interested in hearing it.</p>
+
+<a name="167340478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167340478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167340478">Chris Hughes (Jun 04 2019 at 22:23)</a>:</h4>
+<p>I strongly agree that the <code>fintype</code> thing is a major problem, but I wasn't sure of the best approach. It's a barrier to finite groups that never got resolved. I'm not sure how using finsets solves the issue, <code>card α</code>, would become <code>finset.univ.card</code>, but we still use a <code>fintype</code> instance. I thought it might be okay to just make <code>fintype</code> a proposition for most proof purposes, and keep the computable version just in case anyone wanted to compute with it. Either that or make Lean handle subsingletons better with rewrite / simp etc.</p>
+
+<a name="167341174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167341174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167341174">Kevin Buzzard (Jun 04 2019 at 22:35)</a>:</h4>
+<p>Chris pointed out the <code>fintype</code> issue to me nearly a year ago now. </p>
+<p>Jeremy's silly <code>nat</code> calculation is this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>  <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span>
+<span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">ring</span><span class="o">,</span>
+ <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_add_eq_add_sub</span><span class="o">],</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_sub_succ</span> <span class="o">},</span>
+  <span class="n">change</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="bp">_</span><span class="o">,</span> <span class="n">apply</span> <span class="n">mul_le_mul</span><span class="bp">;</span> <span class="n">try</span> <span class="o">{</span><span class="n">simp</span><span class="o">},</span>
+  <span class="n">change</span> <span class="mi">2</span><span class="err">^</span><span class="mi">0</span> <span class="bp">≤</span> <span class="bp">_</span><span class="o">,</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_le_pow_of_le_right</span><span class="bp">;</span> <span class="n">norm_num</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It's the sort of thing that would turn Patrick's stomach! </p>
+<p>Universes are somehow beyond my ken.</p>
+
+<a name="167341572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167341572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167341572">Mario Carneiro (Jun 04 2019 at 22:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> The universe issue is because <code>colorable</code> has an internal universe variable:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">colorable</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">coloring</span> <span class="n">G</span> <span class="n">α</span><span class="o">),</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">k</span>
+</pre></div>
+
+
+<p>means</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">colorable</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">coloring</span> <span class="n">G</span> <span class="n">α</span><span class="o">),</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">k</span>
+</pre></div>
+
+
+<p>where you almost certainly did not intend to have <code>colorable</code> take a second (input!) universe variable. It is not possible to existentially quantify over universe variables, so <code>colorable.{u v} G k</code> says that there is a coloring using some type in <code>Type v</code>. I would suggest either using <code>Type u</code> instead of <code>Type v</code> here, or even simpler, skipping general types entirely and using <code>fin k</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">colorable</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">coloring</span> <span class="n">G</span> <span class="o">(</span><span class="n">fin</span> <span class="n">k</span><span class="o">))</span>
+</pre></div>
+
+
+<p>Then the equivalence to the first definition (for an arbitrary fintype in any universe) is a theorem.</p>
+
+<a name="167342630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342630">Jeremy Avigad (Jun 04 2019 at 23:01)</a>:</h4>
+<p>Thanks to all three of you for the quick responses! </p>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> You are right. It is convenient to use inductive types for graph-theoretic constructions, but then I don't see how to get a <code>finset</code> without avoiding the <code>fintype</code> problem. Probably the best solution, as you say, is to have a <code>finite_type</code> class in <code>Prop</code> that mirrors the <code>fintype</code> one (until <code>rw</code> and so on are able to handle subsingletons). The duplication would be unfortunate though. (Or does anyone really need the one in <code>Type</code>?)</p>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks for the explanation. Forcing the colors to be in the same type as the graph might work. (But maybe one day someone will want to 2-color a huge graph with <code>bool</code>?) Using a general type rather than <code>fin k</code> was useful in the proofs, because in the key argument Wikipedia runs as follows: "Suppose you have a coloring of the original graph with {1,...,k}. Without loss of generality, we can assume the hub is colored k." Can you see a clever way to get the WLOG using <code>fin k</code>?</p>
+
+<a name="167342761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342761">Mario Carneiro (Jun 04 2019 at 23:03)</a>:</h4>
+<p>I'm not saying you can't have <code>coloring G A</code> for some other type <code>A</code>, I'm saying to prove a lemma that this implies <code>coloring G (fin (card A))</code> and hence <code>colorable G (card A)</code></p>
+
+<a name="167342769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342769">Kevin Buzzard (Jun 04 2019 at 23:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">what_is_this_called</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167342825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342825">Kevin Buzzard (Jun 04 2019 at 23:04)</a>:</h4>
+<p>My library-search-fu is failing me.</p>
+
+<a name="167342839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342839">Mario Carneiro (Jun 04 2019 at 23:04)</a>:</h4>
+<p>it's an iff, sub will be on the left, and on the left of the eq</p>
+
+<a name="167342855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342855">Mario Carneiro (Jun 04 2019 at 23:05)</a>:</h4>
+<p>so <code>nat.sub_eq_iff_add_eq</code> or similar</p>
+
+<a name="167342869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342869">Jeremy Avigad (Jun 04 2019 at 23:05)</a>:</h4>
+<p>Ah, got it. Yes, that seems the way to go.</p>
+
+<a name="167342878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342878">Mario Carneiro (Jun 04 2019 at 23:05)</a>:</h4>
+<p>it's <code>nat.sub_eq_iff_eq_add</code></p>
+
+<a name="167343211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343211">Kevin Buzzard (Jun 04 2019 at 23:12)</a>:</h4>
+<p>It's not an iff because maybe a=0 and c&gt;&gt;b</p>
+
+<a name="167343223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343223">Mario Carneiro (Jun 04 2019 at 23:12)</a>:</h4>
+<p>oh, you aren't assuming the subtraction works?</p>
+
+<a name="167343243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343243">Kevin Buzzard (Jun 04 2019 at 23:13)</a>:</h4>
+<p>It's somehow not quite the right thing anyway. You do have to prove <code>1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</code> at some point -- yeah exactly, that the subtraction works.</p>
+
+<a name="167343315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343315">Mario Carneiro (Jun 04 2019 at 23:14)</a>:</h4>
+<p>I don't think we have it; if there is an equality in the hypotheses we usually just substitute it in, so it's just saying <code>a + b - b = a</code> which is one of the variants of <code>nat.add_sub_cancel</code></p>
+
+<a name="167343352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343352">Mario Carneiro (Jun 04 2019 at 23:15)</a>:</h4>
+<p>(also I think this is the wrong thread)</p>
+
+<a name="167343421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343421">Kevin Buzzard (Jun 04 2019 at 23:16)</a>:</h4>
+<p>this thread is already a mess ;-)</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>  <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span>
+<span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_iff_eq_add</span><span class="o">,</span>
+    <span class="n">ring</span><span class="o">,</span>
+<span class="c1">--    ⊢ 1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't see how one can get away from that silly inequality goal.</p>
+
+<a name="167343437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343437">Mario Carneiro (Jun 04 2019 at 23:17)</a>:</h4>
+<p>oh I see this is Jeremy's nat equality issue</p>
+
+<a name="167343446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343446">Kevin Buzzard (Jun 04 2019 at 23:17)</a>:</h4>
+<p>Right.</p>
+
+<a name="167343455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343455">Kevin Buzzard (Jun 04 2019 at 23:17)</a>:</h4>
+<p>But he's doing exactly what I'm going to have to do now, n&gt;=0 and d&gt;=0 so done.</p>
+
+<a name="167343466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343466">Kevin Buzzard (Jun 04 2019 at 23:18)</a>:</h4>
+<p>Maybe some sort of mono tactic saves you the pain?</p>
+
+<a name="167343516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343516">Mario Carneiro (Jun 04 2019 at 23:18)</a>:</h4>
+<p>apply <code>a + b &lt;= c -&gt; a &lt;= c - b</code> and then linarith</p>
+
+<a name="167343601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343601">Kevin Buzzard (Jun 04 2019 at 23:19)</a>:</h4>
+<p><code>linarith</code> was the first thing I tried. It doesn't work.</p>
+
+<a name="167343677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343677">Kevin Buzzard (Jun 04 2019 at 23:20)</a>:</h4>
+<p>The lemma is basically equivalent to <code>⊢ 1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</code>; if you can get the cancellation to work then <code>ring</code> does the job. But to prove this you need <code>2^n&gt;=1</code> and now it's all going a bit meh.</p>
+
+<a name="167344001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344001">Mario Carneiro (Jun 04 2019 at 23:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span>
+<span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_iff_eq_add</span><span class="o">,</span> <span class="o">{</span><span class="n">ring</span><span class="o">},</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_sub_left_of_add_le</span><span class="o">,</span>
+  <span class="n">linarith</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pow_pos</span> <span class="o">(</span><span class="n">dec_trivial</span><span class="o">:</span><span class="mi">2</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">n</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167344329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344329">Kevin Buzzard (Jun 04 2019 at 23:34)</a>:</h4>
+<p>Aah you just beat me on length -- I didn't know about <code>nat.pow_pos</code> so used <code>nat.pow_le_pow_of_le_right</code>. I found <code>nat.le_sub_right_of_add_le</code> using <code>library_search</code> :D</p>
+
+<a name="167344347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344347">Mario Carneiro (Jun 04 2019 at 23:35)</a>:</h4>
+<p>Better solution: don't use subtraction</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">card_iterated_mycielskian</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">G</span><span class="bp">.</span><span class="n">vertex</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">card</span> <span class="o">(</span><span class="n">iterated_mycielskian</span> <span class="n">G</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">vertex</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">card</span> <span class="n">G</span><span class="bp">.</span><span class="n">vertex</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">iterated_mycielskian</span><span class="o">],</span> <span class="o">{</span><span class="n">simp</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">card_mycielskian</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_succ</span><span class="o">,</span> <span class="n">mul_right_comm</span><span class="o">,</span> <span class="err">←</span> <span class="n">ih</span><span class="o">],</span> <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167344357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344357">Kevin Buzzard (Jun 04 2019 at 23:35)</a>:</h4>
+<p>That horrific function shouldn't even be called subtraction.</p>
+
+<a name="167344361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344361">Mario Carneiro (Jun 04 2019 at 23:35)</a>:</h4>
+<p>monus then</p>
+
+<a name="167344415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344415">Kevin Buzzard (Jun 04 2019 at 23:36)</a>:</h4>
+<p>I think Patrick would prefer moanus</p>
+
+<a name="167344697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344697">Jeremy Avigad (Jun 04 2019 at 23:42)</a>:</h4>
+<p>I like Mario's last solution. I should have thought of it. I wonder: how can we record this general strategy so that others don't make the same mistake I did? We need a theorem linter that warns users away from subtraction on nat and suggests alternatives. (Similarly, one should replace division on int and nat by multiplication, despite Descartes' rule XX: <a href="https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind" target="_blank" title="https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind">https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind</a>.)</p>
+
+<a name="167344965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344965">Mario Carneiro (Jun 04 2019 at 23:48)</a>:</h4>
+<p>Perhaps we should collect some tips and tricks. It's not quite the same as the style guide, and I don't think any of the other doc pages covers this area, but I think we have a decent collection of things to avoid and beginner mistakes</p>
+
+<a name="167346981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167346981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167346981">Koundinya Vajjha (Jun 05 2019 at 00:29)</a>:</h4>
+<p>"Work always in maximal generality" would be a good rule too.</p>
+
+<a name="167364857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167364857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167364857">Floris van Doorn (Jun 05 2019 at 07:38)</a>:</h4>
+<p>About the original question: are the lines the same with <code>set_option pp.instantiate_mvars false</code> (in addition to <code>pp.all true</code> )? I have no particular reason why they wouldn't be, but there was another case where this option showed a difference when <code>pp.all</code> didn't.</p>
+
+<a name="167365128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167365128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167365128">Sebastien Gouezel (Jun 05 2019 at 07:43)</a>:</h4>
+<p>With <code>set_option pp.instantiate_mvars false</code>, I still get in the trace</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
+
+
+<p>while I have in the context</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span>
+</pre></div>
+
+<a name="167370809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167370809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167370809">Sebastien Gouezel (Jun 05 2019 at 09:15)</a>:</h4>
+<p>If someone wants to play with this weird instance search behavior, the branch is now available at <a href="https://github.com/leanprover-community/mathlib/issues/1112" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1112">#1112</a></p>
+
+<a name="177703430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177703430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177703430">Sebastien Gouezel (Oct 09 2019 at 11:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> You were looking for weird instance behavior. The one at the beginning of this thread is still puzzling for me. To sum it up: in <code>analysis/normed_space/operator_norm.lean</code>, there are the lines</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Continuous linear maps themselves form a normed space with respect to</span>
+<span class="cm">    the operator norm. -/</span>
+<span class="kn">instance</span> <span class="n">to_normed_group</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">normed_group</span><span class="bp">.</span><span class="n">of_core</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">op_norm_zero_iff</span><span class="o">,</span> <span class="n">op_norm_triangle</span><span class="o">,</span> <span class="n">op_norm_neg</span><span class="bp">⟩</span>
+
+<span class="c">/-</span><span class="cm"> The next instance should be found automatically, but it is not.</span>
+<span class="cm">TODO: fix me -/</span>
+<span class="kn">instance</span> <span class="n">to_normed_group_prod</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">to_normed_group</span>
+</pre></div>
+
+
+<p>I don't know why the second instance is not found by <code>apply_instance</code>. The instance trace search contains the line</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
+
+
+<p>while the context contains</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span>
+</pre></div>
+
+
+<p>If everything is put in <code>Type</code> (or even in the same universe), then the issue disappears.</p>
+
+<a name="177712254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177712254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177712254">Daniel Selsam (Oct 09 2019 at 13:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Thanks. I'll look into it, though it seems to be just an issue with the unifier, not the typeclass resolution procedure itself. Note that you can trace the failed <code>is_def_eq</code> with <code>set_option trace.type_context.is_def_eq</code> and <code>set_option trace.type_context.is_def_eq_detail</code>.</p>
+
+<a name="177713460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177713460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177713460">Sebastien Gouezel (Oct 09 2019 at 13:31)</a>:</h4>
+<p>This is way too big for my eyes. I was wondering if this is was a problem with the unifier, or with typeclass resolution feeding something weird to the unifier.</p>
+
+<a name="177714468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177714468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177714468">Sebastian Ullrich (Oct 09 2019 at 13:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Reading the unifier log is an art. Could you put it in a gist/...?</p>
+
+<a name="177715662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177715662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177715662">Sebastien Gouezel (Oct 09 2019 at 13:55)</a>:</h4>
+<p>Done at <a href="https://gist.github.com/sgouezel/8357413e4c91f1092993c7a2c04ee112" target="_blank" title="https://gist.github.com/sgouezel/8357413e4c91f1092993c7a2c04ee112">https://gist.github.com/sgouezel/8357413e4c91f1092993c7a2c04ee112</a>. 2821 lines, so not sure this helps...</p>
+
+<a name="177718668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177718668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177718668">Daniel Selsam (Oct 09 2019 at 14:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Thanks. Can you please enable <code>pp.all</code>? We need to see the universes.</p>
+
+<a name="177719099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177719099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177719099">Sebastien Gouezel (Oct 09 2019 at 14:30)</a>:</h4>
+<p>Sure. It is at <a href="https://gist.github.com/sgouezel/be6d961c87d2c6bb017a8fba2417d229" target="_blank" title="https://gist.github.com/sgouezel/be6d961c87d2c6bb017a8fba2417d229">https://gist.github.com/sgouezel/be6d961c87d2c6bb017a8fba2417d229</a>, with</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq_detail</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+</pre></div>
+
+<a name="177719178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177719178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177719178">Sebastien Gouezel (Oct 09 2019 at 14:31)</a>:</h4>
+<p>4169 lines now...</p>
+
+<a name="177719603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177719603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177719603">Daniel Selsam (Oct 09 2019 at 14:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Thanks. The message is so long that it got truncated though. One last request: can you please do the same thing but with <code>pp.universes</code> instead of <code>pp.all</code>?</p>
+
+<a name="177719669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177719669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177719669">Daniel Selsam (Oct 09 2019 at 14:37)</a>:</h4>
+<p>(My system is configured for Lean4 so it is not convenient for me to generate these myself right now)</p>
+
+<a name="177720247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177720247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177720247">Sebastien Gouezel (Oct 09 2019 at 14:42)</a>:</h4>
+<p>Ah, I didn't spot it got truncated. New version at <a href="https://gist.github.com/sgouezel/11afeb220ab65f45f4565c1f05c25546" target="_blank" title="https://gist.github.com/sgouezel/11afeb220ab65f45f4565c1f05c25546">https://gist.github.com/sgouezel/11afeb220ab65f45f4565c1f05c25546</a> with</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq_detail</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">universes</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+</pre></div>
+
+
+<p>And I am happy to give you any output you need (you're trying to help, after all!)</p>
+
+<a name="177720296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177720296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177720296">Sebastien Gouezel (Oct 09 2019 at 14:42)</a>:</h4>
+<p>3144 lines</p>
+
+<a name="177720610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177720610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177720610">Sebastien Gouezel (Oct 09 2019 at 14:45)</a>:</h4>
+<p>Another version where it fails on</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">to_normed_group_prod</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="bp">×</span> <span class="n">E</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>is available at <a href="https://gist.github.com/sgouezel/1bde1320a31474311bb4f1331ee58960" target="_blank" title="https://gist.github.com/sgouezel/1bde1320a31474311bb4f1331ee58960">https://gist.github.com/sgouezel/1bde1320a31474311bb4f1331ee58960</a>. There are just 2 universes instead of 4, so this is maybe easier to read.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

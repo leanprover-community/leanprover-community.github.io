@@ -1,0 +1,47 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/21432Projectionisadefshouldbelemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/21432Projectionisadefshouldbelemma.html">Projection is a def, should be lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177363936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20is%20a%20def%2C%20should%20be%20lemma/near/177363936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21432Projectionisadefshouldbelemma.html#177363936">Johan Commelin (Oct 04 2019 at 18:00)</a>:</h4>
+<p><code>#sanity_check</code> gave me the following complaint:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> An subring of a Huber ring is called a “ring of integral elements”</span>
+<span class="cm">if it is open, integrally closed, and power bounded. See [Wedhorn, Def 7.14].-/</span>
+<span class="kn">structure</span> <span class="n">is_ring_of_integral_elements</span> <span class="o">(</span><span class="n">Rplus</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">Rplus</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">Rplus</span><span class="o">]</span> <span class="o">[</span><span class="n">Huber_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">Rplus</span> <span class="n">R</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">is_integrally_closed</span> <span class="n">Rplus</span> <span class="n">R</span><span class="o">,</span> <span class="n">open_embedding</span> <span class="o">(</span><span class="n">algebra_map</span> <span class="n">R</span> <span class="o">:</span> <span class="n">Rplus</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_power_bounded</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">algebra_map</span> <span class="n">R</span> <span class="o">:</span> <span class="n">Rplus</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">R</span><span class="err">ᵒ</span><span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> INCORRECT DEF/LEMMA: -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">is_ring_of_integral_elements</span><span class="bp">.</span><span class="n">to_is_integrally_closed</span> <span class="c">/-</span><span class="cm"> is a def, should be a lemma/theorem -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">is_ring_of_integral_elements</span><span class="bp">.</span><span class="n">to_open_embedding</span> <span class="c">/-</span><span class="cm"> is a def, should be a lemma/theorem -/</span>
+</pre></div>
+
+<a name="177364011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20is%20a%20def%2C%20should%20be%20lemma/near/177364011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21432Projectionisadefshouldbelemma.html#177364011">Johan Commelin (Oct 04 2019 at 18:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Is this a known issue?</p>
+
+<a name="177364541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20is%20a%20def%2C%20should%20be%20lemma/near/177364541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21432Projectionisadefshouldbelemma.html#177364541">Johan Commelin (Oct 04 2019 at 18:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Just cc-ing you, in case this isn't known.</p>
+
+<a name="177364544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20is%20a%20def%2C%20should%20be%20lemma/near/177364544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21432Projectionisadefshouldbelemma.html#177364544">Simon Hudon (Oct 04 2019 at 18:07)</a>:</h4>
+<p>I was not involved in writing <code>#sanity_check</code>. I don't know what the policy is with regards to projections</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,385 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/75506hardwareverification.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html">hardware verification</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188284010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188284010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188284010">Tim Daly (Feb 15 2020 at 13:38)</a>:</h4>
+<p>I've been looking at "verification down to the metal". Robert Baruch has been designing a CPU in an FPGA and documenting each step with video. One of his videos is "Very Basic Introduction to Formal Verification" which involves formal verification of Verilog (hardware design language) modules. See (<a href="https://www.youtube.com/watch?v=9e7F1XhjhKw" target="_blank" title="https://www.youtube.com/watch?v=9e7F1XhjhKw">https://www.youtube.com/watch?v=9e7F1XhjhKw</a>) and also the paper "Veriflog Synthesis and Formal Verification with Yosys" (<a href="http://www.clifford.at/papers/2016/yosys-synth-formal/slides.pdf" target="_blank" title="http://www.clifford.at/papers/2016/yosys-synth-formal/slides.pdf">http://www.clifford.at/papers/2016/yosys-synth-formal/slides.pdf</a>)</p>
+<div class="youtube-video message_inline_image"><a data-id="9e7F1XhjhKw" href="https://www.youtube.com/watch?v=9e7F1XhjhKw" target="_blank" title="https://www.youtube.com/watch?v=9e7F1XhjhKw"><img src="https://i.ytimg.com/vi/9e7F1XhjhKw/default.jpg"></a></div>
+
+<a name="188284316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188284316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188284316">Tim Daly (Feb 15 2020 at 13:49)</a>:</h4>
+<p>Yosys is using things like BDDs or model checking. But a lot of "metal" level "modules" in Verilog are basically either Mealy or Moore state machines. It seems to me that these could be modelled in logic and Lean-like proof machinery could be applied. I'm reading a book on hardware state machines at the moment with an eye towards a potential implementation. That would mean that, for instance, microcode implementations would be fully verifiable at the hardware level.</p>
+
+<a name="188284807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188284807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188284807">Tim Daly (Feb 15 2020 at 14:04)</a>:</h4>
+<p>For those who want to play along see Volnei Pedroni "Finite State Machines in Hardware" (<a href="https://www.amazon.com/Finite-State-Machines-Hardware-SystemVerilog/dp/0262019663" target="_blank" title="https://www.amazon.com/Finite-State-Machines-Hardware-SystemVerilog/dp/0262019663">https://www.amazon.com/Finite-State-Machines-Hardware-SystemVerilog/dp/0262019663</a>)</p>
+
+<a name="188285072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188285072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188285072">Tim Daly (Feb 15 2020 at 14:12)</a>:</h4>
+<p>Lean seems to have an advantage over, say ACL2, in that we have dependent types. It should be possible to declare a 'register type' that knows the size of the register, for example.</p>
+
+<a name="188302053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302053">Tim Daly (Feb 15 2020 at 22:50)</a>:</h4>
+<p>Lets play 'assume'. Assume you can prove that a hardware finite state machine (FSM) implements a specification. (Since the implementation is finite state then it seems you can use a SAT solver?). Assume that the specification is Lean's proof checker (so the FSM can check a Lean proof). Assume the state machine(s) is small enough to fit in an Field Programmable Gate Array (FPGA) (which are huge these days). Then there is a piece of hardware to proof check. Note that the large data center companies (but not ordinary mortals) have access to the new Intel CPU which has a built-in FPGA. So... one could have a hardware "instruction" to check a proof.</p>
+
+<a name="188302174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302174">Tim Daly (Feb 15 2020 at 22:54)</a>:</h4>
+<p>(sorry, wrote thread). A more (mealy?) interesting question: Can CIC be implemented in finite state machines?</p>
+
+<a name="188302581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302581">Mario Carneiro (Feb 15 2020 at 23:08)</a>:</h4>
+<p>yes?</p>
+
+<a name="188302586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302586">Mario Carneiro (Feb 15 2020 at 23:08)</a>:</h4>
+<p>What's the actual question? Of course everything is possible in principle</p>
+
+<a name="188302763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302763">Tim Daly (Feb 15 2020 at 23:14)</a>:</h4>
+<p>The X86 instruction set is beyond my powers to fully specify (I've tried). So trying to validate an implementation is also outside the possible (at least for me). However, an "instruction set" that is specific to proof checking and/or CIC and is well designed (say, as an FSM) then it would be easier to validate.</p>
+
+<a name="188302829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302829">Tim Daly (Feb 15 2020 at 23:16)</a>:</h4>
+<p>In addition, data centers used FPGAs all over the place (e.g. they run compression algorithms "on the wire" so the CPU can send/receive at higher bandwidth, they run encryption/decryption "on the wire" so data in flight can't be read or modified). So if code "carried proofs" then you could check, in parallel, that the code is valid.</p>
+
+<a name="188302903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302903">Tim Daly (Feb 15 2020 at 23:18)</a>:</h4>
+<p>Modern Intel CPUs contain an FPGA which, in principle, allows you to define your own instructions. So you could "side load" a proof checker.</p>
+
+<a name="188302971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302971">Tim Daly (Feb 15 2020 at 23:21)</a>:</h4>
+<p>So you package the proof checker FPGA binfile, the code, the code proof, all "under signed encryption", and then I (well, not <em>I</em> since I don't have access to the new CPUs) can send a "proven GCD" algorithm.</p>
+
+<a name="188303072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303072">Tim Daly (Feb 15 2020 at 23:24)</a>:</h4>
+<p>I have a couple FPGAs and I'm looking at the question of validating FSMs for my own chosen instruction set. The game is to design the instruction set to underlie the proof checker.</p>
+
+<a name="188303349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303349">Tim Daly (Feb 15 2020 at 23:33)</a>:</h4>
+<p>Rather than a Peano succ(succ(succ zero))) computation you'd rather work in normal machine binary (which, as I understand Univalence, says they are "equal"). So Lean can use much higher level (h-level) kinds of reasoning if you can "insert a computer algebra system" into Lean. But you need proven algorithms, presumably "down to the metal".</p>
+
+<a name="188303400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303400">Mario Carneiro (Feb 15 2020 at 23:34)</a>:</h4>
+<p>Yes, this is possible, but lean is not optimally positioned for such an effort. You really want a simplified kernel that doesn't take tens of thousands of lines to write and especially to specify</p>
+
+<a name="188303409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303409">Tim Daly (Feb 15 2020 at 23:35)</a>:</h4>
+<p>I've been looking at Andromeda (Bauer) which could (possibly) use Lean's CIC rules in declarative form.</p>
+
+<a name="188303455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303455">Mario Carneiro (Feb 15 2020 at 23:37)</a>:</h4>
+<p>FYI, in case you weren't aware, you are describing <a href="https://github.com/digama0/mm0" target="_blank" title="https://github.com/digama0/mm0">my current project</a> almost exactly</p>
+
+<a name="188303461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303461">Mario Carneiro (Feb 15 2020 at 23:37)</a>:</h4>
+<p>I'm not targeting an FPGA, although it could be done</p>
+
+<a name="188303508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303508">Tim Daly (Feb 15 2020 at 23:38)</a>:</h4>
+<p>Sorry, I'm not trying to step on your turf. I'm coming at it from the question of "computational mathematics", merging proof and computer algebra.</p>
+
+<a name="188303511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303511">Mario Carneiro (Feb 15 2020 at 23:38)</a>:</h4>
+<p>I just wasn't sure if you were trolling me ;)</p>
+
+<a name="188303519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303519">Chris B (Feb 15 2020 at 23:39)</a>:</h4>
+<p>It's too late for that now. Pistols at dawn.</p>
+
+<a name="188303520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303520">Tim Daly (Feb 15 2020 at 23:39)</a>:</h4>
+<p>I assume you've seen my "paper" on the Intel instruction semantics.</p>
+
+<a name="188303523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303523">Mario Carneiro (Feb 15 2020 at 23:39)</a>:</h4>
+<p>The 7000 page one?</p>
+
+<a name="188303573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303573">Tim Daly (Feb 15 2020 at 23:40)</a>:</h4>
+<p>Yeah (Intel is big, the Intel reference book pile is a couple feet tall)</p>
+
+<a name="188303579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303579">Mario Carneiro (Feb 15 2020 at 23:40)</a>:</h4>
+<p>You don't need the entire instruction set to write a proof checker though</p>
+
+<a name="188303586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303586">Tim Daly (Feb 15 2020 at 23:40)</a>:</h4>
+<p>Leave Dawn out of this . She is innocent.</p>
+
+<a name="188303640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303640">Tim Daly (Feb 15 2020 at 23:43)</a>:</h4>
+<p>Yep, you don't need all that semantics. You only (maybe) need a finite state machine with a few, validated, and carefully crafted instructions.</p>
+
+<a name="188303697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303697">Tim Daly (Feb 15 2020 at 23:45)</a>:</h4>
+<p>I tried to do an FPGA startup so I have some Altera FPGA hardware (which is the company Intel bought) and I've been playing around "in the sand", thinking about a validated proof checker.</p>
+
+<a name="188303705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303705">Tim Daly (Feb 15 2020 at 23:45)</a>:</h4>
+<p>I will look deeper into what you're doing. I'm seriously not trying to step on your turf.</p>
+
+<a name="188303748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303748">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>you know, there are other options than stepping on turf, you could come in the front door</p>
+
+<a name="188303756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303756">Tim Daly (Feb 15 2020 at 23:46)</a>:</h4>
+<p>Rumor has it someone has a bullet with my name on it :-)</p>
+
+<a name="188303757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303757">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>I'm sure there are ways to collaborate</p>
+
+<a name="188303761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303761">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>without the pistols</p>
+
+<a name="188303842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303842">Tim Daly (Feb 15 2020 at 23:49)</a>:</h4>
+<p>Let me get up to speed on your links and see if I can help</p>
+
+<a name="188303850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303850">Mario Carneiro (Feb 15 2020 at 23:49)</a>:</h4>
+<p>This might be a place to start: <a href="https://arxiv.org/pdf/1907.01283.pdf" target="_blank" title="https://arxiv.org/pdf/1907.01283.pdf">https://arxiv.org/pdf/1907.01283.pdf</a></p>
+
+<a name="188303913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303913">Tim Daly (Feb 15 2020 at 23:50)</a>:</h4>
+<p>Printing it now. Thanks.</p>
+
+<a name="188303981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303981">Tim Daly (Feb 15 2020 at 23:53)</a>:</h4>
+<p>I've been looking at your paper on the Type theory of Lean, trying to figure out how to wedge that into Andromeda</p>
+
+<a name="188304154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304154">Mario Carneiro (Feb 15 2020 at 23:58)</a>:</h4>
+<p>The last question at <a href="http://www.andromeda-prover.org/answers.html" target="_blank" title="http://www.andromeda-prover.org/answers.html">http://www.andromeda-prover.org/answers.html</a> suggests that Andromeda is too "opinionated" to be general purpose, and in particular cannot support CIC</p>
+
+<a name="188304245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304245">Mario Carneiro (Feb 16 2020 at 00:00)</a>:</h4>
+<p>There is an MM0 implementation of lean at <a href="https://github.com/digama0/mm0/blob/master/examples/lean.mm1" target="_blank" title="https://github.com/digama0/mm0/blob/master/examples/lean.mm1">lean.mm1</a></p>
+
+<a name="188304302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304302">Simon Cruanes (Feb 16 2020 at 00:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> that's the perfect moment to ask <span class="user-mention" data-user-id="223495">@Tim Daly</span> to write another mm0 proof checker <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span> <br>
+Or maybe two checkers, the second of which would be on his FPGA.</p>
+
+<a name="188304851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304851">Tim Daly (Feb 16 2020 at 00:20)</a>:</h4>
+<p>Comments on your x86 paper.</p>
+<p>(1) "information on Linux system calls"... yeah, I had to skip over system calls in the 7000 page paper. System calls were "on the list" to be thought about but our Malware project got cancelled.</p>
+<p>(2) "bootstrapping a theorem prover"... I can see where we've crossed paths. I gave up on the x86 path and decided to look at FPGA finite state machines (which a SAT solver can check). </p>
+<p>(3) The link I gave above to the Baruch video "Very Basic Introduction to Formal Verification" shows a "prove" mechanism that can be applied to Verilog (hardware spec) code. It includes inductive proofs.</p>
+
+<a name="188304956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304956">Mario Carneiro (Feb 16 2020 at 00:24)</a>:</h4>
+<p>I don't handle very many linux system calls, but you need a few in order to do anything. I have <code>open</code>, <code>read</code>, <code>write</code>, <code>fstat</code> and <code>mmap</code>. In addition to that, you need to axiomatize the program loading behavior, which is surprisingly subtle and context dependent. I think it's not actually possible to guarantee that your program will not run out of memory and access out of bounds before it gets to the first line of the actual program (the ELF <code>_start</code> label)</p>
+
+<a name="188304958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304958">Tim Daly (Feb 16 2020 at 00:24)</a>:</h4>
+<p>(4) The 7k paper includes information on the ELF format, so we've both suffered through that.</p>
+
+<a name="188305105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305105">Tim Daly (Feb 16 2020 at 00:29)</a>:</h4>
+<p>The linking loader is a self-modifying program. It takes "data" of your program and "data" of libraries, constructs a program, and then "passes execution" to the constructed binary. I'm outlining a paper on "Self Modifying Code" using the linking loader as an example. The idea is to view the linking loader in a "continuation passing style" so the loaded program "returns to the linker.</p>
+<p>The Tail-Called Linker<br>
+It isn't what it was because it is gone.<br>
+It isn't what it will be because it is becoming.<br>
+But it alway is.</p>
+
+<a name="188305155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305155">Tim Daly (Feb 16 2020 at 00:30)</a>:</h4>
+<p>The 7k semantics program was hand-checked against the C standard library, instruction by instruction.</p>
+
+<a name="188305235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305235">Tim Daly (Feb 16 2020 at 00:33)</a>:</h4>
+<p>(I have a morbid fascination with self-modifying code. I believe it is a way out of Turing's box but that's just a belief so far)</p>
+
+<a name="188305243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305243">Chris B (Feb 16 2020 at 00:33)</a>:</h4>
+<p>Not sure how much overlap there is with what you want to do, but I saw a talk once by Adam Chlipala about work his team was doing on verifying hardware/ISA stuff for riscv using coq and a tool they built in coq called Kami. The repo is still pretty active and seems to have examples, it might give you some insight into how people have applied a DTT-based prover to that domain.<br>
+<a href="https://github.com/sifive/Kami" target="_blank" title="https://github.com/sifive/Kami">https://github.com/sifive/Kami</a></p>
+
+<a name="188305309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305309">Tim Daly (Feb 16 2020 at 00:35)</a>:</h4>
+<p>Hmpf. I've read a bit of Chlipala's work but this is the first I've heard of Kami. Thanks.</p>
+
+<a name="188305358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305358">Tim Daly (Feb 16 2020 at 00:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="132878">@Simon Cruanes</span> re: re-implementing... not a bad idea but first I have to reverse-engineer mm0 :-)</p>
+
+<a name="188305430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305430">Chris B (Feb 16 2020 at 00:39)</a>:</h4>
+<p>Looks like there are some papers on the main page, they might be more informative than the repo. <a href="http://plv.csail.mit.edu/kami/" target="_blank" title="http://plv.csail.mit.edu/kami/">http://plv.csail.mit.edu/kami/</a></p>
+
+<a name="188305540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305540">Tim Daly (Feb 16 2020 at 00:42)</a>:</h4>
+<p>Their Bluespec work looks dead center on what I've been trying to do. Pistols at dawn. It's all her fault anyway.</p>
+
+<a name="188305743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188305743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188305743">Tim Daly (Feb 16 2020 at 00:48)</a>:</h4>
+<p>Google search "zipcpu formal" for a lot of interesting threads</p>
+
+<a name="188859769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188859769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188859769">Tim Daly (Feb 23 2020 at 09:01)</a>:</h4>
+<p>There is some hardware state machine work at York: Foster, Baxter, Cavalcanti, Miyazawa, and Woodcock "Automating Verification of State Machines with Reactive Design in Isabelle/UTP" (<a href="https://arxiv.org/pdf/1807.08588.pdf" target="_blank" title="https://arxiv.org/pdf/1807.08588.pdf">https://arxiv.org/pdf/1807.08588.pdf</a>). This is based on Hoare and He "Unified Theory of Programming" (UTP) in Isabelle.</p>
+<p>In pursuit of a "proven hardware proof checker" I bought a Diligent CmodA7 Field Programmable Gate Array and have the Xilinx Vivado software. I'm looking for papers providing formal proof techniques for finite state machines. The idea is that the hardware proof checker has its own proof which can then proof-check Lean proofs.</p>
+
+<a name="188861257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188861257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188861257">Tim Daly (Feb 23 2020 at 09:39)</a>:</h4>
+<p>Hoare "Unified Theories of Programming"  (<a href="https://fi.ort.edu.uy/innovaportal/file/20124/1/04-hoare_unified_theories.pdf" target="_blank" title="https://fi.ort.edu.uy/innovaportal/file/20124/1/04-hoare_unified_theories.pdf">https://fi.ort.edu.uy/innovaportal/file/20124/1/04-hoare_unified_theories.pdf</a>) merging Denotational, Algebraic, and Operational semantics.</p>
+
+<a name="189000592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000592">Tim Daly (Feb 25 2020 at 08:41)</a>:</h4>
+<p>Since Lean and Coq implement the same logic it seems to me that their proof checker should be the same code. Is this reasonable?</p>
+
+<a name="189000696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000696">Tim Daly (Feb 25 2020 at 08:43)</a>:</h4>
+<p>Further, since the proof checker basically takes an input and returns either true or false, it is essentially a Binary Decision Diagram (BDD). Knuth probably wrote one on a napkin over lunch for his book. Given that, it seems that the instruction set for a proof checker ought to support the decisions.</p>
+
+<a name="189000701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000701">Donald Sebastian Leung (Feb 25 2020 at 08:43)</a>:</h4>
+<p>Hmmm ... I'm no expert but I would disagree. Even though their base calculus (CoIC) is the same, they may extend it in different ways. For example, Haskell is based on System-F but it adds general recursion and a whole host of other things on top of it.</p>
+
+<a name="189000770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000770">Tim Daly (Feb 25 2020 at 08:44)</a>:</h4>
+<p>Shouldn't that be "reasoned away" by the time you get to the bottom of the trusted core?</p>
+
+<a name="189000795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000795">Donald Sebastian Leung (Feb 25 2020 at 08:45)</a>:</h4>
+<p>Maybe, IDK, I'm no expert so I might just be making a fool out of myself <span aria-label="stuck out tongue" class="emoji emoji-1f61d" role="img" title="stuck out tongue">:stuck_out_tongue:</span></p>
+
+<a name="189000853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189000853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189000853">Tim Daly (Feb 25 2020 at 08:46)</a>:</h4>
+<p>Oh, not to worry. I'm certainly making a fool of myself.</p>
+
+<a name="189001649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189001649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189001649">Tim Daly (Feb 25 2020 at 09:01)</a>:</h4>
+<p>There is too much to know and not enough time to know it all. It helps to ask (stupid) questions so someone with expertise can explain why I'm wrong.</p>
+
+<a name="189001830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189001830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189001830">Patrick Massot (Feb 25 2020 at 09:05)</a>:</h4>
+<p>You could still take a couple of days off trolling and actually try to learn some Lean by writing Lean code.</p>
+
+<a name="189002185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002185">Mario Carneiro (Feb 25 2020 at 09:10)</a>:</h4>
+<p>The short answer is no, they do not have the same kernel, nor even compatible kernels, for a host of insignificant but technically complicated reasons</p>
+
+<a name="189002294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002294">Kevin Buzzard (Feb 25 2020 at 09:12)</a>:</h4>
+<p>I'm also not an expert, but my impression is that Mario "wrote down what Lean's logic was" in his MSc thesis, and nobody has done the analogous thing for Coq's logic?</p>
+
+<a name="189002327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002327">Tim Daly (Feb 25 2020 at 09:13)</a>:</h4>
+<p>I am spending time writing Lean code (working thru TPIL). I just don't have anything worth saying about it. I'm sorry you feel that I'm "trolling". The whole Lean community only seems to care about issues related to mathlib. So, obviously, trying to introduce topics of program proof and "down to the metal" are "off topic". Note that these are active topics in Coq (e.g. Bluespec (Chlipala), Deep Specification (Appel, Pierce, et al), and PhD work on the subject.</p>
+
+<a name="189002330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002330">Mario Carneiro (Feb 25 2020 at 09:13)</a>:</h4>
+<p>And yet <span class="user-mention" data-user-id="259452">@Bas Spitters</span> says that Coq's theory is more well understood than lean's</p>
+
+<a name="189002423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002423">Tim Daly (Feb 25 2020 at 09:14)</a>:</h4>
+<p>The computer algebra community also seems me at "trolling" because nobody believes that any mathematician writing computer programs would waste time on a proof.</p>
+
+<a name="189002508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002508">Tim Daly (Feb 25 2020 at 09:16)</a>:</h4>
+<p>I guess its time to shut down this thread.</p>
+
+<a name="189002972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189002972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189002972">Kevin Buzzard (Feb 25 2020 at 09:23)</a>:</h4>
+<p>It's certainly true that the two provers seem to have attracted two different communities. I think Leo wants to attract more program-proof people with Lean 4, I get the impression that certain design decisions have been made in order to tempt these people over.</p>
+
+<a name="189003457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189003457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189003457">Tim Daly (Feb 25 2020 at 09:31)</a>:</h4>
+<p>mathlib is certainly useful. Its results need to be woven into the inheritance hierarchy of Axiom so individual programs can use the theorems. I'm working on that "weaving" (hence my discussion about parsing and comments about naming conventions and non-unicode). With a focus on proving (math) programs correct it is also vital that proofs have execution semantics (hence my "trolling" on proglib). But since I"m not "contributing" to mathlib development it is clear that any other topic is "off topic". So I don't think Leo will attract any program-proof people, especially from computer algebra who already think proofs are not worth writing.</p>
+
+<a name="189003637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189003637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189003637">Tim Daly (Feb 25 2020 at 09:34)</a>:</h4>
+<p>I speak from experience since "proving programs correct" was one of the main issues that caused a hard fork of the Axiom project. You would think that mathematicians who write algebra would want proofs but apparently not. And mathematicians who write proofs don't want programs.</p>
+
+<a name="189003666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189003666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189003666">Sebastian Ullrich (Feb 25 2020 at 09:35)</a>:</h4>
+<p>If you want executable proofs, a system with built-in proof irrelevance does not seem like the best choice, yes. Nothing of that will change in Lean 4.</p>
+
+<a name="189004520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189004520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189004520">Tim Daly (Feb 25 2020 at 09:49)</a>:</h4>
+<p>Why on earth would you write a new kernel for a proof system and not prove it correct? The most trusted part of the trusted system should be proven "down to the metal". Program proofs are central to the whole issue. I'd expect the kernel to be written starting from the judgments with incremental development down to code with each step proven correct. This is computational mathematics, not a game design.</p>
+
+<a name="189005535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189005535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189005535">Tim Daly (Feb 25 2020 at 10:03)</a>:</h4>
+<p>But I am "singing the dual of that argument" in the computer algebra clade. Why on earth would you write a GCD algorithm and not prove it correct, down to the metal? This is computational mathematics, not game design. Somehow computational mathematics has forked into two clades that don't have the same notion of "computational mathematics", although it is probably just me thinking they are related, given the evidence.</p>
+
+<a name="189005623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189005623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189005623">Tim Daly (Feb 25 2020 at 10:04)</a>:</h4>
+<p>Anyway, I'm clearly off topic again. Sigh.</p>
+
+<a name="189006023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189006023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189006023">Bas Spitters (Feb 25 2020 at 10:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I was referring to your post on coq-club: "the VM is undergoing some significant changes".<br>
+Ignoring the computational/meta-theoretical aspects of syntax, semantically, the theories seem to the similarly worked out. E.g. the set theoretical model for pCuIC:<br>
+<a href="https://hal.inria.fr/hal-01952037/document" target="_blank" title="https://hal.inria.fr/hal-01952037/document">https://hal.inria.fr/hal-01952037/document</a><br>
+<span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> 's thesis contains quite a detailed overview of the implementation of both Coq and lean.</p>
+
+<a name="189006418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189006418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189006418">Mario Carneiro (Feb 25 2020 at 10:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="259452">@Bas Spitters</span>  Do you have a link to <span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> 's thesis? I'm not finding it in the obvious places online</p>
+
+<a name="189006844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189006844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189006844">Gaëtan Gilbert (Feb 25 2020 at 10:23)</a>:</h4>
+<p>I talked a bit about type theory which can be applied to lean but I would say it's the theoretical side rather than the implementation side.</p>
+<p><a href="https://gitlab.com/SkySkimmer/thesis/-/jobs/artifacts/master/download?job=build" target="_blank" title="https://gitlab.com/SkySkimmer/thesis/-/jobs/artifacts/master/download?job=build">https://gitlab.com/SkySkimmer/thesis/-/jobs/artifacts/master/download?job=build</a><br>
+I need to find a better place to put it.</p>
+
+<a name="189006980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189006980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189006980">Mario Carneiro (Feb 25 2020 at 10:25)</a>:</h4>
+<p>I'm looking for a theoretical account of the complete kernel</p>
+
+<a name="189007100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189007100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189007100">Mario Carneiro (Feb 25 2020 at 10:26)</a>:</h4>
+<p>For instance this would have to include both the fixed universes and also parametric universes, because the coq kernel deals with both systems simultaneously</p>
+
+<a name="189007159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189007159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189007159">Mario Carneiro (Feb 25 2020 at 10:27)</a>:</h4>
+<p>Also it has to define recursion using fix and match rather than elimination, because that's what the kernel does</p>
+
+<a name="189007216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189007216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189007216">Mario Carneiro (Feb 25 2020 at 10:28)</a>:</h4>
+<p>(I have had difficulty finding the complete set of rules for the structural less than relation)</p>
+
+<a name="189016698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189016698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189016698">Johan Commelin (Feb 25 2020 at 12:55)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="223495">Tim Daly</span> <a href="#narrow/stream/113488-general/topic/hardware.20verification/near/189003457" title="#narrow/stream/113488-general/topic/hardware.20verification/near/189003457">said</a>:</p>
+<blockquote>
+<p>mathlib is certainly useful. Its results <strong>need</strong> to be woven into the inheritance hierarchy of Axiom so individual programs can use the theorems.</p>
+</blockquote>
+<p>(emphasis mine)</p>
+<p>Dear Tim, I think it's statements like this that rub some of us the wrong way. You are highly invested in Axiom, and that's fine. But often you write as if there is a logical necessity that Lean and Axiom work together. Or that Lean is designed to be some piece in the big grand toolchain of Axiom. That's just not true.</p>
+<p>Working on building interaction between Lean and Axiom is a great idea. Very important. But both systems are also valuable (maybe less, but still) without that interaction.</p>
+
+<a name="189024107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189024107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189024107">Simon Cruanes (Feb 25 2020 at 14:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="223495">Tim Daly</span> <a href="#narrow/stream/113488-general/topic/hardware.20verification/near/189000696" title="#narrow/stream/113488-general/topic/hardware.20verification/near/189000696">said</a>:</p>
+<blockquote>
+<p>Further, since the proof checker basically takes an input and returns either true or false, it is essentially a Binary Decision Diagram (BDD). </p>
+</blockquote>
+<p>by that argument, most programs in logic are "basically" a BDD. But inputs are of arbitrary size, so it doesn't work that way!<br>
+A kernel for CiC is a complicated thing to write (afaik, the most complicated kind of kernel of trust found in proof assistants). Doing it purely in hardware would be a research problem.</p>
+
+<a name="189025459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/189025459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#189025459">Reid Barton (Feb 25 2020 at 14:49)</a>:</h4>
+<p>And not just programs in logic but also all decision problems, which means basically all problems considered in complexity theory. Suggesting they all reduce to something Knuth wrote on a napkin cannot be taken seriously.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

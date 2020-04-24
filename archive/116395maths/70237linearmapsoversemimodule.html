@@ -1,0 +1,147 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/70237linearmapsoversemimodule.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html">linear maps over semimodule</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185809038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185809038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185809038">Sebastien Gouezel (Jan 16 2020 at 12:15)</a>:</h4>
+<p>Right now, the identity does not make sense as a linear map from <code>ℕ</code> to <code>ℕ</code> as <code>ℕ</code> is not a ring, only a semiring. Would anyone object to defining linear maps on semimodules over semirings to allow "linear algebra" on <code>ℕ</code>-valued matrices? This shows up on <a href="https://github.com/leanprover-community/mathlib/issues/1883" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1883">#1883</a>, where it is rightly argued that having the trace of an <code>ℕ</code>-valued matrix makes sense, and still I think it would be better to have the trace as a linear map.</p>
+
+<a name="185814391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185814391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185814391">Chris Hughes (Jan 16 2020 at 13:31)</a>:</h4>
+<p>I don't think there's even a change to the axioms, so this definitely makes sense.</p>
+
+<a name="185818425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185818425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185818425">Kevin Buzzard (Jan 16 2020 at 14:21)</a>:</h4>
+<p>I'm afraid that when I was making a push to get people to do commutative algebra in Lean, I had no idea what a semiring was ;-)</p>
+
+<a name="185824677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185824677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185824677">Sebastien Gouezel (Jan 16 2020 at 15:27)</a>:</h4>
+<p>I had a go at it, and I thought it would also be a good idea to let <code>module</code> be an abbreviation for <code>semimodule</code>. Everything compiles well, but some things become extremely slow, and I have not been able to adjust the instances (Yes, I want Lean 4 !! :)<br>
+MWE (with current mathlib):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">convex</span>
+
+<span class="c1">-- attribute [instance, priority 200] add_comm_monoid.to_add_monoid</span>
+<span class="c1">-- set_option trace.class_instances true</span>
+
+<span class="n">class</span> <span class="n">inner_product_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">add_comm_monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">semimodule</span> <span class="n">ℝ</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>takes 30s on my laptop. With instances tracing on, it does not complete.</p>
+
+<a name="185826662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185826662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185826662">Johan Commelin (Jan 16 2020 at 15:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Thanks for the attempt!</p>
+
+<a name="185826677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185826677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185826677">Johan Commelin (Jan 16 2020 at 15:45)</a>:</h4>
+<p>Too bad that it blows up</p>
+
+<a name="185827891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185827891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185827891">Reid Barton (Jan 16 2020 at 15:57)</a>:</h4>
+<p>This reminds me a bit of <a href="https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce">https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce</a></p>
+
+<a name="185828108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185828108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185828108">Johan Commelin (Jan 16 2020 at 15:58)</a>:</h4>
+<p>Except that this time the compile time is multiplied by 30 instead of divided by 3</p>
+
+<a name="185828396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185828396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185828396">Sebastien Gouezel (Jan 16 2020 at 16:00)</a>:</h4>
+<p>I am still hoping that <span class="user-mention" data-user-id="111080">@Floris van Doorn</span>  will tell me that there is an instance trick solving this :-)</p>
+
+<a name="185829140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185829140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185829140">Reid Barton (Jan 16 2020 at 16:07)</a>:</h4>
+<p>Well who hasn't gotten a constant off by a factor of 90 before, am I right?</p>
+
+<a name="185831357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185831357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185831357">Patrick Massot (Jan 16 2020 at 16:26)</a>:</h4>
+<p>If someone can minimize this then it will certainly interest Daniel (who is not reading this stream by the way).</p>
+
+<a name="185832005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832005">Daniel Selsam (Jan 16 2020 at 16:32)</a>:</h4>
+<p>In the meantime, how about a non-minimized repro? Do I only need the snippet you posted above on top of current mathlib?</p>
+
+<a name="185832213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832213">Sebastien Gouezel (Jan 16 2020 at 16:34)</a>:</h4>
+<p>Yes, the snippet is a minimal working example.</p>
+
+<a name="185832235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832235">Daniel Selsam (Jan 16 2020 at 16:34)</a>:</h4>
+<p>Thanks. (I can't check this easily right now because I am currently building a modified mathlib for a different experiment)</p>
+
+<a name="185832374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832374">Sebastien Gouezel (Jan 16 2020 at 16:35)</a>:</h4>
+<p>But I expect that you will tell me this problem is already solved by the algorithm you have developed for Lean 4. And I will be extremely happy about it, and extremely sad that I don't have Lean 4 yet :(</p>
+
+<a name="185832376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832376">Patrick Massot (Jan 16 2020 at 16:35)</a>:</h4>
+<p>Do you know about the community <code>cache-olean</code> tool? It would allow to clone <code>mathlib</code> and get a compiled version from a few hours ago in about 20 seconds.</p>
+
+<a name="185832517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832517">Daniel Selsam (Jan 16 2020 at 16:36)</a>:</h4>
+<p>For my experiments I generally need to rebuild mathlib with a differently-instrumented Lean3 each time.</p>
+
+<a name="185832579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832579">Patrick Massot (Jan 16 2020 at 16:37)</a>:</h4>
+<p>Oh I see. Forget about reusing oleans then...</p>
+
+<a name="185832621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832621">Daniel Selsam (Jan 16 2020 at 16:37)</a>:</h4>
+<p>(and I am reluctant to start having multiple mathlibs floating around at the same time)</p>
+
+<a name="185832696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832696">Patrick Massot (Jan 16 2020 at 16:38)</a>:</h4>
+<p>But don't hesitate to tell us if you have a patched Lean3 that already fixes things <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="185832747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185832747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185832747">Daniel Selsam (Jan 16 2020 at 16:38)</a>:</h4>
+<blockquote>
+<p>Oh I see. Forget about reusing oleans then...</p>
+</blockquote>
+<p>To clarify: to diagnose the problem discussed in this thread, I can reuse oleans and only run a modified Lean3 on the new file.</p>
+
+<a name="185869743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185869743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185869743">Oliver Nash (Jan 16 2020 at 22:41)</a>:</h4>
+<p>Who knew the trace of a matrix could be so controversial? Thank you all for the thoughts. I will have some time again at the weekend and will take this up again then.</p>
+
+<a name="185900628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185900628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185900628">Sebastien Gouezel (Jan 17 2020 at 09:41)</a>:</h4>
+<blockquote>
+<p>To clarify: to diagnose the problem discussed in this thread, I can reuse oleans and only run a modified Lean3 on the new file.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> ,  did you finally understand what is going wrong with this snippet?</p>
+
+<a name="185913850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185913850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185913850">Daniel Selsam (Jan 17 2020 at 13:08)</a>:</h4>
+<p>Not yet, I have been swamped with other things. It is on my list.</p>
+
+<a name="185945698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185945698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185945698">Daniel Selsam (Jan 17 2020 at 18:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Diamonds. It tries to prove <code>discrete_linear_ordered_field</code> 60,000 times.</p>
+
+<a name="185946135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185946135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185946135">Daniel Selsam (Jan 17 2020 at 19:01)</a>:</h4>
+<p>(so should be instantaneous in Lean4)</p>
+
+<a name="185951274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185951274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185951274">Sebastien Gouezel (Jan 17 2020 at 20:03)</a>:</h4>
+<p>Thanks a lot for your investigation. Can you see from this a reasonable priority tweak that would avoid this crazy search? (And do you understand why the situation is so much different with <code>semimodule</code> and with <code>module</code>?)</p>
+
+<a name="186356576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/186356576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#186356576">Yury G. Kudryashov (Jan 23 2020 at 04:27)</a>:</h4>
+<p>One more reason to have linear maps on semimodules over semirings: I'd like to have <code>convex</code> for semimodules over <code>nnreal</code> to be able to say that the set of invariant measures of an endomorphism is convex.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

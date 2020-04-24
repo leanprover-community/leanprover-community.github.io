@@ -1,0 +1,140 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/51460myattemptprovinggcdabgcdba.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html">my attempt proving gcd(a, b) = gcd(b, a)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180204001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180204001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180204001">agro1986 (Nov 08 2019 at 05:29)</a>:</h4>
+<p>Hi everyone. I tried defining gcd and then proving that gcd(a, b) implies gcd(b, a):</p>
+<div class="codehilite"><pre><span></span>variables {a b c d: ℤ}
+
+def divides (a b: ℤ): Prop := ∃(d: ℤ), b = a * d
+
+def gcd (a b d: ℤ): Prop :=
+  ¬(a = 0 ∧ b = 0) ∧
+  divides d a ∧
+  divides d b ∧
+  ∀ (c: ℤ), divides c a ∧ divides c b → c ≤ d
+
+theorem gcd_sym (h: gcd a b d): gcd b a d :=
+  begin
+    let hnonzero := h.left,        -- ¬(a = 0 ∧ b = 0)
+    let hda := h.right.left,       -- divides d a ∧
+    let hdb := h.right.right.left, -- divides d b ∧
+    let hgreatest := h.right.right.right,
+    apply and.intro,
+      exact (assume hzero: b = 0 ∧ a = 0,
+        hnonzero ⟨hzero.right, hzero.left⟩),
+    apply and.intro,
+      assumption,
+    apply and.intro,
+      assumption,
+    assume c,
+      let hc_lt_d := hgreatest c,
+      assume hc_divides,
+        exact hc_lt_d ⟨hc_divides.right, hc_divides.left⟩
+  end
+</pre></div>
+
+
+<p>Would you define gcd differently? (e.g., something that means the same thing but is more canonical to write in Lean)</p>
+<p>Also, the proof is a bit long for basically flipping some terms. Any way you would streamline it? Thanks a lot!</p>
+
+<a name="180207810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180207810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180207810">Tim Baanen (Nov 08 2019 at 07:14)</a>:</h4>
+<p>My instinct would be to define <code>gcd : ℤ → ℤ → ℤ</code> using Euclid's algorithm (and prove it is the unique number that satisfies the condition in your <code>gcd</code> proposition). The proof would then state <code>gcd a b = gcd b a</code>.</p>
+
+<a name="180207878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180207878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180207878">Tim Baanen (Nov 08 2019 at 07:16)</a>:</h4>
+<p>But I'm pretty much an intuitionist, so take that as you want :P</p>
+
+<a name="180212659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180212659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180212659">Johan Commelin (Nov 08 2019 at 09:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="244890">@agro1986</span> Could you explain a bit of your background/motivation/goal? Such a bigger picture could help us with answering more specific questions. Are these training exercises, or do you want to formalise a particular piece of maths, or do you have another goal?</p>
+
+<a name="180213545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180213545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180213545">Kevin Buzzard (Nov 08 2019 at 09:17)</a>:</h4>
+<p>Here's a more compressed tactic mode proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gcd_sym</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="n">d</span><span class="o">):</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">a</span> <span class="n">d</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">hne0</span><span class="o">,</span> <span class="n">hda</span><span class="o">,</span> <span class="n">hdb</span><span class="o">,</span> <span class="n">hdmin</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">exact</span> <span class="n">mt</span> <span class="n">and</span><span class="bp">.</span><span class="n">comm</span><span class="bp">.</span><span class="n">mp</span> <span class="n">hne0</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">rintros</span> <span class="n">c</span> <span class="bp">⟨</span><span class="n">ha</span><span class="o">,</span> <span class="n">hb</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hdmin</span> <span class="n">c</span> <span class="bp">⟨</span><span class="n">hb</span><span class="o">,</span> <span class="n">ha</span><span class="bp">⟩</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="180213696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180213696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180213696">Kevin Buzzard (Nov 08 2019 at 09:20)</a>:</h4>
+<p>and here's a term mode proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gcd_sym</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="n">d</span><span class="o">):</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">a</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">mt</span> <span class="n">and</span><span class="bp">.</span><span class="n">comm</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">hc</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">hc</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+<a name="180220292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180220292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180220292">agro1986 (Nov 08 2019 at 11:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> for now, training exercise to familiarize myself with the language :). I'm rereading an elementary number theory textbook while challenging myself to write the definitions and proofs using Lean</p>
+
+<a name="180221350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221350">agro1986 (Nov 08 2019 at 11:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="238446">@Tim Baanen</span> hmm, that's an interesting way to think about it. Write the algorithm for it, and then using Lean prove that it satisfies certain properties...</p>
+<p>However when I try something like this:</p>
+<div class="codehilite"><pre><span></span>def add (a: ℤ) (b: ℤ): ℤ := a + b
+
+def add_sym (a: ℤ) (b: ℤ): add a b = add b a :=
+  begin
+    -- ???
+  end
+</pre></div>
+
+
+<p>I don't have any idea to first prove the super obvious definitionally 100% correct fact that <code>h: add a b = a + b</code> :(. Any pointers?</p>
+
+<a name="180221753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221753">Mario Carneiro (Nov 08 2019 at 11:36)</a>:</h4>
+<p><code>rfl</code></p>
+
+<a name="180221780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221780">Mario Carneiro (Nov 08 2019 at 11:36)</a>:</h4>
+<p>in tactic mode, <code>unfold add</code> will change the goal to <code>a + b = b + a</code></p>
+
+<a name="180221915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221915">Kevin Buzzard (Nov 08 2019 at 11:39)</a>:</h4>
+<p>Because it's true <em>by definition</em>, you can use the <code>change</code> tactic. For example <code>change a + b = b + a</code> should work.</p>
+
+<a name="180222047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180222047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180222047">agro1986 (Nov 08 2019 at 11:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Great!</p>
+<div class="codehilite"><pre><span></span>def add_sym (a: ℤ) (b: ℤ): add a b = add b a :=
+  begin
+    unfold add,
+    ring,
+  end
+</pre></div>
+
+
+<p>change tactic also works! Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="180223449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180223449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180223449">agro1986 (Nov 08 2019 at 12:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thank you for the compressed tactic mode proof also. It's kind of a  magical experience that with Lean, you can just paste the proof and then I can interactively walk through it while seeing how the state changes. rcases and rintros with their pattern matching is so useful.</p>
+
+<a name="180228706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180228706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180228706">Reid Barton (Nov 08 2019 at 13:21)</a>:</h4>
+<p>I think a better definition would conclude <code>∀ (c: ℤ), divides c a ∧ divides c b → divides c d</code>. Then asssume <code>d &gt;= 0</code>. You don't need the <code>¬(a = 0 ∧ b = 0)</code> part.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

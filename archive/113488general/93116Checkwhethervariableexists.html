@@ -1,0 +1,63 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/93116Checkwhethervariableexists.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html">Check whether variable exists</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174387702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387702">EnjoysMath (Aug 28 2019 at 18:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">object_instance_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<p>Hopefully o is a string</p>
+
+<a name="174387836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387836">EnjoysMath (Aug 28 2019 at 18:12)</a>:</h4>
+<p>Part of my algorithm for connecting graphics items with Lean instances needs to check whether an object specified by o already exists.  So how can we do that with Lean commands?</p>
+
+<a name="174387862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387862">Johan Commelin (Aug 28 2019 at 18:13)</a>:</h4>
+<p>There is something like <code>mk_fresh_name</code> or something like that. I don't know anything about meta programming in Lean</p>
+
+<a name="174387889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387889">EnjoysMath (Aug 28 2019 at 18:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  thx, I'll look at my code again and see if I can use that instead</p>
+
+<a name="174387984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387984">EnjoysMath (Aug 28 2019 at 18:14)</a>:</h4>
+<p>Can't really, unless I do a major redesign since I have:</p>
+
+<a name="174387995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174387995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174387995">EnjoysMath (Aug 28 2019 at 18:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">add_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cat</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">()</span><span class="o">.</span><span class="n">object_instance_exists</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">()</span><span class="o">.</span><span class="n">add_object_instance</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">cat</span><span class="p">)]</span> <span class="o">=</span> <span class="n">cat</span>
+</pre></div>
+
+<a name="174388021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174388021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174388021">EnjoysMath (Aug 28 2019 at 18:15)</a>:</h4>
+<p>Where interface() is the Lean interface</p>
+
+<a name="174388045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174388045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174388045">EnjoysMath (Aug 28 2019 at 18:15)</a>:</h4>
+<p>Shouldn't <code>#check</code> do the above?</p>
+
+<a name="174388136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20variable%20exists/near/174388136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93116Checkwhethervariableexists.html#174388136">EnjoysMath (Aug 28 2019 at 18:16)</a>:</h4>
+<p>I'll do some reading and figure out a way to make it work :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

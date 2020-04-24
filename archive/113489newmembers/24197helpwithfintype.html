@@ -1,0 +1,464 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/24197helpwithfintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html">help with fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188777502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188777502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188777502">Matt E (Feb 21 2020 at 21:42)</a>:</h4>
+<p>I have a type of words over alphabets (which I am treating as enumerated types). </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="err">Γ</span> <span class="bp">|</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">Y</span>
+
+<span class="kn">inductive</span> <span class="n">word</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">ε</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">word</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">word</span> <span class="bp">→</span> <span class="n">word</span>
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">∙</span> <span class="bp">`</span> <span class="o">:</span><span class="mi">100</span> <span class="o">:=</span> <span class="n">word</span><span class="bp">.</span><span class="n">nonempty</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">Γ</span><span class="bp">.</span><span class="n">X</span> <span class="err">∙</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">word</span> <span class="err">Γ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I would like to have a <code>matrix (word Γ) (word Γ) _</code>, but this doesn't work as we would need <code>instance : fintype (word Γ)</code> (which surely is not constructible). So I started an attempt at finite words</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">max_length</span> <span class="o">:=</span> <span class="mi">1000</span>
+<span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">finword</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="bp">&lt;=</span> <span class="n">max_length</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I have no idea really how to prove <code>fintype</code> for this. Maybe I need to rethink my approach. Thanks in advance for any suggestions. For reference I am trying to model what is called on slide 7 here "Closed and Consistent Finite Hankel Matrices", which as you can see are in the first instance finite matrices indexed by words in a language (hopefully once I have the correct type for such a matrix, then the closed &amp; consistent predicates will be easy) <a href="https://borjaballe.github.io/slides/turing18.pdf" target="_blank" title="https://borjaballe.github.io/slides/turing18.pdf">https://borjaballe.github.io/slides/turing18.pdf</a></p>
+
+<a name="188778987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188778987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188778987">Reid Barton (Feb 21 2020 at 22:01)</a>:</h4>
+<p>I would just not use <code>matrix</code></p>
+
+<a name="188779003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188779003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188779003">Reid Barton (Feb 21 2020 at 22:02)</a>:</h4>
+<p>A function seems fine</p>
+
+<a name="188779994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188779994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188779994">Matt E (Feb 21 2020 at 22:16)</a>:</h4>
+<p>hm, yes I suppose a "partial" function <code>word α -&gt; word α -&gt; option bool</code> could work... I was thinking it would be useful to draw on the <code>matrix</code> methods, but actually it does not have the main thing I need which is some kind of <code>add_row</code>. let's see if I can define that...</p>
+
+<a name="188793709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188793709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188793709">Matt E (Feb 22 2020 at 02:32)</a>:</h4>
+<p>so this is working well enough so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">table</span><span class="bp">`</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span>
+
+<span class="n">def</span> <span class="n">add_row</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">table</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">row</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">entries</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">update</span> <span class="n">t</span> <span class="n">row</span> <span class="n">entries</span>
+
+<span class="n">def</span> <span class="n">consistent</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">table</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p₁</span> <span class="n">p₂</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">T</span> <span class="n">p₁</span> <span class="bp">=</span> <span class="n">T</span> <span class="n">p₂</span> <span class="bp">→</span> <span class="n">T</span> <span class="o">(</span><span class="n">a</span><span class="err">∙</span><span class="n">p₁</span><span class="o">)</span> <span class="bp">=</span> <span class="n">T</span> <span class="o">(</span><span class="n">a</span><span class="err">∙</span><span class="n">p₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>now, ideally I would have a function that for any table, either proves consistency or gives a counterexample (or at least gives a bool answer for consistent or not). I should be able to construct that function as a term of some type right? I'm having trouble getting started</p>
+
+<a name="188794472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794472">Mario Carneiro (Feb 22 2020 at 02:53)</a>:</h4>
+<p>You should probably make <code>table</code> a definition rather than a notation</p>
+
+<a name="188794516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794516">Mario Carneiro (Feb 22 2020 at 02:54)</a>:</h4>
+<p>You can't decide <code>consistent T</code> unless <code>word A</code> is finite</p>
+
+<a name="188794526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794526">Mario Carneiro (Feb 22 2020 at 02:54)</a>:</h4>
+<p>and <code>A</code></p>
+
+<a name="188794545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794545">Mario Carneiro (Feb 22 2020 at 02:55)</a>:</h4>
+<p>The type you want to construct is <code>decidable (consistent T)</code></p>
+
+<a name="188794551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794551">Mario Carneiro (Feb 22 2020 at 02:56)</a>:</h4>
+<p>although this is only the weaker form; for the stronger form you need some specialized proof-or-counterexample type</p>
+
+<a name="188808316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188808316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188808316">Matt E (Feb 22 2020 at 09:11)</a>:</h4>
+<p>thanks. so I'm back to square one - I know how to deal with proving <code>fintype A</code> but <code>word A</code> just isn't finite (it is basically <code>list A</code>). so was my original <code>finword</code>sketch possibly a non insane idea?</p>
+
+<a name="188819826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188819826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188819826">Matt E (Feb 22 2020 at 14:33)</a>:</h4>
+<p>right, so I'm pretty happy with this</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">x</span>
+<span class="kn">inductive</span> <span class="n">fin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span>    <span class="o">{}</span>      <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>     <span class="o">:</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">len</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="n">len</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">len</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">∙</span> <span class="bp">`</span> <span class="o">:</span><span class="mi">100</span> <span class="o">:=</span> <span class="n">finword</span><span class="bp">.</span><span class="n">nonempty</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ε</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">finword</span><span class="bp">.</span><span class="n">empty</span>
+</pre></div>
+
+
+<p>but now I'm stuck on the type of tables:<br>
+<code>def mytable : finword α 100 _ → finword α 100 _ → option bool |  ε ε := tt ...</code> clearly isn't valid, but neither is filling in any particular <code>fin</code> for the <code>_</code>. so it seems I would need to make that argument implicit in <code>finword</code>, but I'm not sure if that's possible...</p>
+
+<a name="188820722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188820722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188820722">Matt E (Feb 22 2020 at 14:59)</a>:</h4>
+<p>this works, including the word lengths manually but is not very elegant</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mytable</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">10</span><span class="o">,</span> <span class="n">finword</span> <span class="err">Γ</span> <span class="mi">10</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="err">Γ</span> <span class="mi">10</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>  <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>  <span class="n">ε</span>          <span class="n">ε</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">succ</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span> <span class="o">(</span><span class="err">Γ</span><span class="bp">.</span><span class="n">X</span><span class="err">∙</span><span class="n">ε</span><span class="o">)</span> <span class="n">ε</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+</pre></div>
+
+<a name="188821509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188821509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188821509">Matt E (Feb 22 2020 at 15:21)</a>:</h4>
+<p>and further, for a moderately sized table, lean does not want to compile it (<code>deep recursion was detected at 'replace'</code>)</p>
+
+<a name="188833441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188833441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188833441">Mario Carneiro (Feb 22 2020 at 21:13)</a>:</h4>
+<p>This is not what you want - each <code>finword A n i</code> is isomorphic to <code>A</code>, so it doesn't represent the type of words. You need <code>empty</code> and <code>nonempty</code> to be able to inhabit the same type for that. I suggest:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span> <span class="o">{}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="188833513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188833513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188833513">Mario Carneiro (Feb 22 2020 at 21:15)</a>:</h4>
+<p>Where <code>fin</code> comes in is that you can define a bijection between <code>finword A n</code> and <code>fin n -&gt; A</code></p>
+
+<a name="188834255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834255">Matt E (Feb 22 2020 at 21:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> that's perfect, thanks. I got into a subtle confusion but I see now</p>
+
+<a name="188834310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834310">Mario Carneiro (Feb 22 2020 at 21:39)</a>:</h4>
+<p>Actually, I think <code>empty</code> needs type <code>finword 0</code> if you want this to be like the type <code>vector A n</code></p>
+
+<a name="188834362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834362">Matt E (Feb 22 2020 at 21:40)</a>:</h4>
+<p>true</p>
+
+<a name="188834489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834489">Matt E (Feb 22 2020 at 21:45)</a>:</h4>
+<p>I think the original should work for my purposes</p>
+
+<a name="188841405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188841405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188841405">Matt E (Feb 23 2020 at 01:05)</a>:</h4>
+<p>I am proving <code>decidable (consistent T)</code> for a special case to get a feel for the general one. blanking on how to solve a goal of the form:</p>
+<div class="codehilite"><pre><span></span><span class="n">a_1</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span>  <span class="bp">=</span> <span class="n">f</span>  <span class="n">y</span>
+<span class="err">⊢</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">c</span>
+</pre></div>
+
+
+<p>where <code>a_1</code> is false... it's late</p>
+
+<a name="188841861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188841861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188841861">Bryan Gin-ge Chen (Feb 23 2020 at 01:15)</a>:</h4>
+<p>If you can get a term <code>t : false</code>, then <code>t.elim</code> will solve the goal. Similarly, if you have <code>ha : a</code> and <code>hna: ¬a</code>, <code>absurd ha hna</code> will work.</p>
+
+<a name="188842106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188842106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188842106">Mario Carneiro (Feb 23 2020 at 01:22)</a>:</h4>
+<p>You can use <code>exfalso</code> to make the goal <code>false</code> explicitly, but it's rarely necessary. Once you prove the context is contradictory it usually doesn't matter what the goal is</p>
+
+<a name="188842591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188842591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188842591">Matt E (Feb 23 2020 at 01:38)</a>:</h4>
+<p>cheers, remember these from the NNG but actually introducing the relevant term was tripping me up... got there in the end</p>
+
+<a name="188842674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188842674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188842674">Matt E (Feb 23 2020 at 01:41)</a>:</h4>
+<p>I feel it will be brutal to generalize this proof to any table...</p>
+
+<a name="189127374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127374">Wojciech Nawrocki (Feb 26 2020 at 15:58)</a>:</h4>
+<p>Hello! I'm trying to construct an object for all fintypes, i.e. I want a conclusion of the form <code>∀ (J: Type u) [fintype J], C J</code> for some motive <code>C</code>. I scoured the chat for ways to construct stuff out of fintypes and it seems one way to do it is by induction on <code>fintype.card</code>, but the inductive step is really awkward since one needs to construct something like "a fintype-with-one-object-less-than-J given that <code>fintype.card J = nat.succ n</code>". Constructing my thing would be quite nice given the following recursion principle:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>The problem is I'm not quite sure if this is provable, or even true. Might it be?</p>
+
+<a name="189127826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127826">Kevin Buzzard (Feb 26 2020 at 16:02)</a>:</h4>
+<p>My guess is that this would only be provable if you can prove that <code>C</code> is constant on isomorphism classes, i.e. if there's a bijection between J and K then C(J)=C(K).</p>
+
+<a name="189127974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127974">Kevin Buzzard (Feb 26 2020 at 16:03)</a>:</h4>
+<p>Because your assumptions will enable to you prove C(unit ⊕ unit ⊕ ... ⊕ unit) but where do you go from there unless you know C is constant on isomorphism classes?</p>
+
+<a name="189133624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189133624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189133624">Wojciech Nawrocki (Feb 26 2020 at 17:00)</a>:</h4>
+<p>Thank you, this does sound reasonable. So something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">J</span> <span class="err">≃</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">J</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">J&#39;</span><span class="o">)</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>might be true.</p>
+
+<a name="189134307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189134307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189134307">Kevin Buzzard (Feb 26 2020 at 17:08)</a>:</h4>
+<p>Yes it might be, but if C is really taking values in Sort v then the danger here is that it might be hard to prove <code>C J = C J'</code>. Equality of types is a thorny subject.</p>
+
+<a name="189138404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189138404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189138404">Scott Morrison (Feb 26 2020 at 17:47)</a>:</h4>
+<p>You should be able to do this with only the assumption <code>J ≃ J' → C J ≃ C J'</code>.</p>
+
+<a name="189141213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141213">Reid Barton (Feb 26 2020 at 18:14)</a>:</h4>
+<p>But at this point you might as well just prove <code>nonempty (C J)</code></p>
+
+<a name="189141259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141259">Reid Barton (Feb 26 2020 at 18:15)</a>:</h4>
+<p>So you might as well just assume C takes values in Props</p>
+
+<a name="189142256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142256">Reid Barton (Feb 26 2020 at 18:25)</a>:</h4>
+<p>This is assuming you don't intend to prove any lemmas about <em>which</em> value <code>my_rec</code> takes, but it's hard to see what kind of lemma you could expect to have.</p>
+
+<a name="189142374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142374">Wojciech Nawrocki (Feb 26 2020 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Wouldn't <code>def myC (J: Type u) [fintype J] : Type := fin (fintype.card J)</code> be a valid non-Prop example? It's fairly simple to prove that it respects isomorphisms.</p>
+
+<a name="189142761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142761">Reid Barton (Feb 26 2020 at 18:29)</a>:</h4>
+<p>We could even take <code>C J = J</code></p>
+
+<a name="189143066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189143066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189143066">Reid Barton (Feb 26 2020 at 18:31)</a>:</h4>
+<p>But to define <code>myrec</code> you will have to choose an isomorphism from J to the nested sum of <code>unit</code>s, and this choice won't be compatible with isomorphisms</p>
+
+<a name="189146195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189146195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189146195">Wojciech Nawrocki (Feb 26 2020 at 18:56)</a>:</h4>
+<p>Thank you, I don't really care about what it returns as long as it's in Type. For context, I'm trying to prove in the catthy library that binary products and terminal object imply finite products by recursion on the size of <code>J</code> where <code>(discrete J) ⥤ C</code> is the diagram. The return type is <code>has_limit F</code> which is not a Prop. Doing this on <code>fin n</code> doesn't seem to work because it's not universe-polymorphic and the category wants objects at level <code>u</code>, so perhaps what I really want is a polymorphic <code>pfin</code>.</p>
+
+<a name="189127374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127374">Wojciech Nawrocki (Feb 26 2020 at 15:58)</a>:</h4>
+<p>Hello! I'm trying to construct an object for all fintypes, i.e. I want a conclusion of the form <code>∀ (J: Type u) [fintype J], C J</code> for some motive <code>C</code>. I scoured the chat for ways to construct stuff out of fintypes and it seems one way to do it is by induction on <code>fintype.card</code>, but the inductive step is really awkward since one needs to construct something like "a fintype-with-one-object-less-than-J given that <code>fintype.card J = nat.succ n</code>". Constructing my thing would be quite nice given the following recursion principle:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>The problem is I'm not quite sure if this is provable, or even true. Might it be?</p>
+
+<a name="189127826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127826">Kevin Buzzard (Feb 26 2020 at 16:02)</a>:</h4>
+<p>My guess is that this would only be provable if you can prove that <code>C</code> is constant on isomorphism classes, i.e. if there's a bijection between J and K then C(J)=C(K).</p>
+
+<a name="189127974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127974">Kevin Buzzard (Feb 26 2020 at 16:03)</a>:</h4>
+<p>Because your assumptions will enable to you prove C(unit ⊕ unit ⊕ ... ⊕ unit) but where do you go from there unless you know C is constant on isomorphism classes?</p>
+
+<a name="189133624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189133624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189133624">Wojciech Nawrocki (Feb 26 2020 at 17:00)</a>:</h4>
+<p>Thank you, this does sound reasonable. So something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">J</span> <span class="err">≃</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">J</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">J&#39;</span><span class="o">)</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>might be true.</p>
+
+<a name="189134307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189134307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189134307">Kevin Buzzard (Feb 26 2020 at 17:08)</a>:</h4>
+<p>Yes it might be, but if C is really taking values in Sort v then the danger here is that it might be hard to prove <code>C J = C J'</code>. Equality of types is a thorny subject.</p>
+
+<a name="189138404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189138404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189138404">Scott Morrison (Feb 26 2020 at 17:47)</a>:</h4>
+<p>You should be able to do this with only the assumption <code>J ≃ J' → C J ≃ C J'</code>.</p>
+
+<a name="189141213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141213">Reid Barton (Feb 26 2020 at 18:14)</a>:</h4>
+<p>But at this point you might as well just prove <code>nonempty (C J)</code></p>
+
+<a name="189141259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141259">Reid Barton (Feb 26 2020 at 18:15)</a>:</h4>
+<p>So you might as well just assume C takes values in Props</p>
+
+<a name="189142256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142256">Reid Barton (Feb 26 2020 at 18:25)</a>:</h4>
+<p>This is assuming you don't intend to prove any lemmas about <em>which</em> value <code>my_rec</code> takes, but it's hard to see what kind of lemma you could expect to have.</p>
+
+<a name="189142374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142374">Wojciech Nawrocki (Feb 26 2020 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Wouldn't <code>def myC (J: Type u) [fintype J] : Type := fin (fintype.card J)</code> be a valid non-Prop example? It's fairly simple to prove that it respects isomorphisms.</p>
+
+<a name="189142761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142761">Reid Barton (Feb 26 2020 at 18:29)</a>:</h4>
+<p>We could even take <code>C J = J</code></p>
+
+<a name="189143066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189143066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189143066">Reid Barton (Feb 26 2020 at 18:31)</a>:</h4>
+<p>But to define <code>myrec</code> you will have to choose an isomorphism from J to the nested sum of <code>unit</code>s, and this choice won't be compatible with isomorphisms</p>
+
+<a name="189146195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189146195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189146195">Wojciech Nawrocki (Feb 26 2020 at 18:56)</a>:</h4>
+<p>Thank you, I don't really care about what it returns as long as it's in Type. For context, I'm trying to prove in the catthy library that binary products and terminal object imply finite products by recursion on the size of <code>J</code> where <code>(discrete J) ⥤ C</code> is the diagram. The return type is <code>has_limit F</code> which is not a Prop. Doing this on <code>fin n</code> doesn't seem to work because it's not universe-polymorphic and the category wants objects at level <code>u</code>, so perhaps what I really want is a polymorphic <code>pfin</code>.</p>
+
+<a name="189127374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127374">Wojciech Nawrocki (Feb 26 2020 at 15:58)</a>:</h4>
+<p>Hello! I'm trying to construct an object for all fintypes, i.e. I want a conclusion of the form <code>∀ (J: Type u) [fintype J], C J</code> for some motive <code>C</code>. I scoured the chat for ways to construct stuff out of fintypes and it seems one way to do it is by induction on <code>fintype.card</code>, but the inductive step is really awkward since one needs to construct something like "a fintype-with-one-object-less-than-J given that <code>fintype.card J = nat.succ n</code>". Constructing my thing would be quite nice given the following recursion principle:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>The problem is I'm not quite sure if this is provable, or even true. Might it be?</p>
+
+<a name="189127826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127826">Kevin Buzzard (Feb 26 2020 at 16:02)</a>:</h4>
+<p>My guess is that this would only be provable if you can prove that <code>C</code> is constant on isomorphism classes, i.e. if there's a bijection between J and K then C(J)=C(K).</p>
+
+<a name="189127974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127974">Kevin Buzzard (Feb 26 2020 at 16:03)</a>:</h4>
+<p>Because your assumptions will enable to you prove C(unit ⊕ unit ⊕ ... ⊕ unit) but where do you go from there unless you know C is constant on isomorphism classes?</p>
+
+<a name="189133624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189133624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189133624">Wojciech Nawrocki (Feb 26 2020 at 17:00)</a>:</h4>
+<p>Thank you, this does sound reasonable. So something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">J</span> <span class="err">≃</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">J</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">J&#39;</span><span class="o">)</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>might be true.</p>
+
+<a name="189134307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189134307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189134307">Kevin Buzzard (Feb 26 2020 at 17:08)</a>:</h4>
+<p>Yes it might be, but if C is really taking values in Sort v then the danger here is that it might be hard to prove <code>C J = C J'</code>. Equality of types is a thorny subject.</p>
+
+<a name="189138404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189138404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189138404">Scott Morrison (Feb 26 2020 at 17:47)</a>:</h4>
+<p>You should be able to do this with only the assumption <code>J ≃ J' → C J ≃ C J'</code>.</p>
+
+<a name="189141213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141213">Reid Barton (Feb 26 2020 at 18:14)</a>:</h4>
+<p>But at this point you might as well just prove <code>nonempty (C J)</code></p>
+
+<a name="189141259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141259">Reid Barton (Feb 26 2020 at 18:15)</a>:</h4>
+<p>So you might as well just assume C takes values in Props</p>
+
+<a name="189142256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142256">Reid Barton (Feb 26 2020 at 18:25)</a>:</h4>
+<p>This is assuming you don't intend to prove any lemmas about <em>which</em> value <code>my_rec</code> takes, but it's hard to see what kind of lemma you could expect to have.</p>
+
+<a name="189142374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142374">Wojciech Nawrocki (Feb 26 2020 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Wouldn't <code>def myC (J: Type u) [fintype J] : Type := fin (fintype.card J)</code> be a valid non-Prop example? It's fairly simple to prove that it respects isomorphisms.</p>
+
+<a name="189142761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142761">Reid Barton (Feb 26 2020 at 18:29)</a>:</h4>
+<p>We could even take <code>C J = J</code></p>
+
+<a name="189143066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189143066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189143066">Reid Barton (Feb 26 2020 at 18:31)</a>:</h4>
+<p>But to define <code>myrec</code> you will have to choose an isomorphism from J to the nested sum of <code>unit</code>s, and this choice won't be compatible with isomorphisms</p>
+
+<a name="189146195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189146195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189146195">Wojciech Nawrocki (Feb 26 2020 at 18:56)</a>:</h4>
+<p>Thank you, I don't really care about what it returns as long as it's in Type. For context, I'm trying to prove in the catthy library that binary products and terminal object imply finite products by recursion on the size of <code>J</code> where <code>(discrete J) ⥤ C</code> is the diagram. The return type is <code>has_limit F</code> which is not a Prop. Doing this on <code>fin n</code> doesn't seem to work because it's not universe-polymorphic and the category wants objects at level <code>u</code>, so perhaps what I really want is a polymorphic <code>pfin</code>.</p>
+
+<a name="189127374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127374">Wojciech Nawrocki (Feb 26 2020 at 15:58)</a>:</h4>
+<p>Hello! I'm trying to construct an object for all fintypes, i.e. I want a conclusion of the form <code>∀ (J: Type u) [fintype J], C J</code> for some motive <code>C</code>. I scoured the chat for ways to construct stuff out of fintypes and it seems one way to do it is by induction on <code>fintype.card</code>, but the inductive step is really awkward since one needs to construct something like "a fintype-with-one-object-less-than-J given that <code>fintype.card J = nat.succ n</code>". Constructing my thing would be quite nice given the following recursion principle:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>The problem is I'm not quite sure if this is provable, or even true. Might it be?</p>
+
+<a name="189127826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127826">Kevin Buzzard (Feb 26 2020 at 16:02)</a>:</h4>
+<p>My guess is that this would only be provable if you can prove that <code>C</code> is constant on isomorphism classes, i.e. if there's a bijection between J and K then C(J)=C(K).</p>
+
+<a name="189127974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189127974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189127974">Kevin Buzzard (Feb 26 2020 at 16:03)</a>:</h4>
+<p>Because your assumptions will enable to you prove C(unit ⊕ unit ⊕ ... ⊕ unit) but where do you go from there unless you know C is constant on isomorphism classes?</p>
+
+<a name="189133624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189133624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189133624">Wojciech Nawrocki (Feb 26 2020 at 17:00)</a>:</h4>
+<p>Thank you, this does sound reasonable. So something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">myrec</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="n">pempty</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">CS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">C</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">unit</span> <span class="err">⊕</span> <span class="n">J&#39;</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="n">J&#39;</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J&#39;</span><span class="o">],</span> <span class="n">J</span> <span class="err">≃</span> <span class="n">J&#39;</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">J</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">J&#39;</span><span class="o">)</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">C</span> <span class="n">J</span>
+</pre></div>
+
+
+<p>might be true.</p>
+
+<a name="189134307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189134307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189134307">Kevin Buzzard (Feb 26 2020 at 17:08)</a>:</h4>
+<p>Yes it might be, but if C is really taking values in Sort v then the danger here is that it might be hard to prove <code>C J = C J'</code>. Equality of types is a thorny subject.</p>
+
+<a name="189138404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189138404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189138404">Scott Morrison (Feb 26 2020 at 17:47)</a>:</h4>
+<p>You should be able to do this with only the assumption <code>J ≃ J' → C J ≃ C J'</code>.</p>
+
+<a name="189141213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141213">Reid Barton (Feb 26 2020 at 18:14)</a>:</h4>
+<p>But at this point you might as well just prove <code>nonempty (C J)</code></p>
+
+<a name="189141259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189141259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189141259">Reid Barton (Feb 26 2020 at 18:15)</a>:</h4>
+<p>So you might as well just assume C takes values in Props</p>
+
+<a name="189142256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142256">Reid Barton (Feb 26 2020 at 18:25)</a>:</h4>
+<p>This is assuming you don't intend to prove any lemmas about <em>which</em> value <code>my_rec</code> takes, but it's hard to see what kind of lemma you could expect to have.</p>
+
+<a name="189142374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142374">Wojciech Nawrocki (Feb 26 2020 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Wouldn't <code>def myC (J: Type u) [fintype J] : Type := fin (fintype.card J)</code> be a valid non-Prop example? It's fairly simple to prove that it respects isomorphisms.</p>
+
+<a name="189142761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189142761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189142761">Reid Barton (Feb 26 2020 at 18:29)</a>:</h4>
+<p>We could even take <code>C J = J</code></p>
+
+<a name="189143066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189143066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189143066">Reid Barton (Feb 26 2020 at 18:31)</a>:</h4>
+<p>But to define <code>myrec</code> you will have to choose an isomorphism from J to the nested sum of <code>unit</code>s, and this choice won't be compatible with isomorphisms</p>
+
+<a name="189146195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/189146195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#189146195">Wojciech Nawrocki (Feb 26 2020 at 18:56)</a>:</h4>
+<p>Thank you, I don't really care about what it returns as long as it's in Type. For context, I'm trying to prove in the catthy library that binary products and terminal object imply finite products by recursion on the size of <code>J</code> where <code>(discrete J) ⥤ C</code> is the diagram. The return type is <code>has_limit F</code> which is not a Prop. Doing this on <code>fin n</code> doesn't seem to work because it's not universe-polymorphic and the category wants objects at level <code>u</code>, so perhaps what I really want is a polymorphic <code>pfin</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

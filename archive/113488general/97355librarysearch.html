@@ -1,0 +1,439 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/97355librarysearch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html">library_search</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="159997569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997569">Scott Morrison (Mar 05 2019 at 12:13)</a>:</h4>
+<p>... a present coming soon:</p>
+<p>Here's a randomly chosen short mathlib proof:</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+⟨b, (nat.div_mul_cancel h).symm⟩
+</pre></div>
+
+
+<p>Now, let's try</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+by library_search
+</pre></div>
+
+
+<p>wait a few seconds, and observe the trace message <code>div_dvd_of_dvd h</code>, which is interesting I guess, but not that awesome.</p>
+<p>However:</p>
+<div class="codehilite"><pre><span></span>lemma div_dvd_of_dvd {a b : ℕ} (h : b ∣ a) : (a / b) ∣ a :=
+by library_search [-div_dvd_of_dvd]
+</pre></div>
+
+
+<p>gives <code>dvd.intro b (nat.div_mul_cancel h)</code>.</p>
+<p>There were no hints here, just scraping all the imported declarations, and doing a neither-depth-nor-breadth-first search of the tree of applications of lemmas to the goal.</p>
+
+<a name="159997676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997676">Scott Morrison (Mar 05 2019 at 12:15)</a>:</h4>
+<p>Now, this is pretty sensitive to how much you have imported! With just <code>data.nat.prime</code> imported, this example takes a second or so, but with everything-and-the-kitchen-sink imported it spirals out to 40s, which is obviously unacceptable. But I've barely started optimising / trimming the search tree, so it's possible this will still improve a lot.</p>
+
+<a name="159997754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997754">Scott Morrison (Mar 05 2019 at 12:16)</a>:</h4>
+<p>Other examples are much less sensitive to the amount imported.  For example I can find the proof of <code>example {a b c : ℕ} (h₁ : a ∣ c) (h₂ : a ∣ b + c) : a ∣ b</code> in about 1s with small imports, and 2s with lots of imports.</p>
+
+<a name="159997826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997826">Scott Morrison (Mar 05 2019 at 12:17)</a>:</h4>
+<p>(That proof is <code>(nat.dvd_add_iff_left h₁).mpr h₂</code>)</p>
+
+<a name="159997879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997879">Patrick Massot (Mar 05 2019 at 12:18)</a>:</h4>
+<p>It's very promising!</p>
+
+<a name="159997891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997891">Patrick Massot (Mar 05 2019 at 12:18)</a>:</h4>
+<p>It's very exciting to see you are back to tactic writing!</p>
+
+<a name="159997917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997917">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>Attempting to prepare examples for my students was getting discouraging. Also they are already upset about not being able to find lemmas. :-)</p>
+
+<a name="159997958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997958">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>Also -- thanks to Simon and Keeley for help at key points, and Johan's constant encouragement. :-)</p>
+
+<a name="159997967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/159997967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#159997967">Scott Morrison (Mar 05 2019 at 12:19)</a>:</h4>
+<p>But there's still some work to get this polished, it's a mess at the moment!</p>
+
+<a name="160015701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/160015701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#160015701">Johan Commelin (Mar 05 2019 at 16:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I'm glad you interpret my nagging and whining as encouragement (-;<br>
+I'm very excited to see this! I really hope we will have a <code>back</code> in mathlib soon.</p>
+
+<a name="160022912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/160022912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#160022912">Patrick Massot (Mar 05 2019 at 17:37)</a>:</h4>
+<p>This is also how I collaborate with Simon</p>
+
+<a name="164559455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164559455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164559455">Johan Commelin (Apr 30 2019 at 17:49)</a>:</h4>
+<p>I had some people in my office today who attended Kevin's talk. They had never used Lean before, but they wanted to try it. I helped them setup the system, and they dove in. First thing they wanted to try: prove that the derivative of <code>exp</code> is <code>exp</code>. After we had the statement formalised, I told them about some basic tactics, and <code>library_search</code>. They loved it. It worked surprisingly often, which kept them addicted. Of course, when we got to the meat of the theorem, we gut stuck. But nevertheless: chapeau <span class="user-mention" data-user-id="110087">@Scott Morrison</span>!<br>
+(I think Kevin would say that they went in instant Isabelle-mode.)</p>
+
+<a name="164561941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164561941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164561941">Kevin Buzzard (Apr 30 2019 at 18:17)</a>:</h4>
+<p>Proving the derivative of exp is exp is not something we can currently do, right?</p>
+
+<a name="164561960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164561960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164561960">Kevin Buzzard (Apr 30 2019 at 18:17)</a>:</h4>
+<p>We need that a power series can be differentiated term by term</p>
+
+<a name="164561977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164561977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164561977">Patrick Massot (Apr 30 2019 at 18:17)</a>:</h4>
+<p>we don't know that</p>
+
+<a name="164561999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164561999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164561999">Kenny Lau (Apr 30 2019 at 18:17)</a>:</h4>
+<p>that's just comparison test</p>
+
+<a name="164562192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164562192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164562192">Kevin Buzzard (Apr 30 2019 at 18:19)</a>:</h4>
+<p>Why doesn't someone do it if it's easy? We have done so much algebra. We need some analysts!</p>
+
+<a name="164563054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164563054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164563054">Mario Carneiro (Apr 30 2019 at 18:27)</a>:</h4>
+<p>we have basic exp inequalities already, right? so that's not needed</p>
+
+<a name="164563090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164563090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164563090">Mario Carneiro (Apr 30 2019 at 18:27)</a>:</h4>
+<p>In this case you need that <code>exp x - 1 - x</code> is O(x^2)</p>
+
+<a name="166112089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166112089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166112089">Sebastien Gouezel (May 20 2019 at 19:23)</a>:</h4>
+<p><code>library_search</code> works extremely well most of the time (many thanks for this). However, I just got the following strange behavior</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">continuous_at</span><span class="bp">.</span><span class="n">preimage_mem_nhds</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">continuous_at</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>the output of <code>library_search</code> is <code>exact mem_def.mpr (h s hs)</code>, which does not work. It should be <code>exact mem_def.mpr (h hs)</code> (or simply <code>exact h hs</code>).</p>
+
+<a name="166112350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166112350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166112350">Simon Hudon (May 20 2019 at 19:26)</a>:</h4>
+<p>Is it because <code>s</code> should be an implicit argument?</p>
+
+<a name="166113191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113191">Sebastien Gouezel (May 20 2019 at 19:37)</a>:</h4>
+<p>It's complicated to say: there is a lot of nontrivial unfolding to be done.</p>
+
+<a name="166113773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113773">Simon Hudon (May 20 2019 at 19:43)</a>:</h4>
+<p>You can see the function type of <code>h</code> by putting this into your proof script:</p>
+<div class="codehilite"><pre><span></span>   <span class="n">do</span> <span class="o">{</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">h</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="o">}</span>
+</pre></div>
+
+<a name="166113782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113782">Simon Hudon (May 20 2019 at 19:43)</a>:</h4>
+<p>(don't forget to <code>open tactic</code>)</p>
+
+<a name="166114441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166114441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166114441">Sebastien Gouezel (May 20 2019 at 19:51)</a>:</h4>
+<p>semi-implicit argument: <code>∀ ⦃a : set β⦄, a ∈ (nhds (f x)).sets → a ∈ (filter.map f (nhds x)).sets</code></p>
+
+<a name="182051592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182051592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182051592">Sebastien Gouezel (Nov 27 2019 at 19:34)</a>:</h4>
+<p>How would you prove</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">no_way</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_field</span> <span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="err">𝕜</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">F</span><span class="o">]</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f&#39;</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">id</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p><code>by simp</code> doesn't work (obvious gap in the library that I will fill right away), so I tried <code>library_search</code>. It worked, giving me the following proof...</p>
+
+<a name="182051612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182051612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182051612">Sebastien Gouezel (Nov 27 2019 at 19:34)</a>:</h4>
+<p>... <code>exact neg_inj rfl</code></p>
+
+<a name="182051691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182051691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182051691">Sebastien Gouezel (Nov 27 2019 at 19:35)</a>:</h4>
+<p>where <code>neg_inj</code> is</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">neg_inj</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="bp">-</span><span class="n">a</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">b</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>Lean is way too clever for me here to see a relationship between the question I ask and the answer I get.</p>
+
+<a name="182051922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182051922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182051922">Sebastien Gouezel (Nov 27 2019 at 19:38)</a>:</h4>
+<p>Indeed, <code>- f'.comp continuous_linear_map.id = - f'</code>is <code>rfl</code>, but <code>f'.comp continuous_linear_map.id = f'</code>is not...</p>
+
+<a name="182052031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182052031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182052031">Chris Hughes (Nov 27 2019 at 19:39)</a>:</h4>
+<p><code>cases f'; refl</code> or <code>ext; refl</code>?</p>
+
+<a name="182052544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182052544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182052544">Sebastien Gouezel (Nov 27 2019 at 19:45)</a>:</h4>
+<p>Yes, the natural proof I would use is <code>ext, refl</code>, and it works fine. I was just amazed by the answer of <code>library_search</code>.</p>
+
+<a name="182057496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057496">Johan Commelin (Nov 27 2019 at 20:49)</a>:</h4>
+<p>Isn't it nice that Lean is getting clever? That's what all the mathematicians want, right?</p>
+
+<a name="182057748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057748">Floris van Doorn (Nov 27 2019 at 20:53)</a>:</h4>
+<p>This is one of the strange artifacts from Lean not having the definitional eta rule for structures. The eta rule for (say) products states that <code>x : prod A B</code> is definitionally equal to <code>(x.1, x.2)</code>. A rule like this makes sense. After all, the first and second projections of both <code>x</code> and <code>(x.1, x.2)</code> are already definitionally equal in Lean, so it makes sense to say that they are definitionally equal. </p>
+<p>In your case you have again two structures, where all projections are definitionally equal. This means that if you perform any transformation on both the LHS and the RHS that only take projections into account (like <code>neg</code>), you get something definitionally equal, which is why the proof that <code>library_search</code> found works.</p>
+<p>Originally the reason that Lean didn't get this rule was that the developers saw no compelling reason to add it. A while later I stated some (IMO) compelling reasons, but it never got added.</p>
+
+<a name="182057836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057836">Patrick Massot (Nov 27 2019 at 20:54)</a>:</h4>
+<p>This behavior of product never ceases to catch me by surprise.</p>
+
+<a name="182058493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058493">Sebastien Gouezel (Nov 27 2019 at 21:04)</a>:</h4>
+<p>Even if you added this rule for structures, I guess it would not ensure that <code>id</code> and <code>lambda x, (x.1, x.2)</code> are defeq, right? (in manifolds, it would have helped me a lot if this had been true).</p>
+
+<a name="182058910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058910">Sebastien Gouezel (Nov 27 2019 at 21:10)</a>:</h4>
+<p>I think it is the first time I understand what this eta rule for structures is. Thanks! Now I just need to understand alpha, beta, gamma, delta, and how many others do you have?</p>
+
+<a name="182058933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058933">Johan Commelin (Nov 27 2019 at 21:11)</a>:</h4>
+<p>Ooh, and then there are Y and S and K combinators, in case you get bored....</p>
+
+<a name="182060049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182060049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182060049">Kevin Buzzard (Nov 27 2019 at 21:27)</a>:</h4>
+<p>I learnt about these alpha beta things when I was trying to get automation working in the definition of the complex numbers</p>
+
+<a name="182060126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182060126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182060126">Kevin Buzzard (Nov 27 2019 at 21:28)</a>:</h4>
+<p>All proofs of eg associativity of multiplication are "check on real and imaginary parts" so it was precisely these projections in a very concrete situation</p>
+
+<a name="182061967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182061967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182061967">Floris van Doorn (Nov 27 2019 at 21:57)</a>:</h4>
+<p>Here is a cheat sheet:</p>
+<div class="codehilite"><pre><span></span>α-equivalence: λ x, f x ≡ λ y, f y
+β-reduction: (λ x, f x) a ≡ f a
+δ-reduction: unfold a definition
+η-reduction: λ x, f x ≡ f (η-expansion is in the other direction)
+ι-reduction: nat.rec P₀ Pₛ 0 ≡ P₀ and nat.rec P₀ Pₛ n.succ ≡ Pₛ n (nat.rec P₀ Pₛ n)
+ζ-reduction: (let x := a in f x) ≡ f a
+β-reduction (for records): (x, y).1 ≡ x and (x, y).2 ≡ y
+η-reduction (for records): (x.1, x.2) ≡ x
+</pre></div>
+
+
+<p>all reduction rules are directed (from left to right), but if you take the congruence closure (that is, the smallest equivalence relation that respects all ways to make a term), you get the corresponding equivalence</p>
+
+<a name="182062071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182062071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182062071">Floris van Doorn (Nov 27 2019 at 21:58)</a>:</h4>
+<p>Usually they are written a bit differently, using substitution instead of function application, but that will probably be more confusing. But just to be clear: something like <code>β</code>-reduction also applies if the term inside the lambda is not a application - so something like <code>(λ x, x) a ≡ a</code> is an instance of <code>β</code>-reduction</p>
+
+<a name="182063842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182063842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182063842">Chris Hughes (Nov 27 2019 at 22:25)</a>:</h4>
+<p>Why do the two <code>eta</code>s and <code>beta</code>s have the same name? Isn't the second <code>beta</code> just a combination of <code>delta</code> and <code>iota</code>?</p>
+
+<a name="182065296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065296">Mario Carneiro (Nov 27 2019 at 22:46)</a>:</h4>
+<p>If you view the projections as primitive, they are different</p>
+
+<a name="182065700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065700">Floris van Doorn (Nov 27 2019 at 22:53)</a>:</h4>
+<p>The last two names are maybe informal usage of these names. Yes, the second <code>beta</code> is indeed a combination of <code>delta</code> and <code>iota</code> in Lean. This is because products are defined as a inductive type. If records are primitive (not special cases of inductive types) then it could be its own rule.</p>
+<p>Sometimes <code>ι</code>-reduction is also called "<code>β</code>-reduction for inductive types". To explain this terminology, we have to take a step back.<br>
+In type theory, to each type former, there is a number of rules associated to it. I will explain these rules by using the natural numbers as an example.</p>
+<ul>
+<li>(Type) formation rules: when can I form this type? For natural numbers, we have <code>nat : Type</code></li>
+<li>(Term) introduction rules: when can I form an element of this type? For natural numbers: <code>0 : nat</code> and if <code>n : nat</code> then <code>n.succ : nat</code></li>
+<li>(Term) elimination rules: how can I eliminate out of this type? For natural numbers this is <code>nat.rec</code>.</li>
+<li>Then there are computation rules. These have two flavors<p>- What happens if I apply an elimination rule to an introduction rule? In general, this is sometimes called <code>beta</code>-reduction (since it corresponds to <br>
+<code>beta</code>-reduction when talking about functions). For natural numbers, these are the <code>iota</code>-reduction rules mentioned above.<br>
+- What happens if I apply an introduction rule to an elimination rule? These are called <code>eta</code>-conversion rules. The natural numbers don't really have them (I think you can write something like an eta-rule down, but it's not that useful. For functions and products, it's the eta rule I mentioned above.</p>
+</li>
+</ul>
+<p>This is the reason that different rules have the name <code>beta</code>/<code>eta</code>-reductions: they are the corresponding reduction rules for those type formers.</p>
+
+<a name="182065761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065761">Floris van Doorn (Nov 27 2019 at 22:54)</a>:</h4>
+<p>If you want more information than my summary, you can look e.g. here: <a href="https://ncatlab.org/nlab/show/type+theory#Syntax" target="_blank" title="https://ncatlab.org/nlab/show/type+theory#Syntax">https://ncatlab.org/nlab/show/type+theory#Syntax</a></p>
+
+<a name="182105414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182105414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182105414">Sebastian Ullrich (Nov 28 2019 at 12:43)</a>:</h4>
+<p>Just for comparison, Agda has definitional eta for <em>some</em> structures. Some termination (for coinductive structures, so not very relevant) and performance (even for pairs, unsolved?) issues are documented at <a href="https://github.com/agda/agda/issues/2436" target="_blank" title="https://github.com/agda/agda/issues/2436">https://github.com/agda/agda/issues/2436</a>.</p>
+
+<a name="182117322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182117322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182117322">Reid Barton (Nov 28 2019 at 15:28)</a>:</h4>
+<p>Coq also has opt-in definitional eta for structures.</p>
+
+<a name="183284849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183284849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183284849">Abhimanyu Pallavi Sudhir (Dec 12 2019 at 18:08)</a>:</h4>
+<p>Does library_search check for every possible paranthetic nesting structure of the hypothesis? Or just superficial combinations and repetitions?</p>
+
+<a name="183285547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183285547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183285547">Johan Commelin (Dec 12 2019 at 18:16)</a>:</h4>
+<p>I don't think it does anything with associativity, if that is what you mean. The goal has to match perfectly.</p>
+
+<a name="183285788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183285788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183285788">Abhimanyu Pallavi Sudhir (Dec 12 2019 at 18:19)</a>:</h4>
+<p>I mean, if we have hypothesis H1 H2 H3 and goal G, and we have a library theorem L such that L (H1 H2) H3 = G, will the tactic find L?</p>
+
+<a name="183286048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183286048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183286048">Patrick Massot (Dec 12 2019 at 18:22)</a>:</h4>
+<p>Yes.</p>
+
+<a name="183286096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183286096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183286096">Patrick Massot (Dec 12 2019 at 18:22)</a>:</h4>
+<p>Or maybe I don't understand the question.</p>
+
+<a name="183289794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183289794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183289794">Johan Commelin (Dec 12 2019 at 18:58)</a>:</h4>
+<p>I'm actually not sure if <code>library_search</code> will close that. <code>suggest</code> hopefully will do it. But as far as I know <code>library_search</code> only tries to close the immediate hypotheses of <code>L</code> with existing hypotheses in your context. There is no recursion.</p>
+
+<a name="183289883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183289883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183289883">Johan Commelin (Dec 12 2019 at 18:59)</a>:</h4>
+<p><code>suggest</code> wouldn't close the goal either, but would hopefully suggest <code>refine L _ H3</code>. And after that <code>suggest</code> and <code>library_search</code> should both close the goal via <code>solve_by_elim</code></p>
+
+<a name="189430252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189430252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189430252">Sebastien Gouezel (Mar 01 2020 at 11:37)</a>:</h4>
+<p>I am always amazed by library_search. I thought it was only supposed to try to apply all lemmas in the library, filling them with things in the context. But look at what happens in the following situation:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">card</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">ordered_partition2</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="o">:</span> <span class="n">ordered_partition2</span> <span class="n">n</span> <span class="err">≃</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I wanted to get the name of the lemma saying that if one has an equiv between two fintypes they have the same cardinal, so I asked <code>library_search</code> in my context. Its answer is:</p>
+<div class="codehilite"><pre><span></span><span class="n">Try</span> <span class="n">this</span><span class="o">:</span> <span class="n">exact</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span>
+  <span class="err">⇑</span><span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="err">⇑</span><span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">)),</span>
+     <span class="n">inj</span> <span class="o">:=</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">of_bijective</span><span class="bp">._</span><span class="n">proof_1</span> <span class="err">⇑</span><span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">))</span>
+              <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">bijective</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">)))}</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">pmap</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">multiset</span><span class="bp">.</span><span class="n">powerset_aux</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">fin_range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)))</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">powerset</span><span class="bp">._</span><span class="n">proof_1</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="o">))</span>
+</pre></div>
+
+
+<p>and it works perfectly well :) (Still, I will rather go with <code>exact fintype.card_congr this</code>)</p>
+
+<a name="189431733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189431733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189431733">Mario Carneiro (Mar 01 2020 at 12:26)</a>:</h4>
+<p>I think it unfolded some proof in the library to get that</p>
+
+<a name="189431842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189431842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189431842">Marc Huisinga (Mar 01 2020 at 12:31)</a>:</h4>
+<p>plagiarization!</p>
+
+<a name="189431893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189431893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189431893">Mario Carneiro (Mar 01 2020 at 12:33)</a>:</h4>
+<p>I don't know what <code>order_partition2</code> is so I can't completely reverse engineer it but the last bit, <code>list.pmap finset.mk ...</code> is the list that results if you ask what list enumerates <code>finset.powerset (@finset.univ (fin (n-1)))</code></p>
+
+<a name="189432036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432036">Sebastien Gouezel (Mar 01 2020 at 12:38)</a>:</h4>
+<p><code>order_partition2 n</code> is a structure, defined as</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">ordered_partition2</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">boundaries</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span>
+<span class="o">(</span><span class="n">zero_mem</span>   <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="err">∈</span> <span class="n">boundaries</span><span class="o">)</span>
+<span class="o">(</span><span class="n">last_mem</span>   <span class="o">:</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">last</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">boundaries</span><span class="o">))</span>
+</pre></div>
+
+
+<p>I constructed an equiv between this and <code>finset (fin (n-1))</code> (the one that is used in the proof). So, I am not surprised that an enumeration of the powerset of <code>fin (n-1)</code> shows up in the proof found by <code>library_search</code>.</p>
+<p>On an unrelated note, I was surprised that I could not prove that this is a <code>fintype</code> directly. Even</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">my_struct</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">my_finset</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">my_struct</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>fails...</p>
+
+<a name="189432044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432044">Sebastien Gouezel (Mar 01 2020 at 12:39)</a>:</h4>
+<p>While</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">inst2</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>works, of course.</p>
+
+<a name="189432088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432088">Mario Carneiro (Mar 01 2020 at 12:40)</a>:</h4>
+<p>There is no tactic for proving arbitrary inductive types to be finite. (I think <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> was working on something like this...) You have to manually cobble together the constructions in <code>fintype.lean</code></p>
+
+<a name="189432093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432093">Mario Carneiro (Mar 01 2020 at 12:41)</a>:</h4>
+<p>Certainly <code>apply_instance</code> will not work, there is no typeclass instance to find</p>
+
+<a name="189432133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432133">Mario Carneiro (Mar 01 2020 at 12:42)</a>:</h4>
+<p>Conceivably it might work with a hypothetical <code>@[derive fintype]</code> on the definition of <code>order_partition2</code></p>
+
+<a name="189432196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432196">Mario Carneiro (Mar 01 2020 at 12:45)</a>:</h4>
+<p>But if you just use the existing constructors instead of defining a new type, typeclass inference works fine:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">{</span>
+  <span class="n">boundaries</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">//</span>
+  <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="err">∈</span> <span class="n">boundaries</span> <span class="bp">∧</span>
+  <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">last</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">boundaries</span><span class="o">)}</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="189432293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189432293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189432293">Mario Carneiro (Mar 01 2020 at 12:49)</a>:</h4>
+<p>and that is also the easiest method of proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">ordered_partition2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">fintype</span><span class="bp">.</span><span class="n">of_equiv</span> <span class="o">{</span><span class="n">boundaries</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">//</span>
+  <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="err">∈</span> <span class="n">boundaries</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">last</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">boundaries</span><span class="o">)}</span>
+<span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="189433113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189433113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189433113">Sebastien Gouezel (Mar 01 2020 at 13:19)</a>:</h4>
+<p>Sure, I know how to do it with a subtype. But since I need the exact cardinality, I have anyway to construct the equiv with <code>fin (n-1)</code>. I was just surprised the <code>fintype</code> instance didn't work out of the box, because in general almost everything works out of the box!</p>
+
+<a name="189435049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189435049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189435049">Mario Carneiro (Mar 01 2020 at 14:26)</a>:</h4>
+<p>Well, my point is that as you wrote it it's impossible to have anything work out of the box unless you go into lean to change how the <code>structure</code> command works. You would have to put a <code>@[derive fintype]</code> annotation or trigger a tactic by some similar method... and someone would have to write that tactic</p>
+
+<a name="189445654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189445654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189445654">Jeremy Avigad (Mar 01 2020 at 20:03)</a>:</h4>
+<p>No, I am not working on tactics for inductive types. What Mario is thinking of is this: there is a general strategy for showing finitely branching inductive types are encodable: <a href="https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean">https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean</a>. There is a lot of boilerplate involved, but that sort of thing can also be automated. (But I am not planning to do it.)</p>
+
+<a name="189458109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189458109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189458109">Yury G. Kudryashov (Mar 02 2020 at 02:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Where do you use <code>ordered_partition2</code>?</p>
+
+<a name="189467369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189467369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189467369">Sebastien Gouezel (Mar 02 2020 at 06:53)</a>:</h4>
+<p>I am working on analytic functions (in good generality, i.e., possibly on Banach spaces). These are the functions that have locally an expansion <code>f(x + h) = \Sigma_n f_n(h, ..., h)</code> where <code>f_n</code> is a continuous <code>n</code>-multilinear map. To show that the composition of analytic functions is analytic, you need to write the composition of two such things as a series of multilinear maps, which is kind of dirty. I use <code>ordered_partition2</code> there.</p>
+
+<a name="193433100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/193433100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#193433100">Kenny Lau (Apr 09 2020 at 10:42)</a>:</h4>
+<p>I would like to personally thank <span class="user-mention" data-user-id="110087">@Scott Morrison</span> for creating this incredibly useful <code>library_search</code> tactic (and others who contributed to this tactic).</p>
+
+<a name="193433229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/193433229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#193433229">Kenny Lau (Apr 09 2020 at 10:44)</a>:</h4>
+<p>I typed:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">real</span><span class="bp">.</span><span class="n">exists_one_div</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>and then I found exactly the name of the lemma <code>exists_nat_one_div_lt</code> that I couldn't find by trying <code>real.exists_</code> and other <code>real.</code> prefixes</p>
+
+<a name="193433560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/193433560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#193433560">Scott Morrison (Apr 09 2020 at 10:48)</a>:</h4>
+<p>You're welcome. I really should get back to work on it; I think it easily could be better still.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

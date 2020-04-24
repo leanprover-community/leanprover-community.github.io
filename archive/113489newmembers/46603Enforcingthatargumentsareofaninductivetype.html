@@ -1,0 +1,63 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html">Enforcing that arguments are of an inductive type?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180711478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180711478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180711478">Li Yao'an (Nov 14 2019 at 08:59)</a>:</h4>
+<p>I've been thinking about using Types to mimic sets. For each <code>set α</code>, we can construct a structure <code>tset</code> with a field of type α and a proof that α is in the set. However, I have run into a problem when defining subsets: what I want is a function <code>subset</code>that takes in two tsets and says whether the first is a subset of the second. Informally, we want <code>subset</code> to be : <code>∀ s : S, ∃ t : T, ↑ s = ↑ t</code>. However, the equality only makes sense if the types of the sets building S and T were the same.</p>
+<p>This would be solved if we could enforce that arguments be of a certain type by writing something like :</p>
+<div class="codehilite"><pre><span></span>def subtset {α : Type} {S&#39; T&#39; : set α} (S := tset S&#39;) (T := tset T&#39;)  :=
+    ∀ s: S, ∃ t : T, ↑ s = ↑ t
+</pre></div>
+
+
+<p>where (S := tset S') is trying to mean that S is an object of type tset S'.</p>
+<p>Naturally, this doesn't work. I've also tried type classes, but that failed for me as well.</p>
+<p>What is a sensible way to specify that an argument must be of a given inductive type?</p>
+
+<a name="180715292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180715292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180715292">Mario Carneiro (Nov 14 2019 at 09:57)</a>:</h4>
+<p>In mathlib, there is a coercion from <code>set A</code> to <code>Type</code> that constructs the subtype, so you can wrote <code>a : s</code> if <code>s : set A</code> and it means what you are calling <code>tset</code>.</p>
+
+<a name="180715388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180715388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180715388">Mario Carneiro (Nov 14 2019 at 09:58)</a>:</h4>
+<p>It's not clear to me what it means for an element of <code>s : set A</code> to be a subset of an element of some other <code>t : set A</code>, because these elements are both just elements of <code>A</code>, which don't have any subset relation between them. Surely you mean to say simply <code>s \sub t</code>?</p>
+
+<a name="180717756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180717756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180717756">Li Yao'an (Nov 14 2019 at 10:30)</a>:</h4>
+<p>Thanks for the reply.</p>
+<p>I have not seen the automatic coercion of a set to a subtype in Mathlib. Where can I find the code or a reference explaining it?</p>
+<p>I meant for S and T to be the tsets (subtypes), but I guess it was not so clear I was inventing notation.</p>
+<p>Additionally, for learning purposes, let's say I want to rewrite that part of Mathlib myself.</p>
+<p>Say I have a coercion <code>coer : set → α</code>. For two<code> set α</code>'s S and T, I wish to express <code>S ⊂ T</code> without mentioning the sets explicitly. That is, I wish to construct a function <code>subset'</code> so that <code>subset' ( (coer S) (coer T) )</code> is the Prop that S is a subset of T. However, the arguments to <code>subset'</code> don't make sense if S and T are sets over different Types, so <strong>I want to enforce the condition that my first argument is exactly <code>tset S'</code> for some <code>S : set α</code>.</strong> </p>
+<p>In short, my question was: is the above possible? (with direct methods preferred over indirect methods)</p>
+
+<a name="180719259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180719259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180719259">Chris Hughes (Nov 14 2019 at 10:50)</a>:</h4>
+<p>No. In Lean two types with the same cardinality are indistinguishable, so for example you cannot even prove <code>nat \ne int</code> and you could not prove that two infinite subtypes of <code>nat</code> are not equal to each other, or to any other countably infinite type.</p>
+
+<a name="180723199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180723199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180723199">Mario Carneiro (Nov 14 2019 at 11:50)</a>:</h4>
+<p>Well, technically you can assert that a type is equal to <code>tset S</code> for some <code>S : set A</code>, but as Chris says type constructors are not necessarily injective so you can't recover <code>S</code> from this fact, and hence there will be no well defined subset relation on such types</p>
+
+<a name="180734193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180734193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180734193">Kevin Buzzard (Nov 14 2019 at 14:15)</a>:</h4>
+<p>You can just do this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">subtset</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">S&#39;</span> <span class="n">T&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span>  <span class="o">:=</span>
+    <span class="bp">∀</span> <span class="n">s</span><span class="o">:</span> <span class="n">S&#39;</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">t</span> <span class="o">:</span> <span class="n">T&#39;</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

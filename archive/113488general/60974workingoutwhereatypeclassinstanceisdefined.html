@@ -1,0 +1,185 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html">working out where a typeclass instance is defined</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169719473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719473">Kevin Buzzard (Jul 05 2019 at 16:04)</a>:</h4>
+<p>So here I am in the middle of a Lean file, with lots of imports and variables and so on, I'm learning Lean, and I just noticed that</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="err">⊤</span>
+</pre></div>
+
+
+<p>typechecks. This means that <code>submodule R M</code> has some structure which I don't know about -- it will be some kind of lattice. So now I want to go straight to the place in mathlib where this lattice structure is defined. I try looking at where <code>submodule</code> is defined, but I can't see anything there, and so then I figure I'll investigate with <code>#print</code> and <code>#check</code>. But I can't do it! And I even guessed at some point.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="err">⊤</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">notation</span> <span class="err">⊤</span> <span class="c1">-- lattice.has_top.top _</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span><span class="bp">.</span><span class="n">top</span> <span class="c1">-- comes from typeclass lattice.has_top</span>
+
+<span class="n">def</span> <span class="n">ABC</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ABC</span> <span class="c1">-- lattice.has_top -- ??? Where is the definition??</span>
+
+<span class="c1">-- so probably `submodule R M` is a lattice. Let&#39;s start there.</span>
+
+<span class="n">def</span> <span class="n">guess1</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">guess1</span> <span class="c1">-- lattice.conditionally_complete_lattice.to_lattice (submodule R M)</span>
+
+<span class="n">def</span> <span class="n">guess2</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">guess2</span> <span class="c1">--   lattice.conditionally_complete_lattice_of_complete_lattice</span>
+
+<span class="c1">-- I am getting bored now.</span>
+
+<span class="n">def</span> <span class="n">guess3</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">complete_lattice</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">guess3</span> <span class="c1">-- ??? lattice.complete_lattice ???</span>
+
+<span class="c1">-- I am now stuck</span>
+</pre></div>
+
+<a name="169719575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719575">Kevin Buzzard (Jul 05 2019 at 16:06)</a>:</h4>
+<p>Somewhere some instance is defined. How do I get to that definition without having to ask or guess or search?</p>
+
+<a name="169719831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719831">Kenny Lau (Jul 05 2019 at 16:11)</a>:</h4>
+<p>pp.implicit</p>
+
+<a name="169719838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719838">Kevin Buzzard (Jul 05 2019 at 16:11)</a>:</h4>
+<p>nice</p>
+
+<a name="169719841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719841">Kevin Buzzard (Jul 05 2019 at 16:11)</a>:</h4>
+<p>There are a bunch of things open</p>
+
+<a name="169719886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719886">Kevin Buzzard (Jul 05 2019 at 16:12)</a>:</h4>
+<p>I did <code>pp.all</code></p>
+
+<a name="169719935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719935">Kevin Buzzard (Jul 05 2019 at 16:13)</a>:</h4>
+<p>You need <code>pp.all</code>. Here's the last guess with implicit:</p>
+<div class="codehilite"><pre><span></span>def guess3 : Π {R M : Type u} [_inst_1 : ring R] [_inst_2 : add_comm_group M] [_inst_3 : @module R M _inst_1 _inst_2],
+  lattice.complete_lattice (@submodule R M _inst_1 _inst_2 _inst_3) :=
+λ {R M : Type u} [_inst_1 : ring R] [_inst_2 : add_comm_group M] [_inst_3 : @module R M _inst_1 _inst_2],
+  @lattice.complete_lattice R M _inst_1 _inst_2 _inst_3
+</pre></div>
+
+<a name="169719959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169719959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169719959">Kevin Buzzard (Jul 05 2019 at 16:13)</a>:</h4>
+<p>with <code>pp.all</code> it's <code>submodule.lattice.complete_lattice</code></p>
+
+<a name="169720179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720179">Kevin Buzzard (Jul 05 2019 at 16:17)</a>:</h4>
+<p>Aah I see, you use <code>implicit</code> at another point in the investigation</p>
+
+<a name="169720417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720417">Mario Carneiro (Jul 05 2019 at 16:20)</a>:</h4>
+<p>I agree this is not nice. Here's what I did to jump to the location:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="c1">-- copy-paste below</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="bp">@</span><span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span><span class="bp">.</span><span class="n">top</span> <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_3</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="c">/-</span><span class="cm"> &lt;- ctrl-click -/</span> <span class="n">R</span> <span class="n">M</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_3</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_3</span><span class="o">)</span>
+</pre></div>
+
+<a name="169720624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720624">Mario Carneiro (Jul 05 2019 at 16:24)</a>:</h4>
+<p>If you know that <code>\top</code> is provided by has_top, you can skip the <code>pp.notation</code> line like so:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="c">/-</span><span class="cm"> &lt;- ctrl-click -/</span> <span class="n">R</span> <span class="n">M</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span>
+  <span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_3</span><span class="o">)</span>
+</pre></div>
+
+<a name="169720641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720641">Kevin Buzzard (Jul 05 2019 at 16:25)</a>:</h4>
+<p>If you have <code>submodule</code> open, your results might be different.</p>
+
+<a name="169720646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720646">Kevin Buzzard (Jul 05 2019 at 16:25)</a>:</h4>
+<p>And you can't close it, and you're 400 lines in</p>
+
+<a name="169720658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720658">Mario Carneiro (Jul 05 2019 at 16:25)</a>:</h4>
+<p>You can still do the same thing, the printout only looks a bit different</p>
+
+<a name="169720711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720711">Kevin Buzzard (Jul 05 2019 at 16:26)</a>:</h4>
+<p>yeah, <code>submodule</code> was suppressed so you couldn't copy paste and then click!</p>
+
+<a name="169720730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720730">Mario Carneiro (Jul 05 2019 at 16:26)</a>:</h4>
+<p>Oh! That looks like a <code>pp</code> bug</p>
+
+<a name="169720749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720749">Mario Carneiro (Jul 05 2019 at 16:27)</a>:</h4>
+<p>since <code>submodule.lattice.has_top</code> is protected, the pretty printer should not show it without the namespace</p>
+
+<a name="169720750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720750">Kevin Buzzard (Jul 05 2019 at 16:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">has_top</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">))</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">@lattice.has_top R M _inst_1 _inst_2 _inst_3 : lattice.has_top (@submodule R M _inst_1 _inst_2 _inst_3)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="169720756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720756">Kevin Buzzard (Jul 05 2019 at 16:27)</a>:</h4>
+<p>That's exactly what stopped me proceeding.</p>
+
+<a name="169720840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720840">Kenny Lau (Jul 05 2019 at 16:28)</a>:</h4>
+<p>I seldom <code>open</code> things so I don't have this problem</p>
+
+<a name="169720846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720846">Kevin Buzzard (Jul 05 2019 at 16:29)</a>:</h4>
+<p>Yeah I checked. Opening <code>submodule</code> is what causes <code>@submodule.lattice.has_top</code> to become <code>@lattice.has_top</code></p>
+
+<a name="169720860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720860">Kevin Buzzard (Jul 05 2019 at 16:29)</a>:</h4>
+<blockquote>
+<p>I seldom <code>open</code> things so I don't have this problem</p>
+</blockquote>
+<p>I'm looking at someone else's work here</p>
+
+<a name="169720982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720982">Mario Carneiro (Jul 05 2019 at 16:31)</a>:</h4>
+<p><code>set_option pp.full_names true</code> does the trick</p>
+
+<a name="169720988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169720988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169720988">Mario Carneiro (Jul 05 2019 at 16:31)</a>:</h4>
+<p>or <code>pp.all</code> of course</p>
+
+<a name="169721049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169721049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169721049">Kevin Buzzard (Jul 05 2019 at 16:32)</a>:</h4>
+<p><code>pp.all</code> was horrible in my use case, it was huge</p>
+
+<a name="169721054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169721054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169721054">Kevin Buzzard (Jul 05 2019 at 16:32)</a>:</h4>
+<p>This full_names thing is much better</p>
+
+<a name="169721077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/working%20out%20where%20a%20typeclass%20instance%20is%20defined/near/169721077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60974workingoutwhereatypeclassinstanceisdefined.html#169721077">Mario Carneiro (Jul 05 2019 at 16:33)</a>:</h4>
+<p><code>pp.all</code> is just the conjunction of a large number of other <code>pp</code> options</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

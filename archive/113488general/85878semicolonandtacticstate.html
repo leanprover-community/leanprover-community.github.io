@@ -1,0 +1,116 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/85878semicolonandtacticstate.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html">semicolon and tactic state</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188297575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297575">Bryan Gin-ge Chen (Feb 15 2020 at 20:34)</a>:</h4>
+<p><a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F/near/188296878" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F/near/188296878">Jason's post in the "ML for Lean" topic</a> reminded me of this. It's really too bad that we can't see how the goals change before / after semicolons. </p>
+<p>I made a half-hearted attempt to see whether there was any way to implement this for 3.5.x, but I didn't get very far. I did manage to figure out that the relevant code is around <a href="https://github.com/leanprover-community/lean/blob/0d2b2697d163416d759f52e417d5579685e01d9e/library/init/meta/tactic.lean#L1029" target="_blank" title="https://github.com/leanprover-community/lean/blob/0d2b2697d163416d759f52e417d5579685e01d9e/library/init/meta/tactic.lean#L1029">here</a>, but I think I got stuck when I couldn't figure out how to get the cursor position to change the tactic state display using <code>save_info</code> (?).</p>
+<p>Does anyone have any suggestions for this?</p>
+
+<a name="188297631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297631">Mario Carneiro (Feb 15 2020 at 20:36)</a>:</h4>
+<p>I would actually be curious to see how the tactic state reporting after <code>,</code> in <code>rw [a, b]</code> works, since that's unlike any other tactic; maybe we can generalize that to other contexts</p>
+
+<a name="188297690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297690">Bryan Gin-ge Chen (Feb 15 2020 at 20:39)</a>:</h4>
+<p>Yeah, I remember trying to understand that as well, I think it's around <a href="https://github.com/leanprover-community/lean/blob/dacb70b83853b23b2fc20afdc4d5888cee0d4363/library/init/meta/interactive.lean#L358" target="_blank" title="https://github.com/leanprover-community/lean/blob/dacb70b83853b23b2fc20afdc4d5888cee0d4363/library/init/meta/interactive.lean#L358">here</a>. I guess I should study <code>parser</code>.</p>
+
+<a name="188298655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188298655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188298655">Mario Carneiro (Feb 15 2020 at 21:07)</a>:</h4>
+<p>I think the way it works it that when an info request is sent from a certain position, <code>set_goal_info_pos</code> brackets a parser such that while that parser is running, request positions are edited to the beginning position, and then <code>save_info</code> is used to annotate these specific target positions in the text with the current goal state.</p>
+
+<a name="188299035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188299035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188299035">Mario Carneiro (Feb 15 2020 at 21:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">have_many</span>
+  <span class="o">(</span><span class="n">es</span><span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">list_of</span> <span class="err">$</span> <span class="n">set_goal_info_pos</span> <span class="err">$</span>
+    <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">cur_pos</span> <span class="bp">&lt;*&gt;</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">pexpr</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">es</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="n">e</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">do</span>
+  <span class="n">save_info</span> <span class="n">p</span><span class="o">,</span>
+  <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">assertv</span> <span class="bp">`</span><span class="n">this</span> <span class="n">t</span> <span class="n">e</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">have_many</span> <span class="o">[</span>
+    <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">+</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">),</span>
+    <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">+</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">),</span>
+    <span class="n">zero_lt_one</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188299157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188299157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188299157">Mario Carneiro (Feb 15 2020 at 21:20)</a>:</h4>
+<p>However, this won't work for making <code>;</code> display the goal state, because the <code>;</code> is parsed by the global parser, not a custom tactic parser</p>
+
+<a name="188299160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188299160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188299160">Mario Carneiro (Feb 15 2020 at 21:20)</a>:</h4>
+<p>you would have to change lean to support this</p>
+
+<a name="188300359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188300359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188300359">Bryan Gin-ge Chen (Feb 15 2020 at 21:58)</a>:</h4>
+<p>Thanks! That definitely helps.</p>
+
+<a name="188302130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188302130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188302130">Tim Daly (Feb 15 2020 at 22:53)</a>:</h4>
+<p>A more (mealy? :-) interesting question: Can CIC be implemented in finite state machines?</p>
+
+<a name="188773609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188773609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188773609">Alexander Bentkamp (Feb 21 2020 at 20:58)</a>:</h4>
+<p>Another related issue is that you need to type a comma to see the next proof state. It's very confusing for beginners. Is this something that could be easily changed?</p>
+
+<a name="188778190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188778190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188778190">Patrick Massot (Feb 21 2020 at 21:51)</a>:</h4>
+<p>As a teacher I would love to see that changing. Students keep calling me to complain Lean is not happy since they don't see "goals accomplished", but they only miss one comma at the end.</p>
+
+<a name="189214364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/189214364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#189214364">Jason Rute (Feb 27 2020 at 13:42)</a>:</h4>
+<p>Another thing along these lines that I just discovered is that if one puts the curser right after a left curly brace <code>{</code>, it shows the goal state before the curly brace which could have multiple goals.  Just in case this behavior isn't universal, using Lean 3.4.2 and looking at line line 40 in <code>.../3.4.2/lean/library/init/data/fin/ops.lean</code> if one places the curser before and after the<code>{</code>, one gets</p>
+<div class="codehilite"><pre><span></span><span class="mi">2</span> <span class="n">goals</span>
+<span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span>
+<span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">h₂</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="n">a</span> <span class="err">%</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span>
+
+<span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span>
+<span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₂</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="n">a</span> <span class="err">%</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>However, inside the <code>{...}</code> block it should just be the first goal.</p>
+
+<a name="189215194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/189215194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#189215194">Jason Rute (Feb 27 2020 at 13:54)</a>:</h4>
+<p>Oh, it is because there isn't a space after <code>{</code>.  In my example, the line 40 is <code>{simp [mod_zero], assumption},</code>.  If I add a space after the <code>{</code>, then the when I place the curser after the space, I do get the correct state: </p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span>
+<span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₂</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="n">a</span> <span class="err">%</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">n</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

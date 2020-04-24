@@ -1,0 +1,450 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/83397colimits.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html">colimits</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="162285074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285074">Scott Morrison (Apr 01 2019 at 22:29)</a>:</h4>
+<p>I'd like to make some plans for progress on colimits.</p>
+
+<a name="162285079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285079">Scott Morrison (Apr 01 2019 at 22:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> has a PR open that provides direct limits for rings and fields, but that is disconnected from the limits library. That PR builds direct limits by first taking coproducts, and then quotienting. As was pointed out in the comments there, this construction could be generalised further --- in fact all colimits in <code>CommRing</code> can be constructed this way, but some of the nice properties only hold for directed/filtered colimits. There is also an alternative construction, which takes the disjoint union (i.e. the colimit of the underlying types), which only works for filtered colimits. This construction hasn't been implemented by anyone, to my knowledge.</p>
+
+<a name="162285086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285086">Scott Morrison (Apr 01 2019 at 22:29)</a>:</h4>
+<p>I would eventually like to see both constructions, using the API of the limits library, all written in a way that is easy and obvious to generalise from one algebraic category to the next (and possibly eventually with tactics that do most of the busy work).</p>
+
+<a name="162285177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285177">Scott Morrison (Apr 01 2019 at 22:30)</a>:</h4>
+<p>(e.g. someday someone is going to want filtered colimits of semifoobiquandles, and in the long run it shouldn't be difficult)</p>
+
+<a name="162285187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285187">Scott Morrison (Apr 01 2019 at 22:30)</a>:</h4>
+<p>That all said, I'm not opposed to getting Kenny's work merged sooner rather than later, as long as we have a roadmap to eventually achieve the nicer setup.</p>
+
+<a name="162285320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285320">Scott Morrison (Apr 01 2019 at 22:32)</a>:</h4>
+<p>In Kenny's PR, he wrote </p>
+<blockquote>
+<p>It is constructed as a quotient of the free module (for the module case) or quotient of<br>
+the free commutative ring (for the ring case) instead of a quotient of the disjoint union<br>
+so as to make the operations (addition etc.) "computable".</p>
+</blockquote>
+<p>Can someone explain to me what this means?</p>
+
+<a name="162285936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285936">Scott Morrison (Apr 01 2019 at 22:41)</a>:</h4>
+<p>So... what steps are on the roadmap? To hook Kenny's existing constructions up to the limits API, I think we would aspire to</p>
+<ul>
+<li>define <code>has_coproduct</code> and <code>has_coequalizer</code> (variants of these exist in branches; we should talk to <span class="user-mention" data-user-id="110032">@Reid Barton</span> about which to go with),</li>
+<li>start providing instances --- I'd suggest actually doing the warm-up case of <code>SemiGrp</code>first, to get the structure right, and then go back through doing the relevant bits of the algebraic hierarchy</li>
+<li>provide <code>has_coequalizers CommRing</code>, which is straightforward.</li>
+<li>provide <code>has_coproducts CommRing</code> by plugging in the already known universal properties of the free constructions.</li>
+<li>state directly the construction of the colimit in CommRing as a quotient of a free product,</li>
+<li>prove <code>has_coproducts + has_coequalizers -&gt; has_coproducts</code> in generality (this exists in branches, I think, but needs updating).</li>
+<li>prove that in <code>CommRing</code> this is definitionally equal to the construction given above</li>
+<li>finish providing the <code>has_coproducts CommRing</code> instance, checking along the way that we can make it agree with the abstract construction</li>
+</ul>
+
+<a name="162285951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162285951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162285951">Scott Morrison (Apr 01 2019 at 22:41)</a>:</h4>
+<p>The other half of the roadmap is to provide the disjoint union construction.</p>
+
+<a name="162286034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286034">Kevin Buzzard (Apr 01 2019 at 22:42)</a>:</h4>
+<p>One way of defining the direct limit of rings is to take the disjoint union of the rings (which is not a ring) and then quotient out by the smallest equivalence relation which relates <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">a</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">f(a)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mclose">)</span></span></span></span> for all morphisms <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> in the direct limit diagram and all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>∈</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">a\in A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit">a</span><span class="mrel">∈</span><span class="mord mathit">A</span></span></span></span>. To add two elements <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">a_1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">a_2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> in the quotient one first rings rings <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">A_1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">A_2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> that they're in, one then randomly chooses a ring further down the structure, say <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mn>1</mn></msub><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A_1\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>A</mi><mn>2</mn></msub><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A_2\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>, pushes <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">a_1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">a_2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> down to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> and then adds there. This involves choices. </p>
+<p>Another way, which I think you have to use when doing general colimits, is to take the disjoint union of the rings, form the polynomial ring with coefficents in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">Z</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.68889em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span> over this set, and then quotient out by the ideal generated by elements of the form <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>−</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f(a)-b</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mclose">)</span><span class="mbin">−</span><span class="mord mathit">b</span></span></span></span> regarded as degree 1 elements in this big ring. Now one can define addition on the quotient without making choices...perhaps?</p>
+
+<a name="162286039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286039">Scott Morrison (Apr 01 2019 at 22:42)</a>:</h4>
+<p>Here the work to be done is of a different nature. The main work is to take the colimit of underlying types, and equip that with the relevant algebraic structure.</p>
+
+<a name="162286077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286077">Scott Morrison (Apr 01 2019 at 22:43)</a>:</h4>
+<p>(as Kevin said in the meantime)</p>
+
+<a name="162286085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286085">Scott Morrison (Apr 01 2019 at 22:43)</a>:</h4>
+<p>Now, I think one can make this really smooth.</p>
+
+<a name="162286151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286151">Scott Morrison (Apr 01 2019 at 22:44)</a>:</h4>
+<p>There are two steps. We need to construct operations on the colimit type (e.g. multiplication, defined as Kevin just said), and we need to check axioms.</p>
+
+<a name="162286206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286206">Scott Morrison (Apr 01 2019 at 22:45)</a>:</h4>
+<p>The work of checking that the operations are well-defined, and that the axioms are satisfied, is of a quite similar nature.</p>
+
+<a name="162286217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286217">Kevin Buzzard (Apr 01 2019 at 22:45)</a>:</h4>
+<p>In the disjoint union case one still has to choose a random point further down the line.</p>
+
+<a name="162286219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286219">Scott Morrison (Apr 01 2019 at 22:45)</a>:</h4>
+<p>We have two elements in the disjoint union, and we are trying to show that they are equal in the quotient.</p>
+
+<a name="162286279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286279">Scott Morrison (Apr 01 2019 at 22:46)</a>:</h4>
+<p>As an example, let's consider checking associativity of multiplication.</p>
+
+<a name="162286283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286283">Kevin Buzzard (Apr 01 2019 at 22:46)</a>:</h4>
+<p>In the quotient ring case one just uses the usual <code>quotient.lift</code> or whatever it is.</p>
+
+<a name="162286291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286291">Kevin Buzzard (Apr 01 2019 at 22:46)</a>:</h4>
+<p>Isn't Kenny's issue more with defining the structures than checking axioms?</p>
+
+<a name="162286311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286311">Scott Morrison (Apr 01 2019 at 22:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I was starting to talk here about the disjoint union construction, which Kenny wasn't doing.</p>
+
+<a name="162286323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286323">Kevin Buzzard (Apr 01 2019 at 22:47)</a>:</h4>
+<p>So what I think he must not like is defining addition on the quotient.</p>
+
+<a name="162286326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286326">Scott Morrison (Apr 01 2019 at 22:47)</a>:</h4>
+<p>So yes, he wasn't dealing with the issue I'm talking about now.</p>
+
+<a name="162286339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286339">Kevin Buzzard (Apr 01 2019 at 22:48)</a>:</h4>
+<p>OK</p>
+
+<a name="162286406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286406">Scott Morrison (Apr 01 2019 at 22:48)</a>:</h4>
+<p>Say we have a = (x, a_x), b = (y, b_y), z = (z, b_z). (The first element of the pair is the point in the colimit, then the second element is an element of the ring at that point.)</p>
+
+<a name="162286427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286427">Scott Morrison (Apr 01 2019 at 22:49)</a>:</h4>
+<p>We're trying to prove <code>(a*b)*c</code> = <code>a*(b*c)</code>.</p>
+
+<a name="162286443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286443">Scott Morrison (Apr 01 2019 at 22:49)</a>:</h4>
+<p>But the chosen representatives of these multiplications sit in different pieces of the disjoint union.</p>
+
+<a name="162286508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286508">Scott Morrison (Apr 01 2019 at 22:50)</a>:</h4>
+<p>So certainly we need to go to _some_ higher point in the colimit. But it's not enough to just go to some point higher than those two points.</p>
+
+<a name="162286570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286570">Scott Morrison (Apr 01 2019 at 22:51)</a>:</h4>
+<p>say <code>(a*b)</code> was sitting over some point <code>p</code>, <code>b*c</code> was sitting over <code>q</code>, and <code>(a*b)*c)</code> sits over <code>r</code>, while <code>a*(b*c)</code> sits over <code>s</code>.</p>
+
+<a name="162286631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286631">Scott Morrison (Apr 01 2019 at 22:52)</a>:</h4>
+<p>We now have this big messy diagram, with points <code>x y z p q r s</code>, and we want to use the fact that there is a cocone for that diagram, and pass to that point before trying to prove <code>(a*b)*c = a*(b*c)</code>.</p>
+
+<a name="162286791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286791">Scott Morrison (Apr 01 2019 at 22:55)</a>:</h4>
+<p>So what do we do? We identify that cocone point, called it <code>w</code>, and maps from each of <code>x y z p q r s</code> to <code>w</code>. We then say that we're going to proving the equality <code>(a*b)*c = a*(b*c)</code> by doing it over the point <code>w</code>, and then by repeating using the axiom that <code>w</code> really is a cone point, and that all the morphisms in sight are ring homomorphisms, we see this reduces to the equation <code>(f(a_x)*g(b_y))*h(c_z) = f(a_x)*(g(b_y)*h(c_z))</code>, where <code>f g h</code> are the morphisms from <code>x y z</code> respectively to <code>w</code>.</p>
+
+<a name="162286796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286796">Scott Morrison (Apr 01 2019 at 22:55)</a>:</h4>
+<p>This goal we can finally discharge directly with <code>mul_assoc</code>.</p>
+
+<a name="162286977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286977">Scott Morrison (Apr 01 2019 at 22:58)</a>:</h4>
+<p>This whole argument should in the first instance be written in a way so that it's completely clear that it was generic --- it barely mattered that we were proving multiplicative associativity rather than distributivity, the argument is always the same.</p>
+
+<a name="162286988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162286988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162286988">Scott Morrison (Apr 01 2019 at 22:58)</a>:</h4>
+<p>Later, we can write some tactics (like <code>pi_instance</code>) that do this work for us.</p>
+
+<a name="162287113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162287113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162287113">Scott Morrison (Apr 01 2019 at 23:00)</a>:</h4>
+<p>I think we may also want a tactic that "builds diagrams" for us, out of a collection of objects and morphisms in the local hypotheses. This would enable us to write a tactic that says "check that the goal is an equality in a colimit type; check the local environment for objects and morphisms in the indexing category, and build the cocone over all of them; now attempt to prove the equality by passing to the cocone point".</p>
+
+<a name="162287282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162287282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162287282">Scott Morrison (Apr 01 2019 at 23:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, <span class="user-mention" data-user-id="110064">@Kenny Lau</span>, I'd love to hear what you guys think of this plan!</p>
+
+<a name="162305041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162305041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162305041">Kevin Buzzard (Apr 02 2019 at 05:32)</a>:</h4>
+<p>I don't really understand what can be done with tactics but it sounds like a tactic can be used to generate this proof</p>
+
+<a name="162306290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162306290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162306290">Johan Commelin (Apr 02 2019 at 06:04)</a>:</h4>
+<p>I think this is really cool. There is just one uncomfortable feeling that is nagging at me: So far we haven't really been able to apply the category lib in other parts of the library. I don't know exactly why that is. But I'd first like to make sure that it is not because of some DTT/Lean issue that we aren't aware of. If it is one of those things that mathematicians handle transparently and aren't even aware of, but Lean gets hung up about, then we are doomed...</p>
+
+<a name="162306313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162306313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162306313">Johan Commelin (Apr 02 2019 at 06:05)</a>:</h4>
+<p>If it is only because <code>category_theory/</code> is considered "high-level" and we don't want those imports in "lower-level" parts of the library, then we have some sort of social problem.</p>
+
+<a name="162307031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162307031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162307031">Kevin Buzzard (Apr 02 2019 at 06:23)</a>:</h4>
+<p>In practice I have an actual bunch of rings in the sense that they're types <code>X i</code> with <code>[ring X i]</code> and I want to take their actual direct limit and prove it's a ring and have access to the universal property, all by magic.</p>
+
+<a name="162351925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162351925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162351925">Reid Barton (Apr 02 2019 at 16:40)</a>:</h4>
+<p>I think the simplest/Lean-iest way to do these in general is: First, construct the colimit of an arbitrary diagram of (say) rings, as the quotient of an inductive type by an inductive proposition. Then check that when the input diagram is filtered, the object we built also has the following properties:</p>
+<ul>
+<li>Every element of the underlying inductive type is in the image of the map from one of the rings of the diagram.</li>
+<li>Every pair of elements of the original rings which become equal in the colimit (after forming the quotient) already become equal at some point in the diagram.</li>
+</ul>
+<p>Both of these are easy inductions: the point is that each constructor of the inductive type and the inductive proposition is built from only finitely many smaller terms, so we can pass to a point in the diagram where the statement we are proving holds for all of them.</p>
+<p>Once we check these two properties, then we can conclude by a general lemma that the colimit is isomorphic to the "disjoint union mod identifying elements with their images" construction, or that the colimit is preserved by the forgetful functor to sets, or whatever exact statement of that we want.</p>
+
+<a name="162352063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352063">Johan Commelin (Apr 02 2019 at 16:42)</a>:</h4>
+<p>And can we provide easy glue with unbundled (say) rings? So that if you have <code>X : I → Type</code> and <code>[\for i, ring (X i)]</code>, you can easily build a diagram in <code>Ring</code>?</p>
+
+<a name="162352089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352089">Johan Commelin (Apr 02 2019 at 16:43)</a>:</h4>
+<p>Because otherwise we have a nice and abstract machine, but it becomes a pain to use in the rest of mathlib</p>
+
+<a name="162352094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352094">Reid Barton (Apr 02 2019 at 16:43)</a>:</h4>
+<p>I think you just do it?</p>
+
+<a name="162352176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352176">Johan Commelin (Apr 02 2019 at 16:44)</a>:</h4>
+<p>It shouldn't take more than half a line... and we want this for all bundled categories, I guess.</p>
+
+<a name="162352205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352205">Johan Commelin (Apr 02 2019 at 16:44)</a>:</h4>
+<p>And we want it for indexed families, but also for single objects, and maybe other thingies?</p>
+
+<a name="162352625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352625">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p><code>mk_ob</code> makes a type with a ring instance into an object of <code>Ring</code></p>
+
+<a name="162352660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352660">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p>for a functor, obviously you'd have to provide all the fields: action on objects, action on morphisms, identity and composition laws; so it would be a little longer</p>
+
+<a name="162352678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352678">Reid Barton (Apr 02 2019 at 16:50)</a>:</h4>
+<p>Ideally, you would be in a situation where you already have a functor</p>
+
+<a name="162352734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352734">Johan Commelin (Apr 02 2019 at 16:51)</a>:</h4>
+<p>Yeah, but in the rest of mathlib you aren't in that ideal situation.</p>
+
+<a name="162352835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162352835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162352835">Johan Commelin (Apr 02 2019 at 16:52)</a>:</h4>
+<p>So <code>mk_ob</code> is good. We'll need similar things for the categories that are quasi-bundled. (Like <code>CommRing</code>, which doesn't use the machinery, even though it is an obvious candidate.)</p>
+
+<a name="162353032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353032">Reid Barton (Apr 02 2019 at 16:55)</a>:</h4>
+<p>Yes, I suggest making <code>CommRing.mk_ob</code>, etc., which also helps Lean understand what category it's supposed to produce an object of--I'm not  confident <code>mk_ob</code> would work in most cases without a type ascription</p>
+
+<a name="162353820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353820">Johan Commelin (Apr 02 2019 at 17:03)</a>:</h4>
+<p>Can we replace <code>bundled</code> and <code>concrete_category</code> with some <code>meta</code> stuff that rolls all these categories for us?</p>
+
+<a name="162353898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353898">Reid Barton (Apr 02 2019 at 17:04)</a>:</h4>
+<p>Why?</p>
+
+<a name="162353909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353909">Johan Commelin (Apr 02 2019 at 17:04)</a>:</h4>
+<p>It could also create a bunch of forgetful functors corresponding to classes that extend each other.</p>
+
+<a name="162353929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353929">Johan Commelin (Apr 02 2019 at 17:04)</a>:</h4>
+<p>Because then we will have <code>Ring.mk_ob</code> and <code>Group.mk_ob</code> etc...</p>
+
+<a name="162353960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353960">Johan Commelin (Apr 02 2019 at 17:05)</a>:</h4>
+<p>You can generate better code if you use some <code>meta</code> stuff.</p>
+
+<a name="162353987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162353987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162353987">Johan Commelin (Apr 02 2019 at 17:05)</a>:</h4>
+<p>Or am I dreaming?</p>
+
+<a name="162355170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355170">Johan Commelin (Apr 02 2019 at 17:18)</a>:</h4>
+<p>Sadly something like this doesn't work either</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">rings</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">instances</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">categorify</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="n">X</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">unify</span><span class="o">]</span> <span class="n">def</span> <span class="n">mk_Ring</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Ring</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">unification_hint</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">pattern</span> <span class="o">:=</span> <span class="n">categorify</span> <span class="n">R</span> <span class="err">≟</span> <span class="n">X</span><span class="bp">.</span><span class="n">α</span><span class="o">,</span>
+  <span class="n">constraints</span> <span class="o">:=</span> <span class="o">[</span><span class="n">X</span> <span class="err">≟</span> <span class="n">mk_ob</span> <span class="n">R</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+<a name="162355187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355187">Reid Barton (Apr 02 2019 at 17:19)</a>:</h4>
+<p>I think that is trying to solve a problem we don't have yet. It's not hard to write such things by hand for now.</p>
+
+<a name="162355643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162355643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162355643">Johan Commelin (Apr 02 2019 at 17:24)</a>:</h4>
+<p>Yeah, that's true.</p>
+
+<a name="162387207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162387207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162387207">Scott Morrison (Apr 03 2019 at 00:34)</a>:</h4>
+<p>This sounds great, thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span>. So --- where do we start, and in particular what happens to <a href="https://github.com/leanprover-community/mathlib/issues/754" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/754">#754</a>?</p>
+
+<a name="162387230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162387230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162387230">Scott Morrison (Apr 03 2019 at 00:35)</a>:</h4>
+<p>It seems like the very first step is seeing if we can repackage Kenny's work into providing <code>has_colimits CommRing</code>.</p>
+
+<a name="162387295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162387295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162387295">Scott Morrison (Apr 03 2019 at 00:36)</a>:</h4>
+<p>It would have to be generalised, because we want it to construct arbitrary colimits, not just direct limits.</p>
+
+<a name="162387298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162387298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162387298">Scott Morrison (Apr 03 2019 at 00:36)</a>:</h4>
+<p>It would be nice if his construction of the colimit more obviously did so "as the quotient of an inductive type by an inductive proposition".</p>
+
+<a name="162422774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422774">Scott Morrison (Apr 03 2019 at 12:08)</a>:</h4>
+<p>Okay, I just followed <span class="user-mention" data-user-id="110032">@Reid Barton</span>'s suggestions for implementing colimits (just the first half of the recipe, nothing about filtered colimits and disjoint unions yet), and did the special case of monoids.</p>
+
+<a name="162422928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422928">Scott Morrison (Apr 03 2019 at 12:10)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean">https://github.com/leanprover-community/mathlib/blob/colimits/src/algebra/colimits.lean</a></p>
+
+<a name="162422937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422937">Scott Morrison (Apr 03 2019 at 12:10)</a>:</h4>
+<p>I was very carefully to never ever think about monoids, however.</p>
+
+<a name="162422983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162422983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162422983">Scott Morrison (Apr 03 2019 at 12:11)</a>:</h4>
+<p>I claim that you could pipe <code>#print monoid</code> into a python script that would produce that file.</p>
+
+<a name="162423014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423014">Scott Morrison (Apr 03 2019 at 12:11)</a>:</h4>
+<p>And if you piped <code>#print comm_ring</code> into the same script you'd end up with <code>has_colimits CommRing</code>.</p>
+
+<a name="162423072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423072">Scott Morrison (Apr 03 2019 at 12:12)</a>:</h4>
+<p>(Well, ... maybe that's slightly optimistic. But pretty close!)</p>
+
+<a name="162423102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423102">Scott Morrison (Apr 03 2019 at 12:13)</a>:</h4>
+<p>The proofs could be compressed a lot with some automation. (And that each such compression would make the python script for other algebraic structures easier to implement.)</p>
+
+<a name="162423139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423139">Scott Morrison (Apr 03 2019 at 12:13)</a>:</h4>
+<p>It was all very pleasantly "downhill". You just do the obvious thing at every step.</p>
+
+<a name="162423411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423411">Scott Morrison (Apr 03 2019 at 12:17)</a>:</h4>
+<p>On the other hand, the construction you get is absolutely awful. It looks nothing like a free monoid.</p>
+
+<a name="162423851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423851">Johan Commelin (Apr 03 2019 at 12:23)</a>:</h4>
+<p>This is cool.</p>
+
+<a name="162423855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423855">Johan Commelin (Apr 03 2019 at 12:23)</a>:</h4>
+<p>Is the next step to build the python script?</p>
+
+<a name="162423903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423903">Johan Commelin (Apr 03 2019 at 12:24)</a>:</h4>
+<p>Or are you going for tactics directly?</p>
+
+<a name="162423932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162423932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162423932">Johan Commelin (Apr 03 2019 at 12:24)</a>:</h4>
+<p>I expressed a related sentiment/dream yesterday:</p>
+<blockquote>
+<p>Can we replace <code>bundled</code> and <code>concrete_category</code> with some <code>meta</code> stuff that rolls all these categories for us?</p>
+</blockquote>
+<p><a href="#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820" title="#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820">https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/topic/colimits/near/162353820</a></p>
+
+<a name="162424633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162424633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162424633">Scott Morrison (Apr 03 2019 at 12:34)</a>:</h4>
+<p>I think the next step if to wait until Reid has a chance to say if this is what he had in mind! If it is, then some tactics to cleanup, then attempting to do another example by hand, then ... asking Keeley if he knows a trick for defining new inductive types in commands. :-)</p>
+
+<a name="162427833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162427833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162427833">Kevin Buzzard (Apr 03 2019 at 13:15)</a>:</h4>
+<p>I once wrote python code which produced Lean code: <a href="https://xenaproject.wordpress.com/2018/07/26/617-is-prime/" target="_blank" title="https://xenaproject.wordpress.com/2018/07/26/617-is-prime/">https://xenaproject.wordpress.com/2018/07/26/617-is-prime/</a></p>
+
+<a name="162438452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162438452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162438452">Reid Barton (Apr 03 2019 at 15:21)</a>:</h4>
+<p>It might be better to add constructors making <code>relation</code> an equivalence relation and using <code>quotient</code> instead of <code>quot</code>, particularly for the part about filtered colimits. (To handle the infinitary case correctly you actually need to do this, though I guess it doesn't matter in the finitary case.)</p>
+
+<a name="162460581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162460581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162460581">Scott Morrison (Apr 03 2019 at 19:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> could you briefly explain why? I was a bit worried about this, but it seemed to just be adding more cases to the proofs to use <code>quotient</code>.</p>
+
+<a name="162462264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162462264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162462264">Reid Barton (Apr 03 2019 at 19:45)</a>:</h4>
+<p>Suppose you have an infinitary operation f and you want to prove x1 ~ y1, x2 ~ y2, ... implies f(x1, x2, ...) ~ f(y1, y2, ...). You cannot conclude this from the fact that f preserves ~ in each argument separately.</p>
+
+<a name="162462518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162462518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162462518">Reid Barton (Apr 03 2019 at 19:48)</a>:</h4>
+<p>To put it another way, say you form <code>relation'</code> by adding refl, symm, trans constructors to <code>relation</code>. Then in the infinitary case, <code>relation'</code> is bigger than the equivalence relation generated by <code>relation</code>. <code>relation'</code> is the correct one to use. If you quotient by the equivalence relation generated by <code>relation</code>, then you will not be able to define the operations on the quotient.</p>
+
+<a name="162468131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468131">Scott Morrison (Apr 03 2019 at 20:47)</a>:</h4>
+<p>Thanks. I will try this out.</p>
+
+<a name="162468214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468214">Scott Morrison (Apr 03 2019 at 20:48)</a>:</h4>
+<p>How do you feel about the objection that "this colimit is ugly", because it's not the nice one for monoids that a human would produce (words)?</p>
+
+<a name="162468225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468225">Scott Morrison (Apr 03 2019 at 20:48)</a>:</h4>
+<p>Of course you can use the colimit API, so in some sense you have everything.</p>
+
+<a name="162468241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468241">Scott Morrison (Apr 03 2019 at 20:48)</a>:</h4>
+<p>But I worry that implementing this generic approach widely is just going to leave us with the desire to build concrete models in many cases anyway.</p>
+
+<a name="162468309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468309">Scott Morrison (Apr 03 2019 at 20:50)</a>:</h4>
+<p>Does having the "ugly" colimit make it easier to build these concrete models? (Perhaps after setting up the "filtered colimit as disjoint union" machinery?)</p>
+
+<a name="162468407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162468407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162468407">Kevin Buzzard (Apr 03 2019 at 20:51)</a>:</h4>
+<p>Kenny defined <code>powers x</code> for x in a ring, as {x^n : n in nat}. This was in the middle of a bunch of monoidy stuff in his localisation work. I asked him recently why he didn't just define it to be the monoid generated by x. He said that this was a pain to work with (the monoid generated by x is some inductive prop-- if a and b are in then a*b is in etc) and that in practice it was much easier to just use the concrete definition rather than having to prove it and rewrite the proof all the time.</p>
+
+<a name="162469438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162469438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162469438">Scott Morrison (Apr 03 2019 at 21:02)</a>:</h4>
+<p>My suspicion is that you can have your cake and eat it too. I don't know what "rewrite the proof all the time" could mean --- you prove the monoid generated by a singleton is <code>powers x</code> once, in the file about free monoids. But you should make sure to express the universal properties of <code>powers x</code> using a uniform API for universal properties (i.e. adjunctions, limits, etc), rather than writing them as stray lemmas.</p>
+
+<a name="162471003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471003">Kevin Buzzard (Apr 03 2019 at 21:22)</a>:</h4>
+<p>He wanted to write &lt;2,rfl&gt; and &lt;1,rfl&gt; and &lt;0,rfl&gt; in term mode rather than having to rewrite the proof that he wrote once, lots of times.</p>
+
+<a name="162471639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471639">Scott Morrison (Apr 03 2019 at 21:30)</a>:</h4>
+<p>Sorry, not sure what that means. Perhaps we can get him to show the example sometime.</p>
+
+<a name="162471891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471891">Chris Hughes (Apr 03 2019 at 21:34)</a>:</h4>
+<p>He can write <code>&lt;2,rfl&gt;</code> instead of <code>proof_of_equivalence.2 &lt;2,rfl&gt;</code></p>
+
+<a name="162471906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471906">Kevin Buzzard (Apr 03 2019 at 21:34)</a>:</h4>
+<p>He constantly wanted to prove things like "1 in powers x" or "x^2 in powers x" and he could prove them very easily from his definition, the proof that x^2 is in powers x is &lt;2,rfl&gt;. Sometimes he wanted to prove that x^(m+n) was in powers x and his proof was &lt;m+n,rfl&gt;. He found it easier to work with. With powers x = {y : exists n, x^ n = y} he would have to rewrite every time</p>
+
+<a name="162471914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471914">Kevin Buzzard (Apr 03 2019 at 21:34)</a>:</h4>
+<p>What Chris said</p>
+
+<a name="162471947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471947">Kevin Buzzard (Apr 03 2019 at 21:35)</a>:</h4>
+<p>he decided that the benefits outweighed the disadvantages on this particular occasion.</p>
+
+<a name="162471968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162471968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162471968">Kevin Buzzard (Apr 03 2019 at 21:35)</a>:</h4>
+<p>It's a subtle business. It's all about your use case, probably.</p>
+
+<a name="162472392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/colimits/near/162472392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/83397colimits.html#162472392">Chris Hughes (Apr 03 2019 at 21:41)</a>:</h4>
+<p>I don't think it depends on your use case. You still have all the constructors and recursors for <code>powers</code> as you have with the closure definition, as lemmas. But lemma won't give you anonymous constructor notation unfortunately, it needs to be an actual constructor for that.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

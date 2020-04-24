@@ -1,0 +1,147 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53081debuggingtoadditive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html">debugging to_additive</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="164327849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164327849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164327849">Kevin Buzzard (Apr 27 2019 at 09:55)</a>:</h4>
+<p>I'm writing code about open subgroups. Patrick wrote the first lemma here and I wrote the second. Note: this is not a MWE, the WE is "clone the perfectoid project and try this in <code>for_mathlib/nonarchimedean/open_subgroup</code>" and I'm not going to minimise right now because I'm looking for techniques, not answers.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">open_add_subgroup</span><span class="bp">.</span><span class="n">is_open_of_open_add_subgroup</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">is_open_of_open_subgroup</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_subgroup</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">U</span> <span class="o">:</span> <span class="n">open_subgroup</span> <span class="n">G</span><span class="o">,</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">is_open_iff_forall_mem_open</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">h₂</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">U</span><span class="o">,</span> <span class="n">h₁U</span><span class="o">,</span> <span class="n">h₂U</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span> <span class="n">at</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">hu</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">hu</span> <span class="n">hx</span> <span class="o">},</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">continuous_mul</span> <span class="n">continuous_id</span> <span class="n">continuous_const</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">h₁U</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply_instance</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h₂U</span><span class="bp">.</span><span class="n">to_is_submonoid</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">open_add_subgroup</span><span class="bp">.</span><span class="n">is_closed</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">open_subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)),</span>
+  <span class="n">rw</span> <span class="n">is_open_iff_forall_mem_open</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">u</span> <span class="n">hux</span><span class="o">,</span>
+    <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span> <span class="n">at</span> <span class="n">hux</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_compl_iff</span> <span class="n">at</span> <span class="n">hx</span> <span class="err">⊢</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">hu</span><span class="o">,</span> <span class="n">apply</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="o">(</span><span class="n">is_subgroup</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hux</span><span class="o">)</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">continuous_mul</span> <span class="n">continuous_id</span> <span class="n">continuous_const</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">U</span><span class="bp">.</span><span class="n">is_open</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply_instance</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">erw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_inv_self</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>First lemma works fine. Second lemma gives error</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  @open_subgroup.is_open G _inst_1
+term
+  _inst_1
+has type
+  add_group G
+but is expected to have type
+  group G
+</pre></div>
+
+
+<p>and my interpretation of this error is "the <code>to_additive</code> algorithm failed". Indeed if I comment out <code>@[to_additive open_add_subgroup.is_closed]</code> the error goes away.</p>
+<p>How do I begin to debug this issue? I would prefer an answer which didn't involve bisection (i.e. attempting to prove smaller and smaller lemmas using automation) -- that's what I'm trying to avoid.</p>
+
+<a name="164328155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328155">Patrick Massot (Apr 27 2019 at 10:04)</a>:</h4>
+<p>Maybe one intermediate lemma used in the proof misses a <code>to_additive</code> tag</p>
+
+<a name="164328179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328179">Kevin Buzzard (Apr 27 2019 at 10:06)</a>:</h4>
+<p>Right. But Lean knows which one, and yet the only way I know of for finding out for myself is by a tedious process involving lots of sublemmas half the size of the previous sublemma. Whereas Lean knows right now.</p>
+
+<a name="164328668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328668">Sebastien Gouezel (Apr 27 2019 at 10:18)</a>:</h4>
+<p>Offtopic, but your first lemma's assumptions are too strong: you just need <code>s</code> to contain a nonempty open set.</p>
+
+<a name="164328838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164328838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164328838">Kevin Buzzard (Apr 27 2019 at 10:23)</a>:</h4>
+<p>Indeed! Nice catch, thanks.</p>
+
+<a name="164342505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164342505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164342505">Kevin Buzzard (Apr 27 2019 at 16:18)</a>:</h4>
+<p>OK so I debugged this by cutting and pasting the old proof and then trying to fix it and luckily I ran into the missing thing.</p>
+
+<a name="164342522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164342522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164342522">Kevin Buzzard (Apr 27 2019 at 16:19)</a>:</h4>
+<p>There's no better way? I was lucky that <code>mul_X</code> was defined and <code>add_X</code> was not; if it had been defined but not given the attribute I suspect this method would have failed.</p>
+
+<a name="164350862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164350862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164350862">Mario Carneiro (Apr 27 2019 at 19:49)</a>:</h4>
+<p>The error actually tells you which to_additive tag is missing, if you know where to look. The error says it tried to apply <code>open_subgroup.is_open</code>, but it is expecting a <code>group</code> and it was given an <code>add_group</code>. That's because <code>group</code> got translated correctly but <code>open_subgroup.is_open</code> didn't. So double check that <code>open_subgroup.is_open</code> has a <code>@[to_additive open_add_subgroup.is_open]</code> annotation</p>
+
+<a name="164351014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351014">Kevin Buzzard (Apr 27 2019 at 19:53)</a>:</h4>
+<p>Yes, that was exactly the problem. I should have read the error more carefully instead of just throwing my hands in the air!</p>
+
+<a name="164351065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351065">Kevin Buzzard (Apr 27 2019 at 19:54)</a>:</h4>
+<p>We had defined <code>open_subgroup.is_open</code> ,  left a gap, and then defined <code>open_add_subgroup.is_open</code> and added the annotation then. Is it safe to just put the annotation before the first definition instead of after the second one? I still don't feel I quite know how these things work. We should do something with equation lemmas too, right?</p>
+
+<a name="164351365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351365">Mario Carneiro (Apr 27 2019 at 20:02)</a>:</h4>
+<p>You can either write <code>open_subgroup.is_open</code> with a <code>@[to_additive open_add_subgroup.is_open]</code> annotation, and it will be generated automatically, or you can write <code>open_subgroup.is_open</code> and <code>open_add_subgroup.is_open</code> and put <code>attribute [to_additive open_add_subgroup.is_open] open_subgroup.is_open</code> afterwards. This will add the tag but will not create the theorem, which can be useful if the proof is not automatic for some reason</p>
+
+<a name="164351381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351381">Kevin Buzzard (Apr 27 2019 at 20:03)</a>:</h4>
+<p>But what about all of the equation lemmas etc? We also then have to tag all of these, right? this is the impression I'm getting from looking at mathlib.</p>
+
+<a name="164351383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351383">Mario Carneiro (Apr 27 2019 at 20:03)</a>:</h4>
+<p>For <code>def</code>s, you also have to mark the equation lemmas with <code>to_additive</code></p>
+
+<a name="164351386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351386">Kevin Buzzard (Apr 27 2019 at 20:03)</a>:</h4>
+<p>Right. Can't this be done automatically?</p>
+
+<a name="164351389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351389">Mario Carneiro (Apr 27 2019 at 20:03)</a>:</h4>
+<p>in principle</p>
+
+<a name="164351441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351441">Mario Carneiro (Apr 27 2019 at 20:04)</a>:</h4>
+<p>right now <code>to_additive</code> doesn't do this because it's not easy to find out when this is necessary</p>
+
+<a name="164351474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/debugging%20to_additive/near/164351474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53081debuggingtoadditive.html#164351474">Mario Carneiro (Apr 27 2019 at 20:05)</a>:</h4>
+<p>Also you can't create equation lemmas manually (they have a special internal tag that isn't accessible to tactics) so it's not a perfect replica</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,126 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/08260derivehandlerforfintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html">derive handler for fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189729528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189729528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189729528">Scott Morrison (Mar 04 2020 at 20:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, I notice that in <code>archive/sensitivity.lean</code> we successfully use a <code>@[derive fintype]</code>. Where is this coming from? I want to use it somewhere else but can't work out what I need to import. I just get a <code>failed to find a derive handler for fintype</code> message.</p>
+
+<a name="189729935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189729935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189729935">Scott Morrison (Mar 04 2020 at 20:08)</a>:</h4>
+<p>Related <code>derive</code> question... It seems there's a problem if you use <code>@[derive decidable_eq]</code> twice in the same file, and there is a broken work-around in place.</p>
+
+<a name="189730034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730034">Scott Morrison (Mar 04 2020 at 20:09)</a>:</h4>
+<p>The problem seems to be disambiguating the <code>decidable_eq</code> in the second <code>@[derive decidable_eq]</code> annotation. Does that mean <code>_root_.decidable_eq</code>, or is it just the instance that was defined a moment ago by the first derive handler? (Which has a name ending in <code>decidable_eq</code>!)</p>
+
+<a name="189730088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730088">Scott Morrison (Mar 04 2020 at 20:10)</a>:</h4>
+<p>The error message that shows up is <code>failed to find a derive handler for 'choice decidable_eq category_theory.limits.walking_parallel_pair.decidable_eq'</code></p>
+
+<a name="189730095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730095">Simon Hudon (Mar 04 2020 at 20:10)</a>:</h4>
+<p>To find the <code>fintype</code> derive handler, try: <code>run_cmd attribute.get_instances `derive_handler &gt;&gt;= tactic.trace</code></p>
+
+<a name="189730141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730141">Scott Morrison (Mar 04 2020 at 20:10)</a>:</h4>
+<p>And I'm guessing (?) that this <code>choice</code> business is some attempt to work out what we're actually trying to derive, based on what's actually available?</p>
+
+<a name="189730292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730292">Simon Hudon (Mar 04 2020 at 20:12)</a>:</h4>
+<p><code>choice</code> I believe is the Lean macro for name overloading. It defers to the elaborator the choice between the two. But that being said, it's curious that it would affect you there.</p>
+
+<a name="189730653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730653">Simon Hudon (Mar 04 2020 at 20:16)</a>:</h4>
+<p>I think I see the problem. This is the parser for the <code>derive</code> attribute: <code>parser := pexpr_list_or_texpr</code>. It has to parse expressions because you could specify something like <code>module real</code></p>
+
+<a name="189730707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730707">Simon Hudon (Mar 04 2020 at 20:17)</a>:</h4>
+<p>If you give a name to the offending <code>decidable_eq</code> instance, that should go away</p>
+
+<a name="189730730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730730">Simon Hudon (Mar 04 2020 at 20:17)</a>:</h4>
+<p>(a name different from <code>decidable_eq</code></p>
+
+<a name="189730916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730916">Reid Barton (Mar 04 2020 at 20:19)</a>:</h4>
+<p>which you can't do because it was generated automatically by the derive handler</p>
+
+<a name="189730920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189730920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189730920">Simon Hudon (Mar 04 2020 at 20:19)</a>:</h4>
+<p>Actually, we may be able to make that code a bit more robust</p>
+
+<a name="189731812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189731812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189731812">Scott Morrison (Mar 04 2020 at 20:29)</a>:</h4>
+<p>okay... I have a PR I'm looking at that has <code>@[derive _root_.decidable_eq]</code> to get around this problem. Should I allow that for now, or better to wait on some robustification?</p>
+
+<a name="189732236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189732236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189732236">Simon Hudon (Mar 04 2020 at 20:34)</a>:</h4>
+<p>I think you should keep that PR. The change would go in Lean itself</p>
+
+<a name="189733049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189733049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189733049">Simon Hudon (Mar 04 2020 at 20:45)</a>:</h4>
+<p>There are two ways to fix your particular issue. Either we generate a different name for the instance or we tolerate ambiguities in the name of the classes that we're trying to build an instance for</p>
+
+<a name="189733224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189733224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189733224">Simon Hudon (Mar 04 2020 at 20:47)</a>:</h4>
+<p>The solution for both is very simple. I'm not sure about the ramifications though</p>
+
+<a name="189733343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189733343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189733343">Rob Lewis (Mar 04 2020 at 20:48)</a>:</h4>
+<p>Note that the <code>delta_instance</code> handler (which just unfolds a definition and calls <code>apply_instance</code>) appends something to the name for exactly this reason. <a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/core.lean#L1511" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/core.lean#L1511">https://github.com/leanprover-community/mathlib/blob/master/src/tactic/core.lean#L1511</a></p>
+
+<a name="189733698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189733698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189733698">Simon Hudon (Mar 04 2020 at 20:52)</a>:</h4>
+<p>If you use it twice in a row and that it generates an instance for the same class, will you have a name clash with that approach?</p>
+
+<a name="189733791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189733791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189733791">Rob Lewis (Mar 04 2020 at 20:53)</a>:</h4>
+<p>The name is based on the type and the instance it's looking for, and it uses <code>get_unused_decl_name</code>, so no, I hope not.</p>
+
+<a name="189734719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189734719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189734719">Simon Hudon (Mar 04 2020 at 21:04)</a>:</h4>
+<p>That might be the right approach then. We could move <code>get_unused_decl_name</code> to core for that</p>
+
+<a name="189734930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189734930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189734930">Rob Lewis (Mar 04 2020 at 21:06)</a>:</h4>
+<p>Huh, I kind of assumed <code>get_unused_decl_name</code> was from core already, guess not.</p>
+
+<a name="189735771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189735771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189735771">Simon Hudon (Mar 04 2020 at 21:16)</a>:</h4>
+<p>Me too. That means that it shouldn't clash too much with its new neighbors</p>
+
+<a name="189736325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189736325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189736325">Simon Hudon (Mar 04 2020 at 21:22)</a>:</h4>
+<p>It would be nice if the meta programming interface allowed us to make protected declarations</p>
+
+<a name="189736354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189736354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189736354">Rob Lewis (Mar 04 2020 at 21:22)</a>:</h4>
+<p>Absolutely, I've wanted that a whole bunch of times.</p>
+
+<a name="189736403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189736403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189736403">Simon Hudon (Mar 04 2020 at 21:23)</a>:</h4>
+<p>Maybe that's a better solution then</p>
+
+<a name="189740048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189740048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189740048">Simon Hudon (Mar 04 2020 at 21:56)</a>:</h4>
+<p>making things protected seem to fix the issue</p>
+
+<a name="189740793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handler%20for%20fintype/near/189740793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08260derivehandlerforfintype.html#189740793">Simon Hudon (Mar 04 2020 at 22:05)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/pull/138" target="_blank" title="https://github.com/leanprover-community/lean/pull/138">https://github.com/leanprover-community/lean/pull/138</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

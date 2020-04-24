@@ -1,0 +1,104 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/81529axiomschemasinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html">axiom schemas in Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193694252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193694252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193694252">Chris M (Apr 12 2020 at 04:46)</a>:</h4>
+<p>In set theory, we have the axiom schema of specification: Let ϕ(u, p) be a formula. Then there is an axiom ∀X ∀p ∃Y ∀u (u ∈ Y ↔ u ∈ X ∧ ϕ(u, p)).</p>
+<p>It seems like in CoIC we can formalize this as: <code>∀(φ : Set → Set → Prop) , ∀X, ∀p, ∃S, (∀u, u ε S ↔ u ε X ∧ φ u p)</code>, where I'm interpreting <code>ε</code> as $\in$.  However,  it seems to me that strictly speaking, this is stronger than the axiom schema as used in set theory, since φ : Set → Set → Prop does not have to correspond to any first-order formula. It could be a binary property that cannot be represented in (first-order) logic.</p>
+<p>How do we more faithfully represent axiom schemas in Lean?</p>
+
+<a name="193694419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193694419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193694419">Kenny Lau (Apr 12 2020 at 04:53)</a>:</h4>
+<p>first formalize a theory of FOL (first order languages), then build a model of ZFC, and then verify that the model satisfies the axioms</p>
+
+<a name="193694460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193694460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193694460">Chris M (Apr 12 2020 at 04:54)</a>:</h4>
+<p>lol, I hope you're joking</p>
+
+<a name="193694854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193694854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193694854">Andrew Ashworth (Apr 12 2020 at 05:06)</a>:</h4>
+<p>have fun: <a href="https://github.com/leanprover-community/mathlib/tree/master/src/set_theory" title="https://github.com/leanprover-community/mathlib/tree/master/src/set_theory">https://github.com/leanprover-community/mathlib/tree/master/src/set_theory</a></p>
+
+<a name="193695118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695118">Chris M (Apr 12 2020 at 05:14)</a>:</h4>
+<p>Isn't there a simple way that one can formalize axiom schema's in Lean?</p>
+
+<a name="193695600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695600">Mario Carneiro (Apr 12 2020 at 05:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="284606">@Chris M</span> What you described <em>is</em> the way we represent schemas. Yes, this is a second order formulation, and it's not exactly equivalent, but it is the version that plays well with everything else. The quantifier ranges over all formulas that can be described <em>in lean</em>, which is more important for formalization in lean. This is strictly more than the set of formulas that can be described in FOL, because Lean is has access to higher order quantifiers, and if you want to capture all and only the first order formulas you have to define what a first order formula is, which requires a definition of FOL as kenny said.</p>
+
+<a name="193695649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695649">Mario Carneiro (Apr 12 2020 at 05:30)</a>:</h4>
+<p>you don't have to build a model of ZFC though</p>
+
+<a name="193695912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695912">Kenny Lau (Apr 12 2020 at 05:39)</a>:</h4>
+<p>can you evaluate a FOL formula?</p>
+
+<a name="193695916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695916">Mario Carneiro (Apr 12 2020 at 05:39)</a>:</h4>
+<p>sure</p>
+
+<a name="193695958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695958">Mario Carneiro (Apr 12 2020 at 05:40)</a>:</h4>
+<p>not computably, but you can define a function from <code>formula</code> to <code>(nat -&gt; Prop) -&gt; Prop</code> or something like that</p>
+
+<a name="193695963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695963">Kenny Lau (Apr 12 2020 at 05:41)</a>:</h4>
+<p>oh right, Prop is impredicative</p>
+
+<a name="193695972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193695972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193695972">Mario Carneiro (Apr 12 2020 at 05:41)</a>:</h4>
+<p>Impredicativity isn't needed here, i.e. you could do the same in <code>Type</code> if the model also lives in <code>Type</code></p>
+
+<a name="193696012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696012">Mario Carneiro (Apr 12 2020 at 05:42)</a>:</h4>
+<p>actually the type of the eval should be <code>formula -&gt; (nat -&gt; A) -&gt; Prop</code></p>
+
+<a name="193696017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696017">Mario Carneiro (Apr 12 2020 at 05:43)</a>:</h4>
+<p>where the function is providing elements of the model <code>A</code> for every free variable</p>
+
+<a name="193696064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696064">Chris M (Apr 12 2020 at 05:44)</a>:</h4>
+<p>When you say "define what a FOL formula is", does that mean you can no longer use the <code>∀(φ : Set → Set → Prop)</code> approach, because a <code>formula</code> is now no longer a function to <code>Prop</code>, but a normal structure like any other structure we'd want to formalize?</p>
+
+<a name="193696074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696074">Kenny Lau (Apr 12 2020 at 05:44)</a>:</h4>
+<p>yeah</p>
+
+<a name="193696079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696079">Mario Carneiro (Apr 12 2020 at 05:44)</a>:</h4>
+<p>The quantifier would range over <code>formula</code>, and then you would replace <code>phi</code> with <code>eval2 phi : Set -&gt; Set -&gt; Prop</code></p>
+
+<a name="193696094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696094">Mario Carneiro (Apr 12 2020 at 05:45)</a>:</h4>
+<p>You can restrict attention to two variable formulas, or set variables out of range to a default value</p>
+
+<a name="193696169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193696169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193696169">Mario Carneiro (Apr 12 2020 at 05:46)</a>:</h4>
+<p>If you use a quantifier <code>∀(φ : Set → Set → Prop)</code>, then it's a higher order quantifier so you get those "indescribable" formulas</p>
+
+<a name="193711805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/axiom%20schemas%20in%20Lean%3F/near/193711805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81529axiomschemasinLean.html#193711805">Reid Barton (Apr 12 2020 at 12:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="284606">Chris M</span> <a href="#narrow/stream/113489-new-members/topic/axiom.20schemas.20in.20Lean.3F/near/193694460" title="#narrow/stream/113489-new-members/topic/axiom.20schemas.20in.20Lean.3F/near/193694460">said</a>:</p>
+<blockquote>
+<p>lol, I hope you're joking</p>
+</blockquote>
+<p><a href="https://github.com/flypitch/flypitch/" title="https://github.com/flypitch/flypitch/">https://github.com/flypitch/flypitch/</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

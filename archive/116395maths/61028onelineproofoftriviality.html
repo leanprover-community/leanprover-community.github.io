@@ -1,0 +1,172 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/61028onelineproofoftriviality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html">one-line proof of triviality</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180885201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885201">Kevin Buzzard (Nov 16 2019 at 00:18)</a>:</h4>
+<p>The following is a bit annoying from a pedagogical perspective. Is there any workaround short of "don't introduce epsilon" or "remove epsilon by writing <code>show (b - a) / 2 &gt; 0</code> before <code>linarith</code>"? I'm completely happy to make local modifications to <code>linarith</code>; I'm thinking about making a real number game but obviously I want to make everything as easy as possible for the mathematician end-user (I'm targetting UGs who are learning about limits right now at my university).</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">ε</span> <span class="o">:=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span> <span class="c1">-- fails</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180885513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885513">Chris Hughes (Nov 16 2019 at 00:24)</a>:</h4>
+<p>Does <code>dsimp [ε]; linarith</code> work?</p>
+
+<a name="180885564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885564">Kevin Buzzard (Nov 16 2019 at 00:24)</a>:</h4>
+<p>Aah it does. I tried <code>unfold \e</code> and that didn't work but your trick does.</p>
+
+<a name="180885592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885592">Kevin Buzzard (Nov 16 2019 at 00:25)</a>:</h4>
+<p>I'd still rather have a tactic which didnt mention epsilon at all though, so I could just attach it to linarith.</p>
+
+<a name="180885620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885620">Kevin Buzzard (Nov 16 2019 at 00:25)</a>:</h4>
+<p><code>dsimp *, linarith</code> works</p>
+
+<a name="180885673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885673">Chris Hughes (Nov 16 2019 at 00:26)</a>:</h4>
+<p>If you used <code>generalize</code> instead of <code>let</code> it would work.</p>
+
+<a name="180885677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885677">Kevin Buzzard (Nov 16 2019 at 00:26)</a>:</h4>
+<p>although it might well have side effects.</p>
+
+<a name="180885699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885699">Chris Hughes (Nov 16 2019 at 00:26)</a>:</h4>
+<p><code>generalize</code> makes more sense for learners.</p>
+
+<a name="180885719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885719">Chris Hughes (Nov 16 2019 at 00:27)</a>:</h4>
+<p>because you get the hypothesis that <code>epsilon = (a - b) / 2</code></p>
+
+<a name="180885743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885743">Kevin Buzzard (Nov 16 2019 at 00:27)</a>:</h4>
+<p>but epsilon isn't in the target until after the have</p>
+
+<a name="180885915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885915">Kevin Buzzard (Nov 16 2019 at 00:30)</a>:</h4>
+<p>you're right though in that if I add <code>h1 : ε = (m - l) / 2</code> to the local context then linarith works again. What does this <code>ε : ℝ := (m - l) / 2,</code> mean then? linarith can't see through it but it's not a hypothesis either?</p>
+
+<a name="180885943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180885943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180885943">Kevin Buzzard (Nov 16 2019 at 00:31)</a>:</h4>
+<p>I could hack <code>let</code> so that <code>let A := B</code> adds <code>h : A = B</code> to the local context :-)</p>
+
+<a name="180886005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180886005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180886005">Kevin Buzzard (Nov 16 2019 at 00:32)</a>:</h4>
+<p>In fact if <code>let A := B</code> changed the local context by adding <code>A : real</code> and <code>hA : A = B</code> rather than doing what it currently does, I wouldn't be in this situation.</p>
+
+<a name="180886149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180886149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180886149">Chris Hughes (Nov 16 2019 at 00:35)</a>:</h4>
+<p><code>generalize</code> is exactly your hacked let. <code>generalise h : (a - b) / 2 = epsilon</code> does what you want I think.</p>
+
+<a name="180886337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180886337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180886337">Kevin Buzzard (Nov 16 2019 at 00:38)</a>:</h4>
+<p>Oh you're absolutely right! I tried it and it didn't work but I think I got the equality the wrong way around. Thanks! I misunderstood the man page -- it talking about replacing things in the "target" which I incorrectly assumed meant "the goal"</p>
+
+<a name="180886793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180886793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180886793">Chris Hughes (Nov 16 2019 at 00:46)</a>:</h4>
+<p>I think it does mean the goal. If there is an <code>(a - b) /2</code> in the goal it will be replaced with <code>epsilon</code></p>
+
+<a name="180903897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180903897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180903897">Rob Lewis (Nov 16 2019 at 08:52)</a>:</h4>
+<p>I thought I added the <code>set</code> tactic because you asked exactly this question before. <code>set ε := (b - a) / 2 with h</code> or something like that should work.</p>
+
+<a name="180904007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180904007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180904007">Rob Lewis (Nov 16 2019 at 08:56)</a>:</h4>
+<blockquote>
+<p>you're right though in that if I add <code>h1 : ε = (m - l) / 2</code> to the local context then linarith works again. What does this <code>ε : ℝ := (m - l) / 2,</code> mean then? linarith can't see through it but it's not a hypothesis either?</p>
+</blockquote>
+<p>It means epsilon is "locally defined" to be <code>(m - l)/2</code>. You shouldn't expect <code>linarith</code> to see through it any more than if it were a function <code>epsilon m l</code> you defined separately.</p>
+
+<a name="180904061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180904061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180904061">Rob Lewis (Nov 16 2019 at 08:58)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941" title="#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941</a></p>
+
+<a name="180904288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180904288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180904288">Mario Carneiro (Nov 16 2019 at 09:06)</a>:</h4>
+<p>Would it make sense for <code>linarith [ε]</code> to unfold epsilon as a preprocessing step?</p>
+
+<a name="180904425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180904425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180904425">Rob Lewis (Nov 16 2019 at 09:11)</a>:</h4>
+<p>That syntax is taken for adding to/restricting the list of inequalities it uses, but yes, something like that could be done. But <code>linarith unfolding [epsilon]</code> would just be sugar for <code>unfold epsilon; linarith</code>, it's barely different.</p>
+
+<a name="180906162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180906162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180906162">Kevin Buzzard (Nov 16 2019 at 10:07)</a>:</h4>
+<p>I tried unfold epsilon and it didn't work iirc</p>
+
+<a name="180906211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180906211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180906211">Kevin Buzzard (Nov 16 2019 at 10:08)</a>:</h4>
+<p>I like the <code>set</code> solution best! Thanks Rob</p>
+
+<a name="180906278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180906278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180906278">Mario Carneiro (Nov 16 2019 at 10:10)</a>:</h4>
+<p>Not all unfolding tactics know how to unfold let expressions in the context, they are a bit special</p>
+
+<a name="180906288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180906288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180906288">Mario Carneiro (Nov 16 2019 at 10:11)</a>:</h4>
+<p><code>dsimp</code> does, but AFAIK dunfold and unfold don't</p>
+
+<a name="180906333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180906333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180906333">Rob Lewis (Nov 16 2019 at 10:12)</a>:</h4>
+<blockquote>
+<p>I like the <code>set</code> solution best! Thanks Rob</p>
+</blockquote>
+<p>I'm not surprised, since it was added in response to you asking this exact question in January!</p>
+
+<a name="180907548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180907548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180907548">Kevin Buzzard (Nov 16 2019 at 10:51)</a>:</h4>
+<p>January was a long time ago for my brain :D</p>
+
+<a name="180907592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180907592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180907592">Mario Carneiro (Nov 16 2019 at 10:52)</a>:</h4>
+<p>the gift that keeps on giving</p>
+
+<a name="180907609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180907609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180907609">Kevin Buzzard (Nov 16 2019 at 10:53)</a>:</h4>
+<p>I'll try to remember to ask again next August or so.</p>
+
+<a name="180907663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180907663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180907663">Kevin Buzzard (Nov 16 2019 at 10:55)</a>:</h4>
+<p>In fact I'm more likely to remember it this time, because probably in Jan I just needed it to show off Lean in some informal seminars I was giving to analysis students, whereas this time I am trying to make some real number game using it so now I have to think about how to teach it, and teaching is always a good way of learning stuff.</p>
+
+<a name="180907841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180907841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180907841">Kevin Buzzard (Nov 16 2019 at 11:00)</a>:</h4>
+<blockquote>
+<p><a href="#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941" title="#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith.20failure/near/157057941</a></p>
+<p>In practice I have some positive real eps := (b - a) / 2</p>
+</blockquote>
+<p>rofl</p>
+
+<a name="180908031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180908031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180908031">Johan Commelin (Nov 16 2019 at 11:06)</a>:</h4>
+<p>As a bit of solace... at some point I found a really interesting question on mathoverflow about the Mumford–Tate conjecture. I was so excited that someone was thinking about these questions in the exact same way as I was... well you can figure out the rest (-;</p>
+
+<a name="180909106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/one-line%20proof%20of%20triviality/near/180909106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61028onelineproofoftriviality.html#180909106">Kevin Buzzard (Nov 16 2019 at 11:45)</a>:</h4>
+<p>Oh that happens to me all the time! :D</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

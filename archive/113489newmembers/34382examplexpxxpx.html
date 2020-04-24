@@ -1,0 +1,320 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/34382examplexpxxpx.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html">example : ¬ (∃ x, ¬ p x) → (∀ x, p x)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179689937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179689937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179689937">Eduardo Cavazos (Nov 02 2019 at 07:01)</a>:</h4>
+<p>Question posted to stackoverflow:</p>
+<p><a href="https://stackoverflow.com/q/58668917/268581" target="_blank" title="https://stackoverflow.com/q/58668917/268581">https://stackoverflow.com/q/58668917/268581</a></p>
+<p>Thanks for any suggestions!</p>
+
+<a name="179690183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690183">Johan Commelin (Nov 02 2019 at 07:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="243015">@Eduardo Cavazos</span> Have you tried <code>by tauto!</code>?</p>
+
+<a name="179690322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690322">Johan Commelin (Nov 02 2019 at 07:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="243015">@Eduardo Cavazos</span> Here is a way to get hints from Lean itself.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">your_statement</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tauto</span><span class="bp">!</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo</span>
+</pre></div>
+
+
+<p>That way you can see how Lean would prove these. You can then try to optimise the proof.</p>
+
+<a name="179690451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690451">Johan Commelin (Nov 02 2019 at 07:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="243015">@Eduardo Cavazos</span> Voila:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">finish</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo</span>
+</pre></div>
+
+
+<p>This tells me that you can prove your example in TPIL term-mode style as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span> <span class="o">(</span><span class="bp">¬∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">imp_congr_eq</span> <span class="o">(</span><span class="n">propext</span> <span class="n">not_exists</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span><span class="o">))))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="bp">¬¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span>
+       <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span>
+         <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+            <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+               <span class="n">false</span><span class="bp">.</span><span class="n">rec</span> <span class="n">false</span> <span class="o">(</span><span class="n">false_of_true_eq_false</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">eq_true_intro</span> <span class="o">(</span><span class="n">a</span> <span class="n">x</span><span class="o">)))</span> <span class="o">(</span><span class="n">eq_false_intro</span> <span class="n">a_1</span><span class="o">))))</span>
+              <span class="n">X</span>
+              <span class="n">p</span>
+              <span class="n">x</span>
+              <span class="n">a_1</span>
+              <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">forall_congr_eq</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">auto</span><span class="bp">.</span><span class="n">not_not_eq</span> <span class="o">(</span><span class="n">p</span> <span class="n">x</span><span class="o">)))</span> <span class="n">a</span><span class="o">)))</span>
+</pre></div>
+
+<a name="179690578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690578">Mario Carneiro (Nov 02 2019 at 07:19)</a>:</h4>
+<p>Looking at automated proofs is not the best way to find a good manual proof</p>
+
+<a name="179690799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690799">Eduardo Cavazos (Nov 02 2019 at 07:25)</a>:</h4>
+<p>Here's what I came up with based on Simon's hint on stackoverflow:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnExnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+            <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="o">(</span><span class="n">p</span> <span class="n">x</span><span class="o">))</span>
+                <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="n">hpx</span><span class="o">)</span>
+                <span class="o">(</span><span class="bp">λ</span> <span class="n">hnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+                    <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hnExnpx</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="n">hnpx</span> <span class="n">hpx</span><span class="o">))))))</span>
+</pre></div>
+
+
+<p>Then simplifying it a bit (use <code>by_contradiction</code> instead of <code>(em (p x))</code> and an anonymous constructor for the <code>exists.intro</code>):</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnExnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+            <span class="n">by_contradiction</span>
+                <span class="o">(</span><span class="bp">λ</span> <span class="n">hnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+                    <span class="n">hnExnpx</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="n">hnpx</span> <span class="n">hpx</span><span class="o">)</span><span class="bp">⟩</span><span class="o">)))</span>
+</pre></div>
+
+<a name="179690846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690846">Eduardo Cavazos (Nov 02 2019 at 07:27)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110026">@Simon Hudon</span> !</p>
+
+<a name="179690858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690858">Simon Hudon (Nov 02 2019 at 07:27)</a>:</h4>
+<p>My secret identity was discovered :)</p>
+
+<a name="179690899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179690899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179690899">Simon Hudon (Nov 02 2019 at 07:28)</a>:</h4>
+<p>You're welcome!</p>
+
+<a name="179691176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691176">Johan Commelin (Nov 02 2019 at 07:39)</a>:</h4>
+<p>Looking at automated proofs might not be the best way, but they can certainly provide hints when you are stuck.</p>
+
+<a name="179691466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691466">Eduardo Cavazos (Nov 02 2019 at 07:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Thanks for demonstrating that. It's good to know that that sort of thing is available. Now I'll have to look up what all those new functions in the generated proof mean as many of them haven't yet been introduced in TPIL by chapter 4. <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="179691533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691533">Mario Carneiro (Nov 02 2019 at 07:50)</a>:</h4>
+<p>At some point you will have to learn how to look at the library itself; lean gives you a way to define new lemmas and there are a <em>ton</em> of lemmas in lean and mathlib, far more than will be covered in TPIL</p>
+
+<a name="179691545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691545">Mario Carneiro (Nov 02 2019 at 07:51)</a>:</h4>
+<p>The <code>logic.basic</code> file of mathlib contains a bunch of theorems like this one</p>
+
+<a name="179691654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691654">Eduardo Cavazos (Nov 02 2019 at 07:54)</a>:</h4>
+<p>I hope I installed mathlib correctly! Everything seems to work. I basically just set the LEAN_PATH environment variable to contain these three entries:</p>
+<div class="codehilite"><pre><span></span>...\lean-3.4.2-windows\lib\lean\leanpkg
+...\lean-3.4.2-windows\lib\lean\library
+...\mathlib\src
+</pre></div>
+
+
+<p>Where <code>...</code> is a longer part of the path on my filesystem.</p>
+
+<a name="179691659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691659">Mario Carneiro (Nov 02 2019 at 07:54)</a>:</h4>
+<p>Don't set the LEAN_PATH environment variable (ignore the recommendation that lean gives, it's out of date)</p>
+
+<a name="179691661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691661">Mario Carneiro (Nov 02 2019 at 07:54)</a>:</h4>
+<p>Use the <code>leanpkg.path</code> file instead</p>
+
+<a name="179691663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691663">Mario Carneiro (Nov 02 2019 at 07:55)</a>:</h4>
+<p>which is set up by the <code>leanpkg</code> command</p>
+
+<a name="179691725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691725">Mario Carneiro (Nov 02 2019 at 07:56)</a>:</h4>
+<p>If you put in the leanpkg.path file:</p>
+<div class="codehilite"><pre><span></span>builtin_path
+path ../mathlib/src
+</pre></div>
+
+<a name="179691738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691738">Mario Carneiro (Nov 02 2019 at 07:57)</a>:</h4>
+<p>then it should all work (the path to mathlib is relative to the <code>leanpkg.path</code> file)</p>
+
+<a name="179691783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691783">Mario Carneiro (Nov 02 2019 at 07:58)</a>:</h4>
+<p>But if the LEAN_PATH env var is set, it will override the leanpkg.path file, meaning that repos which use it won't work on your machine</p>
+
+<a name="179691999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179691999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179691999">Eduardo Cavazos (Nov 02 2019 at 08:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , thanks for the tips. I don't see a <code>leanpkg.path</code> file in my Lean installation.</p>
+
+<a name="179692022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692022">Mario Carneiro (Nov 02 2019 at 08:03)</a>:</h4>
+<p>It is autogenerated by <code>leanpkg</code> when you run e.g. <code>leanpkg new</code> but you can just create a file in your project directory called <code>leanpkg.path</code> and those contents and lean will use it</p>
+
+<a name="179692068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692068">Mario Carneiro (Nov 02 2019 at 08:04)</a>:</h4>
+<p>the file has to be in some parent of the directory where your lean files are stored</p>
+
+<a name="179692137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692137">Eduardo Cavazos (Nov 02 2019 at 08:06)</a>:</h4>
+<p>Hmm... If I create a new buffer in vscode which isn't yet saved to a file, but is in 'lean' mode, where will vscode look for the 'leanpkg.path' file?</p>
+
+<a name="179692144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692144">Mario Carneiro (Nov 02 2019 at 08:07)</a>:</h4>
+<p>It uses your project root, if you have "opened a folder" in vscode</p>
+
+<a name="179692152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692152">Mario Carneiro (Nov 02 2019 at 08:07)</a>:</h4>
+<p>otherwise it uses your user global settings</p>
+
+<a name="179692221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692221">Johan Commelin (Nov 02 2019 at 08:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="243015">@Eduardo Cavazos</span> <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/windows.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/windows.md">https://github.com/leanprover-community/mathlib/blob/master/docs/install/windows.md</a> might be relevant</p>
+
+<a name="179692268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692268">Bryan Gin-ge Chen (Nov 02 2019 at 08:10)</a>:</h4>
+<p>The <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md">mathlib doc page on Lean projects</a> has a useful set of commands.</p>
+
+<a name="179692544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692544">Eduardo Cavazos (Nov 02 2019 at 08:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Yup, I saw those directions. Setting LEAN_PATH seemed easier than all that. :-) But now I know about <code>leanpkg.path</code> so I'll look into using that now.</p>
+
+<a name="179692602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692602">Eduardo Cavazos (Nov 02 2019 at 08:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> That page does indeed seem helpful (also linked from the page that <span class="user-mention" data-user-id="112680">@Johan Commelin</span> posteed). Thanks!</p>
+
+<a name="179692828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179692828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179692828">Eduardo Cavazos (Nov 02 2019 at 08:28)</a>:</h4>
+<p>Hmm... if I do:</p>
+<div class="codehilite"><pre><span></span>leanpkg new lean_test
+</pre></div>
+
+
+<p>at a Windows command prompt, I get:</p>
+<div class="codehilite"><pre><span></span>failed to start child process
+</pre></div>
+
+<a name="179693075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693075">Bryan Gin-ge Chen (Nov 02 2019 at 08:36)</a>:</h4>
+<p>What shell are you using on windows? I remember people running into this error when they didn't use the bash shell that comes with git for windows.</p>
+
+<a name="179693084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693084">Mario Carneiro (Nov 02 2019 at 08:37)</a>:</h4>
+<p>I use the MSYS2 shell on windows; the git bash shell doesn't work for me</p>
+
+<a name="179693134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693134">Eduardo Cavazos (Nov 02 2019 at 08:38)</a>:</h4>
+<blockquote>
+<p>What shell are you using on windows? I remember people running into this error when they didn't use the bash shell that comes with git for windows.</p>
+</blockquote>
+<p>Just the basic Windows Command Prompt. I'll give one of the other shells a try.</p>
+
+<a name="179693295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693295">Eduardo Cavazos (Nov 02 2019 at 08:43)</a>:</h4>
+<p>However, there is a <code>leanpkg.bat</code> file in the Lean <code>bin</code> directory which seems to imply that the authors intended for it to be run from the standard Windows Command Prompt.</p>
+
+<a name="179693302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693302">Mario Carneiro (Nov 02 2019 at 08:43)</a>:</h4>
+<p>how do you figure?</p>
+
+<a name="179693305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693305">Mario Carneiro (Nov 02 2019 at 08:43)</a>:</h4>
+<p>oh, a bat file</p>
+
+<a name="179693356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693356">Mario Carneiro (Nov 02 2019 at 08:45)</a>:</h4>
+<p>Can you run <code>lean --version</code> from the command line?</p>
+
+<a name="179693471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693471">Eduardo Cavazos (Nov 02 2019 at 08:48)</a>:</h4>
+<blockquote>
+<p>Can you run <code>lean --version</code> from the command line?</p>
+</blockquote>
+<p>Yup!</p>
+<div class="codehilite"><pre><span></span>C:\temp&gt;lean --version
+Lean (version 3.4.2, commit cbd2b6686ddb, Release)
+</pre></div>
+
+<a name="179693605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693605">Mario Carneiro (Nov 02 2019 at 08:52)</a>:</h4>
+<p>you might also try <code>lean --run lean/leanpkg/leanpkg/main.lean</code> but I don't have high hopes for using the windows command prompt</p>
+
+<a name="179693742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/179693742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#179693742">Eduardo Cavazos (Nov 02 2019 at 08:57)</a>:</h4>
+<p>Using git bash seems to work:</p>
+<div class="codehilite"><pre><span></span>$ leanpkg new lean_test_a
+&gt; mkdir -p lean_test_a
+&gt; cd lean_test_a
+&gt; mkdir src
+&gt; git init -q
+&gt; git checkout -b lean-3.4.2
+Switched to a new branch &#39;lean-3.4.2&#39;
+configuring lean_test_a 0.1
+</pre></div>
+
+<a name="187167510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187167510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187167510">Daniel Keys (Feb 01 2020 at 16:17)</a>:</h4>
+<p>This also gives me trouble in tactic mode:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span>
+
+<span class="kn">theorem</span> <span class="n">T05_1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnExnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="o">(</span><span class="n">p</span> <span class="n">x</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="n">hpx</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">hnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hnExnpx</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="n">hnpx</span> <span class="n">hpx</span><span class="o">))))))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">T05_1</span>
+<span class="n">include</span> <span class="n">a</span>
+<span class="kn">theorem</span> <span class="n">T05_2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">hnExnpx</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">em</span> <span class="o">(</span><span class="n">p</span> <span class="n">a</span><span class="o">)</span> <span class="o">)</span> <span class="k">with</span> <span class="n">hpa</span> <span class="n">hnpa</span><span class="o">,</span>
+    <span class="o">{</span>
+        <span class="n">exact</span> <span class="n">hpa</span>
+    <span class="o">},</span>
+    <span class="o">{</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>To my understanding, <code>a</code> is an arbitrary element of <code>α</code> so <code>hpa</code> should fill the goal. It may be that I don't write the term correctly, though! Or maybe my understanding is wrong. Or both!</p>
+
+<a name="187167927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187167927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187167927">Patrick Massot (Feb 01 2020 at 16:28)</a>:</h4>
+<p>No, <code>a</code> is not arbitrary at this stage. The tactic state on the error line means <code>a</code> is a fixed element its type.</p>
+
+<a name="187167936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187167936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187167936">Daniel Keys (Feb 01 2020 at 16:29)</a>:</h4>
+<p>I could guess that, but not sure how to go about it.</p>
+
+<a name="187168130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187168130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187168130">Patrick Massot (Feb 01 2020 at 16:35)</a>:</h4>
+<p>I just had a look at the actual statement of T05_2. What is <code>a</code> doing there?</p>
+
+<a name="187168196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187168196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187168196">Patrick Massot (Feb 01 2020 at 16:37)</a>:</h4>
+<p>Remove that <code>include a</code> and start the proof with <code>intros h x,   by_contradiction H,</code>. I need to go. Have fun!</p>
+
+<a name="187168258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%83%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%80%20x%2C%20p%20x%29/near/187168258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34382examplexpxxpx.html#187168258">Daniel Keys (Feb 01 2020 at 16:39)</a>:</h4>
+<p>Will do, thanks!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

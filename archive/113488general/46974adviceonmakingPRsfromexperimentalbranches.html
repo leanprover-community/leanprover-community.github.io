@@ -1,0 +1,169 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html">advice on making PRs from experimental branches</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190248685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190248685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190248685">Scott Morrison (Mar 11 2020 at 03:51)</a>:</h4>
+<p>I often find myself creating a branch of mathlib that explores some experimental idea, that perhaps goes well, and perhaps goes badly. Inevitably along the way I find myself making changes to existing parts of mathlib, either to fix something yucky, add a missing lemma, or refactor something. Sometimes I make multiple changes like this to different parts of mathlib.</p>
+<p>At the end of the day, probably I don't want to turn the whole branch into a PR (perhaps the overall idea went badly...), but I want to extract out the useful groups of changes into separate PRs.</p>
+<p>What do people do to achieve this?</p>
+
+<a name="190248741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190248741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190248741">Scott Morrison (Mar 11 2020 at 03:53)</a>:</h4>
+<p>So far the only good trick I know is to make a new branch, and run <code>git merge --squash experimental_branch</code>. This gives me all the changes that branch made, as unstaged edits to the current branch. I then revert most of the files, essentially all the ones that I hope have nothing to do with the subset of changes I'm trying to capture.</p>
+
+<a name="190248744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190248744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190248744">Scott Morrison (Mar 11 2020 at 03:53)</a>:</h4>
+<p>This works pretty well, but often I get things wrong and revert too much or too little and have to try again.</p>
+
+<a name="190248748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190248748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190248748">Scott Morrison (Mar 11 2020 at 03:53)</a>:</h4>
+<p>If anyone has suggested workflows that work better, I'd love to hear!</p>
+
+<a name="190250145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190250145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190250145">Mario Carneiro (Mar 11 2020 at 04:36)</a>:</h4>
+<p>This is probably domain specific, but usually when I am working on a formalization inside mathlib, I will put <code>for_mathlib</code> stuff directly in the files where they should go, which is probably a completely different file or part of the library than what I'm actually working on. So it's not hard to isolate these edits and push only them. Plus, they are usually standalone things so they can just drop in to mathlib.</p>
+<p>For more complicated refactorings and such, it generally has to be done in bulk, and some care has to be taken with the PR. I don't think there is an easy way to extract your "branch" changes from the "refactoring" once it gets to this point.</p>
+
+<a name="190251297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190251297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190251297">Scott Morrison (Mar 11 2020 at 05:15)</a>:</h4>
+<p>I guess I tend to "work on mathlib directly", so I never have a <code>to_mathlib</code> directory.</p>
+
+<a name="190252083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190252083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190252083">Mario Carneiro (Mar 11 2020 at 05:42)</a>:</h4>
+<p>Sure, I do too, but I use the term to refer to library stuff that inevitably appears when working on a project. If you are in a separate project this should go at the top of your file, or in a separate file, but if you are working in mathlib then it should go where it is supposed to be (which is probably not wherever you are working).</p>
+
+<a name="190252539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190252539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190252539">Johan Commelin (Mar 11 2020 at 06:00)</a>:</h4>
+<p>I still put it at the top of the file that I'm working on, because otherwise I trigger massive recompiles. How do you avoid this?</p>
+
+<a name="190253533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253533">Mario Carneiro (Mar 11 2020 at 06:30)</a>:</h4>
+<p>I don't. Options include: PR-ing without testing and trusting CI; don't import so many dependencies so that the chain from your change to your current project is not so bad; and putting things in the current file with an eye for where they will go, then doing bulk insertions with minimal checks during the PR</p>
+
+<a name="190253555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253555">Mario Carneiro (Mar 11 2020 at 06:31)</a>:</h4>
+<p>Another option is to become vaguely frustrated at how slow lean is</p>
+
+<a name="190253682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253682">Johan Commelin (Mar 11 2020 at 06:34)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/advice.20on.20making.20PRs.20from.20experimental.20branches/near/190253555" title="#narrow/stream/113488-general/topic/advice.20on.20making.20PRs.20from.20experimental.20branches/near/190253555">said</a>:</p>
+<blockquote>
+<p>Another option is to become vaguely frustrated at how slow lean is</p>
+</blockquote>
+<p>I'll go for this one.</p>
+
+<a name="190253697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253697">Johan Commelin (Mar 11 2020 at 06:35)</a>:</h4>
+<p>When is your type theoretic editor plugin for MM0 being released?</p>
+
+<a name="190253699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253699">Johan Commelin (Mar 11 2020 at 06:35)</a>:</h4>
+<p>(I guess in 202X? <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> )</p>
+
+<a name="190253704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253704">Mario Carneiro (Mar 11 2020 at 06:36)</a>:</h4>
+<p>Lean 0</p>
+
+<a name="190253821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253821">Mario Carneiro (Mar 11 2020 at 06:39)</a>:</h4>
+<p>You know, there is a feature in MM1 that is kind of overkill for it but would make a massive difference for lean: you can turn off proof checking in all files other than the one you are working on. This is kind of obviously the correct setting for interactive use, and CI can do the full check</p>
+
+<a name="190253874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190253874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190253874">Mario Carneiro (Mar 11 2020 at 06:40)</a>:</h4>
+<p>In lean it would even be useful to be able to <code>lean --make --no-proofs</code> and get usable (but incomplete) <code>.olean</code> files</p>
+
+<a name="190254019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254019">Johan Commelin (Mar 11 2020 at 06:44)</a>:</h4>
+<p>But in Lean you can tell it to check only the current file, can't you?</p>
+
+<a name="190254025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254025">Johan Commelin (Mar 11 2020 at 06:44)</a>:</h4>
+<p>"check visible files"</p>
+
+<a name="190254026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254026">Johan Commelin (Mar 11 2020 at 06:44)</a>:</h4>
+<p>That sounds close enough</p>
+
+<a name="190254029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254029">Mario Carneiro (Mar 11 2020 at 06:44)</a>:</h4>
+<p>you still need to have the other files be processed, but only for theorem statements</p>
+
+<a name="190254053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254053">Mario Carneiro (Mar 11 2020 at 06:45)</a>:</h4>
+<p>I don't think that "check visible files" does anything to stop the catastrophic cascade when you jump into <code>tactic.basic</code> to add or modify a tactic</p>
+
+<a name="190254100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254100">Mario Carneiro (Mar 11 2020 at 06:46)</a>:</h4>
+<p>plus you are still left with a whole bunch of invalidated olean files that you need to regenerate non-interactively</p>
+
+<a name="190254116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254116">Mario Carneiro (Mar 11 2020 at 06:47)</a>:</h4>
+<p>I would be curious to see how expensive it is to <code>lean --make</code> all of mathlib without proofs. My guess is ~1 minute</p>
+
+<a name="190254117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254117">Mario Carneiro (Mar 11 2020 at 06:47)</a>:</h4>
+<p>hopefully less</p>
+
+<a name="190254161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254161">Mario Carneiro (Mar 11 2020 at 06:48)</a>:</h4>
+<p>but I think there are still some hard typeclass problems in some theorem statements (I don't think we are doing anything heavy in <code>def</code>s)</p>
+
+<a name="190254404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254404">Markus Himmel (Mar 11 2020 at 06:55)</a>:</h4>
+<p>Regarding the question about only keeping the changes you want: If the changes you want to keep and those you want to get rid of are in separate commits, then you can run <code>git rebase -i abcde</code> where <code>abcde</code> is the last commit from master that your branch has. It opens your editor with a list of all the commits in your experimental branch. You can then simply delete the commits you do not want by deleting the corresponding lines.</p>
+
+<a name="190254529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190254529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190254529">Mario Carneiro (Mar 11 2020 at 06:58)</a>:</h4>
+<p>In my case it's almost never in a separate commit, because it invariably comes up in the middle of the project. I guess with better git hygiene I could make a mini commit every time I have a library change, resulting in some spotted history of intermingled library and project commits, and then the library commits could be interactive-rebased into one group or one commit</p>
+
+<a name="190255419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190255419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190255419">Scott Morrison (Mar 11 2020 at 07:21)</a>:</h4>
+<p>Yes, my git hygiene is terrible. If I'm working on something experimental, commits tend to line up with when I go to sleep. :-)</p>
+
+<a name="190255823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190255823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190255823">Johan Commelin (Mar 11 2020 at 07:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Should we turn the <code>--no-proofs</code> thing into a feature request for <code>lean-3.1X.Y</code>?</p>
+
+<a name="190255835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190255835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190255835">Johan Commelin (Mar 11 2020 at 07:31)</a>:</h4>
+<p>I have no idea how hard it would be to implement something like that...</p>
+
+<a name="190256028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190256028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190256028">Mario Carneiro (Mar 11 2020 at 07:34)</a>:</h4>
+<p>I think not hard. Keep in mind that lean is already elaborating proofs asynchronously, so there is already a part where that part of the work is placed in a closure and sent elsewhere. If we simply ignore that closure than bam, no proofs</p>
+
+<a name="190256136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190256136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190256136">Mario Carneiro (Mar 11 2020 at 07:36)</a>:</h4>
+<p>Some changes may have to be made to allow <code>.olean</code> file creation to proceed without the proof result, but the content can just be replaced with a <code>sorry</code> macro</p>
+
+<a name="190256242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190256242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190256242">Mario Carneiro (Mar 11 2020 at 07:39)</a>:</h4>
+<p>On a related note it might be nice to turn off that "imported file uses sorry" warning, which is way overkill in non-interactive mode (since it gets spammed on every dependency importing another dependency), and would become much worse with this compilation strategy</p>
+
+<a name="190256746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190256746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190256746">Yury G. Kudryashov (Mar 11 2020 at 07:48)</a>:</h4>
+<p>I often work on an experimental feature without making commits, then add selected changes to a <code>git stash</code>, create a new branch from <code>master</code> in another worktree, and do <code>git stash pop</code>. Emacs magit makes it easy.</p>
+
+<a name="190261426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/advice%20on%20making%20PRs%20from%20experimental%20branches/near/190261426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46974adviceonmakingPRsfromexperimentalbranches.html#190261426">Gabriel Ebner (Mar 11 2020 at 09:05)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/advice.20on.20making.20PRs.20from.20experimental.20branches/near/190254116" title="#narrow/stream/113488-general/topic/advice.20on.20making.20PRs.20from.20experimental.20branches/near/190254116">said</a>:</p>
+<blockquote>
+<p>I would be curious to see how expensive it is to <code>lean --make</code> all of mathlib without proofs. My guess is ~1 minute</p>
+</blockquote>
+<p>Unfortunately it's much longer than that.  Definitions take a surprising amount of time to elaborate (just think of type class resolution).  Then there are definitions that contains stuff like <code>cast (by simp) ...</code>.  (You can't skip the simp because you need to know what local constants the resulting proof depends on.)  And then there are instance definitions: <code>instance ... := by refine { add := ..., good := ... 20 line proof ... }; tidy</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

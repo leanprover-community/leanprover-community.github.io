@@ -1,0 +1,75 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/60898Bugwithletinpatternmatch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html">Bug with let in pattern match</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169863205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169863205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169863205">Rob Lewis (Jul 08 2019 at 12:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="213273">@Paul-Nicolas Madelaine</span> came across some strange behavior, which we shortened to the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">let</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">tt</span> <span class="k">in</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">k</span> <span class="c1">-- fails</span>
+<span class="c1">--| (k+1) := if k = k then tt else ff -- fails</span>
+<span class="c1">--| (k+1) := if h : k = k then tt else ff -- succeeds</span>
+</pre></div>
+
+
+<p>The <code>let</code> in the first case seems to prevent type class resolution from finding <code>decidable (k = k)</code> in the second. Weirdly, if you use a dependent if and name the <code>k = k</code> hypothesis, it succeeds. Does anyone recognize this as a known bug? Or is it something new?</p>
+
+<a name="169863525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169863525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169863525">Kevin Buzzard (Jul 08 2019 at 12:22)</a>:</h4>
+<p>That <code>let</code> is very weird though, right?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">hello_world</span> <span class="o">:=</span> <span class="n">tt</span> <span class="k">in</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">k</span> <span class="c1">-- succeeds</span>
+</pre></div>
+
+<a name="169863868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169863868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169863868">Rob Lewis (Jul 08 2019 at 12:29)</a>:</h4>
+<p>It's not so weird, and the failure also happens with <code>let (a, b) := (tt, tt)</code>. Does <code>let _ := ...</code> destruct the rhs? Maybe it has to be a pattern matching <code>let</code>.</p>
+
+<a name="169864021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864021">Rob Lewis (Jul 08 2019 at 12:31)</a>:</h4>
+<p>(Yes, it seems like <code>let _ := ...</code> does destruct the rhs.)</p>
+
+<a name="169864208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864208">Mario Carneiro (Jul 08 2019 at 12:34)</a>:</h4>
+<p>hm, this looks hard to diagnose without jumping into the C++</p>
+
+<a name="169864407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864407">Mario Carneiro (Jul 08 2019 at 12:37)</a>:</h4>
+<p>Also <code>to_bool (k = k)</code> works, even though it's the same thing as <code>k = k</code>, so the error must happen before the lean magic that triggers this</p>
+
+<a name="169864408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864408">Rob Lewis (Jul 08 2019 at 12:37)</a>:</h4>
+<p>It's not exactly high priority. I just thought I knew all the big Lean 3 bugs, but this one doesn't look familiar.</p>
+
+<a name="169864420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864420">Mario Carneiro (Jul 08 2019 at 12:37)</a>:</h4>
+<p>I agree, I haven't seen this one</p>
+
+<a name="169864786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864786">Rob Lewis (Jul 08 2019 at 12:42)</a>:</h4>
+<p>I'll open an issue at community Lean. Not expecting anyone to fix it, just to keep track of it.</p>
+
+<a name="169864910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169864910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169864910">Patrick Massot (Jul 08 2019 at 12:44)</a>:</h4>
+<p>Maybe we should ping Sebastian so that it also goes into his private list, in case it's still Lean 4 relevant?</p>
+
+<a name="169865235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bug%20with%20let%20in%20pattern%20match/near/169865235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60898Bugwithletinpatternmatch.html#169865235">Rob Lewis (Jul 08 2019 at 12:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> FYI, if you think this is relevant!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

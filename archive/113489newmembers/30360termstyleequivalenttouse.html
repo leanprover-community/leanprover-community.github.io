@@ -1,0 +1,99 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/30360termstyleequivalenttouse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html">term style equivalent to `use`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192169441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169441">Kevin Doran (Mar 29 2020 at 11:26)</a>:</h4>
+<p>I am trying to write a term-style solution to <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>'s maths challenges. I'm a little stuck on <a href="https://github.com/leanprover-community/mathlib/issues/4" title="https://github.com/leanprover-community/mathlib/issues/4">#4</a>, with the following progress (and tactic solution included at the bottom for comparison):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">function</span>
+
+<span class="kn">theorem</span> <span class="n">challenge4</span>
+ <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+ <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+ <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">surjective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="bp">→</span> <span class="n">surjective</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h₁</span><span class="o">,</span>
+<span class="k">assume</span> <span class="n">z</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="bp">∃</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">g</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">z</span><span class="o">,</span> <span class="k">from</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">z</span><span class="o">)</span>
+ <span class="o">(</span><span class="k">assume</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hh₁</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span><span class="o">),</span>
+   <span class="k">have</span> <span class="n">hh₂</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">z</span><span class="o">,</span> <span class="k">from</span> <span class="n">hh₁</span><span class="o">,</span> <span class="c1">-- I&#39;m not sure how to create a variable, y : Y, using f x.</span>
+   <span class="c1">--exists.intro (f x) hh₂</span>
+   <span class="n">sorry</span><span class="o">),</span>
+ <span class="n">h₂</span>
+
+<span class="kn">theorem</span> <span class="n">challenge4_tactic</span>
+ <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+ <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+ <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">surjective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="bp">→</span> <span class="n">surjective</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">intro</span> <span class="n">z</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="n">z</span> <span class="k">with</span> <span class="n">a</span> <span class="n">ha</span><span class="o">,</span>
+ <span class="n">use</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span>
+ <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192169463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169463">Kevin Buzzard (Mar 29 2020 at 11:27)</a>:</h4>
+<p>Oh yeah, I can never do those crazy assume have proofs either. Why not just go full lambda-calculus?</p>
+
+<a name="192169559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169559">Patrick Massot (Mar 29 2020 at 11:29)</a>:</h4>
+<p><code>   let y := f x in
+   exists.intro y hh₂</code></p>
+
+<a name="192169561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169561">Kevin Buzzard (Mar 29 2020 at 11:29)</a>:</h4>
+<p>You can replace the sorry with <code>⟨f x, hh₂⟩</code></p>
+
+<a name="192169740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169740">Kevin Doran (Mar 29 2020 at 11:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169463" title="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169463">said</a>:</p>
+<blockquote>
+<p>Oh yeah, I can never do those crazy assume have proofs either. Why not just go full lambda-calculus?</p>
+</blockquote>
+<p>The downside of starting with the fantastic "Logic and Proof" website is that my understanding is currently rooted pretty exclusively in assume proofs.</p>
+
+<a name="192169753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192169753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192169753">Kevin Doran (Mar 29 2020 at 11:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169559" title="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169559">said</a>:</p>
+<blockquote>
+<p><code>   let y := f x in
+   exists.intro y hh₂</code></p>
+</blockquote>
+<p>Thanks! That's what I needed. I didn't know of  <code>let ... in</code>.</p>
+
+<a name="192170039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192170039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192170039">Kevin Buzzard (Mar 29 2020 at 11:40)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="252241">Kevin Doran</span> <a href="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169740" title="#narrow/stream/113489-new-members/topic/term.20style.20equivalent.20to.20.60use.60/near/192169740">said</a>:</p>
+<blockquote>
+<p>The downside of starting with the fantastic "Logic and Proof" website is that my understanding is currently rooted pretty exclusively in assume proofs.</p>
+</blockquote>
+<p>Are you the kind of person who understands those big fractions with <code>Gamma ⊢ x : P</code> on the top and bottom?</p>
+
+<a name="192170045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192170045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192170045">Kevin Buzzard (Mar 29 2020 at 11:40)</a>:</h4>
+<p>All I know is that you don't have to have a clue about those to use Lean.</p>
+
+<a name="192202189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/term%20style%20equivalent%20to%20%60use%60/near/192202189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30360termstyleequivalenttouse.html#192202189">Kevin Doran (Mar 30 2020 at 00:47)</a>:</h4>
+<p>I'm trying to follow that path! The assume have proofs get out of hand quickly.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

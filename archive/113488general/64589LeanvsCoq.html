@@ -1,0 +1,1120 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/64589LeanvsCoq.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html">Lean vs Coq</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184801623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184801623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184801623">Ramkumar Ramachandra (Jan 04 2020 at 12:16)</a>:</h4>
+<p>Is Lean slow because a VM is used for computations?</p>
+
+<a name="184801982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184801982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184801982">Mario Carneiro (Jan 04 2020 at 12:27)</a>:</h4>
+<p>This is a vague statement without a reference for comparison, but the short answer is yes. When you evaluate a lean tactic or lean function using <code>#eval</code>, it executes a bytecode in a similar way to Python, leading to the same order of speed (it's certainly not as well optimized as python though).</p>
+
+<a name="184802050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802050">Mario Carneiro (Jan 04 2020 at 12:29)</a>:</h4>
+<p>One of the biggest changes with Lean 4 is an overhaul of this system. Lean code will now be transpiled to C and then compiled and run, so you are likely to see performance similar to Haskell (although again, optimization is an infinitely deep rabbit-hole)</p>
+
+<a name="184802160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802160">Ramkumar Ramachandra (Jan 04 2020 at 12:32)</a>:</h4>
+<p>I see, that's good to hear. I was comparing the compile speeds of mathlib and math-comp, which are comparable in size.</p>
+
+<a name="184802166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802166">Mario Carneiro (Jan 04 2020 at 12:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="256543">@Ramkumar Ramachandra</span> You made a similar claim on coq-club regarding speed of Coq over lean for everyday elaboration. My personal experience is the opposite, so if you could clarify what kind of benchmark you are thinking of that would be helpful</p>
+
+<a name="184802173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802173">Mario Carneiro (Jan 04 2020 at 12:33)</a>:</h4>
+<p>How fast does math-comp compile? Is the material comparable? Does this include the coq standard library?</p>
+
+<a name="184802176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802176">Ramkumar Ramachandra (Jan 04 2020 at 12:33)</a>:</h4>
+<p>Just plain wall-clock time. Run <code>make</code> on mathlib or math-comp. math-comp takes about 10 mins to build, and the loc-count is similar.</p>
+
+<a name="184802219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802219">Ramkumar Ramachandra (Jan 04 2020 at 12:34)</a>:</h4>
+<p>It doesn't include the standard library, and I think the material is comparable, but I'm a beginner.</p>
+
+<a name="184802220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802220">Mario Carneiro (Jan 04 2020 at 12:35)</a>:</h4>
+<p>I think the Coq standard library is much bigger than the lean core lib</p>
+
+<a name="184802289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802289">Mario Carneiro (Jan 04 2020 at 12:36)</a>:</h4>
+<p>Also, I suspect that math-comp is much more low level in its tactic usage, leading to faster run times. I could be wrong but Gonthier has some opinions in this area that are not shared elsewhere in the coq ecosystem</p>
+
+<a name="184802303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802303">Ramkumar Ramachandra (Jan 04 2020 at 12:37)</a>:</h4>
+<p>lean's stdlib is 18k loc, while coq's is 122k. Coq's stdlib is indeed much larger.</p>
+
+<a name="184802308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802308">Mario Carneiro (Jan 04 2020 at 12:37)</a>:</h4>
+<p>I think mathlib is closer to coq stdlib + math-comp</p>
+
+<a name="184802351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802351">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>but this is still a very vague equivalence because the details are all different</p>
+
+<a name="184802352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802352">Ramkumar Ramachandra (Jan 04 2020 at 12:38)</a>:</h4>
+<p>That would be incorrect. math-comp uses ssreflect heavily.</p>
+
+<a name="184802356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802356">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>Right, that's what I mean</p>
+
+<a name="184802364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802364">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>ssreflect is a very direct imperative tactic style</p>
+
+<a name="184802373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802373">Mario Carneiro (Jan 04 2020 at 12:39)</a>:</h4>
+<p>it's fast to work with that</p>
+
+<a name="184802374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802374">Ramkumar Ramachandra (Jan 04 2020 at 12:39)</a>:</h4>
+<p>Ah; I wouldn't know.</p>
+
+<a name="184802378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802378">Patrick Massot (Jan 04 2020 at 12:39)</a>:</h4>
+<p>Yes, Gonthier and his team are extremely proud of using almost no automation.</p>
+
+<a name="184802379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802379">Mario Carneiro (Jan 04 2020 at 12:39)</a>:</h4>
+<p>A representative of the opposite camp would be isabelle, which uses lots of automated proof searching and "blast", "auto", "sledgehammer" type tactics</p>
+
+<a name="184802425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802425">Ramkumar Ramachandra (Jan 04 2020 at 12:40)</a>:</h4>
+<p>Yes. I believe they're also starting to play with ML-based proof search.</p>
+
+<a name="184802435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802435">Mario Carneiro (Jan 04 2020 at 12:40)</a>:</h4>
+<p>I'm pretty sure this split is the number 1 aspect that contributes to overall proof checking time of entire libraries</p>
+
+<a name="184802451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802451">Ramkumar Ramachandra (Jan 04 2020 at 12:41)</a>:</h4>
+<p>... okay, but lean is similar enough to coq to compare on an loc-basis, no?</p>
+
+<a name="184802493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802493">Mario Carneiro (Jan 04 2020 at 12:42)</a>:</h4>
+<p>Roughly, yes. I think lean is a bit more terse in general from my impressions</p>
+
+<a name="184802496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802496">Ramkumar Ramachandra (Jan 04 2020 at 12:42)</a>:</h4>
+<p>Do you have an answer to my question about formalizing ∞-categories, by the way?</p>
+
+<a name="184802512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802512">Mario Carneiro (Jan 04 2020 at 12:43)</a>:</h4>
+<p>I've been wanting to see how infinity cats are formalized for a long time, because I don't understand the math and will continue not to until someone actually writes a formal definition down instead of vague words</p>
+
+<a name="184802553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802553">Mario Carneiro (Jan 04 2020 at 12:44)</a>:</h4>
+<p>There is nothing in principle stopping anyone from writing it down assuming they actually know what they want</p>
+
+<a name="184802621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802621">Mario Carneiro (Jan 04 2020 at 12:45)</a>:</h4>
+<p>I will say that I think it is ludicrous to consider changing your foundations (kernel) in order to accomodate X mathematics. If you need to do so you've already lost</p>
+
+<a name="184802666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802666">Ramkumar Ramachandra (Jan 04 2020 at 12:46)</a>:</h4>
+<p>I've just started working on formalizing ∞-categories in Coq. The textbook-definition is the most straightforward way to think about it, and you kind of have to bend over backwards in the Coq formalization -- it's quite ugly.</p>
+
+<a name="184802672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802672">Mario Carneiro (Jan 04 2020 at 12:46)</a>:</h4>
+<p>Do you have a link?</p>
+
+<a name="184802687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802687">Mario Carneiro (Jan 04 2020 at 12:47)</a>:</h4>
+<p>I think the lean way wouldn't be so different from that, so I'm interested to know what bending you have to do</p>
+
+<a name="184802745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802745">Ramkumar Ramachandra (Jan 04 2020 at 12:49)</a>:</h4>
+<p>See <a href="https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692" target="_blank" title="https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692">https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692</a> -- I haven't made much progress though.</p>
+
+<a name="184802831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802831">Ramkumar Ramachandra (Jan 04 2020 at 12:51)</a>:</h4>
+<p>I couldn't write a currified version: it became too complicated.</p>
+
+<a name="184803228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803228">Ramkumar Ramachandra (Jan 04 2020 at 13:03)</a>:</h4>
+<blockquote>
+<p>I will say that I think it is ludicrous to consider changing your foundations (kernel) in order to accomodate X mathematics. If you need to do so you've already lost</p>
+</blockquote>
+<p>I would disagree with this, because HoTT is quite a deep change.</p>
+
+<a name="184803416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803416">Mario Carneiro (Jan 04 2020 at 13:08)</a>:</h4>
+<p>I'm saying that if you want to be a theorem prover for general mathematics, you can't be playing games with the foundations all the time. Yes, this is throwing HoTT and Cubical type theories under the bus</p>
+
+<a name="184803487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803487">Mario Carneiro (Jan 04 2020 at 13:10)</a>:</h4>
+<p>That definition, at least, would go through in lean with only syntactic changes</p>
+
+<a name="184803499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803499">Mario Carneiro (Jan 04 2020 at 13:11)</a>:</h4>
+<p>You would have to define it as a pair like you did, though; they are mutually recursive so you need them both</p>
+
+<a name="184803553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803553">Ramkumar Ramachandra (Jan 04 2020 at 13:12)</a>:</h4>
+<p>It's more complicated than garden-variety mutually-recursive types: the second definition takes the type of the first definition as an argument.</p>
+
+<a name="184803559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803559">Ramkumar Ramachandra (Jan 04 2020 at 13:12)</a>:</h4>
+<p>I did indeed try with mutually-recusive types, before I hit this limitation.</p>
+
+<a name="184803560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803560">Mario Carneiro (Jan 04 2020 at 13:12)</a>:</h4>
+<p>right, it's an inductive-recursive definition</p>
+
+<a name="184803572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803572">Mario Carneiro (Jan 04 2020 at 13:13)</a>:</h4>
+<p>If you didn't have the index <code>n</code> this would be impossible to define in lean</p>
+
+<a name="184803579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803579">Ramkumar Ramachandra (Jan 04 2020 at 13:13)</a>:</h4>
+<p>Indeed; I thought so too.</p>
+
+<a name="184803620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803620">Mario Carneiro (Jan 04 2020 at 13:14)</a>:</h4>
+<p>but as it stands this is just a regular recursive function on nat</p>
+
+<a name="184803711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803711">Ramkumar Ramachandra (Jan 04 2020 at 13:16)</a>:</h4>
+<blockquote>
+<p>I'm saying that if you want to be a theorem prover for general mathematics, you can't be playing games with the foundations all the time. Yes, this is throwing HoTT and Cubical type theories under the bus</p>
+</blockquote>
+<p>That's a valid viewpoint, but Coq is a full-fledged programming language + proof assistant. They do play games with TT and PLT.</p>
+
+<a name="184803722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803722">Mario Carneiro (Jan 04 2020 at 13:17)</a>:</h4>
+<p>I know. And I don't trust their metatheory at all</p>
+
+<a name="184803731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803731">Ramkumar Ramachandra (Jan 04 2020 at 13:17)</a>:</h4>
+<p>Why so? "Coq Coq Correct!" is quite an accessible exposition.</p>
+
+<a name="184803781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803781">Ramkumar Ramachandra (Jan 04 2020 at 13:18)</a>:</h4>
+<p>I would sympathize with the viewpoint that you don't care about good type theoretic properties because a VM "works in practice", but the trust in the metatheory is quite high.</p>
+
+<a name="184803796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803796">Ramkumar Ramachandra (Jan 04 2020 at 13:19)</a>:</h4>
+<p>Note that Coq has been used to build CompCert, which was (and still is) an engineering marvel.</p>
+
+<a name="184803870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803870">Ramkumar Ramachandra (Jan 04 2020 at 13:21)</a>:</h4>
+<p>Lean doesn't try to be a general-purpose programming language for building verified software stacks. It has a narrower focus: a big step-up for pure mathematicians, who are currently on mathematica and sage.</p>
+
+<a name="184803917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803917">Mario Carneiro (Jan 04 2020 at 13:22)</a>:</h4>
+<p>I have not read "Coq Coq Correct" yet, but skimming it it looks to be a step in the right direction. But It is still a subset of Coq. I won't be satisfied until the entire kernel is covered</p>
+
+<a name="184803924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803924">Mario Carneiro (Jan 04 2020 at 13:22)</a>:</h4>
+<p>Being able to build things in a proof assistant doesn't mean it doesn't have a bug in it</p>
+
+<a name="184803930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803930">Mario Carneiro (Jan 04 2020 at 13:22)</a>:</h4>
+<p>That is only half of the equation</p>
+
+<a name="184803949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184803949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184803949">Ramkumar Ramachandra (Jan 04 2020 at 13:23)</a>:</h4>
+<p>Indeed, and work is in progress. Coq Coq Correct! already covers a very large subset, by the way.</p>
+
+<a name="184804004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804004">Mario Carneiro (Jan 04 2020 at 13:24)</a>:</h4>
+<p>I wrote the paper on Lean's Type Theory because I didn't want Lean to make the same mistake. That paper covers <em>everything</em> the kernel is capable of doing (and some things it can't), so that soundness means something</p>
+
+<a name="184804006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804006">Ramkumar Ramachandra (Jan 04 2020 at 13:24)</a>:</h4>
+<p>In practice, too, very few serious bugs have been reported in Coq, over the last twenty years.</p>
+
+<a name="184804036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804036">Ramkumar Ramachandra (Jan 04 2020 at 13:25)</a>:</h4>
+<p>Right; although how much of your paper is mechanized in Lean? :)</p>
+
+<a name="184804037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804037">Mario Carneiro (Jan 04 2020 at 13:25)</a>:</h4>
+<p>Furthermore, my view is that <em>both</em> of these systems are far overcomplicated and you can get by with a much much simpler metatheory (see metamath zero)</p>
+
+<a name="184804047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804047">Ramkumar Ramachandra (Jan 04 2020 at 13:25)</a>:</h4>
+<p>MM0 is interesting, yes.</p>
+
+<a name="184804090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804090">Mario Carneiro (Jan 04 2020 at 13:26)</a>:</h4>
+<p>That's where I'm really putting my money where my mouth is - it's a theorem prover that proves its own implementation</p>
+
+<a name="184804092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804092">Ramkumar Ramachandra (Jan 04 2020 at 13:26)</a>:</h4>
+<p>Perhaps you missed it, but Coq Coq Correct! formalizes a large subset of the Coq engine in Coq.</p>
+
+<a name="184804109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804109">Mario Carneiro (Jan 04 2020 at 13:27)</a>:</h4>
+<p>I didn't miss it - that's actually the best reference I've seen yet as to how to implement a coq kernel</p>
+
+<a name="184804118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804118">Mario Carneiro (Jan 04 2020 at 13:27)</a>:</h4>
+<p>There is of course a huge front end too though</p>
+
+<a name="184804162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804162">Mario Carneiro (Jan 04 2020 at 13:28)</a>:</h4>
+<p>and I don't hold much hope that this be diversified to other front ends</p>
+
+<a name="184804235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804235">Mario Carneiro (Jan 04 2020 at 13:30)</a>:</h4>
+<p>For reimplementing a kernel, it's not necessary that the metatheory work actually be formalized, as long as it is mathematically precise and complete. Coq papers have historically had difficulty with the "complete" part</p>
+
+<a name="184804255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804255">Mario Carneiro (Jan 04 2020 at 13:31)</a>:</h4>
+<p>Formalizing it is the next level, but it helps to have an informal version too</p>
+
+<a name="184804361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804361">Ramkumar Ramachandra (Jan 04 2020 at 13:34)</a>:</h4>
+<p>Agreed. Keep in mind that Coq is twenty years old, and has accumulated quite a lot of features in that time.</p>
+
+<a name="184804380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804380">Mario Carneiro (Jan 04 2020 at 13:35)</a>:</h4>
+<p>The solution to that problem is to not cultivate a community where problems are solved by extending the kernel</p>
+
+<a name="184804397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804397">Mario Carneiro (Jan 04 2020 at 13:36)</a>:</h4>
+<p>which is why I said "don't play games with the foundations" above</p>
+
+<a name="184804444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804444">Mario Carneiro (Jan 04 2020 at 13:36)</a>:</h4>
+<p>a large and complex kernel is the inevitable consequence</p>
+
+<a name="184804445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804445">Ramkumar Ramachandra (Jan 04 2020 at 13:36)</a>:</h4>
+<p>Well, no so much "extending" as "rethinking foundational design choices". I do agree that extending the kernel makes it hard to trust the metatheory.</p>
+
+<a name="184804509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804509">Patrick Massot (Jan 04 2020 at 13:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="256543">@Ramkumar Ramachandra</span> Coq is older than you think it is...</p>
+
+<a name="184804512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804512">Mario Carneiro (Jan 04 2020 at 13:38)</a>:</h4>
+<p>or time is further along</p>
+
+<a name="184804515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804515">Patrick Massot (Jan 04 2020 at 13:38)</a>:</h4>
+<p>Or this is nat subtraction hell again.</p>
+
+<a name="184804524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804524">Patrick Massot (Jan 04 2020 at 13:39)</a>:</h4>
+<p>Who knows what to expect of natural numbers subtraction?</p>
+
+<a name="184804577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804577">Ramkumar Ramachandra (Jan 04 2020 at 13:40)</a>:</h4>
+<p>Preserving good type theoretic properties are important to the Coq community, so rethinking foundations is inevitable. They'd never be okay with a VM, I think.</p>
+
+<a name="184804599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804599">Ramkumar Ramachandra (Jan 04 2020 at 13:41)</a>:</h4>
+<p>Indeed, Coq is thirty years old, not twenty.</p>
+
+<a name="184804601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804601">Kevin Buzzard (Jan 04 2020 at 13:41)</a>:</h4>
+<p>There are several definitions of infinity category in the literature. My instinct would be to formalise the book by Riehl and Verity</p>
+
+<a name="184804645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804645">Patrick Massot (Jan 04 2020 at 13:42)</a>:</h4>
+<p>Thirty years means you count only from the first official release, right?</p>
+
+<a name="184804649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804649">Patrick Massot (Jan 04 2020 at 13:42)</a>:</h4>
+<p>I think the first version is from 1984.</p>
+
+<a name="184804663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804663">Kevin Buzzard (Jan 04 2020 at 13:43)</a>:</h4>
+<p><a href="http://www.math.jhu.edu/~eriehl/elements.pdf" target="_blank" title="http://www.math.jhu.edu/~eriehl/elements.pdf">http://www.math.jhu.edu/~eriehl/elements.pdf</a></p>
+
+<a name="184804797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804797">Ramkumar Ramachandra (Jan 04 2020 at 13:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Why don't you publish your paper on Lean's type theory at POPL or ICFP? It currently has very low visibility.</p>
+
+<a name="184804803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804803">Mario Carneiro (Jan 04 2020 at 13:47)</a>:</h4>
+<p>Maybe I should... It was my masters thesis so publication was not a prerequisite</p>
+
+<a name="184804985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184804985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184804985">Mario Carneiro (Jan 04 2020 at 13:52)</a>:</h4>
+<p>From Riehl §1.2:</p>
+<blockquote>
+<p>In §1.1, we presented “analytic” proofs of a few of the basic facts about quasi-categories.  The category theory of quasi-categories can be developed in a similar style, but we aim instead to develop the “synthetic” theory of infinite-dimensional categories, so that our results will apply to many models at once. To achieve this, our strategy is not to axiomatize what these infinite-dimensional categories <em>are</em>, but rather axiomatize the “universe” in which they <em>live</em>.</p>
+</blockquote>
+<p>I'm getting a bad feeling about this...</p>
+
+<a name="184805004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805004">Patrick Massot (Jan 04 2020 at 13:53)</a>:</h4>
+<p>Doesn't it sound a bit Mochizuki-like?</p>
+
+<a name="184805064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805064">Ramkumar Ramachandra (Jan 04 2020 at 13:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thanks; it's a good book, with emphasis on homotopy coherent theory.</p>
+
+<a name="184805128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805128">Ramkumar Ramachandra (Jan 04 2020 at 13:57)</a>:</h4>
+<p>I'm working through Lurie's Higher Topos Theory from 2009, but it's a tad bit too advanced for me at this point.</p>
+
+<a name="184805177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805177">Kevin Buzzard (Jan 04 2020 at 13:58)</a>:</h4>
+<p>Different people mean different things by infinity category. <span class="user-mention" data-user-id="246635">@Emily Riehl</span> and Verity are attempting to axiomatise the things everyone believes about them so their proofs will apply to all definitions. At least this is my understanding of it.</p>
+
+<a name="184805238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805238">Mario Carneiro (Jan 04 2020 at 14:00)</a>:</h4>
+<blockquote>
+<p>While synthetic, our work is not schematic or hand-wavy, with the details of how to make things fully precise left to “the experts” and turtles all the way down.[2] Rather, we prove our theorems starting from a short list of clearly-enumerated axioms, and our conclusions are valid in any model of∞-categories satisfying these axioms.<br>
+...<br>
+[2] A less rigorous “model-independent” presentation of ∞-category theory might confront a problem of infinite regress,since infinite-dimensional categories are themselves the objects of an ambient infinite-dimensional category, and in developing the theory of the former one is tempted to use the theory of the latter. We avoid this problem by using a very concrete model for the ambient (∞,2)-category of ∞-categories that arises frequently in practice and is designed to facilitate relatively simple proofs. While the theory of (∞,2)-categories remains in its infancy, we are content to cut the Gordian knot in this way.</p>
+</blockquote>
+<p>I don't know if I should be reassured by this</p>
+
+<a name="184805242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805242">Mario Carneiro (Jan 04 2020 at 14:00)</a>:</h4>
+<p>They didn't define what "enriched over quasi-categories" means so I question their claim</p>
+
+<a name="184805253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805253">Mario Carneiro (Jan 04 2020 at 14:01)</a>:</h4>
+<p>I guess they are still drawing on a large unspecified amount of background material</p>
+
+<a name="184805317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805317">Mario Carneiro (Jan 04 2020 at 14:03)</a>:</h4>
+<p>oh wait, they have it in an appendix</p>
+
+<a name="184805374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805374">Kevin Buzzard (Jan 04 2020 at 14:04)</a>:</h4>
+<p>I think their work is formalisable. Just like there is a category of all sets and a 2-category of all categories, there's an infinity-2 category of all infinity categories</p>
+
+<a name="184805430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805430">Mario Carneiro (Jan 04 2020 at 14:06)</a>:</h4>
+<p>I'm just trying to figure out if I can trace through all the definitions leading to infinity cosmos without leaving the book</p>
+
+<a name="184805434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805434">Kevin Buzzard (Jan 04 2020 at 14:06)</a>:</h4>
+<p>I think this stuff is going to be important in modern mathematics, for example Scholze's new preprint on ArXiv proves results about cohomology of schemes using infinity categories</p>
+
+<a name="184805436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805436">Patrick Massot (Jan 04 2020 at 14:06)</a>:</h4>
+<p>Notice  the book is unfinished.</p>
+
+<a name="184805452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805452">Mario Carneiro (Jan 04 2020 at 14:07)</a>:</h4>
+<p>I should hope that this at least is done! (A book on infinity cats should define what is an infinity cat)</p>
+
+<a name="184805495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805495">Mario Carneiro (Jan 04 2020 at 14:08)</a>:</h4>
+<p>certainly once you've got 700 pages in you should have a good answer to the question</p>
+
+<a name="184805506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805506">Patrick Massot (Jan 04 2020 at 14:08)</a>:</h4>
+<p>Not necessarily, they could decide to change something after seeing that page 690 is more painful than it should be.</p>
+
+<a name="184805526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805526">Patrick Massot (Jan 04 2020 at 14:09)</a>:</h4>
+<p>I know nothing about all this though.  Maybe it's already completely defined.</p>
+
+<a name="184805537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805537">Ramkumar Ramachandra (Jan 04 2020 at 14:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  What I mean by ∞-categories are the (∞, 1)-categories formalized in HTT; I think that is the generally-accepted definition now. The general approach is to a type theoretic interpretation is to start with simplicial sets, build ∞-groupoids, and work out the coherence constraints that come with interpreting the model category. Indeed, Voevodsky started the HoTT line of work by defining types to be ∞-groupoids, and Shulman's [2013, 2019] work does solve the coherence problem, by which ∞-topoi can be strictified into Quillen Model Categories. I get the impression that he's not too fond of the ongoing cubical work, because he wants even stronger foundations.</p>
+<p>[Please take my comments with a pinch of salt, since I'm a beginner]</p>
+
+<a name="184805609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805609">Mario Carneiro (Jan 04 2020 at 14:10)</a>:</h4>
+<p>HoTT doesn't formalize (∞, 1)-categories at all AFAIK; they are the metatheory of HoTT</p>
+
+<a name="184805620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805620">Ramkumar Ramachandra (Jan 04 2020 at 14:11)</a>:</h4>
+<p>Yes, that's what I meant.</p>
+
+<a name="184805622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805622">Ramkumar Ramachandra (Jan 04 2020 at 14:11)</a>:</h4>
+<p>It's a very pleasant and elegant metatheory.</p>
+
+<a name="184805627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805627">Kevin Buzzard (Jan 04 2020 at 14:11)</a>:</h4>
+<p>But are they Luries infinity categories?</p>
+
+<a name="184805656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805656">Koundinya Vajjha (Jan 04 2020 at 14:12)</a>:</h4>
+<blockquote>
+<p>I think this stuff is going to be important in modern mathematics, for example Scholze's new preprint on ArXiv proves results about cohomology of schemes using infinity categories</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  could you link to that paper?</p>
+
+<a name="184805694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805694">Ramkumar Ramachandra (Jan 04 2020 at 14:12)</a>:</h4>
+<blockquote>
+<p>HoTT doesn't formalize (∞, 1)-categories at all AFAIK; they are the metatheory of HoTT</p>
+</blockquote>
+<p>HTT: Higher Topos Theory.</p>
+
+<a name="184805712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805712">Ramkumar Ramachandra (Jan 04 2020 at 14:13)</a>:</h4>
+<blockquote>
+<p>But are they Luries infinity categories?</p>
+</blockquote>
+<p>I can't say for sure, but Shulman's [2013, 2019] work should have the answer. I'm still working through them.</p>
+
+<a name="184805762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805762">Johan Commelin (Jan 04 2020 at 14:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="233147">@Ulrik Buchholtz</span> You are our local expert on this stuff... maybe you can enlighten us</p>
+
+<a name="184805765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805765">Mario Carneiro (Jan 04 2020 at 14:14)</a>:</h4>
+<p>I have always been frustrated reading material in that area that assumes everyone knows what an infinity cat is as if it were a single well understood concept. If you just assume that a thing exists that has the properties you want (i.e. HoTT) then it's easy, but building up the theory formally has apparently never been done</p>
+
+<a name="184805772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184805772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184805772">Patrick Massot (Jan 04 2020 at 14:15)</a>:</h4>
+<p>Kevin probably means <a href="https://arxiv.org/abs/1912.10932" target="_blank" title="https://arxiv.org/abs/1912.10932">https://arxiv.org/abs/1912.10932</a></p>
+
+<a name="184806019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806019">Kevin Buzzard (Jan 04 2020 at 14:22)</a>:</h4>
+<p>Yes -- sorry -- doing ten things at once. Cesnavicius-Scholze.</p>
+
+<a name="184806223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806223">Ulrik Buchholtz (Jan 04 2020 at 14:29)</a>:</h4>
+<p>I wouldn't call myself an expert on the model-theory of HoTT, but here's my understanding of where we are: From <a href="http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/program.html" target="_blank" title="http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/program.html">Shulman</a>, we know that any <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-topos (with Lurie's definition) can be presented by a super-nice model category that in turn can be strictified to a model of HoTT. I think it's still not quite what we want: what if we take different presentations, do we get different results (we shouldn't, up to homotopy/identification).</p>
+
+<a name="184806299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806299">Ulrik Buchholtz (Jan 04 2020 at 14:31)</a>:</h4>
+<p>And it's true we don't know whether HoTT (meaning here MLTT+Univalence+HITs) can define the correct type of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-categories, etc. (A majority conjecture that it's impossible without some extension to the theory, I'm agnostic)</p>
+
+<a name="184806368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806368">Ulrik Buchholtz (Jan 04 2020 at 14:33)</a>:</h4>
+<p>So until we either figure out how to do it, or find an acceptable extension (one proposal is two-level type theory with Reedy limits), HoTT is not strong enough to do it's own model theory <strong>in the correct way</strong> – of course, quasicategories can be formalized but that's not adequate from the univalent point of view: it's not the correct type.</p>
+
+<a name="184806411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806411">Kevin Buzzard (Jan 04 2020 at 14:34)</a>:</h4>
+<p>What I don't really understand here is the following. Maths is about lots of things, including infinity categories and lots of other stuff which is completely unrelated to infinity categories. It seems to be that something like UniMath starts with an infinity category of types and then says "that's it". But I want other infinity categories, and I want a gazillion things that aren't infinity categories. So it seems to me that I want to define infinity categories, like I would do in lean, rather than being stuck with them and nothing else</p>
+
+<a name="184806428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806428">Ulrik Buchholtz (Jan 04 2020 at 14:35)</a>:</h4>
+<p>Absolutely, HoTT is currently inadequate to properly talk about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-categories! But only HoTT has a chance of even doing so univalently, all other foundations must rely on models.</p>
+
+<a name="184806440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806440">Ulrik Buchholtz (Jan 04 2020 at 14:35)</a>:</h4>
+<p>I'll say something about all this in my talk on Monday, BTW</p>
+
+<a name="184806441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806441">Mario Carneiro (Jan 04 2020 at 14:35)</a>:</h4>
+<p>what's wrong with models?</p>
+
+<a name="184806481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806481">Mario Carneiro (Jan 04 2020 at 14:36)</a>:</h4>
+<p>somehow I'm missing the added value here</p>
+
+<a name="184806482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806482">Ulrik Buchholtz (Jan 04 2020 at 14:36)</a>:</h4>
+<p>With models you have to always prove that constructions are independent of representations: it's like doing group theory only with group presentations and no actual groups.</p>
+
+<a name="184806492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806492">Mario Carneiro (Jan 04 2020 at 14:37)</a>:</h4>
+<p>But we have a definition of what a group is</p>
+
+<a name="184806543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806543">Mario Carneiro (Jan 04 2020 at 14:38)</a>:</h4>
+<p>Apparently we can't decide what the definition of an infinity cat is, but at least Riehl &amp; Verity have a definition of what a definition of an infinity cat is</p>
+
+<a name="184806546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806546">Ulrik Buchholtz (Jan 04 2020 at 14:38)</a>:</h4>
+<p>Right, but the type of groups in 0-truncated foundations is, well, 0-truncated, so you have to prove that all group-constructions respect isomorphism by hand. The issue with higher structures is similar, just more complicated.</p>
+
+<a name="184806555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806555">Mario Carneiro (Jan 04 2020 at 14:39)</a>:</h4>
+<p>that is an issue of automation not foundations</p>
+
+<a name="184806556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806556">Ulrik Buchholtz (Jan 04 2020 at 14:39)</a>:</h4>
+<p>There are many models for <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-categories, but they are all equivalent: quasicategories with categorical equivalences, complete Segal spaces with equivalences etc</p>
+
+<a name="184806620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806620">Mario Carneiro (Jan 04 2020 at 14:40)</a>:</h4>
+<p>it seems to me like there has been a change of terminology in calling those things "models"</p>
+
+<a name="184806631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806631">Ulrik Buchholtz (Jan 04 2020 at 14:41)</a>:</h4>
+<blockquote>
+<p>that is an issue of automation not foundations</p>
+</blockquote>
+<p>Depends on your point of view, I think. I think it's conceptually very appealing to be able to work with the types of mathematical objects themselves, and not just with models of them.</p>
+
+<a name="184806633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806633">Ulrik Buchholtz (Jan 04 2020 at 14:41)</a>:</h4>
+<p>Well, “model” means a billion things in math. Here, it's like “presentation” in group presentations.</p>
+
+<a name="184806640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806640">Mario Carneiro (Jan 04 2020 at 14:41)</a>:</h4>
+<p>those are not (particular) infinity cats</p>
+
+<a name="184806681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806681">Ulrik Buchholtz (Jan 04 2020 at 14:42)</a>:</h4>
+<p>I though you wanted a definition of infty cats. Did I misunderstand your question?</p>
+
+<a name="184806682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806682">Mario Carneiro (Jan 04 2020 at 14:42)</a>:</h4>
+<p>those are candidates for how you might enumerate all infinity cats</p>
+
+<a name="184806704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806704">Mario Carneiro (Jan 04 2020 at 14:43)</a>:</h4>
+<p>I get why you call them models, but it's not like the situation with group presentations because in that case "models" would be individual groups</p>
+
+<a name="184806752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806752">Daniel Gratzer (Jan 04 2020 at 14:44)</a>:</h4>
+<p>I don't think that these are models in the sense you're expecting: a single category is a model of (essentially algebraic) theory. This 'model' is more like a presentation of CAT itself. Though <span class="user-mention" data-user-id="233147">@Ulrik Buchholtz</span> might correct me on this</p>
+
+<a name="184806756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806756">Mario Carneiro (Jan 04 2020 at 14:44)</a>:</h4>
+<p>Right</p>
+
+<a name="184806769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806769">Ulrik Buchholtz (Jan 04 2020 at 14:45)</a>:</h4>
+<p>In the case of group presentations and groups, they're like the presentations. They are different presentations of the same type: that of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-categories.</p>
+
+<a name="184806827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806827">Ulrik Buchholtz (Jan 04 2020 at 14:46)</a>:</h4>
+<p>Just like the Lean-type (or any 0-truncated type) of groups, together with the data of group isomorphisms present the 1-type of groups.</p>
+
+<a name="184806894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806894">Mario Carneiro (Jan 04 2020 at 14:48)</a>:</h4>
+<p>So there shouldn't be any problem with just picking one of the "presentations" and proving all others equivalent?</p>
+
+<a name="184806895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806895">Ulrik Buchholtz (Jan 04 2020 at 14:48)</a>:</h4>
+<p>The data of (quasicategories, categorical equivalences) is a presentation of the homotopy type of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-categories. (With structure making it a large <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-category itself.)</p>
+
+<a name="184806896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806896">Ulrik Buchholtz (Jan 04 2020 at 14:48)</a>:</h4>
+<p>Absolutely, which is what people have been doing</p>
+
+<a name="184806900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806900">Mario Carneiro (Jan 04 2020 at 14:49)</a>:</h4>
+<p>sounds like a plan</p>
+
+<a name="184806906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806906">Ulrik Buchholtz (Jan 04 2020 at 14:49)</a>:</h4>
+<p>Go for it :)</p>
+
+<a name="184806908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806908">Mario Carneiro (Jan 04 2020 at 14:49)</a>:</h4>
+<p>in particular, nothing stops us from doing this in lean</p>
+
+<a name="184806914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806914">Ulrik Buchholtz (Jan 04 2020 at 14:49)</a>:</h4>
+<p>Absolutely, because people are doing it in informal set-theoretic math, and Lean captures that quite well</p>
+
+<a name="184806969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806969">Ulrik Buchholtz (Jan 04 2020 at 14:50)</a>:</h4>
+<p>We could also do it that way in univalent type theories, but there the level of ambition is higher: we'd want the presented type itself.</p>
+
+<a name="184806970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184806970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184806970">Mario Carneiro (Jan 04 2020 at 14:50)</a>:</h4>
+<p>and the reservations of your HoTT colleagues are about some kind of ambiguity preserving definition</p>
+
+<a name="184807026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807026">Mario Carneiro (Jan 04 2020 at 14:52)</a>:</h4>
+<p>where by "the type itself" you mean that in the metatheory you can prove that this is equivalent to the... real... definition?</p>
+
+<a name="184807098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807098">Mario Carneiro (Jan 04 2020 at 14:54)</a>:</h4>
+<p>it's not clear to me what the set theoretic definition is losing out on here. You still have the language to say what equivalences matter, and show that you have the right definition up to such and such kind of equivalence</p>
+
+<a name="184807103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807103">Ulrik Buchholtz (Jan 04 2020 at 14:54)</a>:</h4>
+<p>That's one thing: that metatheoretically we could show that in an infinity-topos it externalizes to the stack of infinity-categories. Or just internally that it's a type with the correct identity type (meaning categorical equivalences)</p>
+
+<a name="184807178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807178">Johan Commelin (Jan 04 2020 at 14:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> A group is a subset of <code>matrix R n n</code> (for some ring <code>R</code>) such that it is closed under multiplication, and inverses, and contains the unit matrix.</p>
+
+<a name="184807179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807179">Ulrik Buchholtz (Jan 04 2020 at 14:56)</a>:</h4>
+<p>For the rock-bottom foundation, I don't think you lose out. But we want to use HoTT to talk about other infty-toposes than infty-groupods (animated sets!?), and there it matters:</p>
+
+<a name="184807180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807180">Johan Commelin (Jan 04 2020 at 14:56)</a>:</h4>
+<p>Is that a satisfactory definition of groups?</p>
+
+<a name="184807181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807181">Mario Carneiro (Jan 04 2020 at 14:56)</a>:</h4>
+<p>sure</p>
+
+<a name="184807184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807184">Mario Carneiro (Jan 04 2020 at 14:56)</a>:</h4>
+<p>I mean, it's not what I find on wikipedia, so that's a black mark</p>
+
+<a name="184807197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807197">Johan Commelin (Jan 04 2020 at 14:57)</a>:</h4>
+<p>Well, some people would argue that it's not a very elegant definition. It doesn't really capture what we want.</p>
+
+<a name="184807200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807200">Johan Commelin (Jan 04 2020 at 14:57)</a>:</h4>
+<p>Something similar is the problem with inftycats</p>
+
+<a name="184807206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807206">Mario Carneiro (Jan 04 2020 at 14:57)</a>:</h4>
+<p>It does capture what we want though, assuming we got the definition of "what we want" right</p>
+
+<a name="184807247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807247">Ulrik Buchholtz (Jan 04 2020 at 14:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> that's a good point: there's some hope that an eventual HoTT (or HoTT+extension) definition of infty-cats would be nicer/easier to work with than via quasicats</p>
+
+<a name="184807251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807251">Mario Carneiro (Jan 04 2020 at 14:58)</a>:</h4>
+<p>As for finding an elegant definition, that's a process we can work on</p>
+
+<a name="184807267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807267">Johan Commelin (Jan 04 2020 at 14:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think that working with Lurie's quasi-categories in a prover like Lean will be very painful.</p>
+
+<a name="184807276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807276">Mario Carneiro (Jan 04 2020 at 14:59)</a>:</h4>
+<p>Usually community consensus works pretty well to find this though (e.g. matching wikipedia)</p>
+
+<a name="184807280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807280">Johan Commelin (Jan 04 2020 at 14:59)</a>:</h4>
+<p>A synthetic definition would probably remove a lot of proof obligations, and lots "keeping-track of an infinite stack of homotopy-data"</p>
+
+<a name="184807335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807335">Mario Carneiro (Jan 04 2020 at 15:00)</a>:</h4>
+<p>There is nothing stopping you from modeling the synthetic definition in the form of theorems that are crafted to make the proof obligations trivial</p>
+
+<a name="184807340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807340">Ulrik Buchholtz (Jan 04 2020 at 15:00)</a>:</h4>
+<p>BTW, we already have a <a href="https://arxiv.org/abs/1705.07442" target="_blank" title="https://arxiv.org/abs/1705.07442">synthetic definition</a> by working in the infty-topos of simplicial spaces: there we can synthetically define complete Segal spaces.</p>
+
+<a name="184807353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807353">Johan Commelin (Jan 04 2020 at 15:00)</a>:</h4>
+<p>If doing something stupid results in a syntax error, instead of "hey, you've struggled for 37 minutes, maybe you just can't supply all the infinite amount of proof obligations, because you did something silly on the previous line"</p>
+
+<a name="184807363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807363">Ulrik Buchholtz (Jan 04 2020 at 15:01)</a>:</h4>
+<p>If we could internalize this model, we could use it to prove facts about infty-cats at the ambient level</p>
+
+<a name="184807364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807364">Mario Carneiro (Jan 04 2020 at 15:01)</a>:</h4>
+<p>there is no infinite amount of proof obligations, there never has been</p>
+
+<a name="184807371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807371">Johan Commelin (Jan 04 2020 at 15:01)</a>:</h4>
+<p>That depends on how you count</p>
+
+<a name="184807374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807374">Mario Carneiro (Jan 04 2020 at 15:01)</a>:</h4>
+<p>to the extent that HoTT makes sense at all, it's bookkeeping all this information. So it's not infinite</p>
+
+<a name="184807375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807375">Johan Commelin (Jan 04 2020 at 15:01)</a>:</h4>
+<p>Of course the infinite amount can be supplied with finitely many keystrokes</p>
+
+<a name="184807415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807415">Johan Commelin (Jan 04 2020 at 15:02)</a>:</h4>
+<p>Sure, but we don't do HoTT here</p>
+
+<a name="184807420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807420">Mario Carneiro (Jan 04 2020 at 15:02)</a>:</h4>
+<p>It's infinite in the same sense that there are an infinite number of proof obligations to show + on nat is commutative</p>
+
+<a name="184807429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807429">Mario Carneiro (Jan 04 2020 at 15:03)</a>:</h4>
+<p>If we can model HoTT, we can do HoTT in lean/set theory with epsilon overhead</p>
+
+<a name="184807478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807478">Ulrik Buchholtz (Jan 04 2020 at 15:04)</a>:</h4>
+<p>That would actually be great: if you could formalize infty-toposes a la Lurie and prove Shulman's strictification and model result</p>
+
+<a name="184807482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807482">Johan Commelin (Jan 04 2020 at 15:04)</a>:</h4>
+<blockquote>
+<p>If we can model HoTT, we can do HoTT in lean/set theory with epsilon overhead</p>
+</blockquote>
+<p>How would that work?</p>
+
+<a name="184807486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807486">Ulrik Buchholtz (Jan 04 2020 at 15:04)</a>:</h4>
+<p>But how nice is it to do proofs in an object logic/type theory? Is it really <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex"> \varepsilon </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span></span></span></span> overhead?!</p>
+
+<a name="184807493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807493">Johan Commelin (Jan 04 2020 at 15:05)</a>:</h4>
+<p>I mean... we can <em>define</em> simplicial sets. I've done that. Working with them is another matter</p>
+
+<a name="184807542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807542">Mario Carneiro (Jan 04 2020 at 15:06)</a>:</h4>
+<p>To make it epsilon overhead, you need a good set of theorems (this is a finite amount of work, to define what HoTT foundations are) and a theorem prover that is prepared to produce theorems in this embedded logic</p>
+
+<a name="184807549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807549">Mario Carneiro (Jan 04 2020 at 15:06)</a>:</h4>
+<p>that's a UI problem, but it's completely feasible if you think it is possible to build native-HoTT theorem provers</p>
+
+<a name="184807559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807559">Ulrik Buchholtz (Jan 04 2020 at 15:07)</a>:</h4>
+<p>Ideally, I'd like my foundations to make it super-easy and convenient to do proofs in embedded DSLs (domain-specific logics!)</p>
+
+<a name="184807567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807567">Ulrik Buchholtz (Jan 04 2020 at 15:07)</a>:</h4>
+<p>And to be able to externalize via model constructions and interpretations!</p>
+
+<a name="184807572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807572">Mario Carneiro (Jan 04 2020 at 15:08)</a>:</h4>
+<p>And then, once you are committed to this DSL style approach, you realize that the foundations don't have to be type theory at all, and they can be something super simple like string rewriting :)</p>
+
+<a name="184807616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807616">Johan Commelin (Jan 04 2020 at 15:08)</a>:</h4>
+<p>Yes, yes, I know where this is going (-; <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
+
+<a name="184807619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807619">Ulrik Buchholtz (Jan 04 2020 at 15:08)</a>:</h4>
+<p>How does MM0 handle interpretations between DSLs?</p>
+
+<a name="184807702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807702">Mario Carneiro (Jan 04 2020 at 15:10)</a>:</h4>
+<p>There are two parts to any such work: the one-time cost of proving relative consistency of one language to another, and the cost of translating individual target theorems to the other language (which requires changing syntax and stuff and so is O(n))</p>
+
+<a name="184807712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807712">Mario Carneiro (Jan 04 2020 at 15:11)</a>:</h4>
+<p>You can prove the one time cost as a theorem, and the O(n) work is a suite of theorems that are applied in a syntax directed way by tactics</p>
+
+<a name="184807765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807765">Mario Carneiro (Jan 04 2020 at 15:12)</a>:</h4>
+<p>This lets you model arbitrarily complicated syntactic theories like HoTT or anything else as long as you have a grasp on the metatheory (which tells you how to prove the translation theorems)</p>
+
+<a name="184807887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807887">Ulrik Buchholtz (Jan 04 2020 at 15:16)</a>:</h4>
+<p>If I want to know that relative to some base theory (say of primitive recursive or polynomial time strength) that theory S interprets theory T, are you thinking of MM0 as the base theory, or should I fix another base theory to talk about the syntaxes of S and T?</p>
+
+<a name="184807891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807891">Johan Commelin (Jan 04 2020 at 15:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I wonder if the following is a down to earth test case: at some point someone (probably <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>) defined <em>continuous linear maps</em> and showed that identity and composition of such maps are again such maps. Tada, we have a category. Can some tactics now automatically PR <a href="https://github.com/leanprover-community/mathlib/blob/8e820e28bf4e1e1eb091608b1d5a5c2f4d8650f2/src/topology/algebra/module.lean#L368L446" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/8e820e28bf4e1e1eb091608b1d5a5c2f4d8650f2/src/topology/algebra/module.lean#L368L446">https://github.com/leanprover-community/mathlib/blob/8e820e28bf4e1e1eb091608b1d5a5c2f4d8650f2/src/topology/algebra/module.lean#L368L446</a></p>
+
+<a name="184807896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184807896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184807896">Johan Commelin (Jan 04 2020 at 15:16)</a>:</h4>
+<p>Because that seems to be related to what you are suggesting</p>
+
+<a name="184808029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808029">Mario Carneiro (Jan 04 2020 at 15:20)</a>:</h4>
+<p>MM0 is the theorem prover, you have to supply your own theory, but it can be something like PA or ZFC for a reasonable math foundation. This is viewed as a fixed background where you are doing "all of math". So you have theory S and T and you want to interpret one in the other, so you define both in ZFC in MM0 and then the mapping function is explicitly definable in the logic, and you can prove properties about it; and it is also computable (in the sense that you can figure out what it does on any given term), so you can "run" it using tactics.</p>
+
+<a name="184808099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808099">Mario Carneiro (Jan 04 2020 at 15:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Doesn't lean <em>already</em> have tactics to very nearly automate all of this? It's really not a leap to think that we could do so if we cared enough</p>
+
+<a name="184808108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808108">Yury G. Kudryashov (Jan 04 2020 at 15:22)</a>:</h4>
+<p>We have a constructor, not a tactic.</p>
+
+<a name="184808127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808127">Yury G. Kudryashov (Jan 04 2020 at 15:23)</a>:</h4>
+<p>(I mean, a constructor for concrete categories)</p>
+
+<a name="184808200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808200">Mario Carneiro (Jan 04 2020 at 15:25)</a>:</h4>
+<p>Lean 3 is limited in the kinds of definitions you can write by automation, but it already generates lots of theorems for inductive types. You could have a <code>#eval make_category continuous_linear_map</code> that just produces all these theorems, adds attributes, notations, etc, if it is sufficiently boilerplate</p>
+
+<a name="184808273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808273">Johan Commelin (Jan 04 2020 at 15:27)</a>:</h4>
+<p>Well, by now we have 25 different kinds of equivs</p>
+
+<a name="184808277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808277">Johan Commelin (Jan 04 2020 at 15:27)</a>:</h4>
+<p>I would say it is sufficiently boilerplate</p>
+
+<a name="184808280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808280">Mario Carneiro (Jan 04 2020 at 15:27)</a>:</h4>
+<p>25?</p>
+
+<a name="184808281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808281">Johan Commelin (Jan 04 2020 at 15:27)</a>:</h4>
+<p>They all follow the same pattern</p>
+
+<a name="184808282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808282">Johan Commelin (Jan 04 2020 at 15:27)</a>:</h4>
+<p>Ooh, maybe its 13, maybe 37</p>
+
+<a name="184808338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808338">Johan Commelin (Jan 04 2020 at 15:28)</a>:</h4>
+<p>equiv, add_equiv, mul_equiv, ring_equiv, linear_equiv, continuous_linear_equiv, continuous_equiv (or homeo, maybe)</p>
+
+<a name="184808343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808343">Johan Commelin (Jan 04 2020 at 15:29)</a>:</h4>
+<p>And there's probably more that I haven't thought of immediately</p>
+
+<a name="184808351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808351">Mario Carneiro (Jan 04 2020 at 15:29)</a>:</h4>
+<p>Keep in mind also that there is a tradeoff between when you want to switch to an explicit model of the commonalities (i.e. a theory of categories) that becomes more reasonable the more examples you have</p>
+
+<a name="184808369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808369">Mario Carneiro (Jan 04 2020 at 15:29)</a>:</h4>
+<p>The reason we have all the duplication is because we actually care about the consequences in all of these disparate cases</p>
+
+<a name="184808433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808433">Mario Carneiro (Jan 04 2020 at 15:30)</a>:</h4>
+<p>i.e. we want to have a way to say "compose these two linear equivs" which doesn't involve the overhead of category theory</p>
+
+<a name="184808448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808448">Johan Commelin (Jan 04 2020 at 15:31)</a>:</h4>
+<p>Apparently...</p>
+
+<a name="184808495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808495">Johan Commelin (Jan 04 2020 at 15:32)</a>:</h4>
+<p>Anyway, I guess we could make an attempt at defining quasi-categories à la Lurie</p>
+
+<a name="184808496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808496">Johan Commelin (Jan 04 2020 at 15:32)</a>:</h4>
+<p>And then maybe some tactic writers can make them work nicely</p>
+
+<a name="184808502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808502">Mario Carneiro (Jan 04 2020 at 15:32)</a>:</h4>
+<p>In the largest scale, if we have 50 of these categories, but they are all highly used in their own domains, we want the full product of theorems (composition of linear equivs is an equiv, an invertible group hom is an equiv, etc) but these theorems can be proven using a category theory</p>
+
+<a name="184808517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808517">Ulrik Buchholtz (Jan 04 2020 at 15:33)</a>:</h4>
+<p>I find it funny that you think of using DSLs as having <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex"> \varepsilon </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span></span></span></span> overhead, but common organizational abstractions such as categories as overhead to be avoided? <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="184808523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808523">Ulrik Buchholtz (Jan 04 2020 at 15:33)</a>:</h4>
+<p>Category theory is itself a kind of DSL</p>
+
+<a name="184808569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808569">Mario Carneiro (Jan 04 2020 at 15:34)</a>:</h4>
+<p>It's a tradeoff. There is overhead to use the abstraction, vs overhead to state the specific variant (and prove using the abstraction)</p>
+
+<a name="184808584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808584">Ulrik Buchholtz (Jan 04 2020 at 15:35)</a>:</h4>
+<p>I agree, but I want to know the value of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex"> \varepsilon </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">ε</span></span></span></span>, that's all <span aria-label="big smile" class="emoji emoji-1f604" role="img" title="big smile">:big_smile:</span></p>
+
+<a name="184808645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808645">Mario Carneiro (Jan 04 2020 at 15:36)</a>:</h4>
+<p>You are absolutely correct that category theory is a DSL. The epsilon overhead only happens after you put in the (possibly large) O(1) overhead of proving all the base theorems for the target category</p>
+
+<a name="184808661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808661">Ulrik Buchholtz (Jan 04 2020 at 15:37)</a>:</h4>
+<p>But these are typically theorems you want anyway.</p>
+
+<a name="184808663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808663">Mario Carneiro (Jan 04 2020 at 15:37)</a>:</h4>
+<p>right</p>
+
+<a name="184808671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808671">Mario Carneiro (Jan 04 2020 at 15:37)</a>:</h4>
+<p>In Johan's example, you want that full product of theorems in any case</p>
+
+<a name="184808721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808721">Mario Carneiro (Jan 04 2020 at 15:38)</a>:</h4>
+<p>so there isn't much point optimizing anything except a boilerplate generating tactic</p>
+
+<a name="184808803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808803">Mario Carneiro (Jan 04 2020 at 15:40)</a>:</h4>
+<p>but my impression has been that the benefits of category theory in this area are pretty shallow. Proving that the composition of equivs is an equiv assuming that an equiv is a hom with an inverse is not a very large term</p>
+
+<a name="184808837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808837">Mario Carneiro (Jan 04 2020 at 15:41)</a>:</h4>
+<p>And I don't see much demand for more complicated categorical facts (are there any interesting theorems about general categories? Yoneda seems like the pinnacle but it's still not that complicated)</p>
+
+<a name="184808882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808882">Mario Carneiro (Jan 04 2020 at 15:42)</a>:</h4>
+<p>all the real theorems require tons of additional assumptions beyond just being a category</p>
+
+<a name="184808991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184808991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184808991">Ulrik Buchholtz (Jan 04 2020 at 15:45)</a>:</h4>
+<p>I don't know what differentiates a “real” theorem from other theorems. You're right that category theory proofs are short (many would consider this a virtue, but from a proof size point-of-view it means they can be inlined). I think for abelian categories and toposes, the “inlinings” would start to get longer.</p>
+
+<a name="184809038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809038">Johan Commelin (Jan 04 2020 at 15:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> You goal is golfing <code>pp.all</code> output. My goal is golfing the number of keystrokes that I type.</p>
+
+<a name="184809136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809136">Ulrik Buchholtz (Jan 04 2020 at 15:48)</a>:</h4>
+<p>Right, there's a difference between the original tactic entered by the user, and the storage of a proof, and the various other ways we'd want to re-display and re-check a proof after it's been completed. I think all systems could improve in these matters.</p>
+
+<a name="184809146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809146">Mario Carneiro (Jan 04 2020 at 15:49)</a>:</h4>
+<p>As for what the value of epsilon is, in the best case you are looking at a single extra universal quantifier. So that means each generalized theorem application gets an extra argument pointing to the fact "X is a category and C is the objects, H is the homs" or however that needs to be stored. In lean's case this would usually be a typeclass arg so the visible overhead goes to zero, while the pp.all overhead is something like 5% or less (since most steps will not be these generalized theorems they make up a small proportion of the proof anyway)</p>
+
+<a name="184809221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809221">Mario Carneiro (Jan 04 2020 at 15:50)</a>:</h4>
+<p>Even if we're measuring total keystrokes, there is still a tradeoff between how much work is needed to define the tactic that saves the work</p>
+
+<a name="184809229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809229">Kevin Buzzard (Jan 04 2020 at 15:50)</a>:</h4>
+<p>I think I want to know the snake lemma in an arbitrary abelian category. That proof is much much longer than Yoneda and is used in the real world</p>
+
+<a name="184809236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809236">Mario Carneiro (Jan 04 2020 at 15:51)</a>:</h4>
+<p>if you are thinking "well that's not my problem" then that's just an externalized cost model</p>
+
+<a name="184809258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809258">Mario Carneiro (Jan 04 2020 at 15:51)</a>:</h4>
+<p>has the snake lemma been done formally before?</p>
+
+<a name="184809299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809299">Mario Carneiro (Jan 04 2020 at 15:52)</a>:</h4>
+<p>I'm not actually sure that it's true that the proof is long, formally</p>
+
+<a name="184809300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809300">Ulrik Buchholtz (Jan 04 2020 at 15:52)</a>:</h4>
+<p>The fact is that mathematicians like abstractions, both shallow and deep, and like to use them, so we should make it convenient to do so. That means making it easy to write the necessary tactics, too</p>
+
+<a name="184809321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809321">Mario Carneiro (Jan 04 2020 at 15:53)</a>:</h4>
+<p>Right, there is always the argument that category theory et al is innately interesting, rather than my operational interest metric</p>
+
+<a name="184809385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809385">Johan Commelin (Jan 04 2020 at 15:54)</a>:</h4>
+<blockquote>
+<p>has the snake lemma been done formally before?</p>
+</blockquote>
+<p>It probably has been done somewhere. (Note that formally we'll need the snake <em>definition</em> before stating the snake <em>lemma</em>. I.e., the connecting homomorphism is a definition that is usually sn(e)aked into a lemma.)</p>
+
+<a name="184809469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809469">Johan Commelin (Jan 04 2020 at 15:57)</a>:</h4>
+<p>Fun fact: the Snake Lemma is one of the few lemmas that has "proof by imdb"</p>
+
+<a name="184809476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809476">Johan Commelin (Jan 04 2020 at 15:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">snake</span> <span class="o">:</span> <span class="n">bla</span> <span class="n">bla</span> <span class="n">bla</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">imdb</span>
+</pre></div>
+
+<a name="184809740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809740">Kevin Buzzard (Jan 04 2020 at 16:05)</a>:</h4>
+<p>I'm not sure all the details were given there though. I think this is a bad reference and the only reason it's so common is because it's funny.</p>
+
+<a name="184809789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809789">Kevin Buzzard (Jan 04 2020 at 16:06)</a>:</h4>
+<p>I think there's a proof in kashiwara-schapiro? Of course anyone who cares could work out a proof by themselves...</p>
+
+<a name="184809865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809865">Daniel Gratzer (Jan 04 2020 at 16:08)</a>:</h4>
+<p>Aluffi has some quote about it being 'bad manners to prove the snake lemma in public' I think...</p>
+
+<a name="184809870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809870">Johan Commelin (Jan 04 2020 at 16:08)</a>:</h4>
+<p>The opposite of an abelian category is an abelian category. That allows you to cut the proof in half (plus epsilon, of course)</p>
+
+<a name="184809961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184809961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184809961">Johan Commelin (Jan 04 2020 at 16:10)</a>:</h4>
+<p>I think that may count as an application of category theory (<span class="user-mention" data-user-id="110049">@Mario Carneiro</span>), since the category of modules over a ring does not have an opposite category equivalent to modules over a ring.</p>
+
+<a name="184810059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184810059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184810059">Mario Carneiro (Jan 04 2020 at 16:13)</a>:</h4>
+<p>It's hard to guess what the relative difficulty would be. You certainly give up some things by going to categories, e.g. you can't reason about points and defining functions pointwise anymore</p>
+
+<a name="184810179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184810179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184810179">Johan Commelin (Jan 04 2020 at 16:16)</a>:</h4>
+<p>Ooh, and you need to define abelian categories (-;</p>
+
+<a name="184810182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184810182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184810182">Johan Commelin (Jan 04 2020 at 16:16)</a>:</h4>
+<p>And there are multiple definitions, so you have to make a choice</p>
+
+<a name="184810237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184810237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184810237">Mario Carneiro (Jan 04 2020 at 16:18)</a>:</h4>
+<p>I'm just going to assume that an abelian category is a category where every diagram commutes</p>
+
+<a name="184811140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184811140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184811140">Kenny Lau (Jan 04 2020 at 16:47)</a>:</h4>
+<blockquote>
+<p>The opposite of an abelian category is an abelian category.</p>
+</blockquote>
+<p>just category theory things</p>
+
+<a name="184811262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184811262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184811262">Jesse Michael Han (Jan 04 2020 at 16:51)</a>:</h4>
+<p>this might be a good excuse to do the mitchell embedding theorem (the diagram chasing proof of the snake lemma is less annoying than the purely diagrammatic proof)</p>
+
+<a name="184813256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184813256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184813256">Ramkumar Ramachandra (Jan 04 2020 at 17:51)</a>:</h4>
+<p>A summary of the discussion: <a href="https://artagnon.com/articles/leancoq" target="_blank" title="https://artagnon.com/articles/leancoq">https://artagnon.com/articles/leancoq</a></p>
+
+<a name="184813446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184813446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184813446">Johan Commelin (Jan 04 2020 at 17:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="256543">@Ramkumar Ramachandra</span> Concerning the speed comparison at the end. You missed Mario's point that Lean uses a lot more automation (notably type class inference).</p>
+
+<a name="184813452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184813452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184813452">Johan Commelin (Jan 04 2020 at 17:57)</a>:</h4>
+<p>Besides that: thanks for this write-up!</p>
+
+<a name="184813507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184813507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184813507">Bryan Gin-ge Chen (Jan 04 2020 at 17:59)</a>:</h4>
+<blockquote>
+<p>Lean has much lower startup-cost for pure mathematicians, since its built-in features and math library are great for doing undergraduate-level group theory &amp; topology, masters-level commutative algebra &amp; category theory, but it plateaus quickly thereafter. </p>
+</blockquote>
+<p>I might have missed something but is there really a sense that working with mathlib "plateaus quickly" in some areas?</p>
+
+<a name="184813633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184813633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184813633">Johan Commelin (Jan 04 2020 at 18:02)</a>:</h4>
+<p>Well, we still don't have sheaves and/or abelian categories. Even though we've been discussing them for &gt;18 months</p>
+
+<a name="184814273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814273">Kevin Buzzard (Jan 04 2020 at 18:23)</a>:</h4>
+<p>That's just lack of person-power though. It's hard to do things right.</p>
+
+<a name="184814369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814369">Sebastian Ullrich (Jan 04 2020 at 18:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="256543">@Ramkumar Ramachandra</span> That was fast! Minor nitpick: Lean 4 is written mostly in Lean, not C (at least as soon as we delete the old C++ frontend)</p>
+
+<a name="184814500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814500">Ramkumar Ramachandra (Jan 04 2020 at 18:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Thanks; fixed.</p>
+
+<a name="184814549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814549">Ramkumar Ramachandra (Jan 04 2020 at 18:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Thanks, but I'm not sure I understand how to phrase it.</p>
+
+<a name="184814559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814559">Ramkumar Ramachandra (Jan 04 2020 at 18:33)</a>:</h4>
+<p>I did say that it uses a VM; doesn't that cover "automation"?</p>
+
+<a name="184814620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814620">Johan Commelin (Jan 04 2020 at 18:35)</a>:</h4>
+<p>Not really. In Lean, you can do the following: say <code>X</code> and <code>Y</code> are types. We can assume that they are endowed with a topology, by writing <code>[topological_space X]</code> and <code>[topological_space Y]</code>. If you later on write <code>X × Y</code>, and treat it as topological space, then Lean will figure out on its own that there is some piece of maths in the library that explains that it should use the product topology.</p>
+
+<a name="184814662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814662">Johan Commelin (Jan 04 2020 at 18:36)</a>:</h4>
+<p>In other systems, you explicitly flag "Hey, I'm using the product of <code>X</code> and <code>Y</code>, and remember, it has the product topology"</p>
+
+<a name="184814682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184814682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184814682">Johan Commelin (Jan 04 2020 at 18:37)</a>:</h4>
+<p>So, summary: Lean is constantly figuring out a boatload of trivialities under the hood. The result is that statements in Lean can get pretty close to what it looks like in ordinary maths. (But this still varies a lot per subject. The current manifold code is not really recognisable to outsiders.)</p>
+
+<a name="184815576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184815576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184815576">Emily Riehl (Jan 04 2020 at 19:05)</a>:</h4>
+<blockquote>
+<p>I guess they are still drawing on a large unspecified amount of background material</p>
+</blockquote>
+<p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>. I'd contend our work isn't Mochizuki-like because the background material we rely upon is known (to a certain community of mathematicians at least). Someone who is familiar with what it's like to work with a simplicial model category could start right away in Chapter 1 (and not read any of the appendices) and understand precisely what we mean right away. On that same point, the material in Appendices A-D is all in the literature somewhere; by contrast Appendices E-F contain technical results about ∞-cosmoi and so are things we proved to support this work. So someone who knows a fair amount of categorical homotopy theory could read the book without ever looking at those appendices and would have a pretty easy go of it, at least for Parts I, III, and IV; II and V are somewhat more technical. </p>
+<p>About to board a flight so I'll leave it here for now. Thanks for your interest!</p>
+
+<a name="184815837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184815837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184815837">Mario Carneiro (Jan 04 2020 at 19:13)</a>:</h4>
+<p>I wasn't intending to throw shade on the work at all; I'm obviously not the target audience but for formalization being able to find the definitions of everything without a stack of background is important for getting started. In any case, with the appendices I managed to find all the definitions that are needed for that first definition, so I think it passes the test :)</p>
+
+<a name="184832188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184832188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184832188">Ramkumar Ramachandra (Jan 05 2020 at 03:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Thanks; I've updated the post to use your example.</p>
+
+<a name="185014578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/185014578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#185014578">Reid Barton (Jan 07 2020 at 14:24)</a>:</h4>
+<p>Regarding quasicategories, I posted a definition on the maths stream a while ago. On mobile and don't know how to link to it, but searching for QCat should find it.</p>
+
+<a name="185014672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/185014672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#185014672">Reid Barton (Jan 07 2020 at 14:25)</a>:</h4>
+<p>By itself it's not good for much, of course.</p>
+
+<a name="185015225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/185015225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#185015225">Johan Commelin (Jan 07 2020 at 14:31)</a>:</h4>
+<p>Voila: <a href="#narrow/stream/116395-maths/topic/quasicategories/near/165386120" title="#narrow/stream/116395-maths/topic/quasicategories/near/165386120">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quasicategories/near/165386120</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

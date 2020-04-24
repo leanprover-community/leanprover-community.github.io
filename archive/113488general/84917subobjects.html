@@ -1,0 +1,202 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84917subobjects.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html">subobjects</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171329872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171329872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171329872">Kevin Buzzard (Jul 20 2019 at 14:38)</a>:</h4>
+<p>This is the Lean proof that the open subsets of a topological space form a complete lattice.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="o">(</span><span class="n">opens</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">complete_lattice</span><span class="bp">.</span><span class="n">copy</span>
+<span class="o">(</span><span class="bp">@</span><span class="n">order_dual</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">complete_lattice</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">galois_insertion</span><span class="bp">.</span><span class="n">lift_complete_lattice</span>
+    <span class="o">(</span><span class="n">order_dual</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">(</span><span class="n">order_dual</span> <span class="o">(</span><span class="n">opens</span> <span class="n">α</span><span class="o">))</span> <span class="bp">_</span> <span class="n">interior</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="n">gi</span><span class="o">))</span>
+<span class="c">/-</span><span class="cm"> le  -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">⊆</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> top -/</span> <span class="bp">⟨</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_univ</span><span class="bp">⟩</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">interior_univ</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"> bot -/</span> <span class="bp">⟨</span><span class="err">∅</span><span class="o">,</span> <span class="n">is_open_empty</span><span class="bp">⟩</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> sup -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∪</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_union</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> inf -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∩</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_inter</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span><span class="o">,</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">interior_eq_of_open</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_inter</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+<span class="kn">end</span>
+<span class="c">/-</span><span class="cm"> Sup -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">Us</span><span class="o">,</span> <span class="bp">⟨</span><span class="err">⋃₀</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="err">&#39;&#39;</span> <span class="n">Us</span><span class="o">),</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_sUnion</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">U</span> <span class="n">hU</span><span class="o">,</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">rcases</span> <span class="n">hU</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">V</span><span class="o">,</span> <span class="n">hV</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">h&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">subst</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hV</span><span class="o">}</span><span class="bp">⟩</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">Sup_range</span><span class="o">],</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I was expecting the proof to look more like the following: "we all know that <code>set alpha</code> is a complete lattice, and open subsets are just a sublattice of this, so things like finite intersections and infinite unions will remain the same once it has been fed into the system that finite intersections and infinite unions of opens are open, which is the axioms for a topology, so we're done". It will be some sort of sub-infi-bot-hemi-sup-subcomplete-lattice or whatever. Are these kinds of sublattices already in mathlib? Then you get of the form a sub-infi-hemi-sublattice of a complete lattice is complete. Is this a thing? Can this be an instance? What is going on with this code? It looks on the face of it as bad as some of the code I write, and the authors of the file are Johannes and Mario. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> why did things turn out like that with all the <code>_copy</code> nonsense?</p>
+
+<a name="171330006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330006">Kevin Buzzard (Jul 20 2019 at 14:43)</a>:</h4>
+<p>Hey -- are sublattices in Lean bundled or unbundled?</p>
+
+<a name="171330069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330069">Kevin Buzzard (Jul 20 2019 at 14:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I am learning to love lattices! What do you think about bundled sublattices?</p>
+
+<a name="171330592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330592">Chris Hughes (Jul 20 2019 at 15:00)</a>:</h4>
+<p>I'm AFK. What do the two <code>begin... end</code> blocks prove?</p>
+
+<a name="171330600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330600">Chris Hughes (Jul 20 2019 at 15:00)</a>:</h4>
+<p>I guess the hard part is infinite sup and inf.</p>
+
+<a name="171330914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330914">Kevin Buzzard (Jul 20 2019 at 15:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>structure subthing (K : Type) [thing K] :=
+(carrier : set K)
+(proof : is_subthing carrier)
+</pre></div>
+
+
+<p>Is <code>carrier</code> idiomatic Lean?</p>
+
+<a name="171330915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330915">Kevin Buzzard (Jul 20 2019 at 15:08)</a>:</h4>
+<p>The first begin end block proves this:</p>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u_1,
+_inst_1 : topological_space α
+⊢ (λ (U V : opens α), ⟨U.val ∩ V.val, _⟩) = complete_lattice.inf
+</pre></div>
+
+
+<p>and the second proves this:</p>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u_1,
+_inst_1 : topological_space α
+⊢ (λ (Us : set (opens α)), ⟨⋃₀(subtype.val &#39;&#39; Us), _⟩) = complete_lattice.Sup
+</pre></div>
+
+<a name="171331005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331005">Chris Hughes (Jul 20 2019 at 15:11)</a>:</h4>
+<p>My guess is it's because  the definition given by the galois insertion would be <code>interior (a \cap b) </code>, but that's not the definition we want in this case.</p>
+
+<a name="171331367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331367">Kevin Buzzard (Jul 20 2019 at 15:21)</a>:</h4>
+<p>That's an interesting observation.</p>
+<p>Is there no notation for <code>has_Sup</code> or <code>has_Inf</code> like we have <code>⊔</code> and <code>⊓</code> for sup and inf? And this <code>supr</code> notation <code>⨆</code> -- is that notation which doesn't have a typeclass associated to it? Is that something which could change in Lean 4?</p>
+
+<a name="171331682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331682">Chris Hughes (Jul 20 2019 at 15:30)</a>:</h4>
+<p>It doesn't have a typeclass because of universe issues.</p>
+
+<a name="171331689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331689">Chris Hughes (Jul 20 2019 at 15:31)</a>:</h4>
+<p>The indexing type could be in any universe.</p>
+
+<a name="171331752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331752">Chris Hughes (Jul 20 2019 at 15:32)</a>:</h4>
+<p>It leads to a somewhat unnatural definition for cInf on Prop and set</p>
+
+<a name="171332861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171332861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171332861">Kevin Buzzard (Jul 20 2019 at 16:05)</a>:</h4>
+<p>Is this a bug in <code>open</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="kn">structure</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">sublattice</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sup_preserved</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">,</span> <span class="n">a</span> <span class="err">⊔</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inf_preserved</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">,</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="c1">-- note that lattice is open.</span>
+<span class="c1">-- uncomment the next line to fix line 17:</span>
+<span class="c1">-- open lattice</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">sublattice</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">sublattice</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="171333955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171333955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171333955">Kevin Buzzard (Jul 20 2019 at 16:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">thing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">.</span> <span class="c1">-- insert data here</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">class</span> <span class="n">is_subthing</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span> <span class="c1">-- insert proofs here</span>
+
+<span class="kn">structure</span> <span class="n">subthing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="k">proof</span> <span class="o">:</span> <span class="n">is_subthing</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">β</span><span class="bp">.</span><span class="n">carrier</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Which coercion should I be using?</p>
+
+<a name="171334282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171334282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171334282">Chris Hughes (Jul 20 2019 at 16:49)</a>:</h4>
+<p>Probably the first two.</p>
+
+<a name="171335500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171335500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171335500">Johan Commelin (Jul 20 2019 at 17:27)</a>:</h4>
+<blockquote>
+<p>I'm AFK.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> AFK? Did you mean AFL?</p>
+
+<a name="171340830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171340830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171340830">Chris Hughes (Jul 20 2019 at 20:10)</a>:</h4>
+<p>What's AFL?</p>
+
+<a name="171340837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171340837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171340837">Wojciech Nawrocki (Jul 20 2019 at 20:11)</a>:</h4>
+<p>Maybe Chris is trying out a pure type theory without axiom K.</p>
+
+<a name="171340845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171340845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171340845">Chris Hughes (Jul 20 2019 at 20:12)</a>:</h4>
+<p>I mean away from laptop. But my phone screen doesn't count as a keyboard.</p>
+
+<a name="171341098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171341098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171341098">Jesse Michael Han (Jul 20 2019 at 20:18)</a>:</h4>
+<p>AFL = away from lean</p>
+<p>i wonder if anyone's tried running lean on their phone</p>
+
+<a name="171341175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171341175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171341175">Chris Hughes (Jul 20 2019 at 20:20)</a>:</h4>
+<p>I tried because there is an emacs app. I gave up without much effort. I think <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> does it.</p>
+
+<a name="171341888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171341888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171341888">Kevin Buzzard (Jul 20 2019 at 20:44)</a>:</h4>
+<p>Yes I've had Lean running on rooted Android phone</p>
+
+<a name="171342520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171342520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171342520">Mario Carneiro (Jul 20 2019 at 21:03)</a>:</h4>
+<p>browser-lean?</p>
+
+<a name="171346108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171346108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171346108">Kevin Buzzard (Jul 20 2019 at 23:05)</a>:</h4>
+<p>It was a chrooted debian with emacs</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

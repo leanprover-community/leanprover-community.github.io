@@ -1,0 +1,196 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/42046topology.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html">topology</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="151738935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/151738935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#151738935">Reid Barton (Dec 13 2018 at 22:39)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>, I was wondering whether you either have proved or were planning to prove Urysohn'slemma or the Tietze extension theorem.<br>
+I ask because I have an ugly, but working proof of the former lying around somewhere, and part of a proof of the latter, and it looks like your PR <a href="https://github.com/leanprover/mathlib/issues/464" target="_blank" title="https://github.com/leanprover/mathlib/issues/464">#464</a> is the main thing I would need to finish it off.</p>
+
+<a name="151759116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/151759116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#151759116">Sebastien Gouezel (Dec 14 2018 at 07:13)</a>:</h4>
+<p>No, I have not done it, and I don't plan to do it. You can go ahead if you want!</p>
+
+<a name="177527732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177527732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177527732">Reid Barton (Oct 07 2019 at 15:03)</a>:</h4>
+<p>So I started trying to write module documentation for topology but (perhaps predictably) I ended up doing another reorganization--hopefully less drastic than the one from March. It is still in progress, but I will be posting a few preliminary PRs.</p>
+
+<a name="177536725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177536725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177536725">Patrick Massot (Oct 07 2019 at 16:35)</a>:</h4>
+<p>Great!</p>
+
+<a name="177537524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537524">Reid Barton (Oct 07 2019 at 16:46)</a>:</h4>
+<p>Currently, <code>topology.constructions</code> is a big grab-bag which I found difficult to document. For example, it doesn't actually contain any constructions themselves, but rather theorems about them, but sometimes those theorems are somewhere else.<br>
+So here's what I'm trying.</p>
+<ul>
+<li>Move the definitions of product topology, etc. from near the end of <code>topology.order</code> to a new file (working name: <code>topology.basic_constructions</code>) which imports <code>topology.order</code>. Also move the most elementary facts about these constructions there (e.g., projections are continuous).</li>
+<li>Import <code>topology.basic_constructions</code> in most other modules, in order to move proofs like "if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>⊂</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">S \subset X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>⊂</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">T \subset Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> are compact, then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>×</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">S \times T</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> is compact" to near the definition of compactness.</li>
+<li>A few basic facts about products and so on (like <code>is_open_prod_iff'</code>) use concepts (like <code>is_open_map</code>) which are defined in later files, so those will remain in <code>topology.constructions</code> (which should perhaps be renamed), which will end up a hopefully much smaller grab-bag.</li>
+</ul>
+
+<a name="177537548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537548">Reid Barton (Oct 07 2019 at 16:46)</a>:</h4>
+<p>So far I implemented this for <code>prod</code> and not any of the other constructions, but it appears to be going well.</p>
+
+<a name="177537621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537621">Reid Barton (Oct 07 2019 at 16:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, you likely tried something like this in the original refactoring; do you see any particular snags?</p>
+
+<a name="177538699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177538699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177538699">Reid Barton (Oct 07 2019 at 16:59)</a>:</h4>
+<p>I'm really tempted to rename all the space variables to <code>X Y Z W</code> first...</p>
+
+<a name="177538733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177538733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177538733">Reid Barton (Oct 07 2019 at 17:00)</a>:</h4>
+<p>since it will make this refactoring a lot easier</p>
+
+<a name="177538870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177538870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177538870">Johan Commelin (Oct 07 2019 at 17:01)</a>:</h4>
+<p>Go for it!</p>
+
+<a name="177540907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177540907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177540907">Patrick Massot (Oct 07 2019 at 17:25)</a>:</h4>
+<p>Reid, please feel free to reorganize things. I got tired during the previous refactor, and Johannes was pushing towards big files. But the current situation is far from perfect.</p>
+
+<a name="177545772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177545772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177545772">Johan Commelin (Oct 07 2019 at 18:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> One thing I wondered is whether <code>embedding</code> and <code>dense_embedding</code> etc should use <code>old_structure_cmd</code>.</p>
+
+<a name="177545800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177545800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177545800">Reid Barton (Oct 07 2019 at 18:22)</a>:</h4>
+<p>I also wondered about that</p>
+
+<a name="177545817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177545817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177545817">Reid Barton (Oct 07 2019 at 18:23)</a>:</h4>
+<p>but I'm trying to leave such changes for separate PRs</p>
+
+<a name="177545935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177545935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177545935">Johan Commelin (Oct 07 2019 at 18:24)</a>:</h4>
+<p>fair enough</p>
+
+<a name="177546345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177546345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177546345">Reid Barton (Oct 07 2019 at 18:28)</a>:</h4>
+<p>At the moment I'm just trying to get the right stuff total in each file, then after that each file can be fixed up nicely</p>
+
+<a name="177559450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177559450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177559450">Patrick Massot (Oct 07 2019 at 20:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> while your are refactoring topology, it would be nice to use the new localized notation feature. I think <code>nhds</code> deserves a notation. In the perfectoid project I always use <code>local notation `𝓝` x:70 := nhds x</code></p>
+
+<a name="177559555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177559555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177559555">Patrick Massot (Oct 07 2019 at 20:52)</a>:</h4>
+<p>In top of the eye candy, the precedence allows to avoid many parentheses.</p>
+
+<a name="177992317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177992317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177992317">Reid Barton (Oct 12 2019 at 14:55)</a>:</h4>
+<p>This refactoring is now <a href="https://github.com/leanprover-community/mathlib/issues/1541" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1541">#1541</a>.</p>
+
+<a name="177992711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177992711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177992711">Reid Barton (Oct 12 2019 at 15:05)</a>:</h4>
+<p>I ended up doing slightly less reordering of imports than planned, and pretty much every theorem ended up in a logical file, though possibly the ordering of imports is "overfit" to the particular set of theorems we have currently.</p>
+
+<a name="177993345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993345">Patrick Massot (Oct 12 2019 at 15:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> did you run sanity_check on all those files?</p>
+
+<a name="177993399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993399">Patrick Massot (Oct 12 2019 at 15:22)</a>:</h4>
+<p>Also, your new README is wonderful, but it should go to <a href="https://github.com/leanprover-community/mathlib/tree/master/docs/theories" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/docs/theories">https://github.com/leanprover-community/mathlib/tree/master/docs/theories</a></p>
+
+<a name="177993401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993401">Reid Barton (Oct 12 2019 at 15:22)</a>:</h4>
+<p>It's running currently</p>
+
+<a name="177993404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993404">Patrick Massot (Oct 12 2019 at 15:22)</a>:</h4>
+<p>I think</p>
+
+<a name="177993409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993409">Mario Carneiro (Oct 12 2019 at 15:22)</a>:</h4>
+<p>is sanity_check in travis?</p>
+
+<a name="177993443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993443">Patrick Massot (Oct 12 2019 at 15:23)</a>:</h4>
+<p>Honestly, if such a PR builds and sanity_checks (and makes sense from a general point of view) then I don't see what I should review. Of course the next step is to make sure every file has a toplevel docstring and <code>doc_blame</code>, but that can be done later (super fast merging is crucial to such PRs).</p>
+
+<a name="177993492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993492">Reid Barton (Oct 12 2019 at 15:24)</a>:</h4>
+<p>I'm also going to go through the same process I did for the linear algebra renaming PR to check that I didn't mess up any declarations</p>
+
+<a name="177993496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993496">Patrick Massot (Oct 12 2019 at 15:24)</a>:</h4>
+<p>Oh I see</p>
+
+<a name="177993517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993517">Patrick Massot (Oct 12 2019 at 15:25)</a>:</h4>
+<p>After a couple of uses like this, sharpening your tool, it would be nice to make it available.</p>
+
+<a name="177993602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993602">Patrick Massot (Oct 12 2019 at 15:27)</a>:</h4>
+<p>Reid, could you please label your PR as WIP until your checks are done?</p>
+
+<a name="177993754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993754">Reid Barton (Oct 12 2019 at 15:30)</a>:</h4>
+<p>Good idea, done</p>
+
+<a name="177993983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177993983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177993983">Reid Barton (Oct 12 2019 at 15:37)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> did you run sanity_check on all those files?</p>
+</blockquote>
+<p>sanity_check found a mistake in my <a href="https://github.com/leanprover-community/mathlib/issues/1516" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1516">#1516</a>, but not this one. I'll fix it in an independent PR.</p>
+
+<a name="178001045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001045">Reid Barton (Oct 12 2019 at 18:34)</a>:</h4>
+<p>(moving back here) I guess we can merge aside from the question about the README.md.<br>
+I thought of the file as saying "if you want to find X, look in file Y", rather than trying to list everything that exists in topology, although I guess it also accomplishes that as a side effect.</p>
+
+<a name="178001060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001060">Patrick Massot (Oct 12 2019 at 18:35)</a>:</h4>
+<p>My point is we don't have any other files like that in that place.</p>
+
+<a name="178001070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001070">Reid Barton (Oct 12 2019 at 18:35)</a>:</h4>
+<p>It's true--I think it would be nice if we did; but maybe this PR isn't the place to make that argument?</p>
+
+<a name="178001127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001127">Reid Barton (Oct 12 2019 at 18:36)</a>:</h4>
+<p>What's the alternative? I guess I could append the contents of README.md to the end of <code>docs/theories/topological_spaces.md</code>, under a heading like "File organization"</p>
+
+<a name="178001146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001146">Patrick Massot (Oct 12 2019 at 18:37)</a>:</h4>
+<p>Yes, maybe after renaming it to <code>topology.md</code></p>
+
+<a name="178001217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178001217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178001217">Reid Barton (Oct 12 2019 at 18:38)</a>:</h4>
+<blockquote>
+<p>These docs are just concerned with the contents of the <code>topological_space.lean</code> file.</p>
+</blockquote>
+<p>which no longer exists</p>
+
+<a name="178002121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178002121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178002121">Reid Barton (Oct 12 2019 at 19:02)</a>:</h4>
+<p>Okay, I've done this (for now, at least)</p>
+
+<a name="178002124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178002124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178002124">Reid Barton (Oct 12 2019 at 19:02)</a>:</h4>
+<p>oops hang on</p>
+
+<a name="178002191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/178002191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#178002191">Reid Barton (Oct 12 2019 at 19:04)</a>:</h4>
+<p>okay, it should be correct now</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

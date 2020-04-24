@@ -1,0 +1,388 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/81703Onthesideoflogic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html">On the side of logic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188640790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188640790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188640790">Dan Stanescu (Feb 20 2020 at 14:20)</a>:</h4>
+<p>Hi everyone: The manual online has this example among the problems at the very end of chapter 3:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="o">:=</span>  <span class="n">sorry</span>
+</pre></div>
+
+
+<p>and states classical reasoning is needed. I came up with the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but am wondering if someone with a stronger foundation in logic could comment: is there a more first-principles proof than this?</p>
+
+<a name="188641026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641026">Donald Sebastian Leung (Feb 20 2020 at 14:23)</a>:</h4>
+<p>A simpler proof would just use <code>classical.em</code>. If you really want to prove it from first principles then you would probably have to somehow derive it from <code>propext</code>, <code>quot.sound</code> and <code>classical.choice</code> (all of which the built-in <code>classical.em</code> depends on)</p>
+
+<a name="188641047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641047">Dan Stanescu (Feb 20 2020 at 14:23)</a>:</h4>
+<p>Also, watching a Coq video inspired me to try this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- prove Peirce &lt;-&gt; em</span>
+<span class="n">def</span> <span class="n">peirce</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>  <span class="o">((</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span>
+<span class="n">def</span> <span class="n">lem</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span>
+
+<span class="kn">theorem</span> <span class="n">peirce_imp_em</span> <span class="o">:</span> <span class="n">peirce</span> <span class="bp">→</span> <span class="n">lem</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">peirce</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">pei</span> <span class="n">P</span><span class="o">,</span>
+    <span class="n">by_contradiction</span> <span class="n">npOnp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="n">pei</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">,</span> <span class="k">from</span> <span class="n">self_to_self</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+</pre></div>
+
+
+<p>but I'm having trouble completing this proof because of what appears to be not enough knowledge of Lean. Anyone can help?</p>
+
+<a name="188641133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641133">Dan Stanescu (Feb 20 2020 at 14:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span>  Right, using classical.em is very easy because it is totally equivalent. But it's not very illuminating.</p>
+
+<a name="188641253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641253">Donald Sebastian Leung (Feb 20 2020 at 14:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641133" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641133">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span>  Right, using classical.em is very easy because it is totally equivalent. But it's not very illuminating.</p>
+</blockquote>
+<p>True - the first principles proof would probably need all 3 of those axioms as I mentioned above (which I have not attempted to prove).</p>
+
+<a name="188641336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641336">Rob Lewis (Feb 20 2020 at 14:26)</a>:</h4>
+<p>The answer kind of depends on what "first principles" you want to start from. If your first principles are "the axioms of Lean including its version of choice," the argument can be seen here: <a href="https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean">https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean</a></p>
+
+<a name="188641354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641354">Rob Lewis (Feb 20 2020 at 14:26)</a>:</h4>
+<p>It's not trivial to follow.</p>
+
+<a name="188641421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641421">Dan Stanescu (Feb 20 2020 at 14:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Great, I'll take a look. I'm just wondering what the authors of the manual meant by a proof at that point.</p>
+
+<a name="188641510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641510">Donald Sebastian Leung (Feb 20 2020 at 14:28)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641047" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641047">said</a>:</p>
+<blockquote>
+<p>Also, watching a Coq video inspired me to try this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- prove Peirce &lt;-&gt; em</span>
+<span class="n">def</span> <span class="n">peirce</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>  <span class="o">((</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span>
+<span class="n">def</span> <span class="n">lem</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span>
+
+<span class="kn">theorem</span> <span class="n">peirce_imp_em</span> <span class="o">:</span> <span class="n">peirce</span> <span class="bp">→</span> <span class="n">lem</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">peirce</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">pei</span> <span class="n">P</span><span class="o">,</span>
+    <span class="n">by_contradiction</span> <span class="n">npOnp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="n">pei</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">,</span> <span class="k">from</span> <span class="n">self_to_self</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+</pre></div>
+
+
+<p>but I'm having trouble completing this proof because of what appears to be not enough knowledge of Lean. Anyone can help?</p>
+</blockquote>
+<p>I've probably done this in Coq before since I completed Chapter 6 of Logical Foundations quite a while ago but I can't remember off the top of my head. Anyway, if you decide to attempt that exercise then you should completely avoid classical reasoning</p>
+
+<a name="188641677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641677">Anne Baanen (Feb 20 2020 at 14:30)</a>:</h4>
+<p>My suggestion is to show <code>¬¬(P ∨ ¬P)</code> without using classical reasoning, then use one of the various classical axioms (e.g. Peirce) to show that this implies <code>P ∨ ¬P</code>.</p>
+
+<a name="188641928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641928">Rob Lewis (Feb 20 2020 at 14:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641421" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641421">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> Great, I'll take a look. I'm just wondering what the authors of the manual meant by a proof at that point.</p>
+</blockquote>
+<p>Honestly, I have no idea :) the easier exercise is to prove it using <code>classical.by_contradiction</code> (avoiding <code>classical.em</code> and any of the tactics that will use classical logic implicitly).</p>
+
+<a name="188641986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641986">Rob Lewis (Feb 20 2020 at 14:33)</a>:</h4>
+<p>In your tactic proof, <code>by_contradiction</code> is fine, but <code>push_neg</code> is cheating.</p>
+
+<a name="188642149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188642149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188642149">Bryan Gin-ge Chen (Feb 20 2020 at 14:35)</a>:</h4>
+<p>In fact, tactics aren't introduced at all until chapter 5, so the intended proof should probably be in term mode.</p>
+
+<a name="188642319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188642319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188642319">Rob Lewis (Feb 20 2020 at 14:36)</a>:</h4>
+<p>To clarify: by "cheating" I don't mean that it's using classical logic, I mean that it's doing some reasoning you may want to practice.</p>
+
+<a name="188643173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188643173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188643173">Dan Stanescu (Feb 20 2020 at 14:43)</a>:</h4>
+<p>Thanks to all! I did get hooked to tactics before term mode because of my initial contact with Lean being through some YouTube videos, but I should turn back to term mode. <br>
+<span class="user-mention" data-user-id="238446">@Anne Baanen</span> Either way I still have trouble producing in Lean the required term to which I could apply Peirce. Nevertheless, thanks for the advice!</p>
+
+<a name="188643565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188643565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188643565">Donald Sebastian Leung (Feb 20 2020 at 14:46)</a>:</h4>
+<blockquote>
+<p>I did get hooked to tactics before term mode ...</p>
+</blockquote>
+<p>Understandable, IMO constructing a proof using tactics is much more pleasant than doing it in term mode, especially when you get to use <del>black magick</del> automation <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span> It sometimes makes me wonder how it feels to be an Agda developer ...</p>
+
+<a name="188648218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188648218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188648218">Kevin Buzzard (Feb 20 2020 at 15:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188643173" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188643173">said</a>:</p>
+<blockquote>
+<p>...because of my initial contact with Lean being through some YouTube videos...</p>
+</blockquote>
+<p>Oh wow. What YouTube videos are driving people here? I keep meaning to put up some simple 5 minute videos doing basic stuff but somehow never seem to get around to it.</p>
+
+<a name="188648620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188648620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188648620">Martin Kleiven (Feb 20 2020 at 15:37)</a>:</h4>
+<p>Definitely do that!</p>
+<p>I was introduced to LEAN by your talk "The Future of Mathematics" which hit first page on /r/programming, and later the article on chalkdust.</p>
+<p>Something like <a href="https://wwwf.imperial.ac.uk/~buzzard/lean_together/lean_intro.mp4" target="_blank" title="https://wwwf.imperial.ac.uk/~buzzard/lean_together/lean_intro.mp4">https://wwwf.imperial.ac.uk/~buzzard/lean_together/lean_intro.mp4</a> demonstrating different aspects of lean would be nice. I want to show everyone else how cool lean is but my competency is not quite there yet!</p>
+
+<a name="188648768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188648768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188648768">Kevin Buzzard (Feb 20 2020 at 15:38)</a>:</h4>
+<p>ha ha if you get competent then you can make the videos yourself :-) There are some professional video people at Imperial who I want to work with but unfortunately they want to make professional videos and I just want to knock up some random rough and ready thing.</p>
+
+<a name="188649508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188649508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188649508">Martin Kleiven (Feb 20 2020 at 15:46)</a>:</h4>
+<p>That's something I have considered. I find, in addition to the formal abstracts project, the promise of using lean for education is very interesting.</p>
+<p>I wonder if it is possible to use lean as a back-end for some kind of user-friendly graphical interface for learning proofs that wouldn't require any programming.</p>
+
+<a name="188650357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650357">Kevin Buzzard (Feb 20 2020 at 15:54)</a>:</h4>
+<p>There is already something like this in Coq I believe?</p>
+
+<a name="188650493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650493">Donald Sebastian Leung (Feb 20 2020 at 15:55)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188650357" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188650357">said</a>:</p>
+<blockquote>
+<p>There is already something like this in Coq I believe?</p>
+</blockquote>
+<p>Yeah, probably GeoCoq/GeoProof or something like that</p>
+
+<a name="188650514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650514">Donald Sebastian Leung (Feb 20 2020 at 15:55)</a>:</h4>
+<p>But it's specific to geometry, I believe</p>
+
+<a name="188650569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650569">Kevin Buzzard (Feb 20 2020 at 15:56)</a>:</h4>
+<p>I was thinking about something <span class="user-mention" data-user-id="110031">@Patrick Massot</span> told me about.</p>
+
+<a name="188650842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650842">Kevin Buzzard (Feb 20 2020 at 15:58)</a>:</h4>
+<p>Really nicely done, GUI where you can pull in things like <code>induction</code> etc</p>
+
+<a name="188650917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188650917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188650917">Martin Kleiven (Feb 20 2020 at 15:59)</a>:</h4>
+<p>I couldn't find anything thus far, ProofGeneral looks like something but it's not specific to Coq, plus it runs inside Emacs</p>
+
+<a name="188651020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651020">Dan Stanescu (Feb 20 2020 at 16:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I started by looking at some videos by Zachary Goldstein. There's a big lack of videos on Lean. Apart from those, the only other ones were Scott Morisson's install guide and a talk about proving compilers correct I think.</p>
+
+<a name="188651200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651200">Patrick Massot (Feb 20 2020 at 16:02)</a>:</h4>
+<p>Kevin means <a href="https://www.edukera.com/" target="_blank" title="https://www.edukera.com/">https://www.edukera.com/</a></p>
+
+<a name="188651208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651208">Martin Kleiven (Feb 20 2020 at 16:02)</a>:</h4>
+<p>That's true. I'm not sure if there's a point in spending too much effort if lean 4 is on the way and contains breaking changes</p>
+
+<a name="188651247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651247">Martin Kleiven (Feb 20 2020 at 16:02)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span>, I'll have a look :)</p>
+
+<a name="188651442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651442">Donald Sebastian Leung (Feb 20 2020 at 16:04)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188651200" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188651200">said</a>:</p>
+<blockquote>
+<p>Kevin means <a href="https://www.edukera.com/" target="_blank" title="https://www.edukera.com/">https://www.edukera.com/</a></p>
+</blockquote>
+<p>Just out of interest, how much of what Coq can do can this GUI do? Would I be able to, for example, define my own inductive data type?</p>
+
+<a name="188651475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651475">Patrick Massot (Feb 20 2020 at 16:05)</a>:</h4>
+<p>No.</p>
+
+<a name="188651504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651504">Patrick Massot (Feb 20 2020 at 16:05)</a>:</h4>
+<p>You can only do exercises, and only the exercises that were created by the creators of this site.</p>
+
+<a name="188651531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651531">Donald Sebastian Leung (Feb 20 2020 at 16:05)</a>:</h4>
+<p>Aha, I see</p>
+<p>Interesting nonetheless</p>
+
+<a name="188651597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651597">Patrick Massot (Feb 20 2020 at 16:06)</a>:</h4>
+<p>At least last time I checked, teachers using this website couldn't create any new exercise.</p>
+
+<a name="188651781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188651781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188651781">Donald Sebastian Leung (Feb 20 2020 at 16:08)</a>:</h4>
+<p>Speaking of GUIs teaching the fundamentals of proof, it reminds me of <a href="http://incredible.pm" target="_blank" title="http://incredible.pm">The Incredible Proof Machine</a></p>
+<p>Basically, it reduces propositional logic and its inference rules to connecting components in a circuit</p>
+
+<a name="190764621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/190764621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#190764621">Dan Stanescu (Mar 16 2020 at 18:50)</a>:</h4>
+<p>Tried recently to talk my colleagues in the philosophy department into looking at Lean, which I think would be a great benefit to students, and got feedback of this kind: </p>
+<div class="codehilite"><pre><span></span>We are using Lemmon’s natural deduction system, which has only ten primitive rules and a particular way of keeping track of dependencies. For example, our rule of conditional proof (conditionalization) has, in contrast to many others, a built-in formal relevance condition that is expressed in dependency numbers. Would Lean be able to mimic such a rule?
+</pre></div>
+
+
+<p>I don't think there is any problem. Since I'm not at all familiar with Lemmon's system (apart from Wikipedia) though and pretty new to Lean as well,  is there someone with a solid background in formal logic who could comment  on whether Lean would have trouble there or not?</p>
+
+<a name="190783235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/190783235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#190783235">Jesse Michael Han (Mar 16 2020 at 21:37)</a>:</h4>
+<p>the <code>#explode</code> command will attempt to print proof terms in such a tabular format</p>
+
+<a name="190784868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/190784868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#190784868">Chris B (Mar 16 2020 at 21:55)</a>:</h4>
+<p>You can also pretty explicitly enumerate and reference named items using term mode/structured proofs.</p>
+<div class="codehilite"><pre><span></span>example (a b c : Prop) : (a → b) → (b → c) → a → c :=
+assume h1 : a → b,
+assume h2 : b → c,
+assume h3 : a,
+have h4 : b, from h1 h3,
+show c, from h2 h4
+</pre></div>
+
+
+<p>The exact definition of "relevance condition" they're using is probably something more involved, maybe you can get them to send you an example?</p>
+
+<a name="191404814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191404814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191404814">Dan Stanescu (Mar 22 2020 at 16:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="116045">Jesse Michael Han</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/190783235" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/190783235">said</a>:</p>
+<blockquote>
+<p>the <code>#explode</code> command will attempt to print proof terms in such a tabular format</p>
+</blockquote>
+<p>Where is <code>#explode</code> hiding? It looks like my Lean installation (version 3.4.2) can't find it.</p>
+
+<a name="191404868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191404868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191404868">Kevin Buzzard (Mar 22 2020 at 16:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">3</span>
+
+<span class="bp">#</span><span class="n">explode</span> <span class="n">mul_add</span>
+</pre></div>
+
+<a name="191404891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191404891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191404891">Kevin Buzzard (Mar 22 2020 at 16:48)</a>:</h4>
+<p>The def is to work around the fact that you can't have a <code>#something</code> directly after the imports.</p>
+
+<a name="191404910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191404910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191404910">Kevin Buzzard (Mar 22 2020 at 16:49)</a>:</h4>
+<p><code>import tactic.explode</code> would also work</p>
+
+<a name="191405027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405027">Dan Stanescu (Mar 22 2020 at 16:52)</a>:</h4>
+<p>The first time I see this, but if I only have <code>import tactic</code> it doesn't work. It does work if I have:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">explode</span>
+
+<span class="n">def</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">3</span>
+
+<span class="bp">#</span><span class="n">explode</span> <span class="n">mul_add</span>
+</pre></div>
+
+<a name="191405059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405059">Kevin Buzzard (Mar 22 2020 at 16:53)</a>:</h4>
+<p>I don't know what works in 3.4.2, I tend to keep up to date with Lean and mathlib. The new tooling makes this really easy. Just go into the root directory of your project folder and type <code>leanproject up</code>. I was doing this with 3.7.something</p>
+
+<a name="191405247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405247">Dan Stanescu (Mar 22 2020 at 16:58)</a>:</h4>
+<p>I'm a little confused with versions. The Lean GitHub page seems to say that 3.4.2 is the latest version (obviously not true, so I don't know what I'm doing wrong there) and doing <code>update-mathlib</code> just keeps the same 3.4.2 version without a <code>leanproject</code> command.</p>
+
+<a name="191405257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405257">Kevin Buzzard (Mar 22 2020 at 16:58)</a>:</h4>
+<p>You are using a frozen repo and frozen tooling.</p>
+
+<a name="191405275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405275">Kevin Buzzard (Mar 22 2020 at 16:59)</a>:</h4>
+<p>Lean 3 development now happens over at <a href="https://github.com/leanprover-community" target="_blank" title="https://github.com/leanprover-community">https://github.com/leanprover-community</a> ; there is a non-MS community fork.</p>
+
+<a name="191405321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405321">Kevin Buzzard (Mar 22 2020 at 17:00)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib#installation" target="_blank" title="https://github.com/leanprover-community/mathlib#installation">here</a> is where to start.</p>
+
+<a name="191405349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405349">Kevin Buzzard (Mar 22 2020 at 17:00)</a>:</h4>
+<p>MS are developing Lean 4 and have lost interest in supporting Lean 3 any more, so some of the amazing people here on this chat are doing the bug fixes etc.</p>
+
+<a name="191405447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405447">Kevin Buzzard (Mar 22 2020 at 17:02)</a>:</h4>
+<p>I think it should be made much clearer on the <a href="https://github.com/leanprover-community/lean" target="_blank" title="https://github.com/leanprover-community/lean">fork README</a> that this is a community fork and in active development.</p>
+
+<a name="191405483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405483">Kevin Buzzard (Mar 22 2020 at 17:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> don't you think that the README on the community fork need a serious update? It should be made clear that the fork is not MS-endorsed but that it is in active development.</p>
+
+<a name="191405546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405546">Kevin Buzzard (Mar 22 2020 at 17:04)</a>:</h4>
+<p>Oh -- I guess this is kind of there in the "IMPORTANT" coment :-)</p>
+
+<a name="191405582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405582">Kevin Buzzard (Mar 22 2020 at 17:05)</a>:</h4>
+<p>Would it be normal to say the current release number at the top of the README? "3.7.2c" or whatever?</p>
+
+<a name="191405659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405659">Patrick Massot (Mar 22 2020 at 17:07)</a>:</h4>
+<p>I think both the community fork README and Leo's README are pretty clear already.</p>
+
+<a name="191405668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405668">Patrick Massot (Mar 22 2020 at 17:08)</a>:</h4>
+<p>In particular, Leo's version does mention the community fork very visibly.</p>
+
+<a name="191405710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405710">Mario Carneiro (Mar 22 2020 at 17:08)</a>:</h4>
+<p>I think it would help to have the current version in the readme as well, to put the 3.4.2 in context</p>
+
+<a name="191405716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405716">Kevin Buzzard (Mar 22 2020 at 17:08)</a>:</h4>
+<p>OK. I misread the "important" comment on the commuity fork as saying "This is 3.4.2 and it will not change any more"</p>
+
+<a name="191405723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405723">Kevin Buzzard (Mar 22 2020 at 17:08)</a>:</h4>
+<p>That was what prompted my comment.</p>
+
+<a name="191405759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405759">Mario Carneiro (Mar 22 2020 at 17:09)</a>:</h4>
+<p>there should also be a link to <code>leanprover/lean</code> repo somewhere on the readme. I am surprised to see that <code>leanprover-community/lean</code> is not actually a fork according to github</p>
+
+<a name="191405839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405839">Kevin Buzzard (Mar 22 2020 at 17:11)</a>:</h4>
+<p>Maybe the very first line of the README should make it clear that this is a fork of the official repo, whatever Github claims, and that the current version is whatever it is.</p>
+
+<a name="191405929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191405929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191405929">Mario Carneiro (Mar 22 2020 at 17:13)</a>:</h4>
+<p>I think the "Important:" comment should lead with the community version. Something like:</p>
+<blockquote>
+<p>Lean 3.7.2 Community Edition<br>
+Important: This fork is maintained and updated by the Lean community. The last official release for Lean 3.x is Lean 3.4.2, which can be found <a href="https://github.com/leanprover/lean" target="_blank" title="https://github.com/leanprover/lean">here</a>. The Lean developers are currently developing Lean 4.</p>
+</blockquote>
+
+<a name="191406418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191406418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191406418">Wojciech Nawrocki (Mar 22 2020 at 17:22)</a>:</h4>
+<p>I made <a href="https://github.com/leanprover-community/lean/issues/158" target="_blank" title="https://github.com/leanprover-community/lean/issues/158">lean#158</a> for this.</p>
+
+<a name="191406433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/191406433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#191406433">Kevin Buzzard (Mar 22 2020 at 17:23)</a>:</h4>
+<p>Many thanks!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

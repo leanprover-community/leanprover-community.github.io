@@ -1,0 +1,175 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/19477CategoriesandUniversesinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html">Categories and Universes in Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182895705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182895705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182895705">Lambert A'Campo (Dec 08 2019 at 14:50)</a>:</h4>
+<p>Can someone explain what <code>(K : Type u) [category.{v} K]</code> means mathematically? Here is my attempt at translating it into mathematics based on set theory: First of all, u and v are universes in this sense <a href="https://en.wikipedia.org/wiki/Grothendieck_universe" target="_blank" title="https://en.wikipedia.org/wiki/Grothendieck_universe">https://en.wikipedia.org/wiki/Grothendieck_universe</a>, then K is a category whose objects are elements of u and whose morphisms are elements of v. </p>
+<p>But if this is correct, then how is the category of all sets modeled in lean?</p>
+
+<a name="182896443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182896443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182896443">Reid Barton (Dec 08 2019 at 15:11)</a>:</h4>
+<p>No, the set of objects of K is an element of u and for each pair of objects X and Y, the set Hom(X, Y) is an element of v.</p>
+
+<a name="182897192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897192">Lambert A'Campo (Dec 08 2019 at 15:32)</a>:</h4>
+<p>ok, so that means Sets is not a category in lean ?</p>
+
+<a name="182897256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897256">Reid Barton (Dec 08 2019 at 15:34)</a>:</h4>
+<p>It is a category</p>
+
+<a name="182897267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897267">Reid Barton (Dec 08 2019 at 15:34)</a>:</h4>
+<p>called <code>Type v</code></p>
+
+<a name="182897284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897284">Lambert A'Campo (Dec 08 2019 at 15:35)</a>:</h4>
+<p>but there is no set of objects of Sets</p>
+
+<a name="182897292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897292">Reid Barton (Dec 08 2019 at 15:35)</a>:</h4>
+<p>Well, I'm assuming "Set" means the category of sets which are elements of some fixed reference universe v</p>
+
+<a name="182897337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897337">Reid Barton (Dec 08 2019 at 15:36)</a>:</h4>
+<p>its set of objects is v itself, which is an element of some bigger universe v+1</p>
+
+<a name="182897349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897349">Lambert A'Campo (Dec 08 2019 at 15:37)</a>:</h4>
+<p>Yes ok I'm just surprised there is no notion of category of sets without mentioning any universe. But maybe that is just an unnatural thing in type theory.</p>
+
+<a name="182897392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897392">Reid Barton (Dec 08 2019 at 15:38)</a>:</h4>
+<p>To be honest, it's not a very good notion in ordinary math, either</p>
+
+<a name="182897401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897401">Kenny Lau (Dec 08 2019 at 15:38)</a>:</h4>
+<blockquote>
+<p>Yes ok I'm just surprised there is no notion of category of sets without mentioning any universe. But maybe that is just an unnatural thing in type theory.</p>
+</blockquote>
+<p>yeah that doesn't exist</p>
+
+<a name="182897403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897403">Kenny Lau (Dec 08 2019 at 15:38)</a>:</h4>
+<p>everything has a universe</p>
+
+<a name="182897488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897488">Lambert A'Campo (Dec 08 2019 at 15:41)</a>:</h4>
+<blockquote>
+<p>To be honest, it's not a very good notion in ordinary math, either</p>
+</blockquote>
+<p>fair enough</p>
+
+<a name="182898018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898018">Kevin Buzzard (Dec 08 2019 at 15:58)</a>:</h4>
+<p>In ZFC people would talk about the "category of sets" -- for them, the objects are what ZFCists would call a <em>class</em>, and Hom(X,Y) is a set for all X and Y.</p>
+
+<a name="182898152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898152">Kevin Buzzard (Dec 08 2019 at 16:01)</a>:</h4>
+<p>Grothendieck was precise in SGA4 but introduced universes. Some ZFC people don't like that (because the existence of a universe implies the existence of a set satisfying the axioms of ZFC, which implies ZFC is consistent, so by Goedel we deduce that we cannot prove the existence of universes in ZFC). People like de Jong have written down in the Stacks project the way that ZFC people can carefully get around issues such as cohomology of a sheaf on the etale site being defined as a limit over a class. Other mathematicians simply don't care about these issues. My belief is that these other mathematicians are secretly using different foundations, because they think that all this kappa-cutoff stuff is boring and regard it as a deficiency of ZFC foundations. Grothendieck thought like this. He wanted to do mathematics, and if ZFC didn't let him do the mathematics he wanted then he was just going to do it anyway and in his mind this said more about ZFC than the theory of sheaves on a site.</p>
+
+<a name="182898583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898583">Kevin Buzzard (Dec 08 2019 at 16:12)</a>:</h4>
+<p>To do etale cohomology you need etale sheaves. To do etale sheaves you need to know about sheafification on sites (not just on top spaces like we needed in the schemes project). Here is <a href="https://stacks.math.columbia.edu/tag/00W1" target="_blank" title="https://stacks.math.columbia.edu/tag/00W1">sheafification in the stacks project</a> (you can trace back to this page from the etale cohomology pages). In example 7.10.2 we discover that in the stacks project, the objects of a category form a set, so the limits are not problematic but we deduce that it must be the categories which are problematic, because the objects in the category of schemes for sure do not form a set. De Jong gives a very precise definition of site <a href="https://stacks.math.columbia.edu/tag/00VG" target="_blank" title="https://stacks.math.columbia.edu/tag/00VG">here</a> and then he remarks that this differs from the SGA4 definition. This is a great example of mathematicians meaning different things by the same words, and because the details here are technical and boring and "not mathematics" or "not proper mathematics", we just claim that the logicians sorted all this out ages ago, even though I am not sure how many logicians are reading SGA4. I do know some who have looked at this. However I don't know any who are looking at Scholze's work which needs infinity categories and all the same questions are there.</p>
+
+<a name="182898652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898652">Reid Barton (Dec 08 2019 at 16:14)</a>:</h4>
+<p>There are already more basic issues. Take a theorem of category theory like "a right adjoint functor preserves limits". Actually, in ZFC, it cannot be a theorem, unless you restrict to small categories, in which case you exclude most cases of interest.</p>
+
+<a name="182898727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898727">Kevin Buzzard (Dec 08 2019 at 16:16)</a>:</h4>
+<p>On the other hand, I am confident that these tedious foundational issues have or can all be resolved, and it's just a case of resolving them. My instinct is to just say "screw ZFC, we're working in dependent type theory with universes so let's use them when we need them, and now looks like a good time". If we are challenged later on by people who say our sheafification procedure doesn't work in ZFC then we can tell them to do it all in Mizar or whatever.</p>
+
+<a name="182898799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898799">Kevin Buzzard (Dec 08 2019 at 16:18)</a>:</h4>
+<p>I still don't know the definition of a site though. In Wikipedia it uses this word "collection" when <a href="https://xenaproject.wordpress.com/2019/12/07/prove-a-theorem-write-a-function/" target="_blank" title="https://xenaproject.wordpress.com/2019/12/07/prove-a-theorem-write-a-function/">defining a Grothendieck topology</a> (see 5th paragraph). What does that word mean? Is it a 3rd universe <code>w</code>?</p>
+
+<a name="182898885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898885">Reid Barton (Dec 08 2019 at 16:20)</a>:</h4>
+<p>Actually I think, to the extent anyone really cares at all, this is a very good application of formalization, because I would much rather trust some automated procedure which determines whether universes can be eliminated from a proof (say of FLT) than trust a human, who probably doesn't understand both the relevant logic and the proof in question.</p>
+
+<a name="182899038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182899038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182899038">Kevin Buzzard (Dec 08 2019 at 16:24)</a>:</h4>
+<p>You're talking like a crank Reid, every proper mathematician knows that the proof of FLT doesn't use universes ;-) I read it on the internet!</p>
+
+<a name="182899104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182899104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182899104">Kevin Buzzard (Dec 08 2019 at 16:27)</a>:</h4>
+<p><a href="https://mathoverflow.net/questions/35746/inaccessible-cardinals-and-andrew-wiless-proof" target="_blank" title="https://mathoverflow.net/questions/35746/inaccessible-cardinals-and-andrew-wiless-proof">https://mathoverflow.net/questions/35746/inaccessible-cardinals-and-andrew-wiless-proof</a> There, Brian Conrad says it's fine so stop worrying</p>
+
+<a name="182902148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902148">Kevin Buzzard (Dec 08 2019 at 17:57)</a>:</h4>
+<p>To get back to the point (and to remove my tongue from my cheek), <span class="user-mention" data-user-id="132603">@Calle Sönne</span> wants to define sites in Lean and there is a universe question. The objects of a category in Lean are something to do with a universe u. The morphisms are something to do with a universe v. For a site we also need the coverings. Are they something to do with u? With v? With a new universe w? Or should we mathematicians simply be sticking with <code>Type</code> at this point and not bothering with these questions?</p>
+
+<a name="182902152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902152">Kevin Buzzard (Dec 08 2019 at 17:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> you have experience with elephants, right?</p>
+
+<a name="182902194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902194">Bhavik Mehta (Dec 08 2019 at 17:58)</a>:</h4>
+<p>Some experience, yeah</p>
+
+<a name="182902364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902364">Kevin Buzzard (Dec 08 2019 at 18:02)</a>:</h4>
+<p>So is the big etale site a site according to PTJ?</p>
+
+<a name="182902434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902434">Kevin Buzzard (Dec 08 2019 at 18:04)</a>:</h4>
+<p>Option 1: we stick to schemes S : C where C : Type 1, check Hom(X,Y) : Type, and demand that a cover of S is Cov(S) : Type. This will involve some jiggery-pokery with cardinals.</p>
+
+<a name="182902443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902443">Kevin Buzzard (Dec 08 2019 at 18:04)</a>:</h4>
+<p>Option 2: S : C, C : Type 1, Hom(X,Y) : Type, but Cov(S) : Type 1. <span class="user-mention" data-user-id="110032">@Reid Barton</span> can you check my working? With this option no cardinals are necessary.</p>
+
+<a name="182902462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902462">Kevin Buzzard (Dec 08 2019 at 18:05)</a>:</h4>
+<p>Option 3: full ZFC. Choose a sufficiently large cardinal, remark that one might occasionally have to increase it. Now S : C, C : Type (not Type 1 any more) and everything is in Type basically, because Type is all we believe in.</p>
+
+<a name="182902522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902522">Kevin Buzzard (Dec 08 2019 at 18:07)</a>:</h4>
+<p>Option 4: fully universe polymorphic. C : Type u, Hom(S,T) : Type v, and Cov(S) : Type w. Is this a site? I could envisage the type theorists among us here arguing that this is clearly the correct definition as far as Lean is concerned.</p>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> which one did you use when you did sites?</p>
+
+<a name="182902609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902609">Johan Commelin (Dec 08 2019 at 18:09)</a>:</h4>
+<p>I think for me <code>w</code> was equal to <code>u</code> or <code>max u v</code>. I moved back an forth between different things a bit.</p>
+
+<a name="182903142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182903142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182903142">Edward Ayers (Dec 08 2019 at 18:23)</a>:</h4>
+<p>I've been helicoptered in by Bhavik, I had a go at implementing sites a while ago for fun. I implemented them as:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">slice</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">X</span>
+
+<span class="kn">structure</span> <span class="n">sieve</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">arrows</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">slice</span> <span class="n">C</span> <span class="n">X</span><span class="o">))</span>
+<span class="o">(</span><span class="n">subs</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">slice</span> <span class="n">C</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">arrows</span><span class="o">)</span> <span class="o">(</span><span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="n">slice</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">g</span> <span class="err">≫</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span> <span class="err">∈</span> <span class="n">arrows</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sieve_set</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span>  <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="n">set</span> <span class="o">(</span><span class="bp">@</span><span class="n">sieve</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">Site</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="n">sieve_set</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">[</span><span class="n">g</span> <span class="o">:</span> <span class="bp">@</span><span class="n">grothendieck</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">J</span><span class="o">]</span>
+</pre></div>
+
+
+<p>So I think if you can express your category by choosing <code>u</code> and <code>v</code> properly, you can define sites on it and I didn't have any universe problems there. Although I didn't get as far as defining the Etale site.</p>
+
+<a name="182903607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182903607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182903607">Edward Ayers (Dec 08 2019 at 18:35)</a>:</h4>
+<p>I would also like to say that I don't understand sites and schemes and stuff and this was more of a personal learning exercise.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

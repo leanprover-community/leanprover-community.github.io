@@ -1,0 +1,776 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/88074castwoes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html">cast woes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="160656265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656265">Johan Commelin (Mar 13 2019 at 11:52)</a>:</h4>
+<p>It's quite humiliating, but how do I kill:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">p</span><span class="bp">.</span><span class="n">prime</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="160656373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656373">Kenny Lau (Mar 13 2019 at 11:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">p</span><span class="bp">.</span><span class="n">prime</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="bp">_</span> <span class="bp">&lt;</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_lt</span><span class="o">]</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span><span class="bp">.</span><span class="n">gt_one</span><span class="bp">;</span> <span class="n">assumption</span>
+</pre></div>
+
+<a name="160656379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656379">Mario Carneiro (Mar 13 2019 at 11:54)</a>:</h4>
+<p><code>pp.gt_one</code>?</p>
+
+<a name="160656397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656397">Kenny Lau (Mar 13 2019 at 11:55)</a>:</h4>
+<p>why is <code>[p.prime]</code> an instance though</p>
+
+<a name="160656399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656399">Johan Commelin (Mar 13 2019 at 11:55)</a>:</h4>
+<p>We really need a <code>cast</code> tactic.</p>
+
+<a name="160656404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656404">Kenny Lau (Mar 13 2019 at 11:55)</a>:</h4>
+<p>and also why does <code>data.nat.prime</code> use ge and gt <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="160656475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656475">Johan Commelin (Mar 13 2019 at 11:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Thanks</p>
+
+<a name="160656504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656504">Mario Carneiro (Mar 13 2019 at 11:57)</a>:</h4>
+<p>I guess it's a bit more natural to read <code>prime.gt_one</code>? not a strong argument</p>
+
+<a name="160656525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656525">Mario Carneiro (Mar 13 2019 at 11:57)</a>:</h4>
+<p>you can make them all le and lt if you want</p>
+
+<a name="160656679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160656679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160656679">Johan Commelin (Mar 13 2019 at 12:00)</a>:</h4>
+<p>I would love to be able to prove this via</p>
+<div class="codehilite"><pre><span></span><span class="n">suffices</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span>
+<span class="o">{</span> <span class="n">cast_magic</span> <span class="kn">using</span> <span class="n">this</span> <span class="o">},</span>
+<span class="bp">...</span>
+</pre></div>
+
+<a name="160658825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658825">Kevin Buzzard (Mar 13 2019 at 12:37)</a>:</h4>
+<p>Did you read my docs on cast?</p>
+
+<a name="160658839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658839">Kevin Buzzard (Mar 13 2019 at 12:37)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/casts.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/casts.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/casts.md</a></p>
+
+<a name="160658875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658875">Johan Commelin (Mar 13 2019 at 12:38)</a>:</h4>
+<p>Yes, I read those... but I guess I also forgot them</p>
+
+<a name="160658888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658888">Kevin Buzzard (Mar 13 2019 at 12:38)</a>:</h4>
+<p>I feel like at least there's an algorithm in there, even if not a tactic</p>
+
+<a name="160658892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658892">Kevin Buzzard (Mar 13 2019 at 12:38)</a>:</h4>
+<p>I wrote them, and I certainly also forgot them.</p>
+
+<a name="160658894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160658894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160658894">Kevin Buzzard (Mar 13 2019 at 12:38)</a>:</h4>
+<p>That's why I wrote them :-)</p>
+
+<a name="160660252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660252">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<p>My docs don't seem to help.</p>
+
+<a name="160660253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660253">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<p>"1=1" can be proved by simp, but for <code>a&lt;b iff a&lt;b</code> it helps a lot if you know the statement of the lemma.</p>
+
+<a name="160660254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660254">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<p><code>simp</code> uses this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">coe_nat_inj&#39;</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">n</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_eq_coe_nat_iff</span> <span class="n">m</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>Actually I don't understand this. What does <code>simp</code> to do goals of the form <code>X -&gt; Y</code>? It tries to simplify <code>X</code> and <code>Y</code> and then sees if it has got lucky and the goal has become <code>Z -&gt; Z</code>?</p>
+
+<a name="160660255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660255">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<p>This works now:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+
+<p>It didn't used to, apparently. But I am a bit weirded out by this -- I thought that it wasn't <code>simp</code>s job to prove this sort of thing? It's an implication, not an iff or an equality.</p>
+
+<a name="160660256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660256">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">nat</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_lt</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It wasn't hard for me to construct a proof, but I had to know the general route.</p>
+
+<a name="160660257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660257">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<p><code>simp</code> uses this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">coe_nat_inj&#39;</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">n</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_eq_coe_nat_iff</span> <span class="n">m</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>Actually I don't understand this. What does <code>simp</code> to do goals of the form <code>X -&gt; Y</code>? It tries to simplify <code>X</code> and <code>Y</code> and then sees if it has got lucky and the goal has become <code>Z -&gt; Z</code>?</p>
+<p>Oh -- ha ha -- </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">imp_self</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">→</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">iff_true_intro</span> <span class="n">id</span>
+</pre></div>
+
+<a name="160660272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160660272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160660272">Kevin Buzzard (Mar 13 2019 at 13:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">nat</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="bp">↔</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">this</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="c1">-- ⊢ ↑1 &lt; ↑p ↔ 1 &lt; p</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="c1">-- gaargh you stupid algorithm</span>
+  <span class="c1">-- ⊢ 1 &lt; ↑p ↔ 1 &lt; p</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="c1">-- @[simp] theorem nat.cast_lt [linear_ordered_semiring α] {m n : ℕ} :</span>
+<span class="c1">--  (m : α) &lt; n ↔ m &lt; n := ...</span>
+</pre></div>
+
+<a name="160661118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661118">Kevin Buzzard (Mar 13 2019 at 13:10)</a>:</h4>
+<p>It's a bit of a challenge to make <code>simp</code> use <code>nat.cast_lt</code> apparently. Can this be fixed somehow? I was seeing if I could construct a proof which did not involve needing to know the name of <code>nat.cast_lt</code> but just relied on the fact that it was a simp lemma.</p>
+
+<a name="160661175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661175">Kevin Buzzard (Mar 13 2019 at 13:11)</a>:</h4>
+<p>I want <code>nat.cast_lt</code> to have greater precedence than \u 1 = 1.</p>
+
+<a name="160661235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661235">Mario Carneiro (Mar 13 2019 at 13:12)</a>:</h4>
+<p>it's not a question of precedence, it's that 1 is not \u 1</p>
+
+<a name="160661266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661266">Mario Carneiro (Mar 13 2019 at 13:12)</a>:</h4>
+<p><code>simp</code> cannot solve cast problems, it's just not an appropriate tool</p>
+
+<a name="160661271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661271">Kevin Buzzard (Mar 13 2019 at 13:12)</a>:</h4>
+<p>If I change 1 to <code>q</code> it works.</p>
+
+<a name="160661306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661306">Mario Carneiro (Mar 13 2019 at 13:13)</a>:</h4>
+<p>it will sometimes get lucky but that's all it is</p>
+
+<a name="160661347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661347">Kevin Buzzard (Mar 13 2019 at 13:13)</a>:</h4>
+<p>I see.</p>
+
+<a name="160661384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661384">Kevin Buzzard (Mar 13 2019 at 13:14)</a>:</h4>
+<p>I don't really understand why <code>simp</code> doesn't solve it.</p>
+
+<a name="160661434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661434">Kevin Buzzard (Mar 13 2019 at 13:14)</a>:</h4>
+<p>It is exactly <code>nat.cast_lt</code>, no?</p>
+
+<a name="160661437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661437">Mario Carneiro (Mar 13 2019 at 13:14)</a>:</h4>
+<p>what?</p>
+
+<a name="160661462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661462">Kevin Buzzard (Mar 13 2019 at 13:14)</a>:</h4>
+<div class="codehilite"><pre><span></span>  -- ⊢ ↑1 &lt; ↑p ↔ 1 &lt; p
+  simp, -- gaargh you stupid algorithm
+  -- ⊢ 1 &lt; ↑p ↔ 1 &lt; p
+</pre></div>
+
+<a name="160661497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661497">Mario Carneiro (Mar 13 2019 at 13:15)</a>:</h4>
+<p><code>1 &lt; ↑p ↔ 1 &lt; p</code> is defeq to an application of <code>nat.cast_lt</code>, but the pattern <code>↑?M1 &lt; ↑?M2</code> doesn't match syntactically</p>
+
+<a name="160661511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661511">Kevin Buzzard (Mar 13 2019 at 13:15)</a>:</h4>
+<p>I made it match syntactically, no?</p>
+
+<a name="160661568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661568">Kevin Buzzard (Mar 13 2019 at 13:16)</a>:</h4>
+<p>I got 1 into \u 1 form</p>
+
+<a name="160661572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661572">Kevin Buzzard (Mar 13 2019 at 13:16)</a>:</h4>
+<p>simp sent it back</p>
+
+<a name="160661578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661578">Mario Carneiro (Mar 13 2019 at 13:16)</a>:</h4>
+<p>Oh I see</p>
+
+<a name="160661616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661616">Kevin Buzzard (Mar 13 2019 at 13:16)</a>:</h4>
+<p>So is it a question of precedence?</p>
+
+<a name="160661636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661636">Mario Carneiro (Mar 13 2019 at 13:16)</a>:</h4>
+<p>The problem is that <code>nat.cast_lt</code> is not in a simp normal form, so it rarely triggers</p>
+
+<a name="160661654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661654">Mario Carneiro (Mar 13 2019 at 13:17)</a>:</h4>
+<p><code>simp</code> is not confluent as a result</p>
+
+<a name="160661768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661768">Mario Carneiro (Mar 13 2019 at 13:18)</a>:</h4>
+<p>The honest approach would just be to have <code>nat.cast_lt</code> not be a simp rule at all, but it works opportunistically sometimes</p>
+
+<a name="160661824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661824">Kevin Buzzard (Mar 13 2019 at 13:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">nat</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">this</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>That works, which is kind of cool, because it meant that I didn't need to know the names of any obscure lemmas.</p>
+
+<a name="160661859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661859">Mario Carneiro (Mar 13 2019 at 13:19)</a>:</h4>
+<blockquote>
+<p>names of any obscure lemmas</p>
+</blockquote>
+<p>You mean "names of anything at all", right?</p>
+
+<a name="160661866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661866">Mario Carneiro (Mar 13 2019 at 13:20)</a>:</h4>
+<p>These are not difficult names</p>
+
+<a name="160661923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661923">Mario Carneiro (Mar 13 2019 at 13:20)</a>:</h4>
+<p>there is much worse than this in the library</p>
+
+<a name="160661927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661927">Kevin Buzzard (Mar 13 2019 at 13:20)</a>:</h4>
+<p>:-)</p>
+
+<a name="160661941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661941">Kevin Buzzard (Mar 13 2019 at 13:20)</a>:</h4>
+<p>To a beginning maths undergraduate, they're all obscure lemmas :-)</p>
+
+<a name="160661976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160661976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160661976">Kevin Buzzard (Mar 13 2019 at 13:21)</a>:</h4>
+<p>To me, they're a little obscure because some have <code>cast</code> and some have <code>coe</code></p>
+
+<a name="160662027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160662027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160662027">Mario Carneiro (Mar 13 2019 at 13:21)</a>:</h4>
+<p>This is unfortunate; most of the <code>coe</code> names have to do with coercions from nat to int in core</p>
+
+<a name="160662973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160662973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160662973">Johan Commelin (Mar 13 2019 at 13:34)</a>:</h4>
+<p>I really don't like these goals.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">p</span><span class="bp">.</span><span class="n">prime</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(((</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="err">^</span> <span class="bp">-</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="bp">-</span><span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="160663305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160663305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160663305">Kevin Buzzard (Mar 13 2019 at 13:39)</a>:</h4>
+<p>I don't think you need that p is prime there</p>
+
+<a name="160663318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160663318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160663318">Kevin Buzzard (Mar 13 2019 at 13:39)</a>:</h4>
+<p>;-)</p>
+
+<a name="160663329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160663329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160663329">Kevin Buzzard (Mar 13 2019 at 13:39)</a>:</h4>
+<p>Did you read my docs about cast?</p>
+
+<a name="160663765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160663765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160663765">Johan Commelin (Mar 13 2019 at 13:44)</a>:</h4>
+<p>Kevin, I'd rather not prove these things by hand. Even if I can after reading a bunch of docs etc... I'm providing motivation for tactic-writers (-;</p>
+
+<a name="160667482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160667482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160667482">Patrick Massot (Mar 13 2019 at 14:22)</a>:</h4>
+<p>They don't need motivation, they need pity</p>
+
+<a name="160669571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160669571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160669571">Rob Lewis (Mar 13 2019 at 14:25)</a>:</h4>
+<p>I haven't fully read this thread (and I can't right now, I need to run in two minutes). But: we have a new intern in Amsterdam, as of last week, who's probably going to think about a cast tactic as his first project. We have some ideas about how to proceed. But if you have thoughts, desiderata, etc, put a list together for us.</p>
+
+<a name="160673278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160673278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160673278">Johan Commelin (Mar 13 2019 at 15:03)</a>:</h4>
+<p>Awesome!</p>
+
+<a name="160678780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160678780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160678780">Kevin Buzzard (Mar 13 2019 at 15:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> a general spec would be "if a mathematician who thinks <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">N</mi></mrow><mo>⊂</mo><mrow><mi mathvariant="double-struck">Z</mi></mrow><mo>⊂</mo><mrow><mi mathvariant="double-struck">Q</mi></mrow><mo>⊂</mo><mrow><mi mathvariant="double-struck">R</mi></mrow><mrow><mi mathvariant="double-struck">C</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}\mathbb{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.85556em;vertical-align:-0.16667em;"></span><span class="base"><span class="mord"><span class="mord mathbb">N</span></span><span class="mrel">⊂</span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mrel">⊂</span><span class="mord"><span class="mord mathbb">Q</span></span><span class="mrel">⊂</span><span class="mord"><span class="mord mathbb">R</span></span><span class="mord"><span class="mord mathbb">C</span></span></span></span></span> can't figure out why something even needs to be proved here, the tactic should prove it. I would be very interested in working with you or others on making a more formal spec, because I do not really understand what goes into the process and yet I feel like I have some understanding of what we mathematicians are missing. Should I just formalise some unit tests?</p>
+
+<a name="160699722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160699722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160699722">Kevin Buzzard (Mar 13 2019 at 16:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- ℕ, ℤ, ℚ, ℝ, ℂ</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">an</span> <span class="n">bn</span> <span class="n">cn</span> <span class="n">dn</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">az</span> <span class="n">bz</span> <span class="n">cz</span> <span class="n">dz</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">aq</span> <span class="n">bq</span> <span class="n">cq</span> <span class="n">dq</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">ar</span> <span class="n">br</span> <span class="n">cr</span> <span class="n">dr</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">ac</span> <span class="n">bc</span> <span class="n">cc</span> <span class="n">dc</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bn</span> <span class="bp">→</span> <span class="n">an</span> <span class="bp">=</span> <span class="n">bn</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">an</span> <span class="bp">=</span> <span class="n">bn</span> <span class="bp">→</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bn</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">az</span> <span class="bp">=</span> <span class="n">bz</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">az</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bz</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">aq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">br</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">aq</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">br</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bz</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bz</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(((</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">bq</span> <span class="bp">↔</span> <span class="o">((</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">bq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bn</span> <span class="bp">↔</span> <span class="n">an</span> <span class="bp">&lt;</span> <span class="n">bn</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bz</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bz</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">((</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bq</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bq</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- zero and one cause special problems</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">bq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">↔</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">bq</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">aq</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">aq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">bn</span> <span class="bp">=</span> <span class="o">(</span><span class="n">an</span> <span class="bp">+</span> <span class="n">bn</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">bq</span> <span class="bp">=</span> <span class="o">((</span><span class="n">an</span> <span class="bp">+</span> <span class="n">bq</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(((</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">bn</span> <span class="bp">=</span> <span class="o">(</span><span class="n">an</span> <span class="bp">+</span> <span class="o">(</span><span class="n">bn</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(((((</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">*</span> <span class="n">bq</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">cq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="n">dn</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">bq</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">cq</span> <span class="err">^</span> <span class="n">dn</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">((</span><span class="n">an</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bq</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">cr</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">dz</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">an</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">bq</span> <span class="bp">∧</span> <span class="o">((</span><span class="n">cr</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dz</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>There are some example goals. Some, but not all, can be solved with <code>simp</code>. One or two might be even solvable with <code>rfl</code>.  I got a bit silly with the last one in the sense that I introduced \and -- this just shows my inexperience with this sort of thing.  I don't know what is reasonable. What is reasonable? If you give me a subset of these things, I can tell you how I would prove them following the tricks I've picked up. Problems such as this were constantly showing up last summer when I was working with a team of undergraduates solving undergraduate level mathematics problems -- you might think some of the examples are artificial but when students have a question about natural numbers and they start subtracting and dividing, they do drift into Z and Q, and I would sometimes see \u \u as a consequence.</p>
+
+<a name="160700808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160700808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160700808">Kevin Buzzard (Mar 13 2019 at 16:52)</a>:</h4>
+<p>I don't even know if \iff is asking more than one might naturally expect a tactic to deliver. Rob I would be very happy to work with you on developing a spec, but of course I can tell you nothing about tactic design. Even a tactic which only proves one-way implications and equalities would be useful, but I have seen with my own eyes that mathematicians sometimes want one-way implications and sometimes two-way ones.</p>
+
+<a name="160761499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160761499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160761499">Rob Lewis (Mar 14 2019 at 08:49)</a>:</h4>
+<p>Thanks, Kevin. This is a good start. The <code>\u \u</code> examples are definitely not trivial, I come across those often enough too.</p>
+
+<a name="160761559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/160761559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#160761559">Rob Lewis (Mar 14 2019 at 08:50)</a>:</h4>
+<p>We'll come back and talk about a formal spec once Paul-Nicolas has made some more progress, but these examples help a lot for the moment.</p>
+
+<a name="161748819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161748819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161748819">Patrick Massot (Mar 26 2019 at 10:36)</a>:</h4>
+<p>One more data point about casts and stupid arithmetic goal. This afternoon I want students to prove that if <code>f : ℝ → ℝ</code> sequentially tends to <code>y₀</code> at <code>x₀</code> then it tends to <code>y₀</code> en <code>x₀</code>. I almost gave on this idea, although this is the perfect illustration for the current chapter (negation of quantified statements). I ended writing in the assignment Lean file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">limite_inv_succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">ε</span>
+
+<span class="kn">axiom</span> <span class="n">inv_succ_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="mi">1</span><span class="bp">/</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>because I couldn't see a way to prove them without devoting a whole lecture to casts and coes.</p>
+
+<a name="161749221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161749221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161749221">Neil Strickland (Mar 26 2019 at 10:42)</a>:</h4>
+<p>I've been doing some basic undergraduate exercises.  I think that this one is a good test case for the cast infrastructure:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"></span>
+<span class="cm"> We are asked to pass judgement on the following &quot;definition&quot; :</span>
+
+<span class="cm">  k : ℝ → ℤ sends x ∈ ℝ to the closest integer.</span>
+
+<span class="cm"> We define precisely what it means for n to be the closest</span>
+<span class="cm"> integer to x : we should have | x - m | &gt; | x - n | for any</span>
+<span class="cm"> integer m ≠ n.  We then show that if m ∈ ℤ, there is no</span>
+<span class="cm"> closest integer to m + 1/2.  From this we deduce that there</span>
+<span class="cm"> is no function k with the expected properties.</span>
+
+<span class="cm"> This is much harder work than you might think.  A lot of the</span>
+<span class="cm"> problem is caused by the cast maps ℤ → ℚ → ℝ</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+ <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≠</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">&gt;</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">n</span> <span class="o">)</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> Even basic identities like 1/2 - 1 = -1/2 cannot easily be</span>
+<span class="cm"> proved directly in ℝ, because there are no general algorithms</span>
+<span class="cm"> for exact calculation in ℝ.  We need to work in ℚ and then</span>
+<span class="cm"> apply the cast map.</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">half_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">/</span> <span class="mi">2</span>
+<span class="n">def</span> <span class="n">neg_half_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="bp">-</span> <span class="n">half_Q</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">half_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">half_Q</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">neg_half_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">neg_half_Q</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> Here is a small identity that could in principle be proved</span>
+<span class="cm"> by a long string of applications of the commutative ring axioms.</span>
+<span class="cm"> The &quot;ring&quot; tactic automates the process of finding this string.</span>
+
+<span class="cm"> For reasons that I do not fully understand, the ring tactic</span>
+<span class="cm"> seems to work more reliably if we do it in a separate lemma</span>
+<span class="cm"> so that the terms are just free variables.  We can then</span>
+<span class="cm"> substitute values for this variables as an extra step.  In</span>
+<span class="cm"> particular, we will substitute h = 1/2, and then give a</span>
+<span class="cm"> separate argument that the final term 2 * h - 1 is zero.</span>
+<span class="cm">-/</span>
+<span class="kn">lemma</span> <span class="n">misc_identity</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">h</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+ <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">h</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span> <span class="o">((</span><span class="n">m</span> <span class="bp">+</span> <span class="n">h</span><span class="o">)</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">ring</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm"> We now prove that there is no closest integer to m + 1/2.</span>
+<span class="cm"> The obvious approach would be to focus attention on the</span>
+<span class="cm"> candidates n = m and n = m + 1, but it turns out that that</span>
+<span class="cm"> creates more work than necessary.  It is more efficient to</span>
+<span class="cm"> prove that for all n, the integer k = 2 m + 1 - n is different</span>
+<span class="cm"> from n and lies at the same distance from m + 1/2, so</span>
+<span class="cm"> n does not have the required property.</span>
+<span class="cm">-/</span>
+<span class="kn">lemma</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">¬</span> <span class="o">(</span><span class="n">is_closest_integer</span> <span class="n">n</span> <span class="o">((</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h0</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x_Q</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_Q</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span>
+ <span class="n">by_cases</span> <span class="n">e0</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+ <span class="o">{</span><span class="c1">-- In this block we consider the possibility that k = n, and</span>
+  <span class="c1">-- show that it is impossible.</span>
+  <span class="n">exfalso</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">at</span> <span class="n">e0</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">e1</span> <span class="o">:=</span> <span class="k">calc</span>
+   <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">e0</span><span class="o">]</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">e2</span> <span class="o">:=</span> <span class="k">calc</span>
+   <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="mi">1</span> <span class="mi">2</span> <span class="o">:</span> <span class="n">rfl</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">))</span> <span class="mi">2</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="n">x</span> <span class="mi">2</span><span class="o">)</span> <span class="n">e1</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mul_mod_right</span> <span class="mi">2</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">dec_trivial</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="n">e2</span><span class="o">,</span>
+ <span class="o">},{</span>
+  <span class="k">let</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">h0</span> <span class="n">k</span> <span class="n">e0</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">u_R</span> <span class="o">:=</span> <span class="n">x_R</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v_R</span> <span class="o">:=</span> <span class="n">x_R</span> <span class="bp">-</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="n">v_R</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">u_R</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+   <span class="n">dsimp</span><span class="o">[</span><span class="n">u_R</span><span class="o">,</span><span class="n">v_R</span><span class="o">,</span><span class="n">x_R</span><span class="o">,</span><span class="n">k</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_bit0</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_neg</span><span class="o">],</span>
+   <span class="n">exact</span> <span class="n">misc_identity</span> <span class="o">(</span><span class="err">↑</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="err">↑</span> <span class="n">n</span><span class="o">)</span> <span class="n">half_R</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_Q</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="o">(((</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">half_Q</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+   <span class="n">dsimp</span><span class="o">[</span><span class="n">half_R</span><span class="o">],</span>
+   <span class="n">rw</span><span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_bit0</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_neg</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">half_R</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">h4</span><span class="o">,</span><span class="n">h3</span><span class="o">,</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">],</span>
+  <span class="n">rw</span><span class="o">[</span><span class="n">h5</span><span class="o">,</span><span class="n">add_zero</span><span class="o">]</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">abs</span> <span class="n">v_R</span> <span class="bp">=</span> <span class="n">abs</span> <span class="n">u_R</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="n">h2</span><span class="o">,</span><span class="n">abs_neg</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">h1</span> <span class="n">h6</span><span class="o">,</span>
+ <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">k_does_not_exist</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span><span class="n">k_spec</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">half_R</span><span class="o">,</span>
+ <span class="n">exact</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">k_spec</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161749440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161749440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161749440">Sebastien Gouezel (Mar 26 2019 at 10:46)</a>:</h4>
+<p>Instead of <code>1/(n+1)</code>, you can use <code>((1:R)/2)^n</code> (and the fact that this sequence tends to <code>0</code>, which should already be there). No need to cast with this one.</p>
+
+<a name="161754183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161754183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161754183">Kevin Buzzard (Mar 26 2019 at 12:03)</a>:</h4>
+<blockquote>
+<p>Even basic identities like 1/2 - 1 = -1/2 cannot easily be<br>
+ proved directly in ℝ, because there are no general algorithms<br>
+ for exact calculation in ℝ.  We need to work in ℚ and then<br>
+ apply the cast map.</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="161754483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161754483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161754483">Kevin Buzzard (Mar 26 2019 at 12:07)</a>:</h4>
+<blockquote>
+<p>For reasons that I do not fully understand, the ring tactic<br>
+ seems to work more reliably if we do it in a separate lemma<br>
+ so that the terms are just free variables.  We can then<br>
+ substitute values for this variables as an extra step.  In<br>
+ particular, we will substitute h = 1/2, and then give a<br>
+ separate argument that the final term 2 * h - 1 is zero.</p>
+</blockquote>
+<p><code>ring</code> can sometimes be a bit ropey when division is involved. One could probably beef it up by putting in a "clear denominators" step.</p>
+
+<a name="161760958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161760958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161760958">Kevin Buzzard (Mar 26 2019 at 13:27)</a>:</h4>
+<p>Oh, it's the casts as well. <span class="user-mention" data-user-id="110596">@Rob Lewis</span> here's something to add to the list of cast test cases:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">-</span> <span class="o">((</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="err">???</span>
+</pre></div>
+
+
+<p>It can be solved by <code>simp;ring</code></p>
+
+<a name="161761561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161761561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161761561">Kevin Buzzard (Mar 26 2019 at 13:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span> here's my take on the result.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+ <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≠</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">m</span> <span class="o">)</span> <span class="bp">&gt;</span> <span class="n">abs</span> <span class="o">(</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">n</span> <span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">¬</span> <span class="o">(</span><span class="n">is_closest_integer</span> <span class="n">n</span> <span class="o">((</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h0</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x_R</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span>
+ <span class="n">by_cases</span> <span class="n">e0</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+ <span class="o">{</span><span class="c1">-- In this block we consider the possibility that k = n, and</span>
+  <span class="c1">-- show that it is impossible.</span>
+  <span class="n">exfalso</span><span class="o">,</span>
+  <span class="n">change</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="n">at</span> <span class="n">e0</span><span class="o">,</span> <span class="c1">-- I prefer this to dsimp</span>
+  <span class="c1">-- every operation I make here is &quot;natural&quot; hence will be in mathlib somewhere</span>
+  <span class="c1">-- and I find it using ctrl-space and name guesswork</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">sub_eq_iff_eq_add</span><span class="o">,</span> <span class="err">←</span><span class="n">two_mul</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">,</span> <span class="err">←</span><span class="n">sub_eq_iff_eq_add&#39;</span><span class="o">,</span> <span class="err">←</span><span class="n">mul_sub</span><span class="o">]</span> <span class="n">at</span> <span class="n">e0</span><span class="o">,</span>
+  <span class="c1">-- e0 : 2 * (n - m) = 1</span>
+  <span class="k">have</span> <span class="n">e2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">))</span> <span class="err">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mul_mod_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">e0</span><span class="o">,</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">mod_eq_of_lt</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">dec_trivial</span><span class="o">)</span> <span class="o">(</span><span class="n">dec_trivial</span><span class="o">)]</span> <span class="n">at</span> <span class="n">e2</span><span class="o">,</span>
+  <span class="c1">-- e2 : 1 = 0</span>
+  <span class="n">cases</span> <span class="n">e2</span><span class="o">,</span> <span class="c1">-- just showing off here</span>
+ <span class="o">},{</span>
+  <span class="k">let</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">h0</span> <span class="n">k</span> <span class="n">e0</span><span class="o">),</span>
+  <span class="n">apply</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">abs_neg</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c1">-- get rid of k</span>
+  <span class="k">show</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">-</span> <span class="o">((</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">n</span><span class="o">),</span>
+  <span class="c1">-- simp does the casts, although it&#39;s a sin to apply it when not closing a goal</span>
+  <span class="c1">-- instead of simp one should say:</span>
+<span class="c1">--  suffices : -(1 : ℝ) + (2⁻¹ + (↑n + (↑m + -(2 * ↑m)))) = -2⁻¹ + (↑n + -↑m),</span>
+<span class="c1">--    simpa,</span>
+  <span class="n">simp</span><span class="o">,</span>
+  <span class="c1">-- now ring finishes the job</span>
+  <span class="n">ring</span>
+ <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">k_does_not_exist</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">is_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span><span class="n">k_spec</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="k">let</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">,</span>
+ <span class="n">exact</span> <span class="n">no_closest_integer</span> <span class="o">(</span><span class="n">k</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">k_spec</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="161783291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161783291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161783291">Neil Strickland (Mar 26 2019 at 17:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  Thanks, that's better than my version.  I will see what I can learn from it.</p>
+
+<a name="161783445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/161783445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#161783445">Kevin Buzzard (Mar 26 2019 at 17:18)</a>:</h4>
+<p>I know you might have pedagogical obstructions to writing your code, so I didn't know how much of my version you'd like. No doubt you can get some super-mangled version of the proof that 2(m-n)=1 is false which is unreadable.</p>
+
+<a name="162927051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/162927051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#162927051">Paul-Nicolas Madelaine (Apr 09 2019 at 16:38)</a>:</h4>
+<p>Here is the first version of the cast tactic I've been working one and that <span class="user-mention" data-user-id="110596">@Rob Lewis</span> mentioned a few weeks ago<br>
+<a href="https://github.com/lean-forward/coe_tactic" target="_blank" title="https://github.com/lean-forward/coe_tactic">https://github.com/lean-forward/coe_tactic</a></p>
+<p>Basically it's a simplify tactic with the appropriate set of lemmas, plus a little heuristic to infer casts in some cases.</p>
+
+<a name="162927341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/162927341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#162927341">Paul-Nicolas Madelaine (Apr 09 2019 at 16:42)</a>:</h4>
+<p>for instance, the expression <code> (an : ℚ) + (bz : ℚ) </code> will first be rewritten as <code> ((an : ℤ) : ℚ) + (bz : ℚ) </code> by the heuristic, and then as <code> ((an : ℤ) + bz) : ℚ) </code> by the appropriate simp lemma</p>
+
+<a name="162927347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/162927347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#162927347">Johan Commelin (Apr 09 2019 at 16:42)</a>:</h4>
+<p>Exciting news!</p>
+
+<a name="163200281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/163200281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#163200281">Paul-Nicolas Madelaine (Apr 12 2019 at 15:25)</a>:</h4>
+<p>If anyone feels inspired, I'm also trying to change the names of the different tactics.<br>
+Mainly I want to replace coe with cast, as it seems more appropriate.<br>
+But there's also the problem of the simpa equivalent of norm_coe, which right now is named norm_coe_a<br>
+So I'm taking any ideas to name these tactics as clearly <br>
+as possible</p>
+
+<a name="164449657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164449657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164449657">Paul-Nicolas Madelaine (Apr 29 2019 at 13:01)</a>:</h4>
+<p>Hello everyone,<br>
+I've worked a lot on trying to improve the code and make it as clear and usable as possible.</p>
+<p>There are now 5 tactics:<br>
+- norm_cast<br>
+- rw_mod_cast, that applies a list of rw rules and normalizes between them<br>
+- apply_mod_cast, that normalizes the goal and a given expression, and then applies the expression<br>
+- exact_mod_cast, that is similar to apply_mod_cast but for exact<br>
+- assumption_mod_cast, that normalizes the goal and all the expressions from the context, then uses assumption</p>
+<p>I've also copied padics files from mathlib and tried to improve the proofs using these tactics.</p>
+<p>I'm waiting for any feedback about what should be changed or added to the tactics,<br>
+and whether they could be added to mathlib</p>
+
+<a name="164450180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450180">Patrick Massot (Apr 29 2019 at 13:06)</a>:</h4>
+<p>Thank you very much for this work! I'm not fighting those kinds of problems those days, but I'll try to find some time to come back to projects I used to work on but gave up because of those issues. Do you know whether your work could be adapted to other coercions and casts? In the perfectoid project we also have many coercion fights, but with more complicated types that nat or int.</p>
+
+<a name="164450692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450692">Kevin Buzzard (Apr 29 2019 at 13:12)</a>:</h4>
+<p>Here was an example we ran into -- if K was a field and K-hat was its completion (with respect to some topology blah blah blah), also a field in cases of interest, then we had an injective map from K to K-hat (a coercion, in fact), so we had a proof that if x was non-zero then coe(x) was also non-zero. Now say x is non-zero. The constructor<code> units.mk0</code> can be used to make a unit out of x, which a mathematician would also call x. The fact that the unit x got coerced into the unit (coe x) was not <code>rfl</code> because we needed to apply <code>units.ext</code>. Mathematicians find these sorts of goals very frustrating because we don't want to waste our time proving x=x, and when rfl doesn't work it's frustrating. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> do you know what -- I think we needed some unit predicate instead of explicitly carrying around the useless inverse which we never used (because it's uniquely determined by x).</p>
+
+<a name="164450784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450784">Paul-Nicolas Madelaine (Apr 29 2019 at 13:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> <br>
+The only thing to do to make it work on other types of casts should be (theoretically) to add new lemmas to the set of norm_cast lemmas.<br>
+But in practiced I've only used it on nat/int/rat/reals and padics, so I definitely have to try using it on more complex examples.</p>
+
+<a name="164450872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450872">Kevin Buzzard (Apr 29 2019 at 13:15)</a>:</h4>
+<p>I think the main problems my students had were all with these use examples (nat/int/rat/real) -- it will be interesting to see how much better you have made their lives!</p>
+
+<a name="164450998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164450998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164450998">Patrick Massot (Apr 29 2019 at 13:17)</a>:</h4>
+<p>I think what really need now is documentation of your work. We have the test file, which is much better than nothing, but we also need some documentation <em>text</em>, explaining what the tactics are doing, roughly how they are doing it, what we can hope for, what is out of scope, how to add new lemmas, etc. I know it's no fun at all. But a <em>lot</em> of software development (especially in free software) turn out to be useless for lack of documentation</p>
+
+<a name="164451116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451116">Paul-Nicolas Madelaine (Apr 29 2019 at 13:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I didn't understand every detail of the example by lack of mathematical background, but the units.ext should be rewritten as an equivalence to be used in the current version of my code. apart from this it should work.</p>
+
+<a name="164451248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451248">Paul-Nicolas Madelaine (Apr 29 2019 at 13:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="210574">@Patrick Massot</span> I recently added comments to the norm_cast file, but I will try to rewrite a more detailed documentation page if that's necessary</p>
+
+<a name="164451468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451468">Patrick Massot (Apr 29 2019 at 13:23)</a>:</h4>
+<p>Your comments in <code>norm_cast</code> seem helpful for people who want to improve the tactics, not for users</p>
+
+<a name="164451508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164451508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164451508">Patrick Massot (Apr 29 2019 at 13:23)</a>:</h4>
+<p>And the user facing tactis (the interactive ones) don't even have docstrings</p>
+
+<a name="164462354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164462354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164462354">Kevin Buzzard (Apr 29 2019 at 15:36)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span>  I didn't understand every detail of the example by lack of mathematical background, but the units.ext should be rewritten as an equivalence to be used in the current version of my code. apart from this it should work.</p>
+</blockquote>
+<p>I think <code>units.ext_iff</code> is the iff version</p>
+
+<a name="164462904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164462904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164462904">Paul-Nicolas Madelaine (Apr 29 2019 at 15:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> well if you send me a particular proof that is actually a lot of boiler plate code to move casts around, I will try to make it clearer with my tactics</p>
+
+<a name="164463116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164463116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164463116">Kevin Buzzard (Apr 29 2019 at 15:47)</a>:</h4>
+<p>I cannot do this right now but I will certainly remember your suggestion!</p>
+
+<a name="164986687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164986687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164986687">Paul-Nicolas Madelaine (May 06 2019 at 14:37)</a>:</h4>
+<p>I made a pull request on the mathlib repository : <a href="https://github.com/leanprover-community/mathlib/pull/988" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/988">https://github.com/leanprover-community/mathlib/pull/988</a>,<br>
+therefore the coe_tactic repo is no longer up to date.</p>
+
+<a name="164991692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164991692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164991692">Johan Commelin (May 06 2019 at 15:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="213273">@Paul-Nicolas Madelaine</span> Thanks a lot for writing these tactics! I look forward to using them <span aria-label="octopus" class="emoji emoji-1f419" role="img" title="octopus">:octopus:</span></p>
+
+<a name="164991899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164991899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164991899">Johan Commelin (May 06 2019 at 15:35)</a>:</h4>
+<p>One comment... for some reason <code>mod_cast</code> sounds too much like you are doing something with modular arithmetic... would it make sense to call the tactics <code>norm_cast</code> after <code>norm_num</code>?<br>
+Ok... maybe that actually sounds like you are taking norms... I don't know. I should probably just get used to it <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="164992078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164992078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164992078">Rob Lewis (May 06 2019 at 15:37)</a>:</h4>
+<p>One of the tactics is already called <code>norm_cast</code>. The others were hard to name. We're open to suggestions!</p>
+
+<a name="164993023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164993023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164993023">Johan Commelin (May 06 2019 at 15:49)</a>:</h4>
+<p>Wait, what does the <code>mod</code> in <code>mod_cast</code> stand for? I thought it stood for "modify". But should I read <code>rw_mod_cast</code> as "<code>rw</code> modulo casts"? If so, then I think it's actually a good name.</p>
+
+<a name="164993071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164993071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164993071">Johan Commelin (May 06 2019 at 15:50)</a>:</h4>
+<p>Maybe I was just being sleepy (-;</p>
+
+<a name="164993170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/164993170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#164993170">Rob Lewis (May 06 2019 at 15:51)</a>:</h4>
+<p>Yes, we have rewrite/apply/exact/assumption modulo casts.</p>
+
+<a name="165655564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655564">Johan Commelin (May 14 2019 at 19:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="213273">@Paul-Nicolas Madelaine</span> Does it make sense to also make <code>convert_mod_cast</code>? Or does <code>exact_mod_cast</code> handle this?</p>
+
+<a name="165655596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655596">Johan Commelin (May 14 2019 at 19:49)</a>:</h4>
+<p>(I haven't tested yet, waiting for the tactics to land in the nightly cache...)</p>
+
+<a name="165655709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655709">Patrick Massot (May 14 2019 at 19:50)</a>:</h4>
+<p>What is the status of Scott's efforts to bring us more compiled stuff? Does he have that branch ready for you somewhere?</p>
+
+<a name="165655823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655823">Johan Commelin (May 14 2019 at 19:51)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/1000/files#diff-dbd7f4184984f905b3e1ed514ca280ccR65" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1000/files#diff-dbd7f4184984f905b3e1ed514ca280ccR65">https://github.com/leanprover-community/mathlib/pull/1000/files#diff-dbd7f4184984f905b3e1ed514ca280ccR65</a></p>
+
+<a name="165655964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655964">Patrick Massot (May 14 2019 at 19:52)</a>:</h4>
+<p>that's a python museum!</p>
+
+<a name="165655998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165655998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165655998">Patrick Massot (May 14 2019 at 19:52)</a>:</h4>
+<p>This syntax is has been replaced by a now obsolete syntax!</p>
+
+<a name="165656043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165656043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165656043">Patrick Massot (May 14 2019 at 19:53)</a>:</h4>
+<p>anyway, <a href="https://tqft.net/lean/mathlib/" target="_blank" title="https://tqft.net/lean/mathlib/">https://tqft.net/lean/mathlib/</a> doesn't look very helpful</p>
+
+<a name="165657259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165657259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165657259">Scott Morrison (May 14 2019 at 20:06)</a>:</h4>
+<p>It's getting there...</p>
+
+<a name="165657297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165657297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165657297">Scott Morrison (May 14 2019 at 20:06)</a>:</h4>
+<p>I modified the script, attempting to make it more robust against build failures, and accidentally deleted everything</p>
+
+<a name="165657306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165657306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165657306">Scott Morrison (May 14 2019 at 20:06)</a>:</h4>
+<p>it's rebuilding as we speak</p>
+
+<a name="165657315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165657315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165657315">Scott Morrison (May 14 2019 at 20:07)</a>:</h4>
+<p>It's a lot of building. :-)</p>
+
+<a name="165657354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165657354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165657354">Patrick Massot (May 14 2019 at 20:07)</a>:</h4>
+<p>Thanks! Your efforts are very much appreciated</p>
+
+<a name="165695930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cast%20woes/near/165695930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/88074castwoes.html#165695930">Paul-Nicolas Madelaine (May 15 2019 at 08:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> the exact_mod_cast tactic is really just a normalization then a call to the <code>exact</code> tactic, so <code>convert_mod_cast</code> would make sense, and it could also normalize the new goals</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

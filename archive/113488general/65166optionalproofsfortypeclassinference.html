@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/65166optionalproofsfortypeclassinference.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html">optional proofs for type class inference</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178039299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178039299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178039299">Chris Hughes (Oct 13 2019 at 14:03)</a>:</h4>
+<p>At the moment we have two types for integers mod n <code>zmod</code> and <code>zmodp</code> depending on whether <code>n</code> is <code>prime</code> or not, so that the field instance can be synthesized. This means that a lot of proofs are duplicated. I think there are other places where this sort of problem could come up.</p>
+<p>Here's an idea I came up with that might make this nicer</p>
+<div class="codehilite"><pre><span></span><span class="n">mport</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+
+<span class="kn">inductive</span> <span class="n">option&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">option&#39;</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option&#39;</span>
+
+<span class="n">def</span> <span class="n">zmod</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">option&#39;</span> <span class="n">n</span><span class="bp">.</span><span class="n">prime</span> <span class="o">:=</span> <span class="n">option&#39;</span><span class="bp">.</span><span class="n">none</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">fin</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>This way proofs that apply whether or not <code>n</code> is prime can be stated in full generality in one statement, and the field instances can be put on the type <code>zmod n (some _)</code>  What do people think of this strategy?</p>
+
+<a name="178045239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045239">Johan Commelin (Oct 13 2019 at 16:47)</a>:</h4>
+<p>Alternatively, we make a <code>coe</code> from <code>nat.primes</code> to <code>pnat</code>. And we ditch <code>zmodp</code>. Then just use <code>zmod</code>.</p>
+
+<a name="178045575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045575">Reid Barton (Oct 13 2019 at 16:57)</a>:</h4>
+<p>Then the idea is to put the instance on <code>zmod ((coe : primes -&gt; pnat) p)</code>?</p>
+
+<a name="178045579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045579">Reid Barton (Oct 13 2019 at 16:57)</a>:</h4>
+<p>the field instance I mean</p>
+
+<a name="178045673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045673">Johan Commelin (Oct 13 2019 at 16:59)</a>:</h4>
+<p>Exactly</p>
+
+<a name="178045759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045759">Johan Commelin (Oct 13 2019 at 17:01)</a>:</h4>
+<p>Parts of the library are currently using <code>[nat.prime p]</code>. But then, we can't write <code>instance : nat.prime (ring_char k)</code> for finite fields <code>k</code>. Because <code>nat.prime</code> is not actually a class. There's still a bunch of things that have to be sorted out here.</p>
+
+<a name="178045885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045885">Johan Commelin (Oct 13 2019 at 17:04)</a>:</h4>
+<p>Otoh, maybe <code>ring_char</code> is actually bad. If you have 3 or more fields, it might be more practical to show that they all have <code>char_p _ p</code> then showing that they all pairwise have the same <code>ring_char</code>.</p>
+
+<a name="178046451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178046451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178046451">Chris Hughes (Oct 13 2019 at 17:18)</a>:</h4>
+<p>This seems sensible to me. Because you almost always have the assumption <code>p.prime</code> as an assumption to the theorem, it shouldn't be as annoying as <code>pnat</code>, because you never start with a natural number and then prove it's prime like you do with positivity. I think perhaps refactors like this should wait until Lean 4 when we know exactly what type class inference will be like</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

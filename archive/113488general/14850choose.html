@@ -1,0 +1,75 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/14850choose.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html">choose</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="165462174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165462174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165462174">Patrick Massot (May 12 2019 at 12:07)</a>:</h4>
+<p>The <a href="https://github.com/leanprover-community/mathlib/blob/c9cfafc922927c4fc157a4acc2e8df984d3e74bd/src/tactic/interactive.lean#L479" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/c9cfafc922927c4fc157a4acc2e8df984d3e74bd/src/tactic/interactive.lean#L479">choose tactic</a> has the annoying habit of generating terms featuring <code>∃ h : P</code> where <code>P</code> is a Prop. In my lectures I use a variant which blindly applies <code>simp only [exists_prop] at *</code>, because I don't know how to do that only to hypotheses that are created by <code>choose</code>. Does anyone know how to do that? Would a PR changing this behavior be welcome?</p>
+
+<a name="165468208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165468208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165468208">Rob Lewis (May 12 2019 at 15:03)</a>:</h4>
+<p>I'd be happy to see a PR changing this in <code>choose</code>, but I'm not sure I've ever looked at that tactic, and don't know how to do it off the top of my head.</p>
+
+<a name="165477163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165477163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165477163">Patrick Massot (May 12 2019 at 19:13)</a>:</h4>
+<p>My problem with <code>choose</code> is the parsing magic. One of the arguments of <code>choose</code> is <code>(names : parse ident*)</code> (where <code>*</code> is the usual notation for <code>many</code>). Sometimes Lean magically converts <code>names</code> to type <code>list (option name)</code> but sometimes not</p>
+
+<a name="165477169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165477169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165477169">Patrick Massot (May 12 2019 at 19:13)</a>:</h4>
+<p>Is there any way to force this?</p>
+
+<a name="165477597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165477597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165477597">Patrick Massot (May 12 2019 at 19:25)</a>:</h4>
+<p>Oh, I was stupid</p>
+
+<a name="165477650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165477650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165477650">Patrick Massot (May 12 2019 at 19:26)</a>:</h4>
+<p>It's <code>optional</code> that corresponds to <code>option</code> of course. <code>many ident</code> is secretely <code>list name</code> not <code>list (option name)</code></p>
+
+<a name="165477984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165477984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165477984">Patrick Massot (May 12 2019 at 19:35)</a>:</h4>
+<p>So I get as a new interactive choose:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">choose&#39;</span> <span class="o">(</span><span class="n">first</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">names</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">tgt</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;using&quot;</span> <span class="bp">*&gt;</span> <span class="n">texpr</span><span class="o">)</span><span class="err">?</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+    <span class="n">tgt</span> <span class="err">←</span> <span class="k">match</span> <span class="n">tgt</span> <span class="k">with</span>
+      <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">this</span>
+      <span class="bp">|</span> <span class="n">some</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">i_to_expr_strict</span> <span class="n">e</span>
+      <span class="kn">end</span><span class="o">,</span>
+    <span class="n">choose</span> <span class="n">tgt</span> <span class="o">(</span><span class="n">first</span> <span class="bp">::</span> <span class="n">names</span><span class="o">),</span>
+    <span class="n">interactive</span><span class="bp">.</span><span class="n">simp</span> <span class="n">none</span> <span class="n">tt</span> <span class="o">[</span><span class="n">simp_arg_type</span><span class="bp">.</span><span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">exists_prop</span><span class="o">)]</span> <span class="o">[]</span> <span class="o">(</span><span class="n">ns</span> <span class="err">$</span> <span class="n">some</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">names</span><span class="o">),</span>
+    <span class="n">try</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">clear</span> <span class="n">tgt</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I even manage to use <code>(ns $ some &lt;$&gt; names)</code>. I hope Simon will be proud</p>
+
+<a name="165479208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165479208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165479208">Patrick Massot (May 12 2019 at 20:08)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/pull/1014/files" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1014/files">https://github.com/leanprover-community/mathlib/pull/1014/files</a></p>
+
+<a name="165498524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165498524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165498524">Johan Commelin (May 13 2019 at 05:04)</a>:</h4>
+<p>One thing I've been thinking is that maybe <code>choose</code> could become a classical <code>rcases</code>.</p>
+
+<a name="165498553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose/near/165498553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14850choose.html#165498553">Johan Commelin (May 13 2019 at 05:05)</a>:</h4>
+<p>I also like that <code>choose</code> flips the syntax compared to <code>rcases</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">choose</span> <span class="err">\</span><span class="bp">&lt;</span><span class="n">the</span><span class="o">,</span> <span class="n">names</span><span class="o">,</span> <span class="n">you</span><span class="o">,</span> <span class="n">want</span><span class="err">\</span><span class="bp">&gt;</span> <span class="kn">using</span> <span class="n">hyp</span>
+<span class="c1">-- vs</span>
+<span class="n">rcases</span> <span class="n">hyp</span> <span class="k">with</span> <span class="err">\</span><span class="bp">&lt;</span><span class="n">the</span><span class="o">,</span> <span class="n">names</span><span class="o">,</span> <span class="n">you</span><span class="o">,</span> <span class="n">want</span><span class="err">\</span><span class="bp">&gt;</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

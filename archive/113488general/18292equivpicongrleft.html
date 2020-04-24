@@ -1,0 +1,285 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/18292equivpicongrleft.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html">equiv.pi_congr_left</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191329752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191329752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191329752">Scott Morrison (Mar 21 2020 at 05:31)</a>:</h4>
+<p>Is this even provable?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">universes</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span>
+
+<span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u₃</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="191329879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191329879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191329879">Scott Morrison (Mar 21 2020 at 05:34)</a>:</h4>
+<p>or perhaps since it's not even true in topological spaces, I shouldn't expect to prove it in dependent type theory??</p>
+
+<a name="191329952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191329952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191329952">Scott Morrison (Mar 21 2020 at 05:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">forall_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mp</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">b</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">),</span>
+  <span class="n">mpr</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span> <span class="n">a</span><span class="o">,</span> <span class="k">begin</span> <span class="n">convert</span> <span class="n">g</span> <span class="bp">_</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span> <span class="n">exact</span> <span class="n">e</span> <span class="n">a</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="kn">end</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>is perfectly okay.</p>
+
+<a name="191330205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191330205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191330205">Yury G. Kudryashov (Mar 21 2020 at 05:45)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="191330260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191330260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191330260">Yury G. Kudryashov (Mar 21 2020 at 05:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="n">x</span><span class="o">],</span> <span class="n">exact</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)</span>  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">ext</span> <span class="n">x</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[],</span> <span class="n">apply</span> <span class="n">eq_of_heq</span><span class="o">,</span> <span class="n">refine</span> <span class="n">heq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">]</span>  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">ext</span> <span class="n">x</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[],</span> <span class="n">apply</span> <span class="n">eq_of_heq</span><span class="o">,</span> <span class="n">refine</span> <span class="n">heq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rw</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
+
+<a name="191330304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191330304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191330304">Yury G. Kudryashov (Mar 21 2020 at 05:48)</a>:</h4>
+<p>(probably needs style tweaks before submitting a PR)</p>
+
+<a name="191330579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191330579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191330579">Scott Morrison (Mar 21 2020 at 05:57)</a>:</h4>
+<p>Slightly golfed:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="n">x</span><span class="o">],</span> <span class="n">exact</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)</span>  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq_of_heq</span> <span class="o">(</span><span class="n">heq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">dsimp</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">]</span> <span class="o">})),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq_of_heq</span> <span class="o">(</span><span class="n">heq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="o">}))</span> <span class="o">}</span>
+</pre></div>
+
+<a name="191331044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191331044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191331044">Scott Morrison (Mar 21 2020 at 06:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span>, do you know how to turn <code>eq.mpr</code> into <code>eq.rec_on</code>?</p>
+
+<a name="191331045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191331045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191331045">Scott Morrison (Mar 21 2020 at 06:12)</a>:</h4>
+<p>Usually my instinct is that this is the bad direction, but to follow your proof in another situation I now want it!</p>
+
+<a name="191331304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191331304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191331304">Scott Morrison (Mar 21 2020 at 06:21)</a>:</h4>
+<p>Think I've got it.</p>
+
+<a name="191331794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191331794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191331794">Scott Morrison (Mar 21 2020 at 06:38)</a>:</h4>
+<p>And here's the "full" version:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span> <span class="n">u₄</span>
+
+<span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₂</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">W</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u₃</span><span class="o">)</span> <span class="o">(</span><span class="n">Z</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u₄</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="n">W</span> <span class="n">a</span> <span class="err">≃</span> <span class="n">Z</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">a</span><span class="o">)))</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">W</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">Z</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">h₁</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="n">b</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h₂</span> <span class="o">(</span><span class="n">h₁</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">h₁</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">)),</span> <span class="o">},</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">h₂</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">a</span><span class="o">)),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">begin</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="o">(</span><span class="n">h₂</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+    <span class="n">dsimp</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">eq_of_heq</span> <span class="o">((</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">h₁</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">))),</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">eq_of_heq</span> <span class="o">((</span><span class="n">eq_rec_heq</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">(</span><span class="n">h₁</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span><span class="bp">.</span><span class="n">apply_symm_apply</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="o">})),</span> <span class="o">}</span>
+</pre></div>
+
+<a name="191333691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191333691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191333691">Mario Carneiro (Mar 21 2020 at 07:49)</a>:</h4>
+<p>here's a <code>heq</code>-less proof:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span> <span class="n">a</span><span class="o">))</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">)),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rintro</span> <span class="bp">_</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">e</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rintro</span> <span class="bp">_</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="n">h</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="n">x</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+<a name="191333858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191333858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191333858">Mario Carneiro (Mar 21 2020 at 07:55)</a>:</h4>
+<p>or with match:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span> <span class="n">a</span><span class="o">))</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">)),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">match</span> <span class="bp">_</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">e</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">with</span> <span class="n">rfl</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">match</span> <span class="bp">_</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="n">h</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="k">with</span> <span class="n">rfl</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
+
+<a name="191334146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334146">Mario Carneiro (Mar 21 2020 at 08:03)</a>:</h4>
+<p>However, <code>pi_congr</code> is easy given these two lemmas:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">W</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">Z</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e₂</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">W</span> <span class="n">a</span> <span class="err">≃</span> <span class="n">Z</span> <span class="o">(</span><span class="n">e₁</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">W</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">Z</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_right</span> <span class="n">e₂</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">pi_congr_left</span> <span class="bp">_</span> <span class="n">e₁</span><span class="o">)</span>
+</pre></div>
+
+<a name="191334194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334194">Kevin Buzzard (Mar 21 2020 at 08:04)</a>:</h4>
+<p>If it's any consolation, it was already trivial in maths ;-)</p>
+
+<a name="191334206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334206">Mario Carneiro (Mar 21 2020 at 08:05)</a>:</h4>
+<p>the reason I didn't prove this in the first place is because the statement looks too difficult to use well</p>
+
+<a name="191334251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334251">Mario Carneiro (Mar 21 2020 at 08:06)</a>:</h4>
+<p>The capitalization on <code>Pi</code> is inconsistent here</p>
+
+<a name="191334434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334434">Scott Morrison (Mar 21 2020 at 08:12)</a>:</h4>
+<p>cool!</p>
+
+<a name="191334686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334686">Scott Morrison (Mar 21 2020 at 08:19)</a>:</h4>
+<p>oh, actually... I don't like the statement of <code>pi_congr_left</code> as much as the previous ones. That is, I think  <code>(Π a, P a) ≃ (Π b, P (e.symm b))</code> is the more natural conclusion.</p>
+
+<a name="191334732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334732">Scott Morrison (Mar 21 2020 at 08:20)</a>:</h4>
+<p>do you have a strong opinion about what should be in the library?</p>
+
+<a name="191334757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191334757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191334757">Scott Morrison (Mar 21 2020 at 08:22)</a>:</h4>
+<p>I just want to think of it as: given an equivalence that turns α into β, what does <code>Π a, P a</code> turn into? And so I want the equivalence showing up only on the right hand side.</p>
+
+<a name="191335374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335374">Mario Carneiro (Mar 21 2020 at 08:41)</a>:</h4>
+<p>It is very important that the statement of the theorem use <code>e</code> and not <code>e.symm</code></p>
+
+<a name="191335383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335383">Scott Morrison (Mar 21 2020 at 08:41)</a>:</h4>
+<p>why is that?</p>
+
+<a name="191335387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335387">Mario Carneiro (Mar 21 2020 at 08:41)</a>:</h4>
+<p>because an arbitrary equivalence is not always defeq to some <code>e.symm</code></p>
+
+<a name="191335434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335434">Mario Carneiro (Mar 21 2020 at 08:42)</a>:</h4>
+<p>this is why you can prove <code>pi_congr</code> using my version of <code>pi_congr_left</code> but not yours</p>
+
+<a name="191335440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335440">Kevin Buzzard (Mar 21 2020 at 08:42)</a>:</h4>
+<p>Really? Is e.symm.symm not defeq to e?</p>
+
+<a name="191335442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335442">Mario Carneiro (Mar 21 2020 at 08:42)</a>:</h4>
+<p>no, that is impossible to arrange</p>
+
+<a name="191335459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335459">Mario Carneiro (Mar 21 2020 at 08:43)</a>:</h4>
+<p>it is possible to make it defeq up to eta expanding <code>e</code>, meaning that it will be defeq for any concrete function, but not given a variable</p>
+
+<a name="191335460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335460">Scott Morrison (Mar 21 2020 at 08:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Pi_congr_left</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">Pi_congr</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">W</span> <span class="n">a</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">b</span><span class="o">,</span> <span class="n">Z</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_right</span> <span class="n">h₂</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_left</span> <span class="bp">_</span> <span class="n">h₁</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+</pre></div>
+
+
+<p>seems to work fine.</p>
+
+<a name="191335505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335505">Mario Carneiro (Mar 21 2020 at 08:44)</a>:</h4>
+<p>Then again, <code>e.symm.symm.to_fun</code> is defeq to <code>e.to_fun</code></p>
+
+<a name="191335506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335506">Kevin Buzzard (Mar 21 2020 at 08:44)</a>:</h4>
+<p>oh, eta expansion. I never understand why this is not <code>rfl</code></p>
+
+<a name="191335507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335507">Mario Carneiro (Mar 21 2020 at 08:44)</a>:</h4>
+<p>which I think is why the proof scott just gave works</p>
+
+<a name="191335512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335512">Mario Carneiro (Mar 21 2020 at 08:45)</a>:</h4>
+<p>still, it's a tricky reduction that I don't want to have to rely on in a more involved context</p>
+
+<a name="191335513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335513">Scott Morrison (Mar 21 2020 at 08:45)</a>:</h4>
+<p>so... can I have primed versions of <code>Pi_congr_left</code> and <code>sigma_congr_left</code> that go the direction I want? :-)</p>
+
+<a name="191335553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335553">Mario Carneiro (Mar 21 2020 at 08:46)</a>:</h4>
+<p>I also think that order is appropriate given the way we usually write simp rules</p>
+
+<a name="191335556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335556">Scott Morrison (Mar 21 2020 at 08:46)</a>:</h4>
+<p>I really can't get by with your ones, it seems...</p>
+
+<a name="191335559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335559">Mario Carneiro (Mar 21 2020 at 08:46)</a>:</h4>
+<p>?</p>
+
+<a name="191335567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335567">Scott Morrison (Mar 21 2020 at 08:47)</a>:</h4>
+<p>it's a bit complicated... see the <code>equiv_rw</code> branch?</p>
+
+<a name="191335569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335569">Scott Morrison (Mar 21 2020 at 08:47)</a>:</h4>
+<p>I really really need to sleep now</p>
+
+<a name="191335572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335572">Mario Carneiro (Mar 21 2020 at 08:47)</a>:</h4>
+<p>If you need that particular form, a primed version is fine</p>
+
+<a name="191335573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335573">Scott Morrison (Mar 21 2020 at 08:47)</a>:</h4>
+<p>so maybe we can work this out later</p>
+
+<a name="191335703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335703">Scott Morrison (Mar 21 2020 at 08:51)</a>:</h4>
+<p>okay <a href="https://github.com/leanprover-community/mathlib/issues/2204" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2204">#2204</a> and <a href="https://github.com/leanprover-community/mathlib/issues/2205" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2205">#2205</a> hopefully do the right things</p>
+
+<a name="191335957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191335957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191335957">Yury G. Kudryashov (Mar 21 2020 at 08:59)</a>:</h4>
+<p>You can always rewrite right to left.</p>
+
+<a name="191337601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191337601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191337601">Johan Commelin (Mar 21 2020 at 09:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/equiv.2Epi_congr_left/near/191335506" title="#narrow/stream/113488-general/topic/equiv.2Epi_congr_left/near/191335506">said</a>:</p>
+<blockquote>
+<p>oh, eta expansion. I never understand why this is not <code>rfl</code></p>
+</blockquote>
+<p>It isn't because it's one of the rules of the game called Lean. In principle, you can change this rule. But that would cause other headaches.</p>
+
+<a name="191338906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191338906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191338906">Kevin Buzzard (Mar 21 2020 at 10:24)</a>:</h4>
+<p>Do we know it would? It would make Lean equality closer to what equality actually means...</p>
+
+<a name="191338908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191338908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191338908">Kevin Buzzard (Mar 21 2020 at 10:24)</a>:</h4>
+<p><code>ext</code> is an axiom, right?</p>
+
+<a name="191339435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191339435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191339435">Yury G. Kudryashov (Mar 21 2020 at 10:38)</a>:</h4>
+<p><code>funext</code> is a theorem proved in stdlib using existence of quotients.</p>
+
+<a name="191352113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv.pi_congr_left/near/191352113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18292equivpicongrleft.html#191352113">Kevin Buzzard (Mar 21 2020 at 15:54)</a>:</h4>
+<p>Right. But it "feels" to me like a lot of the <code>ext</code>theorems should be true by definition. A whole is nothing more than the sum of its parts.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

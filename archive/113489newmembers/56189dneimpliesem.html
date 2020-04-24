@@ -1,0 +1,170 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/56189dneimpliesem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html">dne implies em</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178614962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178614962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178614962">Luis O'Shea (Oct 20 2019 at 23:20)</a>:</h4>
+<p>TPiL 3.5 suggests proving em (excluded middle) using dne (double-negation elimination).  I found this trickier than expected (as a Lean noob) and was wondering what tricks I'm missing. Below is my attempt. Some concrete questions include: Did I really need to define <code>demorgan_nor</code>? Do I need to use the inference symbol (<code>_</code>) so much? Is my attempt too long?</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="kn">lemma</span> <span class="n">demorgan_nor</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">))</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="k">assume</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">this</span><span class="o">,</span> <span class="k">assume</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">this</span> <span class="bp">⟩</span>
+
+<span class="kn">section</span>
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="kn">theorem</span> <span class="n">dne</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">this</span><span class="o">)</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span><span class="o">,</span> <span class="n">absurd</span> <span class="n">this</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">nnem</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span><span class="o">),</span>
+<span class="k">have</span> <span class="n">hpnp</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬¬</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">demorgan_nor</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hnpp</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hpnp</span><span class="bp">.</span><span class="n">left</span> <span class="o">(</span><span class="n">dne</span> <span class="bp">_</span> <span class="n">hpnp</span><span class="bp">.</span><span class="n">right</span><span class="o">),</span>
+<span class="n">hnpp</span><span class="bp">.</span><span class="n">left</span> <span class="n">hnpp</span><span class="bp">.</span><span class="n">right</span>
+
+<span class="kn">theorem</span> <span class="n">em_alt</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span> <span class="o">:=</span> <span class="n">dne</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">nnem</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="178615355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615355">Kenny Lau (Oct 20 2019 at 23:34)</a>:</h4>
+<p>you shouldn't use <code>classical</code> because that is the point, I think.</p>
+
+<a name="178615365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615365">Kenny Lau (Oct 20 2019 at 23:35)</a>:</h4>
+<p>you don't need <code>_</code> if you make the variables implicit</p>
+
+<a name="178615366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615366">Luis O'Shea (Oct 20 2019 at 23:35)</a>:</h4>
+<blockquote>
+<p>you shouldn't use <code>classical</code> because that is the point, I think.</p>
+</blockquote>
+<p>I only used <code>classical</code> to prove <code>dne</code></p>
+
+<a name="178615408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615408">Mario Carneiro (Oct 20 2019 at 23:36)</a>:</h4>
+<p>you should be able to prove <code>nnem</code> without dne or any classical stuff</p>
+
+<a name="178615458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615458">Kenny Lau (Oct 20 2019 at 23:38)</a>:</h4>
+<p>Spoilers:<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">dne</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span> <span class="bp">→</span> <span class="n">p</span>
+
+<span class="kn">theorem</span> <span class="n">em</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">dne</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span><span class="o">),</span>
+<span class="k">have</span> <span class="n">hnp</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span><span class="o">,</span>
+<span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hnp</span>
+</pre></div>
+
+<a name="178615467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615467">Luis O'Shea (Oct 20 2019 at 23:39)</a>:</h4>
+<blockquote>
+<p>you should be able to prove <code>nnem</code> without dne or any classical stuff</p>
+</blockquote>
+<p>Duh! Yes:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">nnem</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span><span class="o">),</span>
+<span class="k">have</span> <span class="n">hpnp</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬¬</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">demorgan_nor</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">hpnp</span><span class="bp">.</span><span class="n">right</span> <span class="n">hpnp</span><span class="bp">.</span><span class="n">left</span>
+</pre></div>
+
+<a name="178615468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615468">Kenny Lau (Oct 20 2019 at 23:39)</a>:</h4>
+<p>Golfed version:<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">dne</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span> <span class="bp">→</span> <span class="n">p</span>
+
+<span class="kn">theorem</span> <span class="n">em</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">dne</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="178615701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615701">Luis O'Shea (Oct 20 2019 at 23:46)</a>:</h4>
+<p>Thanks! So regarding  avoiding <code>_</code>s, is it generally preferable to write <code>variable {p : Prop}</code> rather than <code>variable p : Prop</code>? (Or if not when is one preferred over the other?)</p>
+
+<a name="178615773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20implies%20em/near/178615773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/56189dneimpliesem.html#178615773">Mario Carneiro (Oct 20 2019 at 23:49)</a>:</h4>
+<p>The braces mean "let lean figure it out", i.e. always put a <code>_</code> in that slot. The convention is to make the variable implicit if it can be deduced from the type of later assumptions (not counting the conclusion). So that means <code>dne</code> should have <code>p</code> implicit but <code>em</code> should have it explicit</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

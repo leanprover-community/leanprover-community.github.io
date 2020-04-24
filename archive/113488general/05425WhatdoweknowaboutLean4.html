@@ -1,0 +1,118 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/05425WhatdoweknowaboutLean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html">What do we know about Lean 4?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184318258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184318258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184318258">Yury G. Kudryashov (Dec 27 2019 at 12:19)</a>:</h4>
+<p>Hi, I wonder what should I (as a user) expect from Lean 4 and Lean 3 → 4 porting of mathlib. While I found some slides about new core features coming to Lean 4, I failed to find answers to some basic questions.</p>
+<h3>What about compatibility?</h3>
+<ul>
+<li>Do I guess correctly that most of the tactic code in mathlib will have to be rewritten to work with Lean 4?</li>
+<li>What about proofs / theorems / defs?</li>
+</ul>
+<h3>Algebraic classes (monoids, groups, etc)</h3>
+<p>Are there any big changes coming here?</p>
+<h3>What should I expect from porting?</h3>
+<p>Is it going to be "let's feature freeze and port to Lean 4", "let's start a new branch gradually pick files from <code>master</code>", "let's gradually make parts of the library compatible with Lean 4 while maintaining compatibility with Lean 3", or something else?</p>
+
+<a name="184321676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184321676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184321676">Yury G. Kudryashov (Dec 27 2019 at 13:40)</a>:</h4>
+<p>I ask this to avoid spending too much time on the parts of mathlib that are going to be rewritten from scratch.</p>
+
+<a name="184321704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184321704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184321704">Patrick Massot (Dec 27 2019 at 13:41)</a>:</h4>
+<p>Many answers are unknown, but there are a couple of facts:</p>
+<ul>
+<li>Leo never promised any compatibility between Lean 3 and Lean 4. In fact he very explicitly warned everybody there won't be any compatibility, and we shouldn't build anything and expect it to work in Lean 4. He is on a mission to build a better proof assistant. He always writes this is a research project and not a product.</li>
+<li>Everything we do nonetheless in Lean 3 is worthwhile. The type class instance resolution procedure of Lean 4 has been developed using the experience gathered in mathlib. This is crucial.</li>
+<li>The tactic framework of Lean 4 doesn't exist yet, but one can be sure that not a single line of mathlib tactic code will work without modification in Lean 4.</li>
+</ul>
+<p>Less certain pieces include:</p>
+<ul>
+<li>Personally I think the community of mathematicians using Lean 3 is a huge success that will survive Lean 3.</li>
+<li>It may be possible to write code which automates at least partly the conversion of Lean 3 to Lean 4. I think the dream is that the Lean 4 parser will be flexible enough to parse Lean 3 code and output an approximate Lean 4 version.</li>
+<li>The mathlib community does not have a fixed plan for the transition. There cannot be a plan as long as we don't know more about the preceding point. </li>
+<li>I don't see any reason why mathlib would be more centralized than it currently is. There is no dictator who will say: mathlib is now frozen, everybody should work on porting. Everybody will continue doing whatever they want using whatever time they can find. We may have rules like: don't port and modify a file at the same time, since this could make a huge mess and create a lot of additional work.</li>
+</ul>
+
+<a name="184321767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184321767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184321767">Patrick Massot (Dec 27 2019 at 13:42)</a>:</h4>
+<p>The safest bet if you want to work on something that will stay is documentation.</p>
+
+<a name="184321773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184321773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184321773">Patrick Massot (Dec 27 2019 at 13:43)</a>:</h4>
+<p>You can pick a random file which has no header and docstrings and document it.</p>
+
+<a name="184322702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184322702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184322702">Patrick Massot (Dec 27 2019 at 14:03)</a>:</h4>
+<p>Or, better: write a Windows installer!</p>
+
+<a name="184322753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184322753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184322753">Yury G. Kudryashov (Dec 27 2019 at 14:04)</a>:</h4>
+<p>I'm afraid my instructions for installing something on a WIndows computer would start with "install Linux".</p>
+
+<a name="184323220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184323220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184323220">Patrick Massot (Dec 27 2019 at 14:15)</a>:</h4>
+<p>That's how my instructions start, but experience proved this is not enough.</p>
+
+<a name="184323316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184323316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184323316">Patrick Massot (Dec 27 2019 at 14:16)</a>:</h4>
+<p>This is really bad luck. Last year most of my students had Linux at the end of the semester, because they were forced to install it by computer scientists (I'm using Lean with double-major math/CS students). But I need them to start using Lean at the beginning of the semester.</p>
+
+<a name="184358272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184358272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184358272">Yury G. Kudryashov (Dec 28 2019 at 04:17)</a>:</h4>
+<p>BTW, what changed about class instance resolution in Lean 4?</p>
+
+<a name="184368011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184368011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184368011">Kevin Buzzard (Dec 28 2019 at 09:40)</a>:</h4>
+<p>The algorithm completely changed but as far as I know the new one hasn't been implemented yet</p>
+
+<a name="184369430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184369430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184369430">Patrick Massot (Dec 28 2019 at 10:28)</a>:</h4>
+<p>I think it has been implemented, at least partly.</p>
+
+<a name="184369994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184369994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184369994">Yury G. Kudryashov (Dec 28 2019 at 10:46)</a>:</h4>
+<p>Is there any paper/presentation/... describing the new algorithm?</p>
+
+<a name="184371834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184371834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184371834">Kevin Buzzard (Dec 28 2019 at 11:45)</a>:</h4>
+<p>As far as I know there are just posts by Daniel Selsam on this chat, e.g. <a href="#narrow/stream/113488-general/topic/instances.20and.20parameters/near/178623928" title="#narrow/stream/113488-general/topic/instances.20and.20parameters/near/178623928">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances.20and.20parameters/near/178623928</a></p>
+
+<a name="184381911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184381911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184381911">Simon Hudon (Dec 28 2019 at 16:43)</a>:</h4>
+<blockquote>
+<p>The algorithm completely changed but as far as I know the new one hasn't been implemented yet</p>
+</blockquote>
+<p>They're in the middle of reimplementing it now</p>
+
+<a name="184549005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184549005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184549005">Sebastian Ullrich (Dec 31 2019 at 15:20)</a>:</h4>
+<blockquote>
+<p>Algebraic classes (monoids, groups, etc)</p>
+<p>Are there any big changes coming here?</p>
+</blockquote>
+<p>I don't think I have anything new to share about the other questions, but this one should be easy to answer: AFAIK the plan is not to include the algebraic hierarchy in the corelib, since there is no reason to do so. So this will be up to the community.</p>
+
+<a name="184549216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184549216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184549216">Mario Carneiro (Dec 31 2019 at 15:25)</a>:</h4>
+<p>what's going to happen with <code>tactic.norm_num</code> and the algebraic dependencies there?</p>
+
+<a name="184549295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20do%20we%20know%20about%20Lean%204%3F/near/184549295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05425WhatdoweknowaboutLean4.html#184549295">Sebastian Ullrich (Dec 31 2019 at 15:27)</a>:</h4>
+<p>There should be no reason to include <code>norm_num</code> in the corelib, either</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

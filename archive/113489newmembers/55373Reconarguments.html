@@ -1,0 +1,272 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/55373Reconarguments.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html">Rec_on arguments</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193544046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544046">ROCKY KAMEN-RUBIO (Apr 10 2020 at 07:18)</a>:</h4>
+<p>I'm confused about the behavior of <code>rec_on</code>. Specifically, in the example below, I'm trying to prove something is true for both instances of my inductive definition  <code>mult_3</code>, which only has two cases, but I'm getting three new goal states. In term mode, I understand that <code>rec_on</code> takes in three args, but isn't the goal state here the "first" of those three? The first goal I get when I do this looks identical to the original goal state as well, which doesn't seem right. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">inductive</span> <span class="n">mult_3</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">mult_3_O</span> <span class="o">:</span>
+    <span class="n">mult_3</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">mult_3_SSS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">mult_3</span> <span class="n">n</span> <span class="bp">→</span>
+    <span class="n">mult_3</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">rec_on</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193544073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544073">Kenny Lau (Apr 10 2020 at 07:19)</a>:</h4>
+<p>don't use <code>rec_on</code> in tactic mode. Instead, use <code>induction</code></p>
+
+<a name="193544125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544125">Kenny Lau (Apr 10 2020 at 07:20)</a>:</h4>
+<p>if you want to keep the orders of the arguments when using <code>apply</code>, use <code>fapply</code></p>
+
+<a name="193544138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544138">Kenny Lau (Apr 10 2020 at 07:20)</a>:</h4>
+<p>also try minimize the number of lines by using <code>apply mult_3.rec_on hk</code> instead</p>
+
+<a name="193544144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544144">Kenny Lau (Apr 10 2020 at 07:20)</a>:</h4>
+<p>but preferably use <code>induction hk</code></p>
+
+<a name="193544562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544562">ROCKY KAMEN-RUBIO (Apr 10 2020 at 07:29)</a>:</h4>
+<p>It seems like <code>induction</code> defaults to the type of the variable I apply it to. Is there a way to tell <code>induction</code> that I want it to work on the cases of <code>mult_3</code> instead of the cases of <code>nat</code>, even though everything in <code>hk</code> is a <code>nat</code>?</p>
+
+<a name="193544874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193544874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193544874">Donald Sebastian Leung (Apr 10 2020 at 07:35)</a>:</h4>
+<p>If you have some <code>hyp : mult_3 n</code> then <code>induction hyp</code> should perform structural induction on <code>mult_3</code> instead of ordinary induction on <code>n</code>.</p>
+
+<a name="193545405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193545405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193545405">Kenny Lau (Apr 10 2020 at 07:43)</a>:</h4>
+<p>it looks like I misread the whole thing. The instance of <code>mult_3</code> is in your goal, not your hypothesis.</p>
+
+<a name="193545491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193545491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193545491">Kenny Lau (Apr 10 2020 at 07:45)</a>:</h4>
+<p>so 1. <code>mult_3.rec_on</code> will never work because it is used for destructing an instance of <code>mult_3</code> in your hypothesis, and 2. you should induct on <code>k</code> instead</p>
+
+<a name="193545524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193545524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193545524">ROCKY KAMEN-RUBIO (Apr 10 2020 at 07:45)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span> <a href="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193544874" title="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193544874">said</a>:</p>
+<blockquote>
+<p>If you have some <code>hyp : mult_3 n</code> then <code>induction hyp</code> should perform structural induction on <code>mult_3</code> instead of ordinary induction on <code>n</code>.</p>
+</blockquote>
+<p>Interesting. That makes sense, and seems to be working for me, but it feels weird to have to make something of that type just to tell induction to act on it. </p>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193545405" title="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193545405">said</a>:</p>
+<blockquote>
+<p>it looks like I misread the whole thing. The instance of <code>mult_3</code> is in your goal, not your hypothesis.</p>
+</blockquote>
+<p>Yeah I'm trying to show <code>mult_3 n </code>.</p>
+
+<a name="193546605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193546605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193546605">ROCKY KAMEN-RUBIO (Apr 10 2020 at 08:01)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193545491" title="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193545491">said</a>:</p>
+<blockquote>
+<p>so 1. <code>mult_3.rec_on</code> will never work because it is used for destructing an instance of <code>mult_3</code> in your hypothesis, and 2. you should induct on <code>k</code> instead</p>
+</blockquote>
+<p>I tried inducting on k  and got stuck here. My thinking was that this was tricky because I should have been exploiting the structure of mult_3 more directly, but maybe there's a way forward I'm not seeing? </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">l</span> <span class="n">hl</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_zero</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_O</span><span class="o">,</span>
+
+<span class="n">rw</span> <span class="n">succ_eq_add_one</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Edit: copied the wrong code initially and had to modify.</p>
+
+<a name="193546784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193546784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193546784">Kevin Buzzard (Apr 10 2020 at 08:04)</a>:</h4>
+<p>This is no good -- your induction hypothesis is useless.</p>
+
+<a name="193546815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193546815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193546815">Kevin Buzzard (Apr 10 2020 at 08:04)</a>:</h4>
+<p>You need to do induction before the intro. You need to think carefully about precisely which statement you need to prove by induction.</p>
+
+<a name="193546842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193546842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193546842">Kenny Lau (Apr 10 2020 at 08:05)</a>:</h4>
+<p>actually, rewrite, and then induct on <code>k</code> to prove <code>mult_3 (3 * k)</code></p>
+
+<a name="193546861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193546861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193546861">Kevin Buzzard (Apr 10 2020 at 08:05)</a>:</h4>
+<p>Even better.</p>
+
+<a name="193547481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547481">ROCKY KAMEN-RUBIO (Apr 10 2020 at 08:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193546842" title="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193546842">said</a>:</p>
+<blockquote>
+<p>actually, rewrite, and then induct on <code>k</code> to prove <code>mult_3 (3 * k)</code></p>
+</blockquote>
+<p>This seems a lot better but I'm still getting stuck at the end with my index off by one. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">l</span> <span class="n">hl</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_zero</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_O</span><span class="o">,</span>
+
+<span class="n">rw</span> <span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">succ_eq_add_one</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_add</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_one</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_add</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_SSS</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">hl</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193547666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547666">Mario Carneiro (Apr 10 2020 at 08:18)</a>:</h4>
+<p>you need to delete hypothesis <code>h</code> before the induction, or else it will get automatically pulled into the induction hypothesis making it useless</p>
+
+<a name="193547696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547696">Mario Carneiro (Apr 10 2020 at 08:18)</a>:</h4>
+<p>alternatively you can use <code>induction k with l hl generalizing n</code>, but the variable <code>n</code> is already useless by that point so there is no reason to</p>
+
+<a name="193547728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547728">Kevin Buzzard (Apr 10 2020 at 08:19)</a>:</h4>
+<p>The formalisation of the question itself is bad</p>
+
+<a name="193547733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547733">Kevin Buzzard (Apr 10 2020 at 08:19)</a>:</h4>
+<p>n plays no role and is now screwing you up</p>
+
+<a name="193547744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547744">Kevin Buzzard (Apr 10 2020 at 08:19)</a>:</h4>
+<p>Just prove mult_3 (3*k) and drop the n</p>
+
+<a name="193547833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193547833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193547833">Kevin Buzzard (Apr 10 2020 at 08:21)</a>:</h4>
+<p>You don't want a function which demands n as an input and then immediately demands a proof that it's equal to something else</p>
+
+<a name="193548069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193548069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193548069">ROCKY KAMEN-RUBIO (Apr 10 2020 at 08:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193547744" title="#narrow/stream/113489-new-members/topic/Rec_on.20arguments/near/193547744">said</a>:</p>
+<blockquote>
+<p>Just prove mult_3 (3*k) and drop the n</p>
+</blockquote>
+<p>So the larger proof I'm trying to write uses <code>def div3 (n:ℕ) := ∃ (k : ℕ), n = 3*k</code>, and the question would be stated as <code>div n \r  mult_3 n</code>but I felt like that would have cluttered this example. I agree this formalism is bad.</p>
+
+<a name="193548185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193548185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193548185">Mario Carneiro (Apr 10 2020 at 08:26)</a>:</h4>
+<p>You can do the small amount of logical glue to connect <code>mult_3 (3*k)</code> to <code>3 \| n -&gt;  mult_3 n</code> in the proof of the latter</p>
+
+<a name="193636971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193636971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193636971">ROCKY KAMEN-RUBIO (Apr 11 2020 at 02:00)</a>:</h4>
+<p>This is how I was ultimately able to do it. I kept get stuck not generalizing my n properly at the end with the induction on k, but induction on <code>hyp : mult_3 n</code> worked. Maybe I'm missing something. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">inductive</span> <span class="n">mult_3</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">mult_3_O</span> <span class="o">:</span>
+    <span class="n">mult_3</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">mult_3_SSS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">mult_3</span> <span class="n">n</span> <span class="bp">→</span>
+    <span class="n">mult_3</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">div3</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span>
+<span class="kn">lemma</span> <span class="n">p0</span> <span class="o">:</span> <span class="n">mult_3</span> <span class="mi">0</span> <span class="o">:=</span>  <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_O</span>
+
+<span class="kn">lemma</span> <span class="n">div3_imp_p</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">{</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">mult_3</span> <span class="n">n</span><span class="o">}:</span> <span class="n">div3</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">div3</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">hyp</span><span class="o">,</span>
+
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">p0</span><span class="o">,</span>
+
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_SSS</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">hyp_a</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193638251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193638251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193638251">Mario Carneiro (Apr 11 2020 at 02:31)</a>:</h4>
+<p>The statement of <code>div3_imp_p</code> is nonsense; you can prove it by <code>exact hyp</code> on the first line</p>
+
+<a name="193638293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193638293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193638293">Mario Carneiro (Apr 11 2020 at 02:32)</a>:</h4>
+<p>you've assumed what you wanted to prove</p>
+
+<a name="193638448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193638448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193638448">Mario Carneiro (Apr 11 2020 at 02:37)</a>:</h4>
+<p>This is a totally unfair proof since you probably haven't seen most of these tricks but fwiw</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">div3_imp_p</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">div3</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">k</span><span class="bp">;</span> <span class="n">constructor</span><span class="o">,</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193638551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193638551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193638551">Mario Carneiro (Apr 11 2020 at 02:40)</a>:</h4>
+<p>or the one liner version</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">div3_imp_p</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">div3</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">mult_3</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">induction</span> <span class="n">k</span><span class="bp">;</span> <span class="n">constructor</span><span class="bp">;</span> <span class="n">assumption</span>
+</pre></div>
+
+<a name="193639087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193639087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193639087">ROCKY KAMEN-RUBIO (Apr 11 2020 at 02:59)</a>:</h4>
+<p>Cool! Yeah I'm not too familiar with most of those tactics so I'll read up some more.</p>
+
+<a name="193639312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193639312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193639312">Mario Carneiro (Apr 11 2020 at 03:06)</a>:</h4>
+<p>Here is the same proof but being more explicit about the changes</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">div3_imp_p</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">div3</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">div3</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">k</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">subst</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">mul_zero</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_O</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">change</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">succ</span> <span class="n">k</span> <span class="k">with</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">mult_3_SSS</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">IH</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193639316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193639316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193639316">Mario Carneiro (Apr 11 2020 at 03:07)</a>:</h4>
+<p>The <code>unfold</code>, <code>rw mul_zero</code> and <code>change</code> steps are optional because they make definitionally equal changes to the goal</p>
+
+<a name="193641302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Rec_on%20arguments/near/193641302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55373Reconarguments.html#193641302">Kenny Lau (Apr 11 2020 at 04:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> feel free to post your short solutions <a href="https://www.codewars.com/kata/5cc47f8c4b8fea001de6d226/lean" title="https://www.codewars.com/kata/5cc47f8c4b8fea001de6d226/lean">here</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

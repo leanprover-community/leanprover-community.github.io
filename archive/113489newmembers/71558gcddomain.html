@@ -1,0 +1,134 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/71558gcddomain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html">gcd_domain</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194552593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194552593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194552593">Paul van Wamelen (Apr 18 2020 at 16:26)</a>:</h4>
+<p>I want to use the gcd in a general unique factorization domain and prove e.g. what the prime factorization of <code>gcd a b</code> looks like in terms of the the prime factorizations of <code>a</code> and <code>b</code>. So (but I'm probably misunderstanding something) I don't think I can "just ask for a <code>gcd_domain</code>". I want both a <code>gcd_domain</code> and a <code>unique_factorization_doamin</code>, but I can't <code>variables [unique_factorization_domain α]</code> without <code>integral_domain</code>...</p>
+
+<a name="194553686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194553686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194553686">Kevin Buzzard (Apr 18 2020 at 16:52)</a>:</h4>
+<p>But there is no gcd in a general UFD. It's only defined up to units.</p>
+
+<a name="194553749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194553749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194553749">Kevin Buzzard (Apr 18 2020 at 16:54)</a>:</h4>
+<p>The whole purpose of <code>normalisation domain</code>s is to give a fixed notion of a gcd.</p>
+
+<a name="194553779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194553779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194553779">Reid Barton (Apr 18 2020 at 16:55)</a>:</h4>
+<p>So I guess the first question is, <em>in math</em>, do you want to treat a general UFD?</p>
+
+<a name="194553819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194553819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194553819">Reid Barton (Apr 18 2020 at 16:56)</a>:</h4>
+<p>If so then I think you can't use one of these funny <code>normalization_domain</code>/<code>gcd_domain</code>s.</p>
+
+<a name="194553908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194553908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194553908">Reid Barton (Apr 18 2020 at 16:58)</a>:</h4>
+<p>Then the second question will be how to say what you want to say using mathlib's classes.</p>
+
+<a name="194554029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554029">Kevin Buzzard (Apr 18 2020 at 17:01)</a>:</h4>
+<p>Hmm, I think that on a general UFD you can give a structure of a normalization domain. You put the equivalence relation "our ratio is a unit" on all the irreducible elements of the UFD and then randomly choose an element in each equivalence class, and then extend multiplicatively.</p>
+
+<a name="194554109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554109">Kevin Buzzard (Apr 18 2020 at 17:03)</a>:</h4>
+<p>Although you'll have to be careful not to make it too random, because <code>normalization domain int</code> is already an instance in mathlib, where they chose the positive element of each equivalence class <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mi>p</mi><mo separator="true">,</mo><mo>−</mo><mi>p</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{p,-p\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord mathdefault">p</span><span class="mclose">}</span></span></span></span>.</p>
+
+<a name="194554166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554166">Reid Barton (Apr 18 2020 at 17:04)</a>:</h4>
+<p>Oh I see, I forgot you had these irreducibles to work with.</p>
+
+<a name="194554238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554238">Kevin Buzzard (Apr 18 2020 at 17:06)</a>:</h4>
+<p>I'm not sure this construction is in mathlib though (I don't know this part of the library, I'm just browsing through it). The def <code>unique_factorization_domain.to_gcd_domain</code> assumes a normalization domain.</p>
+
+<a name="194554326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554326">Paul van Wamelen (Apr 18 2020 at 17:08)</a>:</h4>
+<p>Ultimately what I wanted to prove was that in the <code>gaussian_int</code>s, if the product of 2 relatively prime elements is a k'th power then each element is a k'th power. I was thinking it would be possible to do the normalization in <code>gaussian_int</code>s like Kevin describes.</p>
+
+<a name="194554331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554331">Kevin Buzzard (Apr 18 2020 at 17:08)</a>:</h4>
+<p>But this statement isn't true.</p>
+
+<a name="194554338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554338">Kevin Buzzard (Apr 18 2020 at 17:09)</a>:</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">9i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord">9</span><span class="mord mathdefault">i</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>4</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">-4i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.74285em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">4</span><span class="mord mathdefault">i</span></span></span></span> are not squares, but their product is.</p>
+
+<a name="194554392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554392">Paul van Wamelen (Apr 18 2020 at 17:10)</a>:</h4>
+<p>OK, up to units! :)</p>
+
+<a name="194554398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554398">Kevin Buzzard (Apr 18 2020 at 17:10)</a>:</h4>
+<p>If you only care up to units then hopefully you don't need any of that normalisation domain nonsense.</p>
+
+<a name="194554467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554467">Paul van Wamelen (Apr 18 2020 at 17:12)</a>:</h4>
+<p>I thought all the "normalization domain nonsense" was exactly there to make it easy to state things "up to units"!</p>
+
+<a name="194554480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554480">Kevin Buzzard (Apr 18 2020 at 17:13)</a>:</h4>
+<p>On the contrary, my impression is that it's exactly there because the computer scientists thought it was a good idea, and no self-respecting mathematician would touch it.</p>
+
+<a name="194554488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554488">Kevin Buzzard (Apr 18 2020 at 17:13)</a>:</h4>
+<p><code>unique_factorization_domain.lean</code> should contain everything you need.</p>
+
+<a name="194554494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554494">Kevin Buzzard (Apr 18 2020 at 17:14)</a>:</h4>
+<p><code>associates R</code> is the type of equivalence classes <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><msup><mi>R</mi><mo>×</mo></msup></mrow><annotation encoding="application/x-tex">R/R^\times</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.021331em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord">/</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">×</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="194554553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554553">Kevin Buzzard (Apr 18 2020 at 17:15)</a>:</h4>
+<p>and there is a predicate <code>irreducible</code> on them, and <code>factor_set</code> is the type of (finite) multisets of elements of <code>associates R</code> plus a random extra term corresponding to the factors of 0</p>
+
+<a name="194554606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554606">Kevin Buzzard (Apr 18 2020 at 17:16)</a>:</h4>
+<p>and <code>factors' r</code> is the multiset of prime factors of r if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">r\not=0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> (multiset just means set but you're allowed repeated elements)</p>
+
+<a name="194554693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554693">Kevin Buzzard (Apr 18 2020 at 17:18)</a>:</h4>
+<p>If you think about how you want to formalise things, then you want a factorization of a non-zero thing to be exactly a collection of primes-up-to-units (with repeats allowed) whose product is the thing, and this is exactly what <code>factors</code> and <code>factors'</code> are giving you, and all the lemmas you want are proved about these things.</p>
+
+<a name="194554714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554714">Reid Barton (Apr 18 2020 at 17:19)</a>:</h4>
+<p>It sure would be easier if we didn't have all these crazy negative and imaginary numbers</p>
+
+<a name="194554783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554783">Kevin Buzzard (Apr 18 2020 at 17:21)</a>:</h4>
+<p>I think that's what the computer scientists are thinking. You also have to learn to see through the computer science lattice notation, e.g. <code>theorem prod_le {a b : factor_set α} : a.prod ≤ b.prod ↔ a ≤ b</code> means that if the product of the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> divides the product of the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">b_i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> then the multiset of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is a subset of the multiset of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">b_i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, and <code>lemma sup_mul_inf (a b : associates α) : (a ⊔ b) * (a ⊓ b) = a * b</code> means that <code>gcd(a,b)*lcm(a,b)=a*b</code>, where equality is up to units (a and b are not elements of R, they're elements of <code>associates R</code>)</p>
+
+<a name="194554830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554830">Paul van Wamelen (Apr 18 2020 at 17:22)</a>:</h4>
+<p>OK, thanks Kevin! I'll give all of this another think.</p>
+
+<a name="194554838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554838">Kevin Buzzard (Apr 18 2020 at 17:22)</a>:</h4>
+<p>If you only want to work up to units then <code>associates R</code> is the type you're looking for, and there are a ton of lemmas about it.</p>
+
+<a name="194554938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194554938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194554938">Paul van Wamelen (Apr 18 2020 at 17:25)</a>:</h4>
+<p>Yep, have been staring at this for a while now... I was thinking using <code>to_gcd_domain</code> would get me a bit more functionality, but I can certainly survive without it.</p>
+
+<a name="194555004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194555004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194555004">Kevin Buzzard (Apr 18 2020 at 17:26)</a>:</h4>
+<p>The only thing it will give you is a non-canonical but fixed splitting of the map <code>R -&gt; associates R</code>, but given that the statement you want is only true up to units I'm not sure you're buying much with it.</p>
+
+<a name="194626136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gcd_domain/near/194626136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71558gcddomain.html#194626136">Chris Hughes (Apr 20 2020 at 01:10)</a>:</h4>
+<p><code>gcd_domain</code> really needs to be refactored at some point I think, to unlink it from <code>normalization_domain</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,166 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/11947applyingdefinitionstotheorems.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html">applying definitions to theorems</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189322998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189322998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189322998">Danila Kurganov (Feb 28 2020 at 16:02)</a>:</h4>
+<p>Hi, I'm having trouble trying to use my own definitions and applying them to theorems, <br>
+how should I approach the following if I wanted to unpack my definition once lean knows there's a proof of it?</p>
+<div class="codehilite"><pre><span></span>def equivalency (p q : Prop) : Prop := p → q ∧ q → p
+
+theorem (p q : Prop) : equivalency p q → p ∧ q :=
+begin
+  intro eq_pq,
+  -- how do I unpack my definition now?
+end
+</pre></div>
+
+
+<p>Thanks!</p>
+
+<a name="189323102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189323102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189323102">Donald Sebastian Leung (Feb 28 2020 at 16:03)</a>:</h4>
+<p>Try <code>unfold equivalency at *</code></p>
+
+<a name="189323408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189323408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189323408">Danila Kurganov (Feb 28 2020 at 16:06)</a>:</h4>
+<p>Thanks, that works perfectly-  If I wanted to find out more about the unfold tactic (source code maybe?) where should I go? I've not found the tactic codes so far..</p>
+
+<a name="189324062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324062">Kevin Buzzard (Feb 28 2020 at 16:13)</a>:</h4>
+<p>There are <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/tactics.html">lots of tactics</a>, and I picked up the ones which were useful for me by just asking lots of questions.</p>
+
+<a name="189324241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324241">Danila Kurganov (Feb 28 2020 at 16:16)</a>:</h4>
+<p>That's  a neat site, thanks.</p>
+
+<a name="189324780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324780">Bryan Gin-ge Chen (Feb 28 2020 at 16:21)</a>:</h4>
+<p>The doc page that Kevin linked to mostly discusses tactics in mathlib. The source code for those tactics can be found in the <a href="https://github.com/leanprover-community/mathlib/tree/master/src/tactic" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/src/tactic"><code>src/tactic</code> directory of mathlib</a>. The <code>unfold</code> tactic is provided in the core library and its source code is <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/interactive.lean#L1464" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/interactive.lean#L1464">here</a>. It relies on much of the same code as the very important <code>simp</code> tactic, which you can read more about <a href="https://leanprover-community.github.io/mathlib_docs/simp.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/simp.html">here</a>.</p>
+
+<a name="189326937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189326937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189326937">Danila Kurganov (Feb 28 2020 at 16:45)</a>:</h4>
+<p>Will have a read- and I forgot to check src! good to know it's all there. Didn't know simp was much more intricate under-the-hood, good to know</p>
+
+<a name="189327495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189327495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189327495">Reid Barton (Feb 28 2020 at 16:50)</a>:</h4>
+<p>Some tactics (like <code>cases</code>/<code>rcases</code> which is probably coming next) will automatically see through definitional equalities, making <code>unfold</code> redundant once you know what the next step should be.</p>
+
+<a name="189330508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189330508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189330508">Danila Kurganov (Feb 28 2020 at 17:22)</a>:</h4>
+<p>By 'which is probably coming next' you mean some new version of Lean?</p>
+
+<a name="189330532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189330532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189330532">Kevin Buzzard (Feb 28 2020 at 17:22)</a>:</h4>
+<p>he means your next move after <code>unfold</code></p>
+
+<a name="189330578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189330578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189330578">Kevin Buzzard (Feb 28 2020 at 17:23)</a>:</h4>
+<p>Isn't your theorem false by the way? p and q could both be false right?</p>
+
+<a name="189331395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189331395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189331395">Danila Kurganov (Feb 28 2020 at 17:32)</a>:</h4>
+<p>Oh got it; and yeah it's quite false, I've changed it to including that case too</p>
+
+<a name="189334251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189334251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189334251">Danila Kurganov (Feb 28 2020 at 18:01)</a>:</h4>
+<p>it does seem like I am still in a bit of a pickle by the way- I want to use the fact that if one's not true the other must be true; (so I've tried using by_cases), yet my expression is 'not decidable'.. any thoughts?</p>
+<div class="codehilite"><pre><span></span>theorem (p q: Prop) : equivalency p q → ((p ∧ q) ∨ ((¬ p) ∧ (¬ q))) :=
+begin
+  intro eq,
+  unfold equivalency at *,
+  cases eq with pq qp,
+  --by_cases h : p ∧ q,
+end
+</pre></div>
+
+
+<p>I sort of want to just do the casework and/or use a contradiction</p>
+
+<a name="189334404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189334404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189334404">Kevin Buzzard (Feb 28 2020 at 18:02)</a>:</h4>
+<p>Your code doesn't work at all for me. Can you post something which compiles?</p>
+
+<a name="189334505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189334505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189334505">Kevin Buzzard (Feb 28 2020 at 18:03)</a>:</h4>
+<p>Oh -- does the <code>cases</code> line not work for you either?</p>
+
+<a name="189334798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189334798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189334798">Kevin Buzzard (Feb 28 2020 at 18:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equivalency</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">→</span> <span class="n">p</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Your definition is not what you think it is.</p>
+
+<a name="189334830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189334830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189334830">Kevin Buzzard (Feb 28 2020 at 18:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">equivalency</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">→</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">theorem</span> <span class="n">x</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span><span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">equivalency</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">→</span> <span class="o">((</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">((</span><span class="bp">¬</span> <span class="n">p</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">q</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">eq</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">equivalency</span> <span class="n">at</span> <span class="n">eq</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">eq</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="bp">;</span> <span class="n">by_cases</span> <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189609798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189609798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189609798">Danila Kurganov (Mar 03 2020 at 16:35)</a>:</h4>
+<p>I never would have known that I have defined my equivalency poorly; I think it sort of doesn't 'say' anything; but now the by_cases tactic makes much more sense</p>
+
+<a name="189609851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189609851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189609851">Danila Kurganov (Mar 03 2020 at 16:36)</a>:</h4>
+<p>What does this open_locale classical do? It got rid of many red underlines in my vs code</p>
+
+<a name="189610151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189610151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189610151">Kevin Buzzard (Mar 03 2020 at 16:39)</a>:</h4>
+<p>It means that you can assume that every true/false statement is either true or false. Some tactics like <code>finish</code> assume this. Some computer scientists don't like assuming this <em>shrug</em></p>
+
+<a name="189611021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189611021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189611021">Danila Kurganov (Mar 03 2020 at 16:48)</a>:</h4>
+<p>So it just tells Lean what it can assume for the time being, got it thanks</p>
+
+<a name="189611070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189611070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189611070">Kevin Buzzard (Mar 03 2020 at 16:49)</a>:</h4>
+<p>No, it switches Lean into maths mode.</p>
+
+<a name="189611200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189611200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189611200">Danila Kurganov (Mar 03 2020 at 16:50)</a>:</h4>
+<p>By maths mode you mean propositions are either true or false.. or is there something more to this?</p>
+
+<a name="189611445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189611445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189611445">Kevin Buzzard (Mar 03 2020 at 16:52)</a>:</h4>
+<p>I mean that you can assume many things such as the law of the excluded middle, decidability of all propositions etc, things which mathematicians assume all the time without ever questioning that it could be any other way, but some computer scientists don't like to assume because they might want their code to be "constructive", which is some technical thing we don't teach in the maths department.</p>
+
+<a name="189611911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189611911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189611911">Danila Kurganov (Mar 03 2020 at 16:57)</a>:</h4>
+<p>I quite like how it can be constructive, but for the time being I'm guessing typing  <code>open_locale classical</code> should just be a habit then for usual maths. Thanks</p>
+
+<a name="189612080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189612080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189612080">Reid Barton (Mar 03 2020 at 16:59)</a>:</h4>
+<p>In this case you need classical reasoning for <code>x</code> (<code>equivalency p p</code> is true, and then you conclude <code>p</code> or not <code>p</code>.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

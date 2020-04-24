@@ -1,0 +1,414 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/56638universeissuesincategorytheory.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html">universe issues in category theory</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190043280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190043280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190043280">Johan Commelin (Mar 09 2020 at 05:58)</a>:</h4>
+<p>How hard would it be to fix the Lean fork so that it becomes better at figuring out universes? I got the impression that we have to remind Lean about universes in category theory, a lot more than strictly necessary, just because Lean was being a bit lazy...</p>
+
+<a name="190043497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190043497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190043497">Mario Carneiro (Mar 09 2020 at 06:05)</a>:</h4>
+<p>do you have a concrete example?</p>
+
+<a name="190044612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190044612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190044612">Johan Commelin (Mar 09 2020 at 06:43)</a>:</h4>
+<p>Just a random example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">full_subcategory</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">//</span> <span class="n">Z</span> <span class="n">X</span><span class="o">}</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>If Lean figures out the category instance for <code>C</code>, then it knows which 2 universe variables are in play. And so it should be able to figure out the <code>v</code> by itself.</p>
+
+<a name="190044615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190044615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190044615">Johan Commelin (Mar 09 2020 at 06:43)</a>:</h4>
+<p>There might be other, better examples.</p>
+
+<a name="190044723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190044723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190044723">Simon Hudon (Mar 09 2020 at 06:46)</a>:</h4>
+<p>One remedy to this situation would be to make <code>category</code> fully bundled. Then,  the type of your category would dictate the universe in which the arrows are.</p>
+
+<a name="190044851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190044851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190044851">Simon Hudon (Mar 09 2020 at 06:50)</a>:</h4>
+<p>I think it would be a design worth exploring if someone has the time to try it out</p>
+
+<a name="190052733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190052733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190052733">Mario Carneiro (Mar 09 2020 at 09:45)</a>:</h4>
+<p>That already exists, it's called <code>small_category</code></p>
+
+<a name="190052757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190052757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190052757">Mario Carneiro (Mar 09 2020 at 09:46)</a>:</h4>
+<p>but the problem is that while <code>small_category</code> and <code>large_category</code> both fix the homset universe level, they fix it to different things, and <code>category.{v}</code> is the generalization</p>
+
+<a name="190052814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190052814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190052814">Mario Carneiro (Mar 09 2020 at 09:46)</a>:</h4>
+<p>I think this amounts to saying that <code>v</code> is an out_param on the category typeclass instance</p>
+
+<a name="190052819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190052819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190052819">Mario Carneiro (Mar 09 2020 at 09:46)</a>:</h4>
+<p>which is not a thing we can annotate</p>
+
+<a name="190053094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053094">Simon Hudon (Mar 09 2020 at 09:51)</a>:</h4>
+<p>That is not what I'm talking about.</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">structure</span> <span class="n">category</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">-&gt;</span> <span class="n">C</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="c1">-- etc</span>
+</pre></div>
+
+
+<p>Then, we fix the universes at the time of definition of the category or the declaration of the category variable</p>
+
+<a name="190053193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053193">Mario Carneiro (Mar 09 2020 at 09:52)</a>:</h4>
+<p>that will make the problem worse</p>
+
+<a name="190053203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053203">Mario Carneiro (Mar 09 2020 at 09:53)</a>:</h4>
+<p>you will have <code>category.{u v}</code> now</p>
+
+<a name="190053213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053213">Mario Carneiro (Mar 09 2020 at 09:53)</a>:</h4>
+<p>the only reason <code>u</code> can be inferred is because <code>C</code> is a parameter</p>
+
+<a name="190053330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053330">Simon Hudon (Mar 09 2020 at 09:55)</a>:</h4>
+<p>Already, we define <code>variable (C : Type u) [category.{v} C]</code> so both universes are already specified explicitly. What I'm proposing is <code>variable (C : category.{u v})</code> and then never have to specify universes again as far as <code>C</code> is concerned</p>
+
+<a name="190053336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053336">Mario Carneiro (Mar 09 2020 at 09:55)</a>:</h4>
+<p>it will certainly not eliminate the universe annotations in Johan's example</p>
+
+<a name="190053414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053414">Simon Hudon (Mar 09 2020 at 09:56)</a>:</h4>
+<p>If <code>C</code> is a category, it certainly will</p>
+
+<a name="190053426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053426">Mario Carneiro (Mar 09 2020 at 09:56)</a>:</h4>
+<p>I think you don't actually need to specify either currently. You can write <code>variable (C : Type*) [category C]</code> and it will mean the same thing, just with generated names. The actual reason universe names appear there is because they need to be referred to later</p>
+
+<a name="190053544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053544">Mario Carneiro (Mar 09 2020 at 09:58)</a>:</h4>
+<p>(This is also the standard practice in the rest of mathlib, to avoid naming universes unless they need to be referred to by name later)</p>
+
+<a name="190053669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053669">Simon Hudon (Mar 09 2020 at 10:00)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190053426" title="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190053426">said</a>:</p>
+<blockquote>
+<p>I think you don't actually need to specify either currently. You can write <code>variable (C : Type*) [category C]</code> and it will mean the same thing, just with generated names. The actual reason universe names appear there is because they need to be referred to later</p>
+</blockquote>
+<p>You should have a look at <code>category_theory</code></p>
+
+<a name="190053766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053766">Simon Hudon (Mar 09 2020 at 10:01)</a>:</h4>
+<p>Here is the standard practice:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Every category has two names and universe names are a handful</p>
+
+<a name="190053819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053819">Mario Carneiro (Mar 09 2020 at 10:01)</a>:</h4>
+<p>I'm aware. Those names are there because they need to be, but the reasons for that need are not on the <code>variables</code> line</p>
+
+<a name="190053895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053895">Mario Carneiro (Mar 09 2020 at 10:02)</a>:</h4>
+<p>The name on the instance itself is also peculiar, that isn't done anywhere else and you can be sure it's being done for a reason</p>
+
+<a name="190053939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053939">Simon Hudon (Mar 09 2020 at 10:03)</a>:</h4>
+<p>Yes and having a bundled model alleviates that need</p>
+
+<a name="190053974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190053974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190053974">Mario Carneiro (Mar 09 2020 at 10:03)</a>:</h4>
+<p>I think it would be best to stick to Johan's original question</p>
+
+<a name="190054063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190054063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190054063">Mario Carneiro (Mar 09 2020 at 10:04)</a>:</h4>
+<p>I don't think the bundled model would solve any universe problems, and they would be problematic for completely different reasons</p>
+
+<a name="190054104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190054104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190054104">Mario Carneiro (Mar 09 2020 at 10:05)</a>:</h4>
+<p>but taking for granted that categories are represented the way they are, is there anything we can do to eliminate the need to refer to universe names?</p>
+
+<a name="190054251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190054251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190054251">Simon Hudon (Mar 09 2020 at 10:07)</a>:</h4>
+<p>I disagree. The bundling does have an effect on universe inference and I think changing the design of the library is a smaller project than playing with the way the elaborator handles universes</p>
+
+<a name="190054361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190054361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190054361">Mario Carneiro (Mar 09 2020 at 10:08)</a>:</h4>
+<p>perhaps, but the present design already came about as a result of considering what worked best with lean 3 as it existed at the time. Yes, we considered fully bundled, half bundled, and unbundled options, and this was a point of discussion when category theory first entered mathlib, migrated from Scott's repository</p>
+
+<a name="190054381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190054381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190054381">Mario Carneiro (Mar 09 2020 at 10:09)</a>:</h4>
+<p>This question is challenging the premise of that earlier decision - what if we could change lean, could we find something better?</p>
+
+<a name="190055142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190055142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190055142">Simon Hudon (Mar 09 2020 at 10:20)</a>:</h4>
+<p>What's your suggestion?</p>
+
+<a name="190055174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190055174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190055174">Mario Carneiro (Mar 09 2020 at 10:21)</a>:</h4>
+<p>FIgure out what the technical issues are that are currently preventing us from banishing universe annotations in the category theory library, and see if there is another way to solve them using hypothetical elaboration hints</p>
+
+<a name="190055320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190055320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190055320">Mario Carneiro (Mar 09 2020 at 10:23)</a>:</h4>
+<p>I identified one above - <code>category.{u v} C</code> apparently treats <code>v</code> as an output parameter, and while this is a perfectly meaningful statement lean's method of annotating out_params involves sticking identity functions on the parameter, which doesn't work for universes</p>
+
+<a name="190055404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190055404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190055404">Mario Carneiro (Mar 09 2020 at 10:24)</a>:</h4>
+<p>One way I can imagine conveying this info by alternate means is by an annotation, i.e. <code>@[out_param v]</code></p>
+
+<a name="190056867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190056867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190056867">Simon Hudon (Mar 09 2020 at 10:45)</a>:</h4>
+<p>I'm not sold. It looks like a weird feature to me</p>
+
+<a name="190057247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190057247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190057247">Kevin Buzzard (Mar 09 2020 at 10:50)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190053895" title="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190053895">said</a>:</p>
+<blockquote>
+<p>The name on the instance itself is also peculiar, that isn't done anywhere else and you can be sure it's being done for a reason</p>
+</blockquote>
+<p>I think it's because the universe issue stops the <code>category C</code> term being inferred by type class inference sometimes, so you have to explicitly <code>include</code> it, which means having a sensible name for it.</p>
+
+<a name="190057315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190057315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190057315">Mario Carneiro (Mar 09 2020 at 10:51)</a>:</h4>
+<p>So it sounds like this is also caused by the fact that lean doesn't get that <code>v</code> is an out param</p>
+
+<a name="190057449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190057449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190057449">Mario Carneiro (Mar 09 2020 at 10:52)</a>:</h4>
+<p>so if this hypothesis is correct, the fix is to put <code>@[out_param v]</code> on <code>class category</code>, patch lean, and then all of that stuff goes away and you can just write <code>(C : Type*) [category C]</code></p>
+
+<a name="190059571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059571">Sebastian Ullrich (Mar 09 2020 at 11:24)</a>:</h4>
+<p>What exactly does a universe <code>out_param</code> mean? Unlike expr mvars, universe mvars do not block typeclass search and can be instantiated by it by default.</p>
+
+<a name="190059572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059572">Johan Commelin (Mar 09 2020 at 11:24)</a>:</h4>
+<p>Another issue is that we have to write</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">xyzzy</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">xyzzy</span>
+</pre></div>
+
+
+<p>Why that include statement? Lean shouldn't need it.</p>
+
+<a name="190059665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059665">Mario Carneiro (Mar 09 2020 at 11:26)</a>:</h4>
+<p>the include statement is because unnamed parameters are included when the types they refer to are needed (by default), while named parameters are only included when referred to, like other variables</p>
+
+<a name="190059776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059776">Johan Commelin (Mar 09 2020 at 11:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I meant "Why do I need to name the parameter and include it?"</p>
+
+<a name="190059786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059786">Johan Commelin (Mar 09 2020 at 11:29)</a>:</h4>
+<p>Because if I make it unnamed, then the library breaks.</p>
+
+<a name="190059794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059794">Johan Commelin (Mar 09 2020 at 11:29)</a>:</h4>
+<p>And the reason has to do with Leans limited handling of universe parameters.</p>
+
+<a name="190059867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059867">Mario Carneiro (Mar 09 2020 at 11:30)</a>:</h4>
+<p>I'm saying that <em>if</em> you name the parameter, you are also likely to have to include it. So it comes back to why you have to name it</p>
+
+<a name="190059870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059870">Johan Commelin (Mar 09 2020 at 11:30)</a>:</h4>
+<p>Lean sees a statement using <code>C</code>, and decides not to include the instance <code>[category.{v} C]</code> because it depends on the universe <code>v</code>, and <code>v</code> is not determined by <code>C</code>.</p>
+
+<a name="190059884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190059884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190059884">Johan Commelin (Mar 09 2020 at 11:30)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190059867" title="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190059867">said</a>:</p>
+<blockquote>
+<p>I'm saying that <em>if</em> you name the parameter, you are also likely to have to include it. So it comes back to why you have to name it</p>
+</blockquote>
+<p>Ok, my answer that would have been: "You have to name it so that you can include it...."</p>
+
+<a name="190060080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060080">Mario Carneiro (Mar 09 2020 at 11:34)</a>:</h4>
+<p>There are three levels of include here:</p>
+<ul>
+<li>Unnamed parameter, e.g. <code>variable [foo A]</code>. This is included if A is included (plus some universe stuff apparently)</li>
+<li>Included parameter, e.g. <code>variable (x : A) include x</code>. This is always included</li>
+<li>Not included variable, e.g. <code>variable (x : A)</code> or <code>variable [inst: foo A]</code>. This is only included if the name <code>x</code> resp. <code>inst</code> is used in the theorem statement</li>
+</ul>
+<p>Because instances are almost never referred to by name, the third option is usually not good enough, so while the first is preferred, the second is the fallback.</p>
+
+<a name="190060140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060140">Sebastian Ullrich (Mar 09 2020 at 11:35)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190059870" title="#narrow/stream/113488-general/topic/universe.20issues.20in.20category.20theory/near/190059870">said</a>:</p>
+<blockquote>
+<p>Lean sees a statement using <code>C</code>, and decides not to include the instance <code>[category.{v} C]</code> because it depends on the universe <code>v</code>, and <code>v</code> is not determined by <code>C</code>.</p>
+</blockquote>
+<p>It shouldn't be that. Lean only looks at expr variables/parameters when deciding what to include.</p>
+
+<a name="190060348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060348">Johan Commelin (Mar 09 2020 at 11:39)</a>:</h4>
+<p>Crazy, I thought that's what was determined a long time ago. But now I can't reproduce.</p>
+
+<a name="190060413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060413">Mario Carneiro (Mar 09 2020 at 11:40)</a>:</h4>
+<p>Here's a problem:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">C</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">bar</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">C</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kernel failed to type check declaration &#39;bar&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator
+elaborated type:
+  Π (C : Type u) [_inst_1 : foo C], Type u
+elaborated value:
+  λ (C : Type u) [_inst_1 : foo C], C
+nested exception message:
+invalid reference to undefined universe level parameter &#39;u_1&#39;
+</pre></div>
+
+<a name="190060424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060424">Mario Carneiro (Mar 09 2020 at 11:41)</a>:</h4>
+<p>I think it pulled in <code>_inst_1 : foo.{u u_1} C</code> but forgot to also pull in <code>u_1</code></p>
+
+<a name="190060483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060483">Johan Commelin (Mar 09 2020 at 11:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+
+<span class="kn">universe</span> <span class="kn">variables</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⟶</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">𝟙</span> <span class="n">x</span>
+</pre></div>
+
+<a name="190060499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060499">Johan Commelin (Mar 09 2020 at 11:42)</a>:</h4>
+<p>Right, I <em>can</em> reproduce, it's just that the error doesn't show if you replace <code>𝟙 x</code> with an underscore</p>
+
+<a name="190060505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060505">Johan Commelin (Mar 09 2020 at 11:43)</a>:</h4>
+<p>So you really have to finish the code to see the problem.</p>
+
+<a name="190060521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060521">Johan Commelin (Mar 09 2020 at 11:43)</a>:</h4>
+<p>And <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> is right. It does pull in the category instance. So maybe Mario's hypothesis is better.</p>
+
+<a name="190060685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060685">Sebastian Ullrich (Mar 09 2020 at 11:46)</a>:</h4>
+<p>Yeah, <code>collect_univ_params_ignoring_tactics</code> is called on everything  - except for anonymous instances... <a href="https://github.com/leanprover/lean/blob/72a965986fa5aeae54062e98efb3140b2c4e79fd/src/frontends/lean/decl_util.cpp#L256" target="_blank" title="https://github.com/leanprover/lean/blob/72a965986fa5aeae54062e98efb3140b2c4e79fd/src/frontends/lean/decl_util.cpp#L256">https://github.com/leanprover/lean/blob/72a965986fa5aeae54062e98efb3140b2c4e79fd/src/frontends/lean/decl_util.cpp#L256</a></p>
+
+<a name="190060709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060709">Johan Commelin (Mar 09 2020 at 11:47)</a>:</h4>
+<p>Ok, I would like to have that as a feature request for Lean 3.7.1 (-;</p>
+
+<a name="190060893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060893">Mario Carneiro (Mar 09 2020 at 11:50)</a>:</h4>
+<p>that's a bugfix, not a feature request</p>
+
+<a name="190060936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060936">Mario Carneiro (Mar 09 2020 at 11:51)</a>:</h4>
+<p>and I don't see any reason not to slip it into the next release if we know what the fix is</p>
+
+<a name="190060991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190060991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190060991">Sebastian Ullrich (Mar 09 2020 at 11:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> So what about the <code>out_param</code>? What does it do?</p>
+
+<a name="190061011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190061011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190061011">Mario Carneiro (Mar 09 2020 at 11:52)</a>:</h4>
+<p>if your description is correct, then everything is an out param already and my hypothesis was wrong</p>
+
+<a name="190061021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190061021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190061021">Sebastian Ullrich (Mar 09 2020 at 11:53)</a>:</h4>
+<p>Ok</p>
+
+<a name="190061041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190061041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190061041">Mario Carneiro (Mar 09 2020 at 11:53)</a>:</h4>
+<p>I think this bug is the more likely culprit now</p>
+
+<a name="190067908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190067908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190067908">Reid Barton (Mar 09 2020 at 13:28)</a>:</h4>
+<ul>
+<li>the <code>include xyzzy</code> business is certainly due to a bug, which we could now fix in Lean 3</li>
+<li>re <code>out_param</code>: In Lean 3 universe metavariables don't get assigned by an otherwise matching instance. That is if I search for <code>category.{?l_1 u} C</code> and there is an instance <code>CI : category.{v u} C</code> available, it won't be used (and set <code>?l_1</code> to <code>v</code>). In Lean 4 it apparently will. Philosophically I tend to think the Lean 3 behavior is the "correct" one, but certainly the Lean 4 behavior is more convenient in this case. (Actually the Lean 3 behavior is more complicated--there are two kinds of (universe?) metavariables and they behave differently here. If the other kind wasn't assigned by instances matching, then category theory would require many more explicit universes. I don't remember the details though.)</li>
+<li>I agree with Simon that bundled categories are underexplored, and might ameliorate these issues, at least in Lean 3. I think they are unbundled mainly because other algebraic structures are unbundled. Maybe <span class="user-mention" data-user-id="110087">@Scott Morrison</span> knows the history better. Naturally there might be other issues with bundled categories--it would be very tempting to coerce a bundled category to its type of objects for example, and perhaps it wouldn't play nicely with Lean 3's coercion issues.</li>
+</ul>
+
+<a name="190068476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190068476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190068476">Mario Carneiro (Mar 09 2020 at 13:33)</a>:</h4>
+<p>I think that both behaviors are "correct", but reflect the difference between input and output parameters. They both have their place, but I'm inclined to think that universe variables that are not already determined by typechecking later arguments should usually be treated as out parameters. It would be very strange to have instances of both <code>foo.{u 1} X</code> and <code>foo.{u 2} X</code>  and rely on the input universe to figure out which one to use. I rather think that the uniqueness rule should apply even if you strip all universe checks</p>
+
+<a name="190068707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190068707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190068707">Reid Barton (Mar 09 2020 at 13:35)</a>:</h4>
+<p>Yeah, I agree that ideally you'd have <code>out_param</code> for universes too. I'm used to a setting where everything is "<code>in_param</code>" by default; let me try to understand your suggestion</p>
+
+<a name="190068869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190068869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190068869">Reid Barton (Mar 09 2020 at 13:37)</a>:</h4>
+<p>We're still marking <code>out_param</code>s at the level of classes, not the level of instances, right?</p>
+
+<a name="190068888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190068888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190068888">Mario Carneiro (Mar 09 2020 at 13:37)</a>:</h4>
+<p>yes</p>
+
+<a name="190069101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069101">Reid Barton (Mar 09 2020 at 13:39)</a>:</h4>
+<p>so generally I have <code>class {v u} category : Type u -&gt; Type (max u (v+1))</code> or whatever--is the idea to treat universe parameters which don't appear outside the final result type as <code>out_param</code> by default?<br>
+Does it matter syntactically whether I put parameters to the left of the <code>:</code>?</p>
+
+<a name="190069167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069167">Reid Barton (Mar 09 2020 at 13:40)</a>:</h4>
+<p>I could mark pretty much any top-level declaration as a <code>[class]</code>; does that complicate things?</p>
+
+<a name="190069357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069357">Mario Carneiro (Mar 09 2020 at 13:42)</a>:</h4>
+<p>You can actually just treat all universe parameters as out params I think. The ones that are determined already won't matter</p>
+
+<a name="190069456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069456">Mario Carneiro (Mar 09 2020 at 13:42)</a>:</h4>
+<p>and we never use universe values for instance selection</p>
+
+<a name="190069512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069512">Mario Carneiro (Mar 09 2020 at 13:43)</a>:</h4>
+<p>although an instance can be rejected if it is not well typed</p>
+
+<a name="190069642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069642">Reid Barton (Mar 09 2020 at 13:44)</a>:</h4>
+<p>I think maybe this is what Lean 4 does</p>
+
+<a name="190069665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069665">Mario Carneiro (Mar 09 2020 at 13:44)</a>:</h4>
+<p>I think so too</p>
+
+<a name="190069851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190069851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190069851">Mario Carneiro (Mar 09 2020 at 13:46)</a>:</h4>
+<p>Basically, because universe levels can be normalized or modified whenever during unification, they can't be relied on for dispatch anyway, so I would rather have a "universe-naive" typeclass inference mechanism that just ignores universes until unification/typechecking</p>
+
+<a name="190090956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190090956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190090956">Bryan Gin-ge Chen (Mar 09 2020 at 16:48)</a>:</h4>
+<p>How difficult is this bugfix? We should probably make an issue if nobody is planning to work on it right away, otherwise it'll get lost.</p>
+<p>Edit: <a href="https://github.com/leanprover-community/lean/issues/146" target="_blank" title="https://github.com/leanprover-community/lean/issues/146">https://github.com/leanprover-community/lean/issues/146</a></p>
+
+<a name="190091017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20issues%20in%20category%20theory/near/190091017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56638universeissuesincategorytheory.html#190091017">Reid Barton (Mar 09 2020 at 16:49)</a>:</h4>
+<p>I think the "collect universe variables" bugfix should be fairly trivial</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

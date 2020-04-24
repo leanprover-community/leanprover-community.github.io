@@ -1,0 +1,303 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/01676categoryoverandunder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html">category over and under</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193010577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193010577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193010577">orlando (Apr 06 2020 at 08:37)</a>:</h4>
+<p>Hello, </p>
+<p>A little question : </p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">truc</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">Ring</span><span class="o">)(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)(</span><span class="n">hyp</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="err">∈</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">arrow</span> <span class="o">:</span> <span class="o">{</span> <span class="n">f</span> <span class="o">:</span> <span class="n">under</span> <span class="n">R</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span>  <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">hom</span><span class="o">)</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span> <span class="o">})</span>   <span class="c1">--- stupid condition but don&#39;t work  :(</span>
+<span class="c1">---- hum : f.hom  : R ⟶ A for some A true ?</span>
+<span class="c1">---  How i can evaluate f.hom ?</span>
+</pre></div>
+
+<a name="193015742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193015742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193015742">orlando (Apr 06 2020 at 09:27)</a>:</h4>
+<p>In fact the problem is : if i have   <code> f : A ⟶ B  </code> and  <code> a : A </code>, how can i evaluate  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> f  ( a)  </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span></span></span></span> ?   With  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo separator="true">,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A,B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> CommRing  and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> a morphism of commutative Ring ?</p>
+
+<a name="193015809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193015809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193015809">Kenny Lau (Apr 06 2020 at 09:27)</a>:</h4>
+<p><code>f a</code></p>
+
+<a name="193015887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193015887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193015887">orlando (Apr 06 2020 at 09:28)</a>:</h4>
+<p>it's doesn't work !!!</p>
+
+<a name="193015912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193015912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193015912">Kenny Lau (Apr 06 2020 at 09:28)</a>:</h4>
+<p>include all the <code>import</code>s</p>
+
+<a name="193015942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193015942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193015942">Kenny Lau (Apr 06 2020 at 09:28)</a>:</h4>
+<p>the W in MWE is important too</p>
+
+<a name="193016217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016217">orlando (Apr 06 2020 at 09:31)</a>:</h4>
+<p>Sorry i don't understand ? What is MWE ?</p>
+
+<a name="193016287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016287">Kenny Lau (Apr 06 2020 at 09:32)</a>:</h4>
+<p>minimal working example</p>
+
+<a name="193016324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016324">Kenny Lau (Apr 06 2020 at 09:32)</a>:</h4>
+<p>it would be easier for us to help one if one posts MWEs instead of code snippets that can't be copied directly</p>
+
+<a name="193016696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016696">Scott Morrison (Apr 06 2020 at 09:36)</a>:</h4>
+<p>(i.e. copy and paste your code into a new file, make sure it compiles with the error you expect, and that there is nothing in the file besides what is required to demonstrate the behaviour you want help with)</p>
+
+<a name="193016736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016736">Scott Morrison (Apr 06 2020 at 09:36)</a>:</h4>
+<p>(sometimes it's onerous to do this; on the other hand at least half the time I set out to do this, attempting to construct the MWE reveals for me what the problem is)</p>
+
+<a name="193016746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016746">orlando (Apr 06 2020 at 09:37)</a>:</h4>
+<p>Sorry !!!  For example ! </p>
+<div class="codehilite"><pre><span></span> <span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">structure</span> <span class="n">truc</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span><span class="n">CommRing</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">)</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">R</span><span class="o">)</span>
+<span class="o">(</span><span class="n">certif</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">))</span>   <span class="c1">--- problem ?</span>
+</pre></div>
+
+<a name="193016766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016766">Scott Morrison (Apr 06 2020 at 09:37)</a>:</h4>
+<p>missing close parenthesis on the last line?</p>
+
+<a name="193016857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016857">Kevin Buzzard (Apr 06 2020 at 09:38)</a>:</h4>
+<div class="codehilite"><pre><span></span>function expected at
+  f
+term has type
+  A ⟶ R
+</pre></div>
+
+<a name="193016863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016863">orlando (Apr 06 2020 at 09:38)</a>:</h4>
+<p>ok but it's not the problem</p>
+
+<a name="193016872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016872">orlando (Apr 06 2020 at 09:38)</a>:</h4>
+<p>yes Kevin !</p>
+
+<a name="193016873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016873">Scott Morrison (Apr 06 2020 at 09:38)</a>:</h4>
+<p>(It also helps if you include the text of the error message in the comment in the MWE, so people don't have to copy and paste themselves)</p>
+
+<a name="193016901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016901">Scott Morrison (Apr 06 2020 at 09:38)</a>:</h4>
+<p>(Nevertheless, go edit the MWE now!)</p>
+
+<a name="193016913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016913">Kevin Buzzard (Apr 06 2020 at 09:39)</a>:</h4>
+<p>It would be nice to just be able to say "@lean_bot print_errors".</p>
+
+<a name="193016954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016954">Kevin Buzzard (Apr 06 2020 at 09:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">structure</span> <span class="n">truc</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span><span class="n">CommRing</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">)</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">R</span><span class="o">)</span>
+<span class="o">(</span><span class="n">certif</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>works</p>
+
+<a name="193016955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193016955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193016955">Johan Commelin (Apr 06 2020 at 09:39)</a>:</h4>
+<p>Does it help if you change <code>CommRing</code> to <code>CommRing.{0}</code>? (In both places.)</p>
+
+<a name="193017052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017052">Scott Morrison (Apr 06 2020 at 09:40)</a>:</h4>
+<p>No...</p>
+
+<a name="193017090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017090">Kenny Lau (Apr 06 2020 at 09:40)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/116395-maths/topic/category.20over.20and.20under/near/193016324" title="#narrow/stream/116395-maths/topic/category.20over.20and.20under/near/193016324">said</a>:</p>
+<blockquote>
+<p>it would be easier for us to help one if one posts MWEs instead of code snippets that can't be copied directly</p>
+</blockquote>
+<p>and the proof is that immediately two people joined the discussion</p>
+
+<a name="193017105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017105">Scott Morrison (Apr 06 2020 at 09:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">structure</span> <span class="n">truc</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">})</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">})</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">R</span><span class="o">)</span>
+<span class="o">(</span><span class="n">certif</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="193017120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017120">Scott Morrison (Apr 06 2020 at 09:41)</a>:</h4>
+<p>do the coercion on the other side?</p>
+
+<a name="193017220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017220">Scott Morrison (Apr 06 2020 at 09:42)</a>:</h4>
+<p>I think the problem is that when you write <code>f  (1 : A)</code>, Lean doesn't yet know the expected type of the whole term, so it can't find the coercion for <code>f</code> yet.</p>
+
+<a name="193017235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017235">Kenny Lau (Apr 06 2020 at 09:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">structure</span> <span class="n">truc</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">R</span><span class="o">)</span>
+<span class="o">(</span><span class="n">certif</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="193017268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017268">Johan Commelin (Apr 06 2020 at 09:43)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/116395-maths/topic/category.20over.20and.20under/near/193017220" title="#narrow/stream/116395-maths/topic/category.20over.20and.20under/near/193017220">said</a>:</p>
+<blockquote>
+<p>I think the problem is that when you write <code>f  (1 : A)</code>, Lean doesn't yet know the expected type of the whole term, so it can't find the coercion for <code>f</code> yet.</p>
+</blockquote>
+<p>Note that this is because Lean 3 has a coercion system that isn't very smart. Lean 4 should make all of this look stupid.</p>
+
+<a name="193017285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017285">Kenny Lau (Apr 06 2020 at 09:43)</a>:</h4>
+<p>specifying the type of the outer term is better than the inner term</p>
+
+<a name="193017298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017298">Kevin Buzzard (Apr 06 2020 at 09:43)</a>:</h4>
+<p>Why?</p>
+
+<a name="193017306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017306">Kenny Lau (Apr 06 2020 at 09:43)</a>:</h4>
+<p>because Lean elaborates from left to right</p>
+
+<a name="193017323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017323">Kenny Lau (Apr 06 2020 at 09:43)</a>:</h4>
+<p>if you specify the inner type then Lean has to backtrack</p>
+
+<a name="193017388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017388">Kenny Lau (Apr 06 2020 at 09:44)</a>:</h4>
+<p>and of course, people who know what they're talking about can confirm/deny my speculations</p>
+
+<a name="193017688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017688">orlando (Apr 06 2020 at 09:47)</a>:</h4>
+<p>ohhhh that work !</p>
+
+<a name="193017706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017706">Kevin Buzzard (Apr 06 2020 at 09:47)</a>:</h4>
+<p>I think all our suggestions work :-)</p>
+
+<a name="193017890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193017890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193017890">orlando (Apr 06 2020 at 09:50)</a>:</h4>
+<p>I don't tell you, how many time a spent with this problem <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="193018407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193018407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193018407">Kevin Buzzard (Apr 06 2020 at 09:55)</a>:</h4>
+<p>Well I hope you learn from the MWE suggestion because it makes questions much easier to answer. I ignored your question initially precisely because it didn't compile.</p>
+
+<a name="193037281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037281">orlando (Apr 06 2020 at 13:00)</a>:</h4>
+<p>Hello, </p>
+<p>Another triviality problem ! </p>
+<p>My MWE  <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span> </p>
+<p>Is there a unop for morphism ? </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">comma</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">opposite</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">namespace</span> <span class="n">category_theory</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Ring</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Set</span><span class="bp">`</span> <span class="o">:=</span>  <span class="kt">Type</span> <span class="n">u</span>
+
+
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">Aop</span> <span class="n">Bop</span>  <span class="o">:</span> <span class="n">Ring</span><span class="err">ᵒᵖ</span> <span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Aop</span> <span class="err">⟶</span> <span class="n">Bop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">unop</span> <span class="n">Bop</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">f</span><span class="o">(</span><span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>    <span class="c1">-- don&#39;t work ?</span>
+<span class="kn">end</span>
+<span class="kn">lemma</span> <span class="n">test1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span><span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">B</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">f</span><span class="o">(</span><span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>   <span class="c1">-- work !</span>
+ <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">category_theory</span>
+</pre></div>
+
+<a name="193037387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037387">orlando (Apr 06 2020 at 13:00)</a>:</h4>
+<p>it's not minimal <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="193037429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037429">Kevin Buzzard (Apr 06 2020 at 13:01)</a>:</h4>
+<p>The main thing is that it works. <code>end category_theory</code> ;-)</p>
+
+<a name="193037636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037636">orlando (Apr 06 2020 at 13:02)</a>:</h4>
+<p>I edit Kevin !</p>
+
+<a name="193037651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037651">Johan Commelin (Apr 06 2020 at 13:02)</a>:</h4>
+<p>What happens if you <code>Ctrl-click</code> on <code>unop</code></p>
+
+<a name="193037705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037705">Johan Commelin (Apr 06 2020 at 13:02)</a>:</h4>
+<p>It will take you to a different file, and most likely somewhere nearby you will find <code>unop</code> for homs</p>
+
+<a name="193037796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037796">Kevin Buzzard (Apr 06 2020 at 13:03)</a>:</h4>
+<p>it's nothing to do with categories, where we end up :-(</p>
+
+<a name="193037906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037906">Reid Barton (Apr 06 2020 at 13:04)</a>:</h4>
+<p>Right because <code>opposite</code> for categories was merged with something else. I still don't think it was necessarily a good idea.</p>
+
+<a name="193037923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037923">Reid Barton (Apr 06 2020 at 13:04)</a>:</h4>
+<p>IIRC, you want <code>f.unop</code> for a hom</p>
+
+<a name="193037930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193037930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193037930">Reid Barton (Apr 06 2020 at 13:04)</a>:</h4>
+<p>but I probably don't</p>
+
+<a name="193038002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193038002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193038002">Kevin Buzzard (Apr 06 2020 at 13:05)</a>:</h4>
+<p>confirmed: <code>exact f.unop.map_mul a b,</code> works</p>
+
+<a name="193038107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193038107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193038107">Reid Barton (Apr 06 2020 at 13:05)</a>:</h4>
+<p>I actually wonder whether we could get rid of the <code>op</code>/<code>unop</code> for homs. It doesn't seem as important as the one for objects</p>
+
+<a name="193038312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193038312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193038312">orlando (Apr 06 2020 at 13:07)</a>:</h4>
+<p>Ok <code> f.unop </code>  i try <code> unop f </code>  <code> f^\unop</code> <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="193038344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193038344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193038344">Johan Commelin (Apr 06 2020 at 13:07)</a>:</h4>
+<p><code>f.unop</code> is <code>hom.unop f</code></p>
+
+<a name="193038382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193038382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193038382">Johan Commelin (Apr 06 2020 at 13:07)</a>:</h4>
+<p>Or actually <code>category_theory.category.hom.unop f</code></p>
+
+<a name="193039522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20over%20and%20under/near/193039522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/01676categoryoverandunder.html#193039522">orlando (Apr 06 2020 at 13:16)</a>:</h4>
+<p>Ok i understand Johan, in fact   there is two files opposite !  </p>
+<ol>
+<li>in data/ opposite </li>
+<li>in category_theory/ opposites  </li>
+</ol>
+<p>And i just see the first <span aria-label="frown" class="emoji emoji-1f641" role="img" title="frown">:frown:</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

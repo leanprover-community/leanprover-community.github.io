@@ -1,0 +1,59 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53254crashleanwithrevert.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html">crash lean with `revert`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186808527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186808527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186808527">Kevin Buzzard (Jan 28 2020 at 18:01)</a>:</h4>
+<p>Lean crashes are rare, for me at least. But I think this one seems to be reproducible (for me at least):</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">i_crash_lean_342</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">K</span> <span class="n">S</span> <span class="n">S</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't know how to check whether this still happens in Lean 3.5.0c.</p>
+
+<a name="186808675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186808675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186808675">Bryan Gin-ge Chen (Jan 28 2020 at 18:02)</a>:</h4>
+<p>I believe this is fixed in 3.5.0c: <a href="https://github.com/leanprover-community/lean/issues/53" target="_blank" title="https://github.com/leanprover-community/lean/issues/53">https://github.com/leanprover-community/lean/issues/53</a></p>
+
+<a name="186809184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809184">Kevin Buzzard (Jan 28 2020 at 18:06)</a>:</h4>
+<p>Oh nice -- sorry to waste your time. Can I use 3.5.0c yet by changing my <code>leanpkg.toml</code>? If not, am I right in thinking that it will not be too long before this will be possible?</p>
+
+<a name="186809455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809455">Bryan Gin-ge Chen (Jan 28 2020 at 18:08)</a>:</h4>
+<p>Yes, I think you can follow the instructions Simon posted <a href="#narrow/stream/113488-general/topic/Lean.203.2E5.2E0c.20Released/near/184349819" title="#narrow/stream/113488-general/topic/Lean.203.2E5.2E0c.20Released/near/184349819">here</a>. Hopefully in a few weeks, update-mathlib will be able to fetch 3.5.0c olean files as well.</p>
+
+<a name="186809463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809463">Rob Lewis (Jan 28 2020 at 18:08)</a>:</h4>
+<p>Moving mathlib to 3.5c is on my to-do list for this week. Or more accurately, checking that there will be no complications is on my to-do list, and if there's nothing too bad then the move is too.</p>
+
+<a name="186809530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809530">Rob Lewis (Jan 28 2020 at 18:09)</a>:</h4>
+<p>Getting the nightly builds working with GitHub Actions needs to happen first.</p>
+
+<a name="186809585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809585">Rob Lewis (Jan 28 2020 at 18:09)</a>:</h4>
+<p>And we should know if Gabriel solved that in 40 minutes or so.</p>
+
+<a name="186809824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/crash%20lean%20with%20%60revert%60/near/186809824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53254crashleanwithrevert.html#186809824">Kevin Buzzard (Jan 28 2020 at 18:11)</a>:</h4>
+<p>I am in no hurry Rob. Many thanks for dealing with all these infrastructure issues. I only asked because I remember people talking about it in Pittsburgh. I wouldn't normally care about this sort of thing but because of the segfault I noticed that if I knew how to use 3.5.0c I would have been able to try it myself without bothering people here.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

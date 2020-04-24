@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40856TypeMismatchwithcoetofun.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html">Type Mismatch with coe to fun</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191903385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191903385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191903385">Shing Tak Lam (Mar 26 2020 at 15:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+       <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">structure</span> <span class="n">polynomial_derivation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="c1">-- Delta</span>
+<span class="o">(</span><span class="n">map_add&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">to_fun</span> <span class="n">g</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_C_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">polynomial_derivation</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">polynomial_derivation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">polynomial</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">to_fun</span>
+<span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">polynomial_derivation</span>
+
+<span class="kn">variable</span> <span class="err">Δ</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">ℝ</span>
+<span class="n">include</span> <span class="err">Δ</span>
+
+<span class="kn">variable</span> <span class="err">Δ</span><span class="mi">1</span> <span class="o">:</span> <span class="err">Δ</span> <span class="n">X</span> <span class="bp">=</span> <span class="n">C</span> <span class="mi">1</span>
+<span class="kn">variable</span> <span class="err">Δ</span><span class="mi">2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span><span class="o">),</span> <span class="err">Δ</span><span class="o">(</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="err">Δ</span> <span class="n">f</span> <span class="bp">+</span> <span class="err">Δ</span> <span class="n">g</span>
+<span class="kn">variable</span> <span class="err">Δ</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span><span class="o">),</span> <span class="err">Δ</span><span class="o">(</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="err">Δ</span> <span class="n">f</span>
+<span class="kn">variable</span> <span class="err">Δ</span><span class="mi">4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span><span class="o">),</span> <span class="err">Δ</span><span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">*</span> <span class="err">Δ</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">g</span> <span class="bp">*</span> <span class="err">Δ</span> <span class="n">f</span>
+<span class="n">include</span> <span class="err">Δ</span><span class="mi">1</span> <span class="err">Δ</span><span class="mi">2</span> <span class="err">Δ</span><span class="mi">3</span> <span class="err">Δ</span><span class="mi">4</span>
+
+<span class="kn">definition</span> <span class="n">d</span> <span class="o">:</span> <span class="n">polynomial_derivation</span> <span class="n">ℝ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="err">Δ</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="err">Δ</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">map_C_mul&#39;</span> <span class="o">:=</span> <span class="err">Δ</span><span class="mi">3</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="err">Δ</span><span class="mi">4</span> <span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">d_is_differentiation</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">d</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">derivative</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>There is a type mismatch at <code>d p</code> in the last line. The error message is</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  d p
+term
+  p
+has type
+  polynomial ℝ
+but is expected to have type
+  polynomial ℝ → polynomial ℝ
+</pre></div>
+
+<a name="191903888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191903888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191903888">Shing Tak Lam (Mar 26 2020 at 15:44)</a>:</h4>
+<p>I would think that since <code>polynomial_derivation</code> <code>has _coe_to_fun</code>, I would expect that <code>d p = d.to_fun p = Δ p</code>. And <code>Δ : polynomial ℝ → polynomial ℝ</code>. So <code>Δ p : polynomial ℝ</code>.</p>
+
+<a name="191904691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191904691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191904691">Shing Tak Lam (Mar 26 2020 at 15:49)</a>:</h4>
+<p>Figured it out (maybe?) The <code>variable</code>s are hypotheses in <code>d</code>, so I need to use <code>(d Δ Δ1 Δ2 Δ3 Δ4) p</code></p>
+
+<a name="191905841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191905841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191905841">Kevin Buzzard (Mar 26 2020 at 15:54)</a>:</h4>
+<p>Isn't there any way you can get Delta and all the Delta_i to be included automatically?What does <code>include</code> do if not this?</p>
+
+<a name="191906464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191906464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191906464">Reid Barton (Mar 26 2020 at 15:57)</a>:</h4>
+<p><code>parameters</code></p>
+
+<a name="191906815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20Mismatch%20with%20coe%20to%20fun/near/191906815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40856TypeMismatchwithcoetofun.html#191906815">Reid Barton (Mar 26 2020 at 15:59)</a>:</h4>
+<p><code>include</code> makes sure that <code>Δ1 Δ2 Δ3 Δ4</code> are included as arguments at the definition of <code>d</code>. It doesn't do anything at the use sites of <code>d</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/67232setbuildernotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html">set builder notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185446802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185446802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185446802">Enrico Borba (Jan 12 2020 at 19:31)</a>:</h4>
+<p>Where is the <code>notation</code> declaration for set builder notation in the lean source? I'm trying to understand what exactly I can put before the <code>|</code> in <code>{ x | even x }</code>. Is it only a _single identifier_ that I can place there, so it just becomes a <code>λ x, even x</code>? The main reason I'm asking is because I was hoping to do something like <code>{(a, f a) | a ∈ A}</code>. But I've currently resorted to <code>{x : A × B | f x.1 = x.2}</code>.</p>
+
+<a name="185446868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185446868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185446868">Chris Hughes (Jan 12 2020 at 19:33)</a>:</h4>
+<p>You do have to do it the ugly way I'm afraid.</p>
+
+<a name="185447012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185447012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185447012">Chris Hughes (Jan 12 2020 at 19:36)</a>:</h4>
+<p>There might be good notation for this in Lean 4. But the main downside would be that I expect it would end up having to unfold to something like <code>{x : A × B | ∃ a : A, (a, f a) = x}</code></p>
+
+<a name="185448189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185448189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185448189">Kevin Buzzard (Jan 12 2020 at 20:07)</a>:</h4>
+<p>I think it has to unfold to something like this because that's the only definition I can think of for the set!</p>
+
+<a name="185448240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185448240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185448240">Chris Hughes (Jan 12 2020 at 20:08)</a>:</h4>
+<p>There's the definition in the first post.</p>
+
+<a name="185448391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20builder%20notation/near/185448391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232setbuildernotation.html#185448391">Patrick Massot (Jan 12 2020 at 20:14)</a>:</h4>
+<p>The set builder notation of Lean is of a really different nature as what Enrico wants. It is purely syntactic sugar for defining sets (in the sense of type theory, so all elements have the same type <code>X</code> and a set is a map from <code>X</code> to <code>Prop</code>). Writing <code>{(a, f(a)) | a ∈ A}</code> is the image of a set <code>A</code> under a function, it involves an existential quantifier. Actually I'm not even sure what is meant because <code>A</code> seems to be a set or a type depending on the sentence.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

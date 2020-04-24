@@ -1,0 +1,85 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/80074structurequestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80074structurequestion.html">structure question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169662096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20question/near/169662096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80074structurequestion.html#169662096">Kevin Buzzard (Jul 04 2019 at 17:25)</a>:</h4>
+<p>I was just checking I'd got symmetry working with <code>ne</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="n">ne</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">class zero_ne_one_class (α : Type u) extends has_zero α, has_one α :=</span>
+<span class="cm">(zero_ne_one : 0 ≠ (1:α))</span>
+<span class="cm">-/</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">zero_ne_one_class</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">zero_ne_one</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>and this worked fine. But actually I didn't expect it to work, I expected Lean to moan that it couldn't find an instance of <code>has_zero R</code> etc. The <code>zero_ne_one_class</code> instance seems to have magicked them up!</p>
+<p>But that's weird, because this fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">class topological_ring extends topological_add_monoid α, topological_monoid α : Prop :=</span>
+<span class="cm">(continuous_neg : continuous (λa:α, -a))</span>
+<span class="cm">-/</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">S : Type</span>
+<span class="cm">⊢ topological_space S</span>
+
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">S : Type</span>
+<span class="cm">⊢ ring S</span>
+
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">S : Type,</span>
+<span class="cm">_inst_1 : topological_ring S</span>
+<span class="cm">⊢ has_zero S</span>
+
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">S : Type,</span>
+<span class="cm">_inst_1 : topological_ring S</span>
+<span class="cm">⊢ has_zero S</span>
+
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Structures are still a bit weird to me. Is this got something to do with the "old" structure command or is this yet another weirdness about structures?</p>
+
+<a name="169662173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20question/near/169662173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80074structurequestion.html#169662173">Kevin Buzzard (Jul 04 2019 at 17:27)</a>:</h4>
+<p>Aah, I see:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">topological_add_monoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">continuous_add</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="bp">×</span><span class="n">α</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span>
+</pre></div>
+
+<a name="169662229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20question/near/169662229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80074structurequestion.html#169662229">Kevin Buzzard (Jul 04 2019 at 17:28)</a>:</h4>
+<p>"Extends" gets done automatically, the square bracket stuff doesn't. And there is no doubt some great reason involving diamonds or something which means that it can't extend them.</p>
+
+<a name="169662456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20question/near/169662456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80074structurequestion.html#169662456">Johan Commelin (Jul 04 2019 at 17:34)</a>:</h4>
+<p>Exactly</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

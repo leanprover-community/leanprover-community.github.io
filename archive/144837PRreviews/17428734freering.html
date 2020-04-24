@@ -1,0 +1,246 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/17428734freering.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html">#734 free ring</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="165234589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234589">Johan Commelin (May 09 2019 at 08:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> May I please pick your brain for a little while? I just pushed to this branch... and I'm not sure if things should be refactored...</p>
+
+<a name="165234616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234616">Johan Commelin (May 09 2019 at 08:45)</a>:</h4>
+<p>Please look at this line <a href="https://github.com/leanprover-community/mathlib/blob/a7a2d682c3705f6142a1fa94a9eabebcf90103e5/src/ring_theory/free_comm_ring.lean#L165" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/a7a2d682c3705f6142a1fa94a9eabebcf90103e5/src/ring_theory/free_comm_ring.lean#L165">https://github.com/leanprover-community/mathlib/blob/a7a2d682c3705f6142a1fa94a9eabebcf90103e5/src/ring_theory/free_comm_ring.lean#L165</a></p>
+
+<a name="165234623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234623">Johan Commelin (May 09 2019 at 08:45)</a>:</h4>
+<p>I prove that <code>free_comm_ring</code> is equivalent to <code>mv_polynomial</code> (but I don't show that it is a natural transformation <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span>)</p>
+
+<a name="165234626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234626">Johan Commelin (May 09 2019 at 08:45)</a>:</h4>
+<p>And then afterwards, there are two special cases.</p>
+
+<a name="165234686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234686">Johan Commelin (May 09 2019 at 08:46)</a>:</h4>
+<p>Those could be done by composing two equiv's, but I don't know if that is good for "defeq"-purposes or not.</p>
+
+<a name="165234717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234717">Johan Commelin (May 09 2019 at 08:47)</a>:</h4>
+<p>Because we also know that <code>mv_polynomial _ punit</code> is <code>polynomial _</code></p>
+
+<a name="165234729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234729">Mario Carneiro (May 09 2019 at 08:47)</a>:</h4>
+<p>I was thinking the same thing</p>
+
+<a name="165234748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234748">Mario Carneiro (May 09 2019 at 08:47)</a>:</h4>
+<p>the latter two should follow from some other equiv, but maybe it hasn't been proven yet</p>
+
+<a name="165234840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165234840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165234840">Mario Carneiro (May 09 2019 at 08:49)</a>:</h4>
+<p>It's true that there are potential defeq problems with the way we define equivs in terms of other equivs, but that's a rabbit hole that will lead to a lot more code duplication so I'm inclined to only address issues caused by this as they arise</p>
+
+<a name="165235176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235176">Johan Commelin (May 09 2019 at 08:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> So what shall I do? Leave them as is? Remove them? Redefine them as the composition of two equivs?</p>
+
+<a name="165235188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235188">Mario Carneiro (May 09 2019 at 08:55)</a>:</h4>
+<p>redefine as composition, if the other equivs exist</p>
+
+<a name="165235244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235244">Mario Carneiro (May 09 2019 at 08:56)</a>:</h4>
+<p>I think Kenny did this because he was hoping to replace <code>mv_polynomial</code> with <code>free_comm_ring</code></p>
+
+<a name="165235245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235245">Johan Commelin (May 09 2019 at 08:56)</a>:</h4>
+<p>Ok... there are analogous equivs for <code>free_ring</code>. But there I can't really do the composition trick.</p>
+
+<a name="165235295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235295">Mario Carneiro (May 09 2019 at 08:57)</a>:</h4>
+<p>alternatively, you could show that when <code>A</code> is a subsingleton <code>free_ring A</code> is commutative and hence equiv to <code>free_comm_ring A</code></p>
+
+<a name="165235514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165235514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165235514">Johan Commelin (May 09 2019 at 09:00)</a>:</h4>
+<p>That might be a good idea.</p>
+
+<a name="165268792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165268792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165268792">Johan Commelin (May 09 2019 at 16:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do we know that a functor maps an equiv to an equiv?</p>
+
+<a name="165268816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165268816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165268816">Johan Commelin (May 09 2019 at 16:39)</a>:</h4>
+<p>(And now I mean the <code>category/</code> version. Not <code>category_theory/</code>).</p>
+
+<a name="165268828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165268828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165268828">Johan Commelin (May 09 2019 at 16:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> That's your domain, right?</p>
+
+<a name="165268958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165268958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165268958">Simon Hudon (May 09 2019 at 16:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Can you clarify your question please?</p>
+
+<a name="165270550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165270550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165270550">Johan Commelin (May 09 2019 at 17:00)</a>:</h4>
+<p>We have <code>free_abelian_group</code> which is a functor. And now I have an equiv between two types... I would like to know that their free abelian groups are also equiv.</p>
+
+<a name="165273526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165273526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165273526">Simon Hudon (May 09 2019 at 17:45)</a>:</h4>
+<p>I assume <code>free_abelian_group</code> has a <code>map</code> function?</p>
+
+<a name="165274178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165274178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165274178">Johan Commelin (May 09 2019 at 17:53)</a>:</h4>
+<p>It has an instance of <code>functor</code></p>
+
+<a name="165274192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165274192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165274192">Johan Commelin (May 09 2019 at 17:54)</a>:</h4>
+<p>Even <code>monad</code></p>
+
+<a name="165276714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165276714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165276714">Simon Hudon (May 09 2019 at 18:25)</a>:</h4>
+<p>Lawful?</p>
+
+<a name="165277071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277071">Johan Commelin (May 09 2019 at 18:29)</a>:</h4>
+<p>Yep</p>
+
+<a name="165277592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277592">Simon Hudon (May 09 2019 at 18:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">functor</span> <span class="n">f</span><span class="o">]</span> <span class="o">[</span><span class="n">is_lawful_functor</span> <span class="n">f</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">functor</span> <span class="n">equiv</span> <span class="n">function</span> <span class="n">is_lawful_functor</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">f</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">map</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">map</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">map_map</span><span class="o">,</span> <span class="n">transitivity</span> <span class="n">id</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">x</span><span class="o">,</span>
+                        <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="n">ext</span> <span class="n">a</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">id</span><span class="bp">.</span><span class="n">def</span><span class="o">,</span> <span class="n">symm_apply_apply</span><span class="o">,</span> <span class="n">comp_app</span><span class="o">],</span> <span class="o">},</span>
+                        <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">is_lawful_functor</span><span class="bp">.</span><span class="n">id_map</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c">/-</span><span class="cm"> same thing -/</span> <span class="o">}</span>
+</pre></div>
+
+<a name="165277804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277804">Johan Commelin (May 09 2019 at 18:36)</a>:</h4>
+<p>Ok, but this isn't in mathlib, with some goofy notation?</p>
+
+<a name="165277822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277822">Johan Commelin (May 09 2019 at 18:37)</a>:</h4>
+<p>That's mainly what I was asking...</p>
+
+<a name="165277902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277902">Simon Hudon (May 09 2019 at 18:37)</a>:</h4>
+<p>I would never pick a goofy notation</p>
+
+<a name="165277987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165277987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165277987">Johan Commelin (May 09 2019 at 18:38)</a>:</h4>
+<p>Well... maybe others did... I still struggle with <code>&lt;$&gt;</code> and <code>&lt;*&gt;</code>.</p>
+
+<a name="165278031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165278031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165278031">Johan Commelin (May 09 2019 at 18:39)</a>:</h4>
+<p>So this should be <code>functor.map_equiv</code> or something like that?</p>
+
+<a name="165278181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165278181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165278181">Simon Hudon (May 09 2019 at 18:41)</a>:</h4>
+<p>I just looked. It's not in there. You could put it in <code>data/equiv/functor.lean</code></p>
+
+<a name="165278194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165278194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165278194">Simon Hudon (May 09 2019 at 18:41)</a>:</h4>
+<p>or <code>data/equiv/instances.lean</code></p>
+
+<a name="165278379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165278379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165278379">Johan Commelin (May 09 2019 at 18:43)</a>:</h4>
+<p>Ok, will probably do that.</p>
+
+<a name="165284609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165284609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165284609">Johan Commelin (May 09 2019 at 20:07)</a>:</h4>
+<p>Do we know of an equiv between <code>list X</code> and <code>multiset X</code> if <code>X</code> is a subsingleton?</p>
+
+<a name="165285165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165285165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165285165">Simon Hudon (May 09 2019 at 20:13)</a>:</h4>
+<p>If we do, it will be in <code>multiset.lean</code> but I doubt it's there</p>
+
+<a name="165286992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165286992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165286992">Johan Commelin (May 09 2019 at 20:37)</a>:</h4>
+<p>I pushed a bunch of stuff to this PR</p>
+
+<a name="165287022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165287022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165287022">Johan Commelin (May 09 2019 at 20:38)</a>:</h4>
+<p>There is one annoying sorry left...</p>
+
+<a name="165287052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165287052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165287052">Johan Commelin (May 09 2019 at 20:38)</a>:</h4>
+<p>And a bunch of commented code.</p>
+
+<a name="165287062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165287062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165287062">Johan Commelin (May 09 2019 at 20:38)</a>:</h4>
+<p>I want to sleep now... if others want to take a look. Go ahead.</p>
+
+<a name="165287100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165287100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165287100">Johan Commelin (May 09 2019 at 20:39)</a>:</h4>
+<p>Also, I proved that <code>equiv</code> between list and multiset for subsingletons, but it is noncomputable. And in the wrong file.</p>
+
+<a name="165339019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165339019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165339019">Johan Commelin (May 10 2019 at 14:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I'm slowly converging to something that should be ready to merge. The equiv between <code>free_ring X</code> and <code>free_comm_ring X</code> for subsingletons is now in place. However, it is noncomputable. Should I separately prove a computable version for <code>pempty</code> and <code>punit</code>?</p>
+
+<a name="165342596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165342596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165342596">Johan Commelin (May 10 2019 at 14:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> In my opinion this PR is now ready for review again. (I'm optimistic that Travis will be happy.)</p>
+
+<a name="165369794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165369794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165369794">Mario Carneiro (May 10 2019 at 20:48)</a>:</h4>
+<p>It doesn't need to be noncomputable. It is coming from this theorem:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">subsingleton_equiv</span> <span class="o">[</span><span class="n">subsingleton</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">multiset</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">coe</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">ext_le</span>
+    <span class="o">(</span><span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">coe_card</span><span class="o">,</span> <span class="err">←</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">coe_card</span><span class="o">],</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out_eq</span> <span class="bp">_</span> <span class="o">})</span> <span class="err">$</span>
+    <span class="bp">λ</span> <span class="n">n</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">quot</span><span class="bp">.</span><span class="n">out_eq</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>This generalizes to the basic equiv theorem that <code>quot A R ~= A</code> when <code>\all x y, R x y -&gt; x = y</code>. The inverse function is defined by <code>quot.lift</code>, not <code>quot.out</code></p>
+
+<a name="165390719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165390719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165390719">Johan Commelin (May 11 2019 at 03:42)</a>:</h4>
+<p>Aha, let me try that.</p>
+
+<a name="165394094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165394094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165394094">Johan Commelin (May 11 2019 at 05:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Done</p>
+
+<a name="165394099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165394099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165394099">Johan Commelin (May 11 2019 at 05:29)</a>:</h4>
+<p>Also.. there are 2 instances that make <code>perm</code> a setoid on <code>list X</code></p>
+
+<a name="165394145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165394145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165394145">Johan Commelin (May 11 2019 at 05:30)</a>:</h4>
+<p>One is defined in <code>perm.lean</code> but only for <code>(X : Type)</code>. The other is in <code>multiset.lean</code> and works for arbitrary universes.</p>
+
+<a name="165394147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165394147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165394147">Johan Commelin (May 11 2019 at 05:30)</a>:</h4>
+<p>In this PR I've sneaked a fix that generalises the instance in <code>perm.lean</code> and removes the one in <code>multiset.lean</code>.</p>
+
+<a name="165399159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165399159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165399159">Johan Commelin (May 11 2019 at 07:55)</a>:</h4>
+<p>Here is a link to the changes that I've stacked on top of Kenny's PR: <a href="https://github.com/leanprover-community/mathlib/pull/734/files/379d911cd1050ee7bd94af9735b8f261601dab6f..eccc355ae26283e6f0cb6b6023ff958959414a25" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/734/files/379d911cd1050ee7bd94af9735b8f261601dab6f..eccc355ae26283e6f0cb6b6023ff958959414a25">https://github.com/leanprover-community/mathlib/pull/734/files/379d911cd1050ee7bd94af9735b8f261601dab6f..eccc355ae26283e6f0cb6b6023ff958959414a25</a></p>
+
+<a name="165732834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23734%20free%20ring/near/165732834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/17428734freering.html#165732834">Johan Commelin (May 15 2019 at 17:08)</a>:</h4>
+<p>Is there anyone who wants to review this PR? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,605 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/96233Univalenceaxiom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html">Univalence axiom</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="163774952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/163774952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#163774952">Thomas Scholz (Apr 19 2019 at 23:48)</a>:</h4>
+<p>Is it possible to formulate and prove in Lean (together with the univalence axiom from homotopy type theory) the statement<br>
+"Isomorphic groups have the same (structural) properties."<br>
+Or is this just like a meta property that cannot be formulated in Lean?</p>
+<p>Of course, one could formulate the statement not only for groups, but for any kind of structure.</p>
+
+<a name="163775129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/163775129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#163775129">Simon Hudon (Apr 19 2019 at 23:52)</a>:</h4>
+<p>The univalence axiom is inconsistent with proof irrelevence which is baked into Lean's logic. I think with parametricity theorems we may be able to prove this kind of result. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> or <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> might have to chime in to confirm.</p>
+
+<a name="164167848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164167848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164167848">Thomas Scholz (Apr 25 2019 at 13:04)</a>:</h4>
+<p>Okay. But in general (without proof irrelevance), would it be possible in type theory to formulate/formalize statements such as<br>
+"Isomorphic groups have the same (structural) properties."?<br>
+Or are such statements rather meta properties?<br>
+I guess that in ZFC, the above statement is not formalizable, because it is not possible to quantify over properties (let alone define what a <em>structural</em> property). So my hope is that the statement is formalizable in type theory, because in type theory, properties are mathematical objects. Also, in type theory, all properties are structural properties, I think.<br>
+Please let me know if this is the wrong place to ask this question.</p>
+
+<a name="164168006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164168006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164168006">Johan Commelin (Apr 25 2019 at 13:06)</a>:</h4>
+<p>Here is a property of groups: let <code>G</code> be a group. My property for groups <code>H</code> is: <code>H = G</code>.<br>
+This is true for the group <code>G</code>, but not in general for arbitary groups <code>H</code> that are merely isomorphic to <code>G</code>.</p>
+
+<a name="164168014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164168014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164168014">Johan Commelin (Apr 25 2019 at 13:06)</a>:</h4>
+<p>HoTT fixes this by changing <code>=</code>.</p>
+
+<a name="164169140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164169140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164169140">Thomas Scholz (Apr 25 2019 at 13:22)</a>:</h4>
+<p>Okay. In HoTT, is it possible to formulate/formalize statements such as<br>
+"Isomorphic groups have the same (structural) properties."?<br>
+Or are such statements rather meta properties in HoTT?</p>
+
+<a name="164267742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164267742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164267742">Floris van Doorn (Apr 26 2019 at 14:43)</a>:</h4>
+<p>Yes, in HoTT you can easily prove  that isomorphic groups have the same properties. The formal statement could be something like</p>
+<div class="codehilite"><pre><span></span>∀(G H : Group), G ≅ H → ∀(P : G → Prop), P G ↔ P H
+</pre></div>
+
+
+<p>Note that <code>G</code> and <code>H</code> share all properties that can be expressed in the type theory. This might look a bit weird from a set-theoretic perspective: <code>G</code> and <code>H</code> could have different elements. However, in type theory you cannot really express that.</p>
+<p>Aside: with <code>Prop</code> above I mean all types that have at most 1 element. You can replace <code>Prop</code> by <code>Type</code> and the statement would still be true.</p>
+
+<a name="164267983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164267983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164267983">Kevin Buzzard (Apr 26 2019 at 14:45)</a>:</h4>
+<p>I don't really have time right now to start playing with this Voevodsky stuff where you work in Coq and have this extra axiom. Is there a way of doing this sort of stuff in Lean 3? Lean 4?</p>
+
+<a name="164268120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268120">Kevin Buzzard (Apr 26 2019 at 14:47)</a>:</h4>
+<p>I went out for a meal this week with a strong algebraist and I asked him to prove that if R and S were isomorphic rings and R was Gorenstein then S was Gorenstein and he simply did not know where to start. He said it was obvious.</p>
+
+<a name="164268139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268139">Kevin Buzzard (Apr 26 2019 at 14:47)</a>:</h4>
+<p>Mathematicians are really good at this. What are we doing?</p>
+
+<a name="164268259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268259">Kevin Buzzard (Apr 26 2019 at 14:48)</a>:</h4>
+<p>Is there some sort of univalence conjecture that one can formalise in Lean? Stating that for all structures in a certain typeclass this basic property of "being the same" manages to permeate through -- the correct notion of equiv.</p>
+
+<a name="164268311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268311">Kevin Buzzard (Apr 26 2019 at 14:49)</a>:</h4>
+<p>There are two notions as well, I think: one a prop and one a type.</p>
+
+<a name="164268328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268328">Kevin Buzzard (Apr 26 2019 at 14:49)</a>:</h4>
+<p>How does one formalise what I'm saying in Lean?</p>
+
+<a name="164268415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268415">Kevin Buzzard (Apr 26 2019 at 14:50)</a>:</h4>
+<p>There's some sort of statement whose proof is "by pure mathematician's secret power"</p>
+
+<a name="164268440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268440">Kevin Buzzard (Apr 26 2019 at 14:50)</a>:</h4>
+<p>it's our heavy rfl</p>
+
+<a name="164268512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268512">Kevin Buzzard (Apr 26 2019 at 14:51)</a>:</h4>
+<p>and everyone always tells me to go and do HOTT. I just want someone to do it for me ;-) or at least tell me what I should be formalising.</p>
+
+<a name="164268541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268541">Kevin Buzzard (Apr 26 2019 at 14:51)</a>:</h4>
+<p>I can quite believe that this is all very well understood by some people.</p>
+
+<a name="164268669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268669">Kevin Buzzard (Apr 26 2019 at 14:53)</a>:</h4>
+<p>Is it some mathematician monad or something?</p>
+
+<a name="164268836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268836">Kevin Buzzard (Apr 26 2019 at 14:54)</a>:</h4>
+<p>"they are the same to a mathematician, who works in ZFC but has made a solomn promise never to do anything naughty such as looking at elements of elements of groups in set theory"</p>
+
+<a name="164268873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164268873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164268873">Kevin Buzzard (Apr 26 2019 at 14:55)</a>:</h4>
+<p>You're in the typeclass of you're the kind of structure which a mathematician would find acceptable.</p>
+
+<a name="164269049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269049">Greg Conneen (Apr 26 2019 at 14:56)</a>:</h4>
+<p>I don't know enough about Lean to formalise something like this, but I think cheeky way to circumvent this is start with the proposition above by <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> as the definition of isomorphic mathematical structures, rather than an axiom. However, I don't know that such a definition would lend itself to being useful to Lean.</p>
+
+<a name="164269068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269068">Kevin Buzzard (Apr 26 2019 at 14:56)</a>:</h4>
+<p>Ask a research mathematician who doesn't know anything about schemes the following question: "Say X and Y are schemes, and X and Y are isomorphic. Say X is affine. Do you think Y is also affine?". They would answer "yeah, probably. "</p>
+
+<a name="164269221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269221">Greg Conneen (Apr 26 2019 at 14:58)</a>:</h4>
+<p>I know very little about schemes, despite my advisor being an algebraic geometer. However, I can say beyond a shadow of a doubt that two isomorphic schemes would both be affine if one is.</p>
+
+<a name="164269270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269270">Greg Conneen (Apr 26 2019 at 14:58)</a>:</h4>
+<p>That's not because I've run into this before; it's because I know how mathematicians use the word isomorphic</p>
+
+<a name="164269309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269309">Kevin Buzzard (Apr 26 2019 at 14:59)</a>:</h4>
+<p>Because schemes have a certain public interface which is mathematician-acceptable; there's a topological space, there's a functor from the open sets, but there's definitely no looking at elements of the topological space -- those are "unopenable sets" -- I think they're more like terms in type theory (terms that aren't types).</p>
+
+<a name="164269341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269341">Kevin Buzzard (Apr 26 2019 at 14:59)</a>:</h4>
+<p>It's our super-power!</p>
+
+<a name="164269423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269423">Kevin Buzzard (Apr 26 2019 at 15:00)</a>:</h4>
+<p>I want to find out what our super-power is, because not having it is <em>really inconvenient</em>!</p>
+
+<a name="164269446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269446">Johan Commelin (Apr 26 2019 at 15:00)</a>:</h4>
+<p>I think Voevodsky found it and made HoTT</p>
+
+<a name="164269467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269467">Kevin Buzzard (Apr 26 2019 at 15:00)</a>:</h4>
+<p>But I want it in Lean</p>
+
+<a name="164269504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269504">Greg Conneen (Apr 26 2019 at 15:01)</a>:</h4>
+<p>how much HoTT is in Lean?</p>
+
+<a name="164269524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269524">Kevin Buzzard (Apr 26 2019 at 15:01)</a>:</h4>
+<p>And it's not an axiom, it's just a predicate on structures -- are you a mathematician-friendly structure?</p>
+
+<a name="164269559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269559">Kevin Buzzard (Apr 26 2019 at 15:01)</a>:</h4>
+<blockquote>
+<p>how much HoTT is in Lean?</p>
+</blockquote>
+<p>Let's find out. There is a HoTT library for Lean 3 and I have never even looked at it. Where is it?</p>
+
+<a name="164269658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269658">Greg Conneen (Apr 26 2019 at 15:02)</a>:</h4>
+<p>Sounds like the place to start</p>
+
+<a name="164269670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269670">Floris van Doorn (Apr 26 2019 at 15:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span> : the problem with doing that is Lean is that you will never be able to prove that two structures are isomorphic (except in very trivial cases). You won't be able to show that the free group on 1 generator and <code>(ℤ,+)</code> are isomorphic. You would need some axiom like univalence for that.</p>
+
+<a name="164269719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269719">Floris van Doorn (Apr 26 2019 at 15:03)</a>:</h4>
+<p>There is a big Lean 2 library for HoTT. Lean 2 used to support HoTT, but that support was dropped in Lean 3.</p>
+
+<a name="164269729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269729">Floris van Doorn (Apr 26 2019 at 15:03)</a>:</h4>
+<p>The Lean 3 HoTT library is here: <a href="https://github.com/gebner/hott3" target="_blank" title="https://github.com/gebner/hott3">https://github.com/gebner/hott3</a></p>
+
+<a name="164269762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269762">Greg Conneen (Apr 26 2019 at 15:03)</a>:</h4>
+<p>Yeah, I figured that would happen. I knew that such a cheeky construction wouldn't lend itself easily to actually proving theorems, but as a mathematician it's a nice definition</p>
+
+<a name="164269795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269795">Floris van Doorn (Apr 26 2019 at 15:04)</a>:</h4>
+<p>It basically avoids the use of <code>Prop</code>, ever, because that (or at least: certain parts of it) is inconsistent with univalence.</p>
+
+<a name="164269860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269860">Greg Conneen (Apr 26 2019 at 15:04)</a>:</h4>
+<p>What? What parts of <code>Prop</code> are inconsistent with univalence? Now I'm very curious</p>
+
+<a name="164269996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164269996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164269996">Sebastien Gouezel (Apr 26 2019 at 15:06)</a>:</h4>
+<p>To me, this looks like first order logic statements about a structure. Assume you have a structure together with some language (in rings, this would be constants <code>0</code> and <code>1</code> and addition and multiplication). Then any proposition expressed solely in this language (with forall and exists quantifiers, and negation, and free variables, and so on), if true in a ring, is true in any isomorphic ring. The proof is completely algorithmic (push everything by your isomorphism, by induction over the length of the formula). This is a weaker notion than isomorphism, in general (really deep theorem: in the language of groups, the free groups over 2 generators and 3 generators satisfy exactly the same formulas -- but ℤ^2 and ℤ^3 don't, it is a nice exercise to find a formula distinguishing the two). </p>
+<p>If you allow yourself more words in your language (such as <code>∈</code>, or subsets, or things like that), then you can express more statements. But again everything is clearly invariant under isomorphism (and algorithmic, there is nothing mathematically hard in there). I don't see why there couldn't be a completely general tactic to push first-order statements by isomorphisms of the language under consideration, but since writing a transfer tactic is apparently hard I am certainly underestimating the difficulty.</p>
+
+<a name="164270101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164270101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164270101">Floris van Doorn (Apr 26 2019 at 15:07)</a>:</h4>
+<p>Well, univalence allows you to prove that there are two proofs of a certain equality that are unequal (for example, you can prove this for <code>bool = bool</code>, but that is not important for now). In Lean, any two proofs of an equality are definitionally equal (because they are proofs of a <code>Prop</code>), so stating univalence naively for <code>eq</code> in Lean will be inconsistent...</p>
+
+<a name="164270130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164270130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164270130">Greg Conneen (Apr 26 2019 at 15:07)</a>:</h4>
+<p>oh</p>
+
+<a name="164270137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164270137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164270137">Greg Conneen (Apr 26 2019 at 15:07)</a>:</h4>
+<p>OH</p>
+
+<a name="164270163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164270163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164270163">Greg Conneen (Apr 26 2019 at 15:07)</a>:</h4>
+<p>Yeah, that's no good.</p>
+
+<a name="164270482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164270482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164270482">Floris van Doorn (Apr 26 2019 at 15:10)</a>:</h4>
+<p>One thing you might try is define a new inductive type:</p>
+<div class="codehilite"><pre><span></span>inductive hott_eq {α : Type u} (a : α) : α → Type
+| refl : hott_eq a
+</pre></div>
+
+
+<p>It is <em>exactly</em> the same as <code>eq</code>, except that it lives in <code>Type</code> instead of <code>Prop</code>. Since it lives in type, proof irrelevance doesn't apply to it, so this should be consistent with univalence, right? <br>
+Alas, assuming univalence for this <code>hott_eq</code> is also inconsistent in Lean. The fact that you have a proof-irrelevant <code>eq</code> living in <code>Prop</code> lying around, allows you to prove that <code>eq</code> and <code>hott_eq</code> are equivalent (i.e. <code>a = a'</code> is in bijection with <code>hott_eq a a'</code> for all <code>a</code>, <code>a'</code>). So you can prove that <code>hott_eq a a'</code> is also a subsingleton. So univalence is also inconsistent for that.</p>
+
+<a name="164271475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271475">Chris Hughes (Apr 26 2019 at 15:23)</a>:</h4>
+<p>I think one difficulty with the algorithm to do this, is that using the axiom of choice makes it difficult to prove</p>
+
+<a name="164271607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271607">Chris Hughes (Apr 26 2019 at 15:24)</a>:</h4>
+<p>That it is a theorem about the structures.</p>
+
+<a name="164271651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271651">Kevin Buzzard (Apr 26 2019 at 15:25)</a>:</h4>
+<blockquote>
+<p>so stating univalence naively for <code>eq</code> in Lean will be inconsistent...</p>
+</blockquote>
+<p>That's because you're not using the right <code>eq</code>. You need to use <em>mathematician's <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.36687em;"></span><span class="strut bottom" style="height:0.36687em;vertical-align:0em;"></span><span class="base"><span class="mrel">=</span></span></span></span></em> not your silly equalities that we don't understand or care about. That's the one you state univalence for.</p>
+
+<a name="164271655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271655">Chris Hughes (Apr 26 2019 at 15:25)</a>:</h4>
+<p>For example trying to prove two isomorphic vector spaces have the same dimension, requires some non trivial maths, since dimension is defined by choosing a basis.</p>
+
+<a name="164271678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271678">Kevin Buzzard (Apr 26 2019 at 15:25)</a>:</h4>
+<p>But if it were not true, then the definition of dimension <em>would never have been born</em></p>
+
+<a name="164271738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271738">Kevin Buzzard (Apr 26 2019 at 15:26)</a>:</h4>
+<p>There is some sort of gap here</p>
+
+<a name="164271788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271788">Kevin Buzzard (Apr 26 2019 at 15:27)</a>:</h4>
+<p>Of course isomorphic vector spaces have the same dimension -- the proof is that vector spaces and dimensions are mathematical objects so isomorphism cannot change them. That's the definition of isomorphism.</p>
+
+<a name="164271820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271820">Kevin Buzzard (Apr 26 2019 at 15:27)</a>:</h4>
+<p>Isomorphisms are the equivs that preserves mathematical predicates.</p>
+
+<a name="164271847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271847">Kevin Buzzard (Apr 26 2019 at 15:27)</a>:</h4>
+<p>Where are these notions in Lean? This is still the easy stuff for us.</p>
+
+<a name="164271958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164271958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164271958">Kevin Buzzard (Apr 26 2019 at 15:29)</a>:</h4>
+<p>All of our objects come with some notion of isomorphism, and all of our predicates, when defined formally, are isomorphism-invariant.</p>
+
+<a name="164272126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272126">Edward Ayers (Apr 26 2019 at 15:30)</a>:</h4>
+<p>There are some predicates that are not preserved over vector space isomorphism right? Eg, isomorphism between V and its dual but <code>x ∈ V → x ∈ V*</code> is false.</p>
+
+<a name="164272144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272144">Kenny Lau (Apr 26 2019 at 15:30)</a>:</h4>
+<p>but <code>\in</code> is not in the language of vector spaces</p>
+
+<a name="164272171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272171">Kevin Buzzard (Apr 26 2019 at 15:31)</a>:</h4>
+<blockquote>
+<p>There are some predicates that are not preserved over vector space isomorphism right? Eg, isomorphism between V and its dual but <code>x ∈ V → x ∈ V*</code> is false.</p>
+</blockquote>
+<p>Ed!</p>
+
+<a name="164272199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272199">Edward Ayers (Apr 26 2019 at 15:31)</a>:</h4>
+<p>Maybe I am just confused</p>
+
+<a name="164272207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272207">Kevin Buzzard (Apr 26 2019 at 15:31)</a>:</h4>
+<p>Did you say <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>∈</mo><mi>V</mi><mspace width="0.277778em"></mspace><mo>⟹</mo><mspace width="0.277778em"></mspace><mi>x</mi><mo>∈</mo><msup><mi>V</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">x\in V \implies x\in V^*</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.688696em;"></span><span class="strut bottom" style="height:0.727796em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit">x</span><span class="mrel">∈</span><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟹</span></span><span class="mord mathit"><span class="mspace thickspace"></span><span class="mord mathit">x</span></span><span class="mrel">∈</span><span class="mord"><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span></span></span></span>??</p>
+
+<a name="164272231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272231">Edward Ayers (Apr 26 2019 at 15:32)</a>:</h4>
+<p>That is false right?</p>
+
+<a name="164272233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272233">Kevin Buzzard (Apr 26 2019 at 15:32)</a>:</h4>
+<p>Ed -- that absolutely makes no sense at all.</p>
+
+<a name="164272284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272284">Kevin Buzzard (Apr 26 2019 at 15:32)</a>:</h4>
+<p>That sentence is <em>not allowed in maths mode</em></p>
+
+<a name="164272295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272295">Kevin Buzzard (Apr 26 2019 at 15:32)</a>:</h4>
+<p>It's a stupid question, go away and do your problem sheets and come back with better questions.</p>
+
+<a name="164272302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272302">Kevin Buzzard (Apr 26 2019 at 15:32)</a>:</h4>
+<p>Your question is <em>not mathematics</em></p>
+
+<a name="164272337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272337">Kevin Buzzard (Apr 26 2019 at 15:33)</a>:</h4>
+<p>You can only say that question in stupid things like Lean that allow you to do any old crap and define objects that we're not interested in.</p>
+
+<a name="164272458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272458">Kevin Buzzard (Apr 26 2019 at 15:34)</a>:</h4>
+<p>The moment you write <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">x\in V</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit">x</span><span class="mrel">∈</span><span class="mord mathit" style="margin-right:0.22222em;">V</span></span></span></span> you have decreed that the type of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span></span></span></span> is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">V</span></span></span></span>, so what you say afterwards doesn't make sense in maths mode because it doesn't even typecheck.</p>
+
+<a name="164272491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272491">Sebastien Gouezel (Apr 26 2019 at 15:34)</a>:</h4>
+<p>In first order logic, <code>x \in V</code> does not make sense as <code>x</code> is not part of the language you are allowing yourself currently, i.e., the language of vector spaces (with addition, 0, scalar multiplication and so on).</p>
+
+<a name="164272498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272498">Kevin Buzzard (Apr 26 2019 at 15:34)</a>:</h4>
+<p>It typechecks in ZFC, but that is an unfortunate coincidence, and it's part of our vow never to use the fact that it typechecks in ZFC.</p>
+
+<a name="164272563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272563">Chris Hughes (Apr 26 2019 at 15:35)</a>:</h4>
+<p>There are some other grey areas. I think there's a <code>generator</code> function for a principal ideal in mathlib. This function isn't preserved under isomorphism, but maybe the things I do with it are.</p>
+
+<a name="164272693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164272693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164272693">Kevin Buzzard (Apr 26 2019 at 15:37)</a>:</h4>
+<p>This use of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.5391em;"></span><span class="strut bottom" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="base"><span class="mrel">∈</span></span></span></span> when I put Ed's statement into maths mode is not the type theory usage of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.5391em;"></span><span class="strut bottom" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="base"><span class="mrel">∈</span></span></span></span>. This is mathematian's <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.5391em;"></span><span class="strut bottom" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="base"><span class="mrel">∈</span></span></span></span>. It's the mathematician's version of <code>:</code>. Mathematicans use some weird variant of ZFC where they add some extra "mathematician-allowable types", and we only allow certain uses of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.5391em;"></span><span class="strut bottom" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="base"><span class="mrel">∈</span></span></span></span> rather than all the ones strictly allowed in ZFC. We abide by some other unwritten rules. I think it might be interesting to formalise them in Lean.</p>
+
+<a name="164273153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164273153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164273153">Kevin Buzzard (Apr 26 2019 at 15:43)</a>:</h4>
+<blockquote>
+<p>but <code>\in</code> is not in the language of vector spaces</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>  can you explain this to me in Lean? I will understand it better then. If <code>[vector_space V]</code> then I can still talk about <code>x : V</code>. So I've managed to get hold of it somehow, and I surely need those terms when I'm making some fundamental definitions like the definition of a linear map between vector spaces</p>
+
+<a name="164273349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164273349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164273349">Kevin Buzzard (Apr 26 2019 at 15:45)</a>:</h4>
+<p>Actually, I do wonder whether I need the terms at all. I could just define a linear map to be a function from V to W that commuted with all the structure. I don't even need the terms. The identity element is just a map from unit to V. And don't get me started with punit -- we like to use unit. And everything can be in Type because we have a clever way of doing category theory called "proper classes", and it honestly all works because sometimes Brian Conrad or Peter Scholze all check.</p>
+
+<a name="164274991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164274991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164274991">Kevin Buzzard (Apr 26 2019 at 16:08)</a>:</h4>
+<p>Here is another issue -- Patrick, Johan and I are constantly complaining that we are having to prove X=X and we are battling against your stupid constructivist nonsense. Of course two terms of a subsingleton are equal, this is just <code>noncomputable rfl</code></p>
+
+<a name="164275314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164275314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164275314">Kevin Buzzard (Apr 26 2019 at 16:13)</a>:</h4>
+<p>It took me ages to learn all the equalities that you type theorists have been offering to our community, but the fact that no mathematician has ever heard of any equality other than <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.36687em;"></span><span class="strut bottom" style="height:0.36687em;vertical-align:0em;"></span><span class="base"><span class="mrel">=</span></span></span></span> and the fact that this equality symbol in <em>maths mode</em> is currently not in Lean is a core reason why mathematicians find the software hard to use. I don't care if they're defeq or not -- this typeclass instance, or monad or whatever it is, is telling me that these two things are EQUAL which is the way mathematicians spell <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.36687em;"></span><span class="strut bottom" style="height:0.36687em;vertical-align:0em;"></span><span class="base"><span class="mrel">=</span></span></span></span> when trying and failing to explain it to computer scientists. I don't have time to change systems now, I just want to work in a place where objects are treated only via their interfaces</p>
+
+<a name="164278132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164278132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164278132">Sebastien Gouezel (Apr 26 2019 at 16:52)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>but <code>\in</code> is not in the language of vector spaces</p>
+</blockquote>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <span class="user-mention silent" data-user-id="110050">Sebastien Gouezel</span>  can you explain this to me in Lean? I will understand it better then. If <code>[vector_space V]</code> then I can still talk about <code>x : V</code>. So I've managed to get hold of it somehow, and I surely need those terms when I'm making some fundamental definitions like the definition of a linear map between vector spaces</p>
+</blockquote>
+<p>Let me explain what is the first order logic of a structure. You have some symbols, and you are only allowed to write formulas using these symbols and quantifiers and free variables. For instance, in the language of groups (with multiplication, neutral element and inverses), you can write the formula <code>∃x, ∀y, ∃z, y=z*z ∨ y = z*z*x</code>. It is true in some groups, and not true in some other groups (this one is true in ℤ but not in ℤ^2, for instance). I claim that if such a formula is true in a group, it is obviously true in an isomorphic group (induction over the length of the formula, this is completely algorithmic). And this is not specific at all to groups: whatever structure with some language, isomorphisms will respect true formulas. You can add to your language more symbols such as <code>∈</code>, or <code>⊆</code> and then you can express more statements but that they are still all respected with any notion of isomorphism. </p>
+<p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. And with this point of view isomorphism invariance is obvious for all these statements.</p>
+
+<a name="164279268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279268">Fabian Glöckle (Apr 26 2019 at 17:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I think deciding which parts of the implementation of a certain structure are allowed to be "used / unfolded" within a theory and which aren't, can't only be decided syntactically. What you are describing, is to my mind the human intelligence to have a higher level model of a structure apart from its technical implementation (the reals as a continuum, not as Dedekind cuts / equivalence classes of Cauchy sequences; this is also the reason why people rarely prove that different implementations of an idea are in fact equivalent).<br>
+There have been several attempts at trying to make the term "within the scope of a theory / respecting a theory" precise.<br>
+First order model theory, as <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> describes, defines a language for a structure; isomorphism is then what is compatible with all parts of the language.<br>
+Category theory allows us to create an abstract notion of morphism and says that valid constructions are only those which respect isomorphisms (in the sense of morphisms with a two-sided inverse).<br>
+I think it is because we check definitions for their compatibility with a theory that we consider the question "is a scheme which is isomorphic to an affine scheme affine?" tautological. But this already assumes "affine-ness" to be well-defined with respect to the theory of schemes.</p>
+
+<a name="164279648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279648">Kevin Buzzard (Apr 26 2019 at 17:13)</a>:</h4>
+<blockquote>
+<p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. </p>
+</blockquote>
+<p>I do not understand this at all. Here is <a href="https://en.wikipedia.org/wiki/Global_dimension" target="_blank" title="https://en.wikipedia.org/wiki/Global_dimension">the Wikipedia page on global dimension of rings</a>. I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions. How do you do this in first order logic? Where and how is all this extra structure being represented in Lean, and what properties does this extra structure have?</p>
+
+<a name="164279669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279669">Kevin Buzzard (Apr 26 2019 at 17:13)</a>:</h4>
+<p>Can isomorphism of schemes be expressed in first order logic? Can isomorphism of topological spaces?</p>
+
+<a name="164279718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279718">Kevin Buzzard (Apr 26 2019 at 17:14)</a>:</h4>
+<p>I don't even know what these questions mean.</p>
+
+<a name="164279737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279737">Kevin Buzzard (Apr 26 2019 at 17:14)</a>:</h4>
+<p>I just want to see it in Lean, that's the only thing I understand properly.</p>
+
+<a name="164279817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164279817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164279817">Chris Hughes (Apr 26 2019 at 17:15)</a>:</h4>
+<p>Aren't most of the properties we care about not part of the first order structure? Could I do state something like 'the product of all elements of a finite monoid is 1'. This seems to involve proving some equivalence of properties between finset A and finset B, and any proof that this property is preserved will require induction on a list.</p>
+
+<a name="164280104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280104">Kevin Buzzard (Apr 26 2019 at 17:19)</a>:</h4>
+<p>Here's a basic thing I don't understand. If I see the definition of a ring in Lean, I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism. If I see the definition of a topological space, I cannot guess the definition of morphism (i.e. a computer can't) because there are two choices. If I see the definition of a partial order again there seem to be two choices: either <code>a &lt; b -&gt; f a &lt; f b</code> or <code>a &lt; b &lt;-&gt; f a &lt; f b</code>. Both might be used in mathematics. But I can guess what an isomorphism is, and miraculously this <em>canonical</em> notion of isomorphism is independent of the choice I made for my morphisms. Some stuff is happening automatically and some stuff isn't. Oh! Is it not a typeclass but some sort of weird new tag controlled by a machine? Is this the hold-up? It has to be tags so it's fiddly as hell and most of us can't do it? I can't have a "mathematician-approved for isomorphisms" Prop-valued tag?</p>
+
+<a name="164280106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280106">Fabian Glöckle (Apr 26 2019 at 17:19)</a>:</h4>
+<blockquote>
+<p>I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions.</p>
+</blockquote>
+<p>The moment you call it a "property of rings", you are asserting that this property respects ring-isos.</p>
+
+<a name="164280231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280231">Fabian Glöckle (Apr 26 2019 at 17:21)</a>:</h4>
+<blockquote>
+<p>I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism</p>
+</blockquote>
+<p>I am currently writing a command which is supposed to do exactly this. Given a <code>has_xyz</code>, generate the type of functions respecting <code>xyz</code></p>
+
+<a name="164280235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280235">Kevin Buzzard (Apr 26 2019 at 17:21)</a>:</h4>
+<p>I know, but what I am saying is that there is nothing mathematically interesting that can be said about predicates on the type of all rings which are <em>not</em> "properties of rings", because we don't talk about such ugly predicates -- they are no use to us. But they can be made in Lean, unfortunately.</p>
+
+<a name="164280248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280248">Sebastien Gouezel (Apr 26 2019 at 17:21)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Most mathematical statements can be expressed as first order statements of the structure under consideration if you allow yourself the right language. </p>
+</blockquote>
+<p>I do not understand this at all. Here is <a href="https://en.wikipedia.org/wiki/Global_dimension" target="_blank" title="https://en.wikipedia.org/wiki/Global_dimension">the Wikipedia page on global dimension of rings</a>. I claim that isomorphic rings have equal global dimensions. I once read the definition of the global dimension of a ring, but that was a long time ago and I have forgotten it. However I am still absolutely 100% mathematician-sure that isomorphic rings have equal global dimensions. How do you do this in first order logic? Where and how is all this extra structure being represented in Lean, and what properties does this extra structure have?</p>
+</blockquote>
+<p>This one is hard to express in first-order logic as it is quantifying over all A-modules. To me, it is not obvious even from a mathematical point of view. Think of a ring R in some universe u, and some other ring S in some universe v, which are isomorphic. Maybe it is possible to construct in universe v some S-module which has no analogue in universe u (maybe because its cardinality is larger than any set in universe u), and this S-module is precisely the one that plays a role in the definition.</p>
+<p>On the other hand, for most properties which are obviously invariant from the definition (being principal or Euclidean, say), this can be expressed in first-order logic.</p>
+
+<a name="164280315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280315">Kevin Buzzard (Apr 26 2019 at 17:22)</a>:</h4>
+<p>I think that definitional type equality should be banned and replaced with mathematical equality of mathematical structures.</p>
+
+<a name="164280379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280379">Kevin Buzzard (Apr 26 2019 at 17:23)</a>:</h4>
+<p>Sebastien  I am most definitely happy to restrict to objects in one universe. Mathematicians never need any more in practice, right?</p>
+
+<a name="164280495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280495">Kevin Buzzard (Apr 26 2019 at 17:25)</a>:</h4>
+<p>I think a better example schemes. Let's do them. How do you express schemes in first order logic? A scheme is a topological space equipped with a functor from some (small) category made from the open sets to the (large) category of rings, plus some axioms that need not concern us but which I can assure you can be written in maths mode.</p>
+
+<a name="164280540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280540">Kevin Buzzard (Apr 26 2019 at 17:25)</a>:</h4>
+<p>And I want to prove that if S and T are isomorphic schemes and S is Noetherian then T is Noetherian.</p>
+
+<a name="164280652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280652">Kevin Buzzard (Apr 26 2019 at 17:27)</a>:</h4>
+<p>This is a baby example -- this is only MSc. Perfectoid spaces are much more complicated objects. But I can guarantee the purity of the make, because they were made by mathematicians. Can I do this in first order logic? Can I do this in Lean?</p>
+
+<a name="164280820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280820">Sebastien Gouezel (Apr 26 2019 at 17:28)</a>:</h4>
+<p>If you try to write down the definition of noetherian unfolding everything, you will see it boils down to a complicated formula with a lot of quantifiers but just involving the objects you are working with. So this is definitely a first order formula in the appropriate language, yes.</p>
+
+<a name="164280863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164280863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164280863">Sebastien Gouezel (Apr 26 2019 at 17:29)</a>:</h4>
+<p>Of course, I am not expecting you to unfold everything by hand, a computer can do this much better than you!</p>
+
+<a name="164281203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281203">Kevin Buzzard (Apr 26 2019 at 17:32)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>I can correctly guess the definition of a homomorphism of rings, and as a consequence guess the definition of isomorphism</p>
+</blockquote>
+<p>I am currently writing a command which is supposed to do exactly this. Given a <code>has_xyz</code>, generate the type of functions respecting <code>xyz</code></p>
+</blockquote>
+<p>What will you do for topological spaces and for binary relations? How many choices do you have for the homomorphisms? What about the isomorphisms though? Do you agree that there are two different questions here -- generating morphisms and generating isomorphisms i.e. generating the groupoid associated to the structure. </p>
+<p>Do you see any difference between bundled and unbundled objects? In a parallel universe Lean could have had bundled groups. Just one type! It would have looked something like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">Group</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="c1">-- or Type*, I don&#39;t care, but putting in the star makes it harder work</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">-&gt;</span> <span class="n">G</span> <span class="bp">-&gt;</span> <span class="n">G</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">mul</span> <span class="n">one</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g</span><span class="o">)</span>
+<span class="bp">...</span>
+</pre></div>
+
+<a name="164281450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281450">Kevin Buzzard (Apr 26 2019 at 17:35)</a>:</h4>
+<blockquote>
+<p>If you try to write down the definition of noetherian unfolding everything, you will see it boils down to a complicated formula with a lot of quantifiers but just involving the objects you are working with. So this is definitely a first order formula in the appropriate language, yes.</p>
+</blockquote>
+<p>So there is a "first order language of schemes"? Even though schemes involve something which can't be done in Isabelle within its typeclass framework?</p>
+
+<a name="164281464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281464">Fabian Glöckle (Apr 26 2019 at 17:35)</a>:</h4>
+<p>I think the category theory approach about defining morphisms as stronger than the first order approach<br>
+(because at some point, the tools for moving parts of structures back and forth become higher-order, think of sheaf pullbacks in morphism definitions)</p>
+
+<a name="164281619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164281619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164281619">Fabian Glöckle (Apr 26 2019 at 17:37)</a>:</h4>
+<p>And I think the correct order is "define morphisms" -&gt; "isomophisms as morphisms with a two-sided inverse" -&gt; "everything that respects isomorphisms is a sensible definition"</p>
+
+<a name="164283369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164283369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164283369">Fabian Glöckle (Apr 26 2019 at 17:56)</a>:</h4>
+<blockquote>
+<p>What will you do for topological spaces and for binary relations? How many choices do you have for the homomorphisms? What about the isomorphisms though? Do you agree that there are two different questions here -- generating morphisms and generating isomorphisms i.e. generating the groupoid associated to the structure. </p>
+</blockquote>
+<p>Okay I understand what you are saying. But then if I think about two different foundational systems for mathematics, the associated groupoids of a structure can be "different" (whatever that means). From a metamathematical point of view, asking about how the groupoid looks is not well-defined. Hence the decision for the univalence axiom to compress it as much as possible (to the hott_eq groupoid).</p>
+
+<a name="164284299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164284299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164284299">Chris Hughes (Apr 26 2019 at 18:05)</a>:</h4>
+<p>What is a first order statement about groups? I thought anything involving <code>Pi (x : Pi _) </code> was no longer first order. Is this correct?</p>
+
+<a name="164287156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164287156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164287156">Sebastien Gouezel (Apr 26 2019 at 18:38)</a>:</h4>
+<p>It depends on the language you are allowing. Second order statements are first order for an extended language. A first order statement in the classical sense is: <code>∃x, ∀y, ∃z, y=z*z ∨ y = z*z*x</code>. A second order statement in the classical sense, which becomes first order if you allow quantification over sets, is the following: there is a finite subset that generates the group (written suitably with quantifiers).</p>
+
+<a name="164288093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164288093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164288093">Sebastien Gouezel (Apr 26 2019 at 18:50)</a>:</h4>
+<blockquote>
+<p>Do you see any difference between bundled and unbundled objects?</p>
+</blockquote>
+<p>I guess a good transfer tactic would unbundle everything, write everything in first order form, transfer everything, and then rebundle it.</p>
+
+<a name="164289137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164289137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164289137">Kevin Buzzard (Apr 26 2019 at 19:04)</a>:</h4>
+<p>If you showed a mathematician a definition of a pushforward of sheaves (that's called <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mo>∗</mo></msub><mrow><mi mathvariant="script">F</mi></mrow></mrow><annotation encoding="application/x-tex">f_*\mathcal{F}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.175696em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord"><span class="mord mathcal" style="margin-right:0.09931em;">F</span></span></span></span></span> in maths and <code>sheaf.map f</code> in Lean) they would agree that it was pretty canonical. On the other hand you could also imagine some far more stupid definitions (e.g. just send everything to the zero sheaf). Here's a question. Let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">C</mi></mrow></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.05834em;">C</span></span></span></span></span> denote the category of sheaves of abelian groups on a topological space <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> and let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">D</mi></mrow></mrow><annotation encoding="application/x-tex">\mathcal{D}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.02778em;">D</span></span></span></span></span> denote the category of sheaves of abelian groups on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span>. If I give you a continuous map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f:X\to Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span> then I claim that there is a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>a</mi><mi>n</mi><mi>o</mi><mi>n</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">canonical</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">c</span><span class="mord mathit">a</span><span class="mord mathit">n</span><span class="mord mathit">o</span><span class="mord mathit">n</span><span class="mord mathit">i</span><span class="mord mathit">c</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span></span></span></span> functor from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">C</mi></mrow></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.05834em;">C</span></span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="script">D</mi></mrow></mrow><annotation encoding="application/x-tex">\mathcal{D}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathcal" style="margin-right:0.02778em;">D</span></span></span></span></span>, namely the pushforward. One has to be careful here -- this construction seems to be giving some sort of "functor" from a category to some sort of two-category; I say "functor" because F(fg) and F(f) o F(g) are perhaps only canonically isomorphic rather than equal.</p>
+
+<a name="164293418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164293418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164293418">Mario Carneiro (Apr 26 2019 at 20:01)</a>:</h4>
+<p>I agree with Fabian that the <em>meaning</em> of "predicate on rings" is that it is a predicate that respects ring isomorphism. There is a generic mechanism for producing isomorphisms (not homomorphisms) on first order structures, and I believe it extends to higher order as well (so that topologies are also applicable and so on). I think it's best to define these manually though, since we care how it's expressed.</p>
+<p>I want to reiterate an example Chris gave, which demonstrates the important fact that some structure preserving predicates contain subterms that are not structure preserving. <code>dim V</code> is the cardinality of a basis of V. This is a structure preserving predicate, but the reason this is a deep proof is because it is formed out of a non-structure preserving function "a basis of V" (i.e. <code>choice (exists basis of V)</code>). An arbitrary vector space isomorphism will not take <code>choice (exists basis of V)</code> to <code>choice (exists basis of W)</code>, because there is no connection between these bases (unless V = W in lean). There is a particular isomorphism that preserves this, but that's not what a "vector space property" means.</p>
+
+<a name="164294607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294607">Kevin Buzzard (Apr 26 2019 at 20:17)</a>:</h4>
+<p>But <code>rfl++</code> should still prove that if V and W are isomorphic then their dimensions are equal.</p>
+
+<a name="164294617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294617">Kevin Buzzard (Apr 26 2019 at 20:17)</a>:</h4>
+<p>I don't care if there's content -- it's math-trivial.</p>
+
+<a name="164294679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294679">Kevin Buzzard (Apr 26 2019 at 20:18)</a>:</h4>
+<p><code>dimension</code> has some "I am isomorphism-invariant" tag</p>
+
+<a name="164294683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294683">Kevin Buzzard (Apr 26 2019 at 20:18)</a>:</h4>
+<p>it just took some work to get it there</p>
+
+<a name="164294963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294963">Mario Carneiro (Apr 26 2019 at 20:22)</a>:</h4>
+<p>yes, that's <code>transfer</code></p>
+
+<a name="164294967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164294967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164294967">Sebastien Gouezel (Apr 26 2019 at 20:22)</a>:</h4>
+<p>If you define "dimension" as the maximal cardinality of an independent subset, yes, <code>rfl++</code> should prove it. If you defined it as "take the cardinality of some random basis", then the statement that is is invariant under isomorphism is non-trivial.</p>
+
+<a name="164295000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164295000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164295000">Mario Carneiro (Apr 26 2019 at 20:23)</a>:</h4>
+<p>it relies on "I am isomorphism invariant" tags to build such proofs for first order statements (like other properties you want this tag on)</p>
+
+<a name="164295067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164295067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164295067">Mario Carneiro (Apr 26 2019 at 20:24)</a>:</h4>
+<p>The problem is not that <code>transfer</code> doesn't work, it's that nothing has these tags right now so <code>transfer</code> doesn't know what to do</p>
+
+<a name="164295404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164295404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164295404">Kevin Buzzard (Apr 26 2019 at 20:29)</a>:</h4>
+<blockquote>
+<p>If you define "dimension" as the maximal cardinality of an independent subset, yes, <code>rfl++</code> should prove it. If you defined it as "take the cardinality of some random basis", then the statement that is is invariant under isomorphism is non-trivial.</p>
+</blockquote>
+<p>The mathematician in me wants to say that it is a theorem that the max cardinality of an independent subset is equal to the cardinality of a random basis, and I appreciate that this needs to be proved in a good API. However my point is simply that <em>however</em> the definition of dimension is made in Lean, a good API should have the result that it is isomorphism-invariant. Does this make people more inclined towards one definition than the other?</p>
+
+<a name="164295605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164295605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164295605">Sebastien Gouezel (Apr 26 2019 at 20:32)</a>:</h4>
+<p>I definitely prefer the definition as the maximal cardinality of a linearly independent subset, as it is obviously isomorphism-invariant, contrary to the definition "take the cardinality of a basis found using choice".</p>
+
+<a name="164296343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164296343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164296343">Chris Hughes (Apr 26 2019 at 20:43)</a>:</h4>
+<p>Do you have the same problem deep down though, since "cardinals have supremums" is presumably proven with choice?</p>
+
+<a name="164296573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164296573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164296573">Sebastien Gouezel (Apr 26 2019 at 20:47)</a>:</h4>
+<p>Even if some choice is involved, it will be the same choice over both sides of the isomorphism, i.e., choice over the same set of cardinals. Hence, it should give the same result (choice is an unpredictable but deterministic function: give it the same argument, it will give the same conclusion). At least if you don't change universes.</p>
+
+<a name="164296618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164296618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164296618">Kevin Buzzard (Apr 26 2019 at 20:47)</a>:</h4>
+<p>I'm happy not to change universes. Mathematicians don't really need universes for most of what we do.</p>
+
+<a name="164300340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164300340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164300340">Mario Carneiro (Apr 26 2019 at 21:44)</a>:</h4>
+<p>Actually <code>dim V</code> in mathlib is defined in that way - it is the minimum cardinality of any basis for V, so it is "manifestly invariant" provided you can show that the set of basis cardinalities is preserved under isomorphism</p>
+
+<a name="164300389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164300389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164300389">Mario Carneiro (Apr 26 2019 at 21:45)</a>:</h4>
+<p>I recall thinking about whether to extend the definition to modules, but I think it isn't clear whether the min or sup is preferred in that case</p>
+
+<a name="164301456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164301456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164301456">Kevin Buzzard (Apr 26 2019 at 22:01)</a>:</h4>
+<p>Free modules over a nonzero ring have a well-defined dimension, it's interesting that Mario says it's not clear what the best definition is, the theorem that if R^a injects into R'b then a&lt;=b  is tricky even for a, b finite. But if R^b surjects onto R^a then just tensoring up to a residue field shows b&gt;=a</p>
+
+<a name="164301473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164301473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164301473">Kevin Buzzard (Apr 26 2019 at 22:01)</a>:</h4>
+<p>Tensoring with a fixed thing preserves surjections but not injections -- it's right exact but not left exact</p>
+
+<a name="164301527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164301527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164301527">Kevin Buzzard (Apr 26 2019 at 22:02)</a>:</h4>
+<p>I always thought that inequality situation was a strange asymmetry</p>
+
+<a name="164301555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164301555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164301555">Mario Carneiro (Apr 26 2019 at 22:03)</a>:</h4>
+<p>I should preface this by saying it's been a while and I've forgotten the results of my research. I see that <code>dim</code> is only defined for vector spaces so apparently I gave up</p>
+
+<a name="164302266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Univalence%20axiom/near/164302266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96233Univalenceaxiom.html#164302266">Kevin Buzzard (Apr 26 2019 at 22:14)</a>:</h4>
+<p>Of course we just prove that they're the same and then who cares what the definition is, it's both.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

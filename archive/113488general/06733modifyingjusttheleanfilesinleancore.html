@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06733modifyingjusttheleanfilesinleancore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html">modifying just the lean files, in lean core</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192149589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192149589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192149589">Scott Morrison (Mar 29 2020 at 00:58)</a>:</h4>
+<p>Suppose I want to checkout git@github.com:leanprover-community/lean.git and just modify some of the Lean files. What do I actually do? The build instructions there are all about actually building Lean itself. I just want to modify some <code>.lean</code> files under the <code>library</code> directory. How do build everything in the library directory?</p>
+
+<a name="192149590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192149590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192149590">Scott Morrison (Mar 29 2020 at 00:58)</a>:</h4>
+<p>I've got so used to the wonders of <code>elan</code>/<code>leanpkg</code> based lean...</p>
+
+<a name="192149938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192149938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192149938">Bryan Gin-ge Chen (Mar 29 2020 at 01:09)</a>:</h4>
+<p>Hmm, if your default Lean is at 3.7.2c (or if you set an <code>elan</code> override for your <code>lean</code> repo directory) then you can just open <code>library/</code> in VS Code and it should be OK for most things right now, since the master commit doesn't have any changes to Lean beyond 3.7.2c. </p>
+<p>However, "Go to definition" won't direct you to the right place, and you might not be able to test your changes easily, since you'll still be running a different version of Lean using a different core library.</p>
+<p>I don't know how to get all of that in sync without building Lean and setting up an <code>elan</code> override to a local toolchain (see <code>elan toolchain help link</code>).</p>
+
+<a name="192150798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192150798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192150798">Yury G. Kudryashov (Mar 29 2020 at 01:39)</a>:</h4>
+<p>I used <code>elan run leanprover-community-lean-3.7.2 lean --make -j 1 .  </code> to compile modified library, doesn't give you editor support.</p>
+
+<a name="192150848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192150848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192150848">Yury G. Kudryashov (Mar 29 2020 at 01:41)</a>:</h4>
+<p>How do I override toolchain in a directory?</p>
+
+<a name="192150896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192150896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192150896">Bryan Gin-ge Chen (Mar 29 2020 at 01:42)</a>:</h4>
+<p>I can never remember the syntax so I just type <code>elan override</code> and follow what it says there.</p>
+
+<a name="192150902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192150902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192150902">Bryan Gin-ge Chen (Mar 29 2020 at 01:42)</a>:</h4>
+<p>Looks like it's <code>elan override set leanprover-community-lean-3.7.2</code>.</p>
+
+<a name="192151132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192151132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192151132">Yury G. Kudryashov (Mar 29 2020 at 01:50)</a>:</h4>
+<p>Emacs mode works after <code>elan override</code>!</p>
+
+<a name="192151143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192151143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192151143">Yury G. Kudryashov (Mar 29 2020 at 01:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> What are you going to modify?</p>
+
+<a name="192153684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20just%20the%20lean%20files%2C%20in%20lean%20core/near/192153684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06733modifyingjusttheleanfilesinleancore.html#192153684">Scott Morrison (Mar 29 2020 at 03:16)</a>:</h4>
+<p>I wanted to muck around with <code>ne.def</code>, contrary to Mario's advice. :-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

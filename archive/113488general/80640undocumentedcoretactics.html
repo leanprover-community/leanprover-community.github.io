@@ -1,0 +1,515 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/80640undocumentedcoretactics.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html">undocumented core tactics</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193428623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428623">Kevin Buzzard (Apr 09 2020 at 09:55)</a>:</h4>
+<p>I'm thinking about documenting core tactics. Below are some core tactics, with no docstrings, and I have no idea what any of them do. Is an end user ever supposed to use any of them? I propose not adding them to the community docs. I suspect many are intermediate constructions which are not supposed to be used by the end user (but on the other hand all of them are in <code>tactic.interactive</code>...). Is anyone's favourite interactive tactic on this list?</p>
+<div class="codehilite"><pre><span></span>cases_arg_p,
+cases_core,
+concat_tags,
+constructor_matching,
+exacts._main,
+existsi._main,
+get_rule_eqn_lemmas,
+guard_expr_eq,
+propagate_tags,
+rsimp,
+rw_rule,
+rw_rule.cases_on,
+rw_rule.has_reflect,
+rw_rule.mk,
+rw_rule.mk.inj,
+rw_rule.mk.inj_arrow,
+rw_rule.no_confusion,
+rw_rule.no_confusion_type,
+rw_rule.pos,
+rw_rule.rec,
+rw_rule.rec_on,
+rw_rule.rule,
+rw_rule.symm,
+rw_rule_p,
+rw_rules,
+rw_rules_t,
+rw_rules_t.cases_on,
+rw_rules_t.end_pos,
+rw_rules_t.has_reflect,
+rw_rules_t.mk,
+rw_rules_t.mk.inj,
+rw_rules_t.mk.inj_arrow,
+rw_rules_t.no_confusion,
+rw_rules_t.no_confusion_type,
+rw_rules_t.rec,
+rw_rules_t.rec_on,
+rw_rules_t.rules,
+simp_core,
+simp_core_aux,
+to_expr&#39;,
+</pre></div>
+
+<a name="193428755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428755">Mario Carneiro (Apr 09 2020 at 09:56)</a>:</h4>
+<p><code>propagate_tags</code> is somewhat useful but it's primarily meant for non-interactive use. The only one there that is an actual end user tactic is <code>rsimp</code></p>
+
+<a name="193428774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428774">Mario Carneiro (Apr 09 2020 at 09:57)</a>:</h4>
+<p><code>constructor_matching</code> too I think</p>
+
+<a name="193428800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428800">Kevin Buzzard (Apr 09 2020 at 09:57)</a>:</h4>
+<p>Just to note that this follows from a conversation <a href="#narrow/stream/116395-maths/topic/mul_left_cancel/near/193421143" title="#narrow/stream/116395-maths/topic/mul_left_cancel/near/193421143">here</a></p>
+
+<a name="193428809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428809">Kevin Buzzard (Apr 09 2020 at 09:57)</a>:</h4>
+<p>Do you fancy telling me docstrings for these tactics?</p>
+
+<a name="193428828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428828">Mario Carneiro (Apr 09 2020 at 09:57)</a>:</h4>
+<p><code>rsimp</code> is simp but more... robust?</p>
+
+<a name="193428882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428882">Mario Carneiro (Apr 09 2020 at 09:58)</a>:</h4>
+<p><code>propagate_tags</code> propagates tags</p>
+
+<a name="193428894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428894">Johan Commelin (Apr 09 2020 at 09:58)</a>:</h4>
+<p><code>rintro</code> is intro but more... robust?</p>
+
+<a name="193428920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428920">Johan Commelin (Apr 09 2020 at 09:58)</a>:</h4>
+<p><code>rsimp</code> is simp but more... recursive?</p>
+
+<a name="193428921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428921">Rob Lewis (Apr 09 2020 at 09:58)</a>:</h4>
+<p>A lot of those are misplaced in the tactic.interactive namespace.</p>
+
+<a name="193428930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428930">Kevin Buzzard (Apr 09 2020 at 09:58)</a>:</h4>
+<p>I guessed.</p>
+
+<a name="193428974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428974">Johan Commelin (Apr 09 2020 at 09:59)</a>:</h4>
+<p>Let's fix this in Lean 3.8.1 (-;</p>
+
+<a name="193428978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428978">Kevin Buzzard (Apr 09 2020 at 09:59)</a>:</h4>
+<p>But now would be a good time for someone to write a docstring for any tactic they want to save on this list.</p>
+
+<a name="193428999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193428999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193428999">Rob Lewis (Apr 09 2020 at 09:59)</a>:</h4>
+<p>At some point in the doc gen stuff I wanted to enforce that every declaration in  <code>tactic.interactive</code> had a doc string and would get displayed.</p>
+
+<a name="193429015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429015">Rob Lewis (Apr 09 2020 at 09:59)</a>:</h4>
+<p>But there was way too much junk in the namespace to do this.</p>
+
+<a name="193429052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429052">Mario Carneiro (Apr 09 2020 at 09:59)</a>:</h4>
+<p><code>guard_expr_eq</code> is actually an interactive tactic</p>
+
+<a name="193429136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429136">Mario Carneiro (Apr 09 2020 at 10:00)</a>:</h4>
+<p>it looks useful for testing</p>
+
+<a name="193429218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429218">Mario Carneiro (Apr 09 2020 at 10:01)</a>:</h4>
+<p>although it's a bit odd that the first argument is an <code>expr</code> and the second is parsed</p>
+
+<a name="193429366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429366">Mario Carneiro (Apr 09 2020 at 10:02)</a>:</h4>
+<p>actually scratch that, I think the main intended use of this function is via <code>guard_target</code> and <code>guard_hyp</code></p>
+
+<a name="193429412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429412">Mario Carneiro (Apr 09 2020 at 10:03)</a>:</h4>
+<p><code>propagate_tags</code> is a noninteractive tactic</p>
+
+<a name="193429820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193429820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193429820">Mario Carneiro (Apr 09 2020 at 10:07)</a>:</h4>
+<p>Here's an example of <code>constructor_matching</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">constructor_matching</span><span class="bp">*</span> <span class="o">[</span><span class="bp">_∧_</span><span class="o">,</span> <span class="bp">_∨_</span><span class="o">]</span><span class="bp">;</span> <span class="n">trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193430161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193430161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193430161">Mario Carneiro (Apr 09 2020 at 10:11)</a>:</h4>
+<p><code>rsimp</code> is something I would love to read a doc string about. It uses smt stuff internally, it probably does some <code>cc</code> inside it, and it strangely has no space for lemma inputs like <code>simp</code>; I think it relies entirely on annotations and things in the context</p>
+
+<a name="193430678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193430678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193430678">Patrick Massot (Apr 09 2020 at 10:16)</a>:</h4>
+<p>I think <code>rsimp</code> is documented in the Lean 3 meta-programing paper.</p>
+
+<a name="193436367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193436367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193436367">Kevin Buzzard (Apr 09 2020 at 11:19)</a>:</h4>
+<p>If someone who understands something about any of the tactics listed above could just give me a docstring sentence while I fix up all the other issues I've run into, that would be great. Anything in the above list which we don't get a sentence for will not be included because I know 99% of us can live without all of them</p>
+
+<a name="193436513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193436513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193436513">Johan Commelin (Apr 09 2020 at 11:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Do you have a branch where you collect them? Or do you want people to post in this thread?</p>
+
+<a name="193436580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193436580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193436580">Johan Commelin (Apr 09 2020 at 11:21)</a>:</h4>
+<p>I don't think I've ever used any of the tactics on that list</p>
+
+<a name="193436734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193436734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193436734">Mario Carneiro (Apr 09 2020 at 11:23)</a>:</h4>
+<p>I think <code>rsimp</code> and <code>constructor_matching</code> are the only two that need documentation</p>
+
+<a name="193436770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193436770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193436770">Mario Carneiro (Apr 09 2020 at 11:23)</a>:</h4>
+<p>the rest are just non-interactive tactics and should be documented elsewhere</p>
+
+<a name="193438801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193438801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193438801">Kevin Buzzard (Apr 09 2020 at 11:48)</a>:</h4>
+<p>Can someone confirm that the core docstrings for <code>cases_matching</code> and <code>cases_type</code> are incorrect? They both seem to make the claim in their example that they will do something to the goal, but in experiments I can only make these tactics do something to do hypotheses.</p>
+
+<a name="193438858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193438858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193438858">Kevin Buzzard (Apr 09 2020 at 11:48)</a>:</h4>
+<p>Currently the docstring for <code>cc</code> is <code>Tries to prove the main goal using congruence closure.</code>. I remember this being no help to me whatsoever as a beginner. Does anyone have any better suggestions, e.g. a reference?</p>
+
+<a name="193438898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193438898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193438898">Kevin Buzzard (Apr 09 2020 at 11:49)</a>:</h4>
+<p><code>congr</code> has no docstring. Should the docstring be "This tactic is broken -- use <code>congr'</code>"?</p>
+
+<a name="193438982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193438982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193438982">Kevin Buzzard (Apr 09 2020 at 11:50)</a>:</h4>
+<p>Are we happy with <code>dsimp</code> documentation "<code>dsimp</code> is similar to <code>simp</code>, except that it only uses definitional equalities."?</p>
+
+<a name="193439047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439047">Mario Carneiro (Apr 09 2020 at 11:51)</a>:</h4>
+<p><code>cases_matching</code> and <code>cases_type</code> are more automated variants of <code>cases</code>, and have a similar effect on the goal</p>
+
+<a name="193439069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439069">Kevin Buzzard (Apr 09 2020 at 11:51)</a>:</h4>
+<p>Does <code>cases</code> have any effect on a goal?</p>
+
+<a name="193439084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439084">Rob Lewis (Apr 09 2020 at 11:51)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438801" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438801">said</a>:</p>
+<blockquote>
+<p>Can someone confirm that the core docstrings for <code>cases_matching</code> and <code>cases_type</code> are incorrect? They both seem to make the claim in their example that they will do something to the goal, but in experiments I can only make these tactics do something to do hypotheses.</p>
+</blockquote>
+<p>I think both use "goal" to refer to the context + target, not just the target.</p>
+
+<a name="193439090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439090">Kevin Buzzard (Apr 09 2020 at 11:51)</a>:</h4>
+<p>!</p>
+
+<a name="193439159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439159">Rob Lewis (Apr 09 2020 at 11:52)</a>:</h4>
+<p>They change the context, which you could argue is part of the goal. But "goal" is used differently in e.g. <code>tactic.get_goals</code></p>
+
+<a name="193439175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439175">Kevin Buzzard (Apr 09 2020 at 11:52)</a>:</h4>
+<p>That's it for now, although I could mention that the <code>iterate</code> docstring displays with one of those "error while executing interactive.param_desc" errors. Is this something which can be fixed now?</p>
+
+<a name="193439211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439211">Rob Lewis (Apr 09 2020 at 11:53)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438898" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438898">said</a>:</p>
+<blockquote>
+<p><code>congr</code> has no docstring. Should the docstring be "This tactic is broken -- use <code>congr'</code>"?</p>
+</blockquote>
+<p>If <code>congr'</code> isn't in core, then no, it shouldn't be.</p>
+
+<a name="193439213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439213">Mario Carneiro (Apr 09 2020 at 11:53)</a>:</h4>
+<p>it's <code>small_nat</code> causing problems again</p>
+
+<a name="193439287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439287">Rob Lewis (Apr 09 2020 at 11:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438858" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438858">said</a>:</p>
+<blockquote>
+<p>Currently the docstring for <code>cc</code> is <code>Tries to prove the main goal using congruence closure.</code>. I remember this being no help to me whatsoever as a beginner. Does anyone have any better suggestions, e.g. a reference?</p>
+</blockquote>
+<p>There's a pretty good tactic doc that we add for <code>cc</code> in mathlib already.</p>
+
+<a name="193439314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439314">Kevin Buzzard (Apr 09 2020 at 11:54)</a>:</h4>
+<p>Oh gosh, are some of these things in already??</p>
+
+<a name="193439322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439322">Rob Lewis (Apr 09 2020 at 11:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438982" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193438982">said</a>:</p>
+<blockquote>
+<p>Are we happy with <code>dsimp</code> documentation "<code>dsimp</code> is similar to <code>simp</code>, except that it only uses definitional equalities."?</p>
+</blockquote>
+<p>I mean, it could definitely be improved...</p>
+
+<a name="193439412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439412">Rob Lewis (Apr 09 2020 at 11:55)</a>:</h4>
+<p>The only core tactics with doc entries (that are tagged with the <code>core</code> label, anyway) are <code>cc</code>, <code>simp</code>, and <code>conv</code>.</p>
+
+<a name="193439518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439518">Kevin Buzzard (Apr 09 2020 at 11:56)</a>:</h4>
+<p>That's great news about <code>conv</code> because this has no docstring.</p>
+
+<a name="193439552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439552">Kevin Buzzard (Apr 09 2020 at 11:56)</a>:</h4>
+<p>So I can just delete <code>cc</code>, <code>simp</code> and <code>conv</code> from my list I guess?</p>
+
+<a name="193439612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439612">Kevin Buzzard (Apr 09 2020 at 11:57)</a>:</h4>
+<p>In fact I have to delete <code>simp</code>, running <code>add_tactic_doc</code> gives the error <code>invalid object declaration, environment already has an object named 'tactic_doc._2018668402'</code>. That's clever. Is some hashing going on?</p>
+
+<a name="193439679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439679">Scott Morrison (Apr 09 2020 at 11:58)</a>:</h4>
+<p>Ideally you could transport the doc entries for <code>cc</code>, <code>simp</code> and <code>conv</code> from mathlib into doc strings in core?</p>
+
+<a name="193439687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439687">Rob Lewis (Apr 09 2020 at 11:58)</a>:</h4>
+<p>If you're planning to make a PR to core adding doc strings, maybe you could use the first few sentences of the doc entries for those tactics? They're all pretty detailed entries, probably too much for doc strings.</p>
+
+<a name="193439742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439742">Rob Lewis (Apr 09 2020 at 11:58)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193439612" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193439612">said</a>:</p>
+<blockquote>
+<p>In fact I have to delete <code>simp</code>, running <code>add_tactic_doc</code> gives the error <code>invalid object declaration, environment already has an object named 'tactic_doc._2018668402'</code>. That's clever. Is some hashing going on?</p>
+</blockquote>
+<p>Yes, this is because there's already a doc entry with the name <code>simp</code>.</p>
+
+<a name="193439765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439765">Rob Lewis (Apr 09 2020 at 11:58)</a>:</h4>
+<p>(The error reporting could be improved.)</p>
+
+<a name="193439791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439791">Scott Morrison (Apr 09 2020 at 11:59)</a>:</h4>
+<p>Was your list above of undocumented tactics exhaustive? If so, perhaps we should go through removing most of them from the interactive namespace.</p>
+
+<a name="193439991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193439991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193439991">Rob Lewis (Apr 09 2020 at 12:01)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193439791" title="#narrow/stream/113488-general/topic/undocumented.20core.20tactics/near/193439791">said</a>:</p>
+<blockquote>
+<p>Was your list above of undocumented tactics exhaustive? If so, perhaps we should go through removing most of them from the interactive namespace.</p>
+</blockquote>
+<p>It wouldn't hurt, but I think it's a decent amount of effort that is better spent on other things.</p>
+
+<a name="193440042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193440042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193440042">Rob Lewis (Apr 09 2020 at 12:01)</a>:</h4>
+<p>mathlib makes a mess of the interactive namespace too.</p>
+
+<a name="193440176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193440176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193440176">Kevin Buzzard (Apr 09 2020 at 12:02)</a>:</h4>
+<p>It wasn't quite  exhaustive -- <code>congr</code> has no docstring (and I still don't know what to write for it).</p>
+
+<a name="193441372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193441372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193441372">Kevin Buzzard (Apr 09 2020 at 12:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>/-- Basically equivalent to `convert rfl`, the `congr` tactic attempts to identify both
+  sides of an equality goal `A = B`, leaving as new goals the subterms of `A` and `B`
+  which are not definitionally equal. Note that `congr` can be over-aggressive at times;
+  in mathlib the `congr&#39;` tactic provides a more refined approach.-/
+</pre></div>
+
+<a name="193442293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193442293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193442293">Johan Commelin (Apr 09 2020 at 12:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Note that <code>convert</code> uses <code>congr</code> under the hood.</p>
+
+<a name="193442501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193442501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193442501">Kevin Buzzard (Apr 09 2020 at 12:27)</a>:</h4>
+<p>I was copying docstrings over for unhelpfully-documented tactics such as <code>ac_refl</code> and <code>rw</code>, where the docstring is just "this is an abbreviation for another tactic". But actually, do we really want both <code>ac_refl</code> and <code>ac_reflexivity</code> in our docs? They are the same tactic. Should we just choose one?</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Proves a goal with target `s = t` when `s` and `t` are equal up to the associativity and</span>
+<span class="cm">commutativity of their binary operations. -/</span>
+<span class="n">add_tactic_doc</span>
+<span class="o">{</span> <span class="n">name</span>       <span class="o">:=</span> <span class="s2">&quot;ac_refl&quot;</span><span class="o">,</span>
+  <span class="n">category</span>   <span class="o">:=</span> <span class="n">doc_category</span><span class="bp">.</span><span class="n">tactic</span><span class="o">,</span>
+  <span class="n">decl_names</span> <span class="o">:=</span> <span class="o">[</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">ac_refl</span><span class="o">],</span>
+  <span class="n">tags</span>       <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;core&quot;</span><span class="o">,</span> <span class="s2">&quot;lemma application&quot;</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="n">add_tactic_doc</span>
+<span class="o">{</span> <span class="n">name</span>       <span class="o">:=</span> <span class="s2">&quot;ac_reflexivity&quot;</span><span class="o">,</span>
+  <span class="n">category</span>   <span class="o">:=</span> <span class="n">doc_category</span><span class="bp">.</span><span class="n">tactic</span><span class="o">,</span>
+  <span class="n">decl_names</span> <span class="o">:=</span> <span class="o">[</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">ac_reflexivity</span><span class="o">],</span>
+  <span class="n">tags</span>       <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;core&quot;</span><span class="o">,</span> <span class="s2">&quot;lemma application&quot;</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193442523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193442523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193442523">Johan Commelin (Apr 09 2020 at 12:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The `congr` tactic attempts to identify both sides of an equality goal `A = B`,</span>
+<span class="cm"> leaving as new goals the subterms of `A` and `B` which are not definitionally equal.</span>
+<span class="cm"> Example: suppose the goal is `x * f y = g w * f z`. Then `congr` will produce two goals:</span>
+<span class="cm"> `x = g w` and `y = z`.</span>
+
+<span class="cm"> Note that `congr` can be over-aggressive at times; in mathlib the `congr&#39;` tactic provides</span>
+<span class="cm"> a more refined approach, by taking a parameter that limits the recursion depth.-/</span>
+</pre></div>
+
+<a name="193444434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193444434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193444434">Rob Lewis (Apr 09 2020 at 12:45)</a>:</h4>
+<blockquote>
+<p>Should we just choose one?</p>
+</blockquote>
+<p>Yes, maybe mention both names in the doc entry, but it doesn't need two entries. You can put multiple names in the <code>decl_names</code> field.</p>
+
+<a name="193444563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193444563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193444563">Kevin Buzzard (Apr 09 2020 at 12:47)</a>:</h4>
+<p>Like this?</p>
+<div class="codehilite"><pre><span></span><span class="n">add_tactic_doc</span>
+<span class="o">{</span> <span class="n">name</span>       <span class="o">:=</span> <span class="s2">&quot;rw&quot;</span><span class="o">,</span>
+  <span class="n">category</span>   <span class="o">:=</span> <span class="n">doc_category</span><span class="bp">.</span><span class="n">tactic</span><span class="o">,</span>
+  <span class="n">decl_names</span> <span class="o">:=</span> <span class="o">[</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">rw</span><span class="o">,</span> <span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">rewrite</span><span class="o">],</span>
+  <span class="n">tags</span>       <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;core&quot;</span><span class="o">,</span> <span class="s2">&quot;basic&quot;</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193444584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193444584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193444584">Kevin Buzzard (Apr 09 2020 at 12:47)</a>:</h4>
+<p>I don't understand the back ticks in decl_names</p>
+
+<a name="193444675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193444675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193444675">Kevin Buzzard (Apr 09 2020 at 12:47)</a>:</h4>
+<p>Note also I added a new tag "basic", which we might be able to point beginners to who want to prove basic goals like the exercises in TPIL or the NNG levels.</p>
+
+<a name="193445260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445260">Rob Lewis (Apr 09 2020 at 12:52)</a>:</h4>
+<p>Like that. But if my docs for <code>add_tactic_doc</code> are right, you'll have to add one more field in this case: <code>inherit_description_from := `tactic.interactive.rw</code> since it doesn't know which one to take the entry from.</p>
+
+<a name="193445424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445424">Rob Lewis (Apr 09 2020 at 12:54)</a>:</h4>
+<p><code>decl_names</code> is a list of names. If you just wrote <code>tactic.interactive.foo</code>, this could refer to a definition <code>foo : name</code>. The backticks say "parse this thing as a literal name."</p>
+
+<a name="193445719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445719">Kevin Buzzard (Apr 09 2020 at 12:57)</a>:</h4>
+<p>If the "description" is the docstring, then I think I'd rather inherit from <code>rewrite</code> because the docstring for <code>rw</code> is useless (it says "an abbreviation for <code>rewrite</code>"). However if I inherit from <code>rewrite</code> then all the examples use <code>rewrite</code>. Can I instead do this:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">-</span>
+<span class="cm">`rw e` applies identity `e` as a rewrite rule to the target of the main goal. If `e` is preceded by</span>
+<span class="cm">left arrow (`←` or `&lt;-`), the rewrite is applied in the reverse direction. If `e` is a defined</span>
+<span class="cm">constant, then the equational lemmas associated with `e` are used. This provides a convenient</span>
+<span class="cm">way to unfold `e`.</span>
+
+<span class="cm">`rw [e₁, ..., eₙ]` applies the given rules sequentially.</span>
+
+<span class="cm">`rw e at l` rewrites `e` at location(s) `l`, where `l` is either `*` or a list of hypotheses</span>
+<span class="cm">in the local context. In the latter case, a turnstile `⊢` or `|-` can also be used, to signify</span>
+<span class="cm">the target of the goal.</span>
+<span class="cm">-/</span>
+<span class="n">add_tactic_doc</span>
+<span class="o">{</span> <span class="n">name</span>       <span class="o">:=</span> <span class="s2">&quot;rw&quot;</span><span class="o">,</span>
+  <span class="n">category</span>   <span class="o">:=</span> <span class="n">doc_category</span><span class="bp">.</span><span class="n">tactic</span><span class="o">,</span>
+  <span class="n">decl_names</span> <span class="o">:=</span> <span class="o">[</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">rw</span><span class="o">,</span> <span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">rewrite</span><span class="o">],</span>
+  <span class="n">tags</span>       <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;core&quot;</span><span class="o">,</span> <span class="s2">&quot;basic&quot;</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>? Have I understood correctly?</p>
+
+<a name="193445780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445780">Rob Lewis (Apr 09 2020 at 12:57)</a>:</h4>
+<p>Yep, that's perfect.</p>
+
+<a name="193445859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445859">Rob Lewis (Apr 09 2020 at 12:58)</a>:</h4>
+<p>But honestly, I'd rather just replace the <code>rw</code> doc string with what you just wrote, and inherit the doc entry from that.</p>
+
+<a name="193445939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193445939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193445939">Rob Lewis (Apr 09 2020 at 12:59)</a>:</h4>
+<p>No reason to keep useless doc strings around if you're writing their replacements anyway.</p>
+
+<a name="193446370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193446370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193446370">Kevin Buzzard (Apr 09 2020 at 13:02)</a>:</h4>
+<p>Yes, there is a PR to core in this. But here's my logic: the PR I'm making for mathlib has a whole load of <code>add_tactic_doc</code>s with no docstrings, and the few that do have docstrings correspond exactly to the things which need to be changed in core. So I figured I'd do this one first and see if anyone has comments about my modified docstrings, with the advantage being that it can be deployed quickly. When the mathlib PR has gone through the review process I can then PR to core, and when that has gone through and mathlib catches up with core I can then do a third PR removing the docstrings I'm adding in the first PR. There seems to me to be little point in doing them both simultaneously, because then we'll end up with docs which are suboptimal for a few weeks.</p>
+
+<a name="193446911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193446911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193446911">Rob Lewis (Apr 09 2020 at 13:06)</a>:</h4>
+<p>It sounds like extra work for you, but if you're willing, that's fine :)</p>
+
+<a name="193447410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193447410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193447410">Rob Lewis (Apr 09 2020 at 13:10)</a>:</h4>
+<p>How many things would you have to change in core? We just had a 3.8 release and haven't even moved mathlib over yet. If the review isn't too complicated, you could PR those to core now, we can release 3.8.1, and then your mathlib additions can follow at your leisure.</p>
+
+<a name="193449460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193449460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193449460">Kevin Buzzard (Apr 09 2020 at 13:26)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/2371" title="https://github.com/leanprover-community/mathlib/issues/2371">#2371</a> . I'm so far from my comfort zone right now I don't really want to be making a core Lean PR until other people have had a chance to look at what I already did. When will the API docs change?</p>
+
+<a name="193450123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450123">Rob Lewis (Apr 09 2020 at 13:31)</a>:</h4>
+<p>I'll take a look now! For what it's worth, the people looking at core Lean PRs are a strict subset of those looking at mathlib PRs.</p>
+
+<a name="193450206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450206">Rob Lewis (Apr 09 2020 at 13:32)</a>:</h4>
+<p>The docs will update about an hour after the PR gets merged.</p>
+
+<a name="193450607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450607">Scott Morrison (Apr 09 2020 at 13:35)</a>:</h4>
+<p>Wow, thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>! I'm also going through this now, and have already learnt two cool tactics, <code>cases_matching</code> and <code>cases_type</code>.</p>
+
+<a name="193450819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450819">Scott Morrison (Apr 09 2020 at 13:36)</a>:</h4>
+<p>Can't we combine the doc entries for <code>erw</code> and <code>erewrite</code> into one?</p>
+
+<a name="193450868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450868">Scott Morrison (Apr 09 2020 at 13:37)</a>:</h4>
+<p>I'm not certain of the behaviour of <code>add_tactic_doc</code>, but I think you can just list more than one declaration in the <code>decl_names</code> field.</p>
+
+<a name="193450930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193450930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193450930">Scott Morrison (Apr 09 2020 at 13:37)</a>:</h4>
+<p>You might then need to specify which doc string gets used, using the optional <code>inherit_doc_string_from</code> (or something like that) field.</p>
+
+<a name="193452195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193452195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193452195">Kevin Buzzard (Apr 09 2020 at 13:48)</a>:</h4>
+<p>Yes thanks for this, I may well have missed out other duplicate tactics, I genuinely don't know what half of these things do and part of me is tempted to not put a bunch of them into the API docs</p>
+
+<a name="193453599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193453599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193453599">Rob Lewis (Apr 09 2020 at 13:58)</a>:</h4>
+<p>Okay, I left some comments on the top part. Rather than the long list of suggestions on the PR, it'll be easier for me just to push a commit that adds a bunch of tags.</p>
+
+<a name="193453642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193453642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193453642">Rob Lewis (Apr 09 2020 at 13:59)</a>:</h4>
+<p>I don't have time right this sec, so Kevin or others, if you'd like to tag some tactics, feel free!</p>
+
+<a name="193453888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193453888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193453888">Rob Lewis (Apr 09 2020 at 14:00)</a>:</h4>
+<p>Anything that mainly creates/combines hypotheses should be tagged "context management." Stuff like <code>intro</code>, <code>constructor</code>, etc can be "logic." If a tactic fails when it doesn't close the goal, "finishing."</p>
+
+<a name="193455345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193455345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193455345">Johan Commelin (Apr 09 2020 at 14:11)</a>:</h4>
+<p>Too me something like <code>intro</code> and <code>apply</code> sounds like "basic", where with "logic" I would think of tableau provers or something like that...</p>
+
+<a name="193457138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193457138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193457138">Rob Lewis (Apr 09 2020 at 14:25)</a>:</h4>
+<p>They can be "basic" too, tags aren't exclusive. I say "logic" because they're very close to the core syntax of Lean.</p>
+
+<a name="193457175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193457175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193457175">Rob Lewis (Apr 09 2020 at 14:25)</a>:</h4>
+<p>(<code>tauto</code> is also tagged "logic")</p>
+
+<a name="193457479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193457479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193457479">Bryan Gin-ge Chen (Apr 09 2020 at 14:28)</a>:</h4>
+<p>Thanks for doing this Kevin! I just added some suggestions to the PR, mostly "finishing" tags, and I tried to combine <code>erw</code> and <code>erewrite</code> the way you did <code>rw</code> and <code>rewrite</code>.</p>
+
+<a name="193708749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193708749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193708749">Rob Lewis (Apr 12 2020 at 11:18)</a>:</h4>
+<p>See the result of Kevin's hard work here: <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html" title="https://leanprover-community.github.io/mathlib_docs/tactics.html">https://leanprover-community.github.io/mathlib_docs/tactics.html</a> (use the drop down menu on the left to filter for label "core").</p>
+
+<a name="193708764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193708764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193708764">Rob Lewis (Apr 12 2020 at 11:18)</a>:</h4>
+<p>This makes it much easier to notice what's mislabeled and which doc strings need to be updated!</p>
+
+<a name="193708917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193708917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193708917">Kevin Buzzard (Apr 12 2020 at 11:22)</a>:</h4>
+<p>Most of the new docstrings are directly from core. The next step is to see if we want to change any of the core docstrings. I for one will be very pleased to see the back of <code>An abbreviation for rewrite</code> which people who want to see advanced syntax for <code>rw</code> get.</p>
+
+<a name="193711858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193711858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193711858">Reid Barton (Apr 12 2020 at 12:50)</a>:</h4>
+<p>I mean, if not for that docstring, would you even know that <code>rewrite</code> exists?</p>
+
+<a name="193711860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193711860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193711860">Reid Barton (Apr 12 2020 at 12:50)</a>:</h4>
+<p>Seems pretty helpful to me <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="193713873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undocumented%20core%20tactics/near/193713873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80640undocumentedcoretactics.html#193713873">Patrick Massot (Apr 12 2020 at 13:46)</a>:</h4>
+<p>Maybe the title of that page needs to be changed now.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

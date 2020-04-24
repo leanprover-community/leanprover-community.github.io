@@ -1,0 +1,167 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/363811074categoryinstancestoroot.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html">#1074 category instances to root</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="166335564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335564">Johan Commelin (May 23 2019 at 06:14)</a>:</h4>
+<p>What do people think of the idea to just move these instances into the rest of the mathlib hierarchy instead of in the directory <code>category_theory/instances</code>? I wouldn't mind having a file <code>ring_theory/category.lean</code> etc...<br>
+I think it would stimulate the tighter integration of category theory with the rest of mathlib.</p>
+
+<a name="166335579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335579">Mario Carneiro (May 23 2019 at 06:15)</a>:</h4>
+<p>that sounds reasonable</p>
+
+<a name="166335735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335735">Scott Morrison (May 23 2019 at 06:19)</a>:</h4>
+<p>I'm on it.</p>
+
+<a name="166336748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166336748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166336748">Scott Morrison (May 23 2019 at 06:41)</a>:</h4>
+<p>The question is where to put all the subsidiary files. One option is to just move the current <code>category_theory/instances/Top/</code> directory to <code>topology/Top/</code>. Another is to move it to <code>topology/category/</code>. The choice is I guess between things like:</p>
+<div class="codehilite"><pre><span></span>import topology.Top
+import topology.Top.limits -- this is redundant
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>import topology.category
+import topology.category.limits -- this is redundant
+</pre></div>
+
+
+<p>I guess the second one is clearly better.</p>
+
+<a name="166336832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166336832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166336832">Johan Commelin (May 23 2019 at 06:43)</a>:</h4>
+<p>I prefer the second. And I'm being a bit dense, but what do you mean with "this is redundant"?</p>
+
+<a name="166337155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166337155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166337155">Scott Morrison (May 23 2019 at 06:51)</a>:</h4>
+<p>Oh, sorry, I showed two import statements in each case, but since <code>import topology.category</code> will import <code>topology/category/default.lean</code>, which just contains a list of import statements for all the subsidiary files, there's no need to <code>import topology.category.limits</code> if you've already done that.</p>
+
+<a name="166337373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166337373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166337373">Johan Commelin (May 23 2019 at 06:56)</a>:</h4>
+<p>Ok... I see. I certainly prefer the second. On the other hand... where will <code>TopCommRing</code> go?</p>
+
+<a name="166344601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166344601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166344601">Patrick Massot (May 23 2019 at 09:14)</a>:</h4>
+<p>I would expect to get <code>Top</code> by importing <code>topologic.basic</code> and <code>TopCommRing</code> by importing <code>topology.algebra.ring</code></p>
+
+<a name="166344697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166344697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166344697">Mario Carneiro (May 23 2019 at 09:16)</a>:</h4>
+<p>that's going to put a lot of category stuff in the dependency chain</p>
+
+<a name="166344711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166344711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166344711">Mario Carneiro (May 23 2019 at 09:16)</a>:</h4>
+<p>because <code>topology.basic</code> is used all over the place</p>
+
+<a name="166367551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166367551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166367551">Reid Barton (May 23 2019 at 14:47)</a>:</h4>
+<p>I haven't looked at the PR specifically yet but I agree this move generally makes sense.</p>
+
+<a name="166413203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166413203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166413203">Scott Morrison (May 24 2019 at 00:37)</a>:</h4>
+<p>Getting <code>Top</code> as soon as you import <code>topology.basic</code> would not actually add <em>that</em> much of the category theory library to the dependency chain. Our current <code>Top/basic.lean</code> file (which introduces it) depends on:</p>
+<ul>
+<li><code>concrete_category.lean</code></li>
+<li><code>functor.lean</code></li>
+<li><code>category.lean</code></li>
+<li><code>types.lean</code></li>
+<li><code>functor_category.lean</code></li>
+<li><code>natural_transformation.lean</code></li>
+<li><code>fully_faithful.lean</code></li>
+<li><code>isomorphism.lean</code><br>
+(and compiling that chain take 13s single threaded).</li>
+</ul>
+
+<a name="166413212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166413212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166413212">Scott Morrison (May 24 2019 at 00:37)</a>:</h4>
+<p>I'm not necessarily pushing for this. I hadn't thought to go that far until Patrick suggested it, but if it is not particularly expensive for the import chain I do like the idea a lot.</p>
+
+<a name="166413282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166413282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166413282">Scott Morrison (May 24 2019 at 00:39)</a>:</h4>
+<p>It would certainly be possible to split <code>types.lean</code> into two pieces and strip off the bottom four from that list...</p>
+
+<a name="166422637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422637">Johan Commelin (May 24 2019 at 04:41)</a>:</h4>
+<p>I wouldn't mind that change. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What do you think? After all, no-one cares about having posets in their dependency chain. We shouldn't be too scared by a bit of basic category theory either...</p>
+
+<a name="166422684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422684">Mario Carneiro (May 24 2019 at 04:42)</a>:</h4>
+<p>I don't like it, not for <code>topology.basic</code>. Ideally that should give me the basics of topology only, independent of other fields to the degree possible</p>
+
+<a name="166422686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422686">Mario Carneiro (May 24 2019 at 04:42)</a>:</h4>
+<p>if <code>topology.basic</code> doesn't give me that then what does?</p>
+
+<a name="166422696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422696">Johan Commelin (May 24 2019 at 04:43)</a>:</h4>
+<p>Ok, so we want <code>topology.category</code> and then <code>topology.default</code> gives me everything I want...</p>
+
+<a name="166422701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422701">Mario Carneiro (May 24 2019 at 04:43)</a>:</h4>
+<p>I don't even know what the extent of <code>topology.default</code> is... that could be the entire library</p>
+
+<a name="166422748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422748">Scott Morrison (May 24 2019 at 04:44)</a>:</h4>
+<p>Ok, I will for now move things like <code>Top</code> into files like <code>topology/category.lean</code>.</p>
+
+<a name="166422750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422750">Keeley Hoek (May 24 2019 at 04:44)</a>:</h4>
+<p><code>import mathlib</code></p>
+
+<a name="166422753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422753">Scott Morrison (May 24 2019 at 04:44)</a>:</h4>
+<p>We can go for tighter integration later. :-)</p>
+
+<a name="166422756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422756">Mario Carneiro (May 24 2019 at 04:44)</a>:</h4>
+<p>I like <code>import mathlib</code> because it's obvious what goes in and what doesn't</p>
+
+<a name="166422778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422778">Mario Carneiro (May 24 2019 at 04:45)</a>:</h4>
+<p>I think too many files are unclear about their intended dependencies, so dependency creep is a thing which eventually blows up in some cycle</p>
+
+<a name="166422824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422824">Mario Carneiro (May 24 2019 at 04:46)</a>:</h4>
+<p>or just means that it takes half an hour to compile any file</p>
+
+<a name="166426098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166426098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166426098">Kevin Buzzard (May 24 2019 at 06:13)</a>:</h4>
+<p>People import entire python math libraries just because they want a cosine, right?</p>
+
+<a name="166430467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166430467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166430467">Chris Hughes (May 24 2019 at 07:44)</a>:</h4>
+<p>I bet the authors of python maths libraries don't do that.</p>
+
+<a name="166836943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166836943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166836943">Scott Morrison (May 29 2019 at 17:21)</a>:</h4>
+<p>I moved things to:</p>
+<div class="codehilite"><pre><span></span>import algebra.CommRing
+import algebra.Mon
+import topology.Top
+import topology.algebra.TopCommRing
+import measure_theory.Meas
+</pre></div>
+
+
+<p>(most of these have further files in subdirectories, e.g. <code>import algebra.CommRing.colimits</code>).</p>
+
+<a name="166837467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166837467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166837467">Johan Commelin (May 29 2019 at 17:27)</a>:</h4>
+<p>Looks fine to me. <span class="user-mention" data-user-id="110032">@Reid Barton</span> Shall we merge?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

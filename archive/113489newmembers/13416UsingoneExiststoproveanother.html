@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/13416UsingoneExiststoproveanother.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/13416UsingoneExiststoproveanother.html">Using one Exists to prove another?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193538068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20one%20Exists%20to%20prove%20another%3F/near/193538068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13416UsingoneExiststoproveanother.html#193538068">ROCKY KAMEN-RUBIO (Apr 10 2020 at 04:50)</a>:</h4>
+<p>This came up in my attempt at the first codewars Lean problem. I want to show that the inductive definition for divisibility by 3 (<code>mult_3</code>) implies that the number can also be written as a multiple of 3. I'm getting stuck at the end of my <code>p_eq_3n</code> proof. I want to extract a <code>k</code> from <code>h</code>, and then use <code>k+3</code> on my goal state, and I saw another post suggest using <code>classical.some</code>, but then my goal state doesn't seem responsive to <code>rfl</code>. Am I misusing <code>classical.some</code>? Is there another way to do this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">inductive</span> <span class="n">mult_3</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">mult_3_O</span> <span class="o">:</span>
+    <span class="n">mult_3</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">mult_3_SSS</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">mult_3</span> <span class="n">n</span> <span class="bp">→</span>
+    <span class="n">mult_3</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">lemma</span> <span class="n">p_eq_3n</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">mult_3</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">hn</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">mult_3</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hn</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="mi">0</span><span class="o">,</span>
+<span class="n">refl</span><span class="o">,</span>
+<span class="n">intros</span> <span class="n">n</span> <span class="n">hn2</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193538126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20one%20Exists%20to%20prove%20another%3F/near/193538126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13416UsingoneExiststoproveanother.html#193538126">Kenny Lau (Apr 10 2020 at 04:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+</pre></div>
+
+<a name="193538875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20one%20Exists%20to%20prove%20another%3F/near/193538875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13416UsingoneExiststoproveanother.html#193538875">ROCKY KAMEN-RUBIO (Apr 10 2020 at 05:14)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Using.20one.20Exists.20to.20prove.20another.3F/near/193538126" title="#narrow/stream/113489-new-members/topic/Using.20one.20Exists.20to.20prove.20another.3F/near/193538126">said</a>:</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+</pre></div>
+
+
+</blockquote>
+<p>Thank you!</p>
+
+<a name="193539608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20one%20Exists%20to%20prove%20another%3F/near/193539608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13416UsingoneExiststoproveanother.html#193539608">Donald Sebastian Leung (Apr 10 2020 at 05:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="261068">@ROCKY KAMEN-RUBIO</span> Welcome to Codewars! <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span> <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

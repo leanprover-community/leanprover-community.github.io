@@ -1,0 +1,80 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/62066Specificselectionoftermswithrw.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html">Specific selection of terms with rw</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188636006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188636006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188636006">Martin Kleiven (Feb 20 2020 at 13:20)</a>:</h4>
+<p>Hey I'm going through the Nat Num Game, currently working through mul_add, I wonder first and foremost if it fundementally matters which variable we perform induction on? It seems some are much harder.</p>
+<p><code>a(b + c) = ab + ac</code></p>
+<p>Solving for <em>a</em> was my first shot but this got very hard fast, I did manage to solve for <em>b</em> and <em>c</em> however.</p>
+<p>Q2: Is it possible to provide a selector for specific terms?</p>
+<p>I know we can say <code>rw add_assoc a b c</code>, but is <code>rw add_assoc (ab) + a + (ac)</code> possible?</p>
+
+<a name="188636271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188636271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188636271">Chris Hughes (Feb 20 2020 at 13:24)</a>:</h4>
+<p>You can do <code>rw add_assoc (a * b) a (a * c)</code>. Not sure if this is what you wanted.</p>
+
+<a name="188636566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188636566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188636566">Martin Kleiven (Feb 20 2020 at 13:29)</a>:</h4>
+<p>Okay so it does indeed work. Turned out I wanted right_add_comm but that's alright.</p>
+<p>Solving for <em>a</em>,  is that possible as well?</p>
+
+<a name="188636827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188636827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188636827">Anne Baanen (Feb 20 2020 at 13:32)</a>:</h4>
+<p>The set of variables you perform induction on does matter, but given the set it shouldn't matter in which order you do induction.</p>
+
+<a name="188636998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188636998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188636998">Anne Baanen (Feb 20 2020 at 13:35)</a>:</h4>
+<p>In this case, if you start by induction on <code>a</code> in <code>a * (b + c)</code>, you should be able to solve the base case, but there is no lemma <code>succ_mul</code> equivalent to <code>mul_succ</code> (yet!)</p>
+
+<a name="188637166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188637166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188637166">Martin Kleiven (Feb 20 2020 at 13:37)</a>:</h4>
+<p>If I understand correctly the choice on which variable to perform induction on is determined by previous lemmas that are proved, and ultimately what I choose depends on this. But any choice of variable are valid?</p>
+
+<a name="188638497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188638497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188638497">Anne Baanen (Feb 20 2020 at 13:54)</a>:</h4>
+<p>I'm sorry, I don't understand the question. Indeed, the set of variables you do induction on is determined by the previous lemmas, and ultimately by the definitions. (For example, <code>*</code> is defined by recursion on the right-hand argument, so to prove things about <code>a * b</code> you probably want to do induction on the right-hand argument <code>b</code>.) But given that the variables you want to do induction on are correct, you can pick any one of the variables to start with, and you shouldn't get stuck.</p>
+
+<a name="188638499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188638499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188638499">Donald Sebastian Leung (Feb 20 2020 at 13:54)</a>:</h4>
+<p>Not in general. For example, suppose you want to prove some property about exponentiation (on the natural numbers), e.g. <code>a ^ (b + c) = (a ^ b) * (a ^ c)</code>, which is defined as follows:</p>
+<ul>
+<li><code>a ^ 0 = 1</code></li>
+<li><code>a ^ (S n) = a * (a ^ n)</code></li>
+</ul>
+<p>Since exponentiation is defined by induction on its second argument, attempting to prove the statement by induction on <code>a</code> (the first argument) would fail miserably.</p>
+
+<a name="188638686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188638686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188638686">Anne Baanen (Feb 20 2020 at 13:56)</a>:</h4>
+<p>Perhaps it's clearer to say that doing induction on <em>only</em> <code>a</code> would fail, but if the next command is <code>induction b</code>, you should be able to solve it anyway.</p>
+
+<a name="188638832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188638832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188638832">Donald Sebastian Leung (Feb 20 2020 at 13:58)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="238446">Anne Baanen</span> <a href="#narrow/stream/113489-new-members/topic/Specific.20selection.20of.20terms.20with.20rw/near/188638686" title="#narrow/stream/113489-new-members/topic/Specific.20selection.20of.20terms.20with.20rw/near/188638686">said</a>:</p>
+<blockquote>
+<p>Perhaps it's clearer to say that doing induction on <em>only</em> <code>a</code> would fail, but if the next command is <code>induction b</code>, you should be able to solve it anyway.</p>
+</blockquote>
+<p>But you probably won't be able to use the induction hypothesis generated by <code>induction a</code> anyway so you're technically not really performing induction on <code>a</code></p>
+
+<a name="188639267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188639267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188639267">Anne Baanen (Feb 20 2020 at 14:03)</a>:</h4>
+<p>That's also a reasonable view. But up to definitional equality, <code>rw [add_zero]</code> (where <code>add_zero</code> reduces to <code>eq.refl</code>) then also isn't really doing rewriting :P</p>
+
+<a name="188643634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specific%20selection%20of%20terms%20with%20rw/near/188643634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62066Specificselectionoftermswithrw.html#188643634">Martin Kleiven (Feb 20 2020 at 14:47)</a>:</h4>
+<p>Okay thanks, still not quite there but its starting to make sense to me, got some reading to do. Thank you both!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

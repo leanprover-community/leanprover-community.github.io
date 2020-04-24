@@ -1,0 +1,102 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/80279zeromaxarfllemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html">zero_max a rfl lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178819700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178819700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178819700">Lucas Allen (Oct 23 2019 at 03:30)</a>:</h4>
+<p>Hello,</p>
+<p>I was messing around with <code>suggest</code> just now and I found that <code>zero_max</code> in <code>data.nat.basic</code> can be proved by <code>rfl</code>, i.e. the following code works for me:</p>
+<div class="codehilite"><pre><span></span>lemma zero_max {m : nat} : max 0 m = m := rfl
+</pre></div>
+
+
+<p>But the proof of this lemma in my version of mathlib is</p>
+<div class="codehilite"><pre><span></span>lemma zero_max {m : nat} : max 0 m = m :=
+max_eq_right (zero_le _)
+</pre></div>
+
+
+<p>Should this be changed?</p>
+
+<a name="178819812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178819812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178819812">Kenny Lau (Oct 23 2019 at 03:34)</a>:</h4>
+<p>yes</p>
+
+<a name="178820255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820255">Mario Carneiro (Oct 23 2019 at 03:49)</a>:</h4>
+<p>no</p>
+
+<a name="178820379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820379">Mario Carneiro (Oct 23 2019 at 03:52)</a>:</h4>
+<p>refl proofs are more brittle. This adds an unneeded dependence on the fact that the decidable instance of <code>0 &lt;= m</code> reduces to true, as well as the fact that the definition of <code>max a b</code> is <code>if a &lt;= b then b else a</code> instead of <code>if b &lt;= a then a else b</code></p>
+
+<a name="178820382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820382">Mario Carneiro (Oct 23 2019 at 03:52)</a>:</h4>
+<p>the given proof is insensitive to such details</p>
+
+<a name="178900295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178900295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178900295">Lucas Allen (Oct 23 2019 at 21:49)</a>:</h4>
+<p>Oh... so <code>rfl</code> isn't always the best possible proof? That's really weird.</p>
+
+<a name="178901696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178901696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178901696">Mario Carneiro (Oct 23 2019 at 22:10)</a>:</h4>
+<p>another example of a theorem that can be proven by rfl but really shouldn't is <code>100 * 100 = 10000</code></p>
+
+<a name="178903753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178903753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178903753">Wojciech Nawrocki (Oct 23 2019 at 22:42)</a>:</h4>
+<p>Is the reason that tactics can use binary reprs while kernel does unary, or something else?</p>
+
+<a name="178905173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178905173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178905173">Mario Carneiro (Oct 23 2019 at 23:02)</a>:</h4>
+<p>yes</p>
+
+<a name="178905200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178905200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178905200">Mario Carneiro (Oct 23 2019 at 23:03)</a>:</h4>
+<p>the kernel is forced to use the definition of <code>nat</code>, which is unary and horrible for computation</p>
+
+<a name="178913029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178913029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178913029">Scott Morrison (Oct 24 2019 at 01:30)</a>:</h4>
+<p>I'm starting to come around to the idea that <code>rfl</code> is the worst possible proof. It's the ultimate "Mathematician A: the proof is obvious. Mathematician B [several hours later]: yes, it is obvious."</p>
+
+<a name="178913053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178913053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178913053">Scott Morrison (Oct 24 2019 at 01:31)</a>:</h4>
+<p>It says: well, if you go an unfold definitions, possibly all the way down to the beginnings, you will eventually see that these two things really are the same thing. No one likes to do that, and quite reasonably the kernel sometimes does a terrible job at it.</p>
+
+<a name="178968733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178968733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178968733">Wojciech Nawrocki (Oct 24 2019 at 16:14)</a>:</h4>
+<p>I'm not convinced this is true in general. One can construct efficient decision procedures, in which case a proof by <code>rfl</code> does not have to carry out a long computation.</p>
+
+<a name="178975451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178975451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178975451">Mario Carneiro (Oct 24 2019 at 17:23)</a>:</h4>
+<p>There are proofs where <code>rfl</code> is the appropriate way to prove it. <code>dec_trivial</code> is like this, in that you are expected to be able to reduce a term of type <code>decidable p</code> to one of its constructors</p>
+
+<a name="178975465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178975465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178975465">Mario Carneiro (Oct 24 2019 at 17:23)</a>:</h4>
+<p>that doesn't mean it's the fastest proof though</p>
+
+<a name="178975707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178975707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178975707">Mario Carneiro (Oct 24 2019 at 17:25)</a>:</h4>
+<p>kernel reductions are constrained by a certain approach to the problem that relies on the definition of the inductive types. You have to really write things carefully if you want kernel reduction to not suck. Even using the equation compiler isn't a great idea because it generates huge terms that slow down reduction</p>
+
+<a name="179092082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/179092082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#179092082">Lucas Allen (Oct 25 2019 at 21:50)</a>:</h4>
+<p>Is there a way to prove <code>100*100 = 10000</code> using binary instead of unary?</p>
+
+<a name="179092907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/179092907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#179092907">Mario Carneiro (Oct 25 2019 at 22:03)</a>:</h4>
+<p><code>by norm_num</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

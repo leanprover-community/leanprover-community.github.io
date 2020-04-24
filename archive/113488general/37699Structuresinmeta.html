@@ -1,0 +1,113 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/37699Structuresinmeta.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html">Structures in meta</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="166707601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166707601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166707601">Fabian Glöckle (May 28 2019 at 11:45)</a>:</h4>
+<p>Hello everyone, my attempts at auto-generating the corresponding homomorphism types and categories for the classes we have already defined in mathlib have moved a bit. For example</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">add_homomorphism_type</span> <span class="bp">`</span><span class="n">ordered_ring</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ordered_ring_homomorphism</span>
+</pre></div>
+
+
+<p>yields</p>
+<div class="codehilite"><pre><span></span>def ordered_ring_homomorphism : Π {α : Type u} {β : Type v} [i₁ : ordered_ring α] [i₂ : ordered_ring β], (α → β) → Prop :=
+λ {α : Type u} {β : Type v} [i₁ : ordered_ring α] [i₂ : ordered_ring β] (f : α → β),
+  (∀ {x0 x1 : α}, f (ordered_ring.add x0 x1) = ordered_ring.add (f x0) (f x1)) ∧
+    f (ordered_ring.zero α) = ordered_ring.zero β ∧
+      (∀ {x0 : α}, f (ordered_ring.neg x0) = ordered_ring.neg (f x0)) ∧
+        (∀ {x0 x1 : α}, f (ordered_ring.mul x0 x1) = ordered_ring.mul (f x0) (f x1)) ∧
+          f (ordered_ring.one α) = ordered_ring.one β ∧
+            (∀ {x0 x1 : α}, ordered_ring.le x0 x1 → ordered_ring.le (f x0) (f x1)) ∧
+              ∀ {x0 x1 : α}, ordered_ring.lt x0 x1 → ordered_ring.lt (f x0) (f x1)
+</pre></div>
+
+
+<p>This is not perfect though, as one would hope for a class for the homomorphism type (to access the fields more easily).<br>
+ How can I generate structures/classes in meta code?<br>
+And connected to that: can one retrieve the information that <code>group</code>extends <code>monoid</code> programmatically somehow, or is this immediately inlined?</p>
+
+<a name="166708585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166708585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166708585">Mario Carneiro (May 28 2019 at 11:58)</a>:</h4>
+<p>The only way to create structures and classes in 3.4 is to use <code>emit_code_here</code> and build a string to send to the parser. There is an API for this in 3.5c</p>
+
+<a name="166882389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166882389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166882389">Johan Commelin (May 30 2019 at 05:39)</a>:</h4>
+<p>I guess it should be possible to write a wrapper around <code>emit_code_here</code> that works in 3.4, right?</p>
+
+<a name="166882438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166882438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166882438">Johan Commelin (May 30 2019 at 05:40)</a>:</h4>
+<p>It would take some <code>expr</code> and traverse it to build the string for you.</p>
+
+<a name="166882442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166882442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166882442">Johan Commelin (May 30 2019 at 05:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="121918">@Edward Ayers</span> Did you by chance already write such a wrapper?</p>
+
+<a name="166888219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166888219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166888219">Edward Ayers (May 30 2019 at 07:56)</a>:</h4>
+<p>sorry Johan!</p>
+
+<a name="167419581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167419581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167419581">Fabian Glöckle (Jun 05 2019 at 18:59)</a>:</h4>
+<blockquote>
+<p>The only way to create structures and classes in 3.4 is to use <code>emit_code_here</code> and build a string to send to the parser. There is an API for this in 3.5c</p>
+</blockquote>
+<p>Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ! Follow-up: how does one "call" a <code>lean.parser unit</code> as a user?</p>
+
+<a name="167420210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167420210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167420210">Simon Hudon (Jun 05 2019 at 19:06)</a>:</h4>
+<p>You have to write a user command. You can look through mathlib and core for the occurrence of <code>@[user_command]</code> to show you examples of how it's done</p>
+
+<a name="167421841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167421841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167421841">Fabian Glöckle (Jun 05 2019 at 19:22)</a>:</h4>
+<p>ah, I already tried this and got stuck. What is wrong about this?</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">emit_homomorphism_structure</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="err">$</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">tk</span> <span class="s2">&quot;emitte&quot;</span><span class="o">)</span> <span class="o">(</span><span class="n">struct_name</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">homomorphism_structure</span> <span class="n">struct_name</span><span class="o">,</span>
+   <span class="n">emit_structure_here</span> <span class="n">s</span>
+</pre></div>
+
+<a name="167421985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167421985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167421985">Fabian Glöckle (Jun 05 2019 at 19:24)</a>:</h4>
+<p>the error message reads </p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">user</span><span class="bp">-</span><span class="n">defined</span> <span class="n">command</span><span class="o">,</span> <span class="n">must</span> <span class="n">return</span> <span class="n">type</span> <span class="bp">`</span><span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span><span class="bp">`</span>
+</pre></div>
+
+<a name="167422333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167422333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167422333">Mario Carneiro (Jun 05 2019 at 19:28)</a>:</h4>
+<p>you can't put <code>struct_name</code> in the type; use <code>struct_name &lt;- ident</code> in the body</p>
+
+<a name="167423674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167423674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167423674">Fabian Glöckle (Jun 05 2019 at 19:45)</a>:</h4>
+<p>thanks, it now works!<br>
+I had to put a dot after the last line, what does it mean?</p>
+
+<a name="167424026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167424026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167424026">Reid Barton (Jun 05 2019 at 19:49)</a>:</h4>
+<p>Dot ends a top-level command. Usually it should be optional.</p>
+
+<a name="167424954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167424954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167424954">Fabian Glöckle (Jun 05 2019 at 20:00)</a>:</h4>
+<p>Another question: i am using <code>expr.to_string</code> to create the strings for <code>emit_code_here</code> but the results do not parse straight away</p>
+<div class="codehilite"><pre><span></span><span class="n">eq</span><span class="bp">.</span><span class="o">{</span><span class="n">succ</span> <span class="n">v</span><span class="o">}</span> <span class="n">β</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">mul</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">α</span> <span class="n">i₁</span> <span class="n">x0</span> <span class="n">x1</span><span class="o">))</span> <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">mul</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">β</span> <span class="n">i₂</span> <span class="o">(</span><span class="n">f</span> <span class="n">x0</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">x1</span><span class="o">))</span>
+</pre></div>
+
+<a name="167425097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167425097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167425097">Fabian Glöckle (Jun 05 2019 at 20:02)</a>:</h4>
+<p>is this intended, are there better methods, workarounds?<br>
+(implicit parameters are one problem, and <code>succ u</code>instead of <code>u+1</code>the other)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

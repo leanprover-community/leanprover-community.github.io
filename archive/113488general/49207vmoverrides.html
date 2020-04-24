@@ -1,0 +1,156 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49207vmoverrides.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html">vm overrides</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="160292995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160292995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160292995">Edward Ayers (Mar 08 2019 at 14:21)</a>:</h4>
+<p>I was thinking about VM overrides a little this week. I hacked around with the Lean source code a little and I got the VM to swap out vm_declarations  when one attaches a <code>vm_override</code> attribute to a declaration. <br>
+<a href="https://github.com/EdAyers/lean/tree/vm_override" target="_blank" title="https://github.com/EdAyers/lean/tree/vm_override">https://github.com/EdAyers/lean/tree/vm_override</a><br>
+The branch is not usable and crashes lean all of the time, it's just an experiment. <br>
+The conclusions of my experiment are:</p>
+<p>I get stack mismanagement errors if the VM overridden type has a different size to the original type. So just swapping out declarations isn't good enough. The VM needs to keep a registry of what is overridden.<br>
+My proposal for VM overrides is to use typeclasses or similar to give a pseudo-bijection between the original data and the override data:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">float</span> <span class="o">:=</span> <span class="bp">...</span><span class="n">IEEE</span> <span class="kn">definition</span> <span class="n">of</span> <span class="n">float</span> <span class="n">goes</span> <span class="n">here</span>
+
+<span class="n">meta</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_vm_override</span> <span class="n">float</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="o">:=</span>  <span class="bp">⟨</span><span class="n">to_native</span><span class="o">,</span> <span class="n">from_native</span><span class="bp">⟩</span>
+
+  <span class="c1">-- now the VM is aware that all floats should be converted to native.floats.</span>
+
+  <span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+  <span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">float</span> <span class="o">:=</span>   <span class="bp">...</span> <span class="n">IEEE</span> <span class="kn">definition</span>
+  <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">float</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">add</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>The VM will use the given <code>to_native</code> and <code>from_native</code> functions to convert between the formats. This means that if you define some operation on floats but you forget to give the VM override, then it won't completely break the VM because the VM can convert between the native and nonnative versions of the data as necessary.</p>
+
+<a name="160310542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160310542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160310542">Mario Carneiro (Mar 08 2019 at 18:00)</a>:</h4>
+<p>It shouldn't be possible to forget to give the VM override once the basics are set up. In particular, all core operations that reference the overridden type (of which there are O(1) of them) must be overridden. In your example that means all the <code>float</code> constructors and <code>float.rec</code>. In practice I would instead define a separate inductive type <code>inductive IEEE_float := ...</code> like you are envisioning, and then <code>structure float := (to_IEEE: IEEE_float)</code> is a newtype that gets overridden. Now you only need a few overrides: <code>to_IEEE</code> is overriden to <code>from_native</code>, <code>mk</code> is overridden to <code>to_native</code>, and <code>float.rec</code> is overridden to a function that uses <code>from_native</code>.</p>
+
+<a name="160310593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160310593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160310593">Mario Carneiro (Mar 08 2019 at 18:01)</a>:</h4>
+<p>Could you elaborate on the stack mismanagement errors? It is possible that we need to hint to lean that the type itself is being overridden (and it's also good documentation), but I didn't think this would be necessary.</p>
+
+<a name="160369925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160369925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160369925">Edward Ayers (Mar 09 2019 at 14:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Is this the kind of thing you have in mind?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">IEEE_float</span> <span class="o">:=</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="c1">-- plus other defininitions</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">]</span>
+<span class="kn">structure</span> <span class="n">float</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span> <span class="bp">-</span> <span class="bp">&gt;</span> <span class="n">float</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">mk</span> <span class="n">y</span><span class="o">),</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="c1">-- Errors because no VM override attribute</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">neg</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span>  <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">,</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">neg</span> <span class="n">x</span>
+
+<span class="c1">-- This does not error because only composed of vm_overridden functions.</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">double</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="n">x</span> <span class="o">,</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">x</span>
+</pre></div>
+
+<a name="160369968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160369968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160369968">Edward Ayers (Mar 09 2019 at 14:36)</a>:</h4>
+<p>I'll get back to you with details of VM stack errors. Most likely a function of my misprogramming than with Lean.</p>
+
+<a name="160378607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160378607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160378607">Mario Carneiro (Mar 09 2019 at 18:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="121918">@Edward Ayers</span>  Here's how you override the core functions:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span>
+
+<span class="kn">inductive</span> <span class="n">IEEE_float</span> <span class="o">:=</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">...</span>
+<span class="c1">-- plus other defininitions</span>
+
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span> <span class="bp">→</span> <span class="n">IEEE_float</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">of_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span> <span class="bp">→</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span>
+
+<span class="c1">-- No vm implementation needed</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">IEEE_float</span> <span class="bp">→</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">)</span> <span class="o">:</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="n">H</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_IEEE</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="o">]</span> <span class="c1">-- optional?</span>
+<span class="kn">structure</span> <span class="n">float</span> <span class="o">:=</span> <span class="o">(</span><span class="n">to_IEEE</span> <span class="o">:</span> <span class="n">IEEE_float</span><span class="o">)</span>
+
+<span class="c1">-- Override the core functions</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">rec</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">rec</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">of_IEEE</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">mk</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span><span class="o">]</span> <span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">add</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span> <span class="bp">-</span> <span class="bp">&gt;</span> <span class="n">float</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">mk</span> <span class="n">y</span><span class="o">),</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="c1">-- No error because the equation compiler defines this function in terms of</span>
+<span class="c1">-- float.rec and float.mk</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">neg</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">-&gt;</span> <span class="n">float</span>  <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="o">(</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">,</span> <span class="n">mk</span> <span class="err">$</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">neg</span> <span class="n">x</span>
+
+<span class="c1">-- This does not error because only composed of vm_overridden functions.</span>
+<span class="n">def</span> <span class="n">float</span><span class="bp">.</span><span class="n">double</span> <span class="o">:=</span> <span class="err">\</span><span class="n">lam</span> <span class="n">x</span> <span class="o">,</span> <span class="n">float</span><span class="bp">.</span><span class="n">add</span> <span class="n">x</span> <span class="n">x</span>
+</pre></div>
+
+<a name="160419723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160419723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160419723">Edward Ayers (Mar 10 2019 at 15:07)</a>:</h4>
+<p>I get a <code>only attribute [class] accepted for structures</code> error for adding <code>vm_override</code> attribute to <code>float</code>. Should I turn off in C++ or is it there for a reason?</p>
+
+<a name="160419879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160419879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160419879">Mario Carneiro (Mar 10 2019 at 15:11)</a>:</h4>
+<p>I would guess that there is no good reason for the restriction</p>
+
+<a name="160420018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160420018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160420018">Mario Carneiro (Mar 10 2019 at 15:15)</a>:</h4>
+<p>But I can't replicate the error. This works, for example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">norm</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">T</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+</pre></div>
+
+<a name="160420081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160420081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160420081">Mario Carneiro (Mar 10 2019 at 15:17)</a>:</h4>
+<p>but actually, like I say in the comment I'm not sure that it is required to vm_override the type itself, since the type is erased. (It might make good documentation but I don't see how the VM would make use of the info.)</p>
+
+<a name="160424301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160424301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160424301">Edward Ayers (Mar 10 2019 at 17:22)</a>:</h4>
+<p>My VM error was coming from Lean doing some optimisation on declarations which use projection.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_repr</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">to_repr</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">string</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">to_repr</span> <span class="err">$</span> <span class="n">float</span><span class="bp">.</span><span class="n">to_IEEE</span> <span class="err">$</span> <span class="n">x</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_override</span> <span class="n">native</span><span class="bp">.</span><span class="n">float</span><span class="bp">.</span><span class="n">to_repr</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">to_repr2</span> <span class="o">:</span> <span class="n">float</span> <span class="bp">→</span> <span class="n">string</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">IEEE_float</span><span class="bp">.</span><span class="n">to_repr</span> <span class="err">$</span>  <span class="n">x</span>
+
+<span class="c1">-- this one works</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">to_repr</span> <span class="err">$</span> <span class="n">float</span><span class="bp">.</span><span class="n">one</span><span class="o">)</span>
+
+<span class="c1">-- this one gives a VM stack error.</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">to_repr2</span> <span class="err">$</span> <span class="n">float</span><span class="bp">.</span><span class="n">one</span><span class="o">)</span>
+</pre></div>
+
+
+<p>If I am interpreting the C++ correctly, when Lean makes the bytecode for <code>to_repr2 $ float.one</code>, it has written down somewhere that <code>to_repr2</code> uses destructors and then inlines the destructor step in the bytecode. Therefore the native vm_declaration and the non-native vm_declaration alter the stack inconsistently.</p>
+
+<a name="160424742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160424742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160424742">Edward Ayers (Mar 10 2019 at 17:35)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="160426367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vm%20overrides/near/160426367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49207vmoverrides.html#160426367">Edward Ayers (Mar 10 2019 at 18:22)</a>:</h4>
+<p>After more digging, when bytecode for <code>to_repr2 $ float.one</code> is made, the bytecode compiler doesn't even see the constant <code>to_repr2</code>, the optimisation is occurring before it is fed to bytecode generator. I can't figure out which part of Lean is doing the optimising though.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

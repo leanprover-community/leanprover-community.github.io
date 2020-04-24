@@ -1,0 +1,125 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/94408Rewritewithaddsubdoesntwork.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html">Rewrite with add_sub doesn't work</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188712007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712007">Yufan Lou (Feb 21 2020 at 08:28)</a>:</h4>
+<p>I'd like to rewrite the left hand side of <code>length l + (n - length l) = max n (length l)</code> to n, but <code>rw add_sub</code> gives me this error:</p>
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
+  ?m_3 + (?m_4 - ?m_5)
+</pre></div>
+
+
+<p>How may I tell Lean that <code>?m_3</code> and <code>?m_5</code> should be <code>length l</code>?</p>
+
+<a name="188712129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712129">Mario Carneiro (Feb 21 2020 at 08:30)</a>:</h4>
+<p>That's not the problem. Lean would match that if it could, but what lean is not doing a very good job of saying is that <code>+</code> and <code>-</code> in the pattern are not the same as the <code>+</code> and <code>-</code> in your goal</p>
+
+<a name="188712167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712167">Mario Carneiro (Feb 21 2020 at 08:31)</a>:</h4>
+<p>because nat subtraction (in your goal) is not the same as subtraction in a group (which is what the theorem you are applying is about)</p>
+
+<a name="188712175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712175">Mario Carneiro (Feb 21 2020 at 08:31)</a>:</h4>
+<p>You need to use <code>nat.add_sub</code></p>
+
+<a name="188712257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712257">Yufan Lou (Feb 21 2020 at 08:32)</a>:</h4>
+<p>ah that's why if I try to <code>rw add_sub _ n _</code> I get a <code>cannot synthesize class instance</code> error for <code>add_group nat</code></p>
+
+<a name="188712269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712269">Mario Carneiro (Feb 21 2020 at 08:33)</a>:</h4>
+<p>Right, because nat is not an additive group</p>
+
+<a name="188712300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712300">Mario Carneiro (Feb 21 2020 at 08:33)</a>:</h4>
+<p>However, most theorems about additive groups have analogues on nat, with the same names with <code>nat.</code> in front</p>
+
+<a name="188712311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712311">Mario Carneiro (Feb 21 2020 at 08:34)</a>:</h4>
+<p>they usually have extra side conditions about things being less than other things</p>
+
+<a name="188712357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712357">Yufan Lou (Feb 21 2020 at 08:34)</a>:</h4>
+<p>I'm using <a href="https://leanprover.github.io/live" target="_blank" title="https://leanprover.github.io/live">https://leanprover.github.io/live</a> , is the theorem up there yet?</p>
+
+<a name="188712373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712373">Mario Carneiro (Feb 21 2020 at 08:34)</a>:</h4>
+<p>I may have guessed the names wrong but all of these theorems are quite old</p>
+
+<a name="188712419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712419">Mario Carneiro (Feb 21 2020 at 08:35)</a>:</h4>
+<p>It's <code>nat.add_sub_of_le</code></p>
+
+<a name="188712468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712468">Yufan Lou (Feb 21 2020 at 08:36)</a>:</h4>
+<p><code>rw ←nat.add_sub_assoc</code> worked too thx</p>
+
+<a name="188712485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712485">Mario Carneiro (Feb 21 2020 at 08:36)</a>:</h4>
+<p>add_sub_assoc says something else</p>
+
+<a name="188712603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712603">Yufan Lou (Feb 21 2020 at 08:38)</a>:</h4>
+<p>oh <code>nat.add_sub_of_le</code> gets me straight to <code>n</code> nice thx<br>
+it didn't show up in the autocomplete tho</p>
+
+<a name="188712622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712622">Mario Carneiro (Feb 21 2020 at 08:38)</a>:</h4>
+<p>Even better, <code>nat.sub_add_eq_max</code> is almost exactly your statement, after commuting on the left</p>
+
+<a name="188712705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712705">Yufan Lou (Feb 21 2020 at 08:40)</a>:</h4>
+<p><code>unknown identifier 'nat.sub_add_eq_max'</code> <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span>‍♂️</p>
+
+<a name="188712713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712713">Mario Carneiro (Feb 21 2020 at 08:40)</a>:</h4>
+<p><code>import data.nat.basic</code></p>
+
+<a name="188712727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712727">Yufan Lou (Feb 21 2020 at 08:40)</a>:</h4>
+<p><code>open nat</code> doesn't give me a lot huh</p>
+
+<a name="188712752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712752">Mario Carneiro (Feb 21 2020 at 08:41)</a>:</h4>
+<p>open nat doesn't do anything except allow you to leave off the <code>nat.</code> on lemmas</p>
+
+<a name="188712761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712761">Mario Carneiro (Feb 21 2020 at 08:41)</a>:</h4>
+<p><code>import</code> loads new files into your session so you have more theorems</p>
+
+<a name="188712776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712776">Mario Carneiro (Feb 21 2020 at 08:41)</a>:</h4>
+<p><code>data.nat.basic</code> is the mathlib file for all the missing nat lemmas</p>
+
+<a name="188712835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188712835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188712835">Yufan Lou (Feb 21 2020 at 08:42)</a>:</h4>
+<p>ahh i see</p>
+
+<a name="188715281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188715281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188715281">Kevin Buzzard (Feb 21 2020 at 09:29)</a>:</h4>
+<p>There is a much newer and better version of Lean online at leanprover-community</p>
+
+<a name="188715308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188715308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188715308">Kevin Buzzard (Feb 21 2020 at 09:29)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">https://leanprover-community.github.io/lean-web-editor/</a></p>
+
+<a name="188715352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewrite%20with%20add_sub%20doesn%27t%20work/near/188715352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94408Rewritewithaddsubdoesntwork.html#188715352">Kevin Buzzard (Feb 21 2020 at 09:30)</a>:</h4>
+<p>It has a much more up to date lean and mathlib</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

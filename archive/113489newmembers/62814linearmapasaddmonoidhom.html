@@ -1,0 +1,63 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/62814linearmapasaddmonoidhom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html">`linear_map` as `add_monoid_hom`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187591265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187591265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187591265">Oliver Nash (Feb 06 2020 at 21:34)</a>:</h4>
+<p>I have bumped into the fact that <code>linear_map</code> does not extend <code>add_monoid_hom</code>, i.e., that the definition is <em>not</em>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">linear_map&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">add_monoid_hom</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">smul</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="n">x</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">c</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="err">•</span> <span class="n">to_fun</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I may be missing something but at the moment this appears to cause me some mild inconvenience since I cannot apply results about <code>add_monoid_hom</code>s to <code>linear_map</code>s. On the other hand, I note that the actual definition of <code>linear_map</code> has the advantage that we are saved from pointlessly proving <code>map_zero</code> in a bunch of places.</p>
+<p>My questions are:</p>
+<ol>
+<li>Am I missing something, and this is all a bit silly?</li>
+<li>Are there other reasons why it would be a Bad Thing to have <code>linear_map</code>s be <code>add_monoid_hom</code>s?</li>
+<li>Is there support for regarding <code>linear_map</code>s as <code>add_monoid_hom</code>s, e.g., via coercion? I have not yet found any.</li>
+</ol>
+
+<a name="187624315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187624315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187624315">Oliver Nash (Feb 07 2020 at 09:24)</a>:</h4>
+<p>Glancing this morning I wonder if an answer to 2 above would be that <code>add_monoid_hom</code> depends upon only two carrier types whereas <code>linear_map</code> needs three, so we might run into typeclass inference issues if it extended.</p>
+
+<a name="187717459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187717459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187717459">Kevin Buzzard (Feb 08 2020 at 13:41)</a>:</h4>
+<p>Is there an instance from <code>linear_map</code> to <code>add_monoid_hom</code>? Would this solve your problems?</p>
+
+<a name="187718872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187718872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187718872">Oliver Nash (Feb 08 2020 at 14:27)</a>:</h4>
+<p>Well my problems have evaporated after I reworked things slightly for different reasons so this has become a bit theoretical. Also both <code>linear_map</code> and <code>add_monoid_hom</code> are structures rather than classes so I don't think I could appeal to instances as things stand, though I appreciate the suggestion.</p>
+
+<a name="187718995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187718995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187718995">Oliver Nash (Feb 08 2020 at 14:31)</a>:</h4>
+<p>I'm a little surprised this is not more of an issue but I expect this is mostly a reflection of my own ignorance. I'm not blocked so I think I'll just carry on, and keep an eye out for places in the codebase from which I might be able to understand better why this has not proven problematic.</p>
+
+<a name="187719054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187719054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187719054">Kevin Buzzard (Feb 08 2020 at 14:33)</a>:</h4>
+<p>You're right about instances -- my suggestion won't work. If <code>f : linear_map X Y</code> then you presumably have <code>f.map_zero</code> and <code>f.map_add</code> -- is this enough?</p>
+
+<a name="187719104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187719104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187719104">Oliver Nash (Feb 08 2020 at 14:35)</a>:</h4>
+<p>Certainly, I can trivially build a term of type <code>add_monoid_hom</code> from a term of type <code>linear_map</code> because of the two results you mention. However I think I won't automatically have handy facts like that this construction itself preserves addition etc.</p>
+
+<a name="187739006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60linear_map%60%20as%20%60add_monoid_hom%60/near/187739006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62814linearmapasaddmonoidhom.html#187739006">Amelia Livingston (Feb 09 2020 at 01:21)</a>:</h4>
+<p>I think <code>linear_map</code> was defined a long time before <code>add_monoid_hom</code>; maybe the former should be updated but I'm not sure</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

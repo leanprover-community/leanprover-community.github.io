@@ -1,0 +1,250 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/03707ProvingSomethingisFalse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html">Proving Something is False</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191408532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191408532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191408532">Dev-Indra (Mar 22 2020 at 18:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">greater</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">≥</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">g_iff_exists_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">greater</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">rw</span> <span class="n">greater</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">ge_iff_exists_add</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">ne_from_not_eq</span><span class="o">,</span>
+
+    <span class="n">split</span><span class="o">,</span>
+
+    <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">h_left</span><span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">h_right</span><span class="o">:</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="n">h</span><span class="o">,</span>
+
+        <span class="n">cases</span> <span class="n">h_left</span> <span class="k">with</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+        <span class="n">use</span> <span class="n">u</span><span class="o">,</span>
+
+        <span class="n">split</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">hu</span><span class="o">,</span>
+
+        <span class="n">by_contradiction</span><span class="o">,</span>
+
+        <span class="n">sorry</span>
+    <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>After I use <code>by_contradiction</code> I have the following tactic state: </p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">h_right</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">hu</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">u</span><span class="o">,</span>
+<span class="n">a_1</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">u</span> <span class="bp">≥</span> <span class="mi">1</span>
+<span class="err">⊢</span> <span class="n">false</span>
+</pre></div>
+
+
+<p>So how to I use a_1 to conclude that u = 0. And how do I substitute this into hu to show a = b. And then how to I show a = b and h_right gives me false?</p>
+
+<a name="191409297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409297">Daniel Keys (Mar 22 2020 at 18:30)</a>:</h4>
+<p>Your example is difficult to replicate. Can you try <code>push_neg at a_1</code> and see what you get?</p>
+
+<a name="191409375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409375">Dev-Indra (Mar 22 2020 at 18:31)</a>:</h4>
+<p>This is my tactic state afterwards:</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h_right</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">hu</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">u</span><span class="o">,</span>
+<span class="n">a_1</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+<span class="err">⊢</span> <span class="n">false</span>
+</pre></div>
+
+<a name="191409448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409448">Dev-Indra (Mar 22 2020 at 18:32)</a>:</h4>
+<p>Then what? Does a_1 now mean u = 0, or do I have to do something else for Lean to understand this?</p>
+
+<a name="191409479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409479">Daniel Keys (Mar 22 2020 at 18:33)</a>:</h4>
+<p>You should be able to get <code>u=0</code> now.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hu</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191409558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409558">Dev-Indra (Mar 22 2020 at 18:35)</a>:</h4>
+<p>And then how to I substitute u = 0 into hu? Would hu and h_right = false after the substitution?</p>
+
+<a name="191409677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409677">Patrick Massot (Mar 22 2020 at 18:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="272522">@Dev-Indra</span> if you want efficient help, you should post a MWE: one code block containing everything needed to replicate your problem (including import lines) and not more.</p>
+
+<a name="191409707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409707">Bryan Gin-ge Chen (Mar 22 2020 at 18:38)</a>:</h4>
+<p>If <code>H : u = 0</code> you can write <code>subst H</code> to replace all occurrences of <code>u</code> with <code>0</code>, or you can rewrite specific hypotheses <code>h1</code>, <code>h2</code>, <code>h3</code> using <code>rw H at h1 h2 h3</code>.</p>
+
+<a name="191409714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409714">Patrick Massot (Mar 22 2020 at 18:38)</a>:</h4>
+<p>This allows people to copy-paste your code and immediately see the problem.</p>
+
+<a name="191409799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409799">Mario Carneiro (Mar 22 2020 at 18:40)</a>:</h4>
+<p>it also allows people to respond with fully formed examples as responses, so that you don't have to guess about things like where to put the <code>subst H</code> or what punctuation to put around it</p>
+
+<a name="191409850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409850">Dev-Indra (Mar 22 2020 at 18:41)</a>:</h4>
+<p>So here is my code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="c1">--Important theorems adapted from the Natural Number Game------------------------------</span>
+<span class="kn">theorem</span> <span class="n">ge_iff_exists_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">a</span> <span class="bp">≥</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">le_iff_exists_add</span><span class="o">,</span>  <span class="c1">-- Ok, maybe this theorem was a little bit silly :)</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">greater</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">≥</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">g_iff_exists_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">greater</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">rw</span> <span class="n">greater</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">ge_iff_exists_add</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">ne_from_not_eq</span><span class="o">,</span>
+
+    <span class="n">split</span><span class="o">,</span>
+
+    <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">h_left</span><span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">h_right</span><span class="o">:</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="n">h</span><span class="o">,</span>
+
+        <span class="n">cases</span> <span class="n">h_left</span> <span class="k">with</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+        <span class="n">use</span> <span class="n">u</span><span class="o">,</span>
+
+        <span class="n">split</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">hu</span><span class="o">,</span>
+
+        <span class="n">by_contradiction</span><span class="o">,</span>
+        <span class="n">push_neg</span> <span class="n">at</span> <span class="n">a_1</span><span class="o">,</span>
+
+        <span class="n">sorry</span>
+    <span class="o">},</span>
+    <span class="o">{</span>  <span class="n">intro</span> <span class="n">h2</span><span class="o">,</span>
+
+        <span class="n">cases</span> <span class="n">h2</span> <span class="k">with</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">hu_left</span><span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">+</span><span class="n">u</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">hu</span><span class="o">,</span>
+        <span class="n">split</span><span class="o">,</span>
+        <span class="n">use</span> <span class="n">u</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">hu_left</span><span class="o">,</span>
+
+        <span class="n">by_contradiction</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">wrong</span><span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">a_1</span><span class="o">,</span>
+
+        <span class="n">sorry</span>
+
+    <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191409894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191409894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191409894">Daniel Keys (Mar 22 2020 at 18:42)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="272522">Dev-Indra</span> <a href="#narrow/stream/113489-new-members/topic/Proving.20Something.20is.20False/near/191409558" title="#narrow/stream/113489-new-members/topic/Proving.20Something.20is.20False/near/191409558">said</a>:</p>
+<blockquote>
+<p>And then how to I substitute u = 0 into hu? Would hu and h_right = false after the substitution?</p>
+</blockquote>
+<p>For this kind of tasks, it is a good idea to go through the Natural Numbers Game.</p>
+
+<a name="191410385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410385">Dev-Indra (Mar 22 2020 at 18:51)</a>:</h4>
+<p>Here is my tactic state: </p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h_right</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">hu</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">h_right</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+<span class="err">⊢</span> <span class="n">false</span>
+</pre></div>
+
+
+<p>Is there a way to take the disjunction of hu and h_right?</p>
+
+<a name="191410550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410550">Daniel Keys (Mar 22 2020 at 18:54)</a>:</h4>
+<p><code>exact h_right hu</code></p>
+
+<a name="191410551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410551">Dev-Indra (Mar 22 2020 at 18:54)</a>:</h4>
+<p>and finally is there a theorem that states p and not p implies false? If so, what is the theorem name?</p>
+
+<a name="191410575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410575">Mario Carneiro (Mar 22 2020 at 18:55)</a>:</h4>
+<p>if <code>hnp : not p</code> and <code>hp : p</code> then <code>hnp hp : false</code></p>
+
+<a name="191410584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410584">Mario Carneiro (Mar 22 2020 at 18:55)</a>:</h4>
+<p>because <code>not p</code> is defined to be <code>p -&gt; false</code></p>
+
+<a name="191410638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410638">Patrick Massot (Mar 22 2020 at 18:56)</a>:</h4>
+<p>You need to learn about negation in the foundations used by Lean.</p>
+
+<a name="191410944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Something%20is%20False/near/191410944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03707ProvingSomethingisFalse.html#191410944">Patrick Massot (Mar 22 2020 at 19:03)</a>:</h4>
+<p>The following is probably what you wanted to do (although it's not the optimal road). You can read what library_search says and put it instead of library_search.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="c1">--Important theorems adapted from the Natural Number Game------------------------------</span>
+<span class="kn">theorem</span> <span class="n">ge_iff_exists_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">a</span> <span class="bp">≥</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="n">le_iff_exists_add</span> <span class="c1">-- this is only defining an alias to le_iff_exists_add</span>
+
+<span class="n">def</span> <span class="n">greater</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">≥</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">g_iff_exists_add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">greater</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">greater</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">ge_iff_exists_add</span><span class="o">,</span>
+  <span class="c1">--rw ne_from_not_eq, -- this line is useless</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h_right</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="o">[</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="o">],</span>
+    <span class="n">by_contradiction</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">push_neg</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">interval_cases</span> <span class="n">u</span><span class="o">,</span>
+    <span class="n">contradiction</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu_left</span><span class="o">,</span> <span class="n">hu_right</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="n">use</span> <span class="o">[</span><span class="n">u</span><span class="o">,</span> <span class="n">hu_left</span><span class="o">],</span>
+    <span class="c1">-- linarith would finish here</span>
+    <span class="k">assume</span> <span class="n">wrong</span><span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">wrong</span> <span class="n">at</span> <span class="n">hu_left</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">library_search</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">library_search</span><span class="o">,</span>
+    <span class="n">contradiction</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

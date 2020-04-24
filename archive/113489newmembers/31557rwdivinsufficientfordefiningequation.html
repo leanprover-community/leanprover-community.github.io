@@ -1,0 +1,237 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html">rw div insufficient for defining equation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="159916352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159916352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159916352">Plam (Mar 04 2019 at 14:12)</a>:</h4>
+<p>Hi!</p>
+<p>I'm working my way through theorem proving in Lean and have hit a bit of a snag.</p>
+<p>In section 8.4 we define div via well-founded recursion (I have called it div'). Then we are told that we can prove the defining equation of div as follows</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">div&#39;</span><span class="o">]</span>
+</pre></div>
+
+
+<p>but when I attempt this, I get an unsolved goal. Specifically,</p>
+<div class="codehilite"><pre><span></span>well_founded.fix lt_wf div&#39;.F x y = ite (0 &lt; y ∧ y ≤ x) (1 + well_founded.fix lt_wf div&#39;.F (x - y) y) 0
+</pre></div>
+
+
+<p>Is this because my version of div' lacks something div has? Something has changed in Lean since that was written? I've done something wrong?</p>
+<p>Thanks for any guidance</p>
+<p>(By the way, #eval doesn't work in the super fast way described in the book for me. #eval fib 100 doesn't work, never mind #eval fib 10000. Seems unlikely they're related, but thought it worth mentioning!)</p>
+
+<a name="159916913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159916913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159916913">Patrick Massot (Mar 04 2019 at 14:20)</a>:</h4>
+<p>Could you post a complete example? If I simply type in a Lean file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">div</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+    <span class="k">have</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+    <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div</span><span class="o">]</span>
+</pre></div>
+
+
+<p>then everything works as advertised</p>
+
+<a name="159917218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159917218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159917218">Plam (Mar 04 2019 at 14:24)</a>:</h4>
+<p>That's good to know! Trying it out with my definition using the equation compiler like that works, but it doesn't work using well_founded.fix directly.</p>
+<p>Here's the example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">div_rec_lemma&#39;</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span>
+
+<span class="n">def</span> <span class="n">div&#39;</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x₁</span><span class="o">,</span> <span class="n">x₁</span> <span class="bp">&lt;</span> <span class="n">x</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">div_rec_lemma&#39;</span> <span class="n">h</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="k">else</span>
+  <span class="n">zero</span>
+
+<span class="n">def</span> <span class="n">div&#39;</span> <span class="o">:=</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="n">lt_wf</span> <span class="n">div&#39;</span><span class="bp">.</span><span class="n">F</span>
+
+<span class="n">def</span> <span class="n">div&#39;&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span>
+    <span class="k">have</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">sub_lt</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">)</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+    <span class="n">div&#39;&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="mi">0</span>
+
+<span class="c1">-- Fails!:</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div&#39;</span><span class="o">]</span>
+
+<span class="c1">-- Works!:</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">div&#39;&#39;</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="k">if</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">x</span> <span class="k">then</span> <span class="n">div&#39;&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">div&#39;&#39;</span><span class="o">]</span>
+</pre></div>
+
+<a name="159918358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159918358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159918358">Patrick Massot (Mar 04 2019 at 14:39)</a>:</h4>
+<p>I'm not an expert at well founded recursion, but I think you could try reading <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+
+<a name="159923606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159923606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159923606">Andrew Ashworth (Mar 04 2019 at 15:44)</a>:</h4>
+<p>regarding fib 100 being slow: the docs are outdated. automatic memoization was disabled awhile back</p>
+
+<a name="159933047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933047">Plam (Mar 04 2019 at 17:39)</a>:</h4>
+<p>That was a useful read, but I appear not to have internalised it yet! I introduced a hypothesis the well foundedness checker seems to want, and I fail to make progress:</p>
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">prove</span> <span class="n">recursive</span> <span class="n">application</span> <span class="n">is</span> <span class="n">decreasing</span><span class="o">,</span> <span class="n">well</span> <span class="n">founded</span> <span class="n">relation</span>
+  <span class="bp">@</span><span class="n">has_well_founded</span><span class="bp">.</span><span class="n">r</span> <span class="o">(</span><span class="n">psum</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">has_well_founded_of_has_sizeof</span> <span class="o">(</span><span class="n">psum</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">))</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">psum</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">psigma</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sizeof</span><span class="o">))</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">psigma</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sizeof</span>
+             <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">@</span><span class="n">psigma</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sizeof</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sizeof</span><span class="o">)))))</span>
+<span class="n">Possible</span> <span class="n">solutions</span><span class="o">:</span>
+  <span class="bp">-</span> <span class="n">Use</span> <span class="err">&#39;</span><span class="n">using_well_founded&#39;</span> <span class="n">keyword</span> <span class="k">in</span> <span class="n">the</span> <span class="kn">end</span> <span class="n">of</span> <span class="n">your</span> <span class="kn">definition</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">tactics</span> <span class="n">for</span> <span class="n">synthesizing</span> <span class="n">well</span> <span class="n">founded</span> <span class="n">relations</span> <span class="n">and</span> <span class="n">decreasing</span> <span class="n">proofs</span><span class="bp">.</span>
+  <span class="bp">-</span> <span class="n">The</span> <span class="n">default</span> <span class="n">decreasing</span> <span class="n">tactic</span> <span class="n">uses</span> <span class="n">the</span> <span class="err">&#39;</span><span class="n">assumption&#39;</span> <span class="n">tactic</span><span class="o">,</span> <span class="n">thus</span> <span class="n">hints</span> <span class="o">(</span><span class="n">aka</span> <span class="n">local</span> <span class="n">proofs</span><span class="o">)</span> <span class="n">can</span> <span class="n">be</span> <span class="n">provided</span> <span class="kn">using</span> <span class="err">&#39;</span><span class="k">have</span><span class="err">&#39;</span><span class="bp">-</span><span class="n">expressions</span><span class="bp">.</span>
+<span class="n">The</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">failure</span> <span class="n">state</span> <span class="n">for</span> <span class="n">the</span> <span class="n">decreasing</span> <span class="n">tactic</span><span class="bp">.</span>
+<span class="n">nested</span> <span class="n">exception</span> <span class="n">message</span><span class="o">:</span>
+<span class="n">failed</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span>
+<span class="err">⊢</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span>
+</pre></div>
+
+<a name="159933138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933138">Kevin Buzzard (Mar 04 2019 at 17:40)</a>:</h4>
+<p>Does this help: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a> ?</p>
+
+<a name="159933196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933196">Kevin Buzzard (Mar 04 2019 at 17:41)</a>:</h4>
+<p>Note that h\1 is not what you want to prove; the issue is that it tried to solve the goal using an assumption but h\1 is not quite the right assumption.</p>
+
+<a name="159933296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933296">Kevin Buzzard (Mar 04 2019 at 17:42)</a>:</h4>
+<p>Oh sorry, I see Patrick already posted that.</p>
+
+<a name="159933304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933304">Chris Hughes (Mar 04 2019 at 17:42)</a>:</h4>
+<p>sometime adding <code>dec_tac := tactic.assumption</code> to the <code>using_well_founded</code> helps.</p>
+
+<a name="159933313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933313">Kevin Buzzard (Mar 04 2019 at 17:42)</a>:</h4>
+<p>Maybe you should post some code rather than just the error</p>
+
+<a name="159933477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933477">Chris Hughes (Mar 04 2019 at 17:44)</a>:</h4>
+<p>Although this definition should be well founded according to the default well founded relation, which is the lexicographic ordering.</p>
+
+<a name="159933502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933502">Chris Hughes (Mar 04 2019 at 17:44)</a>:</h4>
+<p>Depending on the other cases.</p>
+
+<a name="159933885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159933885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159933885">Plam (Mar 04 2019 at 17:49)</a>:</h4>
+<p>Thanks for the hints. Having corrected my h\1, I still end up with the error. Here's the code prompting the error (still broken in several places)</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">theorem</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">add_assoc</span>
+<span class="k">with</span> <span class="n">add_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">zero_add</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">],</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">succ_add_succ</span><span class="o">,</span> <span class="err">←</span><span class="n">succ_add_succ</span><span class="o">,</span> <span class="err">←</span><span class="n">add_comm</span> <span class="n">m</span> <span class="n">n</span><span class="o">]</span> <span class="o">}</span>
+<span class="k">with</span> <span class="n">add_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span> <span class="n">n</span> <span class="n">p</span> <span class="mi">1</span><span class="o">,</span> <span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Note that add has been defined (and infixed as +) locally</p>
+
+<a name="159951392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159951392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159951392">Scott Morrison (Mar 04 2019 at 21:15)</a>:</h4>
+<p>Plam, you should post a minimal working example, i.e. with everything need for someone to run it locally.</p>
+
+<a name="159953649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159953649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159953649">Plam (Mar 04 2019 at 21:43)</a>:</h4>
+<p>Gotcha! Sorry for being slow on the uptake on that</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="n">def</span> <span class="n">add</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span> <span class="bp">+</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">add</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">add</span>
+
+<span class="kn">theorem</span> <span class="n">add_zero</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">zero_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">zero_add</span> <span class="n">n</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">succ_add_succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">succ_add_succ</span> <span class="n">m</span> <span class="n">n</span><span class="o">]</span>
+
+<span class="n">mutual</span> <span class="kn">theorem</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">add_assoc</span>
+<span class="k">with</span> <span class="n">add_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">zero_add</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">succ_add_succ</span> <span class="n">m</span> <span class="n">n</span><span class="o">]}</span>
+<span class="k">with</span> <span class="n">add_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">n</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="mi">0</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span> <span class="n">n</span> <span class="n">p</span> <span class="mi">1</span><span class="o">,</span> <span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span> <span class="o">]</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="159954570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159954570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159954570">Kevin Buzzard (Mar 04 2019 at 21:54)</a>:</h4>
+<p>You can easily prove add_assoc by itself without intertwining it with add_comm. add_assoc doesn't need any commutativity hypotheses.</p>
+
+<a name="159954882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159954882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159954882">Kevin Buzzard (Mar 04 2019 at 21:59)</a>:</h4>
+<p>What is your actual question? Proving associativity by induction on p and then proving commutativity afterwards is the standard way of doing it. Are you specifically trying to do it in a complicated way and then trying to get the equation compiler to sort it all out, or are you just wanting to prove it?</p>
+
+<a name="159954997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159954997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159954997">Kevin Buzzard (Mar 04 2019 at 22:00)</a>:</h4>
+<p><a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/</a> is a (more tactic-oriented) approach</p>
+
+<a name="159961210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159961210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159961210">Plam (Mar 04 2019 at 23:24)</a>:</h4>
+<p>Thanks for the link. I don't mind not intertwining, but I do want to get practice with the equation compiler for proofs (as that is an explicit goal of the exercise)</p>
+
+<a name="159961860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159961860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159961860">Plam (Mar 04 2019 at 23:34)</a>:</h4>
+<p>Also I guess I'm explicitly interested in what is going wrong with the well-foundedness checker</p>
+
+<a name="159961943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rw%20div%20insufficient%20for%20defining%20equation/near/159961943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31557rwdivinsufficientfordefiningequation.html#159961943">Plam (Mar 04 2019 at 23:35)</a>:</h4>
+<p>(I got the assoc and comm proofs sorted based on what you said -- thanks!)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/86821lexicographicpreorder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html">lexicographic_preorder</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="160857760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160857760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160857760">Scott Morrison (Mar 15 2019 at 09:04)</a>:</h4>
+<p>A tactic I'm writing will need</p>
+<div class="codehilite"><pre><span></span>def lexicographic_preorder {α β : Type*} [preorder α] [preorder β] : preorder (α × β) :=
+{ le := λ a b, a.1 &lt; b.1 ∨ (a.1 = b.1 ∧ a.2 ≤ b.2),
+  le_refl := ...,
+  le_trans := ..., }
+</pre></div>
+
+
+<p>as a local instance. Last time I asked it didn't seem like this was already in mathlib (explicitly in terms of preorders). Should I PR it ahead of the tactic PR?</p>
+
+<a name="160857907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160857907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160857907">Mario Carneiro (Mar 15 2019 at 09:07)</a>:</h4>
+<p>I like it. No instance, maybe shorten to <code>lex_preorder</code> since <code>lex</code> is used elsewhere for this thing, and also add total order and well order if possible</p>
+
+<a name="160859817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160859817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160859817">Scott Morrison (Mar 15 2019 at 09:42)</a>:</h4>
+<p>Great, will do.</p>
+
+<a name="160859833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160859833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160859833">Scott Morrison (Mar 15 2019 at 09:42)</a>:</h4>
+<p>A suggestion which file it goes in?</p>
+
+<a name="160866301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160866301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160866301">Mario Carneiro (Mar 15 2019 at 11:28)</a>:</h4>
+<p><code>order.basic</code> I think</p>
+
+<a name="160866392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160866392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160866392">Scott Morrison (Mar 15 2019 at 11:30)</a>:</h4>
+<p>In the meantime I've PR'd it to <code>src/order/lexicographic.lean</code>. Shall I move it back into <code>basic</code>?</p>
+
+<a name="160934448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160934448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160934448">Scott Morrison (Mar 16 2019 at 04:42)</a>:</h4>
+<p>It looks like actually using my lexicographic pre/partial/linear orders is a bit painful, because of the existing pre/partial order on products.</p>
+
+<a name="160934452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160934452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160934452">Scott Morrison (Mar 16 2019 at 04:42)</a>:</h4>
+<p>I'm wondering if we should actually remove those as instances.</p>
+
+<a name="160934461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160934461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160934461">Scott Morrison (Mar 16 2019 at 04:43)</a>:</h4>
+<p>In my mind the two different partial orders on a product are both sensible things, and so by our usual rules about instances neither should be installed by default.</p>
+
+<a name="160934527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160934527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160934527">Scott Morrison (Mar 16 2019 at 04:45)</a>:</h4>
+<p>I'm compiling everything now, but so far it seems there are no breakages at this point.</p>
+
+<a name="160967122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160967122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160967122">Simon Hudon (Mar 16 2019 at 20:51)</a>:</h4>
+<p>I would be in favor of only making the lexicographical order an instance because it yields a total order which the current one does not. We could use a type synonym if we want to select the current order</p>
+
+<a name="160967138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lexicographic_preorder/near/160967138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86821lexicographicpreorder.html#160967138">Simon Hudon (Mar 16 2019 at 20:51)</a>:</h4>
+<p>Or locally make it an instance and decrease the priority of lexicographical order</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

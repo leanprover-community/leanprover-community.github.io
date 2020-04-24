@@ -1,0 +1,90 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/39387subtractequationlemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html">subtract equation lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="159341747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341747">Calle Sönne (Feb 25 2019 at 14:42)</a>:</h4>
+<p>I have a goal <code> a = b </code> and a hypothesis <code>`c = d </code> is there a lemma that gives <code>a - c = b - d </code>?  Only way I see how to do it without the lemma is to subtract c from a = b, then use conv to rw c on rhs, but this is quite tedious.</p>
+
+<a name="159341757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341757">Calle Sönne (Feb 25 2019 at 14:42)</a>:</h4>
+<p>I am in some ring if that is relevant</p>
+
+<a name="159341774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341774">Kenny Lau (Feb 25 2019 at 14:43)</a>:</h4>
+<p><code>congr (congr_arg (-) (hab : a = b)) (hcd : c = d)</code></p>
+
+<a name="159341781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341781">Kenny Lau (Feb 25 2019 at 14:43)</a>:</h4>
+<p>I once tried to get it to mathlib but people didn't like it</p>
+
+<a name="159341836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341836">Kenny Lau (Feb 25 2019 at 14:44)</a>:</h4>
+<p>or you can just <code>have a - c = b - d, by rw [hab, hcd]</code></p>
+
+<a name="159341862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159341862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159341862">Patrick Massot (Feb 25 2019 at 14:44)</a>:</h4>
+<p>I think that actually we should have more tactics like that, at least for teaching purposes</p>
+
+<a name="159343083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159343083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159343083">Gabriel Ebner (Feb 25 2019 at 15:01)</a>:</h4>
+<p>If you already have <code>a - c = b - d</code> as a goal, then you can apply the <code>congr</code> tactic which produces <code>a=b</code> and <code>c=d</code> as subgoals (there's also <code>congr'</code>):</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">d</span><span class="o">,</span> <span class="k">by</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">assumption</span>
+</pre></div>
+
+<a name="159348749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159348749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159348749">Calle Sönne (Feb 25 2019 at 16:06)</a>:</h4>
+<p>I have this goal: <code> 0 = finset.sum (finset.range n) (λ (x : ℕ), digit b r x * ↑b ^ (n - x) - digit b r x * ↑b ^ (n - 1 - x + 1)) </code> Im having trouble proving this, as the subtraction lemma I need require <code>x ≤ n</code> which is only true in the finset.range n, can I "enter" the sum somehow and prove it there, given hypothesis <code>x ≤ n</code> or similar .</p>
+
+<a name="159348782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159348782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159348782">Calle Sönne (Feb 25 2019 at 16:07)</a>:</h4>
+<p>the lemma is, nat.add_sub_assoc</p>
+
+<a name="159348951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159348951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159348951">Calle Sönne (Feb 25 2019 at 16:09)</a>:</h4>
+<p>The closest I have gotten is here: </p>
+<div class="codehilite"><pre><span></span><span class="mi">0</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span><span class="o">))</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">x</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">(</span><span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">x</span><span class="o">))))</span>
+</pre></div>
+
+
+<p>which is what requires nat.add_sub_assoc</p>
+
+<a name="159349056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159349056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159349056">Kenny Lau (Feb 25 2019 at 16:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_zero</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">→</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">s</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="159349094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159349094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159349094">Patrick Massot (Feb 25 2019 at 16:11)</a>:</h4>
+<p>You could use <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L124" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L124">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean#L124</a> if you were using my bigop proto-library. I don't know about finset</p>
+
+<a name="159349124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159349124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159349124">Calle Sönne (Feb 25 2019 at 16:11)</a>:</h4>
+<p>Thanks :)</p>
+
+<a name="159372370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159372370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159372370">Scott Morrison (Feb 25 2019 at 21:12)</a>:</h4>
+<p>We really need a mode in <code>conv</code> to enter a sum (whether finset or bigop), automatically gaining the hypothesis saying that you are in the domain.</p>
+
+<a name="159372445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtract%20equation%20lemma/near/159372445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39387subtractequationlemma.html#159372445">Patrick Massot (Feb 25 2019 at 21:13)</a>:</h4>
+<p>That would be really cool</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,56 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/08406leanpkgupgradenotworkingforme.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html">leanpkg upgrade not working for me</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177628922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177628922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177628922">Kevin Buzzard (Oct 08 2019 at 15:44)</a>:</h4>
+<p>I am with a student and when we type <code>leanpkg upgrade</code> on their project things seem to work fine. But when I then type <code>update-mathlib</code> in their repo I get <code>Error: no nightly archive found</code>. In <code>_target/deps/mathlib</code> I see all the latest commits. I thought that <code>update-mathlib</code> always worked now -- do I have to wait for something to compile or something?</p>
+
+<a name="177629011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629011">Patrick Massot (Oct 08 2019 at 15:45)</a>:</h4>
+<p>It looks like it tries to use mathlib master instead of lean-3.4.2</p>
+
+<a name="177629023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629023">Patrick Massot (Oct 08 2019 at 15:45)</a>:</h4>
+<p>please post <code>leanpkg.toml</code></p>
+
+<a name="177629029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629029">Floris van Doorn (Oct 08 2019 at 15:45)</a>:</h4>
+<p>I don't know if this an issue for <code>update-mathlib</code> but you can try checking out <code>origin/lean-3.4.2</code>.</p>
+
+<a name="177629031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629031">Kevin Buzzard (Oct 08 2019 at 15:45)</a>:</h4>
+<p>Aah thanks Patrick. This is a super-old project.</p>
+
+<a name="177629056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629056">Kevin Buzzard (Oct 08 2019 at 15:46)</a>:</h4>
+<p><code>lean_version = "nightly-2018-06-21"</code> ;-)</p>
+
+<a name="177629157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629157">Patrick Massot (Oct 08 2019 at 15:46)</a>:</h4>
+<p>Make sure this file ends with </p>
+<div class="codehilite"><pre><span></span>lean_version = &quot;3.4.2&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;c6fab42c36f65ff95a9043aa7aa6fb9bc4b4708c&quot;}
+</pre></div>
+
+<a name="177629183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade%20not%20working%20for%20me/near/177629183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08406leanpkgupgradenotworkingforme.html#177629183">Patrick Massot (Oct 08 2019 at 15:47)</a>:</h4>
+<p>and don't forget to <code>leanpkg configure</code> after modifying this</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

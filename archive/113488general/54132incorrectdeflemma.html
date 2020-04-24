@@ -1,0 +1,157 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/54132incorrectdeflemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html">incorrect def/lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173082282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173082282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173082282">Floris van Doorn (Aug 13 2019 at 03:37)</a>:</h4>
+<p>In the latest installment of my <code>#sanity_check</code> command, here is a list of all declarations in mathlib that either</p>
+<ul>
+<li>are a lemma/theorem but construct data</li>
+<li>are a definition, but define an element of a proposition</li>
+</ul>
+<p><a href="https://gist.github.com/fpvandoorn/bdc82881ba8e6461460e8028c291162f" target="_blank" title="https://gist.github.com/fpvandoorn/bdc82881ba8e6461460e8028c291162f">https://gist.github.com/fpvandoorn/bdc82881ba8e6461460e8028c291162f</a></p>
+<p>Maybe some of them are intended to be like this, but most of them should be changed.</p>
+<p>The ultimate goal of the <code>#sanity_check</code> command is that you put it at the bottom of your file while working on it, and it will give you warnings for things you're probably doing wrong. What other (realistic) features would you like it to detect?</p>
+
+<a name="173091319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173091319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173091319">Kevin Buzzard (Aug 13 2019 at 07:12)</a>:</h4>
+<p>Kenny once found some applications of <code>simp</code> in mathlib which could be changed to <code>rfl</code></p>
+
+<a name="173091324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173091324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173091324">Kevin Buzzard (Aug 13 2019 at 07:12)</a>:</h4>
+<p>But that might be asking too much</p>
+
+<a name="173094712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173094712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173094712">Rob Lewis (Aug 13 2019 at 08:17)</a>:</h4>
+<p>I was wondering if we could use this to flag particularly large or slow proofs. Quiz: if we define <code>meta def expr.size (e : expr) : ℕ := e.fold 0 $ λ _ _, nat.succ</code>, what do you think is biggest declaration in mathlib? No cheating.</p>
+
+<a name="173094857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173094857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173094857">Rob Lewis (Aug 13 2019 at 08:19)</a>:</h4>
+<p>(Note, this definition of size has very little correlation to compile time, partly because it ignores auxiliary declarations.)</p>
+
+<a name="173096912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173096912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173096912">Rob Lewis (Aug 13 2019 at 08:56)</a>:</h4>
+<p>Here are the top 50. The average is 337.</p>
+<div class="codehilite"><pre><span></span>(81923, Gromov_Hausdorff.totally_bounded)
+(51474, category_theory.yoneda_lemma._proof_4)
+(51307, category_theory.yoneda_lemma._proof_5)
+(45050, filter.is_lawful_monad)
+(44764, emetric.countable_closure_of_compact)
+(39488, dense_Inter_of_open_nat)
+(38767, is_integral_of_mem_of_fg)
+(38442, category_theory.whiskering_left._proof_13)
+(36064, category_theory.adjunction.cocones_iso._proof_5)
+(35121, _private.51918499.mul_le_of_limit_aux)
+(32774, category_theory.whiskering_right._proof_13)
+(32371, category_theory.category_of_elements._proof_5)
+(30707, category_theory.whiskering_right._proof_12)
+(30515, category_theory.adjunction.cones_iso._proof_5)
+(29441, measure_theory.simple_func_sequence_tendsto)
+(28014, real.exists_sup)
+(27209, category_theory.uncurry._proof_9)
+(26970, category_theory.category_of_elements.to_comma._proof_7)
+(26028, set.is_lawful_monad)
+(25754, ring.direct_limit.of.zero_exact_aux)
+(25726, is_noetherian_pi)
+(25578, ordinal.add_le_of_limit)
+(24060, nat.partrec.code.evaln_complete)
+(24005, Gromov_Hausdorff.second_countable)
+(23577, category_theory.uncurry._proof_7)
+(23420, category_theory.whiskering_right._proof_11)
+(23065, exists_preimage_norm_le)
+(22119, bounded_continuous_function.arzela_ascoli₁)
+(22105, hash_map.mem_insert)
+(21108, free_group.is_lawful_monad)
+(21004, real.pi_gt_314)
+(20566, turing.TM2to1.tr_respects_aux₂)
+(20254, turing.TM2to1.tr_supports)
+(19701, category_theory.lax_monoidal_functor.mk.inj_eq)
+(19439, nat.partrec.code.evaln_prim)
+(19291, category_theory.uncurry._proof_8)
+(19029, nat.partrec.code.evaln_sound)
+(18929, writer_t.is_lawful_monad)
+(18766, category_theory.adjunction.functoriality_is_right_adjoint._proof_5)
+(18704, real.pi_lt_315)
+(18639, onote.repr_power_aux₂)
+(18530, category_theory.adjunction.functoriality_is_left_adjoint._proof_5)
+(18514, category_theory.adjunction.functoriality_is_left_adjoint._proof_6)
+(18498, category_theory.adjunction.functoriality_is_right_adjoint._proof_6)
+(18435, exists_of_linear_independent_of_finite_span)
+(17418, semiquot.is_lawful_monad)
+(17392, category_theory.whiskering_left._proof_12)
+(17372, except_t.is_lawful_monad)
+(17075, turing.TM1to1.tr_supports)
+(17057, category_theory.adjunction.cocones_iso._proof_3)
+</pre></div>
+
+<a name="173107401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173107401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173107401">Chris Hughes (Aug 13 2019 at 12:15)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="173127347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173127347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173127347">Mario Carneiro (Aug 13 2019 at 16:12)</a>:</h4>
+<p>It's surprising that <code>yoneda_lemma</code> achieves both the <a href="https://github.com/leanprover-community/mathlib/issues/2" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2">#2</a> and <a href="https://github.com/leanprover-community/mathlib/issues/3" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/3">#3</a> positions on this list, considering the size of the proof script. Perhaps the <code>obviously</code> isn't obvious after all?</p>
+
+<a name="173127449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173127449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173127449">Kevin Buzzard (Aug 13 2019 at 16:13)</a>:</h4>
+<p>It's obvious to mathematicians :P</p>
+
+<a name="173128110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173128110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173128110">Sebastien Gouezel (Aug 13 2019 at 16:21)</a>:</h4>
+<p>I see that <code>Gromov_Hausdorff.totally_bounded</code> comes first. Since I wrote it, does it make me an olympic champion for writing such a big proof, or an olympic loser for being unable to write optimized proofs?</p>
+
+<a name="173128389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173128389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173128389">Patrick Massot (Aug 13 2019 at 16:24)</a>:</h4>
+<p>I would say olympic champion for refusing to split off lemmas.</p>
+
+<a name="173128865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173128865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173128865">Sebastien Gouezel (Aug 13 2019 at 16:31)</a>:</h4>
+<p>I jus had a look at the proof, it is not that bad (150 lines, no obvious lemma to split off).</p>
+
+<a name="173131849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173131849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173131849">Rob Lewis (Aug 13 2019 at 17:10)</a>:</h4>
+<p>It's funny. Printing the long proofs from <code>tidy</code> isn't so bad, even with <code>pp.all</code>. In contrast, <code>Gromov_Hausdorff.totally_bounded</code> locks up VS Code for me. Where is the complexity in <code>yoneda</code> coming from?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">gromov_hausdorff</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span><span class="bp">._</span><span class="n">proof_4</span>
+</pre></div>
+
+<a name="173133284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173133284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173133284">Rob Lewis (Aug 13 2019 at 17:27)</a>:</h4>
+<p>Oh, duh. <code>category_theory.yoneda._proof_4</code> isn't <code>category_theory.yoneda_lemma._proof_4</code>. That one's bigger (but still loads okay).</p>
+
+<a name="173158297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173158297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173158297">Scott Morrison (Aug 13 2019 at 22:41)</a>:</h4>
+<p>I'll try to have a look sometime. I suspect all the category theory lemmas appearing here is just a consequence of the category theory library actually using <em>dependent</em> types all over, and hence expressions tend to have huge invisible implicit arguments, often repeated many times over.  I bet if we could measure the "weight" of an expression deduplicating repeated subexpressions these lemmas would fall down the list somewhat.</p>
+
+<a name="173274596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/173274596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#173274596">Scott Morrison (Aug 15 2019 at 08:46)</a>:</h4>
+<p>Could sanity check even check for duplicate definitions? That is, find a definition in this file which is definitionally equal to some imported definition?</p>
+
+<a name="174042583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/174042583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#174042583">Johan Commelin (Aug 24 2019 at 15:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Thanks for building these lists! They are useful reminders of maintenance work that we shouldn't forget about.</p>
+
+<a name="174749653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/174749653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#174749653">Scott Morrison (Sep 03 2019 at 00:27)</a>:</h4>
+<p>All of the "defs that should be lemmas" in the category theory library were being created by <code>restate_axiom</code>. I've updated this to create lemmas when appropriate, in <a href="https://github.com/leanprover-community/mathlib/issues/1390" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1390">#1390</a>.</p>
+
+<a name="174774827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20def/lemma/near/174774827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54132incorrectdeflemma.html#174774827">Kevin Buzzard (Sep 03 2019 at 10:10)</a>:</h4>
+<p>Good catch!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

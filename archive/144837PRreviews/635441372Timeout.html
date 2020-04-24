@@ -1,0 +1,154 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/635441372Timeout.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html">#1372 Timeout</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174704630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174704630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174704630">Kevin Kappelmann (Sep 02 2019 at 09:53)</a>:</h4>
+<p>I was splitting up a file in this <a href="https://github.com/leanprover-community/mathlib/pull/1372" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1372">PR</a> but get a <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/579466607" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/579466607">timeout in travis</a>. I am quite lost what's going on, so any help is appreciated.</p>
+
+<a name="174704924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174704924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174704924">Mario Carneiro (Sep 02 2019 at 09:59)</a>:</h4>
+<p>Since when do we have a 90 minute limit on Travis? I thought it was 45 minutes</p>
+
+<a name="174877394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174877394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174877394">Kevin Kappelmann (Sep 04 2019 at 12:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> (and whoever else knows how to deal with timeouts), what's the best approach for me to figure out why Travis is still timing out for this PR? Do I need to run the compile command on my PC and just wait for 90 minutes and see where it gets stuck? My laptop is quite old (+6 years) and hence has difficulties compiling mathlib all at once.</p>
+
+<a name="174888733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174888733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174888733">Floris van Doorn (Sep 04 2019 at 14:46)</a>:</h4>
+<p>Timeouts are annoying to track. I had to track down some timeouts in <a href="https://github.com/leanprover-community/mathlib/issues/1319" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1319">#1319</a>, and what I indeed did was compile the whole library locally. However, Lean doesn't print an error message when it reaches a timeout, and it still created the olean file (perhaps the command-line Lean has a much higher timeout treshhold?), so I looked at which olean files took longest to create. Now I realize I could have used <code>lean --make -T 100000</code> to set a timeout limit, which should probably work.</p>
+
+<a name="174888799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174888799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174888799">Floris van Doorn (Sep 04 2019 at 14:47)</a>:</h4>
+<p>That said, I'm worried whether there could be something wrong with the Travis setup. PR <a href="https://github.com/leanprover-community/mathlib/issues/1375" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1375">#1375</a> fails, but it is hard to imagine that adding a single lemma (that is never used!) causes a timeout somewhere (the lemma itself compiles fine on my laptop)</p>
+
+<a name="174889221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174889221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174889221">Keeley Hoek (Sep 04 2019 at 14:51)</a>:</h4>
+<p>On thing that should be mentioned is that travis does not provide a consistent computing power for jobs; sometimes when you just restart the build, it just works, because your job got more CPU. Since yours has failed over and over, that probably isn't the case?</p>
+
+<a name="174891943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174891943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174891943">Kevin Kappelmann (Sep 04 2019 at 15:17)</a>:</h4>
+<blockquote>
+<p>That said, I'm worried whether there could be something wrong with the Travis setup. PR <a href="https://github.com/leanprover-community/mathlib/issues/1375" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1375">#1375</a> fails, but it is hard to imagine that adding a single lemma (that is never used!) causes a timeout somewhere (the lemma itself compiles fine on my laptop)</p>
+</blockquote>
+<p>That's interesting. I have the strong feeling that there is something wrong in the setup and not in the commit. I also did not add or change any lemmas (I just moved an removed some lemmas in my commit).</p>
+
+<a name="174891973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174891973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174891973">Kevin Kappelmann (Sep 04 2019 at 15:17)</a>:</h4>
+<blockquote>
+<p>On thing that should be mentioned is that travis does not provide a consistent computing power for jobs; sometimes when you just restart the build, it just works, because your job got more CPU. Since yours has failed over and over, that probably isn't the case?</p>
+</blockquote>
+<p>Yeah, it did restart multiple times already</p>
+
+<a name="174914807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174914807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174914807">Floris van Doorn (Sep 04 2019 at 19:31)</a>:</h4>
+<p>Interestingly, <a href="https://github.com/leanprover-community/mathlib/issues/1375" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1375">#1375</a> did compile fine after I merged it into master. I tried merging your PR into master, to see if that changes anything.</p>
+
+<a name="174932481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174932481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174932481">Scott Morrison (Sep 04 2019 at 23:36)</a>:</h4>
+<p>Seems not to have. I nuked the travis cache for <a href="https://github.com/leanprover-community/mathlib/issues/1372" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1372">#1372</a>, and merged master again.</p>
+
+<a name="174949257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174949257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174949257">Bryan Gin-ge Chen (Sep 05 2019 at 06:49)</a>:</h4>
+<p>I just finished building this branch locally, and it did take an absurd amount of time. It looks like there are timeouts in at least the following:</p>
+<ul>
+<li><code>data/nat/basic.lean</code> at <code>add_pow</code></li>
+<li><code>computability/partrec.lean</code> at <code>partrec</code></li>
+<li><code>computability/partrec_code.lean</code> at <code>eval</code></li>
+<li><code>computability/halting.lean</code> at <code>vec</code></li>
+</ul>
+<p>These were just the files where I happened to notice <code>lean --make</code> get stuck for a very long time.</p>
+<p>How hard would it be to write a script that recorded compile times or some other related profiling? Something like that seems like it would be really useful on travis.</p>
+
+<a name="174950999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174950999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174950999">Mario Carneiro (Sep 05 2019 at 07:26)</a>:</h4>
+<p>The computability files have a few long proofs, but they haven't changed in a long while and they don't use any fancy tactics so I don't see how any recent change could have affected them</p>
+
+<a name="174951029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951029">Mario Carneiro (Sep 05 2019 at 07:27)</a>:</h4>
+<p>Are you running with a shortened timeout?</p>
+
+<a name="174951126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951126">Mario Carneiro (Sep 05 2019 at 07:28)</a>:</h4>
+<p>computability/partrec.lean at partrec is talking about an inductive definition, so that must be lean's autogenerated theorems</p>
+
+<a name="174951136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951136">Mario Carneiro (Sep 05 2019 at 07:28)</a>:</h4>
+<p>eval is a big recursive definition, not even a theorem, and similarly with vec</p>
+
+<a name="174951156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951156">Bryan Gin-ge Chen (Sep 05 2019 at 07:29)</a>:</h4>
+<p>The time limit is set to <code>100000</code> in the settings.</p>
+<p>The timeouts in <code>data.nat.choose</code> go away if I change all the <code>choose</code> to <code>nat.choose</code>.  I also don't see why this would've changed.</p>
+
+<a name="174951161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951161">Mario Carneiro (Sep 05 2019 at 07:29)</a>:</h4>
+<p>In fact I think those names are not accurate, i.e. the name that you see might not actually be what takes the time. Lean is multithreaded so it's probably hard to get that right</p>
+
+<a name="174951221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951221">Mario Carneiro (Sep 05 2019 at 07:30)</a>:</h4>
+<p>it might just be a cold cache or something</p>
+
+<a name="174951228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951228">Bryan Gin-ge Chen (Sep 05 2019 at 07:30)</a>:</h4>
+<p>Yeah, I opened those 4 files in VS Code afterwards to check.</p>
+
+<a name="174951244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951244">Mario Carneiro (Sep 05 2019 at 07:31)</a>:</h4>
+<p><code>(deterministic) timeout</code> doesn't live up to its name</p>
+
+<a name="174951269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174951269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174951269">Mario Carneiro (Sep 05 2019 at 07:31)</a>:</h4>
+<p>I think command line lean runs with infinite timeout</p>
+
+<a name="174964047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174964047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174964047">Kevin Kappelmann (Sep 05 2019 at 11:23)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110087">@Scott Morrison</span>  - sadly, it failed again.<br>
+Thanks for running it locally <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> ! As said, I have difficulties compiling everything on my computer. I agree, it would be really great to see in Travis where it got stuck/have some sort of table of compilation times for each theorem, but I guess, according to <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , that's not an easy undertaking.</p>
+
+<a name="175043899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175043899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175043899">Kevin Kappelmann (Sep 06 2019 at 08:06)</a>:</h4>
+<p>I created a <a href="https://github.com/leanprover-community/mathlib/pull/1403" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1403">testing PR</a> to see if I can detect where and why this PR times out.</p>
+
+<a name="175065384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175065384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175065384">Kevin Kappelmann (Sep 06 2019 at 13:43)</a>:</h4>
+<p>So apparently, changing the import from <code>data.rat</code> to <code>data.rat.order</code> in <code>tactic.norm_num</code> (see <a href="https://github.com/leanprover-community/mathlib/pull/1403/files" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1403/files">here</a>) makes travis time out (see <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/581560818" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/581560818">here</a>). But why? <code>data.rat</code> imports <code>data.rat.order</code>. So to me it seems that it should not make any difference (or it should even be faster)(?).</p>
+
+<a name="175067756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175067756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175067756">Keeley Hoek (Sep 06 2019 at 14:07)</a>:</h4>
+<p>Just a total guess, but does <code>data.rat</code> have things like typeclass short-circuits to make typeclass resolution (potentially much) faster?</p>
+
+<a name="175067843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175067843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175067843">Keeley Hoek (Sep 06 2019 at 14:08)</a>:</h4>
+<p>By which I mean some technically-unnecessary instance declarations which make life easier for lean</p>
+
+<a name="175068100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068100">Chris Hughes (Sep 06 2019 at 14:10)</a>:</h4>
+<p>My guess is that something now no longer imports <code>rat.cast</code> that needs it, and it timed out trying to coerce a <code>rat</code> to a <code>real</code></p>
+
+<a name="175068176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068176">Patrick Massot (Sep 06 2019 at 14:11)</a>:</h4>
+<p>Chris's guess sounds very plausible. Broken coercions are a very common cause of timeout.</p>
+
+<a name="175068337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068337">Kevin Kappelmann (Sep 06 2019 at 14:13)</a>:</h4>
+<p>Hmm, that sounds reasonable. I'll give it a shot.</p>
+
+<a name="175079381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175079381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175079381">Kevin Kappelmann (Sep 06 2019 at 16:14)</a>:</h4>
+<p>This works now (I kept the <code>data.rat.cast</code> import in <code>norm_num</code>). Thanks Chris :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

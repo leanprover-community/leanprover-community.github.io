@@ -1,0 +1,61 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/55954fintypedecidability.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html">fintype + decidability</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190853375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190853375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190853375">Vaibhav Karve (Mar 17 2020 at 14:17)</a>:</h4>
+<p>I am trying to figure out how decidability works. I have an incomplete picture of this and so am writing various functions to see if I can figure it out.</p>
+<p>My instinct is that any predicate on a fintype should be decidable + computable. Is that correct? For example I wrote:</p>
+<div class="codehilite"><pre><span></span>  <span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">f</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="n">p</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">refine</span> <span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">decidable_set_of</span> <span class="n">α</span> <span class="n">p</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>Lean informs me that this is <em>noncomputable</em> because it depends on <em>classical.prop_decidable</em>. But I don't want to give up computability. How can I make this computable?</p>
+
+<a name="190853735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190853735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190853735">Patrick Massot (Mar 17 2020 at 14:20)</a>:</h4>
+<p>I'm don't care at all about computability so read this with caution, but I don't think knowing finiteness is enough</p>
+
+<a name="190857220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190857220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190857220">Kevin Buzzard (Mar 17 2020 at 14:44)</a>:</h4>
+<p>My understanding is probably even worse than Patrick's but if I have two real numbers a and b for which a=b is undecidable then can't I just make a fintype from a and b and now equality is not decidable on this fintype?</p>
+
+<a name="190857349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190857349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190857349">Chris Hughes (Mar 17 2020 at 14:45)</a>:</h4>
+<p>It's not true. This would imply decidability of every Proposition, since for any Proposition <code>P</code>, and a fintype <code>X</code>, <code>λ x : X, P</code> is a predicate on a finite type.</p>
+
+<a name="190859707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190859707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190859707">Reid Barton (Mar 17 2020 at 15:00)</a>:</h4>
+<p>Well, maybe not if <code>X</code> is empty but otherwise yes</p>
+
+<a name="190861214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190861214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190861214">Vaibhav Karve (Mar 17 2020 at 15:09)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/fintype.20.2B.20decidability/near/190857220" title="#narrow/stream/113489-new-members/topic/fintype.20.2B.20decidability/near/190857220">said</a>:</p>
+<blockquote>
+<p>My understanding is probably even worse than Patrick's but if I have two real numbers a and b for which a=b is undecidable then can't I just make a fintype from a and b and now equality is not decidable on this fintype?</p>
+</blockquote>
+<p>But the code I included in my question does type-check! So Lean is telling me that any predicate on a fintype is decidable. My question is why is it not computable.</p>
+
+<a name="190862062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190862062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190862062">Chris Hughes (Mar 17 2020 at 15:14)</a>:</h4>
+<p>With classical logic every proposition is decidable. You can't computable decide every predicate on a fintype because then you'd be able to computably decide every proposition.</p>
+
+<a name="190862747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/fintype%20%2B%20decidability/near/190862747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55954fintypedecidability.html#190862747">Vaibhav Karve (Mar 17 2020 at 15:18)</a>:</h4>
+<p>Okay. I didn't realize that. I commented out <code>open classical</code> and <code>local attribute prop_decidable</code> from my file. Now the example above does not type-check.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

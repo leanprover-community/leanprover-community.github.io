@@ -1,0 +1,349 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html">multiple assumptions of definitionally equal type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181934993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181934993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181934993">Reuben Rowe (Nov 26 2019 at 15:53)</a>:</h4>
+<p>I have come across a situation where, in tactic mode, I have two assumptions in my context whose types are not equal but they are definitionally equal. Specifically, for a particular expression <code>_e</code>, the types are <code>m ∈ _e</code> and <code>_e = some m</code>. I would like to rewrite using the equality. However, when I use <code>rw ‹_e = some m›</code> the <code>rw</code> tactic fails because the assumption of type <code>m ∈ _e</code> appears before the other one in the context, and so the tactic <code>‹_e = some m›</code> returns the wrong assumption.</p>
+<p>Of course, I can use the names of the assumptions instead of the <code>‹⬝›</code> tactic, but I would like to avoid using names if I can.</p>
+<p>Is this a known problem? is it considered a "problem"?</p>
+
+<a name="181946876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181946876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181946876">Kevin Buzzard (Nov 26 2019 at 17:58)</a>:</h4>
+<p>I guess I've never had to worry about not using names. Do you need both hypotheses in the context? If not then you could <code>clear</code> one. Otherwise probably you can use some <code>meta</code> magic (which I know nothing about) to give the bad tactic a fresh name or something.</p>
+
+<a name="181948686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181948686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181948686">Reuben Rowe (Nov 26 2019 at 18:18)</a>:</h4>
+<p>It's not that I can't use names for the hypotheses, it's that I want to try doing without - it's a style objective.</p>
+
+<a name="181949214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949214">Kevin Buzzard (Nov 26 2019 at 18:24)</a>:</h4>
+<p>Just to be sure -- if you rewrite with the name of the correct assumption, does the rewrite not fail?</p>
+<p>I was looking at <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/conditionally_complete_lattice.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/conditionally_complete_lattice.lean">conditionally complete lattices</a> in Lean's maths library over the last few days, and they use the french quotes in several places.</p>
+
+<a name="181949311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949311">Reid Barton (Nov 26 2019 at 18:25)</a>:</h4>
+<p>I suppose the <code>assumption</code> tactic (which underlies the french quotes) could do a first pass to look for a hypothesis that matches the requested type syntactically. I seem to recall this coming up before.</p>
+
+<a name="181949784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949784">Reuben Rowe (Nov 26 2019 at 18:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>: yes, if I name the hypothesis <code>rw</code> succeeds</p>
+
+<a name="181949805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949805">Rob Lewis (Nov 26 2019 at 18:31)</a>:</h4>
+<p>It might even be enough to change this line to <code>show p, by assumption</code>. <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871">https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871</a></p>
+
+<a name="181949936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949936">Rob Lewis (Nov 26 2019 at 18:32)</a>:</h4>
+<p>There's a chance that could have side effects elsewhere.</p>
+
+<a name="181949947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949947">Reuben Rowe (Nov 26 2019 at 18:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span>: no, it is the <code>assumption</code> tactic itself which picks the wrong hypothesis</p>
+
+<a name="181949986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949986">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p>It doesn't matter which hypothesis the tactic chooses if they're definitionally the same. What matters is what the assumption tactic is used to prove.</p>
+
+<a name="181950005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950005">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p><code>(p : t)</code> isn't necessarily the same as <code>show t, from p</code>.</p>
+
+<a name="181950018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950018">Reuben Rowe (Nov 26 2019 at 18:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>: I played around by implementing a new version of <code>assumption</code> which checks for syntactic equality. In my particular case it was failing because there are meta-variables that are different.</p>
+
+<a name="181950033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950033">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p>The latter guarantees a term with type <code>t</code>. The former guarantees a term with type defeq to <code>t</code>.</p>
+
+<a name="181950103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950103">Rob Lewis (Nov 26 2019 at 18:34)</a>:</h4>
+<p>So <code>assumption</code> would still find the first proof, but it would use it to prove the syntactic thing you want.</p>
+
+<a name="181950145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950145">Reid Barton (Nov 26 2019 at 18:34)</a>:</h4>
+<p>That would make the french quote syntax marginally more useful as well</p>
+
+<a name="181950200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950200">Reuben Rowe (Nov 26 2019 at 18:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> oh right, yes I see what you mean</p>
+
+<a name="181951614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181951614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181951614">Reuben Rowe (Nov 26 2019 at 18:50)</a>:</h4>
+<p>So, I tried defining a local notation for french brackets with this proposed new implementation, and I was getting some errors:</p>
+<div class="codehilite"><pre><span></span>none of the overloads are applicable
+error for λ (x_1 : _),
+  show x_1, from has_bind.seq (tactic.save_info (_ 49 34)) (tactic.step tactic.interactive.assumption)
+assumption tactic failed
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>context: switched to basic overload resolution where arguments are elaborated without any information about the expected type, because failed to elaborate all candidates using the expected type
+  m = n
+this can happen because, for example, coercions were not considered in the process
+none of the overloads are applicable
+</pre></div>
+
+<a name="181951909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181951909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181951909">Reid Barton (Nov 26 2019 at 18:53)</a>:</h4>
+<p>That error looks weird</p>
+
+<a name="181952018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952018">Reid Barton (Nov 26 2019 at 18:54)</a>:</h4>
+<p>How did you define the notation exactly?</p>
+
+<a name="181952021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952021">Reuben Rowe (Nov 26 2019 at 18:54)</a>:</h4>
+<p>It might be because in my code, there are some implicit goals that need to be solved.</p>
+
+<a name="181952039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952039">Reuben Rowe (Nov 26 2019 at 18:54)</a>:</h4>
+<blockquote>
+<p>How did you define the notation exactly?</p>
+</blockquote>
+<p>notation <code>‹</code> p <code>›</code> := (show p, by assumption)</p>
+
+<a name="181952147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952147">Reid Barton (Nov 26 2019 at 18:55)</a>:</h4>
+<p>Making it local notation (or just different syntax) might help, then it will override the global notation rather than Lean trying to consider both</p>
+
+<a name="181952180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952180">Reuben Rowe (Nov 26 2019 at 18:55)</a>:</h4>
+<p>When I inline <code>show p, by assumption</code> at the place I want to use it (i.e. to generate a name for the hypothesis I want to apply <code>rw</code> to), it goes through fine, but also gives me new goals related to the parameters in my code.</p>
+
+<a name="181952278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952278">Reuben Rowe (Nov 26 2019 at 18:56)</a>:</h4>
+<blockquote>
+<p>Making it local notation (or just different syntax) might help, then it will override the global notation rather than Lean trying to consider both</p>
+</blockquote>
+<p>Yeah, that seems to be working.</p>
+
+<a name="181952301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952301">Reid Barton (Nov 26 2019 at 18:57)</a>:</h4>
+<p>Working working or the same behavior as when you wrote <code>show p, by assumption</code> manually?</p>
+
+<a name="181952470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952470">Reuben Rowe (Nov 26 2019 at 18:58)</a>:</h4>
+<p>The latter.</p>
+
+<a name="181952519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952519">Reuben Rowe (Nov 26 2019 at 18:59)</a>:</h4>
+<p>So, it is generating new goals related to the implicit parameters of <code>p</code>.</p>
+
+<a name="181952994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952994">Reid Barton (Nov 26 2019 at 19:04)</a>:</h4>
+<p>So let's see. The actual <code>p</code> in your case involves metavariables? And you're expecting them to be filled in by the actual type of the hypothesis that matches?</p>
+
+<a name="181953015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181953015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181953015">Reid Barton (Nov 26 2019 at 19:05)</a>:</h4>
+<p>(wouldn't it be easier to just give the name of the hypothesis...?)</p>
+
+<a name="181953395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181953395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181953395">Rob Lewis (Nov 26 2019 at 19:09)</a>:</h4>
+<p>This is hard to follow without a working example.</p>
+
+<a name="181953585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181953585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181953585">Reuben Rowe (Nov 26 2019 at 19:11)</a>:</h4>
+<p>OK, I'll give the code.</p>
+
+<a name="181953736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181953736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181953736">Reid Barton (Nov 26 2019 at 19:13)</a>:</h4>
+<p>There are also probably easy ways to avoid having the old hypothesis around, besides <code>clear</code>, like <code>rw at</code> or <code>replace</code></p>
+
+<a name="181954219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181954219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181954219">Reuben Rowe (Nov 26 2019 at 19:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">parameters</span> <span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">}</span> <span class="o">[</span><span class="n">denumerable</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span> <span class="n">αs</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">incl</span> <span class="o">:</span> <span class="n">α</span> <span class="err">↪</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">embedding</span><span class="bp">.</span><span class="n">mk</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode_injective</span>
+
+<span class="n">def</span> <span class="n">codes</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">map</span> <span class="n">incl</span> <span class="n">αs</span>
+
+<span class="n">def</span> <span class="n">code</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span>  <span class="mi">0</span>
+  <span class="bp">|</span> <span class="n">some</span> <span class="n">n</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+  <span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="o">,</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">max_of_mem</span> <span class="err">‹</span><span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="err">›</span><span class="o">)</span> <span class="k">with</span> <span class="n">m</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="err">‹</span><span class="n">m</span> <span class="err">∈</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span><span class="err">›</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span>
+      <span class="n">rw</span> <span class="n">code</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="err">‹</span><span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="err">›</span><span class="o">,</span>
+      <span class="n">refl</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="k">show</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span><span class="o">,</span>
+      <span class="k">by</span> <span class="k">calc</span>
+        <span class="n">c</span> <span class="bp">≤</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">le_max_of_mem</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">assumption</span><span class="o">}}</span>
+         <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_self</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="n">code</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">symmetry</span><span class="o">,</span> <span class="k">from</span> <span class="err">‹</span><span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="err">›</span><span class="o">},</span>
+    <span class="n">done</span><span class="o">,</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="181954334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181954334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181954334">Reuben Rowe (Nov 26 2019 at 19:20)</a>:</h4>
+<blockquote>
+<p>There are also probably easy ways to avoid having the old hypothesis around, besides <code>clear</code>, like <code>rw at</code> or <code>replace</code></p>
+</blockquote>
+<p>Yes, but these all involve naming the hypotheses, and I can just give the name of the hypothesis to <code>rw</code>, but as I say I am trying to see how far I can get by writing proofs in a "nameless" style. Perhaps this is not an interesting thing to try and do.</p>
+
+<a name="181954666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181954666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181954666">Rob Lewis (Nov 26 2019 at 19:23)</a>:</h4>
+<p>This works fine for me?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">denumerable</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">section</span>
+<span class="kn">parameters</span> <span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">}</span> <span class="o">[</span><span class="n">denumerable</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span> <span class="n">αs</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">incl</span> <span class="o">:</span> <span class="n">α</span> <span class="err">↪</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">embedding</span><span class="bp">.</span><span class="n">mk</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode_injective</span>
+
+<span class="n">def</span> <span class="n">codes</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">map</span> <span class="n">incl</span> <span class="n">αs</span>
+
+<span class="n">def</span> <span class="n">code</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span>  <span class="mi">0</span>
+  <span class="bp">|</span> <span class="n">some</span> <span class="n">n</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+  <span class="kn">end</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="err">‹</span><span class="bp">`</span> <span class="n">p</span> <span class="bp">`</span><span class="err">›</span><span class="bp">`</span> <span class="o">:=</span> <span class="o">(</span><span class="k">show</span> <span class="n">p</span><span class="o">,</span> <span class="k">by</span> <span class="n">assumption</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="o">,</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">max_of_mem</span> <span class="err">‹</span><span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="err">›</span><span class="o">)</span> <span class="k">with</span> <span class="n">m</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="o">,</span>  <span class="k">from</span> <span class="err">‹</span><span class="n">m</span> <span class="err">∈</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span><span class="err">›</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span>
+      <span class="n">rw</span> <span class="n">code</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="err">‹</span><span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="err">›</span><span class="o">,</span>
+      <span class="n">refl</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="k">show</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span><span class="o">,</span> <span class="k">from</span>
+      <span class="k">calc</span>
+        <span class="n">c</span> <span class="bp">≤</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">le_max_of_mem</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">assumption</span><span class="o">}}</span>
+         <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_self</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="n">code</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">symmetry</span><span class="o">,</span> <span class="k">from</span> <span class="err">‹</span><span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="err">›</span><span class="o">},</span>
+    <span class="n">done</span><span class="o">,</span>
+  <span class="kn">end</span>
+
+ <span class="kn">end</span>
+</pre></div>
+
+<a name="181954835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181954835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181954835">Rob Lewis (Nov 26 2019 at 19:25)</a>:</h4>
+<blockquote>
+<p>Perhaps this is not an interesting thing to try and do</p>
+</blockquote>
+<p>I'm not sure it's uninteresting, but it's definitely nonstandard. You'll run into issues sooner or later.</p>
+
+<a name="181955067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181955067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181955067">Reuben Rowe (Nov 26 2019 at 19:27)</a>:</h4>
+<blockquote>
+<p>This works fine for me?</p>
+</blockquote>
+<p>Yes, you are right, it is. So something else about the rest of my code is causing the problem.</p>
+
+<a name="181955148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181955148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181955148">Rob Lewis (Nov 26 2019 at 19:28)</a>:</h4>
+<p>Note that I changed <code>show : c &lt; code</code> to <code>show c &lt; code</code>.</p>
+
+<a name="181955163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181955163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181955163">Rob Lewis (Nov 26 2019 at 19:28)</a>:</h4>
+<p>But that's probably unrelated.</p>
+
+<a name="181957619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181957619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181957619">Reuben Rowe (Nov 26 2019 at 19:57)</a>:</h4>
+<p>OK, here is the code that displays what I was seeing.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">denumerable</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="err">‹</span><span class="bp">`</span> <span class="n">p</span> <span class="bp">`</span><span class="err">›</span><span class="bp">`</span> <span class="o">:=</span> <span class="o">(</span><span class="k">show</span> <span class="n">p</span><span class="o">,</span> <span class="k">by</span> <span class="n">assumption</span><span class="o">)</span>
+
+<span class="kn">section</span>
+
+  <span class="kn">parameters</span> <span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">}</span> <span class="o">[</span><span class="n">denumerable</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span> <span class="n">αs</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span> <span class="o">}</span>
+
+  <span class="kn">private</span>
+    <span class="n">def</span> <span class="n">incl</span> <span class="o">:</span> <span class="n">α</span> <span class="err">↪</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+      <span class="n">function</span><span class="bp">.</span><span class="n">embedding</span><span class="bp">.</span><span class="n">mk</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode</span> <span class="n">encodable</span><span class="bp">.</span><span class="n">encode_injective</span>
+
+  <span class="kn">private</span>
+    <span class="n">def</span> <span class="n">codes</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">map</span> <span class="n">incl</span> <span class="n">αs</span>
+
+  <span class="kn">private</span>
+    <span class="n">def</span> <span class="n">code</span> <span class="o">:=</span>
+      <span class="k">match</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="k">with</span>
+      <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span>  <span class="mi">0</span>
+      <span class="bp">|</span> <span class="n">some</span> <span class="n">n</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+      <span class="kn">end</span>
+
+  <span class="kn">parameter</span> <span class="o">(</span> <span class="n">αs</span> <span class="o">)</span>
+
+  <span class="n">def</span> <span class="n">fresh_var</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+    <span class="n">denumerable</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">α</span> <span class="n">code</span>
+
+  <span class="kn">example</span> <span class="o">:</span> <span class="n">fresh_var</span> <span class="err">∉</span> <span class="n">αs</span> <span class="o">:=</span>
+    <span class="k">begin</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="o">,</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span>
+        <span class="n">intros</span><span class="o">,</span>
+        <span class="n">cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">max_of_mem</span> <span class="err">‹</span><span class="n">c</span> <span class="err">∈</span> <span class="n">codes</span><span class="err">›</span><span class="o">)</span> <span class="k">with</span> <span class="n">m</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:</span> <span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="o">,</span>
+          <span class="k">by</span> <span class="n">assumption</span><span class="o">,</span>
+          <span class="c1">-- from ‹m ∈ codes.max›,</span>
+        <span class="k">have</span> <span class="o">:</span> <span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span>
+          <span class="n">rw</span> <span class="n">code</span><span class="o">,</span>
+          <span class="n">rw</span> <span class="err">‹</span><span class="n">codes</span><span class="bp">.</span><span class="n">max</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">m</span><span class="err">›</span><span class="o">,</span>
+          <span class="c1">-- rw this,</span>
+          <span class="n">refl</span><span class="o">,</span>
+        <span class="o">},</span>
+        <span class="k">show</span> <span class="n">c</span> <span class="bp">&lt;</span> <span class="n">code</span><span class="o">,</span> <span class="k">from</span>
+          <span class="k">calc</span>
+            <span class="n">c</span> <span class="bp">≤</span> <span class="n">m</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">le_max_of_mem</span><span class="o">,</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">assumption</span><span class="o">}}</span>
+            <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_self</span>
+            <span class="bp">...</span> <span class="bp">=</span> <span class="n">code</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span><span class="n">symmetry</span><span class="o">,</span> <span class="k">from</span> <span class="err">‹</span><span class="n">code</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="err">›</span><span class="o">},</span>
+        <span class="n">done</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="n">sorry</span>
+  <span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Now the problem is the use of the <code>private</code> keyword --- removing it, the code is fine.</p>
+<p>I guess I have misunderstood the purpose of this keyword: my intention was that the definitions should not be visible outside of the section (or some other unit) in which they are declared.</p>
+
+<a name="181958280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181958280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181958280">Reid Barton (Nov 26 2019 at 20:05)</a>:</h4>
+<p>I vaguely recall seeing something like this... maybe an interaction between <code>private</code> and <code>parameters</code>?</p>
+
+<a name="181958286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181958286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181958286">Reid Barton (Nov 26 2019 at 20:05)</a>:</h4>
+<p>And tactic mode</p>
+
+<a name="181958460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181958460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181958460">Reuben Rowe (Nov 26 2019 at 20:07)</a>:</h4>
+<p>If you remove the local notation for the french brackets, you see the problem I was originally describing (i.e. the <code>assumption</code> tactic finding the wrong assumption). <strong>This is whether the <code>private</code> keyword is used or not.</strong></p>
+<p>If you include the local notation, but put <code>private</code> on the definitions for both <code>codes</code> and <code>code</code>, you see a problem due to extra goals being generated.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

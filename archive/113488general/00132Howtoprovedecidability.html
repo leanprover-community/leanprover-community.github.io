@@ -1,0 +1,160 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/00132Howtoprovedecidability.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html">How to prove decidability?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184087098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184087098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184087098">Li Yao'an (Dec 23 2019 at 07:03)</a>:</h4>
+<p>I was reproving things about the natural numbers, when I thought it would be good to show that le (&lt;=) is decidable.<br>
+decidable is an inductive class constructed either by p or (not p), so supposing I construct a function f taking in two natural numbers a and b, and gives a proof of either <code>a &lt;= b</code> or <code>\not(a &lt;= b)</code>,  and additionally showed that f was decidable, then I could possibly show that &lt;= was decidable with some ite statement over another function g that tells us which statement we are trying to prove. But firstly, we would have to show g was decidable, and I can't seem to show that.</p>
+<p>How should I proceed to show the decidability of (a class of) statements?</p>
+<p>Edit: Now that I think of it, I'm not sure what the syntax of the statement I'm trying to prove is.</p>
+
+<a name="184088713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088713">Mario Carneiro (Dec 23 2019 at 07:50)</a>:</h4>
+<p>Certainly you can't prove decidability by case analysis. This is essentially assuming what you want to prove</p>
+
+<a name="184088721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088721">Mario Carneiro (Dec 23 2019 at 07:50)</a>:</h4>
+<p>The actual statement you want to prove is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;=</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="184088735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088735">Mario Carneiro (Dec 23 2019 at 07:51)</a>:</h4>
+<p>In the case of le on natural numbers, the proof goes by induction on one argument and cases on the other</p>
+
+<a name="184088786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088786">Mario Carneiro (Dec 23 2019 at 07:52)</a>:</h4>
+<p>You have to show that <code>0 &lt;= b</code> is true, <code>succ a &lt;= 0</code> is false, and <code>succ a &lt;= succ b</code> iff <code>a &lt;= b</code></p>
+
+<a name="184090659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184090659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184090659">Li Yao'an (Dec 23 2019 at 08:39)</a>:</h4>
+<p>Thanks for the reply; I am now less confused.</p>
+<p>On a theoretical note, suppose I had written the function f (inductively). Additionally, I prove that f either outputs a proof of <code> a  &lt;= b </code> or <code>\not a &lt;= b</code>. Is there any way to formalize the line of reasoning "f is computable and hence proves that <code> a &lt;= b </code> is decidable?</p>
+<p>On a more practical note, I tried to fill in the sorry for the statement you gave (I sorried out the details):</p>
+<div class="codehilite"><pre><span></span>instance decidable_le : decidable_rel ((≤) : nat -&gt; nat -&gt; Prop)
+|0 b := sorry
+|(succ a) 0 := sorry
+|(succ a) (succ b) :=
+begin
+   specialize decidable_le a b, cases decidable_le with h h, admit, admit
+end
+</pre></div>
+
+
+<p>but I'm getting "rec_fn_macro only allowed in meta definitions". What is this error?</p>
+
+<a name="184097927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184097927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184097927">Mario Carneiro (Dec 23 2019 at 11:15)</a>:</h4>
+<p>Are you sure? The following gives me no errors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">≤</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="bp">|</span><span class="mi">0</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">specialize</span> <span class="n">decidable_le</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">cases</span> <span class="n">decidable_le</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span> <span class="n">admit</span><span class="o">,</span> <span class="n">admit</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184145351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184145351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184145351">Li Yao'an (Dec 24 2019 at 01:55)</a>:</h4>
+<p>My bad, the error only seems to appear once I fill in the admits. Give me some time to generate a somewhat MWE. (I used lots of lemmas.)</p>
+
+<a name="184145892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184145892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184145892">Li Yao'an (Dec 24 2019 at 02:10)</a>:</h4>
+<p>Here's a code:</p>
+<div class="codehilite"><pre><span></span>namespace hidden
+
+inductive nat : Type
+|zero : nat
+|succ : nat → nat
+
+namespace nat
+
+constant le : nat → nat → Prop
+infix ` ≤ ` := le
+
+axiom p1 : ∀ b : nat, zero ≤ b
+axiom p2 : ∀ a : nat, ¬succ a ≤ zero
+axiom p3 : ∀ a b : nat, succ a ≤ succ b ↔ a ≤ b
+
+instance decidable_le : decidable_rel ((≤) : nat -&gt; nat -&gt; Prop) -- rec_fn_macro only allowed in meta definitions
+|zero b := begin apply is_true, exact p1 b end
+|(succ a) zero := begin apply is_false, exact p2 a end
+|(succ a) (succ b) :=
+begin
+  specialize decidable_le a b, cases decidable_le with h h,
+  apply is_false, rwa p3, apply is_true, rwa p3
+end
+
+end nat
+end hidden
+</pre></div>
+
+<a name="184162067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184162067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184162067">Kevin Buzzard (Dec 24 2019 at 10:26)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="184162640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184162640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184162640">Kevin Buzzard (Dec 24 2019 at 10:42)</a>:</h4>
+<p>Interesting! Changing <code>instance</code> to <code>theorem</code> (which is not what you want) makes the error go away.</p>
+
+<a name="184162744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184162744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184162744">Kevin Buzzard (Dec 24 2019 at 10:45)</a>:</h4>
+<p>It might be something to do with the fact that you're using constants. They get very little love here, nobody ever uses them (perhaps for reasons like this?)</p>
+
+<a name="184168679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184168679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184168679">Mario Carneiro (Dec 24 2019 at 13:08)</a>:</h4>
+<p>It has to do with the <code>noncomputable</code> markings associated with use of constants and axioms</p>
+
+<a name="184168693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184168693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184168693">Mario Carneiro (Dec 24 2019 at 13:08)</a>:</h4>
+<p>compare:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+
+<span class="kn">inductive</span> <span class="n">nat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span><span class="n">zero</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="bp">|</span><span class="n">succ</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span>
+
+<span class="kn">namespace</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">le</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">≤</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">le</span>
+
+<span class="kn">theorem</span> <span class="n">p1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">zero</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">p2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="bp">¬</span><span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">p3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">succ</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">≤</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="bp">|</span><span class="n">zero</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">is_true</span><span class="o">,</span> <span class="n">exact</span> <span class="n">p1</span> <span class="n">b</span> <span class="kn">end</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="n">zero</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">is_false</span><span class="o">,</span> <span class="n">exact</span> <span class="n">p2</span> <span class="n">a</span> <span class="kn">end</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">specialize</span> <span class="n">decidable_le</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">cases</span> <span class="n">decidable_le</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_false</span><span class="o">,</span> <span class="n">rwa</span> <span class="n">p3</span><span class="o">,</span> <span class="n">apply</span> <span class="n">is_true</span><span class="o">,</span> <span class="n">rwa</span> <span class="n">p3</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">nat</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="184238962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184238962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184238962">Li Yao'an (Dec 26 2019 at 01:50)</a>:</h4>
+<p>Thanks. It seems fixed now.</p>
+<p>Previously, in my second case, I proved p2 directly: since le a b was defined as <code> \exists x, a + x = b </code>, I used choice to pick an x and prove false. Changing this to cases resolves the computability issue and removes the error.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,148 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/99453gluingpresheaves.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html">gluing presheaves</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171569887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171569887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171569887">Scott Morrison (Jul 24 2019 at 00:59)</a>:</h4>
+<p>Sorry I haven't been participating in the great sheaf-hunt. I had a think while walking the dog this morning about the "high-brow" way to do gluing of (pre)sheaves, and came up with the following. (IANAAG, so this may all be nonsense...)</p>
+<p>Instead of thinking about the special case of gluing (pre)sheaves on a pair of open sets, I'd be more general, and try to construct colimits in the category of (pre)sheaved spaces. (This should avoid all the mucking about with open sets in open sets in open sets ...)</p>
+<p>Given a diagram <code>F : J \func (PresheafedSpace C)</code>, you can compose with the forgetful functor to <code>Top</code> and get a diagram of topological spaces. Take the colimit of this, and call the resulting space <code>X</code>. You can now pushforward the presheaves <code>(F.obj j).𝒪</code> to get presheaves on <code>X</code>, and indeed you ... get a diagram <code>F' : J \func (X.presheaf C)</code>. As long as <code>C</code> has limits, <code>X.presheaf C</code> automatically has limits, so we just take the limit of <code>F'</code> to define our final presheaf <code>O</code> on <code>X</code>.</p>
+<p>There's a cocone on <code>F</code> with tip <code>(X, O)</code>. Its <code>j</code> component is just the pair consisting of the inclusion of <code>(F.obj j).to_Top</code> into <code>X</code>, and the component of the limit cone for <code>F'</code>.</p>
+<p>Presumably this cocone is actually universal, but I didn't think about it!</p>
+<p>Finally, we better check that if we glue presheaves which are actually sheaves, we end up with a sheaf. The sheaf condition on <code>G : (opens X)^op \func C</code> says that <code>G</code> preserves certain limits. (In particular, limits of the "pairwise intersections" diagrams for a cover, but I think you can also <a href="https://mathoverflow.net/questions/23268/geometric-intuition-for-limits/80767#comment48292_23276" target="_blank" title="https://mathoverflow.net/questions/23268/geometric-intuition-for-limits/80767#comment48292_23276">get away</a> with saying it preserves limits over arbitrary filtered (not cofiltered!) diagrams in <code>(opens X)^op</code>; doesn't matter either way.) Now there's just a general fact that if you have a diagram of functors, which all preserve limits of a certain shape, then the limit of that diagram of functors also preserves limits of that shape (this part is not in mathlib yet, but should be pretty easy; first prove the Fubini theorem for limits?), and this gives the result.</p>
+
+<a name="171577764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171577764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171577764">Johan Commelin (Jul 24 2019 at 04:31)</a>:</h4>
+<p>I didn't manage to get a workable version of "sheaves are presheaves that preserve limits of a certain shape". That was causing me lots of pain last november/december... however, it clearly seems like a good theorem/def to have if we want to do sheaves on sites.</p>
+
+<a name="171821010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171821010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171821010">Scott Morrison (Jul 27 2019 at 00:16)</a>:</h4>
+<p>My last paragraph was inddeed wrong; while being a sheaf is about preserving certain limits, it's <em>not</em> about preserves limits of a certain shape. So while I think my sketch of gluing presheaves is fine (indeed, the construction, including all the data but missing some proofs, is at <a href="https://github.com/leanprover-community/mathlib/blob/sheaves/src/algebraic_geometry/presheafed_space/colimits.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaves/src/algebraic_geometry/presheafed_space/colimits.lean">https://github.com/leanprover-community/mathlib/blob/sheaves/src/algebraic_geometry/presheafed_space/colimits.lean</a>), it's still slightly more work to glue sheaves.</p>
+
+<a name="171821079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171821079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171821079">Scott Morrison (Jul 27 2019 at 00:18)</a>:</h4>
+<p>I suspect the best way to do that is to do sheafification first, which shows sheaves are a reflective subcategory of presheaves. Then a little more work would show sheafed-spaces are a reflective subcategory of presheafed-spaces, and then the general nonsense I proved recently about reflective subcategories would give you filtered colimits (in particular, pushouts) of sheafed-spaces.</p>
+
+<a name="172964904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964904">Scott Morrison (Aug 11 2019 at 11:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, I did a little more work on sheaves this afternoon. I haven't got to the interesting things (sheafification and gluing sheaves), but it seems to be going fairly smoothly so far. The only thing I've actually proved so far is that the pushforward of a sheaf is a sheaf.</p>
+
+<a name="172964907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964907">Scott Morrison (Aug 11 2019 at 11:21)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean">https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean</a></p>
+
+<a name="172964947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964947">Scott Morrison (Aug 11 2019 at 11:22)</a>:</h4>
+<p>The highlights are:</p>
+<div class="codehilite"><pre><span></span>def sheaf_condition := Π (c : cover.{v} X), preserves_limit c.diagram F
+
+/--
+A sheaf is a presheaf satisfying the sheaf condition.
+-/
+structure sheaf : Type (max (v+1) u) :=
+(F : X.presheaf C)
+(condition : F.sheaf_condition)
+
+/--
+Morphisms of sheaves are just morphisms of the underlying presheaves, so we
+transfer the category structure using `induced_category.category`.
+-/
+instance category_sheaf (X : Top.{v}) : category (sheaf.{v} C X) :=
+induced_category.category sheaf.F
+
+/--
+The pushforward of a sheaf is still a sheaf.
+-/
+def pushforward {X Y : Top.{v}} (f : X ⟶ Y) (ℱ : sheaf.{v} C X) : sheaf.{v} C Y :=
+{ F := f _* ℱ.F,
+  condition := λ c, by { dsimp [presheaf.pushforward], apply_instance } }
+</pre></div>
+
+<a name="172964955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964955">Scott Morrison (Aug 11 2019 at 11:23)</a>:</h4>
+<p>There are still a few underlying sorries in other files, but they are boring general things about preserving limits.</p>
+
+<a name="172965057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965057">Kevin Buzzard (Aug 11 2019 at 11:26)</a>:</h4>
+<p>It's great to hear it's going well so far! </p>
+<p>Ramon broke down the sheaf condition into two parts -- "locality" and "gluing", which for rings and groups boiled down to the assertion that to say a map was bijective was the same as saying it was injective and surjective. In general category-theoretic terms one probably cannot do this though.</p>
+
+<a name="172965664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965664">David Michael Roberts (Aug 11 2019 at 11:45)</a>:</h4>
+<p>Reminds me of the Grothendieck +-construction on presheaves that first constructs a separated presheaf from a presheaf, then a sheaf from a separated presheaf.</p>
+
+<a name="172965723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965723">Kevin Buzzard (Aug 11 2019 at 11:46)</a>:</h4>
+<p>Yes exactly; this is why I mentioned it. For Grothendieck the distinction was important in the construction of sheafification of a presheaf. On the other hand because a general isomorphism is more than a monomorphism which is an epimorphism I am slightly confused about what one should do in this generality.</p>
+
+<a name="174042077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174042077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174042077">Johan Commelin (Aug 24 2019 at 14:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Thanks for working on this! Any updates so far? I'm still hoping for some sort of synthesis with all the work done by <span class="user-mention" data-user-id="110064">@Kenny Lau</span>.<br>
+Kenny, do you plan on PRing your espace etale stuff?</p>
+
+<a name="174186548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174186548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174186548">Scott Morrison (Aug 27 2019 at 00:14)</a>:</h4>
+<p>No recent news, I haven’t had a lot of space for mathlib in the last two weeks. I made a fair bit of progress on the + construction, but haven’t returned to gluing. I don’t yet see an obstacle to doing gluing “properly”, i.e. with presheaves defined as functors <code>(open X)^\op \func C</code> and sheaves defined by the <code>preserves_limit</code> condition that is now fully defined in the <code>sheaves</code> branch.</p>
+
+<a name="174186555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174186555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174186555">Scott Morrison (Aug 27 2019 at 00:14)</a>:</h4>
+<p>It will just take some more work. :-)</p>
+
+<a name="174186589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174186589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174186589">Scott Morrison (Aug 27 2019 at 00:15)</a>:</h4>
+<p>I’d be happy, @JohanCommelin, if you’d have a look at the sheaf condition as written in that branch as see if you’re happy with it.</p>
+
+<a name="174214838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174214838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174214838">Johan Commelin (Aug 27 2019 at 10:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think it looks fine... can you prove that <code>yoneda Top</code> lands in sheaves? Or is that hard? There is almost no maths content in that statement.</p>
+
+<a name="174332165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174332165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174332165">Scott Morrison (Aug 28 2019 at 04:48)</a>:</h4>
+<p>You don't literally mean <code>yoneda Top</code>, I think. You mean something like <code>X.toTop.op ⋙ (yoneda Top)</code>, I think -- you want to start at <code>(opens X)^\op</code>, and end at <code>Type</code>. [ED: this is in mathlib as <code>presheaf_to_Top X T</code>, the presheaf of continuous functions on X with values in T.]</p>
+
+<a name="174332174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174332174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174332174">Scott Morrison (Aug 28 2019 at 04:49)</a>:</h4>
+<p>I think there should be exactly the real mathematical work of that statement: if you have a bunch of continuous functions on opens sets of X, that agree on the overlaps, then there exists a unique continuous function on the union that agrees with each of them.</p>
+
+<a name="174332251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174332251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174332251">Scott Morrison (Aug 28 2019 at 04:50)</a>:</h4>
+<p>I'm actually not sure if that's in mathlib. I'll look later, and if so hook it up to prove the sheaf condition for <code>presheaf_to_Top X T</code>.</p>
+
+<a name="174332254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174332254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174332254">Scott Morrison (Aug 28 2019 at 04:50)</a>:</h4>
+<p>If it's not in mathlib, I won't do it right away. :-)</p>
+
+<a name="174332361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174332361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174332361">Johan Commelin (Aug 28 2019 at 04:53)</a>:</h4>
+<p>Ok, I think <span class="user-mention" data-user-id="132603">@Calle Sönne</span> did the gluing of continuous functions at some point. I don't know if it ended up in mathlib.</p>
+
+<a name="174412089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174412089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174412089">Scott Morrison (Aug 29 2019 at 00:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="132603">@Calle Sönne</span>, do you have this code somewhere? It doesn't seem to have made it to mathlib: <a href="https://github.com/leanprover-community/mathlib/commits?author=callesonne" target="_blank" title="https://github.com/leanprover-community/mathlib/commits?author=callesonne">https://github.com/leanprover-community/mathlib/commits?author=callesonne</a></p>
+
+<a name="174779065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174779065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174779065">Calle Sönne (Sep 03 2019 at 11:26)</a>:</h4>
+<p>I dont recall working on that, maybe <span class="user-mention" data-user-id="132889">@Jean Lo</span> was working on it?</p>
+
+<a name="174779265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174779265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174779265">Jean Lo (Sep 03 2019 at 11:30)</a>:</h4>
+<p>yeah, I think that was me. I went on to be consumed by some other stuff, and did not put together a PR.</p>
+
+<a name="174779566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/174779566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#174779566">Jean Lo (Sep 03 2019 at 11:36)</a>:</h4>
+<p>unfortunately I'm currently away from home without my work computer, but here's a link to the discussion about gluing continuous functions: <a href="#narrow/stream/113489-new-members/topic/gluing.20functions" title="#narrow/stream/113489-new-members/topic/gluing.20functions">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/gluing.20functions</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

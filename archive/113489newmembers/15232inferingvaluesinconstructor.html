@@ -1,0 +1,79 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/15232inferingvaluesinconstructor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html">infering values in constructor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183211780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183211780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183211780">Sean B. (Dec 11 2019 at 23:07)</a>:</h4>
+<p>Hello,<br>
+I am a student who is learning lean through one of my classes as an introduction to function programming and proof assistants.  In one practice problem, we were asked to defined the simple predicate below:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">cool</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">cool_2</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">2</span>
+<span class="bp">|</span> <span class="n">cool_5</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">5</span>
+<span class="bp">|</span> <span class="n">cool_sum</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">cool</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">cool</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">cool</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">cool_prod</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">cool</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">cool</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">cool</span> <span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>We were then tasked to prove <code>cool 7</code>.  When creating this proof, I found some odd behavior that I do not understand.  In the statement...</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">7</span> <span class="o">:=</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_sum</span> <span class="mi">2</span> <span class="mi">5</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_2</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_5</span>
+</pre></div>
+
+
+<p>...lean assumes that the first two arguments should be 6 and 1 with respective proofs of the two.  Adding the <code>@</code> token before the constructor seems to remove this assumption.  Note, however, that the product constructor does not infer any values.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">10</span> <span class="o">:=</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_prod</span> <span class="mi">2</span> <span class="mi">5</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_2</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_5</span>
+</pre></div>
+
+
+<p>I went to my professor and he recommended me this forum.  If anyone has an idea on why lean assumes values for the <code>cool_sum</code> constructor, my professor and I would enjoy the information.</p>
+
+<a name="183218896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183218896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183218896">Chris Hughes (Dec 12 2019 at 00:56)</a>:</h4>
+<p>I think it's to do with the fact that <code>7</code> is notation for <code>bit1 (bit1 1)</code>, which itself is defined to be <code>1 + 1 + 1 + (1 + 1 + 1) + 1</code>, with brackets <code>(((1 + 1) + 1) + ((1 + 1) + 1)) + 1</code>. So it expects <code>6</code> and <code>1</code> because the first <code>+</code> adds <code>6</code> and <code>1</code>. If you try <code>8</code> it expects <code>4</code> and <code>4</code> for a similar reason.</p>
+
+<a name="183218946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183218946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183218946">Chris Hughes (Dec 12 2019 at 00:57)</a>:</h4>
+<p>This is a fix by the way </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">7</span> <span class="o">:=</span> <span class="o">(</span><span class="n">cool</span><span class="bp">.</span><span class="n">cool_sum</span> <span class="mi">2</span> <span class="mi">5</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_2</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_5</span> <span class="o">:</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="183219042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183219042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183219042">Kenny Lau (Dec 12 2019 at 00:58)</a>:</h4>
+<p>that's cool</p>
+
+<a name="183223083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183223083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183223083">Mario Carneiro (Dec 12 2019 at 02:20)</a>:</h4>
+<p>The <code>@</code> symbol before a constant is most known for making implicit arguments explicit so you can fill them in, but it also changes the elaboration strategy, from default to <code>simple</code>. The difference is that in the default mode, elaboration is performed from the outside in, matching the goal and elaborating the parts, while in simple mode it first elaborates the parts then unifies the result against the target.</p>
+<p>In default mode, since you are proving <code>cool 7</code> (which is <code>cool (6 + 1)</code> as Chris says), lean knows that <code>cool.cool_sum</code> has type <code>cool (?m1 + ?m2)</code> where <code>?m1</code> and <code>?m2</code> are yet to be determined, so it sets <code>?m1 := 6</code> and <code>?m2 := 1</code>, which then later fails because the first argument to <code>cool.cool_sum</code> is <code>?m1</code> and you have provided <code>2</code> instead of <code>6</code>.</p>
+<p>In simple mode, it first elaborates <code>2</code> (nat) and <code>5</code> (nat) and <code>cool.cool_2</code> (<code>cool 2</code>) and <code>cool.cool_5</code> (<code>cool 5</code>), then applies <code>cool.cool_sum</code> to this to get a proof of <code>cool (2 + 5)</code>. It then checks that this unifies with the target (<code>cool 7</code>) by doing a little computation to prove <code>2 + 5 = 7</code>,  and succeeds.</p>
+<p>Chris's trick is another way to make this work without using simple mode. The <code>(... : _)</code> signals to lean to forget the expected type, so in the first stage it doesn't know that the type is <code>cool 7</code>, so it doesn't guess <code>?m1 := 6</code> and <code>?m2 := 1</code> that leads to the earlier failure. It holds off on the guess until it sees the arguments, which means it ends up going through the same process as the simple elaboration, eventually finding out that the type of the whole term is <code>cool (2 + 5)</code>. The type ascription then checks this against the real answer, <code>cool 7</code>, resulting in the computation and success.</p>
+
+<a name="183229434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183229434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183229434">Johan Commelin (Dec 12 2019 at 05:08)</a>:</h4>
+<p>Wow! So this is actually a really well-designed exercise. Assuming that it was the point to explain how these elaboration strategies differ.</p>
+
+<a name="183265096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183265096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183265096">Kevin Sullivan (Dec 12 2019 at 14:43)</a>:</h4>
+<p>Thanks for these answers. I hate it when I can't explain to my students why they're seeing what they're seeing. So I sent Sean B. here. But I really do love it when my students teach me something. These are first and second year undergrads at UVa. Thanks, Sean, for bringing us this problem. By exploring a simple example you clearly uncovered an area of considerable complexity. (The problem was from a homework assignment in second year discrete math course at UVA that I'm teaching using Lean.)</p>
+
+<a name="183282961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183282961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183282961">Andrew Ashworth (Dec 12 2019 at 17:46)</a>:</h4>
+<p>Wahoowa! I wish I could've learned Lean when I was an undergrad :)</p>
+
+<a name="183291673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183291673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183291673">Kevin Buzzard (Dec 12 2019 at 19:16)</a>:</h4>
+<p>I'm in a room with about ten undergrads learning Lean :D</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,154 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/54969zeroversus0.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html">zero versus 0</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188934090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188934090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188934090">Shing Tak Lam (Feb 24 2020 at 15:08)</a>:</h4>
+<p>Hello, I'm just getting started using Lean, and I've been looking at the Natural Numbers game. I've copied the definitions over from the Github repository, but the behaviour seems to be different on my local version versus the online version.</p>
+<p>So for example for the first exercise in the Addition world, the goal on the online version is <code>0 + 0 = 0</code>, but on my local version is <code>0 + zero = zero</code>. I've defined <code>instance : has_zero mynat : ⟨mynat.zero⟩</code> like in the repository. I could obviously use <code>rw mynat_zero_eq_zero,</code>, but then it would be nice to know why and how to fix this, as a way to learn more about how Lean itself works. So is there a way for Lean to know (or for me to tell Lean) that <code>zero</code> and <code>0</code> are the same thing?</p>
+<p>Is this something that is defined custom for the Natural Numbers Game, as I see that some of the code in the repo <code>open lean</code>, or am I missing something?</p>
+<p>Thank you very much,</p>
+
+<a name="188937541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188937541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188937541">Kevin Buzzard (Feb 24 2020 at 15:47)</a>:</h4>
+<p>Yeah. What actually happens in the natural number game is that it isn't really honest Lean because honest Lean's induction tactic has this problem and i would constantly see this causing problems to students. So in the natural number game I change the induction tactic so that after it's applied, lean rewrites all the <code>zero</code>s to 0s</p>
+
+<a name="188938294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188938294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188938294">Kevin Buzzard (Feb 24 2020 at 15:55)</a>:</h4>
+<p>It will take me a while to remember the details, but <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/modded.lean#L70" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/modded.lean#L70">here</a> is an example of me defining a new tactic <code>induction'</code> which is "apply induction, and then run the simplifier" and <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/mynat/definition.lean#L23" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/mynat/definition.lean#L23">here</a> is where I tag that zero should be rewritten to 0. Finally <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/nat_num_game.lean#L51" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/nat_num_game.lean#L51">here</a> is where I tell Lean to use my induction tactic not the inbuilt one. Note that Rob Lewis did most of the technical work here.</p>
+
+<a name="188984870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188984870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188984870">Shing Tak Lam (Feb 25 2020 at 01:51)</a>:</h4>
+<p>Alright, I see. So if I'm just getting started with Lean would you suggest I just stick with <code>zero</code> in all of the proofs (I think the only numbers that come up are <code>0</code>, <code>1</code> and <code>2</code>, so not too many <code>succ</code>s needed)? Or should I try and bodge it so that it reflects the behaviour of the Natural Numbers Game? From what I've seen so far, using <code>0</code>, <code>1</code> and <code>2</code> seems to be more of an aesthetic decision, and functionally it (should) be the same. Obviously in the real world, Lean's <code>nat</code> would just be used, so this shouldn't be an issue anyways.</p>
+<p>Another difference I noticed is that on my local installation of lean, <code>simp</code> and <code>rw</code> seem to be able to close goals, so a <code>rw h</code> for example can be the last statement in a proof. But in the natural numbers game I'd need to end the proof with <code>refl</code>. Is this also intended as a difference between the two?</p>
+
+<a name="188986348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188986348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188986348">Scott Morrison (Feb 25 2020 at 02:25)</a>:</h4>
+<p>If you have<br>
+<code>@[simp] lemma mynat_zero_eq_zero : zero = 0 := rfl</code><br>
+then just calling <code>dsimp</code> should replace all your <code>zero</code>s with <code>0</code>s.</p>
+
+<a name="188990290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188990290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188990290">Shing Tak Lam (Feb 25 2020 at 04:19)</a>:</h4>
+<p>Alright I see, so <code>@[simp]</code> is an attribute to tell lean that it can use it for simplifying? If so, I've added the <code>@[simp]</code> attribute to <code>add_assoc</code> and <code>add_comm</code>, but the simplifier isn't able to solve a goal that only consists of <code>add_assoc</code> and <code>add_comm</code>. Does it matter that they are in different files? I've imported those files into my working file and they are all in the same namespace.</p>
+<p>The goal is</p>
+<div class="codehilite"><pre><span></span>a * t + b * t + (a + b) = a * t + a + (b * t + b)
+</pre></div>
+
+
+<p>My manual proof to solve it is:</p>
+<div class="codehilite"><pre><span></span>rw add_assoc, rw &lt;-add_assoc (b*t), rw add_comm (b*t), rw add_assoc (a), rw add_assoc (a*t)
+</pre></div>
+
+
+<p>But running <code>simp</code> gives me a new goal, which isn't any simpler than the original.</p>
+<div class="codehilite"><pre><span></span>a + (b * t + (b + a * t)) = a + (a * t + (b + b * t))
+</pre></div>
+
+
+<p>In the docs it says <code>simp</code> doesn't recognise <code>&lt;-</code>, however even if I do the parts with the <code>&lt;-</code> manually then use <code>simp</code></p>
+<div class="codehilite"><pre><span></span>rw add_assoc,rw &lt;-add_assoc (b*t), simp,
+</pre></div>
+
+
+<p>It still doesn't solve it, and generates a new goal which it should be able to solve with only <code>add_comm</code> and <code>add_assoc</code></p>
+<div class="codehilite"><pre><span></span>a * t + b * t + (a + b) = a * t + a + (b * t + b)
+</pre></div>
+
+
+<p>Another question, from looking at the docs, it says <code>dsimp</code> is similar to <code>simp</code>, except it uses definitional equalities only. So does that mean that <code>simp</code> uses them as well, or is it only <code>dsimp</code>?</p>
+
+<a name="188991328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188991328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188991328">Mario Carneiro (Feb 25 2020 at 04:46)</a>:</h4>
+<p>you should also simp with <code>add_left_comm</code></p>
+
+<a name="188991976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188991976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188991976">Shing Tak Lam (Feb 25 2020 at 05:03)</a>:</h4>
+<p>I see, thank you very much. After defining <code>add_left_comm</code> (It wasn't in the list of theorems on the left of the page), <code>simp</code> solved the goal. I guess it's time to go down the rabbit hole and find where that is defined in the Natural Numbers Game repo.</p>
+<p>Edit: Interestingly, searching for <code>left_comm</code> in the Natural Numbers Repo does not have any results...</p>
+
+<a name="188993369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188993369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188993369">Mario Carneiro (Feb 25 2020 at 05:43)</a>:</h4>
+<p>you can prove <code>add_left_comm</code> using the other two</p>
+
+<a name="188993894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188993894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188993894">Shing Tak Lam (Feb 25 2020 at 06:00)</a>:</h4>
+<p>I know, it's quite simple to prove using just <code>add_assoc</code> and <code>add_comm</code>. My comment about the Natural numbers game is that <code>simp</code> can solve it in the game, even though I can't seem to find <code>add_left_comm</code>defined in the game (at least not in the repo).</p>
+<p>I think what's happening is that there is more behind the scenes 'magic' (for the lack of a better word) in the Natural Numbers game than I thought.</p>
+
+<a name="188994365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188994365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188994365">Mario Carneiro (Feb 25 2020 at 06:14)</a>:</h4>
+<p>There was a recent move to remove the <code>@[simp]</code> attribute from <code>add_comm</code>, <code>add_assoc</code> and <code>add_left_comm</code>. Most likely this is not reflected in NNG</p>
+
+<a name="188994374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188994374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188994374">Mario Carneiro (Feb 25 2020 at 06:15)</a>:</h4>
+<p>I don't think NNG uses <code>simp</code> much</p>
+
+<a name="188995461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188995461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188995461">Shing Tak Lam (Feb 25 2020 at 06:47)</a>:</h4>
+<p>I think it might be namespaces? If I understand this correctly (VSCode go to definition on <code>add_comm</code> isn't very useful), <code>add_comm</code> is defined in by lean, but as all of the theorems are in the same namespace (<code>namespace mynat</code>) for the NNG, there is a <code>mynat.add_comm</code>. So when a theorem uses <code>rw add_comm</code> in the NNG it would use <code>mynat.add_comm</code> and not the one in lean's library. So changes in the library shouldn't change the NNG.</p>
+<p>But then none of the <code>theorem</code>s are tagged with <code>@[simp]</code> in the repo... So now I'm not sure anymore. I mean I have it working on my end now, so I should probably focus my effort on completing the game before (attempting and failing at) reverse engineering the NNG.</p>
+<p><code>simp</code> is often useful as a final step in the NNG, when the goal just requires commutativity/associativity to solve. It's not strictly required but it's great as a quality of life thing.</p>
+
+<a name="189001740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189001740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189001740">Kevin Buzzard (Feb 25 2020 at 09:03)</a>:</h4>
+<p>The natural number game is a standalone thing. I decided that I wanted users to see 0 and never <code>zero</code> so I made it so that users never see <code>zero</code>. In general the rule is that you should decide on one "canonical form" for things and try and stick to it. In Lean and mathlib they also decided on 0 over zero but you can decide what you want. If you're using mathlib it's probably best to stick with their conventions but I am unclear what you're doing. If you're defining your own natural numbers then you can use whatever conventions you like but it's best to be consistent. </p>
+<p>The reason you see zero when using the <code>induction</code> tactic on Lean's naturals in Lean is a technical one, due to the default induction tactic always using the exact constructors used when defining the type, and you can't use 0 when defining the type.</p>
+<p>Yes I also changed the behaviour of rewrite because I felt that beginner users were confused by its ability to close refl goals automatically. Again this is a one-off design decision based on my target audience. In general it's much more convenient to have rw closing refl goals once you know what you're doing.</p>
+<p>Simp is complicated, it's not merely a matter of "if I tell it all the lemmas then it will figure out how to apply them in exactly the right order". Simp works best with lemmas for which the right hand side of the equality is simpler than the left hand side. Neither associativity nor commutativity have this property. <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/game/world3/level9.lean#L37" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/game/world3/level9.lean#L37">here</a> is where I tag those lemmas with <code>simp</code> -- I don't do it when I define them, I do it all at once when we have all three.</p>
+
+<a name="189002032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002032">Donald Sebastian Leung (Feb 25 2020 at 09:08)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/zero.20versus.200/near/189001740" title="#narrow/stream/113489-new-members/topic/zero.20versus.200/near/189001740">said</a>:</p>
+<blockquote>
+<p>The natural number game is a standalone thing. I decided that I wanted users to see 0 and never <code>zero</code> so I made it so that users never see <code>zero</code>. In general the rule is that you should decide on one "canonical form" for things and try and stick to it. In Lean and mathlib they also decided on 0 over zero but you can decide what you want. If you're using mathlib it's probably best to stick with their conventions but I am unclear what you're doing. If you're defining your own natural numbers then you can use whatever conventions you like but it's best to be consistent. </p>
+<p>The reason you see zero is a technical one, due to the default induction tactic always using the exact constructors used when defining the type, and you can't use 0 when defining the type.</p>
+<p>Yes I also changed the behaviour of rewrite because I felt that beginner users were confused by its ability to close refl goals automatically. Again this is a one-off design decision based on my target audience. In general it's much more convenient to have rw closing refl goals once you know what you're doing.</p>
+<p>Simp is complicated, it's not merely a matter of "if I tell it all the lemmas then it will figure out how to apply them in exactly the right order". Simp works best with lemmas for which the right hand side of the equality is simpler than the left hand side. Neither associativity nor commutativity have this property.</p>
+</blockquote>
+<p>Wow, I didn't realize that you tweaked the behavior of certain fundamental tactics like <code>rw</code> and <code>simp</code> even after having gone through TPIL and got the chance to use <code>rw</code>/<code>simp</code> and other things as-is. This is very interesting ...</p>
+
+<a name="189002117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002117">Kevin Buzzard (Feb 25 2020 at 09:09)</a>:</h4>
+<p>There is term mode and tactic mode and even something called conv mode. Rob Lewis and Simon Hudon showed me how to write my own "mode". All the <code>begin end</code> blocks in the natural number game are in a slightly hacked tactic mode, that's why if you look at the code they all start <code>begin [nat_num_game]</code></p>
+
+<a name="189002220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002220">Donald Sebastian Leung (Feb 25 2020 at 09:11)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/zero.20versus.200/near/189002117" title="#narrow/stream/113489-new-members/topic/zero.20versus.200/near/189002117">said</a>:</p>
+<blockquote>
+<p>There is term mode and tactic mode and even something called conv mode. Rob Lewis and Simon Hudon showed me how to write my own "mode". All the <code>begin end</code> blocks in the natural number game are in a slightly hacked tactic mode, that's why if you look at the code they all start <code>begin [nat_num_game]</code></p>
+</blockquote>
+<p>Guess I just learned something new today <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span></p>
+
+<a name="189002275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002275">Patrick Massot (Feb 25 2020 at 09:12)</a>:</h4>
+<p>Technically term mode and <code>nat_num_game</code> mode have not much in common.</p>
+
+<a name="189002639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002639">Shing Tak Lam (Feb 25 2020 at 09:18)</a>:</h4>
+<p>Alright I see. Having thought about it a bit more, would it be fair to say that what <code>simp</code> does is (kind of in a hand wavy way) look through lemmas tagged with<code>@[simp]</code>, see if the LHS match the goal. If so, then apply it. Then repeat. When nothing can be applied then stop. </p>
+<p>If that is the case, then it would make sense for associativity/commutativity to be not very good for this, as it wouldn't have much of a reduction in complexity of the expression. So then using just <code>assoc</code> and <code>comm</code> for <code>simp</code> would be akin to a brute force (depth/breadth first) search with different combinations of <code>assoc</code> and <code>comm</code>?</p>
+<p>Then that makes sense with the comment above talking about how the <code>simp</code> attribute was removed for <code>add_comm</code>, <code>add_assoc</code>.</p>
+
+<a name="189002663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002663">Kevin Buzzard (Feb 25 2020 at 09:18)</a>:</h4>
+<p>It <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/modded.lean#L55-L82" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/modded.lean#L55-L82">looks like</a> I change <code>rw</code>, <code>use</code>, <code>induction</code> and <code>cases</code>. The <code>symmetry'</code> tactic (a modified <code>symmetry</code> that also works on hypotheses) is already in mathlib. <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/nat_num_game.lean#L10" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/nat_num_game.lean#L10">Here</a> is where I tell Lean to let tactic X in my mode equal the usual tactic X, for X not in those 5 cases, and <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/nat_num_game.lean#L49-L66" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/tactic/nat_num_game.lean#L49-L66">here</a> is where I insert my modified tactics.</p>
+
+<a name="189002821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/189002821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#189002821">Kevin Buzzard (Feb 25 2020 at 09:21)</a>:</h4>
+<p>I am not an expert in the simplifier. But most simp lemmas are of the form (thing) = (slightly simpler thing), or (thing) &lt;-&gt; (slightly simpler thing). The simplifier then knows what to do -- try and make stuff simpler. The question is whether you want the simplifier to <em>also</em> be able to solve goals of the form <code>a+b+c+d+e=(d+(b+a)+(c+e))</code>. It can, but there might be some trickery going on behind the scenes to make this happen. I think there's actually a tactic <code>ac_refl</code> whose job it is to specifically solve goals like this. If you're in a ring or a semiring, then <code>ring</code> will also solve these I think.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

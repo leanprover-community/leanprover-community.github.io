@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06544Anyreasonwhyreadingstdoutshouldfail.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06544Anyreasonwhyreadingstdoutshouldfail.html">Any reason why reading stdout should fail?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182622543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20reason%20why%20reading%20stdout%20should%20fail%3F/near/182622543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06544Anyreasonwhyreadingstdoutshouldfail.html#182622543">Daniel Donnelly (Dec 05 2019 at 02:40)</a>:</h4>
+<div class="codehilite"><pre><span></span>        elif self.state == self.AwaitingResponse:
+            for line in self._proc.stdout:
+               self.check_pause()
+               json = JSON.loads(line)
+               self.receive_queue.append(json)
+            self.state = self.ProcessingResponse
+</pre></div>
+
+
+<p>This grabs the first few lines but on the last line the thread the above is running in crashes because of the read of stdout.  No error is presented in my debugger.</p>
+<p>I'm connecting the process like this:</p>
+<div class="codehilite"><pre><span></span>  def connect_to_server(self):
+      exec = self.lean_executable
+      self._proc = subprocess.Popen([exec, &quot;-j0&quot;, &quot;--server&quot;],
+                                      stdin =subprocess.PIPE,
+                                      stdout=subprocess.PIPE,
+                                      stderr=subprocess.PIPE,
+                                      universal_newlines=True,
+                                      bufsize=1, env={&#39;LEAN_PATH&#39;: self.lean_folder})
+      self.state = self.ServerRunning
+</pre></div>
+
+
+<p>Also doing <code>stdout.readlines()</code> will crash the process as well as <code>stdout.read()</code> or <code>stdout.readline()</code>'ing to the end.</p>
+
+<a name="182623218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20reason%20why%20reading%20stdout%20should%20fail%3F/near/182623218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06544Anyreasonwhyreadingstdoutshouldfail.html#182623218">Daniel Donnelly (Dec 05 2019 at 02:58)</a>:</h4>
+<p>The solution is to use <code>communicate()</code>:</p>
+<div class="codehilite"><pre><span></span>            stdout, stderr = self._proc.communicate()
+            print(stdout)
+</pre></div>
+
+
+<p>Process doesn't crash when you do that.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

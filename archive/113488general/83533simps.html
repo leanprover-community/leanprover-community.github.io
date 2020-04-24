@@ -1,0 +1,207 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/83533simps.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html">simps</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176768317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176768317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176768317">Johan Commelin (Sep 27 2019 at 17:44)</a>:</h4>
+<p>Is there some way to ask <code>simps</code> which lemmas it has added?</p>
+
+<a name="176772911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176772911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176772911">Floris van Doorn (Sep 27 2019 at 18:32)</a>:</h4>
+<p>No. Currently the best methods are <code>#print prefix</code> (which will give way too much if your namespace is big) or autocompletion.</p>
+<p>Do you want a <code>@[simps?]</code> which also prints which declarations it has added?</p>
+
+<a name="176780186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176780186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176780186">Johan Commelin (Sep 27 2019 at 19:49)</a>:</h4>
+<p><code>@[simps?]</code> seems like a nice feature.</p>
+
+<a name="176782024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176782024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176782024">Simon Hudon (Sep 27 2019 at 20:09)</a>:</h4>
+<p>I think I would rather go for a <code>#print</code>-like command. Attributes usually do not have such options. On the other hand, if people know the options for <code>#print</code>, a similar command would mesh better with what they already know</p>
+
+<a name="176784396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176784396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176784396">Floris van Doorn (Sep 27 2019 at 20:40)</a>:</h4>
+<p><code>@[simps?]</code> should never show up in the final version of a file. <br>
+It is probably both the easiest write in a file (just adding a question mark to an attribute you already have) and to implement (since I can just let my tactics return some information)</p>
+
+<a name="176786968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176786968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176786968">Simon Hudon (Sep 27 2019 at 21:18)</a>:</h4>
+<p>And <code>#print</code> should never appear either. I'm just thinking of the workflow of using Lean. I think it's better to aim for a consistent way of using it. That makes learning the tool and the language much easier. To me, it goes in the column of keeping arbitrary complexity down</p>
+
+<a name="176787031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176787031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176787031">Floris van Doorn (Sep 27 2019 at 21:19)</a>:</h4>
+<p>A lot of tactics give extra information when adding <code>?</code>, so it's pretty similar to that (maybe more attributes should print debug info when <code>?</code> is added).</p>
+
+<a name="176787745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/176787745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#176787745">Simon Hudon (Sep 27 2019 at 21:29)</a>:</h4>
+<p>It is a common convention for tactics but not attributes. I think I would support it if the <code>?</code> option printed more than just a list of declarations added to the environment. Maybe some information about the tactics using the attribute for instance.</p>
+
+<a name="177019183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177019183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177019183">Scott Morrison (Oct 01 2019 at 03:55)</a>:</h4>
+<p>I've been away from zulip for a few days, and just came here specifically to ask for <code>@[simps?]</code>, and I'm very glad to have been pre-empted.</p>
+
+<a name="177022326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177022326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177022326">Scott Morrison (Oct 01 2019 at 04:30)</a>:</h4>
+<p>Also --- I noticed <code>@[simps]</code> fails if the definition uses a <code>let</code>. Not super important.</p>
+
+<a name="177022661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177022661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177022661">Reid Barton (Oct 01 2019 at 04:40)</a>:</h4>
+<p>Oh, you might not have seen--I have a diff with a lot of <code>simps</code> for category theory, which I haven't PRed yet</p>
+
+<a name="177022934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177022934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177022934">Scott Morrison (Oct 01 2019 at 04:48)</a>:</h4>
+<p>Oops, okay, I didn't see that.</p>
+
+<a name="177022940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177022940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177022940">Scott Morrison (Oct 01 2019 at 04:49)</a>:</h4>
+<p>Where did you get to?</p>
+
+<a name="177022999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177022999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177022999">Scott Morrison (Oct 01 2019 at 04:50)</a>:</h4>
+<p>I ran into one problem in <code>category_theory/products/associator.lean</code>, where <code>@[simps]</code> on <code>associator</code> and <code>inverse_associator</code> didn't seem to have the desired effect. Not quite sure why.</p>
+
+<a name="177023019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177023019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177023019">Scott Morrison (Oct 01 2019 at 04:50)</a>:</h4>
+<p>I'll stop in that case, and put up what I did so far.</p>
+
+<a name="177062429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177062429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177062429">Floris van Doorn (Oct 01 2019 at 14:48)</a>:</h4>
+<blockquote>
+<p>Also --- I noticed <code>@[simps]</code> fails if the definition uses a <code>let</code>. Not super important.</p>
+</blockquote>
+<p>I did not think about <code>let</code> expressions. What is the example in the library where it fails.</p>
+
+<a name="177063024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177063024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177063024">Floris van Doorn (Oct 01 2019 at 14:54)</a>:</h4>
+<blockquote>
+<p>I ran into one problem in <code>category_theory/products/associator.lean</code>, where <code>@[simps]</code> on <code>associator</code> and <code>inverse_associator</code> didn't seem to have the desired effect. Not quite sure why.</p>
+</blockquote>
+<p>It is currently the expected behavior that <code>@[simps]</code> produces different lemmas for this. <code>@[simps]</code> has no idea which structures you want to "go into" and which structures you don't, so currently it creates <code>associator_obj_fst</code>, <code>associator_obj_snd_fst</code> and <code>associator_obj_snd_snd</code> (and same for <code>map</code>). <br>
+At some point, you might be able to write <code>@[simps associator_obj associator_map]</code> to get your desired output, but that is currently not the case. For now you probably shouldn't use <code>@[simps]</code> on this declaration. If you have an algorithmic method of deciding when to not "go into" a structure, let me know.</p>
+
+<a name="177121149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177121149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177121149">Scott Morrison (Oct 02 2019 at 04:40)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Also --- I noticed <code>@[simps]</code> fails if the definition uses a <code>let</code>. Not super important.</p>
+</blockquote>
+<p>I did not think about <code>let</code> expressions. What is the example in the library where it fails.</p>
+</blockquote>
+<p>In <a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/limits/cones.lean#L392" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/limits/cones.lean#L392">cones.lean</a>:</p>
+<div class="codehilite"><pre><span></span>def map_cone_inv [is_equivalence H]
+  (c : cone (F ⋙ H)) : cone F :=
+let t := (inv H).map_cone c in
+let α : (F ⋙ H) ⋙ inv H ⟶ F :=
+  ((whisker_left F (is_equivalence.unit_iso H).inv) : F ⋙ (H ⋙ inv H) ⟶ _) ≫ (functor.right_unitor _).hom in
+{ X := t.X,
+  π := ((category_theory.cones J C).map α).app (op t.X) t.π }
+</pre></div>
+
+<a name="177121192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177121192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177121192">Scott Morrison (Oct 02 2019 at 04:42)</a>:</h4>
+<p>Thanks for the explanation in the associator case. I agree it's not obvious what to do here.</p>
+
+<a name="177431036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177431036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177431036">Floris van Doorn (Oct 05 2019 at 20:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Of course, in this case, I won't be able to generate the lemma <code>map_cone_inv_X</code> as currently stated, because that lemma unfolds some definitions. I could probably generate a lemma like the following:</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="n">map_cone_inv</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span> <span class="bp">=</span> <span class="o">((</span><span class="n">inv</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="n">map_cone</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span>
+</pre></div>
+
+
+<p>Do we sometimes want to keep the <code>let</code> expression, like this:</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="n">map_cone_inv</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span> <span class="bp">=</span> <span class="o">(</span><span class="k">let</span> <span class="n">t</span> <span class="o">:=</span> <span class="o">(</span><span class="n">inv</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="n">map_cone</span> <span class="n">c</span> <span class="k">in</span> <span class="n">t</span><span class="bp">.</span><span class="n">X</span><span class="o">)</span>
+</pre></div>
+
+<a name="179280505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179280505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179280505">Floris van Doorn (Oct 28 2019 at 22:01)</a>:</h4>
+<blockquote>
+<p>Also --- I noticed <code>@[simps]</code> fails if the definition uses a <code>let</code>. Not super important.</p>
+</blockquote>
+<p>Fixed in <a href="https://github.com/leanprover-community/mathlib/issues/1626" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1626">#1626</a></p>
+
+<a name="179297052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179297052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179297052">Floris van Doorn (Oct 29 2019 at 03:20)</a>:</h4>
+<p>PR <a href="https://github.com/leanprover-community/mathlib/issues/1630" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1630">#1630</a> allows us to use <code>simps</code> for functors on product categories.</p>
+
+<a name="179297374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179297374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179297374">Floris van Doorn (Oct 29 2019 at 03:29)</a>:</h4>
+<p>I also tried to make <code>simps</code> useful for new <code>category</code> instances. I added an option to shorten the name (so that we generate the name <code>my_category_hom</code> instead of <code>my_category_to_category_struct_to_has_hom_hom</code>). Then I realized that there is a bigger problem: the simp-lemmas you wrote by hand use things like <code>my_category.to_category_struct</code>, but the automatically generated lemmas use the definiens of <code>my_category.to_category_struct</code>. It might be tricky to fold these definitions in.</p>
+
+<a name="179298047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179298047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179298047">Floris van Doorn (Oct 29 2019 at 03:47)</a>:</h4>
+<p>Is there a reason that <code>whisker_left</code> and <code>whisker_right</code> are defined as projections of <code>whiskering_left</code>/<code>whiskering_right</code>? The following feels more natural to me: (not only because we can use <code>@[simps]</code>, but also because it's natural to factor a field out of the definition, if you're going to give it a name anyway)</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+          <span class="o">{</span><span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒟</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₂</span><span class="o">}</span> <span class="n">D</span><span class="o">]</span>
+          <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">[</span><span class="n">ℰ</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₃</span><span class="o">}</span> <span class="n">E</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span> <span class="err">𝒟</span> <span class="n">ℰ</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="n">def</span> <span class="n">whisker_left</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">G</span> <span class="err">⟶</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="err">⋙</span> <span class="n">G</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">F</span> <span class="err">⋙</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">c</span><span class="o">),</span>
+  <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">intros</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">functor</span><span class="bp">.</span><span class="n">comp_map</span><span class="o">,</span> <span class="n">functor</span><span class="bp">.</span><span class="n">comp_map</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="n">def</span> <span class="n">whisker_right</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">}</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">G</span> <span class="err">⟶</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">D</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">G</span> <span class="err">⋙</span> <span class="n">F</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">H</span> <span class="err">⋙</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">α</span><span class="bp">.</span><span class="n">app</span> <span class="n">c</span><span class="o">),</span>
+  <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">intros</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="bp">;</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">functor</span><span class="bp">.</span><span class="n">comp_map</span><span class="o">,</span> <span class="n">functor</span><span class="bp">.</span><span class="n">comp_map</span><span class="o">,</span> <span class="err">←</span><span class="n">F</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span> <span class="err">←</span><span class="n">F</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="n">D</span> <span class="n">E</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="n">def</span> <span class="n">whiskering_left</span> <span class="o">:</span> <span class="o">(</span><span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="err">⥤</span> <span class="o">((</span><span class="n">D</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">)</span> <span class="err">⥤</span> <span class="o">(</span><span class="n">C</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">F</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">G</span><span class="o">,</span> <span class="n">F</span> <span class="err">⋙</span> <span class="n">G</span><span class="o">,</span>
+    <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">G</span> <span class="n">H</span> <span class="n">α</span><span class="o">,</span> <span class="n">whisker_left</span> <span class="n">F</span> <span class="n">α</span> <span class="o">},</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">F</span> <span class="n">G</span> <span class="n">τ</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span> <span class="n">H</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">τ</span><span class="bp">.</span><span class="n">app</span> <span class="n">c</span><span class="o">),</span>
+      <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">dsimp</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">H</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span> <span class="err">←</span><span class="n">H</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span> <span class="err">←</span><span class="n">τ</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="kn">end</span> <span class="o">},</span>
+    <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">ext1</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">f</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="kn">end</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="n">def</span> <span class="n">whiskering_right</span> <span class="o">:</span> <span class="o">(</span><span class="n">D</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">)</span> <span class="err">⥤</span> <span class="o">((</span><span class="n">C</span> <span class="err">⥤</span> <span class="n">D</span><span class="o">)</span> <span class="err">⥤</span> <span class="o">(</span><span class="n">C</span> <span class="err">⥤</span> <span class="n">E</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">F</span><span class="o">,</span> <span class="n">F</span> <span class="err">⋙</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">α</span><span class="o">,</span> <span class="n">whisker_right</span> <span class="n">α</span> <span class="n">H</span> <span class="o">},</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">G</span> <span class="n">H</span> <span class="n">τ</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">F</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span> <span class="n">τ</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">c</span><span class="o">),</span>
+      <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">dsimp</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">τ</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="kn">end</span> <span class="o">},</span>
+    <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span> <span class="n">ext1</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">nat_trans</span><span class="bp">.</span><span class="n">naturality</span><span class="o">]</span> <span class="kn">end</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="n">D</span> <span class="n">E</span><span class="o">}</span>
+</pre></div>
+
+<a name="179298411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179298411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179298411">Floris van Doorn (Oct 29 2019 at 03:58)</a>:</h4>
+<p>One thing which I might add in the future is to automatically generate lemmas like <code>cone_of_cocone_left_op_π_app</code> for <code>cone_of_cocone_left_op</code> (in <code>category_theory.limits.cones</code>). <br>
+Currently, if you write <code>attribute [simps π_app] cone_of_cocone_left_op</code> then when the tactic reaches the <code>app</code> field, it fails. This is because it needs <code>cone_of_cocone_left_op.π</code> to be a constructor to "look into". Instead, I can just apply <code>app</code> to both the LHS and the RHS, and then call <code>simp</code> on the RHS to generate the lemma.<br>
+This should automatically generate <code>cone_of_cocone_left_op_π_app</code>.</p>
+
+<a name="179298536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/179298536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#179298536">Floris van Doorn (Oct 29 2019 at 04:02)</a>:</h4>
+<p>Oh, I now see <a href="https://github.com/leanprover-community/mathlib/issues/1613" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1613">#1613</a>. That answers my question 2 messages ago.</p>
+
+<a name="191698174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/191698174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#191698174">Yury G. Kudryashov (Mar 25 2020 at 03:25)</a>:</h4>
+<p>Can I somehow query the list of lemmas generated by <code>simps</code>? Or print all lemmas in a namespace?</p>
+
+<a name="191698254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/191698254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#191698254">Yury G. Kudryashov (Mar 25 2020 at 03:27)</a>:</h4>
+<p>Already guessed name in my case</p>
+
+<a name="191708166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/191708166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#191708166">Bryan Gin-ge Chen (Mar 25 2020 at 07:38)</a>:</h4>
+<p>Do you mean <code>#print prefix your_namespace</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

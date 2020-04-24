@@ -1,0 +1,160 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/74349provingequalityofstructures.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html">proving equality of structures</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="126644596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126644596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126644596">Reid Barton (May 16 2018 at 13:18)</a>:</h4>
+<p>Is there a tactic or something that's like <code>apply subtype.eq</code>, but works for a general structure? Or do I have to write down the equality lemma manually?</p>
+
+<a name="126644607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126644607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126644607">Kenny Lau (May 16 2018 at 13:19)</a>:</h4>
+<p><code>congr</code>, which doesn't always work</p>
+
+<a name="126644746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126644746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126644746">Reid Barton (May 16 2018 at 13:22)</a>:</h4>
+<p>I thought about <code>congr</code>, but my goal is literally <code>e1 = e2</code> and <code>congr</code> made no progress. Somehow I need to eta expand each side first, and then apply <code>congr</code>.</p>
+
+<a name="126646065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126646065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126646065">Kevin Buzzard (May 16 2018 at 13:53)</a>:</h4>
+<p>From the changelog:</p>
+
+<a name="126646068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126646068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126646068">Kevin Buzzard (May 16 2018 at 13:53)</a>:</h4>
+<p>"simp now reduces equalities c a_1 ... a_n = c b_1 ... b_n to a_1 = b_1 /\ ... /\ a_n = b_n if c is a constructor. This feature can be disabled using simp {constructor_eq := ff}"</p>
+
+<a name="126646116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126646116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126646116">Kevin Buzzard (May 16 2018 at 13:54)</a>:</h4>
+<p>of course, simp might do other things as well...</p>
+
+<a name="126654166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126654166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126654166">Nicholas Scheel (May 16 2018 at 16:59)</a>:</h4>
+<p>hm I asked a similar question a while ago, but it was about a lemma not a tactic: <a href="#narrow/stream/113488-general/subject/structure.20equality.20from.20parts/near/124033713" title="#narrow/stream/113488-general/subject/structure.20equality.20from.20parts/near/124033713">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/structure.20equality.20from.20parts/near/124033713</a></p>
+
+<a name="126654471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126654471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126654471">Reid Barton (May 16 2018 at 17:05)</a>:</h4>
+<p>Yes, same goal. I managed to write my lemma by copying <code>subtype.eq</code> very carefully.</p>
+
+<a name="126674624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126674624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126674624">Scott Morrison (May 17 2018 at 01:08)</a>:</h4>
+<p>Someone (yikes, I've forgotten who, and my copy doesn't record the name) wrote for me a tactic called <code>congr_struct</code> that sometimes is useful for proving equalities of structures. In the presence of fields with dependencies on earlier fields it create new <code>heq</code> goals, which isn't always what you want.</p>
+
+<a name="126674631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126674631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126674631">Scott Morrison (May 17 2018 at 01:08)</a>:</h4>
+<p>There's a copy at &lt;<a href="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/congr_struct.lean" target="_blank" title="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/congr_struct.lean">https://github.com/semorrison/lean-tidy/blob/master/src/tidy/congr_struct.lean</a>&gt; (you can just remove the import if you want to steal a copy).</p>
+
+<a name="126674640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126674640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126674640">Scott Morrison (May 17 2018 at 01:09)</a>:</h4>
+<p>If anyone wants it I can PR it into mathlib. I'm not actually using it anywhere myself at the moment.</p>
+
+<a name="126674691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126674691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126674691">Scott Morrison (May 17 2018 at 01:10)</a>:</h4>
+<p>I end up writing my own lemmas, e.g. of the form</p>
+<div class="codehilite"><pre><span></span>structure NaturalTransformation (F G : C ↝ D) : Type (max (u+1) v) :=
+  (components: Π X : C, (F +&gt; X) ⟶ (G +&gt; X))
+  (naturality: ∀ {X Y : C} (f : X ⟶ Y), (F &amp;&gt; f) ≫ (components Y) = (components X) ≫ (G &amp;&gt; f))
+
+infixr ` ⟹ `:50  := NaturalTransformation
+
+lemma NaturalTransformations_componentwise_equal
+  (α β : F ⟹ G)
+  (w : ∀ X : C, α.components X = β.components X) : α = β :=
+  begin
+    induction α with α_components α_naturality,
+    induction β with β_components β_naturality,
+    have hc : α_components = β_components := funext w,
+    subst hc
+  end
+</pre></div>
+
+<a name="126674692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126674692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126674692">Scott Morrison (May 17 2018 at 01:10)</a>:</h4>
+<p>(and I have lots of these, unfortunately)</p>
+
+<a name="126676097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126676097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126676097">Mario Carneiro (May 17 2018 at 02:02)</a>:</h4>
+<p>Mathlib is calling these lemmas "extensionality" theorems, for use with Simon's <code>ext</code> tactic. The fastest way to prove them is to case on both structures, then apply <code>congr</code> and other extensionality theorems to the resulting goals</p>
+
+<a name="126676208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126676208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126676208">Mario Carneiro (May 17 2018 at 02:07)</a>:</h4>
+<p>I don't have the necessary stuff to test your example, but I think it is possible to have a proof that looks something like <code>by cases α; cases β; congr; exact funext w</code></p>
+
+<a name="126679010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126679010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#126679010">Scott Morrison (May 17 2018 at 03:51)</a>:</h4>
+<p>Yes, that proof works too.</p>
+
+<a name="162712910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162712910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162712910">Kevin Buzzard (Apr 06 2019 at 18:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> thanks for refactoring my unbundled presheaves of types code; whilst you no longer reduce the length of what I write by a factor of 10, you still input some new ideas which I can learn from. Here's something I picked up. I am interested in proving equalities of structures, i.e. writing extensionality lemmas (I'm adding to an old thread, I thought it might be a way of making things more coherent). I had thought that Lean generated lemmas which did these things for me. But I learnt from your refactor that Lean does not always generate the best ones. Here's a concrete example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">structure</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">fs</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span><span class="o">)</span> <span class="c1">-- this is a subsingleton but not a prop</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">s</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">fs</span> <span class="bp">==</span> <span class="n">y</span><span class="bp">.</span><span class="n">fs</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">foo</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span> <span class="c1">-- auto-generated lemmas FTW</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hs</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+
+<span class="c1">-- but hf is not needed!</span>
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext_better1</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">fs</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">ft</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">t</span><span class="o">):</span>
+<span class="n">foo</span><span class="bp">.</span><span class="n">mk</span> <span class="n">s</span> <span class="n">fs</span> <span class="bp">=</span> <span class="n">foo</span><span class="bp">.</span><span class="n">mk</span> <span class="n">t</span> <span class="n">ft</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">congr</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hs</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">ext_better2</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">s</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hs</span><span class="o">,</span> <span class="c1">-- what does this even do?</span>
+  <span class="n">congr</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Lean basically generated the first proof automatically. But the heq can be avoided. There are two ways of avoiding it, both of which I demonstrate here. The first is a direct application of <code>congr</code>. The second does cases on an equality! What is going on there? I don't understand what happens. Hypothesis <code>hs</code> changes from</p>
+<div class="codehilite"><pre><span></span>hs : {s := x_s, fs := x_fs}.s = {s := y_s, fs := y_fs}.s
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span>hs : {s := x_s, fs := x_fs}.s = {s := x_s, fs := y_fs}.s
+</pre></div>
+
+
+<p>One of those structures doesn't even look type correct to to me. Oh -- wait -- the <em>type</em> of <code>y_fs</code> changes! So it is type correct! The cases is doing something magic. What is going on?</p>
+<p>Side question: which ext lemma is the best one to prove? The one with the structures or the one with the components? Or should one prove both?</p>
+
+<a name="162713077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162713077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162713077">Johan Commelin (Apr 06 2019 at 18:15)</a>:</h4>
+<p>I think <code>better2</code> is the one that you want to have.</p>
+
+<a name="162717612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162717612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162717612">Mario Carneiro (Apr 06 2019 at 19:52)</a>:</h4>
+<p>Cases on an equality is one of the most useful things you can do in the presence of dependencies. The effect is the same as <code>subst</code>: The variable (in this case <code>y_s</code>) is removed from the context and all occurrences are replaced with <code>x_s</code>. This usually means you can make progress, because now <code>x_fs</code> and <code>y_fs</code> have the same type, so you can reasonably state and prove an equality about them</p>
+
+<a name="162717714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/162717714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html#162717714">Mario Carneiro (Apr 06 2019 at 19:54)</a>:</h4>
+<p>What actually happened is that <code>cases</code> first reverts all dependencies, like <code>y_fs</code>, and then rewrites the goal (which is a dependent pi making reference to <code>y_s</code>) to change <code>y_s</code> to <code>x_s</code>. Then the type of <code>y_fs</code> changes at the same time as the goal changes, so it stays type correct</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

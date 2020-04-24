@@ -1,0 +1,274 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/90849Returnofthemonolith.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html">Return of the monolith</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193636458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193636458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193636458">Kevin Doran (Apr 11 2020 at 01:44)</a>:</h4>
+<p>Hey everyone,</p>
+<p>I have some questions regarding the proof below (or in <a href="https://tinyurl.com/u4yk3t7" title="https://tinyurl.com/u4yk3t7">live editor</a>).</p>
+<ol>
+<li>Are there some tactics that I can use to simplify inequalities involving absolutes?</li>
+<li>In the proof of the reverse part of the bi-implication, what is a better way of introducing a positive real greater than two others?</li>
+</ol>
+<p>Any tips at all welcome.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">namespace</span> <span class="n">ch9</span>
+
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`|`</span><span class="n">x</span><span class="bp">`|`</span> <span class="o">:=</span> <span class="n">abs</span> <span class="n">x</span>
+
+<span class="n">def</span> <span class="n">is_bounded</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">M</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">X</span> <span class="err">⊆</span> <span class="n">set</span><span class="bp">.</span><span class="n">Icc</span> <span class="o">(</span><span class="bp">-</span><span class="n">M</span><span class="o">)</span> <span class="n">M</span>
+
+<span class="n">def</span> <span class="n">has_finite_sup</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">upper_bounds</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">nonempty</span>
+
+<span class="n">def</span> <span class="n">has_finite_inf</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">lower_bounds</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">nonempty</span>
+
+<span class="c1">-- This is an trivial proof on paper, but I ended up with a mess in Lean.</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_bounded</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">has_finite_sup</span> <span class="n">X</span> <span class="bp">∧</span> <span class="n">has_finite_inf</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span>
+    <span class="c1">-- The forward proof isn&#39;t too bad—it&#39;s the reverse that is the main issue.</span>
+    <span class="n">intro</span> <span class="n">hb</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">hb</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="o">,</span> <span class="n">h₁</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">l</span> <span class="o">:=</span> <span class="bp">-</span><span class="n">u</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hub</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">X</span><span class="o">,</span>
+      <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">hx</span><span class="o">)</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hlb</span> <span class="o">:</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">X</span><span class="o">,</span>
+      <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">hx</span><span class="o">)</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hfs</span> <span class="o">:</span> <span class="n">has_finite_sup</span> <span class="n">X</span><span class="o">,</span> <span class="k">from</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">nonempty_of_mem</span> <span class="n">hub</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hfi</span> <span class="o">:</span> <span class="n">has_finite_inf</span> <span class="n">X</span><span class="o">,</span> <span class="k">from</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">nonempty_of_mem</span> <span class="n">hlb</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hfs</span><span class="o">,</span> <span class="n">hfi</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span>
+    <span class="c1">-- This part is a mess, mainly becase:</span>
+    <span class="c1">--   1. I don&#39;t find a simple way of going from `u l : ℝ` to `∃ m &gt; 0, m ≥ u ∧ m ≥ l`</span>
+    <span class="c1">--   2. I don&#39;t know of a tactic like `linarith` that will work with abs inequalities.</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="bp">.</span><span class="n">right</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="bp">.</span><span class="n">right</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">l</span><span class="o">,</span> <span class="n">hl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="c1">-- Try create m by setting it equal to `|upper bound| + |lower bound| + 1`</span>
+    <span class="k">let</span> <span class="n">m0</span> <span class="o">:=</span> <span class="bp">|</span><span class="n">u</span><span class="bp">|</span> <span class="bp">+</span> <span class="bp">|</span><span class="n">l</span><span class="bp">|</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">m0</span> <span class="bp">≥</span> <span class="bp">|</span><span class="n">u</span><span class="bp">|</span> <span class="bp">∧</span> <span class="n">m0</span> <span class="bp">≥</span> <span class="bp">|</span><span class="n">l</span><span class="bp">|</span><span class="o">,</span>
+      <span class="n">split</span><span class="bp">;</span> <span class="o">{</span><span class="n">norm_num</span><span class="o">,</span> <span class="n">apply</span> <span class="n">abs_nonneg</span><span class="o">},</span>
+    <span class="k">let</span> <span class="n">m1</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">m0</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">m0</span> <span class="bp">≤</span> <span class="n">m1</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h₄</span> <span class="o">:</span> <span class="n">m1</span> <span class="bp">≥</span> <span class="bp">|</span><span class="n">u</span><span class="bp">|</span> <span class="bp">∧</span> <span class="n">m1</span> <span class="bp">≥</span> <span class="bp">|</span><span class="n">l</span><span class="bp">|</span><span class="o">,</span>
+      <span class="c1">-- Short but opaque alternative for h₄ proof:</span>
+      <span class="c1">--   split; cases h₁; apply le_trans; assumption,</span>
+      <span class="n">split</span><span class="o">,</span>
+      <span class="o">{</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="n">h₁</span><span class="bp">.</span><span class="n">left</span> <span class="n">h₂</span><span class="o">,</span>
+      <span class="o">},</span>
+      <span class="o">{</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="n">h₁</span><span class="bp">.</span><span class="n">right</span> <span class="n">h₂</span><span class="o">,</span>
+      <span class="o">},</span>
+    <span class="n">use</span> <span class="n">m1</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span>
+    <span class="c1">-- Can&#39;t find any automation for here.</span>
+      <span class="k">have</span> <span class="n">m0_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">m0</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_nonneg</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="n">l</span><span class="o">),</span>
+      <span class="k">have</span> <span class="n">h₃</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">m1</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_pos_of_nonneg_of_pos</span> <span class="n">m0_nonneg</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+      <span class="n">exact</span> <span class="n">h₃</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="o">{</span>
+      <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="c1">-- Can&#39;t find any automation for here.</span>
+      <span class="k">have</span> <span class="n">hxm</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">m1</span><span class="o">,</span> <span class="k">from</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">hu</span> <span class="n">hx</span><span class="o">)</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">(</span><span class="n">le_abs_self</span> <span class="n">u</span><span class="o">)</span> <span class="n">h₄</span><span class="bp">.</span><span class="n">left</span><span class="o">),</span>
+      <span class="k">have</span> <span class="n">hml</span> <span class="o">:</span> <span class="bp">-</span><span class="n">l</span> <span class="bp">≤</span> <span class="n">m1</span><span class="o">,</span> <span class="k">from</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">neg_le_abs_self</span> <span class="n">l</span><span class="o">)</span> <span class="n">h₄</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">neg_le</span> <span class="n">at</span> <span class="n">hml</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hmx</span> <span class="o">:=</span> <span class="n">le_trans</span> <span class="n">hml</span> <span class="o">(</span><span class="n">hl</span> <span class="n">hx</span><span class="o">),</span>
+      <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hmx</span><span class="o">,</span> <span class="n">hxm</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="o">},</span>
+  <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">ch9</span>
+</pre></div>
+
+
+<p>It's an attempt to replicate some book material, and I understand that definitions exist in a different form in mathlib. (For reference, a <a href="#narrow/stream/113489-new-members/topic/cleaning.20up.20this.20tactic.20proof.20(regarding.20closures)" title="#narrow/stream/113489-new-members/topic/cleaning.20up.20this.20tactic.20proof.20(regarding.20closures)">previous related post</a>).</p>
+
+<a name="193639148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193639148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193639148">Mario Carneiro (Apr 11 2020 at 03:01)</a>:</h4>
+<p>Here's a reasonably clean proof of the statement. There are probably also more automated proofs of this using <code>linarith</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_bounded</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">has_finite_sup</span> <span class="n">X</span> <span class="bp">∧</span> <span class="n">has_finite_inf</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">is_bounded</span><span class="o">,</span> <span class="n">has_finite_inf</span><span class="o">,</span> <span class="n">has_finite_sup</span><span class="o">,</span> <span class="n">h</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">,</span> <span class="n">upper_bounds</span><span class="o">,</span> <span class="n">lower_bounds</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_def</span><span class="o">],</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">M</span><span class="o">,</span> <span class="n">M0</span><span class="o">,</span> <span class="n">hM</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨⟨</span><span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="bp">_</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨-</span><span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="bp">_</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">hv</span><span class="bp">⟩⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">max</span> <span class="mi">1</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)),</span> <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">lt_of_lt_of_le</span> <span class="n">zero_lt_one</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">le_max_left</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">apply</span> <span class="n">neg_le</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">neg_le_neg</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="n">hv</span> <span class="n">hx</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">exact</span> <span class="n">hu</span> <span class="n">hx</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193639319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193639319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193639319">Reid Barton (Apr 11 2020 at 03:07)</a>:</h4>
+<p>I am really tempted to write another compactness proof</p>
+
+<a name="193639365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193639365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193639365">Mario Carneiro (Apr 11 2020 at 03:09)</a>:</h4>
+<p>these statements with maxes seem like they should follow from some filter based reasoning</p>
+
+<a name="193640504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193640504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193640504">Kevin Doran (Apr 11 2020 at 03:46)</a>:</h4>
+<p>Thanks for the example <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>. </p>
+<p>Some of my takeaways: <br>
+*the use of <code>max</code>; using <code>max</code>, it is quick to get a positive real greater than <code>u</code> and <code>l</code>, and it also avoids the need for dealing with absolutes. <br>
+*I should try experiment with more <code>_</code>,  with <code>rintro</code>, and I should consider <code>&lt;some_bijection&gt;.1</code> instead of <code>iff.elim</code>. </p>
+<p>Is the use of simp at the beginning common? I feel that one downside is that later on in the proof, the tactic goal is less legible.</p>
+
+<a name="193640607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193640607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193640607">Mario Carneiro (Apr 11 2020 at 03:50)</a>:</h4>
+<p>The point of the simp at the beginning is to clean up the proof statement until it is just basic logic. You don't have to, because they are all defeq simplifications; I think you can just delete those lines and it will still work</p>
+
+<a name="193640706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193640706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193640706">Mario Carneiro (Apr 11 2020 at 03:54)</a>:</h4>
+<p>Actually that's not entirely true, the first <code>simp</code> gets rid of the nonempty X assumptions. But the proof changes only very slightly if you skip the <code>simp</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_bounded</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">has_finite_sup</span> <span class="n">X</span> <span class="bp">∧</span> <span class="n">has_finite_inf</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">M</span><span class="o">,</span> <span class="n">M0</span><span class="o">,</span> <span class="n">hM</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="bp">-</span><span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨⟨_</span><span class="o">,</span> <span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">hv</span><span class="bp">⟩⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">max</span> <span class="mi">1</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)),</span> <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">lt_of_lt_of_le</span> <span class="n">zero_lt_one</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">le_max_left</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">apply</span> <span class="n">neg_le</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">neg_le_neg</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="n">hv</span> <span class="n">hx</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">le_trans</span> <span class="bp">_</span> <span class="o">(</span><span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">exact</span> <span class="n">hu</span> <span class="n">hx</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193652307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652307">Patrick Massot (Apr 11 2020 at 09:54)</a>:</h4>
+<p>Another version that would be rather easy to automate:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">X</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_bounded</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">has_finite_sup</span> <span class="n">X</span> <span class="bp">∧</span> <span class="n">has_finite_inf</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">M</span><span class="o">,</span> <span class="n">M0</span><span class="o">,</span> <span class="n">hM</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="bp">-</span><span class="n">M</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">hM</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨⟨_</span><span class="o">,</span> <span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">hv</span><span class="bp">⟩⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">max</span> <span class="mi">1</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)),</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">le_max_left</span> <span class="mi">1</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)),</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">le_max_right</span> <span class="mi">1</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)),</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">le_max_left</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">),</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">le_max_right</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">),</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">linarith</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">linarith</span> <span class="o">[</span><span class="n">hv</span> <span class="n">hx</span><span class="o">]</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">linarith</span> <span class="o">[</span><span class="n">hu</span> <span class="n">hx</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The missing tactic would crawl the context and assumptions looking for <code>max A B</code> and doing <code>have := le_max_left A B, have := le_max_right A B</code>.</p>
+
+<a name="193652322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652322">Patrick Massot (Apr 11 2020 at 09:55)</a>:</h4>
+<p>It should be a fun meta-programming exercise. You can also do the analogous thing handling <code>min</code> and <code>abs</code>.</p>
+
+<a name="193652325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652325">Kevin Buzzard (Apr 11 2020 at 09:55)</a>:</h4>
+<p><code>max_le</code> is also useful, but is this too hard because it's an implication?</p>
+
+<a name="193652370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652370">Patrick Massot (Apr 11 2020 at 09:56)</a>:</h4>
+<p>I <em>think</em> that <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md</a> has everything you need for this exercise.</p>
+
+<a name="193652381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652381">Kevin Buzzard (Apr 11 2020 at 09:56)</a>:</h4>
+<p>I always felt that <code>linarith</code> could be beefed up by epsilon in this regard, but my understanding is that the correct approach is not to hack linarith but instead to write something else which uses it under the hood.</p>
+
+<a name="193652386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652386">Patrick Massot (Apr 11 2020 at 09:57)</a>:</h4>
+<p>Yes, this is the exercise I'm proposing.</p>
+
+<a name="193652391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652391">Kevin Buzzard (Apr 11 2020 at 09:57)</a>:</h4>
+<p>But to get <code>max_le</code> involved one would also need something like <code>cc</code> perhaps?</p>
+
+<a name="193652430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652430">Patrick Massot (Apr 11 2020 at 09:58)</a>:</h4>
+<p>Note that we still manage to pity Rob from time to times. Recently he added splitting conjunctions.</p>
+
+<a name="193652438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652438">Patrick Massot (Apr 11 2020 at 09:58)</a>:</h4>
+<p>Yes, you can add <code>max_le</code> to the game but you'll need <code>tauto</code> to instantiate it, and I'm not sure it would work.</p>
+
+<a name="193652440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652440">Kevin Buzzard (Apr 11 2020 at 09:58)</a>:</h4>
+<p>Another useful fact, I <em>guess</em>, might be <code>max a b = a \or max a b = b</code></p>
+
+<a name="193652456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652456">Kevin Buzzard (Apr 11 2020 at 09:59)</a>:</h4>
+<p>You need more than <code>tauto</code> to instantiate it because the proofs a&lt;= X  and b&lt;=X which will need might be themselves proved using linarith</p>
+
+<a name="193652512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652512">Kevin Buzzard (Apr 11 2020 at 10:00)</a>:</h4>
+<p>There is something here which always feels accessible to me, but which I don't quite understand properly.</p>
+
+<a name="193652518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652518">Patrick Massot (Apr 11 2020 at 10:00)</a>:</h4>
+<p>Yes, that's why it's more complicated.</p>
+
+<a name="193652531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652531">Patrick Massot (Apr 11 2020 at 10:00)</a>:</h4>
+<p>Kevin, I suggest you first do the meta-programming exercise I set above.</p>
+
+<a name="193652554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652554">Kevin Buzzard (Apr 11 2020 at 10:01)</a>:</h4>
+<p>I did that PR with the core tactic docs but I draw the line at metaprogramming :-)</p>
+
+<a name="193652563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652563">Kevin Buzzard (Apr 11 2020 at 10:01)</a>:</h4>
+<p>I don't know any programming, let alone metaprogramming. I think my time today would be better spent making games :-)</p>
+
+<a name="193652606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Return%20of%20the%20monolith/near/193652606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90849Returnofthemonolith.html#193652606">Kevin Buzzard (Apr 11 2020 at 10:02)</a>:</h4>
+<p>[although the first 2 hours of it have been spent dealing with work emails :-/ ]</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

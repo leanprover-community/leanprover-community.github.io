@@ -1,0 +1,452 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/67748WSLubuntuerror.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html">WSL ubuntu error</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182132062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182132062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182132062">Jason KY. (Nov 28 2019 at 19:39)</a>:</h4>
+<p>Hi! <br>
+I'm trying to install mathlib on Ubuntu running in a WSL (in order to use format lean) but this happens,</p>
+<div class="codehilite"><pre><span></span>curl https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/remote-install-update-mathlib.sh -sSf | bash
+Installing python dependencies (at user level)
+/home/jasonky/.virtualenvs/format_lean/bin/pip3
+ERROR: Can not perform a &#39;--user&#39; install. User site-packages are not visible in this virtualenv.
+</pre></div>
+
+
+<p>Thanks in advance for any help!</p>
+
+<a name="182133916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182133916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182133916">Andrew Ashworth (Nov 28 2019 at 20:20)</a>:</h4>
+<p>This is a bit non-standard. You will need to install mathlib the standard way via leanpkg, and then compile it. The problem is with your use of a virtual environment, and a conflict with pip.</p>
+
+<a name="182134025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182134025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182134025">Jason KY. (Nov 28 2019 at 20:23)</a>:</h4>
+<p>I see... Sadly format lean requires the virtual environment to work :( But I guess I can always compile the LEAN code individually and then compile (and it works!)</p>
+
+<a name="182134167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182134167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182134167">Andrew Ashworth (Nov 28 2019 at 20:26)</a>:</h4>
+<p>I don't think it would be a big deal if you have some shell scripting experience to fix <code>remote-install-update-mathlib</code>? I can't help you there, though, since I personally do not use the community mathlib update scripts.</p>
+
+<a name="182134981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182134981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182134981">Jason KY. (Nov 28 2019 at 20:46)</a>:</h4>
+<p>Ahh.. I'll see if I can make something happen! Thanks for the help!</p>
+
+<a name="182233000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182233000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182233000">Patrick Massot (Nov 30 2019 at 10:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="243312">@Jason KY.</span>  Why do you say <code>format_lean</code> <em>needs</em> a virtual env? The documentation may recommend it, but there is nothing preventing you to install it in your global user space or even system-wide.</p>
+
+<a name="182233280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182233280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182233280">Patrick Massot (Nov 30 2019 at 10:18)</a>:</h4>
+<p>It's tricky to support all kinds of setup. We really need to write more levels of instructions. We need both simpler instructions for people who want Lean+precompiled mathlib without all the tooling and more detailed instructions. However the ultimate documentation for those mathlib tools are the bash scripts and python source code. That <code>remote-install-update-mathlib</code> actually does very little, especially if you want only <code>update-mathlib</code>, which is by far the most useful tool here. In the end, you want to be able to run the python program <code>https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/update-mathlib.py</code>. So it needs to be found by your system, and its python dependencies need to be found. Every trick to make that happen in any given setup is allowed.</p>
+<p>The external dependencies are listed <a href="https://github.com/leanprover-community/mathlib-tools/blob/3a5af79dde17b20296c58863ac234f9945e11e36/scripts/remote-install-update-mathlib.sh#L5" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/3a5af79dde17b20296c58863ac234f9945e11e36/scripts/remote-install-update-mathlib.sh#L5">here</a> as they appear on <a href="https://pypi.org" target="_blank" title="https://pypi.org">PyPi</a> and can be fetched by the python package installer <code>pip</code>. I think the only internal dependency is <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/auth_github.py" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/auth_github.py">https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/auth_github.py</a>.</p>
+
+<a name="182238498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182238498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182238498">Jason KY. (Nov 30 2019 at 13:03)</a>:</h4>
+<p>I see! I assumed that <code>format_lean</code> needed the virtual environment since that's what it said on the installation guide. I'll try reinstalling it globally and perhaps that will work better!</p>
+
+<a name="182238726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182238726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182238726">Kevin Buzzard (Nov 30 2019 at 13:11)</a>:</h4>
+<p>You're using a virtual Ubuntu on a windows machine, right? Is there anything stopping you just installing it on Windows?</p>
+
+<a name="182239998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182239998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182239998">Jason KY. (Nov 30 2019 at 13:52)</a>:</h4>
+<p>I don't know how to install it on windows since there's no documentation about it (and I'm not techy enough to know how to) :/</p>
+
+<a name="182246883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182246883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182246883">Kevin Buzzard (Nov 30 2019 at 17:06)</a>:</h4>
+<p>Why not just install python 3.7 on Windows following some google instructions and then download a command line terminal and type in the commands in the installation instructions? I don't know much about Windows but I don't really see why this wouldn't work. Just make sure the python exe is in the path for the terminal.</p>
+
+<a name="182251594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182251594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182251594">Jason KY. (Nov 30 2019 at 19:18)</a>:</h4>
+<p>I tried this and it <em>almost</em> worked! But it broke once I tried to compile the lean files saying <code>TypeError: argument of type 'WindowsPath' is not iterable</code>. I don't believe this to be a Python path issue, should it? My Python works fine in the terminal otherwise.</p>
+
+<a name="182252295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182252295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182252295">Bryan Gin-ge Chen (Nov 30 2019 at 19:39)</a>:</h4>
+<p>Did the error give you a file and line number? You may be able to fix that by changing that line in the Python so that it uses the <code>.name</code> field of the WindowsPath object.</p>
+
+<a name="182252668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182252668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182252668">Jason KY. (Nov 30 2019 at 19:50)</a>:</h4>
+<div class="codehilite"><pre><span></span>Traceback (most recent call last):
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 156, in &lt;module&gt;
+    Fire(render_lean_project)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 471, in _Fire
+    target=component.__name__)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 119, in render_lean_project
+    TradBegin, TradEnd])
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\line_reader.py&quot;, line 24, in __init__
+    self.server = Server(lean_exec_path, lean_path)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\server.py&quot;, line 15, in __init__
+    env={&#39;LEAN_PATH&#39;: lean_path})
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 775, in __init__
+    restore_signals, start_new_session)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 1119, in _execute_child
+    args = list2cmdline(args)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 530, in list2cmdline
+    needquote = (&quot; &quot; in arg) or (&quot;\t&quot; in arg) or not arg
+TypeError: argument of type &#39;WindowsPath&#39; is not iterable
+</pre></div>
+
+
+<p>This is the entire message.  I'm not sure if I should mess around with these codes if I don't know what I'm doing :P</p>
+
+<a name="182253139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253139">Bryan Gin-ge Chen (Nov 30 2019 at 20:04)</a>:</h4>
+<p>Could you try running <code>format_project --debug</code>? I'm curious what kind of object <code>lean_exec_path</code> is. I suspect that <code>lean_exec_path</code> needs to be converted to a string somewhere along the way.</p>
+
+<a name="182253289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253289">Jason KY. (Nov 30 2019 at 20:08)</a>:</h4>
+<p>This is what <code>format_project --debug</code> gives me:</p>
+<div class="codehilite"><pre><span></span>$ format_project --debug
+Lean executable path: C:\Users\Jason\.elan\toolchains\3.4.2\bin\lean
+LEAN_PATH: C:\Users\Jason\.elan\toolchains\3.4.2\bin\..\lib\lean\library:C:\Users\Jason\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu16.04onWindows_79rhkp1fndgsc\LocalState\rootfs\home\jasonky\M4000x_LEAN_formalisation\src:_target\deps\mathlib\src
+Template folder: C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\templates
+Tactic state filters:  []
+Traceback (most recent call last):
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 156, in &lt;module&gt;
+    Fire(render_lean_project)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 471, in _Fire
+    target=component.__name__)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 119, in render_lean_project
+    TradBegin, TradEnd])
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\line_reader.py&quot;, line 24, in __init__
+    self.server = Server(lean_exec_path, lean_path)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\server.py&quot;, line 15, in __init__
+    env={&#39;LEAN_PATH&#39;: lean_path})
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 775, in __init__
+    restore_signals, start_new_session)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 1119, in _execute_child
+    args = list2cmdline(args)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 530, in list2cmdline
+    needquote = (&quot; &quot; in arg) or (&quot;\t&quot; in arg) or not arg
+TypeError: argument of type &#39;WindowsPath&#39; is not iterable
+</pre></div>
+
+<a name="182253575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253575">Bryan Gin-ge Chen (Nov 30 2019 at 20:16)</a>:</h4>
+<p>Ah, OK, I guess this doesn't help much since <code>print</code> coerces objects to a string. The following might work (I can't test easily at the moment). Change <a href="https://github.com/leanprover-community/format_lean/blob/master/bin/format_project#L109" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/bin/format_project#L109">this line</a> to this:</p>
+<div class="codehilite"><pre><span></span>    <span class="n">lecture_reader</span> <span class="o">=</span> <span class="n">FileReader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lean_exec_path</span><span class="p">),</span> <span class="n">lean_path</span><span class="p">,</span>
+</pre></div>
+
+
+<p>and then reinstall format_lean.</p>
+
+<a name="182253827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253827">Jason KY. (Nov 30 2019 at 20:23)</a>:</h4>
+<p>Emm... Now it gives no error but it's not compiling either :(</p>
+
+<a name="182254771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182254771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182254771">Bryan Gin-ge Chen (Nov 30 2019 at 20:50)</a>:</h4>
+<p>What happens, exactly? Does the command successfully run with no output but nothing is added in the "outdir" that you specified? What does the file that you used for "inpath" look like?</p>
+
+<a name="182254983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182254983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182254983">Jason KY. (Nov 30 2019 at 20:56)</a>:</h4>
+<p>I have <code>only = ['src/M40001/M40001.lean']</code>within my <code>format.toml</code>so I would expect it to compile the file indicated into the folder <code>html</code>. But when I run the command it creates some other files named <code>lecture</code> in <code>html</code>. The terminal itself does not return anything.</p>
+
+<a name="182255202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182255202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182255202">Jason KY. (Nov 30 2019 at 21:03)</a>:</h4>
+<p>My inpath file should be fine I think. I have compiled it once before in my WSL and it worked like a charm!</p>
+
+<a name="182255505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182255505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182255505">Bryan Gin-ge Chen (Nov 30 2019 at 21:11)</a>:</h4>
+<p>A file called <code>lecture.css</code> (and <code>lecture.css.map</code>) is fine. That's a style file used in the generated HTML. If you see other <code>lecture</code> files I'm not sure where they're coming from.</p>
+<p>Does it work if you change <code>format.toml</code> to <code>only = ['M40001/M40001.lean']</code>? Make sure that <code>format.lean</code> is in the directory that contains <code>src/</code> too. It looks like the paths in <code>only</code> need to be relative to the <code>src/</code> subdirectory. </p>
+<p>Sorry, I don't have direct experience with <code>format_lean</code> so I'm guessing based on browsing the source at this point.</p>
+
+<a name="182255721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182255721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182255721">Jason KY. (Nov 30 2019 at 21:16)</a>:</h4>
+<p>I can't seem to find the <code>format.lean</code> file. Where can I get it?</p>
+
+<a name="182255901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182255901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182255901">Patrick Massot (Nov 30 2019 at 21:19)</a>:</h4>
+<p>He meant <code>format_lean</code>, not <code>format.lean</code> I guess</p>
+
+<a name="182255983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182255983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182255983">Patrick Massot (Nov 30 2019 at 21:21)</a>:</h4>
+<p>Could you post an archive of the project you are trying to format?</p>
+
+<a name="182256083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256083">Jason KY. (Nov 30 2019 at 21:23)</a>:</h4>
+<p><a href="https://github.com/JasonKYi/M4000x_LEAN_formalisation.git" target="_blank" title="https://github.com/JasonKYi/M4000x_LEAN_formalisation.git">https://github.com/JasonKYi/M4000x_LEAN_formalisation.git</a><br>
+The files I want to compile are in src/M40001</p>
+
+<a name="182256222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256222">Patrick Massot (Nov 30 2019 at 21:26)</a>:</h4>
+<p>It works with no problem here.</p>
+
+<a name="182256286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256286">Patrick Massot (Nov 30 2019 at 21:28)</a>:</h4>
+<p>although the last entry in your format.toml is strange.</p>
+
+<a name="182256358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256358">Patrick Massot (Nov 30 2019 at 21:30)</a>:</h4>
+<p>Reading back Bryan's message, he meant <code>format.toml</code>, not <code>format.lean</code>.</p>
+
+<a name="182256372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256372">Jason KY. (Nov 30 2019 at 21:31)</a>:</h4>
+<p>Oh yeah, I see the typo. Unfortunately, it still doesn't compile with the typo fixed :(</p>
+<blockquote>
+<p>Reading back Bryan's message, he meant <code>format.toml</code>, not <code>format.lean</code>.</p>
+</blockquote>
+<p>That makes a lot more sense! Had me worried there for a bit cause I couldn't find format_lean either</p>
+
+<a name="182256416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256416">Patrick Massot (Nov 30 2019 at 21:32)</a>:</h4>
+<p>Let me try to describe what I did</p>
+
+<a name="182256427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256427">Patrick Massot (Nov 30 2019 at 21:32)</a>:</h4>
+<p>I checked out your repository, went there, ran <code>leanpkg configure</code>, then <code>update-mathlib</code> then <code>format_project</code> and it created html files. I did nothing else.</p>
+
+<a name="182256439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256439">Patrick Massot (Nov 30 2019 at 21:33)</a>:</h4>
+<p>Could you describe again the situation on your side?</p>
+
+<a name="182256442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256442">Jason KY. (Nov 30 2019 at 21:33)</a>:</h4>
+<p>Let me try to copy your steps</p>
+
+<a name="182256554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256554">Jason KY. (Nov 30 2019 at 21:36)</a>:</h4>
+<p>I've done what the first two steps but when I enter <code>format_project</code> it simply creates 5 files in the indicated directory without compiling any of the indicated files.</p>
+
+<a name="182256582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256582">Patrick Massot (Nov 30 2019 at 21:37)</a>:</h4>
+<p>Which 5 files?</p>
+
+<a name="182256674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256674">Jason KY. (Nov 30 2019 at 21:39)</a>:</h4>
+<p><code>colourful</code> <code>jquery.min</code> <code>lean</code> <code>lecture</code> <code>lecture.css.map</code></p>
+
+<a name="182256762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256762">Patrick Massot (Nov 30 2019 at 21:41)</a>:</h4>
+<p>Where do you see those files? Are you using a graphical file explorer hiding file extensions?</p>
+
+<a name="182256775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256775">Patrick Massot (Nov 30 2019 at 21:41)</a>:</h4>
+<p>Or are you using a civilized shell?</p>
+
+<a name="182256850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256850">Patrick Massot (Nov 30 2019 at 21:42)</a>:</h4>
+<p>You should see a M40001 folder inside your html folder.</p>
+
+<a name="182256872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256872">Jason KY. (Nov 30 2019 at 21:43)</a>:</h4>
+<p>ah sorry, my windows automatically hid the file extensions. With the extensions they are <code>colourful.css</code> <code>jquery.min.js</code> <code>lean.js</code> <code>lecture.css</code> <code>lecture.css.map</code></p>
+
+<a name="182256884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256884">Jason KY. (Nov 30 2019 at 21:43)</a>:</h4>
+<p>There is no M40001 folder in the html folder</p>
+
+<a name="182256885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256885">Patrick Massot (Nov 30 2019 at 21:43)</a>:</h4>
+<p>It would still help to fix the little issues from your repository. Remove the last entry in your <code>only</code> list, and correct the code in <code>src/M40001/M40001.lean</code>: you cannot end a proof with a comment. Each comment get attached to the <em>following</em> sequence of tactic lines.</p>
+
+<a name="182256942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256942">Patrick Massot (Nov 30 2019 at 21:44)</a>:</h4>
+<p>I'm worried about those file extension because it looks like you use graphical stuff instead of a command line where you can actually see things happening.</p>
+
+<a name="182256953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256953">Patrick Massot (Nov 30 2019 at 21:44)</a>:</h4>
+<p>What command line do you use to run <code>format_project</code>?</p>
+
+<a name="182256964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256964">Jason KY. (Nov 30 2019 at 21:44)</a>:</h4>
+<p>I'm using git bash</p>
+
+<a name="182256967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256967">Patrick Massot (Nov 30 2019 at 21:45)</a>:</h4>
+<p>What do you see when running <code>format_project --debug</code> (after fixing your format.toml)?</p>
+
+<a name="182256981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182256981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182256981">Patrick Massot (Nov 30 2019 at 21:45)</a>:</h4>
+<p>Then why don't you use git bash to list files in folders?!</p>
+
+<a name="182257037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257037">Jason KY. (Nov 30 2019 at 21:46)</a>:</h4>
+<p>haha, I find just using the file explorer on windows easier <span aria-label="sweat" class="emoji emoji-1f613" role="img" title="sweat">:sweat:</span></p>
+
+<a name="182257058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257058">Patrick Massot (Nov 30 2019 at 21:47)</a>:</h4>
+<p>You just proved  this assumption was wrong...</p>
+
+<a name="182257064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257064">Jason KY. (Nov 30 2019 at 21:47)</a>:</h4>
+<p>This is what I see</p>
+<div class="codehilite"><pre><span></span>format_project --debug
+
+Lean executable path: C:\Users\Jason\.elan\toolchains\3.4.2\bin\lean
+LEAN_PATH: C:\Users\Jason\.elan\toolchains\3.4.2\bin\..\lib\lean\library:C:\Users\Jason\OneDrive\Documents\UG Documents\Lean\project\my_project\src:_target\deps\mathlib\src
+Template folder: C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\templates
+Tactic state filters:  []
+</pre></div>
+
+<a name="182257127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257127">Patrick Massot (Nov 30 2019 at 21:48)</a>:</h4>
+<p>And this is run from the folder <code>C:\Users\Jason\OneDrive\Documents\UG Documents\Lean\project\my_project\</code>, right?</p>
+
+<a name="182257133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257133">Jason KY. (Nov 30 2019 at 21:48)</a>:</h4>
+<p>yes</p>
+
+<a name="182257307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257307">Patrick Massot (Nov 30 2019 at 21:52)</a>:</h4>
+<p>this is crazy</p>
+
+<a name="182257324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257324">Patrick Massot (Nov 30 2019 at 21:52)</a>:</h4>
+<p>Could you launch the python shell from there, and type:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;**/*.lean&#39;</span><span class="p">))</span>
+</pre></div>
+
+<a name="182257438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257438">Jason KY. (Nov 30 2019 at 21:54)</a>:</h4>
+<p>How do I open a python shell? Sorry, a bit new to this...</p>
+
+<a name="182257443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257443">Patrick Massot (Nov 30 2019 at 21:54)</a>:</h4>
+<p>type python</p>
+
+<a name="182257509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257509">Jason KY. (Nov 30 2019 at 21:56)</a>:</h4>
+<p>I get this</p>
+<div class="codehilite"><pre><span></span>$ python
+from pathlib import Path
+list(Path(&#39;src&#39;).glob(&#39;**/*.lean&#39;))
+
+  File &quot;&lt;stdin&gt;&quot;, line 3
+
+    ^
+SyntaxError: invalid syntax
+</pre></div>
+
+<a name="182257516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257516">Patrick Massot (Nov 30 2019 at 21:56)</a>:</h4>
+<p>Did you first type python and hit enter?</p>
+
+<a name="182257526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257526">Jason KY. (Nov 30 2019 at 21:57)</a>:</h4>
+<p>yeah</p>
+
+<a name="182257537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257537">Jason KY. (Nov 30 2019 at 21:57)</a>:</h4>
+<p>should I not do that?</p>
+
+<a name="182257539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257539">Patrick Massot (Nov 30 2019 at 21:57)</a>:</h4>
+<p>And it doesn't write anything like:</p>
+<div class="codehilite"><pre><span></span>Python 3.7.2 (default, Feb  2 2019, 10:55:41)
+[GCC 7.3.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+</pre></div>
+
+<a name="182257585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257585">Patrick Massot (Nov 30 2019 at 21:58)</a>:</h4>
+<p>maybe try <code>python3</code> instead of <code>python</code>?</p>
+
+<a name="182257596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257596">Jason KY. (Nov 30 2019 at 21:59)</a>:</h4>
+<p>writing python or python3 just gives me a black space to write on</p>
+<div class="codehilite"><pre><span></span>Jason@DESKTOP-I8Q00VV MINGW64 ~/OneDrive/Documents/UG Documents/Lean/project/my_project (master)
+$ python3 --version
+Python 3.7.3
+
+Jason@DESKTOP-I8Q00VV MINGW64 ~/OneDrive/Documents/UG Documents/Lean/project/my_project (master)
+$ python3
+</pre></div>
+
+<a name="182257665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257665">Bryan Gin-ge Chen (Nov 30 2019 at 22:01)</a>:</h4>
+<p>You may need to follow the steps here to get a working shell: <a href="https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash" target="_blank" title="https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash">https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash</a></p>
+
+<a name="182257715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257715">Bryan Gin-ge Chen (Nov 30 2019 at 22:02)</a>:</h4>
+<p>The simplest thing to do is just to try typing <code>python -i</code> and hitting enter before pasting in the commands that Patrick gave.</p>
+
+<a name="182257724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257724">Jason KY. (Nov 30 2019 at 22:03)</a>:</h4>
+<p>aha now it's working</p>
+<div class="codehilite"><pre><span></span>$ python
+Python 3.7.3 (v3.7.3:ef4ec6ed12, Mar 25 2019, 21:26:53) [MSC v.1916 32 bit (Inte
+l)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</pre></div>
+
+<a name="182257729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257729">Patrick Massot (Nov 30 2019 at 22:03)</a>:</h4>
+<p>I cannot help with an operating system which is so actively fighting against its users, I'm sorry.</p>
+
+<a name="182257778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257778">Patrick Massot (Nov 30 2019 at 22:04)</a>:</h4>
+<p>Who knows how much useful information it is hiding at every time.</p>
+
+<a name="182257788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257788">Jason KY. (Nov 30 2019 at 22:05)</a>:</h4>
+<p>Emm, I get this error </p>
+<div class="codehilite"><pre><span></span>&gt;&gt;&gt; from pathlib import Path
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+</pre></div>
+
+<a name="182257790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257790">Patrick Massot (Nov 30 2019 at 22:05)</a>:</h4>
+<p>and nothing else?</p>
+
+<a name="182257794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257794">Patrick Massot (Nov 30 2019 at 22:05)</a>:</h4>
+<p>This doesn't make any sense.</p>
+
+<a name="182257836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257836">Jason KY. (Nov 30 2019 at 22:06)</a>:</h4>
+<p>it also says <code>KeyboardInterrupt</code> after that</p>
+
+<a name="182257838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257838">Jason KY. (Nov 30 2019 at 22:06)</a>:</h4>
+<div class="codehilite"><pre><span></span>&gt;&gt;&gt; from pathlib import Path
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+KeyboardInterrupt
+</pre></div>
+
+
+<p>but nothing after this</p>
+
+<a name="182257847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257847">Patrick Massot (Nov 30 2019 at 22:07)</a>:</h4>
+<p>I need to go anyway. The quickest way to achieve your goals is probably to install Linux.</p>
+
+<a name="182257851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257851">Patrick Massot (Nov 30 2019 at 22:07)</a>:</h4>
+<p>I'm sorry.</p>
+
+<a name="182257854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257854">Jason KY. (Nov 30 2019 at 22:07)</a>:</h4>
+<p>Don't worry! Thanks for your help!</p>
+
+<a name="182257902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182257902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182257902">Jason KY. (Nov 30 2019 at 22:08)</a>:</h4>
+<p>I think for now I'll just send my files to <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  to compile. I'll get a Linux machine anyway after chirstmas :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

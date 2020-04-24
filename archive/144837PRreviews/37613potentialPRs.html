@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/37613potentialPRs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html">potential PR's</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170746032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170746032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170746032">Jeremy Avigad (Jul 12 2019 at 18:47)</a>:</h4>
+<p>I don't know if this is a good place to propose potential PR's before working on them. If not, let me know. In any case, I have three to suggest.</p>
+<p>(1) Silvia de Toffoli recently asked me to show her the clearest, most intuitive formalization of the mutilated checkerboard problem I could. This is what I came up with: <a href="https://gist.github.com/avigad/1080e327ad6806884c9c5091f5c449bd" target="_blank" title="https://gist.github.com/avigad/1080e327ad6806884c9c5091f5c449bd">https://gist.github.com/avigad/1080e327ad6806884c9c5091f5c449bd</a>. Is this worth putting in mathlib? <span class="user-mention" data-user-id="111080">@Floris van Doorn</span>  recently formalized the Littlewood problem on cubes, which is much more impressive. I couldn't find that in the library, but did I miss it? If not, we could create a 'combinatorics' folder for both of these.</p>
+<p>(2) On <code>finset</code>, we use <code>bind s f</code> or <code>s.bind f</code> for the union of <code>f x</code> as <code>x</code> ranges over <code>s</code>. This would scare any mathematician away. By analogy to the version on <code>set</code>, we could call it <code>bUnion s f</code> for 'bounded union'. How do people feel about that change? I can also look into introducing the bounded union notation, but I worry that it will conflict with the set theory notation in a bad way.</p>
+<p>(On <code>finset</code> we also use the notation <code>filter s p</code> for the set of <code>x</code> in <code>s</code> satisfying <code>p</code>. There is a generic typeclass <code>sep</code> that handles that on <code>set</code>, but, alas, we cannot use that for <code>finset</code> because the <code>finset</code> version requires a typeclass instance for decidable equality. So I would be inclined to stick with <code>filter</code>.)</p>
+<p>(3) The library has an empty <code>pending</code> folder. Does that serve a purpose any more? If not, shall we delete it?</p>
+
+<a name="170749190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170749190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170749190">Mario Carneiro (Jul 12 2019 at 19:31)</a>:</h4>
+<p>I believe it's done pending and is now fully pent</p>
+
+<a name="170749608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170749608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170749608">Jeremy Avigad (Jul 12 2019 at 19:36)</a>:</h4>
+<p>O.k., I PR'ed (3).</p>
+
+<a name="170755473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170755473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170755473">Simon Hudon (Jul 12 2019 at 21:01)</a>:</h4>
+<p>(2) we can introduce a synonym but this is a useful entry to have in the API. When you're trying to build a monad or even just use <code>finset</code> as a monad, you shouldn't have to wonder what <code>bind</code> is called. It's called bind.</p>
+
+<a name="170807017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170807017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170807017">Floris van Doorn (Jul 13 2019 at 22:05)</a>:</h4>
+<p>About (1). We discussed what to do with the cubing the cube problem here (including the replies below):<br>
+<a href="#narrow/stream/116395-maths/topic/cubing.20a.20cube/near/166786363" title="#narrow/stream/116395-maths/topic/cubing.20a.20cube/near/166786363">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cubing.20a.20cube/near/166786363</a></p>
+<p>I think the consensus was that it was good to have a folder in mathlib, but outside <code>src/</code>with these kind of projects.</p>
+
+<a name="170807025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170807025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170807025">Floris van Doorn (Jul 13 2019 at 22:05)</a>:</h4>
+<p>But my formalization is indeed not yet in mathlib.</p>
+
+<a name="170807256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170807256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170807256">Floris van Doorn (Jul 13 2019 at 22:12)</a>:</h4>
+<p>I don't have a strong opinion on (2), but it would be nice to have notation for it.<br>
+For the parenthesized part of (2): would it be reasonably to add a <code>sep</code> typeclass for <code>finset</code> that uses <code>classical.prop_decidable</code>? (That is possible, right?) Just don't use the notation if you don't want to be fully classical.</p>
+
+<a name="170838038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/potential%20PR%27s/near/170838038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/37613potentialPRs.html#170838038">Jeremy Avigad (Jul 14 2019 at 15:32)</a>:</h4>
+<p>Sounds good. At this stage, I prefer not to take the lead on structural decisions for <code>mathlib</code>, since the younger generation will (hopefully) be dealing with them longer than I will. If anyone creates such a folder, I'd be glad to add it, but I also don't mind leaving it as a gist.</p>
+<p>I am also writing some notes for Silvia. It has to do with exactly the issue discussed on the last thread. Fenner Tanswell used the mutilated checkerboard problem in a paper (based on a formalization by Larry Paulson in Isabelle and another one in Mizar), and Silvia wants to respond to it. It seems that the philosophical community is looking to draw conclusions on the relationship between mathematics and formalization, and at least we can make sure the data is accurate from an ITP perspective.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

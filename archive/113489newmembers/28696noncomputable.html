@@ -1,0 +1,51 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/28696noncomputable.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html">noncomputable</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188389789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188389789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188389789">Paul van Wamelen (Feb 17 2020 at 16:08)</a>:</h4>
+<p>I'm trying</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">to_complex</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">[</span><span class="n">ω</span><span class="o">])</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">re</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="n">im</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">I</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">sqrt</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span>
+</pre></div>
+
+
+<p>but getting <code>definition 'to_complex' is noncomputable, it depends on 'complex.discrete_field'</code>.<br>
+Is there some <code>import</code> or <code>open</code> that will "deal" with this? What are the consequences of ignoring the noncomputability of sqrt?<br>
+It looks like an interesting exercise to make <code>real.sqrt</code> computable (looks like there is a proof sketch in the comments of <code>real.sqrt</code>'s definition). Is that worth trying? Is it just a matter of constructing the Cauchy sequence that converges to sqrt(n)?</p>
+
+<a name="188390057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188390057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188390057">Reid Barton (Feb 17 2020 at 16:12)</a>:</h4>
+<p>The real numbers as implemented in mathlib have no useful computational structure anyways (they are Cauchy sequences without any explicit rate of convergence). You should just put <code>noncomputable theory</code> at the top of your file if you are going to use the reals a lot.</p>
+
+<a name="188391256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188391256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188391256">Paul van Wamelen (Feb 17 2020 at 16:29)</a>:</h4>
+<p>Thanks!<br>
+Are you saying that even if we complete the proof of <code>sqrt_aux_converges</code> sqrt would still be "uncomputable"?</p>
+
+<a name="188391396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188391396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188391396">Chris Hughes (Feb 17 2020 at 16:31)</a>:</h4>
+<p>It would be computable in the sense that Lean wouldn't have the <code>noncomputable</code> tag, but it would not be computable in any practical sense. There is no computable function <code>real -&gt; bool</code> for example, so there's basically nothing you can do with a "computable" function on the current implementation of the reals.</p>
+
+<a name="188391780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188391780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188391780">Paul van Wamelen (Feb 17 2020 at 16:37)</a>:</h4>
+<p>I think I see :)<br>
+Thanks again! (I must say I'm blown away by the support here...)</p>
+
+<a name="188394508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noncomputable/near/188394508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28696noncomputable.html#188394508">Kevin Buzzard (Feb 17 2020 at 17:16)</a>:</h4>
+<p>I tend to not put <code>noncomputable theory</code> at the top of my files, and then every time Lean complains something is noncomputable I just write <code>noncomputable</code> in front of it, so e.g. <code>noncomputable def to_complex ...</code> would also remove the error.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

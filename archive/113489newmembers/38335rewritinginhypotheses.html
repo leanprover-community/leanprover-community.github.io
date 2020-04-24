@@ -1,0 +1,263 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/38335rewritinginhypotheses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html">rewriting in hypotheses</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179068781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179068781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179068781">Tim Hosgood (Oct 25 2019 at 17:03)</a>:</h4>
+<p>I'm working through the natural number game (which is really great, by the way, so thank you!) and I'm on level 2-12: showing that <code>a + b = a → b = 0</code>. Starting with <code>intro h,</code> takes me to</p>
+<div class="codehilite"><pre><span></span>a b : mynat,
+h : a + b = a
+⊢ b = 0
+</pre></div>
+
+
+<p>and what I'd like to do now is rewrite <code>h</code> with <code>add_zero</code> to get <code>a + b = a + 0</code>, but I can't figure out how to just rewrite the _last_ occurrence of <code>a</code>. If I do <code>rw ← add_zero a at h,</code> then it replaces _both_ <code>a</code>s with <code>a + 0</code>, which I don't want, and if I don't give <code>add_zero</code> an argument then I get an error, so I'm not sure how to even just rewrite the first <code>a</code> (if I could, then I could somehow use <code>symmetry</code> to get what I want (and this is a bonus question: how can I apply <code>symmetry</code> to <code>h</code>? Using <code>symmetry at h</code> (my naive guess) doesn't work)).</p>
+
+<a name="179069257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069257">Kevin Buzzard (Oct 25 2019 at 17:09)</a>:</h4>
+<p>ha ha you want to do something which is possible, but which I have never explained. So I can see why you're stuck :D</p>
+
+<a name="179069325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069325">Kevin Buzzard (Oct 25 2019 at 17:10)</a>:</h4>
+<p>In fact I'd be very interested to hear what other problems there are after 2-6; I didn't really think hard about those at all. [by which I mean: I was more concerned with documenting 3-1 to 3.6 than 2-7 to 2-16]</p>
+
+<a name="179069419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069419">Kevin Buzzard (Oct 25 2019 at 17:11)</a>:</h4>
+<p>I am surprised <code>symmetry at h</code> doesn't work -- I thought I had realised that this was something which should be useful and someone made a pull request to make it happen. You could do <code>have h2 := h.symm</code>, that would give you <code>a = a + b</code>, but it wouldn't solve your rewriting problem.</p>
+
+<a name="179069687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069687">Kevin Buzzard (Oct 25 2019 at 17:14)</a>:</h4>
+<p><code>have</code> is a really useful tool here.</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="c1">-- now we have an extra goal!</span>
+    <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  a b : mynat,</span>
+<span class="cm">  h : a + b = a,</span>
+<span class="cm">  h3 : a + b = a + 0</span>
+<span class="cm">  ⊢ b = 0</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Does this solve your problem?</p>
+
+<a name="179069835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069835">Kevin Buzzard (Oct 25 2019 at 17:16)</a>:</h4>
+<p>If you want your mind to be blown, here are some other tactics you can use: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md</a></p>
+
+<a name="179069856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179069856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179069856">Kevin Buzzard (Oct 25 2019 at 17:16)</a>:</h4>
+<p>The computer scientists have been working hard.</p>
+
+<a name="179070040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179070040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179070040">Kevin Buzzard (Oct 25 2019 at 17:18)</a>:</h4>
+<p>But here is an explanation of how you can do that rewrite for just one <code>a</code>: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md</a></p>
+
+<a name="179070056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179070056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179070056">Kevin Buzzard (Oct 25 2019 at 17:18)</a>:</h4>
+<p>There is so much to learn ;-)</p>
+
+<a name="179070131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179070131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179070131">Kevin Buzzard (Oct 25 2019 at 17:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="n">at</span> <span class="n">h</span> <span class="k">begin</span>
+    <span class="n">to_rhs</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">add_zero</span> <span class="n">a</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="c1">-- h : a + b = a + 0</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179070699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179070699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179070699">Kevin Buzzard (Oct 25 2019 at 17:25)</a>:</h4>
+<p>Oh! Just looking back through old PR's I find this: <a href="https://github.com/leanprover-community/mathlib/pull/1269" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1269">https://github.com/leanprover-community/mathlib/pull/1269</a> -- apparently you have to use <code>symmetry'</code>and I don't think I imported this into the natural number game :-/ I'll fix this in v1.1. I think <code>symmetry at h</code> is a very good guess and it should work, and I think I have the power to make it work (thanks to <span class="user-mention" data-user-id="110596">@Rob Lewis</span> ). The issue is that <code>symmetry</code> is defined in core Lean so we can't mess with it and add the "at h" functionality, but I can mess with it in the natural number game because I am already basically using a hacked Lean.</p>
+
+<a name="179070865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179070865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179070865">Kevin Buzzard (Oct 25 2019 at 17:27)</a>:</h4>
+<p>Right now, clearly the <code>have</code> solution is the easiest for the end user. I should add documentation about <code>have</code> for those brave enough to venture into those extra levels. For inequality world all that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>=</mo><mi>a</mi><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a+b=a\implies b=0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> stuff is essential.</p>
+
+<a name="179072541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179072541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179072541">Kevin Buzzard (Oct 25 2019 at 17:45)</a>:</h4>
+<p><a href="https://github.com/ImperialCollegeLondon/natural_number_game/issues/9" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/issues/9">https://github.com/ImperialCollegeLondon/natural_number_game/issues/9</a></p>
+
+<a name="179072600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179072600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179072600">Tim Hosgood (Oct 25 2019 at 17:45)</a>:</h4>
+<p>wow, thanks for the massive response! I'll have a proper read through in a bit and let you know if I have any further questions :-)</p>
+
+<a name="179072687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179072687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179072687">Tim Hosgood (Oct 25 2019 at 17:46)</a>:</h4>
+<p>so far I haven't had any other such 'why doesn't this thing work' moments up to this level, but will keep you updated if I come across any others</p>
+
+<a name="179072774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179072774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179072774">Kevin Buzzard (Oct 25 2019 at 17:47)</a>:</h4>
+<p>If you want to get serious, just download mathlib onto your computer</p>
+<p><a href="https://github.com/leanprover-community/mathlib#installation" target="_blank" title="https://github.com/leanprover-community/mathlib#installation">https://github.com/leanprover-community/mathlib#installation</a></p>
+<p>and then just install the game locally. You can play on your own machine, you don't need an internet connection, it's faster, the error messages are ever so slightly better, and you can save your progress.</p>
+
+<a name="179072931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179072931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179072931">Tim Hosgood (Oct 25 2019 at 17:49)</a>:</h4>
+<p>I'm guessing that <code>begin</code> and <code>end</code> are hidden in the game, and secretly surrounding the text box into which you type your solutions?</p>
+
+<a name="179073054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179073054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179073054">Tim Hosgood (Oct 25 2019 at 17:50)</a>:</h4>
+<p>I'm starting to get into Lean. I've been wanting to get into proof assistants for quite some time, coming from a theoretical background, but never managed to decide which one was 'best' to learn. I started playing this game though and before I knew it I had already learnt more than I had in any other assistant, so probably just going to explore Lean a bit more</p>
+
+<a name="179073076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179073076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179073076">Tim Hosgood (Oct 25 2019 at 17:50)</a>:</h4>
+<p>the docs for mathlib seem really _really_ well written as well, which is a big bonus</p>
+
+<a name="179073223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179073223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179073223">Kevin Buzzard (Oct 25 2019 at 17:52)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/">https://leanprover.github.io/theorem_proving_in_lean/</a> is another cracker. But honestly, I learnt 90% of what I know by just asking questions here.</p>
+
+<a name="179073299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179073299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179073299">Tim Hosgood (Oct 25 2019 at 17:53)</a>:</h4>
+<p>will add that to my (already very long) reading list, thanks!</p>
+
+<a name="179073340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179073340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179073340">Kevin Buzzard (Oct 25 2019 at 17:54)</a>:</h4>
+<p>Yes, <code>begin</code> and <code>end</code> are surrounding the text box which you can type in in the natural number game. I'm a mathematician, and for me, the proofs are always the most fun part. My original ideas about how to teach this stuff are here <a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/</a> but the game is an attempt to make it much easier for the end user.</p>
+
+<a name="179077624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179077624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179077624">Tim Hosgood (Oct 25 2019 at 18:40)</a>:</h4>
+<p>in 2-13, there's the hint of using <code>zero_ne_succ</code>, which seems to imply that maybe we want to be doing a proof by contradiction? is this something that you can do in Lean, or are proofs by contradiction not 'constructive' enough?</p>
+
+<a name="179077637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179077637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179077637">Tim Hosgood (Oct 25 2019 at 18:40)</a>:</h4>
+<p>(also I suppose I've never actually proved this lemma without contradiction before!)</p>
+
+<a name="179086400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179086400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179086400">Kevin Buzzard (Oct 25 2019 at 20:30)</a>:</h4>
+<p>I don't know if I've introduced <code>cases b with x</code>, which splits one goal into two, the cases <code>b = 0</code> and <code>b = succ x</code>.</p>
+
+<a name="179086421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179086421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179086421">Kevin Buzzard (Oct 25 2019 at 20:30)</a>:</h4>
+<p>I also don't know if I've introduced <code>apply</code> and I'm pretty sure that I have not told you that <code>a \ne b</code> is by definition <code>a = b -&gt; false</code></p>
+
+<a name="179089278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179089278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179089278">Kevin Buzzard (Oct 25 2019 at 21:06)</a>:</h4>
+<p>Yeah, I think this is pretty much impossible to solve given what I've told you. I'll need to document this a bit better. I had to release the game because chalkdust was coming out and in it I claim that the game will be ready, whereas in fact I had several other big things going on in my life (teaching and a deadline for the perfectoid paper) so these later world 2 levels are very rough around the edges. I will try and fix them up this weekend once I've read the 717 unread emails in my inbox</p>
+
+<a name="179091273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179091273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179091273">Tim Hosgood (Oct 25 2019 at 21:36)</a>:</h4>
+<p>ah, I see how <code>cases</code> would help here :-)</p>
+
+<a name="179091298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179091298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179091298">Tim Hosgood (Oct 25 2019 at 21:37)</a>:</h4>
+<p>that's ok, I really don't think it's particularly bad! you do specifically say that you won't really give any hints for the bonus levels and one needs to look stuff up etc</p>
+
+<a name="179095078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179095078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179095078">Kevin Buzzard (Oct 25 2019 at 22:38)</a>:</h4>
+<p>You can do cases on equality too! If you managed to get <code>h : succ x = 0</code> then try <code>cases h</code> and see what happens.</p>
+
+<a name="179101982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179101982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179101982">Tim Hosgood (Oct 26 2019 at 01:06)</a>:</h4>
+<p>I've spotted just a few typos and stuff when playing through. Nothing major, but would you like me to keep a track of the few I see and let you know?</p>
+
+<a name="179115730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179115730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179115730">Kevin Buzzard (Oct 26 2019 at 08:20)</a>:</h4>
+<p>Absolutely. You could put them on the issues page at <a href="https://github.com/ImperialCollegeLondon/natural_number_game/issues" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/issues">https://github.com/ImperialCollegeLondon/natural_number_game/issues</a> if you didn't want them to just be lost in a pile of starred zulip messages or the 717 unread emails I currently have (the joys of teaching). I would be completely happy to have 25 trivial comments. There are several completely minor things there already. I plan on releasing v1.01 soon after all the admin for my course is over (i.e. soon after 1st November) with a ton of minor bug fixes and corrections. I know this should all have been done before v1.0 but I wanted to release the game at the same time as the chalkdust magazine came out.</p>
+
+<a name="179134990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179134990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179134990">Emily Riehl (Oct 26 2019 at 17:54)</a>:</h4>
+<p>Just wanted to say thanks for putting this game out. I'm having fun with it. I'm also very slowly trying to work through the back levels of world 2, trying to learn some more tactics (my first time using lean). But it's been great.</p>
+
+<a name="179136466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136466">Kevin Buzzard (Oct 26 2019 at 18:42)</a>:</h4>
+<p>Hey <span class="user-mention" data-user-id="246635">@Emily Riehl</span> it's great to see you here! I am really sorry about the later levels in world 2, they are really poorly documented.</p>
+
+<a name="179136857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136857">Tim Hosgood (Oct 26 2019 at 18:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> are you planning on writing up example solutions/further hints at any point? if not, I might write a sort of 'guided tour' to the game, with some example solutions, but I'm sure that mine aren't exactly always the most direct...</p>
+
+<a name="179136864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136864">Tim Hosgood (Oct 26 2019 at 18:54)</a>:</h4>
+<p>at by 'at any point' I really do mean 'some arbitrary point in the future', and not 'tomorrow' or 'this week' or anything</p>
+
+<a name="179136877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136877">Kevin Buzzard (Oct 26 2019 at 18:55)</a>:</h4>
+<p>You can see my plans here <a href="https://github.com/ImperialCollegeLondon/natural_number_game/issues" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/issues">https://github.com/ImperialCollegeLondon/natural_number_game/issues</a> but actually you can probably find all the solutions here <a href="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/solutions" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/solutions">https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/solutions</a> or here <a href="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game">https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game</a> if you look around.</p>
+
+<a name="179136946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136946">Kevin Buzzard (Oct 26 2019 at 18:57)</a>:</h4>
+<p>The repo is currently doing two completely distinct jobs, which is probably bad. You can clone it and play the levels on your own computer, or you can compile the repo using <a href="https://github.com/mpedramfar/Lean-game-maker" target="_blank" title="https://github.com/mpedramfar/Lean-game-maker">https://github.com/mpedramfar/Lean-game-maker</a> -- but this compilation process needs the solutions. So the solutions are in two completely different places right now :-/</p>
+
+<a name="179136948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179136948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179136948">Tim Hosgood (Oct 26 2019 at 18:57)</a>:</h4>
+<p>oh brilliant, that can help on a level I was stuck on!</p>
+
+<a name="179137067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137067">Tim Hosgood (Oct 26 2019 at 19:00)</a>:</h4>
+<p>and thanks again for doing this, by the way. it really makes actually getting started with a proof assistant so much easier than otherwise</p>
+
+<a name="179137269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137269">Kevin Buzzard (Oct 26 2019 at 19:04)</a>:</h4>
+<p>yeah that was exactly the point :D Sorry it took me two years!</p>
+
+<a name="179137713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137713">waldo (Oct 26 2019 at 19:15)</a>:</h4>
+<p>I'm getting the Lean is busy message do you know how to make it actually work? (site didn't load for me on firefox, so went for edge)</p>
+
+<a name="179137719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137719">Kevin Buzzard (Oct 26 2019 at 19:16)</a>:</h4>
+<p>I don't know anything about the web side of things.</p>
+
+<a name="179137760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137760">Kevin Buzzard (Oct 26 2019 at 19:16)</a>:</h4>
+<p>Try holding down shift and clicking reload?</p>
+
+<a name="179137788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137788">Kevin Buzzard (Oct 26 2019 at 19:17)</a>:</h4>
+<p>Let's make a new thread.</p>
+
+<a name="179137800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179137800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179137800">waldo (Oct 26 2019 at 19:17)</a>:</h4>
+<p>sure, I'm new to this platform so I'm not sure how everything works here. it seems different from irc</p>
+
+<a name="179148962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179148962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179148962">Emily Riehl (Oct 27 2019 at 01:18)</a>:</h4>
+<blockquote>
+<p>You can do cases on equality too! If you managed to get <code>h : succ x = 0</code> then try <code>cases h</code> and see what happens.</p>
+</blockquote>
+<p>Can you explain what cases h does? It seems like I should be calling the function zero_ne_succ to apply to h to get a term of type bot or something but I'm really not sure what's going on under the hood.</p>
+
+<a name="179149162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179149162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179149162">Jesse Michael Han (Oct 27 2019 at 01:24)</a>:</h4>
+<p><code>cases</code> applies the induction principle and then discards the induction hypothesis; in this case equality is an inductive type and applying the induction principle amounts to substituting it</p>
+
+<a name="179296282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179296282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179296282">Floris van Doorn (Oct 29 2019 at 03:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span>'s answer is part of what <code>cases</code> does. <br>
+<code>cases</code> also has special support for equality between constructors of an inductive type. It will apply <code>nat.no_confusion</code> in your example (which is almost the same as <code>encode</code> in HoTT. This means that if <code>h</code> is an equality between two different constructors, then it will close the goal, and if <code>h</code> is an equality between the same constructor, it will derive the equalities between the arguments of this constructor, and apply cases to those equalities.</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">cases</span> <span class="n">h</span><span class="o">,</span> <span class="n">refl</span> <span class="o">}</span>
+</pre></div>
+
+<a name="179306170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179306170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179306170">Kevin Buzzard (Oct 29 2019 at 07:32)</a>:</h4>
+<p>There is something interesting with these examples because they are propositions, and yet their proof uses recursion rather than just induction</p>
+
+<a name="179306206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewriting%20in%20hypotheses/near/179306206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38335rewritinginhypotheses.html#179306206">Kevin Buzzard (Oct 29 2019 at 07:33)</a>:</h4>
+<p>They are the two axioms that Peano isolated in his original work defining the naturals but which are absent in Lean's definition</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

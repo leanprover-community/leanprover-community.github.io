@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/01036rsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html">rsimp</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="165992248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/165992248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#165992248">Jesse Michael Han (May 18 2019 at 21:36)</a>:</h4>
+<p>What is <code>rsimp</code>, how does it work, and why is it so slow?</p>
+
+<a name="165992828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/165992828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#165992828">Jesse Michael Han (May 18 2019 at 21:55)</a>:</h4>
+<p>prompted by the discussion about the simp lemma <code>eq_self_iff_true</code>, I was playing around with <code>simp</code> and its occasional inability to prove definitional equalities</p>
+<p>i'm surprised that below <code>{[smt] close}</code> closes the goal, but <code>cc</code> doesnt (i thought they had the same strength)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">squeeze</span>
+
+<span class="n">def</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="n">def</span> <span class="n">B</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">A</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="n">rfl</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rsimp</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">close</span><span class="o">}</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cc</span> <span class="c1">-- fails</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="165998077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/165998077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#165998077">Mario Carneiro (May 19 2019 at 00:36)</a>:</h4>
+<p>I know the r stands for "robust", but I have not looked at the implementation. It's almost never used</p>
+
+<a name="168676762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/168676762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#168676762">Wojciech Nawrocki (Jun 21 2019 at 12:28)</a>:</h4>
+<blockquote>
+<p>why is it so slow</p>
+</blockquote>
+<p>Is <code>rsimp</code> meant to be <em>painfully</em> slow? I just tried it on a single-hypothesis-with-the-goal-being-just-the-hypothesis example and it takes 10 seconds.</p>
+
+<a name="168676935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/168676935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#168676935">Wojciech Nawrocki (Jun 21 2019 at 12:30)</a>:</h4>
+<p>Regarding what <code>rsimp</code> actually is, it's described in <a href="https://leanprover.github.io/papers/tactic.pdf" target="_blank" title="https://leanprover.github.io/papers/tactic.pdf">chapter 2 here</a>. It more or less tries to find the simplest form of every expression using congruence closure and rewrites it to that.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

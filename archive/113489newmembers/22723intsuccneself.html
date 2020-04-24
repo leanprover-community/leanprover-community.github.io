@@ -1,0 +1,99 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/22723intsuccneself.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html">int.succ_ne_self</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171362228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171362228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171362228">Scott Morrison (Jul 21 2019 at 08:09)</a>:</h4>
+<p>Do we have<br>
+<code>lemma int.succ_ne_self {x : ℤ} : x + 1 ≠ x := ...</code><br>
+?</p>
+
+<a name="171363181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171363181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171363181">Scott Morrison (Jul 21 2019 at 08:39)</a>:</h4>
+<p>Hopefully there is something less hideous than</p>
+<div class="codehilite"><pre><span></span>lemma int.succ_ne_self {x : ℤ} : x + 1 ≠ x :=
+begin
+  intro h,
+  replace h := congr_arg (λ n : ℤ, n - x) h,
+  dsimp at h,
+  rw [add_assoc, add_comm, neg_add_cancel_right, add_right_neg] at h,
+  exact one_ne_zero h
+end
+</pre></div>
+
+<a name="171363443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171363443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171363443">Chris Hughes (Jul 21 2019 at 08:46)</a>:</h4>
+<p><code>(ne_of_lt (lt_add_one x)).symm</code></p>
+
+<a name="171363571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171363571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171363571">Mario Carneiro (Jul 21 2019 at 08:50)</a>:</h4>
+<p><code>ne_of_gt (lt_add_one x)</code></p>
+
+<a name="171370290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171370290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171370290">Kevin Buzzard (Jul 21 2019 at 12:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> maybe you could expand library_search a bit ;-)</p>
+
+<a name="171371564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171371564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171371564">Jesse Michael Han (Jul 21 2019 at 12:54)</a>:</h4>
+<p>if you're feeling particularly lazy, <code>λ _, by omega</code></p>
+
+<a name="171372068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171372068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171372068">Kevin Buzzard (Jul 21 2019 at 13:09)</a>:</h4>
+<p>Finally the correct answer :-)</p>
+
+<a name="171372070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171372070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171372070">Kevin Buzzard (Jul 21 2019 at 13:09)</a>:</h4>
+<p>Very nice</p>
+
+<a name="171372117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171372117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171372117">Kenny Lau (Jul 21 2019 at 13:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">lemma</span> <span class="n">int</span><span class="bp">.</span><span class="n">succ_ne_self</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="k">by</span> <span class="n">linarith</span>
+</pre></div>
+
+<a name="171372687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171372687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171372687">Kevin Buzzard (Jul 21 2019 at 13:28)</a>:</h4>
+<p>A new winner :-)</p>
+
+<a name="171372690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171372690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171372690">Kevin Buzzard (Jul 21 2019 at 13:28)</a>:</h4>
+<p>Oh no wait it's longer</p>
+
+<a name="171389813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171389813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171389813">Mario Carneiro (Jul 21 2019 at 22:09)</a>:</h4>
+<p>clearly we need to rename <code>linarith</code> to <code>lia</code>then</p>
+
+<a name="171389861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171389861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171389861">Kevin Buzzard (Jul 21 2019 at 22:10)</a>:</h4>
+<p>We should just have a tactic "schoolkid" which tries them all one after the other, and then just tell people that the other tactics are deprecated</p>
+
+<a name="171389885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171389885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171389885">Mario Carneiro (Jul 21 2019 at 22:11)</a>:</h4>
+<p>but then it should be called <code>sk</code> or else it won't win the golfing competitions</p>
+
+<a name="171391113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171391113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171391113">Marc Huisinga (Jul 21 2019 at 22:49)</a>:</h4>
+<p>for single symbol names i propose <span aria-label="work in progress" class="emoji emoji-1f6a7" role="img" title="work in progress">:work_in_progress:</span> (\construction) for "will fix the bad perf of this later" or <span aria-label="biohazard" class="emoji emoji-2623" role="img" title="biohazard">:biohazard:</span> (\biohazard) for "run lean at own risk and always place pc in spent fuel pool for cooling beforehand"</p>
+
+<a name="171392647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.succ_ne_self/near/171392647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22723intsuccneself.html#171392647">Jesse Michael Han (Jul 21 2019 at 23:36)</a>:</h4>
+<p>while in vietnam, floris and i came up with this:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="kn">notation</span> <span class="bp">`⟨</span><span class="err">╯°□°</span><span class="bp">⟩</span><span class="err">╯︵┻━┻</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

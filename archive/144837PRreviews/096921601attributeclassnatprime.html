@@ -1,0 +1,118 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/096921601attributeclassnatprime.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html">#1601 attribute [class] nat.prime</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178911792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178911792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178911792">Reid Barton (Oct 24 2019 at 01:05)</a>:</h4>
+<p>Not a PR, but numbered from the same, er, numberspace?<br>
+I created issue <a href="https://github.com/leanprover-community/mathlib/issues/1601" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1601">#1601</a> about the awkward side effects of having <code>attribute [class] nat.prime</code> in a different module than the one that defines <code>nat.prime</code>.</p>
+
+<a name="178912168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912168">Mario Carneiro (Oct 24 2019 at 01:12)</a>:</h4>
+<p>You can revert a class using <code>unfreezeI</code></p>
+
+<a name="178912189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912189">Mario Carneiro (Oct 24 2019 at 01:12)</a>:</h4>
+<p>but I agree that having <code>attribute [class] nat.prime</code> globally in a file other than <code>data.nat.prime</code> is liable to cause problems</p>
+
+<a name="178912200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912200">Mario Carneiro (Oct 24 2019 at 01:13)</a>:</h4>
+<p>It should just be on the definition itself</p>
+
+<a name="178912212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912212">Reid Barton (Oct 24 2019 at 01:13)</a>:</h4>
+<p>For <code>nat.prime</code> in particular I think it is probably viable to treat it as a type class, particularly as there aren't a whole lot of theorems whose conclusion is that a number is prime, are there?</p>
+
+<a name="178912270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912270">Reid Barton (Oct 24 2019 at 01:14)</a>:</h4>
+<p>meaning that the "type class trap" is not that much of a hindrance</p>
+
+<a name="178912284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912284">Reid Barton (Oct 24 2019 at 01:14)</a>:</h4>
+<p>having to insert facts into the instance cache with <code>haveI</code>, etc.</p>
+
+<a name="178912307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912307">Mario Carneiro (Oct 24 2019 at 01:15)</a>:</h4>
+<p>I remember when we first talked about this, the idea was to make <code>nat.prime</code> a "weak typeclass" in the sense that it has the <code>class</code> attribute but no instances</p>
+
+<a name="178912323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912323">Mario Carneiro (Oct 24 2019 at 01:15)</a>:</h4>
+<p>so it's only helping to get things out of the context</p>
+
+<a name="178912401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912401">Reid Barton (Oct 24 2019 at 01:17)</a>:</h4>
+<p>Maybe an <code>instance (p : primes) : p.prime</code></p>
+
+<a name="178912420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912420">Reid Barton (Oct 24 2019 at 01:17)</a>:</h4>
+<p>so that you can express conclusions of the form "there exists a prime p such that ..." and unpack them without needing <code>resetI</code>?</p>
+
+<a name="178912469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912469">Reid Barton (Oct 24 2019 at 01:18)</a>:</h4>
+<p>Haha, can you actually write the instance type as <code>p.prime</code>? I don't think I've ever seen it written that way</p>
+
+<a name="178912512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178912512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178912512">Reid Barton (Oct 24 2019 at 01:19)</a>:</h4>
+<p>oh, that wouldn't work anyways. but <code>instance primes.prime (p : primes) : (p : ℕ).prime</code> works</p>
+
+<a name="178917776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178917776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178917776">Johan Commelin (Oct 24 2019 at 03:32)</a>:</h4>
+<p>Also <code>ring_char K</code> would want to be an instance, whenever <code>K</code> is a finite field.</p>
+
+<a name="178917788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178917788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178917788">Johan Commelin (Oct 24 2019 at 03:33)</a>:</h4>
+<p>I reposted my crazy idea at <a href="https://github.com/leanprover-community/mathlib/issues/1601" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1601">#1601</a>, where I propose to ditch this class, and just use bundled primes as argument to <code>Z_p</code> and <code>Q_p</code> and <code>zmod</code> (so we ditch <code>zmodp</code>)</p>
+
+<a name="178956314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178956314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178956314">Johan Commelin (Oct 24 2019 at 14:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Do you see any obvious disadvantages to my proposal?</p>
+
+<a name="178956443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178956443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178956443">Johan Commelin (Oct 24 2019 at 14:18)</a>:</h4>
+<p>Otoh, if we make <code>nat.prime</code> a class, should we do it properly? As in</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_prime</span> <span class="o">:</span> <span class="bp">...</span><span class="o">)</span>
+</pre></div>
+
+<a name="178956574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178956574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178956574">Johan Commelin (Oct 24 2019 at 14:19)</a>:</h4>
+<p>Because I remember having trouble applying a theorem that wanted a <code>[prime p]</code>, and I couldn't <code>haveI : prime p := bla</code>. In this case I think <code>p</code> was <code>ring_char K</code> for some finite field.</p>
+
+<a name="178956923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178956923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178956923">Johan Commelin (Oct 24 2019 at 14:22)</a>:</h4>
+<p>The error message seemed to suggest that this was because <code>prime</code> was not a proper class, but only a <code>def</code> tagged as a class.</p>
+
+<a name="178956996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178956996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178956996">Reid Barton (Oct 24 2019 at 14:23)</a>:</h4>
+<p>I started writing a response on the issue last night, but apparently I fell asleep first</p>
+
+<a name="178957135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178957135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178957135">Reid Barton (Oct 24 2019 at 14:24)</a>:</h4>
+<p>I think this would basically work, but one disadvantage would be that the coercion from <code>primes</code> to <code>nat</code> might not fire as often as you like. For example, if <code>p : primes</code>, then <code>p - 1</code> would only work if the expected type was already known (say <code>nat</code> or <code>int</code>).</p>
+
+<a name="178957157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178957157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178957157">Reid Barton (Oct 24 2019 at 14:24)</a>:</h4>
+<p>That might not be a big deal in practice, I'm not sure</p>
+
+<a name="178957380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/178957380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#178957380">Johan Commelin (Oct 24 2019 at 14:26)</a>:</h4>
+<p>That's true.</p>
+
+<a name="179916451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231601%20attribute%20%5Bclass%5D%20nat.prime/near/179916451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/096921601attributeclassnatprime.html#179916451">Johan Commelin (Nov 05 2019 at 09:54)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1648" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1648">#1648</a> is my first attempt at "class"ifying <code>nat.prime</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

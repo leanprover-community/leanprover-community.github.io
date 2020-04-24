@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/09383dreadedredblocksofdeathareback.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html">dreaded red blocks of death are back</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="163319685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163319685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163319685">Kevin Buzzard (Apr 14 2019 at 14:34)</a>:</h4>
+<p>In VS Code I sometimes get a red rectangle, typically after I've written something with a syntax error. This is not the same as a red underline -- it's a full red background on one or more characters. The only way I can get rid of it is to mash the keyboard creating an error on the pane on the Lean messages pane on the right, and then to hover over the red writing in that pane explaining the error message. I've been doing this for a month or so; VS Code used to do this back in 2017 but I've not seen the behaviour for ages until recently.</p>
+
+<a name="163319882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163319882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163319882">Kevin Buzzard (Apr 14 2019 at 14:38)</a>:</h4>
+<p><a href="/user_uploads/3121/JZtRmHg_Bw03Wgk2obpGF4mj/red_rectangle.png" target="_blank" title="red_rectangle.png">red_rectangle.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/JZtRmHg_Bw03Wgk2obpGF4mj/red_rectangle.png" target="_blank" title="red_rectangle.png"><img src="/user_uploads/3121/JZtRmHg_Bw03Wgk2obpGF4mj/red_rectangle.png"></a></div>
+
+<a name="163323853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163323853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163323853">Bryan Gin-ge Chen (Apr 14 2019 at 16:29)</a>:</h4>
+<p>A few months back I fixed the old code in the extension that shows these red rectangles. They're only supposed to appear when you're hovering over a message (error, warning, or info) in the info view panel though, so something is clearly broken. Do you know what else might be triggering them?</p>
+
+<a name="163327309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163327309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163327309">Kevin Buzzard (Apr 14 2019 at 18:07)</a>:</h4>
+<p>They appear randomly and it's hard to reproduce.</p>
+
+<a name="163328032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163328032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163328032">Bryan Gin-ge Chen (Apr 14 2019 at 18:26)</a>:</h4>
+<p>OK, I think I've found the bug. To reproduce, you have to type something which creates an error message in the info view exactly underneath your mouse cursor, and then edit the code so that the message goes away before you move your mouse away from that spot. The extension doesn't properly clean up the hover decoration and so it gets stuck. Thanks for reporting this! I'll try to PR a fix soon.</p>
+<p>edit: <a href="https://github.com/leanprover/vscode-lean/pull/119" target="_blank" title="https://github.com/leanprover/vscode-lean/pull/119">Here it is</a></p>
+
+<a name="163328062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163328062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163328062">Kevin Buzzard (Apr 14 2019 at 18:27)</a>:</h4>
+<p>Good detective work! Thanks!</p>
+
+<a name="163330207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dreaded%20red%20blocks%20of%20death%20are%20back/near/163330207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09383dreadedredblocksofdeathareback.html#163330207">Patrick Massot (Apr 14 2019 at 19:22)</a>:</h4>
+<p>Oh, fixing this would be great! My students see it all the time. I usually switch to another file and switch back. I never suspected this was a vscode-lean bug, I thought this was VScode alone</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

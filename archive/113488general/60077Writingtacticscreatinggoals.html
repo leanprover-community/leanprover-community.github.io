@@ -1,0 +1,208 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/60077Writingtacticscreatinggoals.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html">Writing tactics: creating goals</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192149831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192149831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192149831">Alastair Horn (Mar 29 2020 at 01:05)</a>:</h4>
+<p>Calling any lean programmers,</p>
+<p>I am a maths undergraduate. After 'graduating' from the natural number game, I've investigated a little further and gone through most of Theorem Proving in Lean.<br>
+As I have some programming experience, I'd love to learn how to write tactics. I've been trying to teach myself how to do so but it has been difficult as my only real documentation of sorts has been <a href="https://leanprover-community.github.io/mathlib_docs/tactic_writing.html" title="https://leanprover-community.github.io/mathlib_docs/tactic_writing.html">https://leanprover-community.github.io/mathlib_docs/tactic_writing.html</a>.</p>
+<p>I've set myself a couple of mini goals: to recreate <code>left</code> specifically for <code>or</code> propositions, and <code>split</code> specifically for <code>and</code> propositions.<br>
+Here is my code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">parse</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+
+<span class="c1">-- This tactic is like `left`, but only works on ∨</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">myorleft</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">l</span> <span class="bp">∨</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="c1">-- Not a clue what I&#39;m doing, want to create a goal of type l and use it</span>
+  <span class="o">(</span><span class="n">set_goals</span> <span class="o">[</span><span class="n">l</span><span class="o">])</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span>
+
+<span class="c1">-- And similarly for ∧</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">myandsplit</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">l</span> <span class="bp">∧</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="c1">-- Just guessing, want to create two goals and then use them</span>
+  <span class="o">(</span><span class="n">and</span><span class="bp">.</span><span class="n">intro</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span><span class="o">,</span>
+  <span class="n">set_goals</span> <span class="o">(</span><span class="n">l</span> <span class="bp">::</span> <span class="o">[</span><span class="n">r</span><span class="o">])</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">useorleft</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">myorleft</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">useandsplit</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">∧</span> <span class="n">p</span><span class="o">):</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">myandsplit</span><span class="o">,</span> <span class="o">{</span>
+    <span class="k">from</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+  <span class="o">},</span> <span class="o">{</span>
+    <span class="k">from</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+  <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>How can I open goals for the user to prove, then form the correct type and close the main goal?</p>
+
+<a name="192150046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150046">Mario Carneiro (Mar 29 2020 at 01:12)</a>:</h4>
+<p>An easy way to do this is to use <code>tactic.applyc ``or.inl</code> instead of <code>(set_goals [l]) &gt;&gt;= tactic.exact</code></p>
+
+<a name="192150069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150069">Kevin Buzzard (Mar 29 2020 at 01:13)</a>:</h4>
+<p>These are great mini goals. The only other reference I know of, other than the tutorial, is <a href="https://leanprover.github.io/programming_in_lean/programming_in_lean.pdf" title="https://leanprover.github.io/programming_in_lean/programming_in_lean.pdf">programming in Lean</a>, which is incomplete and out of date but taught me a lot about monads (I had worked through a lot of learnyouahaskell by that point).</p>
+
+<a name="192150112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150112">Bryan Gin-ge Chen (Mar 29 2020 at 01:14)</a>:</h4>
+<p>Time for me to point out again that <a href="https://lean-forward.github.io/logical-verification/2019/" title="https://lean-forward.github.io/logical-verification/2019/">the Logical Verification in Lean course notes</a> also have a lot of great material on metaprogramming. <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span></p>
+
+<a name="192150161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150161">Mario Carneiro (Mar 29 2020 at 01:16)</a>:</h4>
+<p>If you want to be a bit more controlled about it and do the unification yourself, you can create a goal of type <code>l</code> using <code>g &lt;- mk_mvar l</code>, then create the desired proof term, which is <code> `(or.inl %%l %%r %%g)</code>, then use it for the main goal using <code>tactic.exact  `(or.inl %%l %%r %%g)</code>, and finally give the newly created metavariable back to the user using <code>gs &lt;- get_goals, set_goals (g :: gs)</code>. This is what <code>applyc</code> is doing</p>
+
+<a name="192150219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150219">Alastair Horn (Mar 29 2020 at 01:19)</a>:</h4>
+<p>Thank you so much everyone! I will check out learnyouahaskell, as I'm not experienced with functional programming. And those notes look handy. That's precisely what I've been looking for Mario :)</p>
+
+<a name="192150222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150222">Mario Carneiro (Mar 29 2020 at 01:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">myorleft</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">l</span> <span class="bp">∨</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="n">g</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">`</span><span class="o">(</span><span class="bp">@</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">%%</span><span class="n">l</span> <span class="err">%%</span><span class="n">r</span> <span class="err">%%</span><span class="n">g</span><span class="o">),</span>
+  <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+  <span class="n">set_goals</span> <span class="o">(</span><span class="n">g</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">useorleft</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">myorleft</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192150262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150262">Mario Carneiro (Mar 29 2020 at 01:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">myorleft</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">applyc</span> <span class="bp">``</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">useorleft</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">myorleft</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192150340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150340">Mario Carneiro (Mar 29 2020 at 01:23)</a>:</h4>
+<p>Note that if you forget to give the metavariable back to the user, you will end up in a funny state where there are no goals but the proof term still has a metavariable in it. This happens every once in a while and indicates a bug in the tactic</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">myorleft</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">l</span> <span class="bp">∨</span> <span class="err">%%</span><span class="n">r</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="n">g</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">`</span><span class="o">(</span><span class="bp">@</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">%%</span><span class="n">l</span> <span class="err">%%</span><span class="n">r</span> <span class="err">%%</span><span class="n">g</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">useorleft</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">myorleft</span><span class="o">,</span>
+  <span class="c1">-- goals accomplished?</span>
+<span class="kn">end</span> <span class="c1">-- tactic failed, result contains meta-variables</span>
+</pre></div>
+
+<a name="192150341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192150341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192150341">Alastair Horn (Mar 29 2020 at 01:23)</a>:</h4>
+<p>Wonderful! And I've managed to do the and one now too</p>
+
+<a name="192151021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192151021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192151021">Kevin Buzzard (Mar 29 2020 at 01:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="123965">Bryan Gin-ge Chen</span> <a href="#narrow/stream/113488-general/topic/Writing.20tactics.3A.20creating.20goals/near/192150112" title="#narrow/stream/113488-general/topic/Writing.20tactics.3A.20creating.20goals/near/192150112">said</a>:</p>
+<blockquote>
+<p>Time for me to point out again that <a href="https://lean-forward.github.io/logical-verification/2019/" title="https://lean-forward.github.io/logical-verification/2019/">the Logical Verification in Lean course notes</a> also have a lot of great material on metaprogramming. <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span></p>
+</blockquote>
+<p>I'm reading through them now so I won't forget again :-)</p>
+
+<a name="192168663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192168663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192168663">Patrick Massot (Mar 29 2020 at 11:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="274262">@Alastair Horn</span> I know the tactic writing doc misses a section on manipulating the goal, it's been on my TODO list forever. Feel free to transform the conversation you had with Mario into a new section and open a pull request (ask here or google github opening a pull request if needed).</p>
+
+<a name="192168703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192168703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192168703">Patrick Massot (Mar 29 2020 at 11:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Do you know why <a href="https://leanprover-community.github.io/mathlib_docs/tactic_writing.html" title="https://leanprover-community.github.io/mathlib_docs/tactic_writing.html">https://leanprover-community.github.io/mathlib_docs/tactic_writing.html</a> has no code block syntax highlighting?</p>
+
+<a name="192170636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192170636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192170636">Rob Lewis (Mar 29 2020 at 11:57)</a>:</h4>
+<p>I think the docs don't do syntax highlighting at all right now. There was a reason for this at the beginning, I don't remember what.</p>
+
+<a name="192170639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192170639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192170639">Rob Lewis (Mar 29 2020 at 11:57)</a>:</h4>
+<p>I'll look into it when I have time.</p>
+
+<a name="192175739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192175739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192175739">Bryan Gin-ge Chen (Mar 29 2020 at 13:59)</a>:</h4>
+<p>The Lean 3 changes were <a href="https://github.com/pygments/pygments/pull/1415" title="https://github.com/pygments/pygments/pull/1415">merged into pygments master</a>, so I was going to try and add syntax highlighting to doc-gen after their next release.</p>
+
+<a name="192177682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192177682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192177682">Rob Lewis (Mar 29 2020 at 14:42)</a>:</h4>
+<p>Oh, nice!</p>
+
+<a name="192796897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192796897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192796897">Jasmin Blanchette (Apr 03 2020 at 12:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> : We just released a new edition of the book, at</p>
+<div class="codehilite"><pre><span></span>https://lean-forward.github.io/logical-verification/2020/index.html#material
+</pre></div>
+
+
+<p>It's now 50 pages of so longer than before and has color. The material on metaprogramming has been greatly expanded. I'd be grateful for any feedback.</p>
+
+<a name="192797144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192797144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192797144">Bryan Gin-ge Chen (Apr 03 2020 at 12:42)</a>:</h4>
+<p>Great! I'll take a look when I have a chance.</p>
+
+<a name="192804869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192804869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192804869">Patrick Massot (Apr 03 2020 at 13:40)</a>:</h4>
+<p>I'm a bit confused by all those Dutch courses. How many Lean courses are there at VU? Is it like one by Rob and one by Jasmin?</p>
+
+<a name="192804924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192804924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192804924">Jasmin Blanchette (Apr 03 2020 at 13:40)</a>:</h4>
+<p>Yep.</p>
+
+<a name="192804970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192804970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192804970">Jasmin Blanchette (Apr 03 2020 at 13:40)</a>:</h4>
+<p>You can see the list at <a href="https://lean-forward.github.io" title="https://lean-forward.github.io">https://lean-forward.github.io</a> then click "events".</p>
+
+<a name="192805139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192805139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192805139">Jasmin Blanchette (Apr 03 2020 at 13:41)</a>:</h4>
+<p>Rob's is BSc level and focused on introduction/elimination rules for connectives, using proof terms / structured proofs.</p>
+
+<a name="192805332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/192805332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#192805332">Jasmin Blanchette (Apr 03 2020 at 13:43)</a>:</h4>
+<p>Mine is an MSc-level course and it's mostly backward/tactical proofs, with the focus on practical applications (but a bit of logical mastur***n at the beginning of course to learn the syntax -- Chapters 2 and 3 of the book).</p>
+
+<a name="193711131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20tactics%3A%20creating%20goals/near/193711131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60077Writingtacticscreatinggoals.html#193711131">Alastair Horn (Apr 12 2020 at 12:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="121058">@Jasmin Blanchette</span> it looks great! Thanks</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

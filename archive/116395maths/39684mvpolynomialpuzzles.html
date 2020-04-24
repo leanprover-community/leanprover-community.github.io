@@ -1,0 +1,76 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/39684mvpolynomialpuzzles.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/39684mvpolynomialpuzzles.html">mv_polynomial puzzles</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186572593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/mv_polynomial%20puzzles/near/186572593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/39684mvpolynomialpuzzles.html#186572593">Kevin Buzzard (Jan 25 2020 at 13:01)</a>:</h4>
+<p>I keep coming up with these. Do we have this one? What is it called, if so?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">monomial</span> <span class="n">s</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">coeff</span> <span class="n">s</span><span class="o">))</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="186573465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/mv_polynomial%20puzzles/near/186573465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/39684mvpolynomialpuzzles.html#186573465">Kevin Buzzard (Jan 25 2020 at 13:29)</a>:</h4>
+<p>I am such a hacker:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">monomial</span> <span class="n">s</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">coeff</span> <span class="n">s</span><span class="o">))</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">ext</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">coeff_sum</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">coeff_monomial</span><span class="o">],</span>
+  <span class="n">by_cases</span> <span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_subset</span> <span class="o">(</span><span class="k">show</span> <span class="o">{</span><span class="n">s</span><span class="o">}</span> <span class="err">⊆</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span><span class="o">,</span> <span class="k">begin</span>
+      <span class="n">intros</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
+      <span class="n">convert</span> <span class="n">hs</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">hi</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span> <span class="n">cases</span> <span class="n">hi</span>
+    <span class="kn">end</span><span class="o">),</span>
+    <span class="n">swap</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">t</span> <span class="n">ht</span> <span class="n">hts</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">if_neg</span><span class="o">,</span>
+      <span class="n">intro</span> <span class="n">hts2</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">hts</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">hts2</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="n">convert</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_singleton</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">if_pos</span><span class="o">,</span>
+    <span class="n">refl</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_subset</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">empty_subset</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span><span class="o">),</span>
+    <span class="n">swap</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">t</span> <span class="n">ht1</span> <span class="n">ht2</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">if_neg</span><span class="o">,</span>
+      <span class="n">intro</span> <span class="n">hts</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">hs</span><span class="o">,</span>
+      <span class="n">rwa</span> <span class="n">hts</span> <span class="n">at</span> <span class="n">ht1</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_empty</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">mem_support_iff</span> <span class="n">at</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="n">symmetry</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">classical</span><span class="bp">.</span><span class="n">not_not</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hs</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I sometimes feel like I write Lean the way a child would.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

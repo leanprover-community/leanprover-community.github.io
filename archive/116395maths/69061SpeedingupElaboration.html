@@ -1,0 +1,108 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/69061SpeedingupElaboration.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html">Speeding up Elaboration</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191882226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191882226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191882226">Shing Tak Lam (Mar 26 2020 at 13:17)</a>:</h4>
+<p>Hello,</p>
+<p>So I've been working on this with <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , and one issue that is coming up is how long it takes for Lean to finish checking the file.</p>
+<p><a href="https://gist.github.com/shingtaklam1324/7939604394643c1ac1b0e70b0022548e" title="https://gist.github.com/shingtaklam1324/7939604394643c1ac1b0e70b0022548e">https://gist.github.com/shingtaklam1324/7939604394643c1ac1b0e70b0022548e</a></p>
+<p>I suspect it's to do with <code>ring</code>, since commenting out <code>ring</code> and replacing it with <code>sorry</code> in <code>structure_theorem</code> speeds it up significantly, from 11 seconds to 2.</p>
+<p>Also, <code>structure_classification</code> takes around 2 seconds to parse. Is this normal?</p>
+
+<a name="191882470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191882470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191882470">Kevin Buzzard (Mar 26 2020 at 13:19)</a>:</h4>
+<p>Nice work! You should update the docstring now you've proved <code>structure_classification</code>. Can you use this stuff to prove the STEP question we started with? That would be a cool finish :-)</p>
+<p>But on the other hand I can see that you don't really want to add code at the bottom of the file because the orange bars are getting tedious.</p>
+<p>[Background: I wrote the skeleton and Shing proved the theorems]</p>
+
+<a name="191885838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191885838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191885838">Kenny Lau (Mar 26 2020 at 13:43)</a>:</h4>
+<p>yeah don't use <code>ring</code></p>
+
+<a name="191886811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191886811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191886811">Kevin Buzzard (Mar 26 2020 at 13:50)</a>:</h4>
+<p>So use ten rewrites instead??</p>
+
+<a name="191886826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191886826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191886826">Kevin Buzzard (Mar 26 2020 at 13:50)</a>:</h4>
+<p>Or are they all easy?</p>
+
+<a name="191886861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191886861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191886861">Kevin Buzzard (Mar 26 2020 at 13:50)</a>:</h4>
+<p>If they're all easy, why is <code>ring</code> taking a long time -- <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  do you have any idea?</p>
+
+<a name="191886971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191886971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191886971">Mario Carneiro (Mar 26 2020 at 13:51)</a>:</h4>
+<p>my first guess if <code>ring</code> is slow is the defeq check</p>
+
+<a name="191887207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887207">Mario Carneiro (Mar 26 2020 at 13:52)</a>:</h4>
+<p>hm, looks like the default unfolding mode is <code>reducible</code>, it shouldn't really start unfolding unless you use <code>ring!</code></p>
+
+<a name="191887260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887260">Mario Carneiro (Mar 26 2020 at 13:53)</a>:</h4>
+<p>next guess is typeclass inference</p>
+
+<a name="191887457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887457">Mario Carneiro (Mar 26 2020 at 13:54)</a>:</h4>
+<p>I try not to use any lean builtin tactics because they all have bad edge case behavior, but it's not 100%</p>
+
+<a name="191887584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887584">Mario Carneiro (Mar 26 2020 at 13:55)</a>:</h4>
+<p>oh, we're talking about polynomials, so it's almost certainly typeclass inference</p>
+
+<a name="191887778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887778">Mario Carneiro (Mar 26 2020 at 13:56)</a>:</h4>
+<p>One thing you can try is to break out just the statement of the theorem you want to prove by <code>ring</code> as a separate lemma, and see if it's still slow</p>
+
+<a name="191887837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887837">Mario Carneiro (Mar 26 2020 at 13:57)</a>:</h4>
+<p>If so, try replacing the base type with a variable of type comm_ring and see if it's still slow</p>
+
+<a name="191887896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887896">Kevin Buzzard (Mar 26 2020 at 13:57)</a>:</h4>
+<p>These are great ideas, thanks.</p>
+
+<a name="191887949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191887949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191887949">Kevin Buzzard (Mar 26 2020 at 13:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="266440">@Shing Tak Lam</span> get in touch with me offline if you don't understand what Mario is suggesting.</p>
+
+<a name="191888683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191888683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191888683">Shing Tak Lam (Mar 26 2020 at 14:03)</a>:</h4>
+<p>Alright that worked. Extracting the goal and proving that separately sped it up significantly. 10ms for the lemma and 2.6 seconds for the main theorem. Much faster than the 11 seconds previously.</p>
+
+<a name="191888714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191888714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191888714">Kevin Buzzard (Mar 26 2020 at 14:03)</a>:</h4>
+<p>Nice.</p>
+
+<a name="191888805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191888805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191888805">Kevin Buzzard (Mar 26 2020 at 14:04)</a>:</h4>
+<p>So now you can update the gist and get to work on doing the STEP question :-)</p>
+
+<a name="191888859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191888859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191888859">Shing Tak Lam (Mar 26 2020 at 14:04)</a>:</h4>
+<p>I'll extract the goal from the other places where it's slow first.</p>
+
+<a name="191889211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191889211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191889211">Shing Tak Lam (Mar 26 2020 at 14:07)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="191958627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Speeding%20up%20Elaboration/near/191958627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69061SpeedingupElaboration.html#191958627">Scott Morrison (Mar 26 2020 at 22:46)</a>:</h4>
+<p>Yeah, I think the general lesson is that structures are very-super-linear in elaboration time, and breaking out anything but the most trivial of proofs in fields into separate lemmas is a good idea.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

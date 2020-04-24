@@ -1,0 +1,63 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/62405openembeddings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html">open embeddings</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175804347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175804347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175804347">Patrick Massot (Sep 16 2019 at 11:44)</a>:</h4>
+<p>We bumped mathlib in the perfectoid project and got <a href="https://github.com/leanprover-community/mathlib/commit/10cb0d125d1d02d0ea68e478456c522bd1920d29" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/10cb0d125d1d02d0ea68e478456c522bd1920d29">https://github.com/leanprover-community/mathlib/commit/10cb0d125d1d02d0ea68e478456c522bd1920d29</a> which conflicts with our own implementation of <code>open_embedding</code> <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/open_embeddings.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/open_embeddings.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/open_embeddings.lean</a>. We should decide whether we adapt our code to use mathlib open embeddings or PR something. <span class="user-mention" data-user-id="110032">@Reid Barton</span>  there are a couple of things to decide here. First we put <code>open_embedding</code> in the <code>topological_space</code> namespace whereas you put it in root. I think we are clearly right, what will we do when the algebraic geometry gang will claim we have the wrong definition?</p>
+<p>With slightly more mathematical content, we have a definition which looks stronger but is equivalent. We ask that an open embedding is an embedding which is open. You only ask is has open range. Also we use a structure, in order to have meaningful names for each condition, <code>h.is_open_map</code> and <code>h.embedding</code> rather that <code>h.1</code> and <code>h.2</code>. Do you have any a priori objection to merge our efforts using our definition (and namespace)?</p>
+
+<a name="175804586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175804586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175804586">Reid Barton (Sep 16 2019 at 11:49)</a>:</h4>
+<p>I noticed that <code>embedding</code> changed to a structure so it makes sense for <code>open_embedding</code> to change to one as well. I just ask you make corresponding changes to <code>closed_embedding</code> too</p>
+
+<a name="175805375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175805375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175805375">Patrick Massot (Sep 16 2019 at 12:03)</a>:</h4>
+<p>What about putting the (seemingly) stronger condition in the definition,  are you ok with that?</p>
+
+<a name="175805598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175805598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175805598">Reid Barton (Sep 16 2019 at 12:06)</a>:</h4>
+<p>For propositions the exact definition usually doesn't matter much. Normally I think we try to make the definition something easy to check, since the constructor has special support. You can emulate extracting the <code>is_open_map</code> field by defining a function <code>open_embedding.is_open_map</code>.</p>
+
+<a name="175805649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175805649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175805649">Reid Barton (Sep 16 2019 at 12:07)</a>:</h4>
+<p>Normally it should be easier to check that the range is open than that the image of an open set is open (maybe not in <code>open_embedding.comp</code> though)</p>
+
+<a name="175805732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175805732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175805732">Patrick Massot (Sep 16 2019 at 12:09)</a>:</h4>
+<p>I guess we also want mathematicians not to be surprised by the definition. But maybe this case is unclear</p>
+
+<a name="175995880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175995880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175995880">Johan Commelin (Sep 18 2019 at 11:43)</a>:</h4>
+<p><code>logic.embedding</code> has the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">embedding</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inj</span>    <span class="o">:</span> <span class="n">injective</span> <span class="n">to_fun</span><span class="o">)</span>
+</pre></div>
+
+<a name="175995897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175995897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175995897">Johan Commelin (Sep 18 2019 at 11:43)</a>:</h4>
+<p>Do we want topological embeddings to extend those?</p>
+
+<a name="175995937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/175995937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#175995937">Johan Commelin (Sep 18 2019 at 11:44)</a>:</h4>
+<p>In other words, should topological embeddings be bundled maps, or a predicate on a function?</p>
+
+<a name="176009060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20embeddings/near/176009060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62405openembeddings.html#176009060">Patrick Massot (Sep 18 2019 at 14:18)</a>:</h4>
+<p>I settled for a minimal change, simply making <code>open_embedding</code> and <code>closed_embedding</code> structures extending <code>embedding</code>: <a href="https://github.com/leanprover-community/mathlib/pull/1459" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1459">https://github.com/leanprover-community/mathlib/pull/1459</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/52203deletemulrightinv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html">delete `mul_right_inv`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187075194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187075194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187075194">Kevin Buzzard (Jan 31 2020 at 11:29)</a>:</h4>
+<p>There's a function called <code>mul_right_inv</code> in the root namespace, defined in core. I am writing a teaching file where I develop the basics of group theory from scratch, so I have my own definition of <code>group</code> -- a class, in a namespace <code>mygroup</code>. If I make the instance <code>mygroup.group G -&gt; group G</code> then this causes mayhem because I am trying to get my users to prove things like <code>theorem mygroup.group.mul_right_inv (a : G) : a * a⁻¹ = 1</code> so they can use it later, but if our home-rolled groups are known to be Lean groups then all these theorems are automatically available so the user can apply them in the wrong order to make the API.</p>
+<p>My current crappy fix is not to make the instance, so <code>mul_right_inv</code> doesn't actually apply for my groups, but then when the user wants to rewrite it they have to put something like <code>rw group.mul_right_inv</code> (they're always in the <code>mygroup</code> namespace). I can get Lean to complain about an ambiguity in <code>mul_right_inv</code> but I would rather just locally make that function private in my repo so that the user can't possibly be confused about it, because I know it is never what they want to use. Is this possible?</p>
+
+<a name="187075416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187075416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187075416">Sebastian Ullrich (Jan 31 2020 at 11:33)</a>:</h4>
+<p>If you declare that name inside <code>mygroup</code> (<code>abbrev mul_right_inv := @group.mul_right_inv</code>), it will shadow the root declaration instead of overloading it</p>
+
+<a name="187075606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187075606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187075606">Johan Commelin (Jan 31 2020 at 11:37)</a>:</h4>
+<p>Huh, if you don't make the instance, then <code>rw group.mul_right_inv</code> won't work right?</p>
+
+<a name="187075615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187075615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187075615">Johan Commelin (Jan 31 2020 at 11:37)</a>:</h4>
+<p>I'm confused about what your problem is.</p>
+
+<a name="187076056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187076056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187076056">Sebastian Ullrich (Jan 31 2020 at 11:44)</a>:</h4>
+<p>That <code>group</code> is <code>mygroup.group</code>, I assume</p>
+
+<a name="187076465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/delete%20%60mul_right_inv%60/near/187076465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52203deletemulrightinv.html#187076465">Johan Commelin (Jan 31 2020 at 11:52)</a>:</h4>
+<p>Aha. That makes sense</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

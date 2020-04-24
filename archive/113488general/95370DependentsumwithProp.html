@@ -1,0 +1,61 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/95370DependentsumwithProp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html">Dependent sum with Prop</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182718304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182718304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182718304">Harrison Grodin (Dec 06 2019 at 00:21)</a>:</h4>
+<p>I'm trying to write a list merging function which, given two lists and an included proof that each is nondecreasing, produces a result list and a proof that it's also nondecreasing. While I think I have some idea of how to tackle it implementation-wise, I can't seem to get the types to line up (especially wrt pi/sigma vs. forall/exists). Here's a sketch of my current setup (with a bit of pseudocode in the <code>merge</code> type itself):</p>
+<div class="codehilite"><pre><span></span>inductive nondecreasing : list ℕ → Prop
+| nil    : nondecreasing []
+| single : Π {x : ℕ}, nondecreasing [x]
+| zip    : Π {x y : ℕ} {xs : list ℕ}, x ≤ y → nondecreasing (y :: xs) → nondecreasing (x :: y :: xs)
+
+def merge : Π (x y : Σ l, nondecreasing l), Σ l&#39; : list ℕ, nondecreasing (list.append x.l y.l) l&#39; := sorry
+</pre></div>
+
+
+<p>Is there any way I can make this (or something like it) work?</p>
+
+<a name="182718402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182718402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182718402">Harrison Grodin (Dec 06 2019 at 00:23)</a>:</h4>
+<p>The main issue with this approach, afaict, is the distinction between <code>Prop</code> and <code>Type ?</code>:</p>
+<div class="codehilite"><pre><span></span>has type
+  list ℕ → Prop : Type
+but is expected to have type
+  list ℕ → Type ? : Type (?+1)
+</pre></div>
+
+<a name="182718768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182718768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182718768">Harrison Grodin (Dec 06 2019 at 00:31)</a>:</h4>
+<p>If I use a <code>Σ</code>, it complains about <code>Prop</code> being invalid, but if I use a <code>∃</code>, I'm unable to unpack the actual list itself... I think this is due to the special casing on <code>Prop</code>?</p>
+
+<a name="182718826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182718826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182718826">Harrison Grodin (Dec 06 2019 at 00:32)</a>:</h4>
+<p>(Apologies if this is a silly question - seems like it could be...)</p>
+
+<a name="182719631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182719631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182719631">Mario Carneiro (Dec 06 2019 at 00:48)</a>:</h4>
+<p>Use <code>Σ'</code></p>
+
+<a name="182719674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182719674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182719674">Mario Carneiro (Dec 06 2019 at 00:48)</a>:</h4>
+<p>or <code>{l | nondecreasing l}</code></p>
+
+<a name="182720241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20sum%20with%20Prop/near/182720241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95370DependentsumwithProp.html#182720241">Harrison Grodin (Dec 06 2019 at 00:59)</a>:</h4>
+<p>Oh, that's perfect! Thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

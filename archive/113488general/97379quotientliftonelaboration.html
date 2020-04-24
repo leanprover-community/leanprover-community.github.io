@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/97379quotientliftonelaboration.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97379quotientliftonelaboration.html">quotient.lift_on elaboration</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169751281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.lift_on%20elaboration/near/169751281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97379quotientliftonelaboration.html#169751281">Kenny Lau (Jul 06 2019 at 04:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">setoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">setoid</span> <span class="n">s</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hf1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hf2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≈</span> <span class="n">y</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">x</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span> <span class="bp">≈</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">y</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">quotient</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">→</span> <span class="n">quotient</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="err">⟦</span><span class="o">(</span><span class="bp">⟨</span><span class="n">f</span> <span class="n">r</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">r</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span><span class="err">⟧</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">hf2</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid constructor ⟨...⟩, expected type is not an inductive type</span>
+<span class="cm">  ?m_1</span>
+<span class="cm">-/</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">setoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">setoid</span> <span class="n">s</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">hf1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hf2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≈</span> <span class="n">y</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">x</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span> <span class="bp">≈</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">y</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">quotient</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">→</span> <span class="n">quotient</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="err">⟦</span><span class="bp">⟨</span><span class="n">f</span> <span class="n">r</span><span class="o">,</span> <span class="n">hf1</span> <span class="n">r</span><span class="bp">⟩</span><span class="err">⟧</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">hf2</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span>
+</pre></div>
+
+<a name="169751321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.lift_on%20elaboration/near/169751321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97379quotientliftonelaboration.html#169751321">Kenny Lau (Jul 06 2019 at 04:24)</a>:</h4>
+<p>why does it fail when I have an inductive type?</p>
+
+<a name="169752140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.lift_on%20elaboration/near/169752140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97379quotientliftonelaboration.html#169752140">Mario Carneiro (Jul 06 2019 at 04:54)</a>:</h4>
+<p>it's an elaboration order problem. Anonymous constructors must resolve to an inductive type straight away, but I guess the other stuff is getting elaborated before lean knows what the target type is of the function</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,270 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81552Coqasaleantypechecker.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html">Coq as a lean type checker</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186803454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186803454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186803454">Bas Spitters (Jan 28 2020 at 17:08)</a>:</h4>
+<p>Gaetan Gilbert made a Coq type checker for lean in order the help understand the differences. I think it's very useful in that way.<br>
+<a href="https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581" target="_blank" title="https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581">https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581</a></p>
+
+<a name="186804882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186804882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186804882">Johan Commelin (Jan 28 2020 at 17:24)</a>:</h4>
+<p>That seems like a really thorough comparison. Chapeau!</p>
+
+<a name="186806965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186806965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186806965">Rob Lewis (Jan 28 2020 at 17:48)</a>:</h4>
+<p>This is cool! I'm not really clear what's meant by this line:</p>
+<blockquote>
+<p>The whole stdlib cannot be checked as some conversion problems are<br>
+pathological. two_pos seems a typical example (0 &lt; 2 in an ordered<br>
+field). </p>
+</blockquote>
+<p>I'm probably missing something, does anyone know what the issue is with 0 &lt; 2?</p>
+
+<a name="186807137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807137">Johan Commelin (Jan 28 2020 at 17:50)</a>:</h4>
+<p>I just saw that <span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> also has an account here. So we can ask him directly <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="186807665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807665">Floris van Doorn (Jan 28 2020 at 17:54)</a>:</h4>
+<p>Yes, this looks really cool indeed. Also interesting to see some small kernel differences between Coq and Lean I have never seen before.</p>
+
+<a name="186807681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807681">Gaëtan Gilbert (Jan 28 2020 at 17:54)</a>:</h4>
+<p>It means that some conversion problem involved in checked the proof of 0&lt;2 is difficult for Coq. I haven't investigated yet, I guess it starts unfolding the wrong thing then gets lost.</p>
+
+<a name="186807862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807862">Floris van Doorn (Jan 28 2020 at 17:56)</a>:</h4>
+<p>I also don't know what the problem is with <code>two_pos</code>. <br>
+For the lazy:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">two_pos</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">unfold</span> <span class="n">bit0</span><span class="o">,</span> <span class="n">exact</span> <span class="n">add_pos</span> <span class="n">zero_lt_one</span> <span class="n">zero_lt_one</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>and <code>#print two_pos</code> gives</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">two_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">],</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">],</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span>
+    <span class="o">(</span><span class="n">id</span>
+       <span class="o">((</span><span class="bp">λ</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">a_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e_2</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="n">b_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e_3</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b_1</span><span class="o">),</span>
+           <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">gt</span> <span class="n">e_2</span><span class="o">)</span> <span class="n">e_3</span><span class="o">)</span>
+          <span class="mi">2</span>
+          <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+          <span class="o">(</span><span class="n">bit0</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="mi">1</span><span class="o">)</span>
+          <span class="mi">0</span>
+          <span class="mi">0</span>
+          <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">0</span><span class="o">)))</span>
+    <span class="o">(</span><span class="n">add_pos</span> <span class="n">zero_lt_one</span> <span class="n">zero_lt_one</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Maybe it's the weird identity function generated by <code>unfold</code> that causes problems.</p>
+
+<a name="186808427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186808427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186808427">Rob Lewis (Jan 28 2020 at 18:00)</a>:</h4>
+<p>Hmm, maybe. I would have guessed that the proof of <code>two_pos</code> doesn't have that much that's even possible to unfold. But Lean isn't happy with <code>#reduce two_pos</code> either.</p>
+
+<a name="186808855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186808855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186808855">Rob Lewis (Jan 28 2020 at 18:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> remember when you used to complain about proving things about numerals? Turns out the proofs are actually hard :p</p>
+
+<a name="186808987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186808987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186808987">Floris van Doorn (Jan 28 2020 at 18:04)</a>:</h4>
+<p>For me, <code>#reduce @two_pos</code> takes a couple of seconds. There is still a bunch to unfold, with all the substitutions involved in the following definitions (used in <code>two_pos</code>):</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">add_pos</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">add_lt_add_right</span>
+</pre></div>
+
+
+<p>Maybe Coq is busy unfolding all these, which doesn't seem to be necessary.</p>
+
+<a name="186809012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186809012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186809012">Kevin Buzzard (Jan 28 2020 at 18:04)</a>:</h4>
+<p>yeah my ideas about what maths is "hard" have changed rather radically in the last 2.5 years...</p>
+
+<a name="186810230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810230">Gaëtan Gilbert (Jan 28 2020 at 18:14)</a>:</h4>
+<p>OK I figured out why two_pos is slow<br>
+In Coq we try reducing terms before testing if they're proof irrelevant <br>
+If I change that order two_pos checks basically instantly</p>
+<p>The reason we picked that order is basically that all our benches use only relevant terms (since sprop is still new), and for those it's faster to reduce first</p>
+
+<a name="186810287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810287">Kevin Buzzard (Jan 28 2020 at 18:14)</a>:</h4>
+<p>What is Coq's <code>sprop</code>?</p>
+
+<a name="186810318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810318">Floris van Doorn (Jan 28 2020 at 18:15)</a>:</h4>
+<p>It's Lean's <code>Prop</code>: a universe that is definitionally proof irrelevant.</p>
+
+<a name="186810364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810364">Floris van Doorn (Jan 28 2020 at 18:15)</a>:</h4>
+<p>Coq's <code>Prop</code> is not definitionally proof irrelevant, but you can add proof irrelevance as an axiom.</p>
+
+<a name="186810394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810394">Kevin Buzzard (Jan 28 2020 at 18:15)</a>:</h4>
+<p>I see. So the issue is <code>rfl</code> working or not?</p>
+
+<a name="186810455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810455">Kevin Buzzard (Jan 28 2020 at 18:16)</a>:</h4>
+<p>Hey this is a really cool way to check <code>sprop</code> :-)</p>
+
+<a name="186810728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810728">Kevin Buzzard (Jan 28 2020 at 18:19)</a>:</h4>
+<p>There will be issues with quotients as well, presumably? I never quite understood <a href="https://leanprover.github.io/reference/expressions.html#computation" target="_blank" title="https://leanprover.github.io/reference/expressions.html#computation">the Lean reference manual</a> here: it seems to give a definition of <code>rfl</code> which doesn't seem (to me) to imply that <code>quot.lift f h (quot.mk r a) = f a</code> is defeq.</p>
+
+<a name="186810976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186810976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186810976">Floris van Doorn (Jan 28 2020 at 18:21)</a>:</h4>
+<p>Yes, quotients are also an issue, but there is a trick in Coq using so-called Private Inductive types. This has also been used to implement higher inductive types in the Coq-HoTT library (a quotient is an example of a higher inductive type).</p>
+
+<a name="186811352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186811352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186811352">Floris van Doorn (Jan 28 2020 at 18:25)</a>:</h4>
+<p>It's quite a hack, the idea is the following. You privately define the quotient <code>A / R</code> to be just <code>A</code> (or a inductive type that is isomorphic to <code>A</code>): then it's very easy to define functions <code>quot.lift</code> and <code>quot.mk</code> such that the rule <code>quot.lift f h (quot.mk r a) = f a</code> holds definitionally. Of course, you don't get the rule that if <code>x ~ x'</code> then <code>[x] = [x']</code>, but you can add that as as an (inconsistent) axiom. Then you declare everything that you don't want to use as "private" (for example the fact that <code>A / R</code> was implemented as <code>A</code>), so that you cannot use these things anymore. <br>
+The final result is that from outside the private module, everything you can see is exactly the behavior of a quotient.</p>
+
+<a name="186811725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186811725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186811725">Floris van Doorn (Jan 28 2020 at 18:28)</a>:</h4>
+<p>Here is another explanation: <a href="https://dl.acm.org/doi/pdf/10.1145/3018610.3018615?download=true" target="_blank" title="https://dl.acm.org/doi/pdf/10.1145/3018610.3018615?download=true">https://dl.acm.org/doi/pdf/10.1145/3018610.3018615?download=true</a><br>
+(Section "Higher Inductive Types")</p>
+
+<a name="186811886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186811886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186811886">Kevin Buzzard (Jan 28 2020 at 18:30)</a>:</h4>
+<p>You CS guys are so imaginative ;-)</p>
+
+<a name="186811923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186811923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186811923">Kevin Buzzard (Jan 28 2020 at 18:30)</a>:</h4>
+<p>I'll try explaining quotients using this technique to my undergraduates when I teach them next year.</p>
+
+<a name="186811979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186811979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186811979">Kevin Buzzard (Jan 28 2020 at 18:31)</a>:</h4>
+<p>if it's good enough for the computer, it's good enough for them.</p>
+
+<a name="186826396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186826396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186826396">Mario Carneiro (Jan 28 2020 at 20:40)</a>:</h4>
+<p>So basically it's controlled inconsistency? :/</p>
+
+<a name="186826584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186826584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186826584">Mario Carneiro (Jan 28 2020 at 20:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> Have you looked at all at the reverse process, Coq -&gt; Lean? I've been bugging all coq people I know to tell me how the kernel typechecking algorithm works, because it's not completely documented anywhere outside the ML</p>
+
+<a name="186826613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186826613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186826613">Mario Carneiro (Jan 28 2020 at 20:43)</a>:</h4>
+<p>Is there an analogue of the Lean output format for Coq?</p>
+
+<a name="186831409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186831409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186831409">Gaëtan Gilbert (Jan 28 2020 at 21:33)</a>:</h4>
+<p>Coq -&gt; Lean is way harder due to universe cumulativity (I wouldn't be surprised if it's impossible)<br>
+Other universe issues:</p>
+<ul>
+<li>non recursively uniform parameters (AFAICT translating them to regular indices only changes the universe of the inductive)</li>
+<li>template universe polymorphism (a predecessor of universe polymorphism, kinda underspecified, it has caused repeated inconsistencies but hasn't been removed because it's still in use everywhere through sigma types and list and so on)</li>
+</ul>
+<p>If you get past universe issues you also have</p>
+<ul>
+<li>your pattern matching to eliminator elaboration must be as strong as the termination condition implemented in Coq (not sure how hard this is, I'm not an expert on the termination checker)</li>
+<li>mutual and nested inductives (I think Lean already has some system to deal with those?) </li>
+<li>modules. You could just reduce functor applications and treat the resulting flat modules as namespaces (AFAIK the checker does something like that). If module aliases or Include are used you will not have a fun time.</li>
+</ul>
+<p>Less used:</p>
+<ul>
+<li>records with definitional eta (not used in Coq's stdlib)</li>
+<li>coinductives (not used much afaik)</li>
+<li>primitive integers and floats (also not used much afaik)</li>
+</ul>
+<p>No output format, parsing vo files while ignoring non-kernel stuff may be feasible if you tie yourself to a specific Coq version.</p>
+
+<a name="186831569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186831569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186831569">Gaëtan Gilbert (Jan 28 2020 at 21:35)</a>:</h4>
+<p>PS maybe using serapi or a custom plugin one could get a reasonable output format</p>
+
+<a name="186834184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186834184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186834184">Kevin Buzzard (Jan 28 2020 at 22:04)</a>:</h4>
+<blockquote>
+<p>it has caused repeated inconsistencies but hasn't been removed because it's still in use everywhere through sigma types and list and so on</p>
+</blockquote>
+<p>So to implement this part you have to find an inconsistency in Lean?</p>
+
+<a name="186834800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186834800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186834800">Gaëtan Gilbert (Jan 28 2020 at 22:11)</a>:</h4>
+<p>There are no known inconsistencies left in it, it's just a historically buggy part of Coq</p>
+
+<a name="186839078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186839078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186839078">Kevin Buzzard (Jan 28 2020 at 22:57)</a>:</h4>
+<p>On the other hand I have seen people getting into universe messes here -- they are often sorted out in the end but I have often wondered whether cumulative universes would make life easier. I'm a believer in ZFC so I would be happy if everything sensible just lived in <code>Type</code> (other than the things which are "obviously not sets")</p>
+
+<a name="186847777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186847777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186847777">Mario Carneiro (Jan 29 2020 at 01:16)</a>:</h4>
+<p>I just got to the part of <a href="https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf" target="_blank" title="https://www.irif.fr/~sozeau/research/publications/drafts/Coq_Coq_Correct.pdf">Coq Coq Correct!</a> that deals with the most subtle part of the theory, the guard condition on recursion inside a fixpoint, but they axiomatized it, so there is no definition :(</p>
+
+<a name="186861580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186861580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186861580">Johan Commelin (Jan 29 2020 at 07:17)</a>:</h4>
+<p>This hit HN front page: <a href="https://news.ycombinator.com/item?id=22171305" target="_blank" title="https://news.ycombinator.com/item?id=22171305">https://news.ycombinator.com/item?id=22171305</a></p>
+
+<a name="186862131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186862131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186862131">Johan Commelin (Jan 29 2020 at 07:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You're getting some indirect credit. See the first comment.</p>
+
+<a name="186883196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883196">Gaëtan Gilbert (Jan 29 2020 at 13:05)</a>:</h4>
+<p>Updated stdlib stats after fixing the issue examplified by <code>two_pos</code> (we need to check for proof irrelevance before comparing structurally):</p>
+<p>Lean Import with 10s timeout, set upfront instances and set conv check:<br>
+320s, 1GB RAM<br>
+vo size 111MB<br>
+11 skips (3 timeout, 8 not instantiated)</p>
+<p>The timeouts are <code>bla.equations._eqn_1</code>, where <code>bla</code> in</p>
+<ul>
+<li><code>tactic.delta_config.max_steps._default</code></li>
+<li><code>char.of_nat</code></li>
+<li><code>simp.default_max_steps</code><br>
+These all involve moderately sized integers (<code>of_nat</code> through <code>char.is_valid</code>)</li>
+</ul>
+<p>I actually already did a hack for <code>std.prec.max.equations._eqn_1</code>, setting <code>prec.max</code> to the <code>Expand</code> reduction strategy (when comparing 2 applied constants we need to decide which one we try to reduce first, <code>Expand</code> is the most eager strategy). That may be correct for the <code>max_steps</code> but doesn't seem right for <code>of_nat</code>.<br>
+What does Lean do here?</p>
+
+<a name="186883738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883738">Mario Carneiro (Jan 29 2020 at 13:12)</a>:</h4>
+<p>Lean unfolds the definition with the largest definitional height, which I believe is the max of the definitional heights of all referenced definitions, plus one</p>
+
+<a name="186883916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883916">Mario Carneiro (Jan 29 2020 at 13:14)</a>:</h4>
+<p>Looking at <code>char.of_nat</code>, I see no expensive unfolding at all</p>
+
+<a name="186888854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186888854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186888854">Gaëtan Gilbert (Jan 29 2020 at 14:17)</a>:</h4>
+<p>Thanks, that looks like it works. The Lean stdlib now fully passes:</p>
+<ul>
+<li>284s runtime, 1.3GB RAM usage</li>
+<li>resulting vo takes 116MB</li>
+<li>coqchk takes 540s and 1.1GB RAM<br>
+If we skip structure validation coqchk takes 51s and 720MB RAM<br>
+If we use OCaml's Marshal instead of our custom Analyze coqchk takes 45s and 380MB RAM</li>
+</ul>
+
+<a name="186990610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186990610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186990610">Bas Spitters (Jan 30 2020 at 14:20)</a>:</h4>
+<blockquote>
+<p>So basically it's controlled inconsistency? :/</p>
+</blockquote>
+<p>The technique was explained here in agda:<br>
+<a href="https://homotopytypetheory.org/2011/04/23/running-circles-around-in-your-proof-assistant/" target="_blank" title="https://homotopytypetheory.org/2011/04/23/running-circles-around-in-your-proof-assistant/">https://homotopytypetheory.org/2011/04/23/running-circles-around-in-your-proof-assistant/</a><br>
+It's a hack to add HITs to a type theory that does not have them. Really, we'd like to have a cubical type theory in the future.</p>
+
+<a name="187052614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/187052614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#187052614">Tim Carstens (Jan 31 2020 at 02:43)</a>:</h4>
+<p><span aria-label="heart" class="emoji emoji-2764" role="img" title="heart">:heart:</span>️ to that!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

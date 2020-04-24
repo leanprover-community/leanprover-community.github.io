@@ -1,0 +1,76 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/68007Differencesbetweenand.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html">Differences between (...), {...} and [...]</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193815244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193815244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193815244">Valentin Vinoles (Apr 13 2020 at 20:08)</a>:</h4>
+<p>Hello,</p>
+<p>I have troubles to understand what is the differences between using (...), {...} and [...]. For instance, the three following possibilities seem to work, but are they the same ? If not, what are the differences and what should I use ? </p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">j</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">]</span>
+</pre></div>
+
+
+<p>For instance, in some tutorials, I saw lines like</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">G</span> <span class="o">:</span> <span class="n">group</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span>
+</pre></div>
+
+
+<p>that suggest that they must be differences (if not why using three different notations)...</p>
+<p>Thanks for your help!</p>
+
+<a name="193815346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193815346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193815346">Kenny Lau (Apr 13 2020 at 20:09)</a>:</h4>
+<p><code>()</code> is explicit argument, and <code>[]</code> and <code>{}</code> are for implicit arguments</p>
+
+<a name="193815790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193815790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193815790">Johan Commelin (Apr 13 2020 at 20:13)</a>:</h4>
+<p>Yup, they are quite different.<br>
+If you define</p>
+<div class="codehilite"><pre><span></span>def foo (i : nat) {j : nat} [k : nat] : true := sorry
+</pre></div>
+
+
+<p>then <code>@foo</code> will ask you to provide 3 arguments explicitly. But if you simply use <code>foo</code>, then it only expects you to fill in the <code>i</code> argument. Lean will try to figure out the <code>j</code> argument using "unification". In practice, this means that it will try to figure out <code>j</code> from arguments that follow it.</p>
+<p>In your example, you can see how this works. <code>{X : Type}</code> can be figured out from the explicit <code>(x : X)</code>. This means that you don't have to pass the <code>X</code> argument explicitly to every group lemma that you use!</p>
+<p>Finally, the <code>k</code> argument to <code>foo</code> will be figured out by "type class search". This is usually meant to be used for extra "structure" on a type, such as a group structure, or a metric space, or something like that. (In particular, <code>[k : nat]</code> will not really work.)</p>
+
+<a name="193816043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193816043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193816043">Johan Commelin (Apr 13 2020 at 20:15)</a>:</h4>
+<p>If it's still confusing, just use <code>()</code>, until you find that it becomes boring to pass all arguments by hand. Then you can start using the other types... and experiment with those.</p>
+
+<a name="193874763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193874763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193874763">Valentin Vinoles (Apr 14 2020 at 10:03)</a>:</h4>
+<p>Ok thanks you so much !</p>
+
+<a name="193878042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193878042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193878042">Kevin Buzzard (Apr 14 2020 at 10:36)</a>:</h4>
+<p>PS did you really see <code>[G : group X]</code> and not just <code>[group X]</code>?</p>
+
+<a name="193883840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193883840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193883840">orlando (Apr 14 2020 at 11:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  : if i understand <code> [G  : group X  ] </code> is the same as  <code> [group X] </code> except we have named by  <code> G </code>  the hypothesis ' <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>  is a group ' ,  is it ok ?</p>
+
+<a name="193889096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193889096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193889096">Scott Morrison (Apr 14 2020 at 12:33)</a>:</h4>
+<p>(But usually one would only give a name <code>G</code> to the typeclass if you're doing something complicated, or doing something wrong! The whole design of typeclass intends that you never have to refer to them directly.)</p>
+
+<a name="193896007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Differences%20between%20%28...%29%2C%20%7B...%7D%20and%20%5B...%5D/near/193896007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68007Differencesbetweenand.html#193896007">Kevin Buzzard (Apr 14 2020 at 13:27)</a>:</h4>
+<p>The idea is that there should only be one construction of a group structure on X, so why bother giving it a name? You can get it with <code>by apply_instance</code> if you need it, and you probably don't need it because the type class system will deal with it for you</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

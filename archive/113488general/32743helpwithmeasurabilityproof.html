@@ -1,0 +1,433 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/32743helpwithmeasurabilityproof.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html">help with measurability proof</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169063487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169063487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169063487">Koundinya Vajjha (Jun 26 2019 at 18:02)</a>:</h4>
+<p>Can anyone help me prove this lemma? </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">giry_monad</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">measure_theory</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span>
+
+<span class="kn">lemma</span> <span class="n">inl_measurable_bind_ret</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">bind</span> <span class="n">ν</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">measurable_of_measurable_coe</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I have proven that <code>λ y, dirac (x,y)</code> is measurable for all <code>x</code> and also have that <code>bind</code> followed by <code>dirac</code> is <code>map</code>. But at this point, I am stuck...any suggestions?</p>
+
+<a name="169071696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169071696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169071696">Chris Hughes (Jun 26 2019 at 19:22)</a>:</h4>
+<p>I had a go. No idea if the sorry if even true or not, but I look like I made progress.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">inl_measurable_bind_ret&#39;</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">bind</span> <span class="n">w</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">@</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span><span class="o">),</span>
+  <span class="k">from</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">measurable_prod_mk</span> <span class="n">measurable_const</span> <span class="n">measurable_id</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">measure</span><span class="bp">.</span><span class="n">bind</span><span class="o">],</span>
+  <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">map</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">measure</span><span class="bp">.</span><span class="n">map_map</span> <span class="n">measurable_dirac</span> <span class="o">(</span><span class="n">this</span> <span class="n">x</span><span class="o">)]</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="n">measurable_join</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">measurable_map</span> <span class="bp">_</span> <span class="n">measurable_dirac</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169075961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169075961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169075961">Koundinya Vajjha (Jun 26 2019 at 20:15)</a>:</h4>
+<p>this is progress, but I'm not able to fill in the sorry either.</p>
+
+<a name="169076041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169076041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169076041">Chris Hughes (Jun 26 2019 at 20:16)</a>:</h4>
+<p>Is it true?</p>
+
+<a name="169077299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169077299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169077299">Koundinya Vajjha (Jun 26 2019 at 20:32)</a>:</h4>
+<p>i'm about 70% sure</p>
+
+<a name="169082625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169082625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169082625">Jason Rute (Jun 26 2019 at 21:35)</a>:</h4>
+<p>Dumb question:  as far as whether or not this is true, what is the implicit sigma algebra on the codomain of the map you are trying to prove is measurable?</p>
+
+<a name="169083059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169083059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169083059">Koundinya Vajjha (Jun 26 2019 at 21:41)</a>:</h4>
+<p>For Chris' <code>sorry</code>, the codomain is <code>ennreal</code>. So it is the Borel sigma algebra</p>
+
+<a name="169083921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169083921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169083921">Kenny Lau (Jun 26 2019 at 21:52)</a>:</h4>
+<p>after a long while I've reduced the statement to proving this:</p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">),</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span>
+<span class="err">⊢</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="err">⇑</span><span class="n">ν</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">|</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="err">∈</span> <span class="n">s</span><span class="o">})</span>
+</pre></div>
+
+<a name="169084199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169084199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169084199">Koundinya Vajjha (Jun 26 2019 at 21:57)</a>:</h4>
+<p>Yeah this is where I am stuck as well. :(</p>
+
+<a name="169084253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169084253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169084253">Kenny Lau (Jun 26 2019 at 21:57)</a>:</h4>
+<p>is this even true</p>
+
+<a name="169084343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169084343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169084343">Kenny Lau (Jun 26 2019 at 21:58)</a>:</h4>
+<p>this is demonstrably false if one uses Lebesgue measurable sets for R and R^2</p>
+
+<a name="169084361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169084361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169084361">Kenny Lau (Jun 26 2019 at 21:59)</a>:</h4>
+<p>but the Lebesgue sigma-algebra for R^2 isn't the product of the Lebesgue sigma algebra for R right</p>
+
+<a name="169086562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169086562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169086562">Kenny Lau (Jun 26 2019 at 22:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span>
+<span class="err">⊢</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">map</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="n">ν</span><span class="o">)</span>
+</pre></div>
+
+<a name="169086565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169086565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169086565">Kenny Lau (Jun 26 2019 at 22:31)</a>:</h4>
+<p>this looks neater</p>
+
+<a name="169086576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169086576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169086576">Kenny Lau (Jun 26 2019 at 22:31)</a>:</h4>
+<p>surely all neat propositions are true</p>
+
+<a name="169087542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169087542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169087542">Kenny Lau (Jun 26 2019 at 22:45)</a>:</h4>
+<p>this looks like some sort of fubini theorem</p>
+
+<a name="169088060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088060">Kenny Lau (Jun 26 2019 at 22:54)</a>:</h4>
+<p>let's extract a proof from Billingsley Ch.18</p>
+
+<a name="169088795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088795">Kenny Lau (Jun 26 2019 at 23:05)</a>:</h4>
+<p>which assumes sigma-finiteness of alpha and beta</p>
+
+<a name="169088798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088798">Johannes Hölzl (Jun 26 2019 at 23:05)</a>:</h4>
+<p>Yep, this only works for sigma-finite measures. In Isabelle, we first prove that the product measure is measurable: <code>(λx. f x ⨂⇩M g x) ∈ measurable M (subprob_algebra (N ⨂⇩M L))</code> <a href="http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html" target="_blank" title="http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html">http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html</a> (lemma measurable_pair_measure). The proof can be generalized from subprobabilities to sigma-finite measures, it is even enough if one factor of the product is sigma-finite.</p>
+
+<a name="169088861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088861">Kenny Lau (Jun 26 2019 at 23:06)</a>:</h4>
+<p>does every measurable space have a sigma-finite measure?</p>
+
+<a name="169088869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088869">Kenny Lau (Jun 26 2019 at 23:06)</a>:</h4>
+<p>and is there a counter-example to the claim <code>measurable (λ (x : α), map (prod.mk x) ν)</code>?</p>
+
+<a name="169089269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089269">Johannes Hölzl (Jun 26 2019 at 23:13)</a>:</h4>
+<p>it should boil down to the fact that <code>P s := measurable (fun x. (f x &lt;*&gt; g x) s)</code> (where <code>&lt;*&gt;</code> is the product of measures)  is closed under complement, i.e. <code>P s --&gt; P (set.univ - s)</code>. Now, when the product is finite it translates to <code>measurable (fun x. (f x) univ * (g x) univ - (f x &lt;*&gt; g x) s)</code></p>
+
+<a name="169089369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089369">Johannes Hölzl (Jun 26 2019 at 23:15)</a>:</h4>
+<p>We can cover a sigma-finite measure with finite measures, so this works out if both sides of the product are sigma-finite.</p>
+
+<a name="169089427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089427">Johannes Hölzl (Jun 26 2019 at 23:16)</a>:</h4>
+<p>I thought there was a trick where it is enough that one side is sigma-finite, but I don't remember it.</p>
+
+<a name="169089617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089617">Johannes Hölzl (Jun 26 2019 at 23:19)</a>:</h4>
+<p>every measurable space has a trivial sigma-finite measure (the null-measure). but we don't talk about measurable spaces, but measurable functions <code>A -&gt; measure B</code> (I guess one can call them Kleisli arrows in the Giry Monad?!)</p>
+
+<a name="169089681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089681">Kenny Lau (Jun 26 2019 at 23:20)</a>:</h4>
+<p>but in the claim above, alpha doesn't have a measure yet</p>
+
+<a name="169089723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089723">Johannes Hölzl (Jun 26 2019 at 23:21)</a>:</h4>
+<p>But there is <code>ν</code></p>
+
+<a name="169089736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089736">Kenny Lau (Jun 26 2019 at 23:21)</a>:</h4>
+<p>but that's just a measure on beta</p>
+
+<a name="169089782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089782">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>if every measurable space has a sigma-finite measure then you can use the trick you forgot</p>
+
+<a name="169089793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089793">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>by cooking up a sigma-finite measure on alpha, then let that "one side" be alpha</p>
+
+<a name="169089812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089812">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>but since every set has measure zero I dont see how your trick works</p>
+
+<a name="169089815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089815">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>maybe you need a non-zero measure</p>
+
+<a name="169089965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089965">Kenny Lau (Jun 26 2019 at 23:25)</a>:</h4>
+<p>how is this not trivial</p>
+
+<a name="169090131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090131">Johannes Hölzl (Jun 26 2019 at 23:28)</a>:</h4>
+<p>Maybe a finite counterexample works: Let's assume in <code>A</code> is everything  measurable (top) and B is bottom (only univ and empty). And both are isomorphic to bool. Now <code>ν</code> maps each non-empty map to infinity. I'm too tired to figure out what the measurable set is, but I something like this might result in a counter example.</p>
+
+<a name="169090268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090268">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>well there are only 4 measurable sets</p>
+
+<a name="169090274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090274">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>and I'm sure none of them works</p>
+
+<a name="169090281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090281">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>since in A everything is measurable</p>
+
+<a name="169090322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090322">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>every function from A is automatically measurable</p>
+
+<a name="169090331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090331">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>(and if you swap A and B, still there are only 4 measurable sets and none of them works)</p>
+
+<a name="169090345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090345">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>also I'm quite sure there is no finite counter-example, since you can decompose each finite sigma algebra into a disjoint union of tops</p>
+
+<a name="169090643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090643">Kenny Lau (Jun 26 2019 at 23:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">there</span> <span class="n">are</span> <span class="n">unsolved</span> <span class="n">goals</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">),</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ennreal</span><span class="o">,</span>
+<span class="n">ht</span> <span class="o">:</span> <span class="n">t</span> <span class="err">∈</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ennreal</span> <span class="bp">|</span> <span class="n">is_open</span> <span class="n">s</span><span class="o">}</span>
+<span class="err">⊢</span> <span class="n">is_measurable</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="err">⇑</span><span class="o">(</span><span class="n">map</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="n">ν</span><span class="o">)</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">t</span><span class="o">}</span>
+</pre></div>
+
+<a name="169140737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169140737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169140737">Kenny Lau (Jun 27 2019 at 14:39)</a>:</h4>
+<p>(clearing my sandbox) here's my current status:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">giry_monad</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">measure_theory</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span>
+
+<span class="kn">lemma</span> <span class="n">aux</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">bind</span> <span class="n">ν</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="n">ν</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">:</span><span class="n">β</span><span class="o">,</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)),</span>
+<span class="k">from</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">measurable_prod_mk</span> <span class="n">measurable_const</span> <span class="n">measurable_id</span><span class="o">)</span> <span class="n">measurable_dirac</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="o">(</span><span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span> <span class="n">s</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span><span class="o">),</span> <span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">y</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span> <span class="n">dirac_apply</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton_iff</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr_eq_if</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">bot_eq_zero</span><span class="o">],</span>
+  <span class="n">split_ifs</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">iff_of_false</span> <span class="n">one_ne_zero</span> <span class="o">(</span><span class="n">not_not_intro</span> <span class="n">h</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">iff_of_true</span> <span class="n">rfl</span> <span class="n">h</span> <span class="o">}</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="o">(</span><span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span> <span class="n">s</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="bp">=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">y</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span> <span class="n">dirac_apply</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton_iff</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr_eq_if</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">bot_eq_zero</span><span class="o">],</span>
+  <span class="n">split_ifs</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">iff_of_true</span> <span class="n">rfl</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">iff_of_false</span> <span class="n">zero_ne_one</span> <span class="n">h</span> <span class="o">}</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">r</span><span class="o">:</span><span class="n">ennreal</span><span class="o">,</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">1</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="o">(</span><span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span> <span class="n">s</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="n">r</span><span class="o">}</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">r</span> <span class="n">hr0</span> <span class="n">hr1</span><span class="o">,</span> <span class="n">ext</span> <span class="n">y</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_preimage_eq</span><span class="o">,</span> <span class="n">dirac_apply</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton_iff</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr_eq_if</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">bot_eq_zero</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_empty_eq</span><span class="o">,</span> <span class="n">iff_false</span><span class="o">],</span>
+  <span class="n">split_ifs</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hr1</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hr0</span><span class="bp">.</span><span class="n">symm</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h5</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="o">{</span> <span class="n">y</span><span class="o">:</span><span class="n">β</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">},</span>
+<span class="k">from</span> <span class="n">measurable_prod_mk</span> <span class="n">measurable_const</span> <span class="n">measurable_id</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">sf</span> <span class="o">:</span> <span class="n">simple_func</span> <span class="n">β</span> <span class="n">ennreal</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">:</span><span class="n">β</span><span class="o">,</span> <span class="o">(</span><span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">measurable_sn</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">classical</span><span class="o">,</span> <span class="n">by_cases</span> <span class="n">hr0</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">subst</span> <span class="n">hr0</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h2</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">is_measurable</span><span class="bp">.</span><span class="n">compl</span> <span class="n">h5</span> <span class="o">},</span>
+    <span class="n">by_cases</span> <span class="n">hr1</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">subst</span> <span class="n">hr1</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h3</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h5</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="n">h4</span> <span class="n">r</span> <span class="n">hr0</span> <span class="n">hr1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">is_measurable</span><span class="bp">.</span><span class="n">empty</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">finite</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_subset</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_insert</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_insert</span> <span class="bp">_</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_empty</span><span class="o">)</span>  <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ennreal</span><span class="o">))</span> <span class="err">$</span> <span class="k">begin</span>
+    <span class="n">rintros</span> <span class="n">r</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">only</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">dirac_apply</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr_eq_if</span><span class="o">],</span> <span class="n">split_ifs</span><span class="o">,</span>
+    <span class="n">exacts</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_insert</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_insert_of_mem</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton</span> <span class="bp">_</span><span class="o">)]</span>
+  <span class="kn">end</span> <span class="o">}</span> <span class="k">in</span>
+<span class="k">have</span> <span class="n">h6</span> <span class="o">:</span> <span class="n">sf</span> <span class="bp">=</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">restrict</span> <span class="o">(</span><span class="n">simple_func</span><span class="bp">.</span><span class="n">const</span> <span class="n">β</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">},</span>
+<span class="k">from</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">show</span> <span class="o">(</span><span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">classical</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">simple_func</span><span class="bp">.</span><span class="n">restrict_apply</span> <span class="bp">_</span> <span class="n">h5</span><span class="o">,</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">const_apply</span><span class="o">,</span> <span class="n">dirac_apply</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr_eq_if</span><span class="o">]</span><span class="bp">;</span>
+<span class="n">dsimp</span> <span class="n">only</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_set_of_eq</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">bot_eq_zero</span><span class="o">]</span><span class="bp">;</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">bind_apply</span> <span class="n">hs</span> <span class="n">h1</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="n">map_apply</span> <span class="o">(</span><span class="n">measurable_prod_mk</span> <span class="n">measurable_const</span> <span class="n">measurable_id</span> <span class="o">:</span> <span class="n">measurable</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">))</span> <span class="n">hs</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">integral</span> <span class="n">ν</span> <span class="n">sf</span> <span class="bp">=</span> <span class="n">ν</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">integral</span><span class="o">,</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">lintegral_eq_integral</span><span class="o">,</span> <span class="n">h6</span><span class="o">,</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">restrict_const_integral</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">],</span> <span class="n">refl</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h5</span>
+<span class="kn">end</span>
+
+<span class="c1">-- set_option pp.implicit true</span>
+<span class="c1">-- set_option pp.notation false</span>
+<span class="kn">lemma</span> <span class="n">inl_measurable_bind_ret</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">bind</span> <span class="n">ν</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="c1">-- measurable_of_measurable_coe _ $ λ s hs,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">aux</span><span class="o">]</span><span class="bp">;</span> <span class="n">refine</span> <span class="n">measurable_of_measurable_coe</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">measurable_generate_from</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">ht</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span><span class="bp">;</span>
+<span class="n">dsimp</span> <span class="n">only</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">preimage</span><span class="o">]</span>
+<span class="c1">-- λ s hs, by dsimp only [measure.measurable_space, lattice.supr, lattice.Sup, lattice.has_Sup.Sup, lattice.conditionally_complete_lattice.Sup,</span>
+<span class="c1">-- lattice.complete_lattice.Sup, measurable_space.lattice.complete_lattice, galois_insertion.lift_complete_lattice] at hs</span>
+<span class="c1">-- begin</span>
+<span class="c1">--   -- apply measurable_of_measurable_coe,</span>
+<span class="c1">--   -- intros s hs,</span>
+<span class="c1">--   -- dsimp only [measure_theory.measure.bind, join, of_measurable]</span>
+<span class="c1">--   -- intros s hs, dsimp only [measurable_space.map, measure_theory.measure.bind, join, of_measurable, dirac]</span>
+<span class="c1">-- end</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">false</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span><span class="bp">.</span><span class="n">bind</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">outer_measure</span><span class="bp">.</span><span class="n">dirac</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">measure</span><span class="bp">.</span><span class="n">measurable_space</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">prod</span><span class="bp">.</span><span class="n">measurable_space</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">measurable_space</span><span class="bp">.</span><span class="n">gi_generate_from</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">bind_apply</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">integral</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measurable_integral</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">integral_dirac</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">lintegral_eq_integral</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">simple_func</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measurable_dirac</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measurable_prod_mk</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">simple_func</span><span class="bp">.</span><span class="n">restrict_const_integral</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measurable</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measure</span><span class="bp">.</span><span class="n">map</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">measurable_generate_from</span>
+</pre></div>
+
+<a name="169141130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169141130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169141130">Mario Carneiro (Jun 27 2019 at 14:44)</a>:</h4>
+<p>Doesn't <code>aux</code> follow from <code>bind_dirac</code>?</p>
+
+<a name="169141157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169141157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169141157">Kenny Lau (Jun 27 2019 at 14:44)</a>:</h4>
+<p>I don't know</p>
+
+<a name="169141517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169141517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169141517">Mario Carneiro (Jun 27 2019 at 14:48)</a>:</h4>
+<p>Er, I mean this one <a href="#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054" title="#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054</a></p>
+
+<a name="169141600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169141600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169141600">Mario Carneiro (Jun 27 2019 at 14:49)</a>:</h4>
+<p>I thought it got PRd but maybe not</p>
+
+<a name="169141950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169141950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169141950">Kenny Lau (Jun 27 2019 at 14:53)</a>:</h4>
+<p>that's like 10 times shorter than my proof lol</p>
+
+<a name="169142158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142158">Koundinya Vajjha (Jun 27 2019 at 14:55)</a>:</h4>
+<p>sorry i missed this discussion last night. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> , are you assuming sigma-finiteness?</p>
+
+<a name="169142188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142188">Koundinya Vajjha (Jun 27 2019 at 14:55)</a>:</h4>
+<blockquote>
+<p>Er, I mean this one <a href="#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054" title="#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral.20of.20a.20constant/near/165952054</a></p>
+</blockquote>
+<p>yes this was never PR'd</p>
+
+<a name="169142310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142310">Kenny Lau (Jun 27 2019 at 14:57)</a>:</h4>
+<blockquote>
+<p>sorry i missed this discussion last night. <span class="user-mention silent" data-user-id="110064">Kenny Lau</span> , are you assuming sigma-finiteness?</p>
+</blockquote>
+<p>I only know that I need to prove or disprove this:</p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">),</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span>
+<span class="err">⊢</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="err">⇑</span><span class="n">ν</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">|</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="err">∈</span> <span class="n">s</span><span class="o">})</span>
+</pre></div>
+
+<a name="169142463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142463">Mario Carneiro (Jun 27 2019 at 14:58)</a>:</h4>
+<p>What's the status on PRing your stuff <span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span> ? Remember not to build up too much stuff and PR some giant thing. A good strategy is to PR all the stuff that's not actually part of your main work but is missing from other parts of the library</p>
+
+<a name="169142535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142535">Koundinya Vajjha (Jun 27 2019 at 14:59)</a>:</h4>
+<p>yes I've been putting it off to make it mathlib-ready. i'll get to it soon and yes, will make small PR chunks.</p>
+
+<a name="169142546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142546">Mario Carneiro (Jun 27 2019 at 15:00)</a>:</h4>
+<p>aka your <code>to_mathlib</code> collection</p>
+
+<a name="169142633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142633">Koundinya Vajjha (Jun 27 2019 at 15:00)</a>:</h4>
+<p>actually the stuff I need is a little specialized so its not general enough. but i'll PR it anyway so the maintainers can decide</p>
+
+<a name="169142840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142840">Mario Carneiro (Jun 27 2019 at 15:02)</a>:</h4>
+<p>You can also make a [WIP] PR if you want to expose your current design decisions without making everything ready for merge</p>
+
+<a name="169145159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145159">Koundinya Vajjha (Jun 27 2019 at 15:28)</a>:</h4>
+<p>Probably putting this question in context will help: I ran into this when I was trying to finish proving that the product measure as returned by the Giry monad has it's expected property: <code>(⇑doₐ (x : α) ←ₐ μ ; doₐ (y : β) ←ₐ ν ; ret (x, y)) (set.prod A B) = ⇑μ A * ⇑ν B</code> <br>
+I start off this proof by using a <code>bind_apply</code>. <br>
+Which reduces the goal to </p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">μ</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">hA</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">A</span><span class="o">,</span>
+<span class="n">hB</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">B</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="err">∫</span><span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="err">⇑</span><span class="n">doₐ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="err">←ₐ</span> <span class="n">ν</span> <span class="bp">;</span> <span class="n">ret</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span><span class="err">ð</span><span class="n">μ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">⇑</span><span class="n">μ</span> <span class="n">A</span> <span class="bp">*</span> <span class="err">⇑</span><span class="n">ν</span> <span class="n">B</span>
+</pre></div>
+
+
+<p>But with the additional goal that <code>⊢ measurable (λ (x : α), doₐ (y : β) ←ₐ ν ; ret (x, y))</code></p>
+
+<a name="169145200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145200">Koundinya Vajjha (Jun 27 2019 at 15:29)</a>:</h4>
+<p>I was able to finish everything except for this final goal.</p>
+
+<a name="169145350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145350">Koundinya Vajjha (Jun 27 2019 at 15:30)</a>:</h4>
+<p>I guess in hindsight sigma-finiteness <em>is</em> needed to prove this, but I'm not sure how exactly.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

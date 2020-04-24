@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/768501.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/768501.html">1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169713355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713355">Kenny Lau (Jul 05 2019 at 14:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="mi">1</span> <span class="n">at</span> <span class="n">H</span><span class="bp">;</span> <span class="n">trivial</span> <span class="c1">--fails</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H</span><span class="bp">;</span> <span class="n">trivial</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="169713405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713405">Kenny Lau (Jul 05 2019 at 14:36)</a>:</h4>
+<p>how strongly is <code>1</code> associated with <code>nat</code>?</p>
+
+<a name="169713430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713430">Kevin Buzzard (Jul 05 2019 at 14:36)</a>:</h4>
+<p><code>change</code> is quite happy to fail if it decides what your input means and then realises that it's nothing to do with what the hypothesis it's supposed to be changing is.</p>
+
+<a name="169713453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713453">Kevin Buzzard (Jul 05 2019 at 14:37)</a>:</h4>
+<p>When I see <code>change</code> fail I sometimes change <code>change X at H</code> to <code>def Z := X</code></p>
+
+<a name="169713482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713482">Kevin Buzzard (Jul 05 2019 at 14:38)</a>:</h4>
+<p>and often the def fails. If the def fails I think change just fails. I don't think change looks at what it's supposed to be changing until it's made the thing it's supposed to be changing it to. That's my impression at least.</p>
+
+<a name="169713557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713557">Kevin Buzzard (Jul 05 2019 at 14:38)</a>:</h4>
+<p>So in the first case I guess <code>change</code> is trying to solve the metavariables ASAP, without looking at <code>H</code>, and so it solves them using nat.</p>
+
+<a name="169713727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713727">Mario Carneiro (Jul 05 2019 at 14:41)</a>:</h4>
+<p>That is nat defaulting you are seeing. If a numeral doesn't have a particular type after elaboration it defaults to nat</p>
+
+<a name="169713728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/1/near/169713728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/768501.html#169713728">Mario Carneiro (Jul 05 2019 at 14:41)</a>:</h4>
+<p>I think the <code>change</code> expression might be elaborated separately from the goal to cause this behavior</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

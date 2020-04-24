@@ -1,0 +1,474 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/625821460InfiniteRamsey.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html">#1460 Infinite Ramsey</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177266447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266447">Johan Commelin (Oct 03 2019 at 17:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="115237">@Jared Corduan</span> Even better would be to discuss it in the PR reviews stream <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> But it's a bit hidden...</p>
+
+<a name="177266497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266497">Johan Commelin (Oct 03 2019 at 17:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Should have shown you <code>push_neg</code> instead</p>
+
+<a name="177266524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266524">Johan Commelin (Oct 03 2019 at 17:23)</a>:</h4>
+<p>And I think I would call <code>infinite'</code> by <code>nat.infinite</code> or something like that.</p>
+
+<a name="177266587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266587">Jared Corduan (Oct 03 2019 at 17:24)</a>:</h4>
+<p>ah, wonderful! :)</p>
+
+<a name="177266839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266839">Jared Corduan (Oct 03 2019 at 17:27)</a>:</h4>
+<p>Would my Pi2 definition live in my ramsey file? or with fintype? do folks mind that it is not as general as it could be (were I to place it outside my file)?</p>
+
+<a name="177266847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177266847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177266847">Mario Carneiro (Oct 03 2019 at 17:27)</a>:</h4>
+<p>I would call it <code>nat.unbounded</code> fwiw</p>
+
+<a name="177267000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177267000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177267000">Jared Corduan (Oct 03 2019 at 17:29)</a>:</h4>
+<p>Should I state my theorems with <code>infinite</code>, and swap it out for <code>unbounded</code> when I need to? or are the statements with <code>unbounded</code> ok, provided there exists the equivalence of definitions somewhere?</p>
+
+<a name="177267156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177267156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177267156">Mario Carneiro (Oct 03 2019 at 17:30)</a>:</h4>
+<p>for mathlib, I would prefer a theorem of the form <code>infinite A &lt;-&gt; ∀ x : ℕ, ∃ y : ℕ, x &lt; y ∧ y ∈ A</code> and skip the double definition</p>
+
+<a name="177267288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177267288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177267288">Jared Corduan (Oct 03 2019 at 17:32)</a>:</h4>
+<p>ok, sure thing. That mean stating the ramsey theorems with the mathlib infinite, and swapping out when I need unbounded (which shall be unnamed).</p>
+
+<a name="177965239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965239">Jared Corduan (Oct 12 2019 at 02:02)</a>:</h4>
+<p>I'm having trouble proving the <code>iff</code> between the mathlib <code>infinite</code>and my unbounded definition. I am currently here:</p>
+<div class="codehilite"><pre><span></span>lemma infinite_unbounded (H : set ℕ) :
+  set.infinite H ↔ ∀ x : ℕ, ∃ y : ℕ, x &lt; y ∧ y ∈ H :=
+begin
+  constructor,
+  { classical,
+    contrapose,
+    intro h, unfold set.infinite, rw not_not,
+    have hf : ∃ x, ∀ y, ¬ (x &lt; y ∧ y ∈ H),
+    simp [not_forall, not_exists] at h, simp, exact h,
+    simp at hf,
+    cases hf with x hx,
+    unfold finite,
+    constructor,
+    exact ⟨sorry, sorry⟩,
+  },
+  { intros h hfin,
+    cases (finset.exists_nat_subset_range hfin.to_finset) with n hn,
+    cases (h n) with y Hy,
+    have hyn : y ∈ finset.range n,
+    apply finset.subset_iff.mpr hn, simp [Hy.right],
+    simp at hyn,
+    exact lt_irrefl n (lt_trans (Hy.left) hyn) }
+end
+</pre></div>
+
+
+<p>In context, right before the two sorrys, I have <code>hx : ∀ (y : ℕ), x &lt; y → y ∉ H</code> and need to show <code>fintype ↥H</code>. which seems great, <code>finset.range x</code> should be my fintype. But I get two errors that I'm having trouble understanding.</p>
+<p>If I replace the first sorry with <code>finset.range x</code>, I learn that <code>finset ℕ</code> is not the same type as <code>finset ↥H</code>. Is the coercion on <code>set ℕ</code> not to <code>ℕ</code>?</p>
+<p>If I try to fix the second sorry by showing <code>have hb : ∀ x : ↑H, x ∈ finset.range x</code>, I learn that there is a class instance problem with <code>has_mem ↑H (finset ℕ)</code>.</p>
+<p>I think that I am misunderstanding <code>↑H</code> somehow (it must not be <code>ℕ</code>).</p>
+
+<a name="177965781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965781">Jesse Michael Han (Oct 12 2019 at 02:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">infinite_unbounded</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">H</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">H</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span> <span class="n">by_contra</span> <span class="n">H_contra</span><span class="o">,</span> <span class="n">push_neg</span> <span class="n">at</span> <span class="n">H_contra</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h</span><span class="o">,</span> <span class="n">refine</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">finite_le_nat</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">finish</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">hfin</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">exists_nat_subset_range</span> <span class="n">hfin</span><span class="bp">.</span><span class="n">to_finset</span><span class="o">)</span> <span class="k">with</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">h</span> <span class="n">n</span><span class="o">)</span> <span class="k">with</span> <span class="n">y</span> <span class="n">Hy</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hyn</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">subset_iff</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">hn</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">Hy</span><span class="bp">.</span><span class="n">right</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="n">at</span> <span class="n">hyn</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">lt_irrefl</span> <span class="n">n</span> <span class="o">(</span><span class="n">lt_trans</span> <span class="o">(</span><span class="n">Hy</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span> <span class="n">hyn</span><span class="o">)</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177965901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965901">Jared Corduan (Oct 12 2019 at 02:19)</a>:</h4>
+<p>thank you <span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> ! I will look up what <code>refine finite_subset (finite_le_nat x) (λ _ _, by finish)</code> does! <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span>  refine and finish!</p>
+
+<a name="177965968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965968">Jesse Michael Han (Oct 12 2019 at 02:20)</a>:</h4>
+<p>oh oops, that's supposed to be an <code>exact</code>, i just used <code>refine</code> while finding the proof</p>
+
+<a name="177966056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177966056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177966056">Jared Corduan (Oct 12 2019 at 02:23)</a>:</h4>
+<p>I knew about <code>push_neg</code> from <span class="user-mention" data-user-id="112680">@Johan Commelin</span> , but <code>finish</code> is new to me, thanks!</p>
+
+<a name="177968435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177968435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177968435">Jared Corduan (Oct 12 2019 at 03:35)</a>:</h4>
+<p>ok! so much thanks to <span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> 's help, what's left to think about is (and sorry I'm so slow!):</p>
+<ul>
+<li>can I simplify my proof of the specialized version of the PHP, using the fact that a finite union of finite sets is finite.</li>
+<li>can I use a more natural definition of "size two sets"? I'm a bit scared of using length 2 vectors or fintype, and my definition of and ordered pair <code>(a, b)</code> where <code>a &lt; b</code> is pretty normal in ramsey theory, but I like the idea of doing it right!</li>
+<li>maybe the two lemmas I have about increasing functions on ℕ can be generalized and placed in algebra.order_functions.</li>
+</ul>
+<p>please let me know your preference between long open PRs and getting it done right the first time!</p>
+
+<a name="177970547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177970547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177970547">Johan Commelin (Oct 12 2019 at 04:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="115237">@Jared Corduan</span> We certainly prefer getting it done right.</p>
+
+<a name="177970732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177970732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177970732">Reid Barton (Oct 12 2019 at 04:48)</a>:</h4>
+<p>Particularly for PRs which add entire new modules, there's less cost to having long-open PRs.</p>
+
+<a name="177971434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177971434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177971434">Johan Commelin (Oct 12 2019 at 05:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="115237">@Jared Corduan</span> In the end, I think we don't really care about how you prove you theorem. What we do care about is an end result that can be applied in as many setups as possible. For you proof, it is extremely useful to have the inductive type <code>color</code> lying around. But I propose that after proving your "main" theorem, you go one step further, and reprove it for arbitrary types of cardinality two, by choosing a bijection to <code>color</code>. That saves the user the burden of choosing this bijection.</p>
+
+<a name="177971481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177971481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177971481">Johan Commelin (Oct 12 2019 at 05:12)</a>:</h4>
+<p>In the same sense, if you can add an induction on top that generalizes the result to more colors... all the better.</p>
+
+<a name="177971485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177971485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177971485">Johan Commelin (Oct 12 2019 at 05:13)</a>:</h4>
+<p>Similarly, if you can replace <code>nat^2</code> by ordered pairs in some more general ordered type, extra bonus points.</p>
+
+<a name="177971501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177971501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177971501">Johan Commelin (Oct 12 2019 at 05:13)</a>:</h4>
+<p>I'm not saying all of these <em>must</em> be done. But if it's easy to do, please do it. It vastly increases the risk that this theorem gets used elsewhere.</p>
+
+<a name="177976250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177976250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177976250">Kevin Buzzard (Oct 12 2019 at 07:39)</a>:</h4>
+<p>hah I think that something got lost in translation in the phrase "increases the risk that this theorem gets used" :D</p>
+
+<a name="177986130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177986130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177986130">Jared Corduan (Oct 12 2019 at 12:21)</a>:</h4>
+<p>ok, great, I'll keep going with it! Thank you again for all the help!</p>
+
+<a name="180560437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180560437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180560437">Jared Corduan (Nov 12 2019 at 20:52)</a>:</h4>
+<p>I'm having some trouble figuring out how to work with <code>fintype</code> and <code>multiset</code>, apologies if these are basic questions, perhaps I just need to read some more (or find some good examples of using them in action).</p>
+<p>My goal was to provide the <code>fintype</code> instance for the enumeration <code>color</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+</pre></div>
+
+
+<p>making the needed <code>multiset</code> is easy, <code>red :: blue :: multiset.zero</code>. Then to make a <code>fintype</code> I need to provide a <code>nodup</code> instance. There are a few <code>nodup</code>s around, but it seems the multiset one lifts the list one  via <code>nodup (λ s t p, propext $ perm_nodup p)</code>.  If I try to make a <code>fintype</code> and break into tactic mode:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="n">red</span> <span class="bp">::</span> <span class="n">blue</span> <span class="bp">::</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">zero</span>
+<span class="o">,</span> <span class="k">begin</span> <span class="n">constructor</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span> <span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>Then I'm pretty close, but the sorry is where I am stuck at showing <code> list.pairwise ne list.nil</code>. Looking at the inductive definition of <code>list.nodup</code>, I see that this is indeed the base case, but I don't know in general how to resolve this to Prop...</p>
+<p>Carrying on, if I try to use my <code>all_colors</code> to make a fintype, I get stuck trying to prove membership on the multiset:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+<span class="n">all_colors</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+
+<p>The target at the sorrys is <code>red ∈ all_colors</code> and <code>blue ∈ all_colors</code>. the magic of simp doesn't solve this for me, and I can't figure out how the membership works in the multiset...</p>
+<p>Anyway, I'll carry on, I'm sure if I find some more examples I get it :)</p>
+
+<a name="180561134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180561134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180561134">Patrick Massot (Nov 12 2019 at 20:59)</a>:</h4>
+<p>What about</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="kn">open</span> <span class="n">color</span>
+<span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">red</span><span class="o">,</span> <span class="n">blue</span> <span class="o">}</span>
+</pre></div>
+
+<a name="180562353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180562353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180562353">Chris Hughes (Nov 12 2019 at 21:11)</a>:</h4>
+<p>For a slight performance optimisation </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="kn">open</span> <span class="n">color</span>
+<span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">red</span> <span class="bp">::</span> <span class="n">blue</span> <span class="bp">::</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="180566187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566187">Jared Corduan (Nov 12 2019 at 21:52)</a>:</h4>
+<p>thank you <span class="user-mention" data-user-id="110031">@Patrick Massot</span> and <span class="user-mention" data-user-id="110044">@Chris Hughes</span> ! I see now that that notation is mentioned in the comments inside finset.lean. I'll have to figure out what that's doing...</p>
+<p>Was I far off in trying to create the finset directly?</p>
+<p>Is there a similar trick to creating instances of <code>fintype</code>? With the new working <code>all_colors</code> I'm still unsure how to show, eg, <code>red ∈ all_colors</code>.</p>
+
+<a name="180566268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566268">Chris Hughes (Nov 12 2019 at 21:53)</a>:</h4>
+<p>I'm sure either <code>dec_trivial</code> or <code>by simp all_colors</code> will prove <code>red ∈ all_colors</code></p>
+
+<a name="180566351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566351">Kevin Buzzard (Nov 12 2019 at 21:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+<span class="n">all_colors</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+<a name="180566465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566465">Chris Hughes (Nov 12 2019 at 21:55)</a>:</h4>
+<p><code>assume x, by cases x; simp</code> will also prove all colors are in all_colors</p>
+
+<a name="180566693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566693">Kevin Buzzard (Nov 12 2019 at 21:57)</a>:</h4>
+<p>When I used to get stuck on questions like <code>red ∈ all_colors</code> I would do the following dirty trick. First switch notation off, so you can see what <code>∈</code> really means:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+<span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+<span class="n">all_colors</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="c1">-- ⊢ has_mem.mem red all_colors</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>and then just unfold to figure out what the heck is going on:</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">,</span>
+</pre></div>
+
+
+<p>Actually, this is a tricky one.</p>
+
+<a name="180566787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566787">Jared Corduan (Nov 12 2019 at 21:58)</a>:</h4>
+<p>that's awesome, thank you, I would have not know to try that!</p>
+
+<a name="180566808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566808">Kevin Buzzard (Nov 12 2019 at 21:58)</a>:</h4>
+<p>I guess the point is that ultimately you see that <code>list.mem</code> is involved.</p>
+
+<a name="180566844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566844">Jared Corduan (Nov 12 2019 at 21:59)</a>:</h4>
+<p>I get an error on the <code>refl</code>after the left</p>
+
+<a name="180566989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566989">Kevin Buzzard (Nov 12 2019 at 22:00)</a>:</h4>
+<p>maybe you should post working code. I filled in stuff to get your code working and maybe I made different choices to you. This compiles for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="kn">open</span> <span class="n">color</span>
+
+<span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="n">red</span> <span class="bp">::</span> <span class="n">blue</span> <span class="bp">::</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">zero</span>
+<span class="o">,</span> <span class="k">begin</span> <span class="n">constructor</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span> <span class="kn">end</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+<span class="n">all_colors</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+<a name="180567079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567079">Jared Corduan (Nov 12 2019 at 22:01)</a>:</h4>
+<p>ok, thanks, I was trying to get a short example of where I was stuck, but maybe I've done something weird</p>
+
+<a name="180567096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567096">Kevin Buzzard (Nov 12 2019 at 22:01)</a>:</h4>
+<p>But I've seen this trick before with list.mem: </p>
+<div class="codehilite"><pre><span></span>example : 3 ∈ [1,2,3,4,5] :=
+begin
+  right,
+  right,
+  left,
+  refl,
+end
+</pre></div>
+
+
+<p>that was why I tried it.</p>
+
+<a name="180567255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567255">Jared Corduan (Nov 12 2019 at 22:03)</a>:</h4>
+<p>I appreciate the help! I'll play around some with that and see if I can get it working! I can't get the <code>assume x, by cases x; simp</code> to work either (the simp gets the red sqiggle), so I'm probably doing something odd.</p>
+
+<a name="180567316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567316">Patrick Massot (Nov 12 2019 at 22:04)</a>:</h4>
+<p>Then post working code.</p>
+
+<a name="180567333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567333">Patrick Massot (Nov 12 2019 at 22:04)</a>:</h4>
+<p>(minimized if possible)</p>
+
+<a name="180567391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567391">Jared Corduan (Nov 12 2019 at 22:05)</a>:</h4>
+<p>The refl I assume was trying to prove <code>red = blue</code>, at least that's the goal I see. anyway, I get more organized and report back, thanks again!</p>
+
+<a name="180583956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180583956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180583956">Jared Corduan (Nov 13 2019 at 02:25)</a>:</h4>
+<p>ok! <span class="user-mention" data-user-id="110044">@Chris Hughes</span> definition of <code>all_colors</code> does work with <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> 's fintype instance. It took me a while to figure this out, I was getting errors I didn't understand and had to build a bunch of olean files to see what was going on. So, as promised, working code :) :</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="kn">open</span> <span class="n">color</span>
+
+<span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">red</span> <span class="bp">::</span> <span class="n">blue</span> <span class="bp">::</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">all_colors&#39;</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span> <span class="o">{</span><span class="n">red</span><span class="o">,</span> <span class="n">blue</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+  <span class="n">all_colors</span><span class="o">,</span>
+  <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">left</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span> <span class="c1">-- This refl does not work with all_colors&#39;</span>
+    <span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I still have a lot to learn about how fintype works!</p>
+
+<a name="180584186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180584186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180584186">Jared Corduan (Nov 13 2019 at 02:29)</a>:</h4>
+<p>(so to be clear, the error I was getting earlier still happens when using <code>def all_colors' : finset color := {red, blue}</code>. Though the first definition I had of <code>all_colors</code> with <code>red :: blue :: multiset.zero</code> and the <code>sorry</code> also works with the same proof.)</p>
+
+<a name="180937903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180937903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180937903">Jared Corduan (Nov 17 2019 at 02:12)</a>:</h4>
+<p>is there any notation for working the equivalence (<code>≃</code>)  structure from <code>data/equiv</code>? I looked but could not find anything.</p>
+<p>I wrote a lemma<br>
+<code>lemma color_equiv_fin2 : color ≃ fin 2 </code> with my two element enumeration <code>color</code>.<br>
+But the name <code>color_equiv_fin2.inv_fun</code>, is pretty long and quickly becomes unwieldy. I tried using let bindings for both <code>inv_fun</code> and <code>to_fun</code>, but then is seems that I am no longer able to do a rewrite with <code>right_inv</code>.  (for example, if I let <code>g := color_equiv_fin2.to_fun</code> and <code>g' := color_equiv_fin2.inv_fun</code>, then I cannot rewrite with <code>color_equiv_fin2.right_inv</code> when I see <code>g ( g' (x))</code>, etc.)</p>
+<p>Maybe I just need a short name for <code>color_equiv_fin2</code>, but I thought that maybe I was using things in a weird way.</p>
+
+<a name="180937974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180937974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180937974">Mario Carneiro (Nov 17 2019 at 02:15)</a>:</h4>
+<p>The preferred notation is <code>e x</code> and <code>e.symm x</code> for the function and its inverse</p>
+
+<a name="180938033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180938033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180938033">Jared Corduan (Nov 17 2019 at 02:16)</a>:</h4>
+<p>ok, thanks!</p>
+
+<a name="188296466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296466">Jared Corduan (Feb 15 2020 at 20:02)</a>:</h4>
+<p>I'm having trouble proving things about definitions that use if-then-else. (relating to me trying to provide a more mathlib friendly interface to my version of ramsey's theorem.)</p>
+<p>In particular, the usual trick for extending ramsey's theorem from two colors to multiple colors involves turning a coloring of <code>k</code>-many colors into a coloring of two colors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="n">def</span> <span class="n">split_coloring</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">succ</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">color</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="k">then</span> <span class="n">red</span> <span class="k">else</span> <span class="n">blue</span>
+</pre></div>
+
+
+<p>I then want to be able to make conclusions about <code>split_coloring</code>, such as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">red_split</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">succ</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">split_coloring</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">red</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">split_coloring</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But I get stuck trying to conclude that <code>f a = k</code> from <code> ite (f a = k) red blue = red</code>.</p>
+
+<a name="188296480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296480">Johan Commelin (Feb 15 2020 at 20:03)</a>:</h4>
+<p>Try <code>split_ifs</code></p>
+
+<a name="188296519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296519">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="115237">@Jared Corduan</span> That will give you to goals.</p>
+
+<a name="188296524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296524">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p>The first you can close by <code>assumption</code></p>
+
+<a name="188296526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296526">Jared Corduan (Feb 15 2020 at 20:04)</a>:</h4>
+<p>ok, thanks!</p>
+
+<a name="188296530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296530">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p>The second will be <code>exfalso, proof_that_blue_ne_red</code></p>
+
+<a name="188296542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296542">Jared Corduan (Feb 15 2020 at 20:05)</a>:</h4>
+<p>I suppose I should spend more time seeing what tactics are available. :)</p>
+
+<a name="188296551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296551">Johan Commelin (Feb 15 2020 at 20:05)</a>:</h4>
+<p>Hmm, maybe not <code>exfalso</code> but <code>by_contradiction</code></p>
+
+<a name="188296569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296569">Reid Barton (Feb 15 2020 at 20:05)</a>:</h4>
+<p>or <code>simp</code></p>
+
+<a name="188296648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296648">Jared Corduan (Feb 15 2020 at 20:07)</a>:</h4>
+<p>do you mean <code>simp</code> for my original problem? <code>simp</code> is one of my few tactics I've been trying to use, it did not work her. maybe I need to open some libraries to make <code>simp</code> work for this case?</p>
+
+<a name="188297919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188297919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188297919">Reid Barton (Feb 15 2020 at 20:46)</a>:</h4>
+<p>No, after some <code>split_ifs</code> invocation. For example <code>split_ifs at h; simpa</code> or <code>revert h, split_ifs, simp</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,254 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/63296TPILChapter4Exercises.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html">TPIL Chapter 4 Exercises</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190099442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190099442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190099442">Rocky Kamen-Rubio (Mar 09 2020 at 18:08)</a>:</h4>
+<p>Question 4.2: I'm getting a type mismatch errors on all the example in ch4 exercise 2, first on the iff.intro, then on the or.elim, then on the iff.intro. Any insights would be appreciated!</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">((</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+  <span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">),</span> <span class="k">show</span> <span class="n">r</span><span class="o">,</span> <span class="k">from</span> <span class="n">h</span> <span class="n">a</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span>  <span class="n">hr</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">),</span>
+    <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">h1</span> <span class="n">a</span><span class="o">)</span>
+      <span class="o">(</span><span class="k">assume</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="n">r</span> <span class="n">hpx</span><span class="o">)</span>
+      <span class="o">(</span><span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="bp">_</span> <span class="n">hr</span><span class="o">))</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h2</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h2</span>
+      <span class="o">(</span><span class="k">assume</span> <span class="n">hVxpx</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hVxpx</span> <span class="n">a</span><span class="o">))</span>
+      <span class="o">(</span><span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="bp">_</span> <span class="n">hr</span><span class="o">))</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">r</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+   <span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span> <span class="k">show</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span>
+   <span class="o">((</span><span class="n">h1</span> <span class="n">a</span><span class="o">)</span> <span class="n">hr</span><span class="o">))</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h2</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+  <span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span> <span class="k">show</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span>
+  <span class="o">((</span><span class="n">h2</span> <span class="n">hr</span><span class="o">)</span> <span class="n">a</span><span class="o">))</span>
+</pre></div>
+
+<a name="190099795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190099795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190099795">Reid Barton (Mar 09 2020 at 18:11)</a>:</h4>
+<p>Is this your real code? <code>p</code> is not declared anywhere</p>
+
+<a name="190099815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190099815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190099815">Reid Barton (Mar 09 2020 at 18:12)</a>:</h4>
+<p>also, <code>(assume hr : hr)</code> is clearly wrong</p>
+
+<a name="190099883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190099883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190099883">Edward Ayers (Mar 09 2020 at 18:12)</a>:</h4>
+<p>For the first one, you need to write <code>assume hr a, hr</code> instead of <code>assume hr: hr</code></p>
+
+<a name="190100008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100008">Rocky Kamen-Rubio (Mar 09 2020 at 18:13)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/TPIL.20Chapter.204.20Exercises/near/190099795" title="#narrow/stream/113489-new-members/topic/TPIL.20Chapter.204.20Exercises/near/190099795">said</a>:</p>
+<blockquote>
+<p>Is this your real code? <code>p</code> is not declared anywhere</p>
+</blockquote>
+<p>Sorry! P was defined at the top of my file and I forgot to include it when I copied it over.</p>
+
+<a name="190100050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100050">Edward Ayers (Mar 09 2020 at 18:14)</a>:</h4>
+<p>The pattern for <code>assume</code> is <code>assume x : α, b</code> where <code>x</code> is an identifier, <code>α</code> is a type or proposition and <code>b</code> is a term or proof. But you can skip the type and you can chain multiple identifiers.</p>
+
+<a name="190100302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100302">Rocky Kamen-Rubio (Mar 09 2020 at 18:16)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="121918">Edward Ayers</span> <a href="#narrow/stream/113489-new-members/topic/TPIL.20Chapter.204.20Exercises/near/190099883" title="#narrow/stream/113489-new-members/topic/TPIL.20Chapter.204.20Exercises/near/190099883">said</a>:</p>
+<blockquote>
+<p>For the first one, you need to write <code>assume hr a, hr</code> instead of <code>assume hr: hr</code></p>
+</blockquote>
+<p>Just made that correction, thank you! It's still giving me a type mismatch error on iff.intro though.</p>
+
+<a name="190100318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100318">Edward Ayers (Mar 09 2020 at 18:16)</a>:</h4>
+<p>On the next example, take a look at the error:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  or.elim h2 (λ (hVxpx : ∀ (x : α), p x), or.intro_left ?m_1[hVxpx] (hVxpx a))
+term
+  λ (hVxpx : ∀ (x : α), p x), or.intro_left ?m_1[hVxpx] (hVxpx a)
+has type
+  ∀ (hVxpx : ∀ (x : α), p x), p a ∨ ?m_1[hVxpx]
+but is expected to have type
+  (∀ (x : α), p x) → ∀ (x : α), p x ∨ r
+</pre></div>
+
+<a name="190100821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100821">Edward Ayers (Mar 09 2020 at 18:20)</a>:</h4>
+<p>Try commenting out the code that is complaining and replacing it with an underscore <code>_</code> and then seeing what type Lean wants you to replace the underscore with</p>
+
+<a name="190100862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100862">Edward Ayers (Mar 09 2020 at 18:21)</a>:</h4>
+<p>In the case of the second exercise, you might want to comment out the entire proof and replace with an underscore and then slowly add lines back in.</p>
+
+<a name="190100877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190100877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190100877">Edward Ayers (Mar 09 2020 at 18:21)</a>:</h4>
+<p>Because eg there is a rogue <code>assume a : α,</code> at the top</p>
+
+<a name="190108141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190108141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190108141">Rocky Kamen-Rubio (Mar 09 2020 at 19:29)</a>:</h4>
+<p>Ok I was able to get 1 and 3 working. I realize now that I misunderstood the way that "assume" statements interact with universal quantifiers. I still can't figure out how to get the 'left to right' direction of 2. If I assume a specific element in the assumption to be able to or.elim, then I've lost the generality to exact on all elements in alpha on the right hand side. I feel like I'm missing something.</p>
+
+<a name="190113789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190113789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190113789">Edward Ayers (Mar 09 2020 at 20:23)</a>:</h4>
+<p>I think that <code>(∀ x, p x ∨ r) -&gt; (∀ x, p x) ∨ r</code> needs to be done by contradiction.</p>
+
+<a name="190114515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190114515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190114515">Patrick Massot (Mar 09 2020 at 20:30)</a>:</h4>
+<p>There is nothing much you can try with intuitionistic logic here. The assumption cannot be broken and the only allowed moves are <code>left</code> and <code>right</code>.</p>
+
+<a name="190115353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115353">Patrick Massot (Mar 09 2020 at 20:39)</a>:</h4>
+<p>I'm skimming through this chapter to see what seems allowed, and I'm always puzzled by this "French quotation mark" terminology. In English, do you say ' is a quotation mark? Do you ever use it alone?</p>
+
+<a name="190115451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115451">Marc Huisinga (Mar 09 2020 at 20:40)</a>:</h4>
+<p>the problem mentions that one of the directions requires classical reasoning</p>
+
+<a name="190115455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115455">Patrick Massot (Mar 09 2020 at 20:40)</a>:</h4>
+<p>Anyway, I guess this exercise is rather difficult in term mode, since it seems you are not allowed to use the lemmas describing the negation of quantifiers.</p>
+
+<a name="190115493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115493">Patrick Massot (Mar 09 2020 at 20:41)</a>:</h4>
+<p>Classical reasoning yes, but why half quotation marks?</p>
+
+<a name="190115884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115884">Kevin Buzzard (Mar 09 2020 at 20:46)</a>:</h4>
+<p>I think I'd be happy calling a quotation mark a quotation mark. Does TPIL refer to one French quotation mark? I'm a bit confused about whether you're talking about ' vs " or " vs ""</p>
+
+<a name="190115921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115921">Reid Barton (Mar 09 2020 at 20:46)</a>:</h4>
+<p>apostrophe or single quote</p>
+
+<a name="190115967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190115967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190115967">Reid Barton (Mar 09 2020 at 20:46)</a>:</h4>
+<p>They are sometimes used to quote inside quotations</p>
+
+<a name="190116004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116004">Patrick Massot (Mar 09 2020 at 20:47)</a>:</h4>
+<p>TPIL says ‹ is a French quotation mark, but this symbol appears nowhere in France.  We do use  « as an opening quotation mark.</p>
+
+<a name="190116042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116042">Rob Lewis (Mar 09 2020 at 20:47)</a>:</h4>
+<p>Single quotes are sometimes just normal quotes in the UK, right?</p>
+
+<a name="190116051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116051">Patrick Massot (Mar 09 2020 at 20:47)</a>:</h4>
+<blockquote>
+<p>They are sometimes used to quote inside quotations</p>
+</blockquote>
+<p>I'm so disappointed, I thought python invented this wonderful trick.</p>
+
+<a name="190116296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116296">Rob Lewis (Mar 09 2020 at 20:50)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Quotation_mark#History" target="_blank" title="https://en.wikipedia.org/wiki/Quotation_mark#History">Wiki says:</a></p>
+<blockquote>
+<p>The single quotation marks emerged around 1800 as a means of indicating a secondary level of quotation. One could expect that the logic of using the corresponding single mark would be applied everywhere, but it was not. In some languages using the angular quotation marks, the usage of single ones (‹…›) became obsolete, being replaced by double curved ones (“…”); the single ones still survive, for instance, in Switzerland.</p>
+</blockquote>
+
+<a name="190116310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116310">Rob Lewis (Mar 09 2020 at 20:50)</a>:</h4>
+<p>Maybe we should call them Swiss quotes instead.</p>
+
+<a name="190116373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190116373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190116373">Patrick Massot (Mar 09 2020 at 20:51)</a>:</h4>
+<p>This would be less confusing, especially since French quotation marks are also used in Lean.</p>
+
+<a name="190135690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190135690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190135690">Mario Carneiro (Mar 10 2020 at 01:40)</a>:</h4>
+<p>Given that angle quotation marks are paired, I don't see why there needs to be two different flavors anyway. Nesting FTW</p>
+
+<a name="190135839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190135839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190135839">Kenny Lau (Mar 10 2020 at 01:45)</a>:</h4>
+<p>in Hong Kong written Chinese we use 「」 for the outer quote and 『』 for the inner quote</p>
+
+<a name="190135845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190135845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190135845">Kenny Lau (Mar 10 2020 at 01:45)</a>:</h4>
+<p>(in mainland China they use '' and "")</p>
+
+<a name="190136645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190136645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190136645">Reid Barton (Mar 10 2020 at 02:07)</a>:</h4>
+<p>「」looks like the "round towards 0" operation (ceiling if negative, floor if positive)</p>
+
+<a name="190631151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631151">Rocky Kamen-Rubio (Mar 15 2020 at 05:33)</a>:</h4>
+<p>I'm getting an error message when I try to use <code>exp_log_eq</code> in term mode below for Chapter 6 Exercise 6.</p>
+<div class="codehilite"><pre><span></span><span class="c1">--6. Give a calculational proof of the theorem log_mul below.</span>
+
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">real</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">real</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">log</span> <span class="n">exp</span> <span class="o">:</span> <span class="n">real</span> <span class="bp">→</span> <span class="n">real</span><span class="o">)</span>
+<span class="kn">variable</span>  <span class="n">log_exp_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">log</span> <span class="o">(</span><span class="n">exp</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span>
+<span class="kn">variable</span>  <span class="n">exp_log_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span>
+<span class="kn">variable</span>  <span class="n">exp_pos</span>    <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span>
+<span class="kn">variable</span>  <span class="n">exp_add</span>    <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">y</span>
+
+<span class="c1">-- this ensures the assumptions are available in tactic proofs</span>
+<span class="n">include</span> <span class="n">log_exp_eq</span> <span class="n">exp_log_eq</span> <span class="n">exp_pos</span> <span class="n">exp_add</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">exp_add</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span>  <span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">h</span>
+
+<span class="kn">theorem</span> <span class="n">log_mul</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">calc</span>
+  <span class="n">log</span><span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">refl</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hx</span><span class="o">)</span> <span class="c1">--??????????</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hy</span><span class="o">)</span> <span class="c1">--??????????</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">exp_add</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">log_exp_eq</span>
+</pre></div>
+
+
+<p>I got it to work in tactic mode, but I want to understand what I'm doing wrong. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">log_mul</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">hx</span><span class="o">,</span> <span class="bp">-</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">h1</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">hy</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">h2</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">exp_add</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h2</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">log_exp_eq</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="190631207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631207">Mario Carneiro (Mar 15 2020 at 05:35)</a>:</h4>
+<p><code>by rw exp_log_eq hx</code></p>
+
+<a name="190631211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631211">Mario Carneiro (Mar 15 2020 at 05:35)</a>:</h4>
+<p><code>by exp_log_eq hx</code> doesn't work because <code>exp_log_eq</code> is not a tactic</p>
+
+<a name="190631255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631255">Mario Carneiro (Mar 15 2020 at 05:36)</a>:</h4>
+<p>remember that <code>by tac</code> is shorthand for <code>begin tac, end</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

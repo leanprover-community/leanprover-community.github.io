@@ -1,0 +1,120 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/26244mutuallyinductivetypeandfunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html">mutually inductive type and function</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193696612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193696612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193696612">Scott Morrison (Apr 12 2020 at 06:00)</a>:</h4>
+<p>I would like to define a mutually inductive type and function out of it. Is this possible? My example which I'd hoped might be accepted is:</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">edge_sequence</span><span class="o">,</span> <span class="n">add_edge_sequence</span>
+<span class="k">with</span> <span class="n">edge_sequence</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">single</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">}</span> <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="n">edges</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">L</span><span class="bp">.</span><span class="n">remaining_edges</span><span class="o">)</span> <span class="o">:</span> <span class="n">edge_sequence</span> <span class="n">L</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">edge_sequence</span> <span class="n">L</span><span class="o">)</span> <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="n">edges</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="o">(</span><span class="n">add_edge_sequence</span> <span class="n">S</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">remaining_edges</span><span class="o">)</span> <span class="o">:</span> <span class="n">edge_sequence</span> <span class="n">L</span>
+<span class="k">with</span> <span class="n">add_edge_sequence</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">},</span> <span class="n">edge_sequence</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">layout</span> <span class="n">G</span> <span class="bp">×</span> <span class="n">finset</span> <span class="n">G</span><span class="bp">.</span><span class="n">boxes</span>
+<span class="bp">|</span> <span class="n">L</span> <span class="o">(</span><span class="n">single</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">L</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span>
+<span class="bp">|</span> <span class="n">L</span> <span class="o">(</span><span class="n">cons</span> <span class="n">S</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">L&#39;</span><span class="o">,</span> <span class="n">B</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">L</span><span class="bp">.</span><span class="n">add_edge_sequence</span> <span class="n">S</span> <span class="k">in</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">L&#39;&#39;</span><span class="o">,</span> <span class="n">B&#39;</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">L</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span> <span class="k">in</span> <span class="bp">⟨</span><span class="n">L&#39;&#39;</span><span class="o">,</span> <span class="n">B</span> <span class="err">∪</span> <span class="n">B&#39;</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>(I can try to come up with a MWE if it's completely unclear what I'm going for here!)</p>
+
+<a name="193696621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193696621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193696621">Scott Morrison (Apr 12 2020 at 06:01)</a>:</h4>
+<p>From this I only get the helpful: <code>unknown declaration '4._.0'</code></p>
+
+<a name="193696627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193696627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193696627">Scott Morrison (Apr 12 2020 at 06:01)</a>:</h4>
+<p>Presuming Lean doesn't support this, does anyone who is good at induction know how to "roll it by hand"?</p>
+
+<a name="193696680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193696680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193696680">Scott Morrison (Apr 12 2020 at 06:02)</a>:</h4>
+<p>(<span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, points if you can guess what I'm doing)</p>
+
+<a name="193696689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193696689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193696689">Bryan Gin-ge Chen (Apr 12 2020 at 06:03)</a>:</h4>
+<p>Oh, now I think I know. <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+
+<a name="193697423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193697423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193697423">Mario Carneiro (Apr 12 2020 at 06:28)</a>:</h4>
+<p>The general scheme is called "induction-recursion" and it's stronger than lean's axiomatics, so this isn't always possible</p>
+
+<a name="193697434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193697434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193697434">Mario Carneiro (Apr 12 2020 at 06:29)</a>:</h4>
+<p>do you have a MWE?</p>
+
+<a name="193697638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193697638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193697638">Mario Carneiro (Apr 12 2020 at 06:36)</a>:</h4>
+<p>Is there a typo on the last line, where <code>L.1.add_edge</code> should be <code>L'.1.add_edge</code>?</p>
+
+<a name="193697864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193697864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193697864">Mario Carneiro (Apr 12 2020 at 06:44)</a>:</h4>
+<p>I can't type check this because of the lack of MWE, but something like this should work</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">with_edge_sequence</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">layout</span> <span class="n">G</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">single</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">}</span> <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="n">edges</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">L</span><span class="bp">.</span><span class="n">remaining_edges</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_edge_sequence</span> <span class="n">L</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="n">L</span> <span class="n">L&#39;</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">with_edge_sequence</span> <span class="n">L</span> <span class="n">L&#39;</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="n">edges</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">L&#39;</span><span class="bp">.</span><span class="n">remaining_edges</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_edge_sequence</span> <span class="n">L</span> <span class="o">(</span><span class="n">L&#39;</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">edge_sequence</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="err">Σ</span> <span class="n">L&#39;</span><span class="o">,</span> <span class="n">with_edge_sequence</span> <span class="n">L</span> <span class="n">L&#39;</span>
+
+<span class="n">def</span> <span class="n">add_edge_sequence_boxes</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">L&#39;</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">},</span> <span class="n">with_edge_sequence</span> <span class="n">L</span> <span class="n">L&#39;</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">G</span><span class="bp">.</span><span class="n">boxes</span>
+<span class="bp">|</span> <span class="n">L</span> <span class="bp">_</span> <span class="o">(</span><span class="n">with_edge_sequence</span><span class="bp">.</span><span class="n">single</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">with_edge_sequence</span><span class="bp">.</span><span class="n">cons</span> <span class="n">L</span> <span class="n">L&#39;</span> <span class="n">S</span> <span class="n">e</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_edge_sequence_boxes</span> <span class="n">S</span> <span class="err">∪</span> <span class="o">(</span><span class="n">L&#39;</span><span class="bp">.</span><span class="n">add_edge</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="n">def</span> <span class="n">add_edge_sequence</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="n">layout</span> <span class="n">G</span><span class="o">}</span> <span class="o">:</span> <span class="n">edge_sequence</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">layout</span> <span class="n">G</span> <span class="bp">×</span> <span class="n">finset</span> <span class="n">G</span><span class="bp">.</span><span class="n">boxes</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">L&#39;</span><span class="o">,</span> <span class="n">S</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">L&#39;</span><span class="o">,</span> <span class="n">add_edge_sequence_boxes</span> <span class="n">S</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="193700832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700832">Scott Morrison (Apr 12 2020 at 08:15)</a>:</h4>
+<p>Lovely. Needed one minor tweak: in the <code>cons</code> constructor, I needed to move the <code>S</code> argument last or I get</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">occurrence</span> <span class="n">of</span> <span class="n">recursive</span> <span class="n">arg</span><span class="bp">#</span><span class="mi">5</span> <span class="n">of</span> <span class="err">&#39;</span><span class="n">layout</span><span class="bp">.</span><span class="n">with_edge_sequence</span><span class="bp">.</span><span class="n">cons&#39;</span><span class="o">,</span> <span class="n">the</span> <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">functional</span> <span class="n">type</span> <span class="n">depends</span> <span class="n">on</span> <span class="n">it</span><span class="bp">.</span>
+</pre></div>
+
+
+<p>which we've seen many times before (and is possibly a Lean bug?)</p>
+
+<a name="193700882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700882">Mario Carneiro (Apr 12 2020 at 08:17)</a>:</h4>
+<p>lean doesn't like dependent args after recursive args</p>
+
+<a name="193700891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700891">Mario Carneiro (Apr 12 2020 at 08:17)</a>:</h4>
+<p>in the formal presentation we assume the two are partitioned but it doesn't make a practical difference</p>
+
+<a name="193700892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700892">Kevin Buzzard (Apr 12 2020 at 08:17)</a>:</h4>
+<p>Is it something to do with dots and boxes?</p>
+
+<a name="193700894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700894">Mario Carneiro (Apr 12 2020 at 08:17)</a>:</h4>
+<p>except it's a bit annoying to reorder arguments</p>
+
+<a name="193700938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193700938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193700938">Mario Carneiro (Apr 12 2020 at 08:18)</a>:</h4>
+<p>I recall this coming up during cyril's work on parametricity since the natural inductive type produced by the algorithm has this kind of out of order problem</p>
+
+<a name="193703956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193703956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193703956">Scott Morrison (Apr 12 2020 at 09:47)</a>:</h4>
+<p>It's actually going surprisingly well... Down to a few sorries (some easy, some less so :-)</p>
+
+<a name="193712076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193712076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193712076">Reid Barton (Apr 12 2020 at 12:56)</a>:</h4>
+<p>I think more or less this is one of the examples in one paper on induction-recursion, even.</p>
+
+<a name="193712130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutually%20inductive%20type%20and%20function/near/193712130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26244mutuallyinductivetypeandfunction.html#193712130">Reid Barton (Apr 12 2020 at 12:57)</a>:</h4>
+<p>Probably not useful any more but: <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.6.4575&amp;rep=rep1&amp;type=pdf" title="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.6.4575&amp;rep=rep1&amp;type=pdf">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.6.4575&amp;rep=rep1&amp;type=pdf</a> <code>Fresh</code>, bottom of page 4</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

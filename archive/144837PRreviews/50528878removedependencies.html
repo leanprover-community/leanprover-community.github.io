@@ -1,0 +1,289 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/50528878removedependencies.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html">#878  remove dependencies</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="163672908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163672908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163672908">Simon Hudon (Apr 18 2019 at 17:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Can you follow up on this please? </p>
+<blockquote>
+<p>There's a proof in algebra.archimedean that uses linarith and now fails because I changed the imports. Any idea why?</p>
+</blockquote>
+
+<a name="163673468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673468">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Ah, sorry. I didn't see the notification.</p>
+
+<a name="163673503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673503">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Short answer: no idea. linarith should be unaffected by imports, it doesn't use anything outside of the local context.</p>
+
+<a name="163673518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673518">Rob Lewis (Apr 18 2019 at 17:45)</a>:</h4>
+<p>I'll look closer when I have a chance.</p>
+
+<a name="163673530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673530">Simon Hudon (Apr 18 2019 at 17:45)</a>:</h4>
+<p>Cool, thanks</p>
+
+<a name="163673673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673673">Simon Hudon (Apr 18 2019 at 17:47)</a>:</h4>
+<p>preliminary investigation tells me that all the definitions and constants that go in the proof when it succeeds are still visible by both <code>tactic/linarith.lean</code> and <code>algebra/archimedean.lean</code> when I change the imports.</p>
+
+<a name="163673783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163673783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163673783">Simon Hudon (Apr 18 2019 at 17:48)</a>:</h4>
+<p>Also, when I look at the transitive closure of the import graph and I look at the modules that are no longer visible after eliminating spurious dependencies, adding those imports to <code>tactic/linarith.lean</code> or <code>algebra/archimedean.lean</code> doesn't fix the problem.</p>
+
+<a name="163679348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163679348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163679348">Rob Lewis (Apr 18 2019 at 18:47)</a>:</h4>
+<p>The problem is that the casts to α that appear in the <code>have</code>statements are different from the one that appears in the goal. Changing the imports somehow changed the path that gets found from ℤ to α. So <code>linarith</code> sees the two cast expressions as different, and won't cancel them. You can see this if you add the line <code>set v := (↑⌊x + 1 / 2⌋ : α)</code> before the <code>split</code>. It rewrites the goal to <code>v</code> but not the hypotheses.</p>
+
+<a name="163679503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163679503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163679503">Simon Hudon (Apr 18 2019 at 18:49)</a>:</h4>
+<p>Ok so that's more an issue with <code>coe</code> than with <code>linarith</code>. Any suggestion on not getting caught like that in the future? (also fixing this problem)</p>
+
+<a name="163680119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163680119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163680119">Mario Carneiro (Apr 18 2019 at 18:57)</a>:</h4>
+<p>can you post the pp.all expression? There shouldn't be an ambiguity like that</p>
+
+<a name="163685814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163685814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163685814">Rob Lewis (Apr 18 2019 at 20:03)</a>:</h4>
+<p>Hmm? I think I'm misunderstanding, there's no ambiguity. The line <code>have := lt_floor_add_one (x + 1 / 2)</code> gives you hypothesis <code>this : x + 1 / 2 &lt; ↑⌊x + 1 / 2⌋ + 1</code>. The goal is <code>x - ↑⌊x + 1 / 2⌋ ≤ 1 / 2 ∧ ↑⌊x + 1 / 2⌋ - x ≤ 1 / 2</code>, and the cast is there from the beginning. Unsurprisingly, the term in the <code>set</code> line matches the one in the goal, since they're both coming from elaborating user input in the same place. But it isn't matching the output of <code>lt_floor_add_one</code>.</p>
+
+<a name="163685850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163685850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163685850">Rob Lewis (Apr 18 2019 at 20:03)</a>:</h4>
+<p>Here's the pp.all output, which I admit I didn't try very hard to parse.<br>
+(Edit - one sec, this was too long to paste) <a href="user_uploads/3121/EhwfEjxO2Gw4ohHk-L3CCT6_/trace.txt" target="_blank" title="user_uploads/3121/EhwfEjxO2Gw4ohHk-L3CCT6_/trace.txt">trace.txt</a></p>
+
+<a name="163686033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686033">Rob Lewis (Apr 18 2019 at 20:06)</a>:</h4>
+<p>No easy solution comes to mind. Paul-Nicolas and I have been looking at casts quite a bit lately, and debugging them is horrible, nothing less than pp.all helps.</p>
+
+<a name="163686162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686162">Rob Lewis (Apr 18 2019 at 20:07)</a>:</h4>
+<p>And I don't have time at the moment to chase down why changing imports leads to a different instance.</p>
+
+<a name="163686209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163686209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163686209">Rob Lewis (Apr 18 2019 at 20:08)</a>:</h4>
+<p>Well, an easy solution for this particular case is to give explicit types to the <code>have</code> statements.</p>
+
+<a name="163687636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163687636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163687636">Mario Carneiro (Apr 18 2019 at 20:24)</a>:</h4>
+<p>I am probably misunderstanding too, but isn't <code>↑⌊x + 1 / 2⌋</code> just a variable here from linarith's point of view? I thought that you were saying that the different occurrences of <code>↑⌊x + 1 / 2⌋</code> had different coes and end up as different variables so it isn't provable</p>
+
+<a name="163687790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163687790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163687790">Mario Carneiro (Apr 18 2019 at 20:26)</a>:</h4>
+<p>(PS: coes are ridiculously large. I wonder if we can get a performance improvement by making <code>int.cast</code> depend on a <code>[ring A]</code> rather than <code>[has_zero A] [has_one A] [has_neg A] [has_add A]</code>)</p>
+
+<a name="163688513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688513">Rob Lewis (Apr 18 2019 at 20:36)</a>:</h4>
+<p>Yes, that's exactly what's happening. Specifically, the <code>has_lift_t</code> instances must be defeq but not syntactically equal. I actually thought there was some support in <code>simp</code> to normalize these kinds of things, but maybe there are simp lemmas missing.</p>
+
+<a name="163688536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688536">Rob Lewis (Apr 18 2019 at 20:37)</a>:</h4>
+<p>I'd be in favor of that change to <code>int.cast</code>.</p>
+
+<a name="163688551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688551">Simon Hudon (Apr 18 2019 at 20:37)</a>:</h4>
+<p>That sounds like a good idea to me</p>
+
+<a name="163688676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163688676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163688676">Rob Lewis (Apr 18 2019 at 20:39)</a>:</h4>
+<p>I'm not sure how much of a performance gain it will be, but at least it will shrink the pp.all output a bit, and I don't think it will hurt anything.</p>
+
+<a name="163689004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689004">Mario Carneiro (Apr 18 2019 at 20:43)</a>:</h4>
+<p>A more robust method is to keep track of all the variable replacements, and whenever you find a new atom you see if it defeq matches a previous one and use that variable instead of making a new one</p>
+
+<a name="163689086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689086">Simon Hudon (Apr 18 2019 at 20:44)</a>:</h4>
+<p>That sounds very cumbersome</p>
+
+<a name="163689113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689113">Mario Carneiro (Apr 18 2019 at 20:45)</a>:</h4>
+<p>Surely it already has to be done to some extent; you are traversing the term(s) to find unique atoms, and this is just modifying the equality test</p>
+
+<a name="163689133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689133">Mario Carneiro (Apr 18 2019 at 20:45)</a>:</h4>
+<p>It's <code>pw_filter</code> but with a monadic predicate</p>
+
+<a name="163689363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689363">Simon Hudon (Apr 18 2019 at 20:48)</a>:</h4>
+<p>Are you talking about change <code>simp</code> or <code>linarith</code>?</p>
+
+<a name="163689381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689381">Mario Carneiro (Apr 18 2019 at 20:48)</a>:</h4>
+<p>linarith, in its atom matching step</p>
+
+<a name="163689439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689439">Kevin Buzzard (Apr 18 2019 at 20:49)</a>:</h4>
+<blockquote>
+<p>(PS: coes are ridiculously large. I wonder if we can get a performance improvement by making <code>int.cast</code> depend on a <code>[ring A]</code> rather than <code>[has_zero A] [has_one A] [has_neg A] [has_add A]</code>)</p>
+</blockquote>
+<p>You mean <code>[has_neg A] [has_add A] [has_zero A] [has_one A]</code>, right? ;-)</p>
+
+<a name="163689554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689554">Mario Carneiro (Apr 18 2019 at 20:51)</a>:</h4>
+<p>If school has taught me nothing else it's that a permutation of the correct answer is a correct answer</p>
+
+<a name="163689576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163689576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163689576">Kevin Buzzard (Apr 18 2019 at 20:51)</a>:</h4>
+<p>If all this CS stuff has taught me anything, it's that runtime matters</p>
+
+<a name="163692195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163692195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163692195">Rob Lewis (Apr 18 2019 at 21:27)</a>:</h4>
+<p>This would be reasonable, but I think the same change would need to be made in ring, or else the verification step will fail.</p>
+
+<a name="163693021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693021">Simon Hudon (Apr 18 2019 at 21:39)</a>:</h4>
+<p>Are you referring to Mario's proposed fix?</p>
+
+<a name="163693314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693314">Rob Lewis (Apr 18 2019 at 21:43)</a>:</h4>
+<p>Yes, to Mario's proposed change for how <code>linarith</code> identifies variables. If it identifies them up to definitional equality, instead of syntactic, the search step will succeed in the broken proof in <code>archimedean.lean</code>. But I think the verification step will still fail, since <code>ring</code> also seems to identify variables syntactically.</p>
+
+<a name="163693401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693401">Rob Lewis (Apr 18 2019 at 21:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">id</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="163693443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693443">Kevin Buzzard (Apr 18 2019 at 21:45)</a>:</h4>
+<p>I guess <code>ring</code> doesn't have a clue what this random function <code>id</code> is?</p>
+
+<a name="163693529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693529">Kevin Buzzard (Apr 18 2019 at 21:46)</a>:</h4>
+<p>Right -- it's working up to syntactic equality, that's the point you're making</p>
+
+<a name="163693568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693568">Simon Hudon (Apr 18 2019 at 21:47)</a>:</h4>
+<p>I think I'm finally agreeing with Mario. If you check only syntactically, you can get thrown off by the silliest thing like aliases</p>
+
+<a name="163693719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693719">Rob Lewis (Apr 18 2019 at 21:49)</a>:</h4>
+<p>The details of the implementation of <code>ring</code> aren't fresh in my mind, but I suspect it's not such an easy change to make there.</p>
+
+<a name="163693724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693724">Kevin Buzzard (Apr 18 2019 at 21:49)</a>:</h4>
+<p>In practice things like aliases and not unfolding things to defeq things haven't even been a problem for me as a <code>ring</code> user.</p>
+
+<a name="163693741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693741">Kevin Buzzard (Apr 18 2019 at 21:49)</a>:</h4>
+<p>If an equation is in the form <code>x - id x</code> then I figure it's not yet ready for <code>ring</code> and I fix it up.</p>
+
+<a name="163693820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693820">Rob Lewis (Apr 18 2019 at 21:50)</a>:</h4>
+<p>But what if it's in the form <code>↑⌊x + 1 / 2⌋ - ↑⌊x + 1 / 2⌋</code>?</p>
+
+<a name="163693861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693861">Kevin Buzzard (Apr 18 2019 at 21:51)</a>:</h4>
+<p>Well that's an interesting question! My instinct as a <code>ring</code> user and someone who knows how to battle off <code>coe</code>s would be to remove all the arrows first before trying to use <code>ring</code></p>
+
+<a name="163693882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693882">Kevin Buzzard (Apr 18 2019 at 21:52)</a>:</h4>
+<p>i.e. change it to <code>↑(⌊x + 1 / 2⌋ - ⌊x + 1 / 2⌋)</code></p>
+
+<a name="163693938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163693938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163693938">Simon Hudon (Apr 18 2019 at 21:52)</a>:</h4>
+<p>Would it help to canonicalize expressions so that their structure is completely conform to the language of rings?</p>
+
+<a name="163694156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694156">Kevin Buzzard (Apr 18 2019 at 21:56)</a>:</h4>
+<p>Isn't there a canonical coercion from A to B whenever A &lt;= B in nat int rat real complex? And any coercion will be defeq to that. There's also at most one canonical coercion from nat int rat to a random ring. Can't you just make sure all coercions are the syntactically the canonical ones at every stage?</p>
+
+<a name="163694458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694458">Rob Lewis (Apr 18 2019 at 22:00)</a>:</h4>
+<p>Kevin, I think the coercions are a red herring. An automated proof broke, because changing imports caused some type class instances to be inferred differently, and the syntactic difference confuses <code>linarith</code>. There's an easy enough way to make <code>linarith</code> ignore the syntactic difference, but it only works if the same change happens to <code>ring</code>.</p>
+
+<a name="163694536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694536">Rob Lewis (Apr 18 2019 at 22:00)</a>:</h4>
+<blockquote>
+<p>Would it help to canonicalize expressions so that their structure is completely conform to the language of rings?</p>
+</blockquote>
+<p>I'm not sure what you mean, help what?</p>
+
+<a name="163694612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694612">Rob Lewis (Apr 18 2019 at 22:02)</a>:</h4>
+<p>Again, I don't know the details of <code>ring</code> so well, Mario would need to weigh in to say how big a change this would be.</p>
+
+<a name="163694717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694717">Kevin Buzzard (Apr 18 2019 at 22:03)</a>:</h4>
+<p>Obviously I know far less about what's going on than you do -- but you can't just force all type class instances to be "the right ones that we chose once and for all"?</p>
+
+<a name="163694768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694768">Kevin Buzzard (Apr 18 2019 at 22:04)</a>:</h4>
+<p>Syntactically?</p>
+
+<a name="163694894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694894">Simon Hudon (Apr 18 2019 at 22:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  That's the solution adopted in Haskell and you need some strong assumptions about the type class system in order to make that work. Lean is too permissive for us to make that work</p>
+
+<a name="163694907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163694907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163694907">Simon Hudon (Apr 18 2019 at 22:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Instead of answering your question, I think I'll wait for Mario to comment</p>
+
+<a name="163695095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163695095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163695095">Rob Lewis (Apr 18 2019 at 22:10)</a>:</h4>
+<p>And while we're waiting, I'm headed to bed <span aria-label="sleeping" class="emoji emoji-1f634" role="img" title="sleeping">:sleeping:</span></p>
+
+<a name="163695112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163695112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163695112">Simon Hudon (Apr 18 2019 at 22:10)</a>:</h4>
+<p>Sleep tight!</p>
+
+<a name="163697662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163697662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163697662">Mario Carneiro (Apr 18 2019 at 22:55)</a>:</h4>
+<p>The main problem with this change in both linarith and ring is that they rely on a total order on expressions (<code>expr.lt</code>) for which the lt-comparable exprs are syntactically equal. There is no analogous total order up to defeq, at least not anything cheap. So we basically have to preprocess the term and replace all atoms with numbered variables to impose a local order</p>
+
+<a name="163707551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163707551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163707551">Mario Carneiro (Apr 19 2019 at 02:26)</a>:</h4>
+<p>see <a href="https://github.com/leanprover-community/mathlib/issues/949" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/949">#949</a></p>
+
+<a name="163717543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163717543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163717543">Rob Lewis (Apr 19 2019 at 06:42)</a>:</h4>
+<blockquote>
+<p>The main problem with this change in both linarith and ring is that they rely on a total order on expressions (<code>expr.lt</code>) for which the lt-comparable exprs are syntactically equal. There is no analogous total order up to defeq, at least not anything cheap. So we basically have to preprocess the term and replace all atoms with numbered variables to impose a local order</p>
+</blockquote>
+<p>This basically happens in <code>linarith</code> already. Linear expressions are represented with <code>rb_map ℕ ℤ</code>. Pretty sure there are only two places that have to change:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296">https://github.com/leanprover-community/mathlib/blob/master/src/tactic/linarith.lean#L296</a> and just below at 310. That function becomes a bit less efficient, because you have to walk through the whole key list checking for defeq instead of using <code>rb_map.find</code>. But this shouldn't be noticeable.</p>
+
+<a name="163717740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163717740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163717740">Rob Lewis (Apr 19 2019 at 06:47)</a>:</h4>
+<p>I have a lot to do today and I'm not in the office. But when I have a few minutes I'll take a shot at changing this on top of your pr.</p>
+
+<a name="163736376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163736376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163736376">Rob Lewis (Apr 19 2019 at 13:48)</a>:</h4>
+<p>As expected, it's a small patch. I did a very nonscientific test that showed a 10% performance hit on the linarith test file. Not sure if this came from the changes to linarith, or ring, or if it's just noise.</p>
+
+<a name="163736405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163736405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163736405">Rob Lewis (Apr 19 2019 at 13:49)</a>:</h4>
+<p>I'd be very surprised if the change to linarith was that drastic, so hopefully it's just noise.</p>
+
+<a name="163740804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163740804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163740804">Rob Lewis (Apr 19 2019 at 14:58)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/950" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/950">https://github.com/leanprover-community/mathlib/pull/950</a></p>
+
+<a name="163740808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163740808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163740808">Rob Lewis (Apr 19 2019 at 14:58)</a>:</h4>
+<p>Seems like the performance change was mostly noise.</p>
+
+<a name="163750125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/163750125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#163750125">Simon Hudon (Apr 19 2019 at 17:33)</a>:</h4>
+<p>Awesome! Thanks for doing this!</p>
+
+<a name="164409302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23878%20%20remove%20dependencies/near/164409302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/50528878removedependencies.html#164409302">Simon Hudon (Apr 28 2019 at 21:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can we merge this? I reverted the changes to <code>tactic/interactive.lean</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

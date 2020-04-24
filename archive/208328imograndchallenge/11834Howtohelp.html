@@ -1,0 +1,251 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/208328IMOgrandchallenge/11834Howtohelp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/index.html">IMO-grand-challenge</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html">How to help?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175239057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175239057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175239057">Jason Rute (Sep 09 2019 at 13:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> What you are most looking for from the Lean community.  How would you like the community to help?</p>
+
+<a name="175240600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175240600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175240600">Daniel Selsam (Sep 09 2019 at 13:25)</a>:</h4>
+<blockquote>
+<p>I was in top-10 in Team Russia try outs for IMO 2002, so if you need a help from someone familiar with this type of problems, you may ping me.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Hi Yury, thanks for the offer.</p>
+
+<a name="175249782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175249782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175249782">Daniel Selsam (Sep 09 2019 at 15:00)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="230999">Daniel Selsam</span> What you are most looking for from the Lean community.  How would you like the community to help?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> Great question! I would love for the community to continue discussing design issues in the formal encoding and to start (pseudo-)formalizing many historical problem statements. The main goal now is not to accumulate formal statements but to discover the conceptual challenges with the F2F formulation as efficiently as possible.</p>
+<p>I will soon push a description of a few of the design challenges to <a href="https://github.com/IMO-grand-challenge/formal-encoding" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding">https://github.com/IMO-grand-challenge/formal-encoding</a></p>
+
+<a name="175254384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175254384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175254384">Daniel Selsam (Sep 09 2019 at 15:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> FYI pushed <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a></p>
+
+<a name="175267402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175267402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175267402">Floris van Doorn (Sep 09 2019 at 18:05)</a>:</h4>
+<p>In response to the determine file: I was also thinking a bit about this exact problem how to translate these problems.<br>
+The third proposal, using the solution set, is also not adequate. <code>determineSolutionSet X s_0</code> is equivalent to showing that <code>s_0</code> is countable: I can define (with a little bit of work) a <code>SolutionSet</code> witness using <code>choice</code> if I have proven that <code>s_0</code> is countable.</p>
+<p>I think a reasonable (but not completely satisfactory) solution is to change all problems of the form "determine all <code>f</code> that satisfy <code>P f</code>" to "Show that for all <code>f</code> we have <code>P f</code> iff <code>f</code> is in an explicitly given solution set". Of course, this is unsatisfactory, since we're already "giving the answer" to the program. Though I think that everyone will agree that finding the answer is not the "hard part" of a problem.</p>
+<p>Another possible option is that we do require the F2F programs to find the solutions themselves, but that the solution can only use certain specific "whitelisted" definitions from the library, and no other definitions. There might be issues in deciding which definitions are allowed so that we avoid all unsatisfactory answers.</p>
+
+<a name="175267950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175267950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175267950">Daniel Selsam (Sep 09 2019 at 18:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Hi Floris, thanks for pointing out that <code>countablyInfinite</code> is not "sound", in that it permits unacceptable solutions using choice. I will add that to the document, and to remove any possibility of a similar issue, I will remove the entire clause in the tentative proposal that allows for specific solution formats to be accepted without inspection. As for the "whitelist", this would be great but I am skeptical that it will be possible. Do you find the tentative proposal to be a reasonable compromise?</p>
+
+<a name="175268297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268297">Johan Commelin (Sep 09 2019 at 18:15)</a>:</h4>
+<p>In some sense this just shows that the IMO problem is badly specified... we have this issue with exams as well. If you ask a question like this in Germany, you will always have students who will prove this by the informal analogue of <code>\&lt;_, iff.refl _\&gt;</code>. And if you don't give them full points, they might even threaten to sue the university... things like this have really happened.</p>
+
+<a name="175268308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268308">Patrick Massot (Sep 09 2019 at 18:15)</a>:</h4>
+<p>Floris, I don't think you can say "everyone will agree that finding the answer is not the "hard part" of a problem". Even the easy 2019 Q1 becomes much easier if you give the solution set.</p>
+
+<a name="175268420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268420">Johan Commelin (Sep 09 2019 at 18:16)</a>:</h4>
+<p>I do agree that it would be nice to keep the "find the solution" part. But I don't know how to formalize what that means.</p>
+
+<a name="175268444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268444">Daniel Selsam (Sep 09 2019 at 18:16)</a>:</h4>
+<blockquote>
+<p>Though I think that everyone will agree that finding the answer is not the "hard part" of a problem.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> I think the challenge must include the finding part as well as the proving part.</p>
+
+<a name="175268650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268650">Daniel Selsam (Sep 09 2019 at 18:18)</a>:</h4>
+<blockquote>
+<p>In some sense this just shows that the IMO problem is badly specified... </p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Imprecisely specified, yes, but one could argue that it is an interesting part of the challenge that one must have enough common sense to distinguish acceptable solutions from unacceptable ones.</p>
+
+<a name="175268796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268796">Daniel Selsam (Sep 09 2019 at 18:20)</a>:</h4>
+<blockquote>
+<p>If you ask a question like this in Germany, you will always have students who will prove this by the informal analogue of <code>\&lt;_, iff.refl _\&gt;</code>. And if you don't give them full points, they might even threaten to sue the university... things like this have really happened.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Seriously? Is that folklore or do you have a source?</p>
+
+<a name="175269074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269074">Floris van Doorn (Sep 09 2019 at 18:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> I don't think the proposal is reasonable. Looking at IMO 2019-4, It is decidable to check whether a specific pair <code>(n,k)</code> is a solution, so I think the degenerate solution falls into the category "will get full score without inspection" (if I understand your proposal correctly).</p>
+<p>Even finiteness is too weak. Suppose a program proves that if <code>(n,k)</code> is a solution to IMO 2019-4, then the inequality <code>n, k &lt; 10^(10^100)</code> holds. We can then apply the degenerate solution. A human solution like that will be rejected (you are not allowed to omit a finite but infeasible amount of work).</p>
+
+<a name="175269223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269223">Daniel Selsam (Sep 09 2019 at 18:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> I removed that clause. Please reload the page.</p>
+
+<a name="175269237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269237">Floris van Doorn (Sep 09 2019 at 18:25)</a>:</h4>
+<p>Ok, I agree that giving the answer does make the problem easier. It's a useful hint to determine what proof approaches are likely to work.</p>
+
+<a name="175269250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269250">Daniel Selsam (Sep 09 2019 at 18:25)</a>:</h4>
+<p>I agree that we should not try to be clever and should require all witnesses be sanity-checked by humans.</p>
+
+<a name="175269550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269550">Daniel Selsam (Sep 09 2019 at 18:29)</a>:</h4>
+<blockquote>
+<p>Even finiteness is too weak. </p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Thanks, great example. I will add that to the page.</p>
+
+<a name="175269557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269557">Floris van Doorn (Sep 09 2019 at 18:29)</a>:</h4>
+<p>Oh sorry, you want to manually check all answers. <br>
+That is a reasonable compromise. It will be an extra challenge to the solvers: they have to define the solution set in a human-understandable way (so not buried behind a ton of definitions).</p>
+
+<a name="175269939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269939">Johan Commelin (Sep 09 2019 at 18:33)</a>:</h4>
+<p>I don't have a precise source, but I hear these stories now and then... the professors in my department are really careful nowadays with how they handle students, exams, and all that. I've been present at several "Klausureinsichten" (where students come to see their grade, and the corrected exam). It's completely absurd. Never seen anything like that before. But I guess the most juicy stories are actually folklore, and jucier than what used to be their source in distant past.</p>
+
+<a name="175270065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175270065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175270065">Daniel Selsam (Sep 09 2019 at 18:34)</a>:</h4>
+<blockquote>
+<p>It will be an extra challenge to the solvers: they have to define the solution set in a human-understandable way (so not buried behind a ton of definitions).</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Yes, it is an extra challenge to the solvers, compared to a completely F2F version.</p>
+
+<a name="175272896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175272896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175272896">Kevin Buzzard (Sep 09 2019 at 19:06)</a>:</h4>
+<p>I was once personally faced with this: <a href="https://bmos.ukmt.org.uk/home/fist-1986.pdf" target="_blank" title="https://bmos.ukmt.org.uk/home/fist-1986.pdf">https://bmos.ukmt.org.uk/home/fist-1986.pdf</a> . Question 2 is "find the real number which is the supremum of this explicit non-empty bounded set". I realise I am a bit confused about how to formalise this. I feel like the real question is "give a finite sequence of buttons which one can press on a calculator, such that after you've pressed them, the answer is on the screen".</p>
+
+<a name="175272990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175272990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175272990">Kevin Buzzard (Sep 09 2019 at 19:07)</a>:</h4>
+<p>[NB I got that paper from here: <a href="https://bmos.ukmt.org.uk/home/bmo.shtml" target="_blank" title="https://bmos.ukmt.org.uk/home/bmo.shtml">https://bmos.ukmt.org.uk/home/bmo.shtml</a> -- big library of the training materials used by the UK for many years]</p>
+
+<a name="175274431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175274431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175274431">Chris Hughes (Sep 09 2019 at 19:26)</a>:</h4>
+<p>You can always ask for an explicit term of this type for the witness. I'm not sure if this covers every single "find this real" question</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">inductive</span> <span class="n">calculatorable</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="o">:</span> <span class="n">calculatorable</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">calculatorable</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">pi</span>   <span class="o">:</span> <span class="n">calculatorable</span> <span class="n">real</span><span class="bp">.</span><span class="n">pi</span>
+<span class="bp">|</span> <span class="n">add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">div</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sub</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sqrt</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">sqrt</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sin</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">cos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">cos</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">exp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">exp</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">log</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="175275156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275156">Daniel Selsam (Sep 09 2019 at 19:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Thanks. I would put this approach  in the "whitelist" category. I am open to this kind of approach in principle but I fear that a fleshed out proposal would not only be complicated but would probably still be at risk of being either too forgiving or too restrictive or both.</p>
+
+<a name="175275816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275816">Johan Commelin (Sep 09 2019 at 19:44)</a>:</h4>
+<p>If we do "inspection of results by humans" then we'll still have to engineer the tactics in such a way that they produce convincing results.</p>
+
+<a name="175275841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275841">Johan Commelin (Sep 09 2019 at 19:44)</a>:</h4>
+<p>Once that is done, proving that the result is <code>calculatorable</code> for a some reasonable definition of <code>calculatorable</code> is of course trivial.</p>
+
+<a name="175275885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275885">Johan Commelin (Sep 09 2019 at 19:45)</a>:</h4>
+<p>So I guess it doesn't really matter too much what we do.</p>
+
+<a name="175277979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175277979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175277979">Patrick Massot (Sep 09 2019 at 20:06)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a></p>
+</blockquote>
+<p>My Lean 4 expertise suggests this is meant to be Lean 4 code (I mean I see Camel case). Does it mean you actually use Lean 4? Is it already possible to so interactively (say with a VScode extension)? Or do you have to write the file and call Lean 4 on the command line?</p>
+
+<a name="175278339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175278339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175278339">Johan Commelin (Sep 09 2019 at 20:10)</a>:</h4>
+<p>It also seems <code>\lam x, formula(x)</code> got replaced with <code>\lam x =&gt; formula(x)</code>. I very much applaud moving away from the comma, because it was used for too many other things. Even if Lean didn't get confused, I did (-;</p>
+
+<a name="175278386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175278386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175278386">Johan Commelin (Sep 09 2019 at 20:11)</a>:</h4>
+<p>Now we only need to make <code>\mapsto</code> notation for <code>=&gt;</code> and it will almost read like mathematics <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="175280223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175280223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175280223">Daniel Selsam (Sep 09 2019 at 20:32)</a>:</h4>
+<blockquote>
+<p>My Lean 4 expertise suggests this is meant to be Lean 4 code (I mean I see Camel case). Does it mean you actually use Lean 4? Is it already possible to so interactively (say with a VScode extension)? Or do you have to write the file and call Lean 4 on the command line?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Hi Patrick. Yes, I have been using Lean4 for my pseudo-formalizing (and also my actual programming), but it is not ready for proving theorems yet (there is not even a tactic framework).</p>
+
+<a name="175280317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175280317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175280317">Daniel Selsam (Sep 09 2019 at 20:33)</a>:</h4>
+<p>Emacs mode works just as well, after a little setup. I have never used VScode.</p>
+
+<a name="175280951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175280951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175280951">Daniel Selsam (Sep 09 2019 at 20:40)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="175281434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175281434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175281434">Daniel Selsam (Sep 09 2019 at 20:45)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="230999">Daniel Selsam</span> What you are most looking for from the Lean community.  How would you like the community to help?</p>
+</blockquote>
+<p>FYI To get started, I put a few "help requested"s in <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/transition_systems.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/transition_systems.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/transition_systems.lean</a> (though I will probably switch to using GitHub Issues with RFC in the name). The high-level strategy I suggest is for us to go problem-class by problem-class (with some degree of parallelism), trying to encode a range of problem statements within each class in a uniform way while taking note of outliers and being conscious not to over-fit the details of historical problems.</p>
+
+<a name="175937368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175937368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175937368">Blake Elias (Sep 17 2019 at 18:54)</a>:</h4>
+<p>My two initial thoughts:</p>
+<p>1) <strong>What is the simplest IMO problem for which we can produce a satisfactory formal statement in Lean? </strong></p>
+<p>Perhaps if we start with a few such examples, it will be easier to generalize to certain classes of such "simple" problems -- and then move on to trickier ones -- rather than immediately jumping in to ones with the trickiest issues.</p>
+<p>2) <strong>IMO problems ask one to "find and prove", rather than just "prove".   </strong></p>
+<p>The fact that one must first decide <em>what</em> theorem to prove, and then subsequently prove it, differentiates IMO from other theorem proving / synthesis tasks. I'm not sure what the tried-and-true way to represent such problems is - and perhaps that's part of the difficulty others have been running into when formalizing this task. I've seen discussions here distinguishing between "proof" and "witness" - I take it that gets at this distinction between one's answer and one's proof the answer is correct. Perhaps someone can explain with an example how those terms are being used?</p>
+
+<a name="175939074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175939074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175939074">Daniel Selsam (Sep 17 2019 at 19:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="240563">@Blake Elias</span> Hi Blake, welcome!</p>
+<blockquote>
+<p>1) <strong>What is the simplest IMO problem for which we can produce a satisfactory formal statement in Lean? </strong><br>
+Perhaps if we start with a few such examples, it will be easier to generalize to certain classes of such "simple" problems -- and then move on to trickier ones -- rather than immediately jumping in to ones with the trickiest issues.</p>
+</blockquote>
+<p>I'll just note that most historical problems in algebra and number theory are easy to state. The combinatorics ones are usually pretty easy to state individually, but it may still require careful design to state them in a convenient, uniform way.</p>
+
+<a name="175939464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175939464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175939464">Daniel Selsam (Sep 17 2019 at 19:17)</a>:</h4>
+<blockquote>
+<p>2) <strong>IMO problems ask one to "find and prove", rather than just "prove".   </strong></p>
+<p>The fact that one must first decide <em>what</em> theorem to prove, and then subsequently prove it, differentiates IMO from other theorem proving / synthesis tasks. I'm not sure what the tried-and-true way to represent such problems is - and perhaps that's part of the difficulty others have been running into when formalizing this task. I've seen discussions here distinguishing between "proof" and "witness" - I take it that gets at this distinction between one's answer and one's proof the answer is correct. Perhaps someone can explain with an example how those terms are being used?</p>
+</blockquote>
+<p>See <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a> for some notes on this issue. If we knew what type of object we were looking for, the "find" part would arguably be a standard synthesis problem. The issue is that we don't how to formally distinguish between "degenerate" solutions/witnesses and "acceptable" ones.</p>
+
+<a name="175940399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175940399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175940399">Johan Commelin (Sep 17 2019 at 19:28)</a>:</h4>
+<p>Would it help to require the "witness" part to be constructive? That would counter one of Floris's attacks, where he pointed out that one could use choice to get the witness.</p>
+
+<a name="175941349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175941349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175941349">Daniel Selsam (Sep 17 2019 at 19:39)</a>:</h4>
+<blockquote>
+<p>Would it help to require the "witness" part to be constructive? That would counter one of Floris's attacks, where he pointed out that one could use choice to get the witness.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Note that the Axiom of Choice is a theorem for encodeable types: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283">https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283</a> . Also note that in the finite example Floris gave (<a href="#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074" title="#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074">https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074</a>) the witness type is <code>List</code> and yet the proof can be checked without actually computing the list.</p>
+
+<a name="175941467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175941467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175941467">Johan Commelin (Sep 17 2019 at 19:40)</a>:</h4>
+<p>Alas...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

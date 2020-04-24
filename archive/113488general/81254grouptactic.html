@@ -1,0 +1,323 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81254grouptactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html">`group` tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191451996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191451996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191451996">Scott Morrison (Mar 23 2020 at 10:06)</a>:</h4>
+<p>Can someone please magically make</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a₁</span> <span class="n">a₂</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a₁</span> <span class="bp">*</span> <span class="n">a₂</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">a₁</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a₂</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">group</span>
+</pre></div>
+
+
+<p>work? In 2020, humans should not be expected to do this by hand. :-( What do we need to do to make this happen?</p>
+
+<a name="191452310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191452310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191452310">Johan Commelin (Mar 23 2020 at 10:10)</a>:</h4>
+<p>Maybe somethink like <code>field_simps</code> can help?</p>
+
+<a name="191454171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191454171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191454171">Patrick Massot (Mar 23 2020 at 10:26)</a>:</h4>
+<p>We need time, nothing else. I think it could be written by almost anyone having basic tactic writing knowledge (at least if you don't insist on speed).</p>
+
+<a name="191455802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191455802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191455802">Patrick Massot (Mar 23 2020 at 10:41)</a>:</h4>
+<p>I think this is long overdue, so let me set myself a challenge: tonight I'll mute the "new members" stream and write that tactic.</p>
+
+<a name="191457471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457471">Mario Carneiro (Mar 23 2020 at 10:59)</a>:</h4>
+<p>I actually don't think this is a good example of what is being asked. The problem is, there is a bunch of logic in the way, it's not a question about groups. Once you clear it away, there is nothing here that simp can't handle already</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a₁</span> <span class="n">a₂</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a₁</span> <span class="bp">*</span> <span class="n">a₂</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">a₁</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a₂</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">split</span><span class="bp">;</span> <span class="n">rintro</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="191457633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457633">Johan Commelin (Mar 23 2020 at 11:00)</a>:</h4>
+<p>But if we swap the sides of the iff, I think this would make a good simp-lemma</p>
+
+<a name="191457666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457666">Johan Commelin (Mar 23 2020 at 11:01)</a>:</h4>
+<p>Then it would be <code>by intros; simp</code></p>
+
+<a name="191457819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457819">Mario Carneiro (Mar 23 2020 at 11:02)</a>:</h4>
+<p>I'm not so sure about that. There isn't an obvious way to simp normal form the whole equation here, unless you want to move everything to one side and equate to 1</p>
+
+<a name="191457880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457880">Johan Commelin (Mar 23 2020 at 11:03)</a>:</h4>
+<p>Removing inverses seems good to me</p>
+
+<a name="191457944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457944">Mario Carneiro (Mar 23 2020 at 11:03)</a>:</h4>
+<p>yeah but you can't in general so this is just a heuristic thing</p>
+
+<a name="191457949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191457949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191457949">Scott Morrison (Mar 23 2020 at 11:04)</a>:</h4>
+<p>Haha, <code>rintro rfl</code> is lovely, but still requires human thought before you notice it's a good idea, and is very specific to the case where each side of the <code>iff</code> has one side with a single term.</p>
+
+<a name="191458041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458041">Mario Carneiro (Mar 23 2020 at 11:04)</a>:</h4>
+<p>that's why I said this isn't a good example. I don't know what the general case is that you want to solve</p>
+
+<a name="191458122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458122">Mario Carneiro (Mar 23 2020 at 11:05)</a>:</h4>
+<p>I mean, is <code>group</code> supposed to be a decision procedure for <a href="https://en.wikipedia.org/wiki/Word_problem_for_groups" target="_blank" title="https://en.wikipedia.org/wiki/Word_problem_for_groups">https://en.wikipedia.org/wiki/Word_problem_for_groups</a> ?</p>
+
+<a name="191458244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458244">Scott Morrison (Mar 23 2020 at 11:07)</a>:</h4>
+<p>what if I ask <code>ab=cd iff bd'=a'c</code>? (primes for inverses)</p>
+
+<a name="191458275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458275">Scott Morrison (Mar 23 2020 at 11:07)</a>:</h4>
+<p>No, of course not. It's meant to be a decision procedure that is effective on little annoying cases that I don't want to have to think about. :-)</p>
+
+<a name="191458294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458294">Scott Morrison (Mar 23 2020 at 11:07)</a>:</h4>
+<p>Already I think this case is too annoying to think about.</p>
+
+<a name="191458405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458405">Scott Morrison (Mar 23 2020 at 11:08)</a>:</h4>
+<p>I don't want to have to realise that <code>rintro rfl</code> is the appropriate clever trick for today. I just want the problem to go away because it's a small word problem, and they are easy.</p>
+
+<a name="191458445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458445">Mario Carneiro (Mar 23 2020 at 11:09)</a>:</h4>
+<p><code>rintro rfl</code> is a great too for the toolbox fyi</p>
+
+<a name="191458463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458463">Mario Carneiro (Mar 23 2020 at 11:09)</a>:</h4>
+<p>I basically try to always avoid equalities in the assumptions</p>
+
+<a name="191458553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458553">Scott Morrison (Mar 23 2020 at 11:10)</a>:</h4>
+<p>In any case, I think the word problem question is misleading here. It's the word problem in free groups that matters here, and that is just fine.</p>
+
+<a name="191458740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458740">Scott Morrison (Mar 23 2020 at 11:12)</a>:</h4>
+<p>Oh, maybe I'm wrong... Maybe I'm asking about the word problem in one-relator groups, and that's already a bit difficult, but solvable.</p>
+
+<a name="191458830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458830">Gabriel Ebner (Mar 23 2020 at 11:13)</a>:</h4>
+<p>The example at the beginning of the thread is true in all groups and hence falls under (some generalization of the) word problem for free groups.</p>
+
+<a name="191458876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458876">Gabriel Ebner (Mar 23 2020 at 11:13)</a>:</h4>
+<p>I didn't know that "word problem for groups" has a special technical meaning.  I though it means determining whether two words are equal in all groups (which is of course the same as being equal in free groups).</p>
+
+<a name="191458961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458961">Scott Morrison (Mar 23 2020 at 11:14)</a>:</h4>
+<p>Well, but I'm worried about the iff. Aren't we saying: suppose you're in the free group on three generators, modulo the relation <code>a₁ * a₂ = x</code>. Now, is it true that <code>a₁⁻¹ * x = a₂</code>? Presented that way, it's precisely the word problem in a one-relator group.</p>
+
+<a name="191458967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191458967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191458967">Mario Carneiro (Mar 23 2020 at 11:14)</a>:</h4>
+<p>I think the example at the beginning is an instance of the general word problem for groups, because there are equality hypotheses</p>
+
+<a name="191459042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459042">Mario Carneiro (Mar 23 2020 at 11:15)</a>:</h4>
+<p>the general case is that you have a bunch of values in a group and some equations about them, and want to deduce some more equations. This is exactly the problem of determining equality in a free group modulo some relations</p>
+
+<a name="191459150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459150">Mario Carneiro (Mar 23 2020 at 11:16)</a>:</h4>
+<p>That said, just because it's undecidable doesn't mean that it's not reasonable to have a tactic that does it. After all, it is semidecidable, and we only care about yes instances</p>
+
+<a name="191459184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459184">Gabriel Ebner (Mar 23 2020 at 11:17)</a>:</h4>
+<p>The case for quantifier-free equations is decidable, and the original example falls in this class.  Is this a useful subset?</p>
+
+<a name="191459227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459227">Mario Carneiro (Mar 23 2020 at 11:17)</a>:</h4>
+<p>I think so, I mean having quantifiers would be nice but that's getting pretty close to a general ATP</p>
+
+<a name="191459275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459275">Scott Morrison (Mar 23 2020 at 11:18)</a>:</h4>
+<p>So the "one equation" case is definitely decidable (there's a nice note explaining how to do it at <a href="https://www3.nd.edu/~andyp/notes/OneRelator.pdf" target="_blank" title="https://www3.nd.edu/~andyp/notes/OneRelator.pdf">https://www3.nd.edu/~andyp/notes/OneRelator.pdf</a>, but it's a bunch of work).</p>
+
+<a name="191459343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459343">Mario Carneiro (Mar 23 2020 at 11:18)</a>:</h4>
+<p>I tried simplifying your example in the obvious way, and it almost works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">d</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mul_inv_eq_one</span><span class="o">]</span><span class="bp">;</span> <span class="n">conv</span> <span class="o">{</span><span class="n">to_rhs</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mul_inv_eq_one</span><span class="o">]}</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span>
+<span class="c1">-- ⊢ a * (b * (d⁻¹ * c⁻¹)) = 1 ↔ b * (d⁻¹ * (c⁻¹ * a)) = 1</span>
+</pre></div>
+
+<a name="191459360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459360">Mario Carneiro (Mar 23 2020 at 11:19)</a>:</h4>
+<p>but we need some extra smarts to do a cyclic permutation at the end</p>
+
+<a name="191459528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459528">Gabriel Ebner (Mar 23 2020 at 11:20)</a>:</h4>
+<p>If you just want to show the equivalence of two equations, then it is always enough to normalize with <code>mul_inv_eq_one</code> and then call <code>simp</code>.</p>
+
+<a name="191459553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459553">Mario Carneiro (Mar 23 2020 at 11:21)</a>:</h4>
+<p>that's what I did, as you can see that's not the case</p>
+
+<a name="191459588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191459588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191459588">Gabriel Ebner (Mar 23 2020 at 11:21)</a>:</h4>
+<p>Oh yes, now I see what you mean by cyclic permutations.</p>
+
+<a name="191460155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191460155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191460155">Gabriel Ebner (Mar 23 2020 at 11:28)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113488-general/topic/.60group.60.20tactic/near/191459275" title="#narrow/stream/113488-general/topic/.60group.60.20tactic/near/191459275">said</a>:</p>
+<blockquote>
+<p>So the "one equation" case is definitely decidable (there's a nice note explaining how to do it at <a href="https://www3.nd.edu/~andyp/notes/OneRelator.pdf" target="_blank" title="https://www3.nd.edu/~andyp/notes/OneRelator.pdf">https://www3.nd.edu/~andyp/notes/OneRelator.pdf</a>, but it's a bunch of work).</p>
+</blockquote>
+<p>Oh, this is harder than I expected.  I though that if you wanted to prove <code>s = 1 -&gt; r = 1</code>, then you could always find a generator <code>a</code> such that <code>s = 1 &lt;-&gt; s' = a</code> where <code>s'</code> doesn't contain <code>a</code> (like in Fourier-Motzkin).  Then you could just prove <code>r [s' / a]</code> instead.  However this obviously doesn't work in general.</p>
+
+<a name="191460705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191460705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191460705">Mario Carneiro (Mar 23 2020 at 11:35)</a>:</h4>
+<p>I'm pretty sure that it is always possible to find some term <code>r'(x)</code> containing a free variable <code>x</code> such that <code>r = r'(s)</code> and <code>r'(1) = 1</code></p>
+
+<a name="191464842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191464842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191464842">Kevin Buzzard (Mar 23 2020 at 12:20)</a>:</h4>
+<p><code>rintro \&lt;\&gt;</code> is another good one (thanks Rob)</p>
+
+<a name="191467829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191467829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191467829">Kevin Buzzard (Mar 23 2020 at 12:51)</a>:</h4>
+<p>The theory of Groebner bases is the answer to the analogous question for rings. This is not simple "formal" stuff I guess</p>
+
+<a name="191468024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191468024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191468024">Kevin Buzzard (Mar 23 2020 at 12:53)</a>:</h4>
+<p>Do we have a tactic for the free group question? <code>simp</code> can be trained to do this with <code>mul_left_inv</code> or whatever it is called</p>
+
+<a name="191468053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191468053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191468053">Kevin Buzzard (Mar 23 2020 at 12:53)</a>:</h4>
+<p>And inv_left_mul</p>
+
+<a name="191468103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191468103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191468103">Kevin Buzzard (Mar 23 2020 at 12:53)</a>:</h4>
+<p>This would get it all into one tactic call</p>
+
+<a name="191540808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191540808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191540808">Patrick Massot (Mar 23 2020 at 21:43)</a>:</h4>
+<p>I'm sorry there was a misunderstanding because I've read too quickly Scott's problem. I thought he wanted the analogue of <code>ring</code> or <code>abel</code> in non-commutative groups. So there is no word problem to solve. I mean, <code>ring</code> does not look at assumption to close the goal, it normalizes the goal.</p>
+
+<a name="191541820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191541820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191541820">Patrick Massot (Mar 23 2020 at 21:53)</a>:</h4>
+<p>So this tactic is meant to be much simpler than <code>ring</code> because the only simplification that can occur is <code>a*a⁻¹</code> appears somewhere. But it can cascade, and it can be hidden by parentheses. My initial plan was to do work directly with expressions, or follow what <code>assoc_rewrite</code> is doing, or use <code>assoc_rewrite</code>. It turns out that blindly use <code>repeat { assoc_rw ... }</code> is very slow <span aria-label="rolling eyes" class="emoji emoji-1f644" role="img" title="rolling eyes">:rolling_eyes:</span>. So I decided to first try using the simplifier.</p>
+
+<a name="191541928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191541928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191541928">Patrick Massot (Mar 23 2020 at 21:54)</a>:</h4>
+<p>For instance:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="n">setup_tactic_parser</span>
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">simp_arg_type</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">group</span> <span class="o">(</span><span class="n">locat</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">simp_core</span> <span class="o">{}</span> <span class="n">skip</span> <span class="n">tt</span> <span class="o">[</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_inv_self</span><span class="o">),</span>
+  <span class="n">symm_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_assoc</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_inv_self</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_inv_rev</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">inv_inv</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">inv_mul_self</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_inv_cancel_right</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">mul_inv_cancel_left</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">inv_mul_cancel_right</span><span class="o">),</span>
+  <span class="n">expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">inv_mul_cancel_left</span><span class="o">)]</span>
+  <span class="o">[]</span> <span class="n">locat</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">*</span><span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span><span class="bp">*</span><span class="o">(</span><span class="n">b</span><span class="bp">⁻¹*</span><span class="n">a</span><span class="bp">⁻¹</span><span class="o">)</span><span class="bp">*</span><span class="n">c</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">group</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="bp">⁻¹</span><span class="o">)</span><span class="bp">*</span><span class="n">c</span> <span class="bp">*</span><span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span><span class="bp">*</span><span class="o">(</span><span class="n">b</span><span class="bp">⁻¹*</span><span class="n">a</span><span class="bp">⁻¹</span><span class="o">)</span><span class="bp">*</span><span class="n">c</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">group</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">⁻¹*</span><span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="bp">⁻¹</span><span class="o">)</span><span class="bp">*</span><span class="n">c</span> <span class="bp">*</span><span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span><span class="bp">*</span><span class="o">(</span><span class="n">b</span><span class="bp">⁻¹*</span><span class="n">a</span><span class="bp">⁻¹*</span><span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span><span class="bp">*</span><span class="n">c</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">group</span>
+</pre></div>
+
+<a name="191542239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191542239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191542239">Patrick Massot (Mar 23 2020 at 21:56)</a>:</h4>
+<p>This is not so convenient for Scott's problem however, because of the cyclic permutation issue that Mario pointed out:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">mul_eq_one_rev</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">b</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">mul_eq_one_iff_eq_inv</span><span class="o">},</span> <span class="n">exact</span> <span class="n">eq_inv_iff_eq_inv</span><span class="o">}</span>
+
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">d</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span> <span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_inv_eq_one</span><span class="o">,</span>
+    <span class="n">group</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_inv_eq_one</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">group</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_eq_one_rev</span><span class="o">,</span>
+    <span class="n">group</span><span class="o">,</span>
+    <span class="n">assumption</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_inv_eq_one</span><span class="o">,</span>
+    <span class="n">group</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_inv_eq_one</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">group</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_eq_one_rev</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">group</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">assumption</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191542469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191542469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191542469">Patrick Massot (Mar 23 2020 at 21:59)</a>:</h4>
+<p>We could have tactic that does the <code>rw ← mul_inv_eq_one,   group,</code> combination, and a tactic <code>exact_mod_cyclic</code> that takes an assumption <code>a*b*...*z = 1</code> and tries to match with the goal after cyclic permutation, but that looks like much more specialized tactics that would be worth the trouble only if we need them a lot.</p>
+
+<a name="191542818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191542818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191542818">Kevin Buzzard (Mar 23 2020 at 22:02)</a>:</h4>
+<p><code>ring</code> proves facts about free rings; for general rings we need Groebner bases. These are definitely much more specialised tactics but I would say that we definitely need them. They solve all the analogues of Scott's questions. I believe they are in Coq?</p>
+
+<a name="191545612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191545612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191545612">Patrick Massot (Mar 23 2020 at 22:29)</a>:</h4>
+<p>We still need some simple group normalization tactic in mathlib. Should I PR the above simple tactic? Or is there some expert who wants to do better?</p>
+
+<a name="191547869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191547869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191547869">Alex J. Best (Mar 23 2020 at 22:51)</a>:</h4>
+<p>Can it also normalize <code>int</code> powers of group elements away (both for variable and fixed nats) i.e. <code>a^2 * a</code> becomes <code>a^3</code> and also <code>a^(n+1) * a^2</code> becomes <code>a^(n+3)</code>?</p>
+
+<a name="191568934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191568934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191568934">Scott Morrison (Mar 24 2020 at 05:51)</a>:</h4>
+<p>I'd say PR. :-)</p>
+
+<a name="193165647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165647">Kevin Buzzard (Apr 07 2020 at 10:20)</a>:</h4>
+<p>So how am I supposed to prove <code>example (G : Type) [group G] (g h : G) : g⁻¹ * h = 1 → g = h := sorry</code> in Lean? What is the philosophy? Does this deserve to be a function? Should it be provable with a tactic? <code>library_search</code> doesn't seem to work.</p>
+
+<a name="193165706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165706">Johan Commelin (Apr 07 2020 at 10:21)</a>:</h4>
+<p>I guess <code>mul_inv_eq_one</code> is an <code>iff</code> statement... But you need <code>inv_mul_eq_one</code></p>
+
+<a name="193165743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165743">Kevin Buzzard (Apr 07 2020 at 10:21)</a>:</h4>
+<p>because this is the way it's defined in <code>coset</code></p>
+
+<a name="193165839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165839">Johan Commelin (Apr 07 2020 at 10:22)</a>:</h4>
+<p><code>src/algebra/group/basic.lean:theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=</code></p>
+
+<a name="193165844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165844">Kevin Buzzard (Apr 07 2020 at 10:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">left_rel</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">quotient</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">left_rel</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+<a name="193165854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165854">Johan Commelin (Apr 07 2020 at 10:22)</a>:</h4>
+<p>I think you want to give this theorem a companion</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

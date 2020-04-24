@@ -1,0 +1,158 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49485autobundling.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html">auto bundling</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="166337332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337332">Johan Commelin (May 23 2019 at 06:55)</a>:</h4>
+<p>I'm wondering if we can somehow bridge the gap between bundled and unbundled classes. Let's take <code>Top</code> as an example. If I have <code>X : Top</code>, and I want to apply a lemma from the library to <code>X</code>, then this will usually work. The lemma is written with assumptions <code>{X : Type*} [topological_space X]</code>, and Lean can figure out how to fill them in. It has a <code>coe_to_sort</code> that turns <code>X</code> into a type, and a type class search will figure out the <code>topological_space</code> instance.<br>
+The other direction is currently not so easy. If we have and <code>X : Type*</code> and an instance <code>[topological_space X]</code> it is not so user-friendly to apply a lemma that assumes a <code>Top</code> (for example a generic lemma from the category library). One has to manually bundle everything up using <code>\&lt; X, by apply_instance \&gt;</code>. I would like to be able to just write <code>🗃 X</code> and move on. This becomes especially nice if the bundling takes more than one instance (for example topological groups). The <code>🗃</code> would flag to Lean that it should first infer the expected type of the argument. The user "promises" that this type is a structure that contains exactly one data field. In this field Lean should plug <code>X</code>. All the other fields will be <code>Prop</code>s, and Lean should figure them out using <code>apply_instance</code>.<br>
+I have no idea whether this proposal makes any sense. I fear that it is impossible to implement this in Lean 3.4.2. I hope it will be possible in some future version of Lean...</p>
+
+<a name="166337392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337392">Scott Morrison (May 23 2019 at 06:56)</a>:</h4>
+<p>It's not that hard to build a <code>Top</code>. You can just write <code>Top.of X</code>, and typeclass resolution finds the instance.</p>
+
+<a name="166337412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337412">Johan Commelin (May 23 2019 at 06:57)</a>:</h4>
+<p>I still think that we are drifting away from the beautiful and concise notation that we have in regular maths</p>
+
+<a name="166337494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337494">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>I would like to stay as close as possible to that notation. Inserting a single crazy symbol (an arrow, or an emoji) that is the same for every category, seems to get closer to that ideal than having <code>foo_bar.of</code> for every category.</p>
+
+<a name="166337498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337498">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>I would like to have a <code>has_of</code> class.</p>
+
+<a name="166337500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337500">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>But that seems to be impossible with current tech.</p>
+
+<a name="166337501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337501">Scott Morrison (May 23 2019 at 06:58)</a>:</h4>
+<p>Multiple typeclasses are not a problem:</p>
+<div class="codehilite"><pre><span></span>noncomputable example : TopCommRing := TopCommRing.of ℂ
+</pre></div>
+
+<a name="166337516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337516">Mario Carneiro (May 23 2019 at 06:59)</a>:</h4>
+<p>Please don't replace useful words with emoji</p>
+
+<a name="166337520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337520">Johan Commelin (May 23 2019 at 06:59)</a>:</h4>
+<blockquote>
+<p>Please don't replace useful words with emoji</p>
+</blockquote>
+<p>Why do you replace <code>coe</code> with an arrow?</p>
+
+<a name="166337531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337531">Mario Carneiro (May 23 2019 at 06:59)</a>:</h4>
+<p>I find myself peering closely at <span aria-label="archive" class="emoji emoji-1f5c3" role="img" title="archive">:archive:</span> trying to figure out what it is</p>
+
+<a name="166337533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337533">Mario Carneiro (May 23 2019 at 07:00)</a>:</h4>
+<p>Oh</p>
+
+<a name="166337550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337550">Johan Commelin (May 23 2019 at 07:00)</a>:</h4>
+<p>Or <code>int.add</code> with <code>+</code>?</p>
+
+<a name="166337637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337637">Mario Carneiro (May 23 2019 at 07:01)</a>:</h4>
+<p>Coe is supposed to be invisible, but when you need to know it's there it's best to have a minimally invasive symbol</p>
+
+<a name="166337639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337639">Johan Commelin (May 23 2019 at 07:01)</a>:</h4>
+<p>That</p>
+
+<a name="166337643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337643">Mario Carneiro (May 23 2019 at 07:01)</a>:</h4>
+<p><code>+</code> is not even a reasonable example</p>
+
+<a name="166337648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337648">Johan Commelin (May 23 2019 at 07:01)</a>:</h4>
+<p>That is exactly how I want autobundling to behave</p>
+
+<a name="166337650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337650">Johan Commelin (May 23 2019 at 07:01)</a>:</h4>
+<p>It should be invisible</p>
+
+<a name="166337717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337717">Mario Carneiro (May 23 2019 at 07:02)</a>:</h4>
+<p>It should be coe</p>
+
+<a name="166337722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337722">Johan Commelin (May 23 2019 at 07:02)</a>:</h4>
+<p>It can't be</p>
+
+<a name="166337729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337729">Mario Carneiro (May 23 2019 at 07:03)</a>:</h4>
+<p>that's lean's fault</p>
+
+<a name="166337738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337738">Mario Carneiro (May 23 2019 at 07:03)</a>:</h4>
+<p>the solution is not more crazy notation</p>
+
+<a name="166337752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337752">Johan Commelin (May 23 2019 at 07:03)</a>:</h4>
+<p>Can we fix this in Lean 3.4.2 with crazy notation?</p>
+
+<a name="166337758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337758">Mario Carneiro (May 23 2019 at 07:03)</a>:</h4>
+<p>not generically</p>
+
+<a name="166337766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337766">Johan Commelin (May 23 2019 at 07:03)</a>:</h4>
+<p>Can we <em>easily</em> fix this in Lean 3.5c without crazy notation?</p>
+
+<a name="166337815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337815">Mario Carneiro (May 23 2019 at 07:04)</a>:</h4>
+<p>it's not on the todo list</p>
+
+<a name="166337834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337834">Mario Carneiro (May 23 2019 at 07:04)</a>:</h4>
+<p>changing how coe works would I think be worthwhile but would also change a lot of stuff</p>
+
+<a name="166337836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337836">Johan Commelin (May 23 2019 at 07:04)</a>:</h4>
+<p>I want to be able to have <code>(R : Top) [comm_ring R] [topological_ring R]</code> and then write <code>(R : TopCommRing)</code>, and Lean should just be able to figure out what I mean.</p>
+
+<a name="166337840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337840">Mario Carneiro (May 23 2019 at 07:04)</a>:</h4>
+<p>I know</p>
+
+<a name="166337850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337850">Johan Commelin (May 23 2019 at 07:05)</a>:</h4>
+<p>Is it reasonable to expect that this will become better in Lean 4?</p>
+
+<a name="166337862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337862">Mario Carneiro (May 23 2019 at 07:05)</a>:</h4>
+<p>I don't think it's changed but I could be wrong</p>
+
+<a name="166337870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337870">Johan Commelin (May 23 2019 at 07:05)</a>:</h4>
+<p>Because I think that bundling-unbundling and transfer are the two biggest hurdles to making Lean usable for advanced math</p>
+
+<a name="166337930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337930">Mario Carneiro (May 23 2019 at 07:06)</a>:</h4>
+<p>It doesn't sound like it's so hard currently</p>
+
+<a name="166367479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166367479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166367479">Reid Barton (May 23 2019 at 14:46)</a>:</h4>
+<p>Replying to the original message in this thread: In my experience (which might depend on the subject domain), it's not actually that frequent that one needs to go in the bundling direction if the library is structured to work with bundled objects in general. (I mean your own constructions/lemmas should take as input a bundled <code>(X : Top)</code>.) Basically you need to bundle once per primitive object (e.g., the reals) or construction (e.g., product space or subspace with the induced topology) and then you're set. In contrast, the other direction (coercing <code>Top</code> to <code>Type*</code>) gets used all over the place.<br>
+<a href="https://github.com/rwbarton/lean-homotopy-theory/search?q=mk_ob&amp;unscoped_q=mk_ob" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/search?q=mk_ob&amp;unscoped_q=mk_ob">https://github.com/rwbarton/lean-homotopy-theory/search?q=mk_ob&amp;unscoped_q=mk_ob</a> should give some sense of what I mean</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

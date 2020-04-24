@@ -1,0 +1,159 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/28269normnumisslow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html">norm_num is slow</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193702275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702275">Kenny Lau (Apr 12 2020 at 08:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+
+<span class="kn">theorem</span> <span class="n">test_norm_num</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>parsing took 1.41s
+elaboration of test_norm_num took 2.99s
+</pre></div>
+
+<a name="193702337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702337">Kenny Lau (Apr 12 2020 at 08:59)</a>:</h4>
+<p>for comparison:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+
+<span class="kn">theorem</span> <span class="n">test_ring</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="bp">=</span><span class="n">n</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>parsing took 1.09s
+elaboration of test_ring took 2.41s
+</pre></div>
+
+<a name="193702356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702356">Kenny Lau (Apr 12 2020 at 08:59)</a>:</h4>
+<p>so ok let's say <code>norm_num</code> is an expensive tactic</p>
+
+<a name="193702363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702363">Kenny Lau (Apr 12 2020 at 08:59)</a>:</h4>
+<p>but somehow it takes longer to parse than <code>ring</code></p>
+
+<a name="193702366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702366">Mario Carneiro (Apr 12 2020 at 08:59)</a>:</h4>
+<p>You can do better if you don't jump in and out of tactic mode so much</p>
+
+<a name="193702412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702412">Kenny Lau (Apr 12 2020 at 09:00)</a>:</h4>
+<p>oh, I never knew that</p>
+
+<a name="193702419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702419">Mario Carneiro (Apr 12 2020 at 09:00)</a>:</h4>
+<p>repeating <code>have : nat.prime 13, norm_num,</code> has much better parsing performance for me</p>
+
+<a name="193702423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702423">Kenny Lau (Apr 12 2020 at 09:00)</a>:</h4>
+<p>because I sometimes use <code>rw show foo = bar, by norm_num</code></p>
+
+<a name="193702432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702432">Mario Carneiro (Apr 12 2020 at 09:01)</a>:</h4>
+<p>It has to create a new context and run the tactic, get the result, and return to the original context</p>
+
+<a name="193702439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702439">Kevin Buzzard (Apr 12 2020 at 09:01)</a>:</h4>
+<p>Are there some tips here? I do just the same as Kenny</p>
+
+<a name="193702440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702440">Kenny Lau (Apr 12 2020 at 09:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+
+<span class="kn">theorem</span> <span class="n">test_norm_num</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">13</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>parsing took 1.42s
+elaboration of test_norm_num took 2.47s
+</pre></div>
+
+<a name="193702441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702441">Kenny Lau (Apr 12 2020 at 09:01)</a>:</h4>
+<p>looks like it's the same</p>
+
+<a name="193702495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702495">Mario Carneiro (Apr 12 2020 at 09:03)</a>:</h4>
+<p>I get a lot more reports with many uses of <code>by</code></p>
+
+<a name="193702502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702502">Mario Carneiro (Apr 12 2020 at 09:03)</a>:</h4>
+<p>that might be contributing to the timing</p>
+
+<a name="193702524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702524">Kenny Lau (Apr 12 2020 at 09:03)</a>:</h4>
+<p>so what should we write instead of <code>rw show foo = bar, by norm_num</code>?</p>
+
+<a name="193702586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702586">Mario Carneiro (Apr 12 2020 at 09:05)</a>:</h4>
+<p><code>have foo = bar, {norm_num}, rw this</code></p>
+
+<a name="193702608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702608">Mario Carneiro (Apr 12 2020 at 09:05)</a>:</h4>
+<p>but this seems like hair splitting level optimization</p>
+
+<a name="193702670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20is%20slow/near/193702670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28269normnumisslow.html#193702670">Kenny Lau (Apr 12 2020 at 09:07)</a>:</h4>
+<p>I think we can move on to another thread, because:</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,444 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/37019Howtohandletransfertobundledhoms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html">How to handle transfer to bundled homs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175607193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175607193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175607193">Chris Hughes (Sep 13 2019 at 09:22)</a>:</h4>
+<p>It's seems to have been decided that using bundled ring homs and group homs is going to be the mathlib style. Currently the library is not set up to make it easy for people to write new code using bundled homs, and it is quite a major refactor to update the library to do this. I think perhaps the bulk of the refactor has to be done in one go, as soon as the <code>ideal</code> file is updated, a bunch more stuff will have to be updated as well. Because of this I'm a little bit cautious about merging stuff that will make this refactor harder. </p>
+<p>What's the best way of handling this? Should we refuse to merge anything that uses unbundled homs, or will a more gradual approach work?</p>
+
+<a name="175630918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175630918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175630918">Johan Commelin (Sep 13 2019 at 14:46)</a>:</h4>
+<p>Thanks for starting this discussion. I think people said that the refactor could be done slowly and gradually, even though the total effort would be more than when everything's done in one go.</p>
+
+<a name="175630994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175630994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175630994">Johan Commelin (Sep 13 2019 at 14:47)</a>:</h4>
+<p>I realize that the amount of unbundled stuff being added to the library might grow faster than the amount of parts in the library being refactored... so the process might never converge.</p>
+
+<a name="175631502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175631502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175631502">Chris Hughes (Sep 13 2019 at 14:52)</a>:</h4>
+<p>Giving bundled versions of the lemmas in the most used parts of the library might help the process converge faster. I'm thinking of ideals, subgroups, and maybe <code>polynomial.eval</code> and <code>map</code></p>
+
+<a name="175817473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175817473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175817473">Johan Commelin (Sep 16 2019 at 14:32)</a>:</h4>
+<p>Does anyone else have 2 cents to contribute? <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="175838715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175838715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175838715">Kevin Buzzard (Sep 16 2019 at 18:28)</a>:</h4>
+<p>I don't have a clue. I think I might have been at least partially to blame for the fact that we have both bundled and unbundled versions of some things, but I was just annoyed that everyone seemed to think that bundled was the way to go and yet unbundled was what we had.</p>
+
+<a name="175857459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175857459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175857459">Mario Carneiro (Sep 16 2019 at 22:08)</a>:</h4>
+<p>I think it would be good to expand the library as needed when writing new bundled hom code is difficult. That should require a lot less up front work than a full conversion</p>
+
+<a name="175866779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175866779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175866779">Scott Morrison (Sep 17 2019 at 00:50)</a>:</h4>
+<p>Let’s just make sure there are lots of big “deprecated” warnings everywhere old stuff is being used, and hope that people don’t PR too much stuff extending the use of deprecated code...</p>
+
+<a name="175874784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175874784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175874784">Johan Commelin (Sep 17 2019 at 04:23)</a>:</h4>
+<p>That's exactly what this thread is about. For an example, see my PR on <code>order</code> of power series: <a href="https://github.com/leanprover-community/mathlib/issues/1292" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1292">#1292</a><br>
+(1) It sets up a bunch of maps and proves that they are <code>is_add_group_hom</code>s and occasionally, under suitable conditions they are actually <code>is_ring_hom</code>s...  (In particular, <code>coeff 0</code> is a ring hom, whereas in general <code>coeff n</code> is only additive.)<br>
+(2) Moreover, a bunch of these maps are already defined before the algebraic structure on their source is there. They are used in setting up this structure.</p>
+<p>Both of these points are awkard to pull of in the bundled setting. What do we do with this PR? Because it doubles down on unbundled homs instead of easing the transition to bundled homs.</p>
+
+<a name="175876386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175876386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175876386">Scott Morrison (Sep 17 2019 at 05:05)</a>:</h4>
+<p>I don't really understand what could be awkward. Of course you can define the maps-merely-as-functions before the algebraic structure is there, but surely you can define an <code>is_ring_hom</code> neither earlier nor later than you can define a <code>ring_hom</code>. Is the point that you need then to restate some earlier results, so they are about the coercion of the <code>ring_hom</code>, rather than about the bare function?</p>
+
+<a name="175877453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877453">Johan Commelin (Sep 17 2019 at 05:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Yep, you have to restate a bunch of stuff to address (2). I agree that this is not a big problem, only annoying. But (1) is more of an issue. Suppose we have addressed (2), so that for <code>n : ℕ</code> we have a <code>coeff n : power_series R →+ R</code>. Then there is not a very nice way to magically have <code>coeff 0</code> become a <code>→*+</code>.</p>
+
+<a name="175877512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877512">Scott Morrison (Sep 17 2019 at 05:30)</a>:</h4>
+<p>Ah, I see, that indeed is horrible, and I've been encountering exactly the same issue with functors and monoidal functors while working on enriched categories recently.</p>
+
+<a name="175877525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877525">Scott Morrison (Sep 17 2019 at 05:31)</a>:</h4>
+<p>Sometimes life just gives you a functor, and your job is to add the structure of a monoidal functor. At the moment I have a horrible hack.</p>
+
+<a name="175877583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877583">Scott Morrison (Sep 17 2019 at 05:32)</a>:</h4>
+<p>I've defined <code>functorial</code> and <code>monoidal</code> as typeclasses on functions, as unbundled versions of <code>functor</code> and <code>monoidal_functor</code>. But then at some point I find myself with <code>F : Functor C D</code>, and writing <code>monoidal (F.obj)</code> --- that is, I unbundle a bundled functor, and use a typeclass to express that I know a monoidal structure on it. Yuck!</p>
+
+<a name="175877663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877663">Scott Morrison (Sep 17 2019 at 05:34)</a>:</h4>
+<p>We need non-linear typechecking. :-)</p>
+
+<a name="175877669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877669">Johan Commelin (Sep 17 2019 at 05:35)</a>:</h4>
+<p>Does that help?</p>
+
+<a name="175877681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877681">Scott Morrison (Sep 17 2019 at 05:35)</a>:</h4>
+<p>"I promise that eventually I'll show that this is a <code>-&gt;*+</code>, and in the meantime only use the coercion to <code>-&gt;</code>, and after a little while the coercion to <code>-&gt;+</code>"</p>
+
+<a name="175877688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877688">Johan Commelin (Sep 17 2019 at 05:35)</a>:</h4>
+<p>I mean, once you bundle <code>coeff</code> into an add_hom... you kind of promise that you don't suddenly want to treat it as a ring hom</p>
+
+<a name="175877694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877694">Johan Commelin (Sep 17 2019 at 05:35)</a>:</h4>
+<p>So you want the type of <code>coeff n</code> to depend on <code>n</code>?</p>
+
+<a name="175877735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877735">Johan Commelin (Sep 17 2019 at 05:36)</a>:</h4>
+<p>We could do that (-;</p>
+
+<a name="175877737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877737">Johan Commelin (Sep 17 2019 at 05:36)</a>:</h4>
+<p>Sounds like a pretty ugly hack</p>
+
+<a name="175877743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877743">Scott Morrison (Sep 17 2019 at 05:36)</a>:</h4>
+<p>Sorry, I don't undestand what you're saying about depending on <code>n</code>.</p>
+
+<a name="175877751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877751">Johan Commelin (Sep 17 2019 at 05:37)</a>:</h4>
+<p>For <code>n &gt; 0</code> you will not get a ring hom. But for <code>n = 0</code> you do get a ring hom.</p>
+
+<a name="175877754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877754">Scott Morrison (Sep 17 2019 at 05:37)</a>:</h4>
+<p>oh, duh</p>
+
+<a name="175877759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877759">Johan Commelin (Sep 17 2019 at 05:37)</a>:</h4>
+<p>So what is the type of <code>coeff n</code>?</p>
+
+<a name="175877763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877763">Scott Morrison (Sep 17 2019 at 05:37)</a>:</h4>
+<p>I see, sorry, I wasn't paying attention.</p>
+
+<a name="175877807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877807">Scott Morrison (Sep 17 2019 at 05:38)</a>:</h4>
+<p>well, don't we jsut define <code>constant_term : power_series R -&gt;*+ R</code>?</p>
+
+<a name="175877812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877812">Scott Morrison (Sep 17 2019 at 05:38)</a>:</h4>
+<p>that doesn't seem so bad</p>
+
+<a name="175877822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877822">Scott Morrison (Sep 17 2019 at 05:39)</a>:</h4>
+<p>and a lemma that <code>coeff 0 = (constant_term : power_series R -&gt;+ R)</code>?</p>
+
+<a name="175877841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877841">Scott Morrison (Sep 17 2019 at 05:40)</a>:</h4>
+<p>(oof, do you separately need <code>(coeff 0 : power_series R -&gt; R) = (constant_term : power_series R -&gt; R)</code>?)</p>
+
+<a name="175877892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877892">Scott Morrison (Sep 17 2019 at 05:40)</a>:</h4>
+<p>But I think the general answer here is that you make a "first pass" development, that mostly stays private, and then restate it all as public API at the end.</p>
+
+<a name="175877909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877909">Scott Morrison (Sep 17 2019 at 05:41)</a>:</h4>
+<p>Rather than pretend it's possible to make the sausage in front of everyone.</p>
+
+<a name="175877920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877920">Johan Commelin (Sep 17 2019 at 05:41)</a>:</h4>
+<p>Yeah, but in this case you need even a "third pass" defining <code>constant_term</code>...</p>
+
+<a name="175877921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877921">Scott Morrison (Sep 17 2019 at 05:41)</a>:</h4>
+<p>and maybe the lesson we're learning is that unbundled morphisms are good for the private development, and bundled morphisms are good for the API</p>
+
+<a name="175877922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877922">Johan Commelin (Sep 17 2019 at 05:41)</a>:</h4>
+<p>But maybe that's what it takes...</p>
+
+<a name="175877961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877961">Johan Commelin (Sep 17 2019 at 05:42)</a>:</h4>
+<p>Anyway, I need to run to supervise an LA exam</p>
+
+<a name="175877966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877966">Johan Commelin (Sep 17 2019 at 05:42)</a>:</h4>
+<p>Wish me luck... we'll have to grade them afterwards <span aria-label="face palm" class="emoji emoji-1f926" role="img" title="face palm">:face_palm:</span></p>
+
+<a name="175877984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175877984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175877984">Scott Morrison (Sep 17 2019 at 05:43)</a>:</h4>
+<p>Why is that? In the private development we prove <code>is_add_group_hom (internals.coeff n)</code> and <code>is_ring_hom (internals.coeff 0)</code>, and then in the public API we provide<br>
+<code>coeff (n : nat) : power_series R -&gt;+ R := add_group_hom.of  (internals.coeff n)</code>, and <code>constant_term : power_series R -&gt;+* R := ring_hom.of (internals.coeff 0)</code>.</p>
+
+<a name="175878034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878034">Johan Commelin (Sep 17 2019 at 05:44)</a>:</h4>
+<p>Back in the day the whole concept of <code>constant_term</code> wasn't necessary</p>
+
+<a name="175878035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878035">Scott Morrison (Sep 17 2019 at 05:44)</a>:</h4>
+<p>good luck!</p>
+
+<a name="175878036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878036">Scott Morrison (Sep 17 2019 at 05:44)</a>:</h4>
+<p>Yeah, I agree it's worrying.</p>
+
+<a name="175878037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878037">Johan Commelin (Sep 17 2019 at 05:45)</a>:</h4>
+<p>My point is... the file will probably become 2 times as long</p>
+
+<a name="175878273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878273">Chris Hughes (Sep 17 2019 at 05:51)</a>:</h4>
+<p><code>coeff 0</code> is <code>eval 0</code> so we could just make <code>eval 0</code> our canonical way of talking about the constant term.</p>
+
+<a name="175878324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878324">Chris Hughes (Sep 17 2019 at 05:52)</a>:</h4>
+<p>Oh but this is power series not polynomials.</p>
+
+<a name="175878743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175878743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175878743">Johan Commelin (Sep 17 2019 at 06:03)</a>:</h4>
+<p>It's still true, but it needs more work</p>
+
+<a name="175880255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175880255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175880255">Mario Carneiro (Sep 17 2019 at 06:41)</a>:</h4>
+<p>Why not have <code>coeff_0</code>? Then there is no problem with it having a different type</p>
+
+<a name="175881499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/175881499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#175881499">Johan Commelin (Sep 17 2019 at 07:09)</a>:</h4>
+<p>That's Scott's <code>constant_term</code></p>
+
+<a name="176014983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176014983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176014983">Chris Hughes (Sep 18 2019 at 15:18)</a>:</h4>
+<p>Do we want two versions of everything like <code>is_ring_hom.ker</code> in the meantime whilst the gradual refactor is happening?</p>
+
+<a name="176015141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015141">Kevin Buzzard (Sep 18 2019 at 15:20)</a>:</h4>
+<p>That's a good question. I want to say no -- we should just develop the bundled theory and stop supporting unbundled ring homs completely, moving them to bundled ring homs whenever we can be bothered. Is this a very naive viewpoint?</p>
+
+<a name="176015382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015382">Chris Hughes (Sep 18 2019 at 15:22)</a>:</h4>
+<p>Looking at something like <code>direct_limit</code>, transferring to bundled homs is quite a hard refactor at the moment. Currently a <code>directed system</code> is just a set of functions, and then there's a hypothesis that they're all ring homs. It will have to become a set of morphisms in a category.</p>
+
+<a name="176015442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015442">Chris Hughes (Sep 18 2019 at 15:23)</a>:</h4>
+<p>This approach means the refactor has to be done in one go. Who's going to do that?</p>
+
+<a name="176015455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015455">Kevin Buzzard (Sep 18 2019 at 15:23)</a>:</h4>
+<p>Are we talking about direct limits in arbitrary categories or direct limits in the category of rings?</p>
+
+<a name="176015528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015528">Chris Hughes (Sep 18 2019 at 15:24)</a>:</h4>
+<p>Rings and abelian groups and modules</p>
+
+<a name="176015554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015554">Chris Hughes (Sep 18 2019 at 15:24)</a>:</h4>
+<p>The file Kenny wrote on direct limit.</p>
+
+<a name="176015787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015787">Johan Commelin (Sep 18 2019 at 15:26)</a>:</h4>
+<p>I'm not sure we can get away with only one of the two. Category theory has bundled homs and bundled funtors all over the place. Yet Scott confessed that he introduced <code>functorial</code> and <code>monoidal</code>.</p>
+
+<a name="176015848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015848">Johan Commelin (Sep 18 2019 at 15:27)</a>:</h4>
+<p>I intuitively tend to agree with his "slogan" that unbundled stuff is good for setting things up, but that bundled stuff is good for API's that users should see.</p>
+
+<a name="176015933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015933">Kevin Buzzard (Sep 18 2019 at 15:28)</a>:</h4>
+<p>I thought there was some sort of philosophical objection to having both? Having both doesn't bother me...</p>
+
+<a name="176015945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176015945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176015945">Kevin Buzzard (Sep 18 2019 at 15:28)</a>:</h4>
+<p>I mean, having both long term.</p>
+
+<a name="176016030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016030">Kevin Buzzard (Sep 18 2019 at 15:29)</a>:</h4>
+<p>And the general rule can be to not develop any new API for the unbundled stuff unless you're doing foundational things like <code>direct_limit</code>.</p>
+
+<a name="176016200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016200">Chris Hughes (Sep 18 2019 at 15:31)</a>:</h4>
+<p>I think we want mainly bundled homs and occasionally unbundled.</p>
+
+<a name="176016276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016276">Chris Hughes (Sep 18 2019 at 15:32)</a>:</h4>
+<p>But I think <code>direct_limit</code> should use bundled.</p>
+
+<a name="176016520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016520">Johan Commelin (Sep 18 2019 at 15:35)</a>:</h4>
+<p>Well... it's there already, if you don't bind bundling some objects along the way...</p>
+
+<a name="176016560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016560">Johan Commelin (Sep 18 2019 at 15:35)</a>:</h4>
+<p>If we wait a couple of days, the new concrete category infrastructure due to <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> seems very promising.</p>
+
+<a name="176016593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176016593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176016593">Johan Commelin (Sep 18 2019 at 15:35)</a>:</h4>
+<p>Algebraic closures would be a marvellous place to test it out</p>
+
+<a name="176056417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176056417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176056417">Scott Morrison (Sep 18 2019 at 23:38)</a>:</h4>
+<p>I'm actually coming around to the idea that we want both bundled and unbundled versions of everything, even though we have to pay in the form of writing extra glue code. The glue code seems to work very well; that is, it only needs to be written once when setting up a new bundled/unbundled pair, and then it's pretty straightforward for the user.</p>
+
+<a name="176056452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176056452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176056452">Scott Morrison (Sep 18 2019 at 23:39)</a>:</h4>
+<p>Regarding <code>direct_limit</code> --- there's actually some duplication now between the <code>direct_limits</code> file, and the <code>algebra/category/CommRing/(co)limits.lean</code> files.</p>
+
+<a name="176056457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176056457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176056457">Scott Morrison (Sep 18 2019 at 23:40)</a>:</h4>
+<p>I would really like to address that soon.</p>
+
+<a name="176183953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176183953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176183953">Johan Commelin (Sep 20 2019 at 11:24)</a>:</h4>
+<p>This is what I don't like about bundled homs: I write</p>
+<div class="codehilite"><pre><span></span><span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">coeff</span> <span class="n">n</span> <span class="n">φ</span> <span class="bp">=</span> <span class="n">coeff</span> <span class="n">n</span> <span class="n">ψ</span>
+</pre></div>
+
+
+<p>and I get red squiggles under <code>coeff</code> saying:</p>
+<div class="codehilite"><pre><span></span><span class="n">function</span> <span class="n">expected</span> <span class="n">at</span>
+  <span class="n">coeff</span> <span class="n">n</span>
+<span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="n">mv_power_series</span> <span class="err">?</span><span class="n">m_1</span> <span class="err">?</span><span class="n">m_2</span> <span class="bp">→+</span> <span class="err">?</span><span class="n">m_2</span>
+</pre></div>
+
+<a name="176183967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176183967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176183967">Johan Commelin (Sep 20 2019 at 11:25)</a>:</h4>
+<p>It can figure out those metavariables from <code>φ</code></p>
+
+<a name="176183979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176183979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176183979">Johan Commelin (Sep 20 2019 at 11:25)</a>:</h4>
+<p>But it won't do that. So we need to hand hold it. And that means we have to explicitly provide a bunch of types all the time...</p>
+
+<a name="176184046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184046">Chris Hughes (Sep 20 2019 at 11:26)</a>:</h4>
+<p>I think unfortunately both unbundled and bundled have major downsides.</p>
+
+<a name="176184058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184058">Johan Commelin (Sep 20 2019 at 11:26)</a>:</h4>
+<p>Would this be an example of type class search failure that Leo wants to see?</p>
+
+<a name="176184073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184073">Patrick Massot (Sep 20 2019 at 11:27)</a>:</h4>
+<p>Johan, can you get a minimized version of this that we could give to Leo and Daniel for Lean 4 miraculous resolution?</p>
+
+<a name="176184078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184078">Johan Commelin (Sep 20 2019 at 11:27)</a>:</h4>
+<p>Specifically: a coercion is not kicking in. And it's well-understood why it doesn't.</p>
+
+<a name="176184094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184094">Patrick Massot (Sep 20 2019 at 11:27)</a>:</h4>
+<p>Ok, you thought about this already...</p>
+
+<a name="176184293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184293">Johan Commelin (Sep 20 2019 at 11:31)</a>:</h4>
+<p>Voila, a minimal example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">my_id</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→*</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span> <span class="n">map_one&#39;</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">my_id</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176184302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184302">Johan Commelin (Sep 20 2019 at 11:31)</a>:</h4>
+<p>Lean doesn't like the <code>example</code></p>
+
+<a name="176184369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184369">Patrick Massot (Sep 20 2019 at 11:32)</a>:</h4>
+<p>It's not minimal since <code>→*</code> is not in core, right?</p>
+
+<a name="176184828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184828">Johan Commelin (Sep 20 2019 at 11:40)</a>:</h4>
+<p>Aha... are there examples of bundled functions in core?</p>
+
+<a name="176184855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184855">Patrick Massot (Sep 20 2019 at 11:41)</a>:</h4>
+<p>Probably not, but you can include (a minimized version of) the definition.</p>
+
+<a name="176184858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176184858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176184858">Chris Hughes (Sep 20 2019 at 11:41)</a>:</h4>
+<p>Just define monoid_hom in your minimal example, it's only about three lines.</p>
+
+<a name="176185136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185136">Chris Hughes (Sep 20 2019 at 11:45)</a>:</h4>
+<p>There's a mysterious (to me) failure of <code>has_coe_to_fun</code> in <a href="https://github.com/leanprover-community/mathlib/issues/1404" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1404">#1404</a>. Is this also well understood? It's not at all obvious to me why removing some <code>decidable_eq</code> assumptions should break this lemma.</p>
+
+<a name="176185630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185630">Mario Carneiro (Sep 20 2019 at 11:54)</a>:</h4>
+<p>I think Leo mentioned this issue in his request (coercions are not fired unless all metavariables are instantiated), but let's make a minimal example to show this off</p>
+
+<a name="176185639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185639">Mario Carneiro (Sep 20 2019 at 11:55)</a>:</h4>
+<p>This can be fixed in lean 4 but we have to make the problem clear</p>
+
+<a name="176185665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185665">Chris Hughes (Sep 20 2019 at 11:55)</a>:</h4>
+<p>The one in <a href="https://github.com/leanprover-community/mathlib/issues/1404" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1404">#1404</a> doesn't fire even with type annotations.</p>
+
+<a name="176185732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185732">Mario Carneiro (Sep 20 2019 at 11:56)</a>:</h4>
+<p>could you summarize the problem? I don't see it in the commit</p>
+
+<a name="176185859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185859">Chris Hughes (Sep 20 2019 at 11:59)</a>:</h4>
+<p>line 176 of <code>field_theory/mv_polynomial</code>.</p>
+
+<a name="176185863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185863">Chris Hughes (Sep 20 2019 at 11:59)</a>:</h4>
+<p>Not in the diff.</p>
+
+<a name="176185884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185884">Chris Hughes (Sep 20 2019 at 11:59)</a>:</h4>
+<p>But the <code>coe_to_fun</code> in that statement is broken even with type annotations.</p>
+
+<a name="176185952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176185952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176185952">Chris Hughes (Sep 20 2019 at 12:00)</a>:</h4>
+<p><code>maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')</code></p>
+
+<a name="176189562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176189562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176189562">Johan Commelin (Sep 20 2019 at 12:54)</a>:</h4>
+<p><del>Next issue... bundled homs were supposed to make <code>map_add</code> easier for <code>simp</code>.</del></p>
+
+<a name="176189622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176189622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176189622">Johan Commelin (Sep 20 2019 at 12:55)</a>:</h4>
+<p>Never mind, I should shut up</p>
+
+<a name="176372541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176372541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176372541">Johan Commelin (Sep 23 2019 at 14:20)</a>:</h4>
+<p>I've bundled the homs in the <code>order</code> PR: <a href="https://github.com/leanprover-community/mathlib/issues/1292" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1292">#1292</a></p>
+
+<a name="176372555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176372555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176372555">Johan Commelin (Sep 23 2019 at 14:21)</a>:</h4>
+<p>In the end, I think it wasn't even too painful.</p>
+
+<a name="176839649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176839649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176839649">Yury G. Kudryashov (Sep 28 2019 at 20:09)</a>:</h4>
+<p>I think, the problem is that currently the type of <code>coe_fn f</code> can depend on <code>f</code>, not only its type. On the one hand, this way we can coerce to function something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">bundled_fun</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dom</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">codom</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">dom</span> <span class="bp">→</span> <span class="n">codom</span><span class="o">)</span>
+</pre></div>
+
+
+<p>On the other hand, if we have <code>coe_fn f x</code>, then Lean can't start looking at <code>x</code> before it knows <code>f</code>. I see two possible solutions:</p>
+<ul>
+<li>
+<p>Define something like<br>
+<code>lean
+  structure has_simple_coe_to_fun (α : Type*) (β : out_param Type*) := (coe : α → β)
+  </code><br>
+  and try it before <code>has_coe_to_fun</code></p>
+</li>
+<li>
+<p>Introduce convention (similar to, e.g., Python) that <code>coe_fn f</code> is a notation for <code>f.to_fun</code>.</p>
+</li>
+</ul>
+<p>Sure, each approach has its pros and cons. Hope, someone will come with a better idea.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

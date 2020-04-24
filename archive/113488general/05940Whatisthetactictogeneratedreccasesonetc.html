@@ -1,0 +1,186 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html">What is the tactic to generate`drec`, `cases_on`, etc?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171682415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171682415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171682415">Cyril Cohen (Jul 25 2019 at 11:24)</a>:</h4>
+<p>In interactive mode, <code>drec</code>, <code>cases_on</code>,... are generated at inductive declaration</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">myeq1</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">|</span> <span class="n">refl</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">myeq1</span> <span class="n">a</span> <span class="n">a</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq1</span><span class="bp">.</span><span class="n">drec</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">cases_on</span>
+</pre></div>
+
+
+<p>However in tactic mode,  they are not!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="o">(</span><span class="n">do</span>
+  <span class="n">l</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span> <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">level</span><span class="bp">.</span><span class="n">param</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">add_inductive</span> <span class="s2">&quot;myeq&quot;</span> <span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="mi">1</span>
+    <span class="o">(</span><span class="n">pi</span> <span class="s2">&quot;α&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="o">(</span><span class="n">sort</span> <span class="n">u</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">1</span><span class="o">)</span> <span class="err">$</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span>
+   <span class="o">[((</span><span class="s2">&quot;myeq&quot;</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;refl&quot;</span><span class="o">,</span>
+    <span class="n">pi</span> <span class="s2">&quot;α&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="o">(</span><span class="n">sort</span> <span class="n">u</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="s2">&quot;myeq&quot;</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">var</span> <span class="mi">1</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">])</span>
+   <span class="o">])</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">drec</span> <span class="c">/-</span><span class="cm"> not found -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">cases_on</span> <span class="c">/-</span><span class="cm"> not found -/</span>
+</pre></div>
+
+
+<p>How to generate them or call a tactic that does?</p>
+
+<a name="171684868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171684868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171684868">Mario Carneiro (Jul 25 2019 at 12:07)</a>:</h4>
+<p>There is a community lean tactic for this</p>
+
+<a name="171685014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171685014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171685014">Mario Carneiro (Jul 25 2019 at 12:09)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/environment.lean#L91-L107" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/environment.lean#L91-L107">https://github.com/leanprover-community/lean/blob/master/library/init/meta/environment.lean#L91-L107</a></p>
+
+<a name="171687013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171687013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171687013">Cyril Cohen (Jul 25 2019 at 12:38)</a>:</h4>
+<blockquote>
+<p>There is a community lean tactic for this</p>
+</blockquote>
+<p>should I install lean_community/lean master to access it?</p>
+
+<a name="171687049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171687049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171687049">Mario Carneiro (Jul 25 2019 at 12:39)</a>:</h4>
+<p>I think there are nightlies</p>
+
+<a name="171687164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171687164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171687164">Mario Carneiro (Jul 25 2019 at 12:41)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-15" target="_blank" title="https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-15">https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-15</a></p>
+
+<a name="171687345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171687345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171687345">Mario Carneiro (Jul 25 2019 at 12:43)</a>:</h4>
+<p>The alternative for stock lean is to produce the necessary <code>inductive</code> command as a text expression and call a parser command to splice it into the file</p>
+
+<a name="171687967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171687967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171687967">Cyril Cohen (Jul 25 2019 at 12:51)</a>:</h4>
+<p>Thanks</p>
+
+<a name="171688283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688283">Cyril Cohen (Jul 25 2019 at 12:55)</a>:</h4>
+<p>Is mathlib supposed to be built on top of lean 3.4.2 or lean-community/lean master?</p>
+
+<a name="171688303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688303">Mario Carneiro (Jul 25 2019 at 12:55)</a>:</h4>
+<p>both</p>
+
+<a name="171688374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688374">Mario Carneiro (Jul 25 2019 at 12:56)</a>:</h4>
+<p>we haven't made any backwards incompatible changes yet</p>
+
+<a name="171688395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688395">Cyril Cohen (Jul 25 2019 at 12:56)</a>:</h4>
+<blockquote>
+<p>both</p>
+</blockquote>
+<p>so noone used <code>add_ginductive</code> so far?</p>
+
+<a name="171688445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688445">Mario Carneiro (Jul 25 2019 at 12:57)</a>:</h4>
+<p>not in any mathlib tactics</p>
+
+<a name="171688460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688460">Cyril Cohen (Jul 25 2019 at 12:57)</a>:</h4>
+<p>ok...</p>
+
+<a name="171688480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688480">Mario Carneiro (Jul 25 2019 at 12:57)</a>:</h4>
+<p>Right now most people still use 3.4.2. We want to make it worth switching</p>
+
+<a name="171698559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171698559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171698559">Cyril Cohen (Jul 25 2019 at 14:55)</a>:</h4>
+<p>OK... now this makes my community lean master crash...</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="o">(</span><span class="n">do</span>
+  <span class="n">l</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">level</span><span class="bp">.</span><span class="n">param</span> <span class="n">l</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">params</span> <span class="o">:=</span> <span class="o">[(</span><span class="n">sort</span> <span class="n">u</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)],</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">1</span><span class="o">)</span> <span class="err">$</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">ctorty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="bp">`</span><span class="n">myeq</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">var</span> <span class="mi">1</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">],</span>
+  <span class="k">let</span> <span class="n">inds</span> <span class="o">:=</span> <span class="o">[((</span><span class="bp">`</span><span class="n">myeq</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span>
+    <span class="o">[{</span><span class="n">environment</span><span class="bp">.</span><span class="n">intro_rule</span> <span class="bp">.</span> <span class="n">constr</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">refl</span><span class="o">,</span> <span class="n">type</span> <span class="o">:=</span> <span class="n">ctorty</span><span class="o">}])],</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">params</span> <span class="n">inds</span> <span class="n">ff</span><span class="o">)</span>
+</pre></div>
+
+<a name="171707642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171707642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171707642">Bryan Gin-ge Chen (Jul 25 2019 at 16:59)</a>:</h4>
+<p>My debug build says that <a href="https://github.com/leanprover-community/lean/blob/master/src/kernel/abstract.cpp#L33" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/kernel/abstract.cpp#L33">this assert</a> is failing before it crashes.</p>
+
+<a name="171757994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171757994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171757994">Cyril Cohen (Jul 26 2019 at 08:53)</a>:</h4>
+<p>I reduced the crash to this,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span>
+    <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[]</span> <span class="o">[</span><span class="n">ty</span><span class="o">]</span> <span class="o">[((</span><span class="s2">&quot;test&quot;</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span> <span class="o">[])]</span> <span class="n">ff</span>
+</pre></div>
+
+
+<p>This goes through</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span>
+    <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[]</span> <span class="o">[]</span> <span class="o">[((</span><span class="s2">&quot;test&quot;</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span> <span class="o">[])]</span> <span class="n">ff</span> <span class="c">/-</span><span class="cm"> removed parameter ty -/</span>
+</pre></div>
+
+
+<p>but I have this strange debug/warning/error looping in the output buffer:</p>
+<div class="codehilite"><pre><span></span>cannot parse: foo bar
+cannot parse: bar foo bar
+</pre></div>
+
+<a name="171758615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171758615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171758615">Mario Carneiro (Jul 26 2019 at 09:03)</a>:</h4>
+<p>lol did someone leave some debug code in the build?</p>
+
+<a name="171782494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171782494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171782494">Bryan Gin-ge Chen (Jul 26 2019 at 15:19)</a>:</h4>
+<p>Looks like the foo bar stuff is coming from <a href="https://github.com/leanprover-community/lean/blob/d31cc181ba8c9d022b3f5a933eb97e8d8d6d6e6d/src/library/vm/vm_environment.cpp#L142" target="_blank" title="https://github.com/leanprover-community/lean/blob/d31cc181ba8c9d022b3f5a933eb97e8d8d6d6e6d/src/library/vm/vm_environment.cpp#L142">here</a>.</p>
+
+<a name="171790478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171790478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171790478">Mario Carneiro (Jul 26 2019 at 17:08)</a>:</h4>
+<p>oh dear it was me</p>
+
+<a name="171806854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171806854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171806854">Mario Carneiro (Jul 26 2019 at 20:16)</a>:</h4>
+<p>there is a new nightly out at <a href="https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-26" target="_blank" title="https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-26">https://github.com/leanprover-community/lean-nightly/releases/tag/nightly-2019-07-26</a> without the foo bar</p>
+
+<a name="171807048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171807048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171807048">Wojciech Nawrocki (Jul 26 2019 at 20:19)</a>:</h4>
+<p><a href="/user_uploads/3121/Db3thHT8S6SXeHQrWtG9JPqa/Spider-Man-meme.jpeg" target="_blank" title="Spider-Man-meme.jpeg">Spider-Man-meme.jpeg</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/Db3thHT8S6SXeHQrWtG9JPqa/Spider-Man-meme.jpeg" target="_blank" title="Spider-Man-meme.jpeg"><img src="/user_uploads/3121/Db3thHT8S6SXeHQrWtG9JPqa/Spider-Man-meme.jpeg"></a></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

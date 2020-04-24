@@ -1,0 +1,407 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/38548mathlibinstallation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html">mathlib installation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191067766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191067766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191067766">Iocta (Mar 19 2020 at 03:03)</a>:</h4>
+<p>I have a file that contains only <code>import data.set</code>. Getting tons of these messages:</p>
+<div class="codehilite"><pre><span></span> lap.12.0.…     1   1 error           invalid import: tactic.library_note
+ excessive memory consumption detected at &#39;vm&#39; (potential solution: increase memory consumption threshold) (lean-checker)
+ lap.12.0.…     1   1 error           invalid import: logic.basic
+ excessive memory consumption detected at &#39;replace&#39; (potential solution: increase memory consumption threshold) (lean-checker)
+ lap.12.0.…     1   1 error           invalid import: data.dlist
+ excessive memory consumption detected at &#39;replace&#39; (potential solution: increase memory consumption threshold) (lean-checker)
+</pre></div>
+
+<a name="191067932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191067932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191067932">Iocta (Mar 19 2020 at 03:07)</a>:</h4>
+<p>maybe I have a broken library</p>
+
+<a name="191068109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191068109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191068109">Iocta (Mar 19 2020 at 03:11)</a>:</h4>
+<p><code>data.set</code> is built-in, right? not in mathlib</p>
+
+<a name="191068690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191068690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191068690">Reid Barton (Mar 19 2020 at 03:25)</a>:</h4>
+<p>No, it is part of mathlib. Could it be that your mathlib has not been compiled? Are you opening your file in emacs?</p>
+
+<a name="191068694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191068694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191068694">Reid Barton (Mar 19 2020 at 03:25)</a>:</h4>
+<p>Your error message format is unfamiliar</p>
+
+<a name="191069700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191069700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191069700">Iocta (Mar 19 2020 at 03:52)</a>:</h4>
+<p><code>leanpkg help</code> shows <code>add &lt;url&gt; [branch]     add a dependency from a git repository (uses latest upstream revision)</code> but <code>leanpkg add https://github.com/leanprover-community/mathlib.git master</code> just gives me the help again</p>
+
+<a name="191069717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191069717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191069717">Iocta (Mar 19 2020 at 03:53)</a>:</h4>
+<p>and then if I don't specify <code>master</code> it says <code>cannot find revision lean-3.7.0 in repository _target/deps/mathlib</code></p>
+
+<a name="191070224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191070224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191070224">Iocta (Mar 19 2020 at 04:06)</a>:</h4>
+<p>that feels like a cli-parsing bug to me. is there a maintained version of leanpkg somewhere?</p>
+
+<a name="191070234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191070234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191070234">Iocta (Mar 19 2020 at 04:07)</a>:</h4>
+<p>oh it's part of lean</p>
+
+<a name="191070239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191070239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191070239">Reid Barton (Mar 19 2020 at 04:07)</a>:</h4>
+<p>It's in lean, too, and not very large</p>
+
+<a name="191070617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191070617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191070617">Iocta (Mar 19 2020 at 04:18)</a>:</h4>
+<p>I don't understand why it just gives me the help again instead of accepting the revision <a href="https://github.com/leanprover-community/lean/blob/master/leanpkg/leanpkg/main.lean#L201" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/leanpkg/leanpkg/main.lean#L201">https://github.com/leanprover-community/lean/blob/master/leanpkg/leanpkg/main.lean#L201</a></p>
+
+<a name="191071162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071162">Iocta (Mar 19 2020 at 04:33)</a>:</h4>
+<p>Is leanproject a replacement for leanpkg?</p>
+
+<a name="191071453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071453">Mario Carneiro (Mar 19 2020 at 04:40)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191068694" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191068694">said</a>:</p>
+<blockquote>
+<p>Your error message format is unfamiliar</p>
+</blockquote>
+<p>That's what a copy paste job from the problems window looks like</p>
+
+<a name="191071516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071516">Iocta (Mar 19 2020 at 04:42)</a>:</h4>
+<p>Right</p>
+
+<a name="191071595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071595">Mario Carneiro (Mar 19 2020 at 04:44)</a>:</h4>
+<p>anyway, when you get those errors everywhere it means lean is running out of memory and you should restart lean</p>
+
+<a name="191071605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071605">Reid Barton (Mar 19 2020 at 04:44)</a>:</h4>
+<p>And maybe run <code>leanpkg build</code></p>
+
+<a name="191071733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071733">Iocta (Mar 19 2020 at 04:48)</a>:</h4>
+<p><code>leanpkg build</code> didn't help because I didn't have mathlib in the toml, which happened because <code>leanpkg add</code> failed to add it</p>
+
+<a name="191071793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191071793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191071793">Iocta (Mar 19 2020 at 04:50)</a>:</h4>
+<p>for now I can just <code>leanpkg add</code> a local path, ignoring the weirdness I mentioned above</p>
+
+<a name="191078831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191078831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191078831">Kevin Buzzard (Mar 19 2020 at 07:45)</a>:</h4>
+<p>I don't think leanpkg is designed to work with the modern set-up. If you have deviated from 3.4.2 then I think you need to be using leanproject. It's painless to install via pip and just works</p>
+
+<a name="191078860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191078860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191078860">Kevin Buzzard (Mar 19 2020 at 07:45)</a>:</h4>
+<p>And also elan. Note that mathlib master is on lean 3.7 right now</p>
+
+<a name="191785667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191785667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191785667">Dan Stanescu (Mar 25 2020 at 17:47)</a>:</h4>
+<p>I have <code>mathlib</code>, <code>leanproject</code> etc. reinstalled as per the community page and everything seems working. But I find no way to update <code>lean</code> itself. Running <code>update-mathlib</code> apparently brings in the nightlies, but <code>lean --version</code> keeps reporting <code>3.4.2</code>. Lean was installed through VS Code + elan, and I think that same mechanism used to take care of updates. How does one update the Lean executable to the current community version? Am I missing something?</p>
+
+<a name="191785768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191785768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191785768">Patrick Massot (Mar 25 2020 at 17:47)</a>:</h4>
+<p>If you installed <code>leanproject</code> you don't need <code>update-mathlib</code> anymore.</p>
+
+<a name="191785818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191785818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191785818">Patrick Massot (Mar 25 2020 at 17:48)</a>:</h4>
+<p>Upgrading Lean will happen automatically, you don't have to worry about that.</p>
+
+<a name="191785875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191785875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191785875">Patrick Massot (Mar 25 2020 at 17:48)</a>:</h4>
+<p>Please tell us exactly what you want to do.</p>
+
+<a name="191786020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786020">Dan Stanescu (Mar 25 2020 at 17:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191785818" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191785818">said</a>:</p>
+<blockquote>
+<p>Upgrading Lean will happen automatically, you don't have to worry about that.</p>
+</blockquote>
+<p>Well, my concern is this: I see people talking about Lean version 3.7.something, but on my computer the reported version is <code>3.4.2</code>.</p>
+
+<a name="191786146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786146">Patrick Massot (Mar 25 2020 at 17:50)</a>:</h4>
+<p>Reported where? Do you want to create a new project? Work on an existing project? Update an existing project? What do you want to do. I guess running <code>lean --version</code> is not your end goal.</p>
+
+<a name="191786284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786284">Dan Stanescu (Mar 25 2020 at 17:51)</a>:</h4>
+<p>Reported at the terminal command line if the command is run in an (older) project folder.</p>
+
+<a name="191786381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786381">Patrick Massot (Mar 25 2020 at 17:52)</a>:</h4>
+<p>If this is an old project then you want to upgrade the project. Does it use mathlib?</p>
+
+<a name="191786417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786417">Dan Stanescu (Mar 25 2020 at 17:52)</a>:</h4>
+<p>Yes.</p>
+
+<a name="191786433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786433">Mario Carneiro (Mar 25 2020 at 17:52)</a>:</h4>
+<p>Do you have elan installed?</p>
+
+<a name="191786448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786448">Dan Stanescu (Mar 25 2020 at 17:52)</a>:</h4>
+<p>Yes.</p>
+
+<a name="191786477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786477">Mario Carneiro (Mar 25 2020 at 17:52)</a>:</h4>
+<p>does <code>whereis lean</code> report the elan version of lean?</p>
+
+<a name="191786579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786579">Patrick Massot (Mar 25 2020 at 17:53)</a>:</h4>
+<p>Mario, don't talk about elan, you'll confuse people.</p>
+
+<a name="191786630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786630">Dan Stanescu (Mar 25 2020 at 17:54)</a>:</h4>
+<p><code>whereis lean</code> reports nothing. <code>which lean</code> reports <code>/Users/danstanescu/.elan/bin/lean</code></p>
+
+<a name="191786631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191786631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191786631">Patrick Massot (Mar 25 2020 at 17:54)</a>:</h4>
+<p>Dan, you can run <code>leanproject up</code> inside your project.</p>
+
+<a name="191787252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191787252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191787252">Dan Stanescu (Mar 25 2020 at 17:58)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191786631" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191786631">said</a>:</p>
+<blockquote>
+<p>Dan, you can run <code>leanproject up</code> inside your project.</p>
+</blockquote>
+<p>Thank you, I think this may be what I was in need of. Although at this point it tells me that <code>This project does not depend on mathlib</code> although I'm using it actively. But it may have something to do with my git files, which I can probably figure out.</p>
+
+<a name="191787565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191787565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191787565">Patrick Massot (Mar 25 2020 at 18:00)</a>:</h4>
+<p>Could you paste the content of <code>leanpkg.toml</code> and list the content of the top-level folder of your project?</p>
+
+<a name="191790449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790449">Dan Stanescu (Mar 25 2020 at 18:23)</a>:</h4>
+<p>Here is my <code>.toml</code> file:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;LearnBasics&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;3.4.2&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;dd8da5165bd00b07408dbb87173e96908c6926a4&quot;}
+</pre></div>
+
+<a name="191790580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790580">Dan Stanescu (Mar 25 2020 at 18:24)</a>:</h4>
+<p>And the content of the directory:</p>
+<div class="codehilite"><pre><span></span>_target     leanpkg.path leanpkg.toml src
+</pre></div>
+
+<a name="191790806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790806">Patrick Massot (Mar 25 2020 at 18:26)</a>:</h4>
+<p>This is totally weird.</p>
+
+<a name="191790866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790866">Patrick Massot (Mar 25 2020 at 18:26)</a>:</h4>
+<p>Are you in the folder containing this leanpkg.toml when you run <code>leanproject up</code>?</p>
+
+<a name="191790935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790935">Patrick Massot (Mar 25 2020 at 18:27)</a>:</h4>
+<p>If I create a folder containing only you leanpkg.toml then <code>leanproject up</code> works.</p>
+
+<a name="191790968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191790968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191790968">Dan Stanescu (Mar 25 2020 at 18:27)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191790866" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191790866">said</a>:</p>
+<blockquote>
+<p>Are you in the folder containing this leanpkg.toml when you run <code>leanproject up</code>?</p>
+</blockquote>
+<p>Yes.</p>
+
+<a name="191791040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191791040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191791040">Patrick Massot (Mar 25 2020 at 18:28)</a>:</h4>
+<p>Could you run <code>leanproject --debug up</code>?</p>
+
+<a name="191791166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191791166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191791166">Dan Stanescu (Mar 25 2020 at 18:29)</a>:</h4>
+<p>The result is a little longer:</p>
+<div class="codehilite"><pre><span></span>configuring _user_local_packages 1
+WARNING: leanpkg configurations not specifying `path = &quot;src&quot;` are deprecated.
+Traceback (most recent call last):
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 233, in from_path
+    repo = Repo(path, search_parent_directories=True)
+  File &quot;/Users/danstanescu/.local/lib/python3.7/site-packages/git/repo/base.py&quot;, line 184, in __init__
+    raise InvalidGitRepositoryError(epath)
+git.exc.InvalidGitRepositoryError: /Users/danstanescu/Programming/Lean/LearnBasics
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 92, in upgrade_mathlib
+    proj().upgrade_mathlib()
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 40, in proj
+    lean_upgrade)
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 235, in from_path
+    raise InvalidLeanProject(&#39;Invalid git repository&#39;)
+mathlibtools.lib.InvalidLeanProject: Invalid git repository
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;//anaconda3/bin/leanproject&quot;, line 8, in &lt;module&gt;
+    sys.exit(safe_cli())
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 256, in safe_cli
+    handle_exception(err, str(err))
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 51, in handle_exception
+    raise exc
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 254, in safe_cli
+    cli()
+  File &quot;//anaconda3/lib/python3.7/site-packages/click/core.py&quot;, line 764, in __call__
+    return self.main(*args, **kwargs)
+  File &quot;//anaconda3/lib/python3.7/site-packages/click/core.py&quot;, line 717, in main
+    rv = self.invoke(ctx)
+  File &quot;//anaconda3/lib/python3.7/site-packages/click/core.py&quot;, line 1137, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File &quot;//anaconda3/lib/python3.7/site-packages/click/core.py&quot;, line 956, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File &quot;//anaconda3/lib/python3.7/site-packages/click/core.py&quot;, line 555, in invoke
+    return callback(*args, **kwargs)
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 97, in upgrade_mathlib
+    project.upgrade_mathlib()
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 479, in upgrade_mathlib
+    self.get_mathlib_olean()
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 361, in get_mathlib_olean
+    unpack_archive(get_mathlib_archive(self.mathlib_rev, self.cache_url,
+  File &quot;//anaconda3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 311, in mathlib_rev
+    raise InvalidMathlibProject(&#39;This project does not depend on mathlib&#39;)
+mathlibtools.lib.InvalidMathlibProject: This project does not depend on mathlib
+</pre></div>
+
+<a name="191792173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191792173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191792173">Dan Stanescu (Mar 25 2020 at 18:36)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191790806" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191790806">said</a>:</p>
+<blockquote>
+<p>This is totally weird.</p>
+</blockquote>
+<p>So, after creating a new Lean project, I now get Lean version 3.7.2. But only if I type <code>lean --version</code> in the new project directory, while in the old project directory it still reports 3.4.2.</p>
+
+<a name="191792586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191792586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191792586">Patrick Massot (Mar 25 2020 at 18:39)</a>:</h4>
+<p>It looks like your <code>LearnBasics</code> folder is not a valid git repository, which is clearly unsupported.</p>
+
+<a name="191792638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191792638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191792638">Dan Stanescu (Mar 25 2020 at 18:40)</a>:</h4>
+<p>Right, that's what I thought.</p>
+
+<a name="191792708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191792708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191792708">Dan Stanescu (Mar 25 2020 at 18:40)</a>:</h4>
+<p>Thank you.</p>
+
+<a name="191799189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799189">Dan Stanescu (Mar 25 2020 at 19:27)</a>:</h4>
+<p>Wouldn't it be a good idea for the <code>mathlib</code> installation page to have some pointers to why using <code>git</code> is needed/desirable and a modicum of information on how to keep repositories in sync etc. for non-computer scientists? After all, I suppose it's to be used by mathematicians.</p>
+
+<a name="191799666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799666">Kevin Buzzard (Mar 25 2020 at 19:30)</a>:</h4>
+<p>Conversely one might argue that just saying "click here and do this stuff and don't ask any questions" might be the perfect approach for mathematicians that have no idea what git is :-)</p>
+
+<a name="191799741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799741">Kevin Buzzard (Mar 25 2020 at 19:31)</a>:</h4>
+<p>I never teach my students about git, those that want to learn it or know it already just learn it by googling for git.</p>
+
+<a name="191799788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799788">Kevin Buzzard (Mar 25 2020 at 19:32)</a>:</h4>
+<p>Your point is that we should flag that git is necessary though, which I guess we could do.</p>
+
+<a name="191799890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799890">Dan Stanescu (Mar 25 2020 at 19:32)</a>:</h4>
+<p>You don't need it until you actually do.</p>
+
+<a name="191799933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799933">Kevin Buzzard (Mar 25 2020 at 19:32)</a>:</h4>
+<p>Right :-)</p>
+
+<a name="191799939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799939">Dan Stanescu (Mar 25 2020 at 19:32)</a>:</h4>
+<p>And then you scratch your head and ask yourself what all this is about.</p>
+
+<a name="191799961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191799961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191799961">Dan Stanescu (Mar 25 2020 at 19:33)</a>:</h4>
+<p>Being warned about it is nice.</p>
+
+<a name="191800005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800005">Dan Stanescu (Mar 25 2020 at 19:33)</a>:</h4>
+<p>Doesn't need to be extensive, maybe just a pointer and a link to further info.</p>
+
+<a name="191800236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800236">Kevin Buzzard (Mar 25 2020 at 19:35)</a>:</h4>
+<p>I definitely don't think that it's our job to tell our users how to use git. But I agree that we should learn from the fact that you thought you had a lean project but it wasn't because it wasn't a git project. On the other hand, if you'd created it in the official way then I guess this wouldn't have happened?</p>
+
+<a name="191800316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800316">Dan Stanescu (Mar 25 2020 at 19:35)</a>:</h4>
+<p>There are videos etc. on the net, but let's not forget many in math are so afraid of computers they still write transparencies. And some of the best minds at that!</p>
+
+<a name="191800319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800319">Kevin Buzzard (Mar 25 2020 at 19:35)</a>:</h4>
+<p>Part of the problem is that all the tooling changed recently.</p>
+
+<a name="191800397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800397">Dan Stanescu (Mar 25 2020 at 19:36)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191800236" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191800236">said</a>:</p>
+<blockquote>
+<p>I definitely don't think that it's our job to tell our users how to use git. But I agree that we should learn from the fact that you thought you had a lean project but it wasn't because it wasn't a git project. On the other hand, if you'd created it in the official way then I guess this wouldn't have happened?</p>
+</blockquote>
+<p>Actually I did create it according to the instructions. It was just some time ago.</p>
+
+<a name="191800417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800417">Kevin Buzzard (Mar 25 2020 at 19:36)</a>:</h4>
+<p>Oh OK! Well, things move on :-/</p>
+
+<a name="191800435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800435">Johan Commelin (Mar 25 2020 at 19:36)</a>:</h4>
+<p><code>leanpkg new foobar</code> always created a git repo as far as I know</p>
+
+<a name="191800497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191800497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191800497">Johan Commelin (Mar 25 2020 at 19:37)</a>:</h4>
+<p>But I agree that we should list <code>git</code> as a dependency</p>
+
+<a name="191812088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191812088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191812088">Patrick Massot (Mar 25 2020 at 21:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191800316" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191800316">said</a>:</p>
+<blockquote>
+<p>There are videos etc. on the net, but let's not forget many in math are so afraid of computers they still write transparencies. And some of the best minds at that!</p>
+</blockquote>
+<p>But those people won't try Lean any time soon.</p>
+
+<a name="191812220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191812220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191812220">Patrick Massot (Mar 25 2020 at 21:16)</a>:</h4>
+<p>I also don't know how we could say more clearly that git is required. This is mentioned in all our installations pages.</p>
+
+<a name="191813631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191813631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191813631">Dan Stanescu (Mar 25 2020 at 21:30)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191812220" title="#narrow/stream/113489-new-members/topic/mathlib.20installation/near/191812220">said</a>:</p>
+<blockquote>
+<p>I also don't know how we could say more clearly that git is required. This is mentioned in all our installations pages.</p>
+</blockquote>
+<p>You are right, Patrick. But it can be read as "you need git to install mathlib" everywhere. What is not clear is that you have to keep working on your files in a git repository, for <code>mathlib</code> to work as expected. Not big deal in the long run, but doesn't cost much to add that information there  either.</p>
+
+<a name="191815379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191815379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191815379">Patrick Massot (Mar 25 2020 at 21:50)</a>:</h4>
+<p>Good point. More precisely you need git if you want to update mathlib in your projects.</p>
+
+<a name="191815955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191815955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191815955">Bryan Gin-ge Chen (Mar 25 2020 at 21:56)</a>:</h4>
+<p>Here's a PR <a href="https://github.com/leanprover-community/mathlib/issues/2244" title="https://github.com/leanprover-community/mathlib/issues/2244">#2244</a>.</p>
+
+<a name="191822029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191822029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191822029">Scott Morrison (Mar 25 2020 at 23:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="210574">@Patrick Massot</span> is there room for <code>leanproject</code> giving a useful warning if called in a directory which is not a git repository?</p>
+
+<a name="191822210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20installation/near/191822210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/38548mathlibinstallation.html#191822210">Patrick Massot (Mar 25 2020 at 23:06)</a>:</h4>
+<p>Sure. It already gives such a warning in certain circumstances. I'll try to add more when I'll have time (but feel free to PR).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

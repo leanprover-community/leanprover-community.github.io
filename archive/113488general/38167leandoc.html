@@ -1,0 +1,380 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/38167leandoc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html">leandoc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="164534649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164534649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164534649">Johan Commelin (Apr 30 2019 at 12:34)</a>:</h4>
+<p>Now that the perfectoid project compiles, we want to start beautifying it. Parts will probably displayed with Patricks lean-formatter. However, we would also like to generate hyperlinked and syntax-highlighted docstringified webpages from the source code. This should be done by a tool called <code>leandoc</code> that doesn't yet seem to exist.<br>
+I invite everyone to point to their secret repos where they have started working on this tool.<br>
+Alternatively you may also write a braindump of all the bugs and features that you would like to have in future <code>leandoc</code>.<br>
+Let's see how fast we can throw something together!</p>
+
+<a name="164536497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164536497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164536497">Kevin Buzzard (Apr 30 2019 at 13:01)</a>:</h4>
+<p>There is no book which defines a perfectoid space. All we have is research articles and random pdfs written by graduate students and post-docs who were typically preparing for a talk they had to give on perfectoid spaces. It would be great to turn the Lean definition into a useful resource. I can write the LaTeX around the definition (as could Johan) but some sort of cool way of jumping around between definitions would be brilliant.</p>
+
+<a name="164562418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562418">Koundinya Vajjha (Apr 30 2019 at 18:21)</a>:</h4>
+<p>Here was something I had in mind: with the new Lean 4 parser, it should be theoretically possible to extend the tactic monad with state to capture the tactics being invoked (the tactics are erased after they are parsed in Lean 3).<br>
+This would look like a tactic class <code>begin [foo] ... end</code>, which would parse tactics as they are written and docstrings as well to produce Patrick's webpage-like output.<br>
+I don't know to what extent this is possible but.</p>
+
+<a name="164562781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562781">Patrick Massot (Apr 30 2019 at 18:24)</a>:</h4>
+<p>I hope all this will be much easier with Lean 4. But we can already ask Lean information about each and every position in the file.</p>
+
+<a name="164562849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164562849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164562849">Patrick Massot (Apr 30 2019 at 18:25)</a>:</h4>
+<p>It's only a matter of patience to write a version of format_lean that display information about everything</p>
+
+<a name="164563169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563169">Patrick Massot (Apr 30 2019 at 18:28)</a>:</h4>
+<p>In <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/objects.py#L369-L372</a> you can see python asking for the tactic state at start and end of each proof line. You can replace that with a loop on each character in the line, recording everything (with shared information when the state is constant) and add request for definitions</p>
+
+<a name="164563242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563242">Simon Hudon (Apr 30 2019 at 18:29)</a>:</h4>
+<p>For such a leandoc tool, do you need to know about <code>variable</code> construct? If not, you might already be able to render it from <code>olean</code> files</p>
+
+<a name="164563302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563302">Simon Hudon (Apr 30 2019 at 18:29)</a>:</h4>
+<p>Oh nice! I didn't know you were already this far ahead</p>
+
+<a name="164563389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563389">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p>Did you look at my lectures notes?</p>
+
+<a name="164563404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563404">Simon Hudon (Apr 30 2019 at 18:30)</a>:</h4>
+<p>No</p>
+
+<a name="164563425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563425">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p><a href="https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html" target="_blank" title="https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html">https://www.math.u-psud.fr/~pmassot/enseignement/math114/cours4.html</a></p>
+
+<a name="164563433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563433">Patrick Massot (Apr 30 2019 at 18:30)</a>:</h4>
+<p>It does display tactic state</p>
+
+<a name="164563568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164563568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164563568">Simon Hudon (Apr 30 2019 at 18:32)</a>:</h4>
+<p>That's so cool!</p>
+
+<a name="164581825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164581825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164581825">Moses Schönfinkel (Apr 30 2019 at 22:21)</a>:</h4>
+<p>Do you just want to parse comment-enhanced leandoc specific regions and "attach" these to their closest Lean construct? Or do you actually want to parse Lean as well to attach properly scoped variables, constants, namespaces, etc? Or do you want to parse leandoc specific comment regions with combination of querying Lean server for additional information about the construct the region in question pertains to (I have no clue what information is available this way) - this could dodge quite a bit of scope/dependency resolution and parsing. Is it still the case that Lean 3 grammar is parser-specified and there's no EBNF - or was I dreaming this?</p>
+
+<a name="164582038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164582038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164582038">Johan Commelin (Apr 30 2019 at 22:24)</a>:</h4>
+<p>We want to emulate the experience you have in VScode.</p>
+
+<a name="164582384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164582384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164582384">Kevin Buzzard (Apr 30 2019 at 22:29)</a>:</h4>
+<p>But with added LaTeX</p>
+
+<a name="164582410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164582410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164582410">Moses Schönfinkel (Apr 30 2019 at 22:29)</a>:</h4>
+<p>Eschew leandoc-specific annotations altogether?</p>
+
+<a name="164582486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164582486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164582486">Simon Hudon (Apr 30 2019 at 22:30)</a>:</h4>
+<p>Kevin, LaTeX might have to wait. If we can get it to work in HTML, we can give LaTeX a go but it's truly no fun to work with so a first prototype will have to omit it</p>
+
+<a name="164584542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164584542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164584542">Kevin Buzzard (Apr 30 2019 at 23:02)</a>:</h4>
+<p>aah, the realities of real life.</p>
+
+<a name="164638146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164638146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164638146">matt rice (May 01 2019 at 16:58)</a>:</h4>
+<p>fwiw i have a start on this, which currently just dumps text out... I will try and get into some format, and uploaded</p>
+
+<a name="164638170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164638170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164638170">Johan Commelin (May 01 2019 at 16:59)</a>:</h4>
+<p>Be aware of Patrick's leancrawler...</p>
+
+<a name="164638260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164638260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164638260">Johan Commelin (May 01 2019 at 17:00)</a>:</h4>
+<p>But, yes, I'm excited to hear this, and I'll cheer you on. (And if I can find some time I'll also contribute... but my todo list is growing exponentially the last 3 weeks...)</p>
+
+<a name="164638457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164638457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164638457">matt rice (May 01 2019 at 17:02)</a>:</h4>
+<p>I was using Mario's olean-rs, because it makes it simple to do so</p>
+
+<a name="164639457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164639457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164639457">Simon Hudon (May 01 2019 at 17:18)</a>:</h4>
+<p>Be aware of my fork. I've added some features</p>
+
+<a name="164640699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164640699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164640699">Mario Carneiro (May 01 2019 at 17:34)</a>:</h4>
+<p>maybe make a PR?</p>
+
+<a name="164640891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164640891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164640891">Simon Hudon (May 01 2019 at 17:36)</a>:</h4>
+<p>Done</p>
+
+<a name="164640929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164640929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164640929">Patrick Massot (May 01 2019 at 17:37)</a>:</h4>
+<p>I'm really puzzled. How do you use olean-rs, appart from listing imports?</p>
+
+<a name="164640940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164640940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164640940">Patrick Massot (May 01 2019 at 17:37)</a>:</h4>
+<p>Do you write rust code, or can you use the dump output in any way?</p>
+
+<a name="164641121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164641121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164641121">Simon Hudon (May 01 2019 at 17:39)</a>:</h4>
+<p>I write Rust code</p>
+
+<a name="164641476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164641476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164641476">Patrick Massot (May 01 2019 at 17:42)</a>:</h4>
+<p>Ok. I can see this tool was designed from the bery beginning to make sure mathematicians stay where they belong, and don't interfere with software development.</p>
+
+<a name="164641485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164641485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164641485">matt rice (May 01 2019 at 17:42)</a>:</h4>
+<p>Same, I added a library thing to my fork here so i just replace the <a href="http://main.rs" target="_blank" title="http://main.rs">main.rs</a> file with documentation specific rust code, (will PR when ready)</p>
+
+<a name="164641553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164641553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164641553">Simon Hudon (May 01 2019 at 17:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> That is indeed the first goal of the project</p>
+
+<a name="164641933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164641933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164641933">Simon Hudon (May 01 2019 at 17:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="143402">@matt rice</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Maybe we should consider splitting the project into one library and multiple executables</p>
+
+<a name="164642345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164642345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164642345">matt rice (May 01 2019 at 17:52)</a>:</h4>
+<p>@Simon Hudon yeah, thats done here afaict all i needed to do was add <a href="http://lib.rs" target="_blank" title="http://lib.rs">lib.rs</a> which adds the pub mod's for various things along side <a href="http://main.rs" target="_blank" title="http://main.rs">main.rs</a>.</p>
+
+<a name="164642390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164642390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164642390">Simon Hudon (May 01 2019 at 17:53)</a>:</h4>
+<p>Nice! <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="164674177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164674177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164674177">Mario Carneiro (May 02 2019 at 02:01)</a>:</h4>
+<blockquote>
+<p>Ok. I can see this tool was designed from the very beginning to make sure mathematicians stay where they belong, and don't interfere with software development.</p>
+</blockquote>
+<p>I should hope not. It was written in a sensible language with a strong type system, in as clear a way as I could manage, to document the olean file format and provide a path for further analysis. I'm glad that Matt and Simon are extending it - that's exactly what it was intended for. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> Is there something I can do to make this easier? I had to pick some language to write it in, and modern C++ is a mess, Lean 3 is far too slow for this to be practical (but I also wrote it in lean anyway). I am guessing you would prefer Python? That can be done, although the type of the core <code>Modifications</code> type in olean-rs is much of the documentation and that wouldn't transfer so well to Python.</p>
+
+<a name="164674461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164674461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164674461">Simon Hudon (May 02 2019 at 02:08)</a>:</h4>
+<p>I wouldn't want to work with Python for this. Rust is not exactly easy to learn but I think the type system helps you do a good job. C++ would make things more difficult than necessary. I think OCaml and Haskell could have been good choices too.</p>
+
+<a name="164690600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164690600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164690600">Patrick Massot (May 02 2019 at 08:47)</a>:</h4>
+<p>I can believe the heavy lifting require a heavy language. But if you want regular people to use it then you need binders to a human-oriented language</p>
+
+<a name="164691736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164691736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164691736">Mario Carneiro (May 02 2019 at 09:05)</a>:</h4>
+<p>you are using a lot of weasel words. What's a "human oriented language"? Almost all programming languages are human oriented</p>
+
+<a name="164691924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164691924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164691924">Mario Carneiro (May 02 2019 at 09:08)</a>:</h4>
+<p>again, you haven't said Python explicitly but I'm assuming that's your preference based on your previous projects. I don't think python is very good for large projects, it's too scripty</p>
+
+<a name="164692367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164692367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164692367">Patrick Massot (May 02 2019 at 09:15)</a>:</h4>
+<p>Isn't scripty a weasel word?</p>
+
+<a name="164692369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164692369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164692369">Kevin Buzzard (May 02 2019 at 09:15)</a>:</h4>
+<p>I wonder if there are two different things here. Firstly it would be <em>great</em> to be able to look at Lean code on e.g. my phone's web browser, without having to constantly wonder what the definition of X is -- if I could just click on X instead and then see and then go back, that would be a great step forward for me. Secondly, it would be really interesting -- not just for this community here but broadly for mathematicians, <em>even those who know nothing about Lean</em>, to have some sort of coherent interactive way of exploring what a perfectoid space is. This would be <em>completely new</em> for mathematicians, and some are <em>bound</em> to be interested. These two projects seem related, but don't sound the same to me.</p>
+
+<a name="164692447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164692447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164692447">Patrick Massot (May 02 2019 at 09:16)</a>:</h4>
+<p>The fact that python isn't good for large projects is simply refuted by facts</p>
+
+<a name="164692458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164692458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164692458">Patrick Massot (May 02 2019 at 09:16)</a>:</h4>
+<p>And saying that olean-rs is a large project is...</p>
+
+<a name="164700407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164700407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164700407">Johan Commelin (May 02 2019 at 11:41)</a>:</h4>
+<p>Python is an excellent choice for interactively playing with a bunch of data. I can imagine losing a lot of time while playing with some Jupyter notebook inspecting all sorts of data that we extract from mathlib.</p>
+
+<a name="164701519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164701519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164701519">Patrick Massot (May 02 2019 at 12:02)</a>:</h4>
+<p>Johan, you're pointlessly damaging your keyboard. They are the aristocracy of programming. You could as well advertise numerical analysis to Langlands program people...</p>
+
+<a name="164701566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164701566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164701566">matt rice (May 02 2019 at 12:03)</a>:</h4>
+<p>In this regard one thing I suppose I was excited about yesterday, is a rust library for persistent data structures, <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank" title="https://en.wikipedia.org/wiki/Persistent_data_structure">https://en.wikipedia.org/wiki/Persistent_data_structure</a> (I haven't looked at Mario's Trie implementation yet to see if it is persistent), but in theory you could go through the git history of something like the perfectoid project and inspect the data, and how it changes over time...  That is actually probably painful though with the way i've built it since it would mean compiling each commit... But it would be immediately useful in that something like mathlib you could have the tree for file x, and file y, and all the data would be shared with that of the tree for all of mathlib.</p>
+
+<a name="164701936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164701936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164701936">Johan Commelin (May 02 2019 at 12:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Something like <a href="https://press.princeton.edu/titles/9491.html" target="_blank" title="https://press.princeton.edu/titles/9491.html">https://press.princeton.edu/titles/9491.html</a>?</p>
+
+<a name="164702113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164702113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164702113">Patrick Massot (May 02 2019 at 12:12)</a>:</h4>
+<p>Johan, those people are traitors, like Kevin or William Stein</p>
+
+<a name="164702136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164702136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164702136">Patrick Massot (May 02 2019 at 12:13)</a>:</h4>
+<p>anyway...</p>
+
+<a name="164702152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164702152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164702152">matt rice (May 02 2019 at 12:13)</a>:</h4>
+<p>Anyhow, I hope that perhaps <a href="https://docs.rs/inline-python/0.2.0/inline_python/" target="_blank" title="https://docs.rs/inline-python/0.2.0/inline_python/">https://docs.rs/inline-python/0.2.0/inline_python/</a> may help, the primary reason I did it this way was because I knew it would be a) simple to implement b) simple to install, a) was important since it is highly likely lean 4 puts a clock on it's self life.</p>
+
+<a name="164707648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164707648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164707648">Simon Hudon (May 02 2019 at 13:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Feel free to have those tantrums in private. Nobody is obliged to choose Python to pretend like your only choice of language is a good one in every circumstances. If you don't want to learn a new language don't contribute. We'll live.</p>
+
+<a name="164708334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164708334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164708334">Johan Commelin (May 02 2019 at 13:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="143402">@matt rice</span> do you already have a repo that we can watch/follow/stargaze?</p>
+
+<a name="164708722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164708722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164708722">matt rice (May 02 2019 at 13:41)</a>:</h4>
+<p>not yet, will work on that now, even though it has some issues... I was mostly waiting until I got command line arguments stablized so it wasn't changing on people, but i'll probably doing that last.</p>
+
+<a name="164710615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164710615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164710615">Patrick Massot (May 02 2019 at 14:05)</a>:</h4>
+<p>Simon, I'm not 100% sure what you mean because I had to look up the word "tantrum". But I'm not angry. We mathematicians are experts at snobbery, we don't have any problem with that. I also have no problem with the idea to learn a new computer language: Lean is certainly very different from everything I knew before (even including my OCAML lectures 20 years ago). In this particular case I don't see any reason to learn Rust which is marketed as a "highly concurrent and memory safe language" since, up to now, I was never faced with any concurrency or memory management issue. But I'd very happy to use anything you or Mario will build using this language. Simply I won't be able to help in any way.</p>
+
+<a name="164710929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164710929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164710929">Patrick Massot (May 02 2019 at 14:10)</a>:</h4>
+<p>By the way, I don't mean you need any help from me or anyone else.</p>
+
+<a name="164712699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164712699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164712699">matt rice (May 02 2019 at 14:29)</a>:</h4>
+<p>@Johan Commelin <a href="https://github.com/ratmice/lumpy-leandoc" target="_blank" title="https://github.com/ratmice/lumpy-leandoc">https://github.com/ratmice/lumpy-leandoc</a> theres 2 branches the command line &amp; a TeX one w/ issues</p>
+
+<a name="164713108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713108">Johan Commelin (May 02 2019 at 14:34)</a>:</h4>
+<p>Ooh, don't worry about TeX output</p>
+
+<a name="164713174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713174">Johan Commelin (May 02 2019 at 14:35)</a>:</h4>
+<p>I think what Kevin really meant, when he was talking about LaTeX, was that he wanted to use TeX in the comments, and have MathJaX render it in the generated html files. But maybe I misunderstood him.</p>
+
+<a name="164713194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713194">Johan Commelin (May 02 2019 at 14:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="143402">@matt rice</span> Thanks for the efforts so far!</p>
+
+<a name="164713321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713321">Johan Commelin (May 02 2019 at 14:36)</a>:</h4>
+<p>I would guess that it is easier to generate HTML than to generate TeX, right?</p>
+
+<a name="164713525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713525">matt rice (May 02 2019 at 14:39)</a>:</h4>
+<p>Yeah, I just really like/prefer tex output, and generally know nothing about html stuff , the TeX output is almost there except some long function names, and the blasted missing unicode symbols.  But yes, HTML is probably easier for someone who knows anything about it.</p>
+
+<a name="164713677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164713677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164713677">Johan Commelin (May 02 2019 at 14:40)</a>:</h4>
+<p>I certainly agree that the TeX output will look better from a typographic point of view. But it doesn't allow for too much interaction. That's why I prefer html output in this case. But that shouldn't stop you from generating beautiful TeX</p>
+
+<a name="164933300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164933300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164933300">matt rice (May 05 2019 at 19:45)</a>:</h4>
+<blockquote>
+<p>I think what Kevin really meant, when he was talking about LaTeX, was that he wanted to use TeX in the comments, and have MathJaX render it in the generated html files. But maybe I misunderstood him.</p>
+</blockquote>
+<p>So perhaps beneath mention, but in regards to this, I'm at the point where I need to institute some format for this, e.g. I need to know which parts of the comment (or in whole) need to be TeX escaped, and which should not be, my thoughts were to control this by adding a <strong>docstring_format</strong> key to <em>leanpkg.toml</em> and optionally some magic string in the comment itself, to allow for competing ideas and/or future flexibility.  I haven't tried yet, but it looks like leanpkg itself will just ignore this.</p>
+
+<a name="164933793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164933793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164933793">matt rice (May 05 2019 at 19:58)</a>:</h4>
+<p>Anyhow, after that i'll try and run it through <a href="https://dlmf.nist.gov/LaTeXML/" target="_blank" title="https://dlmf.nist.gov/LaTeXML/">https://dlmf.nist.gov/LaTeXML/</a> which seems to use MathML rather than MathJax the results on <a href="https://dlmf.nist.gov/" target="_blank" title="https://dlmf.nist.gov/">https://dlmf.nist.gov/</a> look pretty good to me</p>
+
+<a name="164934525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164934525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164934525">Patrick Massot (May 05 2019 at 20:19)</a>:</h4>
+<p>Noooo!</p>
+
+<a name="164934583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164934583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164934583">Patrick Massot (May 05 2019 at 20:20)</a>:</h4>
+<p>Going from Lean to HTML through LaTeX seems completely masochistic, especially if you add perl on top of that. And MathML is dead, after a very long battle to get born.</p>
+
+<a name="164934601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164934601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164934601">Patrick Massot (May 05 2019 at 20:21)</a>:</h4>
+<p>Could you explain again why you want to go to LaTeX first?</p>
+
+<a name="164935887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164935887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164935887">matt rice (May 05 2019 at 20:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  I was just looking at that and yeah, perl is pretty terrible, I figured that as far as the comment format stuff It should in theory need much the same for extracting MathJax.  When working in groups it is often nice to upgrade in sync, and referencing documentation on the web generally reflects the most current version, it's nice as well when I have my tablet and no Wifi...</p>
+
+<a name="164935906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164935906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164935906">Patrick Massot (May 05 2019 at 20:56)</a>:</h4>
+<p>What's the problem you see in the approach I use in <code>format_lean</code>?</p>
+
+<a name="164936030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936030">matt rice (May 05 2019 at 20:58)</a>:</h4>
+<p>Nothing in particular, I had hoped to show that it could be integrated with the lean supported doc-strings, for e.g. REPL/VSCode integration and the like eventually,  So the lack of lean's awareness of it I would say is the issue.</p>
+
+<a name="164936047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936047">Patrick Massot (May 05 2019 at 20:59)</a>:</h4>
+<p>What you describe sounds like a Lean 4 target</p>
+
+<a name="164936049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936049">Patrick Massot (May 05 2019 at 20:59)</a>:</h4>
+<p>All this should be much easier with the Lean 4 parser</p>
+
+<a name="164936065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936065">Patrick Massot (May 05 2019 at 21:00)</a>:</h4>
+<p>because we will have much more access to information</p>
+
+<a name="164936206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936206">matt rice (May 05 2019 at 21:03)</a>:</h4>
+<p>Right, which was why i was trying to do it as simply as possible, I imagine we need a doc generator for lean 3 because I imagine mathlib is going to be stuck on it for a while... I also imagine lean 4 is going to use the doc_strings format, and so it'd be nice to get something formatting these before we go on a big effort towards documenting things so we can format them nicely as we write.</p>
+
+<a name="164936256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936256">Patrick Massot (May 05 2019 at 21:04)</a>:</h4>
+<p>Note that many docstrings are already formatted using markdown</p>
+
+<a name="164936282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936282">Patrick Massot (May 05 2019 at 21:05)</a>:</h4>
+<p>Markdown+TeX is a really sweet combination as long as you don't require a fancy layout</p>
+
+<a name="164936349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936349">Patrick Massot (May 05 2019 at 21:06)</a>:</h4>
+<p>and it has the advantage that you get many Markdown to HTML formater that can be chained with Mathjax to handle math mode</p>
+
+<a name="164936364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936364">Patrick Massot (May 05 2019 at 21:07)</a>:</h4>
+<p>Also note that, although it's not much used, you can do author-side mathjax and ship pure HTML(+SVG) if you don't like waiting for mathjax to render a webpage</p>
+
+<a name="164936375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936375">matt rice (May 05 2019 at 21:07)</a>:</h4>
+<p>Right, It's these that i'm having trouble with, in particular the unicode symbols outside of math-mode support is terrible</p>
+
+<a name="164936424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936424">Patrick Massot (May 05 2019 at 21:08)</a>:</h4>
+<p>support by what? LaTeX?</p>
+
+<a name="164936427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936427">matt rice (May 05 2019 at 21:08)</a>:</h4>
+<p>yeah.</p>
+
+<a name="164936442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936442">Patrick Massot (May 05 2019 at 21:09)</a>:</h4>
+<p>Yes, even modern TeX compilers like <code>xelatex</code> or <code>lualatex</code> have trouble with that</p>
+
+<a name="164936445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164936445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164936445">Patrick Massot (May 05 2019 at 21:09)</a>:</h4>
+<p>TeX is simply too old <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="164937216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164937216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164937216">matt rice (May 05 2019 at 21:28)</a>:</h4>
+<p>Yeah, one of the issues i'm having is I built a big character fallback list, to redirect to math fonts, but then TeX tries to be helpful when it noticed specific characters that look like an equation so it tries to enter math mode, but then can't figure out where to stop it.</p>
+
+<a name="164937234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/164937234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#164937234">matt rice (May 05 2019 at 21:29)</a>:</h4>
+<p>Anyhow, thanks for the pushback on LaTeXML, i don't really need to be jumping down unwanted rabbit holes...</p>
+
+<a name="168104711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leandoc/near/168104711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38167leandoc.html#168104711">matt rice (Jun 14 2019 at 03:54)</a>:</h4>
+<p>So, I've done an initial release, <a href="https://github.com/ratmice/lumpy-leandoc" target="_blank" title="https://github.com/ratmice/lumpy-leandoc">lumpy-leandoc</a><br>
+Example output can be seen <a href="https://gist.github.com/ratmice/29b869369ec02232b80dce3498a4c0b4" target="_blank" title="https://gist.github.com/ratmice/29b869369ec02232b80dce3498a4c0b4">here</a></p>
+<p>I haven't tried it yet on windows yet expect to do that soon.<br>
+still things that need doing, but somewhat presentable.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

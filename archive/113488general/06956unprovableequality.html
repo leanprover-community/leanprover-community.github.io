@@ -1,0 +1,226 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06956unprovableequality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html">unprovable equality?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170583846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170583846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170583846">Kevin Buzzard (Jul 10 2019 at 22:11)</a>:</h4>
+<p>Is it correct to say that if I define <code> posreal := {r : ℝ // 0 &lt; r}</code> then, remembering <code>nnreal := {r : ℝ // 0 ≤ r}</code>, am I right in thinking that it is impossible to prove <code>nnreal = with_zero posreal</code> in Lean?</p>
+
+<a name="170583953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170583953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170583953">Kevin Buzzard (Jul 10 2019 at 22:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> ? BTW -- nice to meet you today!</p>
+
+<a name="170584107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584107">Floris van Doorn (Jul 10 2019 at 22:14)</a>:</h4>
+<p>That is correct. You can prove that your types are equivalent, but you can (almost) never prove that two types are equal. Therefore, it is "evil" to work with equality between types (unless you're doing homotopy type theory, where this equality is an easy consequence of univalence).</p>
+
+<a name="170584312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584312">Kevin Buzzard (Jul 10 2019 at 22:17)</a>:</h4>
+<p>Well, the non-negative reals are equal to the disjoint union of zero and the positive reals, so how am I supposed to say this in Lean?</p>
+
+<a name="170584371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584371">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>Every theorem about the non-negative reals is also true for the disjoint union of zero and the positive reals.</p>
+
+<a name="170584379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584379">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>and vice versa</p>
+
+<a name="170584382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584382">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>Ask any mathematician</p>
+
+<a name="170586696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170586696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170586696">Jesse Michael Han (Jul 10 2019 at 22:53)</a>:</h4>
+<p>you would have a better shot proving that <code>with_zero posreal</code> is equal to the positive <code>ennreal</code>s since both <code>with_zero</code> and <code>ennreal</code> reduce to <code>option _</code></p>
+<p>but then you're basically trying to prove</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">option</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">P</span> <span class="n">a</span><span class="o">})</span> <span class="bp">=</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">a</span> <span class="n">true</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>and i'm not sure if that's provable in Lean</p>
+
+<a name="170587906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170587906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170587906">Jesse Michael Han (Jul 10 2019 at 23:10)</a>:</h4>
+<p><code>with_zero</code> seems like a construction for adjoining a generic element (by <code>option</code>) and guiding typeclass inference to ensure that <code>none</code> behaves like a zero; if i take the reals, chop off zero, and then adjoin a generic point and say it must behave like zero, i shouldn't expect the new generic point to be literally equal to the old one, only that i end up at an isomorphic copy of the reals</p>
+<p>but if we don't discard the information of the original zero, then of course, if we have two provably equivalent predicates (<code>0 ≤ x</code> vs <code>0 &lt; x ∨ 0 = x</code>) their subtypes are equal</p>
+
+<a name="170588142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170588142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170588142">Kevin Buzzard (Jul 10 2019 at 23:13)</a>:</h4>
+<p>If you want to use the word "isomorphic" instead of "equal" that's fine.</p>
+
+<a name="170588318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170588318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170588318">Kevin Buzzard (Jul 10 2019 at 23:16)</a>:</h4>
+<p>Q1) True or false: the non-negative reals are equal to (or equivalent in some precise way to) the disjoint union of zero and the positive reals.</p>
+<p>Q2) True or false: every true mathematical theorem about the non-negative reals is also true for the disjoint union of zero and the positive reals.</p>
+
+<a name="170588918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170588918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170588918">Yury G. Kudryashov (Jul 10 2019 at 23:27)</a>:</h4>
+<p>E.g., you can prove ring equivalence (see <code>data/equiv/algebra</code>). Unfortunately, there is no simple way to rewrite over such equivalences in Lean.</p>
+
+<a name="170589320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170589320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170589320">Yury G. Kudryashov (Jul 10 2019 at 23:34)</a>:</h4>
+<p>Types in Lean care about internal representation of its members in the memory, not about mathematical properties.</p>
+
+<a name="170589486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170589486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170589486">Yury G. Kudryashov (Jul 10 2019 at 23:36)</a>:</h4>
+<p>In particular, <code>α × β ≠ β × α</code></p>
+
+<a name="170589936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170589936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170589936">Kevin Buzzard (Jul 10 2019 at 23:44)</a>:</h4>
+<p>Right.</p>
+
+<a name="170589938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170589938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170589938">Kevin Buzzard (Jul 10 2019 at 23:44)</a>:</h4>
+<p>This issue is costing me a lot of time right now.</p>
+
+<a name="170594570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170594570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170594570">Mario Carneiro (Jul 11 2019 at 01:26)</a>:</h4>
+<p>This is just the transfer problem yet again. The answer to Q1 is yes and Q2 is no, although if I show you the counterexample you will complain it's not mathematical enough</p>
+
+<a name="170595327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170595327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170595327">Andrew Ashworth (Jul 11 2019 at 01:46)</a>:</h4>
+<p>Q2: define the universal axioms of a mathematical theorem. For example, let me define a proposition that reads: "forall types, return true if types = cauchy sequence and false if types = dedekind cut". Then even though  the two types of real numbers are isomorphic, we clearly have a proposition here that returns a different value for each one. In order to prove things that hold for both objects we have to restrict our propositions to the language of fields, then we can write a tactic to prove things about both of them just as the <code>ring</code> tactic does, which is what <code>transfer</code> does using relators.</p>
+
+<a name="170595391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170595391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170595391">Andrew Ashworth (Jul 11 2019 at 01:48)</a>:</h4>
+<p>I feel like there's an infinite number of dumb propositions that can distinguish between two isomorphic objects, and how is a computer supposed to infer what axioms must hold for each object? It's also true that there are an infinite number of dumb propositions that hold for two isomorphic objects. It's clearly a human problem to decide which ones are relevant, only humans can decide what makes a property "interesting", because math is done for the sake of human curiosity.</p>
+
+<a name="170595956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170595956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170595956">Andrew Ashworth (Jul 11 2019 at 02:05)</a>:</h4>
+<p>So I guess that I'm of the opinion that Q2 is false; and all you can say easily is that all theorems in the language of semirings hold for the non negative reals and the disjoint union of zero and the positive reals, and everything else must be proven.</p>
+
+<a name="170596088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596088">Mario Carneiro (Jul 11 2019 at 02:09)</a>:</h4>
+<p>One thing you can say is that any "property of rings" is preserved by ring isomorphism; but of course this leaves open the question of what a property of rings is, and I would define it as a property preserved by ring isomorphism</p>
+
+<a name="170596146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596146">Mario Carneiro (Jul 11 2019 at 02:11)</a>:</h4>
+<p>By the way, you can't prove that the proposition  "forall types, return true if types = cauchy sequence and false if types = dedekind cut" exists</p>
+
+<a name="170596154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596154">Andrew Ashworth (Jul 11 2019 at 02:11)</a>:</h4>
+<p>really? why?</p>
+
+<a name="170596213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596213">Mario Carneiro (Jul 11 2019 at 02:12)</a>:</h4>
+<p>You can define the proposition "X = cauchy reals" but you can't prove that this is false when X = dedekind reals because that's equivalent to cauchy reals != dedekind reals, and "cauchy reals = dedekind reals" is consistent with lean</p>
+
+<a name="170596396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596396">Andrew Ashworth (Jul 11 2019 at 02:18)</a>:</h4>
+<blockquote>
+<p>One thing you can say is that any "property of rings" is preserved by ring isomorphism; but of course this leaves open the question of what a property of rings is, and I would define it as a property preserved by ring isomorphism</p>
+</blockquote>
+<p>I can't even imagine what the algorithm would be to work backwards and figure out what additional properties of rings you would need to preserve in order to transfer a proposition between the cauchy and dedekind reals</p>
+
+<a name="170596680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596680">Andrew Ashworth (Jul 11 2019 at 02:26)</a>:</h4>
+<p>I guess what you could do is write a hole tactic, for which you provide two isomorphic types, a list of properties, and the proposition you want to transfer. Then the tactic will recursively parse the proposition and check that each term preserves the property axioms, maybe with some sort of automatic prover. Anything left over is spit out for the human to prove.</p>
+
+<a name="170596694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596694">Andrew Ashworth (Jul 11 2019 at 02:27)</a>:</h4>
+<p>I can already feel like there might be some problems with this but I spent about 30 seconds thinking about it.</p>
+
+<a name="170596977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596977">Andrew Ashworth (Jul 11 2019 at 02:34)</a>:</h4>
+<p>Also suddenly your tactic is actually as complicated as an optimizing compiler</p>
+
+<a name="170597183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597183">Mario Carneiro (Jul 11 2019 at 02:40)</a>:</h4>
+<blockquote>
+<p>I can't even imagine what the algorithm would be to work backwards and figure out what additional properties of rings you would need to preserve in order to transfer a proposition between the cauchy and dedekind reals</p>
+</blockquote>
+<p>You don't need any additional properties - they are isomorphic as rings so any ring proposition will transfer</p>
+
+<a name="170597193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597193">Mario Carneiro (Jul 11 2019 at 02:41)</a>:</h4>
+<blockquote>
+<p>I guess what you could do is write a hole tactic, for which you provide two isomorphic types, a list of properties, and the proposition you want to transfer. Then the tactic will recursively parse the proposition and check that each term preserves the property axioms, maybe with some sort of automatic prover. Anything left over is spit out for the human to prove.</p>
+</blockquote>
+<p>This is basically what <code>transfer</code> does</p>
+
+<a name="170597306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597306">Andrew Ashworth (Jul 11 2019 at 02:44)</a>:</h4>
+<p>Yes, but I think Kevin was interested in transferring an arbitrary proposition; so we then have the task of deciding whether or not that proposition is in the set of properties that are shared by both cauchy reals and dekekind reals</p>
+
+<a name="170597377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597377">Andrew Ashworth (Jul 11 2019 at 02:47)</a>:</h4>
+<p>or  (union of zero and the positive reals) intersect (non negative reals), as he mentioned in q2</p>
+
+<a name="170597498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597498">Mario Carneiro (Jul 11 2019 at 02:50)</a>:</h4>
+<p>I am presuming that the isomorphism of rings is determined manually in advance</p>
+
+<a name="170597510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597510">Mario Carneiro (Jul 11 2019 at 02:51)</a>:</h4>
+<p>the transfer stuff won't help you with that proof</p>
+
+<a name="170597561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597561">Andrew Ashworth (Jul 11 2019 at 02:52)</a>:</h4>
+<p>yeah, but that's what he wants, because that's what you need to make q2 = true (I think). Automatic classification of an arbitrary proposition as "mathematical" or not, where mathematical is undefined but every mathematician knows it when they see it</p>
+
+<a name="170600468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170600468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170600468">Mario Carneiro (Jul 11 2019 at 04:17)</a>:</h4>
+<p>The proof that two very different definitions of the reals are equivalent is not obvious in any sense under discussion</p>
+
+<a name="170600479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170600479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170600479">Mario Carneiro (Jul 11 2019 at 04:17)</a>:</h4>
+<p>What is obvious is all the consequences of this fact, like if the cauchy reals are noetherian then so are the dedekind reals</p>
+
+<a name="170601173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170601173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170601173">Johan Commelin (Jul 11 2019 at 04:35)</a>:</h4>
+<p>Of course <code>cauchy</code> vs <code>dedekind</code> is a red herring wrt Kevin's example. <code>with_zero preal = nnreal</code> is in fact obvious.</p>
+
+<a name="170601258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170601258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170601258">Johan Commelin (Jul 11 2019 at 04:37)</a>:</h4>
+<p>I think every mathematician agrees that you need to do some work to prove <code>cauchy_reals = dedekind_reals</code>. But for the other one they certainly won't understand what the question even means, like: "What is there to prove? Aren't they defeq?"</p>
+
+<a name="170601261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170601261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170601261">Johan Commelin (Jul 11 2019 at 04:37)</a>:</h4>
+<p>[/troll]</p>
+
+<a name="170610286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610286">Floris van Doorn (Jul 11 2019 at 07:51)</a>:</h4>
+<blockquote>
+<p>Well, the non-negative reals are equal to the disjoint union of zero and the positive reals, so how am I supposed to say this in Lean?</p>
+</blockquote>
+<p>Equality between types is evil, but equality between sets on a type is fine. You can prove in Lean that</p>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">}</span> <span class="err">∪</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">}</span>
+</pre></div>
+
+<a name="170610575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610575">Johan Commelin (Jul 11 2019 at 07:55)</a>:</h4>
+<p>Lean even knows that this implies that the corresponding subtypes are equiv.</p>
+
+<a name="170610672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610672">Johan Commelin (Jul 11 2019 at 07:56)</a>:</h4>
+<p>But of course the LHS of Floris's equation is <em>not</em> <code>with_zero preal</code>. You can prove that it is the image of the <strong>obvious, canonical</strong> map <code>with_zero preal → ℝ</code>. But then... you might as well show that the RHS is the image, which is also obvious.</p>
+
+<a name="170619503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170619503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170619503">Kevin Buzzard (Jul 11 2019 at 10:08)</a>:</h4>
+<blockquote>
+<p>So I guess that I'm of the opinion that Q2 is false;</p>
+</blockquote>
+<p>So I think that mathematicians are very much of the opinion that Q2 is true.</p>
+
+<a name="170619543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170619543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170619543">Kevin Buzzard (Jul 11 2019 at 10:09)</a>:</h4>
+<blockquote>
+<p>yeah, but that's what he wants, because that's what you need to make q2 = true (I think). Automatic classification of an arbitrary proposition as "mathematical" or not, where mathematical is undefined but every mathematician knows it when they see it</p>
+</blockquote>
+<p>Yes Andrew, this is exactly the issue. We know it when we see it, but it seems hard to formalise. In some sense, I don't know why this is.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

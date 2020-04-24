@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/590101467fconstructor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html">#1467 fconstructor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176235609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231467%20fconstructor/near/176235609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html#176235609">Scott Morrison (Sep 20 2019 at 22:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span>, this isn't a criticism of the PR, just a question --- when would one want to use <code>fconstructor</code> rather than <code>fsplit</code>? Do they actually behave differently?</p>
+
+<a name="176235778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231467%20fconstructor/near/176235778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html#176235778">Floris van Doorn (Sep 20 2019 at 22:37)</a>:</h4>
+<p>I did not know about the existence of <code>fsplit</code>. But <code>fconstructor</code> also applies when an inductive type has multiple constructors. It will usually apply the first one, but if you have an inductive family with multiple constructors, then it will use the first one that applies.</p>
+
+<a name="176235976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231467%20fconstructor/near/176235976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html#176235976">Scott Morrison (Sep 20 2019 at 22:40)</a>:</h4>
+<p>Ah, interesting, thanks.</p>
+
+<a name="176236017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231467%20fconstructor/near/176236017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html#176236017">Scott Morrison (Sep 20 2019 at 22:41)</a>:</h4>
+<p>I never use <code>constructor</code>, I guess. I do wonder whether <code>tidy</code> would be improved by replacing <code>fsplit</code> with <code>fconstructor</code>, if it this can lead to dead-ends.</p>
+
+<a name="176236403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231467%20fconstructor/near/176236403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/590101467fconstructor.html#176236403">Floris van Doorn (Sep 20 2019 at 22:47)</a>:</h4>
+<p>Maybe. Really, 98+% of the time I write <code>(f)constructor</code>, I could have used <code>(f)split</code> instead. The only time I remember really liking <code>constructor</code> was when I did propositional calculus internally in Coq. I had an inductive type with some axioms I used, and then <code>constructor</code> acts as a tiny bit of automation checking whether some propositional formula was an axiom.</p>
+<div class="codehilite"><pre><span></span><span class="kn">Inductive</span> <span class="n">AxiomH</span> <span class="o">:</span> <span class="n">PropF</span> <span class="o">-&gt;</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">|</span> <span class="n">HOrI1</span>  <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span> <span class="err">→</span> <span class="n">A</span><span class="err">∨</span><span class="n">B</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HOrI2</span>  <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">B</span> <span class="err">→</span> <span class="n">A</span><span class="err">∨</span><span class="n">B</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HAndI</span>  <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span> <span class="err">→</span> <span class="n">B</span> <span class="err">→</span> <span class="n">A</span><span class="err">∧</span><span class="n">B</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HOrE</span>   <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span><span class="err">∨</span><span class="n">B</span> <span class="err">→</span> <span class="o">(</span><span class="n">A</span> <span class="err">→</span> <span class="n">C</span><span class="o">)</span> <span class="err">→</span> <span class="o">(</span><span class="n">B</span> <span class="err">→</span> <span class="n">C</span><span class="o">)</span> <span class="err">→</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HAndE1</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span><span class="err">∧</span><span class="n">B</span> <span class="err">→</span> <span class="n">A</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HAndE2</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span><span class="err">∧</span><span class="n">B</span> <span class="err">→</span> <span class="n">B</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HS</span>      <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="o">,</span> <span class="n">AxiomH</span> <span class="o">((</span><span class="n">A</span> <span class="err">→</span> <span class="n">B</span> <span class="err">→</span> <span class="n">C</span><span class="o">)</span> <span class="err">→</span> <span class="o">(</span><span class="n">A</span> <span class="err">→</span> <span class="n">B</span><span class="o">)</span> <span class="err">→</span> <span class="n">A</span> <span class="err">→</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HK</span>      <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span> <span class="n">B</span>  <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="n">A</span> <span class="err">→</span> <span class="n">B</span> <span class="err">→</span> <span class="n">A</span><span class="o">)</span>
+<span class="o">|</span> <span class="n">HClas</span>  <span class="o">:</span> <span class="k">forall</span> <span class="n">A</span>    <span class="o">,</span> <span class="n">AxiomH</span> <span class="o">(</span><span class="err">¬</span><span class="o">(</span><span class="err">¬</span><span class="n">A</span><span class="o">)</span> <span class="err">→</span> <span class="n">A</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

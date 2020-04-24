@@ -1,0 +1,101 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/37872generalizesemicolon.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html">generalize semicolon</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171517972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171517972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171517972">Kenny Lau (Jul 23 2019 at 13:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">generalize</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">refl</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">generalize</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
+
+<a name="171517986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171517986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171517986">Kenny Lau (Jul 23 2019 at 13:29)</a>:</h4>
+<p>somehow the last one breaks Lean</p>
+
+<a name="171520308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520308">Keeley Hoek (Jul 23 2019 at 13:52)</a>:</h4>
+<p>Kenny, this is just because error handling in the parser monad is screwed</p>
+
+<a name="171520319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520319">Keeley Hoek (Jul 23 2019 at 13:52)</a>:</h4>
+<p>There is a bug which never got fixed</p>
+
+<a name="171520321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520321">Kenny Lau (Jul 23 2019 at 13:52)</a>:</h4>
+<p>what's the bug?</p>
+
+<a name="171520361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520361">Keeley Hoek (Jul 23 2019 at 13:53)</a>:</h4>
+<p>The actually error which is being suppressed is that the semicolon is being parsed as part of the <code>0 = n</code> stuff and that's throwing an error</p>
+
+<a name="171520366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520366">Keeley Hoek (Jul 23 2019 at 13:53)</a>:</h4>
+<p>But then that is hidden from you</p>
+
+<a name="171520377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520377">Keeley Hoek (Jul 23 2019 at 13:53)</a>:</h4>
+<p>And instead you just get that</p>
+
+<a name="171520393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520393">Keeley Hoek (Jul 23 2019 at 13:53)</a>:</h4>
+<p><code>vm_check</code> business</p>
+
+<a name="171520477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520477">Keeley Hoek (Jul 23 2019 at 13:54)</a>:</h4>
+<p>MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">interactive</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">lean</span> <span class="n">expr</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">some_arg</span> <span class="o">:</span> <span class="n">parser</span> <span class="o">(</span><span class="n">pexpr</span> <span class="bp">×</span> <span class="n">name</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">fail</span> <span class="s2">&quot;OOPSIE&quot;</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">oopsie</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">some_arg</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">skip</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">oopsie</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
+
+<a name="171520519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520519">Keeley Hoek (Jul 23 2019 at 13:54)</a>:</h4>
+<p>In this case <code>private meta def generalize_arg_p : parser (pexpr × name)</code> in the definition of <code>generalize</code> is failing</p>
+
+<a name="171520573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520573">Keeley Hoek (Jul 23 2019 at 13:55)</a>:</h4>
+<p>The culprit is</p>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">generalize_arg_p_aux</span> <span class="o">:</span> <span class="n">pexpr</span> <span class="bp">→</span> <span class="n">parser</span> <span class="o">(</span><span class="n">pexpr</span> <span class="bp">×</span> <span class="n">name</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="o">(</span><span class="n">app</span> <span class="o">(</span><span class="n">macro</span> <span class="bp">_</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">eq</span> <span class="bp">_</span> <span class="o">])</span> <span class="n">h</span><span class="o">)</span> <span class="o">(</span><span class="n">local_const</span> <span class="n">x</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="o">:=</span> <span class="n">pure</span> <span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;parse error&quot;</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">generalize_arg_p</span> <span class="o">:</span> <span class="n">parser</span> <span class="o">(</span><span class="n">pexpr</span> <span class="bp">×</span> <span class="n">name</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">with_desc</span> <span class="s2">&quot;expr = id&quot;</span> <span class="err">$</span> <span class="n">parser</span><span class="bp">.</span><span class="n">pexpr</span> <span class="mi">0</span> <span class="bp">&gt;&gt;=</span> <span class="n">generalize_arg_p_aux</span>
+</pre></div>
+
+<a name="171520600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520600">Keeley Hoek (Jul 23 2019 at 13:55)</a>:</h4>
+<p>That <code>fail "parse error"</code> is setting fire to the world and then blowing it up,<br>
+instead of just printing <code>parse error</code> to the console. I have a fix in mathlib for the coersion from <code>parser</code> to <code>tactic</code>, but I'd wager that doesn't fix this situation, since the parser being invoked is too deep I think (unless it works in a more hacky way than I expect, in which case importing <code>tactic.core</code> may just magically fix the issue).</p>
+
+<a name="171520859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20semicolon/near/171520859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37872generalizesemicolon.html#171520859">Keeley Hoek (Jul 23 2019 at 13:58)</a>:</h4>
+<p>After checking, indeed it doesn't.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

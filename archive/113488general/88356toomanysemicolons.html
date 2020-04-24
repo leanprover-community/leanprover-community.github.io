@@ -1,0 +1,294 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/88356toomanysemicolons.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html">too many semicolons</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="161818362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818362">Scott Morrison (Mar 27 2019 at 01:02)</a>:</h4>
+<p>I appreciate the desire to be terse, but there are many places where I think we go too far. As an example from <code>linear_combination.lean</code> (I haven't look up who wrote this --- no fingers are being pointed!)</p>
+<div class="codehilite"><pre><span></span>theorem restrict_dom_comp_subtype (s : set β) :
+  (restrict_dom α s).comp (submodule.subtype _) = linear_map.id :=
+by ext l; apply subtype.coe_ext.2; simp; ext a;
+   by_cases a ∈ s; simp [h]; exact (mem_supported&#39;.1 l.2 _ h).symm
+</pre></div>
+
+
+<p>This proof broke when I was trying to clean something up. With the semicolons everywhere, it's much harder to debug than a simple <code>begin ... end</code> block.</p>
+
+<a name="161818369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818369">Scott Morrison (Mar 27 2019 at 01:02)</a>:</h4>
+<p>Indeed, exactly one of those semicolons is actually serving its real purpose (running a tactic on multiple goals).</p>
+
+<a name="161818373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818373">Scott Morrison (Mar 27 2019 at 01:02)</a>:</h4>
+<p>I would have preferred writing this proof as</p>
+<div class="codehilite"><pre><span></span>theorem restrict_dom_comp_subtype (s : set β) :
+  (restrict_dom α s).comp (submodule.subtype _) = linear_map.id :=
+begin
+  ext l,
+  apply subtype.coe_ext.2,
+  simp,
+  ext a,
+  by_cases h : a ∈ s; simp [h],
+  exact (mem_supported&#39;.1 l.2 _ h).symm
+end
+</pre></div>
+
+<a name="161818405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818405">Scott Morrison (Mar 27 2019 at 01:03)</a>:</h4>
+<p>Now you can both see the structure better (<code>simp [h]</code> is acting on both branchs of <code>by_cases</code> --- otherwise the proof is linear),</p>
+
+<a name="161818412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818412">Scott Morrison (Mar 27 2019 at 01:03)</a>:</h4>
+<p>and if something goes wrong you can inspect the intermediate states.</p>
+
+<a name="161818469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818469">Scott Morrison (Mar 27 2019 at 01:04)</a>:</h4>
+<p>I worry that proofs like this are being written in "semicolon style" solely to reduce the character count (and perhaps that feeling of accomplishment when you get a proof short enough to use <code>by</code> instead of <code>begin ... end</code>)</p>
+
+<a name="161818479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161818479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161818479">Scott Morrison (Mar 27 2019 at 01:05)</a>:</h4>
+<p>What do people think? Could we perhaps add something to the style guide discouraging the use of <code>by A;B;C;...;X;Y;Z</code> for chains beyond some length?</p>
+
+<a name="161820641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161820641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161820641">Simon Hudon (Mar 27 2019 at 01:46)</a>:</h4>
+<p>I'm wondering if <code>simp only</code> wouldn't have done more to make the proof adaptable.</p>
+
+<a name="161832360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161832360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161832360">Johannes Hölzl (Mar 27 2019 at 06:14)</a>:</h4>
+<p>I'm in absolutely agree that we should of avoid <code>by A;B;C;...;X;Y;Z</code> as much as possible. With small exceptions like <code>by c; m</code> where <code>c</code> is something like <code>ext</code> or <code>cases</code>, a predictable method to destruct the goal into simpler forms, and <code>m</code> is <code>simp</code> or similar.</p>
+
+<a name="161832370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161832370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161832370">Johannes Hölzl (Mar 27 2019 at 06:14)</a>:</h4>
+<p><code>simp only</code> might help when it breaks, but it doesn't help to make the proof understandable</p>
+
+<a name="161833172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161833172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161833172">Scott Morrison (Mar 27 2019 at 06:32)</a>:</h4>
+<p>That's perhaps a stronger argument than I would have made. There are _many_ examples in mathlib of <code>by X; Y</code> which have only been written as that instead of <code>begin X, Y end</code> for the sake of brevity. What do you think of these?</p>
+
+<a name="161833780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161833780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161833780">Johan Commelin (Mar 27 2019 at 06:49)</a>:</h4>
+<p>I have been guilty of golfing proofs down in this way. I wouldn't mind changing the culture.</p>
+
+<a name="161834103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161834103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161834103">Johannes Hölzl (Mar 27 2019 at 06:57)</a>:</h4>
+<p>I sometimes also do it for the sake of brevity, but when I look at it some times later, I dislike it. But two methods have usually the flavour of first apply cases, or add some kind of "marker" which is then pushed through the statement to solve it.</p>
+
+<a name="161835649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161835649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161835649">Kevin Buzzard (Mar 27 2019 at 07:35)</a>:</h4>
+<p>What about <code>by {A, B, C}</code>?</p>
+
+<a name="161835660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161835660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161835660">Johan Commelin (Mar 27 2019 at 07:35)</a>:</h4>
+<p>I think it's a lot better, but it isn't common style.</p>
+
+<a name="161835715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161835715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161835715">Kevin Buzzard (Mar 27 2019 at 07:36)</a>:</h4>
+<p>I remember being quite surprised the first time I saw a semicolon bring used in this way when there was only one goal</p>
+
+<a name="161835735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161835735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161835735">Kevin Buzzard (Mar 27 2019 at 07:36)</a>:</h4>
+<p>The bracket notation only adds about two characters to the proof</p>
+
+<a name="161835740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161835740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161835740">Kevin Buzzard (Mar 27 2019 at 07:37)</a>:</h4>
+<p>And I also had trouble debugging a semicolon proof recently</p>
+
+<a name="161837070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837070">Scott Morrison (Mar 27 2019 at 08:04)</a>:</h4>
+<p>Okay -- perhaps I will write a PR to the style guide that goes as far as saying: "don't misuse semicolons: <code>X; Y</code> means that <code>X</code> produces multiple goals, and you want to apply <code>Y</code> to each of them"</p>
+
+<a name="161837173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837173">Sebastien Gouezel (Mar 27 2019 at 08:06)</a>:</h4>
+<p>If you just have one semicolon and the two expressions are short, I think it is also acceptable. For instance, <code>by ext; simp</code> looks all right to me.</p>
+
+<a name="161837174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837174">Kevin Buzzard (Mar 27 2019 at 08:06)</a>:</h4>
+<p>I would definitely support that change. I would even be happy if people consistently wrote <code>by {ext, blah}</code> instead of <code>by ext; blah</code>.</p>
+
+<a name="161837203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837203">Scott Morrison (Mar 27 2019 at 08:07)</a>:</h4>
+<p>Maybe one day we will have a proof-linting tool that actually checks for multiple goals when <code>;</code> is used.</p>
+
+<a name="161837278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837278">Mario Carneiro (Mar 27 2019 at 08:09)</a>:</h4>
+<p>Okay, I'm on board as long as I can still keep the two line compression proof</p>
+
+<a name="161837292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837292">Mario Carneiro (Mar 27 2019 at 08:09)</a>:</h4>
+<p>so the example would become</p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="o">{</span> <span class="n">ext</span> <span class="n">l</span><span class="o">,</span> <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">coe_ext</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">ext</span> <span class="n">a</span><span class="o">,</span>
+     <span class="n">by_cases</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="n">exact</span> <span class="o">(</span><span class="n">mem_supported&#39;</span><span class="bp">.</span><span class="mi">1</span> <span class="n">l</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">}</span>
+</pre></div>
+
+<a name="161837353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837353">Mario Carneiro (Mar 27 2019 at 08:10)</a>:</h4>
+<p>and where the internal spaces can be omitted for a one liner like Kevin's style</p>
+
+<a name="161837454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837454">Mario Carneiro (Mar 27 2019 at 08:12)</a>:</h4>
+<p>Actually, I would go so far as to say that <code>by</code> should always be used for compression style proofs and <code>begin ... end</code> for multiline proofs</p>
+
+<a name="161837503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837503">Mario Carneiro (Mar 27 2019 at 08:13)</a>:</h4>
+<p>i.e. <code>by {tac1, tac2}</code> preferred over <code>begin tac1, tac2 end</code>, and</p>
+<div class="codehilite"><pre><span></span>begin
+  tac1,
+  tac2,
+  tac3...
+end
+</pre></div>
+
+
+<p>is preferred over</p>
+<div class="codehilite"><pre><span></span>by {
+  tac1,
+  tac2,
+  tac3...
+}
+</pre></div>
+
+
+<p>or some such thing</p>
+
+<a name="161837668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161837668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161837668">Mario Carneiro (Mar 27 2019 at 08:16)</a>:</h4>
+<p>To clarify on the original example (of which I am the author): I am also against using long strings of <code>tac; tac; tac</code> but my cutoff is about two lines, so that kind of example is around the upper limit</p>
+
+<a name="161838053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161838053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161838053">Kevin Buzzard (Mar 27 2019 at 08:25)</a>:</h4>
+<p>We all have different styles I guess.</p>
+
+<a name="161839525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161839525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161839525">Scott Morrison (Mar 27 2019 at 08:52)</a>:</h4>
+<p>Okay, it sounds like there's a reasonable compromise.</p>
+
+<a name="161839549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161839549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161839549">Scott Morrison (Mar 27 2019 at 08:53)</a>:</h4>
+<p>One complaint I have about semicolons is that VSCode rarely manages to show me the intermediate states, and I really rely on this for parsing proofs.</p>
+
+<a name="161839688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161839688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161839688">Patrick Massot (Mar 27 2019 at 08:55)</a>:</h4>
+<p>I agree with Scott, but this remark obviously don't apply to <code>by ext ; simp</code> or <code>by unfold ... ; apply_instance</code></p>
+
+<a name="161840035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161840035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161840035">Scott Morrison (Mar 27 2019 at 09:00)</a>:</h4>
+<p>I'm certainly not suggesting we go back and change any existing appearances of <code>by ext; simp</code>, but I think it would be reasonable to encourage everyone to write <code>by { ext, simp }</code> in future (assuming that <code>ext</code> is actually only creating one goal!) But I'm not at all concerned by these single semicolon proofs, themselves.</p>
+
+<a name="161840541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161840541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161840541">Johan Commelin (Mar 27 2019 at 09:08)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/854" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/854">#854</a> tries to adhere to your new style guidelines</p>
+
+<a name="161840559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161840559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161840559">Johan Commelin (Mar 27 2019 at 09:08)</a>:</h4>
+<p>I also wrote some <code>split; { tac1, tac2 }</code> proofs</p>
+
+<a name="161840565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161840565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161840565">Johan Commelin (Mar 27 2019 at 09:08)</a>:</h4>
+<p>Instead of chaining semicolons</p>
+
+<a name="161841516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841516">Patrick Massot (Mar 27 2019 at 09:22)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37">https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37</a> <span aria-label="open mouth" class="emoji emoji-1f62e" role="img" title="open mouth">:open_mouth:</span> that's an implicit proof!</p>
+
+<a name="161841643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841643">Patrick Massot (Mar 27 2019 at 09:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> what happened to <a href="https://github.com/leanprover-community/mathlib/pull/431" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/431">https://github.com/leanprover-community/mathlib/pull/431</a> ? Johan's PR would be yet another PR needing this bug fix</p>
+
+<a name="161841705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841705">Johan Commelin (Mar 27 2019 at 09:25)</a>:</h4>
+<p>Those proofs are superboring. I wish I knew a tactic that would kill them for me.</p>
+
+<a name="161841724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841724">Patrick Massot (Mar 27 2019 at 09:25)</a>:</h4>
+<p>You could write it!</p>
+
+<a name="161841968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841968">Johan Commelin (Mar 27 2019 at 09:28)</a>:</h4>
+<p>I guess <code>tidy + rw_search + back</code> would blast through all of this. But then we get complaints that this file is too low-level, and it slows things down, etc...</p>
+
+<a name="161841990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161841990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161841990">Johan Commelin (Mar 27 2019 at 09:28)</a>:</h4>
+<p>Anyway, this is going off topic. Maybe we should move it to PR reviews...</p>
+
+<a name="161843931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161843931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161843931">Kevin Buzzard (Mar 27 2019 at 09:55)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37">https://github.com/leanprover-community/mathlib/blob/4ec60c3353e511d094045e80a32a5715760a7603/src/algebra/pointwise.lean#L34-L37</a> <span aria-label="open mouth" class="emoji emoji-1f62e" role="img" title="open mouth">:open_mouth:</span> that's an implicit proof!</p>
+</blockquote>
+<p>It's not quite -- he uses <code>mul_assoc</code> twice :-)</p>
+
+<a name="161844003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844003">Kevin Buzzard (Mar 27 2019 at 09:56)</a>:</h4>
+<p>Nice to see <code>‹_›</code> in there :-)</p>
+
+<a name="161844005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844005">Patrick Massot (Mar 27 2019 at 09:56)</a>:</h4>
+<p>I wonder why <code>x</code>, <code>y</code> and <code>z</code> are named</p>
+
+<a name="161844025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844025">Kevin Buzzard (Mar 27 2019 at 09:56)</a>:</h4>
+<p>to help the unifier probably <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+
+<a name="161844043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844043">Kevin Buzzard (Mar 27 2019 at 09:57)</a>:</h4>
+<p>Maybe calling them <code>_</code> is a metavariable too far</p>
+
+<a name="161844160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844160">Johan Commelin (Mar 27 2019 at 09:59)</a>:</h4>
+<blockquote>
+<p>I wonder why <code>x</code>, <code>y</code> and <code>z</code> are named</p>
+</blockquote>
+<p>Oops... I forgot to remove them.</p>
+
+<a name="161844424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844424">Patrick Massot (Mar 27 2019 at 10:03)</a>:</h4>
+<p>I really think that writing this tactic would be an excellent exercise. Unfortunately I lack time for this. I need to grade proofs written by my students after convincing Lean. I just went through a fundamentalist student who starts by unfolding every single definition he can see. The goal of the assignment was to prove that increasing sequences with an upper bound tend to their supremum...</p>
+
+<a name="161844497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844497">Sebastien Gouezel (Mar 27 2019 at 10:04)</a>:</h4>
+<p>Did he unfold real numbers to Cauchy sequences?</p>
+
+<a name="161844522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844522">Patrick Massot (Mar 27 2019 at 10:05)</a>:</h4>
+<p>Fortunately, he did not see this definition</p>
+
+<a name="161844750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844750">Patrick Massot (Mar 27 2019 at 10:08)</a>:</h4>
+<p>But he never writes  "upper bound" or "supremum", only things like <code>x ∈ {x : ℝ | ∀ (a : ℝ), a ∈ A → a ≤ x}  and  x ∈ {x : ℝ | ∀ (a : ℝ), a ∈ {x : ℝ | ∀ (a : ℝ), a ∈ A → a ≤ x} → x ≤ a}</code> (written like this on paper). I guess I'm punished by my own sins</p>
+
+<a name="161844923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161844923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161844923">Sebastien Gouezel (Mar 27 2019 at 10:11)</a>:</h4>
+<p>Not sure I understand the concept. First, they get a working Lean proof, and then they write a paper proof -- your idea being that the paper proof will be correct since they have been able to convince Lean. But then you get super-formal proofs on paper?</p>
+
+<a name="161845038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161845038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161845038">Patrick Massot (Mar 27 2019 at 10:13)</a>:</h4>
+<p>The goal of the course is to get correct and readable proofs on paper. Lean is only an intermediate step. I never assumed it would be easy to go from Lean to paper. Some students can do it, some can't. The one I quoted is of course an extreme case</p>
+
+<a name="161851521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/161851521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#161851521">Simon Hudon (Mar 27 2019 at 11:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> to answer your earlier question, I was getting nowhere with that PR so I put it on hold. I can get back to it next week.</p>
+
+<a name="162082970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20semicolons/near/162082970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88356toomanysemicolons.html#162082970">Johan Commelin (Mar 29 2019 at 20:53)</a>:</h4>
+<p>On a somewhat recent mathlib:</p>
+<div class="codehilite"><pre><span></span>git grep &quot;;.*;&quot; | wc -l
+977
+</pre></div>
+
+
+<p>I agree that we shouldn't purge mathlib just for the sake of it. But I wanted to know this stat anyway (-;</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

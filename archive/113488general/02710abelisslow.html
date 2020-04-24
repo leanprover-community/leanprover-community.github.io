@@ -1,0 +1,191 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/02710abelisslow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html">`abel` is slow</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184338159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184338159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184338159">Yury G. Kudryashov (Dec 27 2019 at 19:11)</a>:</h4>
+<p>Hi, it seems that <code>abel</code> spends 3s on the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">-</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span>
+</pre></div>
+
+
+<p><code>lean --profile</code> says that it spends most of the time in <code>tactic.mk_instance</code>. I wonder what instances does it try to make.</p>
+
+<a name="184338257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184338257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184338257">Yury G. Kudryashov (Dec 27 2019 at 19:13)</a>:</h4>
+<p>It works <em>much</em> faster if I reformulate the goal as an equality.</p>
+
+<a name="184348591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184348591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184348591">Kevin Buzzard (Dec 27 2019 at 23:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">abel</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">-</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span>
+</pre></div>
+
+
+<p>gives me</p>
+<div class="codehilite"><pre><span></span>elaboration: tactic compilation took 1.82ms
+scratch.lean:9:3: information tactic profile data
+elaboration: tactic execution took 216ms
+num. allocated objects:  863
+num. allocated closures: 266
+  216ms   100.0%   _interaction._lambda_2
+  216ms   100.0%   interaction_monad_orelse
+  216ms   100.0%   tactic.istep
+  216ms   100.0%   scope_trace
+  216ms   100.0%   tactic.alternative._lambda_3
+  216ms   100.0%   tactic.abel.normalize
+  216ms   100.0%   tactic.replace_at._lambda_4
+  216ms   100.0%   tactic.ext_simplify_core
+  216ms   100.0%   tactic.replace_at
+  216ms   100.0%   tactic.interactive.abel._lambda_3
+  216ms   100.0%   tactic.step
+  216ms   100.0%   tactic.istep._lambda_1
+  216ms   100.0%   tactic.abel.normalize._lambda_6
+  214ms    99.1%   tactic.abel.normalize._lambda_4
+  115ms    53.2%   tactic.abel.mk_cache
+   99ms    45.8%   tactic.trans_conv._lambda_3
+   95ms    44.0%   tactic.mk_instance
+   80ms    37.0%   tactic.abel.eval
+   80ms    37.0%   tactic.abel.eval&#39;
+   47ms    21.8%   tactic.mk_app
+   42ms    19.4%   tactic.mk_mapp
+   19ms     8.8%   tactic.trans_conv._lambda_1
+   19ms     8.8%   tactic.simplify
+   18ms     8.3%   tactic.abel.cache.mk_app
+    8ms     3.7%   tactic.norm_num
+    7ms     3.2%   tactic.abel.eval_neg
+    6ms     2.8%   tactic.abel.eval_add
+    4ms     1.9%   expr.of_nat._lambda_1
+    4ms     1.9%   tactic.abel.eval_atom
+    4ms     1.9%   expr.of_int
+    1ms     0.5%   tactic.abel.cache.iapp
+    1ms     0.5%   expr.const
+    1ms     0.5%   tactic.mk_eq_trans
+    1ms     0.5%   tactic.abel.eval_add._main._lambda_1
+    1ms     0.5%   tactic.abel.normal_expr.term&#39;
+    1ms     0.5%   tactic.abel.cache.mk_term
+    1ms     0.5%   tactic.abel.cache.app
+</pre></div>
+
+
+<p>216ms. Is my machine really 15x as good as yours? Ubuntu 18, 16 gigs of ram, i7-4790K CPU @ 4.00GHz, 8 cores. <code>tactic.mk_instance</code> does not seem to feature much at all.</p>
+
+<a name="184348678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184348678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184348678">Kevin Buzzard (Dec 27 2019 at 23:03)</a>:</h4>
+<p>Have you got different imports?</p>
+
+<a name="184354139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184354139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184354139">Yury G. Kudryashov (Dec 28 2019 at 01:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+</pre></div>
+
+<a name="184370239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370239">Kevin Buzzard (Dec 28 2019 at 10:54)</a>:</h4>
+<p>ooh---<code>abel</code> is slow!</p>
+
+<a name="184370243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370243">Kevin Buzzard (Dec 28 2019 at 10:54)</a>:</h4>
+<div class="codehilite"><pre><span></span>elaboration: tactic execution took 3.65s
+num. allocated objects:  923
+num. allocated closures: 300
+ 3648ms   100.0%   tactic.interactive.abel._lambda_3
+ 3648ms   100.0%   tactic.istep
+ 3648ms   100.0%   scope_trace
+ 3648ms   100.0%   interaction_monad_orelse
+ 3648ms   100.0%   tactic.istep._lambda_1
+ 3648ms   100.0%   tactic.step
+ 3648ms   100.0%   _interaction._lambda_2
+ 3647ms   100.0%   tactic.alternative._lambda_3
+ 3647ms   100.0%   tactic.replace_at
+ 3647ms   100.0%   tactic.replace_at._lambda_4
+ 3646ms    99.9%   tactic.ext_simplify_core
+ 3646ms    99.9%   tactic.abel.normalize
+ 3646ms    99.9%   tactic.abel.normalize._lambda_6
+ 3642ms    99.8%   tactic.abel.normalize._lambda_4
+ 3236ms    88.7%   tactic.abel.mk_cache
+ 3143ms    86.2%   tactic.mk_instance
+  406ms    11.1%   tactic.trans_conv._lambda_3
+  374ms    10.3%   tactic.abel.eval&#39;
+  374ms    10.3%   tactic.abel.eval
+  233ms     6.4%   tactic.mk_app
+  181ms     5.0%   tactic.mk_mapp
+   78ms     2.1%   tactic.abel.cache.mk_app
+   46ms     1.3%   tactic.norm_num
+   38ms     1.0%   tactic.abel.eval_add
+   36ms     1.0%   tactic.abel.eval_neg
+   32ms     0.9%   tactic.trans_conv._lambda_1
+   32ms     0.9%   tactic.simplify
+   17ms     0.5%   expr.of_int
+   17ms     0.5%   tactic.abel.eval_atom
+   17ms     0.5%   expr.of_nat._lambda_1
+    5ms     0.1%   tactic.infer_type
+    1ms     0.0%   tactic.try_core
+    1ms     0.0%   string.push
+    1ms     0.0%   relation_tactic
+    1ms     0.0%   tactic.replace_target
+    1ms     0.0%   tactic.mk_eq_mpr
+    1ms     0.0%   tactic.unify
+    1ms     0.0%   tactic.try
+    1ms     0.0%   _private.1416197847.relation_tactic._lambda_1
+    1ms     0.0%   tactic.apply_core
+</pre></div>
+
+<a name="184370305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370305">Yury G. Kudryashov (Dec 28 2019 at 10:56)</a>:</h4>
+<p>I tried to look at <code>set_option trace.class_instances true</code> output, and it takes wrong routes to very high-order classes before figuring out <code>has_add</code> from <code>add_comm_group</code>.</p>
+
+<a name="184379742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184379742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184379742">Kevin Buzzard (Dec 28 2019 at 15:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">abel</span> <span class="c1">-- necessary</span>
+
+<span class="c1">-- if the 5 imports below are commented out, then the `abel` below compiles for me in around 0.25 seconds</span>
+<span class="c1">-- With set_option trace.class_instances true, debugging output is 21298 lines</span>
+
+<span class="c1">-- now try uncommenting these imports, from top to bottom (some later ones import earlier ones)</span>
+
+<span class="c1">--import algebra.pi_instances -- adds approx 0.9 seconds more (47105 lines of debugging output)</span>
+<span class="c1">--import ring_theory.ideals -- adds approx 0.3 seconds more (53378 lines)</span>
+<span class="c1">--import algebra.euclidean_domain -- adds approx 0.2 seconds more (59692 lines)</span>
+<span class="c1">--import data.complex.basic -- adds approx 0.2 seconds more (89214 lines)</span>
+<span class="c1">--import analysis.normed_space.basic -- adds approx 0.7 seconds more (120699 lines)</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="c1">--set_option trace.class_instances true</span>
+<span class="c1">--set_option profiler true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">-</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

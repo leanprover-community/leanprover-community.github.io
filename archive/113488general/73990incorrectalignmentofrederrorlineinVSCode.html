@@ -1,0 +1,99 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html">incorrect alignment of red error line in VS Code</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187245837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187245837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187245837">Kevin Buzzard (Feb 03 2020 at 09:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">--TODO -- ask on Zulip</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">V</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">P</span>
+
+<span class="c1">-- (correct) error on underscore (Lean reports 8:26: error)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="n">P</span> <span class="bp">=</span> <span class="n">V</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">P</span>
+
+<span class="c1">-- the error is at the underscore but (for me) the red underline is under the 𝕍</span>
+<span class="c1">-- (Lean reports 14:26: error)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="n">P</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Using <code>𝕍</code> instead of <code>V</code> seems to confuse VS Code into putting the red wiggly error line in the wrong place. Can anything be done about this? Did I just mess up somehow?</p>
+
+<a name="187246059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246059">Johan Commelin (Feb 03 2020 at 09:36)</a>:</h4>
+<p>I guess this is some unicode-confusion... <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="187246150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246150">Gabriel Ebner (Feb 03 2020 at 09:37)</a>:</h4>
+<p>The reason is that 𝕍 is one Unicode codepoint (how Lean counts) but two UTF-16 characters (how vscode counts).</p>
+
+<a name="187246202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246202">Kevin Buzzard (Feb 03 2020 at 09:38)</a>:</h4>
+<p>Can we use this to prove false?</p>
+
+<a name="187246223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246223">Johan Commelin (Feb 03 2020 at 09:38)</a>:</h4>
+<p>Uuuh, no?</p>
+
+<a name="187246236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246236">Gabriel Ebner (Feb 03 2020 at 09:38)</a>:</h4>
+<p>It only affects the error squiggles (they can be appear in the wrong column).</p>
+
+<a name="187246241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246241">Johan Commelin (Feb 03 2020 at 09:38)</a>:</h4>
+<p>Lean is absolutely not confused. Only VScode is.</p>
+
+<a name="187246250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246250">Kevin Buzzard (Feb 03 2020 at 09:39)</a>:</h4>
+<p>Can this be "fixed" or is it not broken?</p>
+
+<a name="187246263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246263">Gabriel Ebner (Feb 03 2020 at 09:39)</a>:</h4>
+<p>We could theoretically adjust the column of the error messages in the vscode extension.  PRs are welcome!</p>
+
+<a name="187246277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246277">Kevin Buzzard (Feb 03 2020 at 09:39)</a>:</h4>
+<p>I have a file where I have 100 occurrences of <code>𝕍</code>. How come VS Code is not putting the red error messages 100 characters from where they should be?</p>
+
+<a name="187246328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246328">Kevin Buzzard (Feb 03 2020 at 09:40)</a>:</h4>
+<p>Or maybe it is and I am just so great at avoiding errors that I never noticed?</p>
+
+<a name="187246337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246337">Gabriel Ebner (Feb 03 2020 at 09:40)</a>:</h4>
+<p>The line number is unaffected.  It only matters if you're right of a 𝕍 on the same line.</p>
+
+<a name="187246344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246344">Kevin Buzzard (Feb 03 2020 at 09:40)</a>:</h4>
+<p>gotcha</p>
+
+<a name="187246381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246381">Kevin Buzzard (Feb 03 2020 at 09:41)</a>:</h4>
+<p>Doesn't this mean that I can get VS Code to have an error in a place where there isn't a character?</p>
+
+<a name="187246400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187246400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187246400">Kevin Buzzard (Feb 03 2020 at 09:41)</a>:</h4>
+<p>aah no it goes the wrong way</p>
+
+<a name="187247325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/incorrect%20alignment%20of%20red%20error%20line%20in%20VS%20Code/near/187247325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73990incorrectalignmentofrederrorlineinVSCode.html#187247325">Johan Commelin (Feb 03 2020 at 09:57)</a>:</h4>
+<p>Well, it could be under some whitespace, I guess</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

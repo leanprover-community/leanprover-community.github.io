@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/96852finsetsUnion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html">finset.sUnion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193694661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694661">Scott Morrison (Apr 12 2020 at 05:01)</a>:</h4>
+<p>I can't find any sign of <code>finset.sUnion : finset (finset A) -&gt; finset A</code>. Am I missing something?</p>
+
+<a name="193694718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694718">Kenny Lau (Apr 12 2020 at 05:03)</a>:</h4>
+<p><code>bind</code></p>
+
+<a name="193694848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694848">Chris Hughes (Apr 12 2020 at 05:06)</a>:</h4>
+<p>It might be <code>join</code></p>
+
+<a name="193694903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694903">Scott Morrison (Apr 12 2020 at 05:08)</a>:</h4>
+<p>Hmm... <code>bind</code> isn't quite what I want, it's</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bind</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">β</span>
+</pre></div>
+
+<a name="193694911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694911">Scott Morrison (Apr 12 2020 at 05:09)</a>:</h4>
+<p>and I can't find any sign of <code>finset.join</code>.</p>
+
+<a name="193694980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694980">Scott Morrison (Apr 12 2020 at 05:10)</a>:</h4>
+<p>but I guess <code>s.bind id</code> will do.</p>
+
+<a name="193694987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694987">Scott Morrison (Apr 12 2020 at 05:10)</a>:</h4>
+<p>Shall I just add <code>join</code> defined as that?</p>
+
+<a name="193694991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193694991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193694991">Scott Morrison (Apr 12 2020 at 05:10)</a>:</h4>
+<p>or am I meant to set up a <code>monad</code> instance?</p>
+
+<a name="193695213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193695213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193695213">Kenny Lau (Apr 12 2020 at 05:17)</a>:</h4>
+<p><code>#find</code> doesn't give me anything</p>
+
+<a name="193695663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193695663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193695663">Mario Carneiro (Apr 12 2020 at 05:31)</a>:</h4>
+<p>I wouldn't mind calling this <code>sUnion</code> instead of <code>join</code>. We mostly use set theoretic terminology in <code>finset</code></p>
+
+<a name="193695710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.sUnion/near/193695710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/96852finsetsUnion.html#193695710">Mario Carneiro (Apr 12 2020 at 05:32)</a>:</h4>
+<p>I'm pretty sure I've used <code>bind id</code> for this in the past, without bothering with a definition</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

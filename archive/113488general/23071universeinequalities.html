@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/23071universeinequalities.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html">universe inequalities</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194928204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194928204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194928204">Reid Barton (Apr 22 2020 at 13:16)</a>:</h4>
+<p>I wonder whether it would be possible to implement a version of universe inequalities as an elaborator feature.<br>
+Consider these examples:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">mylift</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ulift</span>
+<span class="n">def</span> <span class="n">mylift&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ulift</span> <span class="c1">-- fails</span>
+<span class="n">def</span> <span class="n">mylift&#39;&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ulift</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span> <span class="n">u</span><span class="o">}</span>
+</pre></div>
+
+<a name="194928559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194928559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194928559">Reid Barton (Apr 22 2020 at 13:19)</a>:</h4>
+<p><code>mylift</code> has the same type as <code>ulift.{v u}</code> so the elaborator doesn't need any help to solve the universe unification problem.<br>
+In <code>mylift'</code>, the type is written differently and the elaborator doesn't know how to solve <code>max v u =?= max u ?l_2</code>.<br>
+We need to help it, as shown in <code>mylift''</code>.</p>
+
+<a name="194929020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194929020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194929020">Reid Barton (Apr 22 2020 at 13:22)</a>:</h4>
+<p>Now maybe the elaborator should just be able to solve this outright, but it also seems like we could help it out a little if we could say: if you get stuck when trying to elaborate the <code>v</code> variable of <code>ulift.{v u}</code>, assume that it will be <code>&gt;= u</code> and use that to simplify the constraints.</p>
+
+<a name="194929319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194929319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194929319">Reid Barton (Apr 22 2020 at 13:24)</a>:</h4>
+<p>Also, now I'm slightly disturbed by the fact that if I write</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mylift&#39;&#39;&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ulift</span><span class="bp">.</span><span class="o">{(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="n">u</span><span class="o">}</span>
+</pre></div>
+
+
+<p>then <code>mylift''</code> and <code>mylift'''</code> are not definitionally equal.</p>
+
+<a name="194935487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194935487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194935487">Mario Carneiro (Apr 22 2020 at 14:05)</a>:</h4>
+<p>No, those two are entirely different functions that are merely provably isomorphic</p>
+
+<a name="194935574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194935574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194935574">Mario Carneiro (Apr 22 2020 at 14:06)</a>:</h4>
+<p>the relation between them is similar to the relation between two inductive types with the same definition</p>
+
+<a name="194935650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194935650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194935650">Reid Barton (Apr 22 2020 at 14:06)</a>:</h4>
+<p>Right, so I guess I shouldn't be too worried about this.</p>
+
+<a name="194935757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194935757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194935757">Mario Carneiro (Apr 22 2020 at 14:07)</a>:</h4>
+<p>But as a result, the elaborator problem here is literally underdetermined</p>
+
+<a name="194935856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194935856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194935856">Mario Carneiro (Apr 22 2020 at 14:08)</a>:</h4>
+<p>which is a fancy way of saying that <code>max</code> is not injective</p>
+
+<a name="194936129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194936129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194936129">Reid Barton (Apr 22 2020 at 14:10)</a>:</h4>
+<p>Right, so if the problem is underdetermined, maybe we can add constraints to make it determined.</p>
+
+<a name="194936171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194936171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194936171">Reid Barton (Apr 22 2020 at 14:10)</a>:</h4>
+<p>Perhaps the better definition to aim for is actually <code>mylift'''</code>?</p>
+
+<a name="194936248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194936248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194936248">Reid Barton (Apr 22 2020 at 14:10)</a>:</h4>
+<p>since that one's easier to characterize: we say we're only allowed to write <code>ulift.{x y}</code> when <code>x &gt;= y</code></p>
+
+<a name="194936461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194936461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194936461">Mario Carneiro (Apr 22 2020 at 14:12)</a>:</h4>
+<p>I don't know... universe expressions can get pretty complicated, especially once <code>imax</code> gets involved</p>
+
+<a name="194936549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194936549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194936549">Mario Carneiro (Apr 22 2020 at 14:12)</a>:</h4>
+<p>I agree that it would be easier to find a "maximal assignment", but I'm still not sure that uniquely picks the inputs from the output</p>
+
+<a name="194937213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20inequalities/near/194937213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23071universeinequalities.html#194937213">Reid Barton (Apr 22 2020 at 14:16)</a>:</h4>
+<p>I guess a useful thing to do would be to look at some of the actual instances in the category theory library where we have to write universe levels explicitly and see if there's some way we could account automatically for all of them</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

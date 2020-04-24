@@ -1,0 +1,256 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/60512randomparserfacts.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html">random parser facts</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="160530131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160530131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160530131">Mario Carneiro (Mar 12 2019 at 00:07)</a>:</h4>
+<p>New discovery while reading the lean source: These are both legal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span> <span class="n">mk</span>
+<span class="kn">structure</span> <span class="n">bar</span> <span class="o">:=</span> <span class="n">mk</span> <span class="bp">::</span>
+</pre></div>
+
+
+<p>and they add a new type isomorphic to <code>unit</code>. (I would have guessed that the second one works, but the first one is a parser trick.) However these don't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">bad</span>
+<span class="kn">structure</span> <span class="n">bad</span><span class="bp">.</span>
+<span class="kn">structure</span> <span class="n">bad</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="160530675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160530675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160530675">Kenny Lau (Mar 12 2019 at 00:16)</a>:</h4>
+<p>who would read the lean source...</p>
+
+<a name="160530775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160530775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160530775">Mario Carneiro (Mar 12 2019 at 00:18)</a>:</h4>
+<p>how else do you learn about undocumented features (and "features")?</p>
+
+<a name="160532761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532761">Mario Carneiro (Mar 12 2019 at 00:56)</a>:</h4>
+<p>aha, here is the random parser fact I was looking for: You may know that you can write <code>{}</code> before the binder of a structure or inductive to make the arguments implicit. This is used for example to make <code>list.nil</code> have no explicit args:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">regular1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="bp">::</span> <span class="o">(</span><span class="n">foo</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+<span class="kn">inductive</span> <span class="n">regular2</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">regular2</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">regular1</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- regular1.mk : Π {α : Type} (l : list α), ℕ → regular1 α l</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">regular1</span><span class="bp">.</span><span class="n">foo</span> <span class="c1">-- Π {α : Type} {l : list α}, regular1 α l → ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">regular2</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- regular2.mk : Π {α : Type} (l : list α), regular2 α l</span>
+
+<span class="kn">structure</span> <span class="n">implicit1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="o">{}</span> <span class="bp">::</span> <span class="o">(</span><span class="n">foo</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+<span class="kn">inductive</span> <span class="n">implicit2</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">|</span> <span class="n">mk</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">implicit2</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">implicit1</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- implicit1.mk : Π {α : Type} {l : list α}, ℕ → implicit1 α l</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">implicit1</span><span class="bp">.</span><span class="n">foo</span> <span class="c1">-- implicit1.foo : Π {α : Type} {l : list α}, implicit1 α l → ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">implicit2</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- implicit2.mk : Π {α : Type} {l : list α}, implicit2 α l</span>
+</pre></div>
+
+
+<p>It turns out there is a third mode, triggered by <code>()</code> before the colon instead. But the parser code here is buggy, so you have to put a space between the parens so it doesn't look like the unit star token:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">explicit1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="o">(</span> <span class="o">)</span> <span class="bp">::</span> <span class="o">(</span><span class="n">foo</span> <span class="o">(</span> <span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+<span class="kn">inductive</span> <span class="n">explicit2</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span> <span class="o">)</span> <span class="o">:</span> <span class="n">explicit2</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">explicit1</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- explicit1.mk : Π (α : Type) (l : list α), ℕ → explicit1 α l</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">explicit1</span><span class="bp">.</span><span class="n">foo</span> <span class="c1">-- explicit1.foo : Π (α : Type) (l : list α), explicit1 α l → ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">explicit2</span><span class="bp">.</span><span class="n">mk</span> <span class="c1">-- explicit2.mk : Π (α : Type) (l : list α), explicit2 α l</span>
+</pre></div>
+
+<a name="160532880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532880">Kenny Lau (Mar 12 2019 at 00:58)</a>:</h4>
+<p>so every <code>def</code> is invoking an instance of the axiom schema...</p>
+
+<a name="160532888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532888">Mario Carneiro (Mar 12 2019 at 00:58)</a>:</h4>
+<p>nonsequitur much?</p>
+
+<a name="160532908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532908">Kenny Lau (Mar 12 2019 at 00:59)</a>:</h4>
+<p>yeah sorry it's a random remark</p>
+
+<a name="160532920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532920">Mario Carneiro (Mar 12 2019 at 01:00)</a>:</h4>
+<p>I suppose random facts are on topic here</p>
+
+<a name="160532971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532971">Kenny Lau (Mar 12 2019 at 01:00)</a>:</h4>
+<p>so what do you think anyway</p>
+
+<a name="160532981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532981">Kenny Lau (Mar 12 2019 at 01:00)</a>:</h4>
+<p>every structure / inductive / class / def is invoking an axiom of the axiom schema, all in the name of definitional equalities</p>
+
+<a name="160532988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160532988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160532988">Kenny Lau (Mar 12 2019 at 01:00)</a>:</h4>
+<p>I suppose there's no way around this</p>
+
+<a name="160533202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533202">Mario Carneiro (Mar 12 2019 at 01:04)</a>:</h4>
+<p>I literally have no idea what you are talking about. It's not related to the context on this thread as far as I can tell</p>
+
+<a name="160533238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533238">Kenny Lau (Mar 12 2019 at 01:05)</a>:</h4>
+<p>I mean, when you create an inductive type, you're effectively adding axioms to the system right</p>
+
+<a name="160533536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533536">Mario Carneiro (Mar 12 2019 at 01:12)</a>:</h4>
+<p>yes, <code>inductive</code> is a mechanism for using an axiom schema built into lean. <code>structure</code> and <code>class</code> are fancy ways to say <code>inductive</code>, and <code>def</code> is not an axiom in any sense</p>
+
+<a name="160533556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533556">Kenny Lau (Mar 12 2019 at 01:13)</a>:</h4>
+<p>you're adding a new constant and adding an axiom that the constant "unfolds" to a certain value</p>
+
+<a name="160533568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533568">Kenny Lau (Mar 12 2019 at 01:13)</a>:</h4>
+<p>when you say <code>def n := 5</code> you're adding the constant <code>n : nat</code> and the axiom <code>n._equations._eqn_1 : n = 5</code></p>
+
+<a name="160533642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533642">Mario Carneiro (Mar 12 2019 at 01:14)</a>:</h4>
+<blockquote>
+<p>you're adding a new constant and adding an axiom that the constant "unfolds" to a certain value</p>
+</blockquote>
+<p>no, definitions in DTT don't work like this</p>
+
+<a name="160533668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533668">Mario Carneiro (Mar 12 2019 at 01:15)</a>:</h4>
+<p>they are abbreviations for certain terms, so there is no axiom of equality</p>
+
+<a name="160533684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533684">Kenny Lau (Mar 12 2019 at 01:15)</a>:</h4>
+<p>I see</p>
+
+<a name="160533685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160533685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160533685">Mario Carneiro (Mar 12 2019 at 01:15)</a>:</h4>
+<p>but for practical reasons definitions are supported by the kernel, which implements definition unfolding as a reduction rule</p>
+
+<a name="160647362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647362">Sebastian Ullrich (Mar 13 2019 at 09:25)</a>:</h4>
+<p>Ooh, good topic. Did you know that you can let-bind notations like in</p>
+<div class="codehilite"><pre><span></span>#eval let infix + := nat.mul in 1 + 2
+</pre></div>
+
+
+<p>? Is anybody using that? Because implementing that in pure Lean is basically impossible and so this will probably not work in Lean 4 and I wonder if anybody will even notice.</p>
+
+<a name="160647524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647524">Mario Carneiro (Mar 13 2019 at 09:26)</a>:</h4>
+<p>what? news to me</p>
+
+<a name="160647569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647569">Sebastian Ullrich (Mar 13 2019 at 09:27)</a>:</h4>
+<p>Yeah, me too until I read the source some time ago</p>
+
+<a name="160647574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647574">Mario Carneiro (Mar 13 2019 at 09:27)</a>:</h4>
+<p>that's pretty cool though</p>
+
+<a name="160647630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647630">Mario Carneiro (Mar 13 2019 at 09:28)</a>:</h4>
+<p>I like the idea of expression-local notations</p>
+
+<a name="160647646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647646">Sebastian Ullrich (Mar 13 2019 at 09:28)</a>:</h4>
+<p>Well, don't get too attached to it <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="160647657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647657">Mario Carneiro (Mar 13 2019 at 09:28)</a>:</h4>
+<p><code>structure</code> has something similar with those <code>(infix bla)</code> binders</p>
+
+<a name="160647691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647691">Sebastian Ullrich (Mar 13 2019 at 09:29)</a>:</h4>
+<p>Yes, that's okay (more or less, it's a pain in the macro expander), because the extended parser (terms) is not the one being executed (commands)</p>
+
+<a name="160647694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647694">Mario Carneiro (Mar 13 2019 at 09:29)</a>:</h4>
+<p>What about an <code>infix</code> tactic? How hard is that?</p>
+
+<a name="160647749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647749">Mario Carneiro (Mar 13 2019 at 09:30)</a>:</h4>
+<p>that seems more doable and just as expressive</p>
+
+<a name="160647811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647811">Mario Carneiro (Mar 13 2019 at 09:31)</a>:</h4>
+<p>I hope the parser isn't going to end up being a second tactic language</p>
+
+<a name="160647836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647836">Sebastian Ullrich (Mar 13 2019 at 09:31)</a>:</h4>
+<p>That's not much better (or worse) because tactic parsing is still part of the big term parser recursion</p>
+
+<a name="160647906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647906">Mario Carneiro (Mar 13 2019 at 09:32)</a>:</h4>
+<p>oh, I see... you won't be able to parse the following expressions until you run the tactic</p>
+
+<a name="160647927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647927">Mario Carneiro (Mar 13 2019 at 09:33)</a>:</h4>
+<p>but you can't run the tactic until you've parsed the tactic block</p>
+
+<a name="160647950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647950">Mario Carneiro (Mar 13 2019 at 09:33)</a>:</h4>
+<p>okay, I'm convinced... kill it with fire</p>
+
+<a name="160647951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160647951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160647951">Sebastian Ullrich (Mar 13 2019 at 09:33)</a>:</h4>
+<p>Yes, it would not be a true tactic but part of the tactic block notation. Then it's no harder or easier than notation-let</p>
+
+<a name="160648019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648019">Sebastian Ullrich (Mar 13 2019 at 09:34)</a>:</h4>
+<p>So let's just pretend this feature has never existed...</p>
+
+<a name="160648053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648053">Mario Carneiro (Mar 13 2019 at 09:35)</a>:</h4>
+<p>but what about expressions that we want to parse with a parser that we don't have at parse time? I was thinking more like a real <code>infix</code> tactic</p>
+
+<a name="160648068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648068">Mario Carneiro (Mar 13 2019 at 09:36)</a>:</h4>
+<p>Some kind of super quoting expression should be available</p>
+
+<a name="160648162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648162">Mario Carneiro (Mar 13 2019 at 09:37)</a>:</h4>
+<p>This is also important for many custom parsers... for example if I want to have a block of code in another language inline and parse it with a custom parser</p>
+
+<a name="160648422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648422">Johan Commelin (Mar 13 2019 at 09:41)</a>:</h4>
+<p>Would this allow us to take a step towards unifying <code>group</code> and <code>add_group</code> and still have natural notation?</p>
+
+<a name="160648880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648880">Sebastian Ullrich (Mar 13 2019 at 09:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I'm not sure I'm following. When using a DSL, you usually statically know its grammar and where it can occur in the Lean grammar (e.g. "as the second argument to this tactic"). Then everything works out.</p>
+
+<a name="160648959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648959">Mario Carneiro (Mar 13 2019 at 09:50)</a>:</h4>
+<p>heh, I'm familiar with lots of languages where the grammar is not statically known (hint: lean is one of them)</p>
+
+<a name="160648990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160648990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160648990">Sebastian Ullrich (Mar 13 2019 at 09:51)</a>:</h4>
+<p>It's certainly not changed at tactic execution time</p>
+
+<a name="160649009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160649009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160649009">Mario Carneiro (Mar 13 2019 at 09:51)</a>:</h4>
+<p>I was thinking of parsing more like "read random junk until you see STOP_NOW"</p>
+
+<a name="160649124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160649124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160649124">Mario Carneiro (Mar 13 2019 at 09:53)</a>:</h4>
+<p>and then you might have to read another file (analogous to lean imports or oleans) to tell you what tokens are valid and how to parse them</p>
+
+<a name="160649137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160649137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160649137">Mario Carneiro (Mar 13 2019 at 09:53)</a>:</h4>
+<p>and this happens from lean's perspective at tactic execution time</p>
+
+<a name="160654766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160654766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160654766">Kevin Buzzard (Mar 13 2019 at 11:27)</a>:</h4>
+<p>All I want to know is whether we'll be able to do <code>{t * s for t in T, s in S if t \ne 7}</code> for S and T subsets of a monoid</p>
+
+<a name="160655026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20parser%20facts/near/160655026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60512randomparserfacts.html#160655026">Sebastian Ullrich (Mar 13 2019 at 11:31)</a>:</h4>
+<p>Oh that's trivial</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

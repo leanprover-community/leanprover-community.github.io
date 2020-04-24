@@ -1,0 +1,118 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/25177foldingproblemsproblem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html">folding problems problem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="161906445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161906445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161906445">Kevin Buzzard (Mar 27 2019 at 22:37)</a>:</h4>
+<p>WARNING: this might crash VS Code. Save all important information before starting.</p>
+<p>Ok here's the game. Type this into Lean and wait for a while for Lean to deterministic time-out.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Now make the "problems" panel big (NB if you don't have a problems panel, pull up on the blue bar at the bottom).<br>
+Things should look something like this:</p>
+<p><a href="/user_uploads/3121/Ox97Mpo9zaMe3Ptbq-isCsrX/VSCode.png" target="_blank" title="VSCode.png">VSCode.png</a> </p>
+<div class="message_inline_image"><a href="/user_uploads/3121/Ox97Mpo9zaMe3Ptbq-isCsrX/VSCode.png" target="_blank" title="VSCode.png"><img src="/user_uploads/3121/Ox97Mpo9zaMe3Ptbq-isCsrX/VSCode.png"></a></div><p>The game now is to try and fold up all the little blue information lines. You see the little <code>^</code> symbols by the blue i's? Click on one and it folds up. Now click on a few more and that's where the fun starts. How many can you manage to fold up?</p>
+
+<a name="161906578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161906578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161906578">Kevin Buzzard (Mar 27 2019 at 22:39)</a>:</h4>
+<p>I think what's going on is that VS Code is having real difficulty distinguishing the different information instances, because many of them seem to display the exact same information. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> do you know what is going on here?</p>
+
+<a name="161907202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161907202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161907202">Bryan Gin-ge Chen (Mar 27 2019 at 22:50)</a>:</h4>
+<p>Possibly related to this? <a href="https://github.com/Microsoft/vscode/issues/68235" target="_blank" title="https://github.com/Microsoft/vscode/issues/68235">https://github.com/Microsoft/vscode/issues/68235</a></p>
+
+<a name="161914469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161914469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161914469">Scott Morrison (Mar 28 2019 at 01:15)</a>:</h4>
+<p>No, I don't think this is the issue.</p>
+
+<a name="161914478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161914478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161914478">Scott Morrison (Mar 28 2019 at 01:15)</a>:</h4>
+<p>I have this one too. The problem is somehow that when it thinks for too long, it resets the window and reopens all the folded things.</p>
+
+<a name="161915476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161915476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161915476">Bryan Gin-ge Chen (Mar 28 2019 at 01:39)</a>:</h4>
+<p>That happens to me too, but if I manage to collapse one of the shorter messages (in the rare moments when VS code is responsive) then scroll down, some of the others have magically become collapsed as well.</p>
+
+<a name="161917513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161917513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161917513">Bryan Gin-ge Chen (Mar 28 2019 at 02:24)</a>:</h4>
+<p>For me, it seems the huge lag is triggered simply by scrolling sufficiently far down in the Problems tab. I managed to make a recording using the profiler in VS code's Chrome dev tools but I'm not able to make sense of it:<br>
+<a href="/user_uploads/3121/sTTFTT8o_kGxcXGR5nCMaBlX/Screenshot-2019-03-27-22.20.12.png" target="_blank" title="Screenshot-2019-03-27-22.20.12.png">Screenshot-2019-03-27-22.20.12.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/sTTFTT8o_kGxcXGR5nCMaBlX/Screenshot-2019-03-27-22.20.12.png" target="_blank" title="Screenshot-2019-03-27-22.20.12.png"><img src="/user_uploads/3121/sTTFTT8o_kGxcXGR5nCMaBlX/Screenshot-2019-03-27-22.20.12.png"></a></div><p>If anyone wants the profile JSON file let me know, it's a 435 MB JSON file that ZIPs to 15 MB.</p>
+
+<a name="161943433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161943433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161943433">Gabriel Ebner (Mar 28 2019 at 11:33)</a>:</h4>
+<p>Looks like a vscode bug to me.  Try to write code with fewer problems. <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span></p>
+
+<a name="161943566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161943566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161943566">Gabriel Ebner (Mar 28 2019 at 11:35)</a>:</h4>
+<p>Hmm, this is not good at all.  vscode is unresponsive even if I don't have the problems tab open.</p>
+
+<a name="161954442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161954442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161954442">Bryan Gin-ge Chen (Mar 28 2019 at 13:58)</a>:</h4>
+<p>Yeah, I can freeze up VS code by hovering over errors in this file as well. Performance profile looks like this:<br>
+<a href="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png" target="_blank" title="Screenshot-2019-03-28-09.26.06.png">Screenshot-2019-03-28-09.26.06.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png" target="_blank" title="Screenshot-2019-03-28-09.26.06.png"><img src="/user_uploads/3121/tcnrH3aIvKDdwguWSGZlxVh2/Screenshot-2019-03-28-09.26.06.png"></a></div><p>The output from the lean server for this file seems to be absurdly large. Maybe we should be truncating it?</p>
+
+<a name="161954607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161954607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161954607">Bryan Gin-ge Chen (Mar 28 2019 at 13:59)</a>:</h4>
+<p>running <code>lean bad.lean &amp;&gt; bad_output</code> from the command line yields (after some waiting) a 98 MB file:</p>
+<div class="codehilite"><pre><span></span>$ wc bad_output
+  995441 8957341 98107053 bad_output
+</pre></div>
+
+<a name="161958328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161958328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161958328">Kevin Buzzard (Mar 28 2019 at 14:36)</a>:</h4>
+<p>Maybe the issue is simply that the file is producing too much debugging output.</p>
+
+<a name="161959044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959044">Kevin Buzzard (Mar 28 2019 at 14:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="n">def</span> <span class="n">XYZ</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℤ</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Here's a better example perhaps. This code compiles quickly with no errors. It produces 14 pieces of debugging output when you click on "def". Folding them up is really hard. This doesn't crash VS Code this time, you just can't fold them.</p>
+
+<a name="161959176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959176">Kevin Buzzard (Mar 28 2019 at 14:45)</a>:</h4>
+<p>It's not impossible though -- I've just done it, although there is a huge amount of whitespace in between some of them.</p>
+
+<a name="161959202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161959202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161959202">Gabriel Ebner (Mar 28 2019 at 14:45)</a>:</h4>
+<p>The earlier problem also has only 16 error messages, apparently one of these error message is almost 100 megabytes though...</p>
+
+<a name="161960295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161960295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161960295">Gabriel Ebner (Mar 28 2019 at 14:56)</a>:</h4>
+<p>I have put in a small <a href="https://github.com/leanprover/vscode-lean/commit/89bd3dc771b2e734d8cfab04ba46cf97c72608bd" target="_blank" title="https://github.com/leanprover/vscode-lean/commit/89bd3dc771b2e734d8cfab04ba46cf97c72608bd">workaround</a>.  The vscode extension now only displays the first <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mn>1</mn><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{13}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathrm">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mord mathrm mtight">3</span></span></span></span></span></span></span></span></span></span></span></span> messages, and for each message only the first <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mrow><mn>1</mn><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{18}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathrm">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">1</span><span class="mord mathrm mtight">8</span></span></span></span></span></span></span></span></span></span></span></span> characters.  This should hopefully be enough error messages for everybody.</p>
+
+<a name="161960980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161960980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161960980">Kevin Buzzard (Mar 28 2019 at 15:03)</a>:</h4>
+<p>2^31: your error message limit. Please contact the maintainers if you would like more errors.</p>
+
+<a name="161976571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/folding%20problems%20problem/near/161976571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25177foldingproblemsproblem.html#161976571">Mario Carneiro (Mar 28 2019 at 17:52)</a>:</h4>
+<p>When I hear stuff like this I'm surprised typeclass inference works at all</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

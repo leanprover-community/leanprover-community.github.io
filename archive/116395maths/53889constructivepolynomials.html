@@ -1,0 +1,118 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/53889constructivepolynomials.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html">constructive polynomials</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177999667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/177999667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#177999667">Reid Barton (Oct 12 2019 at 17:59)</a>:</h4>
+<p>I know polynomials were changed to use classical logic, and that's fine, but it occurred to me that there is a constructively correct notion of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">R[X]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">]</span></span></span></span>, and it isn't the one we were using (unless <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> has decidable equality).</p>
+
+<a name="177999961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/177999961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#177999961">Johan Commelin (Oct 12 2019 at 18:06)</a>:</h4>
+<p>Which is...</p>
+
+<a name="177999994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/177999994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#177999994">Reid Barton (Oct 12 2019 at 18:07)</a>:</h4>
+<p>Namely, you can either take some free construction, or you can work with <code>list R</code> modulo the relation of adding 0s to the end of the list, and I think these are constructively equivalent. Moreover, all the polynomial operations can be implemented without using equality on <code>R</code> aside from decidable equality of polynomials (obviously) and degree (slightly less obviously, but also clearly correctly, since <code>deg (1 + (a - b) * X)</code> is 0 iff <code>a = b</code>).</p>
+
+<a name="178000072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000072">Reid Barton (Oct 12 2019 at 18:09)</a>:</h4>
+<p>The second one is also a lot more reasonable for computation than the current representation, since addition is linear and not quadratic for example</p>
+
+<a name="178000075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000075">Reid Barton (Oct 12 2019 at 18:09)</a>:</h4>
+<p>I'm not sure whether there is a compelling reason to switch at this point though</p>
+
+<a name="178000214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000214">Johan Commelin (Oct 12 2019 at 18:12)</a>:</h4>
+<p>This doesn't easily generalize to <code>mv_poly</code> right?</p>
+
+<a name="178000240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000240">Johan Commelin (Oct 12 2019 at 18:13)</a>:</h4>
+<p>If anything, I would like to redefine <code>polynomial R</code> as <code>mv_polynomial unit R</code>, and make the two API play more in sync. There is lots of stuff that has to be done twice, and isn't done in exactly the same way, etc...</p>
+
+<a name="178000309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000309">Reid Barton (Oct 12 2019 at 18:14)</a>:</h4>
+<p>The big free construction still works for <code>mv_polynomial</code>, and I think you can also do something more similar to the current implementation but constructively correct, but it won't be as nice as lists</p>
+
+<a name="178000476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000476">Reid Barton (Oct 12 2019 at 18:19)</a>:</h4>
+<p><code>free_comm_ring</code> is almost the "big free construction", except it needs to be <code>free_algebra</code>, and also use <code>free_comm_monoid</code> in place of <code>multiset</code></p>
+
+<a name="178000493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000493">Reid Barton (Oct 12 2019 at 18:19)</a>:</h4>
+<p>Or you can build it directly from the syntax of algebras</p>
+
+<a name="178000687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000687">Patrick Massot (Oct 12 2019 at 18:24)</a>:</h4>
+<p>Reid, are you still checking your topology PR? It doesn't sound like it...</p>
+
+<a name="178000841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000841">Reid Barton (Oct 12 2019 at 18:29)</a>:</h4>
+<p>I discovered that there were a sizable number of irrelevant universe parameter order changes, so I "fixed" them and rebuilt</p>
+
+<a name="178000970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000970">Reid Barton (Oct 12 2019 at 18:32)</a>:</h4>
+<p>Oh sorry, I misremembered how <code>multiset</code> is implemented. It is actually the correct thing already.</p>
+
+<a name="178000976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178000976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178000976">Patrick Massot (Oct 12 2019 at 18:32)</a>:</h4>
+<p>So, do you think we can merge?</p>
+
+<a name="178013644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178013644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178013644">Kenny Lau (Oct 13 2019 at 00:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> the constructive polynomials on R is R (x)_Z Z[x]</p>
+
+<a name="178435943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178435943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178435943">Yury G. Kudryashov (Oct 18 2019 at 01:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> One-variable polynomials can be evaluated on non-commutative rings (e.g., matrices or bounded linear operators; not sure if this is implemented in mathlib), and it can't work with <code>mv_polynomial</code>.</p>
+
+<a name="178444094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178444094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178444094">Johan Commelin (Oct 18 2019 at 05:10)</a>:</h4>
+<p>Hmm, fair enough</p>
+
+<a name="178444111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178444111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178444111">Johan Commelin (Oct 18 2019 at 05:11)</a>:</h4>
+<p>So you are saying that <code>polynomial</code> should be defined as <code>mv_noncomm_polynomial unit</code>?</p>
+
+<a name="178548512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178548512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178548512">Yury G. Kudryashov (Oct 19 2019 at 14:24)</a>:</h4>
+<p>AFAIK, we don't have <code>mv_noncomm_polynomial</code> (yet).</p>
+
+<a name="178548677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178548677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178548677">Yury G. Kudryashov (Oct 19 2019 at 14:28)</a>:</h4>
+<p>Probably I'd prefer to have a few monoids of monomials, and let <code>*_polynomial</code> be <code>monoid_algebra monomials_type</code>.</p>
+
+<a name="178548690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178548690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178548690">Yury G. Kudryashov (Oct 19 2019 at 14:28)</a>:</h4>
+<p>Where <code>monoid_algebra</code> is <a href="https://en.wikipedia.org/wiki/Group_ring" target="_blank" title="https://en.wikipedia.org/wiki/Group_ring">https://en.wikipedia.org/wiki/Group_ring</a> for monoids instead of groups (I'm not sure what is the right word for this).</p>
+
+<a name="178551266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178551266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178551266">Kevin Buzzard (Oct 19 2019 at 15:41)</a>:</h4>
+<p>I've heard it being called "monoid ring" before</p>
+
+<a name="178552893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178552893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178552893">Mario Carneiro (Oct 19 2019 at 16:22)</a>:</h4>
+<p>I recall Kenny having a formalization of polynomials using quotients of ring expressions that is pretty constructive</p>
+
+<a name="178553522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178553522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178553522">Johan Commelin (Oct 19 2019 at 16:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> I think <code>finsupp</code> already allows you to do monoid rings</p>
+
+<a name="178553567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20polynomials/near/178553567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53889constructivepolynomials.html#178553567">Johan Commelin (Oct 19 2019 at 16:40)</a>:</h4>
+<p>It's been a while that I read that part of the source though</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

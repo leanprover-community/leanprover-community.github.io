@@ -1,0 +1,524 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/56079LeaninstallationinCoCalc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html">Lean installation in CoCalc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188563583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188563583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188563583">Rob Lewis (Feb 19 2020 at 17:06)</a>:</h4>
+<p>The CoCalc talk in another thread reminded me that I should start getting things ready for my course next year. This led to a chat with <span class="user-mention" data-user-id="128565">@Harald Schilly</span> about how CoCalc installs Lean/mathlib. Irrelevant for my course, but probably relevant to others, so I'm bringing it here.</p>
+<p>It would probably be good to install Lean through the version manager elan, with a reasonable default version (3.5.1?) and a handful of options pre-installed. Right now it's a plain install of a 3.4.2 binary.</p>
+<p>What about pre-installing versions of mathlib? leanpkg has a notion of a global install of a package. But I'm not sure it's the best move here. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> doesn't think it will play well with elan. And it probably interacts badly with non-global mathlib dependencies, which people might use if they want a newer version than whatever CoCalc gives.</p>
+<p>CoCalc could provide directories containing (compiled) mathlibs for each Lean version it pre-installs. Users would have to set up projects with leanpkg.toml files pointing to the right spot. Fine for courses that can distribute this project, trickier for someone who just wants to open a .lean file in CoCalc and start using real numbers.</p>
+<p>As I understand it, free CoCalc doesn't allow accessing external websites. So adding packages from GitHub won't work, nor will elan on new versions of Lean, nor will cache-olean/update-mathlib. This is why I'm suggesting pre-installing things, although of course this a reason to pay for CoCalc :) </p>
+<p>Thoughts? ( cc <span class="user-mention" data-user-id="116034">@William Stein</span> )</p>
+
+<a name="188564988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188564988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188564988">William Stein (Feb 19 2020 at 17:23)</a>:</h4>
+<p>I can tell you that by default it is very confusing for people to get access to mathlib on CoCalc if they aren't experts.   We CoCalc admins definitely do NOT know what to do in order to make mathlib (or other libraries?) available by default, though we've tried and failed repeatedly.    If you want to see precisely what our lean install is on cocalc now, just open a Terminal in any cocalc project (+New --&gt; Terminal), then type <code>cd /ext/lean</code> and <code>ls</code>:</p>
+
+<a name="188564993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188564993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188564993">William Stein (Feb 19 2020 at 17:23)</a>:</h4>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="188565163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188565163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188565163">William Stein (Feb 19 2020 at 17:25)</a>:</h4>
+<div class="codehilite"><pre><span></span>/ext/lean$ ls
+lean  lean-3.4.1-linux  lean-3.4.2-linux
+/ext/lean$ which lean
+/ext/bin/lean
+/ext/lean$ ls -l lean
+lrwxrwxrwx 1 salvus salvus 16 Feb 12  2019 lean -&gt; lean-3.4.2-linux
+/ext/lean$ cd lean-3.4.2-linux/
+/ext/lean/lean-3.4.2-linux$ ls
+bin  include  lib  mathlib  mathlib-lean-3.4.2
+/ext/lean/lean-3.4.2-linux$ lean --path
+{
+  &quot;is_user_leanpkg_path&quot;: true,
+  &quot;leanpkg_path_file&quot;: &quot;/home/user/.lean/leanpkg.path&quot;,
+  &quot;path&quot;: [
+    &quot;/ext/lean/lean-3.4.2-linux/bin/../library&quot;,
+    &quot;/ext/lean/lean-3.4.2-linux/bin/../lib/lean/library&quot;
+  ]
+}
+</pre></div>
+
+
+<p>Note that we have a copy of mathlib but it's not in either of the directories of the default lean search path, which might be why it doesn't work.  Should we move it into a subdirectory called "library"?</p>
+
+<a name="188566515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188566515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188566515">Rob Lewis (Feb 19 2020 at 17:40)</a>:</h4>
+<p>The <code>library</code> subdirectory is for the core Lean library. I'm guessing you'd have trouble moving mathlib there. With your current setup, you can do the following:</p>
+<div class="codehilite"><pre><span></span>~$ leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/
+</pre></div>
+
+
+<p>(don't do it inside <code>/ext/lean/lean-3.4.2-linux/</code>, apparently). This is a global install of mathlib so it should be available whenever you open a Lean file -- you might need  to restart the Lean server if it was running already.</p>
+
+<a name="188566571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188566571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188566571">Rob Lewis (Feb 19 2020 at 17:41)</a>:</h4>
+<p>This is fine if your users are okay with a fixed version of Lean and mathlib.</p>
+
+<a name="188567078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188567078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188567078">Patrick Massot (Feb 19 2020 at 17:47)</a>:</h4>
+<p>One can think that users of CoCalc don't need many versions of mathlib (they would use Lean locally if they were that serious about it). But I'm worried for teachers: what if I start a course using mathlib and suddenly CoCalc updates mathlib? What I did last year was to distribute a compiled mathlib using CoCalc distribution mechanism. Let's dream a bit here. Let's say some script downloads a mathlib nightly on the first of every month and call it <code>mathlib_january</code> etc. Then users could add a leanpkg dependency to <code>mathlib_february</code> or something. Then every year automatically erases ancient mathlibs.</p>
+
+<a name="188567134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188567134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188567134">Patrick Massot (Feb 19 2020 at 17:47)</a>:</h4>
+<p>This shouldn't be a Lean specific issue however. What happens to existing projects when Sage is updated? I guess Sage has some breaking changes from times to times.</p>
+
+<a name="188569371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188569371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188569371">William Stein (Feb 19 2020 at 18:11)</a>:</h4>
+<blockquote>
+<p>This shouldn't be a Lean specific issue however. What happens to existing projects when Sage is updated? I guess Sage has some breaking changes from times to times.</p>
+</blockquote>
+<ol>
+<li>
+<p>We keep all past versions of Sage, and have a sage_select command so users can choose a default.  Right now things are extra complicated because the last Sage update was python2 --&gt; python3!    With Jupyter the situation is very good since there is no default sage version  for Jupyter notebooks  -- you have to explicitly choose a version the first time, and then it defaults to that afterwards and is encoded in the ipynb file, so you get that version henceforth when using that notebook.  If an instructor prepares course materials with Sage-8.9, then all students will be using sage-8.9 when they open that notebook, even if we installed sage-9.1... unless sage-8.9 isn't available and then they get a message and select from the closes related kernel.       This is one thing  Jupyter really got right. </p>
+</li>
+<li>
+<p>We do have several point in time <em>snapshots</em> of the entire (several hundred GB) install stack for a project, which can be selected in project settings.  Then no matter what upgrades happen for a default cocalc project, they don't happen for that project.   People asked for this, but in practice don't use it much -- for most software, people tend to prefer the newest version with whatever bugfixes are in it (plus documentation parity with the web) to a static version.   We also have many completely custom images (using the mybinder spec) and some classes use this for the whole class.    We could do more to make this more straightforward to use though.</p>
+</li>
+</ol>
+
+<a name="188569552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188569552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188569552">William Stein (Feb 19 2020 at 18:13)</a>:</h4>
+<p>We'll try <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code>since this will at least be a good start.   Would this break people being able to install their own mathlib locally that overrides the global one?</p>
+
+<a name="188569885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188569885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188569885">Harald Schilly (Feb 19 2020 at 18:17)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188566515" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188566515">said</a>:</p>
+<div class="codehilite"><pre><span></span>```
+~$ leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/
+```
+(don&#39;t do it inside `/ext/lean/lean-3.4.2-linux/`, apparently).
+</pre></div>
+
+
+<p>Sorry, I'm not 100% sure about that. Does it matter in which directory I run that <code>leanpkg install</code> ? Not inside the one you mention?</p>
+
+<a name="188570395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188570395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188570395">Rob Lewis (Feb 19 2020 at 18:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="116034">William Stein</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188569552" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188569552">said</a>:</p>
+<blockquote>
+<p>We'll try <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code>since this will at least be a good start.   Would this break people being able to install their own mathlib locally that overrides the global one?</p>
+</blockquote>
+<p>I'm not sure -- will try to test locally. Maybe someone else here knows off the top of their head? :)</p>
+
+<a name="188570620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188570620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188570620">Rob Lewis (Feb 19 2020 at 18:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="137337">Harald Schilly</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188569885" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188569885">said</a>:</p>
+<blockquote>
+<p>Sorry, I'm not 100% sure about that. Does it matter in which directory I run that <code>leanpkg install</code> ? Not inside the one you mention?</p>
+</blockquote>
+<p>Running <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code> anywhere outside of <code>/ext/lean</code> should be fine, is my guess. I got weird errors when I did it there, but then I switched to <code>~</code> and it worked.</p>
+
+<a name="188570770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188570770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188570770">Rob Lewis (Feb 19 2020 at 18:28)</a>:</h4>
+<p>Oh, I think it has to be done somewhere you have write access.</p>
+
+<a name="188570828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188570828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188570828">Rob Lewis (Feb 19 2020 at 18:28)</a>:</h4>
+<p>That's why it didn't work in <code>/ext/lean</code>.</p>
+
+<a name="188570886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188570886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188570886">Harald Schilly (Feb 19 2020 at 18:29)</a>:</h4>
+<p>ok, I tried that <code>leanpkg install ...</code>and all that happened was it changed files in my <code>$HOME/.lean</code> directory.</p>
+<p>So, just to clarify: what we here at cocalc aim for is to have lean + mathlib + other libs (if there is a need) at a global location, which is read-only. That directory is accessible from each and every project on cocalc. Then, when lean starts, it should pick up that global mathlib. With Linux or Python, it is possible to tweak a <code>PATH</code> or <code>PYTHONPATH</code> variable, containing a list of directories where it should search for binaries or a library. I suppose with LEAN there is nothing like that and you have to configure this in your local directory? If that's the case, this might only work if we install mathlib + other libs in that <code>builtin_path</code> directory (I saw that in a <code>leanpkg.path</code> file)</p>
+
+<a name="188571005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188571005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188571005">Harald Schilly (Feb 19 2020 at 18:30)</a>:</h4>
+<p>ok, hmm, I think I should read up in detail what the install command is doing.</p>
+
+<a name="188571390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188571390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188571390">Kevin Buzzard (Feb 19 2020 at 18:35)</a>:</h4>
+<p>Note: Rob points out that some of this post is incorrect</p>
+<p>I think <code>install</code> is how a user installs dependencies for their project. For example many mathematics projects have a dependency on mathlib. The <code>install</code> command, for me, would edit <code>leanpkg.toml</code> to indicate that my project relies on mathlib (or more precisely on a certain commit of mathlib). Then <code>leanpkg configure</code> would download that particular commit and put it into <code>_target</code>, and then, if you have all the user tools installed, <code>update-mathlib</code> would download compiled binaries for the version of mathlib you chose. </p>
+<p>Having a stable version of Lean is eminently sensible. 3.5.1 is just a bugfix for 3.4.2 really, I think, so you should probably use that. But I have always downloaded my own mathlibs when using lean on cocalc, because different project rely on different things and mathlib changes can be non-backwards-compatible.</p>
+
+<a name="188571963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188571963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188571963">William Stein (Feb 19 2020 at 18:41)</a>:</h4>
+<p>I just tried typing <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code> in a cocalc project, then creating a lean file and putting a bunch of code that uses mathlib from <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/naturals.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/naturals.md">here</a> in, and it works (no errors in output).</p>
+
+<a name="188572058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572058">Rob Lewis (Feb 19 2020 at 18:42)</a>:</h4>
+<p>Kevin, <code>leanpkg install</code> is different than <code>leanpkg add</code>.</p>
+
+<a name="188572277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572277">Rob Lewis (Feb 19 2020 at 18:45)</a>:</h4>
+<p>Hmm. When you're outside a Lean project (ie no leanpkg.toml in a directory below you), the <code>leanpkg_path_file</code> value shown by <code>lean --path</code> is different. It doesn't exist on my machine. I wonder if creating that file would act as a "default" path file, and what exactly needs to go in to direct it to a default mathlib install.</p>
+
+<a name="188572285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572285">William Stein (Feb 19 2020 at 18:45)</a>:</h4>
+<p>I could make it so that when cocalc is about to start the lean server it first checks to see if ~/.lean is empty, and in that case runs <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code>.  Then mathlib would work for random users (esp without internet access on cocalc), but if anybody needs to do something custom, they can just delete and customize ~/.lean however they want and it won't get touched.</p>
+
+<a name="188572401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572401">William Stein (Feb 19 2020 at 18:46)</a>:</h4>
+<p>Anyway, making a change to run a leanpkg install of mathlib when first running lean wouldn't be too hard...  it also doesn't waste disk space.</p>
+
+<a name="188572459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572459">Rob Lewis (Feb 19 2020 at 18:47)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="116034">William Stein</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188572285" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188572285">said</a>:</p>
+<blockquote>
+<p>I could make it so that when cocalc is about to start the lean server it first checks to see if ~/.lean is empty, and in that case runs <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code>.  Then mathlib would work for random users (esp without internet access on cocalc), but if anybody needs to do something custom, they can just delete and customize ~/.lean however they want and it won't get touched.</p>
+</blockquote>
+<p>That would work, except manually editing a hidden directory isn't the normal way people will try to update mathlib. More likely they'll have a local Lean project and run <code>leanpkg add ...</code> to get a copy from GitHub. The pre-installed one might still be available and cause conflicting imports, I'm not sure.</p>
+
+<a name="188572689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572689">William Stein (Feb 19 2020 at 18:50)</a>:</h4>
+<p>My main motivation is new students and random people who want to solve some problems using mathlib + lean that say <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  tweets about.   They wouldn't have access to github if they are using cocalc for free, and anyways it would be nice to avoid the friction of opening a terminal and using <code>leanpkg add</code>.  The question is if both of these audiences can be served without confusion.</p>
+
+<a name="188572755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572755">Rob Lewis (Feb 19 2020 at 18:51)</a>:</h4>
+<p>Right. It seems like a reasonable default.</p>
+
+<a name="188572765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572765">William Stein (Feb 19 2020 at 18:51)</a>:</h4>
+<blockquote>
+<p>That would work, except manually editing a hidden directory isn't the normal way people will try to update mathlib. </p>
+</blockquote>
+<p>If one does <code>leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/</code> in a clean account, then later does <code>leanpkg add ...</code>, what happens?   Maybe the second command gives them the latest mathlib version and all is good?</p>
+
+<a name="188572960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572960">William Stein (Feb 19 2020 at 18:53)</a>:</h4>
+<p>I've made this issue, which I'll look into later today (have to go now): <a href="https://github.com/sagemathinc/cocalc/issues/4393" target="_blank" title="https://github.com/sagemathinc/cocalc/issues/4393">https://github.com/sagemathinc/cocalc/issues/4393</a></p>
+
+<a name="188572962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188572962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188572962">Rob Lewis (Feb 19 2020 at 18:53)</a>:</h4>
+<p>I'm starting a VM to try it from a clean slate.</p>
+
+<a name="188573083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188573083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188573083">William Stein (Feb 19 2020 at 18:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> thanks.   You can also easily get a new anonymous throw-away cocalc project by opening the following link in a private browsing session:  <a href="https://cocalc.com/app?anonymous=true" target="_blank" title="https://cocalc.com/app?anonymous=true">https://cocalc.com/app?anonymous=true</a>  </p>
+<p>Never mind -- that wouldn't have internet access.</p>
+
+<a name="188574943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188574943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188574943">Rob Lewis (Feb 19 2020 at 19:14)</a>:</h4>
+<p>Okay, I think you're safe with this setup. Run <code>leanpkg install /ext/...</code> in/below <code>~</code>. If someone creates a Lean project anywhere in <code>~</code>, the new <code>leanpkg.path</code> seems to override the global install. This happens whether or not mathlib is added to the project with <code>leanpkg add</code>. The global install is unavailable in the project as soon as the project is created.</p>
+
+<a name="188600629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188600629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188600629">William Stein (Feb 20 2020 at 00:33)</a>:</h4>
+<p>I implemented this and it is NOW live in CoCalc.  mathlib will "just work" with no manual intervention by users for any newly started (or restarted) project that doesn't already have a ~/.lean directory.   In particular, <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you could post lean files on <a href="http://share.cocalc.com" target="_blank" title="http://share.cocalc.com">share.cocalc.com</a> that rely on mathlib, and when people open that content (e.g, as an anonymous user), it'll work (or at least lack of mathlib won't be the issue).</p>
+<p>Here's an example on the share server: <a href="https://share.cocalc.com/share/df81e09e5b8f16f28b3a2e818dcdd4560e7818ae/support/2020-02-19-lean-natural-numbers.lean?viewer=share" target="_blank" title="https://share.cocalc.com/share/df81e09e5b8f16f28b3a2e818dcdd4560e7818ae/support/2020-02-19-lean-natural-numbers.lean?viewer=share">https://share.cocalc.com/share/df81e09e5b8f16f28b3a2e818dcdd4560e7818ae/support/2020-02-19-lean-natural-numbers.lean?viewer=share</a></p>
+<p>If somebody clicks the green button to open the document it should work, automatically adding support for mathlib on first use of lean and they will see this:</p>
+<p><a href="/user_uploads/3121/fTdoCsfC6n-NMherT6YEj4uK/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> </p>
+<div class="message_inline_image"><a href="/user_uploads/3121/fTdoCsfC6n-NMherT6YEj4uK/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/fTdoCsfC6n-NMherT6YEj4uK/pasted_image.png"></a></div><p>I'm guessing the error involving <code>example (p : ℕ) : prime p → p ≥ 2 := prime.two_le</code> is due to our version of mathlib being slightly old.   <span class="user-mention" data-user-id="137337">@Harald Schilly</span> should update the mathlib version soon and then it'll work, presumably (I don't know).</p>
+
+<a name="188614366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188614366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188614366">Johan Commelin (Feb 20 2020 at 06:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="116034">@William Stein</span> <span class="user-mention" data-user-id="137337">@Harald Schilly</span> Wow! Thanks a lot for all your effort.</p>
+
+<a name="188617055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188617055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188617055">Kevin Buzzard (Feb 20 2020 at 08:01)</a>:</h4>
+<p>Thanks for this William. I'm giving a talk in Oxford today and if I get it working before then I'll showcase it</p>
+
+<a name="188617518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188617518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188617518">Rob Lewis (Feb 20 2020 at 08:10)</a>:</h4>
+<p>Awesome!</p>
+
+<a name="188617638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188617638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188617638">Rob Lewis (Feb 20 2020 at 08:13)</a>:</h4>
+<p>A small note, if you're going to update the mathlib version you might as well update the Lean version as well. I'd recommend using 3.5.1 from here: <a href="https://github.com/leanprover-community/lean/releases" target="_blank" title="https://github.com/leanprover-community/lean/releases">https://github.com/leanprover-community/lean/releases</a></p>
+
+<a name="188619668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188619668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188619668">Harald Schilly (Feb 20 2020 at 08:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188617638" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188617638">said</a>:</p>
+<blockquote>
+<p>... recommend using 3.5.1 ...</p>
+</blockquote>
+<p>thank you, I discovered that already. However, regarding mathlib, my impression is that it is fine to grab the master-tip of the repository, but there are also "snapshot" like releases in it's repo. Last one from Oct'19, though. I'm aware of that mathlib-tool, and reading the sources of that script, it looks like grabbing the nightly build is what I should do. For me, as an "outsider" to lean, this is a little bit confusing ^^</p>
+
+<a name="188620172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620172">Rob Lewis (Feb 20 2020 at 09:03)</a>:</h4>
+<p>I think it's extra complicated because the CoCalc install isn't (and shouldn't be) following the "standard" installation model.</p>
+
+<a name="188620223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620223">Rob Lewis (Feb 20 2020 at 09:04)</a>:</h4>
+<p>I have no idea what the snapshot releases in the mathlib repo are for. Maybe we should delete those?</p>
+
+<a name="188620317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620317">Rob Lewis (Feb 20 2020 at 09:05)</a>:</h4>
+<p>Using the master tip of mathlib is fine, if you're building it yourself. There are supporting scripts for downloading pre-built olean files. But there's no need to install them in CoCalc. You could do it locally to create the mathlib image if you wanted.</p>
+
+<a name="188620407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620407">Rob Lewis (Feb 20 2020 at 09:06)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="188620505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620505">Rob Lewis (Feb 20 2020 at 09:08)</a>:</h4>
+<p>The easiest way to get a fully built mathlib repo manually is through the CI. Download the build artifact here: <a href="https://github.com/leanprover-community/mathlib/runs/456786112" target="_blank" title="https://github.com/leanprover-community/mathlib/runs/456786112">https://github.com/leanprover-community/mathlib/runs/456786112</a></p>
+
+<a name="188620532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620532">Rob Lewis (Feb 20 2020 at 09:08)</a>:</h4>
+<p>That will give you the master version of mathlib with pre-built oleans.</p>
+
+<a name="188622620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622620">Harald Schilly (Feb 20 2020 at 09:39)</a>:</h4>
+<p>thank you <span class="user-mention" data-user-id="110596">@Rob Lewis</span> … yes, it's different. So, what I ended up is writing a script to grab the latest nightly build of mathlib from the mathlib-nightly repo. Just one minor detail was off: it extracts as "src/*" without these two toml and path files. I ended up writing them on my own, without specifying the lean version. With what <span class="user-mention" data-user-id="116034">@William Stein</span> came up with will point to the matlib path, which will be next to the default version of lean we at cocalc symlink to. Therefore, the mathlib package will correspond to whatever the default version is, i.e. 3.5.1 right now.</p>
+
+<a name="188622884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622884">Harald Schilly (Feb 20 2020 at 09:42)</a>:</h4>
+<p>net result: the file william shared yesterday will process fine, see screenshot below. This isn't live on cocalc yet, but will be part of our next update (during the weekend). </p>
+<p><a href="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png" target="_blank" title="2020-02-20-lean-mathlib-3.5.1-cocalc.png">2020-02-20-lean-mathlib-3.5.1-cocalc.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png" target="_blank" title="2020-02-20-lean-mathlib-3.5.1-cocalc.png"><img src="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png"></a></div>
+
+<a name="188622900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622900">Patrick Massot (Feb 20 2020 at 09:43)</a>:</h4>
+<blockquote>
+<p>I have no idea what the snapshot releases in the mathlib repo are for. Maybe we should delete those?</p>
+</blockquote>
+<p>Does anyone has enough admin power to get rid of those? They are useless and confusing.</p>
+
+<a name="188624357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188624357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188624357">Rob Lewis (Feb 20 2020 at 10:03)</a>:</h4>
+<p>Nice! Sounds good to me :)</p>
+
+<a name="188624379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188624379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188624379">Rob Lewis (Feb 20 2020 at 10:03)</a>:</h4>
+<p>Yeah, let's figure out how to delete the snapshots. We're certain they aren't used for anything, right?</p>
+
+<a name="188624624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188624624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188624624">Patrick Massot (Feb 20 2020 at 10:07)</a>:</h4>
+<p>The dates clearly prove they aren't used for anything.</p>
+
+<a name="188625589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188625589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188625589">Rob Lewis (Feb 20 2020 at 10:21)</a>:</h4>
+<p>The snapshot is related to some kind of package manager <span class="user-mention" data-user-id="110026">@Simon Hudon</span> was working on at some point. I'm not going to delete that one.</p>
+
+<a name="188625596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188625596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188625596">Rob Lewis (Feb 20 2020 at 10:21)</a>:</h4>
+<p>The others are gone.</p>
+
+<a name="188626020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188626020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188626020">Patrick Massot (Feb 20 2020 at 10:28)</a>:</h4>
+<p>Harald and William, how does all this conversation relate to <a href="https://github.com/sagemathinc/cocalc/issues/3589" target="_blank" title="https://github.com/sagemathinc/cocalc/issues/3589">https://github.com/sagemathinc/cocalc/issues/3589</a>? Did you also solve that?</p>
+
+<a name="188628614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188628614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188628614">Harald Schilly (Feb 20 2020 at 11:14)</a>:</h4>
+<p>The ticke is still open, so I assume the server starts in the home directory. </p>
+<p>One question about the logic: if running <code>lean -p</code> in the directory where the <code>.lean</code> file is says <code>is_user_leanpkg_path</code> is <code>true</code> → start the lean server in <code>$HOME</code>. If it is <code>false</code> → start it in the directory where <code>leanpkg_path_file</code> is. Correct?</p>
+
+<a name="188628652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188628652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188628652">Harald Schilly (Feb 20 2020 at 11:15)</a>:</h4>
+<p>We should make the logic crystal clear on the ticket, that's all. The implementation shouldn't be hard...</p>
+
+<a name="188645722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188645722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188645722">Patrick Massot (Feb 20 2020 at 15:08)</a>:</h4>
+<p>It would be nice if someone who knows more about when Lean does could have a look. Maybe Gabriel or Rob?</p>
+
+<a name="188649030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188649030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188649030">Kevin Buzzard (Feb 20 2020 at 15:41)</a>:</h4>
+<p><a href="https://share.cocalc.com/share/f014cd1885a22e8665a728be825e563fc79b7e1f/Maths_Challenges/?viewer=share" target="_blank" title="https://share.cocalc.com/share/f014cd1885a22e8665a728be825e563fc79b7e1f/Maths_Challenges/?viewer=share">Maths challenges for the Lean curious on CoCalc</a> got demoed in Oxford today and it was slow but ultimately worked fine. In particular mathlib imports work fine (I couldn't get them to work with shared projects yesterday).</p>
+
+<a name="188649089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188649089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188649089">Kevin Buzzard (Feb 20 2020 at 15:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="116034">@William Stein</span> is it slow because Oxford is a long way from Seattle or something?</p>
+
+<a name="188651786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188651786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188651786">Patrick Massot (Feb 20 2020 at 16:08)</a>:</h4>
+<p>I find it distracting that CoCalc is constantly displaying help on the tactic under cursor. VScode doesn't do that.</p>
+
+<a name="188673735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188673735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188673735">William Stein (Feb 20 2020 at 20:18)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188649089" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188649089">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="116034">William Stein</span> is it slow because Oxford is a long way from Seattle or something?</p>
+</blockquote>
+<ol>
+<li>What precisely was slow?  2. the CoCalc servers are on the east coast of the US.</li>
+</ol>
+
+<a name="188673868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188673868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188673868">William Stein (Feb 20 2020 at 20:20)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188651786" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188651786">said</a>:</p>
+<blockquote>
+<p>I find it distracting that CoCalc is constantly displaying help on the tactic under cursor. VScode doesn't do that.</p>
+</blockquote>
+<p>Can you clarify this? Do you mean that a panel off to the right is displaying something when it shouldn't?  What's a minimal example to reproduce this?    CoCalc just takes exactly the same LSP language server protocol data as VSCode and displays it, though how it does so is different.</p>
+
+<a name="188674277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188674277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188674277">Patrick Massot (Feb 20 2020 at 20:25)</a>:</h4>
+<p>Compare <a href="/user_uploads/3121/6_GRBHMTAiHS112R1HhhXnc1/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> and <a href="/user_uploads/3121/C3xc17pNA59rAAvP8x9KsejV/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/6_GRBHMTAiHS112R1HhhXnc1/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/6_GRBHMTAiHS112R1HhhXnc1/pasted_image.png"></a></div><div class="message_inline_image"><a href="/user_uploads/3121/C3xc17pNA59rAAvP8x9KsejV/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/C3xc17pNA59rAAvP8x9KsejV/pasted_image.png"></a></div>
+
+<a name="188674302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188674302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188674302">Patrick Massot (Feb 20 2020 at 20:25)</a>:</h4>
+<p>This is the exact same Lean code with the cursor at the same place.</p>
+
+<a name="188674355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188674355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188674355">Patrick Massot (Feb 20 2020 at 20:26)</a>:</h4>
+<p>But the CoCalc version has an extra line at the bottom right, documenting the sorry tactic.</p>
+
+<a name="188675291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188675291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188675291">William Stein (Feb 20 2020 at 20:38)</a>:</h4>
+<p>Thanks.  In VSCode how does one display the help?      In CoCalc it would probably be very easy to change things so that the help is always displayed in a completely separate panel, and if you don't want to see it, you just close that panel...   Would that work for you?</p>
+
+<a name="188675329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188675329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188675329">William Stein (Feb 20 2020 at 20:39)</a>:</h4>
+<p>(By the way, CoCalc has dark mode editor themes, and also an overall dark mode for the whole UI -- look in Account --&gt; Preferences.)</p>
+
+<a name="188675404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188675404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188675404">Patrick Massot (Feb 20 2020 at 20:40)</a>:</h4>
+<p>In VScode that help would show up as a tooltip if you hover over "sorry".</p>
+
+<a name="188675419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188675419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188675419">Patrick Massot (Feb 20 2020 at 20:40)</a>:</h4>
+<p>The solution you describe would work.</p>
+
+<a name="188675479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188675479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188675479">Kevin Buzzard (Feb 20 2020 at 20:41)</a>:</h4>
+<p>I have a memory that in the community web editor the behaviour is the same as in CoCalc. But I can't get the community web editor to work right now.</p>
+
+<a name="188676090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188676090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188676090">William Stein (Feb 20 2020 at 20:48)</a>:</h4>
+<p>I've created an issue: <a href="https://github.com/sagemathinc/cocalc/issues/4403" target="_blank" title="https://github.com/sagemathinc/cocalc/issues/4403">https://github.com/sagemathinc/cocalc/issues/4403</a></p>
+
+<a name="188676447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188676447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188676447">Patrick Massot (Feb 20 2020 at 20:52)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="188679503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188679503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188679503">William Stein (Feb 20 2020 at 21:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> this is implemented and now live at <a href="https://cocalc.com" target="_blank" title="https://cocalc.com">https://cocalc.com</a>.  Refresh your browser to see the change.  The panel layout doesn't change for files you already have open, but a new "Help" panel appears for newly opened files.  Also, help only goes to the help panel (starting now, even with existing files).</p>
+
+<a name="188680259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680259">Patrick Massot (Feb 20 2020 at 21:31)</a>:</h4>
+<p>Kevin's stuff is not responding right now. I tried logging in my account and accessing the Lean project where we tried stuff last year but it simply hangs at Parsing at line 1.</p>
+
+<a name="188680351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680351">Patrick Massot (Feb 20 2020 at 21:32)</a>:</h4>
+<p>Unfortunately this is my typical CoCalc experience. When it works it's great, but when it doesn't work there is nothing you can do or investigate.</p>
+
+<a name="188680490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680490">Patrick Massot (Feb 20 2020 at 21:33)</a>:</h4>
+<p><a href="/user_uploads/3121/SP9KAD_Z2NobQg-4MPHPTf2W/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/SP9KAD_Z2NobQg-4MPHPTf2W/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/SP9KAD_Z2NobQg-4MPHPTf2W/pasted_image.png"></a></div>
+
+<a name="188680727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680727">Patrick Massot (Feb 20 2020 at 21:36)</a>:</h4>
+<p>Now I have a lot of error messages:</p>
+<div class="codehilite"><pre><span></span>invalid import: data.real.basic
+/home/user/_target/deps/mathlib/data/real/basic.lean:275:13: error: unexpected token
+ 4:10 error
+excessive memory consumption detected at &#39;is_def_eq&#39; (potential solution: increase memory consumption threshold)
+ 6:0 error
+excessive memory consumption detected at &#39;replace&#39; (potential solution: increase memory consumption threshold)
+</pre></div>
+
+<a name="188680736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680736">Patrick Massot (Feb 20 2020 at 21:36)</a>:</h4>
+<p>This is all in the project we share.</p>
+
+<a name="188680890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188680890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188680890">Patrick Massot (Feb 20 2020 at 21:38)</a>:</h4>
+<p>But it works in my teaching project from last year.</p>
+
+<a name="188715408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715408">Harald Schilly (Feb 21 2020 at 09:31)</a>:</h4>
+<p>I've just released the software update, that includes the newer lean/mathlib setup. So, in CoCalc, projects have a "software environment" setting (in project settings → project control). "Default" is what I just updated and if your project is still running from before the update, you have to restart it to get the update. If you're set to "Experimental", you're one step ahead and use what will be the Default soon.</p>
+
+<a name="188715513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715513">Harald Schilly (Feb 21 2020 at 09:32)</a>:</h4>
+<p>In any case, I just tested it <a href="https://share.cocalc.com/share/f014cd1885a22e8665a728be825e563fc79b7e1f/Maths_Challenges/?viewer=share" target="_blank" title="https://share.cocalc.com/share/f014cd1885a22e8665a728be825e563fc79b7e1f/Maths_Challenges/?viewer=share">with these challenges</a> via an anonymous account. clicking the button copies all these files into a fresh project and when I open up a solution, it works.</p>
+
+<a name="188715538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715538">Harald Schilly (Feb 21 2020 at 09:32)</a>:</h4>
+<p>I'll try to remember posting here when we're about to update anything regarding LEAN. If there are any requests, you can ping me as well.</p>
+
+<a name="188715785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715785">Patrick Massot (Feb 21 2020 at 09:36)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="188715813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715813">Patrick Massot (Feb 21 2020 at 09:37)</a>:</h4>
+<p>Kevin, how did you setup up the challenges so that anyone can play via anonymous accounts?</p>
+
+<a name="188715832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188715832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188715832">Patrick Massot (Feb 21 2020 at 09:37)</a>:</h4>
+<p>By the way, I just tried the first challenge and it worked perfectly.</p>
+
+<a name="188720271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188720271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188720271">Harald Schilly (Feb 21 2020 at 10:38)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188715813" title="#narrow/stream/113488-general/topic/Lean.20installation.20in.20CoCalc/near/188715813">said</a>:</p>
+<blockquote>
+<p>Kevin, how did you setup up the challenges so that anyone can play via anonymous accounts?</p>
+</blockquote>
+<p>this is all via <a href="https://doc.cocalc.com/share.html" target="_blank" title="https://doc.cocalc.com/share.html">https://doc.cocalc.com/share.html</a> .. i.e. make a directory, put files in it, go to the parent of that directory (or home dir) and select just this directory and then publish it as such a "share". all files inside of it will end up being public as well.</p>
+
+<a name="188720335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188720335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188720335">Harald Schilly (Feb 21 2020 at 10:39)</a>:</h4>
+<p>when you open it (anonymously, or a fresh project), cocalc's lean editor will start, notices that there is no config in ~/.lean and creates it (that's what william coded up one or two days ago).</p>
+
+<a name="188725219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188725219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188725219">Johan Commelin (Feb 21 2020 at 12:00)</a>:</h4>
+<p>Nice! That works really smoothly. And for my test it was really responsive. This is cool!</p>
+
+<a name="189197701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197701">Harald Schilly (Feb 27 2020 at 09:22)</a>:</h4>
+<p>quick update from my perspective at cocalc: I tried to upgrade to lean 3.6.0 + mathlib 2020-02-27 nightly, but it doesn't work. I have no idea why. The symptoms are high (never ending) cpu usage and then it fails with "excessive memory usage error" or the whole cocalc interface is unresponsive. So, something must have changed that causes an issue. Hence there won't be 3.6.0 on cocalc for now.</p>
+
+<a name="189197801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197801">Johan Commelin (Feb 27 2020 at 09:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110596">@Rob Lewis</span> <span aria-label="up" class="emoji emoji-2b06" role="img" title="up">:up:</span></p>
+
+<a name="189197822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197822">Kevin Buzzard (Feb 27 2020 at 09:25)</a>:</h4>
+<p>One thing you could try is this: upgrade the Lean binary to 3.6, upgrade the mathlib Lean files, and then compile them yourself with <code>lean --make src</code> in the mathlib root directory. It will take a while but it might be the easiest way to just make everything work.</p>
+
+<a name="189197840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197840">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="137337">@Harald Schilly</span> Currently mathlib is not compatible with <code>lean 3.6.0</code></p>
+
+<a name="189197853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197853">Kevin Buzzard (Feb 27 2020 at 09:25)</a>:</h4>
+<p>Oh!</p>
+
+<a name="189197858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197858">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p>Lean 3.6.0 was released yesterday, and we'll first have to fix mathlib.</p>
+
+<a name="189197861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197861">Harald Schilly (Feb 27 2020 at 09:25)</a>:</h4>
+<p>ahh!</p>
+
+<a name="189197888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197888">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml">https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml</a></p>
+
+<a name="189197928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197928">Johan Commelin (Feb 27 2020 at 09:26)</a>:</h4>
+<p>Still says <code>3.5.1</code> <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="189197946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197946">Harald Schilly (Feb 27 2020 at 09:26)</a>:</h4>
+<p>ok. that explains everything. hence just updating mathlib nightly ^^</p>
+
+<a name="189197953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197953">Johan Commelin (Feb 27 2020 at 09:26)</a>:</h4>
+<p>No worries.</p>
+
+<a name="189197987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197987">Johan Commelin (Feb 27 2020 at 09:27)</a>:</h4>
+<p>Probably in a couple of days there will be a big change in mathlib. From then on mathlib wont work with lean 3.4.2 anymore but only with lean 3.6.*</p>
+
+<a name="189198046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189198046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189198046">Johan Commelin (Feb 27 2020 at 09:28)</a>:</h4>
+<p>3.5.1 exists as some sort of transition.</p>
+
+<a name="189200188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189200188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189200188">Rob Lewis (Feb 27 2020 at 10:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="137337">@Harald Schilly</span> If you're installing versions of Lean manually (i.e. you're not using the version manager <code>elan</code>), you'll always need to check by hand that your lean and mathlib versions match. This is a "nonstandard" installation. For the most part we expect people to be using <code>elan</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

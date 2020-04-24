@@ -1,0 +1,85 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40101Hypotheticaljudgements.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html">Hypothetical judgements</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182591289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182591289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182591289">Ariel Davis (Dec 04 2019 at 19:40)</a>:</h4>
+<p>Hello. I'm trying to use Lean to define the semantics of a simple programming language. To do that, I would like to first define inductive types which represent the expressions and types in the language, respectively. I have done this. I would then like to define the judgements for the typing of expressions. This is where I am running into problems. I believe I have something that works for simple expressions, but I'm not sure how to change what i have to account for 'hypotheses' (like 'the variable x has type t'). This is necessary to write down the typing rules for, for instance, an expression "let x = e in e'" where x is a variable and e, e' are expressions. I have attached my code as it is now. Could anyone help me with this? <a href="/user_uploads/3121/s5cBXPIEUTVEKNpjDzsEXu5g/e.lean" target="_blank" title="e.lean">e.lean</a></p>
+
+<a name="182591816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182591816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182591816">Wojciech Nawrocki (Dec 04 2019 at 19:47)</a>:</h4>
+<p>There are many ways to deal with this. One approach is to let the context be a partial map from variables to types. Then extracting a variable is function application and adding <code>x</code> is extending the map by adding a new case that handles <code>x</code>.  Probably the canonical resource for this is <em>Software Foundations</em>. You would be interested in the section on typing (<a href="https://softwarefoundations.cis.upenn.edu/plf-current/Stlc.html#lab214" target="_blank" title="https://softwarefoundations.cis.upenn.edu/plf-current/Stlc.html#lab214">link</a>), but in general going through the Stlc chapters will explain exactly how to do what you want. Foundations uses Coq, so the Lean code will be a little different, but not by too much.</p>
+
+<a name="182592036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592036">Rob Lewis (Dec 04 2019 at 19:49)</a>:</h4>
+<p>To start a bit earlier: you'll want to change your <code>has_typ</code> function to <code>has_typ_in_ctx</code>. Instead of being a binary relation between a term and a type, it will be a three-way relation between a term, a type, and a context.</p>
+
+<a name="182592122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592122">Patrick Massot (Dec 04 2019 at 19:50)</a>:</h4>
+<p>I cannot help with this kind of formalization, but I have a practical suggestion. People here usually post their Lean code either in their message when it is short enough or using <a href="https://gist.github.com/" target="_blank" title="https://gist.github.com/">https://gist.github.com/</a> or a similar website. We don't want people to get used to opening a Lean file randomly downloaded from the internet into VSCode (or emacs) without seeing its content first, since this is a huge security hole (VScode will start running Lean on that file without letting you inspect its content first).</p>
+
+<a name="182592124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592124">Rob Lewis (Dec 04 2019 at 19:50)</a>:</h4>
+<p>You'll need to choose how to represent contexts. There are many possibilities here.</p>
+
+<a name="182592171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592171">Rob Lewis (Dec 04 2019 at 19:50)</a>:</h4>
+<p>Wojciech's suggestion of a partial map makes sense, but another simple one (good enough to write down a basic sketch, at least) would be</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="kn">context</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">list</span> <span class="o">(</span><span class="n">exp</span> <span class="bp">×</span> <span class="n">typ</span><span class="o">)</span>
+</pre></div>
+
+<a name="182592262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592262">Rob Lewis (Dec 04 2019 at 19:51)</a>:</h4>
+<p>So you could do something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">has_typ</span><span class="o">:</span> <span class="kn">context</span> <span class="bp">→</span> <span class="n">exp</span> <span class="bp">-&gt;</span> <span class="n">typ</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>
+<span class="c1">-- 0 : nat</span>
+<span class="bp">|</span> <span class="n">z</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">ctx</span><span class="o">,</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="n">exp</span><span class="bp">.</span><span class="n">z</span> <span class="n">typ</span><span class="bp">.</span><span class="n">num</span>
+<span class="c1">-- e : nat =&gt; Succ(e) : nat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">(</span><span class="n">e</span><span class="o">:</span> <span class="n">exp</span><span class="o">)</span> <span class="o">(</span><span class="n">ctx</span> <span class="o">:</span> <span class="kn">context</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span><span class="o">:</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="n">e</span> <span class="n">typ</span><span class="bp">.</span><span class="n">num</span><span class="o">):</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="o">(</span><span class="n">exp</span><span class="bp">.</span><span class="n">succ</span> <span class="n">e</span><span class="o">)</span> <span class="n">typ</span><span class="bp">.</span><span class="n">num</span>
+<span class="c1">-- true : bool</span>
+<span class="bp">|</span> <span class="n">t</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">ctx</span><span class="o">,</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="n">exp</span><span class="bp">.</span><span class="n">t</span> <span class="n">typ</span><span class="bp">.</span><span class="n">bool</span>
+<span class="c1">-- false : bool</span>
+<span class="bp">|</span> <span class="n">f</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">ctx</span><span class="o">,</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="n">exp</span><span class="bp">.</span><span class="n">f</span> <span class="n">typ</span><span class="bp">.</span><span class="n">bool</span>
+<span class="c1">-- Γ, x : τ ⊢ x : τ</span>
+<span class="bp">|</span> <span class="n">id</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">exp</span><span class="o">)</span> <span class="o">(</span><span class="n">τ</span> <span class="o">:</span> <span class="n">typ</span><span class="o">)</span> <span class="o">(</span><span class="n">ctx</span> <span class="o">:</span> <span class="kn">context</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">τ</span><span class="o">)</span> <span class="err">∈</span> <span class="n">ctx</span> <span class="bp">→</span> <span class="n">has_typ</span> <span class="n">ctx</span> <span class="n">x</span> <span class="n">τ</span>
+<span class="c1">-- Γ ⊢ e : τ ∧ Γ, x : τ ⊢ e&#39; : τ&#39; =&gt; Γ ⊢ let x = e in e&#39; : τ&#39;</span>
+<span class="c1">-- ???</span>
+</pre></div>
+
+<a name="182592333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592333">Rob Lewis (Dec 04 2019 at 19:52)</a>:</h4>
+<p>I've left the last one for you to think about.</p>
+
+<a name="182592365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592365">Ariel Davis (Dec 04 2019 at 19:52)</a>:</h4>
+<p>Thanks everyone for the responses. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> sorry, i hadn't considered that. I'll be more careful in the future.</p>
+
+<a name="182592381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592381">Patrick Massot (Dec 04 2019 at 19:53)</a>:</h4>
+<p>No problem.</p>
+
+<a name="182592643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592643">Rob Lewis (Dec 04 2019 at 19:56)</a>:</h4>
+<blockquote>
+<p>We don't want people to get used to opening a Lean file randomly downloaded from the internet into VSCode (or emacs) without seeing its content first</p>
+</blockquote>
+<p>For the record, this one is safe, and I did check first <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="182592827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Hypothetical%20judgements/near/182592827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40101Hypotheticaljudgements.html#182592827">Rob Lewis (Dec 04 2019 at 19:58)</a>:</h4>
+<p>Unrelated, why does Zulip highlight the word <code>context</code>? Was that ever a keyword?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

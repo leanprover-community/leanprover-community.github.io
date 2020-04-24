@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/87111deBruijnfactorofLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html">de Bruijn factor of Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194810851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194810851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194810851">Kevin Buzzard (Apr 21 2020 at 14:37)</a>:</h4>
+<p>Freek Wiedijk writes about the <a href="http://www.cs.ru.nl/~freek/factor/" title="http://www.cs.ru.nl/~freek/factor/">de Bruijn factor</a> of a formalisation; he gives a reasonable-looking definition but one could also try things such as "number of lines of code in textbook v number of lines of code in formalisation". The problem with measuring it, though, is that a formalisation of something a la mathlib might contain a whole bunch of solid API stuff which is not mentioned in the books, or a formalisation might borrow from several print sources. Note also that "Lean's de Bruijn factor" may not even make sense; it might well be different for different branches of mathematics.</p>
+<p>I'm writing an article and I'd like to mention this concept, but currently I'm at a bit of a loss as to what I can say about it; is there any way that some kind of approximation of a de Bruijn factor for Lean can be measured?</p>
+
+<a name="194813462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194813462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194813462">Mario Carneiro (Apr 21 2020 at 14:53)</a>:</h4>
+<p>You should generally not count API stuff as part of the de Bruijn factor unless it is also part of the informal text</p>
+
+<a name="194813617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194813617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194813617">Mario Carneiro (Apr 21 2020 at 14:54)</a>:</h4>
+<p>It's usually rare to have a direct comparison just happen by accident. You can easily make synthetic benchmarks by proving self contained theorems though</p>
+
+<a name="194813939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194813939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194813939">Mario Carneiro (Apr 21 2020 at 14:56)</a>:</h4>
+<p>and yes, significant variance is expected. This number depends on a myriad of factors</p>
+
+<a name="194815475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194815475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194815475">Bryan Gin-ge Chen (Apr 21 2020 at 15:05)</a>:</h4>
+<p>Out of curiosity I just did it for the sensitivity proof. <code>proof.tex.gz</code> (<a href="https://github.com/leanprover-community/lean-sensitivity/blob/lean-3.4.2/tex/proof.tex" title="https://github.com/leanprover-community/lean-sensitivity/blob/lean-3.4.2/tex/proof.tex">see here</a>) is 1159 bytes and <code>sensitivity.lean.gz</code> (<a href="https://github.com/leanprover-community/mathlib/blob/master/archive/sensitivity.lean" title="https://github.com/leanprover-community/mathlib/blob/master/archive/sensitivity.lean">see here</a>) is 5931 bytes for a de Bruijn factor of 5.12. If I strip out the comments from <code>sensitivity.lean</code> (in a not too careful fashion) then <code>sensitivity_stripped.lean.gz</code>  is 3960 bytes for a de Bruijn factor of 3.42.</p>
+
+<a name="194818184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/de%20Bruijn%20factor%20of%20Lean%3F/near/194818184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87111deBruijnfactorofLean.html#194818184">Johan Commelin (Apr 21 2020 at 15:21)</a>:</h4>
+<p>Ha, that's a nice test case.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

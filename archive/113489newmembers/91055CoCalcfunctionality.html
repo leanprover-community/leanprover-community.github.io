@@ -1,0 +1,327 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/91055CoCalcfunctionality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html">CoCalc functionality</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194229398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194229398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194229398">Alex Mathers (Apr 15 2020 at 21:23)</a>:</h4>
+<p>Hi, anybody have experience with using Lean in CoCalc? I'm trying to figure out how to have multiple Lean files in a single project and import one into another</p>
+
+<a name="194230844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194230844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194230844">Kevin Buzzard (Apr 15 2020 at 21:35)</a>:</h4>
+<p>You need to put your leanpkg.path in the root directory of your cocalc project and adjust it accordingly.</p>
+
+<a name="194230973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194230973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194230973">Kevin Buzzard (Apr 15 2020 at 21:36)</a>:</h4>
+<p>e.g. if in your cocalc project you have a directory my_lean_project containing as usual a leanpkg.path and a leanpkg.toml, and a subdirectory src where all your Lean files are, then you need to move that leanpkg.path one directory up to the root of the cocalc project</p>
+
+<a name="194231111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194231111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194231111">Kevin Buzzard (Apr 15 2020 at 21:37)</a>:</h4>
+<p>and then you'll have to add <code>my_lean_project</code> in the appropriate places, e.g. it might look like this if your project imports mathlib:</p>
+<div class="codehilite"><pre><span></span>builtin_path
+path my_lean_project/_target/deps/mathlib/src
+path my_lean_project/src
+</pre></div>
+
+<a name="194231246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194231246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194231246">Kevin Buzzard (Apr 15 2020 at 21:38)</a>:</h4>
+<p>An alternative is just to dump the lean project in the root cocalc directory, then you can put files in src and have a line <code>path src</code> in your <code>leanpkg.path</code> file.</p>
+
+<a name="194241456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194241456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194241456">Alex Mathers (Apr 15 2020 at 23:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I don't seem to be allowed to make changes to the root directory, even just adding a folder, I get an "access denied" error.  Do you know a way past this?</p>
+
+<a name="194241494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194241494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194241494">Kevin Buzzard (Apr 15 2020 at 23:33)</a>:</h4>
+<p>By the root directory of your cocalc project I just mean ~. If you can't access the root directory of your own cocalc project then where are you putting your files?</p>
+
+<a name="194241823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194241823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194241823">Alex Mathers (Apr 15 2020 at 23:38)</a>:</h4>
+<p>Oh, I saw a path called .smc/root and I thought you meant there. So you just mean the "home page" of the project</p>
+
+<a name="194241864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194241864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194241864">Kevin Buzzard (Apr 15 2020 at 23:38)</a>:</h4>
+<p>I mean the directory where all your files are. Sorry if I called it something wrong.</p>
+
+<a name="194242503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242503">Alex Mathers (Apr 15 2020 at 23:49)</a>:</h4>
+<p>No problem. I'm still having issues, would you be willing to look at some screenshots to see if what I'm doing matches what you're saying?</p>
+
+<a name="194242647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242647">Kevin Buzzard (Apr 15 2020 at 23:51)</a>:</h4>
+<p>sure</p>
+
+<a name="194242652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242652">Alex Mathers (Apr 15 2020 at 23:51)</a>:</h4>
+<p><a href="/user_uploads/3121/gABbNCeXDnrUXJCe9WPwKgug/Screen-Shot-2020-04-15-at-4.46.24-PM.png" title="Screen-Shot-2020-04-15-at-4.46.24-PM.png">Screen-Shot-2020-04-15-at-4.46.24-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/gABbNCeXDnrUXJCe9WPwKgug/Screen-Shot-2020-04-15-at-4.46.24-PM.png" title="Screen-Shot-2020-04-15-at-4.46.24-PM.png"><img src="/user_uploads/3121/gABbNCeXDnrUXJCe9WPwKgug/Screen-Shot-2020-04-15-at-4.46.24-PM.png"></a></div>
+
+<a name="194242667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242667">Alex Mathers (Apr 15 2020 at 23:51)</a>:</h4>
+<p><a href="/user_uploads/3121/8S8tvlzLuXHt6YDQX0kMpyuK/Screen-Shot-2020-04-15-at-4.46.39-PM.png" title="Screen-Shot-2020-04-15-at-4.46.39-PM.png">Screen-Shot-2020-04-15-at-4.46.39-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/8S8tvlzLuXHt6YDQX0kMpyuK/Screen-Shot-2020-04-15-at-4.46.39-PM.png" title="Screen-Shot-2020-04-15-at-4.46.39-PM.png"><img src="/user_uploads/3121/8S8tvlzLuXHt6YDQX0kMpyuK/Screen-Shot-2020-04-15-at-4.46.39-PM.png"></a></div>
+
+<a name="194242677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242677">Alex Mathers (Apr 15 2020 at 23:51)</a>:</h4>
+<p><a href="/user_uploads/3121/pZ7Fr1lAiO1GsyMKXD4KY4fy/Screen-Shot-2020-04-15-at-4.46.52-PM.png" title="Screen-Shot-2020-04-15-at-4.46.52-PM.png">Screen-Shot-2020-04-15-at-4.46.52-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/pZ7Fr1lAiO1GsyMKXD4KY4fy/Screen-Shot-2020-04-15-at-4.46.52-PM.png" title="Screen-Shot-2020-04-15-at-4.46.52-PM.png"><img src="/user_uploads/3121/pZ7Fr1lAiO1GsyMKXD4KY4fy/Screen-Shot-2020-04-15-at-4.46.52-PM.png"></a></div>
+
+<a name="194242684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242684">Kevin Buzzard (Apr 15 2020 at 23:51)</a>:</h4>
+<p>OK so the problem is that you have not put leanpkg.path in the root directory of your cocalc project.</p>
+
+<a name="194242688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242688">Kevin Buzzard (Apr 15 2020 at 23:51)</a>:</h4>
+<p>or whatever you want to call that directory</p>
+
+<a name="194242748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242748">Kevin Buzzard (Apr 15 2020 at 23:52)</a>:</h4>
+<p>currently leanpkg.path is in a subdirectory of the root directory called my_lean_project.</p>
+
+<a name="194242766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242766">Kevin Buzzard (Apr 15 2020 at 23:52)</a>:</h4>
+<p>It's in the root directory of your lean project as opposed to the root directory of your cocalc project</p>
+
+<a name="194242989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194242989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194242989">Kevin Buzzard (Apr 15 2020 at 23:55)</a>:</h4>
+<p>also your leanpkg.path contains  invalid paths, such as <code>leanpkg.path</code>. The paths are relative to the directory that leanpkg.path is in, so once you've put leanpkg.path into the root directory of your cocalc project, the path <code>src</code> and <code>./src</code> will also be invalid because you have no <code>src</code> in the root directory of your cocalc project.</p>
+
+<a name="194243086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243086">Kevin Buzzard (Apr 15 2020 at 23:56)</a>:</h4>
+<p>Finally, Lean will not be able to import subgrp.lean and basics.lean because they are not in directories which are in your path. They should probably be in your Lean project as opposed to floating around outside it.</p>
+
+<a name="194243122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243122">Kevin Buzzard (Apr 15 2020 at 23:57)</a>:</h4>
+<p>Unless they're not part of the project at all.</p>
+
+<a name="194243130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243130">Alex Mathers (Apr 15 2020 at 23:57)</a>:</h4>
+<p>Okay so now things look like this: <a href="/user_uploads/3121/BE5jtJYYvnkXvsqffSzENgqZ/Screen-Shot-2020-04-15-at-4.55.43-PM.png" title="Screen-Shot-2020-04-15-at-4.55.43-PM.png">Screen-Shot-2020-04-15-at-4.55.43-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/BE5jtJYYvnkXvsqffSzENgqZ/Screen-Shot-2020-04-15-at-4.55.43-PM.png" title="Screen-Shot-2020-04-15-at-4.55.43-PM.png"><img src="/user_uploads/3121/BE5jtJYYvnkXvsqffSzENgqZ/Screen-Shot-2020-04-15-at-4.55.43-PM.png"></a></div>
+
+<a name="194243167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243167">Alex Mathers (Apr 15 2020 at 23:57)</a>:</h4>
+<p>I have copies of basics.lean and subgrp.lean in src/rtg/, I just have copies also in the home directory for convenience of testing these things</p>
+
+<a name="194243219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243219">Kevin Buzzard (Apr 15 2020 at 23:58)</a>:</h4>
+<p>What is the current contents of leanpkg.path?</p>
+
+<a name="194243253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243253">Alex Mathers (Apr 15 2020 at 23:58)</a>:</h4>
+<p><a href="/user_uploads/3121/hJ6sjbwAePDP0jd15r5wiK47/Screen-Shot-2020-04-15-at-4.58.33-PM.png" title="Screen-Shot-2020-04-15-at-4.58.33-PM.png">Screen-Shot-2020-04-15-at-4.58.33-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/hJ6sjbwAePDP0jd15r5wiK47/Screen-Shot-2020-04-15-at-4.58.33-PM.png" title="Screen-Shot-2020-04-15-at-4.58.33-PM.png"><img src="/user_uploads/3121/hJ6sjbwAePDP0jd15r5wiK47/Screen-Shot-2020-04-15-at-4.58.33-PM.png"></a></div>
+
+<a name="194243269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243269">Kevin Buzzard (Apr 15 2020 at 23:59)</a>:</h4>
+<p>Delete the first line</p>
+
+<a name="194243307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243307">Kevin Buzzard (Apr 15 2020 at 23:59)</a>:</h4>
+<p>and ideally the last one too because it's a duplicate of the one before</p>
+
+<a name="194243357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243357">Kevin Buzzard (Apr 16 2020 at 00:00)</a>:</h4>
+<p>Does your project depend on mathlib?</p>
+
+<a name="194243397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243397">Kevin Buzzard (Apr 16 2020 at 00:00)</a>:</h4>
+<p>because no mathlib imports will work with this set-up either</p>
+
+<a name="194243480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243480">Kevin Buzzard (Apr 16 2020 at 00:00)</a>:</h4>
+<p>leanpkg.path just just be <code>builtin_path</code> and then a list of all the paths, relative to the root directory of the cocalc project, of where all the lean files are which you want to import.</p>
+
+<a name="194243537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243537">Alex Mathers (Apr 16 2020 at 00:01)</a>:</h4>
+<p>I'd like to use some mathlib things, yeah. I deleted the first and last line</p>
+
+<a name="194243603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243603">Alex Mathers (Apr 16 2020 at 00:02)</a>:</h4>
+<p>I took src from some hidden files and just moved it to the front so it has all of mathlib in it</p>
+
+<a name="194243639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243639">Kevin Buzzard (Apr 16 2020 at 00:03)</a>:</h4>
+<p>Does it work?</p>
+
+<a name="194243651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243651">Alex Mathers (Apr 16 2020 at 00:03)</a>:</h4>
+<p>No :/</p>
+
+<a name="194243660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243660">Kevin Buzzard (Apr 16 2020 at 00:03)</a>:</h4>
+<p>What's the error?</p>
+
+<a name="194243704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243704">Alex Mathers (Apr 16 2020 at 00:04)</a>:</h4>
+<p>1:0 error <br>
+file 'rtg/basics' not found in the LEAN_PATH<br>
+ 1:0 error <br>
+invalid import: rtg.basics<br>
+could not resolve import: rtg.basics</p>
+
+<a name="194243711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243711">Kevin Buzzard (Apr 16 2020 at 00:04)</a>:</h4>
+<p>and what is the line of the file which gives you the error?</p>
+
+<a name="194243721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243721">Kevin Buzzard (Apr 16 2020 at 00:04)</a>:</h4>
+<p>I mean, what does the file say?</p>
+
+<a name="194243736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243736">Alex Mathers (Apr 16 2020 at 00:04)</a>:</h4>
+<p><code>import rtg.basics</code></p>
+
+<a name="194243744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243744">Alex Mathers (Apr 16 2020 at 00:04)</a>:</h4>
+<p>Is all there is in the file</p>
+
+<a name="194243758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243758">Kevin Buzzard (Apr 16 2020 at 00:05)</a>:</h4>
+<p>And do you have a file called SOMETHING/rtg/basics.lean where SOMETHING is one of the lines in your leanpkg.path file?</p>
+
+<a name="194243771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243771">Alex Mathers (Apr 16 2020 at 00:05)</a>:</h4>
+<p>also here is what /src looks like in case that matters: <a href="/user_uploads/3121/FIkR7bvmrvhz2d0lnkpwSidK/Screen-Shot-2020-04-15-at-5.04.33-PM.png" title="Screen-Shot-2020-04-15-at-5.04.33-PM.png">Screen-Shot-2020-04-15-at-5.04.33-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/FIkR7bvmrvhz2d0lnkpwSidK/Screen-Shot-2020-04-15-at-5.04.33-PM.png" title="Screen-Shot-2020-04-15-at-5.04.33-PM.png"><img src="/user_uploads/3121/FIkR7bvmrvhz2d0lnkpwSidK/Screen-Shot-2020-04-15-at-5.04.33-PM.png"></a></div>
+
+<a name="194243849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243849">Kevin Buzzard (Apr 16 2020 at 00:06)</a>:</h4>
+<p>what matters is whether there is a file called basics.lean in the directory rtg</p>
+
+<a name="194243863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243863">Alex Mathers (Apr 16 2020 at 00:06)</a>:</h4>
+<p>Yeah there is</p>
+
+<a name="194243878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243878">Kevin Buzzard (Apr 16 2020 at 00:06)</a>:</h4>
+<p>Oh -- did you restart Lean after you edited your path file?</p>
+
+<a name="194243887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243887">Kevin Buzzard (Apr 16 2020 at 00:06)</a>:</h4>
+<p>there is a button with two going-round arrows</p>
+
+<a name="194243936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243936">Kevin Buzzard (Apr 16 2020 at 00:07)</a>:</h4>
+<p>By the way, where did you get your mathlib olean files from? You will have to be careful to make sure that they are compiled using the same version of Lean as the one in CoCalc, or they will all be recompiled and there will be green squares there for 15 minutes</p>
+
+<a name="194243999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194243999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194243999">Alex Mathers (Apr 16 2020 at 00:08)</a>:</h4>
+<p>That's hilarious, that did something. Now the error message is <code>imported file '/home/user/src/rtg/basics.lean' uses sorry</code> which feels less aggressive</p>
+
+<a name="194244017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244017">Alex Mathers (Apr 16 2020 at 00:09)</a>:</h4>
+<p>And I think that's just coming up because some things in <code>basics</code> use sorry at the moment, actually</p>
+
+<a name="194244057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244057">Kevin Buzzard (Apr 16 2020 at 00:09)</a>:</h4>
+<p>Sorting out the leanpkg.path file is not the hard part.</p>
+
+<a name="194244113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244113">Kevin Buzzard (Apr 16 2020 at 00:10)</a>:</h4>
+<p>The hard part, if you're using your own mathlib, is to make sure it's compatible with cocalc's Lean which is something like 3.5.1</p>
+
+<a name="194244177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244177">Alex Mathers (Apr 16 2020 at 00:11)</a>:</h4>
+<p>when I "unhid" hidden files on the home page I was able to follow the directory .smc/root/ext/lean/lean/mathlib/src and there was where I found all the mathlib files. The /src is the file I just copied to the home folder</p>
+
+<a name="194244204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244204">Kevin Buzzard (Apr 16 2020 at 00:11)</a>:</h4>
+<p>oh that's great. Did you also move the olean files?</p>
+
+<a name="194244295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244295">Kevin Buzzard (Apr 16 2020 at 00:12)</a>:</h4>
+<p>I <em>suspect</em> that you didn't even need to copy them, and that the <code>builtin_path</code> will actually point to the mathlib files</p>
+
+<a name="194244301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244301">Alex Mathers (Apr 16 2020 at 00:12)</a>:</h4>
+<p>I don't think so. I moved /src and leanpkg.toml and leanpkg.path and that's it</p>
+
+<a name="194244313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244313">Alex Mathers (Apr 16 2020 at 00:12)</a>:</h4>
+<p>Yeah I'd believe that for sure</p>
+
+<a name="194244431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244431">Alex Mathers (Apr 16 2020 at 00:14)</a>:</h4>
+<p>Navigating this type of stuff is so unnatural for me right now. Hopefully will adapt</p>
+
+<a name="194244433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244433">Kevin Buzzard (Apr 16 2020 at 00:14)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="268619">Alex Mathers</span> <a href="#narrow/stream/113489-new-members/topic/CoCalc.20functionality/near/194244301" title="#narrow/stream/113489-new-members/topic/CoCalc.20functionality/near/194244301">said</a>:</p>
+<blockquote>
+<p>I don't think so. I moved /src and leanpkg.toml and leanpkg.path and that's it</p>
+</blockquote>
+<p>src is full of olean files</p>
+
+<a name="194244445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244445">Kevin Buzzard (Apr 16 2020 at 00:14)</a>:</h4>
+<p>(I just checked on one of my cocalc projects)</p>
+
+<a name="194244455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244455">Alex Mathers (Apr 16 2020 at 00:15)</a>:</h4>
+<p>I see. Then I guess I did. I'm not even sure what an olean file is tbh so I just guessed</p>
+
+<a name="194244479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244479">Kevin Buzzard (Apr 16 2020 at 00:15)</a>:</h4>
+<p>It's the difference between "your project works" and "I am going to spend 15 minutes compiling because you imported data.real.basic"</p>
+
+<a name="194244851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194244851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194244851">Alex Mathers (Apr 16 2020 at 00:20)</a>:</h4>
+<p>Sounds important. Looking through files now I'm seeing that we have one corresponding to every .lean file it looks like. When I try to open one up it's not clear at all what's going on in there</p>
+
+<a name="194245160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194245160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194245160">Kevin Buzzard (Apr 16 2020 at 00:26)</a>:</h4>
+<p>you definitely don't want to open them, and if you press just one key when one of them is open then you probably screwed everything up</p>
+
+<a name="194245189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194245189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194245189">Kevin Buzzard (Apr 16 2020 at 00:27)</a>:</h4>
+<p>Any edit to an olean file will mean that your project will have to recompile it and all files which import it, I suspect, because this issue was fixed but I think it hadn't been fixed by 3.5.1</p>
+
+<a name="194247023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194247023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194247023">Alex Mathers (Apr 16 2020 at 00:56)</a>:</h4>
+<p>Gotcha</p>
+
+<a name="194247044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194247044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194247044">Alex Mathers (Apr 16 2020 at 00:57)</a>:</h4>
+<p>Thanks a ton for helping out, sorry it took a while</p>
+
+<a name="194269523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CoCalc%20functionality/near/194269523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91055CoCalcfunctionality.html#194269523">Patrick Massot (Apr 16 2020 at 08:10)</a>:</h4>
+<p>I don't have time to read this thread, so I'll post a blind answer just in case:</p>
+<h2>How to use Lean on CoCalc</h2>
+<ul>
+<li>If you have a collection of autonomous Lean files, each of them relying only on mathlib (and not needing a cutting edge mathlib): put them anywhere in you CoCalc project, open them, enjoy</li>
+<li>
+<p>If you have a collection of files relying on each other and on mathlib (and not needing a cutting edge mathlib):</p>
+<ul>
+<li>Put them in some folder <code>my_stuff</code> in the project home folder </li>
+<li>
+<p>In the project home folder, before opening any Lean file, create a file named <code>leanpkg.path</code> containing:<br>
+<code>
+  builtin_path
+  path /ext/lean/lean/mathlib/src
+  path ./my_stuff
+  </code><br>
+  If you opened a Lean file before creating this file you'll need to restart the Lean server by clicking the restart icon on top of the file.</p>
+</li>
+<li>
+<p>If something in your stuff requires heavy compiling (say you actually have a library of stuff and then exercises files) then open a terminal in CoCalc and <code>lean --make my_stuff</code> (or <code>lean --make my_stuff/my_heavy_file.lean</code>).</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Note also that getting a cutting edge mathlib is currently not possible, because this requires a cutting edge Lean, that CoCalc doesn't have.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

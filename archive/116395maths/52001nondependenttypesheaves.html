@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/52001nondependenttypesheaves.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html">non-dependent type sheaves</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192499117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192499117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192499117">Kevin Buzzard (Apr 01 2020 at 08:53)</a>:</h4>
+<p>I guess this is well-known but it's only just dawned on me. Rings are set up in a semi-bundled way in mathlib. So a sheaf of rings needs to involve a dependent type, because it's <code>F : opens X -&gt; Type</code> followed by <code>[hF : Pi (U : opens X), comm_ring (F U)]</code>. But if rings were completely bundled then we could just have <code>F : opens X -&gt; CommRing</code> and no dependent type is needed. Does this mean I should switch to Isabelle or are there dependent types under the hood in this setting?</p>
+
+<a name="192499523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192499523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192499523">Yury G. Kudryashov (Apr 01 2020 at 08:57)</a>:</h4>
+<p><code>CommRing</code> is a dependent type</p>
+
+<a name="192499555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192499555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192499555">Yury G. Kudryashov (Apr 01 2020 at 08:57)</a>:</h4>
+<p>Disclaimer: I never tried Isabelle, and I don't know what it can (not) handle.</p>
+
+<a name="192500974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192500974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192500974">Kevin Buzzard (Apr 01 2020 at 09:13)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/116395-maths/topic/non-dependent.20type.20sheaves/near/192499523" title="#narrow/stream/116395-maths/topic/non-dependent.20type.20sheaves/near/192499523">said</a>:</p>
+<blockquote>
+<p><code>CommRing</code> is a dependent type</p>
+</blockquote>
+<p>I see. I thought it might well be something like this.</p>
+
+<a name="192504330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192504330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192504330">Yury G. Kudryashov (Apr 01 2020 at 09:48)</a>:</h4>
+<p>Another example: we have several <code>measurable_space</code> instances defined to be <code>top</code>.</p>
+
+<a name="192644580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192644580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192644580">Nick Chopper (Apr 02 2020 at 10:08)</a>:</h4>
+<p>I create this(<a href="https://gist.github.com/Jack-Pumpkinhead/cc72ecfc6f32587f0b7ac0ab39c3f074" title="https://gist.github.com/Jack-Pumpkinhead/cc72ecfc6f32587f0b7ac0ab39c3f074">cat.lean</a>) several days ago and have some initial thoughts. I think it might possible to create one completely bundled structure and then get all sorts of things (unbundled structure, like cat/cat'/cat'/... in the file, and proof of equivalence between them or something else) automatically.</p>
+
+<a name="192648631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192648631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192648631">Johan Commelin (Apr 02 2020 at 10:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="270203">@Nick Chopper</span> Sorry, I'm a bit dense... what exactly is your proposal?</p>
+
+<a name="192651822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192651822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192651822">Kevin Buzzard (Apr 02 2020 at 11:35)</a>:</h4>
+<p>bundled categories</p>
+
+<a name="192655457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192655457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192655457">Nick Chopper (Apr 02 2020 at 12:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> auto coe between bundled/unbundled structure (loop?), so as to use type class fill in unbundled one and then actually get a bundled one. I find it has been solved by <code>category_theory.bundled</code> in the case of one-parameter class, but I wonder if it is possible to generate code like inductive type (say, unbundled structure from bundled (don't know how to avoid name confliction (instead of adding <code>'</code>) yet))</p>
+
+<a name="192655498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192655498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192655498">Nick Chopper (Apr 02 2020 at 12:12)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="192655518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/non-dependent%20type%20sheaves/near/192655518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52001nondependenttypesheaves.html#192655518">Nick Chopper (Apr 02 2020 at 12:12)</a>:</h4>
+<p>sorry for poor english</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

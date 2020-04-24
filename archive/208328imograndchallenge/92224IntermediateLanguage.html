@@ -1,0 +1,76 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/208328IMOgrandchallenge/92224IntermediateLanguage.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/index.html">IMO-grand-challenge</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html">Intermediate Language</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175144805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175144805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175144805">Jason Rute (Sep 07 2019 at 15:29)</a>:</h4>
+<p>I assume one of the first steps is to translate all or most of the existing IMO problems into Lean.  I wonder if it would be better to translate them into a separate IMO-specific intermediate language first.  The are many reasons for this.  The most important is that it will make this set of problems available to a much wider community of researchers who work in other systems or logics.  Even if the <em>official</em> competition is in Lean, we all want to know how the state of the art in ATP, ITP tactics, and AI systems fair on IMO problems.  And it seems easier to parse a special intermediate language than to parse arbitrary Lean code (or worse to rebuild a complicated system like HOList or an ATP-backed hammer in Lean).</p>
+
+<a name="175160541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175160541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175160541">Scott Morrison (Sep 07 2019 at 23:46)</a>:</h4>
+<p>Developing such a language seems like a research project in itself. Are there viable existing candidates, for which translating from them into Lean is easier than translating directly?</p>
+
+<a name="175164537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175164537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175164537">Jason Rute (Sep 08 2019 at 02:18)</a>:</h4>
+<blockquote>
+<p>Developing such a language seems like a research project in itself. Are there viable existing candidates, for which translating from them into Lean is easier than translating directly?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> For one, I imagine that when old IMO problems are gathered and translated into Lean this will be a big task, but at the same time they will fall into certain categories that have a common form, vocabulary, and mathematical bent.  The researchers doing the translation might already find it is easier to first write and store the problems in some domain specific intermediate data structure, and from that structure generate the boilerplate Lean code.  If that is the case, it would be nice to share that domain specific data with other researchers.</p>
+<p>If that is not the case, then maybe the Lean code should be the “intermediate language”.  In this case, I strongly suggest a very specific, small, and minimal subset of Lean.  For example, it would be nice if almost all inequality problems were of a particular form and only used a fixed vocabulary.  If a new ad hoc function or definition needs to be added for a problem, then there is should be a fixed format that this function will be defined in.  If possible, the problems should avoid dependent types (using only HOL style syntax).  No fancy Lean features should be used: no custom notation, no implicits.  (In my ideal world, there would be no infix notation either and full use of parentheses as in LISP-style s-expessions.  That is, just pure logical notation.)  (Now, since this is going to be done in Lean 4, I think it is possible that there will be (or maybe already is) good support for getting rid of all the syntactic sugar and compiling down to basic logical notation, and then some of my concerns are moot.)</p>
+<p>Here is my motivation.  Let’s say someone has a great tool for reasoning about inequalities over the real numbers.  Maybe it is an SMT solver, or an AI trained on HOL proofs, or something else entirely.  It would further ATP/ITP/AI research more if that system could be used on the IMO challenge with as little engineering as possible.  It very well might be easier for the user to parse the text of the intermediate language (be that Lean code or otherwise) with a script, convert that to the logic used in their system, do a computation in their own system, extract a proof witness (maybe made up of carefully chosen rewrites and transitive equational reasoning), and then translate that witness into a specific subset of Lean which suits their purpose.  (Also, for designing and testing their system, and publishing research papers, they don’t even need to do the last two steps. That is just so they can compete in the competition.)  (Again, I don’t know much about Lean tactics and interfacing with external systems.  Maybe this is already easily solved.)</p>
+<p>In some sense I think this is what Daniel Selsam and team have in mind, but I just wanted to call out the advantage of easy interoperability with other systems which use other logics.</p>
+
+<a name="175242511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175242511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175242511">Daniel Selsam (Sep 09 2019 at 13:46)</a>:</h4>
+<blockquote>
+<p>No fancy Lean features should be used: no custom notation, no implicits.  (In my ideal world, there would be no infix notation either and full use of parentheses as in LISP-style s-expessions.  That is, just pure logical notation.)  (Now, since this is going to be done in Lean 4, I think it is possible that there will be (or maybe already is) good support for getting rid of all the syntactic sugar and compiling down to basic logical notation, and then some of my concerns are moot.)</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span>  Indeed, these concerns are moot. It will be easy to export all terms in machine-parsable format.</p>
+
+<a name="175244213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175244213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175244213">Daniel Selsam (Sep 09 2019 at 14:04)</a>:</h4>
+<blockquote>
+<p>I strongly suggest a very specific, small, and minimal subset of Lean.  For example, it would be nice if almost all inequality problems were of a particular form and only used a fixed vocabulary.  If a new ad hoc function or definition needs to be added for a problem, then there is should be a fixed format that this function will be defined in.  If possible, the problems should avoid dependent types (using only HOL style syntax).</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span>  The main challenge with the F2F formulation is that we do not know the structure of future questions. I think we should provide abstractions that compress historical problems in the hope that most future problems can be encoded easily, but I think we still need to support almost arbitrary problems. I am not sure yet how to preempt contention about the encoding of these out-of-domain problems, but I think we will learn a lot by encoding historical problems.</p>
+
+<a name="175245535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/175245535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#175245535">Daniel Selsam (Sep 09 2019 at 14:18)</a>:</h4>
+<blockquote>
+<p>If possible, the problems should avoid dependent types (using only HOL style syntax)</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span>  For what it is worth, I think that if a problem involves e.g. a matrix or modular arithmetic, we should use dependent types without hesitation.</p>
+
+<a name="178892179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/178892179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#178892179">Brando Miranda (Oct 23 2019 at 20:17)</a>:</h4>
+<blockquote>
+<p>Developing such a language seems like a research project in itself. Are there viable existing candidates, for which translating from them into Lean is easier than translating directly?</p>
+</blockquote>
+<p>Just want to bump this question because it seems very interesting to think about a intermediate/universal language that makes the challenge more accessible to other ITP systems (since in my experience its extremely difficult to build a ITP system that is compatible with say, ML methods and python).</p>
+<p>Does such an intermediate language exist?</p>
+
+<a name="178905063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Intermediate%20Language/near/178905063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/92224IntermediateLanguage.html#178905063">Daniel Selsam (Oct 23 2019 at 23:01)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Developing such a language seems like a research project in itself. Are there viable existing candidates, for which translating from them into Lean is easier than translating directly?</p>
+</blockquote>
+<p>Just want to bump this question because it seems very interesting to think about a intermediate/universal language that makes the challenge more accessible to other ITP systems (since in my experience its extremely difficult to build a ITP system that is compatible with say, ML methods and python).</p>
+<p>Does such an intermediate language exist?</p>
+</blockquote>
+<p>I doubt this is feasible except for some subset of the problems. It is hard enough to develop and maintain a formal library in a single system.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

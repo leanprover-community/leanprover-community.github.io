@@ -1,0 +1,365 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/05853Proofsearch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html">Proof search</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178035658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178035658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178035658">Marko Grdinic (Oct 13 2019 at 12:06)</a>:</h4>
+<p>I am working on a little proof and need to rewrite <code>sqr (a - b)</code> into <code>sqr a - 2 * a * b + sqr b</code>. Now of course I could define a postulate for this like I did in the Agda proof I am rewriting, but I am guessing that this is proven in the <code>mathlib</code> and Lean has some kind of proof search. In Coq I could write something like <code>Search (forall a b, sqr (a - b) = sqr a - 2 * a * b + sqr b).</code> What functionality for this sort of thing does Lean have?</p>
+
+<a name="178037525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178037525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178037525">Chris Hughes (Oct 13 2019 at 13:06)</a>:</h4>
+<p>The <code>ring</code> tactic should solve this. You'll need to use <code>^2</code> instead of <code>sqr</code> though.</p>
+
+<a name="178038080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178038080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178038080">Floris van Doorn (Oct 13 2019 at 13:24)</a>:</h4>
+<p>For searching, <code>library_search</code> is convenient:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span> <span class="c1">-- exact add_mul_self_eq a b</span>
+</pre></div>
+
+<a name="178038139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178038139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178038139">Floris van Doorn (Oct 13 2019 at 13:26)</a>:</h4>
+<p>Oh wait, the minus sign got lost in translation. I don't think that particular lemma is in the library yet.</p>
+
+<a name="178111436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178111436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178111436">Marko Grdinic (Oct 14 2019 at 15:10)</a>:</h4>
+<p>Let me bring this subject up again as I am having some trouble. </p>
+<div class="codehilite"><pre><span></span>1 goal
+c x : ℚ,
+l : list ℚ,
+E.const_none : ∀ (l : list ℚ), monoid.pow c (list.length l) * rat.inv ↑(list.length l) = c ∨ l = list.nil
+⊢ monoid.pow c (1 + list.length l) * rat.inv (1 + ↑(list.length l)) = c
+</pre></div>
+
+
+<p>Right now I have something like this in my tactic state and I want to search all the proofs involving <code>monoid.pow</code>. What would be the best way to go about this. <code>library_search</code> is not quite equivalent to Coq's <code>Search</code> as it is a tactic that fails or succeeds. Coq's <code>Search</code> can print out every function in which a term appears.</p>
+
+<a name="178113220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178113220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178113220">Alex J. Best (Oct 14 2019 at 15:31)</a>:</h4>
+<p>You can also use <code>set_option trace.library_search true</code> to have library_search list of all possible results matching a given type. Alternatively you can make an educated guess at names with a bit of grepping / text searching in vscode or whatever to find things, this is surprisingly effective because the mathlib naming scheme is quite rigid.</p>
+
+<a name="178113672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178113672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178113672">Kevin Buzzard (Oct 14 2019 at 15:36)</a>:</h4>
+<p>In tactic mode you can try <code>exact monoid.pow</code> and then ctrl-space and then maybe esc and ctrl-space again for good measure. This might give you a list of helpful things.</p>
+
+<a name="178114600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178114600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178114600">Marko Grdinic (Oct 14 2019 at 15:48)</a>:</h4>
+<blockquote>
+<p>Coq's Search can print out every function in which a term appears.</p>
+</blockquote>
+<p>Actually, what I meant to write here is that it can print out every function <strong>in whose type</strong> a term appears which is very useful for searching through theorems of equalities. It is a powerful thing. I am not sure if it is on the requested features list, but if it is not, it definitely should be.</p>
+<p><span class="user-mention" data-user-id="127136">@Alex J. Best</span> </p>
+<blockquote>
+<p>You can also use set_option trace.library_search true to have library_search list of all possible results matching a given type.</p>
+</blockquote>
+<p>I am not sure how to control <code>library_search</code> to just search it for equalities involving <code>monoid.pow</code>. Right now I just tried it and it gave me what seems to be an unordered list of 4k lemmas. It is not really quite the thing I am looking for.</p>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<blockquote>
+<p>In tactic mode you can try exact monoid.pow and then ctrl-space and then maybe esc and ctrl-space again for good measure. This might give you a list of helpful things.</p>
+</blockquote>
+<p>In VS Code that is the trigger for autosuggestion, I am not sure if you are using Emacs what is it there. One thing I do know is that Ctrl + click dives me into the implementation of a function which is useful, but not quite enough for me.</p>
+
+<a name="178116538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178116538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178116538">Marko Grdinic (Oct 14 2019 at 16:13)</a>:</h4>
+<p>For examples how Coq's <code>Search</code> works, check this out: <a href="https://softwarefoundations.cis.upenn.edu/vfa-current/Perm.html" target="_blank" title="https://softwarefoundations.cis.upenn.edu/vfa-current/Perm.html">https://softwarefoundations.cis.upenn.edu/vfa-current/Perm.html</a></p>
+<p>It is the first chapter of vol 3 of Software Foundations.</p>
+
+<a name="178117413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178117413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178117413">Johan Commelin (Oct 14 2019 at 16:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="244262">@Marko Grdinic</span> You are trying to prove that <code>c ^ something = c</code>. You want to do this be claiming that <code>something = 1</code>. You can guess the name of the lemma that says <code>c ^ 1 = c</code>: it will/should/must/shall/ought be called <code>pow_one</code>. So you proceed by saying <code>convert pow_one c</code>. Now you are left with proving <code>something = 1</code>.</p>
+
+<a name="178118194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178118194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178118194">Andrew Ashworth (Oct 14 2019 at 16:35)</a>:</h4>
+<p>Yes. Many of us are aware of how <code>library_search</code> is different from Coq <code>search</code>. Actually there was some brief talk awhile back about ambitious projects like coding up a Hoogle-alike, but it never went anywhere because most people are OK with what we have (some mixture of grep, library_search, and VSCode autocomplete + naming conventions). That is not to say that if you wanted to have a Search tactic in mathlib, that pull request would not be accepted. Although I'm not a maintainer, but generally they are pretty receptive to these things.</p>
+
+<a name="178148392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178148392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178148392">Scott Morrison (Oct 14 2019 at 23:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="209436">@Lucas Allen</span> is almost ready with a <code>refine_list</code> tactic, which is like <code>library_search</code> but allows leaving holes. Hopefully it will be helpful!</p>
+
+<a name="178152115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178152115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178152115">Scott Morrison (Oct 15 2019 at 01:04)</a>:</h4>
+<p>oh, and there it is: <a href="https://github.com/leanprover-community/mathlib/pull/1552" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1552">https://github.com/leanprover-community/mathlib/pull/1552</a></p>
+
+<a name="178154177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178154177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178154177">Johan Commelin (Oct 15 2019 at 01:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="209436">@Lucas Allen</span> Hooray! Nice work!</p>
+
+<a name="178172645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172645">Marko Grdinic (Oct 15 2019 at 08:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> </p>
+<blockquote>
+<p>You are trying to prove that c ^ something = c. You want to do this be claiming that something = 1. You can guess the name of the lemma that says c ^ 1 = c: it will/should/must/shall/ought be called pow_one. So you proceed by saying convert pow_one c. Now you are left with proving something = 1.</p>
+</blockquote>
+<p>Actually,  <code>monoid.pow</code> is misleading here, it really is multiplication under the hood. What I am trying to prove is more like <code>c * (1 + n) / (1 + n) = c</code>. What makes this situation confusing is that the simplifier got it into this strange form using I do not know which rewrites, and I am not sure what the steps for dealing with this should be. It cannot be solved by <code>ring</code> here. Maybe I will try simplifying it step by step in addition to going through the lemmas for <code>rat</code>.</p>
+
+<a name="178172710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172710">Johan Commelin (Oct 15 2019 at 08:48)</a>:</h4>
+<p>There is <code>squeeze_simp</code> that will report what the simplifier did.</p>
+
+<a name="178172737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172737">Johan Commelin (Oct 15 2019 at 08:48)</a>:</h4>
+<p>And I agree that this seems a very crazy end result be the simplifier.</p>
+
+<a name="178174991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178174991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178174991">Marko Grdinic (Oct 15 2019 at 09:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <br>
+I think I am looking at some bug here. I thought that <code>monoid.pow</code> was multiplication, but it turns out it really is a power function.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="c1">-- list.sum (list.map (λ (_x : ℚ), c) (x :: l)) = c * ↑(list.length (x :: l))</span>
+        <span class="n">simp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- add_monoid.smul (1 + list.length l) c = c * (1 + ↑(list.length l))</span>
+        <span class="n">ring</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- add_monoid.smul (list.length l + 1) c = (↑(list.length l) + 1) * c</span>
+        <span class="n">unfold</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- monoid.pow c (list.length l + 1) = (↑(list.length l) + 1) * c</span>
+        <span class="n">unfold</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span> <span class="c1">-- c * monoid.pow c (list.length l) = (↑(list.length l) + 1) * c</span>
+        <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span><span class="o">,</span> <span class="c1">-- c * (↑(list.length l) * c) = (↑(list.length l) + 1) * c</span>
+        <span class="n">ring</span><span class="o">,</span> <span class="c1">-- c * (c * ↑(list.length l)) = c * ↑(list.length l) + c</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>Something is not right here.</p>
+
+<a name="178175189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175189">Johan Commelin (Oct 15 2019 at 09:27)</a>:</h4>
+<p>What is the output if you replace the first <code>simp</code> with <code>squeeze_simp</code>?</p>
+
+<a name="178175230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175230">Johan Commelin (Oct 15 2019 at 09:28)</a>:</h4>
+<p>You want to <code>rw</code> by <code>add_monoid.smul_add</code>, so probably you can add that to <code>simp</code></p>
+
+<a name="178175322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175322">Johan Commelin (Oct 15 2019 at 09:29)</a>:</h4>
+<p>The place where everything goes bonkers is <code>unfold add_monoid.smul</code>, because it switches you from additive to multiplicative notation. Reason: <code>add_monoid.smul</code> is defined to be <code>monoid.pow</code> on <code>multiplicative M</code>, where <code>M</code> is your additive monoid.</p>
+
+<a name="178175518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175518">Marko Grdinic (Oct 15 2019 at 09:33)</a>:</h4>
+<blockquote>
+<p>What is the output if you replace the first simp with squeeze_simp?</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>variance.lean:72:8: information trace output
+simp only [list.repeat,
+ list.length,
+ add_comm,
+ list.sum_repeat,
+ list.map_const,
+ nat.cast_add,
+ nat.cast_one,
+ list.map] at *
+</pre></div>
+
+<a name="178175779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175779">Marko Grdinic (Oct 15 2019 at 09:36)</a>:</h4>
+<blockquote>
+<p>You want to rw by add_monoid.smul_add, so probably you can add that to simp</p>
+</blockquote>
+<p>The effect of that is the same as unfolding it like I am doing now.</p>
+<blockquote>
+<p>The place where everything goes bonkers is unfold add_monoid.smul, because it switches you from additive to multiplicative notation. </p>
+</blockquote>
+<p>So what you are saying is that the <code>*</code>s are actually <code>+</code>s on the left side of the equality?</p>
+
+<a name="178175798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175798">Johan Commelin (Oct 15 2019 at 09:36)</a>:</h4>
+<p>Are you rewriting by <code>smul</code> or <code>smul_add</code>?</p>
+
+<a name="178175847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175847">Johan Commelin (Oct 15 2019 at 09:37)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143">https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143</a></p>
+
+<a name="178175886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175886">Johan Commelin (Oct 15 2019 at 09:38)</a>:</h4>
+<p>That seems like a useful lemma for you</p>
+
+<a name="178175911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175911">Johan Commelin (Oct 15 2019 at 09:38)</a>:</h4>
+<p>It's not tagged as a <code>simp</code>-lemma. So you could add it to the simp-set manually.</p>
+
+<a name="178175960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175960">Johan Commelin (Oct 15 2019 at 09:39)</a>:</h4>
+<p>If you then also add <code>list.eq.repeat</code> (your induction hypothesis) to the simp set, it might be able to close the goal completely</p>
+
+<a name="178176052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178176052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178176052">Johan Commelin (Oct 15 2019 at 09:41)</a>:</h4>
+<p>Also, your lemma doesn't really use that <code>c</code> is a <code>rat</code>. So you could state it for any <code>semiring</code> I guess</p>
+
+<a name="178176793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178176793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178176793">Marko Grdinic (Oct 15 2019 at 09:52)</a>:</h4>
+<p>Thanks.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="n">l</span><span class="o">,</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+        <span class="n">ring</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+        <span class="n">unfold</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+        <span class="n">ring</span><span class="o">,</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul_add</span><span class="o">],</span>
+        <span class="n">refl</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>This goes through. I still find this confusing though. I have no idea why the notation suddenly changed mid way. How does that work? Is there a way print out the goal without the operators?</p>
+
+<a name="178177683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178177683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178177683">Alex J. Best (Oct 15 2019 at 10:06)</a>:</h4>
+<p>Is this what you want  <code>set_option pp.notation false</code>. Example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">1</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="c1">-- has_mem.mem 1 set.univ : Prop</span>
+</pre></div>
+
+<a name="178178914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178178914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178178914">Johan Commelin (Oct 15 2019 at 10:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="244262">@Marko Grdinic</span> Don't do <code>simp [add_monoid.smul]</code> but put the <code>smul_add</code> there instead. I would hope that it would avoid all the ugly notation.</p>
+
+<a name="178193302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178193302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178193302">Marko Grdinic (Oct 15 2019 at 13:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <br>
+Putting it there right away does nothing. I need to unfold <code>monoid.pow</code> first.</p>
+
+<a name="178193354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178193354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178193354">Johan Commelin (Oct 15 2019 at 13:35)</a>:</h4>
+<p>Weird</p>
+
+<a name="178195032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195032">Marko Grdinic (Oct 15 2019 at 13:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- list.sum (list.map (λ (_x : ℚ), c) (x :: l)) = c * ↑(list.length (x :: l))</span>
+<span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">map_const</span><span class="o">,</span> <span class="c1">-- list.sum (list.repeat c (list.length (x :: l))) = c * ↑(list.length (x :: l))</span>
+<span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum_repeat</span> <span class="c1">-- add_monoid.smul (list.length (x :: l)) c = c * ↑(list.length (x :: l))</span>
+</pre></div>
+
+
+<p><code>@[simp] theorem list.sum_repeat : ∀ (a : β) (n : ℕ), (list.repeat a n).sum = n • a</code> is the function that leads into it. It is in <code>algebra.group_power</code>, while map_const is in <code>list.basic</code>. I am not sure why that rewriting is happening considering I had not imported any of the <code>algebra</code> files myself. The only import I have is <code>data.rat</code>. I guess this means that every file in the project can extend the namespace in such a manner.</p>
+<p>Hmmm...definitely not what I expected. I expected that imports would be the main mechanism of information exchange between modules, but these extension definitions seem to be entirely separate from that. I am not sure if the manual said anything about this.</p>
+
+<a name="178195264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195264">Johan Commelin (Oct 15 2019 at 13:53)</a>:</h4>
+<p>It's really powerful!</p>
+
+<a name="178195475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195475">Marc Huisinga (Oct 15 2019 at 13:56)</a>:</h4>
+<p>maybe some file you imported also imports the algebra files.</p>
+
+<a name="178195602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195602">Marc Huisinga (Oct 15 2019 at 13:57)</a>:</h4>
+<p>at least according to TPIL, simp only uses tagged lemmas from files that have been imported (<a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier">https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier</a>, "Once the attribute is applied, however, there is no way to remove it; it persists in any file that imports the one where the attribute is assigned.")</p>
+
+<a name="178196572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178196572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178196572">Marko Grdinic (Oct 15 2019 at 14:06)</a>:</h4>
+<p>I guess <code>data.rat</code> must be importing them then at some point.</p>
+
+<a name="178200943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178200943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178200943">Marko Grdinic (Oct 15 2019 at 14:53)</a>:</h4>
+<p>Here is an easier way of implementing the above function. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">rw</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul_eq_mul</span> <span class="bp">_</span> <span class="n">c</span><span class="o">,</span> <span class="n">ring</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>All my difficulty here was not really understanding the difference between monoidal and regular multiplication. One can use <code>add_monoid.smul_eq_mul</code> to go between the two.</p>
+
+<a name="178239883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178239883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178239883">Lucas Allen (Oct 15 2019 at 22:12)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="209436">Lucas Allen</span> Hooray! Nice work!</p>
+</blockquote>
+<p>Thanks <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="178288634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178288634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178288634">Marko Grdinic (Oct 16 2019 at 13:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">rat</span><span class="o">),</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">*</span><span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span> <span class="c1">-- succeeds</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">rat</span><span class="o">),</span> <span class="n">x</span><span class="bp">*</span><span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p><code>library_search</code> should really be adjusted so that both sides of equalities get tested. It has been useful so far though. In cases like looking for <code>add_monoid.smul_eq_mul</code> I was lucky that I got the sides right otherwise I would not even have realized that something was amiss.</p>
+
+<a name="178289238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178289238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178289238">Johan Commelin (Oct 16 2019 at 13:39)</a>:</h4>
+<p>I think there is currently a PR that tries <code>symmetry</code> in library search</p>
+
+<a name="178298408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178298408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178298408">Rob Lewis (Oct 16 2019 at 15:08)</a>:</h4>
+<blockquote>
+<p>I think there is currently a PR that tries <code>symmetry</code> in library search</p>
+</blockquote>
+<p>I see an issue, but not a PR. Am I overlooking something? I'll review soon if I am.</p>
+
+<a name="178298954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178298954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178298954">Johan Commelin (Oct 16 2019 at 15:14)</a>:</h4>
+<p>I thought that <code>refine_list</code> made this patch</p>
+
+<a name="178299217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178299217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178299217">Rob Lewis (Oct 16 2019 at 15:18)</a>:</h4>
+<p>I don't see anything in the PR or added documentation that says that. If it does, it should be clarified! (Also it should probably be a separate PR.)</p>
+
+<a name="178299293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178299293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178299293">Johan Commelin (Oct 16 2019 at 15:18)</a>:</h4>
+<p>I saw <code>&lt;|&gt; symmetry</code> somewhere, and I guessed that was doing this patch. But I don't know meta code. So don't trust me.</p>
+
+<a name="178299528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178299528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178299528">Rob Lewis (Oct 16 2019 at 15:21)</a>:</h4>
+<p>You could be right. This is a dangerous thing to do. When that's merged, the behavior of <code>library_search</code> will change (and become slower), and it will be very hard to trace the cause, since it isn't mentioned in the commit name or the PR body.</p>
+
+<a name="178299728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178299728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178299728">Johan Commelin (Oct 16 2019 at 15:23)</a>:</h4>
+<p>Then I hereby warn the reviewers (-;</p>
+
+<a name="178321267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178321267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178321267">Kevin Buzzard (Oct 16 2019 at 19:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="244262">@Marko Grdinic</span> the rule of thumb is that the RHS should be "simpler" then the LHS.</p>
+
+<a name="178332175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178332175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178332175">Lucas Allen (Oct 16 2019 at 22:09)</a>:</h4>
+<blockquote>
+<p>I think there is currently a PR that tries <code>symmetry</code> in library search</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> added <code>symmetry</code> to the <code>apply_and_solve</code> function in <code>library_search</code> while he was putting some final touches on <code>refine_list</code>.</p>
+
+<a name="178332297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178332297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178332297">Scott Morrison (Oct 16 2019 at 22:11)</a>:</h4>
+<p>Okay, let's yoink that <code>symmetry</code> back out of this PR, and add it separately later.</p>
+
+<a name="178332311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178332311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178332311">Scott Morrison (Oct 16 2019 at 22:11)</a>:</h4>
+<p>It really should have a performance optimisation put (run <code>symmetry</code> only once, not once for each lemma we try to apply...) anyway.</p>
+
+<a name="178332713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178332713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178332713">Lucas Allen (Oct 16 2019 at 22:17)</a>:</h4>
+<blockquote>
+<p>Okay, let's yoink that <code>symmetry</code> back out of this PR, and add it separately later.</p>
+</blockquote>
+<p>I've removed <code>symmetry</code> from <code>library_search</code> in the <code>refine_list</code> PR.</p>
+
+<a name="178332940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178332940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178332940">Scott Morrison (Oct 16 2019 at 22:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="209436">@Lucas Allen</span>, you should still explain in the top post that all the apparent changes to library_search are actually just refactoring so <code>library_search</code> and <code>refine_list</code> can share code, and (assuming this is correct), this PR doesn't change the behaviour of library_search.</p>
+
+<a name="178334106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178334106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178334106">Lucas Allen (Oct 16 2019 at 22:41)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="209436">Lucas Allen</span>, you should still explain in the top post that all the apparent changes to library_search are actually just refactoring so <code>library_search</code> and <code>refine_list</code> can share code, and (assuming this is correct), this PR doesn't change the behaviour of library_search.</p>
+</blockquote>
+<p>OK. I've modified the top post of the <code>refine_list</code> PR, and I made sure to mention what it's doing to <code>library_search</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

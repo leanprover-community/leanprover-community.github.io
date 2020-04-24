@@ -1,0 +1,84 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/71301911refactorgrouphom.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html">#911 refactor group_hom</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="162886296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162886296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162886296">Johan Commelin (Apr 09 2019 at 07:00)</a>:</h4>
+<p>For some reason <a href="https://github.com/leanprover-community/mathlib/issues/911" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/911">#911</a> seems to hang on <code>field_theory/splitting_field.lean</code> I have no clue why.</p>
+
+<a name="162886302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162886302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162886302">Scott Morrison (Apr 09 2019 at 07:00)</a>:</h4>
+<p>On your local machine too, or just travis?</p>
+
+<a name="162886323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162886323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162886323">Johan Commelin (Apr 09 2019 at 07:01)</a>:</h4>
+<p>Travis reports no output. On my machine it also seems to hang</p>
+
+<a name="162886324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162886324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162886324">Johan Commelin (Apr 09 2019 at 07:01)</a>:</h4>
+<p>Didn't report a deterministic timeout.</p>
+
+<a name="162886326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162886326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162886326">Johan Commelin (Apr 09 2019 at 07:01)</a>:</h4>
+<p>The offending lemma is <code>splits_mul</code></p>
+
+<a name="162891643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162891643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162891643">Johan Commelin (Apr 09 2019 at 08:38)</a>:</h4>
+<p>Does anyone know how to debug this? Lean is just not giving any feedback to me at all. It just hangs.</p>
+
+<a name="162891992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162891992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162891992">Chris Hughes (Apr 09 2019 at 08:44)</a>:</h4>
+<p>Is it because it's getting <code>map_mul</code> confused with <code>polynomial.map_mul</code>?</p>
+
+<a name="162896287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896287">Johan Commelin (Apr 09 2019 at 10:00)</a>:</h4>
+<p>Maybe that's it...</p>
+
+<a name="162896309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896309">Johan Commelin (Apr 09 2019 at 10:01)</a>:</h4>
+<p>I got this on the command line</p>
+<div class="codehilite"><pre><span></span>➜  mathlib git:<span class="o">(</span>is_group_hom<span class="o">)</span> ✗ <span class="nb">time</span> nice leanpkg build
+configuring mathlib <span class="m">0</span>.1
+&gt; lean --make src
+/home/jmc/data/math/mathlib/src/field_theory/splitting_field.lean: polynomial.splits_mulexternal <span class="nb">command</span> exited with status <span class="m">137</span>
+nice leanpkg build  <span class="m">7274</span>.20s user <span class="m">11</span>.87s system <span class="m">330</span>% cpu <span class="m">36</span>:41.78 total
+</pre></div>
+
+<a name="162896322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896322">Johan Commelin (Apr 09 2019 at 10:01)</a>:</h4>
+<p>Does that status code mean anything?</p>
+
+<a name="162896408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896408">Johan Commelin (Apr 09 2019 at 10:02)</a>:</h4>
+<p>It's weird though... because <code>is_group_hom</code> isn't open. I don't understand where the confusion could come from.</p>
+
+<a name="162896428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896428">Johan Commelin (Apr 09 2019 at 10:03)</a>:</h4>
+<p>And there was a <code>is_group_hom.map_mul</code> before.</p>
+
+<a name="162896507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896507">Johan Commelin (Apr 09 2019 at 10:04)</a>:</h4>
+<p>Anyway, I changed the <code>map_mul</code> to <code>polynomial.map_mul</code> and that does seem to work...</p>
+
+<a name="162896510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162896510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162896510">Johan Commelin (Apr 09 2019 at 10:04)</a>:</h4>
+<p>Let's see if Travis is also happy.</p>
+
+<a name="162898049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23911%20refactor%20group_hom/near/162898049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71301911refactorgrouphom.html#162898049">Kevin Buzzard (Apr 09 2019 at 10:34)</a>:</h4>
+<p>Good catch <span class="user-mention" data-user-id="110044">@Chris Hughes</span> !</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

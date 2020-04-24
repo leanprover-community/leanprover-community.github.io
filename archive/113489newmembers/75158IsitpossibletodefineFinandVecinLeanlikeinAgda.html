@@ -1,0 +1,187 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html">Is it possible to define Fin and Vec in Lean like in Agda?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179509703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179509703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179509703">Marko Grdinić (Oct 31 2019 at 08:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kr">data</span> Fin <span class="ow">:</span> ℕ <span class="ow">→</span> <span class="kt">Set</span> <span class="kr">where</span>
+  <span class="nf">zero</span> <span class="ow">:</span> <span class="o">{</span>n <span class="ow">:</span> ℕ<span class="o">}</span> <span class="ow">→</span> Fin <span class="o">(</span>suc n<span class="o">)</span>
+  <span class="nf">suc</span>  <span class="ow">:</span> <span class="o">{</span>n <span class="ow">:</span> ℕ<span class="o">}</span> <span class="o">(</span>i <span class="ow">:</span> Fin n<span class="o">)</span> <span class="ow">→</span> Fin <span class="o">(</span>suc n<span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kr">data</span> Vec <span class="o">(</span>A <span class="ow">:</span> <span class="kt">Set</span> a<span class="o">)</span> <span class="ow">:</span> ℕ <span class="ow">→</span> <span class="kt">Set</span> a <span class="kr">where</span>
+  <span class="nf">[]</span>  <span class="ow">:</span> Vec A zero
+  <span class="nf">_∷_</span> <span class="ow">:</span> <span class="ow">∀</span> <span class="o">{</span>n<span class="o">}</span> <span class="o">(</span>x <span class="ow">:</span> A<span class="o">)</span> <span class="o">(</span>xs <span class="ow">:</span> Vec A n<span class="o">)</span> <span class="ow">→</span> Vec A <span class="o">(</span>suc n<span class="o">)</span>
+</pre></div>
+
+
+<p>I know that Lean has similar definitions to these in the core library, but I consider them inferior to the above as you cannot neatly pattern match on Lean's versions the same way in Agda. In Lean rather than being inductive types, they are implemented as subtypes over <code>nat</code> and <code>list</code>.</p>
+
+<a name="179509872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179509872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179509872">Marko Grdinić (Oct 31 2019 at 08:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Vec</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">Vec</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I guess it is possible for <code>Vec</code>.</p>
+
+<a name="179510083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510083">Mario Carneiro (Oct 31 2019 at 08:16)</a>:</h4>
+<p>Yes, it is possible. I think <code>fin2 n</code> is somewhere in mathlib</p>
+
+<a name="179510111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510111">Marko Grdinić (Oct 31 2019 at 08:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Fin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">Fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">suc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">Fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>And for <code>Fin</code>.</p>
+<p>Honestly, I somewhat expected this would not be possible. Why weren't they defined like this in the core library from the beginning?</p>
+
+<a name="179510158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510158">Mario Carneiro (Oct 31 2019 at 08:18)</a>:</h4>
+<p>because it makes it easier to relate vector theorems to list theorems</p>
+
+<a name="179510172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510172">Marko Grdinić (Oct 31 2019 at 08:18)</a>:</h4>
+<p>How so?</p>
+
+<a name="179510185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510185">Mario Carneiro (Oct 31 2019 at 08:19)</a>:</h4>
+<p>I think it is in keeping with the general sense of "avoid dependent types when possible"</p>
+
+<a name="179510190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510190">Mario Carneiro (Oct 31 2019 at 08:19)</a>:</h4>
+<p>A <code>vector A n</code> is simply a pack of an "untyped" <code>list A</code> and a property about it</p>
+
+<a name="179510200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510200">Mario Carneiro (Oct 31 2019 at 08:20)</a>:</h4>
+<p>with the dependent formulation it is harder to separate the two</p>
+
+<a name="179510245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510245">Mario Carneiro (Oct 31 2019 at 08:20)</a>:</h4>
+<p>That said, there are uses for both styles</p>
+
+<a name="179510266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510266">Mario Carneiro (Oct 31 2019 at 08:20)</a>:</h4>
+<p>and <code>vector</code> doesn't get a lot of use, in part because of that. Feel free to use the dependent version in your own work if you like</p>
+
+<a name="179510278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510278">Johan Commelin (Oct 31 2019 at 08:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> "Pattern-matching should be an editor feature" — Would that be a correct way of paraphrasing a quote of yours?</p>
+
+<a name="179510285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510285">Mario Carneiro (Oct 31 2019 at 08:21)</a>:</h4>
+<p>indeed it would</p>
+
+<a name="179510292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510292">Marko Grdinić (Oct 31 2019 at 08:22)</a>:</h4>
+<p>Oh, lol.</p>
+
+<a name="179510334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510334">Mario Carneiro (Oct 31 2019 at 08:22)</a>:</h4>
+<p>If lean were just a little bit better, you could register a custom <code>vector.rec'</code> theorem and make it just as good as the real thing</p>
+
+<a name="179510372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510372">Mario Carneiro (Oct 31 2019 at 08:23)</a>:</h4>
+<p>except that DTT says defeq matters so I'm a sad panda</p>
+
+<a name="179510481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510481">Marko Grdinić (Oct 31 2019 at 08:25)</a>:</h4>
+<blockquote>
+<p>except that DTT says defeq matters</p>
+</blockquote>
+<p>What do you mean by this?</p>
+
+<a name="179510551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510551">Mario Carneiro (Oct 31 2019 at 08:26)</a>:</h4>
+<p>If I defined <code>vector.rec'</code> in the obvious way (that is, it looks like the recursor of <code>Vec</code> but for the <code>vector A n</code> type) then <code>vector.rec' z s (vector.cons a v) = s a (vector.rec' z s v)</code> will be an equality, but not defeq</p>
+
+<a name="179510570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510570">Mario Carneiro (Oct 31 2019 at 08:27)</a>:</h4>
+<p>and that <em>usually</em> won't matter, but it comes up in certain places, in particular in dependent arguments (like the <code>n</code> of <code>vector A n</code>)</p>
+
+<a name="179510577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510577">Marko Grdinić (Oct 31 2019 at 08:27)</a>:</h4>
+<p>What is defeq?</p>
+
+<a name="179510581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510581">Mario Carneiro (Oct 31 2019 at 08:27)</a>:</h4>
+<p>definitional equality, aka convertibility</p>
+
+<a name="179510634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510634">Mario Carneiro (Oct 31 2019 at 08:28)</a>:</h4>
+<p>If <code>a</code> is defeq to <code>b</code> then <code>a = b</code> is provable by <code>rfl</code></p>
+
+<a name="179510649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510649">Marko Grdinić (Oct 31 2019 at 08:29)</a>:</h4>
+<p>By that quote, do you mean that Lean should have view patterns like Idris and some other languages?</p>
+
+<a name="179510664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510664">Mario Carneiro (Oct 31 2019 at 08:29)</a>:</h4>
+<p>Something like that</p>
+
+<a name="179510725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510725">Marko Grdinić (Oct 31 2019 at 08:30)</a>:</h4>
+<p>By DTT, do you mean Dualized Type Theory? That is what a Google search turned up for me.</p>
+
+<a name="179510729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510729">Mario Carneiro (Oct 31 2019 at 08:30)</a>:</h4>
+<p>That would solve one part of the problem, namely using <code>vector.rec'</code> without it looking way more horrible than what you get with the builtin recursor and the equation compiler</p>
+
+<a name="179510743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510743">Mario Carneiro (Oct 31 2019 at 08:31)</a>:</h4>
+<p>DTT is dependent type theory, the general axiomatic framework used by Coq, Lean, and Agda</p>
+
+<a name="179510751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510751">Mario Carneiro (Oct 31 2019 at 08:31)</a>:</h4>
+<p>(more specifically CIC, the calculus of inductive constructions)</p>
+
+<a name="179510755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510755">Mario Carneiro (Oct 31 2019 at 08:31)</a>:</h4>
+<p>google really let me down here</p>
+
+<a name="179510902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179510902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179510902">Marko Grdinić (Oct 31 2019 at 08:34)</a>:</h4>
+<p>Sorry, I actually know what those terms are, but I am not familiar with the jargon when it is used so informally. </p>
+<p>I have a question I was wondering about. If pattern matching is compiled to recursors, how would shortcutting work in Lean? Suppose you have some function to find an element of a list by index - how would Lean handle stopping in the middle?</p>
+
+<a name="179511254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179511254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179511254">Mario Carneiro (Oct 31 2019 at 08:43)</a>:</h4>
+<p>You still evaluate the function from the outside in</p>
+
+<a name="179511343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179511343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179511343">Mario Carneiro (Oct 31 2019 at 08:44)</a>:</h4>
+<p>In particular, you can even have a tree like inductive <code>inductive T | mk : (nat -&gt; T) -&gt; T</code>, which will take a function in its inductive hypothesis</p>
+
+<a name="179511354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179511354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179511354">Mario Carneiro (Oct 31 2019 at 08:44)</a>:</h4>
+<p>In the VM, the recursor thing is ignored and it just evaluates it like it would a match statement in Coq</p>
+
+<a name="179511390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179511390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179511390">Mario Carneiro (Oct 31 2019 at 08:45)</a>:</h4>
+<p>But it's all a bit heuristic; I suspect that if you set things up right you can get unnecessary computation where early exit doesn't quite work</p>
+
+<a name="179511526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20possible%20to%20define%20Fin%20and%20Vec%20in%20Lean%20like%20in%20Agda%3F/near/179511526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html#179511526">Marko Grdinić (Oct 31 2019 at 08:48)</a>:</h4>
+<p>I see. Thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

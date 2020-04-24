@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/42409squashingPRs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html">squashing PRs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178902902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178902902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178902902">Yury G. Kudryashov (Oct 23 2019 at 22:29)</a>:</h4>
+<p>Hi, what is the reason for squashing PRs? What's wrong with just merging branches? Then <code>git log --merges</code> will show what <code>git log</code> shows now.</p>
+
+<a name="178903172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903172">Reid Barton (Oct 23 2019 at 22:33)</a>:</h4>
+<p>Many commits would not build then. Would <code>git bisect</code> handle this properly? Or Travis?<br>
+More generally, I find git repositories with merges kind of difficult to deal with, maybe because I'm not used to them...</p>
+
+<a name="178903474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903474">Yury G. Kudryashov (Oct 23 2019 at 22:38)</a>:</h4>
+<p>Does Travis care about commits other than HEADs of the master and PRs?</p>
+
+<a name="178903489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903489">Yury G. Kudryashov (Oct 23 2019 at 22:38)</a>:</h4>
+<p>Didn't try <code>git bisect</code> yet.</p>
+
+<a name="178903499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903499">Reid Barton (Oct 23 2019 at 22:38)</a>:</h4>
+<p>For example, although I'm not sure this exact situation would arise in practice, I don't think <code>git rebase</code> works properly when you try to rebase a merge commit. At least it did not work ~10 years ago.</p>
+
+<a name="178903547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903547">Yury G. Kudryashov (Oct 23 2019 at 22:39)</a>:</h4>
+<p>You shouldn't rebase <code>master</code> anyway.</p>
+
+<a name="178903630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903630">Reid Barton (Oct 23 2019 at 22:40)</a>:</h4>
+<p>What would <code>git log -p --merges</code> show?</p>
+
+<a name="178903656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903656">Reid Barton (Oct 23 2019 at 22:41)</a>:</h4>
+<p>oh, maybe <code>git log --first-parent</code> is better?</p>
+
+<a name="178903756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903756">Reid Barton (Oct 23 2019 at 22:42)</a>:</h4>
+<p>Maybe a better answer is that currently most contributors don't attempt to create anything like a clean history on their PR branches, so the extra information that would be retained by merging is sort of garbage.</p>
+
+<a name="178903819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903819">Yury G. Kudryashov (Oct 23 2019 at 22:43)</a>:</h4>
+<p>Yes, this is a good reason.</p>
+
+<a name="178903945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squashing%20PRs/near/178903945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42409squashingPRs.html#178903945">Reid Barton (Oct 23 2019 at 22:45)</a>:</h4>
+<p>Another side effect of this is the terrible commit messages</p>
+<div class="codehilite"><pre><span></span>* oops
+* fix
+* fix again
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,144 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/66185definitionofequiv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html">definition of `equiv`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173785927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173785927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173785927">Kevin Buzzard (Aug 21 2019 at 11:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- `α ≃ β` is the type of functions from `α → β` with a two-sided inverse. -/</span>
+<span class="kn">structure</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span>    <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun</span>   <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">left_inv</span>  <span class="o">:</span> <span class="n">left_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">right_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Why was it decided to use <code>left_inverse</code> and <code>right_inverse</code>, rather than the other possibilities <code> inv_fun \circ to_fun = id</code> or <code>\forall x, inv_fun (to_fun x) = x</code>? Both of my suggestions seem more natural to me.</p>
+
+<a name="173786586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786586">Chris Hughes (Aug 21 2019 at 11:59)</a>:</h4>
+<p>The first thing you'd do when defining an equiv using your definition is apply <code>funext</code>. This definition saves you that trouble.</p>
+
+<a name="173786679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786679">Kevin Buzzard (Aug 21 2019 at 12:00)</a>:</h4>
+<p>I thought I was offering both a pre-funext and a post-funext suggestion?</p>
+
+<a name="173786719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786719">Mario Carneiro (Aug 21 2019 at 12:01)</a>:</h4>
+<p>the second one is defeq to the existing definition</p>
+
+<a name="173786757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786757">Mario Carneiro (Aug 21 2019 at 12:01)</a>:</h4>
+<p>I guess the reasoning is, if you have a definition for something why not use it when it's obviously applicable</p>
+
+<a name="173786823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786823">Mario Carneiro (Aug 21 2019 at 12:02)</a>:</h4>
+<p>If you don't think that <code>left_inverse</code> is appropriate here, when would it ever be appropriate?</p>
+
+<a name="173786892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786892">Patrick Massot (Aug 21 2019 at 12:03)</a>:</h4>
+<p>The "pre-funext" vs "post-funext" dilemma is unfortunately unfixable. In my experience, you will always want both, depending on what you are proving.</p>
+
+<a name="173786985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173786985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173786985">Kevin Buzzard (Aug 21 2019 at 12:04)</a>:</h4>
+<blockquote>
+<p>the second one is defeq to the existing definition</p>
+</blockquote>
+<p>Right, but it's less obfuscated!</p>
+
+<a name="173787016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173787016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173787016">Kevin Buzzard (Aug 21 2019 at 12:05)</a>:</h4>
+<blockquote>
+<p>If you don't think that <code>left_inverse</code> is appropriate here, when would it ever be appropriate?</p>
+</blockquote>
+<p>I don't think I've ever used it...(and that's not only because I can never remember whether it says fg=id or gf=id)</p>
+
+<a name="173787161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173787161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173787161">Mario Carneiro (Aug 21 2019 at 12:07)</a>:</h4>
+<p>that's actually a totally reasonable response too. I'm not sure I would have ever defined <code>left_inverse</code> and <code>right_inverse</code>; they aren't abbreviating enough to be worth it, plus they are easily confused and differ only in argument order</p>
+
+<a name="173787835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173787835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173787835">Kevin Buzzard (Aug 21 2019 at 12:17)</a>:</h4>
+<p>So this "left" and "right" stuff comes up sometimes, and I can never remember which way round things are. If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span> is a left <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-module then that means <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> acts on the left, so <code>r \bub m</code>. This one I remember because I have to in my day job. <code>left_distrib</code> I have no idea what this means, I just use <code>mul_add</code> or <code>add_mul</code> as appropriate, because I know what these mean. <code>left_inverse</code> I have no idea what this means, but it seems to be actually longer than its definition, whatever the definition is. Is there some rule of thumb? Left associative I think I understand -- that means that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mi>b</mi><mi>c</mi><mo>=</mo><mo stretchy="false">(</mo><mi>a</mi><mi>b</mi><mo stretchy="false">)</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">abc=(ab)c</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mord mathdefault">c</span></span></span></span>, right? That is maybe a more sensible use of <code>left</code>?</p>
+
+<a name="173788198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788198">Mario Carneiro (Aug 21 2019 at 12:22)</a>:</h4>
+<p>left distrib is the same as left assoc - a * (b + c) = ...</p>
+
+<a name="173788320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788320">Mario Carneiro (Aug 21 2019 at 12:24)</a>:</h4>
+<p>you put a thing on the left and distribute it</p>
+
+<a name="173788370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788370">Mario Carneiro (Aug 21 2019 at 12:25)</a>:</h4>
+<p>as for left inverse, your guess is as good as mine. Blame the category theorists</p>
+
+<a name="173788465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788465">Mario Carneiro (Aug 21 2019 at 12:26)</a>:</h4>
+<p>actually it probably originates in group theory</p>
+
+<a name="173788493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788493">Mario Carneiro (Aug 21 2019 at 12:26)</a>:</h4>
+<p>category theorists like to call these things monos and sections</p>
+
+<a name="173788510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173788510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173788510">Mario Carneiro (Aug 21 2019 at 12:26)</a>:</h4>
+<p>which is confusing in a completely different way</p>
+
+<a name="173790744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173790744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173790744">Reid Barton (Aug 21 2019 at 12:55)</a>:</h4>
+<p>I just remember that the first law (<code>left_inv</code>) wants an argument which is the same type as the first function (<code>to_fun</code>) and then the same for the second law/function</p>
+
+<a name="173796971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173796971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173796971">Kevin Buzzard (Aug 21 2019 at 14:06)</a>:</h4>
+<p>In <code>data.equiv.basic</code> there is</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">protected</span> <span class="n">def</span> <span class="n">trans</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e₂</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">e₂</span><span class="bp">.</span><span class="n">to_fun</span> <span class="err">∘</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="err">∘</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">,</span>
+  <span class="n">e₂</span><span class="bp">.</span><span class="n">left_inv</span><span class="bp">.</span><span class="n">comp</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">left_inv</span><span class="o">,</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">right_inv</span><span class="bp">.</span><span class="n">comp</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">right_inv</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>and the proofs would not typecheck if one used the more low-level definitions. Here it seems to work because there is a function called <code>function.left_inverse.comp</code></p>
+
+<a name="173797665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173797665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173797665">Simon Hudon (Aug 21 2019 at 14:14)</a>:</h4>
+<p>There's an attribute <code>higher_order</code> if, from the post-ext formulation, you want to create the pre-ext formulation of a lemma</p>
+
+<a name="173799743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799743">Floris van Doorn (Aug 21 2019 at 14:37)</a>:</h4>
+<p>I remember left-inverse/right-inverse as follows: if you have <code>g ∘ f = id</code> in the equation <code>g</code> is on the left, so it is a left-inverse of <code>f</code>, and <code>f</code> is on the right, so it is a right-inverse of <code>g</code>.</p>
+
+<a name="173799907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799907">Kevin Buzzard (Aug 21 2019 at 14:38)</a>:</h4>
+<p>Yeah, this is just the sort of idea that I find really hard to remember like that. Because on other days I might figure that <code>g</code> is on the left, so <code>f</code> is a left-inverse of <code>g</code>.</p>
+
+<a name="173799987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799987">Kevin Buzzard (Aug 21 2019 at 14:39)</a>:</h4>
+<p>The only reason I can remember what a left <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-module is ("<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> goes on the left" as opposed to "the module goes on the left") is that this comes up time and time again in the stuff I read.</p>
+
+<a name="173800688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173800688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173800688">Floris van Doorn (Aug 21 2019 at 14:46)</a>:</h4>
+<p>Makes sense. I get confused myself about most other left/right distinctions (in <code>left_distrib</code> and <code>add_le_add_left</code>, or the direction of <code>assoc</code>), just not this one.</p>
+
+<a name="173834834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173834834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173834834">Scott Morrison (Aug 21 2019 at 21:46)</a>:</h4>
+<p>The corresponding fields in <code>iso</code> (which works fine for <code>Type</code>, as long as you don't mind a fixed universe) are called <code>hom_inv_id</code> and <code>inv_hom_id</code>, which are a little easier to remember.</p>
+
+<a name="173834858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173834858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173834858">Scott Morrison (Aug 21 2019 at 21:47)</a>:</h4>
+<p>(Except that they are actually called <code>hom_inv_id'</code> and <code>inv_hom_id'</code>, because they have <code>auto_param</code>s which hopefully mean you don't even need to write them.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

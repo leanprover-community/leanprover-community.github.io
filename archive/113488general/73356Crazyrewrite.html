@@ -1,0 +1,107 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/73356Crazyrewrite.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html">Crazy rewrite</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189493782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189493782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189493782">Patrick Massot (Mar 02 2020 at 14:10)</a>:</h4>
+<p>My students explore Lean by typing random commands. Does anyone understand how the following proof works?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">injective</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">x&#39;</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x&#39;</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x&#39;</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">injective</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">injective</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">injective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">hf</span> <span class="n">hg</span> <span class="n">x</span> <span class="n">x&#39;</span> <span class="n">gof</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hf</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hg</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="n">gof</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189493958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189493958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189493958">Kevin Buzzard (Mar 02 2020 at 14:12)</a>:</h4>
+<p>The issue being that it should be <code>apply</code> not <code>rw</code>. This is a common issue with mathematicians, they can't tell the difference between <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span>, and indeed in work of schoolkids I've seen the terms used interchangeably. It's very surprising to me that this works!</p>
+
+<a name="189493998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189493998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189493998">Chris Hughes (Mar 02 2020 at 14:12)</a>:</h4>
+<p>The first <code>rw hf x</code> closes the first goal, but creates a new one for the assumption to <code>injective</code></p>
+
+<a name="189494010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494010">Patrick Massot (Mar 02 2020 at 14:12)</a>:</h4>
+<p>Yes, exactly. I feel betrayed by Lean!</p>
+
+<a name="189494060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494060">Kevin Buzzard (Mar 02 2020 at 14:13)</a>:</h4>
+<p>Well spotted Chris :-)</p>
+
+<a name="189494172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494172">Patrick Massot (Mar 02 2020 at 14:14)</a>:</h4>
+<p>Sorry, I don't buy this explanation.</p>
+
+<a name="189494199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494199">Patrick Massot (Mar 02 2020 at 14:15)</a>:</h4>
+<p>Oooh, maybe I see.</p>
+
+<a name="189494210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494210">Patrick Massot (Mar 02 2020 at 14:15)</a>:</h4>
+<p>This is evil.</p>
+
+<a name="189494238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494238">Chris Hughes (Mar 02 2020 at 14:15)</a>:</h4>
+<p>When you do <code>rw</code> it creates new goals for assumptions to the lemmas you used.</p>
+
+<a name="189494239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494239">Donald Sebastian Leung (Mar 02 2020 at 14:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110044">Chris Hughes</span> <a href="#narrow/stream/113488-general/topic/Crazy.20rewrite/near/189493998" title="#narrow/stream/113488-general/topic/Crazy.20rewrite/near/189493998">said</a>:</p>
+<blockquote>
+<p>The first <code>rw hf x</code> closes the first goal, but creates a new one for the assumption to <code>injective</code></p>
+</blockquote>
+<p>I was interested enough by this to pause my work on formalizing incidence geometry in Lean and step through this proof, and was wondering why the heck <code>rw</code> was acting like <code>apply</code> <span aria-label="rofl" class="emoji emoji-1f923" role="img" title="rofl">:rofl:</span></p>
+
+<a name="189494313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494313">Patrick Massot (Mar 02 2020 at 14:16)</a>:</h4>
+<p>Can you imagine the random walk that led to this? Note that <code>rw hf</code> won't do the trick.</p>
+
+<a name="189494451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494451">Patrick Massot (Mar 02 2020 at 14:18)</a>:</h4>
+<p>But I don't have a choice. I promised I would give full credit for Lean proofs that work and don't use the mathlib version of the statement. But I also asked for a pen and paper proof of the same result, and there I can remove credit.</p>
+
+<a name="189494529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494529">Chris Hughes (Mar 02 2020 at 14:19)</a>:</h4>
+<p>The follow-your-nose approach often leads to proofs you don't really understand.</p>
+
+<a name="189494537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494537">Johan Commelin (Mar 02 2020 at 14:19)</a>:</h4>
+<p>Maybe they used <code>hint</code>? And maybe <code>hint</code> ranked <code>rw</code> higher than <code>apply</code>. (It's shorter after all. Do they get points for golfing?)</p>
+
+<a name="189494608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189494608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189494608">Donald Sebastian Leung (Mar 02 2020 at 14:20)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/Crazy.20rewrite/near/189494537" title="#narrow/stream/113488-general/topic/Crazy.20rewrite/near/189494537">said</a>:</p>
+<blockquote>
+<p>Maybe they used <code>hint</code>? And maybe <code>hint</code> ranked <code>rw</code> higher than <code>apply</code>. (It's shorter after all. Do they get points for golfing?)</p>
+</blockquote>
+<p>Ooh ... proof golfing ... <span aria-label="thinking" class="emoji emoji-1f914" role="img" title="thinking">:thinking:</span></p>
+
+<a name="189495245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189495245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189495245">Rob Lewis (Mar 02 2020 at 14:27)</a>:</h4>
+<p>I don't think <code>hint</code> suggests tactics like <code>rw</code> and <code>apply</code> that take parameters.</p>
+
+<a name="189495368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Crazy%20rewrite/near/189495368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73356Crazyrewrite.html#189495368">Patrick Massot (Mar 02 2020 at 14:28)</a>:</h4>
+<p>Their mathlib was frozen at the beginning of the term in early January, so they don't have <code>hint</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,137 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/33919finasasubtype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html">fin as a subtype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189465139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465139">Johan Commelin (Mar 02 2020 at 05:46)</a>:</h4>
+<p>Now that we are changing core, what do people think of redefining <code>fin n</code> as <code>{k // k &lt; n}</code>?</p>
+
+<a name="189465461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465461">Simon Hudon (Mar 02 2020 at 05:56)</a>:</h4>
+<p>Why?</p>
+
+<a name="189465531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465531">Johan Commelin (Mar 02 2020 at 05:59)</a>:</h4>
+<p>Because it's a bit weird to me that this type would get special treating.</p>
+
+<a name="189465580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465580">Johan Commelin (Mar 02 2020 at 06:00)</a>:</h4>
+<p>It's a subtype, but it isn't defined as such.</p>
+
+<a name="189465587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465587">Johan Commelin (Mar 02 2020 at 06:00)</a>:</h4>
+<p>So the whole subtype machinery has to be reproven for <code>fin</code>.</p>
+
+<a name="189465721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465721">Simon Hudon (Mar 02 2020 at 06:04)</a>:</h4>
+<p>For instance?</p>
+
+<a name="189465791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465791">Mario Carneiro (Mar 02 2020 at 06:06)</a>:</h4>
+<p>Well, there are things like <code>fin.eq_of_veq</code> that are just copies of analogous <code>subtype</code> theorems</p>
+
+<a name="189465870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189465870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189465870">Simon Hudon (Mar 02 2020 at 06:09)</a>:</h4>
+<p>Right but how big is the duplication?</p>
+
+<a name="189466061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466061">Mario Carneiro (Mar 02 2020 at 06:15)</a>:</h4>
+<p>Not that large but it has an effect on all later work. You have to use different functions and different theorems, something like the situation with <code>nat.cast</code> vs <code>int.of_nat</code></p>
+
+<a name="189466117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466117">Mario Carneiro (Mar 02 2020 at 06:16)</a>:</h4>
+<p>I think it doesn't <em>add</em> anything to write it as a structure like that. It might make sense to have a separate definition if <code>fin</code> was defined using the fancy inductive family construction, but right now it's literally just a subset</p>
+
+<a name="189466137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466137">Simon Hudon (Mar 02 2020 at 06:17)</a>:</h4>
+<p>If someone feels like creating a branch of Lean with this change to see how much mathlib gets simplified, I'd be curious to see</p>
+
+<a name="189466181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466181">Mario Carneiro (Mar 02 2020 at 06:18)</a>:</h4>
+<p>I don't think there will be any simplification, just changing constant names in a few places. It's just more regular</p>
+
+<a name="189466182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466182">Simon Hudon (Mar 02 2020 at 06:18)</a>:</h4>
+<p>To me, it feels a bit like the difference between writing a structure with two fields vs using <code>prod</code>. Sometimes, the structure is a nicer solution</p>
+
+<a name="189466189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466189">Mario Carneiro (Mar 02 2020 at 06:19)</a>:</h4>
+<p>it's not like the names of the fields are especially meaningful here</p>
+
+<a name="189466197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466197">Mario Carneiro (Mar 02 2020 at 06:19)</a>:</h4>
+<p>the defeq to subtype seems useful</p>
+
+<a name="189466241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466241">Simon Hudon (Mar 02 2020 at 06:20)</a>:</h4>
+<p>What about using coercions from and to subtypes?</p>
+
+<a name="189466245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466245">Mario Carneiro (Mar 02 2020 at 06:20)</a>:</h4>
+<p>cycles, can't do it</p>
+
+<a name="189466250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466250">Mario Carneiro (Mar 02 2020 at 06:20)</a>:</h4>
+<p>lean 3 coercions kind of suck</p>
+
+<a name="189466252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466252">Simon Hudon (Mar 02 2020 at 06:20)</a>:</h4>
+<p>I mean functions to convert</p>
+
+<a name="189466315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466315">Mario Carneiro (Mar 02 2020 at 06:22)</a>:</h4>
+<p>The sorts of places where you want the defeq is for higher order objects like a proof that a subtype is encodable implies that fin is encodable</p>
+
+<a name="189466317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466317">Mario Carneiro (Mar 02 2020 at 06:22)</a>:</h4>
+<p>here you need the function to be an equiv and everything has to be transported along it</p>
+
+<a name="189466322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466322">Mario Carneiro (Mar 02 2020 at 06:23)</a>:</h4>
+<p>missing defeqs at the type level are difficult to patch around</p>
+
+<a name="189466437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466437">Simon Hudon (Mar 02 2020 at 06:26)</a>:</h4>
+<blockquote>
+<p>I don't think there will be any simplification, just changing constant names in a few places. It's just more regular</p>
+</blockquote>
+<p>That sounds like a lot of hassle for very little payoff</p>
+
+<a name="189466448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466448">Yury G. Kudryashov (Mar 02 2020 at 06:27)</a>:</h4>
+<p>BTW, is there any difference between <code>fin.ext_iff</code> and <code>fin.eq_iff_veq</code>?</p>
+
+<a name="189466848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466848">Mario Carneiro (Mar 02 2020 at 06:39)</a>:</h4>
+<p>I prefer to think of changes in terms of how close to ideal they are, rather than how close to today's version they are. The latter mentality leads to cruft</p>
+
+<a name="189466919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466919">Mario Carneiro (Mar 02 2020 at 06:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Apparently not, and they are literally neighbors in the file. Someone must have missed the first one and wrote the second</p>
+
+<a name="189466994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189466994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189466994">Mario Carneiro (Mar 02 2020 at 06:43)</a>:</h4>
+<p>...on the same day by the same person (<a href="https://github.com/leanprover-community/mathlib/commit/d2b39404f2216bdf985bb0eed27247d04a73a01f#diff-956a4c8f0f1dea36ca1059a6e71d64a5R47-R48" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/d2b39404f2216bdf985bb0eed27247d04a73a01f#diff-956a4c8f0f1dea36ca1059a6e71d64a5R47-R48"><code>ext_iff</code></a>, <a href="https://github.com/leanprover-community/mathlib/commit/bac655d3ad38cf95870986d819162df33f91d1a1#diff-956a4c8f0f1dea36ca1059a6e71d64a5R25-R26" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/bac655d3ad38cf95870986d819162df33f91d1a1#diff-956a4c8f0f1dea36ca1059a6e71d64a5R25-R26"><code>eq_iff_veq</code></a>)</p>
+
+<a name="189467055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189467055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189467055">Yury G. Kudryashov (Mar 02 2020 at 06:44)</a>:</h4>
+<p>In two different commits.</p>
+
+<a name="189467130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin%20as%20a%20subtype/near/189467130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33919finasasubtype.html#189467130">Mario Carneiro (Mar 02 2020 at 06:46)</a>:</h4>
+<p>This is actually another place where we could stand to be more regular in our naming. <code>ext_iff</code> is used for a bunch of structures now, so the names of extensionality for <code>fin</code> and <code>subtype</code> are now odd men out</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

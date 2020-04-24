@@ -1,0 +1,129 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/52711resourceformutuallemmas.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html">resource for mutual lemmas</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177515778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177515778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177515778">Vincent Siles (Oct 07 2019 at 12:53)</a>:</h4>
+<p>Using the doc I managed to define a  simple  value type </p>
+<div class="codehilite"><pre><span></span>inductive value : Type
+| VBoolean : bool -&gt; value
+| VInteger : int -&gt; value
+| VString : string -&gt; value
+| VSequence : list value -&gt; value
+| VNone : value
+</pre></div>
+
+
+<p>and  a boolean equality on it (by mutually defining <code>val_eqb</code> and <code>val_list_eqb</code>). Now I'm trying to prove some facts about it (my ultimate goal would be to provide an instance of <code>decidable_eq</code>), but I'm struggling to define mutual lemmas. So far I tried:</p>
+<div class="codehilite"><pre><span></span>mutual theorem val_eqb_eq, val_list_eqb_eq
+with val_eqb_eq: ∀ v0 v1, val_eqb v0 v1 = tt ↔ v0 = v1  :=
+begin
+sorry,
+end
+with val_list_eqb_eq : ∀ l0 l1, val_list_eqb l0 l1 = tt ↔ l0 = l1
+</pre></div>
+
+
+<p>which has several issues:<br>
+<code>invalid equations, must be followed by a command, '.', 'with', doc-string or EOF</code> on the <code>:=</code> and <code>invalid mutual declaration, 'val_list_eqb_eq' expected</code> on the <code>end</code>.</p>
+<p>I can't find much on <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion</a>, but maybe there are other resources ?</p>
+
+<a name="177520026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177520026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177520026">Rob Lewis (Oct 07 2019 at 13:42)</a>:</h4>
+<p>I think you have to use pattern matching notation in mutual declarations, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">theorem</span> <span class="n">val_eqb_eq</span><span class="o">,</span> <span class="n">val_list_eqb_eq</span>
+<span class="k">with</span> <span class="n">val_eqb_eq</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">v0</span> <span class="n">v1</span><span class="o">,</span> <span class="n">val_eqb</span> <span class="n">v0</span> <span class="n">v1</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">↔</span> <span class="n">v0</span> <span class="bp">=</span> <span class="n">v1</span>
+<span class="bp">|</span> <span class="n">v0</span> <span class="n">v1</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="k">with</span> <span class="n">val_list_eqb_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">l0</span> <span class="n">l1</span><span class="o">,</span> <span class="n">val_list_eqb</span> <span class="n">l0</span> <span class="n">l1</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">↔</span> <span class="n">l0</span> <span class="bp">=</span> <span class="n">l1</span>
+<span class="bp">|</span> <span class="n">l0</span> <span class="n">l1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>But note that nested inductives (<code>VSequence : list value -&gt; value</code>) are not one of the strong points of Lean 3. There's limited support for this and you'll get frustrated quickly.</p>
+
+<a name="177521188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177521188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177521188">Vincent Siles (Oct 07 2019 at 13:55)</a>:</h4>
+<p>Damned... and I was thinking I could get away from Coq for that reason :D Thanks for the insight</p>
+
+<a name="177574877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177574877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177574877">Scott Morrison (Oct 08 2019 at 00:50)</a>:</h4>
+<p>My advice would be to avoid the <code>mutual</code> keyword entirely, and roll your own "all-at-once" object defined recursively, then define projectors pulling out the bits you want.</p>
+
+<a name="177588666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177588666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177588666">Vincent Siles (Oct 08 2019 at 06:56)</a>:</h4>
+<p>I tried something like that, but I found that it was as annoying as doing it in Coq, so I'll stick with what I know for the moment</p>
+
+<a name="177589538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589538">Mario Carneiro (Oct 08 2019 at 07:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="243322">@Vincent Siles</span>  Lean implements nested inductives using regular inductives, and you can roll your own without too much difficulty. We're working on a more general framework for nested inductives, but lean's built in inductives have a decent behavior as is</p>
+
+<a name="177589624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589624">Mario Carneiro (Oct 08 2019 at 07:18)</a>:</h4>
+<p>Lean's built in compilation for nested inductives is... half baked</p>
+
+<a name="177589698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589698">Vincent Siles (Oct 08 2019 at 07:20)</a>:</h4>
+<p>I'll definitenly check it out, but right now I have some time constraints, so I'll stick to what I know :p</p>
+
+<a name="177589700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589700">Mario Carneiro (Oct 08 2019 at 07:20)</a>:</h4>
+<p>In the case of the <code>value</code> type, I don't even see why a nested inductive is necessary. Can't you just do:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">value</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">VBoolean</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">-&gt;</span> <span class="n">value</span>
+<span class="bp">|</span> <span class="n">VInteger</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">-&gt;</span> <span class="n">value</span>
+<span class="bp">|</span> <span class="n">VString</span> <span class="o">:</span> <span class="n">string</span> <span class="bp">-&gt;</span> <span class="n">value</span>
+<span class="bp">|</span> <span class="n">VNil</span> <span class="o">:</span> <span class="n">value</span>
+<span class="bp">|</span> <span class="n">VCons</span> <span class="o">:</span> <span class="n">value</span> <span class="bp">-&gt;</span> <span class="n">value</span> <span class="bp">-&gt;</span> <span class="n">value</span>
+<span class="bp">|</span> <span class="n">VNone</span> <span class="o">:</span> <span class="n">value</span>
+</pre></div>
+
+<a name="177589725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589725">Vincent Siles (Oct 08 2019 at 07:21)</a>:</h4>
+<p>It's less easy, I can't directly reuse the <code>list</code> library . What you propose is the usual solution to deal with nested. But you loose all benefits of actual lists</p>
+
+<a name="177589777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589777">Mario Carneiro (Oct 08 2019 at 07:22)</a>:</h4>
+<p>you won't really be able to reuse the list library anyway, because you will have lots of induction constraints</p>
+
+<a name="177589788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589788">Mario Carneiro (Oct 08 2019 at 07:22)</a>:</h4>
+<p>unless you are using it nonrecursively, in which case it's easy to build an isomorphism</p>
+
+<a name="177589806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589806">Vincent Siles (Oct 08 2019 at 07:23)</a>:</h4>
+<p>indeed. That's my current solution with Coq</p>
+
+<a name="177589813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589813">Vincent Siles (Oct 08 2019 at 07:23)</a>:</h4>
+<p>(the isomorphism / coercion)</p>
+
+<a name="177589877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589877">Mario Carneiro (Oct 08 2019 at 07:25)</a>:</h4>
+<p>I think that no matter how you cut it it won't be as nice as a true nested inductive because it's not <em>really</em> a list constructor, it's only a shim over the basic inductive. If you are willing to put <code>meta</code> it will act like the "real thing"</p>
+
+<a name="177589948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177589948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177589948">Vincent Siles (Oct 08 2019 at 07:26)</a>:</h4>
+<p>I don't know about <code>meta</code>. I'll read about it when I'll arrive at the office, thanks</p>
+
+<a name="177590074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177590074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177590074">Mario Carneiro (Oct 08 2019 at 07:28)</a>:</h4>
+<p>This basically means "I don't care about proving things, pretend this is Haskell". It lifts the well foundedness restrictions on recursion and basically all constraints on inductives (positivity, nestedness, etc), meaning that the logic becomes unsound but it still has an operational semantics and you can use it like a programming language</p>
+
+<a name="177597262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177597262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177597262">Kevin Buzzard (Oct 08 2019 at 09:32)</a>:</h4>
+<p>That's a really nice way of thinking about <code>meta</code> -- it should be called <code>haskell</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

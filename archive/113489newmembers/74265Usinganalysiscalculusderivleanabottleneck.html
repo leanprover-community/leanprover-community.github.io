@@ -1,0 +1,233 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html">Using analysis/calculus/deriv.lean a bottleneck</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187941657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187941657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187941657">Daniel Keys (Feb 11 2020 at 18:52)</a>:</h4>
+<p>Hi all: I've been trying to get started using this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">calculus</span><span class="bp">.</span><span class="n">deriv</span>
+
+<span class="n">def</span> <span class="n">twoX</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">twoX</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span> <span class="n">twoX</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Lean seems to become angry. It took several good minutes for the imports to load on a Macbook (one could easily get fried eggs on it after that), then for a couple seconds I did see the check passed, then I got this:</p>
+<div class="codehilite"><pre><span></span><span class="n">checkDerivatives</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span> <span class="n">error</span>
+<span class="n">excessive</span> <span class="n">memory</span> <span class="n">consumption</span> <span class="n">detected</span> <span class="n">at</span> <span class="err">&#39;</span><span class="n">replace&#39;</span> <span class="o">(</span><span class="n">potential</span> <span class="n">solution</span><span class="o">:</span> <span class="n">increase</span> <span class="n">memory</span> <span class="n">consumption</span> <span class="n">threshold</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Should I increase that memory threshold -  and if yes how?</p>
+
+<a name="187941767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187941767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187941767">Johan Commelin (Feb 11 2020 at 18:53)</a>:</h4>
+<p>Probably you haven't compiled mathlib</p>
+
+<a name="187941817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187941817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187941817">Johan Commelin (Feb 11 2020 at 18:54)</a>:</h4>
+<p>So it's starting to do a whole bunch of compilations when you open that file.</p>
+
+<a name="187941856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187941856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187941856">Johan Commelin (Feb 11 2020 at 18:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="259186">@Daniel Keys</span> Is this file in a project that depends on mathlib? Or are you working directly on a clone of mathlib?</p>
+
+<a name="187941913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187941913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187941913">Johan Commelin (Feb 11 2020 at 18:55)</a>:</h4>
+<p>In the first case, run <code>update-mathlib</code>. In the second case <code>cache-olean --fetch</code>.</p>
+
+<a name="187942913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187942913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187942913">Daniel Keys (Feb 11 2020 at 19:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>    I did set up the project directory with <code>mathlib</code>. So I suppose I should do <code>update-mathlib</code>. I did do that a couple of times in the directory though, but it was some time ago. How often does it need to be done? Thank you!</p>
+
+<a name="187943238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187943238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187943238">Daniel Keys (Feb 11 2020 at 19:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Actually just did it again and still have the same problem.</p>
+
+<a name="187943549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187943549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187943549">Daniel Keys (Feb 11 2020 at 19:14)</a>:</h4>
+<p>And when trying the other command I get: <code>Your repo is dirty; fetching in this state could cause you to lose data. </code> <br>
+Which I don't understand, since all my editors are closed. I'm not too much of a GitHub user, maybe there's something I need to do regularly when editing or creating new files.</p>
+
+<a name="187943747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187943747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187943747">Rob Lewis (Feb 11 2020 at 19:16)</a>:</h4>
+<p>When you see this message in VSCode, what files do you have open in tabs?</p>
+
+<a name="187943832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187943832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187943832">Rob Lewis (Feb 11 2020 at 19:17)</a>:</h4>
+<p>Try closing everything besides the file you're working on, and restart the Lean server (ctrl-shift-p, start typing "lean: restart").</p>
+
+<a name="187950064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950064">Daniel Keys (Feb 11 2020 at 20:14)</a>:</h4>
+<p>I didn't see this in Lean, but at the terminal prompt upon typing <code>cache-olean --fetch</code>. My VS Code was closed, and I had no files open in other editors.</p>
+
+<a name="187950417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950417">Daniel Keys (Feb 11 2020 at 20:18)</a>:</h4>
+<p>Now I just restarted, I have only one file open in Lean which reads:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">calculus</span><span class="bp">.</span><span class="n">deriv</span>
+
+<span class="n">def</span> <span class="n">twoX</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">twoX</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span> <span class="n">twoX</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and my computer is going nuts again.</p>
+
+<a name="187950577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950577">Rob Lewis (Feb 11 2020 at 20:20)</a>:</h4>
+<p>I meant for the original issue with the recompiling, not the cache-olean error. If you're not working directly in a mathlib repository, cache-olean isn't the right script to use.</p>
+
+<a name="187950625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950625">Daniel Keys (Feb 11 2020 at 20:20)</a>:</h4>
+<p>Even then, I was only using the same file</p>
+
+<a name="187950645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950645">Rob Lewis (Feb 11 2020 at 20:20)</a>:</h4>
+<p>Delete everything after the imports and restart the server like I described above. Is the CPU still going at it?</p>
+
+<a name="187950689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950689">Daniel Keys (Feb 11 2020 at 20:21)</a>:</h4>
+<p>And I do  work in a mathlib directory. Yes, I just did that and it's going crazy</p>
+
+<a name="187950710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950710">Daniel Keys (Feb 11 2020 at 20:21)</a>:</h4>
+<p>Maybe set up a new, fresh directory?</p>
+
+<a name="187950777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950777">Rob Lewis (Feb 11 2020 at 20:22)</a>:</h4>
+<p>You said before </p>
+<blockquote>
+<p>I did set up the project directory with <code>mathlib</code> </p>
+</blockquote>
+<p>Is the repository you're working in a clone of <code>mathlib</code>, or is it using <code>mathlib</code> as a dependency?</p>
+
+<a name="187950787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950787">Rob Lewis (Feb 11 2020 at 20:22)</a>:</h4>
+<p>i.e., what's in the <code>leanpkg.toml</code> file?</p>
+
+<a name="187950893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187950893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187950893">Daniel Keys (Feb 11 2020 at 20:23)</a>:</h4>
+<p>I didn't know of a difference between the two. Here's the .toml:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;ProofByInduction&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;3.4.2&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;585e107f9811719832c6656f49e1263a8eef5380&quot;}
+</pre></div>
+
+<a name="187951158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951158">Rob Lewis (Feb 11 2020 at 20:26)</a>:</h4>
+<p>That's fine. You're just using mathlib as a dependency. <code>cache-olean</code> is for when you're working directly on mathlib.</p>
+
+<a name="187951170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951170">Rob Lewis (Feb 11 2020 at 20:26)</a>:</h4>
+<p>What's the output when you run <code>update-mathlib</code>?</p>
+
+<a name="187951227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951227">Daniel Keys (Feb 11 2020 at 20:27)</a>:</h4>
+<p>Here it is:</p>
+<div class="codehilite"><pre><span></span>update-mathlib
+Info: No github section found in &#39;git config&#39;, we will use GitHub with no authentication
+Querying GitHub...
+Reusing cached olean archive
+Extracting nightly...
+</pre></div>
+
+<a name="187951393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951393">Rob Lewis (Feb 11 2020 at 20:29)</a>:</h4>
+<p>Try running <code>find _target | grep "[.]olean$" | xargs touch</code></p>
+
+<a name="187951416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951416">Rob Lewis (Feb 11 2020 at 20:29)</a>:</h4>
+<p>Then restart the Lean server in VSCode.</p>
+
+<a name="187951443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951443">Daniel Keys (Feb 11 2020 at 20:29)</a>:</h4>
+<p>Run this in the terminal?</p>
+
+<a name="187951447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951447">Rob Lewis (Feb 11 2020 at 20:29)</a>:</h4>
+<p>Yep.</p>
+
+<a name="187951626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951626">Daniel Keys (Feb 11 2020 at 20:31)</a>:</h4>
+<p>OK. Seems to work. Can you elaborate a bit on what was happening?</p>
+
+<a name="187951941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187951941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187951941">Rob Lewis (Feb 11 2020 at 20:35)</a>:</h4>
+<p>Ugh. It's an unfortunate "feature." olean files are compiled versions of lean files. The <code>update-mathlib</code> script downloads olean files for all of mathlib so you don't need to compile it yourself, which takes ages. But there's one olean per lean file, and one of the tests Lean does to make sure olean files are compatible is to check the timestamps. If file 2 imports file 1 but olean 2 is older than olean 1, olean 2 (and the olean for any lean file that imports lean 2) is invalid.</p>
+
+<a name="187952018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952018">Johan Commelin (Feb 11 2020 at 20:36)</a>:</h4>
+<p>Somehow your system must have updated timestamps on your lean files, or given the olean files old timestamps.</p>
+
+<a name="187952025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952025">Rob Lewis (Feb 11 2020 at 20:36)</a>:</h4>
+<p>Sometimes the timestamps end up wrong after unpacking.</p>
+
+<a name="187952100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952100">Daniel Keys (Feb 11 2020 at 20:37)</a>:</h4>
+<p>OK. So if this happens again, the same solution, right?</p>
+
+<a name="187952142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952142">Rob Lewis (Feb 11 2020 at 20:37)</a>:</h4>
+<p>Yes, but there really needs to be a more permanent solution, it's super annoying.</p>
+
+<a name="187952262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952262">Rob Lewis (Feb 11 2020 at 20:38)</a>:</h4>
+<p>I'm actually not certain if the problem is with comparing .olean timestamps with each other, or comparing the .olean timestamps to the corresponding .lean timestamps.</p>
+
+<a name="187952311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187952311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187952311">Daniel Keys (Feb 11 2020 at 20:39)</a>:</h4>
+<p>Thank you all!</p>
+
+<a name="187966255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187966255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187966255">Kevin Buzzard (Feb 11 2020 at 23:15)</a>:</h4>
+<p>Remember -- Lean is a project, not a product. We work around things. Over the last couple of years the community has seen a lot of funny little issues, most have been fixed, and those that haven't have now got workarounds. I appreciate it can be daunting for the beginner. But the software is usable once you get to know its quirks :-)</p>
+
+<a name="187966371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187966371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187966371">Daniel Keys (Feb 11 2020 at 23:17)</a>:</h4>
+<p>Agreed. It's lots of fun too! I just wish I could devote more time, but either way I'd be blown away without the help here.</p>
+
+<a name="187967300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187967300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187967300">Floris van Doorn (Feb 11 2020 at 23:31)</a>:</h4>
+<blockquote>
+<p>It's an unfortunate "feature."</p>
+</blockquote>
+<p>Would it be possible to just remove this feature in the community fork?</p>
+
+<a name="187967368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187967368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187967368">Floris van Doorn (Feb 11 2020 at 23:32)</a>:</h4>
+<p>Or is this same feature responsible for recompiling the library if I change a <code>.lean</code> file?</p>
+
+<a name="187967378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187967378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187967378">Rob Lewis (Feb 11 2020 at 23:32)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/issues/112" target="_blank" title="https://github.com/leanprover-community/lean/issues/112">https://github.com/leanprover-community/lean/issues/112</a></p>
+
+<a name="187967422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20analysis/calculus/deriv.lean%20a%20bottleneck/near/187967422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74265Usinganalysiscalculusderivleanabottleneck.html#187967422">Rob Lewis (Feb 11 2020 at 23:32)</a>:</h4>
+<p>I don't know the details myself, hoping someone more familiar will chime in.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

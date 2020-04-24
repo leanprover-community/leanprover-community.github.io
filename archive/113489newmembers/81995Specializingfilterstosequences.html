@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/81995Specializingfilterstosequences.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html">Specializing filters to sequences</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189627724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189627724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189627724">Jalex Stark (Mar 03 2020 at 19:53)</a>:</h4>
+<p>I am trying to show that the big oh relation defined in analysis.asymptotics is the same as the one I know as a working computer scientist. The hope would be to use my definition for proving some ``atomic'' inequalities like </p>
+<div class="codehilite"><pre><span></span><span class="err">\</span><span class="k">forall</span> <span class="err">\</span><span class="n">eps</span> <span class="o">:</span> <span class="err">\</span><span class="n">R</span><span class="o">,</span> <span class="err">\</span><span class="n">eps</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="err">\</span><span class="n">i</span> <span class="o">(</span><span class="err">\</span><span class="n">lamdba</span> <span class="n">n</span><span class="o">,</span> <span class="n">log</span> <span class="n">n</span><span class="o">)</span> <span class="n">is_o</span> <span class="o">(</span><span class="err">\</span><span class="n">lambda</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span><span class="err">^\</span><span class="n">eps</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and then use the abstract API in mathlib for facts like "is_o is a partial order"</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">asymptotics</span>
+
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+
+<span class="n">def</span> <span class="n">is_O&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">filter</span><span class="bp">.</span><span class="n">at_top</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">is_O</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">c</span> <span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">,</span> <span class="o">(</span><span class="n">N</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">g</span> <span class="n">x</span>
+
+<span class="kn">theorem</span> <span class="n">is_O_eq_is_O&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">is_O</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">→</span>  <span class="n">is_O&#39;</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">is_O</span><span class="o">,</span> <span class="n">is_O&#39;</span><span class="o">,</span> <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span><span class="o">],</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">c</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">N</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">use</span> <span class="n">c</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O_with_of_le&#39;</span> <span class="n">filter</span><span class="bp">.</span><span class="n">at_top</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189628169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628169">Yury G. Kudryashov (Mar 03 2020 at 19:57)</a>:</h4>
+<p>I'd first <code>simp only [is_O', asymptotics.is_O, filter.mem_at_top_sets]</code></p>
+
+<a name="189628528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628528">Jalex Stark (Mar 03 2020 at 20:00)</a>:</h4>
+<p>That brings me to <code>lean is_O f g → (∃ (c : ℝ), asymptotics.is_O_with c f g filter.at_top)</code></p>
+
+<a name="189628645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628645">Yury G. Kudryashov (Mar 03 2020 at 20:02)</a>:</h4>
+<p>BTW, why do you want <code>C N : nat</code>?</p>
+
+<a name="189628716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628716">Jalex Stark (Mar 03 2020 at 20:02)</a>:</h4>
+<p>That's just how a computer scientist would state it. The arguments are the same with c N : \R</p>
+
+<a name="189628756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628756">Yury G. Kudryashov (Mar 03 2020 at 20:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">asymptotics</span>
+<span class="kn">open</span> <span class="n">filter</span>
+<span class="n">open_locale</span> <span class="n">filter</span>
+
+<span class="kn">lemma</span> <span class="n">is_O_iff</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span> <span class="n">f</span> <span class="n">g</span> <span class="n">at_top</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">c</span> <span class="n">N</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">,</span> <span class="n">N</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">abs</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">abs</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span><span class="o">,</span> <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O_with</span><span class="o">,</span> <span class="n">eventually_at_top</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">norm_eq_abs</span><span class="o">]</span>
+</pre></div>
+
+<a name="189628772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628772">Jalex Stark (Mar 03 2020 at 20:03)</a>:</h4>
+<p>The computer scientist also wants the functions to be <code>\N \to \N </code> but that seems like more work</p>
+
+<a name="189628906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628906">Jalex Stark (Mar 03 2020 at 20:04)</a>:</h4>
+<p>hmm I have open_locale filter but it says unknown identifier 'eventually_at_top'</p>
+
+<a name="189628940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189628940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189628940">Yury G. Kudryashov (Mar 03 2020 at 20:05)</a>:</h4>
+<p>Fixed.</p>
+
+<a name="189629068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189629068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189629068">Jalex Stark (Mar 03 2020 at 20:05)</a>:</h4>
+<p>Awesome, thanks!</p>
+
+<a name="189629402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20filters%20to%20sequences/near/189629402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81995Specializingfilterstosequences.html#189629402">Yury G. Kudryashov (Mar 03 2020 at 20:09)</a>:</h4>
+<p>More generally:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">is_O_at_top_iff</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_sup</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">nonempty</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_norm</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">E</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span> <span class="n">f</span> <span class="n">g</span> <span class="n">at_top</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">c</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">N</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="err">∥</span><span class="n">f</span> <span class="n">x</span><span class="err">∥</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">*</span> <span class="err">∥</span><span class="n">g</span> <span class="n">x</span><span class="err">∥</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O</span><span class="o">,</span> <span class="n">asymptotics</span><span class="bp">.</span><span class="n">is_O_with</span><span class="o">,</span> <span class="n">eventually_at_top</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Feel free to prove a similar fact about <code>is_o</code>, and PR both of them.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

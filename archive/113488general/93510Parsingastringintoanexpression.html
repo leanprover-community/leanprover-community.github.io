@@ -1,0 +1,313 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/93510Parsingastringintoanexpression.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html">Parsing a string into an expression</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186852595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186852595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186852595">Jason Rute (Jan 29 2020 at 03:15)</a>:</h4>
+<p>I recently discovered that Lean can read from <code>stdin</code>.  So now I'm curious if it is possible to do the following in Lean:</p>
+<ol>
+<li>read in a string (representing a Lean term)</li>
+<li>parse that string into an expression</li>
+<li>evaluate (the term given by) that expression</li>
+<li>print the output</li>
+</ol>
+<p>(1) and (4) are easy, but what about (2) and (3)?  I assume (3) is possible with the meta stuff, but (2), I have no idea.</p>
+
+<a name="186852672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186852672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186852672">Jason Rute (Jan 29 2020 at 03:17)</a>:</h4>
+<p>I'm actually more interested in this scenario so feel free to comment on that one also:</p>
+<ol>
+<li>read in a string (representing a Lean Prop)</li>
+<li>parse that string into an expression</li>
+<li>set that expression as a goal</li>
+<li>apply a tactic to that goal</li>
+<li>print the result</li>
+</ol>
+
+<a name="186852857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186852857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186852857">Jason Rute (Jan 29 2020 at 03:21)</a>:</h4>
+<p>To be clear, I'm thinking about parsing Lean's syntax.  (Of course, since expressions are algebraic data structures, one can could pass in say an s-expression for that expression and write a custom parser for those s-expressions.)</p>
+
+<a name="186853158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186853158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186853158">Jason Rute (Jan 29 2020 at 03:29)</a>:</h4>
+<p>Actually, as I think about it, even if there was no Lean syntax parser, I'd still be interested in the other steps (evaluating an expression and setting an expression as a goal).</p>
+
+<a name="186853824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186853824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186853824">Simon Hudon (Jan 29 2020 at 03:45)</a>:</h4>
+<p>For  parsing an expression: <code>lean.parser.with_input interactive.types.texpr my_string</code></p>
+
+<a name="186853881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186853881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186853881">Simon Hudon (Jan 29 2020 at 03:46)</a>:</h4>
+<p>it will give you a <code>pexpr</code> (plus a string) which you can feed into <code>to_expr</code> to elaborate the term into something that you can evaluate or create a goal from</p>
+
+<a name="186854030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186854030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186854030">Simon Hudon (Jan 29 2020 at 03:50)</a>:</h4>
+<p>To evaluate it, you have to write a routine by hand creating a value of type you're interested in from an <code>expr</code>. It can probably be automated with some meta programming</p>
+
+<a name="186854043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186854043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186854043">Simon Hudon (Jan 29 2020 at 03:51)</a>:</h4>
+<p>To set a goal with your expression:</p>
+<div class="codehilite"><pre><span></span><span class="n">v</span> <span class="bp">&lt;-</span> <span class="n">mk_meta_var</span> <span class="n">e</span><span class="o">,</span>
+<span class="n">gs</span> <span class="bp">&lt;-</span> <span class="n">get_goals</span><span class="o">,</span>
+<span class="n">set_goals</span> <span class="err">$</span> <span class="n">v</span> <span class="bp">::</span> <span class="n">gs</span>
+</pre></div>
+
+<a name="186854191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186854191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186854191">Jason Rute (Jan 29 2020 at 03:55)</a>:</h4>
+<p>Thanks!  I will have to try this out.</p>
+
+<a name="186855279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186855279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186855279">Tim Daly (Jan 29 2020 at 04:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> I'm very interested in any code you write for this (obviously). Please make it available either publicly or email me.</p>
+
+<a name="186855612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186855612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186855612">Jason Rute (Jan 29 2020 at 04:32)</a>:</h4>
+<p>Sure, but I will warn you <span class="user-mention" data-user-id="223495">@Tim Daly</span> that I am a hobbist, so I might not get around to it too quickly (or I might wake up tomorrow and want to give it a try :) ).</p>
+
+<a name="186858153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858153">Jason Rute (Jan 29 2020 at 05:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I got this far, but I think I am mixing the <code>parser</code> and <code>tactic</code> monads.  Do you know what I need to do here?</p>
+<div class="codehilite"><pre><span></span>def experiment (s : string) : lean.parser unit :=
+do
+   pe &lt;- lean.parser.with_input interactive.types.texpr s,  -- parser monad
+   e &lt;- to_expr pe.1,  -- tactic monad
+   v &lt;- mk_meta_var e,
+   gs &lt;- get_goals,
+   set_goals $ v :: gs,
+   t &lt;- target,
+   trace t,  -- should output the goal given by the string s
+   return ()
+</pre></div>
+
+<a name="186858223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858223">Jason Rute (Jan 29 2020 at 05:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="223495">@Tim Daly</span> You might be interested also in <a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F">this thread</a>.  For example, I made <a href="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb" target="_blank" title="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb">a python prototype</a> of communicating with Lean using the Lean server.</p>
+
+<a name="186858352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858352">Simon Hudon (Jan 29 2020 at 05:55)</a>:</h4>
+<p>Yes, that's a very annoying separation when you need to invoke the parser. You can invoke tactic from parser but not the other way around. Figuring out how to get the user to call your automation can be tricky. If you only want to call tactic from parser, you can use <code>lean.parser.of_tactic</code></p>
+
+<a name="186858516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858516">Simon Hudon (Jan 29 2020 at 06:00)</a>:</h4>
+<p>For the other way around, it depends on how you want to invoke the script. If you want to call it from a normal proof script (in a <code>begin</code> <code>end</code> block), then we use the <code>parse</code> syntax. Otherwise, you can define a <code>user_command</code> using the attribute <code>user_command</code> and then you just write <code>my_command .</code> at the top level and it will call your script</p>
+
+<a name="186860041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186860041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186860041">Mario Carneiro (Jan 29 2020 at 06:41)</a>:</h4>
+<p>I don't think it is possible to use <code>with_input</code> when using <code>lean --run</code></p>
+
+<a name="186885285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186885285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186885285">Jason Rute (Jan 29 2020 at 13:31)</a>:</h4>
+<p>So this:</p>
+<div class="codehilite"><pre><span></span>meta def experiment (s : string) : lean.parser unit :=
+do
+   pe &lt;- lean.parser.with_input interactive.types.texpr s,
+   e &lt;- lean.parser.of_tactic (tactic.to_expr pe.1),
+   v &lt;- lean.parser.of_tactic (tactic.mk_meta_var e),
+   gs &lt;- lean.parser.of_tactic (tactic.get_goals),
+   lean.parser.of_tactic (tactic.set_goals $ v :: gs),
+   t &lt;- lean.parser.of_tactic tactic.target,
+   lean.parser.of_tactic (tactic.trace t),
+   return ()
+
+run_cmd experiment &quot;true&quot;
+</pre></div>
+
+
+<p>is giving me an error at <code>run_cmd</code>: "vm check failed: dynamic_cast&lt;vm_State*&gt;(to_external(o)) (possibly due to incorrect axioms, or sorry)".  Maybe this is related to what Mario was talking about about not being able to use <code>lean.parser.with_input</code> with <code>lean --run</code>.</p>
+
+<a name="186885835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186885835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186885835">Sebastian Ullrich (Jan 29 2020 at 13:38)</a>:</h4>
+<p>That's a bug, <code>run_cmd</code> should only accept <code>tactic</code>s. <code>lean.parser</code> cannot be used outside of user-defined parser extensions (notations/commands/tactic params).</p>
+
+<a name="186886175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186886175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186886175">Jason Rute (Jan 29 2020 at 13:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you point me to examples of what you mean by "the <code>parse</code> syntax" or using <code>user_command</code>?  (Or does Mario's comment mean what I want to do is ultimately doomed to fail?)</p>
+
+<a name="186905676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186905676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186905676">Simon Hudon (Jan 29 2020 at 16:59)</a>:</h4>
+<p>While it is fresh, can you file this <code>run_cmd</code> issue? I'd like to make the error message better.</p>
+
+<a name="186905863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186905863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186905863">Simon Hudon (Jan 29 2020 at 17:01)</a>:</h4>
+<p>I wouldn't say your project is doomed. I would only say that you'll have to run your experiment while parsing / elaborating Lean files, not as a Lean program (with a main, etc)</p>
+
+<a name="186906842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186906842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186906842">Simon Hudon (Jan 29 2020 at 17:11)</a>:</h4>
+<p>Now about the <code>user_command</code> idea (which I think is what you need):</p>
+<div class="codehilite"><pre><span></span><span class="n">setup_tactic_parser</span> <span class="c1">-- this is actually a user command too</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_command</span> <span class="o">(</span><span class="n">meta_info</span> <span class="o">:</span> <span class="n">decl_meta_info</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;my_command&quot;</span><span class="o">))</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">trace</span> <span class="s2">&quot;hello world&quot;</span>
+<span class="bp">.</span>
+
+<span class="n">my_command</span> <span class="bp">.</span> <span class="c1">-- prints &quot;hello world&quot;</span>
+</pre></div>
+
+<a name="186906944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186906944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186906944">Simon Hudon (Jan 29 2020 at 17:12)</a>:</h4>
+<p>Then if you want to user to write in an expression, you can do:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_command</span> <span class="o">(</span><span class="n">meta_info</span> <span class="o">:</span> <span class="n">decl_meta_info</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;my_command&quot;</span><span class="o">))</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">e</span> <span class="bp">&lt;-</span> <span class="n">texpr</span><span class="o">,</span>
+   <span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">trace</span> <span class="n">e</span>
+<span class="bp">.</span>
+
+<span class="n">my_command</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">.</span> <span class="c1">-- prints &quot;1 + 1&quot;</span>
+</pre></div>
+
+
+<p>(be sure not to forget the <code>.</code>)</p>
+
+<a name="186907328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186907328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186907328">Simon Hudon (Jan 29 2020 at 17:16)</a>:</h4>
+<p>Then you can skip the part where you parse from a string. If you read the string from a file, this is where I would use the <code>with_input</code> trick</p>
+
+<a name="186938412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938412">Jason Rute (Jan 29 2020 at 23:10)</a>:</h4>
+<blockquote>
+<p>While it is fresh, can you file this <code>run_cmd</code> issue? I'd like to make the error message better.</p>
+</blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1928" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1928">https://github.com/leanprover-community/mathlib/issues/1928</a></p>
+
+<a name="186938453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938453">Jason Rute (Jan 29 2020 at 23:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  Thanks for all the help!  I am wondering if I need to take a step back however.  Maybe I don't want/need parsing of Lean code in the first place.</p>
+
+<a name="186938616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938616">Simon Hudon (Jan 29 2020 at 23:13)</a>:</h4>
+<p>Can you explain a bit more how you'd like the user to call your program?</p>
+
+<a name="186938620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938620">Bryan Gin-ge Chen (Jan 29 2020 at 23:13)</a>:</h4>
+<p>The issue should probably be on <code>leanprover-community/lean</code> instead. I bet <span class="user-mention" data-user-id="110026">@Simon Hudon</span> can transfer it over though.</p>
+
+<a name="186938752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938752">Simon Hudon (Jan 29 2020 at 23:15)</a>:</h4>
+<p>Done</p>
+
+<a name="186938761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186938761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186938761">Simon Hudon (Jan 29 2020 at 23:16)</a>:</h4>
+<p>Good call <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span></p>
+
+<a name="186939261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186939261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186939261">Jason Rute (Jan 29 2020 at 23:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> The user will be a machine and it will call <code>lean --run my_program</code> and communicate via stdin and stdout. Specifically the user will send some string representing a theorem to be proved (more on that in a second) via stdin.  The program will read that string in, convert it to an expression, make a goal of that type, apply a tactic (this may also be specified by the user, but for now I'm worried about the goal itself), and print (to stdout) whether the tactic succeeded and the resulting goal (in some serialization).  This will be a loop.  So the program waits for the next input.  I'm starting to realize that it is better to directly serialize the expression than to directly parse Lean code.  I was just about to ask on a new topic if there is a standard serialization of Lean expressions or if I should make my own?</p>
+
+<a name="186939356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186939356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186939356">Jason Rute (Jan 29 2020 at 23:23)</a>:</h4>
+<p>For motivation, I'm trying to make a better and more reliable version of what I made <a href="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb" target="_blank" title="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb">here</a>.</p>
+
+<a name="186939459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186939459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186939459">Jason Rute (Jan 29 2020 at 23:25)</a>:</h4>
+<p>There I used the Lean server, but I think stdin and stdout of a running Lean program is better, faster, and more reliable.</p>
+
+<a name="186939595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186939595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186939595">Simon Hudon (Jan 29 2020 at 23:26)</a>:</h4>
+<p>I see. For serialization, have a look here: <a href="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/system/io.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/system/io.lean">https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/system/io.lean</a></p>
+
+<a name="186940139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186940139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186940139">Rob Lewis (Jan 29 2020 at 23:34)</a>:</h4>
+<p>What imports will your lean program use? If it's a large environment, e.g. all of mathlib, you might still be better off with the server interface. There's overhead to building the environment even if the dependencies are precompiled. Keeping a single server instance going will avoid this.</p>
+
+<a name="186940665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186940665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186940665">Jason Rute (Jan 29 2020 at 23:41)</a>:</h4>
+<p>It would be nice to try both.  To be clear, I intend to keep either instance "going".  If I use stdin/stdout, it will be in a loop.</p>
+
+<a name="186940752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186940752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186940752">Jason Rute (Jan 29 2020 at 23:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> That looks really promising!  I need to upgrade Lean apparently to get that...  Do you by chance know what the serialization looks like?</p>
+
+<a name="186941281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186941281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186941281">Simon Hudon (Jan 29 2020 at 23:50)</a>:</h4>
+<p>I don't remember what it looks like. I'll have a look</p>
+
+<a name="186948344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186948344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186948344">Simon Hudon (Jan 30 2020 at 01:49)</a>:</h4>
+<p>The serialization is not really legible. It's binary serialization format</p>
+
+<a name="186984918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186984918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186984918">Jason Rute (Jan 30 2020 at 13:20)</a>:</h4>
+<p>Thanks Simon!</p>
+
+<a name="186985892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186985892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186985892">Jason Rute (Jan 30 2020 at 13:33)</a>:</h4>
+<p>Ignoring the details of serialization for now (which have and could be solved in a number of ways), here is what I have in mind.  I tested it (with dummy serializations). This code works (and is very fast to call from say Python).</p>
+<div class="codehilite"><pre><span></span>import system.io
+open io
+
+meta def serialize_expr (e : expr) : string := sorry
+meta def deserialize_expr(s : string) : expr := sorry
+
+meta def apply_tactic_to_goal (t : tactic unit) (goal : expr) : tactic (list expr) :=
+do
+  -- set expression as goal
+  v &lt;- tactic.mk_meta_var goal,
+  tactic.set_goals $ [v],
+  -- run tactic on goal
+  t,
+  -- return results
+  gs &lt;- tactic.get_goals,
+  return gs
+
+meta def read_eval_print (_ : unit) : io_core error (option unit) :=
+do
+  do
+    -- get serialized expression from stdin
+    expr_str ← get_line,
+    let e := deserialize_expr expr_str,
+    -- run tactic (skip tactic in this case) on goal
+    gs ← io.run_tactic (apply_tactic_to_goal tactic.skip e),
+    -- print serialized goals to stdout
+    let goal_strs := gs.map serialize_expr,
+    put_str (to_string goal_strs),
+    return ()
+
+meta def main : io unit :=
+  -- loop forever
+  do iterate () read_eval_print,
+  return ()
+</pre></div>
+
+<a name="186986005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186986005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186986005">Jason Rute (Jan 30 2020 at 13:34)</a>:</h4>
+<p>When I say fast, I mean that the first call is slow, but after that it is really fast compared to the lean server.</p>
+
+<a name="186986141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186986141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186986141">Jason Rute (Jan 30 2020 at 13:36)</a>:</h4>
+<p>Of course this is a prototype.  A better version needs error handling (and more features around selecting which tactics to apply).</p>
+
+<a name="187760092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/187760092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#187760092">Jason Rute (Feb 09 2020 at 14:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> I just discovered <code>expr.to_raw_fmt</code> from your other post.  <a href="#narrow/stream/113488-general/topic/.3F.3F.3F/near/187757930" title="#narrow/stream/113488-general/topic/.3F.3F.3F/near/187757930">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/.3F.3F.3F/near/187757930</a>  I don't suppose that hidden somewhere in Lean is a parser for this format (which takes a string of this format and converts it to an <code>expr</code>)?</p>
+
+<a name="187760113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/187760113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#187760113">Mario Carneiro (Feb 09 2020 at 14:05)</a>:</h4>
+<p>no</p>
+
+<a name="187760154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/187760154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#187760154">Mario Carneiro (Feb 09 2020 at 14:06)</a>:</h4>
+<p>It's almost good enough that you can use it as lean surface syntax for an object of type <code>expr</code> though (i.e. using the constructors directly)</p>
+
+<a name="187760165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/187760165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#187760165">Mario Carneiro (Feb 09 2020 at 14:07)</a>:</h4>
+<p><code>expr.to_raw_fmt</code> is defined in lean though and it's a relatively short definition so you can modify it to suit your needs</p>
+
+<a name="187760263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/187760263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#187760263">Jason Rute (Feb 09 2020 at 14:11)</a>:</h4>
+<p>Thanks Mario!  I actually already have made my own <code>expr</code> to <code>string</code> function before I discovered this and made a parser too (although I haven't finished covering all the cases, like macros).  I just thought it was better to use built-in tools when possible.  Thanks!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

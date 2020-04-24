@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/82278isopentrue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html">is_open {true}</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="165841650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165841650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165841650">Chris Hughes (May 16 2019 at 19:33)</a>:</h4>
+<p>how to prove <code>is_open {true}</code>? This should be very easy.</p>
+
+<a name="165841677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165841677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165841677">Chris Hughes (May 16 2019 at 19:33)</a>:</h4>
+<p>The topology on <code>Prop</code> is <code>generate_from {true}</code></p>
+
+<a name="165842981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165842981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165842981">Sebastien Gouezel (May 16 2019 at 19:48)</a>:</h4>
+<p><code>library_search</code> says <code>exact is_open_discrete {to_bool true}</code></p>
+
+<a name="165843032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165843032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165843032">Sebastien Gouezel (May 16 2019 at 19:49)</a>:</h4>
+<p>Sorry, my message is for <code>true</code> in <code>bool</code>. In <code>Prop</code>, <code>library_search</code> says <code>exact is_open_singleton_true</code>.</p>
+
+<a name="165843188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165843188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165843188">Sebastien Gouezel (May 16 2019 at 19:51)</a>:</h4>
+<p><code>simp</code> also works, by the way.</p>
+
+<a name="165844073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165844073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165844073">Jesse Michael Han (May 16 2019 at 20:01)</a>:</h4>
+<p>MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">order</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">({</span><span class="n">true</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>  <span class="n">is_open_singleton_true</span>
+</pre></div>
+
+<a name="165844358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_open%20%7Btrue%7D/near/165844358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82278isopentrue.html#165844358">Jesse Michael Han (May 16 2019 at 20:05)</a>:</h4>
+<p>but that lemma is just a thin wrapper around</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">({</span><span class="n">true</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">generate_open</span><span class="bp">.</span><span class="n">basic</span> <span class="bp">_</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

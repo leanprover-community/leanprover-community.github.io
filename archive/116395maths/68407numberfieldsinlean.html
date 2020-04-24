@@ -1,0 +1,127 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/68407numberfieldsinlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html">number fields in lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172294324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294324">Alex J. Best (Aug 02 2019 at 09:07)</a>:</h4>
+<p>Hi all, currently lean says that number fields needs the basics of f-d vector spaces and noetherian rings, but these seem to be somewhat developed now so I thought I'd try and do some number fields. I made a pretty big mess, but I've almost proved that adjoining a root of a polynomial to Q forms a number field<br>
+<a href="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1" target="_blank" title="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1">https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1</a><br>
+comments about the approach so far would be much appreciated, suggestions to make my life easier etc., as would suggestions as to which parts of my long proofs should be spun out into lemmas . But mostly I would like help with one remaining sorry! It's really dumb but I really can't work it out it's essentially</p>
+<div class="codehilite"><pre><span></span>example (b : ℚ) : (rat.cast b : adjoin_root f) = b := sorry
+</pre></div>
+
+<a name="172294388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294388">Johan Commelin (Aug 02 2019 at 09:08)</a>:</h4>
+<p>What do you mean with "currently lean says" in your first sentence?</p>
+
+<a name="172294406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294406">Kevin Buzzard (Aug 02 2019 at 09:09)</a>:</h4>
+<p>Just to let you know: a group of undergraduates at Imperial have got some work on splitting fields etc (which I think is not currently publically available) and a masters student doing a summer project in VU is working on proving that ideals factor uniquely into prime ideals.</p>
+
+<a name="172294468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294468">Alex J. Best (Aug 02 2019 at 09:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> to be specific mathlib says in mathlib-overview.md line 48</p>
+
+<a name="172294483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294483">Alex J. Best (Aug 02 2019 at 09:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Ok cool, I guess I won't take this too seriously then, thanks.</p>
+
+<a name="172294487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294487">Johan Commelin (Aug 02 2019 at 09:11)</a>:</h4>
+<p>Aha, now I understand</p>
+
+<a name="172294497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294497">Johan Commelin (Aug 02 2019 at 09:11)</a>:</h4>
+<p>First feedback: prove <a href="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L43" target="_blank" title="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L43">https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L43</a> for a general field.</p>
+
+<a name="172294500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294500">Johan Commelin (Aug 02 2019 at 09:11)</a>:</h4>
+<p>Also, maybe first prove that <code>K^n</code> is fin.dim, then deduce that <code>K</code> is findim over K</p>
+
+<a name="172294508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294508">Johan Commelin (Aug 02 2019 at 09:11)</a>:</h4>
+<p>But that's only if you care about generalisations (-;</p>
+
+<a name="172294567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294567">Johan Commelin (Aug 02 2019 at 09:12)</a>:</h4>
+<p><a href="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L81" target="_blank" title="https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L81">https://gist.github.com/alexjbest/9fa36a92f833436199a1f891620db6a1#file-nf-lean-L81</a> This should be called <code>adjoin_root.mk_is...</code></p>
+
+<a name="172294571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294571">Kevin Buzzard (Aug 02 2019 at 09:12)</a>:</h4>
+<p>Well, if people half-do things and they don't end up in mathlib then other people will redo them. You might want to get in touch with Chris Hughes/Kenny Lau about the splitting field stuff (they surely did adding one root of an irreducible poly) and to Sander Dahmen about the masters student (I am terrible with names, this is the guy I met in VU a couple of weeks ago, but his summer job is to do a bunch of number field stuff so he might well be making serious progress)</p>
+
+<a name="172294645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294645">Johan Commelin (Aug 02 2019 at 09:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="127136">@Alex J. Best</span> Maybe first define <code>class finite_field_extension</code> and then specialise to number fields.</p>
+
+<a name="172294656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294656">Johan Commelin (Aug 02 2019 at 09:14)</a>:</h4>
+<p>Pretty soon we will want <code>L/K</code> finite + <code>number_field K</code> implies <code>number_field L</code>.</p>
+
+<a name="172294669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294669">Rob Lewis (Aug 02 2019 at 09:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="228296">@Antoine Béreau</span> is Sander's student.</p>
+
+<a name="172294685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294685">Kevin Buzzard (Aug 02 2019 at 09:15)</a>:</h4>
+<p>That's the guy :-) And <span class="user-mention" data-user-id="110044">@Chris Hughes</span> and <span class="user-mention" data-user-id="110064">@Kenny Lau</span> might know about field extensions too.</p>
+
+<a name="172294687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294687">Johan Commelin (Aug 02 2019 at 09:15)</a>:</h4>
+<p>We should also prove in general that the characteristic of <code>K</code> and <code>adjoin_root f</code> are the same.</p>
+
+<a name="172294691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294691">Chris Hughes (Aug 02 2019 at 09:16)</a>:</h4>
+<p>The theorem <code>rat.eq_cast</code> will help fill in the sorry.</p>
+
+<a name="172294742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294742">Chris Hughes (Aug 02 2019 at 09:16)</a>:</h4>
+<blockquote>
+<p>We should also prove in general that the characteristic of <code>K</code> and <code>adjoin_root f</code> are the same.</p>
+</blockquote>
+<p>Or more generally, the characteristic of any field extension of anything is the same.</p>
+
+<a name="172294749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294749">Johan Commelin (Aug 02 2019 at 09:17)</a>:</h4>
+<p>Right, that's even better (-;</p>
+
+<a name="172294760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294760">Johan Commelin (Aug 02 2019 at 09:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="127136">@Alex J. Best</span> Sorry, for spamming, I can shut up if you want (-;</p>
+
+<a name="172294770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294770">Johan Commelin (Aug 02 2019 at 09:17)</a>:</h4>
+<p>I think <code>number_field</code> should extend <code>algebra</code>.</p>
+
+<a name="172294835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172294835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172294835">Alex J. Best (Aug 02 2019 at 09:18)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="127136">Alex J. Best</span> Sorry, for spamming, I can shut up if you want (-;</p>
+</blockquote>
+<p>No this is good thanks, I was just leaning, generalising <code>finitely_generated K K</code> worked but then it won't apply now <span aria-label="pensive" class="emoji emoji-1f614" role="img" title="pensive">:pensive:</span></p>
+
+<a name="172295014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172295014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172295014">Chris Hughes (Aug 02 2019 at 09:22)</a>:</h4>
+<p>I defined <code>finite_dimensional</code> vector spaces recently. The fact that <code>K</code> is finite dimensional over <code>K</code>, should be an automatic instance. The instance path is kind of funny, it's a consequence of the fact that fields are euclidean domains, so they are PIDs, so they are noetherian rings.</p>
+
+<a name="172296907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/number%20fields%20in%20lean%3F/near/172296907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/68407numberfieldsinlean.html#172296907">Alex J. Best (Aug 02 2019 at 09:57)</a>:</h4>
+<blockquote>
+<p>The theorem <code>rat.eq_cast</code> will help fill in the sorry.</p>
+</blockquote>
+<p>Awesome thanks for this, exactly what I needed!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

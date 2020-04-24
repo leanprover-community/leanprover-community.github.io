@@ -1,0 +1,84 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/44607Resultexists.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html">Result exists?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179756158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179756158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179756158">rory (Nov 03 2019 at 17:46)</a>:</h4>
+<p>Is there any results in mathlib similar to this, <code>int.gcd a b = int.gcd c d ↔ ∀ k, (k ∣ a) ∧ (k ∣ b) ↔ (k ∣ c) ∧ (k ∣ d)</code>, exist?</p>
+
+<a name="179757031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179757031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179757031">Kevin Buzzard (Nov 03 2019 at 18:07)</a>:</h4>
+<p>I guess the roadmap to proving this would be to show that away from the edge cases, the gcd is the largest non-negative int dividing both (which might be in mathlib, it sounds like a natural statement) and then use the fact that if two finite sets are equal then so is their largest element.</p>
+
+<a name="179757084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179757084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179757084">Kevin Buzzard (Nov 03 2019 at 18:08)</a>:</h4>
+<p>My gut feeling is that mathlib is a library of standard results (like the two I mentioned) but then probably it's the user's job to put them together to make statements such as this.</p>
+
+<a name="179765601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179765601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179765601">Reid Barton (Nov 03 2019 at 22:08)</a>:</h4>
+<p>Hopefully there is a lemma <code>(k ∣ a) ∧ (k ∣ b) ↔ k ∣int.gcd a b</code>. That already gives you one direction.</p>
+
+<a name="179765623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179765623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179765623">Reid Barton (Nov 03 2019 at 22:09)</a>:</h4>
+<p>For the other direction you need to show that two nonnegative integers which divide each other are equal, which should also be a lemma</p>
+
+<a name="179767023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179767023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179767023">Kevin Buzzard (Nov 03 2019 at 22:51)</a>:</h4>
+<p>Aah yes this is a much neater way to do it.</p>
+
+<a name="179862498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179862498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179862498">Floris van Doorn (Nov 04 2019 at 18:53)</a>:</h4>
+<p>The result Reid mentions is </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">dvd_gcd_iff</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="err">∣</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>in <code>algebra.gcd_domain</code></p>
+
+<a name="179862534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179862534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179862534">Kenny Lau (Nov 04 2019 at 18:54)</a>:</h4>
+<p>oh I tried looking for it in <code>euclidean_domain</code></p>
+
+<a name="179862691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179862691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179862691">Floris van Doorn (Nov 04 2019 at 18:55)</a>:</h4>
+<p>The single direction exists multiple times, in <code>algebra.euclidean_domain</code> and <code>data.nat.gcd</code> and <code>data.pnat.basic</code></p>
+
+<a name="180025759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180025759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180025759">rory (Nov 06 2019 at 12:15)</a>:</h4>
+<blockquote>
+<p>The result Reid mentions is </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">dvd_gcd_iff</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="err">∣</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>in <code>algebra.gcd_domain</code></p>
+</blockquote>
+<p>How do I eventually convert from <code>gcd a b</code> to  <code>int.gcd</code>?<br>
+The final result could be proved using <code>int.antisymm</code>, but that requires <code>int.gcd</code> not <code>gcd</code></p>
+
+<a name="180025853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180025853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180025853">Mario Carneiro (Nov 06 2019 at 12:16)</a>:</h4>
+<p>there is almost certainly an analogous theorem for <code>int.gcd</code></p>
+
+<a name="180026003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180026003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180026003">Mario Carneiro (Nov 06 2019 at 12:19)</a>:</h4>
+<p>Hm, this particular theorem appears to be missing, but you can reconstruct it from <code>int.dvd_gcd</code>, <code>int.gcd_dvd_left</code>, <code>int.gcd_dvd_right</code></p>
+
+<a name="180026086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180026086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180026086">Mario Carneiro (Nov 06 2019 at 12:20)</a>:</h4>
+<p>or you can use <code>int.coe_gcd</code> to convert <code>gcd</code> to <code>int.gcd</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

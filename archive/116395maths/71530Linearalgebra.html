@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/71530Linearalgebra.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html">Linear algebra</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179882322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179882322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179882322">Sebastien Gouezel (Nov 04 2019 at 22:09)</a>:</h4>
+<p>I need some bits of linear algebra, and I am really struggling. I had forgotten how hard it is to use a part of the library you are not familiar with! Anyway, I am sure everything is already there to get the following statement, but whenever I start with something I begin to unfold and unfold and I am sure I shouldn't (and I guess I am not even writing it in the correct way). </p>
+<div class="codehilite"><pre><span></span><span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">lemma</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">pi_apply_eq</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">ι</span><span class="o">]</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">ι</span> <span class="bp">→</span> <span class="err">𝕜</span><span class="o">)</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="err">𝕜</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span><span class="n">i</span><span class="o">:</span><span class="n">ι</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="bp">λ</span><span class="n">j</span><span class="o">,</span> <span class="k">if</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">i</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>Between <code>constr_self (pi.is_basis_fun 𝕜 ι) f</code> or <code>linear_map.std_basis</code>, I don't know where to start!</p>
+
+<a name="179884358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179884358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179884358">Mario Carneiro (Nov 04 2019 at 22:32)</a>:</h4>
+<p>imports?</p>
+
+<a name="179884508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179884508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179884508">Reid Barton (Nov 04 2019 at 22:34)</a>:</h4>
+<p>No, start with a copyright header</p>
+
+<a name="179884598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179884598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179884598">Mario Carneiro (Nov 04 2019 at 22:35)</a>:</h4>
+<p><code>import apache</code></p>
+
+<a name="179884800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179884800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179884800">Reid Barton (Nov 04 2019 at 22:38)</a>:</h4>
+<p>More seriously, I think you should first use linearity of <code>f</code> to reduce to the same statement without <code>f</code></p>
+
+<a name="179885230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179885230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179885230">Reid Barton (Nov 04 2019 at 22:45)</a>:</h4>
+<p>Then I don't know whether it is an existing lemma. It does seem to be <code>std_basis</code>-related somehow. Anyways, it doesn't look very difficult to prove using <code>sum_mul_boole</code> for example</p>
+
+<a name="179919991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/179919991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#179919991">Sebastien Gouezel (Nov 05 2019 at 10:46)</a>:</h4>
+<p>I ended up doing the following, avoiding completely the linear algebra basis framework, which is a little bit sad. I would be very happy to see the proper way to write it, possibly replacing <code>λj, if i = j then 1 else 0</code> by something more idiomatic. Imports and header included :) Thanks for the reference to <code>sum_mul_boole</code>.</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Nice Zulip header -/</span>
+
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">finite_dimensional</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">lemma</span> <span class="n">pi_eq_sum_univ</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">ι</span><span class="o">]</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="err">𝕜</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span><span class="n">i</span><span class="o">:</span><span class="n">ι</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="err">•</span> <span class="o">(</span><span class="bp">λ</span><span class="n">j</span><span class="o">,</span> <span class="k">if</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">pi</span><span class="bp">.</span><span class="n">finset_sum_apply</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x_1</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">x</span> <span class="n">x_1</span> <span class="bp">*</span> <span class="n">ite</span> <span class="o">(</span><span class="n">k</span> <span class="bp">=</span> <span class="n">x_1</span><span class="o">)</span> <span class="mi">1</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_mul_boole</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="n">x</span> <span class="n">k</span><span class="o">,</span>
+    <span class="n">rwa</span> <span class="n">if_pos</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_univ</span> <span class="bp">_</span><span class="o">)</span> <span class="n">at</span> <span class="n">this</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span><span class="n">l</span> <span class="n">hl</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">smul_eq_mul</span><span class="o">,</span> <span class="n">mul_ite</span><span class="o">,</span> <span class="n">pi</span><span class="bp">.</span><span class="n">smul_apply</span><span class="o">],</span>
+  <span class="n">conv_lhs</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">eq_comm</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">36</span>
+
+<span class="kn">lemma</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">pi_apply_eq_sum_univ</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">ι</span><span class="o">]</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">ι</span> <span class="bp">→</span> <span class="err">𝕜</span><span class="o">)</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="err">𝕜</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span><span class="n">i</span><span class="o">:</span><span class="n">ι</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="bp">λ</span><span class="n">j</span><span class="o">,</span> <span class="k">if</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv_lhs</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">pi_eq_sum_univ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_sum</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span><span class="n">l</span> <span class="n">hl</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_smul</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180698098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/180698098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#180698098">Miguel Raz Guzmán Macedo (Nov 14 2019 at 03:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I believe Terence Tao is unwittingly giving Lean a shoutout...<br>
+<a href="https://twitter.com/InertialObservr/status/1194826080005148672" target="_blank" title="https://twitter.com/InertialObservr/status/1194826080005148672">https://twitter.com/InertialObservr/status/1194826080005148672</a></p>
+<div class="inline-preview-twitter"><div class="twitter-tweet"><a href="https://twitter.com/InertialObservr/status/1194826080005148672" target="_blank"><img class="twitter-avatar" src="https://pbs.twimg.com/profile_images/1145827188266033152/ycPVAOee_normal.jpg"></a><p>Apparently an equivalent result has been used/discovered before, but as Terry Tao states it was never published. 
+
+... oops <a href="https://t.co/i08oAEjMqW" target="_blank" title="https://t.co/i08oAEjMqW">https://twitter.com/InertialObservr/status/1194826080005148672/photo/1</a></p><span>- 〈 Berger | Dillon 〉 (@InertialObservr)</span><div class="twitter-image"><a href="https://t.co/i08oAEjMqW" target="_blank" title="https://t.co/i08oAEjMqW"><img src="https://pbs.twimg.com/media/EJTf_I2UcAA_Lal.jpg:small"></a></div></div></div>
+
+<a name="180700698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/180700698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#180700698">Johan Commelin (Nov 14 2019 at 05:05)</a>:</h4>
+<p>More specifically, I guess you are referring to the following comment by Tao on his blog: <a href="https://terrytao.wordpress.com/2019/08/13/eigenvectors-from-eigenvalues/#comment-528704" target="_blank" title="https://terrytao.wordpress.com/2019/08/13/eigenvectors-from-eigenvalues/#comment-528704">https://terrytao.wordpress.com/2019/08/13/eigenvectors-from-eigenvalues/#comment-528704</a> where he writes:</p>
+<blockquote>
+<p>(It’s at times like this that I wish we had a good semantic search engine for mathematics – I am not sure how I would have discovered this preprint other than by publishing our own preprint and waiting for someone to notice the connection.)</p>
+</blockquote>
+
+<a name="180774158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20algebra/near/180774158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71530Linearalgebra.html#180774158">Miguel Raz Guzmán Macedo (Nov 14 2019 at 20:59)</a>:</h4>
+<p>Yup that same one <span class="user-mention" data-user-id="112680">@Johan Commelin</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

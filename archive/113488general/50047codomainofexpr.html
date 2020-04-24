@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/50047codomainofexpr.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html">codomain of expr</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172316228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172316228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172316228">Chris Hughes (Aug 02 2019 at 15:07)</a>:</h4>
+<p>Is there an easy way to get the domain of an expr representing a bunch of nested pis? Given <code>A -&gt; B -&gt; C -&gt; D</code> I want to return <code>D</code></p>
+
+<a name="172316479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172316479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172316479">Johan Commelin (Aug 02 2019 at 15:10)</a>:</h4>
+<p>That must be <code>meta</code>, right?</p>
+
+<a name="172316617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172316617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172316617">Chris Hughes (Aug 02 2019 at 15:12)</a>:</h4>
+<p>Yes</p>
+
+<a name="172316769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172316769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172316769">Floris van Doorn (Aug 02 2019 at 15:13)</a>:</h4>
+<div class="codehilite"><pre><span></span>meta def codomain (e : expr) : expr :=
+if e.is_pi then codomain e.binding_body else e
+</pre></div>
+
+<a name="172316880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172316880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172316880">Floris van Doorn (Aug 02 2019 at 15:14)</a>:</h4>
+<p>Or more directly:</p>
+<div class="codehilite"><pre><span></span>open expr
+meta def codomain : expr → expr
+| (pi _ _ _ b)  := codomain b
+| e             := e
+</pre></div>
+
+<a name="172317561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172317561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172317561">Keeley Hoek (Aug 02 2019 at 15:22)</a>:</h4>
+<p>Be weary that the result will contain <code>var</code>s</p>
+
+<a name="172318287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/codomain%20of%20expr/near/172318287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50047codomainofexpr.html#172318287">Simon Hudon (Aug 02 2019 at 15:31)</a>:</h4>
+<p>A safer route would be:</p>
+<p><code>(vs,e) &lt;- mk_local_pis e</code> which produces <code>vs</code> a list of variables created to stand for the bound variables of the removed pis and <code>e</code> the codomain that you're looking for.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

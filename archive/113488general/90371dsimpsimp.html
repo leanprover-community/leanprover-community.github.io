@@ -1,0 +1,94 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90371dsimpsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html">`dsimp, simp`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193655191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655191">Scott Morrison (Apr 11 2020 at 11:18)</a>:</h4>
+<p>Often we need to write <code>dsimp, simp</code>, and merely <code>simp</code> won't suffice.</p>
+
+<a name="193655204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655204">Scott Morrison (Apr 11 2020 at 11:19)</a>:</h4>
+<p>This is because <code>simp</code> is afraid of making non-definitional changes, which might break the larger expression, but <code>dsimp</code> can boldly rewrite any subexpression.</p>
+
+<a name="193655208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655208">Scott Morrison (Apr 11 2020 at 11:19)</a>:</h4>
+<p>Here's a toy example (if anyone has an even smaller one, please show me):</p>
+
+<a name="193655212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655212">Scott Morrison (Apr 11 2020 at 11:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">theory</span> <span class="c1">-- not important; this is just here because I use `constant` below.</span>
+
+<span class="kn">constants</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">C</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">constants</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span><span class="o">},</span> <span class="n">h</span> <span class="n">X</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">h</span> <span class="n">Y</span> <span class="n">Z</span> <span class="bp">→</span> <span class="n">h</span> <span class="n">X</span> <span class="n">Z</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">X</span><span class="o">,</span> <span class="n">h</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span>
+<span class="n">axioms</span> <span class="o">(</span><span class="n">ic</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">h</span> <span class="n">X</span> <span class="n">Y</span><span class="o">),</span> <span class="n">c</span> <span class="o">(</span><span class="n">i</span> <span class="n">X</span><span class="o">)</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">ic</span>
+
+<span class="n">def</span> <span class="n">F</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">X</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">h</span> <span class="o">(</span><span class="n">F</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">i</span> <span class="n">X</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">F_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="n">X</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">g_def</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="n">X</span> <span class="bp">=</span> <span class="n">i</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="c1">-- This works fine:</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">h</span> <span class="o">(</span><span class="n">F</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="n">Y</span><span class="o">))</span> <span class="o">:</span> <span class="n">c</span> <span class="o">(</span><span class="n">g</span> <span class="n">X</span><span class="o">)</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- But why do we need the `dsimp` at all?</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">h</span> <span class="o">(</span><span class="n">F</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="n">Y</span><span class="o">))</span> <span class="o">:</span> <span class="n">c</span> <span class="o">(</span><span class="n">g</span> <span class="n">X</span><span class="o">)</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span><span class="o">,</span>
+  <span class="c1">--- remaining goals `c (i X) k = k`, even though this is `ic`</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193655265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655265">Scott Morrison (Apr 11 2020 at 11:21)</a>:</h4>
+<p>Would it be possible to have a combined <code>simp+dsimp</code>, which in a single pass does whatever <code>simp</code> can do, but when <code>simp</code> would be afraid to penetrate deeper into a subexpression, it sends <code>dsimp</code> on ahead of it?</p>
+
+<a name="193655396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655396">Gabriel Ebner (Apr 11 2020 at 11:24)</a>:</h4>
+<p>The <code>hott3</code> simplifier does this: <a href="https://github.com/gebner/hott3/blob/436a4f5e49f51ca5773b34df046bbf67e2584f70/src/hott/init/meta/simp.lean#L11-L22" title="https://github.com/gebner/hott3/blob/436a4f5e49f51ca5773b34df046bbf67e2584f70/src/hott/init/meta/simp.lean#L11-L22">https://github.com/gebner/hott3/blob/436a4f5e49f51ca5773b34df046bbf67e2584f70/src/hott/init/meta/simp.lean#L11-L22</a></p>
+
+<a name="193655414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655414">Scott Morrison (Apr 11 2020 at 11:25)</a>:</h4>
+<p>Could I just drop the <code>guard</code> condition and use this?</p>
+
+<a name="193655459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655459">Scott Morrison (Apr 11 2020 at 11:26)</a>:</h4>
+<p>Why would we not want this to be the default behaviour?</p>
+
+<a name="193655466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655466">Gabriel Ebner (Apr 11 2020 at 11:26)</a>:</h4>
+<p>Yes, you can use this (and drop the guard, it's only necessary for hott).</p>
+
+<a name="193655471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193655471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193655471">Gabriel Ebner (Apr 11 2020 at 11:26)</a>:</h4>
+<p>I have no strong opinion on the default behavior.</p>
+
+<a name="193657340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193657340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193657340">Scott Morrison (Apr 11 2020 at 12:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>, do you know why we have a separate <code>simplify</code> and <code>ext_simplify_core</code>? Is it just a speed optimisation? Do you know of a piece of Lean code that we could replace <code>simplify</code> by (just like your <code>simplify_plus_d</code>) that uses <code>ext_simplify_core</code>, but reproduces the current behaviour of <code>simplify</code>?</p>
+
+<a name="193657430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60dsimp%2C%20simp%60/near/193657430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90371dsimpsimp.html#193657430">Scott Morrison (Apr 11 2020 at 12:15)</a>:</h4>
+<p>(Unfortunately just dropping in <code>simplify_plus_d</code> (without the hott bits), and asking <code>simp_target</code> to use it instead of <code>simplify</code> seems to cause lots of things to fail. :-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

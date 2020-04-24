@@ -1,0 +1,239 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/76367clearingallhypothesis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html">clearing all hypothesis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="163821809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163821809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163821809">Kevin Buzzard (Apr 20 2019 at 22:23)</a>:</h4>
+<p>I want to focus on one of five subgoals. I do this using an inelegant combination of <code>swap</code>s and <code>sorry</code>s. Once I am there, at the heart of the matter, I realise that my context is gigantic; I don't think I'll be using <code>add_left_neg</code> any more, for example. <br>
+Is there a command which just clears as much of the context as it is possible to do? I have come to an interesting sub-question and I want to see better what's going on.</p>
+
+<a name="163821871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163821871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163821871">Kevin Buzzard (Apr 20 2019 at 22:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">-</span>
+<span class="cm">`clear h₁ ... hₙ` tries to clear each hypothesis `hᵢ` from the local context.</span>
+<span class="cm">-/</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">clear</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="bp">*</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">clear_lst</span>
+</pre></div>
+
+
+<p>Can I use this tactic somehow? I don't speak meta.</p>
+
+<a name="163821900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163821900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163821900">Kevin Buzzard (Apr 20 2019 at 22:26)</a>:</h4>
+<p>I am getting sick of</p>
+<div class="codehilite"><pre><span></span>clear tactic failed, hypothesis &#39;zero_add&#39; depends on &#39;add_assoc&#39;
+</pre></div>
+
+
+<p>holes</p>
+
+<a name="163822098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822098">Kevin Buzzard (Apr 20 2019 at 22:30)</a>:</h4>
+<p>ha ha I've got an algorithm</p>
+
+<a name="163822120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822120">Kevin Buzzard (Apr 20 2019 at 22:31)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">clear</span> <span class="n">right_distrib</span> <span class="n">left_distrib</span> <span class="n">add_comm</span> <span class="n">add_zero</span> <span class="n">add_assoc</span> <span class="n">add</span><span class="o">,</span>
+</pre></div>
+
+
+<p>found by switching view to the weird ctrl-shift-alt-enter "info view" which I never use, and then just clearing the first thing it complained about as well. This is getting through it nicely.</p>
+
+<a name="163822169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822169">Simon Hudon (Apr 20 2019 at 22:32)</a>:</h4>
+<p>Feel free to use: <a href="https://github.com/avigad/qpf/blob/97befa73d34ed26137dbb991941d5ce1b1a3e794/src/for_mathlib.lean#L614-L618" target="_blank" title="https://github.com/avigad/qpf/blob/97befa73d34ed26137dbb991941d5ce1b1a3e794/src/for_mathlib.lean#L614-L618">https://github.com/avigad/qpf/blob/97befa73d34ed26137dbb991941d5ce1b1a3e794/src/for_mathlib.lean#L614-L618</a></p>
+
+<a name="163822236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822236">Kevin Buzzard (Apr 20 2019 at 22:35)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="k">show</span> <span class="o">(</span><span class="n">zero_1</span> <span class="bp">=</span> <span class="n">zero</span><span class="o">),</span>
+  <span class="c1">-- refl still fails</span>
+  <span class="n">clear</span> <span class="n">add_left_neg</span><span class="o">,</span> <span class="c1">-- only 20 more to go</span>
+  <span class="n">clear</span> <span class="n">zero_add</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">right_distrib</span> <span class="n">left_distrib</span> <span class="n">add_comm</span> <span class="n">add_zero</span> <span class="n">add_assoc</span> <span class="n">add</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">neg</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">mul_one</span> <span class="n">one_mul</span> <span class="n">mul_assoc</span> <span class="n">mul</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">one</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">add_zero_1</span> <span class="n">add_left_neg_1</span> <span class="n">zero_add_1</span> <span class="n">add_assoc_1</span> <span class="n">add_1</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  clear tactic failed, hypothesis &#39;add_left_neg_1&#39; depends on &#39;add_zero_1&#39;</span>
+
+<span class="cm">  dammit my algo failed!</span>
+<span class="cm">  -/</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Dammit my algo just failed!</p>
+
+<a name="163822252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822252">Kevin Buzzard (Apr 20 2019 at 22:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">clear_except</span> <span class="o">(</span><span class="n">xs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span> <span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="k">let</span> <span class="n">ns</span> <span class="o">:=</span> <span class="n">name_set</span><span class="bp">.</span><span class="n">of_list</span> <span class="n">xs</span><span class="o">,</span>
+   <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">mmap&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span> <span class="o">:</span> <span class="n">expr</span><span class="o">,</span>
+     <span class="n">when</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">ns</span><span class="bp">.</span><span class="n">contains</span> <span class="n">h</span><span class="bp">.</span><span class="n">local_pp_name</span><span class="o">)</span> <span class="err">$</span>
+<span class="n">try</span> <span class="err">$</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">clear</span> <span class="n">h</span><span class="o">)</span> <span class="err">∘</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse</span>
+</pre></div>
+
+
+<p>Simon's tactic.</p>
+
+<a name="163822297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822297">Kevin Buzzard (Apr 20 2019 at 22:36)</a>:</h4>
+<p>I don't understand a word of it, but let's give it a go</p>
+
+<a name="163822300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822300">Kevin Buzzard (Apr 20 2019 at 22:36)</a>:</h4>
+<p>It doesn't delete all my files, does it?</p>
+
+<a name="163822304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822304">Simon Hudon (Apr 20 2019 at 22:36)</a>:</h4>
+<p>As far as you know, no it doesn't</p>
+
+<a name="163822317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822317">Kevin Buzzard (Apr 20 2019 at 22:37)</a>:</h4>
+<p><code>unknown identifier 'parse'</code></p>
+
+<a name="163822320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822320">Kevin Buzzard (Apr 20 2019 at 22:37)</a>:</h4>
+<p>I'm not very good at meta</p>
+
+<a name="163822322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822322">Kevin Buzzard (Apr 20 2019 at 22:37)</a>:</h4>
+<p>you have to spoonfeed me :-/</p>
+
+<a name="163822324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822324">Simon Hudon (Apr 20 2019 at 22:37)</a>:</h4>
+<p>Give me a moment, I'll PR it</p>
+
+<a name="163822544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822544">Simon Hudon (Apr 20 2019 at 22:43)</a>:</h4>
+<p>Just update mathlib to HEAD</p>
+
+<a name="163822545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822545">Simon Hudon (Apr 20 2019 at 22:43)</a>:</h4>
+<p>Revision 9daa1a579fd86c537229c34a00a18a23fdad4db8</p>
+
+<a name="163822874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822874">Kevin Buzzard (Apr 20 2019 at 22:52)</a>:</h4>
+<p>And now I have to compile mathlib manually, right?</p>
+
+<a name="163822882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822882">Kevin Buzzard (Apr 20 2019 at 22:52)</a>:</h4>
+<p>You have given me an assembly manual for your new tool, and now I have to build it myself.</p>
+
+<a name="163822894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822894">Kevin Buzzard (Apr 20 2019 at 22:53)</a>:</h4>
+<p>I've learnt a lot more about git recently. The perfectoid project has taught me a lot about teamwork.</p>
+
+<a name="163822951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822951">Simon Hudon (Apr 20 2019 at 22:54)</a>:</h4>
+<p>:) yeah, unfortunately, being on the bleeding edge means you have to do more work yourself. You can also wait until it gets into the nightly build</p>
+
+<a name="163822969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163822969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163822969">Kevin Buzzard (Apr 20 2019 at 22:55)</a>:</h4>
+<p>I don't mind compiling. I am only just beginning to realise that it's much better for you to make a PR than it is to start posting code here. it's easier for both you and me.</p>
+
+<a name="163823020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163823020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163823020">Kevin Buzzard (Apr 20 2019 at 22:56)</a>:</h4>
+<p>you get a preliminary version up and running at your end, throw out a new branch and I can get it, compile, and test it. It's all just dawning on me really, how all this stuff works.</p>
+
+<a name="163823219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163823219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163823219">Simon Hudon (Apr 20 2019 at 23:02)</a>:</h4>
+<p>I find it really interesting how important it is to learning to write very large proofs to learn to just use the tools effectively</p>
+
+<a name="163823237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163823237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163823237">Kevin Buzzard (Apr 20 2019 at 23:03)</a>:</h4>
+<p>We're 11000 lines in and are running into technical issues with the typeclass system; debugging these instances is, for me, the best way of understanding them; it's better than just asking. I am finally learning to find my own way around Lean.</p>
+
+<a name="163826406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826406">Mario Carneiro (Apr 21 2019 at 00:36)</a>:</h4>
+<p>I like the idea of <code>clear_except</code>, but it would be nice if it can be written <code>clear - h1 h2</code></p>
+
+<a name="163826418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826418">Simon Hudon (Apr 21 2019 at 00:37)</a>:</h4>
+<p>Are you suggesting we put it into core?</p>
+
+<a name="163826591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826591">Mario Carneiro (Apr 21 2019 at 00:42)</a>:</h4>
+<p>that or make a <code>clear'</code></p>
+
+<a name="163826598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826598">Mario Carneiro (Apr 21 2019 at 00:42)</a>:</h4>
+<p>Actually maybe that's a thing we can do on the community fork now... update all the core tactics to match the primed versions</p>
+
+<a name="163826600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826600">Mario Carneiro (Apr 21 2019 at 00:43)</a>:</h4>
+<p>they should all be backward compatible afaik</p>
+
+<a name="163826604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826604">Simon Hudon (Apr 21 2019 at 00:43)</a>:</h4>
+<p>I agree with the latest statement.</p>
+
+<a name="163826613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826613">Simon Hudon (Apr 21 2019 at 00:43)</a>:</h4>
+<p>The thing with the <code>clear - h</code> idea is: does <code>clear h - h'</code> mean anything? Should it mean something?</p>
+
+<a name="163826744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826744">Mario Carneiro (Apr 21 2019 at 00:47)</a>:</h4>
+<p>the thing after clear is a list of names so it's not a problem</p>
+
+<a name="163826805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826805">Mario Carneiro (Apr 21 2019 at 00:48)</a>:</h4>
+<p>I was thinking only <code>clear h1 h2</code> or <code>clear - h1 h2</code></p>
+
+<a name="163826815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826815">Mario Carneiro (Apr 21 2019 at 00:49)</a>:</h4>
+<p><code>clear h - h'</code> doesn't really mean anything not expressible with one of the other two options</p>
+
+<a name="163826936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826936">Simon Hudon (Apr 21 2019 at 00:52)</a>:</h4>
+<p>And if you want to clear everything, you write <code>clear -</code> which I don't like</p>
+
+<a name="163826942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826942">Simon Hudon (Apr 21 2019 at 00:52)</a>:</h4>
+<p>Maybe we could have a tactic called <code>clear_all</code> and add options <code>clear_all - h0 h1</code></p>
+
+<a name="163826998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163826998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163826998">Mario Carneiro (Apr 21 2019 at 00:54)</a>:</h4>
+<p>btw this notation exactly matches the coq tactic iirc</p>
+
+<a name="163827002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163827002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163827002">Mario Carneiro (Apr 21 2019 at 00:54)</a>:</h4>
+<p>what about <code>clear * - h1 h2</code>?</p>
+
+<a name="163827067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163827067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163827067">Mario Carneiro (Apr 21 2019 at 00:56)</a>:</h4>
+<p>also there is another predicate I can imagine saying which isn't expressible: clear everything except for <code>x</code> and the hypotheses that depend on <code>x</code></p>
+
+<a name="163830363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163830363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163830363">Kevin Buzzard (Apr 21 2019 at 02:35)</a>:</h4>
+<p>Oh, <code>clear_except</code> works <em>really</em> well for me! Thank you Simon -- you are a master tool maker when it comes to things like this.</p>
+
+<a name="163830433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163830433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163830433">Kevin Buzzard (Apr 21 2019 at 02:37)</a>:</h4>
+<p>A tactic state with over 30 hypotheses became</p>
+<div class="codehilite"><pre><span></span><span class="n">A</span> <span class="o">:</span> <span class="n">Huber_pair</span><span class="o">,</span>
+<span class="n">v</span> <span class="o">:</span> <span class="err">↥</span><span class="o">(</span><span class="n">Spa</span> <span class="n">A</span><span class="o">),</span>
+<span class="n">zero</span> <span class="n">zero_1</span> <span class="o">:</span> <span class="n">ring_completion</span> <span class="o">(</span><span class="n">valuation_field</span> <span class="o">(</span><span class="n">out</span> <span class="o">(</span><span class="n">v</span><span class="bp">.</span><span class="n">val</span><span class="o">)))</span>
+<span class="err">⊢</span> <span class="n">zero_1</span> <span class="bp">=</span> <span class="n">zero</span>
+</pre></div>
+
+<a name="163830438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clearing%20all%20hypothesis/near/163830438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76367clearingallhypothesis.html#163830438">Simon Hudon (Apr 21 2019 at 02:37)</a>:</h4>
+<p>I cheated: I've been using it for over a year so I had some time to improve it</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

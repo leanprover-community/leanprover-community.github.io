@@ -1,0 +1,192 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/94764unbundledequiv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html">unbundled equiv</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193427391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193427391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193427391">David Wärn (Apr 09 2020 at 09:41)</a>:</h4>
+<p>Is there no typeclass saying that a specified function has a two-sided inverse? Like <code>bijective f</code> but carrying data for the inverse. I tried to define this but noticed that simp doesn't like the lemma <code>f (inv f y) = y</code></p>
+
+<a name="193427521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193427521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193427521">Kenny Lau (Apr 09 2020 at 09:43)</a>:</h4>
+<p>you can create your own structure.</p>
+
+<a name="193427931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193427931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193427931">Mario Carneiro (Apr 09 2020 at 09:47)</a>:</h4>
+<p>That's <code>equiv</code></p>
+
+<a name="193427956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193427956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193427956">Mario Carneiro (Apr 09 2020 at 09:47)</a>:</h4>
+<p>however it bundles both functions inside the structure</p>
+
+<a name="193428027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193428027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193428027">Mario Carneiro (Apr 09 2020 at 09:48)</a>:</h4>
+<p>which plays better with simp lemmas like the one you gave</p>
+
+<a name="193428058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193428058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193428058">Kenny Lau (Apr 09 2020 at 09:48)</a>:</h4>
+<p>this new structure would be a subsingleton, which might have some advantage</p>
+
+<a name="193433667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193433667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193433667">Scott Morrison (Apr 09 2020 at 10:49)</a>:</h4>
+<p><code>is_iso</code></p>
+
+<a name="193433787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193433787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193433787">Scott Morrison (Apr 09 2020 at 10:50)</a>:</h4>
+<p>You might have to make sure <code>category_theory.types</code> is also imported, to hook in the right instance.</p>
+
+<a name="193436631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193436631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193436631">David Wärn (Apr 09 2020 at 11:22)</a>:</h4>
+<p>I like this idea</p>
+
+<a name="193436843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193436843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193436843">David Wärn (Apr 09 2020 at 11:24)</a>:</h4>
+<p>How do I tell Lean to think of my function as a hom?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">is_iso</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">β</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Here Lean complains that f is a <code>\r</code> arrow and not an <code>\h</code> arrow (unless I declare it as an <code>\h</code> arrow to begin with)</p>
+
+<a name="193438114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193438114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193438114">Johan Commelin (Apr 09 2020 at 11:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="130377">@David Wärn</span> Weird... that shouldn't happen</p>
+
+<a name="193438406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193438406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193438406">Johan Commelin (Apr 09 2020 at 11:42)</a>:</h4>
+<p>The problem is that it doesn't find the category instance...</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">category</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">is_iso</span> <span class="kt">Type</span> <span class="bp">_</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="193438416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193438416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193438416">Johan Commelin (Apr 09 2020 at 11:42)</a>:</h4>
+<p>Don't ask me why it doesn't...</p>
+
+<a name="193438471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193438471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193438471">Johan Commelin (Apr 09 2020 at 11:43)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">is_iso</span> <span class="kt">Type</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span>
+</pre></div>
+
+<a name="193438658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193438658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193438658">Kevin Buzzard (Apr 09 2020 at 11:46)</a>:</h4>
+<p><code>include</code> the instance? Isn't this often what we have to do?</p>
+
+<a name="193439279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193439279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193439279">David Wärn (Apr 09 2020 at 11:54)</a>:</h4>
+<p><code>include category_theory.types</code> is invalid as <code>types</code> is not a parameter/variable</p>
+
+<a name="193439321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193439321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193439321">David Wärn (Apr 09 2020 at 11:54)</a>:</h4>
+<p><code>#print instances category</code> shows that the instance is in scope anyway</p>
+
+<a name="193439425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193439425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193439425">Kevin Buzzard (Apr 09 2020 at 11:55)</a>:</h4>
+<p>Even though it's in scope, it is sometimes not picked up because of universe issues.</p>
+
+<a name="193439920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193439920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193439920">Johan Commelin (Apr 09 2020 at 12:00)</a>:</h4>
+<p>Even</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">is_iso</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">β</span><span class="o">)</span>
+</pre></div>
+
+
+<p>doesn't work</p>
+
+<a name="193440440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193440440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193440440">Scott Morrison (Apr 09 2020 at 12:05)</a>:</h4>
+<p>Hmm... that's a pity.</p>
+
+<a name="193440460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193440460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193440460">Scott Morrison (Apr 09 2020 at 12:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> -- could you explain to me the difference between <code>{ }</code> brackets and the double braces I've seen you use?</p>
+
+<a name="193440467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193440467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193440467">Scott Morrison (Apr 09 2020 at 12:05)</a>:</h4>
+<p>I never learnt this.</p>
+
+<a name="193440625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193440625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193440625">Scott Morrison (Apr 09 2020 at 12:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bar</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_iso</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">β</span> <span class="n">f</span>
+</pre></div>
+
+<a name="193440657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193440657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193440657">Scott Morrison (Apr 09 2020 at 12:07)</a>:</h4>
+<p>works, but you can't replace the \beta with an _, even if you supply the additional universe level <code>@is_iso.{0 1}</code>.</p>
+
+<a name="193441772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193441772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193441772">Mario Carneiro (Apr 09 2020 at 12:19)</a>:</h4>
+<p>a double brace argument is implicit but it doesn't get applied unless some argument coming after it also gets applied. For example if <code>f : \all {{x y : A}}, A -&gt; A</code> then <code>f</code> results in just <code>@f</code>, while <code>f z</code> is elaborated to <code>@f _ _ z</code></p>
+
+<a name="193441799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193441799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193441799">Johan Commelin (Apr 09 2020 at 12:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think <code>function.injective</code> is a good example.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="err">\</span><span class="k">forall</span> <span class="o">{{</span><span class="n">x</span> <span class="n">y</span><span class="o">}},</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>without the double braces <code>hf : function.injective f</code> would have type <code>f ?1 = f ?2 → ?1 = ?2</code>. And you would get two crazy meta-variable goals. But <em>with</em> the double braces, <code>hf : function.injective f</code> has type <code>\forall {x y}, f x = f y → x = y</code>. Does that make sense?</p>
+
+<a name="193441878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193441878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193441878">Mario Carneiro (Apr 09 2020 at 12:20)</a>:</h4>
+<p>It is good for definitions that are hiding a forall, like <code>set.subset</code> and <code>function.injective</code></p>
+
+<a name="193442201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193442201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193442201">Johan Commelin (Apr 09 2020 at 12:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113488-general/topic/unbundled.20equiv/near/193440657" title="#narrow/stream/113488-general/topic/unbundled.20equiv/near/193440657">said</a>:</p>
+<blockquote>
+<p>works, but you can't replace the \beta with an _, even if you supply the additional universe level <code>@is_iso.{0 1}</code>.</p>
+</blockquote>
+<p>This is really annoying and sad....</p>
+
+<a name="193446693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbundled%20equiv/near/193446693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94764unbundledequiv.html#193446693">Scott Morrison (Apr 09 2020 at 13:04)</a>:</h4>
+<p>This is the best I can do so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">epi_mono</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+
+<span class="c1">-- We can define an `abbreviation` wrapper that</span>
+<span class="c1">-- lifts honest functions to morphisms in the category `Type`.</span>
+
+<span class="kn">abbreviation</span> <span class="n">as_hom</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">f</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">g</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">[</span><span class="n">is_iso</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)]</span> <span class="o">:</span> <span class="n">mono</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">[</span><span class="n">is_iso</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)]</span> <span class="o">:</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)</span> <span class="err">≫</span> <span class="n">inv</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+
+<span class="c1">-- If you don&#39;t mind some notation you can use fewer keystrokes:</span>
+
+<span class="kn">notation</span>  <span class="bp">`</span><span class="err">↾</span><span class="bp">`</span> <span class="n">f</span> <span class="o">:</span> <span class="mi">200</span> <span class="o">:=</span> <span class="n">as_hom</span> <span class="n">f</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span> <span class="o">:=</span> <span class="err">↾</span><span class="n">f</span> <span class="err">≫</span> <span class="err">↾</span><span class="n">g</span>
+<span class="kn">example</span> <span class="o">[</span><span class="n">is_iso</span> <span class="err">↾</span><span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="n">mono</span> <span class="err">↾</span><span class="n">f</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">[</span><span class="n">is_iso</span> <span class="err">↾</span><span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="err">↾</span><span class="n">f</span> <span class="err">≫</span> <span class="n">inv</span> <span class="err">↾</span><span class="n">f</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

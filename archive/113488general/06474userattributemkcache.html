@@ -1,0 +1,206 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06474userattributemkcache.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html">user_attribute, mk_cache</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="160992849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992849">Scott Morrison (Mar 17 2019 at 10:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, is there any chance you could quickly explain how <code>user_attribute X Y</code> works?</p>
+<p>I'm struggling to work out what's going on in attribute caching. In particular, in <code>cache_cfg</code>, the <code>mk_cache</code> field is meant to be a <code>list name -&gt; tactic X</code>. When is this function invoked? What is the list of names passed to it?</p>
+
+<a name="160992861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992861">Scott Morrison (Mar 17 2019 at 10:13)</a>:</h4>
+<p>It seems that the type <code>X</code> is some global cache object associated with the attribute, and the type <code>Y</code> is a "decorator" on every name that has been tagged with the attribute, that you can recover using <code>attr.get_param name</code>, which is a <code>tactic Y</code>.</p>
+
+<a name="160992901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160992901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160992901">Scott Morrison (Mar 17 2019 at 10:14)</a>:</h4>
+<p>But how do you interact with the <code>X</code>?</p>
+
+<a name="160993432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993432">Scott Morrison (Mar 17 2019 at 10:33)</a>:</h4>
+<p>... Okay, I think I understand.</p>
+
+<a name="160993474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993474">Scott Morrison (Mar 17 2019 at 10:34)</a>:</h4>
+<p>the function in <code>mk_cache</code> is called some subset of the times that <code>attr.get_cache</code> is called.</p>
+
+<a name="160993484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993484">Scott Morrison (Mar 17 2019 at 10:35)</a>:</h4>
+<p>Certainly if <code>attr.get_cache</code> hasn't been called before, <code>mk_cache</code> runs. If any declarations have had the attribute added since the last call to <code>attr.get_cache</code>, <code>mk_cache</code> runs.</p>
+
+<a name="160993487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993487">Scott Morrison (Mar 17 2019 at 10:35)</a>:</h4>
+<p>When nothing has changed since the last call to <code>attr.get_cache</code>, <code>mk_cache</code> may or may not run...! I'm guessing this nondeterministic behaviour might be a race condition.</p>
+
+<a name="160993601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993601">Scott Morrison (Mar 17 2019 at 10:39)</a>:</h4>
+<p>This seems.... not very useful. :-) In particular, when you add the attribute to a new declaration, there's no way to update the old value of the cache, because <code>mk_cache</code> ... oh, can <code>mk_cache</code> call <code>get_cache</code>? But still, it seems there's no way to know which declarations have newly received the attribute since the last call to <code>mk_cache</code>, as <code>mk_cache</code> is just passed the entire list of names, so you're still having to look at all the names that carry the attribute.</p>
+
+<a name="160993657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160993657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160993657">Scott Morrison (Mar 17 2019 at 10:40)</a>:</h4>
+<p>and in any case, <strong>no</strong>, <code>mk_cache</code> cannot call <code>get_cache</code> (unless your goal is SIGBUS).</p>
+
+<a name="160998301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998301">Simon Hudon (Mar 17 2019 at 13:12)</a>:</h4>
+<p>Interesting. I didn't know the last bit.</p>
+
+<a name="160998407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998407">Simon Hudon (Mar 17 2019 at 13:15)</a>:</h4>
+<p>I haven't confirmed it but I believe this works on cache invalidation logic. Every time you add the attribute, you invalidate the cache. Then, when you call <code>get_cache</code>, you rebuild the cache. The idea is that you can add the attribute on a few lemmas and if you don't query the cache in between, it should fairly fast. After that, you can use the cache many time. The first time is going to be the most expensive but after that, every invocation will be very fast.</p>
+
+<a name="160998466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998466">Simon Hudon (Mar 17 2019 at 13:16)</a>:</h4>
+<p>And I suspect that not building the cache incrementally is done to make the cache more reliable: <code>mk_cache</code> expresses a simple relation between the set of declaration that has the attribute and what the cache should be. If you make it incremental it's much harder to use</p>
+
+<a name="160998475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998475">Simon Hudon (Mar 17 2019 at 13:17)</a>:</h4>
+<p>And very easy to get it wrong</p>
+
+<a name="160998602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/160998602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#160998602">Simon Hudon (Mar 17 2019 at 13:20)</a>:</h4>
+<p>The slowest thing you can do from that perspective (which I do not think is any slower than not having a cache) is have a long sequence where you set an attribute, then query the cache, then set an attribute and so on. If you want to make those faster, you can do as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo1</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo2</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo3</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo4</span> <span class="bp">...</span>
+<span class="kn">lemma</span> <span class="n">foo5</span> <span class="bp">...</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">my_attribute</span><span class="o">]</span> <span class="n">foo1</span> <span class="n">foo2</span> <span class="n">foo3</span> <span class="n">foo4</span> <span class="n">foo5</span>
+</pre></div>
+
+
+<p>I don't think it will be much of a gain unless you have a lot of  lemmas that don't depend on each other through your tactic.</p>
+
+<a name="161012233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012233">Koundinya Vajjha (Mar 17 2019 at 19:51)</a>:</h4>
+<p>I would wager to guess that <code>mk_cache</code> is run as soon as the tagged declaration is parsed.</p>
+
+<a name="161012824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012824">Koundinya Vajjha (Mar 17 2019 at 20:09)</a>:</h4>
+<p>I was more interested in the following scenario: If I have two declarations in two files which do not import each other, both marked with the user attribute, is there any way that running <code>get_cache</code> in one file will also include the cached declaration in the other file?</p>
+
+<a name="161012828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161012828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161012828">Koundinya Vajjha (Mar 17 2019 at 20:09)</a>:</h4>
+<p>Or do I have to have a master file which imports both files? And the cache has to be recomputed in that file?</p>
+
+<a name="161014541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014541">Scott Morrison (Mar 17 2019 at 20:57)</a>:</h4>
+<blockquote>
+<p>Or do I have to have a master file which imports both files? And the cache has to be recomputed in that file?</p>
+</blockquote>
+<p>I'm pretty certain you need a master file, and the cache will be recomputed there. Anything else would require global mutable state in the environment, and that seems unlikely.</p>
+
+<a name="161014597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014597">Scott Morrison (Mar 17 2019 at 20:58)</a>:</h4>
+<p>The fact that there is a race condition is and the computation of the cache is nondeterministic it pretty easy to verify. Run the following in VSCode, and read the trace messages:</p>
+<div class="codehilite"><pre><span></span>-- open native
+open tactic
+
+@[user_attribute]
+meta def example_attribute : user_attribute unit unit := {
+  name := `example,
+  descr := &quot;An example attribute&quot;,
+  cache_cfg :=
+   { mk_cache := λ ls, (do trace format!&quot;names: {ls}&quot;),
+     dependencies := [] },
+  after_set := some $ λ name priority persistent, (do trace format!&quot;set {name}&quot;),
+  before_unset := some $ λ name persistent, (do trace format!&quot;unset {name}&quot;)
+}
+
+def f := 3
+def g := 4
+
+section
+local attribute [example] f
+local attribute [-example] f
+local attribute [example] f
+end -- Notice no &quot;unset&quot; at the end of the section?
+
+section
+run_cmd success_if_fail (example_attribute.get_param `f &gt;&gt;= trace)
+
+local attribute [example] f
+run_cmd example_attribute.get_param `f &gt;&gt;= trace
+end
+
+set_option trace.user_attributes_cache true
+attribute [example] f
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+-- it seems non-deterministic whether this next line finds a cached value
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+attribute [example] g
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+
+attribute [example] g
+
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+run_cmd example_attribute.get_cache &gt;&gt;= trace
+</pre></div>
+
+<a name="161014830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014830">Scott Morrison (Mar 17 2019 at 21:04)</a>:</h4>
+<p>In any case... The reason I'm currently interested in this is my <code>library_search</code> tactic, which requires looking over ever declaration in the library. It actually seems to be (incredibly?) fast already, but I was hoping to see if I could use attribute caching to make it even faster. My idea had been to make an auxiliary attribute "has_been_indexed", or something, and to progressively update the map of "lemmas arranged by head symbols" I need every time someone runs <code>library_search</code>. But for this is help, we'd need to be able to reuse previous map, and just add to it the all the lemmas which have been added to the environment since the last call to <code>library_search</code>. That isn't possible, it seems. Given that I'd expect there to be a new declaration roughly every time <code>library_search</code> is called, the cache wouldn't be hit often: only ever for multiple invocations of <code>library_search</code> within the same proof block.</p>
+
+<a name="161014836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161014836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161014836">Scott Morrison (Mar 17 2019 at 21:04)</a>:</h4>
+<p>In any case, this isn't a roadblock. It looks like <code>library_search</code> may be fast enough to be usable.</p>
+
+<a name="161135447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161135447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161135447">Keeley Hoek (Mar 19 2019 at 09:54)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110087">@Scott Morrison</span>, essentially just because <code>get_options</code> and <code>set_options</code> are <code>tactic_state</code> local, I have a way to have the lemma cache be generated only the first time <code>library_search</code> is used in particular a tactic block.</p>
+
+<a name="161220913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161220913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161220913">Keeley Hoek (Mar 20 2019 at 07:01)</a>:</h4>
+<p>Here's a working demo: <a href="https://github.com/khoek/lean-local-cache" target="_blank" title="https://github.com/khoek/lean-local-cache">https://github.com/khoek/lean-local-cache</a></p>
+
+<a name="161221440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161221440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161221440">Johan Commelin (Mar 20 2019 at 07:13)</a>:</h4>
+<p>Does that require modifying core?</p>
+
+<a name="161223477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161223477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161223477">Keeley Hoek (Mar 20 2019 at 07:54)</a>:</h4>
+<p>No, all above board</p>
+
+<a name="161224041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161224041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161224041">Johan Commelin (Mar 20 2019 at 08:04)</a>:</h4>
+<p>Ok, cool!</p>
+
+<a name="161225494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161225494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161225494">Scott Morrison (Mar 20 2019 at 08:31)</a>:</h4>
+<p>And in a second begin end block of the same file, it is regenerated again, right?</p>
+
+<a name="161225725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161225725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161225725">Keeley Hoek (Mar 20 2019 at 08:35)</a>:</h4>
+<p>Yes</p>
+
+<a name="161225748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161225748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161225748">Keeley Hoek (Mar 20 2019 at 08:36)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/837" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/837">https://github.com/leanprover-community/mathlib/pull/837</a><br>
+I'm rocking some tests</p>
+
+<a name="161226716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161226716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161226716">Sayantan Majumdar (Mar 20 2019 at 08:52)</a>:</h4>
+<p>came accross error: toolchain 'nightly' does not have the binary</p>
+
+<a name="161226727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/user_attribute%2C%20mk_cache/near/161226727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06474userattributemkcache.html#161226727">Sayantan Majumdar (Mar 20 2019 at 08:52)</a>:</h4>
+<p>solved one error now the next</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,590 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/41788thenyzandfurthermore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html">"...then y = z and furthermore...</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="157925525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925525">Kevin Buzzard (Feb 09 2019 at 10:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">set</span> <span class="o">(</span><span class="n">K</span> <span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">A</span> <span class="n">z</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  A y = A z</span>
+<span class="cm">term</span>
+<span class="cm">  A z</span>
+<span class="cm">has type</span>
+<span class="cm">  set (K z)</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  set (K y)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>"If two valuations are equivalent then (a) their supports (<code>y</code> and <code>z</code>) are equal and furthermore (b) the balls (<code>A y</code> and <code>A z</code>) of radius 1 in the corresponding fields (<code>K y</code> and <code>K z</code>) constructed using their supports are equal too. "</p>
+<p>We mathematicians know that because <code>y</code> and <code>z</code> are equal, then <code>K y</code> and <code>K z</code> are equal so it makes sense to ask whether the subsets <code>A y</code> and <code>A z</code> are equal. </p>
+<p>I have a feeling that this is going to look quite artificial in Lean. Of course the above attempt doesn't even typecheck.</p>
+
+<a name="157925579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925579">Kenny Lau (Feb 09 2019 at 10:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">set</span> <span class="o">(</span><span class="n">K</span> <span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="n">y</span> <span class="bp">==</span> <span class="n">A</span> <span class="n">z</span> <span class="o">:=</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">heq</span><span class="bp">.</span><span class="n">rfl</span>
+</pre></div>
+
+<a name="157925589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925589">Kevin Buzzard (Feb 09 2019 at 10:49)</a>:</h4>
+<p>Oh heck.</p>
+
+<a name="157925592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925592">Kevin Buzzard (Feb 09 2019 at 10:49)</a>:</h4>
+<p>This smells bad.</p>
+
+<a name="157925646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925646">Kevin Buzzard (Feb 09 2019 at 10:50)</a>:</h4>
+<p>(if only the proof were so simple -- in my example A is not just a function of y (the support) but actually a function of the valuation whose support y is).</p>
+
+<a name="157925647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925647">Mario Carneiro (Feb 09 2019 at 10:50)</a>:</h4>
+<p>Can we avoid the type dependency <code>K</code>?</p>
+
+<a name="157925649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925649">Kevin Buzzard (Feb 09 2019 at 10:50)</a>:</h4>
+<p>Yeah that's an interesting question.</p>
+
+<a name="157925657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925657">Kevin Buzzard (Feb 09 2019 at 10:51)</a>:</h4>
+<p>You're asking if there's some super-convoluted way of rewriting it.</p>
+
+<a name="157925660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925660">Kenny Lau (Feb 09 2019 at 10:51)</a>:</h4>
+<p>he's asking for you to make sure you didn't use <code>induction</code> on a quotient</p>
+
+<a name="157925661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925661">Mario Carneiro (Feb 09 2019 at 10:51)</a>:</h4>
+<p>yes, I think... you need to rethink what you mean by comparing elements of different fields</p>
+
+<a name="157925706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925706">Kevin Buzzard (Feb 09 2019 at 10:52)</a>:</h4>
+<p>They are unrelated fields in general. If P and Q are two prime ideals of a ring R then I want to compare a subset of Frac(R/P) with a subset of Frac(R/Q).</p>
+
+<a name="157925707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925707">Kevin Buzzard (Feb 09 2019 at 10:52)</a>:</h4>
+<p>under the hypothesis that actually P = Q</p>
+
+<a name="157925715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925715">Kenny Lau (Feb 09 2019 at 10:53)</a>:</h4>
+<p>can you <code>subst</code> that equality?</p>
+
+<a name="157925717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925717">Mario Carneiro (Feb 09 2019 at 10:53)</a>:</h4>
+<p>yes, but it probably won't end well</p>
+
+<a name="157925719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925719">Mario Carneiro (Feb 09 2019 at 10:53)</a>:</h4>
+<p>depending on the context</p>
+
+<a name="157925776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925776">Kevin Buzzard (Feb 09 2019 at 10:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="n">w</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="n">v</span> <span class="n">w</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span>
+<span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">set</span> <span class="o">(</span><span class="n">K</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="o">:</span> <span class="n">A</span> <span class="n">v</span> <span class="bp">=</span> <span class="n">A</span> <span class="n">w</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>This is what I actually have.</p>
+
+<a name="157925778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925778">Mario Carneiro (Feb 09 2019 at 10:55)</a>:</h4>
+<p>For the bit that you just said, I would start building morphisms. Is <code>Frac(-)</code> is an operator on rings, or is <code>Frac(R/-)</code> the operator (on ideals)?</p>
+
+<a name="157925780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925780">Kevin Buzzard (Feb 09 2019 at 10:55)</a>:</h4>
+<p>Frac sends an integral domain to its field of fractions.</p>
+
+<a name="157925824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925824">Mario Carneiro (Feb 09 2019 at 10:56)</a>:</h4>
+<p>and what is the integral domain here?</p>
+
+<a name="157925825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925825">Kevin Buzzard (Feb 09 2019 at 10:56)</a>:</h4>
+<p>It's R / supp(v)</p>
+
+<a name="157925844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925844">Mario Carneiro (Feb 09 2019 at 10:57)</a>:</h4>
+<p>Okay, so is there a morphism builder for Frac? That is, if we have a ring hom R -&gt; S, does it yield a field hom Frac(R) -&gt; Frac(S)?</p>
+
+<a name="157925887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925887">Kevin Buzzard (Feb 09 2019 at 10:58)</a>:</h4>
+<p>Given a valuation v on a ring R, one can build (a) its support (<code>f v</code>), a prime ideal of R, (b) the field of fractions R / supp(f v) (<code>K (f v)</code>) and (c) the closed unit ball in this field -- a construction which depends on v again and not just f v.</p>
+
+<a name="157925889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925889">Kevin Buzzard (Feb 09 2019 at 10:58)</a>:</h4>
+<blockquote>
+<p>Okay, so is there a morphism builder for Frac? That is, if we have a ring hom R -&gt; S, does it yield a field hom Frac(R) -&gt; Frac(S)?</p>
+</blockquote>
+<p>No, Frac is really badly behaved.</p>
+
+<a name="157925891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925891">Kevin Buzzard (Feb 09 2019 at 10:58)</a>:</h4>
+<p>Frac(Z)=Q but Frac(Z/p) is Z/p</p>
+
+<a name="157925903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925903">Kevin Buzzard (Feb 09 2019 at 10:59)</a>:</h4>
+<p>Frac (R) is a localisation, so a quotient of the set R x (R \ 0), and (R \ 0) is not at all functorial</p>
+
+<a name="157925906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925906">Mario Carneiro (Feb 09 2019 at 10:59)</a>:</h4>
+<p>okay, so maybe this is the first example of a real transfer theorrem</p>
+
+<a name="157925950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925950">Mario Carneiro (Feb 09 2019 at 11:00)</a>:</h4>
+<p>if R ~= S then Frac(R) ~= Frac(S)</p>
+
+<a name="157925951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925951">Kenny Lau (Feb 09 2019 at 11:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think he's hinting you to use the Strickland approach</p>
+
+<a name="157925955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925955">Kevin Buzzard (Feb 09 2019 at 11:00)</a>:</h4>
+<p>I am happy to use the Strickland approach but I don't yet see how to do it. I would rather Strickland it than use <code>==</code>, which I know gave Chris real problems last summer</p>
+
+<a name="157925964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157925964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157925964">Mario Carneiro (Feb 09 2019 at 11:01)</a>:</h4>
+<p>and moreover this iso computes in the expected way on the generators</p>
+
+<a name="157926003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926003">Kevin Buzzard (Feb 09 2019 at 11:02)</a>:</h4>
+<p>o_O Wedhorn moved from Paderborn and the canonical link to his adic spaces paper ("highly preliminary, do not read" so not on ArXiv) is broken :-/</p>
+
+<a name="157926015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926015">Mario Carneiro (Feb 09 2019 at 11:03)</a>:</h4>
+<p>Actually, would it be enough to have R -&gt; S an injective ring hom? That should preserve R \ 0</p>
+
+<a name="157926073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926073">Kevin Buzzard (Feb 09 2019 at 11:04)</a>:</h4>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/docs/AdicSpaces.pdf" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/docs/AdicSpaces.pdf">http://wwwf.imperial.ac.uk/~buzzard/docs/AdicSpaces.pdf</a> Proposition-Definition 1.27 part(ii) [see how mathematicians don't know the difference between Prop and Type? :-) ], page 8 of the pdf. I'm formalising the proof of (iii) -&gt; (ii). That's the context.</p>
+
+<a name="157926077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926077">Kevin Buzzard (Feb 09 2019 at 11:04)</a>:</h4>
+<p>Indeed if R injects into S then Frac(R) injects into Frac(S).</p>
+
+<a name="157926078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926078">Kevin Buzzard (Feb 09 2019 at 11:04)</a>:</h4>
+<p>But we have R/P and R/Q and there is no map in either direction in general.</p>
+
+<a name="157926090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926090">Kevin Buzzard (Feb 09 2019 at 11:05)</a>:</h4>
+<p>e.g. if R=Z/6Z then for P=(2) and Q=(3) we get Frac(R/P)=R/P=Z/2Z and Frac(R/Q)=R/Q=Z/3Z</p>
+
+<a name="157926096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926096">Kevin Buzzard (Feb 09 2019 at 11:05)</a>:</h4>
+<p>I can see that it is possible to work around all this. It would be a shame if we had to go down the following route:</p>
+
+<a name="157926149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926149">Kevin Buzzard (Feb 09 2019 at 11:07)</a>:</h4>
+<p>The closed unit ball in Frac(R/P) is a subset of Frac(R/P), whose pre-image in (R/P) x ((R/P) - 0) then lifts to a subset of R x (R - P). I can consider this as a subset of R x R.</p>
+
+<a name="157926153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926153">Kevin Buzzard (Feb 09 2019 at 11:07)</a>:</h4>
+<p>I am pretty sure that the claim in (ii) is that the two subsets of R x R coming from the two valuations are equal.</p>
+
+<a name="157926198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926198">Mario Carneiro (Feb 09 2019 at 11:08)</a>:</h4>
+<p>One bit at a time. For the quotients, we have that if P &lt;= Q then there is an injective ring hom R/Q -&gt; R/P</p>
+
+<a name="157926202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926202">Kevin Buzzard (Feb 09 2019 at 11:08)</a>:</h4>
+<blockquote>
+<p>Can we avoid the type dependency <code>K</code>?</p>
+</blockquote>
+<p>Yes. But mathematicians will sneer.</p>
+
+<a name="157926206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926206">Kevin Buzzard (Feb 09 2019 at 11:08)</a>:</h4>
+<blockquote>
+<p>One bit at a time. For the quotients, we have that if P &lt;= Q then there is an injective ring hom R/Q -&gt; R/P</p>
+</blockquote>
+<p>Yes.</p>
+
+<a name="157926217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926217">Kevin Buzzard (Feb 09 2019 at 11:09)</a>:</h4>
+<p>[Hey, I've only just noticed that I can start responding to a specific post of Mario's, think "crap, I should say what I'm responding to just to make the thread clearer", hit "quote and reply" on his original post, and it just dumps it above what I already wrote <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="157926218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926218">Mario Carneiro (Feb 09 2019 at 11:09)</a>:</h4>
+<p>Now if v respects w in the sense we talked about before then supp(v) &lt;= supp(w)</p>
+
+<a name="157926281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926281">Kevin Buzzard (Feb 09 2019 at 11:10)</a>:</h4>
+<p>OK</p>
+
+<a name="157926283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926283">Kevin Buzzard (Feb 09 2019 at 11:10)</a>:</h4>
+<p>I don't know where this is going</p>
+
+<a name="157926285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926285">Mario Carneiro (Feb 09 2019 at 11:10)</a>:</h4>
+<p>so putting it all together we obtain a ring hom from Frac(R/supp(v)) to Frac(R/supp(w))</p>
+
+<a name="157926286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926286">Kevin Buzzard (Feb 09 2019 at 11:10)</a>:</h4>
+<p>sure</p>
+
+<a name="157926296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926296">Kevin Buzzard (Feb 09 2019 at 11:11)</a>:</h4>
+<p>and if v and w are equivalent then supp(v)=supp(w) and we have an equality</p>
+
+<a name="157926297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926297">Kevin Buzzard (Feb 09 2019 at 11:11)</a>:</h4>
+<p>so in particular a morphism</p>
+
+<a name="157926300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926300">Mario Carneiro (Feb 09 2019 at 11:11)</a>:</h4>
+<p>and that's just what you need here</p>
+
+<a name="157926303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926303">Kevin Buzzard (Feb 09 2019 at 11:12)</a>:</h4>
+<p>sure.</p>
+
+<a name="157926349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926349">Kevin Buzzard (Feb 09 2019 at 11:12)</a>:</h4>
+<p>Aah I see.</p>
+
+<a name="157926369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926369">Kevin Buzzard (Feb 09 2019 at 11:13)</a>:</h4>
+<p>I think you're saying that I need to construct a function which takes in two valuations v and w, plus a proof that they're equivalent, and constructs a map Frac(R/supp(v)) -&gt; Frac(R/supp(w))</p>
+
+<a name="157926374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926374">Mario Carneiro (Feb 09 2019 at 11:13)</a>:</h4>
+<p>one thing you should NOT do is say "v = w so R/supp(v) = R/supp(w)", this is equality of types which is evil</p>
+
+<a name="157926379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926379">Kevin Buzzard (Feb 09 2019 at 11:13)</a>:</h4>
+<p>It's only evil because of your weird foundations.</p>
+
+<a name="157926380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926380">Mario Carneiro (Feb 09 2019 at 11:14)</a>:</h4>
+<p>yes</p>
+
+<a name="157926419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926419">Kevin Buzzard (Feb 09 2019 at 11:14)</a>:</h4>
+<p>In ZFC they are equal</p>
+
+<a name="157926422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926422">Mario Carneiro (Feb 09 2019 at 11:14)</a>:</h4>
+<p>yes</p>
+
+<a name="157926423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926423">Kevin Buzzard (Feb 09 2019 at 11:14)</a>:</h4>
+<p>I see.</p>
+
+<a name="157926424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926424">Mario Carneiro (Feb 09 2019 at 11:14)</a>:</h4>
+<p>I feel for you</p>
+
+<a name="157926425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926425">Kevin Buzzard (Feb 09 2019 at 11:14)</a>:</h4>
+<p>Ditto.</p>
+
+<a name="157926426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926426">Kevin Buzzard (Feb 09 2019 at 11:14)</a>:</h4>
+<p>thanks.</p>
+
+<a name="157926435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926435">Kevin Buzzard (Feb 09 2019 at 11:15)</a>:</h4>
+<p>It's like the identity map <code>F(U) -&gt; F(id U)</code> all over again isn't it.</p>
+
+<a name="157926436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926436">Mario Carneiro (Feb 09 2019 at 11:15)</a>:</h4>
+<p>yep</p>
+
+<a name="157926439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926439">Mario Carneiro (Feb 09 2019 at 11:15)</a>:</h4>
+<p>also notice that I didn't just construct a function from the valuations to the map Frac(R/supp(v)) -&gt; Frac(R/supp(w)), I went through three intermediate functions</p>
+
+<a name="157926440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926440">Kevin Buzzard (Feb 09 2019 at 11:15)</a>:</h4>
+<p>Mathematicians must use this concept all over the place.</p>
+
+<a name="157926442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926442">Mario Carneiro (Feb 09 2019 at 11:16)</a>:</h4>
+<p>these will be useful later and should probably go in mathlib</p>
+
+<a name="157926500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926500">Kevin Buzzard (Feb 09 2019 at 11:17)</a>:</h4>
+<p>I should tell you now that the word "valuation" is used in several different contexts in mathematics. In some sense the thing I'm formalising at the minute is the most general thing, it is taking values in some very general space 0 union [totally ordered group], because that's what the people doing adic spaces and perfectoid spaces need, but all the people doing p-adic analysis and rigid spaces and Berkovich spaces just need valuations taking values in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="double-struck">R</mi><mrow><mo>≥</mo><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbb{R}_{\geq0}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.934069em;vertical-align:-0.24517899999999998em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">≥</span><span class="mord mathrm mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24517899999999998em;"></span></span></span></span></span></span></span></span></p>
+
+<a name="157926543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926543">Kevin Buzzard (Feb 09 2019 at 11:18)</a>:</h4>
+<p>and all this kerfuffle about arbitrary ordered groups will just be an annoyance to them.</p>
+
+<a name="157926547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926547">Kevin Buzzard (Feb 09 2019 at 11:18)</a>:</h4>
+<p>They just want <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi><mo>=</mo><msub><mi mathvariant="double-struck">R</mi><mrow><mo>&gt;</mo><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\Gamma=\mathbb{R}_{&gt;0}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.86626em;vertical-align:-0.17737em;"></span><span class="base"><span class="mord mathrm">Γ</span><span class="mrel">=</span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&gt;</span><span class="mord mathrm mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"></span></span></span></span></span></span></span></span> and that's it</p>
+
+<a name="157926548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926548">Mario Carneiro (Feb 09 2019 at 11:18)</a>:</h4>
+<p>The stuff about valuations is probably more idiosyncratic to your development but the other two parts have to do with stuff already in mathlib</p>
+
+<a name="157926555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926555">Kevin Buzzard (Feb 09 2019 at 11:19)</a>:</h4>
+<p>Ha!</p>
+
+<a name="157926556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926556">Kevin Buzzard (Feb 09 2019 at 11:19)</a>:</h4>
+<p>Ironically I have already proved that if v and w are equivalent then supp(v) is a subset of supp(w)</p>
+
+<a name="157926557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926557">Kevin Buzzard (Feb 09 2019 at 11:19)</a>:</h4>
+<p>but I bet you can't guess why :-)</p>
+
+<a name="157926602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926602">Mario Carneiro (Feb 09 2019 at 11:20)</a>:</h4>
+<p>Surely it's the last theorem we talked about?</p>
+
+<a name="157926620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926620">Kevin Buzzard (Feb 09 2019 at 11:20)</a>:</h4>
+<p>But why did I do it already?</p>
+<p>It's because I initially wanted to prove supp(v) = supp(w), but I didn't know how to start the proof with "it suffices to prove supp(v) is a subset of supp(w)" :-)</p>
+
+<a name="157926622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926622">Kevin Buzzard (Feb 09 2019 at 11:20)</a>:</h4>
+<p>I've never been very good at WLOG</p>
+
+<a name="157926629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926629">Kevin Buzzard (Feb 09 2019 at 11:21)</a>:</h4>
+<p>so I proved the inclusion first and then just applied it twice :-)</p>
+
+<a name="157926668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/157926668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#157926668">Kevin Buzzard (Feb 09 2019 at 11:22)</a>:</h4>
+<p>"already" = "two days ago"</p>
+
+<a name="158122063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122063">Johan Commelin (Feb 12 2019 at 14:43)</a>:</h4>
+<blockquote>
+<p>One bit at a time. For the quotients, we have that if P &lt;= Q then there is an injective ring hom R/Q -&gt; R/P</p>
+</blockquote>
+<p>This is not true. The map goes the other way, and is typically not injective. So we're back to wishing for a transfer tactic again.<br>
+(Take <code>R = ℤ</code>, <code>P = 0</code>, and <code>Q = (n)</code>.)</p>
+
+<a name="158122319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122319">Kevin Buzzard (Feb 12 2019 at 14:46)</a>:</h4>
+<p>It is true that if P = Q then we have a map R/P -&gt; R/Q.</p>
+
+<a name="158122323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122323">Kevin Buzzard (Feb 12 2019 at 14:46)</a>:</h4>
+<p>Isn't this all we need?</p>
+
+<a name="158122363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122363">Kevin Buzzard (Feb 12 2019 at 14:47)</a>:</h4>
+<p>If v1 and v2 are equivalent then I can construct a map R/supp(v1) -&gt; R/supp(v2) because I showed that supp(v1)=supp(v2)</p>
+
+<a name="158122389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122389">Kevin Buzzard (Feb 12 2019 at 14:47)</a>:</h4>
+<p>I can prove that this map is functorial (because it's the fricken' identity map)</p>
+
+<a name="158122427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122427">Kevin Buzzard (Feb 12 2019 at 14:47)</a>:</h4>
+<p>and now I get maps K(v1)-&gt;K(v2) if they're equivalent</p>
+
+<a name="158122473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122473">Kevin Buzzard (Feb 12 2019 at 14:48)</a>:</h4>
+<p>and the theorem is that A(v1) gets mapped to A(v2)</p>
+
+<a name="158122519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122519">Kevin Buzzard (Feb 12 2019 at 14:48)</a>:</h4>
+<p>This all sounded fine to me. You're right about injectivity, I can believe I made a slip, but it was Mario talking about injectivity, I was always thinking about the case where the supps were equal.</p>
+
+<a name="158122626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122626">Johan Commelin (Feb 12 2019 at 14:50)</a>:</h4>
+<p>Right... but this stresses the fact this we aren't using some universal properties. It is really <em>transfer</em>. And we're doing it by hand!!!</p>
+
+<a name="158122981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158122981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158122981">Kevin Buzzard (Feb 12 2019 at 14:54)</a>:</h4>
+<p>We're proving that if v1 and v2 are related then we get a map from F v1 to F v2. That sounds generally sensible.</p>
+
+<a name="158123600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158123600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158123600">Johan Commelin (Feb 12 2019 at 15:01)</a>:</h4>
+<p>That sounds like transfer.</p>
+
+<a name="158125405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158125405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158125405">Reid Barton (Feb 12 2019 at 15:23)</a>:</h4>
+<p>I think you can still do what Mario was suggesting though, correcting the statements. I'm not really sure whether this counts as "transfer", but it's again one of those situations where you can generalize to a directed situation where there is (a small amount of) content.</p>
+
+<a name="158125528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158125528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158125528">Johan Commelin (Feb 12 2019 at 15:25)</a>:</h4>
+<p>Sure... but I guess that will almost always be the case.</p>
+
+<a name="158125553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158125553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158125553">Reid Barton (Feb 12 2019 at 15:25)</a>:</h4>
+<p>For any ideals <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>⊂</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I \subset J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">⊂</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> there's a map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>I</mi><mo>→</mo><mi>R</mi><mi mathvariant="normal">/</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">R/I \to R/J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span>. I'll call it <code>reduce I J</code>, omitting the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>⊂</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I \subset J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">⊂</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> hypothesis. It's the map with <code>reduce I J [[r]] = [[r]]</code>, and it's probably important for whatever Kevin was originally doing that it computes in this way, and isn't some silly application of <code>eq.rec</code> when <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>=</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I = J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span>.</p>
+
+<a name="158125641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158125641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158125641">Reid Barton (Feb 12 2019 at 15:26)</a>:</h4>
+<p>Then you have <code>reduce I I = id</code>, <code>reduce J K \o reduce I J = reduce I K</code>. So if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>=</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I = J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span>, then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>⊂</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">I \subset J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mrel">⊂</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>J</mi><mo>⊂</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">J \subset I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.09618em;">J</span><span class="mrel">⊂</span><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> and from these properties we learn that <code>reduce I J</code> and <code>reduce J I</code> are inverse isomorphisms.</p>
+
+<a name="158125831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158125831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158125831">Mario Carneiro (Feb 12 2019 at 15:29)</a>:</h4>
+<blockquote>
+<p>Right... but this stresses the fact this we aren't using some universal properties. It is really transfer. And we're doing it by hand!!!</p>
+</blockquote>
+<p><code>transfer</code> would not save you any of this work. It assumes you've proven all these constructions preserve the appropriate isomorphisms, and they are an input to the algorithm</p>
+
+<a name="158126067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158126067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158126067">Johan Commelin (Feb 12 2019 at 15:32)</a>:</h4>
+<p>But if the system is set up properly, then it could derive lots of these isom-preserving properties as they are being defined.</p>
+
+<a name="158126120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158126120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158126120">Reid Barton (Feb 12 2019 at 15:33)</a>:</h4>
+<p>Well... the system already knows that if <code>I = J</code> then there's a map <code>R/I -&gt; R/J</code></p>
+
+<a name="158126206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158126206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158126206">Reid Barton (Feb 12 2019 at 15:34)</a>:</h4>
+<p>it's called <code>eq.rec_on</code></p>
+
+<a name="158126222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158126222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158126222">Mario Carneiro (Feb 12 2019 at 15:35)</a>:</h4>
+<blockquote>
+<p>But if the system is set up properly, then it could derive lots of these isom-preserving properties as they are being defined.</p>
+</blockquote>
+<p>AKA "this is a basic theorem that should be proven immediately after the definition"</p>
+
+<a name="158126246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158126246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158126246">Mario Carneiro (Feb 12 2019 at 15:35)</a>:</h4>
+<p>to which I agree</p>
+
+<a name="158127890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158127890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158127890">Kevin Buzzard (Feb 12 2019 at 15:56)</a>:</h4>
+<p>The dreaded theorem is the one which turns a non-equality into an equality -- "if v1 is equivalent to v2 then two things (the supports) are <em>equal</em>". Apparently now all consequences of the fact that two things are equal now need to be written explicitly.</p>
+
+<a name="158127957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158127957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158127957">Mario Carneiro (Feb 12 2019 at 15:57)</a>:</h4>
+<p>That's not the problem. If the theorem you want was the end goal you could just <code>subst</code> and be done with it</p>
+
+<a name="158127988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158127988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158127988">Mario Carneiro (Feb 12 2019 at 15:57)</a>:</h4>
+<p>But you need this to be a <em>good</em> function, that computes well on known inputs</p>
+
+<a name="158128020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158128020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158128020">Mario Carneiro (Feb 12 2019 at 15:57)</a>:</h4>
+<p>like Reid said</p>
+
+<a name="158128121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158128121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158128121">Kevin Buzzard (Feb 12 2019 at 15:58)</a>:</h4>
+<p>The problem is that I don't understand what "computes" means.</p>
+
+<a name="158128139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158128139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158128139">Kevin Buzzard (Feb 12 2019 at 15:59)</a>:</h4>
+<p>It's an alien concept to me :-)</p>
+
+<a name="158128186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158128186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158128186">Kevin Buzzard (Feb 12 2019 at 15:59)</a>:</h4>
+<p>I only care about proving theorems. Are you saying I need to understand this "computes" business anyway?</p>
+
+<a name="158129011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158129011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158129011">Reid Barton (Feb 12 2019 at 16:08)</a>:</h4>
+<p>In principle you don't need to, as long as you have ways to manually replace things by their definitions, apply beta reduction, etc. For example, I guess metamath has no analogue of computation (though it's rather different in other ways as well).</p>
+
+<a name="158129257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158129257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158129257">Reid Barton (Feb 12 2019 at 16:11)</a>:</h4>
+<p>well maybe in situations involving more complicated dependent types you actually do need to</p>
+
+<a name="158129280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158129280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158129280">Mario Carneiro (Feb 12 2019 at 16:11)</a>:</h4>
+<p>metamath has explicit beta reduction. You might think that's a downside, but it means that you don't really have to care about the definitions of things - definitions just have a bunch of equivalent formulations, or properties that follow, that are all exactly as good as any other</p>
+
+<a name="158129756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158129756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158129756">Reid Barton (Feb 12 2019 at 16:17)</a>:</h4>
+<p>or maybe just a terminology issue--"computes well" just means that something satisfies useful <em>definitional</em> equalities</p>
+
+<a name="158130177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158130177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158130177">Reid Barton (Feb 12 2019 at 16:22)</a>:</h4>
+<p>For example, in this case we have a little triangle involving <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>I</mi></mrow><annotation encoding="application/x-tex">R/I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">R/J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> and it commutes. The maps from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> are <code>[[ ]]</code> in lean. If you define the map <code>R/I -&gt; R/J</code> using <code>quotient.lift</code> (even when <code>I = J</code>!) then this triangle will commute definitionally. If you define it using <code>eq.rec_on (h : I = J)</code> then it won't commute definitionally unless <code>h</code> is <code>rfl</code>. You have to prove it as a propositional equality, using cases on <code>h</code>.</p>
+
+<a name="158130200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158130200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158130200">Johan Commelin (Feb 12 2019 at 16:22)</a>:</h4>
+<p>But metamath doesn't have perfectoid spaces...</p>
+
+<a name="158131110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158131110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158131110">Mario Carneiro (Feb 12 2019 at 16:34)</a>:</h4>
+<p>no, because it doesn't have you. It does have the prime number theorem because it has me. We do what we are comfortable with and can wrap our heads around</p>
+
+<a name="158136822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158136822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158136822">Kevin Buzzard (Feb 12 2019 at 17:46)</a>:</h4>
+<p>So why do I care about whether a proof is <code>rfl</code> or a propositional equality which I prove and give a name and rewrite with occasionally?</p>
+
+<a name="158137596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158137596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158137596">Mario Carneiro (Feb 12 2019 at 17:56)</a>:</h4>
+<p>Mostly because it's annoying to prove those little theorems after you used <code>eq.rec</code> to construct the function. You can do it all by cases on an appropriate equality, but determining the things to generalize to make it work is often finicky</p>
+
+<a name="158138211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158138211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158138211">Reid Barton (Feb 12 2019 at 18:04)</a>:</h4>
+<p>Also when you want to use the equality, it's more convenient to use <code>rfl</code>--potentially a lot more convenient, because a single <code>rfl</code> could be the equivalent of applying a lot of lemmas</p>
+
+<a name="158382540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158382540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158382540">Kevin Buzzard (Feb 12 2019 at 19:59)</a>:</h4>
+<p>So this is merely a matter of convenience?</p>
+
+<a name="158382951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158382951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158382951">Kevin Buzzard (Feb 12 2019 at 20:03)</a>:</h4>
+<blockquote>
+<p>For example, in this case we have a little triangle involving <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>I</mi></mrow><annotation encoding="application/x-tex">R/I</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi mathvariant="normal">/</mi><mi>J</mi></mrow><annotation encoding="application/x-tex">R/J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span> and it commutes. The maps from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> are <code>[[ ]]</code> in lean. If you define the map <code>R/I -&gt; R/J</code> using <code>quotient.lift</code> (even when <code>I = J</code>!) then this triangle will commute definitionally. If you define it using <code>eq.rec_on (h : I = J)</code> then it won't commute definitionally unless <code>h</code> is <code>rfl</code>. You have to prove it as a propositional equality, using cases on <code>h</code>.</p>
+</blockquote>
+<p>I don't understand how this can be true. I thought proof irrelevance would prevent the actual choice of <code>h</code>from changing anything in any way.</p>
+
+<a name="158383058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383058">Kevin Buzzard (Feb 12 2019 at 20:04)</a>:</h4>
+<p>PS I quoted Reid's post which had <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">maths</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">m</span><span class="mord mathit">a</span><span class="mord mathit">t</span><span class="mord mathit">h</span><span class="mord mathit">s</span></span></span></span> in and the double <code>$$</code> became single <code>$</code>s which broke the maths mode.</p>
+
+<a name="158383078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383078">Kevin Buzzard (Feb 12 2019 at 20:05)</a>:</h4>
+<blockquote>
+<p>PS I quoted Reid's post which had $maths$ in and the double <code>$</code> became single `s which broke the maths mode.</p>
+</blockquote>
+<p>quoting my own post</p>
+
+<a name="158383087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383087">Reid Barton (Feb 12 2019 at 20:05)</a>:</h4>
+<p>Right, more accurate would be "unless <code>I</code> and <code>J</code> are definitionally equal"</p>
+
+<a name="158383097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383097">Kevin Buzzard (Feb 12 2019 at 20:05)</a>:</h4>
+<p>Aah I see!</p>
+
+<a name="158383106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383106">Reid Barton (Feb 12 2019 at 20:05)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>PS I quoted Reid's post which had $maths$ in and the double <code> became single </code>s which broke the maths mode.</p>
+</blockquote>
+<p>quoting my own post</p>
+</blockquote>
+<p>quoting your post</p>
+
+<a name="158383118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383118">Kevin Buzzard (Feb 12 2019 at 20:05)</a>:</h4>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>PS I quoted Reid's post which had $maths$ in and the double <code> became single </code>s which broke the maths mode.</p>
+</blockquote>
+<p>quoting my own post</p>
+</blockquote>
+<p>quoting your post</p>
+</blockquote>
+<p>quoting yours</p>
+
+<a name="158383129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22...then%20y%20%3D%20z%20and%20furthermore.../near/158383129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41788thenyzandfurthermore.html#158383129">Reid Barton (Feb 12 2019 at 20:06)</a>:</h4>
+<p>I think the sequence has converged</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

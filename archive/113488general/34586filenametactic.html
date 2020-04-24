@@ -1,0 +1,137 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/34586filenametactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html">filename tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194573534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194573534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194573534">Jason Rute (Apr 19 2020 at 01:48)</a>:</h4>
+<p>Is there a tactic (or way to write a tactic) which returns the filename (and line/col number would be better) of the file it is being run in?  I want the file to be the entry point file with the <code>begin ... end</code> block or <code>by</code> block.  This might be too much to ask for, but it doesn't hurt to ask.</p>
+
+<a name="194573737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194573737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194573737">Jason Rute (Apr 19 2020 at 01:55)</a>:</h4>
+<p>If that is not possible or even if it is: Is there a way to label traces with the filename (when being run from the command line).  The error messages are labeled with the file name, e.g.:</p>
+<div class="codehilite"><pre><span></span>/tmp/tmp_lean_project/src/test.lean:3:0: error: tactic failed, there are unsolved goals
+state:
+⊢ true
+</pre></div>
+
+
+<p>Can one do the same for traces?</p>
+
+<a name="194575131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575131">Scott Morrison (Apr 19 2020 at 02:40)</a>:</h4>
+<p>Have a look at <code>env.decl_olean decl_name</code>.</p>
+
+<a name="194575135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575135">Scott Morrison (Apr 19 2020 at 02:40)</a>:</h4>
+<p>That requires that you know a declaration made in the current file. Hopefully there is something better.</p>
+
+<a name="194575137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575137">Scott Morrison (Apr 19 2020 at 02:41)</a>:</h4>
+<p>Actually, read the linters, they must do this.</p>
+
+<a name="194575142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575142">Reid Barton (Apr 19 2020 at 02:41)</a>:</h4>
+<p>But it doesn't return anything for declarations in the current file.</p>
+
+<a name="194575155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575155">Scott Morrison (Apr 19 2020 at 02:41)</a>:</h4>
+<p>Seems so, it only uses <code>env.decl_olean</code>.</p>
+
+<a name="194575201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575201">Scott Morrison (Apr 19 2020 at 02:43)</a>:</h4>
+<p>I mean, as a terrible hack you can synthesize a new declaration, then use <code>decl_olean</code> to find the file it was defined in... <span aria-label="nauseated" class="emoji emoji-1f922" role="img" title="nauseated">:nauseated:</span></p>
+
+<a name="194575256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575256">Reid Barton (Apr 19 2020 at 02:44)</a>:</h4>
+<p>I thought about trying to generate a warning, since those are also labelled with the position, but I couldn't figure out a way to make it happen. If you were at top level, it would be doable.</p>
+
+<a name="194575274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575274">Reid Barton (Apr 19 2020 at 02:45)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113488-general/topic/filename.20tactic/near/194575201" title="#narrow/stream/113488-general/topic/filename.20tactic/near/194575201">said</a>:</p>
+<blockquote>
+<p>I mean, as a terrible hack you can synthesize a new declaration, then use <code>decl_olean</code> to find the file it was defined in... <span aria-label="nauseated" class="emoji emoji-1f922" role="img" title="nauseated">:nauseated:</span></p>
+</blockquote>
+<p>I tried this and it doesn't work because there is no location information for declarations in the current file (the name <code>decl_olean</code> is a hint)</p>
+
+<a name="194575277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575277">Scott Morrison (Apr 19 2020 at 02:45)</a>:</h4>
+<p>Ah!</p>
+
+<a name="194575279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575279">Reid Barton (Apr 19 2020 at 02:45)</a>:</h4>
+<p>though I don't see why Lean couldn't provide it in principle</p>
+
+<a name="194575283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575283">Reid Barton (Apr 19 2020 at 02:45)</a>:</h4>
+<p><code>decl_pos</code> also returns nothing</p>
+
+<a name="194575322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575322">Jason Rute (Apr 19 2020 at 02:46)</a>:</h4>
+<p>What does "top level" mean here?  Outside of any definition, theorem, etc?</p>
+
+<a name="194575327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575327">Reid Barton (Apr 19 2020 at 02:46)</a>:</h4>
+<p>Yes, where you could put a top-level command</p>
+
+<a name="194575387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575387">Reid Barton (Apr 19 2020 at 02:48)</a>:</h4>
+<p>For example, <code>#eval false</code></p>
+
+<a name="194575505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575505">Reid Barton (Apr 19 2020 at 02:53)</a>:</h4>
+<p>Hmm, thinking outside the box, if you're willing to interact with Lean through the server interface, you could obtain location information that way</p>
+
+<a name="194575542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575542">Reid Barton (Apr 19 2020 at 02:54)</a>:</h4>
+<p>It can be as simple as feeding Lean the whole file as a batch</p>
+
+<a name="194575547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575547">Reid Barton (Apr 19 2020 at 02:54)</a>:</h4>
+<p>then use a tactic which invokes <code>trace</code></p>
+
+<a name="194575568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575568">Reid Barton (Apr 19 2020 at 02:54)</a>:</h4>
+<p>Our editors know where to put the trace, so it must be in the server output</p>
+
+<a name="194575582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575582">Jason Rute (Apr 19 2020 at 02:55)</a>:</h4>
+<p>Yeah, what I'm working on now isn't using the server.  Worse case, I can run each file individually.</p>
+
+<a name="194575631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575631">Reid Barton (Apr 19 2020 at 02:57)</a>:</h4>
+<p>Are you using <code>lean --make</code>?</p>
+
+<a name="194575633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575633">Reid Barton (Apr 19 2020 at 02:57)</a>:</h4>
+<p>I don't know whether it is compatible with <code>--server</code></p>
+
+<a name="194575741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575741">Jason Rute (Apr 19 2020 at 03:01)</a>:</h4>
+<p>Probably <code>lean filename</code> or  <code>lean --make filename</code>.</p>
+
+<a name="194575743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575743">Jason Rute (Apr 19 2020 at 03:01)</a>:</h4>
+<p>Curious, how do you add warnings at the top level?</p>
+
+<a name="194575878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575878">Reid Barton (Apr 19 2020 at 03:04)</a>:</h4>
+<p><code>#eval false</code> was an example. I'm not sure if you can avoid the extraneous output.</p>
+
+<a name="194575933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filename%20tactic/near/194575933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34586filenametactic.html#194575933">Mario Carneiro (Apr 19 2020 at 03:06)</a>:</h4>
+<p>you can use <code>lean --run</code> to read a lean file and put <code>#eval main</code> at the bottom</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,107 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html">How to access the multiplication inside the monoid inside ..</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185419368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185419368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185419368">Agnishom Chattopadhyay (Jan 12 2020 at 05:09)</a>:</h4>
+<p>In line 23, <a href="https://gist.github.com/Agnishom/426552564fd1a235ac7c009c24b11c09" target="_blank" title="https://gist.github.com/Agnishom/426552564fd1a235ac7c009c24b11c09">here</a>, I have the structure <code>monoid_recognizer</code> which supposedly consists of a monoid <code>m</code> among other things.</p>
+<p>In line 41, I would like to use the multiplication involved with this monoid. However, simply refering to it as <code>*</code> would not work as would be evident from running the code. I have also tried other things like <code>M.is_monoid.mul</code>, etc.</p>
+<p>How do I get it to work?</p>
+
+<a name="185419563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185419563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185419563">Mario Carneiro (Jan 12 2020 at 05:16)</a>:</h4>
+<p>You need to make it an instance, i.e.:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">A</span><span class="o">}</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="n">monoid_recognizer</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">monoid</span> <span class="n">M</span><span class="bp">.</span><span class="n">m</span> <span class="o">:=</span> <span class="n">M</span><span class="bp">.</span><span class="n">is_monoid</span>
+</pre></div>
+
+<a name="185419578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185419578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185419578">Agnishom Chattopadhyay (Jan 12 2020 at 05:17)</a>:</h4>
+<p>That is a good idea. Thanks</p>
+
+<a name="185419619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185419619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185419619">Agnishom Chattopadhyay (Jan 12 2020 at 05:18)</a>:</h4>
+<p>What other way is there to do this? My understanding is that something like <code>M.is_monoid.mul</code> or similar thing should work</p>
+
+<a name="185434711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185434711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185434711">Chris B (Jan 12 2020 at 13:35)</a>:</h4>
+<p>This works for me :</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+let MONOID_MUL : M.m → M.m → M.m := M.is_monoid.mul
+in @dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, MONOID_MUL q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+
+<p>What error message are you getting?</p>
+
+<a name="185439052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185439052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185439052">Agnishom Chattopadhyay (Jan 12 2020 at 15:47)</a>:</h4>
+<p>That works, thanks!</p>
+<p>While this works:</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+let MONOID_MUL : M.m → M.m → M.m := M.is_monoid.mul
+in @dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, MONOID_MUL q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+
+<p>the following variants however do not:</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+@dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, M.is_monoid.mul q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+let MONOID_MUL : M.m → M.m → M.m := M.is_monoid.mul
+in @dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, M.is_monoid.mul q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+
+<p>I get the error message <code>invalid field notation, function 'monoid.mul' does not have explicit argument with type (monoid ...)</code>.</p>
+<p>I wonder why?</p>
+
+<a name="185440457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185440457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185440457">Chris B (Jan 12 2020 at 16:32)</a>:</h4>
+<p>That's a great question...  And one that I'm sure Mario or someone can answer for you lol. FWIW this works too.</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+@dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, @monoid.mul M.m M.is_monoid q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+<a name="185442984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185442984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185442984">Mario Carneiro (Jan 12 2020 at 17:47)</a>:</h4>
+<p>The problem, as the error message says, is that <code>monoid.mul</code> has an argument of type <code>monoid A</code>, but it is not explicit, so you aren't allowed to use projection notation on an element of type <code>monoid A</code> to apply <code>monoid.mul</code>. You can write <code>@monoid.mul _ M.is_monoid q (M.h [a])</code></p>
+
+<a name="185444337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185444337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185444337">Agnishom Chattopadhyay (Jan 12 2020 at 18:25)</a>:</h4>
+<p>well, why does it work when it is bound using a <code>let</code> then? As in Chris's example?</p>
+
+<a name="185449797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185449797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185449797">Mario Carneiro (Jan 12 2020 at 20:53)</a>:</h4>
+<p>Lean appears to be a bit inconsistent in the handling of partial applications and built in projections here. Demo:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">X</span> <span class="o">:</span> <span class="n">monoid</span> <span class="n">nat</span>
+<span class="kn">constant</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">func</span> <span class="o">{</span><span class="n">A</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">mul</span>   <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">func</span>  <span class="c1">-- failed to synth monoid (monoid ℕ)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">mul</span> <span class="n">a</span>  <span class="c1">-- invalid field notation, insufficient number of arguments</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">func</span> <span class="n">a</span> <span class="c1">-- invalid field notation, insufficient number of arguments</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">mul</span> <span class="n">a</span> <span class="n">b</span>   <span class="c1">-- invalid field notation, no explicit (monoid ...) arg</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">X</span><span class="bp">.</span><span class="n">func</span> <span class="n">a</span> <span class="n">b</span>  <span class="c1">-- invalid field notation, no explicit (monoid ...) arg</span>
+</pre></div>
+
+
+<p>Note that the types of <code>monoid.mul</code> and <code>monoid.func</code> are exactly the same; the only difference is that <code>monoid.mul</code> is a built in structure projection and <code>monoid.func</code> is a defined (well, axiomatized) function on <code>monoid</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,61 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/45594badcoercion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html">bad coercion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170518627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170518627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170518627">Chris Hughes (Jul 10 2019 at 07:25)</a>:</h4>
+<p>Would this function be a bad coercion? Do I have to use <code>has_coe_t</code> or something for this?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">to_matrix</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">pequiv</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">matrix</span> <span class="n">m</span> <span class="n">n</span> <span class="n">R</span>
+<span class="bp">|</span> <span class="n">i</span> <span class="n">j</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">j</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="170519834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170519834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170519834">Kenny Lau (Jul 10 2019 at 07:47)</a>:</h4>
+<p>why don't you use projection</p>
+
+<a name="170519920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170519920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170519920">Chris Hughes (Jul 10 2019 at 07:49)</a>:</h4>
+<p>I do, but then I write <code>.to_matrix</code> everywhere, and everything is long and unreadable.</p>
+
+<a name="170529332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170529332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170529332">Joe Hendrix (Jul 10 2019 at 10:22)</a>:</h4>
+<p>Can you make it a definition and add local instances where you find yourself frequently writing <code>to_matrix</code>?  The main question I have with coercision instances is whether you always want them to spread to modules that import the module that are in even indirectly.</p>
+
+<a name="170529857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170529857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170529857">Chris Hughes (Jul 10 2019 at 10:33)</a>:</h4>
+<p>The difficulty with that is I need all the theorems to be stated with whichever one I'm using.</p>
+
+<a name="170531122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170531122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170531122">Joe Hendrix (Jul 10 2019 at 10:55)</a>:</h4>
+<p>That's true, but you could still define the coe_t, just not make it an instance.</p>
+<p>What I had in mind was something like</p>
+<div class="codehilite"><pre><span></span>def to_mat_coe : coe_t (pequiv m n) (matrix m n R) := &lt;to_matrix&gt;
+local [instance] to_mat_coe
+</pre></div>
+
+
+<p>Then other modules that want the coercions just write <code>local [instance] to_mat_coe</code>.</p>
+<p>Note that the above syntax may not be exactly right, it's been a while since I used Lean 3.</p>
+
+<a name="170531970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170531970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170531970">Mario Carneiro (Jul 10 2019 at 11:12)</a>:</h4>
+<p>That will create a bunch of theorems of the form <code>@coe _ _ (to_mat_coe) foo = bar</code>, which will not be usable after the coercion goes away</p>
+
+<a name="170532008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170532008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170532008">Mario Carneiro (Jul 10 2019 at 11:13)</a>:</h4>
+<p>This can't be a coe because <code>R</code> is an out parameter</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

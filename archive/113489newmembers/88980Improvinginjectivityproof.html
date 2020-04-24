@@ -1,0 +1,146 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/88980Improvinginjectivityproof.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html">Improving injectivity proof</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189808344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189808344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189808344">Danila Kurganov (Mar 05 2020 at 16:20)</a>:</h4>
+<p>Hi, I've proved that the composition of two injective functions is itself injective, but I'd like to see if I can improve on my proof; the paper version is much more slick IMO and I want to know if I can make my Lean more paper-like. Here is the code:</p>
+<div class="codehilite"><pre><span></span>def injective {X : Type} {Y : Type} (f : X → Y) : Prop :=
+∀ a b : X, f a = f b → a = b
+
+
+theorem injective_comp2 {X Y Z : Type} (f : X → Y) (g : Y → Z) :
+  injective f → injective g → injective (g ∘ f) :=
+
+begin
+  intros injf injg,
+  unfold injective at *,
+  intros c d,
+
+  intro lefty,
+  unfold function.comp at *,
+
+  have intermediary : f c = f d,
+  apply injg,
+  exact lefty,
+
+  apply injf,
+  exact intermediary,
+end
+</pre></div>
+
+
+<p>Now usually (after some explaining) I'd just do <code>g ∘ f a = g ∘ f b → g(f(a)) = g(f(b)) → f(a) = f(b) → a = b</code>, thinking in terms of injectivity in one-direction instead of bouncing back-and-forth with have statements. Is there anyway I can do this for the above theorem?</p>
+
+<a name="189808590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189808590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189808590">Johan Commelin (Mar 05 2020 at 16:22)</a>:</h4>
+<p>I don't know if this is what you want, but you can remove all the <code>unfold</code> statements</p>
+
+<a name="189808752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189808752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189808752">Johan Commelin (Mar 05 2020 at 16:24)</a>:</h4>
+<p>Once you've done that, the <code>have</code> statement becomes redundant...</p>
+
+<a name="189809614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189809614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189809614">Danila Kurganov (Mar 05 2020 at 16:31)</a>:</h4>
+<p>How does <code>have</code> become redundant here?</p>
+<p>(I do see though that the unfold isn't of use in the backend)</p>
+
+<a name="189809745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189809745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189809745">Johan Commelin (Mar 05 2020 at 16:32)</a>:</h4>
+<p>Because your <code>have</code> is equal to the goal. So you might as well prove it directly.</p>
+
+<a name="189810274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189810274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189810274">Danila Kurganov (Mar 05 2020 at 16:37)</a>:</h4>
+<p>Oh wow that's neat!</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">injective_comp3</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">injective</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">injective</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">injective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">injf</span> <span class="n">injg</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">c</span> <span class="n">d</span><span class="o">,</span>
+
+  <span class="n">intro</span> <span class="n">lefty</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">injf</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">injg</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">lefty</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>For some reason some time ago I figured it wouldn't work so nicely...</p>
+
+<a name="189813161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189813161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189813161">Kevin Buzzard (Mar 05 2020 at 17:03)</a>:</h4>
+<p>If you're at Xena this evening I'll show you some other proofs :-)</p>
+
+<a name="189813941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189813941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189813941">Danila Kurganov (Mar 05 2020 at 17:09)</a>:</h4>
+<p>Yes please :)</p>
+
+<a name="189814795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189814795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189814795">Yury G. Kudryashov (Mar 05 2020 at 17:16)</a>:</h4>
+<p>Please use "lean" after triple backticks, then your code will be highlighted.</p>
+
+<a name="189819145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189819145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189819145">Scott Morrison (Mar 05 2020 at 17:59)</a>:</h4>
+<p>Now that you've got down to a tactic proof that only usees <code>intro</code>, <code>apply</code> and <code>exact</code>, you should practice turning this into a term-mode proof.</p>
+
+<a name="189819237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189819237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189819237">Scott Morrison (Mar 05 2020 at 18:00)</a>:</h4>
+<p>(Hint, you can do it step by step, pulling things "out the front" of the begin ... end block.)</p>
+
+<a name="189820374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189820374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189820374">Yury G. Kudryashov (Mar 05 2020 at 18:13)</a>:</h4>
+<p>Also try <code>#print injective_comp3</code></p>
+
+<a name="189821766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189821766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189821766">Chris Hughes (Mar 05 2020 at 18:29)</a>:</h4>
+<p>Here's a really short proof <code>λ hf hg _ _, (hf _ _ ∘ hg _ _)</code></p>
+
+<a name="189822286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189822286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189822286">Danila Kurganov (Mar 05 2020 at 18:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">,</span> <span class="n">a</span> <span class="n">c</span> <span class="n">d</span> <span class="o">(</span><span class="n">b</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">e</span><span class="o">)</span>
+</pre></div>
+
+
+<p>How's this? (Thanks Kevin)</p>
+
+<a name="189822414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189822414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189822414">Scott Morrison (Mar 05 2020 at 18:34)</a>:</h4>
+<p>at some point the idea that variable names should be single letters becomes a bad one. :-)</p>
+
+<a name="189822755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189822755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189822755">Marc Huisinga (Mar 05 2020 at 18:38)</a>:</h4>
+<p>we should stick to de brujin indices instead</p>
+
+<a name="189823211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189823211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189823211">Danila Kurganov (Mar 05 2020 at 18:43)</a>:</h4>
+<p>What's a term-mode proof?</p>
+
+<a name="189823827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189823827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189823827">Danila Kurganov (Mar 05 2020 at 18:49)</a>:</h4>
+<p>Also, <code>#print injective_comp3</code> gives me a messy thing to read about, but it does help with not needing to unfold everything all the time</p>
+
+<a name="189824933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Improving%20injectivity%20proof/near/189824933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88980Improvinginjectivityproof.html#189824933">Johan Commelin (Mar 05 2020 at 19:02)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="255278">Danila Kurganov</span> <a href="#narrow/stream/113489-new-members/topic/Improving.20injectivity.20proof/near/189823211" title="#narrow/stream/113489-new-members/topic/Improving.20injectivity.20proof/near/189823211">said</a>:</p>
+<blockquote>
+<p>What's a term-mode proof?</p>
+</blockquote>
+<p>A proof that doesn't use <code>begin ... end</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

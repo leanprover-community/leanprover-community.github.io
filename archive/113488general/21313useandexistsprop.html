@@ -1,0 +1,136 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/21313useandexistsprop.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html">use and exists_prop</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="158113833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158113833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158113833">Patrick Massot (Feb 12 2019 at 12:38)</a>:</h4>
+<p>For teaching purposes, I wonder whether we should slightly modify <code>use</code> to try <code>rw exsists_prop</code> at the end. It shouldn't break too many proofs since you can still use <code>use</code> when the goal is a conjunction</p>
+
+<a name="158113892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158113892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158113892">Patrick Massot (Feb 12 2019 at 12:39)</a>:</h4>
+<p>I'm thinking of goal that look like <code>∃ δ &gt; 0, ...</code> where the goal becomes <code>∃ (H : δ &gt; 0), ...</code> after giving the required δ</p>
+
+<a name="158419509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158419509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158419509">Johan Commelin (Feb 13 2019 at 07:28)</a>:</h4>
+<p>I think this is a very good idea if we want this tactic to be <code>use</code>r-friendly.</p>
+
+<a name="158419512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158419512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158419512">Johan Commelin (Feb 13 2019 at 07:28)</a>:</h4>
+<p>You have my vote.</p>
+
+<a name="158440032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440032">Johan Commelin (Feb 13 2019 at 13:35)</a>:</h4>
+<p>/me <del>wrote</del> edited his first tactic...</p>
+
+<a name="158440096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440096">Johan Commelin (Feb 13 2019 at 13:36)</a>:</h4>
+<p>Voila:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">use_this</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="n">l</span> <span class="bp">&gt;&gt;</span> <span class="o">(</span><span class="n">triv</span> <span class="bp">&lt;|&gt;</span> <span class="n">try</span> <span class="bp">`</span><span class="o">[</span><span class="n">rw</span> <span class="n">exists_prop</span><span class="o">]))</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="158440339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440339">Johan Commelin (Feb 13 2019 at 13:39)</a>:</h4>
+<p>In fact, I would rather see that <code>∃ p ≥ n, prime p</code> is expanded to the sane thing as soon as I enter the <code>begin end</code>-block.<br>
+Now I see <code>∃ (p : ℕ) (H : p ≥ n), prime p</code>, which is of course quite ugly. Can't some magic in <code>begin</code> turn this into<br>
+<code>∃ (p : ℕ), p ≥ n ∧ prime p</code> immediately?</p>
+
+<a name="158440419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158440419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158440419">Johan Commelin (Feb 13 2019 at 13:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> you seem to be able to make <code>begin</code> do magic tricks. Is this something that could be done?</p>
+
+<a name="158444149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158444149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158444149">Reid Barton (Feb 13 2019 at 14:30)</a>:</h4>
+<p>Well, in general, we don't want <code>begin</code> to replace things by non-defeq things</p>
+
+<a name="158444201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158444201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158444201">Johan Commelin (Feb 13 2019 at 14:31)</a>:</h4>
+<p>I wish <code>∃ p ≥ n, prime p</code> was syntactic sugar for <code>∃ (p : ℕ), p ≥ n ∧ prime p</code>.</p>
+
+<a name="158444245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158444245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158444245">Johan Commelin (Feb 13 2019 at 14:32)</a>:</h4>
+<p>I would like <code>set_option newbie_mode true</code> that would fix some of these things.<br>
+Even if we don't want that option in mathlib.</p>
+
+<a name="158444292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158444292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158444292">Reid Barton (Feb 13 2019 at 14:32)</a>:</h4>
+<p>Maybe better than <code>rw exists_prop</code> would be whatever the version with <code>apply</code> would be, so that it only applies at the outermost position</p>
+
+<a name="158444616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/158444616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#158444616">Johan Commelin (Feb 13 2019 at 14:35)</a>:</h4>
+<p>Hmm, that makes sense.</p>
+
+<a name="185738764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185738764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185738764">Patrick Massot (Jan 15 2020 at 20:10)</a>:</h4>
+<p>I'm revisiting an old thread since it's Lean-teaching time again. Should we replace <a href="https://github.com/leanprover-community/mathlib/blob/3053a16942cf8bc388eb4758cf9f9f5c0ff02ccb/src/tactic/interactive.lean#L615-L616" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/3053a16942cf8bc388eb4758cf9f9f5c0ff02ccb/src/tactic/interactive.lean#L615-L616">https://github.com/leanprover-community/mathlib/blob/3053a16942cf8bc388eb4758cf9f9f5c0ff02ccb/src/tactic/interactive.lean#L615-L616</a> by:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">use</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="n">l</span><span class="o">,</span>
+   <span class="n">try</span> <span class="n">triv</span><span class="o">,</span>
+   <span class="n">try</span> <span class="o">(</span><span class="n">do</span>
+           <span class="bp">`</span><span class="o">(</span><span class="n">Exists</span> <span class="err">%%</span><span class="n">p</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+           <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">exists_prop</span><span class="bp">.</span><span class="n">mpr</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span> <span class="bp">&gt;&gt;</span> <span class="n">skip</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I tried and it doesn't break mathlib. I guess one could use a more primitive approach without using <code>apply</code> but I have no idea whether it would be faster.</p>
+
+<a name="185738841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185738841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185738841">Patrick Massot (Jan 15 2020 at 20:10)</a>:</h4>
+<p>Recall the goal is to avoid <code>∃ δ &gt; 0</code> becoming <code>∃ (H : δ &gt; 0)</code> after calling <code>use</code>.</p>
+
+<a name="185739055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185739055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185739055">Reid Barton (Jan 15 2020 at 20:13)</a>:</h4>
+<p>Probably best to wrap it in a <code>focus1 $ </code>, so the <code>try</code>s can't randomly affect other goals (not sure this is possible with the current version of <code>use</code>)</p>
+
+<a name="185745868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185745868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185745868">Patrick Massot (Jan 15 2020 at 21:25)</a>:</h4>
+<p>Thanks Reid. See <a href="https://github.com/leanprover-community/mathlib/pull/1882" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1882">https://github.com/leanprover-community/mathlib/pull/1882</a>.</p>
+
+<a name="185753839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185753839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185753839">Yury G. Kudryashov (Jan 15 2020 at 23:01)</a>:</h4>
+<p>BTW, how hard would be making <code>use a</code> as good in reporting errors as <code>refine ⟨a, _⟩</code>. Currently if I make a typo in <code>a</code>, it fails with very uninformative message, and I have to write <code>let a := ...</code> or <code>have a := ...</code> first to find out what's wrong.</p>
+
+<a name="185754091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185754091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185754091">Rob Lewis (Jan 15 2020 at 23:04)</a>:</h4>
+<p>This is added to my list of things to think about when I have spare cycles, but it sounds generally fine to me.</p>
+
+<a name="185754128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185754128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185754128">Rob Lewis (Jan 15 2020 at 23:05)</a>:</h4>
+<blockquote>
+<p>BTW, how hard would be making <code>use a</code> as good in reporting errors as <code>refine ⟨a, _⟩</code>. Currently if I make a typo in <code>a</code>, it fails with very uninformative message, and I have to write <code>let a := ...</code> or <code>have a := ...</code> first to find out what's wrong.</p>
+</blockquote>
+<p><code>use</code> is more general, since <code>use a</code> doesn't know the pattern <code>⟨a, _⟩</code>. It will work for something like <code>⟨⟨a, _⟩, _⟩</code> as well. Perhaps the error messages can be improved.</p>
+
+<a name="185755562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185755562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185755562">Reid Barton (Jan 15 2020 at 23:26)</a>:</h4>
+<p>Yeah, I never use <code>use</code>, because <code>refine</code> is already ingrained and there's a ~25% chance I have a type error in which case I will need to change it to <code>refine</code> to get a useful error message.</p>
+
+<a name="185758051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185758051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185758051">Kevin Buzzard (Jan 16 2020 at 00:05)</a>:</h4>
+<p>I always use <code>use</code>, because I am often writing Lean code in front of people who have very little clue about Lean, and the word <code>use</code> explains really well what is going on. When it works, it works great.</p>
+
+<a name="185758065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/use%20and%20exists_prop/near/185758065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21313useandexistsprop.html#185758065">Kevin Buzzard (Jan 16 2020 at 00:05)</a>:</h4>
+<p>I suspect Patrick will be in a similar position this term.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,91 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/18865Weakunivalenceimplieschoice.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html">Weak univalence implies choice</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170796501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170796501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170796501">Chris Hughes (Jul 13 2019 at 16:33)</a>:</h4>
+<p>Today I proved that <code>weak_univalence {α β : Sort*} : α ≃ β → α = β</code> and <code>quot.sound</code> imply choice as stated in Lean. You can get a weaker version of choice without <code>quot.sound</code>; this requires decidable equality on the type you're choosing from.<br>
+<a href="https://gist.github.com/ChrisHughes24/c7b8bcb3e50b2531be94f11ba2c23e3c" target="_blank" title="https://gist.github.com/ChrisHughes24/c7b8bcb3e50b2531be94f11ba2c23e3c">https://gist.github.com/ChrisHughes24/c7b8bcb3e50b2531be94f11ba2c23e3c</a> </p>
+<p>Curiously, Lean didn't ask me to mark the definition as noncomputable since I only used propositional axioms.</p>
+<p>I copied the version of <code>em</code> from the HoTT book for part of this. It's much easier to understand than the Lean proof.</p>
+
+<a name="170806753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170806753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170806753">Floris van Doorn (Jul 13 2019 at 21:56)</a>:</h4>
+<p>That is surprising, since <code>choice</code> as stated in Lean is inconsistent with full univalence.</p>
+
+<a name="170806759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170806759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170806759">Floris van Doorn (Jul 13 2019 at 21:57)</a>:</h4>
+<p>How much do you rely on definitional proof irrelevance?</p>
+
+<a name="170807448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170807448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170807448">Chris Hughes (Jul 13 2019 at 22:18)</a>:</h4>
+<p>The main non-HoTT-valid thing I do is unique choice on <code>{β : Type u // option β = plift α}</code></p>
+
+<a name="170809026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170809026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170809026">Floris van Doorn (Jul 13 2019 at 23:17)</a>:</h4>
+<p>Interesting. In HoTT that type is indeed not a proposition (subsingleton), while here it is. There is a weird interplay between proof irrelevance and "weak univalence". </p>
+<p>Some remarks (probably not new to Chris):</p>
+<ul>
+<li>Unique Choice is provable in HoTT, but the proof Chris gave is looks a little weird from a HoTT perspective, since it relies on the fact that <code>=</code> is a proposition.</li>
+<li>The proof that <code>option</code> is injective also works in HoTT. <code>unit + A ≃ unit + B → A ≃ B</code> is proven <a href="https://github.com/leanprover/lean2/blob/master/hott/types/sum.hlean#L276" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/types/sum.hlean#L276">here</a> in Lean 2 HoTT. It is not an "embedding" though (which would be necessary to do the rest of the argument in HoTT).</li>
+<li>The proof structure is interesting (weird): you first prove decidable choice, then you prove LEM from that, and then you use that to show that the decidability condition in choice is superfluous.</li>
+</ul>
+
+<a name="170809164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170809164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170809164">Floris van Doorn (Jul 13 2019 at 23:20)</a>:</h4>
+<p>Although your proof heavily relies on proof irrelevance, I don't think you ever need it to be definitional.</p>
+
+<a name="170818961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170818961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170818961">Kenny Lau (Jul 14 2019 at 05:04)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="kn">definition</span> <span class="n">unit_sum_equiv_cancel_map</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">a</span><span class="o">,</span> <span class="n">cases</span> <span class="n">sum</span><span class="bp">.</span><span class="n">mem_cases</span> <span class="o">(</span><span class="n">H</span> <span class="o">(</span><span class="n">inr</span> <span class="n">a</span><span class="o">))</span> <span class="k">with</span> <span class="n">u</span> <span class="n">b</span><span class="o">,</span> <span class="n">rotate</span> <span class="mi">1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">u</span> <span class="k">with</span> <span class="n">u</span> <span class="n">Hu</span><span class="o">,</span> <span class="n">cases</span> <span class="n">sum</span><span class="bp">.</span><span class="n">mem_cases</span> <span class="o">(</span><span class="n">H</span> <span class="o">(</span><span class="n">inl</span> <span class="err">⋆</span><span class="o">))</span> <span class="k">with</span> <span class="n">u&#39;</span> <span class="n">b</span><span class="o">,</span> <span class="n">rotate</span> <span class="mi">1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">u&#39;</span> <span class="k">with</span> <span class="n">u&#39;</span> <span class="n">Hu&#39;</span><span class="o">,</span> <span class="n">exfalso</span><span class="o">,</span> <span class="n">apply</span> <span class="n">empty_of_inl_eq_inr</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="n">inl</span> <span class="err">⋆</span> <span class="bp">=</span> <span class="n">H</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">H</span> <span class="o">(</span><span class="n">inl</span> <span class="err">⋆</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">to_left_inv</span> <span class="n">H</span> <span class="o">(</span><span class="n">inl</span> <span class="err">⋆</span><span class="o">))</span><span class="bp">⁻¹</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">H</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">inl</span> <span class="n">u&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">Hu&#39;</span><span class="o">}</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">H</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">inl</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_prop</span><span class="bp">.</span><span class="n">elim</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">H</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">H</span> <span class="o">(</span><span class="n">inr</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span> <span class="o">{</span><span class="n">Hu</span><span class="bp">⁻¹</span><span class="o">}</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">inr</span> <span class="n">a</span> <span class="o">:</span> <span class="n">to_left_inv</span> <span class="n">H</span> <span class="o">(</span><span class="n">inr</span> <span class="n">a</span><span class="o">)</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="170818995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170818995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170818995">Kenny Lau (Jul 14 2019 at 05:04)</a>:</h4>
+<p><a href="https://github.com/leanprover/lean2/blob/master/hott/types/sum.hlean#L218" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/types/sum.hlean#L218">https://github.com/leanprover/lean2/blob/master/hott/types/sum.hlean#L218</a></p>
+
+<a name="170819002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170819002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170819002">Kenny Lau (Jul 14 2019 at 05:04)</a>:</h4>
+<p>I cannot understand this at all</p>
+
+<a name="170828029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170828029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170828029">Floris van Doorn (Jul 14 2019 at 10:08)</a>:</h4>
+<p>The proof is not readable at all, and also not intended as such. The idea is, given <code>f : unit + A ≃ unit + B</code> we define a function <code>g : A → B</code> such that</p>
+<ul>
+<li>if <code>f(inr a) = inr b</code> then <code>g(a) = b</code></li>
+<li>if <code>f(inr a) = inl star</code> then <code>f (inl star) = inr b'</code> for some <code>b'</code> and we define <code>g(a) = b'</code></li>
+<li>Everything after the <code>exfalso</code> is a (longer than necessary) proof that <code>f(inr a) = inl star</code> and <code>f (inl star) = inl star</code> is impossible.</li>
+</ul>
+
+<a name="170828975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170828975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170828975">Kenny Lau (Jul 14 2019 at 10:42)</a>:</h4>
+<p>oh I understand it now, I thought it was some HoTT-specific thing that didn't hold in real maths</p>
+
+<a name="170828976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Weak%20univalence%20implies%20choice/near/170828976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18865Weakunivalenceimplieschoice.html#170828976">Kenny Lau (Jul 14 2019 at 10:42)</a>:</h4>
+<p>thanks</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

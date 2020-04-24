@@ -1,0 +1,26 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/47176Instancesforforgetfulinheritance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47176Instancesforforgetfulinheritance.html">Instances for forgetful inheritance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189264380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instances%20for%20forgetful%20inheritance/near/189264380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47176Instancesforforgetfulinheritance.html#189264380">Patrick Massot (Feb 27 2020 at 22:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span>  did you had a look at <a href="https://hal.inria.fr/hal-02463336/document" target="_blank" title="https://hal.inria.fr/hal-02463336/document">https://hal.inria.fr/hal-02463336/document</a>? The authors somehow claim that instance resolution procedures (either unification hints or type classes) should do something special to prioritize instances that corresponding to embedded weaker structures. For instance, in mathlib we <a href="https://github.com/leanprover-community/mathlib/blob/0fc45dcd16b7042179efb36a8e62f908bf0bd0e9/src/topology/metric_space/basic.lean#L63-L71" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/0fc45dcd16b7042179efb36a8e62f908bf0bd0e9/src/topology/metric_space/basic.lean#L63-L71">define a metric space</a> as a structure containing a <code>uniform_space</code> structure as a field <code>to_uniform_space</code>, and an axiom <code>uniformity_dist</code> saying this uniform space structure has to be the determined by the other fields. Then in mathlib we mark <code>to_uniform_space</code> as an instance but, for reasons explained <a href="https://github.com/leanprover-community/mathlib/blob/089d058642290b9b5a47aef655cae47eb22cbd97/src/tactic/lint.lean#L287-L297" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/089d058642290b9b5a47aef655cae47eb22cbd97/src/tactic/lint.lean#L287-L297">here</a>, this instance has a low priority. However, when we want a uniform structure on a metric space, we would like that one to be found immediately. In the paper, the authors argue that unification hints allow more search control that type classes for this issue (this is the traditional claim that unification hints are more verbose but more controlled than type class). Do you have any thought about that?</p>
+
+<a name="189329519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instances%20for%20forgetful%20inheritance/near/189329519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47176Instancesforforgetfulinheritance.html#189329519">Daniel Selsam (Feb 28 2020 at 17:12)</a>:</h4>
+<p>Unfortunately I don't have time to read these links right now, but my default Zulip typeclass answering machine message is 'wait and see if this is still a problem after tabling'. This might be a problem right now only because if the wrong instance fires first you might try to synthesize <code>decidable_linear_ordered_field</code> ~30,000 times. If it is really still a problem after porting, then we could consider supporting additional instance annotations.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

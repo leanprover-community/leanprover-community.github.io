@@ -1,0 +1,101 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/98046IOchangesin342.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html">IO changes in 3.4.2</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="159400352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159400352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159400352">Simon Winwood (Feb 26 2019 at 05:43)</a>:</h4>
+<p>In lean 3.4.2 the mode for subprocess pipes was changed ---  in 3.4.1 pipes are binary, but in 3.4.2 they are utf-8.  Is there some way to change the mode of these pipes (either before or after they are created?)  I looked and couldn't see anything obvious.</p>
+
+<a name="159400663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159400663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159400663">Andrew Ashworth (Feb 26 2019 at 05:51)</a>:</h4>
+<p>are you talking about this commit: <a href="https://github.com/leanprover/lean/commit/4e16bc7192f9f32b03222142e659fa3dae4b8025#diff-6915aa5b8efa0a177a7155df746d3a21" target="_blank" title="https://github.com/leanprover/lean/commit/4e16bc7192f9f32b03222142e659fa3dae4b8025#diff-6915aa5b8efa0a177a7155df746d3a21">https://github.com/leanprover/lean/commit/4e16bc7192f9f32b03222142e659fa3dae4b8025#diff-6915aa5b8efa0a177a7155df746d3a21</a>?</p>
+
+<a name="159400734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159400734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159400734">Andrew Ashworth (Feb 26 2019 at 05:52)</a>:</h4>
+<p>Probably want to ask <span class="user-mention" data-user-id="110111">@Keeley Hoek</span></p>
+
+<a name="159404379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404379">Simon Winwood (Feb 26 2019 at 07:23)</a>:</h4>
+<p>Possibly?  I noticed it when my lean program started behaving really oddly, and I tracked it down to a change in the release notes.</p>
+
+<a name="159404424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404424">Keeley Hoek (Feb 26 2019 at 07:24)</a>:</h4>
+<p>(Looks like the zulip app tricked me I to posting twice, sorry)</p>
+
+<a name="159404446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404446">Keeley Hoek (Feb 26 2019 at 07:25)</a>:</h4>
+<p>Hey!</p>
+<p>By default pipes weren't binary, they were text mode. The commit referenced instead changes the behaviour of text mode pipes to properly decode utf-8 characters when writing them (and encode when reading), instead of just butchering the internal representation of each character by truncating it to the lowest 8 bits. </p>
+<p>This behaviour is only enabled in text mode, and the function in the io namespace which opens a file descriptor handle takes an optional boolean true or false argument which specifies whether to open the handle in text (ff) or binary (tt) mode.</p>
+
+<a name="159404492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404492">Simon Winwood (Feb 26 2019 at 07:26)</a>:</h4>
+<p>This isn't enabled for process pipes though --- I can't change the mode of a pipe as far as I can tell.<br>
+\</p>
+
+<a name="159404509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404509">Simon Winwood (Feb 26 2019 at 07:27)</a>:</h4>
+<p>This might be more due to me abusing lean's char type, but there doesn't seem to be any byte buffer support</p>
+
+<a name="159404706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404706">Keeley Hoek (Feb 26 2019 at 07:32)</a>:</h4>
+<p>Ooooh, yep that sound bad. A problem will arise when lean reads a byte from a process handle with the highest bit set (i.e. non ASCII). I'm less certain about what would happen if an invalid unicode character is written...</p>
+
+<a name="159404736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159404736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159404736">Keeley Hoek (Feb 26 2019 at 07:33)</a>:</h4>
+<p>Is that consistent with what you're seeing?</p>
+
+<a name="159405853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159405853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159405853">Simon Winwood (Feb 26 2019 at 07:55)</a>:</h4>
+<p>I am reading from a file and writing to a pipe, and getting unexpected results on the other end of the pipe.  The text coming back is all ascii, so I am fine there</p>
+
+<a name="159406135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159406135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159406135">Simon Winwood (Feb 26 2019 at 08:00)</a>:</h4>
+<p>I need to head off.  This isn't blocking anything, but it would be nice to figure out a workaround, esp. for future releases.  Maybe something like byte-buffers (instead of just char buffers)?  I don't know what the plan for lean 4 looks like either</p>
+
+<a name="159406144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/159406144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#159406144">Simon Winwood (Feb 26 2019 at 08:00)</a>:</h4>
+<p>thanks for replying so quickly btw</p>
+
+<a name="160035030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160035030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160035030">Joe Hendrix (Mar 05 2019 at 20:00)</a>:</h4>
+<p>I work with Simon.  It sounds like we're definitely not able to upgrade to Lean 3.4.2 until we find a way to send binary data from another process into Lean.  We could do tricks like base64 encode the data, but for now I think we'll just stay with Lean 3.4.1 until Lean 4 is out with a C FFI.</p>
+
+<a name="160035763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160035763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160035763">Mario Carneiro (Mar 05 2019 at 20:08)</a>:</h4>
+<p>What's the issue? I have written a lean program that reads binary data, so I think it's at least possible to get the behavior you want</p>
+
+<a name="160037086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160037086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160037086">Mario Carneiro (Mar 05 2019 at 20:26)</a>:</h4>
+<p>here's a small demo:</p>
+<div class="codehilite"><pre><span></span>$ printf &quot;%b&quot; &#39;\xca\xfe\xba\xbe&#39; &gt; test.bin
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span>
+  <span class="n">h</span> <span class="err">←</span> <span class="n">io</span><span class="bp">.</span><span class="n">mk_file_handle</span> <span class="s2">&quot;test.bin&quot;</span> <span class="n">io</span><span class="bp">.</span><span class="n">mode</span><span class="bp">.</span><span class="n">read</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="bp">⟨</span><span class="mi">4</span><span class="o">,</span> <span class="n">c</span><span class="bp">⟩</span> <span class="err">←</span> <span class="n">io</span><span class="bp">.</span><span class="n">fs</span><span class="bp">.</span><span class="n">read</span> <span class="n">h</span> <span class="mi">4</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="o">(</span><span class="n">to_string</span> <span class="err">$</span> <span class="n">char</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">array</span><span class="bp">.</span><span class="n">to_list</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">return</span> <span class="o">())</span>
+  <span class="c1">-- [202, 254, 186, 190]</span>
+</pre></div>
+
+<a name="160039764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IO%20changes%20in%203.4.2/near/160039764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98046IOchangesin342.html#160039764">Joe Hendrix (Mar 05 2019 at 21:02)</a>:</h4>
+<p>We want to read binary data from stdout on a process created by <code>io.proc.spawn</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

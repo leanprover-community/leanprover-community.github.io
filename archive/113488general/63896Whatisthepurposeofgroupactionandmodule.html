@@ -1,0 +1,139 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html">What is the purpose of `group_action` and `module`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="161530549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161530549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161530549">Johan Commelin (Mar 23 2019 at 15:38)</a>:</h4>
+<p>There are certain classes which are defined to be exactly some other class, with the only difference that they make more assumptions on the carrier types. Examples: a <code>group_action</code> is exactly a <code>monoid_action</code> where the acting monoid is a group; a <code>module</code> is exactly a <code>semimodule</code> where the scalar semiring is a ring.<br>
+What is the purpose of such classes. Do they only exist for reasons of terminology, or are there also other benefits?</p>
+
+<a name="161531551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161531551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161531551">Chris Hughes (Mar 23 2019 at 16:04)</a>:</h4>
+<p>I did it like that because somebody complained about not having <code>vector_space</code>, and I thought they might complain about this as well.</p>
+
+<a name="161535503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161535503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161535503">Johan Commelin (Mar 23 2019 at 17:41)</a>:</h4>
+<p>I understand. But maybe it does complicate the type class graph. Leading to more complicated instance searches, etc... So we might also just have a class called <code>action</code>.</p>
+
+<a name="161536453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161536453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161536453">Johan Commelin (Mar 23 2019 at 18:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> What do you think? Are these issues, or is this irrelevant?</p>
+
+<a name="161536477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161536477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161536477">Johan Commelin (Mar 23 2019 at 18:05)</a>:</h4>
+<p>Creating the extra class does mean restating lots of lemmas etc...</p>
+
+<a name="161538224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538224">Kevin Buzzard (Mar 23 2019 at 18:54)</a>:</h4>
+<p>What if an undergraduate asks "where are vector spaces?" and you reply "oh, just use modules" and they say "what is a module"?</p>
+
+<a name="161538308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538308">Johan Commelin (Mar 23 2019 at 18:57)</a>:</h4>
+<p>What if an undergrad uses vector spaces, and he has to prove <code>0 \in V</code>, and you say, oh that's <code>module.zero_mem</code>.</p>
+
+<a name="161538311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538311">Johan Commelin (Mar 23 2019 at 18:57)</a>:</h4>
+<p>Or whatever...</p>
+
+<a name="161538312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538312">Johan Commelin (Mar 23 2019 at 18:57)</a>:</h4>
+<p>The hierarchy is leaking through everywhere. I don't think we can really avoid that.</p>
+
+<a name="161538357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538357">Kevin Buzzard (Mar 23 2019 at 18:58)</a>:</h4>
+<p>We can't just define vector_space.zero_mem? What's the problem with this approach?</p>
+
+<a name="161538362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538362">Johan Commelin (Mar 23 2019 at 18:58)</a>:</h4>
+<p>That it is a duplication of effort, and harder to maintain</p>
+
+<a name="161538364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538364">Johan Commelin (Mar 23 2019 at 18:58)</a>:</h4>
+<p>Because it will go out of sync</p>
+
+<a name="161538379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538379">Kevin Buzzard (Mar 23 2019 at 18:59)</a>:</h4>
+<p>Maybe a tactic?</p>
+
+<a name="161538380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538380">Johan Commelin (Mar 23 2019 at 18:59)</a>:</h4>
+<p>Maybe...</p>
+
+<a name="161538447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538447">Johan Commelin (Mar 23 2019 at 19:00)</a>:</h4>
+<p>Anyway, I'm fine with making an exception for <code>vector_space</code> for pedagogical reasons. Note that I didn't mention <code>vector_space</code> in my first post. I purposefully chose <code>group_action</code> and <code>module</code>.</p>
+
+<a name="161538530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161538530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161538530">Kevin Buzzard (Mar 23 2019 at 19:02)</a>:</h4>
+<p>Modules are different to vector spaces, I think it's inevitable that one should expect submodule.zero_mem and subspace.zero_mem and subring.zero_mem and subgroup.zero_mem and all sorts of other zero_mems</p>
+
+<a name="161539290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161539290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161539290">Johan Commelin (Mar 23 2019 at 19:25)</a>:</h4>
+<p>I don't how often I've written <code>apply is_add_subgroup.add_mem</code>. Lean still doesn't know what I mean...</p>
+
+<a name="161539348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161539348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161539348">Kevin Buzzard (Mar 23 2019 at 19:26)</a>:</h4>
+<p>you could fix it ;-)</p>
+
+<a name="161539444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161539444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161539444">Johan Commelin (Mar 23 2019 at 19:29)</a>:</h4>
+<p>I don't know if it should be fixed...</p>
+
+<a name="161581392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161581392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161581392">Chris Hughes (Mar 24 2019 at 14:20)</a>:</h4>
+<p>I'd be very happy to get rid of group actions. I'd also be happy to rename the <code>is_monoid_action</code> theorems to whatever they're called for vector spaces, <code>one_smul</code> or whatever. <code>module</code> should probably extend <code>monoid_action</code>, or at least there should be an instance saying every module is a monoid action.</p>
+
+<a name="161581708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161581708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161581708">Kevin Buzzard (Mar 24 2019 at 14:29)</a>:</h4>
+<p>In group cohomology one has groups acting on abelian groups (with group law +). The definition is that the group acts on the underlying type by morphisms which preserve addition. This definition extends to monoid actions on abelian groups (although I don't think I've ever seen it being used for monoids which are not either groups or rings).</p>
+
+<a name="161616042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161616042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161616042">Johan Commelin (Mar 25 2019 at 05:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I suggest merging the current PR first, and then changing those names etc... in a follow-up PR.</p>
+
+<a name="161616060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161616060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161616060">Johan Commelin (Mar 25 2019 at 05:35)</a>:</h4>
+<p>That keeps the PR's nice and small</p>
+
+<a name="161620544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161620544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161620544">Johan Commelin (Mar 25 2019 at 07:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Are there CS reasons for having these type classes? Do they help type class search, or do they hamper it?</p>
+
+<a name="161623207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623207">Sebastian Ullrich (Mar 25 2019 at 08:28)</a>:</h4>
+<p>The usual downside of such trivial classes is that implicit coercion only works in one direction: If you have an <code>is_monoid_action</code> on a group, it's not automatically an <code>is_group_action</code>. You have to explicitly declare an instance for that. That may not be an issue, but if it is, <code>is_group_action</code> could be defined as an <code>abbreviation</code> (i.e. reducible) so that type class search treats it as equivalent to <code>is_monoid_action</code>.</p>
+
+<a name="161623213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623213">Sebastian Ullrich (Mar 25 2019 at 08:28)</a>:</h4>
+<p>I don't see any upsides other than terminology</p>
+
+<a name="161623445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623445">Johan Commelin (Mar 25 2019 at 08:33)</a>:</h4>
+<p>Ok, I could imagine that you would shortcut some type class searches this way...</p>
+
+<a name="161623460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161623460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161623460">Johan Commelin (Mar 25 2019 at 08:33)</a>:</h4>
+<p>But I think that the downside you mention is enough reason to do away with this class.</p>
+
+<a name="161741001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161741001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161741001">Johan Commelin (Mar 26 2019 at 08:31)</a>:</h4>
+<p>Should we also generalise <code>is_ring_hom</code> to only assume <code>semiring</code> instances? (I would vote for not changing the name... even if it is not exactly accurate.)</p>
+
+<a name="161753463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20purpose%20of%20%60group_action%60%20and%20%60module%60/near/161753463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63896Whatisthepurposeofgroupactionandmodule.html#161753463">Johan Commelin (Mar 26 2019 at 11:53)</a>:</h4>
+<p>Nevermind... the difference is of course that you need to make <code>map_zero</code> explicit for semirings</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

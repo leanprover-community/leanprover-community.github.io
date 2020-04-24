@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/08628refllemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08628refllemma.html">_refl_lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179539597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/_refl_lemma/near/179539597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08628refllemma.html#179539597">Kevin Buzzard (Oct 31 2019 at 15:02)</a>:</h4>
+<p>How does <code>_refl_lemma</code> work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">X</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span>
+
+<span class="kn">namespace</span> <span class="n">X</span>
+
+<span class="n">def</span> <span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">true</span>
+
+<span class="kn">lemma</span> <span class="n">R_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">R</span> <span class="n">t</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">R_refl&#39;</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">R_refl</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="bp">_</span><span class="n">refl_lemma</span><span class="o">]</span> <span class="n">X</span><span class="bp">.</span><span class="n">R_refl&#39;</span> <span class="n">X</span><span class="bp">.</span><span class="n">R_refl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span> <span class="n">t</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refl</span><span class="o">,</span> <span class="c1">-- fails</span>
+<span class="kn">end</span>
+
+
+<span class="kn">end</span> <span class="n">X</span>
+</pre></div>
+
+
+<p>I'm trying to make <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>≤</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a\leq a</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> provable by <code>refl</code> in level 5-1 of the natural number game, and my incantation does not cut it, as has been pointed out to me.</p>
+
+<a name="179539873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/_refl_lemma/near/179539873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08628refllemma.html#179539873">Chris Hughes (Oct 31 2019 at 15:04)</a>:</h4>
+<p><code>_refl_lemma</code> is only for lemmas whose proof is <code>rfl</code>. <code>dsimp</code> uses it</p>
+
+<a name="179540037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/_refl_lemma/near/179540037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08628refllemma.html#179540037">Reid Barton (Oct 31 2019 at 15:06)</a>:</h4>
+<p>Kevin, you're looking for <code>@[refl]</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

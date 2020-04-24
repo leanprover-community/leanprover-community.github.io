@@ -1,0 +1,185 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/59018typeclassinstanceshelp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html">typeclass instances help</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="195185198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195185198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195185198">Bhavik Mehta (Apr 24 2020 at 13:11)</a>:</h4>
+<p>Here's a massively simplified version of where I'm stuck:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">adjunction</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">over</span>
+
+<span class="kn">namespace</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category</span> <span class="n">limits</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="n">class</span> <span class="n">exponentiable</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">bp</span> <span class="o">:</span> <span class="n">has_finite_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_adj</span> <span class="o">:</span> <span class="n">is_left_adjoint</span> <span class="o">(</span><span class="n">prod_functor</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">))</span>
+
+<span class="n">class</span> <span class="n">is_cartesian_closed</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">has_finite_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cart_closed</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="n">exponentiable</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">is_cartesian_closed</span><span class="bp">.</span><span class="n">cart_closed</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="n">def</span> <span class="n">exp</span><span class="bp">.</span><span class="n">functor</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_finite_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">exponentiable</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">@</span><span class="n">exponentiable</span><span class="bp">.</span><span class="n">is_adj</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">right</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">star</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">over</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="n">def</span> <span class="n">Pi_functor</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_finite_limits</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">exponentiable</span> <span class="n">B</span><span class="o">]</span> <span class="o">:</span> <span class="n">over</span> <span class="n">B</span> <span class="err">⥤</span> <span class="n">C</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="n">def</span> <span class="n">star_adj_pi_of_exponentiable</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_finite_limits</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">exponentiable</span> <span class="n">B</span><span class="o">]</span> <span class="o">:</span> <span class="n">star</span> <span class="n">B</span> <span class="err">⊣</span> <span class="n">Pi_functor</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">section</span> <span class="n">pb</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">over</span><span class="bp">.</span><span class="n">construct_products</span><span class="bp">.</span><span class="n">over_binary_product_of_pullback</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">pullback_along</span> <span class="o">[</span><span class="n">has_pullbacks</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">over</span> <span class="n">B</span> <span class="err">⥤</span> <span class="n">over</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="n">star</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span> <span class="err">⋙</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">iterated_slice_equiv</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">functor</span>
+<span class="kn">end</span> <span class="n">pb</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">C</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">is_locally_cartesian_closed</span> <span class="kn">extends</span> <span class="n">has_finite_limits</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">overs_cc</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="n">is_cartesian_closed</span> <span class="o">(</span><span class="n">over</span> <span class="n">B</span><span class="o">))</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">is_locally_cartesian_closed</span><span class="bp">.</span><span class="n">overs_cc</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">has_pullbacks_of_has_finite_limits</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">has_finite_wide_pullbacks_of_has_finite_limits</span>
+
+<span class="kn">variable</span> <span class="o">[</span><span class="n">is_locally_cartesian_closed</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">thing</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_left_adjoint</span> <span class="o">(</span><span class="n">pullback_along</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">right</span> <span class="o">:=</span> <span class="bp">_</span> <span class="err">⋙</span> <span class="bp">_</span><span class="o">,</span> <span class="n">adj</span> <span class="o">:=</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">star_adj_pi_of_exponentiable</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">))</span> <span class="o">(</span><span class="n">equivalence</span><span class="bp">.</span><span class="n">to_adjunction</span> <span class="bp">_</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">category_theory</span>
+</pre></div>
+
+
+<p>My issue is that <code>star_adj_pi_of_exponentiable</code> gives a typeclass error (it can't find <code>exponentiable (over.mk f)</code>), but it should be okay since we have that <code>C</code> is LCC, so <code>C/B</code> is CC, and <code>over.mk f</code> is in <code>C/B</code>, so <code>over.mk f</code> should be exponentiable... How can I make this work?</p>
+
+<a name="195185992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195185992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195185992">Reid Barton (Apr 24 2020 at 13:17)</a>:</h4>
+<p>My guess is you have too many instances</p>
+
+<a name="195186201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186201">Reid Barton (Apr 24 2020 at 13:18)</a>:</h4>
+<p>You ask about making it work, but first do you know why it doesn't work?</p>
+
+<a name="195186466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186466">Bhavik Mehta (Apr 24 2020 at 13:21)</a>:</h4>
+<p>I'm not really sure why it doesn't work. I tried manually giving the instances which should make it work, and it gives this error:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">star_adj_pi_of_exponentiable</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">term</span>
+  <span class="n">is_cartesian_closed</span><span class="bp">.</span><span class="n">cart_closed</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">exponentiable</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">category_1</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">is_cartesian_closed</span><span class="bp">.</span><span class="n">to_has_finite_products</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">category_1</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">is_locally_cartesian_closed</span><span class="bp">.</span><span class="n">overs_cc</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="n">B</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span> <span class="n">A</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">exponentiable</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">category_1</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">limits</span><span class="bp">.</span><span class="n">has_finite_products_of_has_finite_limits</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">category_1</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">has_finite_limits</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">has_finite_wide_pullbacks_of_has_finite_limits</span> <span class="n">C</span> <span class="err">𝒞</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">is_locally_cartesian_closed</span><span class="bp">.</span><span class="n">to_has_finite_limits</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">B</span> <span class="n">A</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="195186498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186498">Bhavik Mehta (Apr 24 2020 at 13:21)</a>:</h4>
+<p>and here was the instance I put in:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">thing</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_left_adjoint</span> <span class="o">(</span><span class="n">pullback_along</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">right</span> <span class="o">:=</span> <span class="bp">_</span> <span class="err">⋙</span> <span class="bp">_</span><span class="o">,</span> <span class="n">adj</span> <span class="o">:=</span> <span class="n">adjunction</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">star_adj_pi_of_exponentiable</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_cartesian_closed</span><span class="bp">.</span><span class="n">cart_closed</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">over</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span><span class="o">)))</span> <span class="o">(</span><span class="n">equivalence</span><span class="bp">.</span><span class="n">to_adjunction</span> <span class="bp">_</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+<a name="195186524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186524">Reid Barton (Apr 24 2020 at 13:21)</a>:</h4>
+<p>Yes, this looks like the sort of issue I suspected</p>
+
+<a name="195186542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186542">Reid Barton (Apr 24 2020 at 13:21)</a>:</h4>
+<p>You have too many ways to prove C/B has products</p>
+
+<a name="195186674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186674">Bhavik Mehta (Apr 24 2020 at 13:22)</a>:</h4>
+<p>Hmm okay... What sort of thing should I be trying to fix this?</p>
+
+<a name="195186749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195186749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195186749">Bhavik Mehta (Apr 24 2020 at 13:23)</a>:</h4>
+<p>Could I make <code>has_finite_products_of_has_finite_limits</code> not be an instance locally?</p>
+
+<a name="195187150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195187150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195187150">Reid Barton (Apr 24 2020 at 13:26)</a>:</h4>
+<p>I would start by avoiding <code>extends</code>. If that isn't enough, you would have to remove some instances.</p>
+
+<a name="195187173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195187173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195187173">Reid Barton (Apr 24 2020 at 13:26)</a>:</h4>
+<p>You cannot just make any old construction that works in math into an instance because of issues like this.</p>
+
+<a name="195187523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195187523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195187523">Bhavik Mehta (Apr 24 2020 at 13:29)</a>:</h4>
+<p>I'll try removing <code>extends</code>, thanks!</p>
+
+<a name="195187552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195187552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195187552">Bhavik Mehta (Apr 24 2020 at 13:29)</a>:</h4>
+<p>Out of interest, why does that cause problems?</p>
+
+<a name="195187647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195187647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195187647">Reid Barton (Apr 24 2020 at 13:30)</a>:</h4>
+<p>I think there is no substitute for reading the error message and understanding how you got there</p>
+
+<a name="195188038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195188038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195188038">Reid Barton (Apr 24 2020 at 13:33)</a>:</h4>
+<p>In general, using <code>extends</code> is less flexible because you cannot specify the base instance and the "extension" separately.</p>
+
+<a name="195188861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195188861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195188861">Reid Barton (Apr 24 2020 at 13:40)</a>:</h4>
+<p>It might help to translate your definitions back into math as follows:<br>
+A CC category is a category with chosen finite products such that each chosen finite product functor X x - has a (chosen) right adjoint.<br>
+An LCC category is a category with chosen finite limits such that each slice category C/B is a CC category.</p>
+
+<a name="195188904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195188904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195188904">Reid Barton (Apr 24 2020 at 13:40)</a>:</h4>
+<p>You also know of a way, given chosen finite limits in C, to construct finite products in C/B for each B.</p>
+
+<a name="195189021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195189021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195189021">Reid Barton (Apr 24 2020 at 13:41)</a>:</h4>
+<p>However, your definitions don't require that if you apply this construction to the chosen finite limits of C, you get the chosen finite products of C/B.</p>
+
+<a name="195189156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195189156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195189156">Reid Barton (Apr 24 2020 at 13:42)</a>:</h4>
+<p>(Technically, since you didn't write <code>extends category</code>, I should say something like "A category C is CC if we have chosen finite products for it such that ...", but the category instance is not at issue here.)</p>
+
+<a name="195189251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195189251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195189251">Reid Barton (Apr 24 2020 at 13:43)</a>:</h4>
+<p>If you don't use <code>extends</code> in the definition of <code>is_cartesian_closed</code> then the translation is<br>
+"A category C with chosen finite products is CC if for each X, the chosen product functor X x - has a right adjoint"<br>
+and now there's a better chance you can make everything coherent</p>
+
+<a name="195189924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195189924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195189924">Bhavik Mehta (Apr 24 2020 at 13:48)</a>:</h4>
+<p>That makes a lot of sense, thanks</p>
+
+<a name="195192692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20instances%20help/near/195192692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59018typeclassinstanceshelp.html#195192692">Reid Barton (Apr 24 2020 at 14:09)</a>:</h4>
+<p>This library design problem would be a lot easier if we didn't try to make things constructive, because then everything in sight would be a Prop.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

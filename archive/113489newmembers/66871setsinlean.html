@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/66871setsinlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/66871setsinlean.html">sets in lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186636180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sets%20in%20lean/near/186636180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66871setsinlean.html#186636180">Harsha Nyapathi (Jan 26 2020 at 20:11)</a>:</h4>
+<p>Given an inductive type with finite elements, I want to make a set of some of the elements based on some property. How would you achieve that using functions (because function maps every element to a different object)? Also, what is the introduction rule for sets? The context is that I want to make a set of adjacent vertices of given vertex in a graph. Ultimately I want to find the connected component of the vertex. I'm stuck as to how to approach this.</p>
+
+<a name="186637725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sets%20in%20lean/near/186637725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66871setsinlean.html#186637725">Alex J. Best (Jan 26 2020 at 20:54)</a>:</h4>
+<p>I'm not sure this answers your questions but maybe its something:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">namespace</span> <span class="n">FiniteGraph</span>
+<span class="n">open_locale</span> <span class="n">classical</span> <span class="c1">-- to remove these lines one must prove that being in a connected component is decidable</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">structure</span> <span class="n">FiniteGraph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">V</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">adjacent</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">V</span> <span class="bp">×</span> <span class="n">V</span><span class="o">))</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">V</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">FiniteGraph</span> <span class="n">V</span><span class="o">)</span>
+<span class="kn">structure</span> <span class="n">path</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">V</span> <span class="bp">×</span> <span class="n">V</span><span class="o">))</span>
+<span class="o">(</span><span class="n">edges_nonempty</span> <span class="o">:</span> <span class="n">edges</span> <span class="bp">≠</span> <span class="o">[])</span>
+<span class="o">(</span><span class="n">edges_in_graph</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">edges</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">adjacent</span> <span class="n">e</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_a_path</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">edges</span><span class="bp">.</span><span class="n">length</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="n">edges</span><span class="bp">.</span><span class="n">nth_le</span> <span class="bp">_</span> <span class="o">(</span><span class="n">sorry</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">edges</span><span class="bp">.</span><span class="n">length</span><span class="o">))</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span>
+                                                 <span class="o">(</span><span class="n">edges</span><span class="bp">.</span><span class="n">nth_le</span> <span class="bp">_</span> <span class="o">(</span><span class="n">sorry</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">edges</span><span class="bp">.</span><span class="n">length</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">connected_component</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">to_finset</span>
+  <span class="o">{</span><span class="n">w</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">p</span> <span class="o">:</span> <span class="n">path</span> <span class="n">F</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">edges</span><span class="bp">.</span><span class="n">nth_le</span> <span class="mi">0</span> <span class="n">sorry</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>        <span class="bp">=</span> <span class="n">v</span>
+                   <span class="bp">∧</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">edges</span><span class="bp">.</span><span class="n">last</span> <span class="n">p</span><span class="bp">.</span><span class="n">edges_nonempty</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">w</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">is_connected</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">v</span> <span class="err">∈</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="err">∈</span> <span class="n">C</span><span class="o">),</span>
+       <span class="bp">∃</span> <span class="n">p</span> <span class="o">:</span> <span class="n">path</span> <span class="n">F</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">edges</span><span class="bp">.</span><span class="n">nth_le</span> <span class="mi">0</span> <span class="n">sorry</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>        <span class="bp">=</span> <span class="n">v</span>
+                   <span class="bp">∧</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">edges</span><span class="bp">.</span><span class="n">last</span> <span class="n">p</span><span class="bp">.</span><span class="n">edges_nonempty</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">w</span>
+
+
+<span class="kn">lemma</span> <span class="n">connected_component_is_connected</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_connected</span> <span class="n">F</span> <span class="o">(</span><span class="n">connected_component</span> <span class="n">F</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="o">(</span><span class="n">connected_component</span> <span class="n">F</span> <span class="n">v</span><span class="o">)</span> <span class="kn">using</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction</span><span class="o">,</span>
+  <span class="c1">-- this is the wrong way to prove this I suppose but this is the induction principle</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">FiniteGraph</span>
+</pre></div>
+
+
+<p>I just used a random type <code>V</code> with fintype to assume it is finite, then to define a subset of vertices subject to some condition I make a <code>finset V</code> from the corresponding set, I use classical logic so that I don't have to prove that a subset of a finset is a finset.</p>
+<p>I don't think I understand your question about functions.</p>
+
+<a name="186637808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sets%20in%20lean/near/186637808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66871setsinlean.html#186637808">Alex J. Best (Jan 26 2020 at 20:56)</a>:</h4>
+<p>Also the last lemma is just a demo, its not even true as we have  a directed graph here and the way I defined paths goes forwards along edges only.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

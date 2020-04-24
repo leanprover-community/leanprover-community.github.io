@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/15069openlocalevsopen.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html">open_locale vs open</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176576626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176576626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176576626">Floris van Doorn (Sep 25 2019 at 15:32)</a>:</h4>
+<p>In <a href="https://github.com/leanprover-community/mathlib/issues/1465" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1465">#1465</a> we are discussing whether <code>open_locale</code> should be used to open namespaces (i.e. the usual <code>open</code> command).<br>
+This could come in various forms:</p>
+<ul>
+<li><code>open_locale real</code> also opens <code>open real</code>, and the same for every namespace; and/or</li>
+<li>we can register namespaces, like <code>open_namespaces nat int rat real complex in number_systems</code> so that <code>open_locale number_systems</code> opens all these namespaces.</li>
+</ul>
+<p>What do you think: is this a useful feature, or confusing, because now <code>open</code> and <code>open_locale</code> are not orthogonal anymore?</p>
+
+<a name="176578158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176578158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176578158">Reid Barton (Sep 25 2019 at 15:46)</a>:</h4>
+<p>The first one seems fine. I don't like the second one much: too hard to understand or control what is open, and a change to the <code>open_namespaces</code> declaration could have unknown consequences elsewhere.</p>
+
+<a name="176579336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176579336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176579336">Simon Hudon (Sep 25 2019 at 15:59)</a>:</h4>
+<p>That's a fair point. One downside of going that way is that we'd like <code>setup_tactic_parser</code> to be subsumed by <code>open_locale</code> and <code>setup_tactic_parser</code> opens a number of namespaces. We can also keep the two separate or build one on the infrastructure of the other.</p>
+
+<a name="176579455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176579455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176579455">Simon Hudon (Sep 25 2019 at 16:00)</a>:</h4>
+<p>One benefit of having it partially separated would be that <code>setup_tactic_parser</code> and <code>open_locale tactic</code> would have different behaviors which might be desirable.</p>
+
+<a name="176580411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176580411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176580411">Reid Barton (Sep 25 2019 at 16:09)</a>:</h4>
+<p>I haven't really looked into how either of these things work, but using <code>open_locale</code> in <code>setup_tactic_parser</code> looks reasonable</p>
+
+<a name="176583698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/open_locale%20vs%20open/near/176583698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15069openlocalevsopen.html#176583698">Reid Barton (Sep 25 2019 at 16:47)</a>:</h4>
+<p><code>setup_tactic_parser</code> is so specialized that the fact that it opens namespaces doesn't bother me in the same way as if <code>open_locale</code> did, and so simple that it doesn't necessarily seem worth writing in terms of <code>open_locale</code>, in my opinion.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

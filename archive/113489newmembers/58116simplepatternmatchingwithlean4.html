@@ -1,0 +1,128 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/58116simplepatternmatchingwithlean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html">simple pattern matching with lean4</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176827964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176827964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176827964">Tobias Grosser (Sep 28 2019 at 14:20)</a>:</h4>
+<p>Hey guys (<span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>?),</p>
+<p>I am trying to get the following code to compile in lean4:</p>
+<div class="codehilite"><pre><span></span>cat test.lean
+import init.data.int.basic
+import init.data.string.basic
+
+def foo (ctx : String) : Int → Int
+| x =&gt; if ctx == &quot;a&quot; then x else (foo &quot;a&quot; x)
+$lean test.lean
+/home/grosser/Projects/lean4/test.lean:4:4: error: type mismatch at application
+  foo &quot;a&quot;
+term
+  &quot;a&quot;
+has type
+  String
+but is expected to have type
+  Int
+$cat test2.lean
+import init.data.int.basic
+import init.data.string.basic
+
+def foo : String → Int → Int
+| &quot;a&quot; x =&gt; x
+| _ x =&gt; foo &quot;a&quot; x
+$lean test2.lean
+/home/grosser/Projects/lean4/test2.lean:4:4: error: invalid application, function expected
+</pre></div>
+
+
+<p>The example is obviously artificial and reduced from an example that is a lot larger. What I want to do is -- in certain cases -- change the first argument and then recurse into the very same function with the updated first argument. Unfortunately, this does not seem to work. In the first test.lean file it seems ctx is already implicitly passed as the first argument to foo such that only the second argument can be passed to foo. In the second test case I get an error message which I do not fully understand. Any ideas?</p>
+
+<a name="176830702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176830702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176830702">Reid Barton (Sep 28 2019 at 15:43)</a>:</h4>
+<p>The first one is wrong in Lean 3 for the reason you say, I assume it is the same in Lean 4.<br>
+It looks like the second one needs commas in Lean 4, judging from (for example) <a href="https://github.com/leanprover/lean4/blob/master/library/init/data/list/basic.lean" target="_blank" title="https://github.com/leanprover/lean4/blob/master/library/init/data/list/basic.lean">https://github.com/leanprover/lean4/blob/master/library/init/data/list/basic.lean</a></p>
+
+<a name="176835232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176835232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176835232">Tobias Grosser (Sep 28 2019 at 18:02)</a>:</h4>
+<p>This seems to work. Thanks a lot. I should have looked myself a little deeper. I had the feeling I may have misunderstood sth basic, but it seems some syntax changed and the error message is not super descriptive. Thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span> for providing details here.</p>
+
+<a name="176835812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176835812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176835812">Kevin Buzzard (Sep 28 2019 at 18:17)</a>:</h4>
+<p>Wow, I hadn't really appreciated the following: that Lean 4 file (with all the CamelCase changes etc) still says copyright 2016 on it. Is that how it works? When mathlib gets ported we leave all the copyrights as they were -- they're not "new files"?</p>
+
+<a name="176839931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176839931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176839931">Patrick Massot (Sep 28 2019 at 20:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> will we keep that ASCII art <code>=&gt;</code>? Or is it only used in core before the parser is able to handle a proper unicode arrow?</p>
+
+<a name="176839951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176839951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176839951">Patrick Massot (Sep 28 2019 at 20:17)</a>:</h4>
+<p>To all people who post Lean 4 code, do you understand correctly that there is still no VScode extension and you use Lean 4 non-interactively (or using emacs)?</p>
+
+<a name="176843580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176843580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176843580">Sebastian Ullrich (Sep 28 2019 at 22:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> <code>⇒</code> does already work. Leo seems to prefer the ASCII arrow, but we haven't really discussed coding styles so far (which of course we should do exactly once when implementing a standard code formatter for Lean 4 and then never talk about this topic again).</p>
+
+<a name="176843644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176843644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176843644">Mario Carneiro (Sep 28 2019 at 22:03)</a>:</h4>
+<p>wait, so the preference is unicode lambda + ascii arrow?</p>
+
+<a name="176864639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176864639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176864639">Sebastian Ullrich (Sep 29 2019 at 09:47)</a>:</h4>
+<p>No, Leo's current preference is <code>fun</code> + <code>=&gt;</code>. My preference may be <code>fun</code> + <code>⇒</code> but I haven't really decided yet.</p>
+
+<a name="176865055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176865055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176865055">Patrick Massot (Sep 29 2019 at 09:57)</a>:</h4>
+<p>Returning to ASCII would be <em>really</em> sad. Readable unicode is the first thing that attracts mathematicians to Lean after seeing Coq.</p>
+
+<a name="176866091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866091">Mario Carneiro (Sep 29 2019 at 10:27)</a>:</h4>
+<p>have you ever read agda code?</p>
+
+<a name="176866092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866092">Mario Carneiro (Sep 29 2019 at 10:27)</a>:</h4>
+<p>unicode can be overused</p>
+
+<a name="176866375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866375">Marc Huisinga (Sep 29 2019 at 10:34)</a>:</h4>
+<p>is exchanging unicode for ascii the motivation for using fun instead of \lam as well?</p>
+
+<a name="176866454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866454">Marc Huisinga (Sep 29 2019 at 10:36)</a>:</h4>
+<p>i suppose λ foo =&gt; bar would look a bit strange</p>
+
+<a name="176866467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866467">Patrick Massot (Sep 29 2019 at 10:37)</a>:</h4>
+<p>This is no need to overuse unicode. We can keep words, but avoid ascii art.</p>
+
+<a name="176866479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866479">Mario Carneiro (Sep 29 2019 at 10:37)</a>:</h4>
+<p>I like using ascii art for programmy stuff and unicode for math stuff</p>
+
+<a name="176866523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866523">Patrick Massot (Sep 29 2019 at 10:38)</a>:</h4>
+<p>You can define functions in math</p>
+
+<a name="176866524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866524">Mario Carneiro (Sep 29 2019 at 10:38)</a>:</h4>
+<p>I'm sure Scott and co will reserve all the arrows</p>
+
+<a name="176866537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176866537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176866537">Mario Carneiro (Sep 29 2019 at 10:39)</a>:</h4>
+<p>by programmy stuff I mean lean core</p>
+
+<a name="176900582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176900582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176900582">matt rice (Sep 30 2019 at 03:36)</a>:</h4>
+<p>Sometimes wish that the ascii -&gt; unicode happened not in the editors input mechanism, but by running a pass over ASCII sources.  So it would be represented as \lam foo, bar then converted to λ foo, bar for display... Not sure it'd be at all readable, but perhaps helpful if you weren't familiar with a symbol, but there are also tons of search boxes which are terrible at unicode... <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,367 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/61892createanelementofproduct.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html">create an element of product</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194243914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194243914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194243914">orlando (Apr 16 2020 at 00:07)</a>:</h4>
+<p>Hello, i have i little problem <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span> <br>
+I redo more simple : </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>            <span class="c1">----- i import all, i don&#39;t understand :D</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">lemma</span> <span class="n">test</span>  <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="n">W</span> <span class="n">Z</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">u0</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">v0</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)(</span><span class="n">g</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⟶</span>  <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">U</span> <span class="err">⨯</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">true</span>   <span class="c1">--- not too difficult goal :D</span>
+<span class="o">:=</span> <span class="k">begin</span>
+    <span class="k">let</span> <span class="n">eu</span> <span class="o">:=</span> <span class="n">hom_of_element</span> <span class="n">u0</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">ev</span> <span class="o">:=</span> <span class="n">hom_of_element</span> <span class="n">v0</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">eu</span> <span class="n">ev</span><span class="o">,</span>            <span class="c1">--- i thinck it&#39;s ok ?</span>
+    <span class="k">let</span> <span class="n">θ</span> <span class="o">:=</span> <span class="n">limit</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">pair</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="n">c</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">R</span> <span class="o">:</span> <span class="n">θ</span> <span class="err">≫</span> <span class="n">φ</span> <span class="bp">=</span> <span class="n">hom_of_element</span> <span class="o">(</span><span class="n">φ</span> <span class="o">(</span> <span class="o">(</span><span class="n">u0</span><span class="o">,</span><span class="n">v0</span><span class="o">)</span> <span class="o">:</span> <span class="n">U</span> <span class="err">⨯</span> <span class="n">V</span> <span class="o">))</span>  <span class="c1">---  PROBLEM cross vs time</span>
+    <span class="n">trivial</span><span class="o">,</span>                                                  <span class="c1">---  how to create (u0,v0) ∈ U ⨯ V  ?</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194244305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194244305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194244305">Reid Barton (Apr 16 2020 at 00:12)</a>:</h4>
+<p>The only thing you know about <code>U ⨯ V</code> is that it is some product of <code>U</code> and <code>V</code> in the category of types, so the only reasonable way to construct "<code>(u, v)</code>" is what you already have on the left-hand side of the equation <code>R</code> (though there should be a more convenient way to build this already).</p>
+
+<a name="194244820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194244820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194244820">orlando (Apr 16 2020 at 00:20)</a>:</h4>
+<p>I'm ok Reid, but  for  an abstract category. For set we have a canonical choise for the product <code> U \times V </code> with the projection.</p>
+
+<a name="194244941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194244941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194244941">orlando (Apr 16 2020 at 00:22)</a>:</h4>
+<p>i mean it's a theorem such that set as product not an assumption ! So there is a construction.</p>
+
+<a name="194244970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194244970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194244970">Reid Barton (Apr 16 2020 at 00:23)</a>:</h4>
+<p>But there isn't a theorem that says the thing denoted by <code>U ⨯ V</code> is actually <em>equal to</em> the product type, and in fact it isn't.</p>
+
+<a name="194244994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194244994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194244994">Reid Barton (Apr 16 2020 at 00:23)</a>:</h4>
+<p>You can define an isomorphism, and that's essentially what you're in the process of doing</p>
+
+<a name="194245086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245086">Reid Barton (Apr 16 2020 at 00:25)</a>:</h4>
+<p><code>U ⨯ V</code> is actually defined as the limit over this <code>walking_pair</code> index category that's related to <code>binary_fan</code>. Otherwise I guess the <code>limit.lift ... (binary_fan.mk ...)</code> stuff wouldn't work.</p>
+
+<a name="194245098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245098">Reid Barton (Apr 16 2020 at 00:25)</a>:</h4>
+<p>It might not be the correct design, but it is the current one.</p>
+
+<a name="194245212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245212">Kevin Buzzard (Apr 16 2020 at 00:27)</a>:</h4>
+<p>For set there is a canonical choice -- but Lean makes another choice ;-)</p>
+
+<a name="194245295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245295">orlando (Apr 16 2020 at 00:29)</a>:</h4>
+<p><span aria-label="confused" class="emoji emoji-1f615" role="img" title="confused">:confused:</span></p>
+
+<a name="194245311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245311">Reid Barton (Apr 16 2020 at 00:29)</a>:</h4>
+<p>Well, it's the library's choice, not Lean's.</p>
+
+<a name="194245399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245399">Reid Barton (Apr 16 2020 at 00:30)</a>:</h4>
+<p>You don't get to believe all the following simultaneously.</p>
+<ul>
+<li>A limit in Set is produced by [such and such general construction].</li>
+<li>A product in Set is produced by the product type.</li>
+<li>Products are limits over the category <code>walking_pair</code>.</li>
+</ul>
+
+<a name="194245464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245464">Reid Barton (Apr 16 2020 at 00:31)</a>:</h4>
+<p>You might say you don't really care what the general construction of limits is, which is true, but whatever it is, there's no way it will reduce to the product of types when the index category is <code>walking_pair</code>.</p>
+
+<a name="194245650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245650">Reid Barton (Apr 16 2020 at 00:34)</a>:</h4>
+<p>It's possible it might be better to abandon the third item on that list instead, or maybe there's some other design we haven't come up with which would be superior.</p>
+
+<a name="194245840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245840">Kevin Buzzard (Apr 16 2020 at 00:37)</a>:</h4>
+<p>You can't fix the problem that there is more than one construction of a limit; even if you magically got products to be the product type, then you can't get triple products to be A x (B x C) and (A x B) x C. There will have to be some sort of infrastructure which moves between isomorphic objects that satisfy the universal property and perhaps binary products is a great place to test it out.</p>
+
+<a name="194245845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245845">orlando (Apr 16 2020 at 00:37)</a>:</h4>
+<p>it's difficult to understand, i have to think a little about this ! Thx</p>
+
+<a name="194245915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245915">Kevin Buzzard (Apr 16 2020 at 00:38)</a>:</h4>
+<p>Orlando, surely your job is to prove that the product A x B satisfies the universal property and then to use that to construct the fixed isomorphism between A x B and whatever mathlib's product is.</p>
+
+<a name="194245969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194245969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194245969">Kevin Buzzard (Apr 16 2020 at 00:39)</a>:</h4>
+<p>And theorems should never be formalised about the product, but only about an object which satisfies the universal property which the product satisfies, I guess.</p>
+
+<a name="194246063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194246063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194246063">Reid Barton (Apr 16 2020 at 00:40)</a>:</h4>
+<p>If you prove it satisfies the universal property then there should be a way in the library to extract the isomorphism from that (though maybe it's easier to build it directly by hand)</p>
+
+<a name="194246154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194246154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194246154">orlando (Apr 16 2020 at 00:41)</a>:</h4>
+<p>Ok i understand  <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="194246243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194246243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194246243">Kevin Buzzard (Apr 16 2020 at 00:42)</a>:</h4>
+<p>This was the mistake we originally made in the schemes project: we proved theorems about R[1/f], but we should have proved theorems about all R-algebras which satisfied the universal property of R[1/f]</p>
+
+<a name="194247547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194247547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194247547">orlando (Apr 16 2020 at 01:07)</a>:</h4>
+<p>I'm ok ! i thick i do that. For example, if  i take the ring <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Z</mi><mo stretchy="false">[</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">]</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn><mi>x</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbb{Z}[X,Y] / (x^2+3xy )</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mord">/</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>, i never proof fact about this ring but i start with Let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> be a ring and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo>∈</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">a, b \in R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> s.t <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn><mi>a</mi><mi>b</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a^2+3ab = 0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> and i show stuff (doing calculus <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span> ) and at the end i can tell ok i choice <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Z</mi><mo stretchy="false">[</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">]</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>3</mn><mi>x</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> \mathbb{Z}[X,Y] / (x^2+3xy)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mord">/</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x,y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a,b</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span></span></span></span> so my calculus show some stuff about this last ring. </p>
+<p>I understand .... tomorow for the product :D</p>
+
+<a name="194260991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194260991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194260991">Markus Himmel (Apr 16 2020 at 06:08)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113488-general/topic/create.20an.20element.20of.20product/near/194246063" title="#narrow/stream/113488-general/topic/create.20an.20element.20of.20product/near/194246063">said</a>:</p>
+<blockquote>
+<p>If you prove it satisfies the universal property then there should be a way in the library to extract the isomorphism from that (though maybe it's easier to build it directly by hand)</p>
+</blockquote>
+<p>Here is how to get the isomorphism:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">binary_products</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">P</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">P</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">P</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">P</span> <span class="err">≅</span> <span class="n">X</span> <span class="err">⨯</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="n">functor</span><span class="bp">.</span><span class="n">map_iso</span> <span class="o">(</span><span class="n">cones</span><span class="bp">.</span><span class="n">forget</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">is_limit</span><span class="bp">.</span><span class="n">unique_up_to_iso</span> <span class="n">h</span> <span class="o">(</span><span class="n">limit</span><span class="bp">.</span><span class="n">is_limit</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
+
+<a name="194267729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194267729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194267729">Scott Morrison (Apr 16 2020 at 07:52)</a>:</h4>
+<p>That definitely needs a shortcut.</p>
+
+<a name="194268468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194268468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194268468">Markus Himmel (Apr 16 2020 at 08:00)</a>:</h4>
+<p>Oh, I just noticed that there already is a shortcut:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">P</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">P</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">P</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">P</span> <span class="err">≅</span> <span class="n">X</span> <span class="err">⨯</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="n">h</span><span class="bp">.</span><span class="n">cone_point_unique_up_to_iso</span> <span class="o">(</span><span class="n">limit</span><span class="bp">.</span><span class="n">is_limit</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="194281954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194281954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194281954">orlando (Apr 16 2020 at 10:11)</a>:</h4>
+<p>Tidy doesn 't work !  <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>            <span class="c1">----- i import all, i don&#39;t understand :D</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">finite_products</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">terminal</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">discrete_category</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+
+<span class="n">def</span> <span class="n">Cartesian_prod</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">binary_fan</span> <span class="n">U</span> <span class="n">V</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="k">let</span> <span class="n">P</span>  <span class="o">:=</span> <span class="n">U</span> <span class="bp">×</span> <span class="n">V</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">π_1</span> <span class="o">:=</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="o">:</span>  <span class="n">P</span> <span class="err">⟶</span>  <span class="n">U</span><span class="o">),</span>
+     <span class="k">let</span> <span class="n">π_2</span> <span class="o">:=</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="o">:</span>  <span class="n">P</span> <span class="err">⟶</span>  <span class="n">V</span><span class="o">),</span>
+     <span class="k">let</span> <span class="n">Fan</span> <span class="o">:=</span> <span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">π_1</span><span class="o">)</span> <span class="o">(</span><span class="n">as_hom</span> <span class="n">π_2</span><span class="o">),</span>
+     <span class="n">exact</span> <span class="n">Fan</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">Cartesian_prod_is_prod</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">exact</span> <span class="o">{</span><span class="n">lift</span> <span class="o">:=</span> <span class="k">begin</span>
+               <span class="n">intros</span><span class="o">,</span>
+               <span class="n">exact</span>  <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">X</span><span class="o">,((</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">left</span> <span class="n">x</span><span class="o">,(</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">),</span>
+<span class="c1">-- is there is some helper ? it&#39;s i little complicated</span>
+               <span class="kn">end</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194281969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194281969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194281969">Kevin Buzzard (Apr 16 2020 at 10:11)</a>:</h4>
+<p>Automation is hard.</p>
+
+<a name="194288512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194288512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194288512">orlando (Apr 16 2020 at 11:20)</a>:</h4>
+<p>I don't understand nothing <span aria-label="innocent" class="emoji emoji-1f607" role="img" title="innocent">:innocent:</span><br>
+The tatic state at HERE is </p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">cone</span> <span class="o">(</span><span class="n">pair</span> <span class="n">U</span> <span class="n">V</span><span class="o">),</span>
+<span class="n">j</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">X</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">j</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">left</span> <span class="n">x</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">j</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>Can i split the goal with <code> j = left and j = right </code> or something like this ? </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>            <span class="c1">----- i import all, i don&#39;t understand :D</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">finite_products</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">terminal</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">discrete_category</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+
+<span class="n">def</span> <span class="n">Cartesian_prod</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">binary_fan</span> <span class="n">U</span> <span class="n">V</span> <span class="o">:=</span>
+ <span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">as_hom</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">×</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">))</span> <span class="o">(</span><span class="n">as_hom</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span>  <span class="o">:</span> <span class="n">U</span> <span class="bp">×</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">V</span><span class="o">))</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span><span class="kn">lemma</span> <span class="n">Cartesian_prod</span><span class="bp">.</span><span class="n">left</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">U</span> <span class="o">)(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span>  <span class="o">:</span>
+<span class="o">((</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">left</span> <span class="bp">=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span>  <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span><span class="kn">lemma</span> <span class="n">Cartesian_prod</span><span class="bp">.</span><span class="n">right</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">U</span> <span class="o">)(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span>  <span class="o">:</span>
+<span class="o">((</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">right</span>   <span class="bp">=</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="c1">-- @[simp] lemma binary_fan.mk_π_app_left {P : C} (π₁ : P ⟶ X) (π₂ : P ⟶ Y) :</span>
+<span class="c1">--   (binary_fan.mk π₁ π₂).π.app walking_pair.left = π₁ := rfl</span>
+<span class="c1">-- binary_fan.mk c&#39;est le constructor de binary_fan : it a cone !</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">is_limit</span>
+<span class="kn">lemma</span> <span class="n">Cartesian_prod_is_prod</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">exact</span>     <span class="o">{</span><span class="n">lift</span> <span class="o">:=</span> <span class="k">begin</span>
+                    <span class="n">intros</span><span class="o">,</span>
+                    <span class="n">exact</span>  <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">((</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">left</span> <span class="n">x</span><span class="o">,</span>  <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">),</span>
+                    <span class="kn">end</span><span class="o">,</span>
+               <span class="n">fac&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+                         <span class="n">intros</span><span class="o">,</span> <span class="n">tidy</span><span class="o">,</span> <span class="c1">--- HERE</span>
+                          <span class="n">sorry</span><span class="o">,</span>
+                    <span class="kn">end</span><span class="o">,</span>
+               <span class="n">uniq&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+               <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194290344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194290344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194290344">Markus Himmel (Apr 16 2020 at 11:39)</a>:</h4>
+<p>Try <code>cases j</code>.</p>
+
+<a name="194291216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194291216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194291216">orlando (Apr 16 2020 at 11:49)</a>:</h4>
+<p>ahaha </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Cartesian_prod_is_prod</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">Cartesian_prod</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">exact</span>     <span class="o">{</span><span class="n">lift</span> <span class="o">:=</span> <span class="k">begin</span>
+                    <span class="n">intros</span><span class="o">,</span>
+                    <span class="n">exact</span>  <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">((</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">left</span> <span class="n">x</span><span class="o">,</span>  <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">π</span><span class="o">)</span><span class="bp">.</span><span class="n">app</span> <span class="n">walking_pair</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">),</span>
+                    <span class="kn">end</span><span class="o">,</span>
+               <span class="n">fac&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+                         <span class="n">intros</span><span class="o">,</span><span class="n">tidy</span><span class="o">,</span> <span class="n">cases</span> <span class="n">j</span>
+                         <span class="o">,</span> <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span><span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span>    <span class="c1">--- i like exact rfl :D</span>
+                    <span class="kn">end</span><span class="o">,</span>
+               <span class="n">uniq&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+               <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194369132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194369132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194369132">orlando (Apr 16 2020 at 21:22)</a>:</h4>
+<p>Hello, another funny stuff <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span> </p>
+<p>oups the code not work  sorry i update  it's ok ! but <span aria-label="confused" class="emoji emoji-1f615" role="img" title="confused">:confused:</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">finite_products</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">discrete_category</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">v1</span> <span class="n">u</span> <span class="n">u1</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">walking_pair</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">namespace</span> <span class="n">TEST</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+<span class="kn">lemma</span> <span class="n">rfl_of_rlf</span> <span class="o">{</span><span class="n">X1</span> <span class="n">Y1</span> <span class="n">X2</span> <span class="n">Y2</span> <span class="o">:</span> <span class="n">C</span><span class="o">}(</span><span class="n">h</span> <span class="o">:</span> <span class="n">X1</span> <span class="bp">=</span> <span class="n">X2</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">Y1</span> <span class="bp">=</span> <span class="n">Y2</span> <span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">X1</span> <span class="err">⟶</span> <span class="n">Y1</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">X2</span> <span class="err">⟶</span> <span class="n">Y2</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">intro</span> <span class="n">f</span><span class="o">,</span><span class="n">tidy</span><span class="o">,</span><span class="n">exact</span> <span class="n">f</span><span class="o">,</span>
+       <span class="c1">--- super tidy</span>
+<span class="kn">end</span>
+<span class="kn">lemma</span> <span class="n">jouer1</span> <span class="o">(</span><span class="n">X1</span> <span class="n">X2</span> <span class="n">Y1</span> <span class="n">Y2</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">fX</span> <span class="o">:</span> <span class="n">X1</span> <span class="err">⟶</span> <span class="n">X2</span><span class="o">)(</span><span class="n">fY</span> <span class="o">:</span> <span class="n">Y1</span> <span class="err">⟶</span> <span class="n">Y2</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="k">let</span> <span class="n">F1</span> <span class="o">:=</span> <span class="n">pair</span> <span class="n">X1</span> <span class="n">Y1</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">F2</span> <span class="o">:=</span> <span class="n">pair</span> <span class="n">X2</span> <span class="n">Y2</span><span class="o">,</span>
+     <span class="k">have</span> <span class="n">hx</span> <span class="o">:</span> <span class="n">X1</span> <span class="bp">=</span> <span class="n">F1</span><span class="bp">.</span><span class="n">obj</span> <span class="n">left</span><span class="o">,</span>
+          <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span>
+     <span class="k">have</span> <span class="n">hx&#39;</span> <span class="o">:</span> <span class="n">X2</span> <span class="bp">=</span> <span class="n">F2</span><span class="bp">.</span><span class="n">obj</span> <span class="n">left</span><span class="o">,</span>
+          <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span>
+          <span class="k">have</span> <span class="n">hy</span> <span class="o">:</span> <span class="n">Y1</span> <span class="bp">=</span> <span class="n">F1</span><span class="bp">.</span><span class="n">obj</span> <span class="n">right</span><span class="o">,</span>
+          <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span>
+     <span class="k">have</span> <span class="n">hy&#39;</span> <span class="o">:</span> <span class="n">Y2</span> <span class="bp">=</span> <span class="n">F2</span><span class="bp">.</span><span class="n">obj</span> <span class="n">right</span><span class="o">,</span>
+          <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span>
+     <span class="c1">-- let ψ := map_pair fX fY,   --- not work is it posssible to make this work ? wihout rfl_of_rfl ?</span>
+     <span class="k">let</span> <span class="n">φ</span> <span class="o">:=</span> <span class="n">map_pair</span>  <span class="o">(</span><span class="n">rfl_of_rlf</span>  <span class="n">hx</span> <span class="n">hx&#39;</span> <span class="n">fX</span><span class="o">)</span> <span class="o">(</span><span class="n">rfl_of_rlf</span> <span class="n">hy</span> <span class="n">hy&#39;</span> <span class="n">fY</span><span class="o">),</span>
+          <span class="n">trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="kn">end</span> <span class="n">TEST</span>
+</pre></div>
+
+<a name="194369533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194369533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194369533">orlando (Apr 16 2020 at 21:25)</a>:</h4>
+<p>An other question : is there is documentation that explain <code> rfl </code>  ?</p>
+
+<a name="194369925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194369925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194369925">Johan Commelin (Apr 16 2020 at 21:29)</a>:</h4>
+<p>That's almost the same thing as asking what <em>definitional equality</em> is. The best resource is probably Mario's thesis.</p>
+
+<a name="194373122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373122">Kenny Lau (Apr 16 2020 at 22:02)</a>:</h4>
+<p>I put this under the "you will pick it up as you use it and ask a million questions about it" file</p>
+
+<a name="194373523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373523">Kevin Buzzard (Apr 16 2020 at 22:06)</a>:</h4>
+<p><code>rfl</code> proves <code>X=Y</code> if X and Y have the same definition</p>
+
+<a name="194373591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373591">Kevin Buzzard (Apr 16 2020 at 22:07)</a>:</h4>
+<p>Like it would prove <code>n+0=n</code> but it would not prove <code>0+n=n</code></p>
+
+<a name="194373615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373615">Kenny Lau (Apr 16 2020 at 22:07)</a>:</h4>
+<p>defeq isn't transitive though</p>
+
+<a name="194373627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373627">Kenny Lau (Apr 16 2020 at 22:07)</a>:</h4>
+<p>but yeah ok for practical purposes</p>
+
+<a name="194373987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20an%20element%20of%20product/near/194373987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61892createanelementofproduct.html#194373987">orlando (Apr 16 2020 at 22:10)</a>:</h4>
+<p>In my example :  tidy do <code> induction h', induction h </code> !</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

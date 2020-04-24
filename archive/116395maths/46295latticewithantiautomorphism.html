@@ -1,0 +1,155 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/46295latticewithantiautomorphism.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html">lattice with antiautomorphism</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192132929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192132929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192132929">Kevin Buzzard (Mar 28 2020 at 17:20)</a>:</h4>
+<p>In <a href="#narrow/stream/113488-general/topic/Group.20morphism/near/192132752" title="#narrow/stream/113488-general/topic/Group.20morphism/near/192132752">this piece of code</a> there's a lattice where inf is much easier to work with than sup. I defined inf and proved all the theorems to make a <code>semilattice_inf_bot</code>. I now wanted a <code>semilattice_sup_top</code> and I claim that I should be able to get it for free by applying an <code>inv</code> function to everything, e.g. <code>E ⊔ F = (F⁻¹ ⊓ E⁻¹)⁻¹</code> and so on (maybe I don't want this to be the definition of sup, but I want to prove this theorem about sup, and once I've proved it and that the inverse of top is bot, I want everything else for free). What is happening here? Is this some kind of <code>to_additive</code> on steroids?</p>
+
+<a name="192133556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192133556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192133556">Johan Commelin (Mar 28 2020 at 17:36)</a>:</h4>
+<p>There is <code>lattice.copy</code>, and all its cousins.</p>
+
+<a name="192133568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192133568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192133568">Johan Commelin (Mar 28 2020 at 17:37)</a>:</h4>
+<p>That allows you to take a lattice structure with ugly definitions, and replace them with good definitions, but maintain all the proofs.</p>
+
+<a name="192134225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192134225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192134225">Kevin Buzzard (Mar 28 2020 at 17:54)</a>:</h4>
+<p>What's happening here is that I prove all the theorems about inf and top, but I don't want to prove any of the theorems about sup and bot because they all follow from the theorems about inf and top when I apply the involution.</p>
+
+<a name="192134251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192134251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192134251">Johan Commelin (Mar 28 2020 at 17:55)</a>:</h4>
+<p>Maybe not all the machinery for transporting half of the structure across that involution is there.</p>
+
+<a name="192134252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192134252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192134252">Chris Hughes (Mar 28 2020 at 17:55)</a>:</h4>
+<p>Can you do a galois connection with the dual to get <code>semilattice_sup_top</code> somehow?</p>
+
+<a name="192134297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192134297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192134297">Kevin Buzzard (Mar 28 2020 at 17:56)</a>:</h4>
+<p>However I was forced to prove them because I didn't know any automation which would do them, and asking <code>simp</code> to do it is I think too tall an order. You apply le_of_inv_ge_inv or eq_of_inv_eq_inv to everything and then apply the corresponding "dual" lemma, with the occasional inv_inv thrown in</p>
+
+<a name="192134308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192134308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192134308">Kevin Buzzard (Mar 28 2020 at 17:56)</a>:</h4>
+<p>Galois connection: that is an interesting idea!</p>
+
+<a name="192136199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192136199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192136199">Kevin Buzzard (Mar 28 2020 at 18:42)</a>:</h4>
+<p>I think I simply need that if <code>L ≃ M</code> is &lt;=-reversing then I can transfer an inf_bot on L to a sup_top on M</p>
+
+<a name="192144789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192144789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192144789">Mario Carneiro (Mar 28 2020 at 22:35)</a>:</h4>
+<p>Do we have the theorem that says that <code>semilattice_inf_bot X -&gt; semilattice_sup_top (dual X)</code>?</p>
+
+<a name="192144797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192144797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192144797">Mario Carneiro (Mar 28 2020 at 22:35)</a>:</h4>
+<p>If so, you should be able to apply it and then use <code>change</code> to fix up all the operations (the inverse function is not necessary)</p>
+
+<a name="192144800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192144800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192144800">Chris Hughes (Mar 28 2020 at 22:35)</a>:</h4>
+<p>I think we need the other way round here</p>
+
+<a name="192144806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192144806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192144806">Mario Carneiro (Mar 28 2020 at 22:36)</a>:</h4>
+<p>oh yes you are right</p>
+
+<a name="192147935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192147935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192147935">Kevin Buzzard (Mar 29 2020 at 00:04)</a>:</h4>
+<p>But this doesn't solve the problem right?</p>
+
+<a name="192147951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192147951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192147951">Kevin Buzzard (Mar 29 2020 at 00:05)</a>:</h4>
+<p>I now need to transport the typeclass along the isomorphism between the lattice and its dual</p>
+
+<a name="192148218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192148218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192148218">Chris Hughes (Mar 29 2020 at 00:12)</a>:</h4>
+<p>Yeah, you have to do that. But you can do that once in great generality.</p>
+
+<a name="192148226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192148226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192148226">Chris Hughes (Mar 29 2020 at 00:13)</a>:</h4>
+<p>So you haven't saved yourself much work, but you've saved the next person some work.</p>
+
+<a name="192148303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192148303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192148303">Kevin Buzzard (Mar 29 2020 at 00:16)</a>:</h4>
+<p>But I thought we're supposed to doing this with the transfer tactic which didn't get written yet? I'm supposed to be giving a talk on this on Wednesday</p>
+
+<a name="192148483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192148483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192148483">Chris Hughes (Mar 29 2020 at 00:22)</a>:</h4>
+<p>I'm not sure the transfer tactic will do that.</p>
+
+<a name="192148535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192148535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192148535">Chris Hughes (Mar 29 2020 at 00:22)</a>:</h4>
+<p>This doesn't feel like that, because the structures are different.</p>
+
+<a name="192149470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149470">Kevin Buzzard (Mar 29 2020 at 00:55)</a>:</h4>
+<p>I mean after getting the suptop on the dual of L from the infbot on L, I then need to get a suptop on L from the suptop on the dual of L by transporting it along the isomorphism I have between L and its dual given by inv</p>
+
+<a name="192149524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149524">Kevin Buzzard (Mar 29 2020 at 00:56)</a>:</h4>
+<p>In my situation I have an isomorphism inv between L and its dual</p>
+
+<a name="192149587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149587">Kevin Buzzard (Mar 29 2020 at 00:58)</a>:</h4>
+<p>So I want to do only half the work for proving L is a bounded lattice. Other than the partial order it seems to be that the inf top structure and the sup bot structure are completely disjoint and dual in some way</p>
+
+<a name="192149744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149744">Chris Hughes (Mar 29 2020 at 01:02)</a>:</h4>
+<p>But that's a theorem that isn't inside the realm of transfer I think. Even though it's an easy tedious theorem. The fact that <code>sup</code> is dual to <code>inf</code> and so on.</p>
+
+<a name="192149804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149804">Mario Carneiro (Mar 29 2020 at 01:04)</a>:</h4>
+<p>I'm confused. The transfer tactic is not needed here</p>
+
+<a name="192149808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149808">Mario Carneiro (Mar 29 2020 at 01:04)</a>:</h4>
+<p>There is a theorem, proven once, that <code>semilattice_sup_top X -&gt; semilattice_inf_bot (dual X)</code></p>
+
+<a name="192149827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149827">Mario Carneiro (Mar 29 2020 at 01:05)</a>:</h4>
+<p>there is no automation involved in this theorem, you just unfold and apply the projections</p>
+
+<a name="192149838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149838">Mario Carneiro (Mar 29 2020 at 01:06)</a>:</h4>
+<p>This is analogous to the theorem <code>group G -&gt; add_group (additive G)</code></p>
+
+<a name="192149880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149880">Mario Carneiro (Mar 29 2020 at 01:07)</a>:</h4>
+<p>Once that is set up, a statement like <code>\forall x y : X, x \cap y = y \cap x</code> can be proven by <code>@sup_comm (dual X) _</code></p>
+
+<a name="192149984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192149984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192149984">Kevin Buzzard (Mar 29 2020 at 01:10)</a>:</h4>
+<p>In my situation I have an inf_bot on L. I want a sup_top on L. The theorem above, proven once, will give me a sup_top on dual(L). Now how do I get the sup_top on L? Answer: use <code>inv</code>, the isomorphism between L and dual(L). But now I need transfer, right? What am I missing?</p>
+
+<a name="192385289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192385289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192385289">Scott Morrison (Mar 31 2020 at 13:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, sorry this answer is two days late, but we are on the verge of having this. From the <a href="https://github.com/leanprover-community/mathlib/compare/equiv_rw..transport" title="https://github.com/leanprover-community/mathlib/compare/equiv_rw..transport"><code>transport</code></a> branch, for which there is an open PR <a href="https://github.com/leanprover-community/mathlib/issues/2251" title="https://github.com/leanprover-community/mathlib/issues/2251">#2251</a>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- We verify that `transport` can move a `semiring` across an equivalence.</span>
+<span class="c1">-- Note that we&#39;ve never even mentioned the idea of addition or multiplication to `transport`.</span>
+<span class="n">def</span> <span class="n">semiring</span><span class="bp">.</span><span class="n">map</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">semiring</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">transport</span><span class="bp">.</span>
+
+<span class="c1">-- Indeed, it can equally well move a `semilattice_sup_top`.</span>
+<span class="n">def</span> <span class="n">sup_top</span><span class="bp">.</span><span class="n">map</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">semilattice_sup_top</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">semilattice_sup_top</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">transport</span><span class="bp">.</span>
+</pre></div>
+
+<a name="192386327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lattice%20with%20antiautomorphism/near/192386327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46295latticewithantiautomorphism.html#192386327">Kevin Buzzard (Mar 31 2020 at 13:09)</a>:</h4>
+<p>Interesting!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

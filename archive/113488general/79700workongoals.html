@@ -1,0 +1,73 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/79700workongoals.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html">work_on_goals?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193204723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193204723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193204723">Alex J. Best (Apr 07 2020 at 15:25)</a>:</h4>
+<p>Is there a tactic or recommended way to work on a specific subset of the set of current goals, (I have 5 and I want to run one set of tactics on 3 of them and one set on the other two)? Currently all I can think of is naming my tactics scripts and calling the relevant one on each, but this would be unwieldy on more than 5.</p>
+
+<a name="193205313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193205313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193205313">Alex J. Best (Apr 07 2020 at 15:28)</a>:</h4>
+<p>Actually I guess this is a duplicate of the goal selectors topic we had recently, sorry!</p>
+
+<a name="193208168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193208168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193208168">Jannis Limperg (Apr 07 2020 at 15:48)</a>:</h4>
+<p><code>focus</code> might be the what you're looking for.</p>
+
+<a name="193208482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193208482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193208482">Alex J. Best (Apr 07 2020 at 15:50)</a>:</h4>
+<p>Maybe not exactly what I'm looking for but definitely useful and not something I was aware of, thanks!</p>
+
+<a name="193255346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193255346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193255346">Scott Morrison (Apr 07 2020 at 22:18)</a>:</h4>
+<p>My students at one point had <code>work_on_goals</code> as a homework assignment. :-) It's only a few lines long  --- someone should PR it!</p>
+
+<a name="193265658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193265658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193265658">Lucas Allen (Apr 08 2020 at 00:44)</a>:</h4>
+<p>I don't know how good this is.</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">work_on_goals</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">tac</span> <span class="o">:</span> <span class="n">itactic</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
+   <span class="n">l</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="n">e</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">gl</span> <span class="o">:=</span> <span class="n">l</span><span class="bp">.</span><span class="n">filter_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">gs</span><span class="bp">.</span><span class="n">nth</span> <span class="n">x</span><span class="o">),</span>
+   <span class="k">let</span> <span class="n">glc</span> <span class="o">:=</span> <span class="n">gs</span><span class="bp">.</span><span class="n">remove_all</span> <span class="n">gl</span><span class="o">,</span>
+   <span class="n">set_goals</span> <span class="n">gl</span><span class="o">,</span>
+   <span class="n">all_goals</span> <span class="n">tac</span><span class="o">,</span>
+   <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">set_goals</span> <span class="o">(</span><span class="n">gs</span> <span class="bp">++</span> <span class="n">glc</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+</pre></div>
+
+<a name="193266452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193266452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193266452">Scott Morrison (Apr 08 2020 at 01:01)</a>:</h4>
+<p>Oh, I wasn't certain what the intended semantics was here. I'd expected just <code>tac</code>, rather than <code>all_goals tac</code>.</p>
+
+<a name="193266498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193266498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193266498">Scott Morrison (Apr 08 2020 at 01:02)</a>:</h4>
+<p>i.e., the interactive tactic was for entering a scope in which you could only see a subset of the goals.</p>
+
+<a name="193266514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193266514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193266514">Scott Morrison (Apr 08 2020 at 01:03)</a>:</h4>
+<p>perhaps then <code>some_goals [3,5,8] { ... }</code> could be defined as <code>work_on_goals [3,5,8] { all_goals { ... } }</code>.</p>
+
+<a name="193266556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/work_on_goals%3F/near/193266556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79700workongoals.html#193266556">Scott Morrison (Apr 08 2020 at 01:03)</a>:</h4>
+<p>But besides deciding this, and giving an error message if <code>eval_expr</code> fails, and addings docs, yes, someone should PR this!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

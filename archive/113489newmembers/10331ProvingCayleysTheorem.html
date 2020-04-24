@@ -1,0 +1,520 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/10331ProvingCayleysTheorem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html">Proving Cayley's Theorem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="164180866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164180866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164180866">Greg Conneen (Apr 25 2019 at 15:31)</a>:</h4>
+<p>Okay, so as was suggested to me the other day, I think it would be a good idea to prove Cayley's theorem in Lean. I think it would give me a good understanding of how certain mathematical structures are implemented in Lean, and would give me a chance to get some feedback on my code. Below is essentially my outline of a TODO.</p>
+<p>Preliminaries: the first thing I need to do is talk about an arbitrary group G, with an operation <code>x</code>. Then I want the set of elements of G, S, defined. Third, I want to define the set F of bijective functions f: S -&gt; S, that is, the set of permutations of S. I assume it would be easiest to first construct this just at injective mappings, and then it should be easy to prove that they are also surjective. Then, I want a construction of function composition within F. The final thing I want to show in my preliminaries is that (F, *) is a group with respect to composition. I assume this might take some bit of doing, since I'll have to show there is an inverse map, and it is in F. This seems like the hardest bit out of the preliminaries, unless there is already something in function.lean that shows a bijective map has an inverse. I will research this.</p>
+<p>Now, the proof of the theorem: This much should be the easy part. all I have to do is define the map in F called f_g(x) = g*x, and show that the set of <code>f_g for all g in G</code> is a subgroup of F. That should be simple once I've gotten through the preliminaries.</p>
+<p>Please let me know if this looks about right for what I'll end up implementing in Lean. Any tips on how to get started with the preliminaries, or any hints/tips about subtleties in Lean I might be missing would be much appreciated.</p>
+
+<a name="164184047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164184047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164184047">Greg Conneen (Apr 25 2019 at 16:04)</a>:</h4>
+<p>I have just discovered that the way permutations are defined includes an inverse</p>
+
+<a name="164187846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164187846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164187846">Patrick Massot (Apr 25 2019 at 16:48)</a>:</h4>
+<p>I'm a bit confused by your list. You saw <code>perm S</code>, right?  There is also <a href="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/group_action.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/group_action.lean">https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/group_action.lean</a></p>
+
+<a name="164187902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164187902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164187902">Greg Conneen (Apr 25 2019 at 16:49)</a>:</h4>
+<p>yes, I saw perm S. This sort of trivialises some of my workload</p>
+
+<a name="164188024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164188024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164188024">Greg Conneen (Apr 25 2019 at 16:50)</a>:</h4>
+<p>I did not see group_action.lean. I will study this file more and come back to this problem.</p>
+
+<a name="164188153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164188153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164188153">Patrick Massot (Apr 25 2019 at 16:52)</a>:</h4>
+<p>I'm very much aware of how bad is our documentation, but we still have lists of files visible on GitHub and on your hard drive. That file is not so well hidden in a folder named <code>group_theory</code>...</p>
+
+<a name="164188856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164188856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164188856">Greg Conneen (Apr 25 2019 at 17:00)</a>:</h4>
+<p>I understand. I've gotten used to hunting around mathlib for interesting and useful files, I just simply didn't think to look for such a file</p>
+
+<a name="164210477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210477">Kevin Buzzard (Apr 25 2019 at 21:15)</a>:</h4>
+<p>Mathlib is a maze and it's extremely difficult to navigate it alone. I attempted to document some of what was there when I was just starting out, and I wrote some kind-of useless files, which perhaps helped nobody, but the attempt to write them at least made me look at every single Lean file in mathlib at least once. Of course back then mathlib was 1/3rd the size!</p>
+
+<a name="164210618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210618">Johan Commelin (Apr 25 2019 at 21:17)</a>:</h4>
+<p>I'm wondering, is the proof of Cayley's theorem just <code>funext</code> and <code>mul_assoc</code>?</p>
+
+<a name="164210660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210660">Johan Commelin (Apr 25 2019 at 21:17)</a>:</h4>
+<p>Ooh, we might need one more <code>ext</code> at the start.</p>
+
+<a name="164210762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210762">Mario Carneiro (Apr 25 2019 at 21:19)</a>:</h4>
+<p>It's pretty crazy that since I gave my talk on the status of mathlib last year, mathlib has roughly doubled in size, and the number of contributors has gone up tenfold</p>
+
+<a name="164210900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210900">Johan Commelin (Apr 25 2019 at 21:20)</a>:</h4>
+<p>Hmm... maybe you should give another talk. Let's see what happens?</p>
+
+<a name="164210951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164210951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164210951">Kevin Buzzard (Apr 25 2019 at 21:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span> There are two kinds of bijections in Lean; there are functions f : X -&gt; Y equipped with an inverse function g : Y -&gt; X and proofs that fg and gf are identity; those pieces of data are terms of type <code>equiv X Y</code>. There are also functions f : X -&gt; Y plus a proof that these functions are injective and surjective. In constructive mathematics or computable mathematics or whatever weird kind of mathematics some computer scientists do, these two concepts are <em>not the same</em>. The problem is that the statement that f is bijective only gives you a <em>theorem</em> that for all y in Y there exists a unique x in X such that f(x)=y. To define the inverse function g you need an algorithm which spits this x out, i.e. "gets data from a proposition", and this is problematic. Even if f is computable, its inverse might not be -- given the algorithm which computes f, how do you get an algorithm which computes its inverse (especially if X is uncountable?). <code>equiv</code> is the "stronger" notion -- one can prove that equivs are bijective. To get a bijective map from an equiv you will have to struggle a bit more and switch on some stuff which I always have switched on anyway so I can't remember what it is exactly. noncomputability? The axiom of choice? Something like that.</p>
+
+<a name="164211040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211040">Kevin Buzzard (Apr 25 2019 at 21:22)</a>:</h4>
+<p>For a general S, an injective function of course isn't bijective. Defining bijective functions in Lean is easy. You should prove that a composite of two injective functions is injective and the composite of two surjective functions is surjective, in tactic mode, as warm-up for this.</p>
+
+<a name="164211051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211051">Koundinya Vajjha (Apr 25 2019 at 21:23)</a>:</h4>
+<blockquote>
+<p>Mathlib is a maze and it's extremely difficult to navigate it alone. I attempted to document some of what was there when I was just starting out, and I wrote some kind-of useless files, which perhaps helped nobody, but the attempt to write them at least made me look at every single Lean file in mathlib at least once. Of course back then mathlib was 1/3rd the size!</p>
+</blockquote>
+<p>I myself was wondering about this. An ideal solution would be something like the archive of formal proofs for Lean, but all tied together with informal docstrings.</p>
+
+<a name="164211334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164211334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164211334">Kevin Buzzard (Apr 25 2019 at 21:26)</a>:</h4>
+<p>PS proving that an injective function from a finite set to itself is also surjective is not easy at all -- you are deluding yourself because you have an extremely accurate but unfortunately very geometric model of a finite set. Lean's definition of a finite set is equivalence classes of lists with no duplicate elements, so any proofs in the API will involve lifting to lists and then proving that things are constant on equivalence classes -- put it another way -- you have to order the set, prove or construct something with the ordered set (typically by induction on the size) and then prove that what you did was independent of the order. This can involve a very delicate induction, because the permutations of a finite set are generated by certain explicit permutations built into Lean. Everything about finite sets is much harder than you think. Fortunately the nice computer scientists wrote a gigantic API for finite sets so that mathematicians can use them the way they like to use them -- but don't be blinded by this -- finite sets are hard, and proving that an injective map is also surjective from first principles is hard.</p>
+
+<a name="164220993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164220993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164220993">Greg Conneen (Apr 25 2019 at 23:59)</a>:</h4>
+<p>Wow, okay. I was away all day and came back to a lot of really useful information. Thank you all so much, but now I have several questions</p>
+
+<a name="164221529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221529">Greg Conneen (Apr 26 2019 at 00:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> how can the proof be that simple? Is our library on groups and functions so extensive that it's practically trivial? I'd like to see your take on the proof. I still plan on doing it in a more roundabout way to help me understand Lean a little better in the process, but it'd be astoundingly beautiful to see a 5-line proof of Cayley's theorem.<br>
+<span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I would love a link to the talk you gave on mathlib, if you'd be so kind.<br>
+<span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I saw how function.lean and data.equiv.basic handled bijections. That makes sense, given how they're defined. I still don't like the notation for <code>equiv</code>, but I suppose it's doable. Secondly, I'd be interested in proving that an injective map f: G -&gt; G is bijective, and similarly when assuming surjectivity. I suppose that's a project for another day.<br>
+Lastly, is there anyone in particular to ask about more detailed comments in mathlib files? Not that the comments aren't sufficient, but I would like more mathematicians such as myself to be able to jump headfirst into Lean, and that seems difficult as-is. I know I'm not bringing up any new conversations, and this is a tangential question, but I was wondering who I should ask.</p>
+
+<a name="164221596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221596">Mario Carneiro (Apr 26 2019 at 00:10)</a>:</h4>
+<p><a href="https://www.youtube.com/watch?v=5tS4j_A1ZvU" target="_blank" title="https://www.youtube.com/watch?v=5tS4j_A1ZvU">https://www.youtube.com/watch?v=5tS4j_A1ZvU</a></p>
+<div class="youtube-video message_inline_image"><a data-id="5tS4j_A1ZvU" href="https://www.youtube.com/watch?v=5tS4j_A1ZvU" target="_blank" title="https://www.youtube.com/watch?v=5tS4j_A1ZvU"><img src="https://i.ytimg.com/vi/5tS4j_A1ZvU/default.jpg"></a></div>
+
+<a name="164221687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221687">Greg Conneen (Apr 26 2019 at 00:13)</a>:</h4>
+<p>Thank you so much!</p>
+
+<a name="164221712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221712">Mario Carneiro (Apr 26 2019 at 00:13)</a>:</h4>
+<p>The statement that injective functions A -&gt; A are bijective is <code>fintype.injective_iff_bijective</code> in <code>data.fintype</code></p>
+
+<a name="164221772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221772">Greg Conneen (Apr 26 2019 at 00:14)</a>:</h4>
+<p>Lovely. Is there a similar proof for surjective to bijective in that file?</p>
+
+<a name="164221775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221775">Mario Carneiro (Apr 26 2019 at 00:14)</a>:</h4>
+<p>it's right after that</p>
+
+<a name="164221782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221782">Greg Conneen (Apr 26 2019 at 00:14)</a>:</h4>
+<p>thanks, I'll check it out</p>
+
+<a name="164221879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164221879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164221879">Kevin Buzzard (Apr 26 2019 at 00:16)</a>:</h4>
+<p>Cayley's theorem can completely be simple. If G is a group then the multiplication map on G can be thought of as a map G -&gt; (G -&gt; G) (indeed in functional programming this is usually how it is stored) and this is exactly the function which embeds G into the permutations. I am confused by all this talk about injective and bijective. I thought G was an arbitrary group. So an injective function G -&gt; G is not bijective. As for comments in mathlib files -- I guess what happened to me was that after a while I realised I didn't need comments, I could just read the code and see what was going on...</p>
+
+<a name="164222305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222305">Greg Conneen (Apr 26 2019 at 00:26)</a>:</h4>
+<p>G is an arbitrary group, you're right. I was just talking about proving bijectivity since I came across it while studying Lean files that I'm not at all accustomed to. <br>
+As for comments... yeah, I guess I'm just not at the point where I'm able to read what's going on all the time. I suppose I just feel sort of stuck in low level Lean proofs since there's just a huge gap between basic proofs on propositions, integers, and the like and actually useful theoretical mathematics, such as algebra and analysis. I'm excited that the proof of Cayley's theorem is so simple, since that says very good things about the people who wrote the files on group theory and functions. But I feel that at the same time, it means I'm learning less about the way mathematics in Lean is formalised with every proof that comes my way. Do you think the best approach is to just read Lean files and use print/check/reduce/eval statements until I understand what's going on? I feel like in order to get comfortable with how mathematical structures are defined in Lean, that's an inevitability. I guess I'm just really excited to get to the high level stuff, but I'm slowly realising how much time that's going to take on my end. Is that the same for all of you, where Lean takes a lot of doing to get from where I am to a clear understanding of much of mathlib?</p>
+
+<a name="164222332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222332">Greg Conneen (Apr 26 2019 at 00:27)</a>:</h4>
+<p>I also don't really know where to start. Should I be reading data.___.basic for things I'm interested in? Where's a good starting point?</p>
+
+<a name="164222389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222389">Kevin Buzzard (Apr 26 2019 at 00:28)</a>:</h4>
+<p>Do you know the syntax for how to make a function and how to make a term of a structure? If so, then try and define a function G -&gt; perm G</p>
+
+<a name="164222399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222399">Kevin Buzzard (Apr 26 2019 at 00:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">equiv</span>
+
+<span class="n">def</span> <span class="n">cayley</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">perm</span> <span class="n">G</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+<a name="164222404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222404">Kevin Buzzard (Apr 26 2019 at 00:29)</a>:</h4>
+<p>TPIL is the place to start</p>
+
+<a name="164222466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222466">Greg Conneen (Apr 26 2019 at 00:30)</a>:</h4>
+<p>I know TPIL is like, the introductory level. But I've read through a majority of it, and skimmed through the bits I didn't. I don't know how much more there is to learn from it</p>
+
+<a name="164222561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222561">Mario Carneiro (Apr 26 2019 at 00:33)</a>:</h4>
+<p>There is a long process from where you are to being able to write mathlib ready mathematics. The best thing you can do in that direction is pick an area that hasn't been formalized, write some stuff, and post about it here, or PR it. It will probably be torn apart but it's a good learning experience</p>
+<p>To read mathlib isn't quite as hard as this; you can do pretty well by going to a file about a theory that interests you, and then browse through it, and figure out what the statements say and what part of the theory is being covered. Ctrl-click on stuff to trace back to prerequisite theorems, and you will start to get a sense of the layout</p>
+
+<a name="164222698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164222698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164222698">Greg Conneen (Apr 26 2019 at 00:36)</a>:</h4>
+<p>Gotcha. Yeah, I'm still sort of intimidated by a lot of mathlib files I guess, despite their triviality on paper</p>
+
+<a name="164235769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164235769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164235769">Kevin Buzzard (Apr 26 2019 at 06:08)</a>:</h4>
+<p>The thing about mathlib is that one of its philosophies is: if the observation is trivial on paper, then try and make the lean proof an incomprehensible one-liner. Of course a lot of these one-liners are now no longer incomprehensible to me, but I well remember when they were.</p>
+
+<a name="164235956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164235956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164235956">Kevin Buzzard (Apr 26 2019 at 06:12)</a>:</h4>
+<p>Here is a cool project. Prove that there is a bijection between equivalence relations on a set X and partitions of X into disjoint non-empty subsets. Mathematically this is straightforward but needs some basic stuff. You don't have to use typeclasses, which are tricky for beginners because the square bracket system needs to be internalised before you can see what it can do for you. Your job is to construct bijections between two sets and prove that they're bijections by evaluating the compositions and checking you get the identity. You'll learn a lot.</p>
+
+<a name="164236069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164236069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164236069">Kevin Buzzard (Apr 26 2019 at 06:15)</a>:</h4>
+<p>NB proving this might take you longer than you think. Not because it's hard, but because you'll have to learn how to manipulate structures and functions quite extensively, in a mathematically very simple situation. Even formalising the statement is a challenge for a beginner; I can do it for you if you want. You will need to make a structure <code>partitions X</code> such that a term of that type is a partition of X.</p>
+
+<a name="164236295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164236295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164236295">Bryan Gin-ge Chen (Apr 26 2019 at 06:20)</a>:</h4>
+<p>There's a related PR on partitions <a href="https://github.com/leanprover-community/mathlib/pull/690" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/690">here</a>, with links to some zulip threads on that topic. It's been languishing for a while since Johannes wanted a different approach and I've been distracted by other things.</p>
+
+<a name="164240613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164240613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164240613">Kevin Buzzard (Apr 26 2019 at 07:55)</a>:</h4>
+<p>This is like the "exercise 6.1" of Lean (forgive the obscure reference to the TeXbook). Proving something which is mathematically very simple and just involves a whole bunch of trivial-to-mathematician observations, in a formal system like Lean, forces you to think very carefully about what a term is, what a type, is, and what the type of everything is. It forces you to learn about how to define functions in Lean whose definitions you completely understand in maths, it forces you to learn about structures and ultimately the amount of code you'll probably end up writing as a beginner is surprisingly large. Then some whizz-kid will show you how it can all be done in a few lines using tricks and you'll begin to see why mathlib chooses 1 line proofs rather than 20 line proofs which are more "readable" -- who wants to read trivialities anyway?</p>
+
+<a name="164240614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164240614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164240614">Kevin Buzzard (Apr 26 2019 at 07:55)</a>:</h4>
+<p>Greg -- here's some homework.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c">/-</span><span class="cm"></span>
+
+<span class="cm">data.equiv.basic  is the import which gives you the type `equiv X Y`, the type of</span>
+<span class="cm">bijections from X to Y.</span>
+
+<span class="cm">Here&#39;s the definition of equiv from that file.</span>
+
+<span class="cm">structure equiv (α : Sort*) (β : Sort*) :=</span>
+<span class="cm">(to_fun    : α → β)</span>
+<span class="cm">(inv_fun   : β → α)</span>
+<span class="cm">(left_inv  : left_inverse inv_fun to_fun)</span>
+<span class="cm">(right_inv : right_inverse inv_fun to_fun)</span>
+
+<span class="cm">To make a term of type `equiv α β` you have to supply a function α → β,</span>
+<span class="cm">a function β → α, and proofs that both composites are the identity function.</span>
+
+<span class="cm">Let&#39;s see how to create the bijection ℤ → ℤ sending x to -x.</span>
+<span class="cm">-/</span>
+<span class="c1">-- let&#39;s prove that x ↦ -x can be extended to</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">equiv</span> <span class="bp">ℤ</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">-</span><span class="n">x</span><span class="o">,</span> <span class="c1">-- this is data</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">-</span><span class="n">x</span><span class="o">,</span>  <span class="c1">-- this is data</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">begin</span> <span class="c1">-- this is a proof</span>
+    <span class="n">change</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="bp">-</span> <span class="bp">-</span><span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">,</span> <span class="c1">-- that&#39;s the question</span>
+    <span class="n">exact</span> <span class="n">neg_neg</span><span class="o">,</span> <span class="c1">-- note: I guessed what this function was called.</span>
+                   <span class="c1">-- If it had been called &quot;lemma 12&quot; I would not have been able to guess</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">neg_neg</span> <span class="c1">-- another proof, this time in term mode</span>
+<span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Q1 Define the type of partitions of a type.</span>
+<span class="cm">A partition of X is a set of subsets of X with the property that each subset</span>
+<span class="cm">is non-empty and each element of X is in precisely one of the subsets.</span>
+<span class="cm">NB : this is one of the harder questions here.</span>
+<span class="cm">-/</span>
+
+<span class="kn">structure</span> <span class="n">partition</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="bp">.</span> <span class="c1">-- remove `.`  and fill in -- look at def of equiv above</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Equivalence relations are in core Lean -- we don&#39;t need any imports.</span>
+<span class="cm">Here&#39;s an example: I&#39;ll prove that the &quot;always true&quot; relation on a set is</span>
+<span class="cm">an equivalence relation.</span>
+
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">always_true</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">true</span>
+
+<span class="c1">-- and now here&#39;s the proof that it&#39;s an equivalence relation.</span>
+
+<span class="kn">theorem</span> <span class="n">always_true_refl</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="o">(</span><span class="n">always_true</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">always_true_symm</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">symmetric</span> <span class="o">(</span><span class="n">always_true</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">always_true_trans</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">transitive</span> <span class="o">(</span><span class="n">always_true</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Hab</span> <span class="n">Hbc</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+
+<span class="c1">-- note pointy brackets to make a term of type &quot;A ∧ B ∧ C&quot;</span>
+<span class="kn">theorem</span> <span class="n">always_true_equiv</span> <span class="o">(</span><span class="n">X</span><span class="o">):</span> <span class="n">equivalence</span> <span class="o">(</span><span class="n">always_true</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">always_true_refl</span> <span class="n">X</span><span class="o">,</span> <span class="n">always_true_symm</span> <span class="n">X</span><span class="o">,</span> <span class="n">always_true_trans</span> <span class="n">X</span><span class="bp">⟩</span>
+<span class="c1">-- autocomplete made that proof really easy to type. It&#39;s really</span>
+<span class="c1">-- lucky that I didn&#39;t call these lemmas lemma 12, lemma 13 and lemma 14.</span>
+
+<span class="c1">-- if X is a type, then `setoid X` is is the type of equivalence relations on X.</span>
+<span class="c1">-- I&#39;ll now make a term of type `setoid X` corresponding to that equivalence</span>
+<span class="c1">-- relation above.</span>
+
+<span class="c1">-- note squiggly brackets and commas at the end of each definition to make a structure</span>
+<span class="n">def</span> <span class="n">always_true_setoid</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">always_true</span> <span class="n">X</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="n">always_true_equiv</span> <span class="n">X</span> <span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Q2 : If X is a type then `setoid X` is the type of equivalence relations on X,</span>
+<span class="cm">and `partitions X` is the type of partitions of X. These two concepts are in</span>
+<span class="cm">some sort of &quot;canonical&quot; bijection with each other (interesting exercise: make</span>
+<span class="cm">this statement mathematically meaningful -- I know we all say it, but what</span>
+<span class="cm">does it *mean*?).</span>
+
+<span class="cm">Let&#39;s prove that these sets biject with each other by defining</span>
+<span class="cm">a term of type equiv (setoid X) (partitions X)</span>
+<span class="cm">-/</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">F</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Q3 : now define a map the other way</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">G</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Q4 : now finally prove that the composite of maps in both directions</span>
+<span class="cm">is the identity</span>
+<span class="cm">-/</span>
+
+<span class="kn">theorem</span> <span class="n">FG_eq_id</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="o">(</span><span class="n">G</span> <span class="n">P</span><span class="o">)</span> <span class="bp">=</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">GF_eq_id</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">G</span> <span class="o">(</span><span class="n">F</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">Q5 : now finally construct the term we seek.</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">partitions_biject_with_equivalence_relations</span> <span class="o">:</span>
+  <span class="n">equiv</span> <span class="o">(</span><span class="n">setoid</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">partition</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="164240615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164240615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164240615">Kevin Buzzard (Apr 26 2019 at 07:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span></p>
+
+<a name="164262807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164262807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164262807">Greg Conneen (Apr 26 2019 at 13:47)</a>:</h4>
+<p>Okay, I see. Thank you for the homework, I'll get to work on it as soon as I can. Sorry about the late response, that was 4am local time</p>
+
+<a name="164265059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164265059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164265059">Kevin Buzzard (Apr 26 2019 at 14:13)</a>:</h4>
+<p>Feel free to ask when you get stuck. There's a lot to do there, I know the maths sounds trivial, but I was surprised when I formalised it just how much was in there.</p>
+
+<a name="164265200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164265200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164265200">Kevin Buzzard (Apr 26 2019 at 14:14)</a>:</h4>
+<p>If you want to go even further at the end, you could prove that an equiv from X to Y induces equivs from <code>partition X</code> to <code>partition </code>Y<code> and from </code>setoid X<code> to </code>setoid Y`, and then you could prove that your construction made the square commute. That would be my answer to the question about why the construction we all know is "canonical"</p>
+
+<a name="164265460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164265460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164265460">Kevin Buzzard (Apr 26 2019 at 14:17)</a>:</h4>
+<p>Maybe you can even prove that your construction is an equivalence of categories from the groupoid of setoids to the groupoid of partitions. <span class="user-mention" data-user-id="110032">@Reid Barton</span> is there enough category theory in core to be able to formalise this statement? What do you think of it as a working definition for "canonical" in what people might call "the canonical construction sending an equivalence relation to its equivalence classes"?</p>
+
+<a name="164265592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164265592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164265592">Greg Conneen (Apr 26 2019 at 14:19)</a>:</h4>
+<p>Ah, that sounds like fun. I've done enough category theory to feel comfortable with that on paper, but seems a bit more daunting in Lean</p>
+
+<a name="164265794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164265794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164265794">Kevin Buzzard (Apr 26 2019 at 14:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span>  can you write me a function which takes as input a simple structure (such as <code>setoid</code>) as input and returns some sort of groupoid? Am I asking for some sort of <code>groupoid</code> typeclass here on structures like <code>partition</code> or am I just talking nonsense?</p>
+
+<a name="164266064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164266064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164266064">Kevin Buzzard (Apr 26 2019 at 14:24)</a>:</h4>
+<p>Recently I've got interested in making loads of equivs, because they've been coming up in the way I think about mathematics. An equiv of setoids is just an equiv of the underlying types such that some diagrams involving the binary relations, all commute.</p>
+
+<a name="164266136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164266136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164266136">Kevin Buzzard (Apr 26 2019 at 14:25)</a>:</h4>
+<p>And I can define two setoids to be isomorphic if there existed an equiv and that's some groupoid I guess.</p>
+
+<a name="164266230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164266230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164266230">Kevin Buzzard (Apr 26 2019 at 14:26)</a>:</h4>
+<p>and then one could suggest that a functor was canonical if it commuted with the groupoid structures.</p>
+
+<a name="164267214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267214">Greg Conneen (Apr 26 2019 at 14:37)</a>:</h4>
+<p>This is what I've got so far for my definition of a partition:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">partition</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">subs</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">))</span>
+<span class="o">(</span><span class="n">part_nonempty</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">subs</span><span class="o">,</span> <span class="n">nonempty</span> <span class="n">k</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ex_incl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="n">subs</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">k</span><span class="o">)</span>
+<span class="o">(</span><span class="n">unique_incl</span> <span class="o">(</span><span class="n">k</span> <span class="n">j</span> <span class="o">:</span> <span class="n">subs</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≠</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
+
+
+<p>but it throws an error on ex_incl since Lean doesn't know that objects of type subs can have elements, I think. Is something of type subs a (set X)? I assumed that's how Lean would handle it, but now I don't know if I've got the right type for k.</p>
+
+<a name="164267257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267257">Greg Conneen (Apr 26 2019 at 14:37)</a>:</h4>
+<p>Or does it specifically have to do with the fact that I'm using the element of symbol?</p>
+
+<a name="164267292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267292">Johan Commelin (Apr 26 2019 at 14:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="218940">@Greg Conneen</span> Here is my rough attempt at Cayley:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="kn">open</span> <span class="n">equiv</span> <span class="n">function</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">cayley_fun</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="o">(</span><span class="n">perm</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">g</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">show</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="bp">=</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">show</span> <span class="n">g</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="bp">=</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">simp</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">cayley_inj</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">cayley_fun</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">g₁</span> <span class="n">g₂</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">congr</span> <span class="n">H</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">),</span>
+  <span class="n">simpa</span> <span class="o">[</span><span class="n">cayley_fun</span><span class="o">]</span> <span class="kn">using</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">cayley_hom</span> <span class="o">:</span> <span class="n">is_group_hom</span> <span class="o">(</span><span class="n">cayley_fun</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_mul</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">g₁</span> <span class="n">g₂</span><span class="o">,</span>
+  <span class="n">ext</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">mul_assoc</span> <span class="n">g₁</span> <span class="n">g₂</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span> <span class="o">}</span>
+</pre></div>
+
+<a name="164267527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267527">Greg Conneen (Apr 26 2019 at 14:40)</a>:</h4>
+<p>I'm getting an error at <code>cayley_hom</code> saying <code>mul</code> was not provided and <code>map_mul</code> is not a field or structure</p>
+
+<a name="164267552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267552">Greg Conneen (Apr 26 2019 at 14:40)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="164267587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164267587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164267587">Greg Conneen (Apr 26 2019 at 14:41)</a>:</h4>
+<p>Oh, it was fixed by replacing the name map_mul with mul. nvm</p>
+
+<a name="164269505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164269505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164269505">Johan Commelin (Apr 26 2019 at 15:01)</a>:</h4>
+<p>Are you on up to date mathlib?</p>
+
+<a name="164269530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164269530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164269530">Greg Conneen (Apr 26 2019 at 15:01)</a>:</h4>
+<p>...probably not</p>
+
+<a name="164269556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164269556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164269556">Greg Conneen (Apr 26 2019 at 15:01)</a>:</h4>
+<p>And I'm not quite sure how to go about updating it. It's been quite a while since I did</p>
+
+<a name="164271041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271041">Kevin Buzzard (Apr 26 2019 at 15:17)</a>:</h4>
+<p>The advantage of staying up to date is that code posted here is more likely to run. Mathlib moves fast and breaks things, and actually seeing your old code break when mathlib breaks is quite interesting, because it's either a change to mathlib which you should know about, or it's because your proof doesn't work any more because it was poorly written. Patrick, Johan and I work hard to keep up with mathlib in our project.</p>
+
+<a name="164271122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271122">Kevin Buzzard (Apr 26 2019 at 15:18)</a>:</h4>
+<p>Our project has its own .toml file which says exactly which version of mathlib we are using. And then once every few weeks we try and update</p>
+
+<a name="164271275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271275">Greg Conneen (Apr 26 2019 at 15:20)</a>:</h4>
+<p>How would I go about updating mathlib? I'm probably using a fall 2018 release</p>
+
+<a name="164271436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271436">Kevin Buzzard (Apr 26 2019 at 15:22)</a>:</h4>
+<p>how are you using it currently?</p>
+
+<a name="164271447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271447">Keeley Hoek (Apr 26 2019 at 15:22)</a>:</h4>
+<p>#ElanEverytime</p>
+
+<a name="164271518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164271518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164271518">Greg Conneen (Apr 26 2019 at 15:23)</a>:</h4>
+<p>It's sitting in _target. I installed using elan, but am not at all familiar with the use of elan. I just followed directions on a github ReadMe somewhere.</p>
+
+<a name="164273536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164273536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164273536">Bryan Gin-ge Chen (Apr 26 2019 at 15:48)</a>:</h4>
+<p>I believe the recommended way is to use the <code>update-mathlib</code> script. See <a href="https://github.com/leanprover-community/mathlib#obtaining-binaries" target="_blank" title="https://github.com/leanprover-community/mathlib#obtaining-binaries">this section</a> of the mathlib readme. Since I've installed that script, I just type <code>leanpkg upgrade</code> and then <code>update-mathlib</code> in the root folder of my lean projects. Make sure that your <code>leanpkg.toml</code> has a line that says <code>lean_version = "3.4.2"</code> at the top.</p>
+
+<a name="164273538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164273538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164273538">Kevin Buzzard (Apr 26 2019 at 15:48)</a>:</h4>
+<p>so you are working in a project? Does the project have a toml file? If so, it might be as simple as running "leanpkg upgrade"</p>
+
+<a name="164273699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164273699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164273699">Greg Conneen (Apr 26 2019 at 15:50)</a>:</h4>
+<p>Yes, my project has a toml file. It does in fact have 3.4.2 as the version number</p>
+
+<a name="164275313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164275313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164275313">Greg Conneen (Apr 26 2019 at 16:13)</a>:</h4>
+<p>Says I should run source /c/Users/Greg/.profile after updating, but threw an error</p>
+
+<a name="164275582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164275582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164275582">Bryan Gin-ge Chen (Apr 26 2019 at 16:17)</a>:</h4>
+<p>Do you mean that the curl command to install update-mathlib threw an error? What was the error?</p>
+
+<a name="164275804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164275804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164275804">Greg Conneen (Apr 26 2019 at 16:20)</a>:</h4>
+<p>No. That didn't throw an error. Once I was done updating, it told me to run another command</p>
+
+<a name="164275887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164275887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164275887">Kevin Buzzard (Apr 26 2019 at 16:21)</a>:</h4>
+<p>Computer people like it if you just cut and paste everything and upload it all so they can see what the actual errors were?</p>
+
+<a name="164275949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164275949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164275949">Kevin Buzzard (Apr 26 2019 at 16:22)</a>:</h4>
+<p>Turns out it means something to them :-)</p>
+
+<a name="164276025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164276025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164276025">Greg Conneen (Apr 26 2019 at 16:23)</a>:</h4>
+<p>Yeah. I'm going to send a picture in just a moment.</p>
+
+<a name="164276200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164276200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164276200">Greg Conneen (Apr 26 2019 at 16:25)</a>:</h4>
+<p>Fixed the issue.</p>
+
+<a name="164302293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164302293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164302293">Greg Conneen (Apr 26 2019 at 22:15)</a>:</h4>
+<p>I still don't know what's wrong with this, though:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">partition</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">subs</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">))</span>
+<span class="o">(</span><span class="n">part_nonempty</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">subs</span><span class="o">,</span> <span class="n">nonempty</span> <span class="n">k</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ex_incl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="n">subs</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">k</span><span class="o">)</span>
+<span class="o">(</span><span class="n">unique_incl</span> <span class="o">(</span><span class="n">k</span> <span class="n">j</span> <span class="o">:</span> <span class="n">subs</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≠</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
+
+<a name="164302368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164302368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164302368">Kevin Buzzard (Apr 26 2019 at 22:16)</a>:</h4>
+<p><code>(ex_incl : ∀ a : X, ∃ k ∈ subs, a ∈ k)</code></p>
+
+<a name="164302374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164302374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164302374">Kevin Buzzard (Apr 26 2019 at 22:17)</a>:</h4>
+<p>subs is a set not a type</p>
+
+<a name="164302396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164302396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164302396">Greg Conneen (Apr 26 2019 at 22:17)</a>:</h4>
+<p>ohhhh</p>
+
+<a name="164302403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164302403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164302403">Greg Conneen (Apr 26 2019 at 22:17)</a>:</h4>
+<p>I see, thank you</p>
+
+<a name="164303068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20Cayley%27s%20Theorem/near/164303068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10331ProvingCayleysTheorem.html#164303068">Greg Conneen (Apr 26 2019 at 22:29)</a>:</h4>
+<p>Also, top kek @ your comments on lines 28 and 82</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,150 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/01873integralrats.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html">integral rats</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="168363789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168363789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168363789">Johan Commelin (Jun 18 2019 at 02:20)</a>:</h4>
+<p>This proof is certainly becoming too long and annoying:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_num_eq_iff</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">r</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">coe_int_eq_mk</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">num_denom</span> <span class="n">r</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk_eq</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">cases</span> <span class="n">r</span> <span class="k">with</span> <span class="n">n</span> <span class="n">d</span> <span class="n">p</span> <span class="n">c</span><span class="o">,</span> <span class="k">show</span> <span class="n">d</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span>
+      <span class="n">change</span> <span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">n</span> <span class="n">d</span><span class="o">)</span><span class="bp">.</span><span class="n">num</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">sorry</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">one_ne_zero</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">ne_of_gt</span><span class="o">,</span> <span class="n">exact_mod_cast</span> <span class="n">r</span><span class="bp">.</span><span class="n">pos</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_of_int</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">num_denom</span> <span class="n">r</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk_nat_eq</span><span class="o">],</span>
+    <span class="n">norm_cast</span><span class="o">,</span> <span class="n">delta</span> <span class="n">rat</span><span class="bp">.</span><span class="n">of_int</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk_nat</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_one_right</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_one</span><span class="o">]</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Can someone unsorry and/or golf this?</p>
+
+<a name="168366546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168366546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168366546">Floris van Doorn (Jun 18 2019 at 03:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">lemma</span> <span class="n">mul_eq_mul_left</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">eq_of_mul_eq_mul_left</span> <span class="n">ha</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h</span><span class="bp">⟩</span>
+
+<span class="kn">open</span> <span class="n">rat</span>
+<span class="kn">lemma</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_num_eq_iff</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">r</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">coe_int_eq_mk</span> <span class="n">r</span><span class="bp">.</span><span class="n">num</span><span class="o">],</span> <span class="n">conv_lhs</span> <span class="o">{</span> <span class="n">to_rhs</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">num_denom</span> <span class="n">r</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="kn">using</span> <span class="n">r</span><span class="bp">.</span><span class="n">cop</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mk_eq</span><span class="o">,</span> <span class="n">mul_eq_mul_left</span> <span class="n">h</span><span class="o">],</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">norm_num</span><span class="o">,</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">denom_ne_zero</span> <span class="n">r</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>edit: further golfing</p>
+
+<a name="168370337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168370337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168370337">Johan Commelin (Jun 18 2019 at 05:11)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="168370406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168370406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168370406">Johan Commelin (Jun 18 2019 at 05:13)</a>:</h4>
+<p>I really need to learn these skills... Although I guess I'm already a lot better at them than one year ago <span aria-label="expressionless" class="emoji emoji-1f611" role="img" title="expressionless">:expressionless:</span></p>
+
+<a name="168372139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168372139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168372139">Johan Commelin (Jun 18 2019 at 05:56)</a>:</h4>
+<p>Hmmm, sleep also seems to help. I now have my attempt down to:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_num_eq_iff</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">r</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">h</span><span class="o">,</span> <span class="n">apply</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_int_denom</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_of_int</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">num_denom</span> <span class="n">r</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk_nat_eq</span><span class="o">],</span>
+    <span class="n">norm_cast</span><span class="o">,</span> <span class="n">delta</span> <span class="n">rat</span><span class="bp">.</span><span class="n">of_int</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk_nat</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_one_right</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_one</span><span class="o">]</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168401467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168401467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168401467">Paul-Nicolas Madelaine (Jun 18 2019 at 13:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> you can also close you first subgoal with norm_cast  instead of applying coe_int_denom directly</p>
+
+<a name="168404325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168404325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168404325">Johan Commelin (Jun 18 2019 at 14:09)</a>:</h4>
+<p>Thanks! <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_num_eq_iff</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">r</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw_mod_cast</span> <span class="err">←</span> <span class="n">h</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw_mod_cast</span> <span class="o">[</span><span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_of_int</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">of_int</span><span class="o">],</span> <span class="n">cases</span> <span class="n">r</span> <span class="k">with</span> <span class="n">n</span> <span class="n">d</span> <span class="n">p</span> <span class="n">c</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168404428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168404428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168404428">Patrick Massot (Jun 18 2019 at 14:10)</a>:</h4>
+<p>Isn't it weird that <code>rw_mod_cast</code> need a lemma whose name includes "cast"? Should this lemma be marked for <code>norm_cast</code> use?</p>
+
+<a name="168404532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168404532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168404532">Johan Commelin (Jun 18 2019 at 14:11)</a>:</h4>
+<p>I am using the lemma backwards though...</p>
+
+<a name="168404690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168404690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168404690">Patrick Massot (Jun 18 2019 at 14:13)</a>:</h4>
+<p><code>norm_cast</code> handles this. You need to state it in the direction indicated by documentation and then never care again</p>
+
+<a name="168420258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168420258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168420258">Paul-Nicolas Madelaine (Jun 18 2019 at 16:59)</a>:</h4>
+<p>norm_cast can't handle this, rat.cast_of_int is not a norm_cast lemma.<br>
+the reason is that norm_cast never tries to unfold coercions.</p>
+<p>I tried to make a simplier version of the proof, but I get a weird error when trying to rewrite h:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">rat</span><span class="bp">.</span><span class="n">coe_num_eq_iff</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">r</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">h</span><span class="o">,</span> <span class="n">norm_cast</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">r</span> <span class="k">with</span> <span class="n">r</span> <span class="n">d</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[]</span> <span class="n">at</span> <span class="n">h</span> <span class="err">⊢</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="c1">--error when I try to use rw</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_of_int</span><span class="o">,</span> <span class="n">norm_cast</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168444623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444623">Kevin Buzzard (Jun 18 2019 at 18:56)</a>:</h4>
+<p>You are trying to rewrite the term <code>{num := r, denom := d, pos := r_pos, cop := r_cop}</code>. Here <code>r_cop</code> is a proof that <code>r</code> and <code>d</code> are coprime. Your <code>h</code> is a proof of <code>d=1</code> so if you do the naive rewrite then <code>denom</code> will become <code>1</code> but <code>r_cop</code> will still be a proof that <code>r</code> and <code>d</code> are coprime, so this term is no longer meaningful.</p>
+
+<a name="168444765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444765">Kevin Buzzard (Jun 18 2019 at 18:58)</a>:</h4>
+<p>The two standard tricks to fix this issue are <code>erw h</code> and <code>simp only [h]</code>, each of which may or may not work. Here <code>erw</code> does not but <code>simp only</code> does. Another cool trick, which works if <code>h</code> is of the form <code>variable = term</code>, is <code>subst h</code>; this also works in your case.</p>
+
+<a name="168444815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444815">Kevin Buzzard (Jun 18 2019 at 18:59)</a>:</h4>
+<p><code>subst</code> is very cool, it rewrites every occurrence of <code>d</code> in everything.</p>
+
+<a name="168444996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444996">Kevin Buzzard (Jun 18 2019 at 19:01)</a>:</h4>
+<p>This phenomenon is somehow the achilles heel of dependent type theory.</p>
+
+<a name="168452134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168452134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168452134">Mario Carneiro (Jun 18 2019 at 20:24)</a>:</h4>
+<p>This is why you should use <code>rat.mk'</code> and the <code>num_denom_cases_on</code> functions instead of straight <code>cases</code></p>
+
+<a name="168452810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168452810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168452810">Kevin Buzzard (Jun 18 2019 at 20:33)</a>:</h4>
+<p>Aah yes, for some reason the default constructor for rat is a bit bonkers, probably because it is the only one which avoids quotients</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

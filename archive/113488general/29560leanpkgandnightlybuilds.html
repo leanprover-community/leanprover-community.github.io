@@ -1,0 +1,255 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29560leanpkgandnightlybuilds.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html">`leanpkg` and nightly builds</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="158421442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158421442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158421442">Simon Hudon (Feb 13 2019 at 08:10)</a>:</h4>
+<p>I'm trying to make the usage of nightly builds as smooth as possible and started an attempt at integrating them into <code>leanpkg</code>. I just pushed it on <code>leanprover-community/lean</code>: <a href="https://github.com/leanprover-community/lean/commit/9028078c635d97fc06ddc1e5583a467d425e6b1f" target="_blank" title="https://github.com/leanprover-community/lean/commit/9028078c635d97fc06ddc1e5583a467d425e6b1f">https://github.com/leanprover-community/lean/commit/9028078c635d97fc06ddc1e5583a467d425e6b1f</a></p>
+<p>I'm adding a <code>nightly</code> field in the <code>leanpkg</code> file and when running configure (whether is as part of <code>leanpkg upgrade</code> command or some other commands) it fetches the relevant nightly build.</p>
+<p>I'm thinking of inhibiting the behavior if a library needs to be built with a different set of dependencies than what appears in its leanpkg file, for example if it depends on a different version of mathlib than what leanpkg will get.</p>
+<p>I'd like to know what people think</p>
+
+<a name="158422923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158422923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158422923">Patrick Massot (Feb 13 2019 at 08:43)</a>:</h4>
+<p>I'd rather have a working <code>update-mathlib</code> that I could use with regular <code>leanpkg</code></p>
+
+<a name="158422994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158422994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158422994">Simon Hudon (Feb 13 2019 at 08:44)</a>:</h4>
+<p>why?</p>
+
+<a name="158423637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158423637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158423637">Patrick Massot (Feb 13 2019 at 08:58)</a>:</h4>
+<p>because I want my students to use it without having to use a fork</p>
+
+<a name="158423747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158423747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158423747">Simon Hudon (Feb 13 2019 at 09:00)</a>:</h4>
+<p>If they use <code>elan</code>, they shouldn't have to worry about the fork. Plus, the existence of the feature does not preclude the existence of <code>update-mathlib</code></p>
+
+<a name="158423770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/158423770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#158423770">Simon Hudon (Feb 13 2019 at 09:01)</a>:</h4>
+<p>And there might still be a chance that it will get accepted into the main Lean repo</p>
+
+<a name="159648644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648644">Kevin Buzzard (Feb 28 2019 at 20:21)</a>:</h4>
+<p>Does <code>update-mathlib</code> work yet? I was not using it because I was waiting for things to calm down. But I thought I'd try it today following <a href="https://github.com/leanprover-community/mathlib/blob/master/README.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/README.md">the instructions on the README</a> and I get</p>
+<div class="codehilite"><pre><span></span>$ curl https://raw.githubusercontent.com/leanprover-community/mathlib/master/scripts/remote-install-update-mathlib.sh -sSf | sh
+[blah blah blah]
+sh: 8: source: not found
+</pre></div>
+
+<a name="159648707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648707">Patrick Massot (Feb 28 2019 at 20:22)</a>:</h4>
+<p>It was renamed recently</p>
+
+<a name="159648716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648716">Kevin Buzzard (Feb 28 2019 at 20:22)</a>:</h4>
+<p>Part of the <code>blah blah blah</code> is </p>
+<div class="codehilite"><pre><span></span>You are using pip version 8.1.1, however version 19.0.3 is available.
+You should consider upgrading via the &#39;pip install --upgrade pip&#39; command.
+</pre></div>
+
+<a name="159648737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648737">Patrick Massot (Feb 28 2019 at 20:22)</a>:</h4>
+<p>The pip message is irrelevant</p>
+
+<a name="159648768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648768">Kevin Buzzard (Feb 28 2019 at 20:22)</a>:</h4>
+<p>So what's the fix?</p>
+
+<a name="159648799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648799">Patrick Massot (Feb 28 2019 at 20:23)</a>:</h4>
+<p>wait a minute, I'll try on my end</p>
+
+<a name="159648893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159648893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159648893">Patrick Massot (Feb 28 2019 at 20:24)</a>:</h4>
+<p>Do you have a <code>.profile</code> file at the root of your home directory?</p>
+
+<a name="159649049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649049">Patrick Massot (Feb 28 2019 at 20:25)</a>:</h4>
+<p>actually it's even weirder, your error message suggests <code>source</code> itself was not found</p>
+
+<a name="159649153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649153">Kevin Buzzard (Feb 28 2019 at 20:27)</a>:</h4>
+<p>I do have a .profile in my home directory, and it's slowly filling up with <code>export PATH="$HOME/.mathlib/bin:$PATH"</code> lines</p>
+
+<a name="159649161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649161">Patrick Massot (Feb 28 2019 at 20:27)</a>:</h4>
+<p>Yes I noticed that...</p>
+
+<a name="159649322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649322">Patrick Massot (Feb 28 2019 at 20:29)</a>:</h4>
+<p>Ok, <code>source</code> is acutally not a valid <code>sh</code> command, only a <code>bash</code> command</p>
+
+<a name="159649395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649395">Patrick Massot (Feb 28 2019 at 20:30)</a>:</h4>
+<p>so this part of the script is bound to fail</p>
+
+<a name="159649438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649438">Patrick Massot (Feb 28 2019 at 20:30)</a>:</h4>
+<p>Before we fix that, you can still delete each <code>PATH="$HOME/.mathlib/bin:$PATH"</code> from your <code>.profile</code> except for one</p>
+
+<a name="159649456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649456">Patrick Massot (Feb 28 2019 at 20:31)</a>:</h4>
+<p>and indeed type <code>source .profile</code> (or <code>. .profile</code>) from your bash shell</p>
+
+<a name="159649478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649478">Patrick Massot (Feb 28 2019 at 20:31)</a>:</h4>
+<p>then you should have <code>update-mathlib</code></p>
+
+<a name="159649588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159649588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159649588">Patrick Massot (Feb 28 2019 at 20:32)</a>:</h4>
+<p>The current state, AFAIK, is you can run this command in any project depending on mathlib. If you are lucky, the commit referenced in your leanpkg.toml corresponds to some mathlib nightly, and life will be very nice. If not then you currently need to manually change this commit to the closest available nightly.</p>
+
+<a name="159650623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650623">Kevin Buzzard (Feb 28 2019 at 20:46)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ update-mathlib
+Querying GitHub...
+Error: no nightly archive found
+</pre></div>
+
+<a name="159650641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650641">Kevin Buzzard (Feb 28 2019 at 20:46)</a>:</h4>
+<p>oh OK so now I edit the toml</p>
+
+<a name="159650694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650694">Kevin Buzzard (Feb 28 2019 at 20:47)</a>:</h4>
+<p>in fact just <code>leanpkg upgrade</code> worked fine</p>
+
+<a name="159650753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650753">Patrick Massot (Feb 28 2019 at 20:48)</a>:</h4>
+<p>worked fine to do what?</p>
+
+<a name="159650773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650773">Kevin Buzzard (Feb 28 2019 at 20:48)</a>:</h4>
+<p>edit the toml</p>
+
+<a name="159650790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650790">Patrick Massot (Feb 28 2019 at 20:48)</a>:</h4>
+<p>sure, but did it bring you to a version having a nightly?</p>
+
+<a name="159650794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650794">Kevin Buzzard (Feb 28 2019 at 20:48)</a>:</h4>
+<p>yes!</p>
+
+<a name="159650808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650808">Kevin Buzzard (Feb 28 2019 at 20:48)</a>:</h4>
+<p>Yes it all seems to have worked. Thanks!</p>
+
+<a name="159650827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650827">Kevin Buzzard (Feb 28 2019 at 20:49)</a>:</h4>
+<p>But it's not great that the installation instructions didn't work on Ubuntu</p>
+
+<a name="159650865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650865">Patrick Massot (Feb 28 2019 at 20:49)</a>:</h4>
+<p>It did work, but only after you log out and log back in</p>
+
+<a name="159650879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650879">Kevin Buzzard (Feb 28 2019 at 20:50)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ sh
+$ cd
+$ . .profile
+sh: 2: .: .profile: not found
+$ source .profie
+sh: 3: source: not found
+$
+</pre></div>
+
+<a name="159650970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159650970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159650970">Kevin Buzzard (Feb 28 2019 at 20:50)</a>:</h4>
+<blockquote>
+<p>It did work, but only after you log out and log back in</p>
+</blockquote>
+<p>Yes fair enough</p>
+
+<a name="159651001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159651001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159651001">Patrick Massot (Feb 28 2019 at 20:51)</a>:</h4>
+<p>For clarification about the nightly lottery. Once someone will find time for it, we'll switch back to storing a nightly for each commit. But then we'll need to periodically erase nightlies (otherwise we'll hit the GitHub disk quota pretty fast)</p>
+
+<a name="159652217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159652217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159652217">Mario Carneiro (Feb 28 2019 at 21:06)</a>:</h4>
+<p>The method I proposed would have the latest master always available as a "nightly", it would just get overwritten unless it's one of the one-a-day lucky ones</p>
+
+<a name="159652240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159652240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159652240">Mario Carneiro (Feb 28 2019 at 21:07)</a>:</h4>
+<p>I don't know if that solves your problem though</p>
+
+<a name="159652259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159652259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159652259">Patrick Massot (Feb 28 2019 at 21:07)</a>:</h4>
+<p>It would be good enough if we can avoid race condition</p>
+
+<a name="159652340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/159652340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#159652340">Patrick Massot (Feb 28 2019 at 21:08)</a>:</h4>
+<p>I guess we cannot avoid that anyway. Even on a very quiet day, we can still run <code>leanpkg upgrade</code> while Travis is compiling mathlib</p>
+
+<a name="160054742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160054742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160054742">Kevin Buzzard (Mar 06 2019 at 00:24)</a>:</h4>
+<p>OK so within the perfectoid project (which has mathlib as a dependency) I changed directory into _target/deps/mathlib, typed <code>git pull</code> on the master branch, removed all old .olean files, and then typed <code>update-mathlib</code>, and a bunch of <code>.olean</code> files have appeared, but <code>git branch</code> within this local copy of mathlib says I'm on master and I am not sure I am; does <code>update-mathlib</code> basically corrupt the git repo? Or have I not used it correctly?</p>
+<div class="codehilite"><pre><span></span>$ git log
+commit 1ec0a1f49db97d45e8666a3bf33217ff79ca1d87
+Author: Rob Lewis &lt;rob.y.lewis@gmail.com&gt;
+Date:   Tue Mar 5 21:55:19 2019 +0100
+
+    fix(tactic/linarith): correctly parse 0*0
+
+...
+</pre></div>
+
+
+<p>(Rob's edit to <code>linarith,lean</code> made today, but</p>
+<div class="codehilite"><pre><span></span>$ ls -l src/tactic/linarith.*
+-rw-rw-r-- 1 buzzard buzzard  31433 Feb 12 21:46 src/tactic/linarith.lean
+-rw-rw-r-- 1 buzzard buzzard 847248 Feb 21 22:02 src/tactic/linarith.olean
+</pre></div>
+
+
+<p>So the log says that <code>linarith.lean</code> changed on 5th March, but the file itself has not changed (and I checked, Rob's edits from today are not there). </p>
+<p>Is this situation OK? What exactly is my <code>toml</code> file supposed to say at this point?</p>
+
+<a name="160297291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160297291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160297291">Johan Commelin (Mar 08 2019 at 15:10)</a>:</h4>
+<p>Some random thoughts (<span class="user-mention" data-user-id="110026">@Simon Hudon</span>):<br>
+Currently you run <code>pip3</code> without prefixing <code>sudo</code> or the <code>--user</code> flag.  I guess this may lead to errors.<br>
+You also run <code>cp</code> which means that you leave some residue behind... I think you want to <code>mv</code> the file into the new directory.</p>
+
+<a name="160307925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160307925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160307925">Patrick Massot (Mar 08 2019 at 17:28)</a>:</h4>
+<p>On Debian-like systems, pip install defaults to <code>--user</code> when run by non-root outside virtual envs, but I don't think this is standard</p>
+
+<a name="160482378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160482378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160482378">Patrick Massot (Mar 11 2019 at 14:21)</a>:</h4>
+<p>I gree with Johan that <code>mv</code> would be better than <code>cp</code>. Also the mathlib nightly tar.gz archive contains <code>src</code> so that the extraction ends up in <code>_target/deps/mathlib/src</code> instead of <code>_target/deps/mathlib</code> as it should. What's weird is I swear it used to work. <span class="user-mention" data-user-id="110026">@Simon Hudon</span>  did you change something to the archive creation recently?</p>
+
+<a name="160492478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160492478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160492478">Simon Hudon (Mar 11 2019 at 16:13)</a>:</h4>
+<p>I haven't changed anything lately. That behavior has been adequate for me.</p>
+
+<a name="160492541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160492541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160492541">Simon Hudon (Mar 11 2019 at 16:14)</a>:</h4>
+<p>The issue could be with the archive creation or the expansion in <code>update-mathlib</code></p>
+
+<a name="160492772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160492772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160492772">Patrick Massot (Mar 11 2019 at 16:17)</a>:</h4>
+<p>I think we are confused by inconsistencies between old projects and new projects</p>
+
+<a name="160492806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160492806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160492806">Patrick Massot (Mar 11 2019 at 16:17)</a>:</h4>
+<p>I think the issue is only for project created before mathlib source moved to <code>src</code></p>
+
+<a name="160492903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%60%20and%20nightly%20builds/near/160492903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29560leanpkgandnightlybuilds.html#160492903">Patrick Massot (Mar 11 2019 at 16:18)</a>:</h4>
+<p>I just tried creating a new mathlib-dependent project with <code>leanpkg new</code> followed by <code>leanpkg add</code> and the directory layout is consistent with what update-mathlib does</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

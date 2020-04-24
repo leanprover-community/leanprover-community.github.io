@@ -1,0 +1,56 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/35917bundlingringequiv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html">bundling ring_equiv</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172067031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20ring_equiv/near/172067031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html#172067031">Kevin Buzzard (Jul 30 2019 at 19:07)</a>:</h4>
+<p>Currently we have</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">ring_equiv</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">to_fun</span><span class="o">)</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="err">≃</span><span class="n">r</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">ring_equiv</span>
+</pre></div>
+
+
+<p>I am on a bundling mission at the minute, and propose changing the definition to</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">ring_equiv</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">map_add&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">ring_equiv</span>
+</pre></div>
+
+
+<p>The field changes are so we can move away from <code>is_ring_hom</code> in general. The notation change is to align the notation for ring equivs with <code> ≃* </code> and <code> ≃+ </code>, which are monoid equivs and add_monoid equivs.</p>
+<p>Would this change be welcome?</p>
+
+<a name="172067132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20ring_equiv/near/172067132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html#172067132">Kevin Buzzard (Jul 30 2019 at 19:09)</a>:</h4>
+<p>Oh -- the primes are because <code>to_fun</code> is not the canonical notation -- I am proposing a coe to fun and then defining <code>map_add</code> etc using the coercion notation.</p>
+
+<a name="172067258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20ring_equiv/near/172067258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html#172067258">Kevin Buzzard (Jul 30 2019 at 19:10)</a>:</h4>
+<p>I have spent some time over the last few weeks trying to imagine a coherent bundled algebraic hierarchy, with subthings, morphisms, equivs all bundled, and this PR suggestion is somehow the sort of thing that comes out of it.</p>
+
+<a name="172067753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20ring_equiv/near/172067753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html#172067753">Chris Hughes (Jul 30 2019 at 19:17)</a>:</h4>
+<p>This change would be welcome.</p>
+
+<a name="172068484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20ring_equiv/near/172068484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35917bundlingringequiv.html#172068484">Floris van Doorn (Jul 30 2019 at 19:27)</a>:</h4>
+<p>Sounds good to me</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

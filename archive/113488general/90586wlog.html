@@ -1,0 +1,178 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90586wlog.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html">wlog</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177397136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397136">Johan Commelin (Oct 05 2019 at 04:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you explain to me how I should invoke <code>wlog</code> in this problem that is <em>clearly</em> (lol) symmetric:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177397183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397183">Johan Commelin (Oct 05 2019 at 04:20)</a>:</h4>
+<p>Note that <code>wlog : a ≤ b</code> succeeds after thinking for a long time.</p>
+
+<a name="177397189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397189">Johan Commelin (Oct 05 2019 at 04:20)</a>:</h4>
+<p>I wouldn't mind if it dumps some proof obligations in my face. I can then manually select a hammer to kill them off.</p>
+
+<a name="177397833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397833">Simon Hudon (Oct 05 2019 at 04:44)</a>:</h4>
+<p>What if you specified the variables on which the symmetry hinges? <code>wlog : a ≤ b ∧ b ≤ c using a b c,</code>?</p>
+
+<a name="177397904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397904">Johan Commelin (Oct 05 2019 at 04:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> </p>
+<div class="codehilite"><pre><span></span>To generate cases at least two permutations are required, i.e. `using [x y, y x]` or exactly 0 or 2 variables
+</pre></div>
+
+<a name="177398067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398067">Simon Hudon (Oct 05 2019 at 04:53)</a>:</h4>
+<p>You could do <code>wlog : a ≤ b ∧ b ≤ c using [a b c,b c a],</code></p>
+
+<a name="177398306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398306">Johan Commelin (Oct 05 2019 at 05:01)</a>:</h4>
+<p>You need 6 permutations, right?</p>
+
+<a name="177398309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398309">Johan Commelin (Oct 05 2019 at 05:01)</a>:</h4>
+<p>And then it times out... <span class="user-mention" data-user-id="110026">@Simon Hudon</span></p>
+
+<a name="177398358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398358">Johan Commelin (Oct 05 2019 at 05:02)</a>:</h4>
+<p>Huh... it works</p>
+
+<a name="177398371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398371">Simon Hudon (Oct 05 2019 at 05:03)</a>:</h4>
+<p>You can file an issue. I'll have a closer look later</p>
+
+<a name="177398372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398372">Johan Commelin (Oct 05 2019 at 05:03)</a>:</h4>
+<p>Ooh, no, it doesn't. It generates a side goal that is false.</p>
+
+<a name="177398478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398478">Johan Commelin (Oct 05 2019 at 05:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <a href="https://github.com/leanprover-community/mathlib/issues/1509" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1509">#1509</a></p>
+
+<a name="180487476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180487476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180487476">Johan Commelin (Nov 12 2019 at 06:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you have any thoughts on this issue?</p>
+
+<a name="180672354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180672354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180672354">Alexander Bentkamp (Nov 13 2019 at 21:03)</a>:</h4>
+<p>I just found out that there is another parameter of this tactic: <code>discharger : tactic unit</code>. Its default value is <code>tactic.solve_by_elim &lt;|&gt; tactic.tautology tt &lt;|&gt; using_smt (smt_tactic.intros &gt;&gt; smt_tactic.solve_goals)</code>, which is the reason <code>wlog</code> takes so long. If you use <code>skip</code> instead, <code>wlog</code> is very fast. Of course, the disadvantage is that you get a lot of stupid goals afterwards.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="kn">using</span> <span class="o">[</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="o">,</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">]</span> <span class="n">skip</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180674862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180674862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180674862">Johan Commelin (Nov 13 2019 at 21:29)</a>:</h4>
+<p>Thanks, that looks very helpful!</p>
+
+<a name="180675082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180675082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180675082">Chris Hughes (Nov 13 2019 at 21:31)</a>:</h4>
+<p>But I guess you could use a more sensible tactic.</p>
+
+<a name="180675286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180675286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180675286">Simon Hudon (Nov 13 2019 at 21:33)</a>:</h4>
+<p>I thought that had been changed in mathlib already</p>
+
+<a name="180677043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180677043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180677043">Alexander Bentkamp (Nov 13 2019 at 21:53)</a>:</h4>
+<p>Let us know if you find a nice way to discharge these goals. Maybe there could be a different default value for <code>discharger</code>?</p>
+
+<a name="180854359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180854359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180854359">Alexander Bentkamp (Nov 15 2019 at 17:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  With an auxiliary lemma for wlog with three variables, we can speed this up a lot.  Maybe this lemma <code>wlog3</code> should be in mathlib:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">wlog3</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">p</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h₃</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">z</span> <span class="kn">using</span> <span class="o">[</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">y</span> <span class="n">z</span> <span class="n">x</span><span class="o">,</span> <span class="n">z</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span> <span class="n">y</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span> <span class="n">x</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="n">z</span> <span class="n">y</span><span class="o">],</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">le_total</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span> <span class="n">hc₁</span><span class="bp">;</span>
+    <span class="n">cases</span> <span class="n">le_total</span> <span class="n">y</span> <span class="n">z</span> <span class="k">with</span> <span class="n">hc₂</span><span class="bp">;</span>
+    <span class="n">cases</span> <span class="n">le_total</span> <span class="n">x</span> <span class="n">z</span> <span class="k">with</span> <span class="n">hc₃</span><span class="bp">;</span>
+    <span class="n">cc</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">hp</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">wlog3</span> <span class="bp">_</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">implies</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">implies</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The trick is that we actually do not need to consider all 5 non-identity permutations. Just 2 permutations are enough to express all others.</p>
+<p>Unfortunately, I don't see a fast way to discharge the resulting goals in a way that is both fast and generally applicable.</p>
+
+<a name="180858722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180858722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180858722">Simon Hudon (Nov 15 2019 at 18:31)</a>:</h4>
+<p>We could tag <code>wlog3</code> with a <code>wlog</code> attribute and get the tactic <code>wlog</code> to try those before trying the <code>discharger</code></p>
+
+<a name="180862932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180862932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180862932">Johan Commelin (Nov 15 2019 at 19:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span> Thanks a lot for looking at this!</p>
+
+<a name="180862951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180862951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180862951">Johan Commelin (Nov 15 2019 at 19:19)</a>:</h4>
+<p>It's already a lot better than the mess that I initially had <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="180862983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180862983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180862983">Johan Commelin (Nov 15 2019 at 19:19)</a>:</h4>
+<p>I'm still hoping that tactics could crunch away more of the administrative parts of the proof.</p>
+
+<a name="180863020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180863020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180863020">Johan Commelin (Nov 15 2019 at 19:20)</a>:</h4>
+<p>It would be nice if one could drill down to the heart of the matter in &lt;5 lines</p>
+
+<a name="180863093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180863093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180863093">Alexander Bentkamp (Nov 15 2019 at 19:20)</a>:</h4>
+<p>You can replace </p>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">implies</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">},</span>
+</pre></div>
+
+
+<p>by <code>cc</code>. But unfortunately, that's very slow. I am not sure why.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

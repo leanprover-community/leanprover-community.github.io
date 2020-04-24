@@ -1,0 +1,97 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/17071extendinginstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html">extending instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181193917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181193917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181193917">Kevin Buzzard (Nov 20 2019 at 10:08)</a>:</h4>
+<p>What's the sensible way to get the bounded lattice instance when type class inference knows all the ingredients? <code>by apply_instance</code> doesn't work for me.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">lattice</span> <span class="o">(</span><span class="n">with_bot</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- with_bot.lattice</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">order_bot</span> <span class="o">(</span><span class="n">with_bot</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- with_bot.order_bot</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">order_top</span> <span class="o">(</span><span class="n">with_bot</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- with_bot.order_top</span>
+
+<span class="c1">-- class bounded_lattice (α : Type u) extends lattice α, order_top α, order_bot α</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">bounded_lattice</span> <span class="o">(</span><span class="n">with_bot</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="181194169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194169">Mario Carneiro (Nov 20 2019 at 10:12)</a>:</h4>
+<p>I think <code>{}</code> works</p>
+
+<a name="181194185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194185">Mario Carneiro (Nov 20 2019 at 10:12)</a>:</h4>
+<p>If not, <code>{..instance1, ..instance2}</code> should</p>
+
+<a name="181194226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194226">Kevin Buzzard (Nov 20 2019 at 10:13)</a>:</h4>
+<p>I had trouble with both of these approaches. Hang on.</p>
+
+<a name="181194230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194230">Mario Carneiro (Nov 20 2019 at 10:13)</a>:</h4>
+<p>Note that this is expected behavior. There is no instance deriving a subclass from its parents, even if there are no fields. You have to explicitly instantiate the substructure</p>
+
+<a name="181194288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194288">Kevin Buzzard (Nov 20 2019 at 10:14)</a>:</h4>
+<p><code>{}</code> gives 17 errors of the form</p>
+<div class="codehilite"><pre><span></span>invalid structure value { ... }, field &#39;inf&#39; was not provided
+</pre></div>
+
+<a name="181194316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194316">Mario Carneiro (Nov 20 2019 at 10:15)</a>:</h4>
+<p>this works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">bounded_lattice</span> <span class="o">(</span><span class="n">with_bot</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span><span class="bp">..</span><span class="n">with_bot</span><span class="bp">.</span><span class="n">lattice</span><span class="o">,</span> <span class="bp">..</span><span class="n">with_bot</span><span class="bp">.</span><span class="n">order_bot</span><span class="o">,</span> <span class="bp">..</span><span class="n">with_bot</span><span class="bp">.</span><span class="n">order_top</span><span class="o">}</span>
+</pre></div>
+
+<a name="181194348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194348">Mario Carneiro (Nov 20 2019 at 10:15)</a>:</h4>
+<p>Oh I see, it's because <code>bounded_lattice</code> is an old style structure</p>
+
+<a name="181194390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194390">Kevin Buzzard (Nov 20 2019 at 10:16)</a>:</h4>
+<p>Yup, works for me too. Thanks.</p>
+
+<a name="181194407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194407">Kevin Buzzard (Nov 20 2019 at 10:16)</a>:</h4>
+<p>While I'm here, what's the idiomatic way for getting <code>set X</code> from <code>set (with_top X)</code>?</p>
+
+<a name="181194415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194415">Mario Carneiro (Nov 20 2019 at 10:16)</a>:</h4>
+<p>When you use a new style structure, these parents are inferred by type class inference, but with an old style structure the fields are splayed and reconstructed, so you need <code>{.. foo}</code> to construct the instance</p>
+
+<a name="181194420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194420">Kevin Buzzard (Nov 20 2019 at 10:16)</a>:</h4>
+<p>i.e the intersection.</p>
+
+<a name="181194440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194440">Mario Carneiro (Nov 20 2019 at 10:17)</a>:</h4>
+<p>I guess that would be <code>coe '' X</code></p>
+
+<a name="181194455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194455">Mario Carneiro (Nov 20 2019 at 10:17)</a>:</h4>
+<p>or rather <code>coe ⁻¹' X</code></p>
+
+<a name="181194461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extending%20instances/near/181194461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17071extendinginstances.html#181194461">Kevin Buzzard (Nov 20 2019 at 10:17)</a>:</h4>
+<p>right. Thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

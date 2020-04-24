@@ -1,0 +1,250 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/44490Defeqinvolvingrecursors.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html">Defeq involving recursors</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193718723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193718723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193718723">Donald Sebastian Leung (Apr 12 2020 at 16:02)</a>:</h4>
+<p>Suppose I have an auxiliary function for efficiently computing the nth Fibonacci number as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">parity</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">fib2</span> <span class="o">(</span><span class="n">gas</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">gas</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">gas&#39;</span> <span class="n">fib2_gas&#39;</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">n</span>
+    <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">fib2_gas&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">))</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">),</span>
+        <span class="k">have</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span><span class="o">,</span>
+        <span class="n">cond</span> <span class="o">(</span><span class="n">even</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">))))</span>
+</pre></div>
+
+
+<p>Now suppose we have natural numbers <code>gas'</code> and <code>n</code>. What would be a partially reduced expression that <code>fib2 (succ gas') (succ n)</code> is defeq to? In particular, I thought it would be defeq to:</p>
+<div class="codehilite"><pre><span></span><span class="n">prod</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">fib2</span> <span class="n">gas&#39;</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">cond</span> <span class="o">(</span><span class="n">even</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">))</span>
+</pre></div>
+
+
+<p>but apparently not.</p>
+<p>(I'm in the middle of a proof involving <code>fib2</code> and would like to partially reduce the goal to a state where I can rewrite based on an inductive hypothesis)</p>
+
+<a name="193719306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193719306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193719306">Kenny Lau (Apr 12 2020 at 16:19)</a>:</h4>
+<p>what does <code>gas</code> stand for?</p>
+
+<a name="193719510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193719510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193719510">Kenny Lau (Apr 12 2020 at 16:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">gas&#39;</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">fib2</span> <span class="n">gas&#39;</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">change</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">fib2</span> <span class="n">gas&#39;</span> <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="bp">/</span><span class="mi">2</span><span class="o">))</span> <span class="bp">_</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">H :</span>
+<span class="cm">  prod.cases_on (fib2 gas&#39; (succ n / 2))</span>
+<span class="cm">      (λ (a b : ℕ),</span>
+<span class="cm">         have c : ℕ, from a * (2 * b - a),</span>
+<span class="cm">         have d : ℕ, from a * a + b * b,</span>
+<span class="cm">         cond (to_bool (even (succ n))) (c, d) (d, c + d)) =</span>
+<span class="cm">    (0, 0)</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193719522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193719522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193719522">Kenny Lau (Apr 12 2020 at 16:24)</a>:</h4>
+<p>I think your expression is correct</p>
+
+<a name="193719538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193719538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193719538">Kenny Lau (Apr 12 2020 at 16:25)</a>:</h4>
+<p>maybe you didn't specify the types enough</p>
+
+<a name="193746620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746620">Donald Sebastian Leung (Apr 13 2020 at 05:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719306" title="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719306">said</a>:</p>
+<blockquote>
+<p>what does <code>gas</code> stand for?</p>
+</blockquote>
+<p>It's a cheap way of ensuring that a non-primitive recursive function eventually terminates, by converting a potentially non-trivial induction / recursion into induction / recursion on a natural number. IMO the concept is pretty well explained in <a href="https://softwarefoundations.cis.upenn.edu/lf-current/ImpCEvalFun.html#lab383" title="https://softwarefoundations.cis.upenn.edu/lf-current/ImpCEvalFun.html#lab383">A Step-Indexed Evaluator</a>, you may wish to take a look there.</p>
+
+<a name="193746635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746635">Donald Sebastian Leung (Apr 13 2020 at 05:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719510" title="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719510">said</a>:</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">gas&#39;</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">fib2</span> <span class="n">gas&#39;</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">change</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">fib2</span> <span class="n">gas&#39;</span> <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="bp">/</span><span class="mi">2</span><span class="o">))</span> <span class="bp">_</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">H :</span>
+<span class="cm">  prod.cases_on (fib2 gas&#39; (succ n / 2))</span>
+<span class="cm">      (λ (a b : ℕ),</span>
+<span class="cm">         have c : ℕ, from a * (2 * b - a),</span>
+<span class="cm">         have d : ℕ, from a * a + b * b,</span>
+<span class="cm">         cond (to_bool (even (succ n))) (c, d) (d, c + d)) =</span>
+<span class="cm">    (0, 0)</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>Thanks, I don't think I tried <code>change</code> (I was using <code>show</code>). I'll take another stab at it now.</p>
+
+<a name="193746638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746638">Kenny Lau (Apr 13 2020 at 05:33)</a>:</h4>
+<p>I thought it was an acronym lol</p>
+
+<a name="193746704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746704">Kenny Lau (Apr 13 2020 at 05:35)</a>:</h4>
+<p>oh btw you don't need <code>gas</code> because Lean has better recursion than Coq! :D</p>
+
+<a name="193746720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746720">Kenny Lau (Apr 13 2020 at 05:35)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110044">Chris Hughes</span> <a href="#narrow/stream/113489-new-members/topic/nat.2Estrong_rec_on_beta/near/193720750" title="#narrow/stream/113489-new-members/topic/nat.2Estrong_rec_on_beta/near/193720750">said</a>:</p>
+<blockquote>
+<p>I think the <code>#eval</code> times are an example of why Lean is so much better than Coq. Coq can't compile well-founded recursion nicely like Lean I heard.</p>
+</blockquote>
+
+<a name="193746722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746722">Kenny Lau (Apr 13 2020 at 05:35)</a>:</h4>
+<p><code>gas</code> is such a Coq thing</p>
+
+<a name="193746865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746865">Donald Sebastian Leung (Apr 13 2020 at 05:38)</a>:</h4>
+<p>To be fair, there's an Equations library in Coq which somewhat resembles Lean's equation compiler, but I'm not sure if there's anything it can't do that Lean's equation compiler can do (or vice versa).</p>
+
+<a name="193746881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193746881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193746881">Andrew Ashworth (Apr 13 2020 at 05:39)</a>:</h4>
+<p>you still might want to use <code>gas</code> or <code>fuel</code>. Sometimes you're too lazy to give a proof of well-foundedness, and if you know an upper bound for how many ops an algorithm will take, it's useful then without having to go <code>meta</code></p>
+
+<a name="193747158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747158">Kenny Lau (Apr 13 2020 at 05:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">parity</span> <span class="n">tactic</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="c">/-</span><span class="cm">- fib2 n = (fib n, fib (n+1)) -/</span>
+<span class="n">def</span> <span class="n">fib2</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">hwf</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="k">from</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_self</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ_pos</span> <span class="n">dec_trivial</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">fib2</span> <span class="o">((</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="n">cond</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">bodd</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="mi">10</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="n">fib2</span>
+<span class="c1">-- [(0, 1), (1, 1), (1, 2), (2, 3), (3, 5), (5, 8), (8, 13), (13, 21), (21, 34), (34, 55)]</span>
+</pre></div>
+
+<a name="193747161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747161">Kenny Lau (Apr 13 2020 at 05:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span></p>
+
+<a name="193747204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747204">Kenny Lau (Apr 13 2020 at 05:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is this O(n*log n)?</p>
+
+<a name="193747217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747217">Mario Carneiro (Apr 13 2020 at 05:48)</a>:</h4>
+<p>relative to what?</p>
+
+<a name="193747230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747230">Mario Carneiro (Apr 13 2020 at 05:49)</a>:</h4>
+<p>you can use <code>n@(_+1)</code> by the way to avoid having to say <code>n+1</code> all the time</p>
+
+<a name="193747277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747277">Mario Carneiro (Apr 13 2020 at 05:50)</a>:</h4>
+<p><code>nat.bodd</code> is probably expensive to compute in the VM because it doesn't have a special implementation</p>
+
+<a name="193747285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747285">Mario Carneiro (Apr 13 2020 at 05:51)</a>:</h4>
+<p>I think you can get an asymptotically optimal implementation if you use <code>nat.binary_rec_on</code></p>
+
+<a name="193747327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747327">Kenny Lau (Apr 13 2020 at 05:52)</a>:</h4>
+<p>hmm</p>
+
+<a name="193747369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747369">Mario Carneiro (Apr 13 2020 at 05:54)</a>:</h4>
+<p>I really wish we had a better way to do this kind of thing where you don't have to pick between efficient in the VM and efficient in the kernel</p>
+
+<a name="193747378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747378">Donald Sebastian Leung (Apr 13 2020 at 05:55)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span> <a href="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193746635" title="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193746635">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719510" title="#narrow/stream/113489-new-members/topic/Defeq.20involving.20recursors/near/193719510">said</a>:</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">gas&#39;</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">fib2</span> <span class="n">gas&#39;</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">change</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">fib2</span> <span class="n">gas&#39;</span> <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="bp">/</span><span class="mi">2</span><span class="o">))</span> <span class="bp">_</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">H :</span>
+<span class="cm">  prod.cases_on (fib2 gas&#39; (succ n / 2))</span>
+<span class="cm">      (λ (a b : ℕ),</span>
+<span class="cm">         have c : ℕ, from a * (2 * b - a),</span>
+<span class="cm">         have d : ℕ, from a * a + b * b,</span>
+<span class="cm">         cond (to_bool (even (succ n))) (c, d) (d, c + d)) =</span>
+<span class="cm">    (0, 0)</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>Thanks, I don't think I tried <code>change</code> (I was using <code>show</code>). I'll take another stab at it now.</p>
+</blockquote>
+<p>It worked! Thanks Kenny!</p>
+
+<a name="193747491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747491">Kenny Lau (Apr 13 2020 at 05:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I have noticed that in Coq if you use change, the expression must not contain holes that can only be filled in relative to the goal; is this better or worse?</p>
+
+<a name="193747493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747493">Kenny Lau (Apr 13 2020 at 05:58)</a>:</h4>
+<p>I suppose this can make things faster</p>
+
+<a name="193747503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747503">Kenny Lau (Apr 13 2020 at 05:59)</a>:</h4>
+<p>because you don’t spend time unifying with the goal</p>
+
+<a name="193747504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747504">Mario Carneiro (Apr 13 2020 at 05:59)</a>:</h4>
+<p>I don't really know what else those holes would be good for</p>
+
+<a name="193747507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747507">Mario Carneiro (Apr 13 2020 at 05:59)</a>:</h4>
+<p>so it seems strictly worse to me</p>
+
+<a name="193747512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747512">Mario Carneiro (Apr 13 2020 at 05:59)</a>:</h4>
+<p>you can always write a term without holes if you want</p>
+
+<a name="193747581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747581">Kenny Lau (Apr 13 2020 at 06:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span> what are holes in Coq used for?</p>
+
+<a name="193747701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747701">Donald Sebastian Leung (Apr 13 2020 at 06:05)</a>:</h4>
+<p>For inferring implicit parameters like in Lean? BTW I don't think I have heard of the <code>change</code> tactic in Coq - is it the same as in Lean?</p>
+
+<a name="193747748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defeq%20involving%20recursors/near/193747748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44490Defeqinvolvingrecursors.html#193747748">Kenny Lau (Apr 13 2020 at 06:06)</a>:</h4>
+<p>yeah</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

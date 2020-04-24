@@ -1,0 +1,45 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29952normnumonfields.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29952normnumonfields.html">norm_num on fields</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172572449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20on%20fields/near/172572449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29952normnumonfields.html#172572449">Kevin Kappelmann (Aug 06 2019 at 09:22)</a>:</h4>
+<p>I get some interesting behaviour when using <code>norm_num</code> on fields. It discharges the goal, but returns an error message.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="c1">-- type mismatch at application...</span>
+<span class="k">begin</span>
+  <span class="n">norm_num</span><span class="o">,</span> <span class="c1">-- all goals accomplished</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>error message:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">id</span> <span class="o">(</span><span class="n">eq_true_intro</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="mi">1</span><span class="o">)))</span>
+<span class="n">term</span>
+  <span class="n">eq_true_intro</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="mi">1</span><span class="o">))</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="mi">1</span> <span class="bp">/</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">/</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">true</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="mi">1</span> <span class="bp">/</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">true</span>
+</pre></div>
+
+
+<p>If I change <code>field</code> to <code>linear_ordered_field</code>, the example works. Any idea what's going on?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

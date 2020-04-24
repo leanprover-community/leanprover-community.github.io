@@ -1,0 +1,107 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/26426subgroupoffreegroupisfree.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html">subgroup of free group is free</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191342167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191342167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191342167">David Wärn (Mar 21 2020 at 11:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">nielsen_schreier</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">free_group</span> <span class="n">α</span><span class="o">))</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">H</span><span class="o">],</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">H</span> <span class="err">≃</span><span class="bp">*</span> <span class="n">free_group</span> <span class="n">R</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">quotient</span> <span class="n">H</span> <span class="bp">×</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">unit</span> <span class="err">≃</span> <span class="n">quotient</span> <span class="n">H</span> <span class="err">⊕</span> <span class="n">R</span><span class="o">)</span>
+</pre></div>
+
+
+<p>A while ago I decided to try to prove the Nielsen-Schreier theorem on free groups to get more familiar with Lean. Now, after countless days of self-isolation, I have <a href="https://github.com/dwarn/nielsen-schreier-lean" target="_blank" title="https://github.com/dwarn/nielsen-schreier-lean">a working proof</a>. Comments welcome!</p>
+
+<a name="191345093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345093">Kevin Buzzard (Mar 21 2020 at 13:13)</a>:</h4>
+<p>Is there any advantage in using parameters over variables?</p>
+
+<a name="191345229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345229">Kevin Buzzard (Mar 21 2020 at 13:17)</a>:</h4>
+<p>non-terminal <code>simp</code>s are discouraged in general, because they can cause trouble with maintenance. There are workarounds (e.g. run <code>simp</code> and then see what the goal has become, and try something like <code>suffices : &lt;new goal&gt;, from simpa using this</code>)</p>
+
+<a name="191345389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345389">Kevin Buzzard (Mar 21 2020 at 13:20)</a>:</h4>
+<p>We are in the process of moving to bundled subgroups rather than <code>is_subgroup</code></p>
+
+<a name="191345691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345691">Johan Commelin (Mar 21 2020 at 13:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="130377">@David Wärn</span> Nice work! At a first glance, a lot of the stuff there looks quite well done.</p>
+
+<a name="191345692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345692">Johan Commelin (Mar 21 2020 at 13:29)</a>:</h4>
+<p>It would be really nice to have this in mathlib</p>
+
+<a name="191345697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345697">Johan Commelin (Mar 21 2020 at 13:29)</a>:</h4>
+<p>But like you say, you might want to factor out some parts</p>
+
+<a name="191345699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345699">Johan Commelin (Mar 21 2020 at 13:29)</a>:</h4>
+<p>Unfortunately we don't have any graph theory yet...</p>
+
+<a name="191345826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191345826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191345826">Mario Carneiro (Mar 21 2020 at 13:32)</a>:</h4>
+<p>I think it would be nice to have a predicate that asserts that a group is freely generated by a subset of its type, so that we can quantify over subsets of H here instead of arbitrary types</p>
+
+<a name="191348912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191348912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191348912">Bhavik Mehta (Mar 21 2020 at 14:44)</a>:</h4>
+<p>Great job!</p>
+
+<a name="191352028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191352028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191352028">David Wärn (Mar 21 2020 at 15:52)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345093" title="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345093">said</a>:</p>
+<blockquote>
+<p>Is there any advantage in using parameters over variables?</p>
+</blockquote>
+<p>I think I chose parameters to try to convey the meaning of keeping things fixed, but variables might be better (at least it would let me use some lemmas for the two different free groups that occur in the argument)</p>
+
+<a name="191352205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191352205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191352205">David Wärn (Mar 21 2020 at 15:57)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345826" title="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345826">said</a>:</p>
+<blockquote>
+<p>I think it would be nice to have a predicate that asserts that a group is freely generated by a subset of its type, so that we can quantify over subsets of H here instead of arbitrary types</p>
+</blockquote>
+<p>That would be nice. You'd just need to prove that an isomorphism with a free group gives a freely generating subset</p>
+
+<a name="191353635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191353635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191353635">David Wärn (Mar 21 2020 at 16:24)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345692" title="#narrow/stream/116395-maths/topic/subgroup.20of.20free.20group.20is.20free/near/191345692">said</a>:</p>
+<blockquote>
+<p>It would be really nice to have this in mathlib</p>
+</blockquote>
+<p>I'll think about making this mathlib-friendly. Would it be worth it to create a small graph theory section with the proof of existence of spanning trees? The characterisation of spanning trees I used is somewhat non-standard: Basically I think of it as a rooted tree where I can do recursion along the edges.</p>
+
+<a name="191354062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191354062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191354062">Patrick Massot (Mar 21 2020 at 16:33)</a>:</h4>
+<p>I think we should stop complaining that there are many possible ways to formalize graphs and trees. We should go ahead, put them in mathlib, and we'll refactor (or add parallel implementations) if needed.</p>
+
+<a name="191354141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191354141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191354141">Kevin Buzzard (Mar 21 2020 at 16:35)</a>:</h4>
+<p>There are many possible ways to formalise algebra stuff -- there are groups, rings, fields etc and we just formalised all of them and proved the links between them. "Graphs" feel the same to me -- it is a catch-all word which can mean many things, and they should all be in.</p>
+
+<a name="191354156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191354156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191354156">Kevin Buzzard (Mar 21 2020 at 16:35)</a>:</h4>
+<p>it's only when they're in that we start realising how we should have done it.</p>
+
+<a name="191354247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191354247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191354247">Kevin Buzzard (Mar 21 2020 at 16:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="130377">@David Wärn</span> why don't you start by just making a basic graph API and PR'ing it? This is how I started. I wrote a basic complex numbers API and PR'ed it, and I think that by the end of the process none of the lines of code I had originally written were left.</p>
+
+<a name="191354255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20of%20free%20group%20is%20free/near/191354255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/26426subgroupoffreegroupisfree.html#191354255">Kevin Buzzard (Mar 21 2020 at 16:37)</a>:</h4>
+<p>Just make the stuff you need for your proof.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/30535innerproductinanormedspace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/30535innerproductinanormedspace.html">inner product in a normed space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172211530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inner%20product%20in%20a%20normed%20space/near/172211530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30535innerproductinanormedspace.html#172211530">Mii Nguyen (Aug 01 2019 at 11:15)</a>:</h4>
+<p>I recently  try to include inner product to a normed space. Here is my work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">normed_group</span>
+
+<span class="n">class</span> <span class="n">has_inner_product</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">inner</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="kn">export</span> <span class="n">has_inner_product</span> <span class="o">(</span><span class="n">inner</span><span class="o">)</span>
+
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">.</span> <span class="o">:=</span> <span class="n">inner</span>
+
+<span class="kn">structure</span> <span class="n">inner_product</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)[</span><span class="n">normed_group</span> <span class="n">α</span> <span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">]:=</span>
+<span class="o">(</span><span class="n">refx</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">y</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">x</span> <span class="o">)</span>
+<span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">z</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="n">z</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">,</span><span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="o">(</span><span class="n">k</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">y</span> <span class="bp">=</span> <span class="n">k</span><span class="bp">*</span><span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">y</span><span class="o">))</span>
+<span class="o">(</span><span class="n">pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">x</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">eq_zero</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">norm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">x</span> <span class="bp">=</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥^</span><span class="mi">2</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>the message error I have is :<br>
+invalid field notation, type is not of the form (C ...) where C is a constant<br>
+  x<br>
+has type<br>
+  α</p>
+<p>I don't understand the error. Can you help me with this? Thank you.</p>
+
+<a name="172211940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inner%20product%20in%20a%20normed%20space/near/172211940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30535innerproductinanormedspace.html#172211940">Scott Morrison (Aug 01 2019 at 11:23)</a>:</h4>
+<p>I suspect your notation isn't working the way you expect, and Lean is still parsing the <code>.</code> as field notation.</p>
+
+<a name="172211995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inner%20product%20in%20a%20normed%20space/near/172211995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30535innerproductinanormedspace.html#172211995">Scott Morrison (Aug 01 2019 at 11:24)</a>:</h4>
+<p>It does seem a bit ambitious trying to overload <code>.</code>, given it has a built-in language meaning.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

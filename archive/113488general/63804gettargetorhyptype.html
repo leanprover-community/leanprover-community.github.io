@@ -1,0 +1,158 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/63804gettargetorhyptype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html">get target or hyp type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194653634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194653634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194653634">Johan Commelin (Apr 20 2020 at 09:52)</a>:</h4>
+<p>Is there something like this already? Or am I approaching things wrong?</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">target_or_hyp_type</span> <span class="o">:</span> <span class="n">option</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="o">:=</span> <span class="n">target</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_type</span> <span class="n">h</span>
+</pre></div>
+
+<a name="194654110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654110">Mario Carneiro (Apr 20 2020 at 09:57)</a>:</h4>
+<p>that seems fine to me, but it also looks specific to your use case</p>
+
+<a name="194654203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654203">Mario Carneiro (Apr 20 2020 at 09:58)</a>:</h4>
+<p>if you want something more general, I would suggest something taking a <code>loc</code> as input</p>
+
+<a name="194654377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654377">Johan Commelin (Apr 20 2020 at 10:00)</a>:</h4>
+<p>Does something like that already exist?</p>
+
+<a name="194654477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654477">Johan Commelin (Apr 20 2020 at 10:01)</a>:</h4>
+<p>Similarly something like this...??</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">replace&#39;</span> <span class="o">:</span> <span class="n">option</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">replace_target</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">e</span> <span class="n">p</span><span class="o">,</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">replace_hyp</span> <span class="n">h</span> <span class="n">e</span> <span class="n">p</span> <span class="bp">&gt;&gt;</span> <span class="n">skip</span>
+</pre></div>
+
+<a name="194654492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654492">Johan Commelin (Apr 20 2020 at 10:01)</a>:</h4>
+<p>Or should that also be done with <code>loc</code>?</p>
+
+<a name="194654602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654602">Mario Carneiro (Apr 20 2020 at 10:02)</a>:</h4>
+<p>I think you are asking the wrong question. What is this for? Usually the goal and the hypotheses have to be treated differently, since in one you can reason forward and the other you reason backward</p>
+
+<a name="194654627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654627">Johan Commelin (Apr 20 2020 at 10:03)</a>:</h4>
+<p>Except for <code>rw</code>, I think</p>
+
+<a name="194654735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654735">Mario Carneiro (Apr 20 2020 at 10:04)</a>:</h4>
+<p>There is a function, <code>loc.apply</code>, where you give it a tactic to operate on hypotheses and another to operate on the goal, and it will do what it needs to on any <code>loc</code>, using any combination of <code>h</code>, <code>|-</code> and <code>*</code></p>
+
+<a name="194654771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654771">Johan Commelin (Apr 20 2020 at 10:04)</a>:</h4>
+<p>Yep, I'm already using that one</p>
+
+<a name="194654798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654798">Mario Carneiro (Apr 20 2020 at 10:05)</a>:</h4>
+<p>as such, there is no <code>option expr</code> involved</p>
+
+<a name="194654812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654812">Mario Carneiro (Apr 20 2020 at 10:05)</a>:</h4>
+<p>just two separate functions</p>
+
+<a name="194654978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194654978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194654978">Johan Commelin (Apr 20 2020 at 10:07)</a>:</h4>
+<p>But that leads to lots of duplication, I think</p>
+
+<a name="194655034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655034">Johan Commelin (Apr 20 2020 at 10:07)</a>:</h4>
+<p>See the <code>nth-rewrite</code> branch</p>
+
+<a name="194655035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655035">Mario Carneiro (Apr 20 2020 at 10:07)</a>:</h4>
+<p>it's not really duplication, it only looks like it</p>
+
+<a name="194655097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655097">Mario Carneiro (Apr 20 2020 at 10:08)</a>:</h4>
+<p>the actual tactics you have to use and the order stuff flows around is different</p>
+
+<a name="194655155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655155">Mario Carneiro (Apr 20 2020 at 10:09)</a>:</h4>
+<p>once you get to something rewrite-like, it does turn into just one tactic, with the form <code>expr -&gt; tactic (expr x expr)</code></p>
+
+<a name="194655460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655460">Mario Carneiro (Apr 20 2020 at 10:12)</a>:</h4>
+<p>looking at your branch, I think you should indeed factor everything through a conversion and applying a conversion</p>
+
+<a name="194655491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655491">Johan Commelin (Apr 20 2020 at 10:12)</a>:</h4>
+<p>What is a conversion?</p>
+
+<a name="194655526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655526">Mario Carneiro (Apr 20 2020 at 10:13)</a>:</h4>
+<p><code>expr -&gt; tactic (expr x expr)</code>, given input <code>e</code> produces <code>e'</code> and a proof of <code>p : e = e'</code></p>
+
+<a name="194655548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655548">Mario Carneiro (Apr 20 2020 at 10:13)</a>:</h4>
+<p>you can cleanly express descending into subterms with this type</p>
+
+<a name="194655653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655653">Mario Carneiro (Apr 20 2020 at 10:14)</a>:</h4>
+<p>and given such a conversion you can apply it to the target as one tactic, or apply it to a hypothesis</p>
+
+<a name="194655918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655918">Johan Commelin (Apr 20 2020 at 10:17)</a>:</h4>
+<p>Are such conversions already used in mathlib? Are there supporting functions?</p>
+
+<a name="194655929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655929">Johan Commelin (Apr 20 2020 at 10:17)</a>:</h4>
+<p>Or should I roll my own?</p>
+
+<a name="194655970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194655970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194655970">Mario Carneiro (Apr 20 2020 at 10:17)</a>:</h4>
+<p>there are a couple, I use it a lot in <code>ring</code></p>
+
+<a name="194656044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656044">Mario Carneiro (Apr 20 2020 at 10:18)</a>:</h4>
+<p>but mostly it's just a pattern that doesn't require much support</p>
+
+<a name="194656046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656046">Johan Commelin (Apr 20 2020 at 10:18)</a>:</h4>
+<p>Ok, but it hasn't been factored out in some sort of reusable package?</p>
+
+<a name="194656054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656054">Johan Commelin (Apr 20 2020 at 10:18)</a>:</h4>
+<p>Ok... fine</p>
+
+<a name="194656279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656279">Mario Carneiro (Apr 20 2020 at 10:20)</a>:</h4>
+<p>see for instance <code>simp_target</code> and <code>simp_hyp</code> that rely on <code>tactic.simplify</code> which is basically a conversion like I described (although it takes some extra arguments)</p>
+
+<a name="194656326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656326">Mario Carneiro (Apr 20 2020 at 10:21)</a>:</h4>
+<p>they just get the result from the conversion and pass to <code>replace_target</code> and <code>replace_hyp</code> respectively</p>
+
+<a name="194656417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656417">Mario Carneiro (Apr 20 2020 at 10:22)</a>:</h4>
+<p>so I think these functions are the reusable package</p>
+
+<a name="194656598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194656598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194656598">Mario Carneiro (Apr 20 2020 at 10:23)</a>:</h4>
+<p>In the <code>tactic.norm_num</code> file there are some orphaned conversion operations <code>refl_conv</code> and <code>trans_conv</code> that could go in <code>tactic.core</code></p>
+
+<a name="194682241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/get%20target%20or%20hyp%20type/near/194682241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63804gettargetorhyptype.html#194682241">Johan Commelin (Apr 20 2020 at 14:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I have no idea whether I did things right, but I think I've deduplicated the code quite far. See <a href="https://github.com/leanprover-community/mathlib/issues/2471" title="https://github.com/leanprover-community/mathlib/issues/2471">#2471</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

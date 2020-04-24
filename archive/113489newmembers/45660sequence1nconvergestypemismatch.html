@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/45660sequence1nconvergestypemismatch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/45660sequence1nconvergestypemismatch.html">sequence 1/n converges, "type mismatch"</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177253432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sequence%201/n%20converges%2C%20%22type%20mismatch%22/near/177253432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45660sequence1nconvergestypemismatch.html#177253432">Luca Seemungal (Oct 03 2019 at 15:05)</a>:</h4>
+<p>Hi, I have the code below:</p>
+<div class="codehilite"><pre><span></span>import data.real.basic
+
+namespace learning
+-- Sequences
+
+def seq_conv_to (a : ℕ → ℝ) (l : ℝ) :=
+∀ ε &gt; 0, ∃ N, ∀ n &gt; N, abs(a n - l) &lt; ε
+
+example : seq_conv_to (λ x, 1/x) (0) :=
+begin
+rw seq_conv_to,
+intros,
+simp,
+existsi ceil(1/ε),
+sorry
+end
+
+end learning
+</pre></div>
+
+
+<p>and I get the error</p>
+<div class="codehilite"><pre><span></span>existsi tactic failed, type mismatch between given term witness and expected type
+state:
+ε : ℝ,
+H : ε &gt; 0
+⊢ ∀ (n : ℕ), ⌈1 / ε⌉ + 1 &lt; n → abs (↑n)⁻¹ &lt; ε
+</pre></div>
+
+
+<p>on the line <code>existsi ceil(1/ε)</code></p>
+<p>Home come? ceil gives a natural number, and that's what N should be, right? Where's the type mismatch?</p>
+
+<a name="177253825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sequence%201/n%20converges%2C%20%22type%20mismatch%22/near/177253825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45660sequence1nconvergestypemismatch.html#177253825">Rob Lewis (Oct 03 2019 at 15:08)</a>:</h4>
+<p><code>ceil</code> gives an integer, not a natural. You may want to use <code>nat_ceil</code> instead.</p>
+
+<a name="177253862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sequence%201/n%20converges%2C%20%22type%20mismatch%22/near/177253862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45660sequence1nconvergestypemismatch.html#177253862">Luca Seemungal (Oct 03 2019 at 15:09)</a>:</h4>
+<p>cheers, that works.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

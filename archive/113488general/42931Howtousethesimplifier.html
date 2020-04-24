@@ -1,0 +1,101 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/42931Howtousethesimplifier.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html">How to use the simplifier?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189387949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189387949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189387949">Kevin Buzzard (Feb 29 2020 at 12:00)</a>:</h4>
+<p>I never use <code>simp</code> really, because I don't understand how it works. Here is a simple example <a href="#narrow/stream/116395-maths/topic/topological.20space.20from.20filter/near/189336789" title="#narrow/stream/116395-maths/topic/topological.20space.20from.20filter/near/189336789">from this thread</a> where I write a simple 7 line tactic mode proof of something which any mathematician would be able to work out in their head.</p>
+<div class="codehilite"><pre><span></span>import tactic
+
+universes u v
+
+open set
+
+-- Say X and Y are types, U=univ is a subset of X
+-- and V is a subset of Y. If C is a subset of X × Y
+-- such that U × V is in the complement of C, then
+-- V is in the complement of the projection of C down to Y.
+-- Maths proof : &quot;if you can&#39;t solve this, you shouldn&#39;t be taking my class&quot;
+-- Alternate maths proof: &quot;draw a rectangle&quot;.
+
+example (X : Type u) (Y : Type v) (U : set X) (hXU : univ ⊆ U)
+  (V : set Y) (C : set (X × Y)) (hUV : set.prod U V ⊆ -C) :
+  V ⊆ -(prod.snd &#39;&#39; C) :=
+-- my Lean proof:
+begin
+  -- Suppose for a contradiction that the intersection is non-empty.
+  -- Then we must have an element of C whose second component is in V
+  rintros v hvV ⟨uv, huv, rfl⟩,
+  -- To get the contradiction it suffices to prove that this element is in U × V
+  revert huv,
+  apply hUV,
+  -- so we need to check its first component is in U and its second is in V
+  rw set.mem_prod,
+  split,
+    -- but U is all of X so the first component must be in U
+    apply hXU, apply set.mem_univ,
+  -- and by assumption the second component is in V
+  exact hvV,
+  -- so done
+end
+</pre></div>
+
+
+<p>I am in the middle of a big tactic mode proof so I can't really massage the hypotheses and there's no advantage slipping into term mode.</p>
+<p>I observe that (a) this proof is pretty simple; (b) both of the theorems I use from <code>data.set.basic</code> (<code>mem_prod</code> and <code>mem_univ</code>) are tagged <code>@[simp]</code> (and one proof is <code>iff.rfl</code> and the other is <code>trivial</code>); (c) <code>simp * at *</code> doesn't work.</p>
+<p>Now what I don't really understand is whether I should even be expecting the simplifier to solve this little logic puzzle, even though the proof looks very much "follow your nose". I don't even know if <code>  simp [hXU, hUV]</code> is meaningful -- it compiles, it doesn't solve the goal. Is this clearly too much for the simplifier? Does the simplifier <em>only</em> prove goals of the form <code>X = Y</code> and only in the situation where subterms of X can be rewritten using simp lemmas until X becomes Y? How should I be solving this goal in fewer than 7 lines? What would a mathlib proof of this look like? This is a big hole in my understanding of how to write mathlib-ready Lean code and it's things like this which are a major contributor to the fact that I've not written more mathlib code.</p>
+
+<a name="189388401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189388401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189388401">Kevin Buzzard (Feb 29 2020 at 12:15)</a>:</h4>
+<p>Hmm:</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">rintros</span> <span class="n">v</span> <span class="n">hvV</span> <span class="bp">⟨</span><span class="n">uv</span><span class="o">,</span> <span class="n">huv</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hUV</span> <span class="bp">⟨</span><span class="n">hXU</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_univ</span> <span class="bp">_</span><span class="o">),</span> <span class="n">hvV</span><span class="bp">⟩</span> <span class="n">huv</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Maybe I'm barking up the wrong tree and I should just concentrate on building terms as compactly as possible.</p>
+
+<a name="189388739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189388739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189388739">Mario Carneiro (Feb 29 2020 at 12:26)</a>:</h4>
+<p>Perhaps this helps.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hXU</span> <span class="o">:</span> <span class="n">univ</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">))</span> <span class="o">(</span><span class="n">hUV</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">U</span> <span class="n">V</span> <span class="err">⊆</span> <span class="bp">-</span><span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">V</span> <span class="err">⊆</span> <span class="bp">-</span><span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="err">&#39;&#39;</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">λ</span> <span class="n">v</span> <span class="n">hvV</span> <span class="n">u</span><span class="o">,</span> <span class="n">hUV</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hXU</span> <span class="bp">_</span><span class="o">)</span> <span class="n">hvV</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189388776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189388776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189388776">Mario Carneiro (Feb 29 2020 at 12:27)</a>:</h4>
+<p>Note the goal after the first line</p>
+
+<a name="189388839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189388839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189388839">Mario Carneiro (Feb 29 2020 at 12:29)</a>:</h4>
+<p>Basically, <code>simp</code> has a whole bunch of basic unfolding type rules in its database, and we just apply everything until it stops changing. Now subset is not usually a thing you want to unfold eagerly, however once you have membership there are a whole bunch of simp lemmas that can trigger, to unfold what it means for something to be an element of a complicated set. So here it cleans up all the unions and images and complements, but it hasn't really done anything with the "logic" part - you still have to plumb <code>hXU</code> and <code>hvV</code> together, but it is much more obvious what to do this time</p>
+
+<a name="189388900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189388900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189388900">Mario Carneiro (Feb 29 2020 at 12:31)</a>:</h4>
+<p>Because these are almost all definitional simplifications, the direct term proof is not much longer in this case. The only real change is you don't have to do that <code>rcases with &lt;a, rfl&gt;</code> dance</p>
+
+<a name="189389009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189389009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189389009">Mario Carneiro (Feb 29 2020 at 12:35)</a>:</h4>
+<p>Your second proof is almost exactly what I would have used for the mathlib proof of this. (I would have used <code>by</code> and squeezed it on one line because it's basically a short term proof.) I wouldn't use the <code>simp</code> proof because that is slower and the savings in proof size are minimal here</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

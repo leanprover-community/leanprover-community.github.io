@@ -1,0 +1,90 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/44950obtainwith.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html">obtain with |</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193750742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193750742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193750742">Mario Carneiro (Apr 13 2020 at 07:30)</a>:</h4>
+<p>I thought that <code>obtain</code> had the same parser as <code>rcases</code> and <code>rintro</code>, but it doesn't work when there is a bar at the top level:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">obtain</span> <span class="o">(</span><span class="n">h</span> <span class="bp">|</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">p</span><span class="o">,</span> <span class="c1">-- parser fail</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193750773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193750773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193750773">Mario Carneiro (Apr 13 2020 at 07:31)</a>:</h4>
+<p>The parentheses shouldn't even be necessary in this case since the <code>:</code> terminates the pattern, so <code>obtain h | h : true ∨ true := p</code> could even be made to work</p>
+
+<a name="193750779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193750779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193750779">Mario Carneiro (Apr 13 2020 at 07:31)</a>:</h4>
+<p>but the docs seem to suggest that a \&lt; \&gt; has to come at the top level</p>
+
+<a name="193751096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751096">Rob Lewis (Apr 13 2020 at 07:38)</a>:</h4>
+<p>I'm almost certain <code>obtain</code> uses the <code>rcases</code> parser, so this is probably a precedence issue or something. Could you open an issue (if you don't feel like fixing yourself)? I can look into it but not immediately.</p>
+
+<a name="193751191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751191">Mario Carneiro (Apr 13 2020 at 07:41)</a>:</h4>
+<p>Technically parentheses are not legal there anyway since we are parsing token by token -- they are only supported if there is direct support for them, as in <code>rintro</code></p>
+
+<a name="193751256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751256">Kevin Buzzard (Apr 13 2020 at 07:42)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="k">obtain</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">h</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">p</span><span class="o">,</span>
+</pre></div>
+
+
+<p>works</p>
+
+<a name="193751273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751273">Mario Carneiro (Apr 13 2020 at 07:43)</a>:</h4>
+<p>oh</p>
+
+<a name="193751282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751282">Mario Carneiro (Apr 13 2020 at 07:43)</a>:</h4>
+<p>yeah, just found that out myself</p>
+
+<a name="193751335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751335">Kenny Lau (Apr 13 2020 at 07:44)</a>:</h4>
+<p>is this a new tactic?</p>
+
+<a name="193751340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751340">Mario Carneiro (Apr 13 2020 at 07:44)</a>:</h4>
+<p>somewhat?</p>
+
+<a name="193751344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751344">Mario Carneiro (Apr 13 2020 at 07:44)</a>:</h4>
+<p>it's at least 6 months old by now</p>
+
+<a name="193751359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751359">Mario Carneiro (Apr 13 2020 at 07:45)</a>:</h4>
+<p>It's just <code>rcases</code> with its arguments in a different order</p>
+
+<a name="193751418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751418">Mario Carneiro (Apr 13 2020 at 07:46)</a>:</h4>
+<p>I think the docstring threw me off with <code>obtain ⟨patt⟩ : type := proof</code></p>
+
+<a name="193751422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751422">Mario Carneiro (Apr 13 2020 at 07:47)</a>:</h4>
+<p>which makes it look like the pattern needs to be in brackets</p>
+
+<a name="193751500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain%20with%20%7C/near/193751500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44950obtainwith.html#193751500">Mario Carneiro (Apr 13 2020 at 07:49)</a>:</h4>
+<p>it would be nice to add support for type ascriptions inside an rcases pattern so you can also write <code>obtain (h : true) | (h : true) := p,</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

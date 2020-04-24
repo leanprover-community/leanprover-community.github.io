@@ -1,0 +1,965 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/57481LeanLaTeX.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html">Lean + LaTeX?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="156681378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156681378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156681378">Kevin Buzzard (Jan 23 2019 at 11:23)</a>:</h4>
+<p>I've been reading work of Lamport about structured proofs.  Here's an extract from <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a> :</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- We now prove that if aₙ → l and bₙ → m then aₙ + bₙ → l + m.</span>
+<span class="kn">theorem</span> <span class="n">tendsto_add</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">b</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_limit</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- let epsilon be a positive real</span>
+  <span class="n">intros</span> <span class="n">ε</span> <span class="n">Hε</span><span class="o">,</span>
+  <span class="c1">-- We now need to come up with N such that</span>
+  <span class="c1">-- n &gt;= N implies |aₙ + bₙ - (l + m)| &lt; ε.</span>
+  <span class="c1">-- Well, note first that epsilon / 2 is also positive.</span>
+  <span class="k">have</span> <span class="n">Hε2</span> <span class="o">:</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+  <span class="c1">-- Choose large M₁ such that n ≥ M₁ implies |a n - l| &lt; ε /2,</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">h1</span> <span class="o">(</span><span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="n">Hε2</span><span class="o">)</span> <span class="k">with</span> <span class="n">M₁</span> <span class="n">HM₁</span><span class="o">,</span>
+  <span class="c1">-- and similarly choose M₂ for the b sequence.</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">h2</span> <span class="o">(</span><span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="n">Hε2</span><span class="o">)</span> <span class="k">with</span> <span class="n">M₂</span> <span class="n">HM₂</span><span class="o">,</span>
+  <span class="c1">-- let N be the max of M1 and M2</span>
+  <span class="k">let</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">max</span> <span class="n">M₁</span> <span class="n">M₂</span><span class="o">,</span>
+  <span class="c1">-- and let&#39;s use this value of N.</span>
+  <span class="n">use</span> <span class="n">N</span><span class="o">,</span>
+  <span class="c1">-- Of course N ≥ M₁ and N ≥ M₂.</span>
+  <span class="k">have</span> <span class="n">H₁</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">≥</span> <span class="n">M₁</span> <span class="o">:=</span> <span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H₂</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">≥</span> <span class="n">M₂</span> <span class="o">:=</span> <span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c1">-- Now say n ≥ N.</span>
+  <span class="n">intros</span> <span class="n">n</span> <span class="n">Hn</span><span class="o">,</span>
+  <span class="c1">-- Then obviously n ≥ M₁...</span>
+  <span class="k">have</span> <span class="n">Hn₁</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">M₁</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+  <span class="c1">-- ...so |aₙ - l| &lt; ε /2</span>
+<span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">HM₁</span> <span class="n">n</span> <span class="n">Hn₁</span><span class="o">,</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>and so on and so on. The point is that I am spelling out the proof I would tell mathematicians in comments, and writing Lean code, which is sometimes self-evident (<code>intros n Hn</code>) and sometimes much harder for beginners to understand (e.g. using <code>le_max_left</code> -- a student could look up what this did, but it's much harder for them to find this function for themselves, and there are far more contrived lines in other parts of this repo). </p>
+<p>I would like to make this look really sexy and I am almost sure that this should be possible with known technology. My dream would be to have what looks like a LaTeX document (perhaps viewed through a web browser) and when you hover over e.g. "Then obviously n &gt;= M_1" you get some transient box which says <code>have Hn₁ : n ≥ M₁ := by linarith,</code>, and if you click on it then you somehow end up viewing a Lean file, or part of a Lean file, where you can look at the goal and change / edit things and play around (and then hit the "reset" button when you've screwed everything up).</p>
+<p>In other words, I'd like to have some sort of thing which I can present as a "formally verified, but looks like LaTeX, proof that the limit of the sum is the sum of the limits". </p>
+<p>I have no doubt that this sort of thing is possible. I've learnt sphinx but I am not quite sure if it is the tool for the job. Does anyone have any suggestions as to how one might be able to do this? There is no particular time frame and if it involves writing a bunch of code then maybe I can find people who will write this code for me. <span class="user-mention" data-user-id="121918">@Edward Ayers</span> <span class="user-mention" data-user-id="110031">@Patrick Massot</span> do either of you know about this kind of thing? </p>
+<p>When it comes to writing Lean code I am 100% convinced that I could write code in the above style which could become "online notes" for a beginning analysis course (such as, let's say, the beginning analysis course in Imperial's new curriculum which starts in October). The notes would have the advantage that they are formally verified. But I do not understand enough about how to build the app I envisage and I would dearly like to hear some suggestions!</p>
+
+<a name="156682310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156682310">Johan Commelin (Jan 23 2019 at 11:41)</a>:</h4>
+<p>Do you remember Neil Stricklands demo? That might be a first approximation of what you want.</p>
+
+<a name="156682399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156682399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156682399">Johan Commelin (Jan 23 2019 at 11:43)</a>:</h4>
+<p>I meant this one: <a href="http://neil-strickland.staff.shef.ac.uk/dagstuhl/Systems/Lean_mathlib/Tasks/primes/" target="_blank" title="http://neil-strickland.staff.shef.ac.uk/dagstuhl/Systems/Lean_mathlib/Tasks/primes/">http://neil-strickland.staff.shef.ac.uk/dagstuhl/Systems/Lean_mathlib/Tasks/primes/</a></p>
+
+<a name="156683049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156683049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156683049">Kevin Buzzard (Jan 23 2019 at 11:56)</a>:</h4>
+<p>Ooh -- thanks for digging that up! <span class="user-mention" data-user-id="130308">@Neil Strickland</span> how did you make this? My plan would be to hide the Lean completely and just have standard maths proof prose visible initially, but one can somehow open up the Lean to see it if one wants to.</p>
+
+<a name="156693777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156693777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156693777">Joseph Corneli (Jan 23 2019 at 14:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> As a quick mockup in Emacs, I used Outshine mode to achieve the following (I realise this doesn't address the LaTeX side of things at all).  This required changing the comment syntax a little bit.  <a href="/user_uploads/3121/_NxlgyLxGewpsjrAPECKZ-g9/Screen-Shot-2019-01-23-at-14.41.33.png" target="_blank" title="Screen-Shot-2019-01-23-at-14.41.33.png">Screen-Shot-2019-01-23-at-14.41.33.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/_NxlgyLxGewpsjrAPECKZ-g9/Screen-Shot-2019-01-23-at-14.41.33.png" target="_blank" title="Screen-Shot-2019-01-23-at-14.41.33.png"><img src="/user_uploads/3121/_NxlgyLxGewpsjrAPECKZ-g9/Screen-Shot-2019-01-23-at-14.41.33.png"></a></div>
+
+<a name="156693999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156693999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156693999">Joseph Corneli (Jan 23 2019 at 14:46)</a>:</h4>
+<p>pressing TAB at the start of the buffer, or on a "headline", cycles between showing or not showing headlines / all content below that level.</p>
+
+<a name="156694296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156694296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156694296">Joseph Corneli (Jan 23 2019 at 14:50)</a>:</h4>
+<p>Maybe there's a similar plugin to Outshine for VS Code? </p>
+<p>For presentation purposes, a related setup for Jupyter is described here: <br>
+<a href="http://chris-said.io/2016/02/13/how-to-make-polished-jupyter-presentations-with-optional-code-visibility/" target="_blank" title="http://chris-said.io/2016/02/13/how-to-make-polished-jupyter-presentations-with-optional-code-visibility/">http://chris-said.io/2016/02/13/how-to-make-polished-jupyter-presentations-with-optional-code-visibility/</a><br>
+with a clickable demo here:<br>
+<a href="https://nbviewer.jupyter.org/github/csaid/polished_notebooks/blob/master/notebook_polished.ipynb" target="_blank" title="https://nbviewer.jupyter.org/github/csaid/polished_notebooks/blob/master/notebook_polished.ipynb">https://nbviewer.jupyter.org/github/csaid/polished_notebooks/blob/master/notebook_polished.ipynb</a></p>
+
+<a name="156701032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156701032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156701032">Patrick Massot (Jan 23 2019 at 16:08)</a>:</h4>
+<p>Indeed this is something we can already mostly do with current technology, although we should be able to do it much better with the Lean 4 parser. Without the possibility to modify the Lean code, we could make something very easily (maybe only after thinking a bit more about the expected output with nested subproofs). In order to get a truly interactive version we could reuse Gabriel's work on the documentation view.</p>
+
+<a name="156702191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156702191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156702191">Kevin Buzzard (Jan 23 2019 at 16:21)</a>:</h4>
+<p>Right. Nothing you say surprises me. Now how do I actually _do_ it?</p>
+
+<a name="156705049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156705049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156705049">Patrick Massot (Jan 23 2019 at 16:58)</a>:</h4>
+<p>Which version? Interactive or read-only?</p>
+
+<a name="156707960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156707960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156707960">Kevin Buzzard (Jan 23 2019 at 17:32)</a>:</h4>
+<p>read-only would be a good start.</p>
+
+<a name="156709620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156709620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156709620">Neil Strickland (Jan 23 2019 at 17:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  there is a new version of my examples now which you can find by following the links at  <a href="http://bim.shef.ac.uk/lean" target="_blank" title="http://bim.shef.ac.uk/lean">http://bim.shef.ac.uk/lean</a>.<br>
+At the moment they are not packaged in a way that makes it super-easy for anyone else to use the same framework, but it is not all that sophisticated either.  The key ingredients are the files <br>
+1. <a href="http://bim.shef.ac.uk/lean/viewer.js" target="_blank" title="http://bim.shef.ac.uk/lean/viewer.js">http://bim.shef.ac.uk/lean/viewer.js</a><br>
+2. <a href="http://bim.shef.ac.uk/lean/viewer.css" target="_blank" title="http://bim.shef.ac.uk/lean/viewer.css">http://bim.shef.ac.uk/lean/viewer.css</a><br>
+3. <a href="http://bim.shef.ac.uk/lean/lean_task_index.html" target="_blank" title="http://bim.shef.ac.uk/lean/lean_task_index.html">http://bim.shef.ac.uk/lean/lean_task_index.html</a> (which is a kind of template)<br>
+4. Libraries <a href="http://bim.shef.ac.uk/js/jquery.js" target="_blank" title="http://bim.shef.ac.uk/js/jquery.js">http://bim.shef.ac.uk/js/jquery.js</a> and <a href="http://bim.shef.ac.uk/js/he.js" target="_blank" title="http://bim.shef.ac.uk/js/he.js">http://bim.shef.ac.uk/js/he.js</a><br>
+For each example you need <br>
+1. A copy of lean_task_index.html with the name, title and description filled in.<br>
+2. A lean file with comments delineated by the strings <br>
+"/-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ "<br>
+and <br>
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-/"</p>
+<p>Let me know if you want further details.</p>
+
+<a name="156709958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156709958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156709958">Patrick Massot (Jan 23 2019 at 17:58)</a>:</h4>
+<p>Neil, I just had a look at the very first example and something is not quite correct. <code>apply refl</code> is not using the <code>refl</code> tactic, it's using a lemma called <code>refl</code> (use F12 to see it). Use <code>refl</code> alone if you want the <code>refl</code> tactic.</p>
+
+<a name="156710182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156710182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156710182">Neil Strickland (Jan 23 2019 at 18:01)</a>:</h4>
+<p>Thanks, I'll fix that.</p>
+
+<a name="156712996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156712996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156712996">Mohammad Pedramfar (Jan 23 2019 at 18:39)</a>:</h4>
+<p>There is an old code here <a href="https://github.com/leanprover/lean.js" target="_blank" title="https://github.com/leanprover/lean.js">https://github.com/leanprover/lean.js</a></p>
+
+<a name="156713098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156713098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156713098">Mohammad Pedramfar (Jan 23 2019 at 18:40)</a>:</h4>
+<p>below in the examples. It's using lean interactively in the browser.</p>
+
+<a name="156713804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156713804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156713804">Mohammad Pedramfar (Jan 23 2019 at 18:48)</a>:</h4>
+<p>This seems to be exactly what you'd need to have an interactive lean webpage<br>
+<a href="https://github.com/leanprover/lean-client-js/" target="_blank" title="https://github.com/leanprover/lean-client-js/">https://github.com/leanprover/lean-client-js/</a></p>
+
+<a name="156728489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156728489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156728489">Patrick Massot (Jan 23 2019 at 21:53)</a>:</h4>
+<blockquote>
+<p>read-only would be a good start.</p>
+</blockquote>
+<p>I'll try to find time over the week-end to build some demo</p>
+
+<a name="156778439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156778439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156778439">Mohammad Pedramfar (Jan 24 2019 at 15:03)</a>:</h4>
+<p>Using the libraries that I mentioned doesn't seem to be very easy. On the other hand, directly manipulating the online lean website seems to be doable. I'll try to make a small interactive example in a few days.</p>
+
+<a name="156778956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156778956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156778956">Bryan Gin-ge Chen (Jan 24 2019 at 15:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="132175">@Mohammad Pedramfar</span> I played around with trying to get a custom version of the web editor working a while back in this thread: <a href="#narrow/stream/113488-general/topic/online.20leanprover" title="#narrow/stream/113488-general/topic/online.20leanprover">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online.20leanprover</a> . I didn't get too far though.</p>
+
+<a name="156841534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156841534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156841534">Mohammad Pedramfar (Jan 25 2019 at 10:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> Thanks. Hopefully this will be easier, since here we only need to play around with the reactjs code to to something in the frontend without touching other parts.</p>
+
+<a name="156987229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987229">Mohammad Pedramfar (Jan 27 2019 at 20:41)</a>:</h4>
+<p>I changed a few things in the online lean editor and turned it into this : <a href="/user_uploads/3121/SV1PUgOO5U2DB4dzH-LExXak/lean-web-editor-with-latex.tar.gz" target="_blank" title="lean-web-editor-with-latex.tar.gz">lean-web-editor-with-latex.tar.gz</a></p>
+
+<a name="156987368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987368">Patrick Massot (Jan 27 2019 at 20:45)</a>:</h4>
+<p>do you have a live demo somewhere?</p>
+
+<a name="156987504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987504">Mohammad Pedramfar (Jan 27 2019 at 20:48)</a>:</h4>
+<p>I'm now running it at <a href="http://192.168.43.31:8080/" target="_blank" title="http://192.168.43.31:8080/">http://192.168.43.31:8080/</a></p>
+
+<a name="156987513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987513">Patrick Massot (Jan 27 2019 at 20:48)</a>:</h4>
+<p>Firefox can’t establish a connection to the server at 192.168.43.31:8080.</p>
+
+<a name="156987523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987523">Wojciech Nawrocki (Jan 27 2019 at 20:49)</a>:</h4>
+<p>That's a local-network IP :) It's not publicly accessible</p>
+
+<a name="156987526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987526">Patrick Massot (Jan 27 2019 at 20:49)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="156987540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987540">Mohammad Pedramfar (Jan 27 2019 at 20:49)</a>:</h4>
+<p>I don't know why I thought http-server would run it on the web</p>
+
+<a name="156987594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987594">Mohammad Pedramfar (Jan 27 2019 at 20:50)</a>:</h4>
+<p>is there an easy way to run it locally ?</p>
+
+<a name="156987599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987599">Patrick Massot (Jan 27 2019 at 20:50)</a>:</h4>
+<p>You may be able to redirect something there</p>
+
+<a name="156987763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156987763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156987763">Mohammad Pedramfar (Jan 27 2019 at 20:55)</a>:</h4>
+<p>I don't know how to do that</p>
+
+<a name="156988002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988002">Patrick Massot (Jan 27 2019 at 21:00)</a>:</h4>
+<p>Maybe you can explain how we could run it locally then, and what there is to see</p>
+
+<a name="156988077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988077">Mohammad Pedramfar (Jan 27 2019 at 21:03)</a>:</h4>
+<p>sure, you'd need to follow the instructions in the readme. run these first :<br>
+npm install<br>
+./fetch_lean_js.sh<br>
+./node_modules/.bin/webpack</p>
+
+<a name="156988127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988127">Mohammad Pedramfar (Jan 27 2019 at 21:04)</a>:</h4>
+<p>then you can into the "dist" folder and run "http-server"</p>
+
+<a name="156988205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988205">Mohammad Pedramfar (Jan 27 2019 at 21:07)</a>:</h4>
+<p>At the moment the content is hardcoded, I have yet to add some kind of editor for the latex part. For any line in the latex, if you click on it, you'll see the corresponding lean code. You can change it and see the goals and warnings etc. but if you click on another line, the changes won't be saved. You can also see all the lean code at the same time, which would be like the normal online editor.</p>
+
+<a name="156988337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988337">Patrick Massot (Jan 27 2019 at 21:11)</a>:</h4>
+<p>Nice!</p>
+
+<a name="156988449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988449">Patrick Massot (Jan 27 2019 at 21:14)</a>:</h4>
+<p>People who want to know what we are talking about can go to <a href="http://pat.perso.ens-lyon.org/lean/" target="_blank" title="http://pat.perso.ens-lyon.org/lean/">http://pat.perso.ens-lyon.org/lean/</a> (it probably won't stay there for long)</p>
+
+<a name="156988459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988459">Patrick Massot (Jan 27 2019 at 21:15)</a>:</h4>
+<p>I can't see any error message when I edit the Lean code</p>
+
+<a name="156988520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988520">Patrick Massot (Jan 27 2019 at 21:16)</a>:</h4>
+<p>wait, the LaTeX doesn't work there</p>
+
+<a name="156988525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988525">Patrick Massot (Jan 27 2019 at 21:16)</a>:</h4>
+<p>I used to work when served locally</p>
+
+<a name="156988646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988646">Mohammad Pedramfar (Jan 27 2019 at 21:20)</a>:</h4>
+<p>The error messages didn't show up at all or were they late ? because the code is probably not the most efficient code possible !</p>
+
+<a name="156988725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988725">Mohammad Pedramfar (Jan 27 2019 at 21:22)</a>:</h4>
+<p>You're right about the LaTeX. I think it works only if things are loaded in the correct order. It shouldn't be difficult to fix.</p>
+
+<a name="156988739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988739">Patrick Massot (Jan 27 2019 at 21:23)</a>:</h4>
+<p>I don't have time to play with this (I have lectures to prepare) but it looks like a nice try</p>
+
+<a name="156988788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156988788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156988788">Mohammad Pedramfar (Jan 27 2019 at 21:24)</a>:</h4>
+<p>Thanks</p>
+
+<a name="156989789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156989789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156989789">Kevin Buzzard (Jan 27 2019 at 21:54)</a>:</h4>
+<p>Hey that's very cool!</p>
+
+<a name="156994368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156994368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#156994368">Mohammad Pedramfar (Jan 28 2019 at 00:20)</a>:</h4>
+<p>Glad you liked it. I'll make it a bit more usable this week.</p>
+
+<a name="157063321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157063321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157063321">Kevin Buzzard (Jan 28 2019 at 22:30)</a>:</h4>
+<p>Could you try something from <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a>?</p>
+
+<a name="157389394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157389394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157389394">Mohammad Pedramfar (Feb 01 2019 at 21:57)</a>:</h4>
+<p>Sure, I'll sort it out this weekend</p>
+
+<a name="157490886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157490886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157490886">Mohammad Pedramfar (Feb 04 2019 at 00:35)</a>:</h4>
+<p>I worked on it a little bit and there's a bug that I haven't solved yet. I'll put it here as soon as I figure out how to make it work.</p>
+
+<a name="157504786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157504786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157504786">Patrick Massot (Feb 04 2019 at 07:21)</a>:</h4>
+<p>I also worked on a prototype of a read-only online viewer this week-end (no Lean running in the browser). I hope I'll have something to show later today.</p>
+
+<a name="157558129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157558129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157558129">Patrick Massot (Feb 04 2019 at 21:18)</a>:</h4>
+<p>I think I'll stop with my experiment for now. <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> could you tell me if <a href="https://www.math.u-psud.fr/~pmassot/lean/" target="_blank" title="https://www.math.u-psud.fr/~pmassot/lean/">https://www.math.u-psud.fr/~pmassot/lean/</a> looks like what you wanted? You should mouse over everything to see what happens. This file is auto-generated from <a href="https://www.math.u-psud.fr/~pmassot/lean/source.html" target="_blank" title="https://www.math.u-psud.fr/~pmassot/lean/source.html">https://www.math.u-psud.fr/~pmassot/lean/source.html</a></p>
+
+<a name="157558212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157558212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157558212">Patrick Massot (Feb 04 2019 at 21:20)</a>:</h4>
+<p>In particular, tactic lines begin and end with an active zone that is currently not so easy to spot</p>
+
+<a name="157561730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157561730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157561730">Mohammad Pedramfar (Feb 04 2019 at 22:12)</a>:</h4>
+<p>That looks much cleaner than what I have here ! Could you send its code so I can add the interactive part to it ?</p>
+
+<a name="157564224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564224">Scott Morrison (Feb 04 2019 at 22:49)</a>:</h4>
+<p>The UI to inspect the current tactic state is a bit confusing (invisible regions that highlight when you mouse over?)</p>
+
+<a name="157564230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564230">Scott Morrison (Feb 04 2019 at 22:49)</a>:</h4>
+<p>(but otherwise pretty great!)</p>
+
+<a name="157564601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564601">Scott Morrison (Feb 04 2019 at 22:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, I see in the source file that you've introduced your own mini mark-up language, e.g. things like:</p>
+<div class="codehilite"><pre><span></span>/- Sub-section
+Basic definitions
+-/
+</pre></div>
+
+
+<p>I wonder if it might be better to just use markdown for this.</p>
+
+<a name="157564692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564692">Rob Lewis (Feb 04 2019 at 22:57)</a>:</h4>
+<p>This is really cool! It looks like, if a line in the source has both code and a comment, only the comment is printed in the HTML, is that right? This means you see a bunch of <code>}</code> but no  <code>{</code>.</p>
+
+<a name="157564880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564880">Scott Morrison (Feb 04 2019 at 23:00)</a>:</h4>
+<p>I was about to say exactly the same thing! :-)</p>
+
+<a name="157564914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157564914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157564914">Scott Morrison (Feb 04 2019 at 23:00)</a>:</h4>
+<p>Having a link that pops out a proof into an interactive lean session would be pretty nice, too.</p>
+
+<a name="157588296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157588296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157588296">Kevin Buzzard (Feb 05 2019 at 07:31)</a>:</h4>
+<p>I'll show this to the kids today (I give an optional analysis lecture Tuesday 1-2 every week). It's really nice!</p>
+
+<a name="157588424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157588424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157588424">Patrick Massot (Feb 05 2019 at 07:34)</a>:</h4>
+<p>Allowing Markdown syntax for title is trivial, except that I put the constrain that the Lean file should compile, so the markdown has to be wrapped in a Lean comment. Would you like:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- # My title</span>
+</pre></div>
+
+
+<p>Of course one could also builds a tool which starts with a combined file and independently spits out a valid Lean file and a valid html file. But I really like to be able to write the source file in VScode with real time Lean compilation.</p>
+
+<a name="157588508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157588508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157588508">Patrick Massot (Feb 05 2019 at 07:36)</a>:</h4>
+<p>About lines like <code>  { -- We assume...</code> : This is indeed handled as a special case. I know the result is a bit weird but I don't know what we want here. Does anyone has a clear idea of what the source and rendered result should look like?</p>
+
+<a name="157588572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157588572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157588572">Patrick Massot (Feb 05 2019 at 07:38)</a>:</h4>
+<p>I warned that the UI for showing tactics would be weird. Again I need suggestions. I don't want to have buttons shown permanently around each Lean line. Maybe I could show two buttons when the mouse is over the Lean line. This would be very touch unfriendly, but the interface is currently oriented towards wide screens anyway (although it would be trivial to but tactic state below the main view on narrow screens)</p>
+
+<a name="157591138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157591138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157591138">Rob Lewis (Feb 05 2019 at 08:36)</a>:</h4>
+<p>I think that having shading permanently around each Lean line would be fine. It doesn't have to look like a button, you could make it only slightly different from the background color.</p>
+
+<a name="157591381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157591381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157591381">Johan Commelin (Feb 05 2019 at 08:42)</a>:</h4>
+<p>Could you just make the entire line clickable? As soon as I click somewhere on a line of Lean code, the tactic state updates to that point. That would be quite intuitive, I think.</p>
+
+<a name="157633518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633518">Patrick Massot (Feb 05 2019 at 19:31)</a>:</h4>
+<p>I could do that of course. I don't know whether it would become much longer to generate the file. I guess the Lean server responds pretty quickly to VScode, but here it means the lean to html conversion would ask for the Lean state at every single character of the proofs</p>
+
+<a name="157633605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633605">Patrick Massot (Feb 05 2019 at 19:32)</a>:</h4>
+<p>This is useful only in case of rewrite with a list of lemmas or equalities. Otherwise the tactic state doesn't change in the middle of a line</p>
+
+<a name="157633647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633647">Johan Commelin (Feb 05 2019 at 19:33)</a>:</h4>
+<p>Aah, no, I just meant to update to <em>after</em> that line.</p>
+
+<a name="157633663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633663">Johan Commelin (Feb 05 2019 at 19:33)</a>:</h4>
+<p>So to bad for <code>rw [foo, bar]</code>.</p>
+
+<a name="157633766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633766">Patrick Massot (Feb 05 2019 at 19:34)</a>:</h4>
+<p>The problem is you also want to see the state before a line, especially the first line of a proof</p>
+
+<a name="157633782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633782">Patrick Massot (Feb 05 2019 at 19:35)</a>:</h4>
+<p>UI is hard</p>
+
+<a name="157633882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157633882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157633882">Patrick Massot (Feb 05 2019 at 19:36)</a>:</h4>
+<p>I pushed what I think is Rob's suggestion (clickable areas are permanently slightly darker)</p>
+
+<a name="157634745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157634745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157634745">Johan Commelin (Feb 05 2019 at 19:48)</a>:</h4>
+<blockquote>
+<p>UI is hard</p>
+</blockquote>
+<p>Definitely. And after &gt;10 years of fooling around I've discovered that I'm not right person for that job (-;</p>
+
+<a name="157635561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157635561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157635561">Mohammad Pedramfar (Feb 05 2019 at 19:58)</a>:</h4>
+<p>I think it wouldn't be that difficult to add the interactive part to it. So that one can double click on a line and go into edit mode and play around.</p>
+
+<a name="157636297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157636297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157636297">Mohammad Pedramfar (Feb 05 2019 at 20:07)</a>:</h4>
+<p>Fixing the latex part in the interactive code that I sent only needed a few lines, but it took me a while to figure out what was wrong. And it seems like the lean server doesn't like firefox very much. It seems to be working in Chrome. Making a good UI on the other hand is gonna take some time. It would be much easier to add the interactive part to this UI.</p>
+
+<a name="157641035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641035">Patrick Massot (Feb 05 2019 at 21:14)</a>:</h4>
+<p>I think I'm done removing all the hard-coded paths in my script, so that other people could play with it (I hope). It's not the same thing as claiming I've cleaned the code...</p>
+
+<a name="157641045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641045">Patrick Massot (Feb 05 2019 at 21:14)</a>:</h4>
+<p>You can find it at <a href="https://github.com/leanprover-community/format_lean" target="_blank" title="https://github.com/leanprover-community/format_lean">https://github.com/leanprover-community/format_lean</a></p>
+
+<a name="157641103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641103">Patrick Massot (Feb 05 2019 at 21:15)</a>:</h4>
+<p>The main thing is a very simple finite state machine. It's based on functions, so it's functional programming, right? The two main principles are:</p>
+<ul>
+<li>every function should take every opportunity to modify its arguments</li>
+<li>every function should use the state of the environment at the time it was defined</li>
+</ul>
+
+<a name="157641500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641500">Patrick Massot (Feb 05 2019 at 21:21)</a>:</h4>
+<p>Every line from the source file is read, and falls into one of three categories: blank line, normal line and special line. Each reader registers a number of special lines handlers, as in <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L307-L311</a> which is the reader used in my demo. Each handlers has a regex that is match against the current line. If it matches, the handlers has the opportunity to inspect the current state of the file reader, and change it. It particular it will most probably change how normal lines and blank lines will be interpreted. The simplest case is <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/lecture.py#L103-L109</a> which discards the Lean header. Of course it can  say that normal lines will be somehow added to the output, maybe after querying a Lean server for tactic state. Then the collected output is passed to a renderer. The renderer I've defined in <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/renderer.py</a> in based on Jinja2.</p>
+
+<a name="157641612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641612">Patrick Massot (Feb 05 2019 at 21:22)</a>:</h4>
+<p>People who only want to play with the UI can tweak the CSS at <a href="https://github.com/leanprover-community/format_lean/tree/master/sass" target="_blank" title="https://github.com/leanprover-community/format_lean/tree/master/sass">https://github.com/leanprover-community/format_lean/tree/master/sass</a> (you need to know tiny bit if SASS) and the templates at <a href="https://github.com/leanprover-community/format_lean/tree/master/templates" target="_blank" title="https://github.com/leanprover-community/format_lean/tree/master/templates">https://github.com/leanprover-community/format_lean/tree/master/templates</a> (you may need a tiny bit of Jinja2)</p>
+
+<a name="157641872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157641872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157641872">Patrick Massot (Feb 05 2019 at 21:26)</a>:</h4>
+<p>Of course I can try to write proper documentation if someone actually wants to modify all this</p>
+
+<a name="157643822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157643822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157643822">Patrick Massot (Feb 05 2019 at 21:52)</a>:</h4>
+<p>I should use the VScode regex for tactic state highlighting instead of pygment</p>
+
+<a name="157644443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157644443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157644443">Bryan Gin-ge Chen (Feb 05 2019 at 22:02)</a>:</h4>
+<p>VS Code's syntax highlighting uses "textMate" grammars, and when I looked before, I wasn't able to find any standalone syntax colorizers that accept that format. (The online lean demo pages get this functionality via the Monaco editor). I was only looking for JS packages though, it's possible there are some in python.</p>
+
+<a name="157651481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157651481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157651481">Patrick Massot (Feb 05 2019 at 23:44)</a>:</h4>
+<p>I used pygments, which is a python lib (actually I used Gabriel's fork which is more suitable for Lean). But the VScode extension does not use textMate for the tactic state view, see <a href="https://github.com/leanprover/vscode-lean/blob/master/src/infoview.ts#L412-L418" target="_blank" title="https://github.com/leanprover/vscode-lean/blob/master/src/infoview.ts#L412-L418">https://github.com/leanprover/vscode-lean/blob/master/src/infoview.ts#L412-L418</a></p>
+
+<a name="157655450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157655450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157655450">Bryan Gin-ge Chen (Feb 06 2019 at 01:00)</a>:</h4>
+<p>Ah, of course. I missed the most important part "tactic state".</p>
+
+<a name="157929110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157929110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157929110">Kevin Buzzard (Feb 09 2019 at 12:47)</a>:</h4>
+<p>Just to say publically what I said to Patrick yesterday -- on Friday I showed this to some students who I meet weekly and who went to my lectures last term (so know what Lean is) but have no interest in Lean. They were really interested in this though, and wanted more. It's like <a href="https://coq.inria.fr/tutorial-nahas" target="_blank" title="https://coq.inria.fr/tutorial-nahas">this</a> (Coq) but infinitely nicer-looking. I'll try and work on some more of this today. I have a bunch of basic analysis formalised <a href="https://github.com/ImperialCollegeLondon/M1P1-lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean">here</a> and it would be great to get it into Patrick's format.</p>
+
+<a name="157929152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157929152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157929152">Kevin Buzzard (Feb 09 2019 at 12:48)</a>:</h4>
+<p>One of them was complaining that they couldn't follow the proof given by the lecturer for one of the theorems, and I pointed out that this could never happen with a formalised version because you can always chase back.</p>
+
+<a name="157935083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935083">matt rice (Feb 09 2019 at 15:57)</a>:</h4>
+<p>I guess my main quibble with it would be the format, I have been looking at the various 'literate programming' tools around, which take a different approach, instead of encoding the documentation in the source comments, they embed the sources in a documentation format, and then extract the sources. I guess perhaps that would be useful if you wanted to e.g. embed excercises, and extract stand alone snippets from the book.</p>
+
+<a name="157935150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935150">Patrick Massot (Feb 09 2019 at 15:59)</a>:</h4>
+<p>This is really two different point of view on the same thing. In my version the focus is on writing documented Lean code, not writing documentation containing Lean code</p>
+
+<a name="157935192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935192">Kevin Buzzard (Feb 09 2019 at 16:00)</a>:</h4>
+<p>I know nothing about "literate programming" -- I want to write a "book" here, a companion to our undergraduate analysis course at Imperial College which will be part of our new curriculum.</p>
+
+<a name="157935202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935202">Patrick Massot (Feb 09 2019 at 16:00)</a>:</h4>
+<p>In particular my version allows to get the interactivity of Lean while writing.</p>
+
+<a name="157935207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935207">Patrick Massot (Feb 09 2019 at 16:00)</a>:</h4>
+<p>Matt, the thing you want already exists, it's used to write TPIL for instance</p>
+
+<a name="157935271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935271">matt rice (Feb 09 2019 at 16:02)</a>:</h4>
+<p>Patrick: Thanks, will look, i had looked at the sources for Logic &amp; Proof, but hadn't seen a mechanism for extracting the sources from it</p>
+
+<a name="157935339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157935339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157935339">matt rice (Feb 09 2019 at 16:05)</a>:</h4>
+<p>One other thing to note about css, i ran across <a href="https://github.com/edwardtufte/tufte-css" target="_blank" title="https://github.com/edwardtufte/tufte-css">https://github.com/edwardtufte/tufte-css</a> yesterday which looks really nice</p>
+
+<a name="157944527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157944527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157944527">Patrick Massot (Feb 09 2019 at 20:31)</a>:</h4>
+<p>I've added Mardown support. Now any text comment</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"></span>
+<span class="cm">My comment</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>is run through <a href="https://github.com/miyuchina/mistletoe" target="_blank" title="https://github.com/miyuchina/mistletoe">https://github.com/miyuchina/mistletoe</a> I chose this markdown python library a bit at random, let's see if it works</p>
+
+<a name="157945837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157945837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157945837">Patrick Massot (Feb 09 2019 at 21:13)</a>:</h4>
+<p>I just added a command line client, see <a href="https://github.com/leanprover-community/format_lean/blob/master/README.md#usage" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/README.md#usage">https://github.com/leanprover-community/format_lean/blob/master/README.md#usage</a></p>
+
+<a name="157945843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157945843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157945843">Patrick Massot (Feb 09 2019 at 21:14)</a>:</h4>
+<p>Now I'll stop for one week again, waiting for Kevin to write example Lean files.</p>
+
+<a name="157946196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157946196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157946196">Scott Morrison (Feb 09 2019 at 21:24)</a>:</h4>
+<blockquote>
+<p>One of them was complaining that they couldn't follow the proof given by the lecturer for one of the theorems, and I pointed out that this could never happen with a formalised version because you can always chase back.</p>
+</blockquote>
+<p>I'm pretty unconvinced of this. There are many proofs in mathlib which are only human decipherable with enormously more effort than would be required for a good textbook proof, _even if_ you already read Lean well.</p>
+
+<a name="157946211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157946211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157946211">Scott Morrison (Feb 09 2019 at 21:25)</a>:</h4>
+<p>The solution, of course, is for us all to have more time on our hands, and to improvement human comprehensibility of mathlib proofs. :-)</p>
+
+<a name="157946213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157946213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157946213">Scott Morrison (Feb 09 2019 at 21:25)</a>:</h4>
+<p>Increasing expectations of readability would be a reasonable first step.</p>
+
+<a name="157946284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157946284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157946284">Mario Carneiro (Feb 09 2019 at 21:27)</a>:</h4>
+<p>This is another thing I miss with metamath - you can actually say that and be correct. Most proof assistants, including lean, do too much behind the scenes work so that it is not really comprehensible to a human even in relatively simple cases</p>
+
+<a name="157947089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157947089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157947089">Patrick Massot (Feb 09 2019 at 21:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> did you see the proofs we are talking about? There are nothing like mathlib proofs. There are written specifically for students, and heavily commented.</p>
+
+<a name="157947246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157947246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157947246">Scott Morrison (Feb 09 2019 at 21:55)</a>:</h4>
+<p>Absolutely! Those proofs are fantastic. I was only disagreeing with Kevin's suggestion that one could always drill down until you understood everything. Drilling down probably means descending into mathlib, and understanding becomes increasingly difficult.</p>
+
+<a name="157947255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157947255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157947255">Patrick Massot (Feb 09 2019 at 21:55)</a>:</h4>
+<p>Oh yes, you should drill to deep, that's notoriously dangerous</p>
+
+<a name="157949733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157949733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157949733">Kevin Buzzard (Feb 09 2019 at 23:12)</a>:</h4>
+<p>Oh I see what you mean. I have been thinking about this a little -- it would be nice if ultimately we could guide some drilling to the library which will hide all our dirty work (e.g. tactics such as "apply le_max_left &lt;|&gt; linarith") and then put big warning signs in there not to drill any more!</p>
+
+<a name="157952751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157952751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157952751">Chris Hughes (Feb 10 2019 at 00:47)</a>:</h4>
+<p>I'm not convinced hiding dirty work is a good idea for teaching Lean. As soon as someone tries to write their own proof, they'll find they need to know how to do the dirty work. Maybe it is a good idea for teaching analysis though.</p>
+
+<a name="157952793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157952793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157952793">Mario Carneiro (Feb 10 2019 at 00:48)</a>:</h4>
+<p>strong agree on this. If you actually expect to teach people how to use the tool, they have to feel the "typical experience", not the "rose-colored talk version of lean"</p>
+
+<a name="157953934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157953934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157953934">Kevin Buzzard (Feb 10 2019 at 01:24)</a>:</h4>
+<p>This is <em>not</em> a tool for teaching people Lean.</p>
+
+<a name="157953935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157953935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157953935">Kevin Buzzard (Feb 10 2019 at 01:24)</a>:</h4>
+<p>This is a tool for teaching people analysis.</p>
+
+<a name="157953949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157953949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157953949">Kevin Buzzard (Feb 10 2019 at 01:25)</a>:</h4>
+<p>I absolutely agree that you can't teach Lean this way. Neil tried it with his write-ups and I think they're too long and complicated. This is a different thing. This is for students who know no Lean but want to pass a basic analysis exam. The Lean code is intimidating but the tactic state is not. The tactic state, and in particular the goal, often make a lot of sense here.</p>
+
+<a name="157954003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954003">Kevin Buzzard (Feb 10 2019 at 01:26)</a>:</h4>
+<p>If you want to teach mathematicians Lean you have to start with 2+2=4 and (a+b)^2=a^2+2ab+b^2.</p>
+
+<a name="157954013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954013">Kevin Buzzard (Feb 10 2019 at 01:27)</a>:</h4>
+<p>Stuff they learnt at school and can hence assume.</p>
+
+<a name="157954016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954016">Mario Carneiro (Feb 10 2019 at 01:27)</a>:</h4>
+<p>I am not sure about that. The solution to the first one is DTT magic and the second is lean magic</p>
+
+<a name="157954060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954060">Kevin Buzzard (Feb 10 2019 at 01:28)</a>:</h4>
+<p>Well, you have TPIL to teach your tribe how to use Lean. Teaching my tribe is harder and maybe I still haven't worked out how to do it.</p>
+
+<a name="157954064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954064">Mario Carneiro (Feb 10 2019 at 01:28)</a>:</h4>
+<p>examples like that just leave people bewildered as to what just happened</p>
+
+<a name="157954066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954066">Kevin Buzzard (Feb 10 2019 at 01:28)</a>:</h4>
+<p>But I've got 150 feedback forms and I am now convinced that I want to teach people analysis and have Lean ticking away in the background</p>
+
+<a name="157954077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954077">Kevin Buzzard (Feb 10 2019 at 01:29)</a>:</h4>
+<p>We teach people mathematics in high school in a completely non-rigorous way; arguments like limit of sin(x)/x is 1 is proved by "draw a picture". Then students go to university and see how it's done rigorously.</p>
+
+<a name="157954078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954078">Mario Carneiro (Feb 10 2019 at 01:29)</a>:</h4>
+<p>I think it's great for demos, to show that lean has a chance of really getting to the hard problems by making the easy problems easy, but that's not the same thing</p>
+
+<a name="157954133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954133">Mario Carneiro (Feb 10 2019 at 01:30)</a>:</h4>
+<p>I'm quite dubious as to the actual long term success of this approach. The people who last are the ones who dive into the details</p>
+
+<a name="157954148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954148">Kevin Buzzard (Feb 10 2019 at 01:31)</a>:</h4>
+<p>Maths lectures are one level of rigour up. We present proofs which we claim are rigorous, at least most of the time. But arguments are still sometimes handwavey. Chris was told in 2nd year lectures the other day that the proof of some theorem about two integrals being equal was "draw the obvious picture".</p>
+
+<a name="157954154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954154">Mario Carneiro (Feb 10 2019 at 01:31)</a>:</h4>
+<p>For first introductions, you really want to get that spark of interest, and these approaches work well. But after that, once they are committed, you want to step back and do it systematically</p>
+
+<a name="157954196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954196">Mario Carneiro (Feb 10 2019 at 01:32)</a>:</h4>
+<p>you can't handwave at lean, no matter how much you want to</p>
+
+<a name="157954197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954197">Kevin Buzzard (Feb 10 2019 at 01:32)</a>:</h4>
+<p>Maths students don't have enough time to learn Lean properly but I want them to engage with it at some level anyway.</p>
+
+<a name="157954208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954208">Kevin Buzzard (Feb 10 2019 at 01:33)</a>:</h4>
+<p>Just like last year, it's past Christmas and my 1st years realise that in a few months they have a bunch of exams to deal with. I get 6-7 people at Xena and they're all dedicated people who can actually write Lean code. But there are literally 100 other people who would be interested in that web page.</p>
+
+<a name="157954217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954217">Mario Carneiro (Feb 10 2019 at 01:33)</a>:</h4>
+<p>I think for a formalizer or budding formalizer, the most valuable skill is being able to deconstruct a mathematician's argument. When they say draw the obvious picture, draw it, convince yourself, and go back over why you are convinced and work it down to something precise</p>
+
+<a name="157954219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954219">Kevin Buzzard (Feb 10 2019 at 01:33)</a>:</h4>
+<p>I can't make them learn the details of how it all works. But they can see the goals changing and the hypotheses appearing -- that stuff is easy to understand and they have never seen anything like it before.</p>
+
+<a name="157954263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954263">Kevin Buzzard (Feb 10 2019 at 01:34)</a>:</h4>
+<p>I have to work with what I have, and what I have is people who can't get over the learning curve but who i want to engage anyway. This is a good half way house for them; I've tried it and I have had very positive results.</p>
+
+<a name="157954274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954274">Mario Carneiro (Feb 10 2019 at 01:35)</a>:</h4>
+<p>I think it's similar to the difference between a textbook for a foreign language and a phrasebook</p>
+
+<a name="157954319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954319">Kevin Buzzard (Feb 10 2019 at 01:36)</a>:</h4>
+<p>I know exactly who I'm teaching and what I want to teach them -- and at the end of the day, I want to make sure they can do an epsilon-delta argument correctly. That's the important thing. They're paying £9000 or £28000 and at the end of it they have to pass an exam with epsilon-delta questions in. That's what they're interested in.</p>
+
+<a name="157954324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954324">Mario Carneiro (Feb 10 2019 at 01:36)</a>:</h4>
+<p>the phrasebook will help you out on the spot, let you get around, and so on. But it's not building a foundation for the dedicated, and while it's not really harmful you will still need to go back and cover the basics if you decide to go all in</p>
+
+<a name="157954336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954336">Kevin Buzzard (Feb 10 2019 at 01:37)</a>:</h4>
+<p>If they look at the material presented like in Patrick's html file, then at any stage they can see a completely rigorous assertion. This is what many of them need to see at this stage -- because <em>this is what the exam will be in</em>. They want to pass the exam -- that is what they are mainly motivated by. This will teach them what they want to learn.</p>
+
+<a name="157954339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954339">Kevin Buzzard (Feb 10 2019 at 01:37)</a>:</h4>
+<p>I say again -- I am not attempting to teach them Lean.</p>
+
+<a name="157954341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954341">Kevin Buzzard (Feb 10 2019 at 01:37)</a>:</h4>
+<p>I am attempting to show them that Lean can be used as a good learning tool for mathematics.</p>
+
+<a name="157954386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954386">Mario Carneiro (Feb 10 2019 at 01:38)</a>:</h4>
+<p>I am not saying you are doing it wrong, even. There are different learning objectives in play</p>
+
+<a name="157954393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954393">Kevin Buzzard (Feb 10 2019 at 01:38)</a>:</h4>
+<p>They come here from school and they think very vaguely, many of them. They struggle in pure maths. Next year the syllabus is being completely revamped and it will be much harder. The new students next year will need even better teaching materials, and I think I am looking at them in Patrick's html file.</p>
+
+<a name="157954460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954460">Mario Carneiro (Feb 10 2019 at 01:41)</a>:</h4>
+<p>I think the isabelle style statement chaining + heavy automation approach is good as an antidote to vague thinking in that it can spot check your assertions, before you go too far off the rails</p>
+
+<a name="157954523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954523">Mario Carneiro (Feb 10 2019 at 01:42)</a>:</h4>
+<p>For the ones who ask <em>how does math work</em> it's better to have a more explicit metamath style where they can drill down until their heads explode (or they are satisfied, whichever comes first)</p>
+
+<a name="157954531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954531">Mario Carneiro (Feb 10 2019 at 01:43)</a>:</h4>
+<p>right now lean is much closer to the first approach</p>
+
+<a name="157954538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157954538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157954538">Mario Carneiro (Feb 10 2019 at 01:43)</a>:</h4>
+<p>although you can use it in the second way, like TPIL does</p>
+
+<a name="157966624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/157966624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#157966624">Patrick Massot (Feb 10 2019 at 08:44)</a>:</h4>
+<p>I really think we should create that "Lean for teaching" stream in order to clear this confusion.</p>
+
+<a name="158025498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158025498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158025498">Kevin Buzzard (Feb 11 2019 at 12:02)</a>:</h4>
+<p>I got Patrick's formatter working :D <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.html">http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.html</a></p>
+
+<a name="158025526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158025526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158025526">Kevin Buzzard (Feb 11 2019 at 12:03)</a>:</h4>
+<p><a href="/user_uploads/3121/JdAEw2Xqv8OuNgE4Ed86MzG9/sandwich.png" target="_blank" title="sandwich.png">sandwich.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/JdAEw2Xqv8OuNgE4Ed86MzG9/sandwich.png" target="_blank" title="sandwich.png"><img src="/user_uploads/3121/JdAEw2Xqv8OuNgE4Ed86MzG9/sandwich.png"></a></div>
+
+<a name="158026117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026117">Kevin Buzzard (Feb 11 2019 at 12:17)</a>:</h4>
+<p>Source is <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean">http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean</a> -- a Lean file which compiles (for me -- there are local imports)</p>
+
+<a name="158026268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026268">Johan Commelin (Feb 11 2019 at 12:20)</a>:</h4>
+<p>There is weird typesetting in <code>so for all n ≥ N</code></p>
+
+<a name="158026274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026274">Johan Commelin (Feb 11 2019 at 12:21)</a>:</h4>
+<p>Otherwise, this confirms that Patrick created something cool (-;</p>
+
+<a name="158026288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026288">Kevin Buzzard (Feb 11 2019 at 12:21)</a>:</h4>
+<p>Yeah, in the png? I fixed it in the html. I'm still figuring out what one can get away with.</p>
+
+<a name="158026355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026355">Kevin Buzzard (Feb 11 2019 at 12:22)</a>:</h4>
+<p>it confirms that Patrick created something which someone other than Patrick can run, which is a useful thing to know.</p>
+
+<a name="158026376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158026376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158026376">Kevin Buzzard (Feb 11 2019 at 12:23)</a>:</h4>
+<p>Perhaps I won't mention that I had to move my import <code>limits.lean</code> into mathlib to get it to compile <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+
+<a name="158027588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158027588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158027588">Patrick Massot (Feb 11 2019 at 12:49)</a>:</h4>
+<p>Currently the tool allows only one supporting library, but this is easy to fix. First I need to teach RSA, but then I'll fix that tonight</p>
+
+<a name="158064512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158064512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158064512">Scott Morrison (Feb 11 2019 at 20:55)</a>:</h4>
+<p>I wonder if we could extend the usefulness of these non-interactive literate formalisations. Given that the goal state is so helpful for someone following along but perhaps having difficulty seeing what a step achieves, we could try to make the goal state even more understandable. What if we turned every name appearing in the goal state into a hyperlink, that links back to the source code of mathlib where it is defined? (Ideally, this would be a html-ified copy of the source code, that in turn has hyperlinks everywhere.) More complicated, as an optional extra names that have been defined in the current document could be have relative hyperlinks, that revealed that fragment of Lean code.</p>
+
+<a name="158064621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158064621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158064621">Scott Morrison (Feb 11 2019 at 20:56)</a>:</h4>
+<p>Independently, merely having a fully crosslinked html version of the mathlib source code would be pretty helpful. I'm not sure if our current tooling lets us write this, yet.</p>
+
+<a name="158064728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158064728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158064728">Patrick Massot (Feb 11 2019 at 20:58)</a>:</h4>
+<p>In principle this is already possible. I'm a bit hesitant to work on this because it should become much easier with the Lean 4 parser. But, in principle, we can ask Lean for information at every single location of the source file, and create the links</p>
+
+<a name="158068440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158068440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158068440">Patrick Massot (Feb 11 2019 at 21:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I just pushed a new commit adding the possibility to handle full projects (see README). The nice thing is everything setup you need can be read from <code>leanpkg.toml</code> so you can simply go to the root of your project and type <code>format_project</code>. I also added a handler for theorems if lemmas are not good enough for you.</p>
+
+<a name="158081144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158081144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158081144">Reid Barton (Feb 12 2019 at 00:57)</a>:</h4>
+<blockquote>
+<p>In principle this is already possible. I'm a bit hesitant to work on this because it should become much easier with the Lean 4 parser. But, in principle, we can ask Lean for information at every single location of the source file, and create the links</p>
+</blockquote>
+<p>I have a really clunky implementation of this lying around somewhere, I could dig it up at some point</p>
+
+<a name="158103134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103134">Johan Commelin (Feb 12 2019 at 09:13)</a>:</h4>
+<p>Little styling-bug report for Lean formatter (<span class="user-mention" data-user-id="110031">@Patrick Massot</span>). In Kevin's demo: <a href="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html">http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html</a> click on the line "Note that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>≥</mo><msub><mi>N</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">N \ge N_a</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mrel">≥</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>≥</mo><msub><mi>N</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">N \ge N_c</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mrel">≥</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>," in the proof. Then you get two Lean-lines of the same length; but the tactic-state-buttons don't align.</p>
+
+<a name="158103193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103193">Johan Commelin (Feb 12 2019 at 09:14)</a>:</h4>
+<p>Also, low-urgency feature request: Can we get resizable tactic-state window? Like in VScode?</p>
+
+<a name="158103356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103356">Johan Commelin (Feb 12 2019 at 09:17)</a>:</h4>
+<p>Also: I can't get to see "no goals" when I click on the last tactic-state-button of the proof (after <code>split;linarith</code> in Kevin's demo).</p>
+
+<a name="158103549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103549">Mario Carneiro (Feb 12 2019 at 09:21)</a>:</h4>
+<p>Does putting a comma on the last line help with that?</p>
+
+<a name="158103622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103622">Johan Commelin (Feb 12 2019 at 09:22)</a>:</h4>
+<p>Probably, but it would be nice if that is not part of the user manual of Lean-formatter...</p>
+
+<a name="158103639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103639">Johan Commelin (Feb 12 2019 at 09:23)</a>:</h4>
+<p>Anyway, these are pretty low-urgency things, I would say.</p>
+
+<a name="158103649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103649">Mario Carneiro (Feb 12 2019 at 09:23)</a>:</h4>
+<p>I'm sad that I can't click on <code>obvious_ineq</code> to find out what it is</p>
+
+<a name="158103651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103651">Johan Commelin (Feb 12 2019 at 09:23)</a>:</h4>
+<p>Hahaha</p>
+
+<a name="158103657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158103657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158103657">Mario Carneiro (Feb 12 2019 at 09:23)</a>:</h4>
+<p>but I guess I'm not the target audience</p>
+
+<a name="158112230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158112230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158112230">Patrick Massot (Feb 12 2019 at 12:08)</a>:</h4>
+<p>Johan, the two styling issues you mention are straight from the Lean source. The lines that don't line up actually have different length in <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean">http://wwwf.imperial.ac.uk/~buzzard/xena/analysis_stuff/sandwich.lean</a> (one of them ends with spurious spaces). I guess I could strip spaces at the end of lines, but it would remove some of the author liberty. The missing "no goals" comes straight from Lean. Adding a comma at the end of the line in the source would indeed fix that issue. The resizable tactic state is probably possible, I need to study more javascript and css</p>
+
+<a name="158116627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158116627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158116627">Kenny Lau (Feb 12 2019 at 13:23)</a>:</h4>
+<p>feedback from a guinea pig from imperial year 2:</p>
+<blockquote>
+<p>It’s nice / The animations are smooth / But it’s not obvious that you need to press on the definitions to reveal the code / Lines, not definitions / Apart from that, it’s really nice</p>
+</blockquote>
+
+<a name="158655328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/158655328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#158655328">Patrick Massot (Feb 15 2019 at 22:24)</a>:</h4>
+<blockquote>
+<p>One other thing to note about css, i ran across <a href="https://github.com/edwardtufte/tufte-css" target="_blank" title="https://github.com/edwardtufte/tufte-css">https://github.com/edwardtufte/tufte-css</a> yesterday which looks really nice</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="143402">@matt rice</span> I tried it in <a href="http://pat.perso.ens-lyon.org/math114/cours1.html" target="_blank" title="http://pat.perso.ens-lyon.org/math114/cours1.html">http://pat.perso.ens-lyon.org/math114/cours1.html</a> and I agree it looks pretty nice. Here I also used other templates of <code>lean-format</code> to get inlined tactic state. This is part of lecture notes I'm writing for my logic and proof course. The source is at <a href="http://pat.perso.ens-lyon.org/math114/source.html" target="_blank" title="http://pat.perso.ens-lyon.org/math114/source.html">http://pat.perso.ens-lyon.org/math114/source.html</a> for people who want to see how Markdown and LaTeX are handled.</p>
+
+<a name="159197767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159197767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159197767">Patrick Massot (Feb 22 2019 at 22:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I have a new iteration for you: <a href="http://pat.perso.ens-lyon.org/M1P1/" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/">http://pat.perso.ens-lyon.org/M1P1/</a> is your sandwich file, rendered in "no lean proof" mode, only tactic state. It also uses the new tactic state tampering feature, see the <a href="http://pat.perso.ens-lyon.org/M1P1/format.toml" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/format.toml">config file used for this render</a> (beware my Firefox needs to be explicitly told to use UTF8 when opening that file)</p>
+
+<a name="159197974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159197974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159197974">Patrick Massot (Feb 22 2019 at 22:42)</a>:</h4>
+<p>I guess it's clearer if I post the config file here:</p>
+<div class="codehilite"><pre><span></span>templates = &quot;templates&quot;
+js = [&quot;lean_tufte.js&quot;]
+css = [&quot;tufte.css&quot;, &quot;et-book.css&quot;, &quot;with_tufte.css&quot;]
+assets = [&quot;et-book&quot;, &quot;tufte.css&quot;, &quot;et-book.css&quot;]
+outdir = &quot;M1P1&quot;
+only = [&quot;sandwich.lean&quot;]
+tactic_state_filters = [
+  [&#39;is_limit ([^ ]+) ([^ ]+)&#39;, &#39;\1ₙ tends to \2&#39;],
+  [&#39;ℕ → ℝ&#39;, &#39;ℝ-valued sequence&#39;],
+  [&#39;([a-z]) n([ ,\n])&#39;, &#39;\1ₙ\2&#39;],
+  [&#39;no goals&#39;, &#39;Current goal completed!&#39;],
+]
+</pre></div>
+
+<a name="159198031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159198031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159198031">Patrick Massot (Feb 22 2019 at 22:43)</a>:</h4>
+<p>Of course this kind of regex tampering is very brittle, but we won't be able to do much more before Lean 4's customizable pretty printer <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span></p>
+
+<a name="159214605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159214605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159214605">Johan Commelin (Feb 23 2019 at 05:20)</a>:</h4>
+<p>Wow! That looks very slick. Congratulations!</p>
+
+<a name="159214661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159214661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159214661">Johan Commelin (Feb 23 2019 at 05:22)</a>:</h4>
+<p>One little point of feedback. You have joined together the lines in the html output. I agree that this is a good move. But the result is that you have two grey boxes next to each other (1 end-of-line, 1 start-of-line) that have the same resulting tactic state. I think it would be even better if you could merge these boxes into one box.</p>
+
+<a name="159220479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159220479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159220479">Patrick Massot (Feb 23 2019 at 08:34)</a>:</h4>
+<p>Of course one problem is that, in more complicated proofs, those two boxes could lead to different states (in case of subproofs). We would need more examples of formatted proofs actually. Then we'll be able to decide whether something smarter should be done.</p>
+
+<a name="159220683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159220683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159220683">Patrick Massot (Feb 23 2019 at 08:40)</a>:</h4>
+<p>I'd like to also point out that everyone can play with this tool. Modifying CSS and template files doesn't even require any python knowledge</p>
+
+<a name="159861933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159861933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159861933">Mohammad Pedramfar (Mar 03 2019 at 19:44)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> I have a new iteration for you: <a href="http://pat.perso.ens-lyon.org/M1P1/" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/">http://pat.perso.ens-lyon.org/M1P1/</a> is your sandwich file, rendered in "no lean proof" mode, only tactic state. It also uses the new tactic state tampering feature, see the <a href="http://pat.perso.ens-lyon.org/M1P1/format.toml" target="_blank" title="http://pat.perso.ens-lyon.org/M1P1/format.toml">config file used for this render</a> (beware my Firefox needs to be explicitly told to use UTF8 when opening that file)</p>
+</blockquote>
+<p>This looks great! Is this compiled with the latest version on github ? There seems to be some bugs in the code, I couldn't run it.</p>
+
+<a name="159863117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159863117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159863117">Kevin Buzzard (Mar 03 2019 at 20:19)</a>:</h4>
+<p>I completely missed this! That's beautiful Patrick!</p>
+
+<a name="159865146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865146">Patrick Massot (Mar 03 2019 at 21:15)</a>:</h4>
+<p>Yes, I can confirm this builds using the latest version on github. You need to put the config file  I linked to in the project directory</p>
+
+<a name="159865150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865150">Patrick Massot (Mar 03 2019 at 21:15)</a>:</h4>
+<p>oh wait</p>
+
+<a name="159865152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865152">Patrick Massot (Mar 03 2019 at 21:15)</a>:</h4>
+<p>you need more</p>
+
+<a name="159865155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865155">Patrick Massot (Mar 03 2019 at 21:15)</a>:</h4>
+<p>I'm sorry</p>
+
+<a name="159865159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865159">Patrick Massot (Mar 03 2019 at 21:15)</a>:</h4>
+<p>I forgot some pieces</p>
+
+<a name="159865211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865211">Scott Morrison (Mar 03 2019 at 21:16)</a>:</h4>
+<p>A suggestion for this tool --- I can see you're writing the types to give "human friendly" names in places (like "R-valued sequence").</p>
+
+<a name="159865220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865220">Scott Morrison (Mar 03 2019 at 21:17)</a>:</h4>
+<p>I wonder if it might be better to give the human friendly name as a comment after the actual type.</p>
+
+<a name="159865272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865272">Scott Morrison (Mar 03 2019 at 21:18)</a>:</h4>
+<p>This way reading the proof states is still a bridge towards learning Lean, and ensures consistency (I haven't seen an example, but I'm worried that these rewrites might not be uniformly applied when the types appear nested inside something else?)</p>
+
+<a name="159865273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865273">Patrick Massot (Mar 03 2019 at 21:18)</a>:</h4>
+<p>I've put a standalone archive at <a href="http://www.math.u-psud.fr/~pmassot/M1P1.tar.gz" target="_blank" title="http://www.math.u-psud.fr/~pmassot/M1P1.tar.gz">www.math.u-psud.fr/~pmassot/M1P1.tar.gz</a></p>
+
+<a name="159865287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865287">Patrick Massot (Mar 03 2019 at 21:19)</a>:</h4>
+<p>The human friendly type is clearly a horrible hack, waiting for <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span>  pretty-printer</p>
+
+<a name="159865291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865291">Patrick Massot (Mar 03 2019 at 21:19)</a>:</h4>
+<p>currently it's nothing more than a regex search and replace</p>
+
+<a name="159865406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865406">Scott Morrison (Mar 03 2019 at 21:22)</a>:</h4>
+<p>Okay. Even with a better pretty printer, I like the idea of displaying types in a way that can be re-entered in Lean, with read-only versions for humans in comments.</p>
+
+<a name="159865409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865409">Scott Morrison (Mar 03 2019 at 21:22)</a>:</h4>
+<p>In any case, this is cool stuff!</p>
+
+<a name="159865433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865433">Patrick Massot (Mar 03 2019 at 21:23)</a>:</h4>
+<p>This style of rendering is designed to hide Lean as much as possible, there are other choices of templates that display also the Lean statement and proof. It's a different intent.</p>
+
+<a name="159865479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865479">Patrick Massot (Mar 03 2019 at 21:24)</a>:</h4>
+<p>Anyway, if you like this you can use it. If people start using it I'll keep improving it.</p>
+
+<a name="159865493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/159865493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#159865493">Patrick Massot (Mar 03 2019 at 21:25)</a>:</h4>
+<p>Although I'd like to do some actual Lean this week (but I'm stuck until someone understands what happens with <a href="#narrow/stream/116395-maths/topic/uniform.20split/near/159860012" title="#narrow/stream/116395-maths/topic/uniform.20split/near/159860012">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniform.20split/near/159860012</a>)</p>
+
+<a name="163352681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163352681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163352681">Mohammad Pedramfar (Apr 15 2019 at 05:05)</a>:</h4>
+<p>I finally finished adding the interactive component to Lean formatter. The syntax is the same as before and I tried to keep the changes minimal. <a href="https://github.com/mpedramfar/format_lean" target="_blank" title="https://github.com/mpedramfar/format_lean">https://github.com/mpedramfar/format_lean</a>.</p>
+
+<a name="163352759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163352759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163352759">Johan Commelin (Apr 15 2019 at 05:07)</a>:</h4>
+<p>Sounds good! <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span> I'll try to find some time to play around with this. But my time is a bit limited this week <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="163353135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163353135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163353135">Scott Morrison (Apr 15 2019 at 05:18)</a>:</h4>
+<p>I needed to run <code>pip3 install .</code>, not <code>pip install .</code>.</p>
+
+<a name="163353221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163353221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163353221">Scott Morrison (Apr 15 2019 at 05:21)</a>:</h4>
+<div class="codehilite"><pre><span></span>arguta:mathlib scott$ format_project --outdir my_dir
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/format_project&quot;, line 12, in &lt;module&gt;
+    from format_lean.renderer import Renderer
+  File &quot;/usr/local/lib/python3.7/site-packages/format_lean/renderer.py&quot;, line 9, in &lt;module&gt;
+    from pygments.lexers import LeanLexer
+ModuleNotFoundError: No module named &#39;pygments&#39;
+</pre></div>
+
+<a name="163353273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163353273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163353273">Scott Morrison (Apr 15 2019 at 05:22)</a>:</h4>
+<p>After installing Gabriel's fork of <code>pygments</code>, I ran into</p>
+<div class="codehilite"><pre><span></span>arguta:mathlib scott$ format_project --outdir my_dir
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/format_project&quot;, line 23, in &lt;module&gt;
+    from interactive.server import interactive_server
+ModuleNotFoundError: No module named &#39;interactive&#39;
+</pre></div>
+
+
+<p>and will give up at this point. :-)</p>
+
+<a name="163356455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163356455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163356455">Mohammad Pedramfar (Apr 15 2019 at 06:43)</a>:</h4>
+<blockquote>
+<p>I needed to run <code>pip3 install .</code>, not <code>pip install .</code>.</p>
+</blockquote>
+<p>If running pip is not the same as running pip3, then you might be working outside any virtual environment (the default python version of ubuntu is 2.7). This code needs python &gt;= 3.<br>
+I also realised that in "INSTALL.md", in the instructions, I have a link to Patrick's Lean formatter. If you have installed that version of Lean formatter, then it makes sense for it to say it can't find the 'interactive' module. I fixed the typos.</p>
+
+<a name="163357082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163357082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163357082">Scott Morrison (Apr 15 2019 at 06:57)</a>:</h4>
+<p>Yes, I'm just running on a mac, where <code>pip</code> is for the python 2 installation, and <code>pip3</code> is for the python 3. I don't think this is uncommon, and I think it's pretty uniform to have a <code>pip3</code> available, so I'd just suggest changing the instructions to use that.</p>
+
+<a name="163357090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163357090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163357090">Scott Morrison (Apr 15 2019 at 06:57)</a>:</h4>
+<p>So... what do I do to fix this "No module named 'interactive'" problem?</p>
+
+<a name="163361201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163361201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163361201">Mohammad Pedramfar (Apr 15 2019 at 08:15)</a>:</h4>
+<blockquote>
+<p>So... what do I do to fix this "No module named 'interactive'" problem?</p>
+</blockquote>
+<p>I just learned something new about how python installs packages. I'll fix it.</p>
+
+<a name="163361407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163361407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163361407">Kevin Buzzard (Apr 15 2019 at 08:18)</a>:</h4>
+<p>The dream of a fully interactive Lean/LaTeX book gets a step closer :-)</p>
+
+<a name="163403012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/163403012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html#163403012">Mohammad Pedramfar (Apr 15 2019 at 18:18)</a>:</h4>
+<p>I think it should be working smoothly now. The installation process is also more straight-forward. It's a bit hacky, but it should do the job.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

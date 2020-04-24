@@ -1,0 +1,89 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/18368Scopingnotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/18368Scopingnotation.html">Scoping notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182925187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Scoping%20notation/near/182925187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18368Scopingnotation.html#182925187">Eduardo Cavazos (Dec 09 2019 at 05:14)</a>:</h4>
+<p>Chapter 7 mentions how to implement <code>list</code>. Instead of reusing the identifier <code>list</code>, I used <code>List</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden_72</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">inductive</span> <span class="n">List</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Nil</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">List</span>
+<span class="bp">|</span> <span class="n">Cons</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">List</span> <span class="bp">→</span> <span class="n">List</span>
+
+<span class="kn">open</span> <span class="n">List</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">l</span> <span class="o">:</span> <span class="o">(</span><span class="n">foldr</span> <span class="bp">`</span><span class="o">,</span><span class="bp">`</span> <span class="o">(</span><span class="n">h</span> <span class="n">t</span><span class="o">,</span> <span class="n">Cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">Nil</span><span class="o">)</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">l</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="c1">-- [1,2,3,4,5] : List ℕ</span>
+
+<span class="kn">end</span> <span class="n">hidden_72</span>
+</pre></div>
+
+
+<p>In a later namespace, I was surprised to see that the <code>[ ]</code> notation carried over:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden_73</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">[</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">]</span> <span class="c1">-- [10,20,30] : hidden_72.List ℕ</span>
+
+<span class="kn">end</span> <span class="n">hidden_73</span>
+</pre></div>
+
+
+<p>Is there a way to limit the scope of the custom <code>[ ]</code> notation on my <code>List</code> to just namespace <code>hidden_72</code>?</p>
+<p>I.e. in any later separate namespace after <code>hidden_72</code>, I'd like for the <code>[ ]</code> notation to build a <code>list</code>, not a <code>List</code>.</p>
+<p>Thanks!</p>
+
+<a name="182925265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Scoping%20notation/near/182925265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18368Scopingnotation.html#182925265">Simon Hudon (Dec 09 2019 at 05:17)</a>:</h4>
+<p>You can look into <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#localized-notation" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#localized-notation">localized notation</a> in mathlib</p>
+
+<a name="182925471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Scoping%20notation/near/182925471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18368Scopingnotation.html#182925471">Eduardo Cavazos (Dec 09 2019 at 05:23)</a>:</h4>
+<blockquote>
+<p>You can look into <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#localized-notation" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#localized-notation">localized notation</a> in mathlib</p>
+</blockquote>
+<p>Interesting! Thanks <span class="user-mention" data-user-id="110026">@Simon Hudon</span>!</p>
+<p>For anyone curious, the above example converted to use <code>localized</code> looks as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">localized</span>
+
+<span class="kn">namespace</span> <span class="n">hidden_72</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">inductive</span> <span class="n">List</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Nil</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">List</span>
+<span class="bp">|</span> <span class="n">Cons</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">List</span> <span class="bp">→</span> <span class="n">List</span>
+
+<span class="kn">open</span> <span class="n">List</span>
+
+<span class="n">localized</span> <span class="s2">&quot;notation `[` l : (foldr `,` (h t, Cons h t) Nil) `]` := l&quot;</span> <span class="k">in</span> <span class="n">my</span><span class="bp">.</span><span class="n">List</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span> <span class="c1">-- [1,2,3,4,5] : List ℕ</span>
+
+<span class="kn">end</span> <span class="n">hidden_72</span>
+
+
+<span class="kn">namespace</span> <span class="n">hidden_73</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">[</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">]</span> <span class="c1">-- list ℕ</span>
+
+<span class="kn">end</span> <span class="n">hidden_73</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

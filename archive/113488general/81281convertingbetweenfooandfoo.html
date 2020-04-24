@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81281convertingbetweenfooandfoo.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81281convertingbetweenfooandfoo.html">converting between `[foo] and "foo"</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188056230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20between%20%60%5Bfoo%5D%20and%20%22foo%22/near/188056230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81281convertingbetweenfooandfoo.html#188056230">Scott Morrison (Feb 12 2020 at 21:45)</a>:</h4>
+<p>I'm finding myself needing both the <code>pexpr</code>s: <code>`[foo]</code> and <code>"foo"</code>. Does anyone know how to convert in either direction?</p>
+
+<a name="188058555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20between%20%60%5Bfoo%5D%20and%20%22foo%22/near/188058555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81281convertingbetweenfooandfoo.html#188058555">Rob Lewis (Feb 12 2020 at 22:14)</a>:</h4>
+<p>I don't think this is really doable. Check the output of <code>run_cmd trace $ ``(`[simp])</code></p>
+
+<a name="188060811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20between%20%60%5Bfoo%5D%20and%20%22foo%22/near/188060811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81281convertingbetweenfooandfoo.html#188060811">Floris van Doorn (Feb 12 2020 at 22:44)</a>:</h4>
+<p>I think this converts <code>"foo"</code> to <code> `[foo]</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">lean</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">add_hint</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;add_hint&quot;</span><span class="o">))</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">n</span> <span class="err">←</span> <span class="n">parser</span><span class="bp">.</span><span class="n">pexpr</span><span class="o">,</span>
+   <span class="n">n</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">n</span><span class="o">,</span>
+   <span class="n">s</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="n">string</span> <span class="n">n</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">t</span> <span class="o">:=</span> <span class="s2">&quot;`[&quot;</span> <span class="bp">++</span> <span class="n">s</span> <span class="bp">++</span> <span class="s2">&quot;]&quot;</span><span class="o">,</span>
+   <span class="n">t</span> <span class="err">←</span> <span class="n">with_input</span> <span class="n">parser</span><span class="bp">.</span><span class="n">pexpr</span> <span class="n">t</span><span class="o">,</span>
+   <span class="n">trace</span> <span class="n">s</span><span class="o">,</span>
+   <span class="n">trace</span> <span class="n">t</span><span class="o">,</span>
+   <span class="n">skip</span>
+
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">add_hint</span> <span class="s2">&quot;simp&quot;</span>
+</pre></div>
+
+<a name="188126860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20between%20%60%5Bfoo%5D%20and%20%22foo%22/near/188126860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81281convertingbetweenfooandfoo.html#188126860">Scott Morrison (Feb 13 2020 at 17:04)</a>:</h4>
+<p>Thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

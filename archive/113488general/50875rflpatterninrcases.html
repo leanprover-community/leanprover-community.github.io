@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/50875rflpatterninrcases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html">`rfl` pattern in `rcases`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="162101744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162101744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162101744">Scott Morrison (Mar 30 2019 at 03:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, how would you feel about the <code>rfl</code> pattern in <code>rcases</code> trying to <code>dsimp</code> before <code>subst</code>ing? I often find myself unable to use the <code>rfl</code> trick, because it needs to be <code>dsimp</code>ed before <code>subst</code> would accept it.</p>
+
+<a name="162101775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162101775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162101775">Scott Morrison (Mar 30 2019 at 03:33)</a>:</h4>
+<p>Options would be:<br>
+1a) in <code>rcases</code>, always run <code>dsimp</code> on <code>rfl</code> parameters before calling <code>subst</code><br>
+1b) in <code>rcases</code>, try <code>subst</code>, and if it fails call <code>dsimp</code> and try again<br>
+2ab) create <code>subst'</code>, with similar choices</p>
+
+<a name="162102079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102079">Scott Morrison (Mar 30 2019 at 03:42)</a>:</h4>
+<p>1a would just mean</p>
+<div class="codehilite"><pre><span></span>with rcases.continue : listΠ (rcases_patt × expr) → tactic goals
+| [] := get_goals
+| ((rcases_patt.many ids, e) :: l) := do
+  gs ← rcases_core ids e,
+  list.join &lt;$&gt; gs.mmap (λ g, set_goals [g] &gt;&gt; rcases.continue l)
+| ((rcases_patt.one `rfl, e) :: l) := do
+  (t, e) ← get_local_and_type e,
+  (s, _) ← mk_simp_set ff [] [],
+  try ((s.dsimplify [] t) &gt;&gt;= λ t, change_core t (some e)),
+  get_local `rfl &gt;&gt;= subst,
+  rcases.continue l
+-- If the pattern is any other name, we already bound the name in the
+-- top-level `cases` tactic, so there is no more work to do for it.
+| (_ :: l) := rcases.continue l
+</pre></div>
+
+<a name="162102219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102219">Kenny Lau (Mar 30 2019 at 03:46)</a>:</h4>
+<p><code>dsimp only</code></p>
+
+<a name="162102711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102711">Scott Morrison (Mar 30 2019 at 04:01)</a>:</h4>
+<p>?</p>
+
+<a name="162102755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162102755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162102755">Scott Morrison (Mar 30 2019 at 04:02)</a>:</h4>
+<p>What does dsimp only have to do with what I was talking about?</p>
+
+<a name="162103871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162103871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162103871">Johan Commelin (Mar 30 2019 at 04:35)</a>:</h4>
+<p>Hmmm: What happens if you <code>dsimp</code> the <code>rfl</code> pattern, but not the other assumptions/goal? Does that bring the risk that the <code>subst</code> still fails (or fails to do the expected thing)?</p>
+
+<a name="162107050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107050">Mario Carneiro (Mar 30 2019 at 06:10)</a>:</h4>
+<p>There are two methods: you can either use <code>⟨⟩</code> or <code>rfl</code> to case on an equality. <code>rfl</code> uses <code>subst</code> and <code>⟨⟩</code> uses <code>cases</code>, and they work in different circumstances. This wasn't entirely intentional, but I hesitate to try to make one of them play both functions now</p>
+
+<a name="162107171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107171">Johan Commelin (Mar 30 2019 at 06:15)</a>:</h4>
+<p>I do think that it is maybe hard to guess what <code>\&lt;&gt;</code> does, if you don't know it. It might be a bit surprising...</p>
+
+<a name="162107728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162107728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162107728">Scott Morrison (Mar 30 2019 at 06:31)</a>:</h4>
+<p>Yes, I know those two methods. But often neither works, and I'm proposing to make <code>rfl</code> work a little bit harder.</p>
+
+<a name="162108138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162108138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162108138">Mario Carneiro (Mar 30 2019 at 06:43)</a>:</h4>
+<p>I think <code>subst'</code> is the best plan. The biggest issue is that <code>subst</code> has an overly restrictive validity check</p>
+
+<a name="162108185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162108185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162108185">Mario Carneiro (Mar 30 2019 at 06:44)</a>:</h4>
+<p>Do you have a simple example of <code>subst</code> failure?</p>
+
+<a name="162112502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112502">Scott Morrison (Mar 30 2019 at 09:01)</a>:</h4>
+<p>There are two ways that I know of that <code>subst</code> can "fail".<br>
+1) is just that you need to <code>dsimp</code> the hypothesis first<br>
+2) is a bit more complicated: <code>subst</code> is meant to not mind whether you give it <code>x = t</code> or <code>t = x</code>, but I can dig up some examples where it fails, but sticking in a <code>.symm</code> would make it work.</p>
+
+<a name="162112515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112515">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>Typical examples of 1) are having a hypothesis <code>h : (a,b).1 = (c,d).1</code>.</p>
+
+<a name="162112550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112550">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>So you have to write <code>dsimp at h, subst h</code>, to get the desired effect. (And this prevents using <code>rfl</code> in <code>rcases</code>.)</p>
+
+<a name="162112552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112552">Scott Morrison (Mar 30 2019 at 09:02)</a>:</h4>
+<p>In fact, I managed to write a proof that ran into this issue in three separate places in the same proof.</p>
+
+<a name="162112567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20pattern%20in%20%60rcases%60/near/162112567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50875rflpatterninrcases.html#162112567">Scott Morrison (Mar 30 2019 at 09:03)</a>:</h4>
+<p>e.g. <a href="https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36">https://github.com/leanprover-community/mathlib/pull/820/files#diff-ad1bfc3bc394b15d391d068b78b04a42R36</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

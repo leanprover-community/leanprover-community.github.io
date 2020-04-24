@@ -1,0 +1,154 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/06346AdventofcodeinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html">Advent of code in Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182304794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182304794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182304794">Frank Dai (Dec 01 2019 at 23:18)</a>:</h4>
+<p>Hello Lean Zulip chat,</p>
+<p>I am trying to do the advent of code (<a href="https://adventofcode.com/" target="_blank" title="https://adventofcode.com/">https://adventofcode.com/</a>) in Lean. I've gotten the code for part 1 written, I'm just trying to figure out how to do IO. There seems to be some functions for doing file IO (<a href="https://github.com/leanprover/lean/blob/master/library/system/io.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/system/io.lean">https://github.com/leanprover/lean/blob/master/library/system/io.lean</a>), but then I realized I have no idea how to parse a char_buffer into a \N. Is there some sort of standard library function for parsing numbers, or will I need to roll my own?</p>
+
+<a name="182305130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182305130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182305130">Bryan Gin-ge Chen (Dec 01 2019 at 23:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> did a few of last year's problems in Lean (<a href="https://github.com/digama0/advent-of-code" target="_blank" title="https://github.com/digama0/advent-of-code">repo here</a>). It looks like he used core Lean's <a href="https://github.com/leanprover-community/lean/blob/master/library/data/buffer/parser.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/data/buffer/parser.lean"><code>data.buffer.parser</code></a> functions <a href="https://github.com/digama0/advent-of-code/blob/lean-3.4.1/common.lean" target="_blank" title="https://github.com/digama0/advent-of-code/blob/lean-3.4.1/common.lean">in his code here</a>.</p>
+
+<a name="182305272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182305272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182305272">Frank Dai (Dec 01 2019 at 23:33)</a>:</h4>
+<p>Thanks for the information, I got it!</p>
+
+<a name="182389643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182389643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182389643">Elvorfirilmathredia (Dec 02 2019 at 21:06)</a>:</h4>
+<p>This is what I have for the first day. It's not pretty and there is one 'sorry' ... so suggestions on how to improve this are quite welcome <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">list</span> <span class="n">io</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">append_line</span> <span class="o">:</span> <span class="n">io</span> <span class="o">(</span><span class="n">list</span> <span class="n">string</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">io</span> <span class="o">(</span><span class="n">list</span> <span class="n">string</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">λ</span> <span class="n">ml</span> <span class="n">i</span><span class="o">,</span> <span class="n">do</span> <span class="n">l</span> <span class="bp">&lt;-</span> <span class="n">ml</span><span class="o">,</span>
+             <span class="n">x</span> <span class="bp">&lt;-</span> <span class="n">get_line</span><span class="o">,</span>
+             <span class="n">return</span> <span class="o">(</span><span class="n">append</span> <span class="n">l</span> <span class="o">[</span><span class="n">x</span><span class="o">])</span>
+
+<span class="n">def</span> <span class="n">fuel</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">/</span> <span class="mi">3</span> <span class="bp">-</span> <span class="mi">2</span>
+
+<span class="kn">lemma</span> <span class="n">fuel_wf</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">additional_fuel</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+  <span class="bp">|</span> <span class="n">m</span> <span class="o">:=</span>
+    <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="k">then</span>
+      <span class="k">have</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span>
+        <span class="k">from</span> <span class="n">fuel_wf</span> <span class="n">m</span> <span class="n">h</span><span class="o">,</span>
+        <span class="n">fuel</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">additional_fuel</span> <span class="o">(</span><span class="n">fuel</span> <span class="n">m</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="mi">0</span>
+
+<span class="n">def</span> <span class="n">total_fuel</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">):=</span> <span class="k">let</span> <span class="n">fm</span> <span class="o">:=</span> <span class="n">fuel</span> <span class="n">m</span> <span class="k">in</span> <span class="n">fm</span> <span class="bp">+</span> <span class="n">additional_fuel</span> <span class="n">fm</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span> <span class="n">lines</span> <span class="bp">&lt;-</span> <span class="o">(</span><span class="n">foldl</span> <span class="n">append_line</span><span class="o">)</span> <span class="o">(</span><span class="n">return</span> <span class="o">[])</span> <span class="o">(</span><span class="n">range</span> <span class="mi">100</span><span class="o">),</span>
+         <span class="n">fuel</span> <span class="bp">&lt;-</span> <span class="n">return</span> <span class="err">$</span> <span class="n">sum</span> <span class="err">$</span> <span class="n">map</span> <span class="o">(</span><span class="n">total_fuel</span> <span class="err">∘</span> <span class="n">string</span><span class="bp">.</span><span class="n">to_nat</span><span class="o">)</span> <span class="n">lines</span><span class="o">,</span>
+         <span class="n">put_str_ln</span> <span class="err">∘</span> <span class="n">to_string</span> <span class="err">$</span> <span class="n">fuel</span>
+</pre></div>
+
+<a name="182391359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182391359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182391359">Patrick Massot (Dec 02 2019 at 21:21)</a>:</h4>
+<p>Isn't this sorry a new test for <code>omega</code>?</p>
+
+<a name="182395519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182395519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182395519">Elvorfirilmathredia (Dec 02 2019 at 22:11)</a>:</h4>
+<blockquote>
+<p>Isn't this sorry a new test for <code>omega</code>?</p>
+</blockquote>
+<p>Hm, I can indeed solve <code>m &lt; 3 * (m+2)</code> with <code>omega</code>, which leaves me with</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fuel_wf</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="mi">3</span> <span class="bp">*</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">),</span>
+    <span class="n">sorry</span><span class="o">,</span>
+
+  <span class="n">omega</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p><del>Sadly I don't even know how to use the definitional equality <code>fuel m = m/3 - 2</code> <span aria-label="sweat" class="emoji emoji-1f613" role="img" title="sweat">:sweat:</span> I just recently finished the natural number game ...</del> I think I can take it from there</p>
+
+<a name="182395995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182395995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182395995">Mario Carneiro (Dec 02 2019 at 22:16)</a>:</h4>
+<p>If you are doing advent of code, you don't need to worry about termination, so you can mark <code>additional_fuel</code> as <code>meta</code> and delete the <code>have</code></p>
+
+<a name="182396107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182396107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182396107">Elvorfirilmathredia (Dec 02 2019 at 22:18)</a>:</h4>
+<blockquote>
+<p>If you are doing advent of code, you don't need to worry about termination, so you can mark <code>additional_fuel</code> as <code>meta</code> and delete the <code>have</code></p>
+</blockquote>
+<p>I know, but where's the fun in that? <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="182397344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182397344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182397344">Patrick Massot (Dec 02 2019 at 22:35)</a>:</h4>
+<p>Sadly <code>m &lt; 3 * (m + 2)</code> is much easier to prove than your goal (and <code>linarith</code> probably does it as well). What you found is the worst part of Lean: nat subtraction hell.</p>
+
+<a name="182397412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182397412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182397412">Patrick Massot (Dec 02 2019 at 22:36)</a>:</h4>
+<p>Unfortunately we still don't have a tactic handling that.</p>
+
+<a name="182397741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182397741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182397741">Patrick Massot (Dec 02 2019 at 22:41)</a>:</h4>
+<p>Actually it may start even before that. Are you sure you actually understand what is <code>m/3</code> in your code? (hint: it's a natural number, not a rational number).</p>
+
+<a name="182397874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182397874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182397874">Bryan Gin-ge Chen (Dec 02 2019 at 22:43)</a>:</h4>
+<p>This is a rare instance where getting a nat from division is actually desired: <a href="https://adventofcode.com/2019/day/1" target="_blank" title="https://adventofcode.com/2019/day/1">https://adventofcode.com/2019/day/1</a></p>
+
+<a name="182398187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182398187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182398187">Patrick Massot (Dec 02 2019 at 22:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">fuel</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">/</span> <span class="mi">3</span> <span class="bp">-</span> <span class="mi">2</span>
+
+<span class="kn">lemma</span> <span class="n">fuel_wf</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">9</span> <span class="bp">≤</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">≤</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_div_iff_mul_le</span> <span class="bp">;</span> <span class="n">linarith</span> <span class="o">},</span>
+  <span class="n">erw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_lt_left_iff_lt_add</span><span class="o">,</span>
+  <span class="n">conv_rhs</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">m</span> <span class="mi">3</span> <span class="o">},</span>
+  <span class="n">all_goals</span> <span class="o">{</span> <span class="n">linarith</span>  <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I really don't know why I did this, probably fear of not finding sleep if I go to bed...</p>
+
+<a name="182652472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652472">Elvorfirilmathredia (Dec 05 2019 at 12:02)</a>:</h4>
+<p>Nice, thanks a lot! I tried to do it myself and ended up with the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fuel_wf</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span><span class="n">apply</span> <span class="n">div_lt_self</span> <span class="n">h</span> <span class="bp">_;</span> <span class="n">linarith</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span><span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_le_self</span> <span class="o">(</span><span class="n">m</span><span class="bp">/</span><span class="mi">3</span><span class="o">)</span> <span class="mi">2</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="n">fuel</span><span class="o">,</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Somehow I had a hard time finding <code>sub_le_self</code> ... I also had to prefix it with <code>nat.</code> because otherwise lean tried to use the one for ordered commutative groups, which obviously does not work for nat.</p>
+
+<a name="182652716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652716">Rob Lewis (Dec 05 2019 at 12:06)</a>:</h4>
+<p>It's a bug that <code>m/3 - 2 ≤ m/3</code> isn't <code>by omega</code>. Hopefully we get this fixed soon.</p>
+
+<a name="182652732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652732">Rob Lewis (Dec 05 2019 at 12:06)</a>:</h4>
+<p><code>norm_num</code> is more appropriate than <code>linarith</code> in the first <code>have</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

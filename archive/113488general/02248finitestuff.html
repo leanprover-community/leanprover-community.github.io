@@ -1,0 +1,628 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/02248finitestuff.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html">finite stuff</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193302377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193302377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193302377">Patrick Massot (Apr 08 2020 at 10:58)</a>:</h4>
+<p>I'm really bad at manipulating finite sets in Lean. This is frustrating because everything about finite sets seem obvious. I'd be very grateful if someone could prove the following lemmas (the second one has the same assumption but a more precise conclusion):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">finite_stuff</span>  <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">finite_stuff&#39;</span> <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">σ</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">|</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">}</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+ <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">finite</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>Of course I'm also interested if someone explains those lemmas should be stated like this and will be a pain to use.</p>
+
+<a name="193303653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193303653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193303653">Johan Commelin (Apr 08 2020 at 11:09)</a>:</h4>
+<p>This reminds me of <a href="https://github.com/leanprover-community/mathlib/blob/51553e36ff9ae93ee4fbfb05a39e5d04c71be565/src/linear_algebra/finsupp.lean#L434" title="https://github.com/leanprover-community/mathlib/blob/51553e36ff9ae93ee4fbfb05a39e5d04c71be565/src/linear_algebra/finsupp.lean#L434">https://github.com/leanprover-community/mathlib/blob/51553e36ff9ae93ee4fbfb05a39e5d04c71be565/src/linear_algebra/finsupp.lean#L434</a></p>
+
+<a name="193304014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193304014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193304014">Johan Commelin (Apr 08 2020 at 11:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> I think the statements are fine. (Maybe I would use <code>t : finset _</code>... To prove this, I would do something like</p>
+<div class="codehilite"><pre><span></span>  <span class="k">have</span> <span class="o">:</span> <span class="err">\</span><span class="k">forall</span> <span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">),</span> <span class="err">\</span><span class="n">ex</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span> <span class="err">\</span><span class="k">in</span> <span class="n">s</span> <span class="n">i</span><span class="o">,</span>
+  <span class="n">choose</span> <span class="n">this</span> <span class="kn">using</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">I</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">t</span><span class="o">,</span>
+</pre></div>
+
+
+<p>modulo minor tweaks</p>
+
+<a name="193304740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193304740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193304740">Kevin Buzzard (Apr 08 2020 at 11:20)</a>:</h4>
+<p>apparently Lean can't synthesize decidable equality on iota. I am assuming that this isn't an issue for Patrick...</p>
+
+<a name="193304995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193304995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193304995">Kevin Buzzard (Apr 08 2020 at 11:23)</a>:</h4>
+<p><code>example (α : Type*) (t : set α) [finite t] : fintype t := by apply_instance -- fails</code></p>
+
+<a name="193305132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305132">Mario Carneiro (Apr 08 2020 at 11:24)</a>:</h4>
+<p>I think you can do cases on the proof of <code>finite t</code></p>
+
+<a name="193305143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305143">Mario Carneiro (Apr 08 2020 at 11:25)</a>:</h4>
+<p>is <code>finite</code> even a typeclass?</p>
+
+<a name="193305177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305177">Kevin Buzzard (Apr 08 2020 at 11:25)</a>:</h4>
+<p>no it isn't -- sorry. But still...</p>
+
+<a name="193305204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305204">Mario Carneiro (Apr 08 2020 at 11:25)</a>:</h4>
+<p>yeah, it's defined as <code>nonempty (fintype t)</code> so just pop it open and use <code>resetI</code></p>
+
+<a name="193305302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305302">Kevin Buzzard (Apr 08 2020 at 11:26)</a>:</h4>
+<p>It's great that to prove this triviality I need to unfreeze local instances :-)</p>
+
+<a name="193305335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305335">Mario Carneiro (Apr 08 2020 at 11:27)</a>:</h4>
+<p>hey, you're the one that wants to use instances that aren't present in the statement</p>
+
+<a name="193305357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305357">Mario Carneiro (Apr 08 2020 at 11:27)</a>:</h4>
+<p>it's not needed for the statement and I'm not sure how it's being used in the proof</p>
+
+<a name="193305536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305536">Kevin Buzzard (Apr 08 2020 at 11:29)</a>:</h4>
+<p>stupid mum_bUnion_iff wants the term to be in a set, not a finset :-)</p>
+
+<a name="193305600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305600">Kevin Buzzard (Apr 08 2020 at 11:30)</a>:</h4>
+<p>How come <code>mem_Union</code> is an iff and <code>mem_bUnion</code> isn't?</p>
+
+<a name="193305884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305884">Mario Carneiro (Apr 08 2020 at 11:33)</a>:</h4>
+<p>probably because <code>mem_bUnion</code> is too old</p>
+
+<a name="193305902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305902">Kevin Buzzard (Apr 08 2020 at 11:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_stuff</span>  <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">t</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">i</span><span class="o">,</span>
+    <span class="n">rintros</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rcases</span> <span class="n">h</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">choose</span> <span class="n">f</span> <span class="n">hf</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">unfreeze_local_instances</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">tfin</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">finset</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_Union</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">f</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_Union</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">,</span>
+  <span class="n">use</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193305929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193305929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193305929">Kevin Buzzard (Apr 08 2020 at 11:33)</a>:</h4>
+<p>That bit at the end could use some tidying</p>
+
+<a name="193306018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193306018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193306018">Mario Carneiro (Apr 08 2020 at 11:34)</a>:</h4>
+<p>it looks like a term mode proof written vertically</p>
+
+<a name="193306035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193306035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193306035">Kevin Buzzard (Apr 08 2020 at 11:34)</a>:</h4>
+<p>that's how I roll</p>
+
+<a name="193306042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193306042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193306042">Kevin Buzzard (Apr 08 2020 at 11:34)</a>:</h4>
+<p>you should see my codewars solutions</p>
+
+<a name="193306513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193306513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193306513">Kevin Buzzard (Apr 08 2020 at 11:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> in the second one, why not have sigma mapping to finset alpha? it's <code>finset.unbind</code> then :-)</p>
+
+<a name="193306991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193306991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193306991">Kevin Buzzard (Apr 08 2020 at 11:45)</a>:</h4>
+<p>Did someone find a proof of <code>finite t -&gt; finite s \cap t</code>?</p>
+
+<a name="193307309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193307309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193307309">Kevin Buzzard (Apr 08 2020 at 11:48)</a>:</h4>
+<p>There should be a <code>mem_fUnion</code></p>
+
+<a name="193307331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193307331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193307331">Kevin Buzzard (Apr 08 2020 at 11:48)</a>:</h4>
+<p>or possibly a mem_fUnion_iff...</p>
+
+<a name="193307549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193307549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193307549">Kevin Buzzard (Apr 08 2020 at 11:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_stuff&#39;</span> <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">σ</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">|</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">}</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+ <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">finite</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">finite_stuff</span> <span class="n">tfin</span> <span class="n">h</span> <span class="k">with</span> <span class="n">I</span> <span class="n">hI</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">I</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">s</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∩</span> <span class="n">t</span><span class="o">),</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span> <span class="n">sorry</span><span class="o">},</span> <span class="c1">-- finite t → finite s ∩ t</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span> <span class="n">apply</span> <span class="n">inter_subset_left</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">hI</span> <span class="o">:=</span> <span class="n">hI</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span> <span class="n">at</span> <span class="n">hI</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hI</span> <span class="k">with</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span> <span class="n">at</span> <span class="n">hi</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hi</span> <span class="k">with</span> <span class="n">hi</span> <span class="n">hsi</span><span class="o">,</span>
+    <span class="n">use</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">hsi</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hx</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm not sure this is mathlib-ready &lt;/sarcasm&gt;, and I assumed finite t -&gt; finite s \cap t, but if it's just something you need now then there it is</p>
+
+<a name="193307595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193307595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193307595">Kevin Buzzard (Apr 08 2020 at 11:51)</a>:</h4>
+<p>I'm not sure these are term mode proofs really, because of the occasional rw mem_Union.</p>
+
+<a name="193307698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193307698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193307698">Kevin Buzzard (Apr 08 2020 at 11:52)</a>:</h4>
+<p>The proof of <code>mem_Union</code> doesn't seem to be rfl</p>
+
+<a name="193311706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193311706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193311706">Mario Carneiro (Apr 08 2020 at 12:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_stuff&#39;</span> <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">σ</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">I</span><span class="o">:</span><span class="n">set</span> <span class="n">ι</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+ <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">finite</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">finite_stuff</span> <span class="n">tfin</span> <span class="n">h</span> <span class="k">with</span> <span class="n">I</span> <span class="n">hI</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">I</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">s</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∩</span> <span class="n">t</span><span class="o">),</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finite_subset</span> <span class="n">tfin</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">inter_subset_right</span> <span class="o">},</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span> <span class="n">apply</span> <span class="n">inter_subset_left</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">hI</span> <span class="o">:=</span> <span class="n">hI</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span> <span class="n">at</span> <span class="n">hI</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hI</span> <span class="k">with</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span> <span class="n">at</span> <span class="n">hi</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">hi</span> <span class="k">with</span> <span class="n">hi</span> <span class="n">hsi</span><span class="o">,</span>
+    <span class="n">use</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">hsi</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">hx</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193312162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193312162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193312162">Patrick Massot (Apr 08 2020 at 12:36)</a>:</h4>
+<p>Than you very much Kevin and Mario!</p>
+
+<a name="193312227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193312227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193312227">Patrick Massot (Apr 08 2020 at 12:36)</a>:</h4>
+<p>Mario, do you think we are missing intermediate lemmas here? It looks like a very long proof for such an obvious fact.</p>
+
+<a name="193313280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313280">Mario Carneiro (Apr 08 2020 at 12:45)</a>:</h4>
+<p>here's kevin's proof in term mode:</p>
+<div class="codehilite"><pre><span></span><span class="bp">```</span><span class="n">lean</span>
+<span class="kn">lemma</span> <span class="n">finite_stuff&#39;</span> <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">σ</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">I</span><span class="o">:</span><span class="n">set</span> <span class="n">ι</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+ <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">finite</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">I</span><span class="o">,</span> <span class="n">hI</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">finite_stuff</span> <span class="n">tfin</span> <span class="n">h</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">I</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">s</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∩</span> <span class="n">t</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">finite_subset</span> <span class="n">tfin</span> <span class="o">(</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">mem_Union</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span>
+    <span class="k">let</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="o">,</span> <span class="n">hsi</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">mem_bUnion_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">hI</span> <span class="n">hx</span><span class="o">)</span> <span class="k">in</span>
+    <span class="bp">⟨⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">hsi</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+<a name="193313327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313327">Kevin Buzzard (Apr 08 2020 at 12:45)</a>:</h4>
+<p>Nice :-)</p>
+
+<a name="193313402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313402">Mario Carneiro (Apr 08 2020 at 12:46)</a>:</h4>
+<p>although I did swap in the use of <code>mem_bUnion_iff</code></p>
+
+<a name="193313506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313506">Kevin Buzzard (Apr 08 2020 at 12:47)</a>:</h4>
+<p>To do that I would have had to understand how supr was implemented and I couldn't be bothered to dig</p>
+
+<a name="193313554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313554">Mario Carneiro (Apr 08 2020 at 12:47)</a>:</h4>
+<p>I don't think this is an unreasonably long proof, given the complexity of the statement itself. Once you set the logical manipulation aside the only actually interesting part is the last 3 lines of my version of the proof</p>
+
+<a name="193313649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313649">Mario Carneiro (Apr 08 2020 at 12:48)</a>:</h4>
+<p>I ctrl-clicked on <code>mem_bUnion</code> and looked for neighbors</p>
+
+<a name="193313663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313663">Mario Carneiro (Apr 08 2020 at 12:48)</a>:</h4>
+<p>it was two lemmas previous</p>
+
+<a name="193313937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313937">Patrick Massot (Apr 08 2020 at 12:50)</a>:</h4>
+<p>Do you think we should keep both version <code>finite_stuff</code> and <code>finite_stuff'</code>?</p>
+
+<a name="193313955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193313955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193313955">Patrick Massot (Apr 08 2020 at 12:50)</a>:</h4>
+<p>(with better names of course)</p>
+
+<a name="193314080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314080">Mario Carneiro (Apr 08 2020 at 12:51)</a>:</h4>
+<p>If you find it useful, I don't see why not</p>
+
+<a name="193314226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314226">Mario Carneiro (Apr 08 2020 at 12:52)</a>:</h4>
+<p>I usually try to find an appropriate constructive analogue for these sorts of things, that is, a function with the stated properties, since existentials have to be unpacked and lack global coherence of choices</p>
+
+<a name="193314383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314383">Patrick Massot (Apr 08 2020 at 12:53)</a>:</h4>
+<p>In my question the first lemma was really meant as training for the second one.</p>
+
+<a name="193314412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314412">Patrick Massot (Apr 08 2020 at 12:53)</a>:</h4>
+<p>I want to use only the second one.</p>
+
+<a name="193314520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314520">Patrick Massot (Apr 08 2020 at 12:54)</a>:</h4>
+<p>If you can turn this lemma into a function that would be even better of course.</p>
+
+<a name="193314569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314569">Patrick Massot (Apr 08 2020 at 12:54)</a>:</h4>
+<p>(in order to avoid unpacking the existential)</p>
+
+<a name="193314694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314694">Mario Carneiro (Apr 08 2020 at 12:55)</a>:</h4>
+<p>I feel like there is a simpler core underlying principle here</p>
+
+<a name="193314771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314771">Patrick Massot (Apr 08 2020 at 12:55)</a>:</h4>
+<p>That was my question about missing lemmas.</p>
+
+<a name="193314914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193314914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193314914">Mario Carneiro (Apr 08 2020 at 12:56)</a>:</h4>
+<p>like, you can swap forall and exists a la skolemization for finite sets</p>
+
+<a name="193315183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193315183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193315183">Sebastien Gouezel (Apr 08 2020 at 12:58)</a>:</h4>
+<p>In the conclusion of <code>finite_stuff'</code>, it would be better to replace <code>t ⊆ ⋃ i, σ i</code>with <code>t = ⋃ i, σ i</code>.</p>
+
+<a name="193315232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193315232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193315232">Patrick Massot (Apr 08 2020 at 12:59)</a>:</h4>
+<p>I didn't need this, but feel free to prove that stronger version!</p>
+
+<a name="193315302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193315302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193315302">Mario Carneiro (Apr 08 2020 at 12:59)</a>:</h4>
+<p>what do you think of this formulation:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_stuff&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ι</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">t</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="193315868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193315868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193315868">Patrick Massot (Apr 08 2020 at 13:03)</a>:</h4>
+<p>That certainly looks cleaner. Can you prove it and deduce Sébastien's version of the original question?</p>
+
+<a name="193316048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316048">Mario Carneiro (Apr 08 2020 at 13:04)</a>:</h4>
+<p>I think it's not quite enough to get the second version of the statement</p>
+
+<a name="193316639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316639">Kevin Buzzard (Apr 08 2020 at 13:08)</a>:</h4>
+<p>Do we have an equiv e between finset X and Pi (s : set X), finite s, and the lemma that for x : X, x \in s iff x \in e s?</p>
+
+<a name="193316655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316655">Mario Carneiro (Apr 08 2020 at 13:08)</a>:</h4>
+<p>Hey, isn't this just the collection principle from zfc?</p>
+
+<a name="193316706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316706">Kevin Buzzard (Apr 08 2020 at 13:09)</a>:</h4>
+<p>All I know is that it's a mathematical triviality so it wouldn't surprise me if the logicians called it a principle</p>
+
+<a name="193316810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316810">Mario Carneiro (Apr 08 2020 at 13:10)</a>:</h4>
+<p>I'm thinking of the version where you replace "finite" with "is a set" and depending on how you set things up it might be a theorem or an axiom</p>
+
+<a name="193316840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316840">Kevin Buzzard (Apr 08 2020 at 13:10)</a>:</h4>
+<p>Like most principles</p>
+
+<a name="193316860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316860">Mario Carneiro (Apr 08 2020 at 13:10)</a>:</h4>
+<p>it's essentially a souped up version of replacement without the assumption that the relation is a function</p>
+
+<a name="193316919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316919">Kevin Buzzard (Apr 08 2020 at 13:11)</a>:</h4>
+<p>Replacement says the image of a set is a set</p>
+
+<a name="193316932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316932">Mario Carneiro (Apr 08 2020 at 13:11)</a>:</h4>
+<p>right</p>
+
+<a name="193316947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316947">Mario Carneiro (Apr 08 2020 at 13:11)</a>:</h4>
+<p>here it's the image under a relation</p>
+
+<a name="193316969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316969">Kevin Buzzard (Apr 08 2020 at 13:11)</a>:</h4>
+<p>A relation on X</p>
+
+<a name="193316974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193316974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193316974">Mario Carneiro (Apr 08 2020 at 13:11)</a>:</h4>
+<p>and it's not really an image because you can take a subset</p>
+
+<a name="193317009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317009">Mario Carneiro (Apr 08 2020 at 13:11)</a>:</h4>
+<p>but you have to preserve "enough" of the original relation</p>
+
+<a name="193317416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317416">Kevin Buzzard (Apr 08 2020 at 13:14)</a>:</h4>
+<p>is_monoid_hom f is unbundled monoid homs and it's a class. monoid_hom is bundled and it's a structure</p>
+
+<a name="193317491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317491">Kevin Buzzard (Apr 08 2020 at 13:15)</a>:</h4>
+<p>finite s is unbundled finiteness and it's a structure. finset is bundled and a structure</p>
+
+<a name="193317498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317498">Patrick Massot (Apr 08 2020 at 13:15)</a>:</h4>
+<p>Do we have a version <code>sInter s</code> when <code>s : finset (set X)</code>? This is why I used <code>finite</code> everywhere instead of <code>finset</code>.</p>
+
+<a name="193317566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317566">Kevin Buzzard (Apr 08 2020 at 13:15)</a>:</h4>
+<p>I mentioned fUnion earlier (which doesn't exist)</p>
+
+<a name="193317581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317581">Patrick Massot (Apr 08 2020 at 13:15)</a>:</h4>
+<p>I know I can write <code>⋂₀ s.to_set</code> but it looks silly.</p>
+
+<a name="193317681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317681">Mario Carneiro (Apr 08 2020 at 13:16)</a>:</h4>
+<p>you can use the coercion as I did above</p>
+
+<a name="193317807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317807">Mario Carneiro (Apr 08 2020 at 13:17)</a>:</h4>
+<p>If we did have something like that, I would prefer it generalize to lattices. I would call it <code>finset.inf</code></p>
+
+<a name="193317883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317883">Mario Carneiro (Apr 08 2020 at 13:18)</a>:</h4>
+<p>ok hey look what I found</p>
+
+<a name="193317972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317972">Johan Commelin (Apr 08 2020 at 13:18)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/finite.20stuff/near/193317491" title="#narrow/stream/113488-general/topic/finite.20stuff/near/193317491">said</a>:</p>
+<blockquote>
+<p>finite s is unbundled finiteness and it's a structure. finset is bundled and a class</p>
+</blockquote>
+<p>Whut?? Is <code>finset</code> a class?</p>
+
+<a name="193317995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317995">Mario Carneiro (Apr 08 2020 at 13:18)</a>:</h4>
+<p>finset isn't a class</p>
+
+<a name="193317997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193317997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193317997">Johan Commelin (Apr 08 2020 at 13:18)</a>:</h4>
+<p>It should be just a <code>structure</code>, right?</p>
+
+<a name="193318002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318002">Kevin Buzzard (Apr 08 2020 at 13:18)</a>:</h4>
+<p>Fixed</p>
+
+<a name="193318022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318022">Kevin Buzzard (Apr 08 2020 at 13:18)</a>:</h4>
+<p>It's the wrong way around</p>
+
+<a name="193318267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318267">Mario Carneiro (Apr 08 2020 at 13:20)</a>:</h4>
+<p>arguably, <code>finite s</code> should be called <code>is_finite s</code>. Is that your point?</p>
+
+<a name="193318337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318337">Mario Carneiro (Apr 08 2020 at 13:21)</a>:</h4>
+<p>I think the problem, grammatically, is that <code>finite</code> is an adjective and <code>monoid_hom</code> is a noun</p>
+
+<a name="193318433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318433">Kevin Buzzard (Apr 08 2020 at 13:22)</a>:</h4>
+<p>I am saying that the class/structure choice is different in the two situations for <del>both</del> the unbundled <del>and the bundled</del> concept<del>s</del></p>
+
+<a name="193318452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318452">Kevin Buzzard (Apr 08 2020 at 13:22)</a>:</h4>
+<p>I think I have this straight now</p>
+
+<a name="193318527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318527">Mario Carneiro (Apr 08 2020 at 13:22)</a>:</h4>
+<p>Oh I see. Well, using typeclasses for these things has always been dubious, that's why we're moving away from them</p>
+
+<a name="193318556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318556">Kevin Buzzard (Apr 08 2020 at 13:23)</a>:</h4>
+<p><del>I'm saying that either finset should be a structure or subgroup should be a class</del></p>
+
+<a name="193318586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318586">Kevin Buzzard (Apr 08 2020 at 13:23)</a>:</h4>
+<p>Reasoning purely by analogy</p>
+
+<a name="193318592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318592">Mario Carneiro (Apr 08 2020 at 13:23)</a>:</h4>
+<p>finset is a structure</p>
+
+<a name="193318624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318624">Mario Carneiro (Apr 08 2020 at 13:23)</a>:</h4>
+<p>subgroup is also a structure</p>
+
+<a name="193318731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318731">Kevin Buzzard (Apr 08 2020 at 13:24)</a>:</h4>
+<p>I see so I still have one error</p>
+
+<a name="193318768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318768">Mario Carneiro (Apr 08 2020 at 13:24)</a>:</h4>
+<p>I'm failing to see past the typo to the point</p>
+
+<a name="193318820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318820">Kevin Buzzard (Apr 08 2020 at 13:24)</a>:</h4>
+<p>Is finite a class?</p>
+
+<a name="193318840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318840">Kevin Buzzard (Apr 08 2020 at 13:25)</a>:</h4>
+<p>I'm on mobile right now</p>
+
+<a name="193318887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193318887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193318887">Kevin Buzzard (Apr 08 2020 at 13:25)</a>:</h4>
+<p>Because is_subgroup is a class</p>
+
+<a name="193319058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319058">Mario Carneiro (Apr 08 2020 at 13:26)</a>:</h4>
+<p><code>finite</code> is not a class, <code>is_subgroup</code> is a class, and yes this is inconsistent</p>
+
+<a name="193319110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319110">Mario Carneiro (Apr 08 2020 at 13:27)</a>:</h4>
+<p>my proposed solution is to delete <code>is_subgroup</code> and call it a day</p>
+
+<a name="193319147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319147">Kevin Buzzard (Apr 08 2020 at 13:27)</a>:</h4>
+<p>Is <code>finite</code> deprecated? Because <code>is_subgroup</code> is, kinda</p>
+
+<a name="193319226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319226">Mario Carneiro (Apr 08 2020 at 13:27)</a>:</h4>
+<p>finite is not deprecated, it is meant to be a proposition to talk about finiteness in other positions</p>
+
+<a name="193319296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319296">Mario Carneiro (Apr 08 2020 at 13:28)</a>:</h4>
+<p>for example you can meaningfully negate it</p>
+
+<a name="193319566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319566">Kevin Buzzard (Apr 08 2020 at 13:30)</a>:</h4>
+<p>This is some sort of indication that one should stick to finsets where one can though</p>
+
+<a name="193319585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319585">Kevin Buzzard (Apr 08 2020 at 13:30)</a>:</h4>
+<p>Bundled ftw</p>
+
+<a name="193319637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193319637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193319637">Kevin Buzzard (Apr 08 2020 at 13:30)</a>:</h4>
+<p>We should have infinset</p>
+
+<a name="193322849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193322849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193322849">Reid Barton (Apr 08 2020 at 13:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">subset_properties</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">finite_stuff</span>  <span class="o">(</span><span class="n">tfin</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">,</span> <span class="n">t</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⊥</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">discrete_topology</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">tfin</span><span class="bp">.</span><span class="n">compact</span><span class="bp">.</span><span class="n">elim_finite_subcover</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_open_discrete</span> <span class="bp">_</span><span class="o">)</span> <span class="n">h</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193323500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193323500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193323500">Johan Commelin (Apr 08 2020 at 13:58)</a>:</h4>
+<p>Brilliant hack!</p>
+
+<a name="193323558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193323558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193323558">Patrick Massot (Apr 08 2020 at 13:58)</a>:</h4>
+<p>Too bad this topology stuff come too late.</p>
+
+<a name="193323649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193323649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193323649">Patrick Massot (Apr 08 2020 at 13:59)</a>:</h4>
+<p>You still get the jury special honorary mention.</p>
+
+<a name="193323838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193323838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193323838">Patrick Massot (Apr 08 2020 at 14:00)</a>:</h4>
+<p>It's too late because I want to put this below <code>order.filter.basic</code>. But it's also good to see that the form of the statement is used elsewhere in mathlib.</p>
+
+<a name="193324453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193324453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193324453">Reid Barton (Apr 08 2020 at 14:05)</a>:</h4>
+<p>Yes, I expected it to be easy but I didn't realize it would be quite this easy.</p>
+
+<a name="193325081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193325081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193325081">Ryan Lahfa (Apr 08 2020 at 14:09)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/finite.20stuff/near/193319296" title="#narrow/stream/113488-general/topic/finite.20stuff/near/193319296">said</a>:</p>
+<blockquote>
+<p>for example you can meaningfully negate it</p>
+</blockquote>
+<p>BTW, is it normal that <code>push_neg</code> on <code>not set.finite</code> cannot rename it as <code>set.infinite</code>, I guess it has to do with <code>simp</code> (?) ?</p>
+
+<a name="193325118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193325118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193325118">Ryan Lahfa (Apr 08 2020 at 14:09)</a>:</h4>
+<p>(I had to do a <code>rw set.infinite</code> in order to get the nice <code>infinite S</code> rather than <code>not set.finite S</code>)</p>
+
+<a name="193325230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193325230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193325230">Mario Carneiro (Apr 08 2020 at 14:10)</a>:</h4>
+<p><code>push_neg</code> needs explicit support for each of these things. Seems like a good PR</p>
+
+<a name="193325318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193325318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193325318">Ryan Lahfa (Apr 08 2020 at 14:11)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/finite.20stuff/near/193325230" title="#narrow/stream/113488-general/topic/finite.20stuff/near/193325230">said</a>:</p>
+<blockquote>
+<p><code>push_neg</code> needs explicit support for each of these things. Seems like a good PR</p>
+</blockquote>
+<p>Sounds good, thanks</p>
+
+<a name="193326128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193326128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193326128">Patrick Massot (Apr 08 2020 at 14:16)</a>:</h4>
+<p>Yes, every end-game negation in push_neg is hardcoded.</p>
+
+<a name="193427495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193427495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193427495">Patrick Massot (Apr 09 2020 at 09:42)</a>:</h4>
+<p>Damn, I was trying to put this finite stuff in the proper place before PRing, and guess what? <a href="https://leanprover-community.github.io/mathlib_docs/data/set/finite.html#set.finite_subset_Union" title="https://leanprover-community.github.io/mathlib_docs/data/set/finite.html#set.finite_subset_Union">https://leanprover-community.github.io/mathlib_docs/data/set/finite.html#set.finite_subset_Union</a></p>
+
+<a name="193427787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193427787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193427787">Kenny Lau (Apr 09 2020 at 09:45)</a>:</h4>
+<div class="message_inline_image"><a href="/user_uploads/3121/sisym_UfFXAaJ5VlkARjOaeL/2020-04-09-2.png" title="/user_uploads/3121/sisym_UfFXAaJ5VlkARjOaeL/2020-04-09-2.png"><img src="/user_uploads/3121/sisym_UfFXAaJ5VlkARjOaeL/2020-04-09-2.png"></a></div>
+
+<a name="193428263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428263">Johan Commelin (Apr 09 2020 at 09:50)</a>:</h4>
+<p>So... why did <code>library_search</code> not find this?</p>
+
+<a name="193428405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428405">Mario Carneiro (Apr 09 2020 at 09:52)</a>:</h4>
+<p>It's very unlikely that library_search will find longer statements, because the probability that you spell the theorem the same way as the library decreases exponentially with the length of the theorem</p>
+
+<a name="193428497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428497">Mario Carneiro (Apr 09 2020 at 09:53)</a>:</h4>
+<p>Because of our rigid naming convention and fairly deterministic file organization it's much likely to notice a collision the way Patrick did, by putting it in its proper place and seeing something already there, or getting a name conflict with a duplicate of your theorem</p>
+
+<a name="193428586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428586">Patrick Massot (Apr 09 2020 at 09:54)</a>:</h4>
+<p>Yes, I'm trying to fit in the more precise version, and it's a pain.</p>
+
+<a name="193428611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428611">Patrick Massot (Apr 09 2020 at 09:54)</a>:</h4>
+<p>Because of mathematically empty differences between my statement and the one already in mathlib.</p>
+
+<a name="193428622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20stuff/near/193428622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02248finitestuff.html#193428622">Mario Carneiro (Apr 09 2020 at 09:55)</a>:</h4>
+<p>this is also why I highly recommend looking at sources for relevant files as a theorem discovery strategy</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,68 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/85351Automationforlistperm.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85351Automationforlistperm.html">Automation for list.perm</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185496784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automation%20for%20list.perm/near/185496784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85351Automationforlistperm.html#185496784">Neil Strickland (Jan 13 2020 at 14:21)</a>:</h4>
+<p>What's the best approach for this goal?</p>
+<div class="codehilite"><pre><span></span>lemma L (a b c d : ℕ) :  ([a,b,c,d] : multiset ℕ) = ([d,a,c,b] : multiset ℕ) := sorry
+</pre></div>
+
+
+<p>Here is the proof that we want to synthesise, but of course we do not want to write it by hand.</p>
+<div class="codehilite"><pre><span></span>begin
+  apply quotient.sound,
+  let h := calc
+    [d,a,c,b] ≈ [a,d,c,b] : list.perm.swap a d [c,b]
+    ... ≈ [a,c,d,b] : list.perm.skip a (list.perm.swap c d [b])
+    ... ≈ [a,c,b,d] : list.perm.skip a (list.perm.skip c (list.perm.swap b d []))
+    ... ≈ [a,b,c,d] : list.perm.skip a (list.perm.swap b c [d]),
+  exact h.symm
+end
+</pre></div>
+
+
+<p>The <code>abel</code> tactic can do it after a tiny translation:</p>
+<div class="codehilite"><pre><span></span>begin
+  change (multiset.cons a 0) +
+         (multiset.cons b 0) +
+         (multiset.cons c 0) +
+         (multiset.cons d 0) =
+         (multiset.cons d 0) +
+         (multiset.cons a 0) +
+         (multiset.cons c 0) +
+         (multiset.cons b 0) ,
+  abel,
+end
+</pre></div>
+
+
+<p>Presumably it should be very easy to automate that first step.  I might take it as a baby exercise in tactic programming if no one suggests any better approach.</p>
+
+<a name="185498172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automation%20for%20list.perm/near/185498172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85351Automationforlistperm.html#185498172">Johan Commelin (Jan 13 2020 at 14:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span> Here's  the same thing as your second version, but more concise</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">change</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">b</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">c</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">d</span><span class="o">}</span> <span class="bp">=</span> <span class="o">{</span><span class="n">d</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">c</span><span class="o">}</span> <span class="bp">+</span> <span class="o">{</span><span class="n">b</span><span class="o">},</span>
+  <span class="n">abel</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185498211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automation%20for%20list.perm/near/185498211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85351Automationforlistperm.html#185498211">Johan Commelin (Jan 13 2020 at 14:36)</a>:</h4>
+<p>A little helper tactic would certainly be useful.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

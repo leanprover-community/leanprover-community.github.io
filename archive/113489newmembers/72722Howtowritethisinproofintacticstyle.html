@@ -1,0 +1,89 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html">How to write this in proof in tactic style</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173320438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173320438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173320438">Luis Berlioz (Aug 15 2019 at 20:10)</a>:</h4>
+<p>Hi, I am trying to write the following proof completely in tactic mode. I don't know how to use tactics with the second <code>by_contradiction</code> statement. Even though the proof works as it written now, currently I am learning about tactic mode so I want to know how to do it even if it is not practical. Thanks.</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">hnA</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">by_contradiction</span><span class="o">,</span>
+   <span class="n">intro</span> <span class="n">hnE</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="k">from</span>
+     <span class="k">assume</span> <span class="n">s</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+    <span class="n">by_contradiction</span>
+        <span class="o">(</span><span class="k">assume</span> <span class="n">hs</span><span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">s</span><span class="o">,</span>
+        <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">hnE</span> <span class="bp">⟨</span> <span class="n">s</span><span class="o">,</span> <span class="n">hs</span> <span class="bp">⟩</span><span class="o">),</span>
+    <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">absurd</span> <span class="n">this</span> <span class="n">hnA</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="173321399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321399">Yury G. Kudryashov (Aug 15 2019 at 20:23)</a>:</h4>
+<p>Copy+pasted your example, defined {α : Type*} {p : α → Prop}. It doesn't work. Do you have any <code>import</code>s?</p>
+
+<a name="173321488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321488">Rob Lewis (Aug 15 2019 at 20:24)</a>:</h4>
+<p>He has the <code>classical</code> namespace open.</p>
+
+<a name="173321504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321504">Rob Lewis (Aug 15 2019 at 20:24)</a>:</h4>
+<p>One way to do it is this, which uses the <code>by_contradiction</code> tactic:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">hnA</span><span class="o">,</span>
+  <span class="n">by_contradiction</span> <span class="n">hne</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+    <span class="n">by_contradiction</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">hne</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">hs</span><span class="bp">⟩</span> <span class="o">},</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">absurd</span> <span class="n">this</span> <span class="n">hnA</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="173321798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321798">Luis Berlioz (Aug 15 2019 at 20:28)</a>:</h4>
+<p>added the import. Thanks!</p>
+
+<a name="173321812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321812">Yury G. Kudryashov (Aug 15 2019 at 20:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">hnA</span><span class="o">,</span>
+<span class="n">by_contradiction</span> <span class="n">hne</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">hnA</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">by_contradiction</span> <span class="n">hx</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">hne</span><span class="o">,</span>
+<span class="n">exact</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="173321838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173321838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173321838">Yury G. Kudryashov (Aug 15 2019 at 20:28)</a>:</h4>
+<p>Another way to achieve the same goal.</p>
+
+<a name="173322567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20write%20this%20in%20proof%20in%20tactic%20style/near/173322567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72722Howtowritethisinproofintacticstyle.html#173322567">Luis Berlioz (Aug 15 2019 at 20:39)</a>:</h4>
+<p>Nice! Thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

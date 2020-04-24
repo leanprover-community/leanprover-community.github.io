@@ -1,0 +1,188 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/80362Provingfalsevsdoublenegation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html">Proving false vs double negation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="157965656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965656">Dominic Farolino (Feb 10 2019 at 08:12)</a>:</h4>
+<p>Hey, I originally posted the question here (<a href="https://github.com/leanprover/lean/issues/1993#issuecomment-462112225" target="_blank" title="https://github.com/leanprover/lean/issues/1993#issuecomment-462112225">https://github.com/leanprover/lean/issues/1993#issuecomment-462112225</a>) if reading it there wouldn’t be too much trouble. The question basically revolves around why two nearly identical proofs of false are interpreted differently in Lean. One proof shows false and results in a negation, then other results in a double negation. The natural deduction for each are both very similar, however the Lean proofs must vary in where the assumptions are placed for it to be valid, which I don’t understand.</p>
+
+<a name="157965714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965714">Mario Carneiro (Feb 10 2019 at 08:14)</a>:</h4>
+<p>This example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="bp">¬</span><span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="bp">¬¬</span><span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="n">h1</span>
+</pre></div>
+
+
+<p>is almost correct, but the type of the <code>show</code> is wrong - it should be <code>show false, from h2 h1</code></p>
+
+<a name="157965738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965738">Mario Carneiro (Feb 10 2019 at 08:15)</a>:</h4>
+<p><code>show</code> will assert the type of the thing you are about to write. I can insert a bunch more shows to see how the <code>assume</code> lines change things:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬¬</span> <span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+<span class="k">show</span> <span class="bp">¬¬</span><span class="n">B</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="bp">¬</span><span class="n">B</span><span class="o">,</span>
+<span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="n">h1</span>
+</pre></div>
+
+<a name="157965802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157965802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157965802">Mario Carneiro (Feb 10 2019 at 08:17)</a>:</h4>
+<p>This reflects how the first line above an -&gt;I rule is the consequent of the implication, without mentioning the LHS which has gone into an assumption</p>
+
+<a name="157966283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157966283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157966283">Dominic Farolino (Feb 10 2019 at 08:33)</a>:</h4>
+<p>Ahh ok so that makes it more clear how it can be broken down. So the only reason we can say show not not B, from assume h2: not B, is because of the line after it then? I think that makes more sense to me now</p>
+
+<a name="157968842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157968842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157968842">Kevin Buzzard (Feb 10 2019 at 10:02)</a>:</h4>
+<p><code>show X</code> means "the goal is X", not " I can show X"</p>
+
+<a name="157982327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157982327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157982327">Dominic Farolino (Feb 10 2019 at 16:57)</a>:</h4>
+<p>Sure, but the only reason we can show ¬¬B from ¬B, is if we show false right after, using ¬B (so that we can negate ¬B to get ¬¬B), right? If that is the case, why does it matter where I assume h2 : ¬B? For example, in the following</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">h1</span> <span class="n">h2</span>
+</pre></div>
+
+
+<p>I assume the negation of the RHS right away, and I don't have to write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">h1</span> <span class="n">h2</span>
+</pre></div>
+
+
+<p>(which is actually invalid which slightly confuses me)</p>
+
+<a name="157982394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157982394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157982394">Chris Hughes (Feb 10 2019 at 16:59)</a>:</h4>
+<p>You write <code>show false</code> when Lean was expecting a proof of <code>¬B</code></p>
+
+<a name="157982453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157982453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157982453">Patrick Massot (Feb 10 2019 at 17:01)</a>:</h4>
+<p>What are you trying to explain with that trivial example? You could write</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span> <span class="n">h1</span>
+</pre></div>
+
+<a name="157982469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157982469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157982469">Patrick Massot (Feb 10 2019 at 17:01)</a>:</h4>
+<p>Or, the sober version: <code>example : ¬ B → ¬ B := id</code></p>
+
+<a name="157982530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157982530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157982530">Dominic Farolino (Feb 10 2019 at 17:03)</a>:</h4>
+<p>Well, I guess I'm just confused with the positioning of <code>assume</code>, with regards to <code>show</code>. In the first example of my previous message,<code>assume h2: B,
+  show false, from h1 h2</code> is valid, but <code>show false, from assume h2: B, h1 h2</code> is not; in both, I assume <code>h2: B</code>, just in different places</p>
+
+<a name="157983017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983017">Patrick Massot (Feb 10 2019 at 17:16)</a>:</h4>
+<p>Do you know how to use <code>_</code> in order to write proof terms?</p>
+
+<a name="157983039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983039">Patrick Massot (Feb 10 2019 at 17:17)</a>:</h4>
+<p>For instance, you can write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>Lean will give an error message describing what was the state and what it was waiting for when you left that <code>_</code> hole</p>
+
+<a name="157983092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983092">Patrick Massot (Feb 10 2019 at 17:18)</a>:</h4>
+<p>You could also first try to learn tactic mode where you see everything.</p>
+
+<a name="157983754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983754">Dominic Farolino (Feb 10 2019 at 17:36)</a>:</h4>
+<p>Sure, but this seems to error out early:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>...not telling me why I can do:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h2</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="n">h1</span> <span class="n">h2</span>
+</pre></div>
+
+
+<p>...but not:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">h1</span> <span class="n">h2</span>
+</pre></div>
+
+
+<p>...I assume the answer is in Mario's statement "This reflects how the first line above an -&gt;I rule is the consequent of the implication, without mentioning the LHS which has gone into an assumption", but I'm trying to figure out what exactly it means. Sorry, very new to lean and stuff.</p>
+
+<a name="157983758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983758">Kevin Buzzard (Feb 10 2019 at 17:36)</a>:</h4>
+<p>Yes, the <code>_</code> trick is really good for working out what Lean is expecting next. There is a well defined logic and syntax for everything here but it takes some getting used to. I found tactic mode much easier when learning Lean, but I have a maths not a CS background</p>
+
+<a name="157983842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983842">Rob Lewis (Feb 10 2019 at 17:39)</a>:</h4>
+<p>If you write </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="bp">¬</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="k">assume</span> <span class="n">h1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">B</span><span class="o">,</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>You'll see that the current goal is <code>¬ B</code>. Writing <code>show false, from ...</code> is telling Lean that what follows is a proof of <code>false</code>. But Lean is expecting a proof of <code>¬ B</code>.</p>
+
+<a name="157983912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157983912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157983912">Rob Lewis (Feb 10 2019 at 17:40)</a>:</h4>
+<p><code>assume h2: B, h1 h2</code> is not a proof of <code>false</code>. It's a proof of <code>B -&gt; false</code>. That's what the <code>assume</code> is doing.</p>
+
+<a name="157985652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157985652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157985652">Dominic Farolino (Feb 10 2019 at 18:34)</a>:</h4>
+<p>Ok thanks, it makes sense that <code>show false, from ...</code> is of course a proof of <code>false</code>, while lean is looking for <code>¬ B</code>. So I guess this works because if if I assume <code>h2: B</code> directly after <code>h1</code>, and proceed to show <code>false</code>, it becomes a proof of <code>¬ B</code>, which is what I needed originally. Ah the ordering of assumes/shows makes more sense now :) I see how this relates to my earlier double-negation question. Thanks so much!</p>
+
+<a name="157985880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157985880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157985880">Kevin Buzzard (Feb 10 2019 at 18:41)</a>:</h4>
+<p>You shouldn't think that "assume X, ..." is somehow putting the assumption X into some database for later use and isn't doing anything else. All these things have well-defined semantics and at the end of the day you're just writing a function. At any stage in the process there is a "goal". If the goal is "X -&gt; Y" then "assume X, " assumes X but also changes the goal to Y. If you work in tactic mode then you can see the tactic state at all times, which is all the assumptions <em>and the goal</em>, and this is what makes it so much easier to understand.</p>
+
+<a name="157985924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157985924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157985924">Kevin Buzzard (Feb 10 2019 at 18:42)</a>:</h4>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html">http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html</a> are some notes I wrote on doing basic logic in tactic mode.</p>
+
+<a name="157985986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/157985986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#157985986">Kevin Buzzard (Feb 10 2019 at 18:44)</a>:</h4>
+<p>On the other hand, I know that people with a more CS background seem to prefer term mode. The exercise in <a href="https://leanprover.github.io/theorem_proving_in_lean/" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving In Lean</a> seem to go down well for those people -- that book does not introduce tactic mode until chapter 5 and it does a bunch of stuff using all this "assume/show" technique before that.</p>
+
+<a name="158002567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/158002567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#158002567">Dominic Farolino (Feb 11 2019 at 02:48)</a>:</h4>
+<p>Thank you, that explanation makes sense, it was clear that the placement of <code>assume</code>s was not arbitrary, but I could not quite see what the rationale always was, but that goal-based explanation helps a lot. Will also check out the notes you wrote, seems very helpful I appreciate it!</p>
+
+<a name="158002591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/158002591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#158002591">Dominic Farolino (Feb 11 2019 at 02:49)</a>:</h4>
+<p>Btw, with regards to the book, is there any known repository of chapter exercise solutions? For ones I'm stuck on, I think it would be helpful to see the right way to frame things sometimes</p>
+
+<a name="158002655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/158002655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#158002655">Mario Carneiro (Feb 11 2019 at 02:51)</a>:</h4>
+<p>I don't think there is a full solution manual, but if you post individual problems here I'm sure people will solve them before you can say "no wait"</p>
+
+<a name="158002656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20false%20vs%20double%20negation/near/158002656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80362Provingfalsevsdoublenegation.html#158002656">Dominic Farolino (Feb 11 2019 at 02:51)</a>:</h4>
+<p>Cool, thanks for the tip, and all of the help</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

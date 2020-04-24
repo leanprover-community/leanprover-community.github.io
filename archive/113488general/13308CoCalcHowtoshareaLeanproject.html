@@ -1,0 +1,154 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/13308CoCalcHowtoshareaLeanproject.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html">CoCalc: How to share a Lean project</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192738372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192738372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192738372">Kevin Buzzard (Apr 02 2020 at 22:58)</a>:</h4>
+<p>I want to let users interact with a Lean file without installing Lean. Unfortunately the Lean file I want to let them interact with is part of a lean project and involves imports of other files in the project. My understanding is that this means that the <a href="https://leanprover-community.github.io/lean-web-editor/" title="https://leanprover-community.github.io/lean-web-editor/">community web editor</a> can't do it without just cutting and pasting all imports on the top, which is sometimes unfeasible.</p>
+<p>CoCalc can solve this problem now because it now has the functionality to share CoCalc project files, and it supports Lean. I believe that free projects don't have internet access so the below would not work without extensive modification. But for a project with internet access, here's a step-by-step guide to enabling users to interact with one of the project files without having to install Lean. Note that CoCalc currently only supports Lean 3.5.1 so be sure your project runs with this version of Lean.</p>
+<p>Step 0) Write the Lean project you want to share on CoCalc and put it on github. Maybe some files in your project import some other files in your project -- that's OK.</p>
+<p>Step 1) Go to <a href="http://Cocalc.com" title="http://Cocalc.com">Cocalc.com</a> and make a new Cocalc project. Make sure it has internet access.</p>
+<p>Step 2) Create a new linux terminal in the project with New -&gt; Linux terminal.</p>
+<p>Step 3) At the terminal, type </p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/leanprover-community/mathlib-tools.git
+cd mathlib-tools
+pip3 install .
+cd ..
+rm -rf mathlib-tools
+</pre></div>
+
+
+<p>I suspect that at some point in the future this will just become <code>pip3 install mathlibtools</code> (Patrick made some changes to the github repo earlier today when we were debugging all this).</p>
+<p>Step 4) Clone your Lean project on CoCalc with <code>leanproject get &lt;name of your Lean project on github&gt;</code> e.g.</p>
+<div class="codehilite"><pre><span></span>leanproject get ImperialCollegeLondon/natural_number_game
+</pre></div>
+
+
+<p>Now there are two reasons why things won't work yet: first, CoCalc's current policy is to have the <code>leanpkg.path</code> file in the root directory rather than in the project folder, and secondly CoCalc doesn't use <code>elan</code>, it just runs a fixed version of Lean, which at the time of writing is 3.5.1, and hence if your project doesn't run on 3.5.1 you're in trouble. </p>
+<p>Step 5) If you had set up your Lean project to use Lean 3.5.1 then that's great. If you didn't then you'll have to fix this now. To get your project running on 3.5.1: go back to Files in CoCalc and find the <code>leanpkg.toml</code> file in your Lean project. Change the line that says</p>
+<div class="codehilite"><pre><span></span>lean_version = [whatever it says]
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span>lean_version = &quot;leanprover-community/lean:3.5.1&quot;
+</pre></div>
+
+
+<p>and then within your lean project type</p>
+<div class="codehilite"><pre><span></span>leanproject --no-lean-upgrade upgrade-mathlib
+</pre></div>
+
+
+<p>This should get you to the last version of mathlib which was supported in 3.5.1 (commit message "Lie algebra should not extend lie ring")</p>
+<p>Step 6) Finally, to get your lean project to work with CoCalc you need to ensure that the <code>leanpkg.path</code> for the project is in the root directory of your CoCalc project. You can do this either by moving all the contents of the Lean project folder into the root directory of the CoCalc folder (don't forget <code>.git</code> and <code>.gitignore</code>), or you can just move <code>leanpkg.path</code> and then hack it, e.g. if the path file which <code>leanproject</code> generated looks like this</p>
+<div class="codehilite"><pre><span></span>builtin_path
+path _target/deps/mathlib/src
+path ./src
+</pre></div>
+
+
+<p>and it's in a directory called <code>natural_number_game</code> then your hacked one should be in the root folder of the CoCalc project and should looks like this:</p>
+<div class="codehilite"><pre><span></span>builtin_path
+path natural_number_game/_target/deps/mathlib/src
+path natural_number_game/src
+</pre></div>
+
+
+<p>Step 7) <code>leanproject build</code> from within the Lean project should now build it. </p>
+<p>Step 8) When the build is finished, use the CoCalc file manager to find the Lean file or files you want to share with the world, click on the box on the left and then click on "Share" amongst the options at the top.</p>
+
+<a name="192738499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192738499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192738499">Kevin Buzzard (Apr 02 2020 at 22:59)</a>:</h4>
+<p>If anyone fancies beta testing, does <a href="https://share.cocalc.com/share/c0521a05c75939105078eb32a3b15ddf84ce8685/src/game/world10/the_lost_levels.lean?viewer=share" title="https://share.cocalc.com/share/c0521a05c75939105078eb32a3b15ddf84ce8685/src/game/world10/the_lost_levels.lean?viewer=share">this link work</a>? Hopefully you should be able to get to the "lost levels" of the natural number game, the API for <code>&lt;</code> which I never managed to find the time to translate into about 20 more web pages but they're all there in one single Lean file which you should be able to play just as if it were the natural number game. Does it work?</p>
+
+<a name="192739375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192739375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192739375">Kevin Buzzard (Apr 02 2020 at 23:08)</a>:</h4>
+<p>[just remembered I can test it myself with a private browser window, and it doesn't, so these instructions still need work]</p>
+
+<a name="192782571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192782571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192782571">Gabriel Ebner (Apr 03 2020 at 10:08)</a>:</h4>
+<p><a href="/user_uploads/3121/Xz2c_MzTIBq4oO37SqJjDxEb/cocalc_error.png" title="cocalc_error.png">cocalc_error.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/Xz2c_MzTIBq4oO37SqJjDxEb/cocalc_error.png" title="cocalc_error.png"><img src="/user_uploads/3121/Xz2c_MzTIBq4oO37SqJjDxEb/cocalc_error.png"></a></div>
+
+<a name="192782603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192782603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192782603">Kevin Buzzard (Apr 03 2020 at 10:09)</a>:</h4>
+<p>Yeah I need to share the entire project I think, which I don't know how to do.</p>
+
+<a name="192782635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192782635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192782635">Gabriel Ebner (Apr 03 2020 at 10:09)</a>:</h4>
+<p>Sorry, missed the "it doesn't" comment.</p>
+
+<a name="192783586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192783586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192783586">Kevin Buzzard (Apr 03 2020 at 10:19)</a>:</h4>
+<p><a href="https://cocalc.com/share/fd285f5a46ee9b6180a0719438cc82490ff98187/natural_number_game/?viewer=share" title="https://cocalc.com/share/fd285f5a46ee9b6180a0719438cc82490ff98187/natural_number_game/?viewer=share">https://cocalc.com/share/fd285f5a46ee9b6180a0719438cc82490ff98187/natural_number_game/?viewer=share</a></p>
+
+<a name="192783688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192783688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192783688">Kevin Buzzard (Apr 03 2020 at 10:20)</a>:</h4>
+<p><a href="https://share.cocalc.com/share/fd285f5a46ee9b6180a0719438cc82490ff98187/natural_number_game/src/game/world10/the_lost_levels.lean?viewer=share" title="https://share.cocalc.com/share/fd285f5a46ee9b6180a0719438cc82490ff98187/natural_number_game/src/game/world10/the_lost_levels.lean?viewer=share">Maybe this is the best link</a></p>
+
+<a name="192783835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192783835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192783835">Kevin Buzzard (Apr 03 2020 at 10:21)</a>:</h4>
+<p>no I am still not sharing my Lean path it seems</p>
+
+<a name="192783972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192783972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192783972">Kevin Buzzard (Apr 03 2020 at 10:23)</a>:</h4>
+<p>I thought I had this working before with the Lean maths challenges but now I am just wondering whether CoCalc just over-rode my local mathlib imports with their inbuilt mathlib ones.</p>
+
+<a name="192785053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192785053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192785053">Kevin Buzzard (Apr 03 2020 at 10:34)</a>:</h4>
+<p>I think everything is broken right now. I'll let people know when I've fixed stuff up.</p>
+
+<a name="192787697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192787697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192787697">Kevin Buzzard (Apr 03 2020 at 11:03)</a>:</h4>
+<p>I've opened a ticket at CoCalc. It's beyond me.</p>
+
+<a name="192805957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192805957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192805957">Patrick Massot (Apr 03 2020 at 13:48)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/CoCalc.3A.20How.20to.20share.20a.20Lean.20project/near/192738372" title="#narrow/stream/113488-general/topic/CoCalc.3A.20How.20to.20share.20a.20Lean.20project/near/192738372">said</a>:</p>
+<blockquote>
+<p>I want to let users interact with a Lean file without installing Lean. Unfortunately the Lean file I want to let them interact with is part of a lean project and involves imports of other files in the project. My understanding is that this means that the <a href="https://leanprover-community.github.io/lean-web-editor/" title="https://leanprover-community.github.io/lean-web-editor/">community web editor</a> can't do it without just cutting and pasting all imports on the top, which is sometimes unfeasible.</p>
+<div class="codehilite"><pre><span></span>CoCalc is great, but that preliminary comment is wrong. You can use your own library in the Lean web editor, but you need to host it somewhere.
+</pre></div>
+
+
+</blockquote>
+
+<a name="192806097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192806097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192806097">Kevin Buzzard (Apr 03 2020 at 13:49)</a>:</h4>
+<p>All I want to do is to share a link. I don't want to host anything, I don't think.</p>
+
+<a name="192806267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192806267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192806267">Patrick Massot (Apr 03 2020 at 13:50)</a>:</h4>
+<p>I mean: could that be a link to your Webpage?</p>
+
+<a name="192813348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192813348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192813348">Kevin Buzzard (Apr 03 2020 at 14:39)</a>:</h4>
+<p>Ok let's say that it could be. Then you are telling me to put a whole bunch of stuff in <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/" title="http://wwwf.imperial.ac.uk/~buzzard/xena/">http://wwwf.imperial.ac.uk/~buzzard/xena/</a> ?</p>
+
+<a name="192813427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192813427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192813427">Patrick Massot (Apr 03 2020 at 14:39)</a>:</h4>
+<p>I'm saying this is an option.</p>
+
+<a name="192813568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192813568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192813568">Patrick Massot (Apr 03 2020 at 14:40)</a>:</h4>
+<p>In my course I'm offering all three options: local Lean+VScode, CoCalc, LeanWeb.</p>
+
+<a name="192813987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CoCalc%3A%20How%20to%20share%20a%20Lean%20project/near/192813987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13308CoCalcHowtoshareaLeanproject.html#192813987">Patrick Massot (Apr 03 2020 at 14:43)</a>:</h4>
+<p>Instructions can be found at <a href="https://github.com/bryangingechen/lean-web-editor" title="https://github.com/bryangingechen/lean-web-editor">https://github.com/bryangingechen/lean-web-editor</a>. This yet another thing that should be integrated to <code>leanproject</code> (something like <code>leanproject web</code> and then copy everything to you web server), but days last only 24 hours.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

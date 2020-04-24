@@ -1,0 +1,83 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81079PQRPQPR.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html">(P → (Q → R)) → (P → Q) → (P → R)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180337761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180337761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180337761">Kevin Buzzard (Nov 09 2019 at 23:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">→</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>I thought that this was a thing. It doesn't have a name? I was taught as an undergraduate that it was one of the three axioms of classical logic, the other two being LEM and P -&gt; Q -&gt; P.</p>
+
+<a name="180337816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180337816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180337816">Kenny Lau (Nov 09 2019 at 23:48)</a>:</h4>
+<p>but with context we are essentially using Fitch system where the only axiom is LEM</p>
+
+<a name="180339972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180339972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180339972">François G. Dorais (Nov 10 2019 at 00:51)</a>:</h4>
+<p>I believe some people call this <code>bind</code>. (re: monad)</p>
+
+<a name="180340385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180340385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180340385">Marc Huisinga (Nov 10 2019 at 01:05)</a>:</h4>
+<p>in my formal systems lecture it was called the german equivalent of "distribute"</p>
+
+<a name="180349652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180349652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180349652">Scott Morrison (Nov 10 2019 at 06:18)</a>:</h4>
+<p>I'm not sure I expected <code>library_search</code> to work here, but <code>{ intros, library_search }</code> certainly should, simply because <code>{ intros, solve_by_elim }</code> should work, because</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">→</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">a_2</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">a_1</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">a_2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>works. However <code>solve_by_elim</code> fails, which is surely a bug. :-(</p>
+
+<a name="180351504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180351504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180351504">Mario Carneiro (Nov 10 2019 at 07:29)</a>:</h4>
+<p>I think it is in <code>init.core</code>, although it might be for Type only</p>
+
+<a name="180351566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180351566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180351566">Mario Carneiro (Nov 10 2019 at 07:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">→</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="n">combinator</span><span class="bp">.</span><span class="n">S</span>
+</pre></div>
+
+<a name="180351613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180351613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180351613">Mario Carneiro (Nov 10 2019 at 07:32)</a>:</h4>
+<p>I know this theorem as "axiom 2". Thanks mathematicians</p>
+
+<a name="180351619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180351619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180351619">Mario Carneiro (Nov 10 2019 at 07:32)</a>:</h4>
+<p>"the S combinator" isn't much better though</p>
+
+<a name="181176665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/181176665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#181176665">Chris B (Nov 20 2019 at 03:19)</a>:</h4>
+<p>If the Sort/Prop version ends up getting included in something permanent, <code>Frege</code> seems like a pretty good choice.</p>
+<div class="codehilite"><pre><span></span>Description: Axiom Frege. Axiom A2 of [Margaris] p. 49
+...
+This axiom was part of Frege&#39;s original system and is known as Frege in the literature
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

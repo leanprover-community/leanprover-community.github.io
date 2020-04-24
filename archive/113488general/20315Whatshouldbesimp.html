@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/20315Whatshouldbesimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html">What should be @[simp]?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188898657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188898657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188898657">Yufan Lou (Feb 24 2020 at 04:34)</a>:</h4>
+<p>I put <code>@[simp]</code> on my leftpad definition to demonstrate it, but it definitely cannot be applied to everything. Are there any rules to which I can refer?</p>
+
+<a name="188899071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188899071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188899071">Johan Commelin (Feb 24 2020 at 04:46)</a>:</h4>
+<p>Rules of thumb: <code>@[simp]</code> should be applied to</p>
+<ul>
+<li>only <code>lemma</code> or <code>theorem</code>, not to <code>def</code></li>
+<li>only things of the form <code>foo = bar</code> or <code>xyzzy = quux</code></li>
+<li>only if the LHS is "more complex" and the RHS is "simpler"</li>
+</ul>
+
+<a name="188899077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188899077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188899077">Johan Commelin (Feb 24 2020 at 04:47)</a>:</h4>
+<p>There are exceptions to these rules, and also the rules are maybe not complete. But they give the rough idea.</p>
+
+<a name="188899546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188899546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188899546">Yufan Lou (Feb 24 2020 at 05:00)</a>:</h4>
+<p>now to go back and rewrite my proof <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="188954125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188954125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188954125">Floris van Doorn (Feb 24 2020 at 18:52)</a>:</h4>
+<p>You can also add <code>@[simp]</code> to definitions. This will tell <code>simp</code> that it can unfold this definition.</p>
+
+<a name="188961530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20should%20be%20%40%5Bsimp%5D%3F/near/188961530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20315Whatshouldbesimp.html#188961530">Scott Morrison (Feb 24 2020 at 20:13)</a>:</h4>
+<p><span aria-label="up" class="emoji emoji-2b06" role="img" title="up">:up:</span> Use with caution!</p>
+<p>If you're defining a structure, you should use <code>@[simps]</code> in preference to <code>@[simp]</code>, as this defines <code>simp</code> lemmas for each of the structure projections, but doesn't allow unfolding the entire definition.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

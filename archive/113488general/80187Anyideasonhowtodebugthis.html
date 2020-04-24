@@ -1,0 +1,432 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/80187Anyideasonhowtodebugthis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html">Any ideas on how to debug this?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189698995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189698995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189698995">Gabriel Ebner (Mar 04 2020 at 14:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">all</span> <span class="c1">-- current mathlib master</span>
+
+<span class="c1">-- simplify tactic failed to simplify</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj_im</span><span class="o">]</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">sin</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">real</span><span class="bp">.</span><span class="n">sin</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">sin_neg</span><span class="o">]</span>
+
+<span class="c1">-- works just fine</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj_im</span><span class="o">]</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">sin</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">real</span><span class="bp">.</span><span class="n">sin</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">sin_neg</span><span class="o">]</span>
+</pre></div>
+
+<a name="189699352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189699352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189699352">Sebastien Gouezel (Mar 04 2020 at 15:03)</a>:</h4>
+<p>Ask <code>squeeze_simp</code>, it will give you the offending lemma.</p>
+
+<a name="189700885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189700885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189700885">Gabriel Ebner (Mar 04 2020 at 15:17)</a>:</h4>
+<p>Unfortunately, simp fails in the first two calls.  So I don't think squeeze simp can do anything.</p>
+
+<a name="189701490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189701490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189701490">Reid Barton (Mar 04 2020 at 15:24)</a>:</h4>
+<p>Try <code>set_option trace.simplify.rewrite true</code></p>
+
+<a name="189701600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189701600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189701600">Sebastien Gouezel (Mar 04 2020 at 15:24)</a>:</h4>
+<p>If you do</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">squeeze_simp</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>you will see the simp lemmas that <code>simp</code> uses on your expression (the ones that prevent <code>complex.conj_im</code> from firing).</p>
+
+<a name="189706113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706113">Gabriel Ebner (Mar 04 2020 at 16:09)</a>:</h4>
+<p>If it was only that easy.  <code>squeeze_simp</code> also fails with "simplify tactic failed to simplify".  (Internally, <code>squeeze_simp</code> looks at the proof produced by <code>simp</code> to determine the used lemmas; if <code>simp</code> doesn't simplify, then there's no proof.)</p>
+
+<a name="189706275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706275">Reid Barton (Mar 04 2020 at 16:11)</a>:</h4>
+<p>Oh, that is weird. That error is supposed to mean that <code>simp</code> made no progress, right?</p>
+
+<a name="189706322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706322">Gabriel Ebner (Mar 04 2020 at 16:11)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113488-general/topic/Any.20ideas.20on.20how.20to.20debug.20this.3F/near/189701490" title="#narrow/stream/113488-general/topic/Any.20ideas.20on.20how.20to.20debug.20this.3F/near/189701490">said</a>:</p>
+<blockquote>
+<p>Try <code>set_option trace.simplify.rewrite true</code></p>
+</blockquote>
+<p>That's my go-to option these days, but I don't see anything suspicious.  In fact, <code>complex.conj_im</code> even seems to be used:</p>
+<div class="codehilite"><pre><span></span>2. [simplify.rewrite] [complex.conj_im]: (complex.conj z).im ==&gt; -z.im
+</pre></div>
+
+<a name="189706342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706342">Reid Barton (Mar 04 2020 at 16:11)</a>:</h4>
+<p>Another option is <code>set_option trace.simplify true</code> and search the log for <code>complex.conj_im</code></p>
+
+<a name="189706501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706501">Gabriel Ebner (Mar 04 2020 at 16:13)</a>:</h4>
+<p>It occurs twice in the log, once for <code>z.conj.im</code> and once for <code>z.im</code>.  It even seems to rewrite the first term.</p>
+
+<a name="189706690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189706690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189706690">Reid Barton (Mar 04 2020 at 16:14)</a>:</h4>
+<p>Seems like <code>simp</code> is just being grumpy then</p>
+
+<a name="189707363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189707363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189707363">Gabriel Ebner (Mar 04 2020 at 16:22)</a>:</h4>
+<p>OMG, <code>complex.im</code> seems to disable <code>simp</code> entirely:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span><span class="bp">.</span><span class="n">conj</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">z</span><span class="bp">.</span><span class="n">conj</span><span class="bp">.</span><span class="n">im</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="189708261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189708261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189708261">Sebastien Gouezel (Mar 04 2020 at 16:30)</a>:</h4>
+<p>A small dichotomy gives a failure with</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">lie_algebra</span>
+       <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj_im</span><span class="o">]</span>
+</pre></div>
+
+<a name="189708592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189708592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189708592">Sebastien Gouezel (Mar 04 2020 at 16:33)</a>:</h4>
+<p>The culprit for me was a memory problem. I increased the maximum memory in my Vscode, and the problem disappeared.</p>
+
+<a name="189708905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189708905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189708905">Gabriel Ebner (Mar 04 2020 at 16:36)</a>:</h4>
+<p>I get the error on the command-line as well, even with the imports reduced to <code>algebra.lie_algebra</code> and <code>data.complex.basic</code>.</p>
+
+<a name="189709100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709100">Gabriel Ebner (Mar 04 2020 at 16:38)</a>:</h4>
+<p>Mmmh, <code>import algebra.lie_algebra</code> seems to be the culprit.</p>
+
+<a name="189709287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709287">Gabriel Ebner (Mar 04 2020 at 16:40)</a>:</h4>
+<p>Oh wow, it's an instance issue, again.</p>
+
+<a name="189709335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709335">Reid Barton (Mar 04 2020 at 16:40)</a>:</h4>
+<p>I've had a number of instances in the category theory library in which simp would refuse to apply a lemma for apparently no reason. Some cases were related to simp's handling of syntactic equality of implicit parameters but in other cases there seemed to be no explanation.</p>
+
+<a name="189709352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709352">Gabriel Ebner (Mar 04 2020 at 16:40)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_32 : @lie_ring ℝ real.add_comm_group := @lie_algebra.to_lie_ring ?x_33 ?x_34 ?x_35 ?x_36 ?x_37
+[class_instances] (1) ?x_35 : comm_ring ?x_33 := @subalgebra.comm_ring ?x_38 ?x_39 ?x_40 ?x_41 ?x_42 ?x_43
+[class_instances] (2) ?x_41 : comm_ring ?x_39 := @subalgebra.comm_ring ?x_44 ?x_45 ?x_46 ?x_47 ?x_48 ?x_49
+[class_instances] (3) ?x_47 : comm_ring ?x_45 := @subalgebra.comm_ring ?x_50 ?x_51 ?x_52 ?x_53 ?x_54 ?x_55
+[class_instances] (4) ?x_53 : comm_ring ?x_51 := @subalgebra.comm_ring ?x_56 ?x_57 ?x_58 ?x_59 ?x_60 ?x_61
+[class_instances] (5) ?x_59 : comm_ring ?x_57 := @subalgebra.comm_ring ?x_62 ?x_63 ?x_64 ?x_65 ?x_66 ?x_67
+[class_instances] (6) ?x_65 : comm_ring ?x_63 := @subalgebra.comm_ring ?x_68 ?x_69 ?x_70 ?x_71 ?x_72 ?x_73
+[class_instances] (7) ?x_71 : comm_ring ?x_69 := @subalgebra.comm_ring ?x_74 ?x_75 ?x_76 ?x_77 ?x_78 ?x_79
+[class_instances] (8) ?x_77 : comm_ring ?x_75 := @subalgebra.comm_ring ?x_80 ?x_81 ?x_82 ?x_83 ?x_84 ?x_85
+[class_instances] (9) ?x_83 : comm_ring ?x_81 := @subalgebra.comm_ring ?x_86 ?x_87 ?x_88 ?x_89 ?x_90 ?x_91
+[class_instances] (10) ?x_89 : comm_ring ?x_87 := @subalgebra.comm_ring ?x_92 ?x_93 ?x_94 ?x_95 ?x_96 ?x_97
+</pre></div>
+
+<a name="189709507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709507">Reid Barton (Mar 04 2020 at 16:42)</a>:</h4>
+<p>In some cases it also seems to get worse over time, that is, with new mathlib the simp stops working and there is no clear reason.</p>
+
+<a name="189709568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709568">Sebastien Gouezel (Mar 04 2020 at 16:42)</a>:</h4>
+<p>It's really funny. In</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj_im</span><span class="o">]</span>
+
+<span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">L</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="n">L</span><span class="o">,</span> <span class="n">lie_ring</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">lie_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">L</span><span class="o">),</span> <span class="err">⁅</span><span class="n">x</span><span class="o">,</span> <span class="n">t</span> <span class="err">•</span> <span class="n">y</span><span class="err">⁆</span> <span class="bp">=</span> <span class="n">t</span> <span class="err">•</span> <span class="err">⁅</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="err">⁆</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj_im</span><span class="o">]</span>
+</pre></div>
+
+
+<p>the first example works, and the second one fails. And yes, they are absolutely identical, but just adding a class inbetween has messed up typeclass search.</p>
+
+<a name="189709608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709608">Reid Barton (Mar 04 2020 at 16:43)</a>:</h4>
+<p>aha! Well this <code>lie_algebra R L extends lie_ring L</code> is a known anti-pattern</p>
+
+<a name="189709680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709680">Sebastien Gouezel (Mar 04 2020 at 16:43)</a>:</h4>
+<p>We need a linter for this!</p>
+
+<a name="189709693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189709693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189709693">Gabriel Ebner (Mar 04 2020 at 16:44)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">conj</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">lie_skew</span><span class="o">]</span>
+</pre></div>
+
+
+<p>The <code>lie_skew</code> lemma has a <code>[lie_ring L]</code> argument which triggers this ugly search.</p>
+
+<a name="189710173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189710173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189710173">Gabriel Ebner (Mar 04 2020 at 16:48)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> and <span class="user-mention" data-user-id="110032">@Reid Barton</span> for debugging this!</p>
+
+<a name="189710195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189710195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189710195">Gabriel Ebner (Mar 04 2020 at 16:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Is there a standard replacement for this anti-pattern?</p>
+
+<a name="189710295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189710295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189710295">Reid Barton (Mar 04 2020 at 16:49)</a>:</h4>
+<p>move <code>[lie_ring L]</code> to before <code>extends</code>, and then add it as another argument in 100 places</p>
+
+<a name="189710398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189710398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189710398">Reid Barton (Mar 04 2020 at 16:50)</a>:</h4>
+<p>Although perhaps <code>lie_ring</code> could <code>extend</code> <code>add_comm_group</code>, which would help a bit</p>
+
+<a name="189710662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189710662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189710662">Reid Barton (Mar 04 2020 at 16:53)</a>:</h4>
+<p>I also have to say I don't understand why <code>simp</code> gets as far as trying to synthesize this instance</p>
+
+<a name="189711744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189711744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189711744">Reid Barton (Mar 04 2020 at 17:03)</a>:</h4>
+<p>So concretely, change</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">lie_ring</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">L</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">has_bracket</span> <span class="n">L</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">lie_ring</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_bracket</span> <span class="n">L</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="n">L</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">L</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="n">L</span><span class="o">,</span> <span class="n">lie_ring</span> <span class="n">L</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">lie_ring</span> <span class="n">L</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="n">L</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="189711847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189711847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189711847">Reid Barton (Mar 04 2020 at 17:04)</a>:</h4>
+<p>then delete <code>[add_comm_group L]</code> elsewhere or replace it by <code>[lie_ring L]</code> as appropriate</p>
+
+<a name="189712393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189712393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189712393">Gabriel Ebner (Mar 04 2020 at 17:09)</a>:</h4>
+<p>Is there a canonical Lie structure on a ring?  Lots of <code>lie_ring</code> definitions are not instances.</p>
+
+<a name="189712901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189712901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189712901">Reid Barton (Mar 04 2020 at 17:14)</a>:</h4>
+<p>Yes, there is <code>lie_ring.of_associative_ring</code> (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">]</mo><mo>=</mo><mi>X</mi><mi>Y</mi><mo>−</mo><mi>Y</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">[X, Y] = XY - YX</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>). I'm not sure why it is not an instance, but it seems reasonable to have it be opt-in.</p>
+
+<a name="189712946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189712946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189712946">Reid Barton (Mar 04 2020 at 17:14)</a>:</h4>
+<p>Is it causing a problem?</p>
+
+<a name="189713012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189713012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189713012">Gabriel Ebner (Mar 04 2020 at 17:15)</a>:</h4>
+<p>You have to write more instances by hand now.  And the errors that you get when you have an extra <code>add_comm_group</code> instance lying around are not pretty.</p>
+
+<a name="189713104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189713104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189713104">Gabriel Ebner (Mar 04 2020 at 17:16)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/2084" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2084">#2084</a></p>
+
+<a name="189713593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189713593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189713593">Floris van Doorn (Mar 04 2020 at 17:21)</a>:</h4>
+<blockquote>
+<p>We need a linter for this!</p>
+</blockquote>
+<p>The linter <code>dangerous_instance</code>should find this. I will investigate why it doesn't.</p>
+
+<a name="189713687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189713687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189713687">Reid Barton (Mar 04 2020 at 17:22)</a>:</h4>
+<p>I see. There seem to be two changes going on here.</p>
+<ul>
+<li>Since <code>lie_algebra</code> no longer extends <code>lie_ring</code> but is indexed on it you have to write two instances instead of one.</li>
+<li>In the <code>lie_algebra</code> instance the <code>lie_ring</code> part can't be inferred from the definition, and also can't be inferred from instance search because what I've been calling instances are not actually instances at all.</li>
+</ul>
+
+<a name="189713886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189713886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189713886">Reid Barton (Mar 04 2020 at 17:24)</a>:</h4>
+<p>For the second one maybe we can just make <code>lie_ring.of_associative_ring</code> an instance after all. <span class="user-mention" data-user-id="240862">@Oliver Nash</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> was there a strong reason to not have it be an instance? I assume it was discussed at some point on the github issue but there are way too many collapsed comments to go looking for it...</p>
+
+<a name="189714007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189714007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189714007">Reid Barton (Mar 04 2020 at 17:25)</a>:</h4>
+<p>Gabriel, do you need this to bump the mathlib version or something?</p>
+
+<a name="189714159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189714159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189714159">Floris van Doorn (Mar 04 2020 at 17:26)</a>:</h4>
+<blockquote>
+<p>The linter <code>dangerous_instance</code>should find this. I will investigate why it doesn't.</p>
+</blockquote>
+<p>Oh, <code>dangerous_instance</code> does catch this problem:</p>
+<div class="codehilite"><pre><span></span>The following arguments become metavariables. argument 1: (R : Type u)
+</pre></div>
+
+
+<p>The problem is that currently linters are disabled for automatically generated definitions. This is necessary for many linters, but linters that check the library more globally (like the instance checking and <code>simp</code>-lemma checking) should be enabled for automatically generated declarations. This in on my to-do list.</p>
+
+<a name="189714160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189714160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189714160">Gabriel Ebner (Mar 04 2020 at 17:26)</a>:</h4>
+<p>Kind of, in the <code>lean36</code> branch the <code>simp_nf</code> linter produces lots of timeouts.  This is one of the timeouts.</p>
+
+<a name="189714875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189714875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189714875">Reid Barton (Mar 04 2020 at 17:33)</a>:</h4>
+<p>I think <a href="https://github.com/leanprover-community/mathlib/pull/1644#discussion_r343902029" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1644#discussion_r343902029">https://github.com/leanprover-community/mathlib/pull/1644#discussion_r343902029</a> is about this lie ring of ring instance/def</p>
+
+<a name="189715352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189715352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189715352">Reid Barton (Mar 04 2020 at 17:39)</a>:</h4>
+<p>Yes, I remember now. Another concern is if you have an instance saying a product of Lie algebras is a Lie algebra, then a product of rings becomes a Lie algebra in two ways. In this case I believe the resulting definitions will work out to be defeq, but in general there could be a problem.</p>
+
+<a name="189715849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189715849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189715849">Johan Commelin (Mar 04 2020 at 17:44)</a>:</h4>
+<p>Sorry for (partially) causing this mess.</p>
+
+<a name="189715891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189715891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189715891">Johan Commelin (Mar 04 2020 at 17:45)</a>:</h4>
+<p>I think we didn't make it an instance because we thought it was better to be conservative for now.</p>
+
+<a name="189716018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189716018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189716018">Reid Barton (Mar 04 2020 at 17:46)</a>:</h4>
+<p>Gabriel I think your change looks fine. Actually the ones for <code>matrix n n R</code> really should be instances, I think, because this is the "by definition" instance. (Unless we wanted to make a synonym <code>gl n R := matrix n n R</code> and attach the instance to that instead.) That would save one occurrence of <code>@lie_algebra</code>.</p>
+
+<a name="189716076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189716076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189716076">Reid Barton (Mar 04 2020 at 17:47)</a>:</h4>
+<p>Johan I think I even also argued that it should not be an instance.</p>
+
+<a name="189716894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189716894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189716894">Johan Commelin (Mar 04 2020 at 17:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> What is the best way forward? Should this be fixed in a separate PR?</p>
+
+<a name="189716968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189716968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189716968">Johan Commelin (Mar 04 2020 at 17:55)</a>:</h4>
+<p>Because I guess that we are running the risk that the bump PR is going to be a huge mess of little changes, and if multiple people contribute, then there will be nobody who has an overview of whether the PR is still doing only harmless changes...</p>
+
+<a name="189717100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717100">Reid Barton (Mar 04 2020 at 17:57)</a>:</h4>
+<p>Do you mean other than <a href="https://github.com/leanprover-community/mathlib/issues/2084" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2084">#2084</a>?</p>
+
+<a name="189717122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717122">Reid Barton (Mar 04 2020 at 17:57)</a>:</h4>
+<p>or is that already a "separate PR"?</p>
+
+<a name="189717152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717152">Johan Commelin (Mar 04 2020 at 17:57)</a>:</h4>
+<p>Ooh, I hadn't seen that one yet...</p>
+
+<a name="189717500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717500">Johan Commelin (Mar 04 2020 at 18:00)</a>:</h4>
+<p>I think this is fine as is. I wouldn't be surprised if we want the <code>gl</code> synonym/abbreviation. We can always turn that <code>def</code> into an <code>instance</code> later.</p>
+
+<a name="189717655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717655">Johan Commelin (Mar 04 2020 at 18:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> If you can make the linter catch these errors that would be great. It would prevent future me from messing up again.</p>
+
+<a name="189717873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189717873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189717873">Johan Commelin (Mar 04 2020 at 18:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> I've put <a href="https://github.com/leanprover-community/mathlib/issues/2084" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2084">#2084</a> on the merge queue</p>
+
+<a name="189725236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189725236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189725236">Scott Morrison (Mar 04 2020 at 19:21)</a>:</h4>
+<p>The linter is upset with <a href="https://github.com/leanprover-community/mathlib/issues/2084" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2084">#2084</a> because of</p>
+<div class="codehilite"><pre><span></span>-- algebra/ordered_group.lean
+#print add_neg_le_iff_le_add /- Left-hand side simplifies from
+  a + -c ≤ b
+to
+  a ≤ c + b
+using
+  [add_neg_le_iff_le_add&#39;]
+Try to change the left-hand side to the simplified term!
+ -/
+</pre></div>
+
+<a name="189725366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189725366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189725366">Scott Morrison (Mar 04 2020 at 19:22)</a>:</h4>
+<p>How was this not a problem previously?</p>
+
+<a name="189727615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189727615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189727615">Gabriel Ebner (Mar 04 2020 at 19:46)</a>:</h4>
+<p>Do you remember my original complaint in this thread?  Apparently <code>simp</code> refuses to rewrite <em>anything</em> if the type class resolution fails (takes too long? not sure) for a single simp lemma.  (This looks like a bug.)  The <code>lie_skew</code> seems to apply to some (all?) negations and causes a loop in type class resolution.  Hence there were a lot of terms that simp did not rewrite, even though they could be simplified with some <code>by simp only [only simp lemmas here]</code>.  Now that the lie_algebra issue is fixed, simp is effectively more powerful and the linter can now detect more problems.</p>
+
+<a name="189728480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189728480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189728480">Reid Barton (Mar 04 2020 at 19:54)</a>:</h4>
+<p>What I think is the most surprising thing about this is that these simp failures are indistinguishable from "simp couldn't make any progress", right?</p>
+
+<a name="189728517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189728517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189728517">Reid Barton (Mar 04 2020 at 19:55)</a>:</h4>
+<p>So when simp fails to apply the lemma you expect, the reason could be that some other lemma is timing out?</p>
+
+<a name="189728610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189728610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189728610">Reid Barton (Mar 04 2020 at 19:56)</a>:</h4>
+<p>while one might naively expect that that would instead result in a timeout?</p>
+
+<a name="189728908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189728908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189728908">Gabriel Ebner (Mar 04 2020 at 19:59)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113488-general/topic/Any.20ideas.20on.20how.20to.20debug.20this.3F/near/189728517" title="#narrow/stream/113488-general/topic/Any.20ideas.20on.20how.20to.20debug.20this.3F/near/189728517">said</a>:</p>
+<blockquote>
+<p>So when simp fails to apply the lemma you expect, the reason could be that some other lemma is timing out?</p>
+</blockquote>
+<p>Yes, this is very counterintuitive.  But it's the best explanation I have before looking into the C++ code.</p>
+
+<a name="189729218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189729218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189729218">Scott Morrison (Mar 04 2020 at 20:02)</a>:</h4>
+<p>Ah, thanks. Sorry for the noise, I was jumping in halfway through.</p>
+
+<a name="189730458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189730458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189730458">Gabriel Ebner (Mar 04 2020 at 20:14)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/issues/137" target="_blank" title="https://github.com/leanprover-community/lean/issues/137">https://github.com/leanprover-community/lean/issues/137</a></p>
+
+<a name="189730559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189730559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189730559">Gabriel Ebner (Mar 04 2020 at 20:15)</a>:</h4>
+<p>The linter actually ignored all errors from simp on purpose.  There is a <code>&lt;|&gt; pure none</code> line in the linter.  That's because I was getting lots of errors from type class resolution.</p>
+
+<a name="189730898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189730898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189730898">Gabriel Ebner (Mar 04 2020 at 20:19)</a>:</h4>
+<p>I've removed the line from the linter that ignores the errors.  Let's say what it says now: <a href="https://github.com/leanprover-community/mathlib/runs/485926769" target="_blank" title="https://github.com/leanprover-community/mathlib/runs/485926769">https://github.com/leanprover-community/mathlib/runs/485926769</a></p>
+
+<a name="189731020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189731020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189731020">Reid Barton (Mar 04 2020 at 20:20)</a>:</h4>
+<p>okay, but in general interactive use... I will just try the example, thanks</p>
+
+<a name="189731052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189731052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189731052">Reid Barton (Mar 04 2020 at 20:20)</a>:</h4>
+<p>"neat"</p>
+
+<a name="189738551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189738551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189738551">Oliver Nash (Mar 04 2020 at 21:41)</a>:</h4>
+<p>Argh many apologies for mostly causing this mess, and many thanks for the PR which has fixed it.</p>
+
+<a name="189738687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189738687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189738687">Patrick Massot (Mar 04 2020 at 21:43)</a>:</h4>
+<p>As you can see from this discussion, these are very subtle issues, and nobody as a good rule book here.</p>
+
+<a name="189738951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189738951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189738951">Oliver Nash (Mar 04 2020 at 21:45)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span> I have just read through the thread and I still feel guilty, but I am too late to have anything to offer.</p>
+
+<a name="189739094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189739094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189739094">Rob Lewis (Mar 04 2020 at 21:46)</a>:</h4>
+<p>This is exactly what the linters are for: hard to know you're doing something dangerous, hard for any reviewer to notice, but the computer can notice easily. Finding this kind of situation is good because we can improve the linters.</p>
+
+<a name="189945321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189945321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189945321">Kevin Buzzard (Mar 06 2020 at 23:34)</a>:</h4>
+<p>So I am assuming that <code>G_module_hom G M N</code> should not extend <code>add_monoid_hom M N</code> for the same reason?</p>
+
+<a name="189945363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189945363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189945363">Kevin Buzzard (Mar 06 2020 at 23:35)</a>:</h4>
+<p>But I can still add a coercion manually, right?</p>
+
+<a name="189945943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189945943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189945943">Reid Barton (Mar 06 2020 at 23:47)</a>:</h4>
+<p>are these structures? The issue described here is only relevant to classes</p>
+
+<a name="189946028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Any%20ideas%20on%20how%20to%20debug%20this%3F/near/189946028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80187Anyideasonhowtodebugthis.html#189946028">Kevin Buzzard (Mar 06 2020 at 23:48)</a>:</h4>
+<p>Aah! Great!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

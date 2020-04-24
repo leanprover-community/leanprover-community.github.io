@@ -1,0 +1,340 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/54190movingmathlibto35c.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html">moving mathlib to 3.5c</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186903553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186903553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186903553">Rob Lewis (Jan 29 2020 at 16:40)</a>:</h4>
+<p>I'm looking into transitioning mathlib to <a href="https://github.com/leanprover-community/lean" target="_blank" title="https://github.com/leanprover-community/lean">Lean 3.5c</a> now. This will allow us to take advantage of various features, bug fixes, etc that have been implemented there. The current version is backward compatible -- mathlib builds under both 3.4.2 and 3.5c right now. But this will probably change in the future.</p>
+<p>Right now, the upgrade path looks easy enough: we change mathlib's <code>leanpkg.toml</code> to read <code>lean_version = "leanprover-community/lean:3.5.0"</code>. Any user running <code>elan</code> just needs to run <code>leanpkg configure</code> in mathlib root, and <code>elan</code> should find the binary. Projects that use mathlib as a dependency should do similar, with <code>leanpkg upgrade</code> to bump mathlib to a 3.5 version. </p>
+<p>At the same time we change <code>leanpkg.toml</code>, we'll change the CI to push 3.5.0 nightlies. I think this means <code>update-mathlib</code> and <code>cache-olean</code> should continue to work seamlessly, and shouldn't break on older commits from before the change.</p>
+<p>Maybe I'm too optimistic -- what am I missing? What will break?</p>
+
+<a name="186904725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186904725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186904725">Kevin Buzzard (Jan 29 2020 at 16:50)</a>:</h4>
+<p>Let's find out!</p>
+
+<a name="186907572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907572">Simon Hudon (Jan 29 2020 at 17:18)</a>:</h4>
+<p>I think <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> might have a few things to say here. I know he doesn't follow the blessed path and other users don't either.</p>
+
+<a name="186907691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907691">Rob Lewis (Jan 29 2020 at 17:19)</a>:</h4>
+<p>There are some PRs to 3.5c that I think might as well be merged before a move. 87, 97, and 99 look pretty unobjectionable. 88 would be great too. I tagged a handful that I think would be backward compatible, but we don't necessarily need all of them.</p>
+
+<a name="186907855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907855">Rob Lewis (Jan 29 2020 at 17:21)</a>:</h4>
+<p>I wasn't using elan until about two hours ago; it's a painless switch. Power users should be able to upgrade their lean version on their own, I guess. I'm not sure how many non-power users we have who aren't using elan.</p>
+
+<a name="186907881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907881">Simon Hudon (Jan 29 2020 at 17:21)</a>:</h4>
+<p>The travis build has (or had?) a daily cron job to compile itself with 3.5. Has it made it to the Github Actions?</p>
+
+<a name="186907965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907965">Rob Lewis (Jan 29 2020 at 17:22)</a>:</h4>
+<p>Right now Actions compiles mathlib with 3.4.2 and the 3.5c nightly every build.</p>
+
+<a name="186907993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186907993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186907993">Rob Lewis (Jan 29 2020 at 17:22)</a>:</h4>
+<p>The only change there will be removing the 3.4.2 build and switching 3.5c from nightly to a particular release.</p>
+
+<a name="186908027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908027">Rob Lewis (Jan 29 2020 at 17:23)</a>:</h4>
+<p>Or just changing 3.4.2 to a 3.5c release, if we want to keep testing the nightlies.</p>
+
+<a name="186908152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908152">Rob Lewis (Jan 29 2020 at 17:24)</a>:</h4>
+<p>BTW, one of the CI checks on leanprover-community/lean is failing right now. It doesn't look significant. But might be nice to get that working when we switch.</p>
+
+<a name="186908174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908174">Simon Hudon (Jan 29 2020 at 17:24)</a>:</h4>
+<p>What check is that?</p>
+
+<a name="186908221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908221">Rob Lewis (Jan 29 2020 at 17:25)</a>:</h4>
+<p>See the build here: <a href="https://github.com/leanprover-community/lean/pull/99" target="_blank" title="https://github.com/leanprover-community/lean/pull/99">https://github.com/leanprover-community/lean/pull/99</a></p>
+
+<a name="186908232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908232">Rob Lewis (Jan 29 2020 at 17:25)</a>:</h4>
+<p>It's a doc PR so I don't think I broke anything!</p>
+
+<a name="186908348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908348">Bryan Gin-ge Chen (Jan 29 2020 at 17:26)</a>:</h4>
+<p>The failure is <a href="https://travis-ci.org/leanprover-community/lean/jobs/642450218#L190" target="_blank" title="https://travis-ci.org/leanprover-community/lean/jobs/642450218#L190">here</a>; looks totally unrelated, so hopefully it should work if restarted.</p>
+
+<a name="186908477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908477">Rob Lewis (Jan 29 2020 at 17:28)</a>:</h4>
+<p>The same problem shows up on a build on <a href="https://github.com/leanprover-community/lean/pull/100" target="_blank" title="https://github.com/leanprover-community/lean/pull/100">Anne's PR</a> from earlier today. But it could be a temporary thing, yeah.</p>
+
+<a name="186908765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908765">Rob Lewis (Jan 29 2020 at 17:31)</a>:</h4>
+<p>A related question, how hard is it to direct elan to a local Lean build? I think <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> mentioned doing this at some point?</p>
+
+<a name="186908952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186908952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186908952">Bryan Gin-ge Chen (Jan 29 2020 at 17:33)</a>:</h4>
+<p>I've been doing it; I don't remember the details but it wasn't hard. I think I just followed the instructions from the command line help.</p>
+<p><strong>edit</strong>: try <code>elan toolchain help link</code></p>
+
+<a name="186912091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186912091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186912091">Patrick Massot (Jan 29 2020 at 18:06)</a>:</h4>
+<p>I still vote that <code>rintro</code> should replace <code>intro</code> in the core library (the interactive versions of course).</p>
+
+<a name="186912133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186912133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186912133">Patrick Massot (Jan 29 2020 at 18:07)</a>:</h4>
+<p>Also issue <a href="https://github.com/leanprover-community/mathlib/issues/95" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/95">#95</a> should be fixable without breaking anything.</p>
+
+<a name="186934626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186934626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186934626">Rob Lewis (Jan 29 2020 at 22:15)</a>:</h4>
+<blockquote>
+<p>I still vote that <code>rintro</code> should replace <code>intro</code> in the core library (the interactive versions of course).</p>
+</blockquote>
+<p>This might be a surprisingly big refactor. <code>rintro</code> would have to be implemented without depending on anything that uses <code>intro</code>. Possible, but it will take work. I guess we could rename <code>intro</code> to <code>intro'</code> and bootstrap.</p>
+
+<a name="186935008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186935008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186935008">Patrick Massot (Jan 29 2020 at 22:21)</a>:</h4>
+<p>This is why I said "the interactive version". Of course we would still use <code>tactic.intro</code>. And if this is not enough then indeed we can rename <code>intro</code> to <code>intro'</code>. We can even call it updating <code>stage0</code> or whatever sounds like Lean4 bootstrapping.</p>
+
+<a name="186948444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186948444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186948444">Mario Carneiro (Jan 30 2020 at 01:51)</a>:</h4>
+<p>I don't think the implementation of <code>rintro</code> uses <code>tactic.interactive.intro</code> at all, and in any case <code>tactic.intro</code> is essentially the same thing</p>
+
+<a name="186948505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186948505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186948505">Mario Carneiro (Jan 30 2020 at 01:52)</a>:</h4>
+<p>if we want a noninteractive version of <code>rintro</code>, it will have a much more complicated type because it creates a complicated hierarchy of subgoals</p>
+
+<a name="186968369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186968369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186968369">Rob Lewis (Jan 30 2020 at 09:53)</a>:</h4>
+<p><code>rintro</code> depends on <code>dlist</code>, and interactive <code>intro</code> is used in proofs in some of the core <code>dlist</code> definitions. I'm not saying there's any theoretical reason intro needs to be implemented first, but disentangling them will take effort.</p>
+
+<a name="186974542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186974542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186974542">Mario Carneiro (Jan 30 2020 at 11:08)</a>:</h4>
+<p>We don't need <code>dlist</code></p>
+
+<a name="186974557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186974557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186974557">Mario Carneiro (Jan 30 2020 at 11:08)</a>:</h4>
+<p>I just use <code>list A -&gt; list A</code> most of the time</p>
+
+<a name="186980964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186980964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186980964">Rob Lewis (Jan 30 2020 at 12:39)</a>:</h4>
+<p>I just noticed this issue on community Lean: <a href="https://github.com/leanprover-community/lean/issues/98" target="_blank" title="https://github.com/leanprover-community/lean/issues/98">https://github.com/leanprover-community/lean/issues/98</a></p>
+
+<a name="186981002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186981002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186981002">Rob Lewis (Jan 30 2020 at 12:39)</a>:</h4>
+<p>We should check that Windows elan is happy with the 3.5c release version before making the change official.</p>
+
+<a name="186981079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186981079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186981079">Rob Lewis (Jan 30 2020 at 12:40)</a>:</h4>
+<p>We should also look into the nightlies issue, of course, but that doesn't have to block the switch.</p>
+
+<a name="186984907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186984907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186984907">Rob Lewis (Jan 30 2020 at 13:20)</a>:</h4>
+<p>Does olean-rs still work with oleans from 3.5c? I know they store additional information now.</p>
+
+<a name="186984976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186984976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186984976">Rob Lewis (Jan 30 2020 at 13:21)</a>:</h4>
+<p>AFAICT olean-rs isn't used anywhere critical, so this also doesn't have to block the switch if there are issues. But we should at least be aware.</p>
+
+<a name="186985102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186985102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186985102">Rob Lewis (Jan 30 2020 at 13:22)</a>:</h4>
+<p>(I guess this is a question mostly for <span class="user-mention" data-user-id="110026">@Simon Hudon</span> and <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> )</p>
+
+<a name="186989610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186989610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186989610">Rob Lewis (Jan 30 2020 at 14:11)</a>:</h4>
+<p>I created a branch for the move. Let me know if you notice any missing changes. <a href="https://github.com/leanprover-community/mathlib/tree/update-3-5" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/update-3-5">https://github.com/leanprover-community/mathlib/tree/update-3-5</a></p>
+
+<a name="186989700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186989700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186989700">Rob Lewis (Jan 30 2020 at 14:12)</a>:</h4>
+<p>I'll see if it builds with my Windows laptop when I get home.</p>
+
+<a name="186991137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/186991137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#186991137">Rob Lewis (Jan 30 2020 at 14:25)</a>:</h4>
+<p>In the meantime, is there other infrastructure that needs to be updated? I don't see anything 3.4.2-specific in the scripts repo.</p>
+
+<a name="187011517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187011517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187011517">Mario Carneiro (Jan 30 2020 at 17:49)</a>:</h4>
+<p>What is new in the olean files?</p>
+
+<a name="187012306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187012306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187012306">Rob Lewis (Jan 30 2020 at 17:57)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/commit/354deadc203454b76f72f325e7c566f10adf52e1" target="_blank" title="https://github.com/leanprover-community/lean/commit/354deadc203454b76f72f325e7c566f10adf52e1">https://github.com/leanprover-community/lean/commit/354deadc203454b76f72f325e7c566f10adf52e1</a> at least</p>
+
+<a name="187039341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187039341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187039341">Wojciech Nawrocki (Jan 30 2020 at 22:42)</a>:</h4>
+<p>Note that I changed that again later, introducing a new <code>mod_doc</code> object to .olean files <a href="https://github.com/leanprover-community/lean/pull/81/files#diff-ae4f52a26f45f3835b747fe8b1d53b71R425" target="_blank" title="https://github.com/leanprover-community/lean/pull/81/files#diff-ae4f52a26f45f3835b747fe8b1d53b71R425">here</a> (the diff above is a backwards-compatible change as far as olean-rs is concerned since it doesn't change the format).</p>
+
+<a name="187070102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187070102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187070102">Rob Lewis (Jan 31 2020 at 10:03)</a>:</h4>
+<p>Windows, OS X, and Ubuntu all seem happy to build a 3.5 mathlib with elan. There's a leanpkg warning (on all systems) we should fix first: <a href="https://github.com/leanprover-community/lean/issues/105" target="_blank" title="https://github.com/leanprover-community/lean/issues/105">https://github.com/leanprover-community/lean/issues/105</a></p>
+
+<a name="187070236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187070236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187070236">Rob Lewis (Jan 31 2020 at 10:05)</a>:</h4>
+<p>So we should:</p>
+<ul>
+<li>fix the leanpkg warning</li>
+<li>merge anything else to leanprover-community/lean that's ready to go</li>
+<li>make a 3.5.1 release</li>
+<li>update <a href="https://github.com/leanprover-community/mathlib/tree/update-3-5" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/update-3-5">https://github.com/leanprover-community/mathlib/tree/update-3-5</a> for 3.5.1</li>
+</ul>
+<p>and then I think we're ready.</p>
+
+<a name="187074752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187074752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187074752">Kevin Buzzard (Jan 31 2020 at 11:21)</a>:</h4>
+<p>What is the difference between 3.5.0 and 3.5.1? Sorry for the naive question</p>
+
+<a name="187077387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187077387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187077387">Rob Lewis (Jan 31 2020 at 12:08)</a>:</h4>
+<p>Nothing much. There have been PRs merged to Lean since the 3.5.0 release that I'd like to include before we switch.</p>
+
+<a name="187135094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187135094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187135094">Yury G. Kudryashov (Jan 31 2020 at 23:42)</a>:</h4>
+<p>BTW, would it break compatibility if we <code>export has_insert.insert</code> to the root namespace instead of creating another <code>def</code>?</p>
+
+<a name="187135136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187135136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187135136">Yury G. Kudryashov (Jan 31 2020 at 23:43)</a>:</h4>
+<p>Another question: are we going to move algebraic structures from stdlib to mathlib before lean4?</p>
+
+<a name="187372787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187372787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187372787">Rob Lewis (Feb 04 2020 at 16:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> / anyone else maintaining 3.5: would it be possible to take care of the first three bullet points above soon? I think <a href="https://github.com/leanprover-community/lean/pull/106" target="_blank" title="https://github.com/leanprover-community/lean/pull/106">https://github.com/leanprover-community/lean/pull/106</a> is the only PR that really needs to make it in before we switch. Then we just need a release.</p>
+
+<a name="187372807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187372807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187372807">Rob Lewis (Feb 04 2020 at 16:19)</a>:</h4>
+<p>I can do the rest from the mathlib side.</p>
+
+<a name="187378189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187378189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187378189">Simon Hudon (Feb 04 2020 at 17:16)</a>:</h4>
+<p>Ok, I just merged a few PRs. Once, they finish building, we can make a release.</p>
+
+<a name="187378905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187378905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187378905">Rob Lewis (Feb 04 2020 at 17:24)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="187382462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187382462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187382462">Yury G. Kudryashov (Feb 04 2020 at 18:00)</a>:</h4>
+<p>BTW, do you plan to introduce any non-bc changes to 3.*?</p>
+
+<a name="187382471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187382471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187382471">Yury G. Kudryashov (Feb 04 2020 at 18:00)</a>:</h4>
+<p>(after this release)</p>
+
+<a name="187384839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187384839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187384839">Mario Carneiro (Feb 04 2020 at 18:24)</a>:</h4>
+<p>yes, not in 3.5.0c but soon enough.</p>
+
+<a name="187384948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187384948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187384948">Mario Carneiro (Feb 04 2020 at 18:25)</a>:</h4>
+<p>some changes to core cannot be done without breaking backward compatibility (for example, changing <code>discrete_field</code> to <code>field</code> or <code>congr'</code> to <code>congr</code>)</p>
+
+<a name="187385610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187385610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187385610">Kevin Buzzard (Feb 04 2020 at 18:33)</a>:</h4>
+<blockquote>
+<p>some changes to core cannot be done without breaking backward compatibility (for example, changing <code>discrete_field</code> to <code>field</code> or <code>congr'</code> to <code>congr</code>)</p>
+</blockquote>
+<p>I guess one could just have an import which defines <code>discrete_field</code> to be <code>field</code> etc? I guess this idea only goes so far though.</p>
+
+<a name="187385875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187385875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187385875">Yury G. Kudryashov (Feb 04 2020 at 18:36)</a>:</h4>
+<p>Do you collect proposed changes somewhere? I'd like to have <code>export has_insert (instert)</code> instead of a <code>def</code>.</p>
+
+<a name="187386284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187386284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187386284">Simon Hudon (Feb 04 2020 at 18:41)</a>:</h4>
+<p>We can create an issue for those proposed changes.</p>
+
+<a name="187391326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187391326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187391326">Simon Hudon (Feb 04 2020 at 19:28)</a>:</h4>
+<p>The release was created, the binaries are now available for Linux, we just have to wait for the other builds to finish:</p>
+<p><a href="https://github.com/leanprover-community/lean/releases/tag/v3.5.1" target="_blank" title="https://github.com/leanprover-community/lean/releases/tag/v3.5.1">https://github.com/leanprover-community/lean/releases/tag/v3.5.1</a></p>
+
+<a name="187408612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187408612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187408612">Rob Lewis (Feb 04 2020 at 22:47)</a>:</h4>
+<p>Awesome, thanks Simon! I'll finish things from the mathlib side tomorrow.</p>
+
+<a name="187408670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187408670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187408670">Rob Lewis (Feb 04 2020 at 22:48)</a>:</h4>
+<p>An issue for "core library changes" is a good idea. Renamings, small lemma changes, etc.</p>
+
+<a name="187408716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187408716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187408716">Rob Lewis (Feb 04 2020 at 22:49)</a>:</h4>
+<p>I think the first mathlib bump should be backward compatible. But 3.5.2 (or 3.6?) can break compatibility, and I don't think we need to wait that long to make the switch.</p>
+
+<a name="187408749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187408749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187408749">Rob Lewis (Feb 04 2020 at 22:49)</a>:</h4>
+<p>Let's see if there are any technical issues with the upgrade first.</p>
+
+<a name="187446524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187446524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187446524">Johan Commelin (Feb 05 2020 at 11:50)</a>:</h4>
+<p>CI is happy with the move: <a href="https://github.com/leanprover-community/mathlib/issues/1958" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1958">#1958</a></p>
+
+<a name="187447799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187447799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187447799">Rob Lewis (Feb 05 2020 at 12:13)</a>:</h4>
+<p>Report any version-related disasters here!</p>
+
+<a name="187448006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187448006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187448006">Johan Commelin (Feb 05 2020 at 12:17)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110596">@Rob Lewis</span> for all the effort you've spent on this migration</p>
+
+<a name="187502462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187502462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187502462">Yury G. Kudryashov (Feb 05 2020 at 22:35)</a>:</h4>
+<p>Where can I read about new features of Lean / stdlib we can use now?</p>
+
+<a name="187503361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187503361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187503361">Rob Lewis (Feb 05 2020 at 22:48)</a>:</h4>
+<p>The <a href="https://github.com/leanprover-community/lean/blob/master/doc/changes.md" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/doc/changes.md">changelog</a> has some descriptions. It should probably be updated for the ones that landed just recently. You can also look at the <a href="https://github.com/leanprover-community/lean/commits/master" target="_blank" title="https://github.com/leanprover-community/lean/commits/master">recent commits</a>.</p>
+
+<a name="187731326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187731326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187731326">Patrick Massot (Feb 08 2020 at 21:00)</a>:</h4>
+<p>What is the current status of the Lean version change? How is it meant to work for project using mathlib?</p>
+
+<a name="187731345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187731345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187731345">Patrick Massot (Feb 08 2020 at 21:01)</a>:</h4>
+<p>I tried to bump mathlib is the perfectoid project, changing our leanpkg.toml to have the same lean_version line as mathlib. But then update-mathlib doesn't seem to work.</p>
+
+<a name="187731354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187731354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187731354">Patrick Massot (Feb 08 2020 at 21:01)</a>:</h4>
+<p>I guess this breaks the convention that the lean-3.4.2 branch was to be used.</p>
+
+<a name="187731420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187731420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187731420">Patrick Massot (Feb 08 2020 at 21:03)</a>:</h4>
+<p>Or maybe not. It seems leanpkg upgrade bumped mathlib to the commit corresponding to the latest nightly. But it still recompiles...</p>
+
+<a name="187755285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187755285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187755285">Rob Lewis (Feb 09 2020 at 11:15)</a>:</h4>
+<p>I tried on an external project a day after the change. Updating the lean_version and <code>leanpkg upgrade</code> worked just fine. Do you need to touch the oleans?</p>
+
+<a name="187758729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187758729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187758729">Patrick Massot (Feb 09 2020 at 13:21)</a>:</h4>
+<p>At least this is what I ended up doing yesterday.</p>
+
+<a name="187758739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187758739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187758739">Patrick Massot (Feb 09 2020 at 13:21)</a>:</h4>
+<p>I'll see what happens with the next nightly.</p>
+
+<a name="187857522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187857522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187857522">Patrick Massot (Feb 10 2020 at 21:00)</a>:</h4>
+<p>I didn't pay enough attention, did the fix to <code>change</code> made it into the Lean version mathlib is now using?</p>
+
+<a name="187859705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187859705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187859705">Simon Hudon (Feb 10 2020 at 21:24)</a>:</h4>
+<p>Yes it did</p>
+
+<a name="187859925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187859925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187859925">Patrick Massot (Feb 10 2020 at 21:26)</a>:</h4>
+<p>Nice, I should resume work on <code>rename_var</code> then.</p>
+
+<a name="187901100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/moving%20mathlib%20to%203.5c/near/187901100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/54190movingmathlibto35c.html#187901100">Patrick Massot (Feb 11 2020 at 10:48)</a>:</h4>
+<p>I just bumped mathlib again in the perfectoid project and everything worked fine. I'm not sure what failed last time.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

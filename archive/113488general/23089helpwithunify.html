@@ -1,0 +1,93 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/23089helpwithunify.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html">help with `unify`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191694366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694366">Scott Morrison (Mar 25 2020 at 01:53)</a>:</h4>
+<p>I'm running into the following problem. I've built an expression<br>
+<code>@equiv.arrow_congr.{1 1 1 ?l_1} α α ?m_2 ?m_3 ?m_4 ?m_5</code><br>
+which Lean tells me has type <br>
+<code>equiv.{1 (imax 1 ?l_1)} (α → α) (?m_2 → ?m_3)</code><br>
+I want to unify this with another expression<br>
+<code>?m_1</code><br>
+with type<br>
+<code>equiv.{1 ?l_1} (α → α) ?m_2)</code>.</p>
+<p>To me that looks good, and unification should succeed. But it doesn't. :-( Can anyone guess what is going on?</p>
+
+<a name="191694554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694554">Alex J. Best (Mar 25 2020 at 01:56)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="191694570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694570">Scott Morrison (Mar 25 2020 at 01:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="127136">@Alex J. Best</span> sorry, copy-paste error which I've just fixed.</p>
+
+<a name="191694636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694636">Scott Morrison (Mar 25 2020 at 01:58)</a>:</h4>
+<p>Ah, I seem to have found the problem. With <code>set_option pp.purify_metavars false</code>, we instead see that the two types are:</p>
+<div class="codehilite"><pre><span></span>equiv.{1 (imax 1 ?l__fresh.1092.218230)} (α → α) (?m__fresh.1092.218696 → ?m__fresh.1092.218697)
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>equiv.{1 ?l__fresh.1092.218230} (α → α) ?m__fresh.1092.218370
+</pre></div>
+
+<a name="191694718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694718">Scott Morrison (Mar 25 2020 at 02:00)</a>:</h4>
+<p>and we can see why unification fails: the two <code>?l_1</code>s  must be the same, so <code>(imax 1 ?l_1)</code> isn't unifying with <code>?l_1</code>.</p>
+
+<a name="191694736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191694736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191694736">Scott Morrison (Mar 25 2020 at 02:00)</a>:</h4>
+<p>That's a bit weird, actually. Aren't they always equal, for any <code>?l_1</code>?</p>
+
+<a name="191695657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191695657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191695657">Scott Morrison (Mar 25 2020 at 02:24)</a>:</h4>
+<p>I guess Lean can't see that <code>?l_1 = (imax 1 ?l_1)</code>. Can anyone who knows universe level unification confirm that this is a plausible explanation?</p>
+
+<a name="191695665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191695665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191695665">Scott Morrison (Mar 25 2020 at 02:25)</a>:</h4>
+<p>I guess my workaround is going to be to avoid <code>Sort</code>.</p>
+
+<a name="191699974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191699974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191699974">Chris Hughes (Mar 25 2020 at 04:13)</a>:</h4>
+<p>Page 2 of Mario's <a href="https://github.com/digama0/lean-type-theory/releases" title="https://github.com/digama0/lean-type-theory/releases">thesis</a> has the universe unification rules. I can't find a way of deducing <code>?l_1 = (imax 1 ?l_1)</code> from the rules given.</p>
+
+<a name="191701626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191701626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191701626">Mario Carneiro (Mar 25 2020 at 04:59)</a>:</h4>
+<p>Using the universe unification rules in my thesis, you can prove that and many other things, but crucially you have to use the split rule to case on whether <code>?l_1</code> is 0 or not, and lean doesn't have that rule, it has a fixed finite set of simplifications and that's it</p>
+
+<a name="191701687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191701687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191701687">Mario Carneiro (Mar 25 2020 at 05:00)</a>:</h4>
+<p>The way the proof goes is that <code>imax 1 0 = 0</code> and <code>imax 1 (suc u) = max 1 (suc u) = suc (max 0 u) = suc u</code>, so <code>imax 1 v = v</code></p>
+
+<a name="191701697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191701697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191701697">Mario Carneiro (Mar 25 2020 at 05:01)</a>:</h4>
+<p>this is the way trepplein does universe checking</p>
+
+<a name="191703261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191703261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191703261">Scott Morrison (Mar 25 2020 at 05:48)</a>:</h4>
+<p>This was a really confusing and hard to debug issue. :-( I understand the issue now, but it took me forever to work out that the problem I was having (solve_by_elim refusing to apply a lemma that worked fine by hand) had as its root cause a universe issue.</p>
+
+<a name="191703343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191703343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191703343">Mario Carneiro (Mar 25 2020 at 05:51)</a>:</h4>
+<p>What is the actual goal? I'm curious how this unification constraint can come up</p>
+
+<a name="191703403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20%60unify%60/near/191703403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23089helpwithunify.html#191703403">Scott Morrison (Mar 25 2020 at 05:53)</a>:</h4>
+<p>Hmm... it will be a bit hard to re-extract, actually. I'll see if I can dig it out.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

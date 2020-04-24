@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/44490ltbase.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html">lt.base</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193457483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt.base/near/193457483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html#193457483">Sebastien Gouezel (Apr 09 2020 at 14:28)</a>:</h4>
+<p>Can someone explain the reason for</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lt</span><span class="bp">.</span><span class="n">base</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_refl</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">lt_succ_self</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">lt</span><span class="bp">.</span><span class="n">base</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>with two identical statements, the first one being a def and the second a lemma. (This is in core).</p>
+
+<a name="193460994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt.base/near/193460994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html#193460994">Mario Carneiro (Apr 09 2020 at 14:54)</a>:</h4>
+<p>Of the two, <code>lt.base</code> is definitely the odd one out. Possibly <a href="https://github.com/leanprover-community/lean/blob/master/tests/lean/run/eq9.lean" title="https://github.com/leanprover-community/lean/blob/master/tests/lean/run/eq9.lean">https://github.com/leanprover-community/lean/blob/master/tests/lean/run/eq9.lean</a> may have something to do with it</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">lt</span><span class="bp">.</span><span class="n">base</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">lt</span><span class="bp">.</span><span class="n">step</span>
+
+<span class="kn">theorem</span> <span class="n">lt_succ</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="bp">.</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span><span class="bp">.</span><span class="n">base</span> <span class="bp">.</span><span class="o">(</span><span class="n">a</span><span class="o">))</span>       <span class="o">:=</span> <span class="n">lt</span><span class="bp">.</span><span class="n">base</span> <span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">.</span><span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">lt</span><span class="bp">.</span><span class="n">step</span> <span class="bp">.</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="n">b</span> <span class="n">h</span><span class="o">)</span>  <span class="o">:=</span> <span class="n">lt</span><span class="bp">.</span><span class="n">step</span> <span class="o">(</span><span class="n">lt_succ</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+<a name="193461078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt.base/near/193461078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html#193461078">Mario Carneiro (Apr 09 2020 at 14:54)</a>:</h4>
+<p>I don't know whether being a def affects its being used in pattern matching like this</p>
+
+<a name="193461404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt.base/near/193461404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html#193461404">Gabriel Ebner (Apr 09 2020 at 14:57)</a>:</h4>
+<p>Because Lean won't unfold theorems.</p>
+
+<a name="193461427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt.base/near/193461427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44490ltbase.html#193461427">Gabriel Ebner (Apr 09 2020 at 14:57)</a>:</h4>
+<p>And you want to pattern-match on the constructors of <code>&lt;</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

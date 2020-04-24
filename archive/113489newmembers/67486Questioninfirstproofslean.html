@@ -1,0 +1,95 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/67486Questioninfirstproofslean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html">Question in first_proofs.lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174100285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100285">EnjoysMath (Aug 25 2019 at 21:15)</a>:</h4>
+<p>lemma inf_lt {A : set ℝ} {x : ℝ} (hx : x is_an_inf_of A) :<br>
+  ∀ y, x &lt; y → ∃ a ∈ A, a &lt; y :=<br>
+begin<br>
+  -- Let <code>y</code> be any real number.<br>
+  intro y,<br>
+  -- Let's prove the contrapositive<br>
+  --  ( ... )<br>
+end</p>
+<p>How does Lean know that <code>intro y</code> means that <code>y</code> is asserted to be a real number?  Is that hidden in the prototype somehow?</p>
+
+<a name="174100480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100480">Chris Hughes (Aug 25 2019 at 21:21)</a>:</h4>
+<p>It guesses that it should be a real, because of the inequality <code>x &lt; y</code> and <code>x</code> is real.</p>
+
+<a name="174100663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100663">Patrick Massot (Aug 25 2019 at 21:27)</a>:</h4>
+<p>It is very important to understand that the first and most essential automation that Lean (or any self-respecting proof assistant) will provide is elaboration: filling in missing information. In the statement I could have written <code>∀ y :ℝ , x &lt; y → ∃ a ∈ A, a &lt; y</code>. But Lean figured out the type of <code>y</code> from the following bit <code>x &lt; y</code>.</p>
+
+<a name="174100773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100773">EnjoysMath (Aug 25 2019 at 21:30)</a>:</h4>
+<p>Learning Lean is a greater experience than I once thought that it would be.  What I mean is that I'm enjoying it and am also impressed with its features.</p>
+
+<a name="174100809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100809">Patrick Massot (Aug 25 2019 at 21:31)</a>:</h4>
+<p>The two main types of elaboration that Lean performs are unification and type class inference. Here you see unification. When Lean meets "∀ y,", where the type of <code>y</code> is not provided, it creates a so-called meta-variable for this missing information, typically denoted by something like <code>?M_1</code>. Then reading <code>x &lt; y</code> and knowing that <code>x</code> has type real creates a constraint <code>?M_1 =  ℝ</code> that is straightforward to "unify" by setting <code>?M_1</code>, but there are many cases where Lean has to work much harder (e.g. cleverly unfolding definitions).</p>
+
+<a name="174100916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174100916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174100916">Patrick Massot (Aug 25 2019 at 21:34)</a>:</h4>
+<p>But then we immediately get a new problem while reading <code>x &lt; y</code>. It also triggers a type class resolution elaboration : we need to find a meaning for <code>&lt;</code> on <code>ℝ</code>, ie an "instance" of <code>has_lt ℝ</code>.</p>
+
+<a name="174101117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174101117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174101117">Patrick Massot (Aug 25 2019 at 21:41)</a>:</h4>
+<p>You can type</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">:=</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">ℝ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and look at the bottom of the Lean messages view to see the effort Lean did to find this instance. Where I am it succeeds right away. But looking at something slightly more complicated, like <code>comm_ring ℝ</code>, I see:</p>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : comm_ring ℝ := @Huber_ring.to_comm_ring ?x_1 ?x_2
+[class_instances] (0) ?x_0 : comm_ring ℝ := @uniform_space.comm_ring ?x_1 ?x_2 ?x_3 ?x_4 ?x_5
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := @uniform_space.completion.comm_ring ?x_6 ?x_7 ?x_8 ?x_9 ?x_10
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := @localization.comm_ring ?x_11 ?x_12 ?x_13 ?x_14
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := @subalgebra.comm_ring ?x_15 ?x_16 ?x_17 ?x_18 ?x_19 ?x_20
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := @algebra.comap.comm_ring ?x_21 ?x_22 ?x_23 ?x_24 ?x_25 ?x_26 ?x_27 ?x_28
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := complex.comm_ring
+failed is_def_eq
+[class_instances] (0) ?x_0 : comm_ring ℝ := real.comm_ring
+</pre></div>
+
+
+<p>Because I'm typing this randomly in the middle of a file about Huber rings (a crucial piece of the definition of perfectoid spaces), Lean first try to find a Huber ring structure on <code>ℝ</code> then see if it's the separated quotient of some uniform space, or the completion of a topological ring (which is not how it's currently defined in mathlib) or a localization etc. until it tries the correct instance.</p>
+
+<a name="174101171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174101171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174101171">Patrick Massot (Aug 25 2019 at 21:42)</a>:</h4>
+<p>Actually this process is what most experienced Lean users complain about the most frequently in this forum. For instance, I wish Lean would first try to search an instance by name, following the naming convention it uses itself when you don't name an instance. In that case it would find <code>real.comm_ring</code> right away.</p>
+
+<a name="174101231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174101231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174101231">Patrick Massot (Aug 25 2019 at 21:44)</a>:</h4>
+<p>The above trace is very short because there is no failed attempt that goes on recursively trying to solve other instance resolutions. But sometimes it gets really hairy, and fails after hitting some maximal depth search</p>
+
+<a name="174101238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174101238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174101238">Patrick Massot (Aug 25 2019 at 21:45)</a>:</h4>
+<p>And now I'll go sleeping. Actual computer science experts will correct what I explained wrong (I'm a mathematician).</p>
+
+<a name="174101414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Question%20in%20first_proofs.lean/near/174101414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67486Questioninfirstproofslean.html#174101414">EnjoysMath (Aug 25 2019 at 21:50)</a>:</h4>
+<p>Thank you for the details. I will try out that trace command :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

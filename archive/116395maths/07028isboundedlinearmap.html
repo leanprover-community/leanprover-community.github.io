@@ -1,0 +1,61 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/07028isboundedlinearmap.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html">`is_bounded_linear_map`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185075951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185075951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185075951">Yury G. Kudryashov (Jan 08 2020 at 02:42)</a>:</h4>
+<p>Is there any good reason to have <code>is_bounded_linear_map</code>? Do I understand correctly that it is equivalent to being a <code>continuous_linear_map</code>?</p>
+
+<a name="185076064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076064">Kenny Lau (Jan 08 2020 at 02:44)</a>:</h4>
+<p>to define the operator norm</p>
+
+<a name="185076085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076085">Kevin Buzzard (Jan 08 2020 at 02:45)</a>:</h4>
+<p>Between Banach spaces I think they're the same, but what generality are these things defined in?</p>
+
+<a name="185076170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076170">Kevin Buzzard (Jan 08 2020 at 02:47)</a>:</h4>
+<p>Thinking aloud. If the pre-image of an open ball is open, then we see |x|&lt;=epsilon -&gt; |f(x)|&lt;=1 so the linear map is bounded. Oh and the converse is also true, right? So this is true in some huge generality?</p>
+
+<a name="185076177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076177">Yury G. Kudryashov (Jan 08 2020 at 02:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <code>is_bounded_linear_map</code> is defined in <code>bounded_linear_maps</code>, and this file <code>import</code>s <code>operator_norm</code>.</p>
+
+<a name="185076236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076236">Yury G. Kudryashov (Jan 08 2020 at 02:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="err">𝕜</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="err">𝕜</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span>
+<span class="n">include</span> <span class="err">𝕜</span>
+
+<span class="kn">lemma</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">bound_of_continuous</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">C</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">C</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">,</span> <span class="err">∥</span><span class="n">f</span> <span class="n">x</span><span class="err">∥</span> <span class="bp">≤</span> <span class="n">C</span> <span class="bp">*</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="185076245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076245">Yury G. Kudryashov (Jan 08 2020 at 02:48)</a>:</h4>
+<p>(quote from <code>operator_norm</code>)</p>
+
+<a name="185076251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076251">Kenny Lau (Jan 08 2020 at 02:48)</a>:</h4>
+<p>I've never seen a lowercase blackboard bold in my life</p>
+
+<a name="185076468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60is_bounded_linear_map%60/near/185076468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07028isboundedlinearmap.html#185076468">Yury G. Kudryashov (Jan 08 2020 at 02:55)</a>:</h4>
+<p>Ah, I see: this is an <strong>unbundled</strong> version of <code>continuous_linear_map</code>. If we want to keep it, this distinction should be made clearer.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

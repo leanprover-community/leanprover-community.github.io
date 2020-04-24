@@ -1,0 +1,73 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/29840ringhomalgebra.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html">ring_hom ≃ algebra</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191359599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring_hom%20%E2%89%83%20algebra/near/191359599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html#191359599">Kevin Buzzard (Mar 21 2020 at 18:26)</a>:</h4>
+<p>In my cosy maths world where all rings are commutative, <code>ring_hom</code> and <code>algebra</code> are the same. So how come the mathlib people decided that one of these is better off as a class, and the other one as a structure?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">ring_hom</span> <span class="n">R</span> <span class="n">A</span> <span class="err">≃</span> <span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="o">{</span>
+    <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">hom</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span>
+    <span class="n">commutes&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mul_comm</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">smul_def&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span>
+  <span class="o">},</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">;</span> <span class="n">exact</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span>
+    <span class="n">map_one&#39;</span> <span class="o">:=</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">R</span> <span class="n">A</span><span class="o">,</span>
+    <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">A</span><span class="o">,</span>
+    <span class="n">map_zero&#39;</span> <span class="o">:=</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">R</span> <span class="n">A</span><span class="o">,</span>
+    <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">A</span>
+  <span class="o">},</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">ext</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">dsimp</span><span class="o">,</span>
+    <span class="n">congr&#39;</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">h__to_has_scalar</span><span class="o">,</span>
+    <span class="n">congr&#39;</span><span class="o">,</span>
+    <span class="n">ext</span> <span class="n">r</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">(</span><span class="n">h_smul_def&#39;</span> <span class="n">r</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="kn">end</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="191360127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring_hom%20%E2%89%83%20algebra/near/191360127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html#191360127">Chris Hughes (Mar 21 2020 at 18:38)</a>:</h4>
+<p>It will be to do with the module structure induced by the ring hom.</p>
+
+<a name="191360768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring_hom%20%E2%89%83%20algebra/near/191360768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html#191360768">Kevin Buzzard (Mar 21 2020 at 18:54)</a>:</h4>
+<p>If I am talking about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> as an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-algebra then it might well be the case that I will soon want to talk about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> as an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-module. But if I'm just talking about a ring homomorphism then there's less of a chance? Maybe this is true but I'm still a bit confused as to how the way I'm thinking about something should dictate how it is implemented internally.</p>
+
+<a name="191361206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring_hom%20%E2%89%83%20algebra/near/191361206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html#191361206">Johan Commelin (Mar 21 2020 at 19:05)</a>:</h4>
+<p>I think it's a difference in emphasis. Do you want to take one ring hom and make it "the canonical ring hom" from A to B? Then B is an A-algebra. But if you just want to talk about the map, but it's nothing special, then you use ring_hom.</p>
+
+<a name="191361250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring_hom%20%E2%89%83%20algebra/near/191361250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29840ringhomalgebra.html#191361250">Kevin Buzzard (Mar 21 2020 at 19:06)</a>:</h4>
+<p>Aah you're right: with the algebra structure you're kind of promising that this is the only ring hom from R to A that you'll ever be interested in. Very nice!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

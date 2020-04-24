@@ -1,0 +1,63 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html">cohomology, and subgroups of subgroups</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="167038419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167038419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167038419">Kevin Buzzard (May 31 2019 at 22:04)</a>:</h4>
+<p>Cocycles are subgroups of cochains; coboundaries are subgroups of cocycles. Cohomology groups are cocycles over coboundaries. At least, that's how it works in group cohomology, and maybe in topology too.</p>
+<p>I guess the cocycles will have to end up being a type at some point, because many arguments involve chasing cocycles and then proving that everything descends...sorry...lifts...to cohomology classes. (That still leaves a bad taste in my mouth). But the coboundaries are going to end up being a subtype of a subtype, which is kind of silly. In general we'll have a group <code>G</code> and then <code>Z B : set G</code> with <code>B \subseteq Z</code>, but will end up using the subtype corresponding to <code>B</code> and then we'll have to make the subtype of <code>B</code> corresponding to <code>Z</code>. Is this a situation where I should just try something and see if it works? Have we already run into this issue <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> ? Am I fussing over nothing? I have a student working on group cohomology and this is about to hit us.</p>
+
+<a name="167040355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167040355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167040355">Floris van Doorn (May 31 2019 at 22:35)</a>:</h4>
+<p>In the Lean 2 HoTT library I've done homology (in this case of modules over a ring - obviously at some point we want to do it generally in an abelian category): <a href="https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376" target="_blank" title="https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376">https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376</a><br>
+(note: <code>property</code> means <code>set</code>)</p>
+<p>You will indeed need lemma's/constructions, like if <code>Z</code> and <code>B</code> are both subgroups of <code>G</code> and <code>B \subseteq Z</code> then <code>B</code> is a subgroup of <code>Z</code>. Of course, the last <code>B</code> is not actually <code>B</code> but something like <code>(subtype.val \-1' B : set Z)</code>. But everything works fine.</p>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>  might tell you a different story, which is also worth considering. The idea is that if you do a lot of group theory in a <em>single</em> group <code>G</code>, you should be really doing subgroup theory. That means that for every definition and lemma, when a mathematician would write "Group", you would write "subgroup of <code>G</code>". And then you try to reason as much as you can using sets (and subsets) instead of subtypes. Jeremy can probably tell this story better.</p>
+
+<a name="167041427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167041427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167041427">Patrick Massot (May 31 2019 at 22:54)</a>:</h4>
+<p>I think this always the same story, explained in <a href="https://hal.inria.fr/hal-00825074v1/document" target="_blank" title="https://hal.inria.fr/hal-00825074v1/document">https://hal.inria.fr/hal-00825074v1/document</a> that was already quoted countless times on this chat</p>
+
+<a name="167042858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167042858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167042858">Chris Hughes (May 31 2019 at 23:22)</a>:</h4>
+<p>Can we do most of the subgroup theory using injective group homs instead? Sounds a bit like the localisation issue.</p>
+
+<a name="167057154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167057154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167057154">Reid Barton (Jun 01 2019 at 05:57)</a>:</h4>
+<p>If you want to do homological algebra in an arbitrary abelian category then you are forced to do what Chris suggests anyways</p>
+
+<a name="167071806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167071806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167071806">Jeremy Avigad (Jun 01 2019 at 13:01)</a>:</h4>
+<p>I was just conveying Georges' story, but I spent a year with Georges formalizing finite group theory, and I think he got that part right. The point is that finite group theory really is finite subgroup theory. There are zillions of constructions of subgroups-- intersections, subgroups generated by elements, conjugates, p-cores, the Frattini subgroup, products, semidirect products, etc., etc. The usual style of argumentation involves  elementhood and inclusions between them subgroup. It is fiddly and combinatorial, and it would be a mess to carry them out if each construction took you to a different type.</p>
+
+<a name="167075757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167075757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167075757">Kevin Buzzard (Jun 01 2019 at 14:58)</a>:</h4>
+<p>I need this for a student project and I want to get it right. Seems to me that Assia is talking subgroups but Chris is suggesting something else. Chris' solution looks mathematically meaningful to me; an injection is canonically isomorphic to an inclusion and it's good to be as flexible as we can</p>
+
+<a name="167075917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167075917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167075917">Chris Hughes (Jun 01 2019 at 15:03)</a>:</h4>
+<p>The downside of my approach is that the lattice of subgroups, or any other structure on the subgroups moves up a universe. And then there's the question of whether we should demand a computable partial inverse i.e. an equivalent of <code>subtype.mk</code>.</p>
+
+<a name="167123575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167123575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167123575">Kevin Buzzard (Jun 02 2019 at 14:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> 's story is about finite groups. We are thinking about typically infinite abelian groups. This might change things. Furthermore, in her situation one can imagine wanting to think about lots of subgroups of a group. We have cochains, cocycles, coboundaries, and that's it. </p>
+<p>Maybe this is a situation where I should just try something and see how it works out.</p>
+
+<a name="167266035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167266035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167266035">Kevin Buzzard (Jun 04 2019 at 07:38)</a>:</h4>
+<p>Thinking about this a bit more, I think that perhaps we just need a general theory of cokernels of morphisms in our various concrete abelian categories. And such a theory would have to be rewritten when we bundle these morphisms. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> is there any progress on bundling?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

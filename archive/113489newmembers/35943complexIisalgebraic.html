@@ -1,0 +1,151 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/35943complexIisalgebraic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html">complex.I is algebraic !</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178007730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178007730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178007730">Nicolás Ojeda Bär (Oct 12 2019 at 21:43)</a>:</h4>
+<p>Hurrah! I installed Lean yesterday evening, and after "just" a day and a half, I managed to prove my first result, namely that <code>i</code> is algebraic. Surely experts should be able to condense my proof to just a few words; please share any advice you may have (tactics, style, etc.). Thanks!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">monic</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kn">lemma</span> <span class="n">degree_one_le_1</span> <span class="o">:</span> <span class="n">degree</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">)</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">norm_num</span><span class="o">,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_le_coe</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">))</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraic</span> <span class="n">ℝ</span> <span class="n">ℂ</span> <span class="n">complex</span><span class="bp">.</span><span class="n">I</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">is_algebraic</span><span class="o">,</span>
+<span class="n">use</span> <span class="o">(</span><span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span>
+<span class="n">split</span><span class="o">,</span>
+<span class="o">{</span> <span class="c1">-- prove monic (X^2 + 1)</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">monic_X_pow_add</span> <span class="o">(</span><span class="n">degree_one_le_1</span> <span class="bp">_</span><span class="o">))</span>
+<span class="o">},</span>
+<span class="o">{</span> <span class="c1">-- prove that I^2 + 1 = 0</span>
+<span class="n">rewrite</span> <span class="n">aeval_def</span><span class="o">,</span>
+<span class="n">rewrite</span> <span class="o">(</span><span class="n">pow_two</span> <span class="n">X</span><span class="o">),</span>
+<span class="n">simp</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178008294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178008294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178008294">Reid Barton (Oct 12 2019 at 21:58)</a>:</h4>
+<p>My expert tip: <code>rw</code> is shorter than <code>rewrite</code></p>
+
+<a name="178009743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178009743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178009743">Alex J. Best (Oct 12 2019 at 22:43)</a>:</h4>
+<p>I'm not an expert, but here's where I'd take it too if I found the same proof,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span> <span class="c1">-- how I &quot;remembered&quot; the name of degree_one just ask library_search</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span> <span class="n">complex</span> <span class="c1">-- so I can write I instead of complex.I</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="c1">-- I changed R to be implicit as we want it to be in is_algebraic, there is no need to specify R twice, as its already just whatever ring x is a term of and x is in the definition</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">monic</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraic</span> <span class="n">ℝ</span> <span class="n">I</span> <span class="o">:=</span> <span class="c1">-- making R implicit above lets me remove \C here, opening complex lets me just write I</span>
+<span class="k">begin</span>
+<span class="c1">-- removed the unfold as it&#39;s not needed (except to find the proof in the first place)</span>
+<span class="n">use</span> <span class="o">(</span><span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span>
+<span class="n">split</span><span class="o">,</span>
+<span class="o">{</span> <span class="c1">-- prove monic (X^2 + 1)</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">monic_X_pow_add</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">degree_one</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">))</span> <span class="c1">-- there is a lemma saying degree of 1 is 0 already, so use it and then 0 \le \u 1 is boring so hit it with dec_trivial, probably there is a lemma for this but dec_trivial is good.</span>
+<span class="o">},</span>
+<span class="o">{</span> <span class="c1">-- prove that I^2 + 1 = 0</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">aeval_def</span><span class="o">,</span> <span class="n">pow_two</span><span class="o">],</span> <span class="c1">-- bit of golfing, personal preference and not necessary, but is more like the human &quot;simplify everything using the definition and that x^2=x&quot;</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178009801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178009801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178009801">Alex J. Best (Oct 12 2019 at 22:45)</a>:</h4>
+<p>And yeah probably someone here can get a one-line proof of this ;) but this seems a good balance to me</p>
+
+<a name="178010052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178010052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178010052">Alex J. Best (Oct 12 2019 at 22:53)</a>:</h4>
+<p>oops, confused myself and forgot the earlier conversation, integral = algebraic over a field!</p>
+
+<a name="178022734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178022734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178022734">Floris van Doorn (Oct 13 2019 at 05:53)</a>:</h4>
+<p>Here is my try. I didn't change Alex's proof, but I did change the statement. If we want to prove that <code>i</code> is algebraic, we really want to prove that it's algebraic over <code>Q</code>. I had to add some instances for Lean to recognize that <code>C</code> is an algebra over <code>Q</code>. These should be added to mathlib. Also, Alex's proof was robust enough to work without changes!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span> <span class="n">complex</span>
+
+<span class="kn">instance</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast</span><span class="bp">.</span><span class="n">is_ring_hom</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_add</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">algebra_rat</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">ℚ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">algebra</span><span class="bp">.</span><span class="n">of_ring_hom</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">monic</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraic</span> <span class="n">ℚ</span> <span class="n">I</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="o">(</span><span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="o">(</span><span class="n">monic_X_pow_add</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">degree_one</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">))</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">aeval_def</span><span class="o">,</span> <span class="n">pow_two</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178023061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178023061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178023061">Alex J. Best (Oct 13 2019 at 06:05)</a>:</h4>
+<p>Nice, definitely these should end up in mathlib. I also worked on getting exactly the same cast going to prove that X^2 + 1 was monic actually, I was hoping that dec_trivial would prove that monic polynomials over Q were in fact monic, and then the proof for R could involve <code>convert (monic_map (rat.cast : ℚ → ℝ)) (dec_trivial : (monic : polynomial ℚ → Prop)(X^2 + 1)),</code> I was hoping that this would be even more robust, and you could show that every polynomial which is "obviously" monic over Q was monic without work this way, rather than worrying about special lemmas on the form of the polynomial. But I couldn't make a decidable instance for polynomial.monic that was computable. I guess this is due to some lines in the polynomial files like noncomputable theory and prop_decidable instances, but I think it would be nice if this could work, is there  a reason not to allow this sort of thing? Or am I missing an existing way to do this?</p>
+
+<a name="178024102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178024102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178024102">Keeley Hoek (Oct 13 2019 at 06:39)</a>:</h4>
+<p>There is an instance for decidability of monic-ness, <code>monic.decidable</code>, but it doesn't work at the moment in this case</p>
+<div class="codehilite"><pre><span></span>instance dinst : decidable (@monic ℚ _ (X^2 + 1)) := by apply_instance
+</pre></div>
+
+
+<p>because of picking up classical stuff in the polynomial development</p>
+
+<a name="178028202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178028202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178028202">Nicolás Ojeda Bär (Oct 13 2019 at 08:48)</a>:</h4>
+<p>1) Just to confirm my understanding, what is the difference between <code>rw aeval_def</code> and <code>simp [aeval_def]</code> ?<br>
+2) How does it work in <code>simp [pow_two]</code> where the argument (<code>X</code>) is not passed (not even with a wildcard <code>_</code>)?</p>
+
+<a name="178028223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178028223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178028223">Patrick Massot (Oct 13 2019 at 08:49)</a>:</h4>
+<p>Did you read <a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#rewriting" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#rewriting">https://leanprover.github.io/theorem_proving_in_lean/tactics.html#rewriting</a> and the next section?</p>
+
+<a name="178028296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178028296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178028296">Nicolás Ojeda Bär (Oct 13 2019 at 08:51)</a>:</h4>
+<p>No, not yet, I will do it now. Thanks for the hint!</p>
+
+<a name="178028297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178028297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178028297">Kevin Buzzard (Oct 13 2019 at 08:51)</a>:</h4>
+<p><code>rw h</code> means "find the left hand side of <code>h</code> in the goal and replace it with the right hand side. <code>simp [h]</code> means "you can use <code>h </code>and also every single lemma tagged <code>[simp]</code> in core Lean and also every module you've imported, all applied according to some clever heuristics which you don't need to know about"</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

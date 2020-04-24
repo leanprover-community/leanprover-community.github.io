@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/94816renameadeclaration.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html">rename a declaration</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192218168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218168">Johan Commelin (Mar 30 2020 at 07:12)</a>:</h4>
+<p>How hard would it be to ask Lean to replace all occurences of <code>foo.bar.xyzzy</code> with <code>baz.quux</code>? This should also work of the namespace <code>foo</code>, <code>foo.bar</code>, and/or <code>baz</code> has been opened...</p>
+
+<a name="192218558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218558">Mario Carneiro (Mar 30 2020 at 07:18)</a>:</h4>
+<p>nope</p>
+
+<a name="192218621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218621">Johan Commelin (Mar 30 2020 at 07:18)</a>:</h4>
+<p>Hmmm.... it's "Mario nope" hard. That's unfortunate.</p>
+
+<a name="192218747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218747">Johan Commelin (Mar 30 2020 at 07:20)</a>:</h4>
+<p>We have the hover information, and olean files know everything about source locations. So I was hoping that we could run some substitution over the source files...</p>
+
+<a name="192218749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218749">Mario Carneiro (Mar 30 2020 at 07:20)</a>:</h4>
+<p>you might be able to exploit go to definition support, but that's exactly the sort of thing that not having an external parser causes</p>
+
+<a name="192218802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192218802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192218802">Mario Carneiro (Mar 30 2020 at 07:20)</a>:</h4>
+<p>It will require some new lean API</p>
+
+<a name="192227872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192227872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192227872">Sebastian Ullrich (Mar 30 2020 at 08:59)</a>:</h4>
+<p>I've actually given some thought to how to do such refactorings in the Lean 3 parser, even without a concrete syntax tree. You could change the scanner to output each read token to some output stream before reading the next token from the input, which gives the parser (which does name resolution in Lean 3) a chance to modify that token before calling into the scanner again...</p>
+
+<a name="192230142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rename%20a%20declaration/near/192230142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94816renameadeclaration.html#192230142">Mario Carneiro (Mar 30 2020 at 09:23)</a>:</h4>
+<p>Could it send the data to vscode instead? I know vscode / LSP has a rename option, and it seems like file editing is better done there</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

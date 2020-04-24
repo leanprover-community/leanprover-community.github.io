@@ -1,0 +1,142 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49556LambdasyntaxinLean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html">Lambda syntax in Lean 4</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193653530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193653530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193653530">Uranus Testing (Apr 11 2020 at 10:31)</a>:</h4>
+<p>Wow! Can it break anything?</p>
+<div class="codehilite"><pre><span></span><span class="n">new_frontend</span>
+
+<span class="n">syntax</span> <span class="s2">&quot;(&quot;</span> <span class="n">term</span> <span class="s2">&quot;↦&quot;</span> <span class="n">term</span> <span class="s2">&quot;)&quot;</span> <span class="o">:</span> <span class="n">term</span>
+<span class="n">macro_rules</span> <span class="bp">`</span><span class="o">((</span><span class="err">$</span><span class="n">x</span> <span class="err">↦</span> <span class="err">$</span><span class="n">y</span><span class="o">))</span> <span class="bp">=&gt;</span> <span class="bp">`</span><span class="o">(</span><span class="k">fun</span> <span class="err">$</span><span class="n">x</span> <span class="bp">=&gt;</span> <span class="err">$</span><span class="n">y</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">6</span> <span class="o">:=</span>
+<span class="n">Eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">6</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">Eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="193679137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193679137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193679137">Sebastian Ullrich (Apr 11 2020 at 20:57)</a>:</h4>
+<p>Hah nice, someone is actually playing with that. You can drop the parens if you set a precedence on the arrow:</p>
+<div class="codehilite"><pre><span></span><span class="n">new_frontend</span>
+
+<span class="n">syntax</span> <span class="n">term</span> <span class="s2">&quot;↦&quot;</span><span class="o">:</span><span class="mi">1024</span> <span class="n">term</span> <span class="o">:</span> <span class="n">term</span>
+<span class="n">macro_rules</span> <span class="bp">`</span><span class="o">(</span><span class="err">$</span><span class="n">x</span> <span class="err">↦</span> <span class="err">$</span><span class="n">y</span><span class="o">)</span> <span class="bp">=&gt;</span> <span class="bp">`</span><span class="o">(</span><span class="k">fun</span> <span class="err">$</span><span class="n">x</span> <span class="bp">=&gt;</span> <span class="err">$</span><span class="n">y</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">6</span> <span class="o">:=</span>
+<span class="n">Eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">6</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">↦</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">Eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>or, of course, just</p>
+<div class="codehilite"><pre><span></span><span class="kn">notation</span> <span class="n">x</span> <span class="s2">&quot;↦&quot;</span><span class="o">:</span><span class="mi">1024</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>Next task: finding and implementing a sensible syntax for multiple parameters?</p>
+
+<a name="193679302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193679302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193679302">Sebastian Ullrich (Apr 11 2020 at 21:00)</a>:</h4>
+<p>Breaking anything by introducing new syntax should be hard as long as it doesn't cover existing syntax, and the leading token isn't already used somewhere else as a non-leading token, like in the <code>[a,b[</code> example.</p>
+
+<a name="193684295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193684295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193684295">Mario Carneiro (Apr 11 2020 at 23:14)</a>:</h4>
+<p>Well, if they are in the same binder group then you could use the syntax <code>(a b : Nat) ↦ a</code>, and if they are not then you could just right associate as in <code>(a : Nat) ↦ (b : Nat) ↦ a</code></p>
+
+<a name="193701879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193701879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193701879">Sebastian Ullrich (Apr 12 2020 at 08:47)</a>:</h4>
+<p>Yeah, looks fine and should even work out of the box with the above definition</p>
+
+<a name="193701932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193701932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193701932">Mario Carneiro (Apr 12 2020 at 08:48)</a>:</h4>
+<p>where is the associativity getting declared?</p>
+
+<a name="193702011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702011">Sebastian Ullrich (Apr 12 2020 at 08:50)</a>:</h4>
+<p><code>term</code> is short for <code>term:0</code>, so it will eat any following binders and <code>"↦":1024</code></p>
+
+<a name="193702023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702023">Mario Carneiro (Apr 12 2020 at 08:50)</a>:</h4>
+<p>yeah but it does that on the left too?</p>
+
+<a name="193702034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702034">Mario Carneiro (Apr 12 2020 at 08:51)</a>:</h4>
+<p>why isn't it <code>binder ↦ term : term</code></p>
+
+<a name="193702114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702114">Sebastian Ullrich (Apr 12 2020 at 08:52)</a>:</h4>
+<p>There is no real LHS. If you start a <code>term</code> syntax with <code>term</code>, the <code>syntax</code> macro recognizes the left recursion and refactors it into a trailing parser. The real parser is <code>"↦":1024 term</code>, it is triggered on the arrow.</p>
+
+<a name="193702121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702121">Mario Carneiro (Apr 12 2020 at 08:53)</a>:</h4>
+<p>so how does the LHS get parsed then?</p>
+
+<a name="193702123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702123">Mario Carneiro (Apr 12 2020 at 08:53)</a>:</h4>
+<p>it's not a term after all</p>
+
+<a name="193702126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702126">Mario Carneiro (Apr 12 2020 at 08:53)</a>:</h4>
+<p>unless you need it to conform to the term grammar anyway?</p>
+
+<a name="193702132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702132">Sebastian Ullrich (Apr 12 2020 at 08:53)</a>:</h4>
+<p>Since binders may contain arbitrary patterns, they are in fact parsed as terms. <code>(a : A) (b : B)</code> is an application of type annotations.</p>
+
+<a name="193702136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702136">Mario Carneiro (Apr 12 2020 at 08:54)</a>:</h4>
+<p>what about <code>{{a : A}}</code></p>
+
+<a name="193702173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702173">Mario Carneiro (Apr 12 2020 at 08:54)</a>:</h4>
+<p>that's not a valid term in lean 3 at least</p>
+
+<a name="193702259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702259">Sebastian Ullrich (Apr 12 2020 at 08:56)</a>:</h4>
+<p>Uh, I don't think we have strict implicits atm... not sure if there was a concious decision to remove them</p>
+
+<a name="193702268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702268">Mario Carneiro (Apr 12 2020 at 08:56)</a>:</h4>
+<p>what about <code>{a : A}</code>?</p>
+
+<a name="193702269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702269">Mario Carneiro (Apr 12 2020 at 08:56)</a>:</h4>
+<p>that's also not valid</p>
+
+<a name="193702666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193702666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193702666">Patrick Massot (Apr 12 2020 at 09:07)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110024">Sebastian Ullrich</span> <a href="#narrow/stream/113488-general/topic/Lambda.20syntax.20in.20Lean.204/near/193702259" title="#narrow/stream/113488-general/topic/Lambda.20syntax.20in.20Lean.204/near/193702259">said</a>:</p>
+<blockquote>
+<p>Uh, I don't think we have strict implicits atm... not sure if there was a concious decision to remove them</p>
+</blockquote>
+<p>But those are crucial!</p>
+
+<a name="193703507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20syntax%20in%20Lean%204/near/193703507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49556LambdasyntaxinLean4.html#193703507">Sebastian Ullrich (Apr 12 2020 at 09:32)</a>:</h4>
+<p>Ah, my description was overly simplified. <code>term</code>s are valid binders, but the other annotations are there as well. So the syntax above is not quite complete yet.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

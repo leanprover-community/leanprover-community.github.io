@@ -1,0 +1,284 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html">Speeding up compilation time for Lean project</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189193673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189193673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189193673">Donald Sebastian Leung (Feb 27 2020 at 08:03)</a>:</h4>
+<p><em>This is broadly related to <a href="#narrow/stream/113488-general/topic/Adding.20Lean.20support.20to.20Codewars" title="#narrow/stream/113488-general/topic/Adding.20Lean.20support.20to.20Codewars">Adding Lean Support to Codewars</a>, but this time I'm directly testing out on my PC instead of on Codewars' servers.</em></p>
+<p>So suppose I create a Lean project as follows:</p>
+<div class="codehilite"><pre><span></span>$ leanpkg new my_project
+$ <span class="nb">cd</span> my_project
+$ leanpkg add leanprover-community/mathlib
+</pre></div>
+
+
+<p>I then remove <code>_target/deps/mathlib/src/</code> entirely and replace it with <a href="https://github.com/leanprover-community/mathlib-nightly/releases/download/nightly-2020-02-17/mathlib-olean-nightly-2020-02-17.tar.gz" target="_blank" title="https://github.com/leanprover-community/mathlib-nightly/releases/download/nightly-2020-02-17/mathlib-olean-nightly-2020-02-17.tar.gz">nightly <code>.olean</code> files for mathlib</a>. Then, after that, I return to the command line:</p>
+<div class="codehilite"><pre><span></span>$ find _target <span class="p">|</span> grep <span class="s2">&quot;[.]lean</span>$<span class="s2">&quot;</span> <span class="p">|</span> xargs rm <span class="c1"># Remove all .lean files from mathlib</span>
+$ find _target <span class="p">|</span> grep <span class="s2">&quot;[.]olean</span>$<span class="s2">&quot;</span> <span class="p">|</span> xargs touch <span class="c1"># Give same timestamp to all .olean files</span>
+</pre></div>
+
+
+<p>Now that the setup is complete, I go to <code>src/</code> in my project directory and create three files <code>Preloaded.lean</code>, <code>Solution.lean</code> and <code>SolutionTest.lean</code> of the following format:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Preloaded.lean -/</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">specific_limits</span> <span class="c1">-- Import something from mathlib</span>
+
+<span class="n">def</span> <span class="n">SUBMISSION</span> <span class="o">:=</span> <span class="n">some_mathematical_statement</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">SUBMISSION</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">SUBMISSION</span> <span class="c1">-- cheat prevention; prevent override of SUBMISSION</span>
+
+<span class="c">/-</span><span class="cm"> Solution.lean -/</span>
+<span class="kn">import</span> <span class="n">Preloaded</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- maybe import some more from mathlib</span>
+
+<span class="c1">-- Solution likely uses some results from mathlib</span>
+<span class="kn">theorem</span> <span class="n">solution</span> <span class="o">:</span> <span class="n">some_mathematical_statement</span> <span class="o">:=</span> <span class="n">some_proof</span>
+
+<span class="c">/-</span><span class="cm"> SolutionTest.lean -/</span>
+<span class="kn">import</span> <span class="n">Preloaded</span> <span class="n">Solution</span>
+
+<span class="kn">theorem</span> <span class="n">submission</span> <span class="o">:</span> <span class="n">SUBMISSION</span> <span class="o">:=</span> <span class="n">solution</span>
+</pre></div>
+
+
+<p>However, I get extremely slow performance when I run:</p>
+<div class="codehilite"><pre><span></span>$ lean SolutionTest.lean -E SolutionTest.out --only-export<span class="o">=</span>submission <span class="o">&amp;&amp;</span> leanchecker SolutionTest.out submission
+</pre></div>
+
+
+<p>For example, doing this on a proof that <code>0.999... = 1</code> takes 1m30s on my machine when it should take only about 8 seconds. Even just compiling <code>SolutionTest.lean</code> as follows takes half a minute:</p>
+<div class="codehilite"><pre><span></span>$ lean SolutionTest.lean
+</pre></div>
+
+
+<p>Does anyone know what I'm doing wrong which is causing this subpar performance? I thought using pre-compiled <code>.olean</code> files (and deleting the original <code>.lean</code> files!) for mathlib should speed up the compilation process?</p>
+
+<a name="189196581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189196581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189196581">Kevin Buzzard (Feb 27 2020 at 09:02)</a>:</h4>
+<p>I think that the issue is that <code>leanpkg new</code> creates a file <code>leanpkg.toml</code> which states that the Lean to be used in this project is Lean 3.4.2. When you download the nightlies they are almost certainly all compiled with Lean 3.5.1 so none of the olean files are valid for the lean binary which the package is being told to use.</p>
+
+<a name="189196587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189196587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189196587">Johan Commelin (Feb 27 2020 at 09:02)</a>:</h4>
+<p>What are you seeing in the output?</p>
+
+<a name="189196680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189196680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189196680">Kevin Buzzard (Feb 27 2020 at 09:04)</a>:</h4>
+<p>The community in general only started using versions of Lean after 3.4.2 this month, after well over a year of being fixed to 3.4.2, and not all of the tooling has caught up.</p>
+
+<a name="189197109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197109">Donald Sebastian Leung (Feb 27 2020 at 09:11)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196581" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196581">said</a>:</p>
+<blockquote>
+<p>I think that the issue is that <code>leanpkg new</code> creates a file <code>leanpkg.toml</code> which states that the Lean to be used in this project is Lean 3.4.2. When you download the nightlies they are almost certainly all compiled with Lean 3.5.1 so none of the olean files are valid for the lean binary which the package is being told to use.</p>
+</blockquote>
+<p>My <code>leanpkg.toml</code> is as follows which says that the Lean version is 3.5.1 as far as I can tell?</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;cw-lean-kata&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;3.5.1&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;f0bb2f826bd20e217edf199b8703b5baeba1354a&quot;}
+</pre></div>
+
+<a name="189197174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197174">Donald Sebastian Leung (Feb 27 2020 at 09:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196587" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196587">said</a>:</p>
+<blockquote>
+<p>What are you seeing in the output?</p>
+</blockquote>
+<p>The usual stuff (some axioms printed out and <code>theorem submission : SUBMISSION</code>), nothing out of the ordinary. I can also paste the exact output if it helps.</p>
+
+<a name="189197451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197451">Patrick Massot (Feb 27 2020 at 09:17)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196581" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189196581">said</a>:</p>
+<blockquote>
+<p>I think that the issue is that <code>leanpkg new</code> creates a file <code>leanpkg.toml</code> which states that the Lean to be used in this project is Lean 3.4.2. When you download the nightlies they are almost certainly all compiled with Lean 3.5.1 so none of the olean files are valid for the lean binary which the package is being told to use.</p>
+</blockquote>
+<p>This question was discussed in <a href="#narrow/stream/113488-general/topic/default.20toolchain" title="#narrow/stream/113488-general/topic/default.20toolchain">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/default.20toolchain</a>. The issue is a <a href="https://github.com/leanprover-community/lean/issues/126" target="_blank" title="https://github.com/leanprover-community/lean/issues/126">big bug</a> in <code>leanpkg</code>.</p>
+
+<a name="189197496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197496">Kevin Buzzard (Feb 27 2020 at 09:18)</a>:</h4>
+<p>I am completely confused by your leanpkg.toml file. My leanpkg makes files with the line <code>lean_version = "3.4.2"</code> and in the projects which I have upgraded by hand to Lean 3.5.1, they say <code>lean_version = "leanprover-community/lean:3.5.1"</code>. I am not an expert in this side of things by any means. I've never seen a toml like yours before but it might be fine.</p>
+
+<a name="189197559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197559">Kevin Buzzard (Feb 27 2020 at 09:19)</a>:</h4>
+<p>...but it might also not be fine.</p>
+
+<a name="189197568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197568">Patrick Massot (Feb 27 2020 at 09:19)</a>:</h4>
+<p>I went to the lean repository to find the link above and I'm really stunned: it seems lean3.6 was released yesterday without fixing this critical bug which prevents using the community Lean with leanpkg.</p>
+
+<a name="189197713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189197713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189197713">Kevin Buzzard (Feb 27 2020 at 09:22)</a>:</h4>
+<p>OK so basically the story is that there has been a community fork of Lean for a long time, but none of the tools used it. We decided earlier this month that it was time to now get users using the community fork, but some of the tools don't work correctly yet. I am using Lean 3.5.1 no problem with this toml:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;M4P33&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;leanprover-community/lean:3.5.1&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;1b1b6
+26ae32b9a23d4eeab59dd78e0f9b3ac594e&quot;}
+</pre></div>
+
+
+<p>so the first question is whether your problems are fixed by changing the toml so that <code>lean_version</code> is what it says above, and <code>mathlib</code> is set so that the revision is precisely the revision which you're checking out with the gzipped tarfile.</p>
+
+<a name="189198080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198080">Sebastian Ullrich (Feb 27 2020 at 09:29)</a>:</h4>
+<p>Presumably <span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span> is not using <code>elan</code>, otherwise he would have gotten an error using his <code>leanpkg.toml</code>.<br>
+<span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span> Does checking an <em>empty</em> Lean file take any significant time? If yes, it could be that Lean is recompiling its own core library. If no, then perhaps the 30s vs 8s checking time simply is a matter of different CPUs, esp. different number of cores.</p>
+
+<a name="189198197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198197">Johan Commelin (Feb 27 2020 at 09:30)</a>:</h4>
+<p>But a typical 100 line file should be checkable in &lt;1s on any cpu that is &lt;5 yrs old, right?</p>
+
+<a name="189198214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198214">Johan Commelin (Feb 27 2020 at 09:30)</a>:</h4>
+<p>The 8s mark is already quite high.</p>
+
+<a name="189198228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198228">Donald Sebastian Leung (Feb 27 2020 at 09:30)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189197713" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189197713">said</a>:</p>
+<blockquote>
+<p>OK so basically the story is that there has been a community fork of Lean for a long time, but none of the tools used it. We decided earlier this month that it was time to now get users using the community fork, but some of the tools don't work correctly yet. I am using Lean 3.5.1 no problem with this toml:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;M4P33&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;leanprover-community/lean:3.5.1&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib&quot;, rev = &quot;1b1b6
+26ae32b9a23d4eeab59dd78e0f9b3ac594e&quot;}
+</pre></div>
+
+
+<p>so the first question is whether your problems are fixed by changing the toml so that <code>lean_version</code> is what it says above, and <code>mathlib</code> is set so that the revision is precisely the revision which you're checking out with the gzipped tarfile.</p>
+</blockquote>
+<p>I changed the <code>.toml</code> to the following:</p>
+<div class="codehilite"><pre><span></span>[package]
+name = &quot;M4P33&quot;
+version = &quot;0.1&quot;
+lean_version = &quot;leanprover-community/lean:3.5.1&quot;
+path = &quot;src&quot;
+
+[dependencies]
+mathlib = {git = &quot;https://github.com/leanprover-community/mathlib-nightly/&quot;, rev = &quot;1b1b626ae32b9a23d4eeab59dd78e0f9b3ac594e&quot;}
+</pre></div>
+
+
+<p>but compilation time is still 1m30s</p>
+
+<a name="189198262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198262">Donald Sebastian Leung (Feb 27 2020 at 09:31)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198197" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198197">said</a>:</p>
+<blockquote>
+<p>But a typical 100 line file should be checkable in &lt;1s on any cpu that is &lt;5 yrs old, right?</p>
+</blockquote>
+<p>Not sure if it's relevant but my Mac is already 6.5 years old <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="189198341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198341">Sebastian Ullrich (Feb 27 2020 at 09:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198214" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198214">said</a>:</p>
+<blockquote>
+<p>The 8s mark is already quite high.</p>
+</blockquote>
+<p>IIRC from the previous topic, Kevin had an alternative proof that takes 1s, so I suppose the proof just isn't very optimized.</p>
+
+<a name="189198345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198345">Johan Commelin (Feb 27 2020 at 09:32)</a>:</h4>
+<p>Well, I just said some numbers.</p>
+
+<a name="189198361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198361">Johan Commelin (Feb 27 2020 at 09:32)</a>:</h4>
+<p>I've done demos of Euclids infinite primes theorem using a 12 year old laptop</p>
+
+<a name="189198379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198379">Donald Sebastian Leung (Feb 27 2020 at 09:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110024">Sebastian Ullrich</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198080" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189198080">said</a>:</p>
+<blockquote>
+<p>Presumably <span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span> is not using <code>elan</code>, otherwise he would have gotten an error using his <code>leanpkg.toml</code>.<br>
+<span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span> Does checking an <em>empty</em> Lean file take any significant time? If yes, it could be that Lean is recompiling its own core library. If no, then perhaps the 30s vs 8s checking time simply is a matter of different CPUs, esp. different number of cores.</p>
+</blockquote>
+<p>Nope, running <code>lean SolutionTest.lean</code> on an empty <code>SolutionTest.lean</code> takes less than 3 seconds</p>
+
+<a name="189198402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198402">Johan Commelin (Feb 27 2020 at 09:33)</a>:</h4>
+<p>That is significant, I think.</p>
+
+<a name="189198406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198406">Johan Commelin (Feb 27 2020 at 09:33)</a>:</h4>
+<p>It should be &lt;0.1s</p>
+
+<a name="189198473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198473">Sebastian Ullrich (Feb 27 2020 at 09:34)</a>:</h4>
+<p>Then I think your hardware is simply ~4x as slow as Kevin's (who reported the 8s number, afair?)</p>
+
+<a name="189198550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189198550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189198550">Donald Sebastian Leung (Feb 27 2020 at 09:35)</a>:</h4>
+<p>Thanks for all the help, I guess I just need to get a faster computer then (and Codewars needs some faster servers, though their servers are about 2x as fast as my Mac)</p>
+
+<a name="189214348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189214348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189214348">Donald Sebastian Leung (Feb 27 2020 at 13:42)</a>:</h4>
+<p>Final update: I went with <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> 's suggestion and went with <code>elan</code> + compiling the mathlib myself (which I swear took at least 2 hours), and my <code>0.999... = 1</code> example took 1m45s to compile. At this point I can be certain that my Mac (and Codewars' servers as well) is simply too slow for Lean. Thank you for all your help and support, I think this thread (and the thread on adding Lean support to Codewars) can be closed now.</p>
+
+<a name="189229346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189229346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189229346">Kevin Buzzard (Feb 27 2020 at 16:28)</a>:</h4>
+<p>There is <em>something wrong</em>. No file this short takes 1m45s to compile. Your set-up is broken. Earlier on I pointed out that you were probably using incompatible Lean and mathlib somehow. All this talk of &gt; 30 seconds is completely absurd. Your set-up is broken right now. Nobody else reports this kind of time on any system, even Johan's old laptop.</p>
+
+<a name="189231181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189231181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189231181">Kevin Buzzard (Feb 27 2020 at 16:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span> I compiled your proof in less than 8 seconds on old hardware. I strongly suspect that you are also compiling a large chunk of Lean's maths library in your tests. If you use VS Code on your mac and look at your proof compiling, where are the orange bars? If they stay at the top of the file for 1 minute then you are compiling mathlib. If they quickly move from the top of the file and then spend 1 minute on your code then you are right, your hardware is not quick enough. The big question is what is going on during that 1 minute. You want to be compiling your code. I strongly suspect you are compiling a large chunk of mathlib due to a bad set-up. I'm sorry the infrastructure is not there. Ironically if you had tried to do all this a month or so ago before Lean 3.5.1 appeared and added to the confusion then you might have found things easier. Right now our tools are bad and everything has to be done by hand. But your belief that your file plus a correctly compiled mathlib takes 1m45 to compile on a machine which is e.g. capable of running a web browser is absurd.</p>
+
+<a name="189233807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189233807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189233807">Sebastian Ullrich (Feb 27 2020 at 17:13)</a>:</h4>
+<p>If he deleted the .lean files, it's definitely not recompiling mathlib at least</p>
+
+<a name="189239427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189239427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189239427">Mario Carneiro (Feb 27 2020 at 18:12)</a>:</h4>
+<p>could it be recompiling the core library? That happens to me sometimes and the 1m45s number seems about right for that</p>
+
+<a name="189252809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189252809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189252809">Patrick Massot (Feb 27 2020 at 20:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110024">Sebastian Ullrich</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189233807" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189233807">said</a>:</p>
+<blockquote>
+<p>If he deleted the .lean files, it's definitely not recompiling mathlib at least</p>
+</blockquote>
+<p>I think he deleted them but restored them. We keep talkinh about olean archive hosted on GitHub or Azure, but they actually contain the lean files as well.</p>
+
+<a name="189252942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189252942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189252942">Patrick Massot (Feb 27 2020 at 20:23)</a>:</h4>
+<p>It would be really nice in Lean 3.7 (and Lean 4...) to have an option asking Lean to log the list of files it compiles and <em>why</em>.</p>
+
+<a name="189253386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189253386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189253386">Jason Rute (Feb 27 2020 at 20:28)</a>:</h4>
+<p>I wonder with the new mathlib tools (leanproject or whatever it will be called) if there could be a tool which lets one test that one's setup is complete, i.e. that it is using the .olean files, and that it compiles a file in a reasonable timeframe.  Then I think for cases like this, telling the user to run that command can be part of the debugging process (and maybe a final step in the setup instructions).</p>
+
+<a name="189253472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189253472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189253472">Patrick Massot (Feb 27 2020 at 20:29)</a>:</h4>
+<p>Could you please copy that message to <a href="https://github.com/leanprover-community/mathlib-tools/pull/16" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/pull/16">https://github.com/leanprover-community/mathlib-tools/pull/16</a>?</p>
+
+<a name="189600787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189600787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189600787">Donald Sebastian Leung (Mar 03 2020 at 15:04)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189239427" title="#narrow/stream/113488-general/topic/Speeding.20up.20compilation.20time.20for.20Lean.20project/near/189239427">said</a>:</p>
+<blockquote>
+<p>could it be recompiling the core library? That happens to me sometimes and the 1m45s number seems about right for that</p>
+</blockquote>
+<p>So it just occurred to me to ask: how can I find out if I'm recompiling the core library? If I do <code>lean --profile someFile.lean</code> and the compilation time in the cumulative profiling times is in the order of fractions of a millisecond then I suppose that that is not the case?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

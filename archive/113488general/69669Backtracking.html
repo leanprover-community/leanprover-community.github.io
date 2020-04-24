@@ -1,0 +1,197 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/69669Backtracking.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html">Backtracking</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194748479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194748479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194748479">Jason Rute (Apr 21 2020 at 00:15)</a>:</h4>
+<p>Let's say I have a finite list of tactics (with no arguments) that I'd like to try on a state.  I'd like to do a <strong>breath first search</strong> with this list of tactics.  Two questions:</p>
+<ol>
+<li>Is this theoretically possible?  Can one "back track" or go to a previously visited state using tactics?</li>
+<li>Is there any caching or will I have to incur the cost of executing that tactic again every time I go back to a previously explored branch. </li>
+</ol>
+<p>(I'm not actually interested in this exact application per say, but I'm trying to understand how flexible tree searching is in Lean tactics.)</p>
+
+<a name="194748727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194748727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194748727">Jason Rute (Apr 21 2020 at 00:18)</a>:</h4>
+<p>Actually, I realize the answer to (1) is true, but the algorithm I have in mind isn't pretty.  The top tactic enumerates all the finite partial paths through the tree in BFS order and then repeatedly tries to execute the sub tactics in that order.  However, it is algorithms like this which make me ask the second question.  Is there anything more efficient?</p>
+
+<a name="194748917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194748917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194748917">Jason Rute (Apr 21 2020 at 00:21)</a>:</h4>
+<p>Maybe after applying a string of tactics, e.g. A, B, A, C if it succeeds one can record the partial term proof so far and store it in a map object.  Whenever a path extending that path comes up again, one can just execute the term instead of the tactics, but I don't know if this is entirely possible.</p>
+
+<a name="194749075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749075">Jason Rute (Apr 21 2020 at 00:23)</a>:</h4>
+<p>Another possibility is that it is possible to save all the expressions in a goal stack and manually set that goal stack.  (This might only partially work, since I assume changing the goals isn't sound, so if a tactic does it, the final proof won't work.)</p>
+
+<a name="194749123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749123">Scott Morrison (Apr 21 2020 at 00:24)</a>:</h4>
+<p>Sure, it's no problem.</p>
+
+<a name="194749130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749130">Scott Morrison (Apr 21 2020 at 00:24)</a>:</h4>
+<p>Backtracking is free.</p>
+
+<a name="194749154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749154">Jason Rute (Apr 21 2020 at 00:24)</a>:</h4>
+<p>How does one do it?</p>
+
+<a name="194749178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749178">Scott Morrison (Apr 21 2020 at 00:24)</a>:</h4>
+<p>You can use <code>get_state</code> and <code>set_state</code>, and pass the <code>tactic_state</code> terms around however you please.</p>
+
+<a name="194749202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749202">Scott Morrison (Apr 21 2020 at 00:25)</a>:</h4>
+<p>I'm not sure from what you say if you already know about <code>s &lt;|&gt; t</code></p>
+
+<a name="194749216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749216">Scott Morrison (Apr 21 2020 at 00:25)</a>:</h4>
+<p>which runs <code>s</code>, and if that fails restores the previous state, then runs <code>t</code>.</p>
+
+<a name="194749274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749274">Jason Rute (Apr 21 2020 at 00:26)</a>:</h4>
+<p>I do know about <code>s &lt;|&gt; t</code>.  I don't just want to backtrack on fails.</p>
+
+<a name="194749325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749325">Scott Morrison (Apr 21 2020 at 00:27)</a>:</h4>
+<p><code>try_core t</code>, which returns an <code>none</code> if <code>t</code> fails, and <code>some a</code> if <code>t</code> returns <code>a</code></p>
+
+<a name="194749329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749329">Scott Morrison (Apr 21 2020 at 00:27)</a>:</h4>
+<p>and <code>get_state</code> / <code>set_state</code></p>
+
+<a name="194749332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749332">Scott Morrison (Apr 21 2020 at 00:27)</a>:</h4>
+<p>should allow you to do anything you like</p>
+
+<a name="194749339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749339">Scott Morrison (Apr 21 2020 at 00:27)</a>:</h4>
+<p>without any re-running tactics.</p>
+
+<a name="194749347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749347">Scott Morrison (Apr 21 2020 at 00:27)</a>:</h4>
+<p>We have lots of "time-travelling" tactics in <code>tactic.core</code>.</p>
+
+<a name="194749451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749451">Jason Rute (Apr 21 2020 at 00:29)</a>:</h4>
+<p>Follow up question: Can you use <code>get_state</code>'s output as a key in a <code>rbmap</code> or <code>rbset</code>?</p>
+
+<a name="194749527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749527">Mario Carneiro (Apr 21 2020 at 00:30)</a>:</h4>
+<p>no</p>
+
+<a name="194749558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749558">Scott Morrison (Apr 21 2020 at 00:30)</a>:</h4>
+<p>Is "no" addressed to the last comment? If so, I agree, <code>tactic.core</code> doesn't have much of this.</p>
+
+<a name="194749571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749571">Mario Carneiro (Apr 21 2020 at 00:31)</a>:</h4>
+<p>I think there is a tactic for checking if the goal has changed</p>
+
+<a name="194749586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749586">Mario Carneiro (Apr 21 2020 at 00:31)</a>:</h4>
+<p>but you can't hash the entire state (from lean)</p>
+
+<a name="194749609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749609">Scott Morrison (Apr 21 2020 at 00:31)</a>:</h4>
+<p><code>tactic.suggest</code> does a certain amount of manipulation of <code>tactic_state</code>.</p>
+
+<a name="194749685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749685">Scott Morrison (Apr 21 2020 at 00:32)</a>:</h4>
+<p>Oh -- I don't know if <span class="user-mention" data-user-id="115715">@Jason Rute</span> is actually talking about detecting multiple paths in the graph of <code>tactic_state</code>s and state transitions.</p>
+
+<a name="194749694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749694">Scott Morrison (Apr 21 2020 at 00:32)</a>:</h4>
+<p>My reading of his question was that he was happy to treat it as a tree.</p>
+
+<a name="194749714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749714">Scott Morrison (Apr 21 2020 at 00:33)</a>:</h4>
+<p>And the point of the question is about breadth first, rather than depth first, search.</p>
+
+<a name="194749801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749801">Jason Rute (Apr 21 2020 at 00:34)</a>:</h4>
+<p>My thoughts are many level's deep.  I've moved from tree to graph. With a tree, I can key each node by the path if needed.  As a graph, I could record all the expressions in the goals (including the local context and target) if I really want to.</p>
+
+<a name="194749842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749842">Mario Carneiro (Apr 21 2020 at 00:34)</a>:</h4>
+<p>I don't actually know why you need to compare <code>tactic_state</code> objects for your original use case</p>
+
+<a name="194749934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749934">Jason Rute (Apr 21 2020 at 00:36)</a>:</h4>
+<p>I probably don't, but I was just curious.</p>
+
+<a name="194749953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194749953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194749953">Mario Carneiro (Apr 21 2020 at 00:36)</a>:</h4>
+<p>Even if you could, the relation would probably be too fine for your needs</p>
+
+<a name="194750013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194750013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194750013">Mario Carneiro (Apr 21 2020 at 00:37)</a>:</h4>
+<p>If you want to deduplicate nodes in the tree, you should focus on the important things that future tactics will be looking at: the goal statement and the hypotheses. I don't know if you are treating multiple goals differently</p>
+
+<a name="194750056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194750056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194750056">Scott Morrison (Apr 21 2020 at 00:38)</a>:</h4>
+<p>I would avoid comparing <code>tactic_state</code> for now, and make sure you know how to do a BFS search of the tree resulting from tactic applications.</p>
+
+<a name="194750092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194750092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194750092">Scott Morrison (Apr 21 2020 at 00:38)</a>:</h4>
+<p>I can write something if you'd like some hints; it's probably only a few lines long.</p>
+
+<a name="194750127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194750127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194750127">Jason Rute (Apr 21 2020 at 00:39)</a>:</h4>
+<p>Thanks.  This was very informative.  I think I know where to start, but if you every feel inclined, I'd be happy to see some code. <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="194751323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194751323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194751323">Scott Morrison (Apr 21 2020 at 00:59)</a>:</h4>
+<p>I haven't attempted to polish this at all, or test anything beyond the example, but:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span>
+
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">run_for_state</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">option</span> <span class="o">(</span><span class="n">tactic_state</span> <span class="bp">×</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">a</span> <span class="err">←</span> <span class="n">try_core</span> <span class="n">t</span><span class="o">,</span>
+   <span class="n">s</span> <span class="err">←</span> <span class="n">get_state</span><span class="o">,</span>
+   <span class="n">return</span> <span class="err">$</span> <span class="n">a</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">s</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">which_succeed</span> <span class="o">(</span><span class="n">tactics</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">))</span> <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="n">tactic_state</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">tactic_state</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">os</span> <span class="err">←</span>
+  <span class="n">tactics</span><span class="bp">.</span><span class="n">enum</span><span class="bp">.</span><span class="n">mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">,</span> <span class="n">do</span>
+    <span class="n">set_state</span> <span class="n">state</span><span class="o">,</span>
+    <span class="n">r</span> <span class="err">←</span> <span class="n">run_for_state</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="n">return</span> <span class="err">$</span> <span class="n">r</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨</span><span class="n">s&#39;</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">s&#39;</span><span class="o">))),</span>
+  <span class="n">return</span> <span class="err">$</span> <span class="o">(</span><span class="n">os</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">to_list</span><span class="o">))</span><span class="bp">.</span><span class="n">join</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">bfs</span> <span class="o">(</span><span class="n">tactics</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">))</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">done</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="o">[[]])</span> <span class="bp">&lt;|&gt;</span>
+<span class="o">(</span><span class="n">do</span>
+  <span class="n">s</span> <span class="err">←</span> <span class="n">get_state</span><span class="o">,</span>
+  <span class="n">rs</span> <span class="err">←</span> <span class="n">which_succeed</span> <span class="n">tactics</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">ns</span> <span class="err">←</span> <span class="n">rs</span><span class="bp">.</span><span class="n">mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">do</span> <span class="n">set_state</span> <span class="n">r</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">ns</span> <span class="err">←</span> <span class="n">bfs</span><span class="o">,</span> <span class="n">return</span> <span class="err">$</span> <span class="n">ns</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">r</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">::</span> <span class="n">n</span><span class="o">)),</span>
+  <span class="n">return</span> <span class="n">ns</span><span class="bp">.</span><span class="n">join</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">bfs</span> <span class="o">[</span><span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="mi">0</span><span class="o">],</span> <span class="bp">`</span><span class="o">[</span><span class="n">split</span><span class="o">]]</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194751850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194751850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194751850">Jason Rute (Apr 21 2020 at 01:08)</a>:</h4>
+<p>Thanks!  Let me play with the code a little, so I understand everything.</p>
+
+<a name="194752535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Backtracking/near/194752535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69669Backtracking.html#194752535">Jason Rute (Apr 21 2020 at 01:23)</a>:</h4>
+<p>First, think I need to upgrade from 3.4.2.  I wonder what I've been missing out...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

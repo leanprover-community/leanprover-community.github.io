@@ -1,0 +1,147 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/62077gitbisecting.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html">git bisecting</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180331493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331493">Kevin Buzzard (Nov 09 2019 at 21:05)</a>:</h4>
+<p>I have heard people (e.g. Reid) talking about bisecting. I have a problem. The schemes repo was written by <span class="user-mention" data-user-id="132858">@Ramon Fernandez Mir</span> and it compiled with June mathlib but doesn't compile with master right now. He is busy doing an MSc (in Amsterdam) and has offered to fix the code but I thought it might be nice to locate the commit of mathlib which broke the repo (and then get it compiling with that commit, and then repeating the process). The code seems very well-written to me and I'm hoping that isolating the breaking commits will make fixing things up easy.</p>
+<p>The question: can I just type one command on the command line and then go to bed tonight, and wake up tomorrow with the output saying "it was this mathlib commit wot broke it"? I am envisaging just pulling a mathlib commit, running update-mathlib or just compiling the schemes repo with uncompiled mathlib, and then choosing another commit depending on whether the compilation returns 0 or not. I can't be the first person to be in this situation (or does everyone fix all their repos immediately after they break?)</p>
+
+<a name="180331738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331738">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:10)</a>:</h4>
+<p><code>git bisect run xxx.sh</code> is what you need</p>
+
+<a name="180331753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331753">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:11)</a>:</h4>
+<p>you need to prepare a script first, let's call it <a href="http://compile.sh" target="_blank" title="http://compile.sh">compile.sh</a></p>
+
+<a name="180331789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331789">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:11)</a>:</h4>
+<p>this <a href="http://compile.sh" target="_blank" title="http://compile.sh">compile.sh</a> returns 0 if everything compiles, return non 0 otherwise.</p>
+
+<a name="180331931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331931">Kevin Buzzard (Nov 09 2019 at 21:14)</a>:</h4>
+<p>Well that should be easy to write -- I hadn't realised it was going to be this easy. Sorry, I should have googled. Hmm wait though, I am a bit unclear about this. Mathlib is the upstream repo which broke my repo, so I should be running git bisect in _target/deps/mathlib? And should the script change the leanpkg.toml of my repo?</p>
+
+<a name="180331943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331943">Kevin Buzzard (Nov 09 2019 at 21:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> do you do this sort of thing on a regular basis?</p>
+
+<a name="180331950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331950">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:15)</a>:</h4>
+<p>sorry i forgot to mention <code>git bisect start</code>, <code>git bisect bad</code> and <code>git bisect start</code>, those are what you need to do before <code>git bisect run compile.sh</code></p>
+
+<a name="180331999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180331999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180331999">Kevin Buzzard (Nov 09 2019 at 21:16)</a>:</h4>
+<p>But are these to solve problems of the form "my repo has stopped compiling, and I want to work out which commit broke it"?</p>
+
+<a name="180332004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332004">Kevin Buzzard (Nov 09 2019 at 21:16)</a>:</h4>
+<p>My problem is "a dependency updated and this broke my repo"</p>
+
+<a name="180332008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332008">Reid Barton (Nov 09 2019 at 21:16)</a>:</h4>
+<p>I have done it occasionally, but not in the context of a package using mathlib as a dependency. Rather I just have a standalone file (in my mathlib checkout) and I test whether it compiles after checking out each new version of mathlib.</p>
+
+<a name="180332018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332018">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:17)</a>:</h4>
+<p>I need to think about it, but I think it is possible</p>
+
+<a name="180332020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332020">Reid Barton (Nov 09 2019 at 21:17)</a>:</h4>
+<p>Though come to think of it, moving the contents of your package <code>src/</code> alongside mathlib's <code>src/</code> has a nonzero chance of just working</p>
+
+<a name="180332023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332023">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:17)</a>:</h4>
+<p>I can even do if for you, and you can just sleep and wait for my result :)</p>
+
+<a name="180332025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332025">Kevin Buzzard (Nov 09 2019 at 21:17)</a>:</h4>
+<p>I just had that very same dirty thought</p>
+
+<a name="180332028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332028">Kevin Buzzard (Nov 09 2019 at 21:17)</a>:</h4>
+<p>(about moving src)</p>
+
+<a name="180332073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332073">Kevin Buzzard (Nov 09 2019 at 21:18)</a>:</h4>
+<p>Lemme try Reid's horrible approach first, it might work.</p>
+
+<a name="180332186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332186">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:21)</a>:</h4>
+<p>and yes, I agree in this case you should run git bisect in a mathlib git repo, then run some commands to: 1. delete  _target/deps/mathlib, 2. copy a new mathlib from the git repo to _target/deps/mathlib 3. compile again</p>
+
+<a name="180332242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332242">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:22)</a>:</h4>
+<p>Reid's approach seems simpler, if you happen to be able to simplify your problem to a standalone minimal test case</p>
+
+<a name="180332251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332251">Reid Barton (Nov 09 2019 at 21:23)</a>:</h4>
+<p>But if you use <code>leanpkg build</code> to build then it will go and check out the commit specified by the leanpkg.toml file. So if you try this approach be sure to run <code>lean --make src</code> directly</p>
+
+<a name="180332435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332435">Kevin Buzzard (Nov 09 2019 at 21:27)</a>:</h4>
+<p>Will it be possible to massively save time by using cache-olean somehow?</p>
+
+<a name="180332498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332498">Kevin Buzzard (Nov 09 2019 at 21:28)</a>:</h4>
+<p>The copying in from src seems safe to me, there are no duplicate file or directory names. I want to find out when <code>src/instances/affine-scheme.lean</code> stopped compiling, because this file compiles iff the repo compiles.</p>
+
+<a name="180332671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332671">Reid Barton (Nov 09 2019 at 21:33)</a>:</h4>
+<p>Okay, then you can use <code>git bisect</code> with <code>lean src/instances/affine-scheme.lean</code> as the command to test</p>
+
+<a name="180332681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332681">Kevin Buzzard (Nov 09 2019 at 21:33)</a>:</h4>
+<p>what will happen with the olean files? Do I just not worry?</p>
+
+<a name="180332764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332764">Reid Barton (Nov 09 2019 at 21:35)</a>:</h4>
+<p>Should be fine</p>
+
+<a name="180332767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332767">Reid Barton (Nov 09 2019 at 21:35)</a>:</h4>
+<p>I don't know anything about using cache-olean</p>
+
+<a name="180332846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332846">Kevin Buzzard (Nov 09 2019 at 21:37)</a>:</h4>
+<p>I'm going to go with something like <code>lean -M6000 --make src/instances/affine-scheme.lean</code>. Hmm, what is a minimum safe value for this? I don't want compilation to fail because of memory issues; conversely I don't want to freeze my machine.</p>
+
+<a name="180332905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332905">Kevin Buzzard (Nov 09 2019 at 21:38)</a>:</h4>
+<p>oh this is great, I think hardly any of mathlib got compiled. Oh I think all my problems are solved, other than which commit broke the repo. Many thanks <span class="user-mention" data-user-id="115180">@Qian Hong (wechat: fracting)</span> and <span class="user-mention" data-user-id="110032">@Reid Barton</span> ! I'll be back in the morning complaining that my house burnt down.</p>
+
+<a name="180332915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180332915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180332915">Reid Barton (Nov 09 2019 at 21:39)</a>:</h4>
+<p>Yes, if you're lucky then you actually don't need to build much of mathlib and then it is much faster than you would otherwise expect.</p>
+
+<a name="180333042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180333042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180333042">Qian Hong (wechat: fracting) (Nov 09 2019 at 21:41)</a>:</h4>
+<p>And if you are unlucky, then there might be more than one commits broke the build, some of broken commits might be fixed by following commits, and then new broken commits introduced...  In that case there is no guarantee <code>git bisect</code> can return the "right" broken commit you want</p>
+
+<a name="180333126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180333126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180333126">Kevin Buzzard (Nov 09 2019 at 21:43)</a>:</h4>
+<p>I'm sure it's broken for multiple reasons, I just thought it might be interesting to find the first place where it broke.</p>
+
+<a name="180333216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180333216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180333216">Reid Barton (Nov 09 2019 at 21:45)</a>:</h4>
+<p>You have no guarantee to find the first place, just some place</p>
+
+<a name="180333230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20bisecting/near/180333230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62077gitbisecting.html#180333230">Kevin Buzzard (Nov 09 2019 at 21:45)</a>:</h4>
+<p>Let's assume that on no occasion did it break and then magically get fixed.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

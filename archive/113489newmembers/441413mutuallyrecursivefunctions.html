@@ -1,0 +1,168 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/441413mutuallyrecursivefunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html">3+ mutually recursive functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175225264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175225264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175225264">Matija Pretnar (Sep 09 2019 at 09:08)</a>:</h4>
+<p>I'm working with multiple big mutually defined inductive types (I'm trying to formalize a language with up to 7 different syntactic sorts). This works okay, but when I try to define corresponding recursive functions, Lean informs me that it has <code>failed to prove recursive application is decreasing, well founded relation</code>. Here is a smaller counterexample:</p>
+<div class="codehilite"><pre><span></span>inductive N : Type
+| Z : N
+| S : N -&gt; N
+
+mutual def f1, f2, f3
+with f1 : N -&gt; N
+| N.Z := N.Z
+| (N.S n) := f2 n
+with f2 : N -&gt; N
+| N.Z := N.Z
+| (N.S n) := f3 n
+with f3 : N -&gt; N
+| N.Z := N.Z
+| (N.S n) := f1 n
+</pre></div>
+
+
+<p>From the error message, I see that it tries to do lexicographic ordering, however this obviously fails. Is there a simple workaround? Thanks in advance!</p>
+
+<a name="175225628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175225628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175225628">Andrew Ashworth (Sep 09 2019 at 09:14)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+
+<a name="175226092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175226092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175226092">Matija Pretnar (Sep 09 2019 at 09:23)</a>:</h4>
+<p>I guess I am in the third case, where I need to define my own well-founded relation. The document suggests</p>
+<blockquote>
+<p>The easiest way to define a well founded relation is using a function to the natural numbers.</p>
+</blockquote>
+<p>This indeed solves the example above, but for my bigger example, the obvious candidate is the size of the term. However, for this I need to define 3+ mutually recursive functions, again causing the error above. What am I missing? I attach the full example. <a href="user_uploads/3121/MQKdjTD4HaM7RsrtQ5-zpE0h/syntax.lean" target="_blank" title="user_uploads/3121/MQKdjTD4HaM7RsrtQ5-zpE0h/syntax.lean">syntax.lean</a></p>
+
+<a name="175226899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175226899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175226899">Scott Morrison (Sep 09 2019 at 09:37)</a>:</h4>
+<p>Generally speaking, <code>mutual def</code> is pretty fragile, and things often go wrong. You're usually best off working out how to roll your own mutual definition (e.g. defining first <code>f123 : N \to N \times N \times N</code>, then later defining <code>f1</code>, <code>f2</code>, and <code>f3</code> as projections).</p>
+
+<a name="175227768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175227768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175227768">Matija Pretnar (Sep 09 2019 at 09:52)</a>:</h4>
+<p>Thank you for the advice, but unfortunately, it does not generalize to my case. I guess the simple example I gave was misleading. What I have are say mutually recursive types <code>T1</code>, <code>T2</code> and <code>T3</code> and I need to define functions <code>size1 : T1 \to N</code>, <code>size2 : T2 \to N</code>, <code>size3 : T3 \to N</code> (as a first step in getting a well-founded relation). I tried avoiding <code>mutual def</code> by defining a single function <code>size : T1 \oplus T2 \oplus T3 \to N</code>, but I get the same error.</p>
+
+<a name="175228944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175228944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175228944">Keeley Hoek (Sep 09 2019 at 10:13)</a>:</h4>
+<p>If it was me, I would try defining <code>size : T1 \times T2 \times T3 \to N \times N \times N</code>, and then convincing lean that that is well-founded.</p>
+
+<a name="175231707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175231707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175231707">Matija Pretnar (Sep 09 2019 at 11:06)</a>:</h4>
+<p>Is there a better way of defining this function aside from listing all the possible 8 x 10 x 2 = 160 cases? I guess one can be smart with auxiliary functions, but probably that again leads to the well-foundedness issues?</p>
+
+<a name="175232735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232735">Keeley Hoek (Sep 09 2019 at 11:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="239275">@Matija Pretnar</span>  Yes, the declaration is slightly more ugly than three separate functions, but you do not need any more cases than you would have otherwise.</p>
+
+<a name="175232751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232751">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Just use a <code>match</code> statement to break off how to generate the three separate outputs</p>
+
+<a name="175232779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232779">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Like, a match for each of <code>T1</code>, <code>T2</code>, and <code>T3</code> (or however many there actually are).</p>
+
+<a name="175232796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232796">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Definitely there should be no duplication like you proposed.</p>
+
+<a name="175232849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232849">Keeley Hoek (Sep 09 2019 at 11:28)</a>:</h4>
+<p>Most of the time, for me anyway, writing everything like this just works out of the box.</p>
+
+<a name="175232859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232859">Keeley Hoek (Sep 09 2019 at 11:28)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a><br>
+is where you have to go to fix further problems you then have</p>
+
+<a name="175234413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175234413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175234413">Matija Pretnar (Sep 09 2019 at 11:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> Many thanks! You had me scared there for a moment <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span> Do you by any chance have an example lying around so I can adapt it to my case?</p>
+
+<a name="175234790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175234790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175234790">Keeley Hoek (Sep 09 2019 at 12:00)</a>:</h4>
+<p>Sorry, not really. Here is sort-of an example:<br>
+<a href="https://github.com/leanprover-community/mathlib/pull/1274/files#diff-5d76d023ea3a78d10ca04f9fa501e572R187" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1274/files#diff-5d76d023ea3a78d10ca04f9fa501e572R187">https://github.com/leanprover-community/mathlib/pull/1274/files#diff-5d76d023ea3a78d10ca04f9fa501e572R187</a><br>
+Ideally <code>le</code> and <code>lt</code> would be defined mutually, but you can see in that case that they are defined together. A <code>using_well_founded</code> at the end there is in fact required to make things actually work, but this seems about the easiest way forward, for example.</p>
+
+<a name="175235146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175235146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175235146">Matija Pretnar (Sep 09 2019 at 12:07)</a>:</h4>
+<p>I'll give it a try, thanks again!</p>
+
+<a name="175267393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175267393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175267393">Žiga Lukšič (Sep 09 2019 at 18:05)</a>:</h4>
+<p>I have played around with it a bit and I would guess that the problem is in the fact that the type <code>A + B + C</code> is actually <code>A + (B + C)</code> (and the same problem probably persists with products?). As such, if you have <code>b : B</code> and <code>cons b : A</code> if you put them in the sum they become  <code>sum.inr (sum.inl b)</code> and <code>sum.inl (cons b)</code>, both having <code>.sizeof</code> (which is the default ordering it tries to use as far as I can tell) of 2 despite <code>b</code> being a subterm of <code>cons b</code>. </p>
+<p>Example: </p>
+<div class="codehilite"><pre><span></span>mutual inductive A, B, C
+with A : Type u
+| base : A
+| cons : C → A
+with B : Type u
+| cons : A → B
+with C : Type u
+| cons : B → C
+
+mutual def adepth, bdepth, cdepth
+with adepth : A → ℕ
+| A.base := 1
+| (A.cons c) := 1 + cdepth c
+with bdepth : B → ℕ
+| (B.cons a) := 1 + adepth a
+with cdepth : C → ℕ
+| (C.cons b) := 1 + bdepth b
+</pre></div>
+
+
+<p>The above code complains that it cant prove <code>2 &lt; 2</code> in the case <code>| (A.cons c) := 1 + cdepth c </code>.<br>
+This can then be kinda fixed by introducing a new type <code>t(riple)sum</code>.</p>
+<div class="codehilite"><pre><span></span>inductive tsum
+| first : A → tsum
+| second : B → tsum
+| third : C → tsum
+
+def depth : tsum → ℕ
+| (tsum.first A.base) := 1
+| (tsum.first (A.cons c)) := 1 + depth (tsum.third c)
+| (tsum.second (B.cons a)) := 1 + depth (tsum.first a)
+| (tsum.third (C.cons b)) := 1 + depth (tsum.second b)
+</pre></div>
+
+
+<p>and the code seems to work for now.</p>
+<p>But could one perhaps construct a better <code>sizeof</code> function for a specific sumtype?<br>
+So something like</p>
+<div class="codehilite"><pre><span></span>def correct_size :  A+B+C → ℕ
+| (sum.inl a) := A.sizeof a
+| (sum.inr (sum.inl b)) := B.sizeof b
+| (sum.inr (sum.inr c)) := C.sizeof c
+</pre></div>
+
+
+<p>and then use this as the measure? I have failed to find a way to insert this into the <code>using_well_founded</code> even with the help of<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+<p>If I made any kind of wrong assumptions or conclusions please let me know.</p>
+
+<a name="175311494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175311494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175311494">Mario Carneiro (Sep 10 2019 at 06:56)</a>:</h4>
+<p><code>correct_size</code> is not correct, because you are depending on the sizeof instance of A which is broken (you have to use <code>correct_size</code> to define it, meaning that this function is mutually recursive with a typeclass instance)</p>
+
+<a name="175311563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175311563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175311563">Mario Carneiro (Sep 10 2019 at 06:58)</a>:</h4>
+<p>The best way to solve this issue is to rewrite the mutual inductive as a regular inductive and use plain induction</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

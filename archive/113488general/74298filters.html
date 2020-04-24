@@ -1,0 +1,175 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/74298filters.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html">filters</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="133377621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133377621">Rohan Mitta (Sep 05 2018 at 14:03)</a>:</h4>
+<p>Hi,</p>
+<p>I'm attempting to prove a proposition from a Topology book and am getting stuck using filters, which I'm not very comfortable with in lean. Can anyone help me with the first sorry? I'm pretty sure that step is true due to the uniform continuity of f but I can't figure out what to do with it.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">continuity</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">metric_space</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">uniform_space</span>
+<span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">theorem</span> <span class="n">complete_iff_of_uniform_cts_bij</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">Hg</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">left_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="n">α</span> <span class="bp">↔</span> <span class="n">complete_space</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">H1</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">H1</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">filt</span> <span class="n">Hfilt</span><span class="o">,</span>
+
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:=</span> <span class="n">H1</span> <span class="o">(</span><span class="n">cauchy_map</span> <span class="n">Hg</span> <span class="n">Hfilt</span><span class="o">),</span>
+    <span class="n">cases</span> <span class="n">H2</span> <span class="k">with</span> <span class="n">x</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+    <span class="n">existsi</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map_le_iff_le_vmap</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">Hmaps</span> <span class="o">:=</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map_eq_vmap_of_inverse</span> <span class="o">(</span><span class="n">function</span><span class="bp">.</span><span class="n">id_of_right_inverse</span> <span class="n">right_inv</span><span class="o">)</span> <span class="o">(</span><span class="n">function</span><span class="bp">.</span><span class="n">id_of_left_inverse</span> <span class="n">left_inv</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">Hmaps</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nhds</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span>
+
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">H3</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133378115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378115">Reid Barton (Sep 05 2018 at 14:11)</a>:</h4>
+<p>H3 must be true because <code>nhds</code> only depends on the topology and f and g are homeomorphisms.<br>
+One direction of the equality will be from continuous.tendsto. The other one should require the continuity of g</p>
+
+<a name="133378211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378211">Johannes Hölzl (Sep 05 2018 at 14:12)</a>:</h4>
+<p>Also, you have an uniform isomorphism (i.e. <code>f</code> with <code>g</code> as inverse). This implies that it is an topological <code>embedding</code>, a <code>dense_embedding</code> and <code>uniform_embedding</code>. If you look for them this should give you enough rules to prove your statement.</p>
+
+<a name="133378251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378251">Reid Barton (Sep 05 2018 at 14:13)</a>:</h4>
+<p>... plus either left_inv or right_inv, and filter.map_map</p>
+
+<a name="133378669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378669">Patrick Massot (Sep 05 2018 at 14:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="120559">@Rohan Mitta</span> don't listen to them, you were almost done. Stating only only implication since the other one follows by symmetry:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">complete_iff_of_uniform_cts_bij</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">Hg</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">left_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">complete_space</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">begin</span>
+
+  <span class="n">intro</span> <span class="n">H1</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">H1</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">filt</span> <span class="n">Hfilt</span><span class="o">,</span>
+
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:=</span> <span class="n">H1</span> <span class="o">(</span><span class="n">cauchy_map</span> <span class="n">Hg</span> <span class="n">Hfilt</span><span class="o">),</span>
+  <span class="n">cases</span> <span class="n">H2</span> <span class="k">with</span> <span class="n">x</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map_le_iff_le_vmap</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">Hmaps</span> <span class="o">:=</span> <span class="n">filter</span><span class="bp">.</span><span class="n">map_eq_vmap_of_inverse</span> <span class="o">(</span><span class="n">function</span><span class="bp">.</span><span class="n">id_of_right_inverse</span> <span class="n">right_inv</span><span class="o">)</span> <span class="o">(</span><span class="n">function</span><span class="bp">.</span><span class="n">id_of_left_inverse</span> <span class="n">left_inv</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">Hmaps</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">tendsto</span> <span class="n">Hf</span><span class="bp">.</span><span class="n">continuous</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">le_trans</span> <span class="n">H_converges_to_x</span> <span class="n">this</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133378866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378866">Kevin Buzzard (Sep 05 2018 at 14:23)</a>:</h4>
+<p>Thanks all of you (I'm sitting next to Rohan)</p>
+
+<a name="133378965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133378965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133378965">Rohan Mitta (Sep 05 2018 at 14:25)</a>:</h4>
+<p>Amazing, thanks everyone!</p>
+
+<a name="133379170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379170">Patrick Massot (Sep 05 2018 at 14:29)</a>:</h4>
+<p>Small cleanup:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">function</span>
+<span class="kn">theorem</span> <span class="n">complete_iff_of_uniform_cts_bij</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">Hg</span> <span class="o">:</span> <span class="n">uniform_continuous</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">left_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">complete_space</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">H1</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">filt</span> <span class="n">Hfilt</span><span class="o">,</span>
+
+  <span class="n">cases</span> <span class="n">H1</span> <span class="o">(</span><span class="n">cauchy_map</span> <span class="n">Hg</span> <span class="n">Hfilt</span><span class="o">)</span> <span class="k">with</span> <span class="n">x</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">filter</span><span class="bp">.</span><span class="n">map_le_iff_le_vmap</span><span class="o">,</span>
+      <span class="err">←</span><span class="n">filter</span><span class="bp">.</span><span class="n">map_eq_vmap_of_inverse</span> <span class="o">(</span><span class="n">id_of_right_inverse</span> <span class="n">right_inv</span><span class="o">)</span> <span class="o">(</span><span class="n">id_of_left_inverse</span> <span class="n">left_inv</span><span class="o">)]</span> <span class="n">at</span> <span class="n">H_converges_to_x</span><span class="o">,</span>
+
+  <span class="n">exact</span> <span class="n">le_trans</span> <span class="n">H_converges_to_x</span> <span class="o">(</span><span class="n">continuous</span><span class="bp">.</span><span class="n">tendsto</span> <span class="n">Hf</span><span class="bp">.</span><span class="n">continuous</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="133379874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133379874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#133379874">Johannes Hölzl (Sep 05 2018 at 14:39)</a>:</h4>
+<p>Thanks Patrick to actually look at the proof (obviously, I didn't ...)</p>
+
+<a name="175450141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175450141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175450141">Johan Commelin (Sep 11 2019 at 16:33)</a>:</h4>
+<p>Is there a particular reason that <code>filter</code> is only defined for <code>set X</code>. (I.e., a filter is a set of sets, etc...). The definition makes sense for arbitrary bounded lattices, of which <code>set X</code> is a particular instance. (And most of the basic lemmas are also true in this more general setting.) Is this to avoid the extra type class in basic files?</p>
+
+<a name="175458627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175458627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175458627">Patrick Massot (Sep 11 2019 at 17:57)</a>:</h4>
+<p>I think <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> considered doing that, but I don't know what came out of this idea.</p>
+
+<a name="175463193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175463193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175463193">Sebastien Gouezel (Sep 11 2019 at 18:46)</a>:</h4>
+<p>Is there a useful application of the generalization?</p>
+
+<a name="175466886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175466886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175466886">Patrick Massot (Sep 11 2019 at 19:26)</a>:</h4>
+<p>I guess it depends who you ask... I certainly wouldn't want traditional filters to become less convenient to use after generalizing. They are everywhere in our topology library.</p>
+
+<a name="175467076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175467076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175467076">Patrick Massot (Sep 11 2019 at 19:28)</a>:</h4>
+<p><a href="https://ncatlab.org/nlab/show/filter" target="_blank" title="https://ncatlab.org/nlab/show/filter">https://ncatlab.org/nlab/show/filter</a> gives the general definition (of course) but doesn't seem to mention any application outside topology</p>
+
+<a name="175470165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175470165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175470165">Johan Commelin (Sep 11 2019 at 19:58)</a>:</h4>
+<p>The category of bounded distributive lattices is anti-equivalent to the category of spectral spaces via a "Spec" functor. It associates to a bounded distributive lattice the set of prime filters.</p>
+
+<a name="175470252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175470252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175470252">Johan Commelin (Sep 11 2019 at 19:59)</a>:</h4>
+<p>A filter <code>F</code> on a lattice is prime if <code>x \glb y \in F → x \in F \or y \in F</code></p>
+
+<a name="175470396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175470396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175470396">Johan Commelin (Sep 11 2019 at 20:00)</a>:</h4>
+<p>This is probably not enough justification for the generalisation, though</p>
+
+<a name="175474240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175474240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175474240">Jeremy Avigad (Sep 11 2019 at 20:44)</a>:</h4>
+<p>Actually, it was <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  who actually started doing it, and got pretty far with the generalization, IIRC. I don't know what came of it.</p>
+
+<a name="175500393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175500393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175500393">Mario Carneiro (Sep 12 2019 at 05:31)</a>:</h4>
+<p>I got bogged down in the propagating library changes. I pushed my WIP on this to the <a href="https://github.com/leanprover-community/mathlib/compare/pfilter" target="_blank" title="https://github.com/leanprover-community/mathlib/compare/pfilter">pfilter</a> branch; perhaps someone wants to pick this back up.</p>
+
+<a name="175503015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175503015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175503015">Johan Commelin (Sep 12 2019 at 06:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks for this branch</p>
+
+<a name="175503036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175503036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175503036">Johan Commelin (Sep 12 2019 at 06:37)</a>:</h4>
+<p>I see you went even more general than lattices, and just used preorders. Were you planning on having some special layer on top of that for filters on lattices?</p>
+
+<a name="175503044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/175503044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74298filters.html#175503044">Johan Commelin (Sep 12 2019 at 06:37)</a>:</h4>
+<p>It's not too encouraging that such a refactor is getting you bogged down... I wish we had better tools for refactoring.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

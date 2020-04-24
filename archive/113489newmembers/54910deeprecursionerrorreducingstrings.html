@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/54910deeprecursionerrorreducingstrings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html">deep recursion error reducing strings</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189027954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/deep%20recursion%20error%20reducing%20strings/near/189027954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html#189027954">Kevin Sullivan (Feb 25 2020 at 15:16)</a>:</h4>
+<p>I'm wondering why using #reduce to evaluate even one-character strings leads to a stack overflow in the default configuration of Lean? To replicate, try this.</p>
+<div class="codehilite"><pre><span></span>#reduce &quot;-&quot;
+</pre></div>
+
+<a name="189028491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/deep%20recursion%20error%20reducing%20strings/near/189028491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html#189028491">Rob Lewis (Feb 25 2020 at 15:21)</a>:</h4>
+<p>A string is a list of chars. A char is a pair of a nat <code>n</code> and a proof of <code>n &lt; 55296 ∨ 57343 &lt; n ∧ n &lt; 1114112</code>. The normal form of that proof is very very large.</p>
+
+<a name="189029140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/deep%20recursion%20error%20reducing%20strings/near/189029140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html#189029140">Gabriel Ebner (Feb 25 2020 at 15:28)</a>:</h4>
+<p>Already the numbers that Rob posted are huge when you unfold them completely:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="n">reduce</span> <span class="mi">15153</span> <span class="c1">-- works</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="mi">15154</span> <span class="c1">-- stack overflow</span>
+</pre></div>
+
+<a name="189034847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/deep%20recursion%20error%20reducing%20strings/near/189034847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html#189034847">Kevin Sullivan (Feb 25 2020 at 16:27)</a>:</h4>
+<p>I see. Ok. For pedagogy, this is inconvenient, as reduce doesn't work to show terms involving strings and #eval prints them in kernel rather than source format. But it is what it is, and I understand there's no workaround. Thank you, gentlemen.</p>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113489-new-members/topic/deep.20recursion.20error.20reducing.20strings/near/189029140" title="#narrow/stream/113489-new-members/topic/deep.20recursion.20error.20reducing.20strings/near/189029140">said</a>:</p>
+<blockquote>
+<p>Already the numbers that Rob posted are huge when you unfold them completely:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="n">reduce</span> <span class="mi">15153</span> <span class="c1">-- works</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="mi">15154</span> <span class="c1">-- stack overflow</span>
+</pre></div>
+
+
+</blockquote>
+
+<a name="189035143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/deep%20recursion%20error%20reducing%20strings/near/189035143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54910deeprecursionerrorreducingstrings.html#189035143">Rob Lewis (Feb 25 2020 at 16:30)</a>:</h4>
+<blockquote>
+<p>#eval prints them in kernel rather than source format</p>
+</blockquote>
+<p>Not sure exactly what you mean by this, but do you want <code>#eval repr "-"</code>? (Same on that example, but compare with something with new lines or whatever.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

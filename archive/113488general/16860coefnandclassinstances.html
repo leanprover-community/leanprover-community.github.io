@@ -1,0 +1,120 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/16860coefnandclassinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html">coe_fn and class instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188154350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188154350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188154350">Yury G. Kudryashov (Feb 13 2020 at 21:32)</a>:</h4>
+<p>I tried to redefine <code>free_group.to_group</code> as a bundled <code>monoid_hom</code>, and failed. It turns out that <code>to_group f</code> has type <code>@monoid_hom.{u v} (free_group.{u} α) β (@group.to_monoid.{u} (free_group.{u} α) (@free_group.group.{u} α))
+    (@group.to_monoid.{v} β ?m_1)</code>, and Lean doesn't try to fill in <code>?m_1</code> before doing the <code>coe_fn</code> search. Any chance to have this fixed in 3.x? I have no idea if it is a hard or an easy task.</p>
+
+<a name="188154648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188154648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188154648">Yury G. Kudryashov (Feb 13 2020 at 21:36)</a>:</h4>
+<p>I mean, a proper fix would make Lean realize that this is <code>monoid_hom _ _</code>, so we already know how to coerce it to a function but I guess it might be easier to fix the order of instance resolution thus fixing a bug in some cases.</p>
+
+<a name="188155104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155104">Reid Barton (Feb 13 2020 at 21:41)</a>:</h4>
+<p>This issue comes up in many contexts, frequently with <code>equiv</code>. For example, in the type of <code>adjunction.hom_equiv</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">hom_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span><span class="o">),</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">G</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>We would much prefer <code>X</code> and <code>Y</code> to be implicit parameters, since they are nearly always obvious from context. But then the type <code>(F.obj X ⟶ Y) ≃ (X ⟶ G.obj Y)</code> is not yet fully known and so it will not be usable as a function because the coercion will not fire. You always have to specify <code>X</code> and <code>Y</code> explicitly (explicitly enough that they can be inferred without considering the context at the use site of <code>hom_equiv</code>).</p>
+
+<a name="188155282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155282">Reid Barton (Feb 13 2020 at 21:43)</a>:</h4>
+<p>Fixing this would mean allowing instance search to run (or, perhaps, allowing it to succeed) when there are still metavariables in the goal of the instance search (here <code>coe_to_fun (monoid_hom ?m_1 ?m_2)</code> or similar). I would say it is unclear how difficult this would be to change, and also unclear what other problems it might introduce.</p>
+
+<a name="188155484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155484">Yury G. Kudryashov (Feb 13 2020 at 21:45)</a>:</h4>
+<p>In my example it is more like <code>coe_to_fun (@monoid_hom α β _inst_1 ?m1)</code></p>
+
+<a name="188155502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155502">Yury G. Kudryashov (Feb 13 2020 at 21:45)</a>:</h4>
+<p>I mean that both <code>α</code> and <code>β</code> are already known.</p>
+
+<a name="188155602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155602">Yury G. Kudryashov (Feb 13 2020 at 21:46)</a>:</h4>
+<p>It would be strange to make <code>monoid β</code> (or <code>group β</code> in my example) an explicit parameter.</p>
+
+<a name="188155833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155833">Reid Barton (Feb 13 2020 at 21:48)</a>:</h4>
+<p>I guess it is a bit different because you expect the <code>monoid beta</code> argument also to be supplied by instance search, right?</p>
+
+<a name="188155860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188155860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188155860">Yury G. Kudryashov (Feb 13 2020 at 21:49)</a>:</h4>
+<p>Right.</p>
+
+<a name="188156067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188156067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188156067">Reid Barton (Feb 13 2020 at 21:51)</a>:</h4>
+<p>Seems like a delicate situation</p>
+
+<a name="188160821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188160821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188160821">Yury G. Kudryashov (Feb 13 2020 at 22:47)</a>:</h4>
+<p>BTW, is there any reason not to go the Python way? I mean, if we want to treat <code>f</code> as a function, try <code>f.to_fun</code> first; if it falls, try <code>coe_fn</code> for compatibility.</p>
+
+<a name="188162662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188162662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188162662">Yury G. Kudryashov (Feb 13 2020 at 23:13)</a>:</h4>
+<p>The first option will work in (almost?)  all mathlib use cases</p>
+
+<a name="188169329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188169329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188169329">Yury G. Kudryashov (Feb 14 2020 at 01:03)</a>:</h4>
+<p>This particular case (not-yet-elaborated class instance makes <code>coe_fn</code> fail) makes it hard to use bundled homs in <code>free_group.to_group</code>, <code>quotient_group.lift</code> and AFAIR <code>mv_polynomial.map</code> hits the same problem.</p>
+
+<a name="188171136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188171136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188171136">Yury G. Kudryashov (Feb 14 2020 at 01:36)</a>:</h4>
+<p>BTW, is it going to work in Lean 4?</p>
+
+<a name="188171701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188171701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188171701">Reid Barton (Feb 14 2020 at 01:51)</a>:</h4>
+<p>Supposedly</p>
+
+<a name="188177960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188177960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188177960">Yury G. Kudryashov (Feb 14 2020 at 04:43)</a>:</h4>
+<p>How hard would be to make a workaround for Lean3?</p>
+
+<a name="188185261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188185261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188185261">Sebastien Gouezel (Feb 14 2020 at 07:55)</a>:</h4>
+<p>Just to mention that this is the reason why, in the manifold files, I use <code>f.to_fun</code>and <code>f.inv_fun</code> for local homeos or local equivs: I first tried with coercions, and Lean got confused all the time.</p>
+
+<a name="188186643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188186643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188186643">Patrick Massot (Feb 14 2020 at 08:20)</a>:</h4>
+<p>This is a well-known issue. Coercions to functions just don't work in Lean 3.</p>
+
+<a name="188186651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188186651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188186651">Patrick Massot (Feb 14 2020 at 08:20)</a>:</h4>
+<p>We can only hope they will work in Lean 4.</p>
+
+<a name="188186742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188186742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188186742">Kevin Buzzard (Feb 14 2020 at 08:22)</a>:</h4>
+<p>A student of mine is writing a group cohomology repo using bundled homs and coercions to functions. We're just at this stage basically, we need to make a decision about whether to coerce or not. I thought that coercions worked quite well at this basic level (we're doing morphisms of G-modules). Now you're making me wonder whether we should switch but I don't think Anca had too many problems when she did H^0 and H^1 and also used bundled G-module homs</p>
+
+<a name="188213368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188213368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188213368">Reid Barton (Feb 14 2020 at 15:02)</a>:</h4>
+<p>I wouldn't necessarily be too eager to switch away from coercions, particularly if you don't intend to PR the result to mathlib. It's hard to predict whether you will encounter these inference issues.</p>
+
+<a name="188213499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188213499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188213499">Reid Barton (Feb 14 2020 at 15:03)</a>:</h4>
+<p>And it's not really that hard to switch later anyways, so not much is riding on the choice</p>
+
+<a name="188286440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_fn%20and%20class%20instances/near/188286440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16860coefnandclassinstances.html#188286440">Sebastian Ullrich (Feb 15 2020 at 14:56)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113488-general/topic/coe_fn.20and.20class.20instances/near/188171701" title="#narrow/stream/113488-general/topic/coe_fn.20and.20class.20instances/near/188171701">said</a>:</p>
+<blockquote>
+<p>Supposedly</p>
+</blockquote>
+<p><a href="https://github.com/leanprover/lean4/blob/master/tests/lean/run/Reid1.lean" target="_blank" title="https://github.com/leanprover/lean4/blob/master/tests/lean/run/Reid1.lean">Indeed</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

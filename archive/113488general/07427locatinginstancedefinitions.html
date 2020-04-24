@@ -1,0 +1,236 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/07427locatinginstancedefinitions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html">locating instance definitions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190610114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610114">Kevin Buzzard (Mar 14 2020 at 19:23)</a>:</h4>
+<p>I always have a hard time finding instance definitions. Is there some algorithmic approach?</p>
+<p>I am working on Scott's <code>enriched</code> branch of mathlib. He's pointed me to some <code>sorry</code>s and I'm trying to fill them in, but I need to learn the library. For definitions I don't know, I just right click. But for type classes I sometimes get stuck. For example, I realised in a file that <code>Type</code> was a monoidal category. I tried</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">fooz</span> <span class="o">:</span> <span class="n">monoidal_category</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>and it worked, so he's given <code>Type</code> the structure of a <code>monoidal_category</code>, which is a typeclass whose definition I can see. One of the fields of this typeclass is <code>tensor_unit</code>. So I now want to see the definition of <code>tensor_unit</code> in <code>fooz</code> because I want to know the definition of this field for <code>Type</code>. I try this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">fooz</span><span class="o">:</span> <span class="n">monoidal_category</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">fooz</span>
+</pre></div>
+
+
+<p>and I find </p>
+<div class="codehilite"><pre><span></span>def Module.fooz : monoidal_category Type :=
+concrete_monoidal_category.to_monoidal_category Type
+</pre></div>
+
+
+<p>OK great. So now I discover there is a new class <code>concrete_monoidal_category C</code>. I can find the definition, and see it extends <code>concrete_category C</code> and <code>monoidal_category C</code>. I then try this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">barz</span> <span class="o">:</span> <span class="n">concrete_monoidal_category</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">barz</span>
+</pre></div>
+
+
+<p>and I see</p>
+<div class="codehilite"><pre><span></span>def Module.barz : concrete_monoidal_category Type :=
+category_theory.concrete_monoidal_category
+</pre></div>
+
+
+<p>and now the trail has basically run dry. </p>
+<p>There must be a better way to do this. It is not specifically this question I'm interested in -- this is most definitely not the first time this has happened to me. I'd like to be able to get to the bottom of these things myself instead of having to ask.</p>
+
+<a name="190610356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610356">Reid Barton (Mar 14 2020 at 19:28)</a>:</h4>
+<p>I don't understand yet why the trail has run dry. What is <code>category_theory.concrete_monoidal_category</code>? If you <code>#check category_theory.concrete_monoidal_category</code> and use jump to definition on it, where does it take you?</p>
+
+<a name="190610413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610413">Kevin Buzzard (Mar 14 2020 at 19:28)</a>:</h4>
+<p>I guess another approach would be this:</p>
+<div class="codehilite"><pre><span></span>#check monoidal_category.tensor_unit Type
+-- 𝟙_ Type : Type
+</pre></div>
+
+
+<p>(the funny 1 is just notation). I want to know what term this unfolds to, ideally by just looking at the code. I was expecting it to be <code>unit</code> but <code>example : monoidal_category.tensor_unit Type = unit := rfl</code> fails</p>
+
+<a name="190610415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610415">Reid Barton (Mar 14 2020 at 19:28)</a>:</h4>
+<p>Well, I would guess <code>punit</code> next</p>
+
+<a name="190610423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610423">Reid Barton (Mar 14 2020 at 19:29)</a>:</h4>
+<p>But I know it's not your real question</p>
+
+<a name="190610442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610442">Kevin Buzzard (Mar 14 2020 at 19:29)</a>:</h4>
+<p>That was the other thing I tried and it was when that failed that I started on the typeclass woozle-hunt.</p>
+
+<a name="190610482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610482">Johan Commelin (Mar 14 2020 at 19:29)</a>:</h4>
+<p>Aaah, that's another thing we can fix in Lean 3.8. <code>unit</code> should be <code>punit : Type</code></p>
+
+<a name="190610484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610484">Reid Barton (Mar 14 2020 at 19:29)</a>:</h4>
+<p>Ah, is the problem somehow that the information you need is in an implicit argument of <code>category_theory.concrete_monoidal_category</code>?<br>
+I haven't looked at the code, but so far I am as confused as you</p>
+
+<a name="190610485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610485">Kevin Buzzard (Mar 14 2020 at 19:29)</a>:</h4>
+<p>It might be a universe issue but I thought it would be easier to look than to guess.</p>
+
+<a name="190610540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610540">Kevin Buzzard (Mar 14 2020 at 19:30)</a>:</h4>
+<p>I don't understand why the code compiles:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">concrete_monoidal_category</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">lax_monoidal</span> <span class="o">:=</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">lax_monoidal_id</span> <span class="o">}</span>
+</pre></div>
+
+<a name="190610559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610559">Kevin Buzzard (Mar 14 2020 at 19:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">concrete_monoidal_category</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="kn">extends</span> <span class="n">concrete_category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">C</span><span class="o">,</span> <span class="n">monoidal_category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">lax_monoidal</span> <span class="o">:</span> <span class="n">lax_monoidal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">concrete_category</span><span class="bp">.</span><span class="n">forget</span> <span class="n">C</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am surprised there is no <code>..[the stuff I want to see]</code> in the definition</p>
+
+<a name="190610577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610577">Johan Commelin (Mar 14 2020 at 19:31)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/types.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/types.lean">https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/types.lean</a></p>
+
+<a name="190610584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610584">Johan Commelin (Mar 14 2020 at 19:31)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/of_has_finite_products.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/of_has_finite_products.lean">https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monoidal/of_has_finite_products.lean</a></p>
+
+<a name="190610631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610631">Kevin Buzzard (Mar 14 2020 at 19:32)</a>:</h4>
+<p><em>boggle</em> so it's <code>terminal Type</code>?</p>
+
+<a name="190610636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610636">Johan Commelin (Mar 14 2020 at 19:32)</a>:</h4>
+<p>Yup...</p>
+
+<a name="190610644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610644">Johan Commelin (Mar 14 2020 at 19:33)</a>:</h4>
+<p>I would hope that is <code>(p)unit</code></p>
+
+<a name="190610646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610646">Chris Hughes (Mar 14 2020 at 19:33)</a>:</h4>
+<p>Isn't terminal <code>Type</code> defined to be <code>punit</code>?</p>
+
+<a name="190610649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610649">Kevin Buzzard (Mar 14 2020 at 19:33)</a>:</h4>
+<p>I still don't see why the code compiles.</p>
+
+<a name="190610663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610663">Kevin Buzzard (Mar 14 2020 at 19:33)</a>:</h4>
+<p>That instance definition doesn't seem to give enough fields, or any indication as to where the extra fields are coming from.</p>
+
+<a name="190610781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610781">Kevin Buzzard (Mar 14 2020 at 19:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">concrete_category</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="kn">extends</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">forget</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">[</span><span class="n">forget_faithful</span> <span class="o">:</span> <span class="n">faithful</span> <span class="n">forget</span><span class="o">]</span>
+<span class="kn">end</span> <span class="n">prio</span>
+</pre></div>
+
+
+<p>Those fields are all missing in the instance definition.</p>
+
+<a name="190610791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610791">Kevin Buzzard (Mar 14 2020 at 19:35)</a>:</h4>
+<p>There is some wizardry going on.</p>
+
+<a name="190610803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610803">Chris Hughes (Mar 14 2020 at 19:35)</a>:</h4>
+<p>Or does <code>terminal Type</code> come from some <code>has_limits</code> definition, so I'm guessing <code>pempty -&gt; pempty</code></p>
+
+<a name="190610848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610848">Kevin Buzzard (Mar 14 2020 at 19:36)</a>:</h4>
+<p>Chris do you understand how that instance code can possibly compile when not all fields are defined?</p>
+
+<a name="190610858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610858">Johan Commelin (Mar 14 2020 at 19:37)</a>:</h4>
+<p>Fields of the form <code>[foobar X]</code> are filled in by typeclass search. You don't need to give them.</p>
+
+<a name="190610865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610865">Kevin Buzzard (Mar 14 2020 at 19:37)</a>:</h4>
+<p>But <code>forget</code> is not marked in that way.</p>
+
+<a name="190610866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610866">Johan Commelin (Mar 14 2020 at 19:37)</a>:</h4>
+<p>Fields of the form <code>(foobar X . obviously)</code> are filled in by <code>tidy</code>. You hopefully don't need to give them.</p>
+
+<a name="190610871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610871">Kevin Buzzard (Mar 14 2020 at 19:37)</a>:</h4>
+<p>But <code>forget</code> doesn't have the <code>obviously</code> autoparam either.</p>
+
+<a name="190610917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610917">Johan Commelin (Mar 14 2020 at 19:38)</a>:</h4>
+<p>Hmmm,... where is this definition that you are talking about?</p>
+
+<a name="190610925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610925">Johan Commelin (Mar 14 2020 at 19:38)</a>:</h4>
+<p>Aaah, found it</p>
+
+<a name="190610926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610926">Kevin Buzzard (Mar 14 2020 at 19:38)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/bc36a65c8da72345bdae5af67eec1c11dd62f680/src/category_theory/enriched/examples.lean#L12" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/bc36a65c8da72345bdae5af67eec1c11dd62f680/src/category_theory/enriched/examples.lean#L12">https://github.com/leanprover-community/mathlib/blob/bc36a65c8da72345bdae5af67eec1c11dd62f680/src/category_theory/enriched/examples.lean#L12</a></p>
+
+<a name="190610935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190610935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190610935">Kevin Buzzard (Mar 14 2020 at 19:39)</a>:</h4>
+<p>I was just playing with this <code>sorry</code>, figuring out what it actually said etc.</p>
+
+<a name="190611044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611044">Kevin Buzzard (Mar 14 2020 at 19:40)</a>:</h4>
+<p>and the goal for that first <code>sorry</code> is <code>⊢ 𝟙_ Type ⟶ (concrete_category.forget (Module ℤ)).obj (𝟙_ (Module ℤ))</code></p>
+
+<a name="190611049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611049">Johan Commelin (Mar 14 2020 at 19:40)</a>:</h4>
+<p>Maybe unification takes care of all the other fields?</p>
+
+<a name="190611056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611056">Kevin Buzzard (Mar 14 2020 at 19:40)</a>:</h4>
+<p>and I just got interested in the definition of <code>𝟙_ Type</code></p>
+
+<a name="190611083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611083">Kevin Buzzard (Mar 14 2020 at 19:41)</a>:</h4>
+<p>I'm very impressed if type class unification can solve <code>faithful ?m_1</code> and then unification can solve <code>?m_1</code>!</p>
+
+<a name="190611087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611087">Kevin Buzzard (Mar 14 2020 at 19:41)</a>:</h4>
+<p>Oh -- but perhaps unification can solve it first.</p>
+
+<a name="190611144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611144">Kevin Buzzard (Mar 14 2020 at 19:42)</a>:</h4>
+<p>Probably this is not even the right question (the actual definition of the term), but I was surprised I couldn't answer it by inspecting the code.</p>
+
+<a name="190611153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611153">Kevin Buzzard (Mar 14 2020 at 19:43)</a>:</h4>
+<p>The definition of the map should be done just using the universal properties of the term.</p>
+
+<a name="190611260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190611260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190611260">Kevin Buzzard (Mar 14 2020 at 19:46)</a>:</h4>
+<p><code>example : monoidal_category.tensor_unit Type = limits.terminal Type := rfl</code> btw</p>
+
+<a name="190612850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190612850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190612850">Kevin Buzzard (Mar 14 2020 at 20:25)</a>:</h4>
+<p><code>ε := λ _, 0,</code> <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span></p>
+
+<a name="190612856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/locating%20instance%20definitions/near/190612856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07427locatinginstancedefinitions.html#190612856">Kevin Buzzard (Mar 14 2020 at 20:25)</a>:</h4>
+<p>and we will never know the definition of the source :-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

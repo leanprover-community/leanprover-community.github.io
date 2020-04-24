@@ -1,0 +1,149 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/13759Requestforreviewofaleftpadproof.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html">Request for review of a leftpad proof</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188900442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188900442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188900442">Yufan Lou (Feb 24 2020 at 05:26)</a>:</h4>
+<p><a href="https://github.com/hwayne/lets-prove-leftpad/pull/29" target="_blank" title="https://github.com/hwayne/lets-prove-leftpad/pull/29">https://github.com/hwayne/lets-prove-leftpad/pull/29</a></p>
+<p>Submission of Lean to Hillel's challenge to prove a formal leftpad</p>
+
+<a name="188900841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188900841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188900841">Scott Morrison (Feb 24 2020 at 05:37)</a>:</h4>
+<p>I think your text leaves out a critical point, namely that the reason why your proofs just consist of <code>rw leftpad, simp</code>, is because the theorems you're trying to prove have already been proved in mathlib! It's not like any magic is happening, beyond that <code>simp</code> is good at pulling out relevant lemmas from the library.</p>
+
+<a name="188900852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188900852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188900852">Alex J. Best (Feb 24 2020 at 05:37)</a>:</h4>
+<p>What you wrote looks great! The only thing I would say is that <code>add_comm</code> actually is a simp lemma (see the example below), the mechanism that stops it from looping however is possibly what makes it not solve your goal there outright, but it can do so in some instances,</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">is_add_comm_simp</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">is_add_comm_simp</span>
+</pre></div>
+
+
+<p>in this example simp changes <code>m+n</code> to <code>n+m</code> but not the other way round so the goal is proved.</p>
+
+<a name="188900885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188900885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188900885">Scott Morrison (Feb 24 2020 at 05:37)</a>:</h4>
+<p>(<code>add_comm</code> will not be a <code>simp</code> lemma for much longer, btw)</p>
+
+<a name="188900954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188900954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188900954">Alex J. Best (Feb 24 2020 at 05:38)</a>:</h4>
+<p>Sure, but the reason isn't because it loops, just that its a bit arbitrary where you end up right?</p>
+
+<a name="188901142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901142">Yufan Lou (Feb 24 2020 at 05:42)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188900841" title="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188900841">said</a>:</p>
+<blockquote>
+<p>I think your text leaves out a critical point, namely that the reason why your proofs just consist of <code>rw leftpad, simp</code>, is because the theorems you're trying to prove have already been proved in mathlib! It's not like any magic is happening, beyond that <code>simp</code> is good at pulling out relevant lemmas from the library.</p>
+</blockquote>
+<p>Let me specify that <code>simp</code> is pulling out theorem from mathlib</p>
+
+<a name="188901150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901150">Alex J. Best (Feb 24 2020 at 05:42)</a>:</h4>
+<p>Actually if you do <code>simp [-add_comm]</code> for your proof of <code>leftpad_length</code> you won't need to rewrite again after, so in this case it is actually the fact that <code>add_comm</code> is (currently) a simp lemma that is slowing you down!</p>
+
+<a name="188901331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901331">Scott Morrison (Feb 24 2020 at 05:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="127136">Alex J. Best</span> <a href="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188900954" title="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188900954">said</a>:</p>
+<blockquote>
+<p>Sure, but the reason isn't because it loops, just that its a bit arbitrary where you end up right?</p>
+</blockquote>
+<p>Yes. It's arbitrary and non-deterministic (or rather, possibly dependent on things you'd really like to be irrelevant).</p>
+
+<a name="188901350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901350">Scott Morrison (Feb 24 2020 at 05:47)</a>:</h4>
+<p>I'm not sure what this Hillel leftpad thing is about, but I wonder if it would be more interesting to actually show direct proofs of these facts, in Lean canonical style, and then point out as an extra: "of course, since all these theorems already exist in mathlib, and <code>simp</code> is awesome, we can prove all these facts with a uniform proof <code>rw leftpad, simp</code>."</p>
+
+<a name="188901405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901405">Yufan Lou (Feb 24 2020 at 05:49)</a>:</h4>
+<p>That would definitely be awesome, but out of my depth. I might add when I study a bit more about mathlib.</p>
+
+<a name="188901482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901482">Yufan Lou (Feb 24 2020 at 05:51)</a>:</h4>
+<p>This leftpad thing is a half-joke referring to when leftpad got removed from npm and sabotaged the building of half of all javascript apps. Hillel is promoting formal methods to be more mainstream so it is a way to ride the meme machine kinda.</p>
+
+<a name="188901485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901485">Scott Morrison (Feb 24 2020 at 05:51)</a>:</h4>
+<p>One solution is just to replace <code>simp</code> with <code>squeeze_simp</code>, see which lemma it's using, look them up, and copy and paste the proofs. :-)</p>
+
+<a name="188901539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901539">Yufan Lou (Feb 24 2020 at 05:52)</a>:</h4>
+<p>wow that can definitely go in README too</p>
+
+<a name="188901568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901568">Yufan Lou (Feb 24 2020 at 05:53)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="127136">Alex J. Best</span> <a href="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188901150" title="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188901150">said</a>:</p>
+<blockquote>
+<p>Actually if you do <code>simp [-add_comm]</code> for your proof of <code>leftpad_length</code> you won't need to rewrite again after</p>
+</blockquote>
+<p>Didn't work when I tried in the online editor. Is it something new?</p>
+
+<a name="188901618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901618">Yufan Lou (Feb 24 2020 at 05:54)</a>:</h4>
+<p><code>squeeze_simp</code> is not in online editor either. Ah I need to actually start my vscode.</p>
+
+<a name="188901643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901643">Yufan Lou (Feb 24 2020 at 05:55)</a>:</h4>
+<p>not today <span aria-label="sleepy" class="emoji emoji-1f62a" role="img" title="sleepy">:sleepy:</span></p>
+
+<a name="188901977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901977">Alex J. Best (Feb 24 2020 at 06:05)</a>:</h4>
+<p>I don't think it's new, thats weird.</p>
+
+<a name="188901982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188901982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188901982">Scott Morrison (Feb 24 2020 at 06:05)</a>:</h4>
+<p>Which online editor are you using?</p>
+
+<a name="188902028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188902028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188902028">Scott Morrison (Feb 24 2020 at 06:06)</a>:</h4>
+<p>You should definitely use Bryan's one, at <a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">https://leanprover-community.github.io/lean-web-editor/</a>, not the original one.</p>
+
+<a name="188902044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188902044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188902044">Yufan Lou (Feb 24 2020 at 06:07)</a>:</h4>
+<p>Oh, I've been using the original one all this time</p>
+
+<a name="188902562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188902562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188902562">Bryan Gin-ge Chen (Feb 24 2020 at 06:23)</a>:</h4>
+<p>Nice work! Did you see <span class="user-mention" data-user-id="110026">@Simon Hudon</span>'s PR to that repository? <a href="https://github.com/hwayne/lets-prove-leftpad/pull/8" target="_blank" title="https://github.com/hwayne/lets-prove-leftpad/pull/8">https://github.com/hwayne/lets-prove-leftpad/pull/8</a></p>
+
+<a name="188903030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188903030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188903030">Yufan Lou (Feb 24 2020 at 06:37)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="123965">Bryan Gin-ge Chen</span> <a href="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188902562" title="#narrow/stream/113488-general/topic/Request.20for.20review.20of.20a.20leftpad.20proof/near/188902562">said</a>:</p>
+<blockquote>
+<p>Nice work! Did you see <span class="user-mention silent" data-user-id="110026">Simon Hudon</span>'s PR to that repository? <a href="https://github.com/hwayne/lets-prove-leftpad/pull/8" target="_blank" title="https://github.com/hwayne/lets-prove-leftpad/pull/8">https://github.com/hwayne/lets-prove-leftpad/pull/8</a></p>
+</blockquote>
+<p>Oh no I did not! Thanks!</p>
+
+<a name="188903096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188903096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188903096">Yufan Lou (Feb 24 2020 at 06:38)</a>:</h4>
+<p>That's ... wow</p>
+
+<a name="188903311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188903311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188903311">Simon Hudon (Feb 24 2020 at 06:44)</a>:</h4>
+<p>I should really finish up that presentation. I've been procrastinating two years on that</p>
+
+<a name="188903534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188903534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188903534">Simon Hudon (Feb 24 2020 at 06:50)</a>:</h4>
+<p>Yours look pretty good :)</p>
+
+<a name="188903611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Request%20for%20review%20of%20a%20leftpad%20proof/near/188903611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13759Requestforreviewofaleftpadproof.html#188903611">Yufan Lou (Feb 24 2020 at 06:52)</a>:</h4>
+<p>Thank you! Yours is way up there for me to study <span aria-label="nerd" class="emoji emoji-1f913" role="img" title="nerd">:nerd:</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,432 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/43091arrays.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html">arrays</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192956135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956135">Miroslav Olšák (Apr 05 2020 at 12:02)</a>:</h4>
+<p>Is it just my impression, or the theory around arrays is not much developed yet? Or is there some modern replacement of arrays? I wanted to prove that array.foldl has certain value by exact description of the values during the folding process. I concluded that I would need a lemma like <code>foldl_inits_eq</code> in the following code</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">array</span><span class="bp">.</span><span class="n">simple_take</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">array</span> <span class="n">m</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="bp">⟨λ</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">lt_of_lt_of_le</span> <span class="n">i</span><span class="bp">.</span><span class="n">is_lt</span> <span class="n">h</span><span class="bp">⟩⟩</span>
+<span class="n">def</span> <span class="n">foldl_inits</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span>
+  <span class="o">:=</span> <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">simple_take</span> <span class="n">k</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">b</span> <span class="n">f</span>
+<span class="kn">lemma</span> <span class="n">foldl_inits_eq</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f2</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">f2</span> <span class="mi">0</span> <span class="n">bot_le</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span>
+      <span class="n">f2</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span><span class="bp">.</span><span class="n">is_lt</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f2</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">i</span><span class="bp">.</span><span class="n">is_lt</span><span class="o">)))</span> <span class="bp">→</span>
+  <span class="n">f2</span> <span class="bp">=</span> <span class="n">foldl_inits</span> <span class="n">a</span> <span class="n">b</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>(note I use my own <code>array.simple_take</code> instead of <code>array.take</code> just because it is easier to handle in proofs).<br>
+I almost managed to prove it up to a lemma</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fold_step</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a2</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">a1</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">a2</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">step</span> <span class="n">i</span><span class="bp">.</span><span class="n">is_lt</span><span class="bp">⟩</span><span class="o">)</span> <span class="bp">→</span>
+    <span class="n">a2</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">b</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">a2</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">lt_add_one</span> <span class="n">n</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">b</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I guess I need to analyze the cases of <code>d_array.iterate_aux</code>, but I am not sure how to do that. Or would it be easier to prove <code>foldl_inits_eq</code> through lists?</p>
+
+<a name="192956158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956158">Mario Carneiro (Apr 05 2020 at 12:03)</a>:</h4>
+<p>what are you trying to prove?</p>
+
+<a name="192956216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956216">Mario Carneiro (Apr 05 2020 at 12:04)</a>:</h4>
+<p>working with arrays is somewhat painful due to all the dependencies and mutable state. If you can recast the theorem in terms of lists it will be easier to prove</p>
+
+<a name="192956294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956294">Miroslav Olšák (Apr 05 2020 at 12:06)</a>:</h4>
+<p>From the higher perspective, still the IMO problem about lamps, C4 in <a href="http://imo-official.org/problems/IMO2008SL.pdf" title="http://imo-official.org/problems/IMO2008SL.pdf">http://imo-official.org/problems/IMO2008SL.pdf</a></p>
+
+<a name="192956306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956306">Mario Carneiro (Apr 05 2020 at 12:06)</a>:</h4>
+<p>there is no way that IMO said anything about arrays</p>
+
+<a name="192956319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956319">Miroslav Olšák (Apr 05 2020 at 12:07)</a>:</h4>
+<p>Well, it counts sequences of certain lengths that satisfy certain properties.</p>
+
+<a name="192956372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956372">Miroslav Olšák (Apr 05 2020 at 12:08)</a>:</h4>
+<p>So I interpretted them as arrays and counted them with <code>fintype.card</code></p>
+
+<a name="192956405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956405">Miroslav Olšák (Apr 05 2020 at 12:09)</a>:</h4>
+<p>Which is harder with lists where proving finiteness would be more challenging, I guess.</p>
+
+<a name="192956452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956452">Mario Carneiro (Apr 05 2020 at 12:10)</a>:</h4>
+<p>finiteness of lists is trivial</p>
+
+<a name="192956467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956467">Miroslav Olšák (Apr 05 2020 at 12:10)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="192956469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956469">Mario Carneiro (Apr 05 2020 at 12:10)</a>:</h4>
+<p>lists are finite. done</p>
+
+<a name="192956484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956484">Miroslav Olšák (Apr 05 2020 at 12:11)</a>:</h4>
+<p>I mean that the number of all lists of certain length is finite (if the original type is also finite)</p>
+
+<a name="192956492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956492">Mario Carneiro (Apr 05 2020 at 12:11)</a>:</h4>
+<p>There is a theorem about that</p>
+
+<a name="192956530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956530">Miroslav Olšák (Apr 05 2020 at 12:12)</a>:</h4>
+<p>But why would I use lists anyway, when the problem discusses only sequences of fixed length?</p>
+
+<a name="192956535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956535">Miroslav Olšák (Apr 05 2020 at 12:12)</a>:</h4>
+<p>It is much more array-like.</p>
+
+<a name="192956560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956560">Mario Carneiro (Apr 05 2020 at 12:12)</a>:</h4>
+<p>array is just a wrapper around <code>fin n -&gt; A</code></p>
+
+<a name="192956563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956563">Miroslav Olšák (Apr 05 2020 at 12:12)</a>:</h4>
+<p>I know.</p>
+
+<a name="192956583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956583">Mario Carneiro (Apr 05 2020 at 12:13)</a>:</h4>
+<p>What representation is best depends on what you need to prove about them</p>
+
+<a name="192956638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956638">Miroslav Olšák (Apr 05 2020 at 12:14)</a>:</h4>
+<p>Well, the sequences describe a certain process.</p>
+
+<a name="192956650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956650">Kevin Buzzard (Apr 05 2020 at 12:15)</a>:</h4>
+<p>Why don't you trust the list API?</p>
+
+<a name="192956666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956666">Miroslav Olšák (Apr 05 2020 at 12:15)</a>:</h4>
+<p>What do you mean by trusting list API?</p>
+
+<a name="192956708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956708">Mario Carneiro (Apr 05 2020 at 12:16)</a>:</h4>
+<p>there are theorems about all the things you are talking about</p>
+
+<a name="192956719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956719">Mario Carneiro (Apr 05 2020 at 12:16)</a>:</h4>
+<p>if you want fixed length, just assert <code>length l = n</code></p>
+
+<a name="192956728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956728">Miroslav Olšák (Apr 05 2020 at 12:16)</a>:</h4>
+<p>Do I understand correctly that you would recommend using lists because they are more developed, even for fixed-size sequences?</p>
+
+<a name="192956731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956731">Kevin Buzzard (Apr 05 2020 at 12:16)</a>:</h4>
+<p>Or maybe you could make a better array API. Remember though that this is different to programming. It doesn't matter if the implementation is inefficient from the point of view of computer science because you're reasoning about the code, not running it</p>
+
+<a name="192956748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956748">Mario Carneiro (Apr 05 2020 at 12:17)</a>:</h4>
+<p>you know that <code>vector A n</code> is just a pair of a list and a proof that it has length <code>n</code></p>
+
+<a name="192956798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192956798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192956798">Mario Carneiro (Apr 05 2020 at 12:18)</a>:</h4>
+<p><code>array</code> is really geared towards efficient algorithms, so many of the functions are unnaturally limited like <code>map : (A -&gt; A) -&gt; array A n -&gt; array A n</code></p>
+
+<a name="192957732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192957732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192957732">Kevin Buzzard (Apr 05 2020 at 12:43)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="133339">Miroslav Olšák</span> <a href="#narrow/stream/113489-new-members/topic/arrays/near/192956666" title="#narrow/stream/113489-new-members/topic/arrays/near/192956666">said</a>:</p>
+<blockquote>
+<p>What do you mean by trusting list API?</p>
+</blockquote>
+<p>I mean that data.list.basic contains 1000 theorems about lists including probably everything you want.</p>
+
+<a name="192958259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958259">Miroslav Olšák (Apr 05 2020 at 12:57)</a>:</h4>
+<p>Uff, the foldl parameters are completely reordered.</p>
+
+<a name="192958326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958326">Kevin Buzzard (Apr 05 2020 at 12:58)</a>:</h4>
+<p>I've done a ton of mathematics in Lean and I've never once looked at foldl. What are you doing?</p>
+
+<a name="192958413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958413">Miroslav Olšák (Apr 05 2020 at 13:01)</a>:</h4>
+<p>Applying a sequence of steps to a state of lamps.</p>
+
+<a name="192958418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958418">Miroslav Olšák (Apr 05 2020 at 13:01)</a>:</h4>
+<p>Look at the lamp problem (just the statement).</p>
+
+<a name="192958470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958470">Miroslav Olšák (Apr 05 2020 at 13:02)</a>:</h4>
+<p>C4 in <a href="http://imo-official.org/problems/IMO2008SL.pdf" title="http://imo-official.org/problems/IMO2008SL.pdf">http://imo-official.org/problems/IMO2008SL.pdf</a></p>
+
+<a name="192958548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958548">Miroslav Olšák (Apr 05 2020 at 13:04)</a>:</h4>
+<p>Now, I am trying to rewrite arrays to vectors.</p>
+
+<a name="192958728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958728">Miroslav Olšák (Apr 05 2020 at 13:09)</a>:</h4>
+<p>It seems that vectors does not support <code>has_mem</code>, which is inconvenient.</p>
+
+<a name="192958830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958830">Mario Carneiro (Apr 05 2020 at 13:11)</a>:</h4>
+<p>you can write <code>a \in v.1</code>, but what do you need it for?</p>
+
+<a name="192958837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958837">Mario Carneiro (Apr 05 2020 at 13:11)</a>:</h4>
+<p>use <code>list.count</code> to find out how many lights are on</p>
+
+<a name="192958898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192958898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192958898">Kevin Buzzard (Apr 05 2020 at 13:12)</a>:</h4>
+<p>One can formalise this question entirely in terms of lists.</p>
+
+<a name="192959201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959201">Miroslav Olšák (Apr 05 2020 at 13:17)</a>:</h4>
+<p>I used ∈ for a condition on the M-sequences that every switch is below n.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_M_seq</span> <span class="o">{</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">lamp_switch_seq</span> <span class="n">n</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span>
+  <span class="o">:=</span> <span class="n">is_N_seq</span> <span class="n">seq</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">seq</span><span class="o">,</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">n</span>
+</pre></div>
+
+<a name="192959266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959266">Miroslav Olšák (Apr 05 2020 at 13:18)</a>:</h4>
+<p>I defined it as</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_mem</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">lamp_switch_seq</span> <span class="n">n</span> <span class="n">k</span><span class="o">)</span>
+  <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">lamp_switch_seq</span> <span class="n">n</span> <span class="n">k</span><span class="o">),</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">seq</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>but the inconvience is that such cross-type manipulations are usually not so well supported by the library.</p>
+
+<a name="192959427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959427">Miroslav Olšák (Apr 05 2020 at 13:22)</a>:</h4>
+<p>For example, with arrays, I could define the sequence by a function, and then immediatelly deduce <code>∃ si, seq.read si = l</code> from <code>l ∈ seq</code>. Now I can similarly create a vector from a function using <code>vector.of_fn</code> but the same deduction will take me some time.</p>
+
+<a name="192959439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959439">Kevin Buzzard (Apr 05 2020 at 13:22)</a>:</h4>
+<p>Why don't you post your full formalisation of the question?</p>
+
+<a name="192959453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959453">Miroslav Olšák (Apr 05 2020 at 13:23)</a>:</h4>
+<p>Now it is complicated, I am in the middle of rewriting arrays to vectors.</p>
+
+<a name="192959470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959470">Miroslav Olšák (Apr 05 2020 at 13:23)</a>:</h4>
+<p>I guess I will just send you the array version.</p>
+
+<a name="192959666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959666">Miroslav Olšák (Apr 05 2020 at 13:28)</a>:</h4>
+<p>The partial formalisation using arrays: <a href="https://github.com/mirefek/my-lean-experiments/blob/master/lamps_array.lean" title="https://github.com/mirefek/my-lean-experiments/blob/master/lamps_array.lean">https://github.com/mirefek/my-lean-experiments/blob/master/lamps_array.lean</a><br>
+Attempt to prove something about array.foldl: <a href="https://github.com/mirefek/my-lean-experiments/blob/master/array_fold.lean" title="https://github.com/mirefek/my-lean-experiments/blob/master/array_fold.lean">https://github.com/mirefek/my-lean-experiments/blob/master/array_fold.lean</a></p>
+
+<a name="192959757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959757">Kevin Buzzard (Apr 05 2020 at 13:31)</a>:</h4>
+<p>Yeah this is going to be hard to do with <code>array</code> I suspect. <code>array</code> is a type written for computer scientists, it seems to me -- it shows up a bunch in <code>meta</code> code. You need a type which is optimised for proving, not computing.</p>
+
+<a name="192959885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959885">Miroslav Olšák (Apr 05 2020 at 13:34)</a>:</h4>
+<p>Well, interpretting a fixed-size sequence as a function is in my opinion mathematical enough.</p>
+
+<a name="192959904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959904">Miroslav Olšák (Apr 05 2020 at 13:35)</a>:</h4>
+<p>I like it more than some inductive construction of it :-).</p>
+
+<a name="192959907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959907">Kevin Buzzard (Apr 05 2020 at 13:35)</a>:</h4>
+<p>Right but there is a non-mathematical issue as well, which is whether you should use a type optimised for computing or one optimised for proving, if you are going to write a proof.</p>
+
+<a name="192959914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959914">Kevin Buzzard (Apr 05 2020 at 13:35)</a>:</h4>
+<p>This is an implementation issue which mathematicians do not normally have to deal with.</p>
+
+<a name="192959963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959963">Kevin Buzzard (Apr 05 2020 at 13:36)</a>:</h4>
+<p>If you want to prove stuff by induction you should use <code>nat</code>. But if you want to prove <code>100000+200000=300000</code> then <code>nat</code> is a disaster because internally it's represented as some super-inefficient linked list or something.</p>
+
+<a name="192959984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959984">Kevin Buzzard (Apr 05 2020 at 13:37)</a>:</h4>
+<p>Conversely binary nats, namely <code>pos_num</code> (check out the definition) are super-efficient for doing arithmetic, but the moment you try and prove something by induction on them you find that your induction principle is "if it's true for n then you need to prove it for 2n and 2n+1"</p>
+
+<a name="192959991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192959991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192959991">Kevin Buzzard (Apr 05 2020 at 13:37)</a>:</h4>
+<p>However as a mathematician you can't tell the difference between <code>pos_num</code> and <code>pnat</code> because they're both <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mo>…</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{1,2,3,4,\ldots\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mclose">}</span></span></span></span></p>
+
+<a name="192960048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960048">Kevin Buzzard (Apr 05 2020 at 13:39)</a>:</h4>
+<p>If you are proving theorems then you should not be thinking at all about the definition of the structure, you should be thinking about what API is available, and the API will depend on (a) how much people have worked on it and (b) how easy it is to prove things about the object.</p>
+
+<a name="192960103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960103">Kevin Buzzard (Apr 05 2020 at 13:40)</a>:</h4>
+<p>The fact that you don't like some inductive construction of something should be irrelevant. What matters is not the definition of the thing, what matters is the API for the thing. If you formalise the question in terms of <code>array</code>s for some spurious reason then you are in trouble when you realise that there are no theorems in the API for arrays because they weren't designed to prove theorems.</p>
+
+<a name="192960121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960121">Miroslav Olšák (Apr 05 2020 at 13:41)</a>:</h4>
+<p>I get it, the inside obviously does not matter.</p>
+
+<a name="192960123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960123">Miroslav Olšák (Apr 05 2020 at 13:41)</a>:</h4>
+<p>but</p>
+
+<a name="192960169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960169">Kevin Buzzard (Apr 05 2020 at 13:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> how would you formalise these statements? There's this thread and there's <a href="#narrow/stream/113489-new-members/topic/grasshopper.20problem" title="#narrow/stream/113489-new-members/topic/grasshopper.20problem">this one</a>. Miroslav might have an easier time formalising the proofs if a Lean expert formalised the statements.</p>
+
+<a name="192960258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960258">Miroslav Olšák (Apr 05 2020 at 13:44)</a>:</h4>
+<p>but it makes sense to have the size inside the type in my case (so rather <code>vector</code> that <code>list</code>)</p>
+
+<a name="192960273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960273">Miroslav Olšák (Apr 05 2020 at 13:45)</a>:</h4>
+<p>In one case, I wanted to quantify over all elements of the vector, but vector does not support <code>has_mem</code></p>
+
+<a name="192960326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960326">Miroslav Olšák (Apr 05 2020 at 13:46)</a>:</h4>
+<p>it is convenient to give a description of the sequence using function (there is <code>vector.of_fn</code>, that is fine)</p>
+
+<a name="192960401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960401">Kevin Buzzard (Apr 05 2020 at 13:49)</a>:</h4>
+<p>I know you are focussed on the fact that these lists all have the same size, but the size of the list is <code>k</code> which is a variable. So you can formalise a statement about a variable k and then a vector v whose length is k. Or you can just formalise a statement about a list. If the vectors all had length 3 I would understand your point of view.</p>
+
+<a name="192960449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960449">Miroslav Olšák (Apr 05 2020 at 13:50)</a>:</h4>
+<p>It feels to me that each of the structures lacks a bit of the interface for proving.</p>
+
+<a name="192960543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960543">Miroslav Olšák (Apr 05 2020 at 13:53)</a>:</h4>
+<p>So you would have lamp_state as vectors, and lamp_switch_seq primarily as a list?</p>
+
+<a name="192960634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960634">Kevin Buzzard (Apr 05 2020 at 13:54)</a>:</h4>
+<p>I would have everything as lists.</p>
+
+<a name="192960648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960648">Miroslav Olšák (Apr 05 2020 at 13:55)</a>:</h4>
+<p>uff</p>
+
+<a name="192960655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960655">Kevin Buzzard (Apr 05 2020 at 13:55)</a>:</h4>
+<p>because data.list.basic is 5000 lines long</p>
+
+<a name="192960717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960717">Miroslav Olšák (Apr 05 2020 at 13:56)</a>:</h4>
+<p>Yes, it is highly a developed structure, just not the one suitable for the task :-D.</p>
+
+<a name="192960739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960739">Kevin Buzzard (Apr 05 2020 at 13:57)</a>:</h4>
+<p>I think you don't have a good understanding of what being suitable for the task means in the context of theorem proving. But I might be wrong. That's why I'd be interested in Floris' opinion.</p>
+
+<a name="192960800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960800">Miroslav Olšák (Apr 05 2020 at 13:58)</a>:</h4>
+<p>I accept that vectors might be better. Alright, let's see what an expert thinks about it.</p>
+
+<a name="192960815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960815">Reid Barton (Apr 05 2020 at 13:58)</a>:</h4>
+<p>This conversation reminds me of when I was at a cryptography talk and the speaker said something like "so what's another group with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> elements besides <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Z</mi><mi mathvariant="normal">/</mi><mi>p</mi><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}/p\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mord">/</span><span class="mord mathdefault">p</span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>?"</p>
+
+<a name="192960827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192960827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192960827">Kevin Buzzard (Apr 05 2020 at 13:59)</a>:</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">E(k)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="192961890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192961890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192961890">Mario Carneiro (Apr 05 2020 at 14:25)</a>:</h4>
+<p>Here's one way to state the problem:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">function</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="o">[]</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">P</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">P</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="o">(</span><span class="n">R</span> <span class="n">a</span><span class="o">)</span> <span class="n">l</span> <span class="n">b</span>
+
+<span class="n">def</span> <span class="n">flip_one</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="n">function</span><span class="bp">.</span><span class="n">update</span> <span class="n">f</span> <span class="n">i</span> <span class="o">(</span><span class="n">bnot</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">admissible</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">flip_one</span> <span class="n">f</span> <span class="n">i</span>
+
+<span class="n">def</span> <span class="n">restricted_admissible</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">flip_one</span> <span class="n">f</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="n">i</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">end_state</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ff</span>
+
+<span class="n">def</span> <span class="n">lamp_seq</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">),</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">))</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="n">R</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">end_state</span> <span class="bp">=</span> <span class="n">s</span><span class="o">)</span> <span class="n">l</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">)</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">theorem</span> <span class="n">C4</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="mi">2</span> <span class="err">∣</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">h3</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">vector</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="n">k</span> <span class="bp">//</span> <span class="n">lamp_seq</span> <span class="n">admissible</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">}</span> <span class="bp">=</span>
+  <span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="n">k</span> <span class="bp">-</span> <span class="n">n</span><span class="o">)</span> <span class="bp">*</span>
+  <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">vector</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="n">k</span> <span class="bp">//</span> <span class="n">lamp_seq</span> <span class="n">restricted_admissible</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="192985164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192985164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192985164">Miroslav Olšák (Apr 06 2020 at 00:22)</a>:</h4>
+<p>How would you prove something about the <code>list.chain''</code>? For example that if <code>n = k</code>, then there exist an <code>admissible</code> sequence (simply switch n-th lamp in n-th step).</p>
+
+<a name="192987722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/arrays/near/192987722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43091arrays.html#192987722">Mario Carneiro (Apr 06 2020 at 01:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;_imp₂</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="n">R&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">R</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">R&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">P</span> <span class="n">P&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">P</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">P&#39;</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">l</span> <span class="n">b</span><span class="o">},</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="n">R</span> <span class="n">P</span> <span class="n">l</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="n">R&#39;</span> <span class="n">P&#39;</span> <span class="n">l</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="n">P&#39;</span> <span class="n">hP</span> <span class="o">[]</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">hP</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="n">P&#39;</span> <span class="n">hP</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">imp</span> <span class="o">(</span><span class="n">hP</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;_imp₂</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">a</span><span class="o">))</span>
+
+<span class="kn">theorem</span> <span class="n">admissible_of_restricted</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">restricted_admissible</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">admissible</span> <span class="n">f</span> <span class="n">g</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
+
+<span class="kn">theorem</span> <span class="n">exists_admissible_finset</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">),</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">card</span> <span class="bp">∧</span>
+    <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;</span> <span class="n">restricted_admissible</span>
+      <span class="o">(</span><span class="n">eq</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">)))</span>
+      <span class="n">l</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="bp">⟨</span><span class="o">[],</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">funext</span> <span class="n">i</span><span class="o">,</span> <span class="n">cases</span> <span class="n">i</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">s</span> <span class="n">hs</span> <span class="n">l</span> <span class="n">e</span> <span class="n">IH</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="bp">⟨_::</span><span class="n">l</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;_imp₂</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="bp">_</span> <span class="n">IH</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">card_insert_of_not_mem</span> <span class="n">hs</span><span class="o">,</span> <span class="err">←</span> <span class="n">e</span><span class="o">],</span> <span class="n">refl</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">rintro</span> <span class="bp">_</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">use</span> <span class="n">a</span><span class="o">,</span>
+      <span class="n">funext</span> <span class="n">i</span><span class="o">,</span> <span class="n">cases</span> <span class="n">i</span><span class="bp">;</span> <span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">],</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">flip_one</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">update</span><span class="o">],</span>
+      <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h</span> <span class="err">⊢</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hs</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">exists_restricted_admissible</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">vector</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="n">n</span><span class="o">,</span> <span class="n">lamp_seq</span> <span class="n">restricted_admissible</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">l</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">hl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">exists_admissible_finset</span> <span class="o">(</span><span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="n">α</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">refine</span> <span class="bp">⟨⟨_</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;_imp₂</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="bp">_</span> <span class="n">hl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rintro</span> <span class="bp">_</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">funext</span> <span class="n">i</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">i</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">end_state</span><span class="o">],</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">exists_admissible</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">vector</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="n">n</span><span class="o">,</span> <span class="n">lamp_seq</span> <span class="n">admissible</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">exists_restricted_admissible</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">imp</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;&#39;_imp₂</span> <span class="n">admissible_of_restricted</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

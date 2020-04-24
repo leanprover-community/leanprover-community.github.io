@@ -1,0 +1,617 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/89168logannlogainmathlib.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html">log (a ^ n) = n * log a in mathlib?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189012832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189012832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189012832">Donald Sebastian Leung (Feb 25 2020 at 11:55)</a>:</h4>
+<p>I would like to rewrite based on <code>log (a ^ n) = n * log a</code> which should be a well-known log identity from high school; however, I can't seem to find it even after searching through the entire <a href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html"><code>analysis.complex.exponential</code></a> in mathlib. Is it not in mathlib yet or am I just not looking hard enough?</p>
+
+<a name="189013532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189013532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189013532">Mario Carneiro (Feb 25 2020 at 12:04)</a>:</h4>
+<p>I think you found a hole. For <code>cpow</code> and the complex log, it is more or less true by definition, but there is an off by 2 pi i problem</p>
+
+<a name="189013544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189013544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189013544">Mario Carneiro (Feb 25 2020 at 12:04)</a>:</h4>
+<p>The real number version follows from that</p>
+
+<a name="189015246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189015246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189015246">Kevin Buzzard (Feb 25 2020 at 12:32)</a>:</h4>
+<p>It would not surprise me if this were false for complex a, perhaps this is why it's not there</p>
+
+<a name="189019210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189019210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189019210">Donald Sebastian Leung (Feb 25 2020 at 13:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189015246" title="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189015246">said</a>:</p>
+<blockquote>
+<p>It would not surprise me if this were false for complex a, perhaps this is why it's not there</p>
+</blockquote>
+<p>Interesting ...<br>
+<span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189013532" title="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189013532">said</a>:</p>
+<blockquote>
+<p>I think you found a hole. For <code>cpow</code> and the complex log, it is more or less true by definition, but there is an off by 2 pi i problem</p>
+</blockquote>
+<p>I see, I guess I will prove it by induction on <code>n</code> then</p>
+
+<a name="189019950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189019950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189019950">Kevin Buzzard (Feb 25 2020 at 13:41)</a>:</h4>
+<p>For induction you'll need log(ab)=log(a)+log(b) which might also be false for complex numbers.</p>
+
+<a name="189020066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189020066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189020066">Donald Sebastian Leung (Feb 25 2020 at 13:43)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189019950" title="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189019950">said</a>:</p>
+<blockquote>
+<p>For induction you'll need log(ab)=log(a)+log(b) which might also be false for complex numbers.</p>
+</blockquote>
+<p>Is that result (for <code>a b : ℝ</code>) in mathlib?</p>
+
+<a name="189020127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189020127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189020127">Kevin Buzzard (Feb 25 2020 at 13:44)</a>:</h4>
+<p>aah but log_mul does indeed exist for reals :-)</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189069936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189069936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189069936">Mario Carneiro (Feb 25 2020 at 22:57)</a>:</h4>
+<p>You shouldn't prove this by induction. For a theorem like this it generalizes to positive reals at least</p>
+
+<a name="189568868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189568868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189568868">Jalex Stark (Mar 03 2020 at 07:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+
+<span class="kn">lemma</span> <span class="n">log_pow_nat</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span><span class="err">^</span><span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">pow_zero</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">log_one</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">nat_zero_eq_zero</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">],</span>
+<span class="n">rw</span> <span class="n">pow_succ</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">real</span><span class="bp">.</span><span class="n">log_mul</span><span class="o">,</span>
+<span class="n">swap</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+<span class="n">swap</span><span class="o">,</span> <span class="n">exact</span> <span class="n">pow_pos</span> <span class="n">hx</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hd</span><span class="o">,</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="n">ring</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">puzzle_2</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">hc</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">q</span> <span class="o">:=</span> <span class="n">inv_mul_cancel</span> <span class="n">hc</span><span class="o">,</span>
+<span class="n">apply_fun</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="err">←</span> <span class="n">mul_assoc</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span><span class="n">rw</span> <span class="n">q</span> <span class="n">at</span> <span class="n">h</span><span class="o">,},</span>
+<span class="n">revert</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_mul</span><span class="o">,</span> <span class="n">imp_self</span><span class="o">],</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">puzzle_3</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">):</span> <span class="mi">1</span><span class="bp">/</span><span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">one_div_eq_inv</span><span class="o">,</span> <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">inv_mul_cancel</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">puzzle_4</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="err">^</span><span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span> <span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">rpow_one</span><span class="o">],</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">pow_mul_nat</span> <span class="o">(</span><span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span><span class="err">^</span><span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span><span class="err">^</span><span class="n">x</span><span class="o">)</span><span class="err">^</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="n">norm_num</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">pow_succ</span><span class="o">,</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">t</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="o">(</span><span class="n">d</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">d</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span> <span class="n">rw</span> <span class="n">t</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_add</span> <span class="bp">_</span> <span class="n">x</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hd</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">hb</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">puzzle_5</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span><span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span><span class="o">))</span><span class="err">^</span><span class="n">n</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="err">←</span>  <span class="n">pow_mul_nat</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_div_eq_inv</span><span class="o">],</span>
+<span class="n">rw</span> <span class="n">inv_mul_cancel</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">rpow_one</span><span class="o">],</span>
+<span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hn</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hx</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">puzzle_6</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span><span class="o">:</span><span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">key</span> <span class="o">:=</span> <span class="n">puzzle_3</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">one_div_eq_inv</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">mul_inv_cancel</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_mul</span><span class="o">],</span>
+<span class="n">exact</span> <span class="n">hn</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">log_pow_nat_inv</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span><span class="err">^</span><span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>  <span class="bp">/</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">n</span><span class="o">)</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">hn_</span> <span class="o">:</span> <span class="o">(</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_cast</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">hn</span><span class="o">,</span>
+<span class="n">set</span> <span class="n">x_inv</span> <span class="o">:=</span> <span class="n">x</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span><span class="o">),</span>
+<span class="n">set</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x_inv</span><span class="o">,</span>
+<span class="n">set</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">q1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="o">(</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span> <span class="o">)</span> <span class="bp">/</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)),</span>
+<span class="n">rw</span> <span class="n">puzzle_3</span><span class="o">,</span>
+<span class="n">suffices</span> <span class="n">q1a</span><span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="err">^</span><span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span> <span class="o">),</span> <span class="n">rw</span> <span class="err">←</span>  <span class="n">q1a</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">puzzle_4</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">hn_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">puzzle_2</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">n</span> <span class="bp">_</span> <span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">],</span>
+<span class="k">have</span> <span class="n">q</span> <span class="o">:=</span> <span class="n">log_pow_nat</span> <span class="o">(</span><span class="n">x_inv</span><span class="o">)</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">swap</span><span class="o">,</span> <span class="n">exact</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_pos_of_pos</span> <span class="n">hx</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="err">↑</span><span class="n">n</span><span class="o">),</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">q</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">q2</span> <span class="o">:=</span> <span class="n">puzzle_5</span> <span class="n">x</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">q2</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">puzzle_6</span> <span class="n">b</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">hn_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hx</span><span class="o">,</span>
+<span class="kn">end</span>
+
+
+
+<span class="kn">theorem</span> <span class="n">log_pow_nat_pair</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span><span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span><span class="err">^</span><span class="o">(</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>  <span class="bp">/</span> <span class="n">b</span> <span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>  <span class="bp">/</span> <span class="n">b</span>  <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">q1</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">b</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span><span class="n">ℝ</span> <span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">q1</span><span class="o">,</span> <span class="n">rw</span> <span class="n">pow_mul_nat</span> <span class="n">x</span> <span class="bp">_</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">log_pow_nat</span><span class="o">,</span> <span class="n">log_pow_nat_inv</span><span class="o">],</span>
+<span class="n">ring</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">assumption</span><span class="o">},</span>
+<span class="n">exact</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_pos_of_pos</span> <span class="n">hx</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="err">↑</span><span class="n">b</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189570235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570235">Johan Commelin (Mar 03 2020 at 07:56)</a>:</h4>
+<p>Note that puzzle 3 is false if <code>x = 0</code>.</p>
+
+<a name="189570240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570240">Johan Commelin (Mar 03 2020 at 07:56)</a>:</h4>
+<p>Some of these puzzles might be solvable <code>by library_search</code></p>
+
+<a name="189570253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570253">Johan Commelin (Mar 03 2020 at 07:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="252300">@Jalex Stark</span> We know that continuous functions are determined by their values on dense subsets. But I don't know the theorem name from the top of my head.</p>
+
+<a name="189570263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570263">Jalex Stark (Mar 03 2020 at 07:57)</a>:</h4>
+<p>just finished clearing the sorries, indeed library_search and squeeze_simp were useful</p>
+
+<a name="189570603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570603">Kevin Buzzard (Mar 03 2020 at 08:02)</a>:</h4>
+<p>In puzzle 3 you can probably just write <code>exact inv_mul_cancel h</code> after the rewrite. <code>revert</code> hardly ever gets used, in my experience</p>
+
+<a name="189570630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570630">Jalex Stark (Mar 03 2020 at 08:03)</a>:</h4>
+<p>ah that makes sense. I think revert was what I needed for squeeze_simp to give me a useful response</p>
+
+<a name="189570695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570695">Jalex Stark (Mar 03 2020 at 08:04)</a>:</h4>
+<p>Some form of this theorem should end up in mathlib, right? Does that mean I should make a pull request or something?</p>
+
+<a name="189570801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570801">Mario Carneiro (Mar 03 2020 at 08:06)</a>:</h4>
+<p>Sure. Note however that mathlib has a style guide, and a lot of cleanup would be needed to get that proof mathlib ready</p>
+
+<a name="189570814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570814">Jalex Stark (Mar 03 2020 at 08:07)</a>:</h4>
+<p>Where do i find the style guide?</p>
+
+<a name="189570831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570831">Mario Carneiro (Mar 03 2020 at 08:07)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/style.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/style.md">https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/style.md</a></p>
+
+<a name="189570866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189570866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189570866">Mario Carneiro (Mar 03 2020 at 08:08)</a>:</h4>
+<p>You can also just browse mathlib sources to get a feel for the style</p>
+
+<a name="189571193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571193">Mario Carneiro (Mar 03 2020 at 08:14)</a>:</h4>
+<p>Here's a restyling of <code>log_pow_nat_inv</code>. I probably haven't got the brackets quite right because I wrote this without lean, but the two exacts at the end indicate that something doesn't add up</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">log_pow_nat_inv</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="n">n</span><span class="o">)</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">hn_</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="o">{</span><span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hn</span><span class="o">},</span>
+  <span class="n">set</span> <span class="n">x_inv</span> <span class="o">:=</span> <span class="n">x</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span><span class="o">),</span>
+  <span class="n">set</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x_inv</span><span class="o">,</span>
+  <span class="n">set</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">q1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)),</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">puzzle_3</span><span class="o">,</span>
+    <span class="n">suffices</span> <span class="n">q1a</span><span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">^</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">q1a</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">puzzle_4</span> <span class="n">x</span> <span class="o">},</span>
+    <span class="n">exact</span> <span class="n">hn_</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">puzzle_2</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">],</span>
+  <span class="k">have</span> <span class="n">q</span> <span class="o">:=</span> <span class="n">log_pow_nat</span> <span class="o">(</span><span class="n">x_inv</span><span class="o">)</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">swap</span><span class="o">,</span> <span class="n">exact</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_pos_of_pos</span> <span class="n">hx</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="err">↑</span><span class="n">n</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">q</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">puzzle_5</span> <span class="n">x</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">puzzle_6</span> <span class="n">b</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hn_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hx</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="189571446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571446">Jalex Stark (Mar 03 2020 at 08:20)</a>:</h4>
+<p>I think you did in fact get the brackets right, it just compiles for me</p>
+
+<a name="189571455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571455">Mario Carneiro (Mar 03 2020 at 08:20)</a>:</h4>
+<p>The question isn't whether it compiles, it is whether there are ever multiple goals in flight</p>
+
+<a name="189571458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571458">Johan Commelin (Mar 03 2020 at 08:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="252300">@Jalex Stark</span> Have you considered applying <code>exp_injective</code>?</p>
+
+<a name="189571490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571490">Mario Carneiro (Mar 03 2020 at 08:21)</a>:</h4>
+<p>The point of the brackets is to organize the goals so that the structure of the proof is clearer</p>
+
+<a name="189571541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571541">Jalex Stark (Mar 03 2020 at 08:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <br>
+that sounds like the kind of thing that would pull a lot of weight but I don't know where to apply it</p>
+
+<a name="189571550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571550">Jalex Stark (Mar 03 2020 at 08:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> oh i see</p>
+
+<a name="189571551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571551">Johan Commelin (Mar 03 2020 at 08:22)</a>:</h4>
+<p>Start your proof with <code>apply exp_injective</code></p>
+
+<a name="189571558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571558">Jalex Stark (Mar 03 2020 at 08:22)</a>:</h4>
+<p>which proof?</p>
+
+<a name="189571587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571587">Jalex Stark (Mar 03 2020 at 08:24)</a>:</h4>
+<p>also i don't know where exp_injective lives, right now Im just trying to find it by typing it and pressing ctrl+space</p>
+
+<a name="189571640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571640">Johan Commelin (Mar 03 2020 at 08:24)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/b42e5687d8b45e47de69e64e944637a6a7b03e1c/src/data/complex/exponential.lean#L879" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/b42e5687d8b45e47de69e64e944637a6a7b03e1c/src/data/complex/exponential.lean#L879">https://github.com/leanprover-community/mathlib/blob/b42e5687d8b45e47de69e64e944637a6a7b03e1c/src/data/complex/exponential.lean#L879</a></p>
+
+<a name="189571661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571661">Johan Commelin (Mar 03 2020 at 08:25)</a>:</h4>
+<p>In VScode, there is also the magnifying glass on the left. That might help as well.</p>
+
+<a name="189571667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571667">Johan Commelin (Mar 03 2020 at 08:25)</a>:</h4>
+<p>But I assume that you've imported <code>analysis.complex.exponential</code>?</p>
+
+<a name="189571709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571709">Johan Commelin (Mar 03 2020 at 08:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="252300">@Jalex Stark</span> What's the final statement that you want to prove?</p>
+
+<a name="189571724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571724">Johan Commelin (Mar 03 2020 at 08:26)</a>:</h4>
+<p>I guess something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">log_pow</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="189571753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571753">Jalex Stark (Mar 03 2020 at 08:27)</a>:</h4>
+<p>yes</p>
+
+<a name="189571803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571803">Johan Commelin (Mar 03 2020 at 08:28)</a>:</h4>
+<p>So I would start that proof immediately with <code>apply exp_injective</code></p>
+
+<a name="189571812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571812">Mario Carneiro (Mar 03 2020 at 08:28)</a>:</h4>
+<p>If you apply exp_injective, then the rhs is <code>x ^ n</code> in the reals by definition</p>
+
+<a name="189571832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571832">Johan Commelin (Mar 03 2020 at 08:28)</a>:</h4>
+<p>And the lhs is equal to that by <code>exp_log hx</code></p>
+
+<a name="189571833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571833">Jalex Stark (Mar 03 2020 at 08:28)</a>:</h4>
+<p>okay</p>
+
+<a name="189571841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571841">Jalex Stark (Mar 03 2020 at 08:29)</a>:</h4>
+<p>i have import analysis.complex.exponential at the top of my file</p>
+
+<a name="189571864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571864">Johan Commelin (Mar 03 2020 at 08:29)</a>:</h4>
+<p>It's weird that this lemma isn't in mathlib yet.</p>
+
+<a name="189571867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571867">Jalex Stark (Mar 03 2020 at 08:29)</a>:</h4>
+<p>unknown identifier 'exp_injective'</p>
+
+<a name="189571870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571870">Johan Commelin (Mar 03 2020 at 08:29)</a>:</h4>
+<p><code>real.exp_injective</code>?</p>
+
+<a name="189571872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571872">Jalex Stark (Mar 03 2020 at 08:29)</a>:</h4>
+<p>that works</p>
+
+<a name="189571881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571881">Mario Carneiro (Mar 03 2020 at 08:29)</a>:</h4>
+<p>I think the proof is as simple as <code>rw [rpow_def_of_pos, log_exp]</code></p>
+
+<a name="189571933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571933">Johan Commelin (Mar 03 2020 at 08:30)</a>:</h4>
+<p>Aha, then you don't even need <code>exp_injective</code> (-;</p>
+
+<a name="189571934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571934">Jalex Stark (Mar 03 2020 at 08:30)</a>:</h4>
+<p>woah so if you have a theorem that f_injective, then apply f_injective is the thing that applies f to both sides of an equation</p>
+
+<a name="189571977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189571977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189571977">Johan Commelin (Mar 03 2020 at 08:31)</a>:</h4>
+<p>Which is just because of the general way <code>apply</code> works.<br>
+<code>hf : injective f</code> is really just a function that turns <code>f x = f y</code> into a proof that <code>x = y</code>.</p>
+
+<a name="189572035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572035">Jalex Stark (Mar 03 2020 at 08:32)</a>:</h4>
+<p>cool i have spent a lot of time finding circuitous ways to apply f to both sides of an equation</p>
+
+<a name="189572037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572037">Johan Commelin (Mar 03 2020 at 08:32)</a>:</h4>
+<p>So if you <code>apply hf</code>, then Lean says, okay, you need to prove <code>x = y</code>, but by <code>hf</code> it suffices to give me a proof of <code>f x = f y</code></p>
+
+<a name="189572053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572053">Johan Commelin (Mar 03 2020 at 08:32)</a>:</h4>
+<p>If you have a hypothesis <code>h : x = y</code>, and you want <code>h' : f x = f y</code>, then you should use <code>congr_arg f h</code>.</p>
+
+<a name="189572071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572071">Mario Carneiro (Mar 03 2020 at 08:33)</a>:</h4>
+<p>or <code>congr' 1</code></p>
+
+<a name="189572090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572090">Jalex Stark (Mar 03 2020 at 08:33)</a>:</h4>
+<p>so should the code block</p>
+
+<a name="189572094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572094">Jalex Stark (Mar 03 2020 at 08:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">log_pow</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">rpow_def_of_pos</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">log_exp</span><span class="o">],</span>
+<span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="189572099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572099">Jalex Stark (Mar 03 2020 at 08:33)</a>:</h4>
+<p>go into mathlib?</p>
+
+<a name="189572149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572149">Johan Commelin (Mar 03 2020 at 08:34)</a>:</h4>
+<p>Yes, more or less</p>
+
+<a name="189572168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572168">Mario Carneiro (Mar 03 2020 at 08:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">log_pow</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">rpow_def_of_pos</span> <span class="n">hx</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">log_exp</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span>
+</pre></div>
+
+<a name="189572171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572171">Johan Commelin (Mar 03 2020 at 08:34)</a>:</h4>
+<p>I would change <code>n</code> to <code>y</code>, put <code>begin</code> on a new line, and maybe turn the statement into <code>real.log x * y</code> to preserve the order of <code>x</code> and <code>y</code> and golf the proof.</p>
+
+<a name="189572189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572189">Johan Commelin (Mar 03 2020 at 08:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you prefer the version with or without <code>mul_comm</code>?</p>
+
+<a name="189572220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572220">Mario Carneiro (Mar 03 2020 at 08:35)</a>:</h4>
+<p>they are both conceivably useful, but for consistency it's probably best to have the <code>y</code> on the right</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">log_pow</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">real</span><span class="bp">.</span><span class="n">log</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">real</span><span class="bp">.</span><span class="n">rpow_def_of_pos</span> <span class="n">hx</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">log_exp</span><span class="o">]</span>
+</pre></div>
+
+<a name="189572294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572294">Johan Commelin (Mar 03 2020 at 08:36)</a>:</h4>
+<p>Also, maybe the name should be <code>log_pow_of_pos</code>?</p>
+
+<a name="189572296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572296">Mario Carneiro (Mar 03 2020 at 08:36)</a>:</h4>
+<p>the <code>real.</code> is not necessary because this will be in the <code>real</code> namespace</p>
+
+<a name="189572308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572308">Mario Carneiro (Mar 03 2020 at 08:37)</a>:</h4>
+<p>Is there a <code>log_pow_of_neg</code>?</p>
+
+<a name="189572314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572314">Johan Commelin (Mar 03 2020 at 08:37)</a>:</h4>
+<p>It's probably bananas</p>
+
+<a name="189572315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572315">Mario Carneiro (Mar 03 2020 at 08:37)</a>:</h4>
+<p>If not, I wouldn't bother</p>
+
+<a name="189572335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572335">Johan Commelin (Mar 03 2020 at 08:37)</a>:</h4>
+<p>We have very bad powers of negative numbers</p>
+
+<a name="189572385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572385">Mario Carneiro (Mar 03 2020 at 08:38)</a>:</h4>
+<p>I think when it comes to <code>real.log</code> you should just assume the argument is always positive</p>
+
+<a name="189572403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572403">Johan Commelin (Mar 03 2020 at 08:38)</a>:</h4>
+<p>Which can happen, if <code>x &lt; 0</code> and <code>y</code> is an even natural number...</p>
+
+<a name="189572411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572411">Mario Carneiro (Mar 03 2020 at 08:39)</a>:</h4>
+<p>I don't think rpow will give you that though</p>
+
+<a name="189572416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572416">Johan Commelin (Mar 03 2020 at 08:39)</a>:</h4>
+<p>But of course the <code>real.log x</code> on the right would fail.</p>
+
+<a name="189572440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572440">Johan Commelin (Mar 03 2020 at 08:39)</a>:</h4>
+<p><code>(-1 : ℝ) ^ (1/3 : ℝ)</code> also doesn't seem to be what I would hope.</p>
+
+<a name="189572449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572449">Mario Carneiro (Mar 03 2020 at 08:40)</a>:</h4>
+<p>What I would hope is a complex number</p>
+
+<a name="189572498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572498">Mario Carneiro (Mar 03 2020 at 08:40)</a>:</h4>
+<p>the odd power thing is nuts</p>
+
+<a name="189572500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572500">Johan Commelin (Mar 03 2020 at 08:40)</a>:</h4>
+<p>We probably need a <code>has_pow ℝ ℚ</code>?</p>
+
+<a name="189572507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572507">Mario Carneiro (Mar 03 2020 at 08:40)</a>:</h4>
+<p>Just say no</p>
+
+<a name="189572522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572522">Mario Carneiro (Mar 03 2020 at 08:41)</a>:</h4>
+<p>use <code>abs</code> and <code>-</code> and build it from the positive version when necessary</p>
+
+<a name="189572526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572526">Johan Commelin (Mar 03 2020 at 08:41)</a>:</h4>
+<p>So how would you express the inverse of <code>λ x, x^3</code>?</p>
+
+<a name="189572541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572541">Mario Carneiro (Mar 03 2020 at 08:41)</a>:</h4>
+<p><code>x^(1/3)</code>, and argue negative numbers by wlog</p>
+
+<a name="189572597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572597">Johan Commelin (Mar 03 2020 at 08:42)</a>:</h4>
+<p>I don't follow</p>
+
+<a name="189572606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572606">Mario Carneiro (Mar 03 2020 at 08:42)</a>:</h4>
+<p><code>x^3</code> is invertible. that's all you need to know</p>
+
+<a name="189572631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572631">Johan Commelin (Mar 03 2020 at 08:43)</a>:</h4>
+<p>Ok, but you don't care about having a formula for the inverse?</p>
+
+<a name="189572641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572641">Mario Carneiro (Mar 03 2020 at 08:43)</a>:</h4>
+<p>The function, if you want to write it down, is <code>if x &gt;= 0 then x^(1/3) else -(-x)^(1/3)</code></p>
+
+<a name="189572701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572701">Johan Commelin (Mar 03 2020 at 08:44)</a>:</h4>
+<p>Would it make sense to have a <code>nth_root 3 : ℝ → ℝ</code>?</p>
+
+<a name="189572705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572705">Mario Carneiro (Mar 03 2020 at 08:44)</a>:</h4>
+<p>but I reject the idea that this is "the" <code>x^(1/3)</code> function</p>
+
+<a name="189572757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572757">Johan Commelin (Mar 03 2020 at 08:45)</a>:</h4>
+<p>You just don't like the fact that the absolute Galois group of <code>ℝ</code> has order 2...</p>
+
+<a name="189572791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572791">Johan Commelin (Mar 03 2020 at 08:45)</a>:</h4>
+<p>It's a real closed field man... shouldn't we celebrate?</p>
+
+<a name="189572804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572804">Mario Carneiro (Mar 03 2020 at 08:45)</a>:</h4>
+<p>I think that when you start talking about 3rd roots you should go complex</p>
+
+<a name="189572878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572878">Johan Commelin (Mar 03 2020 at 08:46)</a>:</h4>
+<p>I would argue that when you start talking about <em>2nd</em> roots you should go complex.</p>
+
+<a name="189572881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572881">Kevin Buzzard (Mar 03 2020 at 08:46)</a>:</h4>
+<p>So you want to define x^y with x a negative real and y a rational with non-negative 2-adic valuation?</p>
+
+<a name="189572940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189572940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189572940">Kevin Buzzard (Mar 03 2020 at 08:47)</a>:</h4>
+<p>We can put it on the pile, with x a positive real and y complex, and with x a non-zero complex and y an integer, as another random region of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="double-struck">C</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{C}^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> where the power operation happens to give a unique sensible answer.</p>
+
+<a name="189573104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573104">Mario Carneiro (Mar 03 2020 at 08:51)</a>:</h4>
+<p>Unlike the first two, it is not continuous on that region</p>
+
+<a name="189573124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573124">Kevin Buzzard (Mar 03 2020 at 08:51)</a>:</h4>
+<p>It's not hard to check that you can't define <code>^</code> on all of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="double-struck">C</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{C}^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> and expect all the "standard" facts <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mi>b</mi><msup><mo stretchy="false">)</mo><mi>c</mi></msup><mo>=</mo><msup><mi>a</mi><mi>c</mi></msup><msup><mi>b</mi><mi>c</mi></msup></mrow><annotation encoding="application/x-tex">(ab)^c=a^cb^c</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>a</mi><mi>b</mi></msup><msup><mo stretchy="false">)</mo><mi>c</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>b</mi><mi>c</mi></mrow></msup></mrow><annotation encoding="application/x-tex">(a^b)^c=a^{bc}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">b</span><span class="mord mathdefault mtight">c</span></span></span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mi>a</mi></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1^a=1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> to hold (because <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">(-1)^{1/2}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> has got square <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><msup><mo stretchy="false">)</mo><mn>1</mn></msup></mrow><annotation encoding="application/x-tex">(-1)^1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span> and also <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1^{1/2}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>), but then there seem to be these random regions where you can get away with it.</p>
+
+<a name="189573203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573203">Kevin Buzzard (Mar 03 2020 at 08:52)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189573104" title="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189573104">said</a>:</p>
+<blockquote>
+<p>Unlike the first two, it is not continuous on that region</p>
+</blockquote>
+<p>Is that really true?</p>
+
+<a name="189573213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573213">Mario Carneiro (Mar 03 2020 at 08:52)</a>:</h4>
+<p>It's continuous for fixed y</p>
+
+<a name="189573232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573232">Kevin Buzzard (Mar 03 2020 at 08:53)</a>:</h4>
+<p>Isn't it just <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mi>y</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-((-x)^y)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mopen">(</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathdefault">x</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>?</p>
+
+<a name="189573236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573236">Mario Carneiro (Mar 03 2020 at 08:53)</a>:</h4>
+<p>but y is in a dense region and it's discontinuous in that direction</p>
+
+<a name="189573338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573338">Mario Carneiro (Mar 03 2020 at 08:54)</a>:</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mrow><mn>2</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">x^{2/3}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8879999999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">/</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span> is positive for negative <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span></p>
+
+<a name="189573351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573351">Kevin Buzzard (Mar 03 2020 at 08:55)</a>:</h4>
+<p>ha!</p>
+
+<a name="189573374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189573374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189573374">Mario Carneiro (Mar 03 2020 at 08:55)</a>:</h4>
+<p>let me repeat: nuts</p>
+
+<a name="189574116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189574116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189574116">Johan Commelin (Mar 03 2020 at 09:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="252300">@Jalex Stark</span> All these discussions shouldn't discourage you from creating a PR for that 2-liner. You found a hole in the libs! Well done.</p>
+
+<a name="189575532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189575532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189575532">Patrick Massot (Mar 03 2020 at 09:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="252300">Jalex Stark</span> <a href="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189571934" title="#narrow/stream/116395-maths/topic/log.20(a.20.5E.20n).20.3D.20n.20*.20log.20a.20in.20mathlib.3F/near/189571934">said</a>:</p>
+<blockquote>
+<p>woah so if you have a theorem that f_injective, then apply f_injective is the thing that applies f to both sides of an equation</p>
+</blockquote>
+<p>In this case you don't need it, but for feature reference : apply_fun f at hyp would do that for you.</p>
+
+<a name="189585100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189585100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189585100">Kevin Buzzard (Mar 03 2020 at 11:46)</a>:</h4>
+<p>"applying f to an equation" can mean two things. If the <em>goal</em> is <code>x = y</code> then to "apply f" to it you <code>apply h</code> where <code>h</code> is the proof that <code>f</code> is injective. If you have a <em>hypothesis</em> <code>hyp : x = y</code> then you can "apply f" to it without injectivity, using <code>apply_fun f at hyp</code>.</p>
+
+<a name="189585138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/log%20%28a%20%5E%20n%29%20%3D%20n%20%2A%20log%20a%20in%20mathlib%3F/near/189585138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89168logannlogainmathlib.html#189585138">Kevin Buzzard (Mar 03 2020 at 11:47)</a>:</h4>
+<p>I think Donald found the hole :-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
