@@ -57,8 +57,10 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
 * [leanprover-community website](https://leanprover-community.github.io/). This includes:
   - [Zulip archive](https://leanprover-community.github.io/archive/)
   - [Mathlib documentation](https://leanprover-community.github.io/mathlib_docs/)
+  - [Statistics about mathlib](https://leanprover-community.github.io/mathlib_stats/)
 * There are also discussions on the mathlib [issue tracker](https://github.com/leanprover-community/mathlib/issues) and [pull requests](https://github.com/leanprover-community/mathlib/pulls).
 * [IMO Grand Challenge](https://imo-grand-challenge.github.io/): a grand challenge to write an AI that can write formal proofs of IMO problems.
+* [Lean kata on Codewars] to compete with other formalizers.
 
 ## FAQs
 
