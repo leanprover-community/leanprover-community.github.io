@@ -22,3 +22,8 @@ Since this chatroom is only visible to registered users, we provide an
 [openly accessible archive](archive/) of the public discussions. This is useful for quick
 reference; for a better browsing interface, and to participate in the discussions, we strongly
 suggest joining the chat. Questions from users at all levels of expertise are welcomed.
+
+Check out some stats about the mathlib repo [here](mathlib_stats).
+
+The growth of mathlib over time:
+![alt text](https://leanprover-community.github.io/mathlib_stats/lines_of_code.png "mathlib loc over time")
