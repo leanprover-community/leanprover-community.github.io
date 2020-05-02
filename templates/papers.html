@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+{% block content %}
+
+  <div class="row mt-3">
+    <div class="col">
+    {{ paper_section | md }}
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <p>The list below is generated from the bibfile, just to illustrate this is possible.</p>
+      <ul>
+        {% for key, paper in papers.items() %}
+        <li>{% for author in paper.persons['author'] %}{{ author }},{% endfor %}<em>{{ paper.fields['title'].strip('{}') }}</em></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

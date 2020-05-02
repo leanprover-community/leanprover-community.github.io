@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="{{base_url}}/css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    {% block extracss %}{% endblock %}
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="{{ base_url }}index.html">LC
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		{% for menu in menus %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  {{ menu.title }}
+          </a>
+		  <div class="dropdown-menu {{ menu.class_right }}" aria-labelledby="navbarDropdown">
+			{% for item in menu.items %}
+			{% if menu.title %}
+			<a class="dropdown-item" href="{{ item.url | url }}">{{ item.title }}</a>
+			{% else %}
+			<div class="dropdown-divider"></div>
+			{% endif %}
+			{% endfor %}
+          </div>
+        </li>
+		{% endfor %}
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  {% block content %}
+	  {% endblock %}
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="{{ base_url }}/js/bootstrap.min.js"></script>
+    {% block extrajs %}{% endblock %}
+  </body>
+</html>
