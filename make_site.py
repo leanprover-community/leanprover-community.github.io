@@ -72,10 +72,10 @@ class Menu:
                                   dic['open_right'])
 
 
-with (DATA/'menus.yaml').open('r') as menu_file:
+with (DATA/'menus.yaml').open('r', encoding='utf-8') as menu_file:
     menus = [Menu.from_dict(menu) for menu in yaml.safe_load(menu_file)]
 
-presentation = (DATA/'presentation.md').read_text()
+presentation = (DATA/'presentation.md').read_text(encoding='utf-8')
 
 @dataclass
 class Formalization:
@@ -84,7 +84,7 @@ class Formalization:
     abstract: str
     url: str
 
-with (DATA/'formalizations.yaml').open('r') as f_file:
+with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
     formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
 
 @dataclass
@@ -93,7 +93,7 @@ class Maintainer:
     descr: str
     img: str
 
-with (DATA/'maintainers.yaml').open('r') as m_file:
+with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
     maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
 
 def render_site(target: Path, base_url: str, reloader=False):
@@ -110,7 +110,7 @@ def render_site(target: Path, base_url: str, reloader=False):
         content_template.stream(**kwargs).dump(str(target/path.parent/title)+'.html')
 
     def get_contents(template):
-        return { 'content': Path(template.filename).read_text().replace('img/',
+        return { 'content': Path(template.filename).read_text(encoding='utf-8').replace('img/',
             base_url+'/img/') }
 
     def url(raw: str):
@@ -127,9 +127,9 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('index.html', {'presentation': presentation,
                                 'formalizations': formalizations}),
                 ('papers.html', {'papers': pybtex.database.parse_file('lean.bib').entries,
-                                 'paper_section': (DATA/'papers.md').read_text()}),
+                                 'paper_section': (DATA/'papers.md').read_text( encoding='utf-8')}),
                 ('meet.html', {'maintainers': maintainers,
-                               'community': (DATA/'community.md').read_text()}),
+                               'community': (DATA/'community.md').read_text( encoding='utf-8')}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown },
