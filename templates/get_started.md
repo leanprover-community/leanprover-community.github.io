@@ -3,7 +3,7 @@
 There are many options if you want to start using Lean, depending on how
 seriously you want to try.
 
-## Just a quick glance
+## <a name="web"></a>Just a quick glance
 
 Lean can run in a web browser thanks to
 [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). Of course,
@@ -24,7 +24,7 @@ pedagogical purposes.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
 
-## Maybe a couple of nights
+## <a name="bundle"></a>Maybe a couple of nights
 
 If you are more serious about trying Lean, or can't stand waiting for
 you web browser, but don't want to start installing too many things,
@@ -44,7 +44,7 @@ the mathlib library, and a couple of Lean files to play with.
 The downside is you won't be able to create your own projects or easily
 upgrade Lean and mathlib. You'll need a regular install for this.
 
-## Regular install
+## <a name="install"></a>Regular install
 
 In order to enjoy the full Lean experience, you need to install a couple
 of dependencies, including a python package providing user-friendly
