@@ -14,7 +14,7 @@ described in the paper
 [The Lean mathematical library](https://arxiv.org/abs/1910.09336), which appeared
 at CPP 2020. You can get a bird's eye view of what is in the library by
 reading [the library overview](mathlib-overview.html).
-You can also have a look at [mathlib statistics](mathlib_stats.html)
+You can also have a look at our [repository statistics](mathlib_stats.html)
 to see how it grows and who contributes to it.
 
 ## What is a proof assistant?
