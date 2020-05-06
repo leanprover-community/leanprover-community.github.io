@@ -4,9 +4,9 @@ The Lean community is rather diverse. We have users coming from computer
 science as well as mathematics, and even a couple of people with a
 physics background.
 Most users are either students or work in academia, but there also some
-data scientists or software engineers working in the industry.
+data scientists and software engineers working in industry.
 
-## The Lean prover Zulip chat
+## The Lean Zulip chat
 
 The main gathering point of our community is a 
 [Zulip chat instance](https://leanprover.zulipchat.com). 
@@ -15,8 +15,8 @@ Since this chatroom is only visible to registered users, we provide an
 of the public discussions. 
 This is useful for quick reference; for a better browsing interface, 
 and to participate in the discussions, we strongly suggest joining the chat.
-Registering with your real name is preferred. 
-Starting with briefly introducing youself is also appreciated.
+Registering with your real name is preferred, but not required. 
+Starting by briefly introducing youself is also appreciated.
 
 Questions from users at all levels of expertise are welcomed. 
 Asking your first questions in the *new members* stream will ensure the answers
@@ -48,9 +48,9 @@ for displayed math.
 
 ## GitHub
 
-The next gathering point after Zulip is GitHub which hosts all the
+The next gathering point after Zulip is GitHub, which hosts all the
 [community repositories](https://github.com/leanprover-community).
-In particular the 
+In particular, the 
 [mathlib pull requests](https://github.com/leanprover-community/mathlib/pulls) 
 page is the right place to see our ongoing efforts.
 
