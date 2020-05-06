@@ -6,9 +6,9 @@ seriously you want to try.
 ## Just a quick glance
 
 Lean can run in a web browser thanks to
-[WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). Of course
-performance in this context is nowhere near the comfort of a regular
-install. This is still a good option if you want to know what Lean looks
+[WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). Of course,
+the performance is nowhere nearthat  of a regular install. 
+This is still a good option if you want to know what Lean looks
 like, and have only 10 minutes to spare. For instance you can read
 your 
 [first proofs](https://leanprover-community.github.io/lean-web-editor/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fleanprover-community%2Ftutorials%2Fmaster%2Fsrc%2Ffirst_proofs.lean).
@@ -19,7 +19,7 @@ pairs to see the state of proofs evolving.
 If this is too passive for you, and you have a bit more time, you can start playing
 [The Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/),
 which also relies on Lean running in your web browser. Beware that some
-Lean commands are voluntarily rendered less efficients in this game for
+Lean commands are voluntarily rendered less efficient in this game for
 pedagogical purposes.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
@@ -38,8 +38,8 @@ the program `trylean` without installing anything anywhere else on your
 computer (although MacOS users will need to tell their system
 they really want to run it). These bundles contain Lean itself, 
 [VScodium](https://vscodium.com/)
-which is a distributable version of VS code, the Lean VScode extension,
-the mathlib library and a couple of Lean files to play with.
+which is a distributable version of the VS Code editor, the Lean VS Code extension,
+the mathlib library, and a couple of Lean files to play with.
 
 The downside is you won't be able to create your own projects or easily
 upgrade Lean and mathlib. You'll need a regular install for this.
@@ -52,7 +52,7 @@ supporting tools. This is not much longer that installing an autonomous
 bundle, but it does spread a bit more in your computer. Your can read
 explanations about 
 [how the various parts fit together](toolchain.html) if you are
-curious. But this is not necessary, you can head straight to
+curious. But this is not necessary. You can head straight to
 installation instructions for you OS: 
 [Debian/Ubuntu](install/debian.html),
 [Other linux](install/linux.html),
