@@ -76,6 +76,7 @@ with (DATA/'menus.yaml').open('r', encoding='utf-8') as menu_file:
     menus = [Menu.from_dict(menu) for menu in yaml.safe_load(menu_file)]
 
 presentation = (DATA/'presentation.md').read_text(encoding='utf-8')
+what_is = (DATA/'what_is.md').read_text(encoding='utf-8')
 
 @dataclass
 class Formalization:
@@ -125,6 +126,7 @@ def render_site(target: Path, base_url: str, reloader=False):
             contexts=[
                 ('.*', default_context),
                 ('index.html', {'presentation': presentation,
+                                'what_is': what_is,
                                 'formalizations': formalizations}),
                 ('papers.html', {'papers': pybtex.database.parse_file('lean.bib').entries,
                                  'paper_section': (DATA/'papers.md').read_text( encoding='utf-8')}),
