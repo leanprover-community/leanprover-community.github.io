@@ -27,26 +27,11 @@
       <canvas id="lines_by_date"></canvas>
     </div>
   </div>  
+
   <div class="row mt-5">
     <h2>Temporal distribution</h2>
   </div>  
-  <div class="row">
-    <div class="col-md-6">
-      <canvas id="weekly_activity"></canvas>
-    </div>
-
-    <div class="col-md-6">
-      <canvas id="hour_of_day"></canvas>
-    </div>
-
-    <div class="col-md-6">
-      <canvas id="day_of_week"></canvas>
-    </div>
-    
-    <div class="col-md-6">
-      <canvas id="month_of_year"></canvas>
-    </div>
-    
+  <div class="row mt-5">
     <div class="col-md-6">
       <canvas id="by_year_month"></canvas>
     </div>
@@ -55,6 +40,7 @@
       <canvas id="by_year"></canvas>
     </div>
   </div>
+
   <div class="row mt-5">
     <h2>Authors</h2>
    
@@ -72,19 +58,7 @@
       <canvas id="commits_by_authors"></canvas>
     </div>
   </div>
-  <div class="row mt-5">
-    <h3>Author of month</h3>
- 
-    <div class="col-12">
-      <div id="aom_table"></div>
-    </div>
-  </div>
-  <div class="row mt-5">
-    <h3>Author of year</h3>
-    <div class="col-12">
-      <div id="aoy_table"></div>
-    </div>
-  </div>
+
   <div class="row mt-5">
    
   </div>
@@ -174,10 +148,6 @@ function makeLineChart(id, title, stamps, datas, show_title = true,
     });
 }
 window.onload = function() {
-    makeBarChart('weekly_activity', 'Weekly activity', weekly_activity)
-    makeBarChart('hour_of_day', 'Commits by hour of day', hour_of_day)
-    makeBarChart('day_of_week', 'Commits by day of week', day_of_week)
-    makeBarChart('month_of_year', 'Commits by month of year', month_of_year)
     makeBarChart('by_year_month', 'Commits by month', by_year_month)
     makeBarChart('by_year', 'Commits by year', by_year)
     
@@ -195,25 +165,6 @@ window.onload = function() {
         responsiveLayout:true,
         columns: authors_cols,
         height: "600px",
-    });
-    table.redraw(true);
-    
-    var table = new Tabulator("#aom_table", {
-        data: aom, //set initial table data
-        layout:"fitColumns",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:true,
-        columns: aom_cols,
-        height: "600px",
-    });
-    table.redraw(true);
-    
-    var table = new Tabulator("#aoy_table", {
-        data: aoy, //set initial table data
-        layout:"fitDataStretch",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:true,
-        columns: aoy_cols,
     });
     table.redraw(true);
 
