@@ -1,6 +1,6 @@
 # How to contribute to mathlib
 
-Principally mathlib uses the 
+Mathlib principally uses the 
 [fork-and-branch workflow](https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/).
 
 Here are some tips and tricks
