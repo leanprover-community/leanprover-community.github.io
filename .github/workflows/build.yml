@@ -1,0 +1,28 @@
+name: deploy site
+
+on:
+  push:
+    branches:
+      - newsite
+
+jobs:
+  build:
+    name: Build HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: install Python dependencies
+        run: python -m pip install --upgrade pip staticjinja PyYaml mistletoe pybtex
+
+      - if: github.repository == 'leanprover-community/leanprover-community.github.io' && github.ref == 'refs/heads/newsite'
+        run:
+          ./deploy.sh
+        env:
+          DEPLOY_GITHUB_TOKEN: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
+          DEPLOY_GITHUB_USER: leanprover-community-bot
