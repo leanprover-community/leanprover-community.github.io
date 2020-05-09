@@ -1,10 +1,8 @@
 set -e
 set -x
 
-cd build/
-git clone "https://$DEPLOY_GITHUB_USER:$DEPLOY_GITHUB_TOKEN@github.com/leanprover-community/leanprover-community.github.io.git"
+git clone "https://$DEPLOY_GITHUB_USER:$DEPLOY_GITHUB_TOKEN@github.com/leanprover-community/leanprover-community.github.io.git" ./build
 
-cd ..
 ./make_site.py
 
 cd build/
