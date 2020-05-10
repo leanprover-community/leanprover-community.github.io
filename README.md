@@ -34,3 +34,8 @@ Before going live, we also need to revive the bundle building process
 * Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?
+
+## Old website
+
+The files and history for the old leanprover-community website can be found in the
+[`oldsite`](https://github.com/leanprover-community/leanprover-community.github.io/tree/oldsite) branch of this repo.

@@ -8,15 +8,16 @@ learning.
 
 ## Hands-on approaches
 
-* Whatever your background, if you want to dive right away, you can play the 
-  [Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/) 
+* Whatever your background, if you want to dive right away, you can play the
+  [Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/)
   by Kevin Buzzard and Mohammad Pedramfar. This is a online interactive tutorial to Lean
   focused on proving properties of the elementary operations on natural numbers.
 
-* For a faster paced and broader dive, you can get the 
+* For a faster paced and broader dive, you can get the
   [tutorials project](https://github.com/leanprover-community/tutorials).
-  (You already have it if you installed an autonomous bundle or followed
-  the instructions on [this page](install/project.html).) 
+  (You already have it if you
+  <!-- installed an autonomous bundle or  -->
+  followed the instructions on [this page](install/project.html).)
   This tutorial is specifically geared towards mathematics rather than
   computer science. The last files of this project are easier if you have
   already encountered the definition of limits of sequences of real
@@ -34,7 +35,7 @@ learning.
   could do.
 
 * If you are very new to the concept of logic and proofs, you can read
-  [Logic and Proof](https://leanprover.github.io/logic_and_proof/), 
+  [Logic and Proof](https://leanprover.github.io/logic_and_proof/),
   a textbook that is a first rigorous proving course that teaches Lean at the same time.
 
 * If you have a computer science background, and are primarily interested
@@ -63,21 +64,21 @@ still have a look at the following resources.
 
 * The [tactic writing tutorial](https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md)
   covers the basics and enables you to read more advanced sources, for instance
-  the code of 
+  the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
-* The reference paper on 
+* The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
 
 ## More on foundations
 
 If you are interested in foundations of Lean, you can first read a
-very rough sketch 
+very rough sketch
 [here](https://leanprover-community.github.io/lean-perfectoid-spaces/type_theory.html).
 If you want a bit more detail, you can read the first chapter
 of the [HoTT book](https://homotopytypetheory.org/book/), ignoring
-anything where univalence is mentioned. 
+anything where univalence is mentioned.
 
-Another potentially useful resource is 
+Another potentially useful resource is
 [this page](https://coq.github.io/doc/master/refman/language/cic.html)
 from Coq's documentation. The foundations of Coq are very very close to
 those of Lean. The most relevant differences to keep in mind are:

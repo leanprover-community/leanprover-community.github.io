@@ -204,7 +204,7 @@ def render_site(target: Path, base_url: str, reloader=False):
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True)
 
-    for folder in ['css', 'js', 'img', 'bundles']:
+    for folder in ['css', 'js', 'img']:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
     site.render(use_reloader=reloader)
 
