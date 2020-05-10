@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-* `pip install staticjinja PyYaml mistletoe pybtex`
+* `pip install staticjinja PyYaml mistletoe pybtex pylatexenc`
 
 In order to rebuilt the CSS from SCSS, you would also need:
 
