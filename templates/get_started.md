@@ -29,9 +29,9 @@ You can also use Lean on [CoCalc](https://cocalc.com/).
 If you are more serious about trying Lean, or can't stand waiting for
 your web browser, but don't want to start installing too many things,
 then you can try one of our autonomous bundles for:
-- [Linux](http://oleanstorage.azureedge.net/releases/bundles/trylean_linux.tar.gz),
-- [MacOS](http://oleanstorage.azureedge.net/releases/bundles/trylean_darwin.tar.gz), or
-- [Windows](http://oleanstorage.azureedge.net/releases/bundles/trylean_windows.zip).
+- [Linux](https://oleanstorage.azureedge.net/releases/bundles/trylean_linux.tar.gz),
+- [MacOS](https://oleanstorage.azureedge.net/releases/bundles/trylean_darwin.tar.gz), or
+- [Windows](https://oleanstorage.azureedge.net/releases/bundles/trylean_windows.zip).
 
 Each of these bundles contains a folder `trylean` from which you can run
 the program `trylean` without installing anything anywhere else on your
