@@ -12,6 +12,11 @@ In order to rebuilt the CSS from SCSS, you would also need:
 * [bootstrap](https://github.com/twbs/bootstrap/archive/v4.4.1.zip)
   should be unpacked at the project root
 
+The website relies on several components which are built in other repositories:
+- [`mathlib_stats`](https://github.com/leanprover-community/mathlib_stats)
+- [`lean-web-editor`](https://github.com/leanprover-community/lean-web-editor)
+- [`mathlib_docs`](https://github.com/leanprover-community/mathlib_docs) (built by CI in mathlib itself)
+
 ## Building
 
 * Build CSS if needed: `sass scss/lean.scss > css/lean.css`

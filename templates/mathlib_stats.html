@@ -2,7 +2,7 @@
 {% block extracss %}
 <script type="text/javascript" src="js/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
- 
+
 <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 <link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
@@ -14,10 +14,10 @@
     <div class="col-12">
       <h1>Mathlib statistics</h1>
     </div>
-  </div>  
+  </div>
   <div class="row mt-5">
     <h2>Code growth</h2>
-  </div>  
+  </div>
   <div class="row mt-5">
     <div class="col-md-6">
       <canvas id="files_by_date"></canvas>
@@ -26,16 +26,16 @@
     <div class="col-md-6">
       <canvas id="lines_by_date"></canvas>
     </div>
-  </div>  
+  </div>
 
   <div class="row mt-5">
     <h2>Temporal distribution</h2>
-  </div>  
+  </div>
   <div class="row mt-5">
     <div class="col-md-6">
       <canvas id="by_year_month"></canvas>
     </div>
-    
+
     <div class="col-md-6">
       <canvas id="by_year"></canvas>
     </div>
@@ -43,7 +43,7 @@
 
   <div class="row mt-5">
     <h2>Authors</h2>
-   
+
     <div class="col-12">
        <div id="authors_table"></div>
     </div>
@@ -60,12 +60,12 @@
   </div>
 
   <div class="row mt-5">
-   
+
   </div>
 {% endblock %}
 
 {% block extrajs %}
-<script type="text/javascript" src="js/gitstats.json"></script>
+<script type="text/javascript" src="mathlib_stats/gitstats.json"></script>
 
 <script>
 
@@ -91,7 +91,7 @@ function makeBarChart(id, title, data) {
             responsive: true,
             legend: {
                 display: false,
-            }, 
+            },
             title: {
                 display: true,
                 text: title
@@ -114,7 +114,7 @@ function makeLineChart(id, title, stamps, datas, show_title = true,
         datasets.push(
            { label: name,
              fill: false,
-             borderColor: colors[colidx], 
+             borderColor: colors[colidx],
              data: data,
              cubicInterpolationMode: 'monotone',
              pointRadius: 1,
@@ -138,7 +138,7 @@ function makeLineChart(id, title, stamps, datas, show_title = true,
             scales: {
                 xAxes: [{
                     type: 'time',
-                    time: { 
+                    time: {
                         unit: 'month',
                         parser: moment.unix,
                     },
@@ -150,7 +150,7 @@ function makeLineChart(id, title, stamps, datas, show_title = true,
 window.onload = function() {
     makeBarChart('by_year_month', 'Commits by month', by_year_month)
     makeBarChart('by_year', 'Commits by year', by_year)
-    
+
     makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
     makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
     makeLineChart('files_by_date', 'Number of files', files_stamps,
