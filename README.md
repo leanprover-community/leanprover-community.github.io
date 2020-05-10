@@ -4,6 +4,8 @@
 
 * `pip install staticjinja PyYaml mistletoe pybtex pylatexenc`
 
+Building the bibliography requires [`bibtool`](https://github.com/ge-ne/bibtool).
+
 In order to rebuilt the CSS from SCSS, you would also need:
 
 * [sass](https://sass-lang.com/)
