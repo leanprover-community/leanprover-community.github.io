@@ -20,7 +20,6 @@ The website relies on several components which are built in other repositories:
 ## Building
 
 * Build CSS if needed: `sass scss/lean.scss > css/lean.css`
-* Update git statistics `./gitstats.py PATH_TO_MATHLIB js`
 * Build site using `make_site.py`. Use option `--local` for local
   viewing (internal url will be prefixed by local file path).
   Use option `--reload` to continuously build when templates are
@@ -35,4 +34,3 @@ Before going live, we also need to revive the bundle building process
 * Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?
-* Compress somehow the gitstats.json files
