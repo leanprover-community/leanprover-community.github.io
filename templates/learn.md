@@ -15,8 +15,7 @@ learning.
 
 * For a faster paced and broader dive, you can get the
   [tutorials project](https://github.com/leanprover-community/tutorials).
-  (You already have it if you
-  <!-- installed an autonomous bundle or  -->
+  (You already have it if you installed an autonomous bundle or
   followed the instructions on [this page](install/project.html).)
   This tutorial is specifically geared towards mathematics rather than
   computer science. The last files of this project are easier if you have
@@ -28,7 +27,7 @@ learning.
 
 ## Textbooks
 
-* If you prefer reading a book (with exercises), the standard reference in
+* If you prefer reading a book (with exercises), the standard reference is
   [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/).
   You almost certainly want to read it at some point anyway, since it
   explains foundational things much better than any hands-on tutorial

@@ -25,9 +25,6 @@ The website relies on several components which are built in other repositories:
   Use option `--reload` to continuously build when templates are
   changed (this won't work for watching changes in `data/`).
 
-Before going live, we also need to revive the bundle building process
-(or remove bundles from documentation).
-
 ## TODO
 
 * Use pygment for syntax highlighting
