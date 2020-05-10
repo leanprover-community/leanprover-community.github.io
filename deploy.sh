@@ -9,5 +9,5 @@ cd build/
 git config user.email "leanprover.community@gmail.com"
 git config user.name "leanprover-community-bot"
 git add -A .
-git commit -m "deploy site from $git_hash"
-git push
+git diff-index HEAD
+git diff-index --quiet HEAD || { git commit -m "deploy site from $git_hash" && git push }
