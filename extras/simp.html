@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1>Simp</h1>
+<p>The <code>simp</code> tactic works by applying a conditional term rewriting system to try and prove, or at
+least simplify, your goal. What this basically means is that <code>simp</code> is equipped with a list of
+lemmas (those tagged with the <code>simp</code> attribute), many of which are of the form <code>X = Y</code> or <code>X iff Y</code>,
+and attempts to match subterms of the goal with the left hand side of a rule, and then replaces the
+subterm with the right hand side. The system is conditional in the sense that lemmas are allowed to
+have preconditions (<code>P -&gt; (X = Y)</code>) and in these cases it will try and prove the precondition using
+its simp lemmas before applying <code>X = Y</code>.</p>
+<p>You can watch <code>simp</code> in action by using <code>set_option trace.simplify true</code> in your code. For example</p>
+<pre><code class="language-lean">namespace hidden
+
+definition cong (a b m : ℤ) : Prop := ∃ n : ℤ, b - a = m * n
+
+notation a ` ≡ ` b ` mod ` m  := cong a b m
+set_option trace.simplify true
+theorem cong_refl (m : ℤ) : ∀ a : ℤ, a ≡ a mod m :=
+begin
+intro a,
+unfold cong,
+existsi (0:ℤ),
+simp
+end
+
+end hidden
+</code></pre>
+<p>If you do this exercise you will discover firstly that <code>simp</code> spends a lot of its time trying random
+lemmas and then giving up very shortly afterwards, and also that the <code>unfold</code> command is also
+underlined in green -- Lean seems to apply <code>simp</code> when you do an <code>unfold</code> as well (apparently
+<code>unfold</code> just asks <code>simp</code> to do its dirty work for it -- <code>unfold X</code> is close to <code>simp only [X]</code>).</p>
+<p>If you only want to see what worked rather than all the things that didn't, you could try
+<code>set_option trace.simplify.rewrite true</code>.</p>
+<h2>Simp lemmas</h2>
+<p>In case you want to train <code>simp</code> to use certain extra lemmas (for example because they're coming up
+again and again in your work) you can add new lemmas for yourself. For example in mathlib in
+<code>algebra/ring.lean</code> we find the line</p>
+<pre><code class="language-lean">@[simp] theorem ne_zero (u : units α) : (u : α) ≠ 0
+</code></pre>
+<p>This lemma is then added to <code>simp</code>'s armoury. Note several things however.</p>
+<ol>
+<li>It might not be wise to make a random theorem into a simp lemma. Ideally the result has to be of
+a certain kind, the most important kinds being those of the form <code>A=B</code> and <code>A↔B</code>. Note however that
+if you want to add <code>fact</code> to <code>simp</code>'s weaponry, you can prove</li>
+</ol>
+<pre><code class="language-lean">@[simp] lemma my_lemma : fact ↔ true
+</code></pre>
+<p>(and in fact more recent versions of Lean do this automatically when you try to add random theorems
+to the simp dataset).</p>
+<ol start="2">
+<li>If you are not careful you can add a bad simp lemma of the form
+<code>foo x y = [something mentioning foo]</code> and then <code>simp</code> will attempt to rewrite <code>foo</code> and then end up
+with another one, and attempt to rewrite that, and so on. This can be fixed by using <code>rw</code> instead of
+<code>simp</code>, or using the config option <code>{single_pass := tt}</code>.</li>
+</ol>
+<h2>When it is unadvisable to use simp</h2>
+<p>Using <code>simp</code> in the middle of proofs is a <code>simp</code> anti-pattern, which will produce brittle code. In
+other words, don't use <code>simp</code> in the middle of proofs. Use it to finish proofs. If you really need
+to simplify a goal in the middle of a proof, then use <code>simp</code>, but afterwards cut and paste the goal
+into your code and write <code>suffices : (simplified thing), by simpa using this</code>. This is really
+important because the behaviour of <code>simp</code> changes sometimes, and if you put <code>simp</code> in the middle of
+proofs then your code might randomly stop compiling and it will be hard to figure out why if you
+didn't write down the exact thing which <code>simp</code> used to be reducing your goal to. See also
+<a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa"><code>squeeze_simp</code></a>.</p>
+<h2>How to use simp better</h2>
+<p>Conversely, if you ever manage to close a goal with <code>simp</code>, then take a look at the line before you
+ran <code>simp</code>. Could you have run simp one line earlier? How far back did simp start working? Even for
+goals where you didn't use simp at all -- could you have used <code>simp</code> for your last line? What about
+the last-but one? And so on.</p>
+<p>Recall that <code>simp</code> lemmas are almost all of the form <code>X = Y</code> or <code>X ↔ Y</code>. Hence <code>simp</code> might work
+well for such goals. However what about goals of the form <code>X → Y</code>? You could try assuming <code>h : X</code>
+and then running either <code>simpa using h</code> or <code>simp {contextual := tt}</code> to see if Lean can deduce <code>Y</code>.</p>
+<h2>Simp options</h2>
+<p>The behaviour of <code>simp</code> can be tweaked by <code>simp</code> variants and also by passing options to the
+algorithm. A good place to start is to look at the docstring for <code>simp</code> (write <code>simp</code> in VS Code and
+hover your mouse over it to see the docstring). Here are some examples, some of which are covered by
+the docstring and some of which are not.</p>
+<ol>
+<li>
+<p><code>simp only [H1, H2, H3]</code> uses only lemmas <code>H1</code>, <code>H2</code>, and <code>H3</code> rather than <code>simp</code>s full
+collection of lemmas. Whyever might one want to do this in practice? Because sometimes <code>simp</code>
+simplifies things too much -- it might unfold things that you wanted to keep folded, for example.
+Another reason is that using <code>simp only</code> can speed up slow <code>simp</code> calls significantly.</p>
+</li>
+<li>
+<p><code>simp [-X]</code> stops <code>simp</code> from using lemma <code>X</code>. One could imagine using this as another solution when one finds <code>simp</code> doing more than you would like. Recall from above that <code>set_option trace.simplify.rewrite true</code> shows you exactly which lemmas <code>simp</code> is using.</p>
+</li>
+<li>
+<p><code>simp * at *</code>. This simplifies everything in sight. Use if life is getting complicated.</p>
+</li>
+<li>
+<p><code>simp {single_pass := tt}</code> -- this <code>single_pass</code> is a config option, one of around 16 at the time of writing. One can use <code>single_pass</code> to avoid loops which would otherwise occur; for example <code>nat.gcd_def</code> is an equality with <code>gcd</code> on both the left and right hand side, so <code>simp [nat.gcd_def]</code> is risky behaviour whereas <code>simp [nat.gcd_def] {single_pass := tt}</code> is not. As you can imagine, <code>simp only [h] {single_pass := tt}</code> here makes simp behave pretty much like <code>rw h</code>.</p>
+</li>
+<li>
+<p>Search for <code>structure simp_config</code> in the file <code>init/meta/simp_tactic.lean</code> in core Lean to see the full list of config options. Others, many undocumented, are:</p>
+</li>
+</ol>
+<pre><code class="language-lean">(max_steps : nat           := simp.default_max_steps)
+(contextual : bool         := ff)
+(lift_eq : bool            := tt)
+(canonize_instances : bool := tt)
+(canonize_proofs : bool    := ff)
+(use_axioms : bool         := tt)
+(zeta : bool               := tt)
+(beta : bool               := tt)
+(eta  : bool               := tt)
+(proj : bool               := tt) -- reduce projections
+(iota : bool               := tt)
+(iota_eqn : bool           := ff) -- reduce using all equation lemmas generated by equation/pattern-matching compiler
+(constructor_eq : bool     := tt)
+(single_pass : bool        := ff)
+(fail_if_unchanged         := tt)
+(memoize                   := tt)
+</code></pre>
+<p>We see from the changelog that setting <code>constructor_eq</code> to true will reduce equations of the form
+<code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct constructors for the same type, and
+to <code>a1 = b1 and a2 = b2 and...</code> if <code>X = Y</code> are the same constructor. Another interesting example is
+<code>iota_eqn</code> : <code>simp!</code> is shorthand for <code>simp {iota_eqn := tt}</code>. This adds non-trivial equation lemmas
+generated by the equation/pattern-matching compiler to simp's weaponry. See the changelog for more
+details.</p>
+<h2>Cutting edge simp facts</h2>
+<p>If you want to find out the most recent tweaks to <code>simp</code>, a very good place to look is
+<a href="https://github.com/leanprover-community/lean/blob/master/doc/changes.md">the changelog</a>.</p>
+<h2>Something that could be added later on</h2>
+<p>&quot;Re: documentation. If you mention congruence, you could show off <code>simp</code>'s support for congruence
+relations. If you show reflexivity and transitivity for cong, and have congruence lemmas for +,
+etc., then you can rewrite with congruences as if they were equations.&quot;</p>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

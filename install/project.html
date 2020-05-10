@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1>Creating a Lean project</h1>
+<p>Lean files are organized in projects called packages. The tool <code>leanpkg</code>
+manages project creation and dependencies. We will now create a new
+project depending on mathlib. The following commands should be typed in a
+terminal.</p>
+<ul>
+<li>
+<p>If you have not logged in since you installed Lean and mathlib, then
+you need to first type <code>source ~/.profile</code>.</p>
+</li>
+<li>
+<p>Then go to a folder where you want to create a project in a subfolder
+<code>my_project</code>, and type:</p>
+<pre><code class="language-bash">leanpkg new my_project
+cd my_project
+leanpkg add leanprover-community/mathlib
+update-mathlib
+</code></pre>
+</li>
+<li>
+<p>launch VScode, either through your application menu or by typing
+<code>code</code></p>
+</li>
+<li>
+<p>On the main screen, or in the File menu, click &quot;Open folder&quot; (on a Mac, just &quot;Open&quot;), and
+choose the folder <code>my_project</code> (<em>not</em> one of its subfolders).</p>
+</li>
+<li>
+<p>Your Lean code should now be put inside files with extension <code>.lean</code> living in <code>my_project/src/</code> or a subfolder thereof. In the file explorer on the left-hand side of VScode, you can right-click on <code>src</code>, choose <code>New file</code>, and type a filename to create a file there.</p>
+</li>
+</ul>
+<p>If you want to make sure everything is working, you can start by
+creating, say <code>my_project/src/test.lean</code> containing:</p>
+<pre><code class="language-lean">import topology.basic
+
+#check topological_space
+</code></pre>
+<p>When the cursor is on the last line, the right hand part of VScode
+should display a &quot;Lean messages&quot; area saying:
+<code>topological_space : Type u_1 → Type u_1</code></p>
+<p>If, for some reason, you happen to loose the &quot;Lean messages&quot; area, you
+can get it back with &quot;Ctrl-Shift-Enter&quot;. Also, you can get the Lean
+documentation inside VScode using &quot;Ctrl-Shift-p&quot; and then, inside the
+text field that appeared, type &quot;lean doc&quot; and hit Enter. Then click
+&quot;Theorem proving in Lean&quot; and enjoy.</p>
+<h1>Working on an existing package</h1>
+<p>Suppose you want to work on an existing project.
+As example, we will take <a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>. Open a terminal.</p>
+<ul>
+<li>
+<p>If you have not logged in since you installed Lean and mathlib, then
+you need to first type <code>source ~/.profile</code>.</p>
+</li>
+<li>
+<p>Go the the directory where you would like this package to live.</p>
+</li>
+<li>
+<p>Run <code>git clone https://github.com/leanprover-community/tutorials.git</code>.</p>
+</li>
+<li>
+<p>This creates a directory named <code>tutorials</code>. Enter it
+with <code>cd tutorials</code>.</p>
+</li>
+<li>
+<p>Type <code>leanpkg configure</code> to get <code>leanpkg</code> ready for use in this project.</p>
+</li>
+<li>
+<p>Type <code>update-mathlib</code> to get mathlib ready for use in this project.</p>
+</li>
+<li>
+<p>Type <code>leanpkg build</code> to compile everything, this should only take a few seconds.</p>
+</li>
+<li>
+<p>launch VScode, either through your application menu or by typing
+<code>code</code></p>
+</li>
+<li>
+<p>On the main screen, or in the File menu, click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and
+choose the folder <code>tutorials</code> (<em>not</em> one of its subfolders).</p>
+</li>
+<li>
+<p>Using the file explorer on the left-hand side, explore everthing you want in
+<code>tutorials/src</code></p>
+</li>
+</ul>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

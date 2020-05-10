@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1>Library Style Guidelines</h1>
+<p>Author: <a href="http://www.andrew.cmu.edu/user/avigad">Jeremy Avigad</a></p>
+<p>In addition to the <a href="naming.md">naming conventions</a>,
+files in the Lean library generally adhere to the following guidelines
+and conventions. Having a uniform style makes it easier to browse the
+library and read the contents, but these are meant to be guidelines
+rather than rigid rules.</p>
+<h3>Variable conventions</h3>
+<ul>
+<li><code>u</code>, <code>v</code>, <code>w</code>, ... for universes</li>
+<li><code>α</code>, <code>β</code>, <code>γ</code>, ... for types</li>
+<li><code>a</code>, <code>b</code>, <code>c</code>, ... for propositions</li>
+<li><code>x</code>, <code>y</code>, <code>z</code>, ... for elements of a generic type</li>
+<li><code>h</code>, <code>h₁</code>, ...     for assumptions</li>
+<li><code>p</code>, <code>q</code>, <code>r</code>, ... for predicates and relations</li>
+<li><code>s</code>, <code>t</code>, ...      for lists</li>
+<li><code>s</code>, <code>t</code>, ...      for sets</li>
+<li><code>m</code>, <code>n</code>, <code>k</code>, ... for natural numbers</li>
+<li><code>i</code>, <code>j</code>, <code>k</code>, ... for integers</li>
+</ul>
+<h3>Line length</h3>
+<p>Lines should not be longer than 100 characters. This makes files
+easier to read, especially on a small screen or in a small window.</p>
+<h3>Header and imports</h3>
+<p>The file header should contain copyright information, a list of all
+the authors who have worked on the file, and a description of the
+contents. Do all <code>import</code>s right after the header, without a line
+break. You can also open namespaces in the same block.</p>
+<pre><code class="language-lean">/-
+Copyright (c) 2015 Joe Cool. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Author: Joe Cool.
+
+A theory of everything.
+-/
+import data.nat algebra.group
+open nat eq.ops
+</code></pre>
+<h3>Structuring definitions and theorems</h3>
+<p>Use spaces around &quot;:&quot;, &quot;:=&quot; or infix operators. Put them before a line break rather
+than at the beginning of the next line.</p>
+<p>Use two spaces to indent. You can use an extra indent when a long line
+forces a break to suggest the break is artificial rather than
+structural, as in the statement of theorem:</p>
+<pre><code class="language-lean">open nat
+theorem two_step_induction_on {P : nat → Prop} (a : nat) (H1 : P 0) (H2 : P (succ 0))
+    (H3 : ∀ (n : nat) (IH1 : P n) (IH2 : P (succ n)), P (succ (succ n))) : P a :=
+sorry
+</code></pre>
+<p>If you want to indent to make parameters line up, that is o.k. too:</p>
+<pre><code class="language-lean">open nat
+theorem two_step_induction_on {P : nat → Prop} (a : nat) (H1 : P 0) (H2 : P (succ 0))
+                              (H3 : ∀ (n : nat) (IH1 : P n) (IH2 : P (succ n)), P (succ (succ n))) :
+  P a :=
+sorry
+</code></pre>
+<p>After stating the theorem, we generally do not indent the first line
+of a proof, so that the proof is &quot;flush left&quot; in the file.</p>
+<pre><code class="language-lean">open nat
+theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) : P n :=
+nat.induction_on n H1 (assume m IH, H2 m)
+</code></pre>
+<p>When a proof rule takes multiple arguments, it is sometimes clearer, and often
+necessary, to put some of the arguments on subsequent lines. In that case,
+indent each argument.</p>
+<pre><code class="language-lean">open nat
+axiom zero_or_succ (n : nat) : n = zero ∨ n = succ (pred n)
+theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B)
+  (H2 : ∀m, n = succ m → B) : B :=
+or.elim (zero_or_succ n)
+  (assume H3 : n = zero, H1 H3)
+  (assume H3 : n = succ (pred n), H2 (pred n) H3)
+</code></pre>
+<p>Don't orphan parentheses; keep them with their arguments.</p>
+<p>Here is a longer example.</p>
+<pre><code class="language-lean">open list
+variable {T : Type}
+
+theorem mem_split {x : T} {l : list T} : x ∈ l → ∃s t : list T, l = s ++ (x::t) :=
+list.rec_on l
+  (assume H : x ∈ [], false.elim (iff.elim_left (mem_nil_iff _) H))
+  (assume y l,
+    assume IH : x ∈ l → ∃s t : list T, l = s ++ (x::t),
+    assume H : x ∈ y::l,
+    or.elim (eq_or_mem_of_mem_cons H)
+      (assume H1 : x = y,
+        exists.intro [] (exists.intro l (by rw H1; refl)))
+      (assume H1 : x ∈ l,
+        let ⟨s, (H2 : ∃t : list T, l = s ++ (x::t))⟩ := IH H1,
+            ⟨t, (H3 : l = s ++ (x::t))⟩ := H2 in
+        have H4 : y :: l = (y::s) ++ (x::t), by rw H3; refl,
+        exists.intro (y::s) (exists.intro t H4)))
+
+</code></pre>
+<p>A short definition can be written on a single line:</p>
+<pre><code class="language-lean">open nat
+definition square (x : nat) : nat := x * x
+</code></pre>
+<p>For longer definitions, use conventions like those for theorems.</p>
+<p>A &quot;have&quot; / &quot;from&quot; pair can be put on the same line.</p>
+<pre><code class="language-lean">have H2 : n ≠ succ k, from subst (ne_symm (succ_ne_zero k)) (symm H),
+[...]
+</code></pre>
+<p>You can also put it on the next line, if the justification is long.</p>
+<pre><code class="language-lean">have H2 : n ≠ succ k,
+  from subst (ne_symm (succ_ne_zero k)) (symm H),
+[...]
+</code></pre>
+<p>If the justification takes more than a single line, keep the &quot;from&quot; on the same
+line as the &quot;have&quot;, and then begin the justification indented on the next line.</p>
+<pre><code class="language-lean">have n ≠ succ k, from
+  not_intro
+    (assume H4 : n = succ k,
+      have H5 : succ l = succ k, from trans (symm H) H4,
+      have H6 : l = k, from succ_inj H5,
+      absurd H6 H2)))),
+[...]
+</code></pre>
+<p>When the arguments themselves are long enough to require line breaks, use
+an additional indent for every line after the first, as in the following
+example:</p>
+<pre><code class="language-lean">open nat eq algebra
+theorem add_right_inj {n m k : nat} : n + m = n + k → m = k :=
+nat.rec_on n
+  (assume H : 0 + m = 0 + k,
+    calc
+        m = 0 + m : eq.symm (zero_add m)
+      ... = 0 + k : H
+      ... = k     : zero_add _)
+  (assume (n : nat) (IH : n + m = n + k → m = k) (H : succ n + m = succ n + k),
+    have H2 : succ (n + m) = succ (n + k), from
+      calc
+        succ (n + m) = succ n + m   : eq.symm (succ_add n m)
+                 ... = succ n + k   : H
+                 ... = succ (n + k) : succ_add n k,
+    have H3 : n + m = n + k, from succ.inj H2,
+    IH H3)
+</code></pre>
+<p>In a class or structure definition, we do not indent fields, as in:</p>
+<pre><code class="language-lean">structure principal_seg {α β : Type*} (r : α → α → Prop) (s : β → β → Prop) extends r ≼o s :=
+(top : β)
+(down : ∀ b, s b top ↔ ∃ a, to_order_embedding a = b)
+
+class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
+  extends has_scalar α β, add_comm_group β :=
+(smul_add : ∀r (x y : β), r • (x + y) = r • x + r • y)
+(add_smul : ∀r s (x : β), (r + s) • x = r • x + s • x)
+(mul_smul : ∀r s (x : β), (r * s) • x = r • s • x)
+(one_smul : ∀x : β, (1 : α) • x = x)
+</code></pre>
+<p>When using a constructor taking several arguments in a definition,
+arguments line up, as in:</p>
+<pre><code class="language-lean">theorem sub_eq_zero_iff_le {a b : ordinal} : a - b = 0 ↔ a ≤ b :=
+⟨λ h, by simpa [h] using le_add_sub a b,
+ λ h, by rwa [← le_zero, sub_le, add_zero]⟩
+</code></pre>
+<p>When defining instances, opening and closing braces are not alone on
+their line. The content is indented by two spaces and <code>:=</code> line up, as
+in:</p>
+<pre><code class="language-lean">instance : partial_order (topological_space α) :=
+{ le          := λt s, t.is_open ≤ s.is_open,
+  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,
+  le_refl     := assume t, le_refl t.is_open,
+  le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
+</code></pre>
+<h3>Binders</h3>
+<p>Use a space after binders:</p>
+<pre><code class="language-lean">example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
+λ (α : Type) (x : α), exists.intro x rfl
+</code></pre>
+<h3>Calculations</h3>
+<p>There is some flexibility in how you write calculational proofs. In
+general, it looks nice when the comparisons and justifications line up
+neatly:</p>
+<pre><code class="language-lean">import data.list
+open list
+variable {α : Type}
+
+theorem reverse_reverse : ∀ (l : list α), reverse (reverse l) = l
+| []       := rfl
+| (a :: l) := calc
+    reverse (reverse (a :: l)) = reverse (concat a (reverse l))     : rfl
+                           ... = reverse (reverse l ++ [a])         : concat_eq_append
+                           ... = reverse [a] ++ reverse (reverse l) : reverse_append
+                           ... = reverse [a] ++ l                   : reverse_reverse
+                           ... = a :: l                             : rfl
+</code></pre>
+<p>To be more compact, for example, you may do this only after the first line:</p>
+<pre><code class="language-lean">import data.list
+open list
+variable {α : Type}
+
+theorem reverse_reverse : ∀ (l : list α), reverse (reverse l) = l
+| []       := rfl
+| (a :: l) := calc
+    reverse (reverse (a :: l))
+          = reverse (concat a (reverse l))     : rfl
+      ... = reverse (reverse l ++ [a])         : concat_eq_append
+      ... = reverse [a] ++ reverse (reverse l) : reverse_append
+      ... = reverse [a] ++ l                   : reverse_reverse
+      ... = a :: l                             : rfl
+</code></pre>
+<h3>Tactic mode</h3>
+<p>When opening a tactic block, <code>begin</code> is not indented but everything
+inside is indented, as in:</p>
+<pre><code class="language-lean">lemma div_self (a : α) : a ≠ 0 → a / a = (1:α) :=
+begin
+  intro hna,
+  have wit_aa := quotient_mul_add_remainder_eq a a,
+  have a_mod_a := mod_self a,
+  dsimp [(%)] at a_mod_a,
+  simp [a_mod_a] at wit_aa,
+  have h1 : 1 * a = a, from one_mul a,
+  conv at wit_aa {for a [4] {rw ←h1}},
+  exact eq_of_mul_eq_mul_right hna wit_aa
+end
+</code></pre>
+<p>A more complicated example, mixing term mode and tactic mode:</p>
+<pre><code class="language-lean">lemma nhds_supr {ι : Sort w} {t : ι → topological_space α} {a : α} :
+  @nhds α (supr t) a = (⨅i, @nhds α (t i) a) :=
+le_antisymm
+  (le_infi $ assume i, nhds_mono $ le_supr _ _)
+  begin
+    rw [supr_eq_generate_from, nhds_generate_from],
+    exact (le_infi $ assume s, le_infi $ assume ⟨hs, hi⟩,
+      begin
+        simp at hi, cases hi with i hi,
+        exact (infi_le_of_le i $ le_principal_iff.mpr $ @mem_nhds_sets α (t i) _ _ hi hs)
+      end)
+  end
+</code></pre>
+<p>When new goals arise as side conditions or steps, they are enclosed in
+focussing braces and indented. Braces are not alone on their line.</p>
+<pre><code class="language-lean">lemma mem_nhds_of_is_topological_basis {a : α} {s : set α} {b : set (set α)}
+  (hb : is_topological_basis b) : s ∈ (𝓝 a).sets ↔ ∃t∈b, a ∈ t ∧ t ⊆ s :=
+begin
+  rw [hb.2.2, nhds_generate_from, infi_sets_eq&#x27;],
+  { simpa [and_comm, and.left_comm] },
+  { exact assume s ⟨hs₁, hs₂⟩ t ⟨ht₁, ht₂⟩,
+      have a ∈ s ∩ t, from ⟨hs₁, ht₁⟩,
+      let ⟨u, hu₁, hu₂, hu₃⟩ := hb.1 _ hs₂ _ ht₂ _ this in
+      ⟨u, ⟨hu₂, hu₁⟩, by simpa using hu₃⟩ },
+  { suffices : a ∈ (⋃₀ b), { simpa [and_comm] },
+    { rw [hb.2.1], trivial } }
+end
+</code></pre>
+<p>Often <code>t0 ; t1</code> is used to execute <code>t0</code> and then <code>t1</code> on all new goals. But <code>;</code> is not a <code>,</code> so
+either write the tactics in one line, or indent the following tacic.</p>
+<pre><code class="language-lean">begin
+  cases x;
+    simp [a, b, c, d]
+end
+</code></pre>
+<h3>Sections</h3>
+<p>Within a section, you can indent definitions and theorems to make the
+scope salient:</p>
+<pre><code class="language-lean">section my_section
+  variable α : Type
+  variable P : Prop
+
+  definition foo (x : α) : α := x
+
+  theorem bar (H : P) : P := H
+end my_section
+</code></pre>
+<p>If the section is long, however, you can omit the indents.</p>
+<p>We generally use a blank line to separate theorems and definitions,
+but this can be omitted, for example, to group together a number of
+short definitions, or to group together a definition and notation.</p>
+<h2>Comments</h2>
+<p>Use comment delimiters <code>/- -/</code> to provide section headers and
+separators, and for long comments. Use <code>--</code> for short or in-line
+comments.</p>
+<p>Documentation strings for declarations are delimited with <code>/-- -/</code>.
+Documentation strings for modules are delimited with <code>/-! -/</code>.</p>
+<hr />
+<p>Copyright (c) 2016 Jeremy Avigad. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jeremy Avigad</p>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

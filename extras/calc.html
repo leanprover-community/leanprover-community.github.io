@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1>How to use calc</h1>
+<p><code>calc</code> is an environment -- so a &quot;mode&quot; like tactic mode, term mode and
+<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">conv mode</a>. Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+<a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs">section 4.3</a>.</p>
+<p>Basic example usage:</p>
+<pre><code class="language-lean">example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
+calc a = b + 1 : H1
+...    = c + 1 : by rw H2
+</code></pre>
+<h1>Error messages, and how to avoid them.</h1>
+<p>Note that the error messages can be quite obscure when things aren't quite right, and often the red
+squiggles end up under a random <code>...</code>. A tip to avoid these problems with calc usage is to first
+populate a skeleton proof such as</p>
+<pre><code class="language-lean">example : A = D :=
+calc A = B : sorry
+...    = C : sorry
+...    = D : sorry
+</code></pre>
+<p>(in tactic mode this might look more like</p>
+<pre><code class="language-lean">have H : A = D,
+  exact calc A = B : sorry
+  ...          = C : sorry
+  ...          = D : sorry,
+</code></pre>
+<p>with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
+one write a VS Code snippet to write this skeleton?)</p>
+<h1>Using operators other than equality.</h1>
+<p>Many of the basic examples in TPIL use equality for most or all of
+the operators, but actually <code>calc</code> will work with any relation for which
+the corresponding transitivity statement is tagged <code>[trans]</code>:</p>
+<pre><code class="language-lean">definition r : ℕ → ℕ → Prop := sorry
+@[trans] theorem r_trans (a b c : ℕ) : r a b → r b c → r a c := sorry
+infix `***`: 50 := r
+
+example (a b c : ℕ) (H1 : a *** b) (H2 : b *** c) : a *** c :=
+calc a *** b : H1
+...    *** c : H2
+</code></pre>
+<h1>Using more than one operator.</h1>
+<p>This is possible; TPIL has the following example:</p>
+<pre><code class="language-lean">theorem T2 (a b c d : ℕ)
+  (h1 : a = b) (h2 : b ≤ c) (h3 : c + 1 &lt; d) : a &lt; d :=
+calc
+  a     = b     : h1
+    ... &lt; b + 1 : nat.lt_succ_self b
+    ... ≤ c + 1 : nat.succ_le_succ h2
+    ... &lt; d     : h3
+</code></pre>
+<p>What is actually going on here? The proofs themselves are not a mystery,
+for example <code>nat.succ_le_succ h2</code> is a proof of <code>b + 1 ≤ c + 1</code>. The
+clever part is that lean can put all of these together to correctly
+deduce that if <code>U = V &lt; W ≤ X &lt; Y</code> then <code>U &lt; Y</code>. The way this is done,
+Kevin thinks (can someone verify this?) is that Lean continually tries
+to amalgamate the first two operators in the list, until there
+is only one left. In other words, Lean will attempt to reduce
+the equations thus:</p>
+<pre><code>U = V &lt; W ≤ X &lt; Y
+U &lt; W ≤ X &lt; Y
+U &lt; X &lt; Y
+U &lt; Y
+</code></pre>
+<p>Note the following subtlety: given <code>U op1 V</code> and <code>V op2 W</code> Lean
+has to conclude <code>U op3 W</code> for some operator, which might be <code>op1</code>
+or <code>op2</code> (or even, as we shall see, a new operator). How is Lean
+doing this? The easiest case is when one of <code>op1</code> and <code>op2</code>
+is <code>=</code>. Lean knows</p>
+<pre><code class="language-lean">#check @trans_rel_right -- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), a = b → r b c → r a c
+#check @trans_rel_left -- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), r a b → b = c → r a c
+</code></pre>
+<p>and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
+operator is the equality operator, Lean looks through the theorems in its database which are tagged
+<code>[trans]</code> and applies these instead. For example Lean has the following definitions:</p>
+<pre><code>@[trans] lemma lt_of_lt_of_le [preorder α] : ∀ {a b c : α}, a &lt; b → b ≤ c → a &lt; c
+@[trans] lemma lt_trans [preorder α] : ∀ {a b c : α}, a &lt; b → b &lt; c → a &lt; c
+</code></pre>
+<p>and it is easily seen that these lemmas can be used to justify the example in the manual.</p>
+<h1>Using user-defined operators</h1>
+<p>It is as simple as tagging the relevant results with <code>trans</code>. For example</p>
+<pre><code class="language-lean">definition r : ℕ → ℕ → Prop := sorry
+definition s : ℕ → ℕ → Prop := sorry
+definition t : ℕ → ℕ → Prop := sorry
+@[trans] theorem rst_trans (a b c : ℕ) : r a b → s b c → t a c := sorry
+infix `***`: 50 := r
+infix `&amp;&amp;&amp;` : 50 := s
+infix `%%%` : 50 := t
+
+example (a b c : ℕ) (H1 : a *** b) (H2 : b &amp;&amp;&amp; c) : a %%% c :=
+calc a *** b : H1
+...    &amp;&amp;&amp; c : H2
+</code></pre>
+<p>This example shows us that the third operator <code>op3</code> can be different to both <code>op1</code> and <code>op2</code>.</p>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
