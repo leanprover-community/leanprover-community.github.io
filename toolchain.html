@@ -187,6 +187,12 @@ path .
 it will look for files in the default places and in the folder containing your new <code>leanpkg.path</code>
 (the path mentioned in the second line is relative to the folder containing <code>leanpkg.path</code>, and <code>.</code> means current folder).
 Now check <code>lean --path</code> from outside or inside the folder containing <code>leanpkg.path</code> to see the difference.</p>
+<p>Note that the way <code>builtin_path</code> is resolved is by going to <code>../library</code>
+and <code>../lib/lean/library</code> relative to the location of the executing lean
+process. Usually lean will be at <code>lean-install-dir/bin/lean</code> and so this
+will go to either <code>lean-install-dir/bin/library</code> (which is used when you
+build <code>lean</code>) or <code>lean-install-dir/bin/lib/lean/library</code> (which is used
+when you use the bare binary distribution).</p>
 <h3>Keeping compiled versions</h3>
 <p>Note that <code>lean</code> rechecks <code>test.lean</code> each time you ask it to check <code>test2.lean</code>,
 even if <code>test.lean</code> was not modified since it was last checked.
