@@ -118,50 +118,29 @@
   </nav>
   <div class="container-sm mt-4">
 	  
-<h1>Controlled installation of Lean and mathlib on Debian/Ubuntu</h1>
-<p>This document explains a more controlled installation procedure
-for Lean and mathlib on Linux distributions derived from Debian (Debian itself,
-Ubuntu, LMDE,...). There is a quicker way described in the main
-<a href="debian.html">install page</a> but it requires more trust.
-Of course you can get even more details about what is going on by
-reading the bash script that will be downloaded below:
-<a href="https://github.com/Kha/elan/blob/master/elan-init.sh">elan_init</a>.</p>
+<h1>Maths in Lean : p-adic numbers</h1>
+<p>The construction of <code>ℝ</code> using Cauchy sequences of rationals can be generalized to any absolute
+value on <code>ℚ</code>. For any prime p, the completion of <code>ℚ</code> with repsect to the p-adic norm creates a field
+<code>ℚ_p</code> and a ring <code>ℤ_p</code>.</p>
 <ul>
-<li>
-<p>Lean itself doesn't depend on much infrastructure, but supporting tools
-needed by most users require <code>git</code>, <code>curl</code>, and <code>python</code>. So the first step is:</p>
-<pre><code class="language-bash">sudo apt install git curl python3 python3-pip
-</code></pre>
-</li>
-<li>
-<p>The next step installs a small tool called <code>elan</code> which will handle
-updating Lean according to the needs of your current project (hit Enter
-when a question is asked). It will live in <code>$HOME/.elan</code> and adds a
-line to <code>$HOME/.profile</code>.</p>
-<pre><code class="language-bash">curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh
-</code></pre>
-</li>
-<li>
-<p>There are two editors you can use with Lean, VS Code and emacs. The
-recommended choice is <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
-<pre><code class="language-bash">wget -O code.deb https://go.microsoft.com/fwlink/?LinkID=760868
-sudo apt install ./code.deb
-rm code.deb
-code --install-extension jroesch.lean
-</code></pre>
-<p>Now open VS Code, and verify Lean is working, for example by saving a file <code>test.lean</code> and entering <code>#eval 1+1</code>.
-A green line should appear underneath <code>#eval 1+1</code>, and hovering the mouse over it you should see <code>2</code>
-displayed.</p>
-<p>The alternative is to use Emacs, and its <a href="https://github.com/leanprover/lean-mode">lean-mode</a>.</p>
-</li>
-<li>
-<p>Then we install a small tool called <code>update-mathlib</code> that which will handle
-updating mathlib according to the needs of your current project.</p>
-<pre><code class="language-bash">sudo pip3 install mathlibtools
-</code></pre>
-</li>
+<li><code>padic_norm.lean</code> defines the p-adic valuation <code>ℤ → ℕ</code>, extends it to <code>ℚ</code>, and defines
+<code>padic_norm {p} : prime p → ℚ → ℚ</code>. Note that this does not lead to a useful instance of
+<code>has_norm</code> since <code>p</code> cannot be inferred from the input, and it is not a norm for
+composite <code>p</code>. <code>padic_norm</code> is shown to be a non-archimedean absolute value.</li>
+<li>Fix <code>p</code> and <code>[fact p.prime]</code>. <code>padic_rationals.lean</code> defines <code>ℚ_[p]</code> as the Cauchy completion of
+<code>ℚ</code> wrt <code>padic_norm p</code> using the same mechanisms as <code>data/real/basic.lean</code>. It is immediately a
+field. The norm lifts to <code>padic_norm_e : ℚ_[p] → ℚ</code>, which is cast to <code>ℝ</code> and gives us a
+<code>normed_field</code> instance. <code>ℚ_[p]</code> is shown to be Cauchy complete.</li>
+<li><code>padic_integers.lean</code> defines <code>ℤ_[p]</code> as the subtype <code>{x : ℚ_[p] \\ ∥x∥ ≤ 1}</code>. It instantiates
+<code>local_ring</code> and <code>normed_ring</code> and is Cauchy complete.</li>
+<li><code>hensel.lean</code> proves Hensel's lemma over <code>ℤ_[p]</code>, described by Gouvêa (1997) as the &quot;most
+important algebraic property of the p-adic numbers.&quot; For <code>F : polynomial ℤ_[p]</code> and <code>a : ℤ_[p]</code>
+with <code>∥F.eval a∥ &lt; ∥F.derivative.eval a∥^2</code>, then there exists a unique <code>z</code> such that
+<code>F.eval z = 0 ∧ ∥z - a∥ &lt; ∥F.derivative.eval a∥</code>; furthermore,
+<code>∥F.derivative.eval z∥ = ∥F.derivative.eval a∥</code>. The proof is an adaptation of
+<a href="http://www.math.uconn.edu/~kconrad/blurbs/gradnumthy/hensel.pdf">a writeup by Keith Conrad</a> and
+uses Newton's method to construct a sequence in <code>ℤ_[p]</code> converging to the unique solution.</li>
 </ul>
-<p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
 
   </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+		MathJax = {
+			  tex: {
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+    <title>Lean community</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1>Maths in lean : Topological Spaces.</h1>
+<p>The <code>topological_space</code> typeclass is defined in mathlib,
+in <code>topology/basic.lean</code>. There are about 18000
+lines of code in <code>topology</code> at the time of writing,
+covering the basics of topological spaces, continuous functions,
+topological groups and rings, and infinite sums. These docs
+are just concerned with the contents of the <code>topological_space.lean</code>
+file.</p>
+<h3>The basic typeclass.</h3>
+<p>The <code>topological_space</code> typeclass is an inductive type, defined
+as a structure on a type <code>α</code> in the obvious way: there is an <code>is_open</code>
+predicate, telling us when <code>U : set α</code> is open, and then the axioms
+for a topology (pedantic note: the axiom that the empty set is open
+is omitted, as it follows from the fact that a union of open sets
+is open, applied to the empty union!).</p>
+<p>Note that there are two ways of formalising the axiom that an arbitrary
+union of open sets is open: one could either ask that given a set
+of open sets, their union is open, or one could ask that given
+a function from some index set <code>I</code> to the set of open sets, the union
+of the values of the function is open. Mathlib goes for the first
+one, so the axiom is</p>
+<pre><code class="language-lean">is_open_sUnion : ∀(s : set (set α)), (∀t∈s, is_open t) → is_open (⋃₀ s)
+</code></pre>
+<p>and then the index set version is a lemma:</p>
+<pre><code class="language-lean">lemma is_open_Union {f : ι → set α} (h : ∀i, is_open (f i)) : is_open (⋃i, f i)
+</code></pre>
+<p>Note the naming conventions, standard across mathlib, that <code>sUnion</code>
+is a union over sets and <code>Union</code> (with a capital U) is a union over
+the image of a function on an indexing set. The capital U's are
+to indicate a union of arbitrary size, as opposed to <code>union</code>, which
+indicates a union of two sets:</p>
+<pre><code class="language-lean">lemma is_open_union (h₁ : is_open s₁) (h₂ : is_open s₂) : is_open (s₁ ∪ s₂)
+</code></pre>
+<p>The predicate <code>is_closed</code>, and functions <code>interior</code>, <code>closure</code>, and
+<code>frontier</code> (closure minus interior,
+sometimes called boundary in mathematics) are defined, and basic
+properties about them are proved. For example</p>
+<pre><code class="language-lean">import topology.basic
+open topological_space
+variables {X : Type} [topological_space X] {U V C D Y Z : set X}
+
+example : is_closed C → is_closed D → is_closed (C ∪ D) := is_closed_union
+
+example : is_open ( -C) ↔ is_closed C := is_open_compl_iff
+
+example : is_open U → is_closed C → is_open (U - C) := is_open_diff
+
+example : interior Y = Y ↔ is_open Y := interior_eq_iff_open
+
+example : Y ⊆ Z → interior Y ⊆ interior Z := interior_mono
+
+example : is_open Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, is_open U ∧ x ∈ U := is_open_iff_forall_mem_open
+
+example : closure Y = Y ↔ is_closed Y := closure_eq_iff_is_closed
+
+example : closure Y = - interior (- Y) := closure_eq_compl_interior_compl
+</code></pre>
+<h3>Filters</h3>
+<p>In mathlib, unlike the typical approach in a mathematics textbook, extensive
+use is made of filters as a tool in the theory of topological spaces. Let
+us briefly review the notion of a filter in mathematics. A filter on a set
+<code>X</code> is a non-empty collection <code>F</code> of subsets of <code>X</code> satisfying the following
+two axioms:</p>
+<ol>
+<li>if <code>U ∈ F</code> and <code>U ⊆ V</code>, then <code>V ∈ F</code>; and</li>
+<li>if <code>U, V ∈ F</code> then there exists <code>W ∈ F</code> with <code>W ⊆ U ∩ V</code>.</li>
+</ol>
+<p>Informally, one can think of <code>F</code> as the set of &quot;big&quot; subsets of <code>X</code>. For example, if <code>X</code> is a set and <code>F</code> is the set of subsets <code>Y</code> of <code>X</code> such that <code>X - Y</code> is finite, then <code>F</code> is a filter. This is called the <em>cofinite filter</em> on <code>X</code>.</p>
+<p>Note that if <code>F</code> is a filter that contains the empty set, then it contains all subsets of <code>X</code> by the first axiom. This filter is sometimes called &quot;bottom&quot; (we will see why a little later on). Some references demand that the empty set is not allowed to be in a filter -- Lean does not have this restriction. A filter not containing the empty set is sometimes called a &quot;proper filter&quot;.</p>
+<p>If <code>X</code> is a topological space, and <code>x ∈ X</code>, then the <em>neighbourhood filter</em> <code>𝓝 x</code> of <code>x</code> is the set of subsets <code>Y</code> of <code>X</code> such that <code>x</code> is in the interior of <code>Y</code>. One checks easily that this is a filter (technical point: to see that this is actually the definition of <code>𝓝 x</code> in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using <code>F ≤ G</code> iff <code>G ⊆ F</code>, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but <code>lemma nhds_sets</code> says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).</p>
+<p>Why are we interested in these filters? Well, given a map <code>f</code> from <code>ℕ</code> to a topological space <code>X</code>, one can check that the resulting sequence <code>f 0</code>, <code>f 1</code>, <code>f 2</code>... tends to <code>x ∈ F</code> if and only if the pre-image of any element in the filter <code>𝓝 x</code> is in the cofinite filter on <code>ℕ</code> -- this is just another way of saying that given any open set <code>U</code> containing <code>x</code>, there exists <code>N</code> such that for all <code>n ≥ N</code>, <code>f n ∈ U</code>. So filters provide a way of thinking about limits.</p>
+<p>The <em>principal filter</em> <code>principal Y</code> attached to a subset <code>Y</code> of a set <code>X</code> is the collection of all subsets of <code>X</code> that contain <code>Y</code>. So it's not difficult to convince yourself that the following results should be true:</p>
+<pre><code class="language-lean">example : interior Y = {x | 𝓝 x ≤ filter.principal Y} := interior_eq_nhds
+
+example : is_open Y ↔ ∀ y ∈ Y, Y ∈ (𝓝 y).sets := is_open_iff_mem_nhds
+</code></pre>
+<h3>Compactness with filters</h3>
+<p>As a consequence of the filter-centric approach, some definitions in mathlib
+look rather strange to a mathematician who is not used to this approach.
+We have already seen a definition using filters
+for what it means for a sequence to tend to a limit. The definition
+of compactness is also written in filter-theoretic terms:</p>
+<pre><code class="language-lean">/-- A set `s` is compact if every filter that contains `s` also meets every
+  neighborhood of some `a ∈ s`. -/
+def compact (Y : set X) := ∀F, F ≠ ⊥ → F ≤ principal Y → ∃y∈Y, F ⊓ 𝓝 y ≠ ⊥
+</code></pre>
+<p>Translated, this says that a subset <code>Y</code> of a topological space <code>X</code> is compact if for every proper filter <code>F</code> on <code>X</code>, if <code>Y</code> is an element of <code>F</code> then there's an element <code>y</code> of <code>Y</code> such that the smallest filter containing both F and the neighbourhood filter of <code>y</code> is not the filter of all subsets of <code>X</code> either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of <code>ℝ^n</code>, any sequence has a convergent subsequence.</p>
+<p>One might ask why this definition of compactness has been chosen, rather than the standard one about open covers having finite subcovers. The reasons for this are in some sense computer-scientific rather than mathematical -- the issue should not be what definition is ultimately chosen (indeed the developers should feel free to choose whatever definition they like as long as it is logically equivalent to the usual one, and they might have reasons related to non-mathematical points such as running times), the issue should be how to prove that the inbuilt definition is equivalent to the one you want to use in practice. And fortunately, we have</p>
+<pre><code class="language-lean">example : compact Y ↔
+  (∀ cov : set (set X), (∀ U ∈ cov, is_open U) → Y ⊆ ⋃₀ cov →
+    ∃ fincov ⊆ cov, set.finite fincov ∧ Y ⊆ ⋃₀ fincov) := compact_iff_finite_subcover
+</code></pre>
+<p>so the Lean definition is equivalent to the standard one.</p>
+<h3>Hausdorff spaces</h3>
+<p>In Lean they chose the terminology <code>t2_space</code> to mean Hausdorff (perhaps because it is shorter!).</p>
+<pre><code class="language-lean">class t2_space (X : Type) [topological_space X] :=
+(t2 : ∀x y, x ≠ y → ∃U V : set X, is_open U ∧ is_open V ∧ x ∈ U ∧ y ∈ V ∧ U ∩ V = ∅)
+</code></pre>
+<p>Of course Hausdorffness is what we need to ensure that limits are unique, but because limits are defined using filters this statements ends up reading as follows:</p>
+<pre><code class="language-lean">lemma tendsto_nhds_unique [t2_space X] {f : β → X} {l : filter β} {x y : X}
+  (hl : l ≠ ⊥) (hx : tendsto f l (𝓝 x)) (hb : tendsto f l (𝓝 y)) : x = y
+</code></pre>
+<p>Note that actually this statement is more general than the classical statement that if a sequence tends to two limits in a Hausdorff space then the limits are the same, because it applies to any non-trivial filter on any set rather than just the cofinite filter on the natural numbers.</p>
+<h3>Bases for topologies.</h3>
+<p>If <code>X</code> is a <em>set</em>, and <code>S</code> is a collection of subsets of <code>X</code>, then one can
+consider the topology &quot;generated by&quot; <code>S</code>, which (as is typical in these
+situations) can be defined in two ways: firstly as the intersection
+of all the topologies on <code>X</code> containing <code>S</code> (where we are here identifying
+a topology with the underlying collection of open sets), or more constructively
+as the sets &quot;generated by&quot; <code>S</code> using the axioms of a topological space.
+Unsurprisingly, it is this latter definition which is used in Lean, as the
+open sets are naturally an inductive type; the open sets are called
+<code>generate_open S</code> and the topology is <code>generate_from S</code>.</p>
+<p>The definition of a basis for a topology in mathlib includes an axiom
+that the topology is generated from the basis in the sense above, which may make
+it hard to prove for an end user that a given set satisfies the definition
+directly. However again we have a theorem which reduces us to checking
+the two usual axioms for a basis:</p>
+<pre><code class="language-lean">example (B : set (set X)) (h_open : ∀ V ∈ B, is_open V)
+  (h_nhds : ∀ (x : X) (U : set X), x ∈ U → is_open U → ∃ V ∈ B, x ∈ V ∧ V ⊆ U) :
+is_topological_basis B :=
+is_topological_basis_of_open_of_nhds h_open h_nhds
+</code></pre>
+<h3>Other things</h3>
+<p>There are other things involving filters, there are separable, first-countable
+and second-countable spaces, product spaces, subspace and quotient
+topologies (and more generally pull-back and push-forward of a topology)
+and things like t1 and t3 spaces.</p>
+<h2>File organization</h2>
+<p>The following &quot;core&quot; modules form a linear chain of imports. A theorem involving concepts defined in several of these files should be found in the last such file in this ordering.</p>
+<ul>
+<li><code>basic</code>
+Topological spaces. Open and closed subsets, interior, closure and frontier (boundary). Neighborhood filters. Limit of a filter. Locally finite families. Continuity and continuity at a point.</li>
+<li><code>order</code>
+The complete lattice structure on topologies on a fixed set. Induced and coinduced topologies.</li>
+<li><code>maps</code>
+Open and closed maps. &quot;Inducing&quot; maps. Embeddings, open embeddings and closed embeddings. Quotient maps.</li>
+<li><code>constructions</code>
+Building new topological spaces from old ones: products, sums, subspaces and quotients.</li>
+<li><code>subset_properties</code>
+Compactness. Clopen subsets, irreducibility and connectedness. Totally disconnected and totally separated sets and spaces.</li>
+<li><code>separation</code>
+Separation axioms T₀ through T₄, also known as Kolmogorov, Tychonoff or Fréchet, Hausdorff, regular, and normal spaces respectively.</li>
+</ul>
+<p>The remaining directories and files, in no particular order:</p>
+<ul>
+<li><code>algebra</code>
+Topological spaces with compatible algebraic or ordered structure.</li>
+<li><code>category</code>
+The categories of topological spaces, uniform spaces, etc.</li>
+<li><code>instances</code>
+Specific topological spaces such as the real numbers and the complex numbers.</li>
+<li><code>metric_space</code>
+The theory of metric spaces; but some notions one might expect to find here are instead generalized to uniform spaces.</li>
+<li><code>sheaves</code>
+Presheaves on a topological space.</li>
+<li><code>uniform_space</code>
+The theory of uniform spaces, including notions such as completeness, uniform continuity and totally bounded sets.</li>
+<li><code>bases</code>
+Bases for filters and topological spaces. Separable, first countable and second countable spaces.</li>
+<li><code>bounded_continuous_function</code>
+Bounded continuous functions from a topological space to a metric space.</li>
+<li><code>compact_open</code>
+The compact-open topology on the space of continuous maps between two topological spaces.</li>
+<li><code>continuous_on</code>
+Neighborhoods within a subset. Continuity on a subset, and continuity within a subset at a point.</li>
+<li><code>dense_embedding</code>
+Embeddings and other functions with dense image.</li>
+<li><code>homeomorph</code>
+Homeomorphisms between topological spaces.</li>
+<li><code>list</code>
+Topologies on lists and vectors.</li>
+<li><code>local_homeomorph</code>
+Homeomorphisms between open subsets of topological spaces.</li>
+<li><code>opens</code>
+The complete lattice of open subsets of a topological space. The types of closed and nonempty compact subsets.</li>
+<li><code>sequences</code>
+Sequential closure and sequential spaces. Sequentially continuous functions.</li>
+<li><code>stone_cech</code>
+The Stone-Čech compactification of a topological space.</li>
+</ul>
+
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
