@@ -127,7 +127,7 @@ for key, data in bib.entries.items():
         url = data.fields['url']
     elif 'eprint' in data.fields:
         eprint = data.fields['eprint']
-        if eprint.startswith('arxiv:'):
+        if eprint.startswith('arXiv:'):
             url = 'https://arxiv.org/abs/'+eprint[6:]
         else:
             url = eprint
