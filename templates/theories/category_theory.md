@@ -1,46 +1,20 @@
 # Maths in Lean : category theory
 
-The `category` typeclass is defined in [category_theory/category.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/category.lean).
+The `category` typeclass is defined in [category_theory/default.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html).
 It depends on the type of the objects, so for example we might write `category (Type u)` if we're talking about a category whose objects are types (in universe `u`).
-Some care is needed with universes (see the section [Universes](##markdown-header-universes)), and end users may often prefer the abbreviations `small_category` and `large_category`.
 
-Functors (which are a structure, not a typeclass) are defined in [category_theory/functor.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/functor/default.lean),
+Functors (which are a structure, not a typeclass) are defined in [category_theory/functor.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html),
 along with identity functors and functor composition.
 
-Natural transformations, and their compositions, are defined in [category_theory/natural_transformation.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/natural_transformation.lean).
+Natural transformations, and their compositions, are defined in [category_theory/natural_transformation.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/natural_transformation.html).
 
 The category of functors and natural transformations between fixed categories `C` and `D`
-is defined in [category_theory/functor_category.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/functor_category.lean).
+is defined in [category_theory/functor_category.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor_category.html).
 
 Cartesian products of categories, functors, and natural transformations appear in
-[category_theory/products.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/products.lean). (Product in the sense of limits will appear elsewhere soon!)
+[category_theory/products/basic.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/products/basic.html). (Product in the sense of limits will appear elsewhere soon!)
 
-The category of types, and the hom pairing functor, are defined in [category_theory/types.lean](https://github.com/leanprover-community/mathlib/blob/master/category_theory/types.lean).
-
-## Universes
-
-Unfortunately in a category theory library we have to deal with universes carefully. We have the following:
-
-````
-category.{u₁ v₁}     : Type (max (u₁+1) (v₁+1))
-C                    : Type v₁
-D                    : Type v₂
-𝒞                    : category.{u₁ v₁} C
-𝒟                    : category.{u₂ v₂} D
-functor C D          : Type (max u₁ u₂ v₁ v₂)
-F G                  : functor C D
-nat_trans F G        : Type (max u₁ v₂)
-functor.category C D : category.{(max u₁ v₂) (max u₁ u₂ v₁ v₂)}
-````
-
-In the above, `category.{v₁ u₁} C` is equivalently written as
-`category.{v₁} C` because `u₁` can be inferred from `C`.
-
-Note then that if we specialise to small categories, where `uᵢ = vᵢ`, then
-`functor.category C D : category.{max u₁ u₂}`, and so is again
-a small category. If `C` is a small category and `D` is a large category
-(i.e. `u₂ = v₂+1`), and `v₂ = v₁` then we have
-`functor.category C D : category.{v₁+1}` so is again a large category.
+The category of types, and the hom pairing functor, are defined in [category_theory/types.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/types.html).
 
 ## Notation
 
