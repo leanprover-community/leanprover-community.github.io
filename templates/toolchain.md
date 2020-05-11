@@ -86,6 +86,13 @@ it will look for files in the default places and in the folder containing your n
 (the path mentioned in the second line is relative to the folder containing `leanpkg.path`, and `.` means current folder).
 Now check `lean --path` from outside or inside the folder containing `leanpkg.path` to see the difference.
 
+Note that the way `builtin_path` is resolved is by going to `../library`
+and `../lib/lean/library` relative to the location of the executing lean
+process. Usually lean will be at `lean-install-dir/bin/lean` and so this
+will go to either `lean-install-dir/bin/library` (which is used when you
+build `lean`) or `lean-install-dir/bin/lib/lean/library` (which is used
+when you use the bare binary distribution).
+
 ### Keeping compiled versions
 
 Note that `lean` rechecks `test.lean` each time you ask it to check `test2.lean`, 
