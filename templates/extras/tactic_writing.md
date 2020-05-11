@@ -404,7 +404,7 @@ As a last refinement, let us make a version of this tactic which names the
 multiplied equality by appending `.mul`, and optionally removes the original
 one if the tactic name is followed by `!`. This is the opportunity to use
 `when` which is the monadic version of `ite` (with else branch doing nothing).
-See [category/combinators.lean](https://github.com/leanprover-community/lean/blob/master/library/init/category/combinators.lean) in core library for other variations on this idea.
+See [control/combinators.lean](https://github.com/leanprover-community/lean/blob/master/library/init/control/combinators.lean) in core library for other variations on this idea.
 ```lean
 meta def tactic.interactive.mul_left_bis (clear_hyp : parse (optional $ tk "!")) (q : parse texpr) :
 parse location → tactic unit
@@ -423,7 +423,7 @@ This is the end of this tutorial (although there are two cheat sheets below).
 If you want to learn more, you can read the definitions of tactics in either
 the core library or mathlib, see what you can understand, and ask specific
 questions on Zulip. For more theory, especially a proper explanation of monads, you can read
-[Programming in Lean](https://github.com/leanprover/programming_in_lean), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
+[Programming in Lean](https://leanprover.github.io/programming_in_lean/), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
 the paper [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf).
 
 ## Mario's backtick cheat sheet

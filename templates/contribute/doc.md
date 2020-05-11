@@ -183,7 +183,7 @@ Third-level headers `###` should be used for titles inside sectioning comments.
 If the comment is more than one line long, the delimiters `/-!` and `-/` should appear on their own
 lines.
 
-See [meta/expr.lean](../../src/meta/expr.lean) for an example in practice.
+See [meta/expr.lean](https://github.com/leanprover-community/mathlib/blob/master/src/meta/expr.lean) for an example in practice.
 
 ```lean
 namespace binder_info
@@ -220,15 +220,15 @@ def map_prefix (f : name → option name) : name → name
 
 ## Theories documentation
 
-In addition to documentation living in Lean files, we have theory documentation in
-[docs/theories](../theories) where we give overviews spanning several Lean files, and
+In addition to documentation living in Lean files, we have [theories documentation](../theories.html)
+where we give overviews spanning several Lean files, and
 more mathematical explanations in cases where formalization requires slightly exotic points of view,
-see for instance the [topology documentation](../theories/topology.md).
+see for instance the [topology documentation](../theories/topology.html).
 
 ## Examples
 
 The following files are maintained as examples of good documentation style:
 
-* [data/padics/padic_norm](../../src/data/padics/padic_norm.lean)
-* [topology/basic](../../src/topology/basic.lean)
-* [analysis/calculus/times_cont_diff](../../src/analysis/calculus/times_cont_diff.lean)
+* [data/padics/padic_norm](https://github.com/leanprover-community/mathlib/blob/master/src/data/padics/padic_norm.lean)
+* [topology/basic](https://github.com/leanprover-community/mathlib/blob/master/src/topology/basic.lean)
+* [analysis/calculus/times_cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/times_cont_diff.lean)
