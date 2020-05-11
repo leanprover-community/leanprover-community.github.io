@@ -30,7 +30,7 @@ The other sections, with second level headers are (in this order):
 * *Tags* (a list of keywords that could be useful when doing text search in mathlib to find where
   something is covered)
 
-References should refer to bibtex entries in [the mathlib citations file](../references.bib).
+References should refer to bibtex entries in [the mathlib citations file](https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).
 
 The following code block is an example of a file header.
 
