@@ -6,7 +6,7 @@
 
 Building the bibliography requires [`bibtool`](https://github.com/ge-ne/bibtool).
 
-In order to rebuilt the CSS from SCSS, you would also need:
+In order to rebuild the CSS from SCSS, you also need:
 
 * [sass](https://sass-lang.com/)
 * [bootstrap](https://github.com/twbs/bootstrap/archive/v4.4.1.zip)
@@ -27,7 +27,7 @@ The website relies on several components which are built in other repositories:
 
 ## TODO
 
-* Use pygment for syntax highlighting
+* Use pygments for syntax highlighting
 * Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?
