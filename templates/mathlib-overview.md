@@ -14,9 +14,9 @@ Vector spaces, bases, finite-dimensional spaces, matrices, linear maps, dual spa
 
 ### Number theory
 
-The [naturals](https://github.com/leanprover-community/mathlib/blob/master/docs/theories/naturals.md), the integers, the rationals.
+The [naturals](theories/naturals.html), the integers, the rationals.
 Primes, uniqueness of factorization. GCDs. Congruences and modular arithmetic. Z is an ED/PID/UFD. Sums of two and four squares, Pell’s equation in cases needed for Matiyasevich’s theorem (d=a^2-1). Euler’s Totient function. Quadratic reciprocity.
-[p-adic numbers](https://github.com/leanprover-community/mathlib/blob/master/docs/theories/padics.md). Hensel’s Lemma.
+[p-adic numbers](theories/padics.html). Hensel’s Lemma.
 
 ### Analysis
 
@@ -33,7 +33,7 @@ Uniform spaces, uniform continuity, completions.
 Topological spaces, open and closed sets, compact sets, connected sets. Separation axioms T0 to T4. Topological groups, rings, fields. Continuous maps, homeomorphisms, the compact-open topology. Sequences, sequential spaces, sequentially continuous functions. The Stone-Cech compactification. Topological fibre bundles. Baire theorem. Normed vector spaces, operator norm.
 Presheaves on a topological space, stalks.
 
-[See here for more details information about topology in mathlib](https://github.com/leanprover-community/mathlib/blob/master/docs/theories/topology.md).
+[See here for more details information about topology in mathlib](theories/topology.html).
 
 ### Measure theory.
 
@@ -45,7 +45,7 @@ Categories, small and large categories.
 Functors, full and faithful functors, natural transformations, the Yoneda lemma. Equivalence of categories, sums, products, limits, adjoints. Monoidal categories.
 The category of commutative rings, the category of modules over a ring, the category of measurable spaces.
 
-[See here for more detailed information about category theory in mathlib](https://github.com/leanprover-community/mathlib/blob/master/docs/theories/category_theory.md).
+[See here for more detailed information about category theory in mathlib](theories/category_theory.html).
 
 ### Other mathematical theories and objects.
 
