@@ -11,7 +11,7 @@ the performance is nowhere near that of a regular install.
 This is still a good option if you want to know what Lean looks
 like, and have only 10 minutes to spare. For instance, you can read
 your
-[first proofs](https://leanprover-community.github.io/lean-web-editor/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fleanprover-community%2Ftutorials%2Fmaster%2Fsrc%2Ffirst_proofs.lean).
+[first proofs](https://leanprover-community.github.io/lean-web-editor/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fleanprover-community%2Ftutorials%2Fmaster%2Fsrc%2Fexercises%2F00_first_proofs.lean).
 You need to wait for the orange bar at the top to turn green and say
 "Lean is ready!". Then you can click anywhere inside `begin` and `end`
 pairs to see the state of proofs evolving.
