@@ -36,7 +36,9 @@ then you can try one of our autonomous bundles for:
 Each of these bundles contains a folder `trylean` from which you can run
 the program `trylean` without installing anything anywhere else on your
 computer (although MacOS users will need to tell their system
-they really want to run it). These bundles contain Lean itself,
+they really want to run it). On Windows this is a batch file, and there will be a Microsoft 
+Defender warning when running it. To allow the batch file to execute, click on "More Info" 
+then "Run anyway". These bundles contain Lean itself,
 [VScodium](https://vscodium.com/)
 which is a distributable version of the VS Code editor, the Lean VS Code extension,
 the mathlib library, and a couple of Lean files to play with.
