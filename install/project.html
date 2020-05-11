@@ -119,10 +119,14 @@
   <div class="container-sm mt-4">
 	  
 <h1>Creating a Lean project</h1>
-<p>Lean files are organized in projects called packages. The tool <code>leanpkg</code>
-manages project creation and dependencies. We will now create a new
-project depending on mathlib. The following commands should be typed in a
-terminal.</p>
+<p>Lean files are organized in projects called packages. Projects are
+git repositories containing a <code>leanpkg.toml</code> file specifying the Lean
+version and all required dependencies alongside the <code>src/</code> subdirectory
+containing the Lean code. The tool
+<a href="https://github.com/leanprover-community/mathlib-tools"><code>leanproject</code></a>
+manages project creation and dependencies.</p>
+<p>We will now create a new project depending on mathlib. The following
+commands should be typed in a terminal.</p>
 <ul>
 <li>
 <p>If you have not logged in since you installed Lean and mathlib, then
@@ -130,23 +134,22 @@ you need to first type <code>source ~/.profile</code>.</p>
 </li>
 <li>
 <p>Then go to a folder where you want to create a project in a subfolder
-<code>my_project</code>, and type:</p>
-<pre><code class="language-bash">leanpkg new my_project
-cd my_project
-leanpkg add leanprover-community/mathlib
-update-mathlib
-</code></pre>
+<code>my_project</code>, and type <code>leanproject new my_project</code>.</p>
 </li>
 <li>
-<p>launch VScode, either through your application menu or by typing
-<code>code</code></p>
+<p>Launch VS Code, either through your application menu or by typing
+<code>code my_project</code>.</p>
 </li>
 <li>
-<p>On the main screen, or in the File menu, click &quot;Open folder&quot; (on a Mac, just &quot;Open&quot;), and
+<p>If you launched VS Code through a menu: on the main screen, or in the
+File menu, click &quot;Open folder&quot; (on a Mac, just &quot;Open&quot;), and
 choose the folder <code>my_project</code> (<em>not</em> one of its subfolders).</p>
 </li>
 <li>
-<p>Your Lean code should now be put inside files with extension <code>.lean</code> living in <code>my_project/src/</code> or a subfolder thereof. In the file explorer on the left-hand side of VScode, you can right-click on <code>src</code>, choose <code>New file</code>, and type a filename to create a file there.</p>
+<p>Your Lean code should now be put inside files with extension <code>.lean</code>
+living in <code>my_project/src/</code> or a subfolder thereof. In the file explorer
+on the left-hand side of VS Code, you can right-click on <code>src</code>, choose
+<code>New file</code>, and type a filename to create a file there.</p>
 </li>
 </ul>
 <p>If you want to make sure everything is working, you can start by
@@ -155,17 +158,21 @@ creating, say <code>my_project/src/test.lean</code> containing:</p>
 
 #check topological_space
 </code></pre>
-<p>When the cursor is on the last line, the right hand part of VScode
-should display a &quot;Lean messages&quot; area saying:
+<p>When the cursor is on the last line, the right hand part of VS Code
+should display a &quot;Lean Goal&quot; area saying:
 <code>topological_space : Type u_1 → Type u_1</code></p>
-<p>If, for some reason, you happen to loose the &quot;Lean messages&quot; area, you
-can get it back with &quot;Ctrl-Shift-Enter&quot;. Also, you can get the Lean
-documentation inside VScode using &quot;Ctrl-Shift-p&quot; and then, inside the
-text field that appeared, type &quot;lean doc&quot; and hit Enter. Then click
-&quot;Theorem proving in Lean&quot; and enjoy.</p>
+<p>If, for some reason, you happen to lose the &quot;Lean Goal&quot; area, you
+can get it back with <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd>
+(<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd> on MacOS).
+Also, you can get the Lean documentation inside VS Code using
+<kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd>
+(<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then,
+inside the text field that appears, type &quot;lean doc&quot; and hit <kbd>Enter</kbd>.
+Then click &quot;Theorem Proving in Lean&quot; and enjoy.</p>
 <h1>Working on an existing package</h1>
-<p>Suppose you want to work on an existing project.
-As example, we will take <a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>. Open a terminal.</p>
+<p>Suppose you want to work on an existing project. As example, we will take
+<a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>.
+Open a terminal.</p>
 <ul>
 <li>
 <p>If you have not logged in since you installed Lean and mathlib, then
@@ -175,32 +182,22 @@ you need to first type <code>source ~/.profile</code>.</p>
 <p>Go the the directory where you would like this package to live.</p>
 </li>
 <li>
-<p>Run <code>git clone https://github.com/leanprover-community/tutorials.git</code>.</p>
+<p>Run <code>leanproject get tutorials</code>.</p>
 </li>
 <li>
-<p>This creates a directory named <code>tutorials</code>. Enter it
-with <code>cd tutorials</code>.</p>
+<p>Launch VS Code, either through your application menu or by typing
+<code>code tutorials</code>. (MacOS users need to take a one-off
+<a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">extra step</a>
+to be able to launch VS Code from the command line.)</p>
 </li>
 <li>
-<p>Type <code>leanpkg configure</code> to get <code>leanpkg</code> ready for use in this project.</p>
+<p>If you launched VS Code from a menu, on the main screen, or in the File menu,
+click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and choose the folder
+<code>tutorials</code> (<em>not</em> one of its subfolders).</p>
 </li>
 <li>
-<p>Type <code>update-mathlib</code> to get mathlib ready for use in this project.</p>
-</li>
-<li>
-<p>Type <code>leanpkg build</code> to compile everything, this should only take a few seconds.</p>
-</li>
-<li>
-<p>launch VScode, either through your application menu or by typing
-<code>code</code></p>
-</li>
-<li>
-<p>On the main screen, or in the File menu, click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and
-choose the folder <code>tutorials</code> (<em>not</em> one of its subfolders).</p>
-</li>
-<li>
-<p>Using the file explorer on the left-hand side, explore everthing you want in
-<code>tutorials/src</code></p>
+<p>Using the file explorer on the left-hand side, explore everything you
+want in <code>tutorials/src</code>.</p>
 </li>
 </ul>
 
