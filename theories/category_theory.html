@@ -119,36 +119,16 @@
   <div class="container-sm mt-4">
 	  
 <h1>Maths in Lean : category theory</h1>
-<p>The <code>category</code> typeclass is defined in <a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/category.lean">category_theory/category.lean</a>.
-It depends on the type of the objects, so for example we might write <code>category (Type u)</code> if we're talking about a category whose objects are types (in universe <code>u</code>).
-Some care is needed with universes (see the section <a href="##markdown-header-universes">Universes</a>), and end users may often prefer the abbreviations <code>small_category</code> and <code>large_category</code>.</p>
-<p>Functors (which are a structure, not a typeclass) are defined in <a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/functor/default.lean">category_theory/functor.lean</a>,
+<p>The <code>category</code> typeclass is defined in <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html">category_theory/default.lean</a>.
+It depends on the type of the objects, so for example we might write <code>category (Type u)</code> if we're talking about a category whose objects are types (in universe <code>u</code>).</p>
+<p>Functors (which are a structure, not a typeclass) are defined in <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html">category_theory/functor.lean</a>,
 along with identity functors and functor composition.</p>
-<p>Natural transformations, and their compositions, are defined in <a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/natural_transformation.lean">category_theory/natural_transformation.lean</a>.</p>
+<p>Natural transformations, and their compositions, are defined in <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/natural_transformation.html">category_theory/natural_transformation.lean</a>.</p>
 <p>The category of functors and natural transformations between fixed categories <code>C</code> and <code>D</code>
-is defined in <a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/functor_category.lean">category_theory/functor_category.lean</a>.</p>
+is defined in <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor_category.html">category_theory/functor_category.lean</a>.</p>
 <p>Cartesian products of categories, functors, and natural transformations appear in
-<a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/products.lean">category_theory/products.lean</a>. (Product in the sense of limits will appear elsewhere soon!)</p>
-<p>The category of types, and the hom pairing functor, are defined in <a href="https://github.com/leanprover-community/mathlib/blob/master/category_theory/types.lean">category_theory/types.lean</a>.</p>
-<h2>Universes</h2>
-<p>Unfortunately in a category theory library we have to deal with universes carefully. We have the following:</p>
-<pre><code>category.{u₁ v₁}     : Type (max (u₁+1) (v₁+1))
-C                    : Type v₁
-D                    : Type v₂
-𝒞                    : category.{u₁ v₁} C
-𝒟                    : category.{u₂ v₂} D
-functor C D          : Type (max u₁ u₂ v₁ v₂)
-F G                  : functor C D
-nat_trans F G        : Type (max u₁ v₂)
-functor.category C D : category.{(max u₁ v₂) (max u₁ u₂ v₁ v₂)}
-</code></pre>
-<p>In the above, <code>category.{v₁ u₁} C</code> is equivalently written as
-<code>category.{v₁} C</code> because <code>u₁</code> can be inferred from <code>C</code>.</p>
-<p>Note then that if we specialise to small categories, where <code>uᵢ = vᵢ</code>, then
-<code>functor.category C D : category.{max u₁ u₂}</code>, and so is again
-a small category. If <code>C</code> is a small category and <code>D</code> is a large category
-(i.e. <code>u₂ = v₂+1</code>), and <code>v₂ = v₁</code> then we have
-<code>functor.category C D : category.{v₁+1}</code> so is again a large category.</p>
+<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/products/basic.html">category_theory/products/basic.lean</a>. (Product in the sense of limits will appear elsewhere soon!)</p>
+<p>The category of types, and the hom pairing functor, are defined in <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html">category_theory/types.lean</a>.</p>
 <h2>Notation</h2>
 <h3>Categories</h3>
 <p>We use the <code>⟶</code> (<code>\hom</code>) arrow to denote sets of morphisms, as in <code>X ⟶ Y</code>.
