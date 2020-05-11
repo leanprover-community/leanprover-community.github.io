@@ -133,6 +133,8 @@ for key, data in bib.entries.items():
             url = eprint
     else:
         raise ValueError(f"Couldn't find a url for bib item {key}")
+    if url.startswith(r'\url'):
+        url = url[4:].strip('{}')
     if 'journal' in data.fields and data.fields['journal'] != 'CoRR':
         journal = data.fields['journal']
     elif 'booktitle' in data.fields:
