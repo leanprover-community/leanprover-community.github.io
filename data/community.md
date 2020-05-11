@@ -64,4 +64,4 @@ the Lean community gathers at specific events.
 The largest past events were:
 
 * [FoMM 2020](http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
-* [Lean together 2019](https://lean-forward.github.io/lean-together/2019/)
+* [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)

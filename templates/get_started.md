@@ -55,7 +55,7 @@ curious. But this is not necessary. You can head straight to
 installation instructions for your OS:
 [Debian/Ubuntu](install/debian.html),
 [Other linux](install/linux.html),
-[MacOS](install/macos.html) or
+[MacOS](install/macos.html), or
 [Windows](install/windows.html).
 
 After this installation procedure, it is crucial to read how to start or
