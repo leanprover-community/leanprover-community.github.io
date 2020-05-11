@@ -1,7 +1,7 @@
 # How to use calc
 
 `calc` is an environment -- so a "mode" like tactic mode, term mode and
-[conv mode](https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md). Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+[conv mode](conv.html). Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
 [section 4.3](https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs).
 
 Basic example usage:

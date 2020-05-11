@@ -3,7 +3,7 @@
 This document explains a more controlled installation procedure
 for Lean and mathlib on Linux distributions derived from Debian (Debian itself,
 Ubuntu, LMDE,...). There is a quicker way described in the main
-[install page](install_debian.md) but it requires more trust.
+[install page](install_debian.html) but it requires more trust.
 Of course you can get even more details about what is going on by
 reading the bash script that will be downloaded below:
 [elan_init](https://github.com/Kha/elan/blob/master/elan-init.sh).
@@ -43,4 +43,4 @@ reading the bash script that will be downloaded below:
   sudo pip3 install mathlibtools
   ```
 
-You can now read instructions about creating and working on [Lean projects](project.md)
+You can now read instructions about creating and working on [Lean projects](project.html)

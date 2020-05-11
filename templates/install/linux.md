@@ -1,6 +1,6 @@
 # Installing Lean and mathlib on Linux
 
-This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.md) for Debian and derived distribtions such as Ubuntu).
+This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distribtions such as Ubuntu).
 
 All commands below should be typed inside a terminal.
 
@@ -36,4 +36,4 @@ All commands below should be typed inside a terminal.
   sudo pip3 install mathlibtools
   ```
 
-You can now read instructions about creating and working on [Lean projects](project.md)
+You can now read instructions about creating and working on [Lean projects](project.html)

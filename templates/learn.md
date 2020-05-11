@@ -61,7 +61,7 @@ After using Lean for a while, you may want to learn how to write your
 own tactics. This is less documented than proof writing, but you can
 still have a look at the following resources.
 
-* The [tactic writing tutorial](https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md)
+* The [tactic writing tutorial](extras/tactic_writing.html)
   covers the basics and enables you to read more advanced sources, for instance
   the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
