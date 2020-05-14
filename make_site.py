@@ -5,6 +5,7 @@ import sys
 import subprocess
 from dataclasses import dataclass
 from typing import List
+import re
 
 import yaml
 from staticjinja import Site
@@ -13,13 +14,26 @@ import pybtex.database
 from mistletoe import Document, HTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
 
+class CustomHTMLRenderer(HTMLRenderer):
+    """
+    Override the default heading to provide links like in GitHub.
+    """
+    def render_heading(self, token) -> str:
+        template = '<h{level} id="{anchor}"><a href="#{anchor}">#</a> {inner}</h{level}>'
+        inner: str = self.render_inner(token)
+        # generate anchor following what github does
+        # See info and links at https://gist.github.com/asabaylus/3071099
+        anchor = inner.strip().lower()
+        anchor = re.sub('[^\w\- ]+', '', anchor).replace(' ', '-')
+        return template.format(level=token.level, inner=inner, anchor=anchor)
+
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
 
     def __init__(self, environment):
         super().__init__(environment)
         environment.extend(
-            markdowner=HTMLRenderer()
+            markdowner=CustomHTMLRenderer()
         )
 
     def parse(self, parser):
@@ -38,7 +52,7 @@ class MarkdownExtension(jinja2.ext.Extension):
     def _markdown_support(self, caller):
         return self.environment.markdowner.render(Document(caller())).strip()
 
-markdown_renderer = HTMLRenderer()
+markdown_renderer = CustomHTMLRenderer()
 
 def render_markdown(src: str) -> str:
     return markdown_renderer.render(Document(src))
