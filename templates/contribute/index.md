@@ -1,6 +1,6 @@
 # How to contribute to mathlib
 
-Mathlib principally uses the 
+Mathlib principally uses the
 [fork-and-branch workflow](https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/).
 
 Here are some tips and tricks
@@ -22,14 +22,6 @@ to make the process of contributing as smooth as possible.
    git checkout -b my_new_feature
    ```
    - See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
-
-
-## The nursery
-
-Finally, https://github.com/leanprover-community/mathlib-nursery
-makes it possible to have early access to work in progress.
-See [its README](https://github.com/leanprover-community/mathlib-nursery/blob/master/README.md)
-for more details.
 
 ## Caching compilation
 
