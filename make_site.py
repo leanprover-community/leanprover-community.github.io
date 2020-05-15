@@ -19,7 +19,7 @@ class CustomHTMLRenderer(HTMLRenderer):
     Override the default heading to provide links like in GitHub.
     """
     def render_heading(self, token) -> str:
-        template = '<h{level} id="{anchor}"><a href="#{anchor}">#</a> {inner}</h{level}>'
+        template = '<h{level} id="{anchor}" class="markdown-heading">{inner} <a class="hover-link" href="#{anchor}">#</a></h{level}>'
         inner: str = self.render_inner(token)
         # generate anchor following what github does
         # See info and links at https://gist.github.com/asabaylus/3071099
