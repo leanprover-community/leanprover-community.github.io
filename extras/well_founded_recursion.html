@@ -118,7 +118,7 @@
   </nav>
   <div class="container-sm mt-4">
 	  
-<h1>The equation compiler and using_well_founded</h1>
+<h1 id="the-equation-compiler-and-using_well_founded" class="markdown-heading">The equation compiler and using_well_founded <a class="hover-link" href="#the-equation-compiler-and-using_well_founded">#</a></h1>
 <p>To define functions and proofs recursively you can use the equation compiler, if you have a well founded relation on that type</p>
 <p>For example the definition of gcd on naturals uses well founded recursion</p>
 <pre><code class="language-lean">def gcd : nat → nat → nat
@@ -133,7 +133,7 @@
 <li>It has failed to prove the required inequality.</li>
 <li>It is not using the correct well founded relation.</li>
 </ol>
-<h2>Proving required inequality</h2>
+<h2 id="proving-required-inequality" class="markdown-heading">Proving required inequality <a class="hover-link" href="#proving-required-inequality">#</a></h2>
 <p>If we modify the gcd example above, by removing the <code>have</code>, we get an error.</p>
 <pre><code class="language-lean">def gcd : nat → nat → nat
 | 0        y := y
@@ -169,7 +169,7 @@ begin
   gcd (y % succ x) (succ x)
 end
 </code></pre>
-<h2>order of arguments</h2>
+<h2 id="order-of-arguments" class="markdown-heading">order of arguments <a class="hover-link" href="#order-of-arguments">#</a></h2>
 <p>Sometimes the default relation the equation compiler uses is not the correct one. For example swapping the order of x and y in the above example causes a failure</p>
 <pre><code class="language-lean">def gcd : nat → nat → nat
 | y 0        := y
@@ -205,7 +205,7 @@ end
 </code></pre>
 <p>This is because for some reason, in the first example, the equation compiler tries to use the always false relation.</p>
 <p>Conjecture : this is because the type of <code>h</code> depends on <code>n</code> and the equation compiler can only synthesize useful relations on non dependent products</p>
-<h2>using_well_founded rel_tac</h2>
+<h2 id="using_well_founded-rel_tac" class="markdown-heading">using_well_founded rel_tac <a class="hover-link" href="#using_well_founded-rel_tac">#</a></h2>
 <p>Sometimes you need to change the well founded relation to prove that a recursion is well founded. To do this you need a <code>has_well_founded</code> instance. This is a structure with two fields, a relation and a proof that this relation is well founded. The easiest way to define a well founded relation is using a function to the natural numbers. For example on multisets the relation <code>λ s t, card s &lt; card t</code> is a well founded relation.</p>
 <p>The following proof in <code>data.multiset</code> uses this relation.</p>
 <pre><code class="language-lean">@[elab_as_eliminator] lemma strong_induction_on {p : multiset α → Sort*} :
