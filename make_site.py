@@ -188,7 +188,7 @@ def render_site(target: Path, base_url: str, reloader=False):
 
     def get_contents(template):
         return { 'content': Path(template.filename).read_text(encoding='utf-8').replace('img/',
-            base_url+'/img/') }
+            base_url+'/img/'), 'name': template.name }
 
     def url(raw: str):
         return raw if raw.startswith('http') else base_url + raw
