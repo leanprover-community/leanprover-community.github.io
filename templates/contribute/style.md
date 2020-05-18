@@ -81,6 +81,8 @@ See [Thales600BC] for the original account on Xyzzyology.
 
 New bibliography entries should be added to `docs/references.bib`.
 
+See our [documentation requirements](doc.html) for more suggestions and examples.
+
 ### Structuring definitions and theorems ###
 
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
