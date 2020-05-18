@@ -1,8 +1,8 @@
-# Maths in lean : linear algebra
+# Maths in lean : Linear Algebra
 
-### semimodules, modules and vector spaces ###
+### Semimodules, Modules and Vector Spaces ###
 
-#### algebra.module ####
+#### `algebra.module` ####
 
 This file defines the typeclass `semimodule R M`, which gives an `R`-semimodule structure on the type `M`, and similarly `module R M` and `vector_space R M`.
 An additive commutative monoid `M` is a semimodule over the semiring `R` if there is a scalar multiplication `•` (`has_scalar.smul`) that satisfies the expected distributivity axioms for `+` (in `M` and `R`) and `*` (in `R`).
@@ -21,9 +21,9 @@ The file `linear_algebra.dimension` defines the dimension of a vector space as t
 Tre rank of a linear map is defined as the dimension of its image.
 Most definitions in this file are non-computable.
 
-### matrices ###
+### Matrices ###
 
-#### data.matrix.basic ###
+#### `data.matrix.basic` ####
 The type `matrix m n α` contains rectangular, `m` by `n` arrays of elements of the type `α`.
 It is an alias for the type `m → n → α`, under the assumptions `[fintype m] [fintype n]` stating that `m` and `n` have finitely many elements.
 A matrix type can be indexed over arbitrary `fintype`s.
@@ -53,9 +53,9 @@ The adjugate and for nonsingular matrices, the inverse is defined in `linear_alg
 The type `special_linear_group m R` is the group of `m` by `m` matrices with determinant `1`,
 and is defined in `linear_algebra.special_linear_group`.
 
-### linear maps and equivalences ###
+### Linear Maps and Equivalences ###
 
-#### linear_algebra.basic ####
+#### `linear_algebra.basic` ####
 
 The type `M →[R]ₗ M₂`, or `linear_map R M M₂`, represents `R`-linear maps from the `R`-module `M` to `M₂`.
 These are defined by their action on elements of `M`.
@@ -82,21 +82,21 @@ If you have an explicit basis for your maps, this equivalence allows you to do c
 
 The dual space, consisting of linear maps `M →[R]ₗ R`, is defined in `linear_algebra.dual`.
 
-### bilinear, sesquilinear and quadratic forms ###
+### Bilinear, Sesquilinear and Quadratic Forms ###
 
-#### linear_algebra.bilinear_form ####
+#### `linear_algebra.bilinear_form` ####
 
 For an `R`-module `M`, the type `bilin_form R M` is the type of maps `M → M → R` that are linear in both arguments.
 The equivalence between `bilin_form R M` and maps `M →ₗ[R] M →ₗ[R] R` that are linear in both arguments is called `bilin_linear_map_equiv`.
 A matrix `M` corresponds to a bilinear form that maps vectors `v` and `w` to `row v ⬝ M ⬝ col w`.
 The equivalence between `bilin_form R (n → R)` and `matrix n n R` is called `bilin_form_equiv_matrix`.
 
-#### linear_algebra.sesquilinear_form ####
+#### `linear_algebra.sesquilinear_form` ####
 
 For an `R`-module `M`, the type `sesq_form R M` is the type of maps `M → M → R` that are linear in the first argument and antilinear in the second.
 Antilinearity for `f : sesq M R` means there is an `I : R → R` such that `f x (a • y) = I a * f x y`, `I (x + y) = I x + I y` and `I (x * y) = I y * I x`.
 
-#### linear_algebra.quadratic_form ####
+#### `linear_algebra.quadratic_form` ####
 
 For an `R`-module `M`, the type `quadratic_form R M` is the type of maps `f : M → R` such that `f (a • x) = a * a * f x` and `λ x y, f (x + y) - f x - f y` is a bilinear map.
 
