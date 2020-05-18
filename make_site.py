@@ -1,11 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from pathlib import Path
 import sys
 import subprocess
 from dataclasses import dataclass
-from typing import List
+from typing import List, Mapping, Optional
 import re
+import markdown
 
 import yaml
 from staticjinja import Site
@@ -113,6 +114,25 @@ class Maintainer:
 with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
     maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
 
+@dataclass
+class HundredTheorem:
+    number: str
+    title: str
+    decl: Optional[str] = None
+    decls: Optional[List[str]] = None
+    author: Optional[str] = None
+    links: Optional[Mapping[str, str]] = None
+    note: Optional[str] = None
+
+with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
+    hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+    for h in hundred_theorems:
+        if h.note:
+            h.note = markdown.markdown(h.note)
+        if h.decl:
+            assert not h.decls
+            h.decls = [h.decl]
+
 bib = pybtex.database.parse_file('lean.bib')
 
 about_lean_dic = {}
@@ -213,6 +233,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                                 'what_is': what_is,
                                 'formalizations': formalizations}),
                 ('papers.html', {'paper_lists': paper_lists}),
+                ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
                 ('.*.md', get_contents)
