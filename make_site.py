@@ -6,7 +6,6 @@ import subprocess
 from dataclasses import dataclass
 from typing import List, Mapping, Optional
 import re
-import markdown
 
 import yaml
 from staticjinja import Site
@@ -127,8 +126,6 @@ class HundredTheorem:
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
-        if h.note:
-            h.note = markdown.markdown(h.note)
         if h.decl:
             assert not h.decls
             h.decls = [h.decl]
