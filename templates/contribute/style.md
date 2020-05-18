@@ -77,7 +77,6 @@ two main concepts in the theory of xyzzyology.
 ## References
 
 See [Thales600BC] for the original account on Xyzzyology.
-```
 
 ### Structuring definitions and theorems ###
 
