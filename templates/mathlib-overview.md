@@ -12,6 +12,8 @@ Lie algebras (definition and basic properties).
 Fields: minimal polynomials, finite extensions, algebraic extensions, splitting fields, perfect closure, finite fields.
 Vector spaces, bases, finite-dimensional spaces, matrices, linear maps, dual spaces, bilinear and sesquilinear forms.
 
+[See here for more details information about linear algebra in mathlib](theories/linear_algebra.html).
+
 ### Number theory
 
 The [naturals](theories/naturals.html), the integers, the rationals.
@@ -53,3 +55,4 @@ Ordinals and cardinals. A model of ZFC.
 Continued fractions. Turing machines, the Halting problem.
 Conway games. The Fibonacci sequence. The hyperreals. Cubing a cube.
 
+[See here for more detailed information about set-like objects in mathlib](theories/sets.html).
