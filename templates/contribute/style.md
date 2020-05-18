@@ -39,12 +39,49 @@ break. You can also open namespaces in the same block.
 Copyright (c) 2015 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Joe Cool.
-
-A theory of everything.
 -/
+
 import data.nat algebra.group
 open nat eq.ops
 ```
+(Tip: In VScode, you can write `copy<TAB>`
+which expands to a skeleton of the copyright header.)
+
+### Module docstrings
+
+After the copyright header and the imports,
+please add a module docstring containing
+
+- a title of the file,
+- a summary of the contents (the main definitions and theorems, proof techniques, etc…)
+- notation that has been used in the file (if any)
+- references to the literature (if any)
+
+In total, the module docstring should look something like this:
+```
+# Foos and bars
+
+In this file we introduce `foo` and `bar`,
+two main concepts in the theory of xyzzyology.
+
+## Main results
+
+- `exists_foo`: the main existence theorem of `foo`s.
+- `bar_of_foo`: a construction of a `bar`, given a `foo`.
+- `bar_eq`    : the main classification theorem of `bar`s.
+
+## Notation
+
+ - `|_|` : The barrification operator, see `bar_of_foo`.
+
+## References
+
+See [Thales600BC] for the original account on Xyzzyology.
+```
+
+New bibliography entries should be added to `docs/references.bib`.
+
+See our [documentation requirements](doc.html) for more suggestions and examples.
 
 ### Structuring definitions and theorems ###
 
