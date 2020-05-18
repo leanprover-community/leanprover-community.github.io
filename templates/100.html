@@ -6,11 +6,10 @@
         <h1>100 theorems</h1>
         
         <p><a href="https://www.cs.ru.nl/~freek/">Freek Wiedijk</a> maintains <a href="https://www.cs.ru.nl/~freek/100/">a list</a> tracking progress of theorem provers in formalizing 100 classic theorems in mathematics as a way of comparing prominent theorem provers.
-        Currently {{hundred_theorems|rejectattr('author', 'none')|list|length}} of them are formalized in Lean:</p>
+        Currently {{hundred_theorems|selectattr('author')|list|length}} of them are formalized in Lean:</p>
 
   <div class="list-group">
-    {% for theorem in hundred_theorems %}
-    {% if theorem.link or theorem.decl or theorem.author or theorem.note %}
+    {% for theorem in hundred_theorems|selectattr('author') %}
     <div class="list-group-item">
         <h5 class="card-title markdown-heading" id="{{ theorem.number }}">{{ theorem.number }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.number }}">#</a></h5>
         <h6 class="card-title">Author: {{ theorem.author }}</h6>
@@ -18,7 +17,6 @@
         {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
         {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
     </div>
-    {% endif %}
     {% endfor %}
   </div>
 

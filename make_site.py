@@ -231,6 +231,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                                 'formalizations': formalizations}),
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
+                ('100-missing.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
                 ('.*.md', get_contents)
