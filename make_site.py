@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import subprocess
 from dataclasses import dataclass
-from typing import List
+from typing import List, Mapping, Optional
 import re
 import markdown
 
@@ -118,17 +118,20 @@ with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
 class HundredTheorem:
     number: str
     title: str
-    decl: List[str] = ""
-    author: str = ""
-    link: str = ""
-    note: str = ""
+    decl: Optional[str] = None
+    decls: Optional[List[str]] = None
+    author: Optional[str] = None
+    links: Optional[Mapping[str, str]] = None
+    note: Optional[str] = None
 
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
-        h.note = markdown.markdown(h.note)
-        if h.decl and isinstance(h.decl, str):
-            h.decl = [h.decl]
+        if h.note:
+            h.note = markdown.markdown(h.note)
+        if h.decl:
+            assert not h.decls
+            h.decls = [h.decl]
 
 bib = pybtex.database.parse_file('lean.bib')
 
