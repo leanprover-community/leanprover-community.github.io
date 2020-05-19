@@ -44,8 +44,9 @@ Author: Joe Cool.
 import data.nat algebra.group
 open nat eq.ops
 ```
-(Tip: In VScode, you can write `copy<TAB>`
-which expands to a skeleton of the copyright header.)
+
+(Tip: If you're editing mathlib in VS Code, you can write `copy`
+and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
 
 ### Module docstrings
 
