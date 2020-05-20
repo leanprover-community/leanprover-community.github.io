@@ -98,8 +98,8 @@ The equivalence between `bilin_form R (n → R)` and `matrix n n R` is called [`
 
 #### [`linear_algebra.sesquilinear_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html) ####
 
-For an `R`-module `M`, the type `sesq_form R M` is the type of maps `M → M → R` that are linear in the first argument and antilinear in the second.
-Antilinearity for `f : sesq M R` means there is an `I : R → R` such that `f x (a • y) = I a * f x y`, `I (x + y) = I x + I y` and `I (x * y) = I y * I x`.
+For an `R`-module `M` and `I : ring_anti_equiv R R`, the type `sesq_form R M I` is the type of maps `M → M → R` that are linear in the first argument and that in the second argument are antilinear with respect to an `R`-[antiautomorphism](https://leanprover-community.github.io/mathlib_docs/ring_theory/maps.html#ring_anti_equiv) `I`.
+Antilinearity of `f` with respect to a ring antiautomorphism `I` means the following equations hold: `f x (a • y) = I a * f x y`, `I 1 = 1`, `I (x + y) = I x + I y` and `I (x * y) = I y * I x`.
 
 #### [`linear_algebra.quadratic_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html) ####
 
