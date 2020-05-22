@@ -14,10 +14,11 @@ to make the process of contributing as smooth as possible.
    - The [documentation guidelines](doc.html).
 3. Create a pull request from a feature branch on your personal fork,
    as explained in the link above, or from a branch of the main repository if you have commit access (you can ask for access on Zulip).
-   If you use an external repository, please make sure that repository has GitHub Actions enabled.
+   - The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
+   - If you use an external repository, **please make sure that repository has GitHub Actions enabled**.
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
 5. You can use `leanproject get-cache` to fetch `.olean` binaries.
-   ```
+   ```text
    leanproject get-cache
    git checkout -b my_new_feature
    ```
