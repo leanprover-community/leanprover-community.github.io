@@ -1,9 +1,11 @@
 # Documentation style
 
-We are in the process of implementing new documentation requirements for mathlib. All future pull
-requests must meet the following standards. See
+All pull requests must meet the following documentation standards. See
 [the `doc-gen` repo](https://github.com/leanprover-community/doc-gen) for information about the
 [automatically generated doc pages](https://leanprover-community.github.io/mathlib_docs/).
+
+You can preview the markdown processing of a GitHub page or pull request
+using the [Lean doc preview page](https://observablehq.com/@bryangingechen/github-lean-doc-preview).
 
 ## Header comment
 
