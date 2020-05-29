@@ -136,18 +136,24 @@ class Overview:
     depth: int
     title: str
     decl: Optional[str] = None
+    parent: Optional['Overview'] = None
     children: List['Overview'] = field(default_factory=list)
 
     @classmethod
-    def from_node(cls, identifier: str, title: str, children, depth: int) -> 'Overview':
-        return cls(
+    def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
+        node = cls(
                 id=identifier,
                 depth=depth,
                 title=title,
                 decl=children if not isinstance(children, dict) else None,
-                children=[cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1) for index, (title, subchildren) in enumerate(children.items())]
-                if isinstance(children, dict) else []
-        )
+                parent=parent,
+                children=[])
+
+        if isinstance(children, dict):
+            node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
+
+        return node
+
 
     @classmethod
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
