@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-* `pip install staticjinja PyYaml mistletoe pybtex pylatexenc`
+* `pip install -r requirements.txt`
 
 Building the bibliography requires [`bibtool`](https://github.com/ge-ne/bibtool).
 
