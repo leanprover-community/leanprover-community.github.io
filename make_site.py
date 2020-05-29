@@ -3,7 +3,7 @@
 from pathlib import Path
 import sys
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Mapping, Optional
 import re
 
@@ -130,6 +130,32 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
             assert not h.decls
             h.decls = [h.decl]
 
+@dataclass
+class Overview:
+    id: str
+    depth: int
+    title: str
+    decl: Optional[str] = None
+    children: List['Overview'] = field(default_factory=list)
+
+    @classmethod
+    def from_node(cls, identifier: str, title: str, children, depth: int) -> 'Overview':
+        return cls(
+                id=identifier,
+                depth=depth,
+                title=title,
+                decl=children if not isinstance(children, dict) else None,
+                children=[cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1) for index, (title, subchildren) in enumerate(children.items())]
+                if isinstance(children, dict) else []
+        )
+
+    @classmethod
+    def from_top_level(cls, index: int, title: str, children) -> 'Overview':
+        return cls.from_node(f"{index}", title, children, 0)
+
+with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
+    overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+
 bib = pybtex.database.parse_file('lean.bib')
 
 about_lean_dic = {}
@@ -234,6 +260,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
+                ('overview.html', {'overviews': overviews}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },

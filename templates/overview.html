@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% block content %}
+
+  <div class="row mt-3">
+    <div class="col">
+        <h1>Overview of multiple mathematical statements in mathlib</h1>
+        
+        <p>This page tracks usual mathematical theories that are or not are in mathlib currently.</p>
+
+  <div class="list-group">
+    {% for statement in overviews recursive %}
+       <div class="list-group-item">
+          <h5 class="card-title markdown-heading" id="{{ statement.id }}">{{ statement.title }}
+                <a class="hover-link" href="#{{ statement.id }}">#</a></h5> 
+          {% if not statement.children and not statement.decl %}
+          <h6 class="card-title">This is currently not in mathlib! You can help us to fix this!</h6>
+          {% elif not statement.children %}
+          <h6 class="card-title"><a href="/mathlib_docs/{{ statement.decl }}">See it in mathlib documentation</a></h6>
+          {% endif %}
+          {% if statement.children %}
+                  {{ loop(statement.children) }}
+          {% endif %}
+       </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
