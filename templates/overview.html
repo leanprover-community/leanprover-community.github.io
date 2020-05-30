@@ -19,6 +19,7 @@
 
                 <div id="overview-accordion">
                         {% for statement in overviews recursive %}
+                        {% if statement.children %}
                         <div class="card{% if statement.isComplete %} statement-done {%else %} statement-todo {% endif %}">
                                 <div class="card-header" id="heading-{{statement.id}}">
                                         <h5 class="card-title markdown-heading" id="{{ statement.id }}">
@@ -27,22 +28,20 @@
                                                 </a>
                                                 <a class="hover-link" href="#{{ statement.id }}">#</a>
                                         </h5>
-                                        {% if statement.children %}<div id="collapse-{{statement.id}}" class="collapse show" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">{% endif %}
+                                        <div id="collapse-{{statement.id}}" class="collapse show" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">
                                                 <div class="card-body">
-                                                        {% if statement.children %}<div id="overview-accordion-{{statement.id}}"> {% endif %}
-                                                                {% if not statement.children and not statement.decl %}
-                                                                <h6 class="card-title">This is currently not in mathlib! You can help us to fix this!</h6>
-                                                                {% elif not statement.children %}
-                                                                <h6 class="card-title"><a href="/mathlib_docs/{{ statement.decl }}">See it in mathlib documentation</a></h6>
-                                                                {% endif %}
-                                                                {% if statement.children %}
+                                                        <div id="overview-accordion-{{statement.id}}">
                                                                 {{ loop(statement.children) }}
-                                                                {% endif %}
-                                                        {% if statement.children %} </div> {% endif %}
+                                                        </div>
                                                 </div>
-                                                {% if statement.children %}</div>{% endif %}
+                                        </div>
                                 </div>
                         </div>
+                        {% else %}
+                        <span class="{%if statement.isComplete %} statement-done {% else %} statement-todo {% endif %}">
+                                <a {% if statement.decl %} href="//mathlib_docs/{{ statement.decl }}" {% endif %}>{{ statement.title }}</a>{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
+                        </span>
+                        {% endif %}
                         {% endfor %}
                 </div>
         </div>
