@@ -27,9 +27,9 @@
                                                 </a>
                                                 <a class="hover-link" href="#{{ statement.id }}">#</a>
                                         </h5>
-                                        <div id="collapse-{{statement.id}}" class="collapse show" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">
+                                        {% if statement.children %}<div id="collapse-{{statement.id}}" class="collapse show" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">{% endif %}
                                                 <div class="card-body">
-                                                        <div id="overview-accordion-{{statement.id}}">
+                                                        {% if statement.children %}<div id="overview-accordion-{{statement.id}}"> {% endif %}
                                                                 {% if not statement.children and not statement.decl %}
                                                                 <h6 class="card-title">This is currently not in mathlib! You can help us to fix this!</h6>
                                                                 {% elif not statement.children %}
@@ -38,9 +38,9 @@
                                                                 {% if statement.children %}
                                                                 {{ loop(statement.children) }}
                                                                 {% endif %}
-                                                        </div>
+                                                        {% if statement.children %} </div> {% endif %}
                                                 </div>
-                                        </div>
+                                                {% if statement.children %}</div>{% endif %}
                                 </div>
                         </div>
                         {% endfor %}
