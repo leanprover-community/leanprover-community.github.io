@@ -7,9 +7,19 @@
 
                 <p>This page tracks usual mathematical theories that are or not are in mathlib currently.</p>
 
+                <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-todo" checked>
+                        <label class="custom-control-label" for="switch-todo">Show todo</label>
+                </div>
+
+                <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-done" checked>
+                        <label class="custom-control-label" for="switch-done">Show done</label>
+                </div>
+
                 <div id="overview-accordion">
                         {% for statement in overviews recursive %}
-                        <div class="card">
+                        <div class="card{% if statement.isComplete %} statement-done {%else %} statement-todo {% endif %}">
                                 <div class="card-header" id="heading-{{statement.id}}">
                                         <h5 class="card-title markdown-heading" id="{{ statement.id }}">
                                                 <a role="button" data-toggle="collapse" href="#collapse-{{statement.id}}" aria-expanded="true" aria-controls="collapse-{{statement.id}}">
@@ -37,4 +47,24 @@
                 </div>
         </div>
 </div>
+{% endblock %}
+{% block extrajs %}
+        <script>
+                $(document).ready(function () {
+                        const $switchTodo = $('#switch-todo');
+                        const $switchDone = $('#switch-done');
+
+                        const $todoStatements = $('.statement-todo');
+                        const $doneStatements = $('.statement-done');
+
+                        function setSwitchToggleEventListener ($checkbox, $statements) {
+                                $checkbox.click(function () {
+                                        $statements.toggle();
+                                });
+                        }
+
+                        setSwitchToggleEventListener($switchTodo, $todoStatements);
+                        setSwitchToggleEventListener($switchDone, $doneStatements);
+                })
+        </script>
 {% endblock %}

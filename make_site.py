@@ -137,6 +137,7 @@ class Overview:
     title: str
     decl: Optional[str] = None
     parent: Optional['Overview'] = None
+    isComplete: bool = False # it means that at least one leaf children has a decl.
     children: List['Overview'] = field(default_factory=list)
 
     @classmethod
@@ -145,13 +146,14 @@ class Overview:
                 id=identifier,
                 depth=depth,
                 title=title,
-                decl=children if not isinstance(children, dict) else None,
+                decl=(children or '').strip() if not isinstance(children, dict) else None,
                 parent=parent,
                 children=[])
 
         if isinstance(children, dict):
             node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
 
+        node.isComplete = any(n.isComplete for n in node.children) if node.children else bool(node.decl)
         return node
 
 
