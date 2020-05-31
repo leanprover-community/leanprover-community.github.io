@@ -59,7 +59,7 @@ Open a terminal.
 
 * Go the the directory where you would like this package to live.
 
-* Run `leanproject get tutorials`. (This is just a shortcut for `leanproject get https://github.com/leanprover-community/tutorials.git`. You can use `leanproject get <git-url>` on any project which has a top-level file `leanpkg.toml` and top-level directory `src/`.)
+* Run `leanproject get tutorials`. (This is just a shortcut for `leanproject get leanprover-community/tutorials`, which is again a shortcut for `leanproject get https://github.com/leanprover-community/tutorials.git`. You can use `leanproject get <git-url>` on any git repo and `leanproject get <github-username>/< project-name>` for any GitHub repo. This will succeed as long as the repo has a top-level file `leanpkg.toml`.)
 
 * Launch VS Code, either through your application menu or by typing
   `code tutorials`. (MacOS users need to take a one-off
