@@ -3,20 +3,28 @@
 
 <div class="row mt-3">
         <div class="col">
-                <h1>Undergraduate mathematics in mathlib</h1>
+                <h1>Missing undergraduate mathematics in mathlib</h1>
 
                 <p>
 				This gives pointers to undergraduate maths topics that are
-				currently covered in mathlib.
+				currently missing in mathlib.
 				There is also a page listing undergraduate maths topics
 				that are 
-				<a href="undergrad_todo.html">not yet in mathlib</a>.
+				<a href="undergrad.html">already in mathlib</a>.
 				</p>
 
+				<p>If you want to work on an item from this list then
+				you should first check the 
+				<a href="https://github.com/leanprover-community/mathlib/pulls">pull requests list</a>
+				to see whether it is already coming, then the 
+				<a href="https://github.com/leanprover-community/mathlib/issues">issues list</a>
+				to see whether it is discussed there, and finally talk
+				about this idea on <a href="https://leanprover.zulipchat.com/">Zulip</a>.
+				<p/>
 
                 <div id="overview-accordion" class="accordion">
                         {% for statement in overviews recursive %}
-                        {% if statement.children and statement.is_nonempty%}
+						{% if statement.children and statement.has_missing_child %}
                         <div class="card statement-done">
                                 <div class="card-header" id="heading-{{statement.id}}">
                                         <h5 class="card-title markdown-heading" id="{{ statement.id }}">
@@ -35,9 +43,9 @@
                                 </div>
                         </div>
                         {% else %}
-						{% if statement.is_nonempty %}
+                        {% if not statement.is_nonempty %}
                         <span class="statement-done">
-                                <a {% if statement.decl %} href="/mathlib_docs/{{ statement.decl }}" {% endif %}>{{ statement.title }}</a>{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
+                                {{ statement.title }}{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
                         </span>
                         {% endif %}
                         {% endif %}

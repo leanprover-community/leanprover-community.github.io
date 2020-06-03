@@ -24,7 +24,7 @@ class CustomHTMLRenderer(HTMLRenderer):
         # generate anchor following what github does
         # See info and links at https://gist.github.com/asabaylus/3071099
         anchor = inner.strip().lower()
-        anchor = re.sub('[^\w\- ]+', '', anchor).replace(' ', '-')
+        anchor = re.sub(r'[^\w\- ]+', '', anchor).replace(' ', '-')
         return template.format(level=token.level, inner=inner, anchor=anchor)
 
 class MarkdownExtension(jinja2.ext.Extension):
@@ -137,8 +137,21 @@ class Overview:
     title: str
     decl: Optional[str] = None
     parent: Optional['Overview'] = None
-    isComplete: bool = False # it means that at least one leaf children has a decl.
     children: List['Overview'] = field(default_factory=list)
+
+    @property
+    def has_missing_child(self) -> bool:
+        if self.children:
+            return any(child.has_missing_child for child in self.children)
+        else:
+            return not bool(self.decl)
+
+    @property
+    def is_nonempty(self) -> bool:
+        if self.children:
+            return any(child.is_nonempty for child in self.children)
+        else:
+            return bool(self.decl)
 
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
@@ -153,7 +166,6 @@ class Overview:
         if isinstance(children, dict):
             node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
 
-        node.isComplete = any(n.isComplete for n in node.children) if node.children else bool(node.decl)
         return node
 
 
@@ -269,6 +281,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
                 ('undergrad.html', {'overviews': overviews}),
+                ('undergrad_todo.html', {'overviews': overviews}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
