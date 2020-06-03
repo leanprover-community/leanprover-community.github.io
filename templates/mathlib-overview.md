@@ -2,6 +2,8 @@
 
 Note that mathlib is currently being actively developed, and new things tend to appear on almost a weekly basis. In particular, the list below might get out of date very quickly. This page was last updated on 27th December 2019.
 
+We have a specific page listing topics in [undergraduate mathematics](undergrad.html).
+
 
 ### Algebra
 
