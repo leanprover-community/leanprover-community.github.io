@@ -22,6 +22,14 @@ learning.
   already encountered the definition of limits of sequences of real
   numbers.
 
+* A brand new resource that is still under construction is
+  *Mathematics in Lean*.
+  It can be [read online](https://leanprover-community.github.io/mathematics_in_lean/),
+  or downloaded [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
+  but it is really meant to be used in VSCode, doing exercises
+  on the fly (see the [instructions](https://leanprover-community.github.io/mathematics_in_lean/introduction.html#getting-started)).
+  It currently covers roughly the same ground as the tutorials prooject.
+
 * Once you know the basics, you can also learn by solving Lean puzzles
   on [Codewars](https://www.codewars.com/?language=lean).
 
