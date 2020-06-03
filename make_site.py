@@ -268,7 +268,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
-                ('overview.html', {'overviews': overviews}),
+                ('undergrad.html', {'overviews': overviews}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
