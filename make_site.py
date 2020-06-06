@@ -13,6 +13,8 @@ import jinja2.ext
 import pybtex.database
 from mistletoe import Document, HTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
+import urllib.request
+import json
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -119,16 +121,40 @@ class HundredTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    decl_links : Optional[List[List[str]]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+    statement: Optional[str] = None
+
+urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json', 'export_db.json')
+with open('export_db.json', 'r', encoding='utf-8') as json_file:
+    decl_loc_map = json.load(json_file, strict=False)
+    json_file.close()
+
+def undecorate_arg(arg):
+    # return re.sub(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', r'\3', arg)
+    return ''.join(
+        match[4] if match[0] == '' else
+        match[1] + match[2] + match[3]
+        for match in re.findall(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', arg))
 
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
         if h.decl:
             assert not h.decls
-            h.decls = [h.decl]
+            decl_name = h.decl.split('#')[-1]
+            h.decl_links = [[decl_name, decl_loc_map[decl_name]['docs_link'], decl_loc_map[decl_name]['src_link']]]
+            if not h.statement:
+                args = [undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']]
+                tp = undecorate_arg(decl_loc_map[decl_name]['type'])
+                h.statement = decl_name + ' ' + ' '.join(args) + ' : ' + tp
+        elif h.decls:
+            h.decl_links = [[decl.split('#')[-1], decl_loc_map[decl.split('#')[-1]]['docs_link'], decl_loc_map[decl.split('#')[-1]]['src_link']] for decl in h.decls]
+        else:
+            h.decl_links = []
+
 
 @dataclass
 class Overview:
