@@ -289,6 +289,8 @@ def render_site(target: Path, base_url: str, reloader=False):
 
     for folder in ['css', 'js', 'img', 'papers']:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
+    subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
+    
     site.render(use_reloader=reloader)
 
 if __name__ == '__main__':
