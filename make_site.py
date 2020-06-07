@@ -15,6 +15,7 @@ from mistletoe import Document, HTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
+import gzip
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -116,21 +117,32 @@ with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
     maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
 
 @dataclass
+class DocDecl:
+    name: str
+    args: List[str]
+    tp: str
+    docs_link: str 
+    src_link: str
+
+@dataclass
 class HundredTheorem:
     number: str
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
-    decl_links : Optional[List[List[str]]] = None
+    doc_decls: Optional[List[DocDecl]] = None
+    #decl_links : Optional[List[List[str]]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
-    statement: Optional[str] = None
+    #statement: Optional[str] = None
 
-urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json', 'export_db.json')
-with open('export_db.json', 'r', encoding='utf-8') as json_file:
-    decl_loc_map = json.load(json_file, strict=False)
+urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json.gz', 'export_db.json.gz')
+with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
+    json_bytes = json_file.read()
     json_file.close()
+
+decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
 
 def undecorate_arg(arg):
     # return re.sub(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', r'\3', arg)
@@ -144,16 +156,27 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     for h in hundred_theorems:
         if h.decl:
             assert not h.decls
-            decl_name = h.decl.split('#')[-1]
-            h.decl_links = [[decl_name, decl_loc_map[decl_name]['docs_link'], decl_loc_map[decl_name]['src_link']]]
-            if not h.statement:
-                args = [undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']]
-                tp = undecorate_arg(decl_loc_map[decl_name]['type'])
-                h.statement = decl_name + ' ' + ' '.join(args) + ' : ' + tp
-        elif h.decls:
-            h.decl_links = [[decl.split('#')[-1], decl_loc_map[decl.split('#')[-1]]['docs_link'], decl_loc_map[decl.split('#')[-1]]['src_link']] for decl in h.decls]
+            h.decls = [h.decl]
+            # decl_name = h.decl.split('#')[-1]
+            # h.doc_decls = [DocDecl(
+            #     name=decl_name, 
+            #     args=[undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']],
+            #     tp=undecorate_arg(decl_loc_map[decl_name]['type']),
+            #     docs_link=decl_loc_map[decl_name]['docs_link'],
+            #     src_link=decl_loc_map[decl_name]['src_link'])]
+        if h.decls:
+            doc_decls = []
+            for decl in h.decls:
+                decl_name = decl.split('#')[-1]
+                doc_decls.append(DocDecl(
+                    name=decl_name, 
+                    args=[undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']],
+                    tp=undecorate_arg(decl_loc_map[decl_name]['type']),
+                    docs_link=decl_loc_map[decl_name]['docs_link'],
+                    src_link=decl_loc_map[decl_name]['src_link']))
+            h.doc_decls = doc_decls
         else:
-            h.decl_links = []
+            h.doc_decls = []
 
 
 @dataclass
