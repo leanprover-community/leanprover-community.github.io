@@ -266,12 +266,16 @@ At present these are not uniform across mathlib.
 
 ### Extensionality ###
 
-A lemma of the form `(∀ a, a ∈ s₁ ↔ a ∈ s₂) → s₁ = s₂` should be named `.ext`,
+A lemma of the form `(∀ x, f x = g x) → f = g` should be named `.ext`,
 and labelled with the `@[ext]` attribute.
 Often this type of lemma can be generated automatically by putting the
 `@[ext]` attribute on a structure.
+(However an automatically generated lemma will always be written in terms
+of the structure projections, and often there is a better statement,
+e.g. using coercions, that should be written by hand then marked with `@[ext]`.)
 
-A lemma of the form `s₁ = s₂ ↔ ∀ a, a ∈ s₁ ↔ a ∈ s₂` should be named `.ext_iff`.
+
+A lemma of the form `f = g ↔ ∀ x, f x = g x` should be named `.ext_iff`.
 
 ### Injectivity ###
 
