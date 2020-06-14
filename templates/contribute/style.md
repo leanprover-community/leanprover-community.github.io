@@ -30,9 +30,10 @@ easier to read, especially on a small screen or in a small window.
 ### Header and imports ###
 
 The file header should contain copyright information, a list of all
-the authors who have worked on the file, and a description of the
-contents. Do all `import`s right after the header, without a line
-break. You can also open namespaces in the same block.
+the authors who have made significant contributions to the file, and
+a description of the contents. Do all `import`s right after the header,
+without a line break, on separate lines. You can also open namespaces
+in the same block.
 
 ```lean
 /-
@@ -41,12 +42,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Joe Cool.
 -/
 
-import data.nat algebra.group
+import data.nat
+import algebra.group
 open nat eq.ops
 ```
 
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
 and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
+
+Regarding the list of authors: we don't have strict rules on what
+contributions qualify for inclusion there. The general idea is that
+the people listed there should be the ones we would reach out to if we had
+questions about the design or development of the Lean code.
 
 ### Module docstrings
 
@@ -59,7 +66,7 @@ please add a module docstring containing
 - references to the literature (if any)
 
 In total, the module docstring should look something like this:
-```
+```markdown
 # Foos and bars
 
 In this file we introduce `foo` and `bar`,
