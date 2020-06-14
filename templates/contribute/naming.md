@@ -259,6 +259,40 @@ check le_of_mul_le_mul_left
 check le_of_mul_le_mul_right
 ```
 
+## Naming of structural lemmas ##
+
+We are trying to standardize certain naming patterns for structural lemmas.
+At present these are not uniform across mathlib.
+
+### Extensionality ###
+
+A lemma of the form `(∀ a, a ∈ s₁ ↔ a ∈ s₂) → s₁ = s₂` should be named `.ext`,
+and labelled with the `@[ext]` attribute.
+Often this type of lemma can be generated automatically by putting the
+`@[ext]` attribute on a structure.
+
+A lemma of the form `s₁ = s₂ ↔ ∀ a, a ∈ s₁ ↔ a ∈ s₂` should be named `.ext_iff`.
+
+### Injectivity ###
+
+Injectivity lemmas should usually be written as bidirectional implications,
+e.g. as `f x = f y ↔ x = y`. Such lemmas should be named `f_inj`
+(although if they are in an appropriate namespace `.inj` is good too).
+Bidirectional injectivity lemmas are often good candidates for `@[simp]`.
+There are still many unidirectional implications named `inj` in mathlib,
+and it is reasonable to update and replace these as you come across them.
+
+Note however that constructors for inductive types have
+automatically generated unidirectional implications, named `.inj`,
+and there is no intention to change this.
+When such an automatically generated lemma already exists,
+and a bidirectional lemma is needed, it may be named `.inj_iff`.
+
+Injectivity lemmas written in terms of an `injective f` conclusion
+should instead use the full word `injective`, typically as `f_injective`.
+The form `injective_f` still appears often in mathlib.
+
+
 ------
 Copyright (c) 2016 Jeremy Avigad. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
