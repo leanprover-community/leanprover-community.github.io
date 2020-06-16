@@ -131,11 +131,9 @@ class HundredTheorem:
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
     doc_decls: Optional[List[DocDecl]] = None
-    #decl_links : Optional[List[List[str]]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
-    #statement: Optional[str] = None
 
 urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json.gz', 'export_db.json.gz')
 with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
@@ -145,7 +143,6 @@ with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
 decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
 
 def undecorate_arg(arg):
-    # return re.sub(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', r'\3', arg)
     return ''.join(
         match[4] if match[0] == '' else
         match[1] + match[2] + match[3]
@@ -157,23 +154,21 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
         if h.decl:
             assert not h.decls
             h.decls = [h.decl]
-            # decl_name = h.decl.split('#')[-1]
-            # h.doc_decls = [DocDecl(
-            #     name=decl_name, 
-            #     args=[undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']],
-            #     tp=undecorate_arg(decl_loc_map[decl_name]['type']),
-            #     docs_link=decl_loc_map[decl_name]['docs_link'],
-            #     src_link=decl_loc_map[decl_name]['src_link'])]
         if h.decls:
             doc_decls = []
             for decl in h.decls:
                 decl_name = decl.split('#')[-1]
+                try:
+                    decl_info = decl_loc_map[decl_name]
+                except KeyError:
+                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl_name}')
+                    continue
                 doc_decls.append(DocDecl(
                     name=decl_name, 
-                    args=[undecorate_arg(arg['arg']) for arg in decl_loc_map[decl_name]['args']],
-                    tp=undecorate_arg(decl_loc_map[decl_name]['type']),
-                    docs_link=decl_loc_map[decl_name]['docs_link'],
-                    src_link=decl_loc_map[decl_name]['src_link']))
+                    args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
+                    tp=undecorate_arg(decl_info['type']),
+                    docs_link=decl_info['docs_link'],
+                    src_link=decl_info['src_link']))
             h.doc_decls = doc_decls
         else:
             h.doc_decls = []
