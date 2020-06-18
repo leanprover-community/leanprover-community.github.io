@@ -363,6 +363,33 @@ check add_le_add_right
 check le_of_mul_le_mul_left
 check le_of_mul_le_mul_right
 </code></pre>
+<h2 id="naming-of-structural-lemmas" class="markdown-heading">Naming of structural lemmas <a class="hover-link" href="#naming-of-structural-lemmas">#</a></h2>
+<p>We are trying to standardize certain naming patterns for structural lemmas.
+At present these are not uniform across mathlib.</p>
+<h3 id="extensionality" class="markdown-heading">Extensionality <a class="hover-link" href="#extensionality">#</a></h3>
+<p>A lemma of the form <code>(∀ x, f x = g x) → f = g</code> should be named <code>.ext</code>,
+and labelled with the <code>@[ext]</code> attribute.
+Often this type of lemma can be generated automatically by putting the
+<code>@[ext]</code> attribute on a structure.
+(However an automatically generated lemma will always be written in terms
+of the structure projections, and often there is a better statement,
+e.g. using coercions, that should be written by hand then marked with <code>@[ext]</code>.)</p>
+<p>A lemma of the form <code>f = g ↔ ∀ x, f x = g x</code> should be named <code>.ext_iff</code>.</p>
+<h3 id="injectivity" class="markdown-heading">Injectivity <a class="hover-link" href="#injectivity">#</a></h3>
+<p>Injectivity lemmas should usually be written as bidirectional implications,
+e.g. as <code>f x = f y ↔ x = y</code>. Such lemmas should be named <code>f_inj</code>
+(although if they are in an appropriate namespace <code>.inj</code> is good too).
+Bidirectional injectivity lemmas are often good candidates for <code>@[simp]</code>.
+There are still many unidirectional implications named <code>inj</code> in mathlib,
+and it is reasonable to update and replace these as you come across them.</p>
+<p>Note however that constructors for inductive types have
+automatically generated unidirectional implications, named <code>.inj</code>,
+and there is no intention to change this.
+When such an automatically generated lemma already exists,
+and a bidirectional lemma is needed, it may be named <code>.inj_iff</code>.</p>
+<p>Injectivity lemmas written in terms of an <code>injective f</code> conclusion
+should instead use the full word <code>injective</code>, typically as <code>f_injective</code>.
+The form <code>injective_f</code> still appears often in mathlib.</p>
 <hr />
 <p>Copyright (c) 2016 Jeremy Avigad. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
