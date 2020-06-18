@@ -157,14 +157,13 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
         if h.decls:
             doc_decls = []
             for decl in h.decls:
-                decl_name = decl.split('#')[-1]
                 try:
-                    decl_info = decl_loc_map[decl_name]
+                    decl_info = decl_loc_map[decl]
                 except KeyError:
-                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl_name}')
+                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
                     continue
                 doc_decls.append(DocDecl(
-                    name=decl_name, 
+                    name=decl, 
                     args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
                     tp=undecorate_arg(decl_info['type']),
                     docs_link=decl_info['docs_link'],
