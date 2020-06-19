@@ -13,6 +13,9 @@ import jinja2.ext
 import pybtex.database
 from mistletoe import Document, HTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
+import urllib.request
+import json
+import gzip
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -114,14 +117,36 @@ with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
     maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
 
 @dataclass
+class DocDecl:
+    name: str
+    args: List[str]
+    tp: str
+    docs_link: str 
+    src_link: str
+
+@dataclass
 class HundredTheorem:
     number: str
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+
+urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json.gz', 'export_db.json.gz')
+with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
+    json_bytes = json_file.read()
+    json_file.close()
+
+decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
+
+def undecorate_arg(arg):
+    return ''.join(
+        match[4] if match[0] == '' else
+        match[1] + match[2] + match[3]
+        for match in re.findall(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', arg))
 
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
@@ -129,6 +154,24 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
         if h.decl:
             assert not h.decls
             h.decls = [h.decl]
+        if h.decls:
+            doc_decls = []
+            for decl in h.decls:
+                try:
+                    decl_info = decl_loc_map[decl]
+                except KeyError:
+                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                    continue
+                doc_decls.append(DocDecl(
+                    name=decl, 
+                    args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
+                    tp=undecorate_arg(decl_info['type']),
+                    docs_link=decl_info['docs_link'],
+                    src_link=decl_info['src_link']))
+            h.doc_decls = doc_decls
+        else:
+            h.doc_decls = []
+
 
 @dataclass
 class Overview:
