@@ -173,6 +173,15 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
             h.doc_decls = []
 
 
+def replace_link(name, id):
+    if name == '':
+        return name
+    else:
+        try:
+            return decl_loc_map[name]['docs_link']
+        except KeyError:
+            print(f'Error: overview item {id} refers to a nonexistent declaration {name}')
+
 @dataclass
 class Overview:
     id: str
@@ -202,7 +211,7 @@ class Overview:
                 id=identifier,
                 depth=depth,
                 title=title,
-                decl=(children or '').strip() if not isinstance(children, dict) else None,
+                decl=replace_link((children or '').strip(), identifier) if not isinstance(children, dict) else None,
                 parent=parent,
                 children=[])
 
