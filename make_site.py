@@ -121,7 +121,7 @@ class DocDecl:
     name: str
     args: List[str]
     tp: str
-    docs_link: str 
+    docs_link: str
     src_link: str
 
 @dataclass
@@ -163,7 +163,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
                     continue
                 doc_decls.append(DocDecl(
-                    name=decl, 
+                    name=decl,
                     args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
                     tp=undecorate_arg(decl_info['type']),
                     docs_link=decl_info['docs_link'],
@@ -176,6 +176,8 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
 def replace_link(name, id):
     if name == '':
         return name
+    elif '/' in name:
+        return '/mathlib_docs/' + name
     else:
         try:
             return decl_loc_map[name]['docs_link']
@@ -342,7 +344,7 @@ def render_site(target: Path, base_url: str, reloader=False):
     for folder in ['css', 'js', 'img', 'papers']:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
-    
+
     site.render(use_reloader=reloader)
 
 if __name__ == '__main__':
