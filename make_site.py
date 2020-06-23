@@ -182,7 +182,7 @@ def replace_link(name, id):
         try:
             return decl_loc_map[name]['docs_link']
         except KeyError:
-            print(f'Error: overview item {id} refers to a nonexistent declaration {name}')
+            raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
 @dataclass
 class Overview:
