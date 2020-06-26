@@ -128,37 +128,46 @@
   <div class="container-sm mt-4">
 	  
 <h1 id="how-to-contribute-to-mathlib" class="markdown-heading">How to contribute to mathlib <a class="hover-link" href="#how-to-contribute-to-mathlib">#</a></h1>
-<p>Mathlib principally uses the
-<a href="https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/">fork-and-branch workflow</a>.</p>
 <p>Here are some tips and tricks
 to make the process of contributing as smooth as possible.</p>
 <ol>
-<li>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
-discuss your contribution before and while you are working on it.</li>
-<li>Adhere to the guidelines:
+<li>
+<p>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
+discuss your contribution before and while you are working on it.</p>
+</li>
+<li>
+<p>Adhere to the guidelines:</p>
 <ul>
 <li>The <a href="style.html">style guide</a> for contributors.</li>
 <li>The explanation of <a href="naming.html">naming conventions</a>.</li>
 <li>The <a href="doc.html">documentation guidelines</a>.</li>
 </ul>
 </li>
-<li>Create a pull request from a feature branch on your personal fork,
-as explained in the link above, or from a branch of the main repository if you have commit access (you can ask for access on Zulip).
+<li>
+<p>Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.</p>
 <ul>
 <li>The title of the PR should follow our <a href="https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md">commit conventions</a>.</li>
-<li>If you use an external repository, <strong>please make sure that repository has GitHub Actions enabled</strong>.</li>
 </ul>
 </li>
-<li>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.</li>
-<li>You can use <code>leanproject get-cache</code> to fetch <code>.olean</code> binaries.
-<pre><code class="language-text">leanproject get-cache
-git checkout -b my_new_feature
-</code></pre>
+<li>
+<p>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.</p>
+</li>
+<li>
+<p>You can use <code>leanproject</code> to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:</p>
 <ul>
-<li>See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
+<li><code>leanproject get -b mathlib:shiny_lemma</code> This will create a (local) branch called <code>shiny_lemma</code> and also create a local folder called <code>mathlib_shiny_lemma</code> with a copy of mathlib for you to work on.</li>
+<li>edit the necessary files, e.g. <code>data/set/basic.lean</code></li>
+<li>If you are anxious, <code>leanproject build</code> to check you didn't break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.</li>
+<li><code>git commit -a</code></li>
+<li><code>git push origin</code> This pushes your branch to GitHub.</li>
+<li>Visit <a href="https://github.com/leanprover/mathlib">mathlib on GitHub</a> to see an invitation to open a PR based on what you just did.</li>
+<li>Wait for continuous integration to build your branch if you didn't do it locally, <code>leanproject get-cache</code> will then download what was built by CI (Continuous Integration)</li>
 </ul>
 </li>
 </ol>
+<ul>
+<li>See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
+</ul>
 <h2 id="caching-compilation" class="markdown-heading">Caching compilation <a class="hover-link" href="#caching-compilation">#</a></h2>
 <p>In the <code>mathlib</code> git repository, you can run the following in a terminal:</p>
 <pre><code class="language-sh">sudo pip3 install mathlibtools
