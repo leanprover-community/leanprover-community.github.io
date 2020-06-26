@@ -72,3 +72,14 @@ Open a terminal.
 
 * Using the file explorer on the left-hand side, explore everything you
   want in `tutorials/src`.
+
+# Contributing to mathlib
+
+Read [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html). Once you have push access to mathlib here are the steps for sharing your shiny new lemmas about sets:
+* `leanproject get -b mathlib:shiny_lemma` This will create a (local) branch called `shiny_lemma` and also create a local folder called `mathlib_shiny_lemma` with a copy of mathlib for you to work on.
+* edit `data/set/basic.lean`
+* If you are anxious, `leanproject build` to check you didn't break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.
+* `git commit -a`
+* `git push origin` This pushes your branch to GitHub.
+* Visit [mathlib on GitHub](https://github.com/leanprover/mathlib) to see an invitation to open a PR based on what you just did.
+* Wait for continuous integration to build your branch if you didn't do it locally, `leanproject get-cache` will then download what was built by CI (Continuous Integration)
