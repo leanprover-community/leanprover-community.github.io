@@ -9,6 +9,10 @@ to make the process of contributing as smooth as possible.
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
    - The [documentation guidelines](doc.html).
+   
+Once you have code that you'd like to contribute, you should open a PR.
+  
+## Making a Pull Request (PR)
 3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.
    - The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
@@ -22,6 +26,13 @@ to make the process of contributing as smooth as possible.
    * Wait for continuous integration to build your branch if you didn't do it locally, `leanproject get-cache` will then download what was built by CI (Continuous Integration)
 
 - See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
+
+## Working with an existing PR
+We use GitHub "labels" to manage review. On the main page for a PR, on the right-hand side, 
+there should be a sidebar with panels "reviewers", "asignees", "labels", etc. 
+Click on the "labels" header to add or remove labels from the current project. The most important labels are "request-review" and "changes-requested". If you label your PR with "request-review", someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to "changes-requested". You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "request-review" to start the process over again.
+
+After some iteration, a reviewer will "approve" the PR. A bot called `bors` will make a comment with instructions. After following these, the PR will get added to the "merge queue". The merge queue gets cleared automatically by bors, but this takes some finite amount of time as it requires building branches of mathlib.
 
 ## Caching compilation
 
