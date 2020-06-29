@@ -39,8 +39,26 @@ reading the bash script that will be downloaded below:
 
 * Then we install a small tool called `leanproject` that which will handle
   updating mathlib according to the needs of your current project.
+  Follow the recommended Python way (look, no `sudo`) and install things into
+  your `$HOME` by doing
+  ```bash
+  pip3 install mathlibtools --user
+  ```
+  and make sure that `$HOME/.local/bin`, where scripts, such as `leanproject`, are installed, is in your `PATH`. If it is not there, do
+  ```bash
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile
+  . ~/.profile
+  ```
+  to have you all set. Alternatively, if you have root/sudo access, you can do (a more dangerous)
   ```bash
   sudo pip3 install mathlibtools
   ```
+  This, in particular, will install scripts such as `leanproject` into `/usr/local/bin`, which should
+  be in your `$PATH`. If it is not there, do
+  ```bash
+  echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.profile
+  . ~/.profile
+  ```
 
+   
 You can now read instructions about creating and working on [Lean projects](project.html)
