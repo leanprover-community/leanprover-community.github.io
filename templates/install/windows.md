@@ -92,6 +92,6 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
    A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
    displayed.
 
-### Lean Projects
+## Lean Projects
 
 Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
