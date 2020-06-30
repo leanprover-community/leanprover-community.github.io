@@ -28,7 +28,8 @@ Once you have code that you'd like to contribute, you should open a PR.
 - See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
 
 ## Working with an existing PR
-We use GitHub "labels" to manage review. On the main page for a PR, on the right-hand side, 
+We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have completed step 3 above")
+On the main page for a PR, on the right-hand side, 
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc. 
 Click on the "labels" header to add or remove labels from the current project. The most important labels are "request-review" and "changes-requested". If you label your PR with "request-review", someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to "changes-requested". You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "request-review" to start the process over again.
 
