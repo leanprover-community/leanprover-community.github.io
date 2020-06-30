@@ -22,6 +22,6 @@ The fast way is: open a terminal and type:
 wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_debian.sh && bash install_debian.sh ; rm -f install_debian.sh && source ~/.profile
 ```
 
-## Lean Projects
+## Creating a Lean Project
 
 Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
