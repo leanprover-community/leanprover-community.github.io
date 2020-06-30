@@ -34,8 +34,9 @@ Installing mathlib supporting tools
 
 At a terminal, run the command
   ```bash
-  brew install python3
-  sudo pip3 install mathlibtools
+  brew install python3 pipx
+  pipx ensurepath
+  pipx install mathlibtools
   ```
 
 This will install tools that, amongst other things, let you download compiled binaries for mathlib.

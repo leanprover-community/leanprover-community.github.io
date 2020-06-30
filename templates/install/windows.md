@@ -64,7 +64,9 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 
 Then, at a terminal, run the command
   ```bash
-  pip3 install mathlibtools
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+  pipx install mathlibtools
   ```
 
 Installing and configuring an editor

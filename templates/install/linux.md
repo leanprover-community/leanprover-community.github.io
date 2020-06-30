@@ -33,7 +33,9 @@ All commands below should be typed inside a terminal.
 * Then we install a small tool called `leanproject` that which will handle
   updating mathlib according to the needs of your current project.
   ```bash
-  sudo pip3 install mathlibtools
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+  pipx install mathlibtools
   ```
 
 You can now read instructions about creating and working on [Lean projects](project.html)
