@@ -33,7 +33,8 @@ On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc. 
 Click on the "labels" header to add or remove labels from the current project. The most important labels are "request-review" and "changes-requested". If you label your PR with "request-review", someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to "changes-requested". You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "request-review" to start the process over again.
 
-After some iteration, a reviewer will "approve" the PR. A bot called `bors` will make a comment with instructions. After following these, the PR will get added to the "merge queue". The merge queue gets cleared automatically by bors, but this takes some finite amount of time as it requires building branches of mathlib.
+After some iteration, a reviewer will "approve" the PR. A bot called `bors` will make a comment with instructions. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
+ After responding appropriately to bors, the PR will get added to the "merge queue". The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 
 ## Caching compilation
 
