@@ -36,4 +36,6 @@ All commands below should be typed inside a terminal.
   sudo pip3 install mathlibtools
   ```
 
-You can now read instructions about creating and working on [Lean projects](project.html)
+### Lean Projects
+
+Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
