@@ -38,7 +38,8 @@ reading the bash script that will be downloaded below:
   The alternative is to use Emacs, and its [lean-mode](https://github.com/leanprover/lean-mode).
 
 * Then we install a small tool called `leanproject` that which will handle
-  updating mathlib according to the needs of your current project.
+  updating mathlib according to the needs of your current project. We use
+  [pipx](https://pipxproject.github.io/pipx/) to perform the installation.
   ```bash
   python3 -m pip install --user pipx
   python3 -m pipx ensurepath

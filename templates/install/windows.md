@@ -62,12 +62,15 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 
 ### Get Scripts
 
-Then, at a terminal, run the command
-  ```bash
-  python3 -m pip install --user pipx
-  python3 -m pipx ensurepath
-  pipx install mathlibtools
-  ```
+Then we install a small tool called `leanproject` that which will handle
+updating mathlib according to the needs of your current project. We use
+[pipx](https://pipxproject.github.io/pipx/) to perform the installation.
+At a terminal, run the commands
+```bash
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+pipx install mathlibtools
+```
 
 Installing and configuring an editor
 ---

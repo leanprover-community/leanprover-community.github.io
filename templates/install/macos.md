@@ -31,15 +31,15 @@ Installing `elan`
 
 Installing mathlib supporting tools
 ---
+We install a small tool called `leanproject` that which will handle
+updating mathlib according to the needs of your current project. We use
+[pipx](https://pipxproject.github.io/pipx/) to perform the installation.
 
-At a terminal, run the command
-  ```bash
-  brew install python3 pipx
-  pipx ensurepath
-  pipx install mathlibtools
-  ```
-
-This will install tools that, amongst other things, let you download compiled binaries for mathlib.
+```bash
+brew install python3 pipx
+pipx ensurepath
+pipx install mathlibtools
+```
 
 Installing and configuring an editor
 ---

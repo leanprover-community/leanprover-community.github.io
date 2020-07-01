@@ -31,7 +31,8 @@ All commands below should be typed inside a terminal.
     displayed.
 
 * Then we install a small tool called `leanproject` that which will handle
-  updating mathlib according to the needs of your current project.
+  updating mathlib according to the needs of your current project. We use
+  [pipx](https://pipxproject.github.io/pipx/) to perform the installation.
   ```bash
   python3 -m pip install --user pipx
   python3 -m pipx ensurepath
