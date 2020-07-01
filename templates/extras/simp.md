@@ -74,7 +74,7 @@ into your code and write `suffices : (simplified thing), by simpa using this`. T
 important because the behaviour of `simp` changes sometimes, and if you put `simp` in the middle of
 proofs then your code might randomly stop compiling and it will be hard to figure out why if you
 didn't write down the exact thing which `simp` used to be reducing your goal to. See also
-[`squeeze_simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa).
+[`squeeze_simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa%20/%20squeeze_scope).
 
 ## How to use simp better
 
