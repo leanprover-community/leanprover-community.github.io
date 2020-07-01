@@ -11,7 +11,7 @@ import yaml
 from staticjinja import Site
 import jinja2.ext
 import pybtex.database
-from mistletoe import Document, HTMLRenderer
+from mistletoe import Document, HTMLRenderer, block_token
 from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
@@ -296,6 +296,8 @@ def render_site(target: Path, base_url: str, reloader=False):
             'menus': menus
             }
 
+    md_renderer = CustomHTMLRenderer()
+
     def render_content(env, template, **kwargs):
         """Render a markdown template."""
         content_template = env.get_template("_markdown.html")
@@ -304,8 +306,18 @@ def render_site(target: Path, base_url: str, reloader=False):
         content_template.stream(**kwargs).dump(str(target/path.parent/title)+'.html')
 
     def get_contents(template):
-        return { 'content': Path(template.filename).read_text(encoding='utf-8').replace('img/',
-            base_url+'/img/'), 'name': template.name }
+        src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
+                base_url+'/img/')
+        doc = Document(src)
+        content = md_renderer.render(doc).strip()
+        title = ''
+        for child in doc.children:
+            if isinstance(child, block_token.Heading):
+                title = child.children[0].content
+                break
+
+        return { 'content': content, 'name': template.name,
+                 'title': title }
 
     def url(raw: str):
         return raw if raw.startswith('http') else base_url + raw
