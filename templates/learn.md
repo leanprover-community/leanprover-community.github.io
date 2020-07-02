@@ -73,6 +73,7 @@ still have a look at the following resources.
   covers the basics and enables you to read more advanced sources, for instance
   the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
+* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
 * The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
 
