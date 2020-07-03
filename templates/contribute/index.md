@@ -35,7 +35,7 @@ Click on the "labels" header to add or remove labels from the current project. T
 
 After some iteration, a reviewer will "approve" the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
 After responding appropriately to bors (if necessary), the PR will get added to the "merge queue". The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
-
+Other labels include "WIP" and "blocked-other-PR". A WIP (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. Consider adding the "help wanted" label to directly solicit contributions. The "blocked-other-PR" label means that some specific other PR should be resolved before addressing this one. 
 ## Caching compilation
 
 In the `mathlib` git repository, you can run the following in a terminal:
