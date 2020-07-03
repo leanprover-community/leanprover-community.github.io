@@ -27,7 +27,7 @@ Once you have code that you'd like to contribute, you should open a PR.
 
 - See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
 
-## Working with an existing PR
+## Lifecycle of a PR
 We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have completed step 3 above")
 On the main page for a PR, on the right-hand side, 
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc. 
