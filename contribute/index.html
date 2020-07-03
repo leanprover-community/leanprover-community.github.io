@@ -131,18 +131,19 @@
 <p>Here are some tips and tricks
 to make the process of contributing as smooth as possible.</p>
 <ol>
-<li>
-<p>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
-discuss your contribution before and while you are working on it.</p>
-</li>
-<li>
-<p>Adhere to the guidelines:</p>
+<li>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
+discuss your contribution before and while you are working on it.</li>
+<li>Adhere to the guidelines:
 <ul>
 <li>The <a href="style.html">style guide</a> for contributors.</li>
 <li>The explanation of <a href="naming.html">naming conventions</a>.</li>
 <li>The <a href="doc.html">documentation guidelines</a>.</li>
 </ul>
 </li>
+</ol>
+<p>Once you have code that you'd like to contribute, you should open a PR.</p>
+<h2 id="making-a-pull-request-pr" class="markdown-heading">Making a Pull Request (PR) <a class="hover-link" href="#making-a-pull-request-pr">#</a></h2>
+<ol start="3">
 <li>
 <p>Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.</p>
 <ul>
@@ -168,6 +169,14 @@ discuss your contribution before and while you are working on it.</p>
 <ul>
 <li>See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
 </ul>
+<h2 id="lifecycle-of-a-pr" class="markdown-heading">Lifecycle of a PR <a class="hover-link" href="#lifecycle-of-a-pr">#</a></h2>
+<p>We use GitHub &quot;labels&quot; to manage review. (Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have completed step 3 above&quot;)
+On the main page for a PR, on the right-hand side,
+there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quot;, &quot;labels&quot;, etc.
+Click on the &quot;labels&quot; header to add or remove labels from the current project. The most important labels are &quot;request-review&quot; and &quot;changes-requested&quot;. If you label your PR with &quot;request-review&quot;, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to &quot;changes-requested&quot;. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;request-review&quot; to start the process over again.</p>
+<p>After some iteration, a reviewer will &quot;approve&quot; the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
+After responding appropriately to bors (if necessary), the PR will get added to the &quot;merge queue&quot;. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+Other labels include &quot;WIP&quot; and &quot;blocked-other-PR&quot;. A WIP (= work in progress) PR still needs some foundational work (e.g. maybe it still contains <code>sorry</code>s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. Consider adding the &quot;help wanted&quot; label to directly solicit contributions. The &quot;blocked-other-PR&quot; label means that some specific other PR should be resolved before addressing this one.</p>
 <h2 id="caching-compilation" class="markdown-heading">Caching compilation <a class="hover-link" href="#caching-compilation">#</a></h2>
 <p>In the <code>mathlib</code> git repository, you can run the following in a terminal:</p>
 <pre><code class="language-sh">sudo pip3 install mathlibtools
