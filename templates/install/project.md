@@ -10,11 +10,12 @@ manages project creation and dependencies.
 We will now create a new project depending on mathlib. The following
 commands should be typed in a terminal.
 
-* If you have not logged in since you installed Lean and mathlib, then
-  you need to first type `source ~/.profile`.
+* Go to a folder where you want to create a project in a subfolder
+  `my_project`, and type `leanproject new my_project`. If you get an
+  error message saying `leanproject` is an unknown command and 
+  you have not logged in since you installed Lean and mathlib, then
+  you may need to first type `source ~/.profile`.
 
-* Then go to a folder where you want to create a project in a subfolder
-  `my_project`, and type `leanproject new my_project`.
 
 * Launch VS Code, either through your application menu or by typing
   `code my_project`.
