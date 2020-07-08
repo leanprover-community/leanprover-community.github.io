@@ -44,9 +44,12 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 * Open Git Bash (type `git bash` in the Start Menu)
 * Run `which python`
   * The expected output is something like `/c/Users/<user>/AppData/Local/Programs/Python/Pythonxx-xx/python`. In this case, proceed to the next step.
-  * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then you need to disable a Windows setting.
-    * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
-    * There should be two entries `App Installer python.exe` and `App Installer python3.exe`. Ensure that both of these are set to `Off`.
+  * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then
+    * Did you follow the instruction to select `Add Python 3.x to PATH` during the installation?
+      * If not, re-run the python installer to uninstall python and try again.
+    * Otherwise, you need to disable a Windows setting.
+      * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
+      * There should be two entries `App Installer python.exe` and `App Installer python3.exe`. Ensure that both of these are set to `Off`.
     * Close and reopen Git Bash and restart this step.
   * If it is any other directory, you might have an existing version of Python. Ask for help in the Zulip chat room (linked above).
   * If you get `command not found`, you should add the Python directory to your path. Google how to do this, or ask on Zulip.
