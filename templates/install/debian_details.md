@@ -11,7 +11,7 @@ reading the bash script that will be downloaded below:
 * Lean itself doesn't depend on much infrastructure, but supporting tools
   needed by most users require `git`, `curl`, and `python`. So the first step is:
   ```bash
-  sudo apt install git curl python3 python3-pip
+  sudo apt install git curl python3 python3-pip python3-venv
   ```
 
 * The next step installs a small tool called `elan` which will handle
@@ -43,6 +43,7 @@ reading the bash script that will be downloaded below:
   ```bash
   python3 -m pip install --user pipx
   python3 -m pipx ensurepath
+  source ~/.profile
   pipx install mathlibtools
   ```
 
