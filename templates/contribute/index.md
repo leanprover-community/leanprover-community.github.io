@@ -20,6 +20,7 @@ Once you have code that you'd like to contribute, you should open a PR.
    * `leanproject get -b mathlib:shiny_lemma` This will create a (local) branch called `shiny_lemma` and also create a local folder called `mathlib_shiny_lemma` with a copy of mathlib for you to work on.
    * edit the necessary files, e.g. `data/set/basic.lean`
    * If you are anxious, `leanproject build` to check you didn't break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.
+   * Make sure you run the following `git` commands from inside `mathlib_shiny_lemma`:
    * `git commit -a`
    * `git push origin` This pushes your branch to GitHub.
    * Visit [mathlib on GitHub](https://github.com/leanprover/mathlib) to see an invitation to open a PR based on what you just did.
