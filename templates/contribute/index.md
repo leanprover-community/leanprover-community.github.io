@@ -18,10 +18,11 @@ Once you have code that you'd like to contribute, you should open a PR.
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
 5. You can use `leanproject` to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:
    * `leanproject get -b mathlib:shiny_lemma` This will create a (local) branch called `shiny_lemma` and also create a local folder called `mathlib_shiny_lemma` with a copy of mathlib for you to work on.
-   * edit the necessary files, e.g. `data/set/basic.lean`
+   * `cd mathlib_shiny_lemma`, so that your working directory is at the root of the git repository.
+   * edit the necessary files, e.g. `src/data/set/basic.lean`
    * If you are anxious, `leanproject build` to check you didn't break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.
    * `git commit -a`
-   * `git push origin` This pushes your branch to GitHub.
+   * `git push origin` This pushes your branch to GitHub. You might get a complaint from git that the remote is not configured. In that case, follow the advice, and run `git push --set-upstream origin shiny_lemma`.
    * Visit [mathlib on GitHub](https://github.com/leanprover/mathlib) to see an invitation to open a PR based on what you just did.
    * Wait for continuous integration to build your branch if you didn't do it locally, `leanproject get-cache` will then download what was built by CI (Continuous Integration)
 
@@ -36,6 +37,7 @@ Click on the "labels" header to add or remove labels from the current project. T
 After some iteration, a reviewer will "approve" the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
 After responding appropriately to bors (if necessary), the PR will get added to the "merge queue". The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 Other labels include "WIP" and "blocked-other-PR". A WIP (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. Consider adding the "help wanted" label to directly solicit contributions. The "blocked-other-PR" label means that some specific other PR should be resolved before addressing this one. 
+
 ## Caching compilation
 
 In the `mathlib` git repository, you can run the following in a terminal:
