@@ -1,11 +1,49 @@
-# Creating a Lean project
+# Lean projects
 
-Lean files are organized in projects called packages. Projects are
-git repositories containing a `leanpkg.toml` file specifying the Lean
-version and all required dependencies alongside the `src/` subdirectory
-containing the Lean code. The tool
-[`leanproject`](https://github.com/leanprover-community/mathlib-tools)
-manages project creation and dependencies. 
+Every non-trivial piece of Lean code needs to live inside a *Lean project*
+(sometimes also called Lean package).
+This means a folder containing in particular a git repository and a file
+`leanpkg.toml` that gathers information about dependencies of the
+project, including for instance the version of Lean that should be used.
+
+Managing all this is done by a little python program called `leanproject`. 
+This page describes the basic use of this tool, and should be sufficient
+for everyday use. 
+If this is not enough for your purposes, you can read the
+full [leanproject documentation](../leanproject.html).
+If you are really curious, you can also read 
+[how pieces fit together](toolchain.md).
+
+
+## Working on an existing project
+
+Suppose you want to work on an existing project. As example, we will take 
+[the tutorial project](https://github.com/leanprover-community/tutorials). 
+Open a terminal.
+
+* If you have not logged in since you installed Lean and mathlib, then
+  you may need to first type `source ~/.profile` or 
+  `source ~/.bash_profile` depending on your OS.
+
+* Go the the directory where you would like this package to live.
+
+* Run `leanproject get tutorials`.
+
+* Launch VS Code, either through your application menu or by typing
+  `code tutorials`. (MacOS users need to take a one-off
+  [extra step](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
+   to be able to launch VS Code from the command line.)
+
+* If you launched VS Code from a menu, on the main screen, or in the File menu,
+  click "Open folder" (just "Open" on a Mac), and choose the folder 
+  `tutorials` (*not* one of its subfolders).
+
+* Using the file explorer on the left-hand side, explore everything you
+  want in `tutorials/src`. 
+  See the [tutorials instructions](https://github.com/leanprover-community/tutorials/blob/master/README.md)
+  for advice about how to do the exercises in this project.
+
+## Creating a Lean project
 
 We will now create a new project depending on mathlib. The following
 commands should be typed in a terminal.
@@ -14,8 +52,7 @@ commands should be typed in a terminal.
   `my_project`, and type `leanproject new my_project`. If you get an
   error message saying `leanproject` is an unknown command and 
   you have not logged in since you installed Lean and mathlib, then
-  you may need to first type `source ~/.profile`.
-
+  you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
 
 * Launch VS Code, either through your application menu or by typing
   `code my_project`.
@@ -49,31 +86,6 @@ Also, you can get the Lean documentation inside VS Code using
 inside the text field that appears, type "lean doc" and hit <kbd>Enter</kbd>.
 Then click "Theorem Proving in Lean" and enjoy.
 
-# Working on an existing package
-
-Suppose you want to work on an existing project. As example, we will take 
-[the tutorial project](https://github.com/leanprover-community/tutorials). 
-Open a terminal.
-
-* If you have not logged in since you installed Lean and mathlib, then
-  you need to first type `source ~/.profile`.
-
-* Go the the directory where you would like this package to live.
-
-* Run `leanproject get tutorials`.
-
-* Launch VS Code, either through your application menu or by typing
-  `code tutorials`. (MacOS users need to take a one-off
-  [extra step](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
-   to be able to launch VS Code from the command line.)
-
-* If you launched VS Code from a menu, on the main screen, or in the File menu,
-  click "Open folder" (just "Open" on a Mac), and choose the folder 
-  `tutorials` (*not* one of its subfolders).
-
-* Using the file explorer on the left-hand side, explore everything you
-  want in `tutorials/src`.
-
-# Contributing to mathlib
+## Contributing to mathlib
 
 See [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html).
