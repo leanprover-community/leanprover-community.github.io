@@ -12,7 +12,7 @@ for everyday use.
 If this is not enough for your purposes, you can read the
 full [leanproject documentation](../leanproject.html).
 If you are really curious, you can also read 
-[how pieces fit together](toolchain.md).
+[how pieces fit together](../toolchain.html).
 
 
 ## Working on an existing project
