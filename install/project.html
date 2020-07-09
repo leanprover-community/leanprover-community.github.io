@@ -31,7 +31,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Creating a Lean project</title>
+	<title>Lean projects</title>
   </head>
   <body>
   <div id="wrapper">
@@ -127,13 +127,54 @@
   </nav>
   <div class="container-sm mt-4">
 	  
-<h1 id="creating-a-lean-project" class="markdown-heading">Creating a Lean project <a class="hover-link" href="#creating-a-lean-project">#</a></h1>
-<p>Lean files are organized in projects called packages. Projects are
-git repositories containing a <code>leanpkg.toml</code> file specifying the Lean
-version and all required dependencies alongside the <code>src/</code> subdirectory
-containing the Lean code. The tool
-<a href="https://github.com/leanprover-community/mathlib-tools"><code>leanproject</code></a>
-manages project creation and dependencies.</p>
+<h1 id="lean-projects" class="markdown-heading">Lean projects <a class="hover-link" href="#lean-projects">#</a></h1>
+<p>Every non-trivial piece of Lean code needs to live inside a <em>Lean project</em>
+(sometimes also called Lean package).
+This means a folder containing in particular a git repository and a file
+<code>leanpkg.toml</code> that gathers information about dependencies of the
+project, including for instance the version of Lean that should be used.</p>
+<p>Managing all this is done by a little python program called <code>leanproject</code>.
+This page describes the basic use of this tool, and should be sufficient
+for everyday use.
+If this is not enough for your purposes, you can read the
+full <a href="../leanproject.html">leanproject documentation</a>.
+If you are really curious, you can also read
+<a href="toolchain.md">how pieces fit together</a>.</p>
+<h2 id="working-on-an-existing-project" class="markdown-heading">Working on an existing project <a class="hover-link" href="#working-on-an-existing-project">#</a></h2>
+<p>Suppose you want to work on an existing project. As example, we will take
+<a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>.
+Open a terminal.</p>
+<ul>
+<li>
+<p>If you have not logged in since you installed Lean and mathlib, then
+you may need to first type <code>source ~/.profile</code> or
+<code>source ~/.bash_profile</code> depending on your OS.</p>
+</li>
+<li>
+<p>Go the the directory where you would like this package to live.</p>
+</li>
+<li>
+<p>Run <code>leanproject get tutorials</code>.</p>
+</li>
+<li>
+<p>Launch VS Code, either through your application menu or by typing
+<code>code tutorials</code>. (MacOS users need to take a one-off
+<a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">extra step</a>
+to be able to launch VS Code from the command line.)</p>
+</li>
+<li>
+<p>If you launched VS Code from a menu, on the main screen, or in the File menu,
+click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and choose the folder
+<code>tutorials</code> (<em>not</em> one of its subfolders).</p>
+</li>
+<li>
+<p>Using the file explorer on the left-hand side, explore everything you
+want in <code>tutorials/src</code>.
+See the <a href="https://github.com/leanprover-community/tutorials/blob/master/README.md">tutorials instructions</a>
+for advice about how to do the exercises in this project.</p>
+</li>
+</ul>
+<h2 id="creating-a-lean-project" class="markdown-heading">Creating a Lean project <a class="hover-link" href="#creating-a-lean-project">#</a></h2>
 <p>We will now create a new project depending on mathlib. The following
 commands should be typed in a terminal.</p>
 <ul>
@@ -142,7 +183,7 @@ commands should be typed in a terminal.</p>
 <code>my_project</code>, and type <code>leanproject new my_project</code>. If you get an
 error message saying <code>leanproject</code> is an unknown command and
 you have not logged in since you installed Lean and mathlib, then
-you may need to first type <code>source ~/.profile</code>.</p>
+you may need to first type <code>source ~/.profile</code> or <code>source ~/.bash_profile</code>.</p>
 </li>
 <li>
 <p>Launch VS Code, either through your application menu or by typing
@@ -177,38 +218,7 @@ Also, you can get the Lean documentation inside VS Code using
 (<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then,
 inside the text field that appears, type &quot;lean doc&quot; and hit <kbd>Enter</kbd>.
 Then click &quot;Theorem Proving in Lean&quot; and enjoy.</p>
-<h1 id="working-on-an-existing-package" class="markdown-heading">Working on an existing package <a class="hover-link" href="#working-on-an-existing-package">#</a></h1>
-<p>Suppose you want to work on an existing project. As example, we will take
-<a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>.
-Open a terminal.</p>
-<ul>
-<li>
-<p>If you have not logged in since you installed Lean and mathlib, then
-you need to first type <code>source ~/.profile</code>.</p>
-</li>
-<li>
-<p>Go the the directory where you would like this package to live.</p>
-</li>
-<li>
-<p>Run <code>leanproject get tutorials</code>.</p>
-</li>
-<li>
-<p>Launch VS Code, either through your application menu or by typing
-<code>code tutorials</code>. (MacOS users need to take a one-off
-<a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">extra step</a>
-to be able to launch VS Code from the command line.)</p>
-</li>
-<li>
-<p>If you launched VS Code from a menu, on the main screen, or in the File menu,
-click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and choose the folder
-<code>tutorials</code> (<em>not</em> one of its subfolders).</p>
-</li>
-<li>
-<p>Using the file explorer on the left-hand side, explore everything you
-want in <code>tutorials/src</code>.</p>
-</li>
-</ul>
-<h1 id="contributing-to-mathlib" class="markdown-heading">Contributing to mathlib <a class="hover-link" href="#contributing-to-mathlib">#</a></h1>
+<h2 id="contributing-to-mathlib" class="markdown-heading">Contributing to mathlib <a class="hover-link" href="#contributing-to-mathlib">#</a></h2>
 <p>See <a href="https://leanprover-community.github.io/contribute/index.html">How to contribute to mathlib</a>.</p>
 
   </div>
