@@ -14,9 +14,10 @@ Once you have code that you'd like to contribute, you should open a PR.
   
 ## Making a Pull Request (PR)
 3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.
-   - The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
+   
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
-5. You can use `leanproject` to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:
+5. The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
+6. You can use `leanproject` to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:
    * `leanproject get -b mathlib:shiny_lemma` This will create a (local) branch called `shiny_lemma` and also create a local folder called `mathlib_shiny_lemma` with a copy of mathlib for you to work on.
    * `cd mathlib_shiny_lemma`, so that your working directory is at the root of the git repository.
    * edit the necessary files, e.g. `src/data/set/basic.lean`
