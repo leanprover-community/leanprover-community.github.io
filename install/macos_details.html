@@ -31,7 +31,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>How to install Lean and mathlib on MacOS</title>
+	<title>Controlled installation of Lean and mathlib on MacOS</title>
   </head>
   <body>
   <div id="wrapper">
@@ -127,25 +127,56 @@
   </nav>
   <div class="container-sm mt-4">
 	  
-<h1 id="how-to-install-lean-and-mathlib-on-macos" class="markdown-heading">How to install Lean and mathlib on MacOS <a class="hover-link" href="#how-to-install-lean-and-mathlib-on-macos">#</a></h1>
-<p>This document explains how to get started with Lean and mathlib if you
-are using MacOS.</p>
-<p>If you get stuck, please come to <a href="https://leanprover.zulipchat.com/">the chat room</a> to ask for assistance.</p>
-<h2 id="installing-lean-and-mathlib" class="markdown-heading">Installing Lean and mathlib <a class="hover-link" href="#installing-lean-and-mathlib">#</a></h2>
-<p>Here we will discuss the fast way, assuming a lot of trust from you. It
-will install Lean, with supporting tools <code>elan</code> and <code>leanpkg</code>,
-the supporting tool <code>leanproject</code> for Lean's mathematical
-library, as well as the code editor VS Code and its Lean plugin, and
-other dependencies you probably already have, like <code>curl</code>, <code>git</code>,
-<code>python3</code>, and <code>pipx</code>. If you don't like this method, there is a
-<a href="macos_details.html">detailed webpage</a> which will decompose the
-process into described stages, and won't ask for a blind <code>sudo</code>.</p>
-<p>The fast way is: open a terminal and type:</p>
-<pre><code class="language-bash">wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh &amp;&amp; bash install_macos.sh ; rm -f install_macos.sh &amp;&amp; source ~/.profile
+<h1 id="controlled-installation-of-lean-and-mathlib-on-macos" class="markdown-heading">Controlled installation of Lean and mathlib on MacOS <a class="hover-link" href="#controlled-installation-of-lean-and-mathlib-on-macos">#</a></h1>
+<p>This document explains a more controlled installation procedure for Lean and
+mathlib on MacOS. There is a quicker way described in the main
+<a href="macos.html">install page</a> but it requires more trust.  Of course you can get
+even more details about what is going on by reading the bash script that will
+be downloaded below:
+<a href="https://github.com/Kha/elan/blob/master/elan-init.sh">elan_init</a>.</p>
+<p>If you get stuck, please come to <a href="https://leanprover.zulipchat.com/">the chat room</a> to ask for
+assistance.</p>
+<p>We'll need to set up Lean, an editor that knows about Lean, and <code>mathlib</code> (the standard library).</p>
+<p>Rather than installing Lean directly, we'll install a small program called <code>elan</code> which
+automatically provides the correct version of Lean on a per-project basis. This is recommended for
+all users.</p>
+<h2 id="installing-codeelancode" class="markdown-heading">Installing <code>elan</code> <a class="hover-link" href="#installing-codeelancode">#</a></h2>
+<ol>
+<li>
+<p>We'll need a terminal, along with some basic prerequisites.
+Install <a href="https://brew.sh/">homebrew</a>, then run <code>brew install gmp coreutils</code> in a terminal
+(<code>gmp</code> is required by <code>lean</code>, <code>coreutils</code> by <code>leanpkg</code>).</p>
+</li>
+<li>
+<p>At a terminal, run the command</p>
+<p><code>curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh</code></p>
+<p>and hit enter when a question is asked.</p>
+<p>It is recommended that you re-login, so that your environment knows about <code>elan</code>.
+(Alternatively, type <code>source $HOME/.elan/env</code> to update the current terminal.)</p>
+</li>
+</ol>
+<h2 id="installing-mathlib-supporting-tools" class="markdown-heading">Installing mathlib supporting tools <a class="hover-link" href="#installing-mathlib-supporting-tools">#</a></h2>
+<p>At a terminal, run the command</p>
+<pre><code class="language-bash">brew install python3 pipx
+pipx ensurepath
+pipx install mathlibtools
 </code></pre>
-<p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a>.
-If you encounter any <code>command not found</code> errors when opening a new terminal,
-logging out from MacOS and logging in again should fix it.</p>
+<p>This will install tools that, amongst other things, let you download compiled binaries for mathlib.</p>
+<h2 id="installing-and-configuring-an-editor" class="markdown-heading">Installing and configuring an editor <a class="hover-link" href="#installing-and-configuring-an-editor">#</a></h2>
+<p>There are two editors you can use with Lean, VS Code and emacs.
+This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).</p>
+<ol>
+<li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
+<li>Launch VS Code.</li>
+<li>Click on the extension icon <img src="https://leanprover-community.github.io//img/new-extensions-icon.png" alt="(image of icon)" />
+(or <img src="https://leanprover-community.github.io//img/extensions-icon.png" alt="(image of icon)" /> in older versions) in the side bar on the left edge of
+the screen (or press <kbd>⇧ Shift</kbd><kbd>⌘ Command</kbd><kbd>X</kbd>) and search for <code>leanprover</code>.</li>
+<li>Click &quot;install&quot; (In old versions of VS Code, you might need to click &quot;reload&quot; afterwards)</li>
+<li>Verify Lean is working, for example by saving a file <code>test.lean</code> and entering <code>#eval 1+1</code>.
+A green line should appear underneath <code>#eval 1+1</code>, and hovering the mouse over it you should see <code>2</code>
+displayed.</li>
+</ol>
+<p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
 
   </div>
 </div>
@@ -153,7 +184,7 @@ logging out from MacOS and logging in again should fix it.</p>
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/install/macos.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/install/macos_details.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
 </nav>
