@@ -24,4 +24,4 @@ wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/mas
 
 ## Lean Projects
 
-Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
+You can now read instructions about creating and working on [Lean projects](project.html)

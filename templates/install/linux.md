@@ -38,4 +38,4 @@ All commands below should be typed inside a terminal.
 
 ## Lean Projects
 
-Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
+You can now read instructions about creating and working on [Lean projects](project.html)

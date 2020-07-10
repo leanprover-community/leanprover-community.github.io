@@ -63,4 +63,4 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 
 ## Lean Projects
 
-Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
+You can now read instructions about creating and working on [Lean projects](project.html)
