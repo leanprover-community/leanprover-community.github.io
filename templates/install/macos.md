@@ -18,7 +18,7 @@ process into described stages, and won't ask for a blind `sudo`.
 
 The fast way is: open a terminal and type:
 ```bash
-wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh && bash install_macos.sh ; rm -f install_macos.sh && source ~/.profile
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh)" && source ~/.profile
 ```
 
 You can now read instructions about creating and working on [Lean projects](project.html).
