@@ -22,6 +22,14 @@ learning.
   already encountered the definition of limits of sequences of real
   numbers.
 
+* A brand new resource that is still under construction is
+  *Mathematics in Lean*.
+  It can be [read online](https://leanprover-community.github.io/mathematics_in_lean/),
+  or downloaded [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
+  but it is really meant to be used in VSCode, doing exercises
+  on the fly (see the [instructions](https://leanprover-community.github.io/mathematics_in_lean/introduction.html#getting-started)).
+  It currently covers roughly the same ground as the tutorials prooject.
+
 * Once you know the basics, you can also learn by solving Lean puzzles
   on [Codewars](https://www.codewars.com/?language=lean).
 
@@ -65,6 +73,7 @@ still have a look at the following resources.
   covers the basics and enables you to read more advanced sources, for instance
   the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
+* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
 * The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
 

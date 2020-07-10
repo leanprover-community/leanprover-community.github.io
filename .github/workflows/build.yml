@@ -2,8 +2,11 @@ name: deploy site
 
 on:
   push:
-    branches:
-      - newsite
+    branches-ignore:
+      - 'master'
+      - 'oldsite'
+  schedule:
+    - cron: '0 4 * * *'
 
 jobs:
   build:
@@ -23,10 +26,12 @@ jobs:
       - name: install Python dependencies
         run: python -m pip install --upgrade pip staticjinja PyYaml mistletoe pybtex pylatexenc
 
-      - if: github.repository == 'leanprover-community/leanprover-community.github.io' && github.ref == 'refs/heads/newsite'
+      - name: build and deploy
         run:
           ./deploy.sh
         env:
           git_hash: ${{ github.sha }}
-          DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_GITHUB_TOKEN: ${{ secrets.MASTER_DEPLOY }}
           DEPLOY_GITHUB_USER: leanprover-community-bot
+          github_repo: ${{ github.repository }}
+          github_ref: ${{ github.ref  }}

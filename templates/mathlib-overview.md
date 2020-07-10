@@ -2,6 +2,8 @@
 
 Note that mathlib is currently being actively developed, and new things tend to appear on almost a weekly basis. In particular, the list below might get out of date very quickly. This page was last updated on 27th December 2019.
 
+We have a specific page listing topics in [undergraduate mathematics](undergrad.html).
+
 
 ### Algebra
 
@@ -11,6 +13,8 @@ Modules over a ring, direct sums and limits, tensor products.
 Lie algebras (definition and basic properties).
 Fields: minimal polynomials, finite extensions, algebraic extensions, splitting fields, perfect closure, finite fields.
 Vector spaces, bases, finite-dimensional spaces, matrices, linear maps, dual spaces, bilinear and sesquilinear forms.
+
+[See here for more details information about linear algebra in mathlib](theories/linear_algebra.html).
 
 ### Number theory
 
@@ -53,3 +57,4 @@ Ordinals and cardinals. A model of ZFC.
 Continued fractions. Turing machines, the Halting problem.
 Conway games. The Fibonacci sequence. The hyperreals. Cubing a cube.
 
+[See here for more detailed information about set-like objects in mathlib](theories/sets.html).
