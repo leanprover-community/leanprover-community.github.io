@@ -1,15 +1,17 @@
 # Documentation style
 
-We are in the process of implementing new documentation requirements for mathlib. All future pull
-requests must meet the following standards. See
+All pull requests must meet the following documentation standards. See
 [the `doc-gen` repo](https://github.com/leanprover-community/doc-gen) for information about the
 [automatically generated doc pages](https://leanprover-community.github.io/mathlib_docs/).
+
+You can preview the markdown processing of a GitHub page or pull request
+using the [Lean doc preview page](https://observablehq.com/@bryangingechen/github-lean-doc-preview).
 
 ## Header comment
 
 Each mathlib file should start with:
-* a header comment with copyright information;
-* the list of imports;
+* a header comment with copyright information (see the [recommendations in our style guidelines](style.html#header-and-imports));
+* the list of imports (one on each line);
 * a module docstring containing general documentation, written using Markdown.
 
 (See the example below.)
@@ -41,8 +43,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Y. Lewis
 -/
 
-import data.rat algebra.gcd_domain algebra.field_power
-import ring_theory.multiplicity tactic.ring
+import data.rat
+import algebra.gcd_domain
+import algebra.field_power
+import ring_theory.multiplicity
+import tactic.ring
 import data.real.cau_seq
 import tactic.norm_cast
 

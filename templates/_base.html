@@ -13,8 +13,16 @@
     {% block extracss %}{% endblock %}
 
 	<script>
+                function buildShortcutsForStructures(names) { 
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
 		MathJax = {
 			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
 				      inlineMath: [['$', '$'], ['\\(', '\\)']]
 				    },
 		};
@@ -23,9 +31,10 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-    <title>Lean community</title>
+	<title>{% block title %}{{ title or 'Lean community' }}{% endblock %}</title>
   </head>
   <body>
+  <div id="wrapper">
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
     <div class="d-flex flex-grow-1">
 		<a class="navbar-brand" href="{{ base_url }}index.html">Lean Community
@@ -58,11 +67,20 @@
   </nav>
   <div class="container-sm mt-4">
 	  {% block content %}
-	  {% endblock %}
+    {% endblock %}
   </div>
+</div>
+{% if name is defined %}
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/{{ name }}">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+</nav>
+{% endif %}
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="{{ base_url }}/js/bootstrap.min.js"></script>
+    <script src="{{ base_url }}/js/bootstrap.min.js"></script>
     {% block extrajs %}{% endblock %}
   </body>
 </html>

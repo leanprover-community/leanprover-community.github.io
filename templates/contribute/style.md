@@ -30,21 +30,66 @@ easier to read, especially on a small screen or in a small window.
 ### Header and imports ###
 
 The file header should contain copyright information, a list of all
-the authors who have worked on the file, and a description of the
-contents. Do all `import`s right after the header, without a line
-break. You can also open namespaces in the same block.
+the authors who have made significant contributions to the file, and
+a description of the contents. Do all `import`s right after the header,
+without a line break, on separate lines. You can also open namespaces
+in the same block.
 
 ```lean
 /-
 Copyright (c) 2015 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Joe Cool.
-
-A theory of everything.
 -/
-import data.nat algebra.group
+
+import data.nat
+import algebra.group
 open nat eq.ops
 ```
+
+(Tip: If you're editing mathlib in VS Code, you can write `copy`
+and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
+
+Regarding the list of authors: we don't have strict rules on what
+contributions qualify for inclusion there. The general idea is that
+the people listed there should be the ones we would reach out to if we had
+questions about the design or development of the Lean code.
+
+### Module docstrings
+
+After the copyright header and the imports,
+please add a module docstring containing
+
+- a title of the file,
+- a summary of the contents (the main definitions and theorems, proof techniques, etc…)
+- notation that has been used in the file (if any)
+- references to the literature (if any)
+
+In total, the module docstring should look something like this:
+```markdown
+# Foos and bars
+
+In this file we introduce `foo` and `bar`,
+two main concepts in the theory of xyzzyology.
+
+## Main results
+
+- `exists_foo`: the main existence theorem of `foo`s.
+- `bar_of_foo`: a construction of a `bar`, given a `foo`.
+- `bar_eq`    : the main classification theorem of `bar`s.
+
+## Notation
+
+ - `|_|` : The barrification operator, see `bar_of_foo`.
+
+## References
+
+See [Thales600BC] for the original account on Xyzzyology.
+```
+
+New bibliography entries should be added to `docs/references.bib`.
+
+See our [documentation requirements](doc.html) for more suggestions and examples.
 
 ### Structuring definitions and theorems ###
 

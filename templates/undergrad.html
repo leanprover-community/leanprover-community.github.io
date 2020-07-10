@@ -1,0 +1,49 @@
+{% extends '_base.html' %}
+{% block title %}Undergrad math in mathlib{% endblock %}
+{% block content %}
+
+<div class="row mt-3">
+        <div class="col">
+                <h1>Undergraduate mathematics in mathlib</h1>
+
+                <p>
+				This gives pointers to undergraduate maths topics that are
+				currently covered in mathlib.
+				There is also a page listing undergraduate maths topics
+				that are 
+				<a href="undergrad_todo.html">not yet in mathlib</a>.
+				</p>
+
+
+                <div id="overview-accordion" class="accordion">
+                        {% for statement in overviews recursive %}
+                        {% if statement.children and statement.is_nonempty%}
+                        <div class="card statement-done">
+                                <div class="card-header" id="heading-{{statement.id}}">
+                                        <h5 class="card-title markdown-heading" id="{{ statement.id }}">
+                                                <a role="button" data-toggle="collapse" href="#collapse-{{statement.id}}" aria-expanded="false" aria-controls="collapse-{{statement.id}}">
+                                                        {{ statement.title }}
+                                                </a>
+                                                <a class="hover-link" href="#{{ statement.id }}">#</a>
+                                        </h5>
+                                        <div id="collapse-{{statement.id}}" class="collapse" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">
+                                                <div class="card-body">
+                                                        <div id="overview-accordion-{{statement.id}}" class="accordion">
+                                                                {{ loop(statement.children) }}
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        {% else %}
+						{% if statement.is_nonempty %}
+                        <span class="statement-done">
+                                <a {% if statement.decl %} href="{{ statement.decl }}" {% endif %}>{{ statement.title }}</a>{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
+                        </span>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                </div>
+        </div>
+</div>
+{% endblock %}

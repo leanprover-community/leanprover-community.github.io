@@ -3,7 +3,7 @@
 There are many options if you want to start using Lean, depending on how
 seriously you want to try.
 
-## <a name="web"></a>Just a quick glance
+## Just a quick glance
 
 Lean can run in a web browser thanks to
 [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). Of course,
@@ -24,7 +24,7 @@ pedagogical purposes.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
 
-## <a name="bundle"></a>Maybe a couple of nights
+## Maybe a couple of nights
 
 If you are more serious about trying Lean, or can't stand waiting for
 your web browser, but don't want to start installing too many things,
@@ -36,7 +36,9 @@ then you can try one of our autonomous bundles for:
 Each of these bundles contains a folder `trylean` from which you can run
 the program `trylean` without installing anything anywhere else on your
 computer (although MacOS users will need to tell their system
-they really want to run it). These bundles contain Lean itself,
+they really want to run it). On Windows this is a batch file, and there will be a Microsoft 
+Defender warning when running it. To allow the batch file to execute, click on "More Info" 
+then "Run anyway". These bundles contain Lean itself,
 [VScodium](https://vscodium.com/)
 which is a distributable version of the VS Code editor, the Lean VS Code extension,
 the mathlib library, and a couple of Lean files to play with.
@@ -44,7 +46,7 @@ the mathlib library, and a couple of Lean files to play with.
 The downside is you won't be able to create your own projects or easily
 upgrade Lean and mathlib. You'll need a regular install for this.
 
-## <a name="install"></a>Regular install
+## Regular install
 
 In order to enjoy the full Lean experience, you need to install a couple
 of dependencies, including a python package providing user-friendly
