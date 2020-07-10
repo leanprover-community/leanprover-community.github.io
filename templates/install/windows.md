@@ -44,9 +44,12 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 * Open Git Bash (type `git bash` in the Start Menu)
 * Run `which python`
   * The expected output is something like `/c/Users/<user>/AppData/Local/Programs/Python/Pythonxx-xx/python`. In this case, proceed to the next step.
-  * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then you need to disable a Windows setting.
-    * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
-    * There should be two entries `App Installer python.exe` and `App Installer python3.exe`. Ensure that both of these are set to `Off`.
+  * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then
+    * Did you follow the instruction to select `Add Python 3.x to PATH` during the installation?
+      * If not, re-run the python installer to uninstall python and try again.
+    * Otherwise, you need to disable a Windows setting.
+      * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
+      * There should be two entries `App Installer python.exe` and `App Installer python3.exe`. Ensure that both of these are set to `Off`.
     * Close and reopen Git Bash and restart this step.
   * If it is any other directory, you might have an existing version of Python. Ask for help in the Zulip chat room (linked above).
   * If you get `command not found`, you should add the Python directory to your path. Google how to do this, or ask on Zulip.
@@ -75,8 +78,8 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Launch VS Code.
-3. Click on the extension icon ![(image of icon)](new-extensions-icon.png)
-   (or ![(image of icon)](extensions-icon.png) in older versions) in the side bar on the left edge of
+3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
+   (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
 4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
 5. Setup the default shell:
