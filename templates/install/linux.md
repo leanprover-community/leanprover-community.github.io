@@ -6,7 +6,7 @@ All commands below should be typed inside a terminal.
 
 * Lean itself doesn't depend on much infrastructure, but supporting tools
   needed by most users require `git`, `curl`, and `python3` (on Debian and
-  Ubuntu also `python3-pip`). So the first step is to get those.
+  Ubuntu also `python3-pip` and `python3-venv`). So the first step is to get those.
 
 * The next step installs a small tool called `elan` which will handle
   updating Lean according to the needs of your current project (hit Enter
@@ -31,9 +31,13 @@ All commands below should be typed inside a terminal.
     displayed.
 
 * Then we install a small tool called `leanproject` that which will handle
-  updating mathlib according to the needs of your current project.
+  updating mathlib according to the needs of your current project. We use
+  [pipx](https://pipxproject.github.io/pipx/) to perform the installation.
   ```bash
-  sudo pip3 install mathlibtools
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+  source ~/.profile
+  pipx install mathlibtools
   ```
 
 You can now read instructions about creating and working on [Lean projects](project.html)
