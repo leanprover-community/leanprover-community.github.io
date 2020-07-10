@@ -47,4 +47,6 @@ reading the bash script that will be downloaded below:
   pipx install mathlibtools
   ```
 
+## Lean Projects
+
 You can now read instructions about creating and working on [Lean projects](project.html)

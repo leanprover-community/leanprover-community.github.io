@@ -40,4 +40,6 @@ All commands below should be typed inside a terminal.
   pipx install mathlibtools
   ```
 
+## Lean Projects
+
 You can now read instructions about creating and working on [Lean projects](project.html)
