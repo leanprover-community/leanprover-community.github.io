@@ -43,6 +43,6 @@ reading the bash script that will be downloaded below:
   sudo pip3 install mathlibtools
   ```
 
-## Creating a Lean Project
+## Lean Projects
 
 Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)

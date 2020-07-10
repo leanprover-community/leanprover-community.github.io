@@ -21,6 +21,9 @@ The fast way is: open a terminal and type:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh)" && source ~/.profile
 ```
 
-You can now read instructions about creating and working on [Lean projects](project.html).
+## Lean Projects
+
+Now that you have a working installation of Lean, you can now read instructions about creating and working on [Lean projects](project.html)
+
 If you encounter any `command not found` errors when opening a new terminal,
 logging out from MacOS and logging in again should fix it.
