@@ -31,7 +31,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>An overview of mathlib</title>
+	<title>Mathematics in mathlib</title>
   </head>
   <body>
   <div id="wrapper">
@@ -127,56 +127,654 @@
   </nav>
   <div class="container-sm mt-4">
 	  
-<h1 id="an-overview-of-mathlib" class="markdown-heading">An overview of mathlib <a class="hover-link" href="#an-overview-of-mathlib">#</a></h1>
-<p>Note that mathlib is currently being actively developed, and new things tend to appear on almost a weekly basis. In particular, the list below might get out of date very quickly. This page was last updated on 27th December 2019.</p>
-<p>We have a specific page listing topics in <a href="undergrad.html">undergraduate mathematics</a>.</p>
-<h3 id="algebra" class="markdown-heading">Algebra <a class="hover-link" href="#algebra">#</a></h3>
-<p>Groups. Subgroups, quotients, cosets, centralizers, free groups, abelianisation, Sylow 1.
-Rings. primes and irreducibles, characteristic of a ring, ideals, fields, Euclidean domains, principal ideal domains, unique factorization domains, Noetherian rings. Ordered rings and fields. Polynomials and power series. Localisation.
-Modules over a ring, direct sums and limits, tensor products.
-Lie algebras (definition and basic properties).
-Fields: minimal polynomials, finite extensions, algebraic extensions, splitting fields, perfect closure, finite fields.
-Vector spaces, bases, finite-dimensional spaces, matrices, linear maps, dual spaces, bilinear and sesquilinear forms.</p>
-<p><a href="theories/linear_algebra.html">See here for more details information about linear algebra in mathlib</a>.</p>
-<h3 id="number-theory" class="markdown-heading">Number theory <a class="hover-link" href="#number-theory">#</a></h3>
-<p>The <a href="theories/naturals.html">naturals</a>, the integers, the rationals.
-Primes, uniqueness of factorization. GCDs. Congruences and modular arithmetic. Z is an ED/PID/UFD. Sums of two and four squares, Pell’s equation in cases needed for Matiyasevich’s theorem (d=a^2-1). Euler’s Totient function. Quadratic reciprocity.
-<a href="theories/padics.html">p-adic numbers</a>. Hensel’s Lemma.</p>
-<h3 id="analysis" class="markdown-heading">Analysis <a class="hover-link" href="#analysis">#</a></h3>
-<p>The reals and complex numbers.
-Basic theory of differentiation of functions of one and several variables. The Intermediate Value Theorem, Rolle's theorem, the Mean Value Theorem. The chain rule, product rule, mean value theorem, C^n and C^infty functions.
-Sups and Infs. Sequences and sums. Sum of a geometric progression, exp and log, trig and inverse trig functions, basic properties (double angle formulae etc). Pi, and proof that it’s between 3.141 and 3.142
-The complex numbers are algebraically closed.
-Definition of real manifold, manifolds with corners. Vector bundles, tangent bundle.</p>
-<h3 id="topology" class="markdown-heading">Topology <a class="hover-link" href="#topology">#</a></h3>
-<p>Metric spaces. Cauchy sequences, Hausdorff distance and Gromov-Hausdorff distance. Completions. Lipschitz continuous functions.
-Uniform spaces, uniform continuity, completions.
-Topological spaces, open and closed sets, compact sets, connected sets. Separation axioms T0 to T4. Topological groups, rings, fields. Continuous maps, homeomorphisms, the compact-open topology. Sequences, sequential spaces, sequentially continuous functions. The Stone-Cech compactification. Topological fibre bundles. Baire theorem. Normed vector spaces, operator norm.
-Presheaves on a topological space, stalks.</p>
-<p><a href="theories/topology.html">See here for more details information about topology in mathlib</a>.</p>
-<h3 id="measure-theory" class="markdown-heading">Measure theory. <a class="hover-link" href="#measure-theory">#</a></h3>
-<p>Sigma algebras, measure spaces, Borel measurable functions, probability spaces, the Lebesgue integral, L^1 spaces, the Bochner integral, the Giry monad (i.e. measures on a measurable space form a measurable space).</p>
-<h3 id="category-theory" class="markdown-heading">Category theory <a class="hover-link" href="#category-theory">#</a></h3>
-<p>Categories, small and large categories.
-Functors, full and faithful functors, natural transformations, the Yoneda lemma. Equivalence of categories, sums, products, limits, adjoints. Monoidal categories.
-The category of commutative rings, the category of modules over a ring, the category of measurable spaces.</p>
-<p><a href="theories/category_theory.html">See here for more detailed information about category theory in mathlib</a>.</p>
-<h3 id="other-mathematical-theories-and-objects" class="markdown-heading">Other mathematical theories and objects. <a class="hover-link" href="#other-mathematical-theories-and-objects">#</a></h3>
-<p>Ordinals and cardinals. A model of ZFC.
-Continued fractions. Turing machines, the Halting problem.
-Conway games. The Fibonacci sequence. The hyperreals. Cubing a cube.</p>
-<p><a href="theories/sets.html">See here for more detailed information about set-like objects in mathlib</a>.</p>
+
+<div class="row mt-3">
+  <div class="col">
+	<h1>A mathlib overview</h1>
+
+	<p>
+	The goal of this web page is to give a rough list of topics
+	currently covered in mathlib, and provide pointers for exploration.
+	This is not meant to be an exhaustive list, and could be outdated
+	(see the <a href="mathlib_docs/">full index</a> for exhaustive
+	and up to date information).
+	</p>
+
+	<p>
+	Here topics are listed in the greatest generality we currently have
+	in mathlib, hence some things may be difficult to recognize. We also
+	have a page dedicated to 
+	<a href="undergrad.html">undergraduate mathematics</a> which may
+	be easier to read, as well as a page listing undergraduate maths topics
+	that are 
+	<a href="undergrad_todo.html">not yet in mathlib</a>.
+	</p>
+
+	
+	<h4>General algebra</h4>
+	  
+	  <p class="ml-4 mb-2">
+	  <b>Category theory</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.small_category">small category</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor">functor</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/natural_transformation.html#category_theory.nat_trans">natural transformation</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/yoneda.html#category_theory.yoneda">Yoneda embedding</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/adjunction/basic.html#category_theory.adjunction">adjunction</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">comma category</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/limits/limits.html#category_theory.limits.is_limit">limits</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebraic_geometry/presheafed_space.html#algebraic_geometry.PresheafedSpace">presheaved spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/monoidal/category.html#category_theory.monoidal_category">monoidal category</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/closed/cartesian.html#category_theory.cartesian_closed">cartesian closed</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/abelian/basic.html#category_theory.abelian">abelian categories</a>.
+		
+		
+		  
+		  See also our documentation page about <a href="theories/category_theory.html">category theory</a>.
+		  
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Numbers</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat">natural numbers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int">integers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/rat/basic.html#rat">rational number</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued fractions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real">real numbers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/real/ereal.html#ereal">extended real numbers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/complex/basic.html#complex">complex numbers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/padics/padic_numbers.html#padic">$p$-adic numbers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/padics/padic_integers.html#padic_int">$p$-adic integers</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/real/hyperreal.html#hyperreal">hyper-real numbers</a>.
+		
+		
+		  
+		  See also our documentation pages about <a href="theories/naturals.html">natural numbers</a>,  and <a href="theories/padics.html">$p$-adic numbers</a>.
+		  
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Group Theory</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/defs.html#group">group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom">group morphism</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/subgroup.html#subgroup">subgroup</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/subgroup.html#subgroup.closure">subgroup generated by a subset</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html#quotient_group.group">quotient group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html#quotient_add_group.quotient_ker_equiv_range">first isomorphism theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/abelianization.html#abelianization">abelianization</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html#free_group">free group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#mul_action">group action</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html#is_cyclic">cyclic group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.perm">permutation group of a type</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Rings</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/ring.html#ring">ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/ring.html#ring_hom">ring morphisms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/CommRing/basic.html#Ring">the category of rings</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/subring.html#is_subring">subring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/noetherian.html#is_noetherian_ring">noetherian ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_ring.html#ordered_ring">ordered ring</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Ideals and Quotients</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#ideal">ideal of a commutative ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/ideals.html#ideal.quotient">quotient rings</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/ideals.html#ideal.is_prime">prime ideals</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebraic_geometry/prime_spectrum.html#prime_spectrum">prime spectrum</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebraic_geometry/prime_spectrum.html#prime_spectrum.zariski_topology">Zariski topology</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/ideals.html#ideal.is_maximal">maximal ideals</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/ideal_operations.html#ideal.quotient_inf_ring_equiv_pi_quotient">Chinese remainder theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html#localization">localization</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Divisibility in integral domains</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/associated.html#irreducible">irreducible elements</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/coprime.html#is_coprime">coprime elements</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/unique_factorization_domain.html#unique_factorization_domain">unique factorisation domain</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/gcd_domain.html#gcd_domain.gcd">greatest common divisor</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/gcd_domain.html#gcd_domain.lcm">least common multiple</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/principal_ideal_domain.html#submodule.is_principal">principal ideal domain</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/euclidean_domain.html#euclidean_domain">Euclidean domains</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/int/gcd.html#nat.xgcd">Euclid's' algorithm</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/totient.html#nat.totient">Euler's totient function ($\varphi$)</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/number_theory/sum_two_squares.html#nat.prime.sum_two_squares">sums of two squares</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/number_theory/sum_four_squares.html#nat.sum_four_squares">sums of four squares</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/number_theory/quadratic_reciprocity.html#zmod.quadratic_reciprocity">quadratic reciprocity</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Polynomials and power series</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/polynomial.html#polynomial">polynomial in one indeterminate</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/polynomial.html#polynomial.roots">roots of a polynomial</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/polynomial.html#polynomial.root_multiplicity">multiplicity</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/field_theory/separable.html#polynomial.separable">separable polynomial</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/polynomial.html#polynomial.euclidean_domain">$K[X]$ is Euclidean</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/polynomial/basic.html#polynomial.is_noetherian_ring">Hilbert basis theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/associated.html#irreducible">irreducible polynomial</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/eisenstein_criterion.html#polynomial.irreducible_of_eisenstein_criterion">Eisenstein's criterion</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/mv_polynomial.html#mv_polynomial">polynomial in several indeterminates</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/field_theory/chevalley_warning.html#char_dvd_card_solutions">Chevalley-Warning theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/power_series.html#power_series">power series</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/padics/hensel.html#hensels_lemma">Hensel's lemma</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Algebras over a ring</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/algebra.html#algebra">associative algebra over a commutative ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">Lie algebra</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Field Theory</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/field.html#field">fields</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/char_p.html#ring_char">characteristic of a ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/char_zero.html#char_zero">characteristic zero</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/char_p.html#char_p">characteristic p</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/char_p.html#frobenius">Frobenius morphisms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/polynomial.html#complex.exists_root">$\C$ is algebraically closed</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/localization.html#fraction_map">field of fractions of an integral domain</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/algebraic.html#algebra.is_algebraic">algebraic extensions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/adjoin_root.html#adjoin_root">rupture field</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/field_theory/splitting_field.html#polynomial.splitting_field">splitting field</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/field_theory/perfect_closure.html#perfect_closure">perfect closure</a>.
+		
+		
+	  </p>
+      
+	  
+	
+	<h4>Linear algebra</h4>
+	  
+	  <p class="ml-4 mb-2">
+	  <b>Fundamentals</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module">module</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map">linear map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Module/basic.html#Module">the category of modules over a ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#vector_space">vector space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html#submodule.quotient">quotient space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/tensor_product.html#tensor_product">tensor product</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/noetherian.html#is_noetherian">noetherian module</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#is_basis">bases</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/multilinear.html#multilinear_map">multilinear map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html#linear_map.general_linear_group">general linear group</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Duality</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dual.html#module.dual">dual vector space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dual.html#is_basis.dual_basis">dual basis</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Finite-dimensional vector spaces</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite-dimensionality</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#module_equiv_finsupp">isomorphism with $K^n$</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dual.html#vector_space.eval_equiv">isomorphism with bidual</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Matrices</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html#matrix">commutative-ring-valued matrices</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html#linear_map.to_matrix">matrix representation of a linear map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/determinant.html#matrix.det">determinant</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/nonsingular_inverse.html#matrix.nonsing_inv">invertibility</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Endomorphism polynomials</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/field_theory/minimal_polynomial.html#minimal_polynomial">minimal polynomial</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/char_poly.html#char_poly">characteristic polynomial</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/char_poly.html#char_poly_map_eval_self">Cayley-Hamilton theorem</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Bilinear and Quadratic Forms</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#bilin_form">bilinear forms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#alt_bilin_form.is_alt">alternating bilinear forms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#sym_bilin_form.is_sym">symmetric bilinear forms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#bilin_form.to_matrix">matrix representation</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html#quadratic_form">quadratic form</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html#quadratic_form.polar">polar form of a quadratic</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/real_inner_product.html#inner_product_space">Euclidean vector spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/real_inner_product.html#inner_mul_inner_self_le">Cauchy-Schwarz inequality</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#bilin_form.is_self_adjoint">self-adjoint endomorphism</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Affine and Euclidian Geometry</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/affine_space.html#affine_space">affine spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/affine_space.html#affine_map">affine functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/affine_space.html#affine_subspace">affine subspaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/affine_space.html#finset.affine_combination">barycenters</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/affine_space.html#affine_space.span_points">affine spans</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/geometry/euclidean.html#euclidean_affine_space">Euclidean affine space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/geometry/euclidean.html#inner_product_geometry.angle">angles of vectors</a>.
+		
+		
+	  </p>
+      
+	  
+		<p>
+	    
+		See also our documentation page about <a href="theories/linear_algebra.html">linear algebra</a>.
+		
+		</p>
+	  
+	
+	<h4>Topology</h4>
+	  
+	  <p class="ml-4 mb-2">
+	  <b>General topology</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter">filter</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.tendsto">limit of a map with respect to filters</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous function</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/category/Top/basic.html#Top">the category of topological spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/order.html#topological_space.induced">induced topology</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/maps.html#is_open_map">open map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/maps.html#is_closed_map">closed map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#closure">closure</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#cluster_pt">cluster point</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/separation.html#t2_space">Hausdorff space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/sequences.html#sequential_space">sequential space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/dense_embedding.html#dense_inducing.extend">extension by continuity</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/subset_properties.html#is_compact">compactness in terms of filters</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/subset_properties.html#compact_iff_finite_subcover">compactness in terms of open covers (Borel-Lebesgue)</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/subset_properties.html#connected_space">connectedness</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/compact_open.html#continuous_map.compact_open">compact open topology</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/stone_cech.html#stone_cech">Stone-Cech compactification</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/topological_fiber_bundle.html#is_topological_fiber_bundle">topological fiber bundle</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Uniform notions</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space">uniform space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric.uniform_continuous_iff">uniformly continuous functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/uniform_convergence.html#tendsto_uniformly">uniform convergence</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#cauchy">Cauchy filters</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#cauchy_seq">Cauchy sequences</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">completeness</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measure_space.html#completion">completion</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compact_separated.html#compact_space.uniform_continuous_of_continuous">Heine-Cantor theorem</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Topological algebra</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/ordered.html#order_topology">order topology</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/ordered.html#intermediate_value_Icc">intermediate value theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/ordered.html#is_compact.exists_forall_le">extreme value theorem</a>, 
+		
+		<a href="/mathlib_docs/order/liminf_limsup.html">limit infimum and supremum</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/group.html#topological_group">topological group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/group_completion.html#uniform_space.completion.add_comm_group">completion of an abelian topological group</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/infinite_sum.html#has_sum">infinite sum</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/ring.html#topological_ring">topological ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/uniform_ring.html#uniform_space.completion.ring">completion of a topological ring</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/module.html#topological_module">topological module</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Metric spaces</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric.ball">ball</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/sequences.html#metric.compact_iff_seq_compact">sequential compactness is equivalent to compactness (Bolzano-Weierstrass)</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric.compact_iff_closed_bounded">Heine-Borel theorem (proper metric space version)</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/lipschitz.html#lipschitz_with">Lipschitz functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.exists_fixed_point">contraction mapping theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/baire.html#dense_Inter_of_open">Baire theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/bounded_continuous_function.html#bounded_continuous_function.arzela_ascoli">Arzela-Ascoli theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/hausdorff_distance.html#emetric.Hausdorff_edist">Hausdorff distance</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gromov_hausdorff.html#Gromov_Hausdorff.GH_space">Gromov-Hausdorff space</a>.
+		
+		
+	  </p>
+      
+	  
+		<p>
+	    
+		See also our documentation page about <a href="theories/topology.html">topology</a>.
+		
+		</p>
+	  
+	
+	<h4>Analysis</h4>
+	  
+	  <p class="ml-4 mb-2">
+	  <b>Normed vector spaces</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed vector space over a normed field</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space.topological_vector_space">topology on a normed vector space</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/finite_dimension.html#linear_equiv.to_continuous_linear_equiv">equivalence of norms in finite dimension</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/finite_dimension.html#submodule.complete_of_finite_dimensional">finite dimensional normed spaces over complete normed fields are complete</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/finite_dimension.html#finite_dimensional.proper">Heine-Borel theorem (finite dimensional normed spaces are proper)</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/module.html#continuous_linear_map">continuous linear maps</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/operator_norm.html#linear_map.mk_continuous">norm of a continuous linear map</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/banach.html#open_mapping">Banach open mapping theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#summable_of_summable_norm">absolutely convergent series in Banach spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/hahn_banach.html#exists_extension_norm_eq">Hahn-Banach theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/topology/bounded_continuous_function.html#bounded_continuous_function.complete_space">completeness of spaces of bounded continuous normed-space-valued functions</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Differentiability</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#has_deriv_at">differentiable functions between normed vector spaces</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#deriv.comp">derivative of a composite function</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#has_strict_deriv_at.of_local_left_inverse">derivative of a reciprocal function</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/local_extr.html#exists_deriv_eq_zero">Rolle's theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/mean_value.html#exists_ratio_deriv_eq_ratio_slope">mean value theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/times_cont_diff.html#times_cont_diff">$C^k$ functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#deriv_mul">Leibniz formula</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/local_extr.html#is_local_min.fderiv_eq_zero">local extrema</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/inverse.html#has_strict_deriv_at.to_local_inverse">inverse function theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/implicit.html#implicit_function_data.implicit_function">implicit function theorem</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Convexity</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/convex/basic.html#convex_on">convex functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/mean_value.html#convex_on_of_deriv2_nonneg">characterizations of convexity</a>, 
+		
+		<a href="/mathlib_docs/analysis/mean_inequalities.html">convexity inequalities</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Special functions</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/analysis/special_functions/exp_log.html#real.log">logarithms</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/complex/exponential.html#real.exp">exponential</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/complex/exponential.html#real.sin">circular trigonometric functions</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/data/complex/exponential.html#real.sinh">hyperbolic trigonometric functions</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Measures and integral Calculus</b>
+		
+		<a href="None">Measure theory</a>, 
+		
+		<a href="None">Integration</a>, 
+		
+		<a href="None">Differentiable manifolds</a>.
+		
+		
+	  </p>
+      
+	  
+	
+	<h4>Computer science and set theory</h4>
+	  
+	  <p class="ml-4 mb-2">
+	  <b>Computer science</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/computability/partrec.html#computable">computable function</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/computability/turing_machine.html#turing.TM0.machine">Turing machine</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/computability/halting.html#computable_pred.halting_problem">halting problem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/computability/halting.html#computable_pred.rice">Rice theorem</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/set_theory/game.html#game">combinatorial game</a>.
+		
+		
+	  </p>
+      
+	  <p class="ml-4 mb-2">
+	  <b>Set theory</b>
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal.html#ordinal">ordinal</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/set_theory/cardinal.html#cardinal">cardinal</a>, 
+		
+		<a href="https://leanprover-community.github.io/mathlib_docs/set_theory/zfc.html#Set">model of ZFC</a>.
+		
+		
+	  </p>
+      
+	  
+	
 
   </div>
 </div>
 
-  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/mathlib-overview.md">Suggest edits to this page on GitHub</a>
-    </li>
-  </ul>
-</nav>
+  </div>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
