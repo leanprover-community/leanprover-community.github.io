@@ -230,6 +230,12 @@ class Overview:
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
+with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
+    undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+
+with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
+    theories = yaml.safe_load(h_file)
+
 bib = pybtex.database.parse_file('lean.bib')
 
 about_lean_dic = {}
@@ -346,8 +352,9 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
                                'community': (DATA/'community.md').read_text( encoding='utf-8')}),
-                ('undergrad.html', {'overviews': overviews}),
-                ('undergrad_todo.html', {'overviews': overviews}),
+                ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
+                ('undergrad.html', {'overviews': undergrad_overviews}),
+                ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
