@@ -34,9 +34,9 @@ Algebra:
 - `*`: mul
 - `^`: pow
 - `/`: div
-- `•` (`\bu`): is smul
-- `⁻¹` (`\-1`): is inv
-- `∣` (`\|`): is dvd
+- `•` (`\bu`): smul
+- `⁻¹` (`\-1`): inv
+- `∣` (`\|`): dvd
 
 Lattices:
 - `<`: lt
