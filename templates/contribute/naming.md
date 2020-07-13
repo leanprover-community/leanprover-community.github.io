@@ -1,6 +1,51 @@
 # Mathlib naming conventions #
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
+### Names of symbols ###
+
+When translating the statements of theorems into words, this dictionary is often used:
+
+Logic:
+- `∨` (`\or`): or
+- `∧` (`\and`): and
+- `→` (`\r`): of (with order reversed and sometimes only the conclusion is stated)
+- `↔` (`\iff`): iff (sometimes omitted along with the right hand side of the iff)
+- `¬` (`\n`): not
+- `∃` (`\ex`): exists / bex (bounded exists)
+- `∀` (`\fo`): all / forall / ball (bounded forall)
+- `=`: eq (often omitted)
+- `≠` (`\ne`): ne
+- `∘` (`\o`): comp
+
+Set:
+- `∈` (`\in`): mem
+- `∪` (`\cup`): union
+- `∩` (`\cap`): inter
+- `⋃` (`\bigcup`): Union / bUnion
+- `⋂` (`\bigcap`): Inter / bInter
+- `\` (`\\`): sdiff
+- `ᶜ` (`\^c`): compl
+
+Algebra:
+- `0`: zero
+- `+`: add
+- `-`: neg (unary) / sub (binary)
+- `1`: one
+- `*`: mul
+- `^`: pow
+- `/`: div
+- `•` (`\bu`): is smul
+- `⁻¹` (`\-1`): is inv
+- `∣` (`\|`): is dvd
+
+Lattices:
+- `<`: lt
+- `≤` (`\le`): le
+- `⊔` (`\sqcup`): sup
+- `⊓` (`\sqcap`): inf
+- `⨆` (`\Sqcup`): Sup
+- `⨅` (`\Sqcap`): Inf
+
 ### General conventions ###
 
 Identifiers are generally lower case with underscores. For the most
