@@ -14,6 +14,7 @@ full [leanproject documentation](../leanproject.html).
 If you are really curious, you can also read 
 [how pieces fit together](../toolchain.html).
 
+There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
 
 ## Working on an existing project
 
