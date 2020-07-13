@@ -11,6 +11,7 @@ to make the process of contributing as smooth as possible.
    - The [documentation guidelines](doc.html).
    
 Once you have code that you'd like to contribute, you should open a PR.
+There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking you through the process of making a PR on YouTube.
   
 ## Making a Pull Request (PR)
 3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.
