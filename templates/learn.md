@@ -1,7 +1,7 @@
 # Learning Lean
 
-There are ways to start learning Lean, depending on your background and
-taste. There are all fun and rewarding, but also difficult and
+There are many ways to start learning Lean, depending on your background and
+taste. They are all fun and rewarding, but also difficult and
 occasionally frustrating. Proof assistants are still difficult to use,
 and you cannot expect to become proficient after one afternoon of
 learning.
@@ -32,6 +32,10 @@ learning.
 
 * Once you know the basics, you can also learn by solving Lean puzzles
   on [Codewars](https://www.codewars.com/?language=lean).
+
+Whatever resource you choose to use from the above list, it could
+be useful to have a copy of our [tactic cheat sheet](img/lean-tactics.pdf)
+at hand, for reference.
 
 ## Textbooks
 
