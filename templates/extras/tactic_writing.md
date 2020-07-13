@@ -1,5 +1,17 @@
 # Tutorial: tactic writing in Lean
 
+This is a tutorial for getting started writing your own tactics in Lean.
+It is intended for an audience that does not necessarily have
+experience working with monads in a functional programming langauge
+(e.g. most mathematicians).
+
+Other useful resources while learning to write tactics include:
+* Rob Lewis' [video tutorials](https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) on metaprogramming in Lean from
+  Lean for the Curious Mathematician 2020.
+* Chapter 7 of the [Hitchhiker's guide to Logical Verification](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf)
+* the original paper about metaprogramming Lean
+  [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf)
+
 ## Monadology
 
 Tactics are programs that act on the proof state. But Lean is a
