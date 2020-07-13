@@ -5,6 +5,8 @@ are using MacOS.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for assistance.
 
+There is a [video walkthrough](https://www.youtube.com/watch?v=NOGWsCNm_FY) of these instructions on YouTube.
+
 ## Installing Lean and mathlib
 
 Here we will discuss the fast way, assuming a lot of trust from you. It

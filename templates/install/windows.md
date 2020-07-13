@@ -6,6 +6,8 @@ This document explains how to get started with Lean and mathlib.
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
 
+There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
+
 We'll need to set up Lean, an editor that knows about Lean, and `mathlib` (the standard library).
 Rather than installing Lean directly, we'll install a small program called `elan` which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
