@@ -1,6 +1,65 @@
 # Mathlib naming conventions #
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
+### Names of symbols ###
+
+When translating the statements of theorems into words, this dictionary is often used:
+
+Logic:
+
+| symbol | shortcut | name                      | notes                                                               |
+|--------|----------|---------------------------|---------------------------------------------------------------------|
+| `∨`    | `\or`    | `or`                      |                                                                     |
+| `∧`    | `\and`   | `and`                     |                                                                     |
+| `→`    | `\r`     | `of`                      | the conclusion is stated first and the hypotheses are often omitted |
+| `↔`    | `\iff`   | `iff`                     | sometimes omitted along with the right hand side of the iff         |
+| `¬`    | `\n`     | `not`                     |                                                                     |
+| `∃`    | `\ex`    | `exists` / `bex`          | `bex` stands for "bounded exists"                                   |
+| `∀`    | `\fo`    | `all` / `forall` / `ball` | `ball` stands for "bounded forall"                                  |
+| `=`    |          | `eq`                      | often omitted                                                       |
+| `≠`    | `\ne`    | `ne`                      |                                                                     |
+| `∘`    | `\o`     | `comp`                    |                                                                     |
+
+Set:
+
+| symbol | shortcut  | name               | notes |
+|--------|-----------|--------------------|-------|
+| `∈`    | `\in`     | `mem`              |       |
+| `∪`    | `\cup`    | `union`            |       |
+| `∩`    | `\cap`    | `inter`            |       |
+| `⋃`    | `\bigcup` | `Union` / `bUnion` |       |
+| `⋂`    | `\bigcap` | `Inter` / `bInter` |       |
+| `\`    | `\\`      | `sdiff`            |       |
+| `ᶜ`    | `\^c`     | `compl`            |       |
+
+Algebra:
+
+| symbol | shortcut | name          | notes                                                       |
+|--------|----------|---------------|-------------------------------------------------------------|
+| `0`    |          | `zero`        |                                                             |
+| `+`    |          | `add`         |                                                             |
+| `-`    |          | `neg` / `sub` | `neg` for the unary function, `sub` for the binary function |
+| `1`    |          | `one`         |                                                             |
+| `*`    |          | `mul`         |                                                             |
+| `^`    |          | `pow`         |                                                             |
+| `/`    |          | `div`         |                                                             |
+| `•`    | `\bu`    | `smul`        |                                                             |
+| `⁻¹`   | `\-1`    | `inv`         |                                                             |
+| `∣`    | `\|`     | `dvd`         |                                                             |
+| `∑`    | `\sum`   | `sum`         |                                                             |
+| `∏`    | `\prod`  | `prod`        |                                                             |
+
+Lattices:
+
+| symbol | shortcut | name  | notes |
+|--------|----------|-------|-------|
+| `<`    |          | `lt`  |       |
+| `≤`    | `\le`    | `le`  |       |
+| `⊔`    | `\sup`   | `sup` |       |
+| `⊓`    | `\inf`   | `inf` |       |
+| `⨆`    | `\Sup`   | `Sup` |       |
+| `⨅`    | `\Inf`   | `Inf` |       |
+
 ### General conventions ###
 
 Identifiers are generally lower case with underscores. For the most
