@@ -46,6 +46,8 @@ Algebra:
 | `•`    | `\bu`    | `smul`        |                                                             |
 | `⁻¹`   | `\-1`    | `inv`         |                                                             |
 | `∣`    | `\|`     | `dvd`         |                                                             |
+| `∑`    | `\sum`   | `sum`         |                                                             |
+| `∏`    | `\prod`  | `prod`        |                                                             |
 
 Lattices:
 
@@ -53,10 +55,10 @@ Lattices:
 |--------|----------|-------|-------|
 | `<`    |          | `lt`  |       |
 | `≤`    | `\le`    | `le`  |       |
-| `⊔`    | `\sqcup` | `sup` |       |
-| `⊓`    | `\sqcap` | `inf` |       |
-| `⨆`    | `\Sqcup` | `Sup` |       |
-| `⨅`    | `\Sqcap` | `Inf` |       |
+| `⊔`    | `\sup`   | `sup` |       |
+| `⊓`    | `\inf`   | `inf` |       |
+| `⨆`    | `\Sup`   | `Sup` |       |
+| `⨅`    | `\Inf`   | `Inf` |       |
 
 ### General conventions ###
 
