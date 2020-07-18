@@ -26,7 +26,7 @@ open set
 
 ## Formal Definition
 
-A **minimum working example** is a code snippet that can be copied-and-pasted into an empty Lean file and still have the same features (working) and that does not include unnecessary details (minimum).
+A **minimal working example** is a code snippet that can be copied-and-pasted into an empty Lean file and still have the same features (working) and that does not include unnecessary details (minimal).
 
 [Here](https://stackoverflow.com/help/minimal-reproducible-example) is the StackOverflow guide to making MWEs.
 
