@@ -176,18 +176,6 @@ so that leanproject will look for caches at
 for one invocation using `leanprover --from-url my_url ...`
 (where `...` denotes a command and its arguments).
 
-### Time-stamps diagnostic and repairing
-
-`lean` uses timestamps to decide whether an olean file should be
-recompiled. You can use:
-```
-leanproject check
-```
-to check that every olean from the core library and mathlib is more
-recent than its source. In case there is some issue, `leanproject` will
-propose to reset timestamps. Of course doing so is a good idea only if
-you are sure you didn't want to modify one of those lean files.
-
 ## Troubleshooting
 
 If `leanproject` ends with a mysterious error message, you can run it 
