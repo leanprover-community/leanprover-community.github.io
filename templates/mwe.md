@@ -1,5 +1,31 @@
 # Minimal working examples
 
+## tl;dr
+
+When posting code on Zulip, please include all `import`s and `open`s and `universe`s and `variable`s, so others can simply just cut and paste what you post, and see the same issue that you are seeing. The best way to ensure you have done this is to make a completely new Lean file containing only what you are proposing to post, and checking that it compiles.
+
+Bad example:
+
+```
+#check (univ : set X)
+```
+
+Good example:
+
+```
+import data.set.basic
+
+universe u
+
+variable (X : Type u)
+
+open set
+
+#check (univ : set X)
+```
+
+## Formal Definition
+
 A **minimum working example** is a code snippet that can be copied-and-pasted into an empty Lean file and still have the same features (working) and that does not include unnecessary details (minimum).
 
 [Here](https://stackoverflow.com/help/minimal-reproducible-example) is the StackOverflow guide to making MWEs.
