@@ -142,6 +142,10 @@ with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
 
 decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
 
+num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'thm'])
+num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
+num_defns = len(decl_loc_map) - num_thms - num_meta
+
 def undecorate_arg(arg):
     return ''.join(
         match[4] if match[0] == '' else
@@ -355,6 +359,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
+                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
