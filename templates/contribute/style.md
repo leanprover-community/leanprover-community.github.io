@@ -58,7 +58,7 @@ questions about the design or development of the Lean code.
 ### Module docstrings
 
 After the copyright header and the imports,
-please add a module docstring containing
+please add a module docstring (delimited with `/-!` and `-/`) containing
 
 - a title of the file,
 - a summary of the contents (the main definitions and theorems, proof techniques, etc…)
@@ -67,6 +67,7 @@ please add a module docstring containing
 
 In total, the module docstring should look something like this:
 ```markdown
+/-!
 # Foos and bars
 
 In this file we introduce `foo` and `bar`,
@@ -85,6 +86,7 @@ two main concepts in the theory of xyzzyology.
 ## References
 
 See [Thales600BC] for the original account on Xyzzyology.
+-/
 ```
 
 New bibliography entries should be added to `docs/references.bib`.
@@ -124,14 +126,13 @@ theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) 
 nat.induction_on n H1 (assume m IH, H2 m)
 ```
 
-When a proof rule takes multiple arguments, it is sometimes clearer, and often
+When a proof term takes multiple arguments, it is sometimes clearer, and often
 necessary, to put some of the arguments on subsequent lines. In that case,
 indent each argument.
 ```lean
 open nat
 axiom zero_or_succ (n : nat) : n = zero ∨ n = succ (pred n)
-theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B)
-  (H2 : ∀m, n = succ m → B) : B :=
+theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀m, n = succ m → B) : B :=
 or.elim (zero_or_succ n)
   (assume H3 : n = zero, H1 H3)
   (assume H3 : n = succ (pred n), H2 (pred n) H3)
@@ -348,6 +349,11 @@ begin
 end
 ```
 
+The final step in a `begin ... end` block may be followed by comma,
+but there is no style rule requiring it.
+(Many authors prefer the comma, so that placing the cursor after it displays "goals accomplished"
+in the infoview, but others dislike it on the basis of the disconcerting grammar.)
+
 Often `t0 ; t1` is used to execute `t0` and then `t1` on all new goals. But `;` is not a `,` so
 either write the tactics in one line, or indent the following tacic.
 
@@ -358,6 +364,13 @@ begin
 end
 ```
 
+For single line tactic proofs (or short tactic proofs embedded in a term), 
+it is preferable to use `by ...` rather than `begin ... end`.
+
+If you are using multiple tactics inside a `by ...` block, use braces
+`by { tac1, tac2 }` rather than abusing the `;` operator `by tac1; tac2`,
+which should only be used when multiple goals need to be processed by `tac2`.
+(This style rule is not yet followed in the older parts of mathlib.)
 
 ### Sections ###
 
