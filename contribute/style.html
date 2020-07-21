@@ -174,7 +174,7 @@ the people listed there should be the ones we would reach out to if we had
 questions about the design or development of the Lean code.</p>
 <h3 id="module-docstrings" class="markdown-heading">Module docstrings <a class="hover-link" href="#module-docstrings">#</a></h3>
 <p>After the copyright header and the imports,
-please add a module docstring containing</p>
+please add a module docstring (delimited with <code>/-!</code> and <code>-/</code>) containing</p>
 <ul>
 <li>a title of the file,</li>
 <li>a summary of the contents (the main definitions and theorems, proof techniques, etc…)</li>
@@ -182,7 +182,8 @@ please add a module docstring containing</p>
 <li>references to the literature (if any)</li>
 </ul>
 <p>In total, the module docstring should look something like this:</p>
-<pre><code class="language-markdown"># Foos and bars
+<pre><code class="language-markdown">/-!
+# Foos and bars
 
 In this file we introduce `foo` and `bar`,
 two main concepts in the theory of xyzzyology.
@@ -200,6 +201,7 @@ two main concepts in the theory of xyzzyology.
 ## References
 
 See [Thales600BC] for the original account on Xyzzyology.
+-/
 </code></pre>
 <p>New bibliography entries should be added to <code>docs/references.bib</code>.</p>
 <p>See our <a href="doc.html">documentation requirements</a> for more suggestions and examples.</p>
@@ -227,13 +229,12 @@ of a proof, so that the proof is &quot;flush left&quot; in the file.</p>
 theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) : P n :=
 nat.induction_on n H1 (assume m IH, H2 m)
 </code></pre>
-<p>When a proof rule takes multiple arguments, it is sometimes clearer, and often
+<p>When a proof term takes multiple arguments, it is sometimes clearer, and often
 necessary, to put some of the arguments on subsequent lines. In that case,
 indent each argument.</p>
 <pre><code class="language-lean">open nat
 axiom zero_or_succ (n : nat) : n = zero ∨ n = succ (pred n)
-theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B)
-  (H2 : ∀m, n = succ m → B) : B :=
+theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀m, n = succ m → B) : B :=
 or.elim (zero_or_succ n)
   (assume H3 : n = zero, H1 H3)
   (assume H3 : n = succ (pred n), H2 (pred n) H3)
@@ -411,6 +412,10 @@ begin
     { rw [hb.2.1], trivial } }
 end
 </code></pre>
+<p>The final step in a <code>begin ... end</code> block may be followed by comma,
+but there is no style rule requiring it.
+(Many authors prefer the comma, so that placing the cursor after it displays &quot;goals accomplished&quot;
+in the infoview, but others dislike it on the basis of the disconcerting grammar.)</p>
 <p>Often <code>t0 ; t1</code> is used to execute <code>t0</code> and then <code>t1</code> on all new goals. But <code>;</code> is not a <code>,</code> so
 either write the tactics in one line, or indent the following tacic.</p>
 <pre><code class="language-lean">begin
@@ -418,6 +423,12 @@ either write the tactics in one line, or indent the following tacic.</p>
     simp [a, b, c, d]
 end
 </code></pre>
+<p>For single line tactic proofs (or short tactic proofs embedded in a term),
+it is preferable to use <code>by ...</code> rather than <code>begin ... end</code>.</p>
+<p>If you are using multiple tactics inside a <code>by ...</code> block, use braces
+<code>by { tac1, tac2 }</code> rather than abusing the <code>;</code> operator <code>by tac1; tac2</code>,
+which should only be used when multiple goals need to be processed by <code>tac2</code>.
+(This style rule is not yet followed in the older parts of mathlib.)</p>
 <h3 id="sections" class="markdown-heading">Sections <a class="hover-link" href="#sections">#</a></h3>
 <p>Within a section, you can indent definitions and theorems to make the
 scope salient:</p>
