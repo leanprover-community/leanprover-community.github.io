@@ -98,25 +98,7 @@ See our [documentation requirements](doc.html) for more suggestions and examples
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
 than at the beginning of the next line.
 
-Use two spaces to indent. You can use an extra indent when a long line
-forces a break to suggest the break is artificial rather than
-structural, as in the statement of theorem:
-
-```lean
-open nat
-theorem two_step_induction_on {P : nat → Prop} (a : nat) (H1 : P 0) (H2 : P (succ 0))
-    (H3 : ∀ (n : nat) (IH1 : P n) (IH2 : P (succ n)), P (succ (succ n))) : P a :=
-sorry
-```
-
-If you want to indent to make parameters line up, that is o.k. too:
-```lean
-open nat
-theorem two_step_induction_on {P : nat → Prop} (a : nat) (H1 : P 0) (H2 : P (succ 0))
-                              (H3 : ∀ (n : nat) (IH1 : P n) (IH2 : P (succ n)), P (succ (succ n))) :
-  P a :=
-sorry
-```
+Use two spaces to indent. 
 
 After stating the theorem, we generally do not indent the first line
 of a proof, so that the proof is "flush left" in the file.
