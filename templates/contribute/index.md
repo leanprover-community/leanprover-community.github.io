@@ -31,14 +31,25 @@ There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking
 - See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
 
 ## Lifecycle of a PR
-We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have completed step 3 above")
+
+We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have completed step 3 above".)
+
 On the main page for a PR, on the right-hand side, 
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc. 
-Click on the "labels" header to add or remove labels from the current project. The most important labels are "request-review" and "changes-requested". If you label your PR with "request-review", someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to "changes-requested". You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "request-review" to start the process over again.
+Click on the "labels" header to add or remove labels from the current project. 
 
-After some iteration, a reviewer will "approve" the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
-After responding appropriately to bors (if necessary), the PR will get added to the "merge queue". The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
-Other labels include "WIP" and "blocked-other-PR". A WIP (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. Consider adding the "help wanted" label to directly solicit contributions. The "blocked-other-PR" label means that some specific other PR should be resolved before addressing this one. 
+The most important labels are "request-review" and "changes-requested". If you label your PR with **"request-review"**, someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to **"changes-requested"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "request-review" to start the process over again.
+
+After some iteration, a reviewer will "approve" the PR and the "ready-to-merge" label will be automatically applied to the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
+After responding appropriately to bors (if necessary), the PR will get added to the ["merge queue"](https://app.bors.tech/repositories/24316). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+
+Here are some other frequently-used labels:
+
+- A **"WIP"** (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. 
+
+- Consider adding the **"help wanted"** label to directly solicit contributions.
+
+- The **"blocked-other-PR"** label means that some specific other PR(s) should be resolved before addressing this one. If you add the "blocked-by-PR" label to your PR, please include the PR numbers of the dependencies in the title and PR comment so that others can see at a glance which PRs should be reviewed first.
 
 ## Caching compilation
 
