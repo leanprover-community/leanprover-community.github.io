@@ -14,7 +14,7 @@ Once you have code that you'd like to contribute, you should open a PR.
 There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking you through the process of making a PR on YouTube.
   
 ## Making a Pull Request (PR)
-3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Make your changes on a branch of the main repository.
+3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Please include your GitHub username in your request. Make your changes on a branch of the main repository.
    
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
 5. The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
