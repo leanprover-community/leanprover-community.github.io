@@ -26,7 +26,7 @@ You can make is slightly more convenient to use by ensuring this `bin` folder is
 You can now check your first proof.
 In a file called `test.lean`, type:
 ```lean
-lemma zero_max (m : ℕ) : max 0 m = m :=
+lemma zero_max (m : nat) : max 0 m = m :=
 max_eq_right (nat.zero_le m)
 ```
 Then you can ask Lean to check this proof by running `lean test.lean`. 
@@ -37,13 +37,13 @@ Lean will output an error message.
 That's 99.9% of what Lean and its supporting tool do,
 but the remaining 0.1% will make your life much easier. 
 
-Before turning to that, you need to understand why Lean didn't ask for the definition of `ℕ`, `max`, `max_eq_right` and `nat.zero_le`.
+Before turning to that, you need to understand why Lean didn't ask for the definition of `nat`, `max`, `max_eq_right` and `nat.zero_le`.
 That's because all those are defined in the part of Lean's core library that is automatically loaded by default.
 This default library lives in the `lib` folder you saw after downloading Lean, 
 precisely in `lib/lean/library/init/`.
 You can prevent loading it by starting your `test.lean` with the line `prelude`.
 Then everything will fall apart. 
-Lean will not know about `ℕ`, `max`, or even the equality sign!
+Lean will not know about `nat`, `max`, or even the equality sign!
 And it won't attempt to read the proof of a statement it couldn't understand.
 So you should not keep that `prelude` line.
 
@@ -126,10 +126,10 @@ Lean's answer will include the location of the file defining `max` as well as th
 
 Now tell Lean you want to modify the file `test.lean` to remove the final `m` at the end:
 ```
-{ "command": "sync", "file_name": "test.lean", "content": "lemma zero_max (m : ℕ) : max 0 m = m :=\nmax_eq_right (nat.zero_le)", "seq_num": 3 }
+{ "command": "sync", "file_name": "test.lean", "content": "lemma zero_max (m : nat) : max 0 m = m :=\nmax_eq_right (nat.zero_le)", "seq_num": 3 }
 ```
 Lean will immediately reply with the error message we saw earlier,
-complaining that `nat.zero_le` has type `∀ (n : ℕ), 0 ≤ n` but is expected to have type `0 ≤ m`.
+complaining that `nat.zero_le` has type `∀ (n : nat), 0 ≤ n` but is expected to have type `0 ≤ m`.
 
 By now you should be tired of interacting directly with Lean's interactive mode.
 It's time to install an editor having some plugin that will do the talking with
