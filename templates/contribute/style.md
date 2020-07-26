@@ -376,12 +376,16 @@ short definitions, or to group together a definition and notation.
 
 ## Comments
 
-Use comment delimiters `/- -/` to provide section headers and
-separators, and for long comments. Use `--` for short or in-line
-comments.
+Use module doc delimiters `/-! -/` to provide section headers and
+separators since these get incorporated into the auto-generated docs,
+and use `/- -/` for more technical comments (e.g. TODOs and
+implementation notes) or for comments in proofs.
+Use `--` for short or in-line comments.
 
 Documentation strings for declarations are delimited with `/-- -/`.
-Documentation strings for modules are delimited with `/-! -/`.
+
+See our [documentation requirements](doc.html) for more suggestions
+and examples.
 
 ------
 Copyright (c) 2016 Jeremy Avigad. All rights reserved.
