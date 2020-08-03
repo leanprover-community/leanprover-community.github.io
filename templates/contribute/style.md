@@ -41,7 +41,6 @@ Copyright (c) 2015 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Joe Cool.
 -/
-
 import data.nat
 import algebra.group
 open nat eq.ops
@@ -98,7 +97,7 @@ See our [documentation requirements](doc.html) for more suggestions and examples
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
 than at the beginning of the next line.
 
-Use two spaces to indent. 
+Use two spaces to indent.
 
 After stating the theorem, we generally do not indent the first line
 of a proof, so that the proof is "flush left" in the file.
@@ -346,7 +345,7 @@ begin
 end
 ```
 
-For single line tactic proofs (or short tactic proofs embedded in a term), 
+For single line tactic proofs (or short tactic proofs embedded in a term),
 it is preferable to use `by ...` rather than `begin ... end`.
 
 If you are using multiple tactics inside a `by ...` block, use braces
