@@ -223,6 +223,16 @@ class Overview:
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
+urllib.request.urlretrieve(
+    'https://raw.githubusercontent.com/leanprover-contrib/leanprover-contrib/store-version-history/version_history.yml',
+    DATA/'project_history.yaml'
+)
+
+urllib.request.urlretrieve(
+    'https://raw.githubusercontent.com/leanprover-contrib/leanprover-contrib/store-version-history/projects/projects.yml',
+    DATA/'projects.yaml'
+)
+
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
@@ -231,6 +241,25 @@ with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
+
+@dataclass
+class Project:
+    name: str
+    organization: str
+    description: str
+    maintainers: List[str]
+
+with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
+    oprojects = yaml.safe_load(h_file)
+
+projects = []
+for project in oprojects:
+    p = oprojects[project]
+    projects.append(Project(project, p['organization'], p['description'], p['maintainers']))
+
+
+with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
+    project_history = yaml.safe_load(h_file)
 
 bib = pybtex.database.parse_file('lean.bib')
 
@@ -352,6 +381,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta}),
+                ('lean_projects.html', {'projects': projects}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
