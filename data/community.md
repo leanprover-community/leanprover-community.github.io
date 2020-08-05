@@ -65,3 +65,44 @@ The largest past events were:
 
 * [FoMM 2020](http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
 * [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)
+
+## Community guidelines
+
+We are devoted to developing an open and accepting community
+that welcomes participation from everyone.
+Behavior that is offensive, discriminatory, or aggressive
+will not be tolerated in any form.
+We adopt the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
+These guidelines apply to the 
+[Lean Zulip chat](https://leanprover.zulipchat.com/) 
+and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
+
+The [maintainer team](#maintainers) enforces this code of conduct.
+Jeremy Avigad, Anne Baanen, and Simon Hudon serve as first points of contact
+for reporting any concerns.
+We also provide an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
+to report incidents that violate the community guidelines.
+
+We encourage a policy of de-escalation in the presence of unwelcome behavior.
+If you perceive someone acting in a way that violates our code of conduct,
+please do not respond in the same way; instead, take action to correct the behavior,
+such as reporting it to the moderators.
+
+## Maintainers
+
+Mathlib maintainers are community members who are actively
+developing mathlib and reviewing pull requests.
+Their number grows naturally when new users become
+frequent contributors.
+
+Maintainers have permission to merge pull requests to mathlib
+and access to GitHub administration settings.
+Otherwise they are community members like everyone else.
+Community decisions are discussed and made in public channels.
+In particular, everyone is encouraged to review pull requests
+and to contribute to the [supporting tools](http://github.com/leanprover-community/)
+for Lean and mathlib.
+
+If you are interested in eventually joining the maintainer team,
+we encourage you to participate as much as possible in the review process.
+Please contact the current maintainers when you feel prepared.
