@@ -24,6 +24,8 @@ open set
 #check (univ : set X)
 ```
 
+Tip: If you are using [Mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [extract_goal](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example, you just need to also include the corresponding `import`s and `open`s and `universe`s and `variable`s to create a minimal working examples.
+
 ## Formal Definition
 
 A **minimal working example** is a code snippet that can be copied-and-pasted into an empty Lean file and still have the same features (working) and that does not include unnecessary details (minimal).
