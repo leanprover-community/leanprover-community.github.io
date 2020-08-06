@@ -24,7 +24,8 @@ open set
 #check (univ : set X)
 ```
 
-Tip: If you are using [Mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [extract_goal](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example, you just need to also include the corresponding `import`s and `open`s and `universe`s and `variable`s to create a minimal working examples.
+Tip: If you are using [Mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example.
+Note you still need to include the corresponding `import`s and `open`s and `universe`s and `variable`s as mentioned above.
 
 ## Formal Definition
 
