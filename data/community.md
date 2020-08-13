@@ -57,15 +57,6 @@ page is the right place to see our ongoing efforts.
 If you want to participate in our projects then you can read our
 [contributing guide](contribute/index.html).
 
-## Workshops and conferences
-
-In addition to general formal methods conferences such as CPP and ITP,
-the Lean community gathers at specific events. 
-The largest past events were:
-
-* [FoMM 2020](http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
-* [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)
-
 ## Community guidelines
 
 We are devoted to developing an open and accepting community
