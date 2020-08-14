@@ -16,10 +16,7 @@
         <h6 class="card-title">Author: {{ theorem.author }}</h6>
         {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
         {% for doc in theorem.doc_decls|default([], true) %}
-        <span class="doc-stmt nm">{{ doc.name }}</span>
-        {% for arg in doc.args|default([], true) %} <span class="doc-stmt arg">{{ arg }}</span>{% endfor %}
-        <span class="doc-stmt sep">:</span>
-        <div class="doc-stmt tp">{{ doc.tp }}</div>
+        <div class="doc-stmt">{{ doc.decl_header_html }}</div>
         <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
         {% endfor %}
         {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
