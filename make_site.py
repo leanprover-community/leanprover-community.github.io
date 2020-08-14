@@ -119,8 +119,7 @@ with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
 @dataclass
 class DocDecl:
     name: str
-    args: List[str]
-    tp: str
+    decl_header_html: str
     docs_link: str
     src_link: str
 
@@ -146,12 +145,6 @@ num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'thm'])
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
-def undecorate_arg(arg):
-    return ''.join(
-        match[4] if match[0] == '' else
-        match[1] + match[2] + match[3]
-        for match in re.findall(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', arg))
-
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
@@ -168,8 +161,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     continue
                 doc_decls.append(DocDecl(
                     name=decl,
-                    args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
-                    tp=undecorate_arg(decl_info['type']),
+                    decl_header_html = decl_info['decl_header_html'] if 'decl_header_html' in decl_info else '',
                     docs_link=decl_info['docs_link'],
                     src_link=decl_info['src_link']))
             h.doc_decls = doc_decls
