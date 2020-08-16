@@ -34,20 +34,20 @@ Set:
 
 Algebra:
 
-| symbol | shortcut | name          | notes                                                       |
-|--------|----------|---------------|-------------------------------------------------------------|
-| `0`    |          | `zero`        |                                                             |
-| `+`    |          | `add`         |                                                             |
-| `-`    |          | `neg` / `sub` | `neg` for the unary function, `sub` for the binary function |
-| `1`    |          | `one`         |                                                             |
-| `*`    |          | `mul`         |                                                             |
-| `^`    |          | `pow`         |                                                             |
-| `/`    |          | `div`         |                                                             |
-| `•`    | `\bu`    | `smul`        |                                                             |
-| `⁻¹`   | `\-1`    | `inv`         |                                                             |
-| `∣`    | `\|`     | `dvd`         |                                                             |
-| `∑`    | `\sum`   | `sum`         |                                                             |
-| `∏`    | `\prod`  | `prod`        |                                                             |
+| symbol | shortcut              | name          | notes                                                       |
+| ------ | --------------------- | ------------- | ----------------------------------------------------------- |
+| `0`    |                       | `zero`        |                                                             |
+| `+`    |                       | `add`         |                                                             |
+| `-`    |                       | `neg` / `sub` | `neg` for the unary function, `sub` for the binary function |
+| `1`    |                       | `one`         |                                                             |
+| `*`    |                       | `mul`         |                                                             |
+| `^`    |                       | `pow`         |                                                             |
+| `/`    |                       | `div`         |                                                             |
+| `•`    | `\bu`                 | `smul`        |                                                             |
+| `⁻¹`   | `\-1`                 | `inv`         |                                                             |
+| `∣`    | <code>\\&#124;</code> | `dvd`         |                                                             |
+| `∑`    | `\sum`                | `sum`         |                                                             |
+| `∏`    | `\prod`               | `prod`        |                                                             |
 
 Lattices:
 
