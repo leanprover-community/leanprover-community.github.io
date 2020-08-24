@@ -15,23 +15,56 @@
     <div class="col-12">
       <h1>Lean projects</h1>
     </div>
+    <div class="col-12">
+    <p>
+      While much Lean development takes place in the mathlib repository,
+      there are many other projects using Lean
+      that are developed and maintained by members of the community.
+      We list here a selection.
+      Many of these projects are designed to be imported as dependencies
+      in other developments.
+      At the bottom of this page,
+      you can see a summary of which projects are compatible with which Lean versions.
+      If two projects both support the same Lean version,
+      you can likely use them together.
+    </p>
+
+    <p>
+      To add a project to this list,
+      please see the directions at the
+      <a href="https://github.com/leanprover-contrib/leanprover-contrib">leanprover-contrib</a> page.
+    </p>
+    </div>
   </div>
 
+  <div class="row row-cols-1 row-cols-md-1">
+    {% for project in projects %}
+      <div class="col mb-4">
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">{{ project.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">maintained by 
+          {% for maintainer in project.maintainers %}
+            <a href="https://github.com/{{ maintainer }}">@{{ maintainer }}</a> 
+          {% endfor %}
+        </h6>
+        <p class="card-text">{{ project.description }}</p>
+        </div>
+            <div class="card-footer text-right bg-white">
+              <small><a href="https://github.com/{{ project.organization }}/{{ project.name }}" class="card-link">View on GitHub</a> (★ {{ project.stars }})</small>
+            </div>
+      </div>
+      </div>
+    {% endfor %}
+    </div>
+  
 
-  {% for project in projects %}
+
 
   <div class="row mt-5">
-    <h3><a href="https://github.com/{{ project.organization }}/{{ project.name }}">{{ project.name }}</a></h3>
-  </div>
-  <div class="row mt-5">
-    <p>{{ project.description }}</p>
-  </div>
-
-
-
-  {% endfor %}
-  <div class="row mt-5">
-    <h2>Projects by supported versions</h2>
+    <div class="col-12">
+      <h2>Projects by supported versions</h2>
+    </div>
 
     <div class="col-12">
        <div id="proj_table"></div>
@@ -44,104 +77,26 @@
 {% endblock %}
 
 {% block extrajs %}
-<script type="text/javascript" src="http://localhost:8000/projects.js"></script>
+<script type="text/javascript" src="https://leanprover-contrib.github.io/leanprover-contrib/projects.js"></script>
 
 <script>
 
 var color = Chart.helpers.color;
 var blue = 'rgb(54, 162, 235)'
 
-// function makeBarChart(id, title, data) {
-//     var barChartData = {
-//         labels: data.labels,
-//         datasets: [{
-//             backgroundColor: color(blue).alpha(0.5).rgbString(),
-//             borderColor: blue,
-//             borderWidth: 1,
-//             data: data.data
-//         }]
-//     };
-
-//     var ctx = document.getElementById(id).getContext('2d');
-//     new Chart(ctx, {
-//         type: 'bar',
-//         data: barChartData,
-//         options: {
-//             responsive: true,
-//             legend: {
-//                 display: false,
-//             },
-//             title: {
-//                 display: true,
-//                 text: title
-//             }
-//         }
-//     });
-// }
-
 colors = ['#377eb8',
     '#ff0029',  '#66a61e', '#984ea3', '#00d2d5', '#ff7f00',
     '#af8d00', '#7f80cd', '#b3e900', '#c42e60', '#a65628', '#f781bf',
     '#8dd3c7', '#bebada', '#fb8072']
 
-// function makeLineChart(id, title, stamps, datas, show_title = true,
-//     show_legend = true) {
-//     var ctx = document.getElementById(id).getContext('2d');
-//     var datasets = []
-//     colidx = 0
-//     for (const [name, data] of Object.entries(datas)) {
-//         datasets.push(
-//            { label: name,
-//              fill: false,
-//              borderColor: colors[colidx],
-//              data: data,
-//              cubicInterpolationMode: 'monotone',
-//              pointRadius: 1,
-//            })
-//         colidx = colidx + 1
-//     };
-//     new Chart(ctx, {
-//         type: 'line',
-//         data: {
-//             labels: stamps,
-//             datasets : datasets
-//         },
-//         options: {
-//             title: {
-//                 display: show_title,
-//                 text: title
-//             },
-//             legend: {
-//                 display: show_legend,
-//             },
-//             scales: {
-//                 xAxes: [{
-//                     type: 'time',
-//                     time: {
-//                         unit: 'month',
-//                         parser: moment.unix,
-//                     },
-//                 }]
-//             },
-//         },
-//     });
-// }
-window.onload = function() {
-    // makeBarChart('by_year_month', 'Commits by month', by_year_month)
-    // makeBarChart('by_year', 'Commits by year', by_year)
 
-    // makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
-    // makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
-    // makeLineChart('files_by_date', 'Number of files', files_stamps,
-    //     files_by_date, true, false)
-    // makeLineChart('lines_by_date', 'Number of lines', lines_stamps,
-    //     lines_by_date, true, false)
+window.onload = function() {
 
     var table = new Tabulator("#proj_table", {
         data: projects, //set initial table data
         layout:"fitColumns",
         layoutColumnsOnNewData:true,
-        responsiveLayout:true,
+        responsiveLayout:false,
         columns: project_cols,
         // height: "600px",
     });

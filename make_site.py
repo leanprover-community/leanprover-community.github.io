@@ -16,6 +16,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
 import gzip
+from github import Github
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -224,12 +225,12 @@ class Overview:
         return cls.from_node(f"{index}", title, children, 0)
 
 urllib.request.urlretrieve(
-    'https://raw.githubusercontent.com/leanprover-contrib/leanprover-contrib/store-version-history/version_history.yml',
+    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
     DATA/'project_history.yaml'
 )
 
 urllib.request.urlretrieve(
-    'https://raw.githubusercontent.com/leanprover-contrib/leanprover-contrib/store-version-history/projects/projects.yml',
+    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
     DATA/'projects.yaml'
 )
 
@@ -248,15 +249,22 @@ class Project:
     organization: str
     description: str
     maintainers: List[str]
+    stars: int 
+
+github = Github()
 
 with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
     oprojects = yaml.safe_load(h_file)
 
 projects = []
-for project in oprojects:
+for project in [project for project in oprojects if 'display' not in oprojects[project] or oprojects[project]['display']]:
     p = oprojects[project]
-    projects.append(Project(project, p['organization'], p['description'], p['maintainers']))
+    github_repo = github.get_repo(p['organization'] + '/' + project)
+    stars = github_repo.stargazers_count
+    descr = render_markdown(p['description'])
+    projects.append(Project(project, p['organization'], descr, p['maintainers'], stars))
 
+projects.sort(key = lambda p: p.stars, reverse=True)
 
 with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
     project_history = yaml.safe_load(h_file)
