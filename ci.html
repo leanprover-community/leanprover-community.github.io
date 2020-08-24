@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!--<link rel="stylesheet" href="css/bootstrap.min.css" >-->
+	<link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+	<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Merriweather:700">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) { 
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>CI for Lean projects on GitHub</title>
+  </head>
+  <body>
+  <div id="wrapper">
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Try it!
+          </a>
+		  <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/lean-web-editor">Lean online</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/get_started.html">Install</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Learn
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/learn.html">Resources</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem proving in Lean</a>
+			
+			
+			
+			<a class="dropdown-item" href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">The natural number game</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/mathlib_docs">API documentation</a>
+			
+			
+          </div>
+        </li>
+		
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Community
+          </a>
+		  <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html">Meet us</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover.zulipchat.com/">Zulip chat</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/meet.html#maintainers">Maintainers</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/contribute/index.html">How to contribute</a>
+			
+			
+			
+			<a class="dropdown-item" href="https://leanprover-community.github.io/papers.html">Papers</a>
+			
+			
+          </div>
+        </li>
+		
+      </ul>
+    </div>
+  </nav>
+  <div class="container-sm mt-4">
+	  
+<h1 id="ci-for-lean-projects-on-github" class="markdown-heading">CI for Lean projects on GitHub <a class="hover-link" href="#ci-for-lean-projects-on-github">#</a></h1>
+<p>The Lean community offers a number of <a href="https://docs.github.com/en/actions">GitHub Actions</a> scripts
+to help maintain Lean projects.
+If you include these scripts in your repository,
+they will help to keep your project up-to-date
+and warn you when it fails to build.</p>
+<p>You can copy the text below into corresponding files
+in the <code>/.github/workflows</code> directory of your project.
+For more advanced options,
+see the README files for each action.</p>
+<h2 id="build-project-and-update-codelean-xyzcode-branches" class="markdown-heading">Build project and update <code>lean-x.y.z</code> branches <a class="hover-link" href="#build-project-and-update-codelean-xyzcode-branches">#</a></h2>
+<p>This script will try to build every push made
+to every branch of your repository.
+When commits are pushed to the <code>master</code> branch,
+it will mirror them to the corresponding <code>lean-x.y.z</code> branch,
+where <code>x.y.z</code> is determined by the Lean version
+in <code>leanpkg.toml</code>.</p>
+<p>You can use the build and update actions separately,
+but we recommend combining them as in the script below.</p>
+<ul>
+<li><a href="https://github.com/leanprover-contrib/lean-build-action">lean-build-action</a></li>
+<li><a href="https://github.com/leanprover-contrib/update-versions-action">update-versions-action</a></li>
+</ul>
+<p><code>/.github/workflows/lean_build.yml</code></p>
+<pre><code class="language-yaml">on:
+  push:
+
+jobs:
+  update_lean_xyz_branch_and_build:
+    runs-on: ubuntu-latest
+    name: Update lean-x.y.z branch and build project
+    steps:
+
+    - name: checkout project
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: update branch
+      if: github.ref == &#x27;refs/heads/master&#x27;
+      uses: leanprover-contrib/update-versions-action@master
+
+    - name: build project
+      uses: leanprover-contrib/lean-build-action@master
+</code></pre>
+<h2 id="upgrade-lean-and-mathlib-versions-on-schedule" class="markdown-heading">Upgrade Lean and mathlib versions on schedule <a class="hover-link" href="#upgrade-lean-and-mathlib-versions-on-schedule">#</a></h2>
+<p>This script will try once a day to update the versions
+of Lean, mathlib, and any other projects that yours depends on.
+If it succeeds, it will push the new <code>leanpkg.toml</code>
+to your <code>master</code> branch.
+If it fails, it will open an issue on your project.
+(Don't worry, it won't spam you with repeated failures.)</p>
+<p>You can change the schedule and frequency of the upgrade
+by modifying the <a href="https://crontab.guru/">cron schedule expression</a>.</p>
+<ul>
+<li><a href="https://github.com/leanprover-contrib/lean-upgrade-action">lean-upgrade-action</a></li>
+</ul>
+<p><code>/.github/workflows/upgrade_lean.yml</code></p>
+<pre><code class="language-yaml">on:
+  schedule:
+    - cron: &#x27;0 2 * * *&#x27; # once a day at 2am UTC
+
+jobs:
+  upgrade_lean:
+    runs-on: ubuntu-latest
+    name: Bump Lean and dependency versions
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v2
+      - name: upgrade Lean and dependencies
+        uses: leanprover-contrib/lean-upgrade-action@master
+        with:
+          repo: ${{ github.repository }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: update version branches
+        uses: leanprover-contrib/update-versions-action@master
+</code></pre>
+
+  </div>
+</div>
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/ci.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+</nav>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
