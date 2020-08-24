@@ -1,6 +1,6 @@
 # CI for Lean projects on GitHub
 
-The Lean community offers a number of GitHub Actions scripts
+The Lean community offers a number of [GitHub Actions](https://docs.github.com/en/actions) scripts
 to help maintain Lean projects.
 If you include these scripts in your repository,
 they will help to keep your project up-to-date
