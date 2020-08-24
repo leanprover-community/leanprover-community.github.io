@@ -6,24 +6,24 @@ This means a folder containing in particular a git repository and a file
 `leanpkg.toml` that gathers information about dependencies of the
 project, including for instance the version of Lean that should be used.
 
-Managing all this is done by a little python program called `leanproject`. 
+Managing all this is done by a little python program called `leanproject`.
 This page describes the basic use of this tool, and should be sufficient
-for everyday use. 
+for everyday use.
 If this is not enough for your purposes, you can read the
 full [leanproject documentation](../leanproject.html).
-If you are really curious, you can also read 
+If you are really curious, you can also read
 [how pieces fit together](../toolchain.html).
 
 There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
 
 ## Working on an existing project
 
-Suppose you want to work on an existing project. As example, we will take 
-[the tutorial project](https://github.com/leanprover-community/tutorials). 
+Suppose you want to work on an existing project. As example, we will take
+[the tutorial project](https://github.com/leanprover-community/tutorials).
 Open a terminal.
 
 * If you have not logged in since you installed Lean and mathlib, then
-  you may need to first type `source ~/.profile` or 
+  you may need to first type `source ~/.profile` or
   `source ~/.bash_profile` depending on your OS.
 
 * Go the the directory where you would like this package to live.
@@ -36,11 +36,11 @@ Open a terminal.
    to be able to launch VS Code from the command line.)
 
 * If you launched VS Code from a menu, on the main screen, or in the File menu,
-  click "Open folder" (just "Open" on a Mac), and choose the folder 
+  click "Open folder" (just "Open" on a Mac), and choose the folder
   `tutorials` (*not* one of its subfolders).
 
 * Using the file explorer on the left-hand side, explore everything you
-  want in `tutorials/src`. 
+  want in `tutorials/src`.
   See the [tutorials instructions](https://github.com/leanprover-community/tutorials/blob/master/README.md)
   for advice about how to do the exercises in this project.
 
@@ -51,7 +51,7 @@ commands should be typed in a terminal.
 
 * Go to a folder where you want to create a project in a subfolder
   `my_project`, and type `leanproject new my_project`. If you get an
-  error message saying `leanproject` is an unknown command and 
+  error message saying `leanproject` is an unknown command and
   you have not logged in since you installed Lean and mathlib, then
   you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
 
@@ -81,11 +81,20 @@ should display a "Lean Goal" area saying:
 If, for some reason, you happen to lose the "Lean Goal" area, you
 can get it back with <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd>
 (<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd> on MacOS).
-Also, you can get the Lean documentation inside VS Code using 
-<kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> 
-(<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then, 
+Also, you can get the Lean documentation inside VS Code using
+<kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd>
+(<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then,
 inside the text field that appears, type "lean doc" and hit <kbd>Enter</kbd>.
 Then click "Theorem Proving in Lean" and enjoy.
+
+## Hosting your project on GitHub
+
+Your project is already a git repository, and as it grows,
+you may want to host it on [GitHub](https://guides.github.com/activities/hello-world/).
+If you take this step, the community offers some
+[GitHub Actions scripts](../ci.html) that could help manage your repository.
+But don't worry if you don't know what this means.
+It's not necessary for using Lean.
 
 ## Contributing to mathlib
 
