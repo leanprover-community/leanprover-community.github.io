@@ -257,12 +257,12 @@ with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
     oprojects = yaml.safe_load(h_file)
 
 projects = []
-for project in [project for project in oprojects if 'display' not in oprojects[project] or oprojects[project]['display']]:
-    p = oprojects[project]
-    github_repo = github.get_repo(p['organization'] + '/' + project)
-    stars = github_repo.stargazers_count
-    descr = render_markdown(p['description'])
-    projects.append(Project(project, p['organization'], descr, p['maintainers'], stars))
+for name, project in oprojects.items(): 
+    if project.get('display', True):
+        github_repo = github.get_repo(project['organization'] + '/' + name)
+        stars = github_repo.stargazers_count
+        descr = render_markdown(project['description'])
+        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
 
 projects.sort(key = lambda p: p.stars, reverse=True)
 
