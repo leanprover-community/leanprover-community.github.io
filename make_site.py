@@ -16,6 +16,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
 import gzip
+from github import Github
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -223,6 +224,16 @@ class Overview:
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
+    DATA/'project_history.yaml'
+)
+
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
+    DATA/'projects.yaml'
+)
+
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
@@ -231,6 +242,32 @@ with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
+
+@dataclass
+class Project:
+    name: str
+    organization: str
+    description: str
+    maintainers: List[str]
+    stars: int 
+
+github = Github()
+
+with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
+    oprojects = yaml.safe_load(h_file)
+
+projects = []
+for name, project in oprojects.items(): 
+    if project.get('display', True):
+        github_repo = github.get_repo(project['organization'] + '/' + name)
+        stars = github_repo.stargazers_count
+        descr = render_markdown(project['description'])
+        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+
+projects.sort(key = lambda p: p.stars, reverse=True)
+
+with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
+    project_history = yaml.safe_load(h_file)
 
 bib = pybtex.database.parse_file('lean.bib')
 
@@ -352,6 +389,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta}),
+                ('lean_projects.html', {'projects': projects}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
