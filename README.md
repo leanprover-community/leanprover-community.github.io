@@ -15,7 +15,7 @@ In order to rebuild the CSS from SCSS, you also need:
 The website relies on several components which are built in other repositories:
 - [`mathlib_stats`](https://github.com/leanprover-community/mathlib_stats)
 - [`lean-web-editor`](https://github.com/leanprover-community/lean-web-editor)
-- [`mathlib_docs`](https://github.com/leanprover-community/mathlib_docs) (built by CI in mathlib itself)
+- [`mathlib_docs`](https://github.com/leanprover-community/mathlib_docs) (built by CI in [doc-gen](https://github.com/leanprover-community/doc-gen/))
 
 ## Building
 
