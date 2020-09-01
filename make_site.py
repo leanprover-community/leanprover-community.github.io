@@ -135,7 +135,10 @@ class HundredTheorem:
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
 
-urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json.gz', 'export_db.json.gz')
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
+    'export_db.json.gz'
+)
 with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
     json_bytes = json_file.read()
     json_file.close()
@@ -146,6 +149,10 @@ num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'thm'])
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
+    DATA/'100.yaml'
+)
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
@@ -219,24 +226,21 @@ class Overview:
 
         return node
 
-
     @classmethod
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
 urllib.request.urlretrieve(
-    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
-    DATA/'project_history.yaml'
+    'https://leanprover-community.github.io/mathlib_docs/overview.yaml',
+    DATA/'overview.yaml'
 )
-
-urllib.request.urlretrieve(
-    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
-    DATA/'projects.yaml'
-)
-
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/undergrad.yaml',
+    DATA/'undergrad.yaml'
+)
 with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
     undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
@@ -249,15 +253,19 @@ class Project:
     organization: str
     description: str
     maintainers: List[str]
-    stars: int 
+    stars: int
 
 github = Github()
 
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
+    DATA/'projects.yaml'
+)
 with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
     oprojects = yaml.safe_load(h_file)
 
 projects = []
-for name, project in oprojects.items(): 
+for name, project in oprojects.items():
     if project.get('display', True):
         github_repo = github.get_repo(project['organization'] + '/' + name)
         stars = github_repo.stargazers_count
@@ -266,6 +274,10 @@ for name, project in oprojects.items():
 
 projects.sort(key = lambda p: p.stars, reverse=True)
 
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
+    DATA/'project_history.yaml'
+)
 with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
     project_history = yaml.safe_load(h_file)
 
