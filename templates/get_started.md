@@ -1,5 +1,11 @@
 # Get started with Lean
 
+You have several options for installing Lean, described below:
+
+* a regular install (recommended)
+* using Lean in a web browser
+* use a stand-alone bundle (which runs out of a single directory, with no system-wide installation)
+
 ## Regular install
 
 * [Debian/Ubuntu](install/debian.html)
