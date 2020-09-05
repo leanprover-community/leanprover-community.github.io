@@ -1,26 +1,32 @@
 # Get started with Lean
 
-There are many options if you want to start using Lean, depending on how
-seriously you want to try.
+## Regular install
+
+* [Debian/Ubuntu](install/debian.html)
+* [Other linux](install/linux.html)
+* [MacOS](install/macos.html)
+* [Windows](install/windows.html)
+
+After this installation procedure, it is crucial to read how to start or
+get a [Lean project](install/project.html). And of course you'll
+probably want to [learn Lean](learn.html)!
+
+A regular install following these instructions installs a few pieces of supporting software.
+You can read about [this infrastructure](toolchain.html) if you are
+curious, but it is not necessary in order to use Lean.
 
 ## Just a quick glance
 
-Lean can run in a web browser thanks to
-[WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). Of course,
-the performance is nowhere near that of a regular install.
-This is still a good option if you want to know what Lean looks
-like, and have only 10 minutes to spare. For instance, you can read
-your
-[first proofs](https://leanprover-community.github.io/lean-web-editor/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fleanprover-community%2Ftutorials%2Fmaster%2Fsrc%2Fexercises%2F00_first_proofs.lean).
+Lean can run in a web browser, although the performance is worse than a regular install.
+Nevertheless it is good for taking a quick look, for example at some
+[first proofs in Lean](https://leanprover-community.github.io/lean-web-editor/#url=https%3A%2F%2Fraw.githubusercontent.com%2Fleanprover-community%2Ftutorials%2Fmaster%2Fsrc%2Fexercises%2F00_first_proofs.lean).
 You need to wait for the orange bar at the top to turn green and say
 "Lean is ready!". Then you can click anywhere inside `begin` and `end`
 pairs to see the state of proofs evolving.
 
-If this is too passive for you, and you have a bit more time, you can start playing
+With a bit more time, you can play
 [The Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/),
-which also relies on Lean running in your web browser. Beware that some
-Lean commands are voluntarily rendered less efficient in this game for
-pedagogical purposes.
+in your browser.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
 
@@ -46,20 +52,3 @@ the mathlib library, and a couple of Lean files to play with.
 The downside is you won't be able to create your own projects or easily
 upgrade Lean and mathlib. You'll need a regular install for this.
 
-## Regular install
-
-In order to enjoy the full Lean experience, you need to install a couple
-of dependencies, including a python package providing user-friendly
-supporting tools. This is not much longer that installing an autonomous
-bundle, but it does spread a bit more in your computer. You can read explanations
-about [how the various parts fit together](toolchain.html) if you are
-curious. But this is not necessary. You can head straight to
-installation instructions for your OS:
-[Debian/Ubuntu](install/debian.html),
-[Other linux](install/linux.html),
-[MacOS](install/macos.html), or
-[Windows](install/windows.html).
-
-After this installation procedure, it is crucial to read how to start or
-get a [Lean project](install/project.html). And of course you'll
-probably want to [learn Lean](learn.html)!
