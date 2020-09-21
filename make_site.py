@@ -311,6 +311,7 @@ for key, data in bib.entries.items():
         raise ValueError(f"Couldn't find a url for bib item {key}")
     if url.startswith(r'\url'):
         url = url[4:].strip('{}')
+    url = url.replace(r'\_', '_')
     if 'journal' in data.fields and data.fields['journal'] != 'CoRR':
         journal = data.fields['journal']
     elif 'booktitle' in data.fields:
