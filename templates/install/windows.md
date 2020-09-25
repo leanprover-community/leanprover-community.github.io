@@ -1,5 +1,4 @@
-Installing Lean and mathlib on Windows
-===
+# Installing Lean and mathlib on Windows
 
 This document explains how to get started with Lean and mathlib.
 
@@ -13,8 +12,7 @@ Rather than installing Lean directly, we'll install a small program called `elan
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
 
-Installing `elan`
----
+## Installing `elan`
 
 1. We'll need a terminal, along with some basic prerequisites.
 
@@ -32,8 +30,7 @@ Installing `elan`
 
   Then close and reopen Git Bash.
 
-Installing mathlib supporting tools
----
+## Installing mathlib supporting tools
 
 In order to use mathlib supporting tools, you need to [get python](https://www.python.org/downloads/) first.
 
@@ -72,8 +69,7 @@ Then, at a terminal, run the command
   pip3 install mathlibtools
   ```
 
-Installing and configuring an editor
----
+## Installing and configuring an editor
 
 There are two Lean-aware editors, VS Code and emacs.
 This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).
