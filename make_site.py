@@ -209,6 +209,15 @@ class Overview:
         else:
             return bool(self.decl)
 
+    @property
+    def nonempty_children(self) -> List['Overview']:
+        return [item for item in self.children if item.is_nonempty]
+
+    @property
+    def has_missing_children(self) -> List['Overview']:
+        return [item for item in self.children if item.has_missing_child]
+
+
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
         node = cls(

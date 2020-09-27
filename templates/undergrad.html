@@ -3,16 +3,29 @@
 {% block content %}
 
 <div class="row mt-3">
-        <div class="col">
-                <h1>Undergraduate mathematics in mathlib</h1>
+  <div class="col">
+    <h1>Undergraduate mathematics in mathlib</h1>
 
-                <p>
-				This gives pointers to undergraduate maths topics that are
-				currently covered in mathlib.
-				There is also a page listing undergraduate maths topics
-				that are 
-				<a href="undergrad_todo.html">not yet in mathlib</a>.
-				</p>
+      <p>
+    This gives pointers to undergraduate maths topics that are
+    currently covered in mathlib.
+    There is also a page listing undergraduate maths topics
+    that are 
+    <a href="undergrad_todo.html">not yet in mathlib</a>.
+    </p>
+  {% for area in overviews %}
+    {% if area.is_nonempty %}
+    <h4>{{ area.title }}</h4>
+      {% for subarea in area.nonempty_children %}
+        <p class="ml-4 mb-2">
+        <b>{{ subarea.title }}</b>
+        {% for item in subarea.nonempty_children %}
+          <a href="{{ item.decl }}">{{ item.title }}</a>{% if not loop.last %}, {% else %}.{% endif %}
+        {% endfor %}
+        </p>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
 
 
                 <div id="overview-accordion" class="accordion">
@@ -36,7 +49,7 @@
                                 </div>
                         </div>
                         {% else %}
-						{% if statement.is_nonempty %}
+            {% if statement.is_nonempty %}
                         <span class="statement-done">
                                 <a {% if statement.decl %} href="{{ statement.decl }}" {% endif %}>{{ statement.title }}</a>{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
                         </span>
