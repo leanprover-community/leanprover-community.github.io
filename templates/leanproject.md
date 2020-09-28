@@ -173,7 +173,7 @@ leanproject set-url my_url
 ```
 so that leanproject will look for caches at
 `my_url/relevant_git_hash.tar.gz`. You can override this base url
-for one invocation using `leanprover --from-url my_url ...`
+for one invocation using `leanproject --from-url my_url ...`
 (where `...` denotes a command and its arguments).
 
 ## Troubleshooting
