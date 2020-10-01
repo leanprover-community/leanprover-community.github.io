@@ -147,106 +147,107 @@ for the functions <code>nat.add</code>, <code>nat.sub</code> and <code>nat.mul</
 (≤, &lt;, |) mean the usual things (get the &quot;divides&quot; symbol with <code>\|</code>.
 The <code>%</code> symbol denotes modulus (remainder after division).</p>
 <p>Here are some of core Lean's functions for working with <code>nat</code>.</p>
-<pre><code class="language-lean">open nat
+<div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
 
-example : nat.succ (nat.succ 4) = 6 := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="n">nat.succ</span> <span class="o">(</span><span class="n">nat.succ</span> <span class="mi">4</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">6</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example : 4 - 3 = 1 := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">4</span> <span class="bp">-</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example : 5 - 6 = 0 := rfl -- these are naturals
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">-</span> <span class="mi">6</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- these are naturals</span>
 
-example : 1 ≠ 0 := one_ne_zero
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">one_ne_zero</span>
 
-example : 7 * 4 = 28 := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">7</span> <span class="bp">*</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">28</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example (m n p : ℕ) : m + p = n + p → m = n := add_right_cancel
+<span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">add_right_cancel</span>
 
-example (a b c : ℕ) : a * (b + c) = a * b + a * c := left_distrib a b c
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">left_distrib</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span>
 
-example (m n : ℕ) : succ m ≤ succ n → m ≤ n := le_of_succ_le_succ
+<span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">le_of_succ_le_succ</span>
 
-example (a b: ℕ) : a &lt; b → ∀ n, 0 &lt; n → a ^ n &lt; b ^ n := pow_lt_pow_of_lt_left
-</code></pre>
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">^</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">^</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">pow_lt_pow_of_lt_left</span>
+</pre></div>
+
 <p>In mathlib there are more basic functions on the naturals, for example
 factorials, lowest common multiples, primes, square roots, and some
 modular arithmetic.</p>
-<pre><code class="language-lean">import data.nat.dist -- distance function
-import data.nat.gcd -- gcd
-import data.nat.modeq -- modular arithmetic
-import data.nat.prime -- prime number stuff
-import data.nat.sqrt  -- square roots
-import tactic.norm_num -- a tactic for fast computations
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">data.nat.dist</span> <span class="c1">-- distance function</span>
+<span class="kn">import</span> <span class="n">data.nat.gcd</span> <span class="c1">-- gcd</span>
+<span class="kn">import</span> <span class="n">data.nat.modeq</span> <span class="c1">-- modular arithmetic</span>
+<span class="kn">import</span> <span class="n">data.nat.prime</span> <span class="c1">-- prime number stuff</span>
+<span class="kn">import</span> <span class="n">data.nat.sqrt</span>  <span class="c1">-- square roots</span>
+<span class="kn">import</span> <span class="n">tactic.norm_num</span> <span class="c1">-- a tactic for fast computations</span>
 
-open nat
+<span class="kn">open</span> <span class="n">nat</span>
 
-example : fact 4 = 24 := rfl -- factorial
+<span class="kd">example</span> <span class="o">:</span> <span class="n">fact</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">24</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- factorial</span>
 
-example (a : ℕ) : fact a &gt; 0 := fact_pos a
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fact</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">fact_pos</span> <span class="n">a</span>
 
-example : dist 6 4 = 2 := rfl -- distance function
+<span class="kd">example</span> <span class="o">:</span> <span class="n">dist</span> <span class="mi">6</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- distance function</span>
 
-example (a b : ℕ) : a ≠ b → dist a b &gt; 0 := dist_pos_of_ne
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">dist</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">dist_pos_of_ne</span>
 
-example (a b : ℕ) : gcd a b ∣ a ∧ gcd a b ∣ b := gcd_dvd a b
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">∣</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">∣</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">gcd_dvd</span> <span class="n">a</span> <span class="n">b</span>
 
-example : lcm 6 4 = 12 := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="n">lcm</span> <span class="mi">6</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">12</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example (a b : ℕ) : lcm a b = lcm b a := lcm_comm a b
-example (a b : ℕ) : gcd a b * lcm a b = a * b := gcd_mul_lcm a b
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">lcm</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">lcm</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">lcm_comm</span> <span class="n">a</span> <span class="n">b</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">lcm</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">gcd_mul_lcm</span> <span class="n">a</span> <span class="n">b</span>
 
-example (a b : ℕ) : (∀ k : ℕ, k &gt; 1 → k ∣ a → ¬ (k ∣ b) ) → coprime a b := coprime_of_dvd
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">∣</span> <span class="n">a</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">k</span> <span class="bp">∣</span> <span class="n">b</span><span class="o">)</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">coprime</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">coprime_of_dvd</span>
 
--- type the congruence symbol with \==
+<span class="c1">-- type the congruence symbol with \==</span>
 
-example : 5 ≡ 8 [MOD 3] := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">5</span> <span class="bp">≡</span> <span class="mi">8</span> <span class="o">[</span><span class="n">MOD</span> <span class="mi">3</span><span class="o">]</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example (a b c d m : ℕ) : a ≡ b [MOD m] → c ≡ d [MOD m] → a * c ≡ b * d [MOD m] := modeq.modeq_mul
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≡</span> <span class="n">b</span> <span class="o">[</span><span class="n">MOD</span> <span class="n">m</span><span class="o">]</span> <span class="bp">→</span> <span class="n">c</span> <span class="bp">≡</span> <span class="n">d</span> <span class="o">[</span><span class="n">MOD</span> <span class="n">m</span><span class="o">]</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">≡</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">[</span><span class="n">MOD</span> <span class="n">m</span><span class="o">]</span> <span class="o">:=</span> <span class="n">modeq.modeq_mul</span>
 
--- nat.sqrt is integer square root (it rounds down).
+<span class="c1">-- nat.sqrt is integer square root (it rounds down).</span>
 
-#eval sqrt 1000047
--- returns 1000
+<span class="k">#eval</span> <span class="n">sqrt</span> <span class="mi">1000047</span>
+<span class="c1">-- returns 1000</span>
 
-example (a : ℕ) : sqrt (a * a) = a := sqrt_eq a
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">sqrt</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sqrt_eq</span> <span class="n">a</span>
 
-example (a b : ℕ) : sqrt a &lt; b ↔ a &lt; b * b := sqrt_lt
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">sqrt</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sqrt_lt</span>
 
--- nat.prime n returns whether n is prime or not.
--- We can prove 59 is prime if we first tell Lean that primality
--- is decidable. But it&#x27;s slow because the algorithms are
--- not optimised for the kernel.
+<span class="c1">-- nat.prime n returns whether n is prime or not.</span>
+<span class="c1">-- We can prove 59 is prime if we first tell Lean that primality</span>
+<span class="c1">-- is decidable. But it&#39;s slow because the algorithms are</span>
+<span class="c1">-- not optimised for the kernel.</span>
 
-instance : decidable (prime 59) := decidable_prime_1 59
-example : prime 59 := dec_trivial
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">prime</span> <span class="mi">59</span><span class="o">)</span> <span class="o">:=</span> <span class="n">decidable_prime_1</span> <span class="mi">59</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">prime</span> <span class="mi">59</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
 
--- (The default instance is `nat.decidable_prime`, which can&#x27;t be
--- used by `dec_trivial`, because the kernel would need to unfold
--- irreducible proofs generated by well-founded recursion.)
+<span class="c1">-- (The default instance is `nat.decidable_prime`, which can&#39;t be</span>
+<span class="c1">-- used by `dec_trivial`, because the kernel would need to unfold</span>
+<span class="c1">-- irreducible proofs generated by well-founded recursion.)</span>
 
--- The tactic `norm_num`, amongst other things, provides faster primality testing.
+<span class="c1">-- The tactic `norm_num`, amongst other things, provides faster primality testing.</span>
 
-example : prime 104729 := by norm_num
+<span class="kd">example</span> <span class="o">:</span> <span class="n">prime</span> <span class="mi">104729</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">norm_num</span>
 
-example (p : ℕ) : prime p → p ≥ 2 := prime.two_le
+<span class="kd">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">prime.two_le</span>
 
-example (p : ℕ) : prime p ↔ p ≥ 2 ∧ ∀ m, 2 ≤ m → m ≤ sqrt p → ¬ (m ∣ p) := prime_def_le_sqrt
+<span class="kd">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">sqrt</span> <span class="n">p</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">m</span> <span class="bp">∣</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prime_def_le_sqrt</span>
 
-example (p : ℕ) : prime p → (∀ m, coprime p m ∨ p ∣ m) := coprime_or_dvd_of_prime
+<span class="kd">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">coprime</span> <span class="n">p</span> <span class="n">m</span> <span class="bp">∨</span> <span class="n">p</span> <span class="bp">∣</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="n">coprime_or_dvd_of_prime</span>
 
-example : ∀ n, ∃ p, p ≥ n ∧ prime p := exists_infinite_primes
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">p</span> <span class="bp">≥</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">prime</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">exists_infinite_primes</span>
 
--- min_fac returns the smallest prime factor of n (or junk if it doesn&#x27;t have one)
+<span class="c1">-- min_fac returns the smallest prime factor of n (or junk if it doesn&#39;t have one)</span>
 
-example : min_fac 12 = 2 := rfl
+<span class="kd">example</span> <span class="o">:</span> <span class="n">min_fac</span> <span class="mi">12</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">rfl</span>
 
--- `factors n` is the prime factorization of `n`, listed in increasing order.
--- This doesn&#x27;t seem to reduce, and apparently there has not been
--- an attempt to get the kernel to evaluate it sensibly.
--- But we can evaluate it in the virtual machine using #eval .
+<span class="c1">-- `factors n` is the prime factorization of `n`, listed in increasing order.</span>
+<span class="c1">-- This doesn&#39;t seem to reduce, and apparently there has not been</span>
+<span class="c1">-- an attempt to get the kernel to evaluate it sensibly.</span>
+<span class="c1">-- But we can evaluate it in the virtual machine using #eval .</span>
 
-#eval factors (2^32+1)
--- [641, 6700417]
-</code></pre>
+<span class="k">#eval</span> <span class="n">factors</span> <span class="o">(</span><span class="mi">2</span><span class="bp">^</span><span class="mi">32</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="c1">-- [641, 6700417]</span>
+</pre></div>
 
   </div>
 </div>

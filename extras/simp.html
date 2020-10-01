@@ -141,22 +141,23 @@ subterm with the right hand side. The system is conditional in the sense that le
 have preconditions (<code>P -&gt; (X = Y)</code>) and in these cases it will try and prove the precondition using
 its simp lemmas before applying <code>X = Y</code>.</p>
 <p>You can watch <code>simp</code> in action by using <code>set_option trace.simplify true</code> in your code. For example</p>
-<pre><code class="language-lean">namespace hidden
+<div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
 
-definition cong (a b m : ℤ) : Prop := ∃ n : ℤ, b - a = m * n
+<span class="kd">definition</span> <span class="n">cong</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">,</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span>
 
-notation a ` ≡ ` b ` mod ` m  := cong a b m
-set_option trace.simplify true
-theorem cong_refl (m : ℤ) : ∀ a : ℤ, a ≡ a mod m :=
-begin
-intro a,
-unfold cong,
-existsi (0:ℤ),
-simp
-end
+<span class="kd">notation</span> <span class="n">a</span> <span class="bp">`</span> <span class="bp">≡</span> <span class="bp">`</span> <span class="n">b</span> <span class="bp">`</span> <span class="n">mod</span> <span class="bp">`</span> <span class="n">m</span>  <span class="o">:=</span> <span class="n">cong</span> <span class="n">a</span> <span class="n">b</span> <span class="n">m</span>
+<span class="kd">set_option</span> <span class="n">trace.simplify</span> <span class="n">true</span>
+<span class="kd">theorem</span> <span class="n">cong_refl</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≡</span> <span class="n">a</span> <span class="n">mod</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+<span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">cong</span><span class="o">,</span>
+<span class="n">existsi</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℤ</span><span class="o">),</span>
+<span class="n">simp</span>
+<span class="kd">end</span>
 
-end hidden
-</code></pre>
+<span class="kd">end</span> <span class="n">hidden</span>
+</pre></div>
+
 <p>If you do this exercise you will discover firstly that <code>simp</code> spends a lot of its time trying random
 lemmas and then giving up very shortly afterwards, and also that the <code>unfold</code> command is also
 underlined in green -- Lean seems to apply <code>simp</code> when you do an <code>unfold</code> as well (apparently
@@ -167,16 +168,18 @@ underlined in green -- Lean seems to apply <code>simp</code> when you do an <cod
 <p>In case you want to train <code>simp</code> to use certain extra lemmas (for example because they're coming up
 again and again in your work) you can add new lemmas for yourself. For example in mathlib in
 <code>algebra/ring.lean</code> we find the line</p>
-<pre><code class="language-lean">@[simp] theorem ne_zero (u : units α) : (u : α) ≠ 0
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">ne_zero</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">units</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span>
+</pre></div>
+
 <p>This lemma is then added to <code>simp</code>'s armoury. Note several things however.</p>
 <ol>
 <li>It might not be wise to make a random theorem into a simp lemma. Ideally the result has to be of
 a certain kind, the most important kinds being those of the form <code>A=B</code> and <code>A↔B</code>. Note however that
 if you want to add <code>fact</code> to <code>simp</code>'s weaponry, you can prove</li>
 </ol>
-<pre><code class="language-lean">@[simp] lemma my_lemma : fact ↔ true
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">my_lemma</span> <span class="o">:</span> <span class="n">fact</span> <span class="bp">↔</span> <span class="n">true</span>
+</pre></div>
+
 <p>(and in fact more recent versions of Lean do this automatically when you try to add random theorems
 to the simp dataset).</p>
 <ol start="2">
@@ -227,23 +230,24 @@ Another reason is that using <code>simp only</code> can speed up slow <code>simp
 <p>Search for <code>structure simp_config</code> in the file <code>init/meta/simp_tactic.lean</code> in core Lean to see the full list of config options. Others, many undocumented, are:</p>
 </li>
 </ol>
-<pre><code class="language-lean">(max_steps : nat           := simp.default_max_steps)
-(contextual : bool         := ff)
-(lift_eq : bool            := tt)
-(canonize_instances : bool := tt)
-(canonize_proofs : bool    := ff)
-(use_axioms : bool         := tt)
-(zeta : bool               := tt)
-(beta : bool               := tt)
-(eta  : bool               := tt)
-(proj : bool               := tt) -- reduce projections
-(iota : bool               := tt)
-(iota_eqn : bool           := ff) -- reduce using all equation lemmas generated by equation/pattern-matching compiler
-(constructor_eq : bool     := tt)
-(single_pass : bool        := ff)
-(fail_if_unchanged         := tt)
-(memoize                   := tt)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="n">max_steps</span> <span class="o">:</span> <span class="n">nat</span>           <span class="o">:=</span> <span class="n">simp.default_max_steps</span><span class="o">)</span>
+<span class="o">(</span><span class="n">contextual</span> <span class="o">:</span> <span class="n">bool</span>         <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lift_eq</span> <span class="o">:</span> <span class="n">bool</span>            <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">canonize_instances</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">canonize_proofs</span> <span class="o">:</span> <span class="n">bool</span>    <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
+<span class="o">(</span><span class="n">use_axioms</span> <span class="o">:</span> <span class="n">bool</span>         <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">zeta</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">beta</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">eta</span>  <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">proj</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span> <span class="c1">-- reduce projections</span>
+<span class="o">(</span><span class="n">iota</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">iota_eqn</span> <span class="o">:</span> <span class="n">bool</span>           <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span> <span class="c1">-- reduce using all equation lemmas generated by equation/pattern-matching compiler</span>
+<span class="o">(</span><span class="n">constructor_eq</span> <span class="o">:</span> <span class="n">bool</span>     <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">single_pass</span> <span class="o">:</span> <span class="n">bool</span>        <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
+<span class="o">(</span><span class="n">fail_if_unchanged</span>         <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<span class="o">(</span><span class="n">memoize</span>                   <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+</pre></div>
+
 <p>We see from the changelog that setting <code>constructor_eq</code> to true will reduce equations of the form
 <code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct constructors for the same type, and
 to <code>a1 = b1 and a2 = b2 and...</code> if <code>X = Y</code> are the same constructor. Another interesting example is

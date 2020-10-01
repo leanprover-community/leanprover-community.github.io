@@ -156,27 +156,28 @@ but we recommend combining them as in the script below.</p>
 <li><a href="https://github.com/leanprover-contrib/update-versions-action">update-versions-action</a></li>
 </ul>
 <p><code>/.github/workflows/lean_build.yml</code></p>
-<pre><code class="language-yaml">on:
-  push:
+<div class="highlight"><pre><span></span><span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
 
-jobs:
-  update_lean_xyz_branch_and_build:
-    runs-on: ubuntu-latest
-    name: Update lean-x.y.z branch and build project
-    steps:
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">update_lean_xyz_branch_and_build</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Update lean-x.y.z branch and build project</span>
+    <span class="nt">steps</span><span class="p">:</span>
 
-    - name: checkout project
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">checkout project</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">fetch-depth</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
 
-    - name: update branch
-      if: github.ref == &#x27;refs/heads/master&#x27;
-      uses: leanprover-contrib/update-versions-action@master
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update branch</span>
+      <span class="nt">if</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">github.ref == &#39;refs/heads/master&#39;</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">leanprover-contrib/update-versions-action@master</span>
 
-    - name: build project
-      uses: leanprover-contrib/lean-build-action@master
-</code></pre>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build project</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">leanprover-contrib/lean-build-action@master</span>
+</pre></div>
+
 <h2 id="upgrade-lean-and-mathlib-versions-on-schedule" class="markdown-heading">Upgrade Lean and mathlib versions on schedule <a class="hover-link" href="#upgrade-lean-and-mathlib-versions-on-schedule">#</a></h2>
 <p>This script will try once a day to update the versions
 of Lean, mathlib, and any other projects that yours depends on.
@@ -190,25 +191,25 @@ by modifying the <a href="https://crontab.guru/">cron schedule expression</a>.</
 <li><a href="https://github.com/leanprover-contrib/lean-upgrade-action">lean-upgrade-action</a></li>
 </ul>
 <p><code>/.github/workflows/upgrade_lean.yml</code></p>
-<pre><code class="language-yaml">on:
-  schedule:
-    - cron: &#x27;0 2 * * *&#x27; # once a day at 2am UTC
+<div class="highlight"><pre><span></span><span class="nt">on</span><span class="p">:</span>
+  <span class="nt">schedule</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">cron</span><span class="p">:</span> <span class="s">&#39;0</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*&#39;</span> <span class="c1"># once a day at 2am UTC</span>
 
-jobs:
-  upgrade_lean:
-    runs-on: ubuntu-latest
-    name: Bump Lean and dependency versions
-    steps:
-      - name: checkout project
-        uses: actions/checkout@v2
-      - name: upgrade Lean and dependencies
-        uses: leanprover-contrib/lean-upgrade-action@master
-        with:
-          repo: ${{ github.repository }}
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: update version branches
-        uses: leanprover-contrib/update-versions-action@master
-</code></pre>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">upgrade_lean</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Bump Lean and dependency versions</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">checkout project</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">upgrade Lean and dependencies</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">leanprover-contrib/lean-upgrade-action@master</span>
+        <span class="nt">with</span><span class="p">:</span>
+          <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ github.repository }}</span>
+          <span class="nt">access-token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update version branches</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">leanprover-contrib/update-versions-action@master</span>
+</pre></div>
 
   </div>
 </div>

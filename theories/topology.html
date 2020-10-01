@@ -153,42 +153,46 @@ of open sets, their union is open, or one could ask that given
 a function from some index set <code>I</code> to the set of open sets, the union
 of the values of the function is open. Mathlib goes for the first
 one, so the axiom is</p>
-<pre><code class="language-lean">is_open_sUnion : ∀(s : set (set α)), (∀t∈s, is_open t) → is_open (⋃₀ s)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">is_open_sUnion</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)),</span> <span class="o">(</span><span class="bp">∀</span><span class="n">t</span><span class="bp">∈</span><span class="n">s</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">t</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">⋃₀</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
 <p>and then the index set version is a lemma:</p>
-<pre><code class="language-lean">lemma is_open_Union {f : ι → set α} (h : ∀i, is_open (f i)) : is_open (⋃i, f i)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">is_open_Union</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">i</span><span class="o">,</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">⋃</span><span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
 <p>Note the naming conventions, standard across mathlib, that <code>sUnion</code>
 is a union over sets and <code>Union</code> (with a capital U) is a union over
 the image of a function on an indexing set. The capital U's are
 to indicate a union of arbitrary size, as opposed to <code>union</code>, which
 indicates a union of two sets:</p>
-<pre><code class="language-lean">lemma is_open_union (h₁ : is_open s₁) (h₂ : is_open s₂) : is_open (s₁ ∪ s₂)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">is_open_union</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">s₁</span> <span class="bp">∪</span> <span class="n">s₂</span><span class="o">)</span>
+</pre></div>
+
 <p>The predicate <code>is_closed</code>, and functions <code>interior</code>, <code>closure</code>, and
 <code>frontier</code> (closure minus interior,
 sometimes called boundary in mathematics) are defined, and basic
 properties about them are proved. For example</p>
-<pre><code class="language-lean">import topology.basic
-open topological_space
-variables {X : Type} [topological_space X] {U V C D Y Z : set X}
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">topology.basic</span>
+<span class="kn">open</span> <span class="n">topological_space</span>
+<span class="kd">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="n">C</span> <span class="n">D</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
 
-example : is_closed C → is_closed D → is_closed (C ∪ D) := is_closed_union
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="n">D</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">C</span> <span class="bp">∪</span> <span class="n">D</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_closed_union</span>
 
-example : is_open ( -C) ↔ is_closed C := is_open_compl_iff
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span> <span class="bp">-</span><span class="n">C</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="o">:=</span> <span class="n">is_open_compl_iff</span>
 
-example : is_open U → is_closed C → is_open (U - C) := is_open_diff
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">U</span> <span class="bp">-</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_open_diff</span>
 
-example : interior Y = Y ↔ is_open Y := interior_eq_iff_open
+<span class="kd">example</span> <span class="o">:</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">interior_eq_iff_open</span>
 
-example : Y ⊆ Z → interior Y ⊆ interior Z := interior_mono
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="n">Z</span> <span class="bp">→</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="n">interior</span> <span class="n">Z</span> <span class="o">:=</span> <span class="n">interior_mono</span>
 
-example : is_open Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, is_open U ∧ x ∈ U := is_open_iff_forall_mem_open
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">U</span> <span class="bp">⊆</span> <span class="n">Y</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="o">:=</span> <span class="n">is_open_iff_forall_mem_open</span>
 
-example : closure Y = Y ↔ is_closed Y := closure_eq_iff_is_closed
+<span class="kd">example</span> <span class="o">:</span> <span class="n">closure</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="n">is_closed</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">closure_eq_iff_is_closed</span>
 
-example : closure Y = - interior (- Y) := closure_eq_compl_interior_compl
-</code></pre>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">closure</span> <span class="n">Y</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">interior</span> <span class="o">(</span><span class="bp">-</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">closure_eq_compl_interior_compl</span>
+</pre></div>
+
 <h3 id="filters" class="markdown-heading">Filters <a class="hover-link" href="#filters">#</a></h3>
 <p>In mathlib, unlike the typical approach in a mathematics textbook, extensive
 use is made of filters as a tool in the theory of topological spaces. Let
@@ -204,36 +208,41 @@ two axioms:</p>
 <p>If <code>X</code> is a topological space, and <code>x ∈ X</code>, then the <em>neighbourhood filter</em> <code>𝓝 x</code> of <code>x</code> is the set of subsets <code>Y</code> of <code>X</code> such that <code>x</code> is in the interior of <code>Y</code>. One checks easily that this is a filter (technical point: to see that this is actually the definition of <code>𝓝 x</code> in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using <code>F ≤ G</code> iff <code>G ⊆ F</code>, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but <code>lemma nhds_sets</code> says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).</p>
 <p>Why are we interested in these filters? Well, given a map <code>f</code> from <code>ℕ</code> to a topological space <code>X</code>, one can check that the resulting sequence <code>f 0</code>, <code>f 1</code>, <code>f 2</code>... tends to <code>x ∈ F</code> if and only if the pre-image of any element in the filter <code>𝓝 x</code> is in the cofinite filter on <code>ℕ</code> -- this is just another way of saying that given any open set <code>U</code> containing <code>x</code>, there exists <code>N</code> such that for all <code>n ≥ N</code>, <code>f n ∈ U</code>. So filters provide a way of thinking about limits.</p>
 <p>The <em>principal filter</em> <code>principal Y</code> attached to a subset <code>Y</code> of a set <code>X</code> is the collection of all subsets of <code>X</code> that contain <code>Y</code>. So it's not difficult to convince yourself that the following results should be true:</p>
-<pre><code class="language-lean">example : interior Y = {x | 𝓝 x ≤ filter.principal Y} := interior_eq_nhds
+<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="bp">𝓝</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">filter.principal</span> <span class="n">Y</span><span class="o">}</span> <span class="o">:=</span> <span class="n">interior_eq_nhds</span>
 
-example : is_open Y ↔ ∀ y ∈ Y, Y ∈ (𝓝 y).sets := is_open_iff_mem_nhds
-</code></pre>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="bp">∈</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="o">:=</span> <span class="n">is_open_iff_mem_nhds</span>
+</pre></div>
+
 <h3 id="compactness-with-filters" class="markdown-heading">Compactness with filters <a class="hover-link" href="#compactness-with-filters">#</a></h3>
 <p>As a consequence of the filter-centric approach, some definitions in mathlib
 look rather strange to a mathematician who is not used to this approach.
 We have already seen a definition using filters
 for what it means for a sequence to tend to a limit. The definition
 of compactness is also written in filter-theoretic terms:</p>
-<pre><code class="language-lean">/-- A set `s` is compact if every filter that contains `s` also meets every
-  neighborhood of some `a ∈ s`. -/
-def compact (Y : set X) := ∀F, F ≠ ⊥ → F ≤ principal Y → ∃y∈Y, F ⊓ 𝓝 y ≠ ⊥
-</code></pre>
+<div class="highlight"><pre><span></span><span class="sd">/-- A set `s` is compact if every filter that contains `s` also meets every</span>
+<span class="sd">  neighborhood of some `a ∈ s`. -/</span>
+<span class="kd">def</span> <span class="n">compact</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span><span class="n">F</span><span class="o">,</span> <span class="n">F</span> <span class="bp">≠</span> <span class="bp">⊥</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≤</span> <span class="n">principal</span> <span class="n">Y</span> <span class="bp">→</span> <span class="bp">∃</span><span class="n">y</span><span class="bp">∈</span><span class="n">Y</span><span class="o">,</span> <span class="n">F</span> <span class="bp">⊓</span> <span class="bp">𝓝</span> <span class="n">y</span> <span class="bp">≠</span> <span class="bp">⊥</span>
+</pre></div>
+
 <p>Translated, this says that a subset <code>Y</code> of a topological space <code>X</code> is compact if for every proper filter <code>F</code> on <code>X</code>, if <code>Y</code> is an element of <code>F</code> then there's an element <code>y</code> of <code>Y</code> such that the smallest filter containing both F and the neighbourhood filter of <code>y</code> is not the filter of all subsets of <code>X</code> either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of <code>ℝ^n</code>, any sequence has a convergent subsequence.</p>
 <p>One might ask why this definition of compactness has been chosen, rather than the standard one about open covers having finite subcovers. The reasons for this are in some sense computer-scientific rather than mathematical -- the issue should not be what definition is ultimately chosen (indeed the developers should feel free to choose whatever definition they like as long as it is logically equivalent to the usual one, and they might have reasons related to non-mathematical points such as running times), the issue should be how to prove that the inbuilt definition is equivalent to the one you want to use in practice. And fortunately, we have</p>
-<pre><code class="language-lean">example : compact Y ↔
-  (∀ cov : set (set X), (∀ U ∈ cov, is_open U) → Y ⊆ ⋃₀ cov →
-    ∃ fincov ⊆ cov, set.finite fincov ∧ Y ⊆ ⋃₀ fincov) := compact_iff_finite_subcover
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span> <span class="bp">↔</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">cov</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">U</span> <span class="bp">∈</span> <span class="n">cov</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="bp">⋃₀</span> <span class="n">cov</span> <span class="bp">→</span>
+    <span class="bp">∃</span> <span class="n">fincov</span> <span class="bp">⊆</span> <span class="n">cov</span><span class="o">,</span> <span class="n">set.finite</span> <span class="n">fincov</span> <span class="bp">∧</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="bp">⋃₀</span> <span class="n">fincov</span><span class="o">)</span> <span class="o">:=</span> <span class="n">compact_iff_finite_subcover</span>
+</pre></div>
+
 <p>so the Lean definition is equivalent to the standard one.</p>
 <h3 id="hausdorff-spaces" class="markdown-heading">Hausdorff spaces <a class="hover-link" href="#hausdorff-spaces">#</a></h3>
 <p>In Lean they chose the terminology <code>t2_space</code> to mean Hausdorff (perhaps because it is shorter!).</p>
-<pre><code class="language-lean">class t2_space (X : Type) [topological_space X] :=
-(t2 : ∀x y, x ≠ y → ∃U V : set X, is_open U ∧ is_open V ∧ x ∈ U ∧ y ∈ V ∧ U ∩ V = ∅)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">t2_space</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">t2</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="bp">∃</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">is_open</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">U</span> <span class="bp">∩</span> <span class="n">V</span> <span class="bp">=</span> <span class="bp">∅</span><span class="o">)</span>
+</pre></div>
+
 <p>Of course Hausdorffness is what we need to ensure that limits are unique, but because limits are defined using filters this statements ends up reading as follows:</p>
-<pre><code class="language-lean">lemma tendsto_nhds_unique [t2_space X] {f : β → X} {l : filter β} {x y : X}
-  (hl : l ≠ ⊥) (hx : tendsto f l (𝓝 x)) (hb : tendsto f l (𝓝 y)) : x = y
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">tendsto_nhds_unique</span> <span class="o">[</span><span class="n">t2_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hl</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">≠</span> <span class="bp">⊥</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">l</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">l</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span>
+</pre></div>
+
 <p>Note that actually this statement is more general than the classical statement that if a sequence tends to two limits in a Hausdorff space then the limits are the same, because it applies to any non-trivial filter on any set rather than just the cofinite filter on the natural numbers.</p>
 <h3 id="bases-for-topologies" class="markdown-heading">Bases for topologies. <a class="hover-link" href="#bases-for-topologies">#</a></h3>
 <p>If <code>X</code> is a <em>set</em>, and <code>S</code> is a collection of subsets of <code>X</code>, then one can
@@ -250,11 +259,12 @@ that the topology is generated from the basis in the sense above, which may make
 it hard to prove for an end user that a given set satisfies the definition
 directly. However again we have a theorem which reduces us to checking
 the two usual axioms for a basis:</p>
-<pre><code class="language-lean">example (B : set (set X)) (h_open : ∀ V ∈ B, is_open V)
-  (h_nhds : ∀ (x : X) (U : set X), x ∈ U → is_open U → ∃ V ∈ B, x ∈ V ∧ V ⊆ U) :
-is_topological_basis B :=
-is_topological_basis_of_open_of_nhds h_open h_nhds
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">h_open</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">V</span> <span class="bp">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">V</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h_nhds</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">V</span> <span class="bp">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">V</span> <span class="bp">⊆</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_topological_basis</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="n">is_topological_basis_of_open_of_nhds</span> <span class="n">h_open</span> <span class="n">h_nhds</span>
+</pre></div>
+
 <h3 id="other-things" class="markdown-heading">Other things <a class="hover-link" href="#other-things">#</a></h3>
 <p>There are other things involving filters, there are separable, first-countable
 and second-countable spaces, product spaces, subspace and quotient

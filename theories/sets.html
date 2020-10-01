@@ -152,35 +152,40 @@
 <h4 id="codedatasetbasiccode" class="markdown-heading"><code>data.set.basic</code> <a class="hover-link" href="#codedatasetbasiccode">#</a></h4>
 <p><code>set α</code>. A set is defined as a predicate, i.e. a function <code>α → Prop</code>. The notation used is <code>{n : ℕ | 4 ≤ n}</code> for the set of naturals greater than or equal to 4. Sets can be infinite, and can only contain elements of the same type.</p>
 <p>A subtype is similar to a set in that it is defined by a predicate. The notation used is <code>{n : ℕ // 4 ≤ n}</code> for the type of naturals greater than or equal to 4. However, a subtype is a type rather than a set, and the elements the aforementioned subtype do not have type <code>ℕ</code>, they have type <code>{n : ℕ // 4 ≤ n}</code>. This means that addition is not defined on this type, and equality between naturals and this type is also undefined. However it is possible to coerce an element of this subtype back into a natural, in the same way that a natural can be coerced into an integer, and then addition and equality behave as normal (see TPIL, chapter 6.7 for more on coercions). To construct an element of a subtype of α, you need an element of α and a proof that it satisfies the predicate, <code>4</code> and <code>le_refl 4</code> in the example below.</p>
-<pre><code class="language-lean">def x : {n : ℕ // 4 ≤ n} := ⟨4, le_refl 4⟩
-example : ↑x + 6 = 10 := rfl
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">//</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">}</span> <span class="o">:=</span> <span class="o">⟨</span><span class="mi">4</span><span class="o">,</span> <span class="n">le_refl</span> <span class="mi">4</span><span class="o">⟩</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">↑</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">6</span> <span class="bp">=</span> <span class="mi">10</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
 <p>Any set can be used where a type is expected, in which case the set will be coerced into the corresponding subtype.</p>
-<pre><code class="language-lean">def S : set ℕ := {n : ℕ | 4 ≤ n}
-example : ∀ n : S, 4 ≤ (n : ℕ) := λ ⟨n, hn⟩, hn
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">|</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">}</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">⟩,</span> <span class="n">hn</span>
+</pre></div>
+
 <p>It is useful to use a subtype rather than a set when you need to define functions on subtypes, or when using the cardinal of a subtype.</p>
 <h3 id="finite-types" class="markdown-heading">Finite types <a class="hover-link" href="#finite-types">#</a></h3>
 <h4 id="codedatafintypebasiccode" class="markdown-heading"><code>data.fintype.basic</code> <a class="hover-link" href="#codedatafintypebasiccode">#</a></h4>
 <p><code>fintype α</code> means that a type α is finite. It is constructed from a finset containing all elements of a type.</p>
-<pre><code class="language-lean">class fintype (α : Type*) :=
-(elems : finset α)
-(complete : ∀ x : α, x ∈ elems)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">elems</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">complete</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">elems</span><span class="o">)</span>
+</pre></div>
+
 <p><code>fintype α</code> is not a proposition, because it contains data, however it is a subsingleton, meaning that any two elements of type <code>fintype α</code> are equal.</p>
 <p><code>finset.univ</code> is the finset containing all elements of a type, given a <code>fintype α</code> instance.</p>
 <h3 id="finite-sets" class="markdown-heading">Finite sets <a class="hover-link" href="#finite-sets">#</a></h3>
 <h4 id="codedatasetfinitecode" class="markdown-heading"><code>data.set.finite</code> <a class="hover-link" href="#codedatasetfinitecode">#</a></h4>
 <p>The definition of a finite set, distinct from a finset is</p>
-<pre><code class="language-lean">def finite (s : set α) : Prop := nonempty (fintype s)
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">finite</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">fintype</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
 <p>This means when the set is coerced into a subtype, the type <code>fintype s</code> is nonempty.
 Using <code>classical.choice</code>, you can produce an object of type <code>fintype s</code> from a proof of <code>finite s</code>. There is a function <code>set.finite.to_finset</code> which produces a finset from a finite set.</p>
 <h3 id="cardinals" class="markdown-heading">Cardinals <a class="hover-link" href="#cardinals">#</a></h3>
 <p>There are three functions <code>finset.card</code>, <code>fintype.card</code> and <code>multiset.card</code>, which refer to the sizes of finsets, multisets and finite types. For finite cardinals of sets, <code>fintype.card</code> can be used, given a proof that the set is finite.</p>
-<pre><code class="language-lean">example : ∀ n : ℕ, fintype.card (fin n) = n := fintype.card_fin
-example : ∀ n : ℕ, finset.card (finset.range n) = n := finset.card_range
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="n">fintype.card</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">fintype.card_fin</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="n">finset.card</span> <span class="o">(</span><span class="n">finset.range</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">finset.card_range</span>
+</pre></div>
+
 <p>Here, <code>fin n</code> is the type of naturals less than n, and <code>finset.range n</code> is the finset of naturals less than n.</p>
 <p><code>set_theory.cardinal</code> contains theory on infinite cardinals</p>
 
