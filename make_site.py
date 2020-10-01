@@ -78,17 +78,11 @@ class MenuItem:
 class Menu:
     title: str
     items: List[MenuItem]
-    right: bool = False
-
-    @property
-    def class_right(self):
-        return ' dropdown-menu-right' if self.right else ''
 
     @classmethod
     def from_dict(cls, dic):
         return cls(dic['title'], [MenuItem.from_dict(item)
-                                  for item in dic['items']],
-                                  dic['open_right'])
+                                  for item in dic['items']])
 
 
 with (DATA/'menus.yaml').open('r', encoding='utf-8') as menu_file:
@@ -348,7 +342,7 @@ paper_lists = [('Papers about Lean',
 def render_site(target: Path, base_url: str, reloader=False):
     default_context = lambda: {
             'base_url': base_url,
-            'menus': menus
+            'menus': menus,
             }
 
     md_renderer = CustomHTMLRenderer()

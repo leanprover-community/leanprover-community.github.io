@@ -13,7 +13,7 @@
     {% block extracss %}{% endblock %}
 
 	<script>
-                function buildShortcutsForStructures(names) { 
+                function buildShortcutsForStructures(names) {
                         const o = {}
                         names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
                         return o
@@ -41,34 +41,28 @@
     </a>
     </div>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-		{% for menu in menus %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  {{ menu.title }}
-          </a>
-		  <div class="dropdown-menu {{ menu.class_right }}" aria-labelledby="navbarDropdown">
-			{% for item in menu.items %}
-			{% if item.title %}
-			<a class="dropdown-item" href="{{ item.url | url }}">{{ item.title }}</a>
-			{% else %}
-			<div class="dropdown-divider"></div>
-			{% endif %}
-			{% endfor %}
-          </div>
-        </li>
-		{% endfor %}
-      </ul>
-    </div>
   </nav>
-  <div class="container-sm mt-4">
+  <div class="container-fluid"><div class="row">
+    <nav id="navbar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">{% for menu in menus %}
+      <h6 class="sidebar-heading px-3 mt-4 mb-1">{{ menu.title }}</h6>
+		  <ul class="nav flex-column">{% for item in menu.items %}
+        {% if item.title %}
+          <li class="nav-item"><a href="{{ item.url | url }}">{{ item.title }}</a></li>
+        {% else %}
+          <!-- <div class="dropdown-divider"></div> -->
+        {% endif %}
+			{% endfor %}</ul>
+		{% endfor %}</nav>
+  <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="mt-4 mx-auto" style="max-width: 90ch">
 	  {% block content %}
     {% endblock %}
-  </div>
+    </div>
+  </main>
+  </div></div>
 </div>
 {% if name is defined %}
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
