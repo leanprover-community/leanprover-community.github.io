@@ -35,7 +35,7 @@
   </head>
   <body>
   <div id="wrapper">
-  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
     <div class="d-flex flex-grow-1">
 		<a class="navbar-brand" href="{{ base_url }}index.html">Lean Community
     </a>
@@ -46,18 +46,17 @@
     </button>
   </nav>
   <div class="container-fluid"><div class="row">
-    <nav id="navbar" class="col-md-3 col-xl-2 d-md-block bg-light sidebar collapse">{% for menu in menus %}
-      <h6 class="sidebar-heading px-3 mt-4 mb-1">{{ menu.title }}</h6>
-		  <ul class="nav flex-column">{% for item in menu.items %}
-        {% if item.title %}
+    <nav id="navbar" class="col-md-3 col-xl-2 d-md-block bg-light sidebar collapse navbar navbar-light pb-4">
+      <div class="d-sm-none d-md-block"><a class="navbar-brand" href="{{ base_url }}index.html">Lean Community</a></div>
+      {% for menu in menus %}<div>
+        <h6 class="sidebar-heading px-3 mt-4 mb-1">{{ menu.title }}</h6>
+        <ul class="nav flex-column">{% for item in menu.items %}
           <li class="nav-item"><a href="{{ item.url | url }}">{{ item.title }}</a></li>
-        {% else %}
-          <!-- <div class="dropdown-divider"></div> -->
-        {% endif %}
-			{% endfor %}</ul>
-		{% endfor %}</nav>
+        {% endfor %}</ul>
+      </div>{% endfor %}
+    </nav>
   <main class="col-md-9 col-xl-8 px-md-4">
-    <div class="mt-4 mx-auto" style="max-width: 90ch">
+    <div class="mt-5 mx-auto" style="max-width: 90ch">
 	  {% block content %}
     {% endblock %}
     </div>
