@@ -347,11 +347,8 @@ end
 
 For single line tactic proofs (or short tactic proofs embedded in a term),
 it is preferable to use `by ...` rather than `begin ... end`.
-
-If you are using multiple tactics inside a `by ...` block, use braces
-`by { tac1, tac2 }` rather than abusing the `;` operator `by tac1; tac2`,
-which should only be used when multiple goals need to be processed by `tac2`.
-(This style rule is not yet followed in the older parts of mathlib.)
+If you are using multiple tactics inside a `by ...` block,
+you can use semicolons to separate them: `by tac1; tac2`.
 
 ### Sections ###
 
