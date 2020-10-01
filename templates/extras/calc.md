@@ -12,7 +12,7 @@ calc a = b + 1 : H1
 ...    = c + 1 : by rw H2
 ```
 
-# Error messages, and how to avoid them.
+## Error messages, and how to avoid them
 
 Note that the error messages can be quite obscure when things aren't quite right, and often the red
 squiggles end up under a random `...`. A tip to avoid these problems with calc usage is to first
@@ -35,7 +35,7 @@ have H : A = D,
 with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
 one write a VS Code snippet to write this skeleton?)
 
-# Using operators other than equality.
+## Using operators other than equality
 
 Many of the basic examples in TPIL use equality for most or all of
 the operators, but actually `calc` will work with any relation for which
@@ -51,7 +51,7 @@ calc a *** b : H1
 ...    *** c : H2
 ```
 
-# Using more than one operator.
+## Using more than one operator
 
 This is possible; TPIL has the following example:
 
@@ -103,7 +103,7 @@ operator is the equality operator, Lean looks through the theorems in its databa
 
 and it is easily seen that these lemmas can be used to justify the example in the manual.
 
-# Using user-defined operators
+## Using user-defined operators
 
 It is as simple as tagging the relevant results with `trans`. For example
 

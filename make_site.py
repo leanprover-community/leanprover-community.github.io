@@ -17,6 +17,10 @@ import urllib.request
 import json
 import gzip
 from github import Github
+from pygments import highlight
+from pygments.styles import get_style_by_name as get_style
+from pygments.lexers import get_lexer_by_name as get_lexer, guess_lexer
+from pygments.formatters.html import HtmlFormatter
 
 class CustomHTMLRenderer(HTMLRenderer):
     """
@@ -30,6 +34,17 @@ class CustomHTMLRenderer(HTMLRenderer):
         anchor = inner.strip().lower()
         anchor = re.sub(r'[^\w\- ]+', '', anchor).replace(' ', '-')
         return template.format(level=token.level, inner=inner, anchor=anchor)
+
+    # Use pygments highlighting.
+    # https://github.com/miyuchina/mistletoe/blob/8f2f0161b2af92f8dd25a0a55cb7d437a67938bc/contrib/pygments_renderer.py
+    formatter = HtmlFormatter()
+    def render_block_code(self, token):
+        code = token.children[0].content
+        try:
+            lexer = get_lexer(token.language) if token.language else guess_lexer(code)
+        except:
+            lexer = get_lexer('text')
+        return highlight(code, lexer, self.formatter)
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
