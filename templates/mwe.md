@@ -6,13 +6,13 @@ When posting code on Zulip, please include all `import`s and `open`s and `univer
 
 Bad example:
 
-```
+```lean
 #check (univ : set X)
 ```
 
 Good example:
 
-```
+```lean
 import data.set.basic
 
 universe u
