@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this document we explain how all the various pieces of the Lean tools ecosystem fit together. 
+In this document we explain how all the various pieces of the Lean tools ecosystem fit together.
 Understanding this precisely is not required, but it will help if you decide to explore non-recommended setups.
-In particular we will gradually introduce new pieces in the story, starting with a bare bone Lean. 
+In particular we will gradually introduce new pieces in the story, starting with a bare bones Lean.
 This is *not* the recommended setup.
 Also this document is long, that's the price for not wanting to blindly follow the recommended setup instructions.
 
@@ -12,14 +12,16 @@ Also this document is long, that's the price for not wanting to blindly follow t
 
 ### Installing Lean
 
-Of course the main piece is Lean itself. You can download Lean binaries for your OS [here](https://github.com/leanprover-community/lean/releases). 
+Of course the main piece is Lean itself. You can download Lean binaries for your OS [here](https://github.com/leanprover-community/lean/releases).
 This contains folders `bin`, `include` and `lib`.
 The `bin` folder contains a `lean` executable which you can run.
 
 That's all, Lean is installed!
 
-You can make is slightly more convenient to use by ensuring this `bin` folder is in your path, or maybe by creating a link to 
+You can make is slightly more convenient to use by ensuring this `bin` folder is in your path, or maybe by creating a link to
 `lean` from a folder which is in you path.
+
+Again, we write this for pedagogical purposes. **This is not the recommended setup.**
 
 ### Proving stuff
 
@@ -29,20 +31,20 @@ In a file called `test.lean`, type:
 lemma zero_max (m : ℕ) : max 0 m = m :=
 max_eq_right (nat.zero_le m)
 ```
-Then you can ask Lean to check this proof by running `lean test.lean`. 
-Lean will think for a second (most of it spend in intialization) and return control to you, without outputing anything.
+Then you can ask Lean to check this proof by running `lean test.lean`.
+Lean will think for a second (most of it spend in initialization) and return control to you, without outputting anything.
 That's Lean's idea of a dignified triumph.
 If you start messing up with the file, say deleting the final `m` on the last line,
 Lean will output an error message.
 That's 99.9% of what Lean and its supporting tool do,
-but the remaining 0.1% will make your life much easier. 
+but the remaining 0.1% will make your life much easier.
 
 Before turning to that, you need to understand why Lean didn't ask for the definition of `ℕ`, `max`, `max_eq_right` and `nat.zero_le`.
 That's because all those are defined in the part of Lean's core library that is automatically loaded by default.
-This default library lives in the `lib` folder you saw after downloading Lean, 
+This default library lives in the `lib` folder you saw after downloading Lean,
 precisely in `lib/lean/library/init/`.
 You can prevent loading it by starting your `test.lean` with the line `prelude`.
-Then everything will fall apart. 
+Then everything will fall apart.
 Lean will not know about `ℕ`, `max`, or even the equality sign!
 And it won't attempt to read the proof of a statement it couldn't understand.
 So you should not keep that `prelude` line.
@@ -59,7 +61,7 @@ zero_max 1
 ```
 Trying to compile it with `lean test2.lean` fails: Lean complains it doesn't know about
 our `zero_max` lemma.
-You need to tell Lean that `test2.lean` relies on `test.lean`. 
+You need to tell Lean that `test2.lean` relies on `test.lean`.
 So add on top of `test2.lean` the line `import test`.
 Now Lean complains it cannot find the file `test` in `LEAN_PATH`.
 You can ask Lean where it searches for files by running `lean --path`, and paying attention
@@ -68,7 +70,7 @@ Notice this list does not contain the folder where `test.lean` is sitting.
 That all caps name in the error message suggests setting an environment variable called `LEAN_PATH` could help.
 Indeed you can run:
 ```bash
-LEAN_PATH=path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean 
+LEAN_PATH=path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean
 ```
 and this succeeds.
 Note that omitting the first part would have brought you to the prelude situation where Lean does not know
@@ -95,8 +97,8 @@ when you use the bare binary distribution).
 
 ### Keeping compiled versions
 
-Note that `lean` rechecks `test.lean` each time you ask it to check `test2.lean`, 
-even if `test.lean` was not modified since it was last checked. 
+Note that `lean` rechecks `test.lean` each time you ask it to check `test2.lean`,
+even if `test.lean` was not modified since it was last checked.
 This is clearly a waste of CPU.
 You can ask Lean to remember its work by running `lean --make test.lean`.
 This will create `test.olean` containing all the relevant information from `test.lean` you need in
@@ -119,7 +121,7 @@ You can ask it to have a look at `test.lean` by typing:
 It will answer a couple of messages, claiming to start working, and then be to done before returning to silence.
 You can then ask for information about what's at column 27 of line 1 of `test.lean` by typing:
 ```
-{ "command": "info", "file_name": "test.lean", "line": 1, "column": 27, "seq_num": 2 } 
+{ "command": "info", "file_name": "test.lean", "line": 1, "column": 27, "seq_num": 2 }
 ```
 Lean's answer will include the location of the file defining `max` as well as the type of
 `max`.
@@ -145,10 +147,10 @@ Your current project only has two files, `test.lean` and `test2.lean` which
 both depend on part of Lean's core library.
 But you want to start using what other people did, so you'll need other Lean files,
 for instance from [mathlib](https://github.com/leanprover-community/mathlib).
-You could download mathlib, and add a line to your `leanpkg.path` pointing to 
+You could download mathlib, and add a line to your `leanpkg.path` pointing to
 `mathlib/src`.
-But of course you'll want to put your project under version control without versionning mathlib,
-which is already versionned somewhere else.
+But of course you'll want to put your project under version control without versioning mathlib,
+which is already versioned somewhere else.
 And you want to update mathlib regularly to enjoy all the latest goodies.
 And mathlib is very long to compile (ie. making olean files), so you'd like to get a precompiled version.
 
@@ -170,7 +172,7 @@ both managers use the same configuration file for your project,
 called `leanpkg.toml`.
 This file should be at the root of your project.
 It is written in the config file language [TOML](https://en.wikipedia.org/wiki/TOML) (which has nothing to do with [ML](https://en.wikipedia.org/wiki/ML_(programming_language)) or [ML](https://en.wikipedia.org/wiki/Machine_learning)).
-You don't need to know anything about the required fields of this configuation file, because the package manager
+You don't need to know anything about the required fields of this configuration file, because the package manager
 will write everything there for you.
 It will also handle writing the `leanpkg.path` file for you,
 and download and update a compiled mathlib for you.
@@ -178,20 +180,20 @@ and download and update a compiled mathlib for you.
 ## Handling Lean versions
 
 Lean is a very active project.
-The core team around Leonardo de Moura at Microsoft research is developing Lean 4, 
+The core team around Leonardo de Moura at Microsoft research is developing Lean 4,
 which is not yet ready for end users,
 while the user community still develops Lean 3.
 So you'll want to frequently update Lean itself.
 Again you don't want to think about this, so [elan](https://github.com/Kha/elan) will handle it.
-This version manager also reads your project `leanpkg.toml`, 
+This version manager also reads your project `leanpkg.toml`,
 and uses it to decide which version of Lean you want to run,
 and download it if needed.
-This is completely transparent. 
+This is completely transparent.
 You can continue to run `lean`,
-directly or through your editor plugin or through `leanproject`, 
+directly or through your editor plugin or through `leanproject`,
 and `elan` will call the appropriate Lean version.
 
 This is why the first step in the recommended installation procedure is to install `elan`.
-Then the second step is to install `leanproject` (in `mathlib-tools`), 
+Then the second step is to install `leanproject` (in `mathlib-tools`),
 and the third step is to install a compatible editor and its Lean plugin.
 And then `leanproject` and the editor plugin handle everything.
