@@ -136,7 +136,7 @@
 <h2 id="introduction" class="markdown-heading">Introduction <a class="hover-link" href="#introduction">#</a></h2>
 <p>In this document we explain how all the various pieces of the Lean tools ecosystem fit together.
 Understanding this precisely is not required, but it will help if you decide to explore non-recommended setups.
-In particular we will gradually introduce new pieces in the story, starting with a bare bone Lean.
+In particular we will gradually introduce new pieces in the story, starting with a bare bones Lean.
 This is <em>not</em> the recommended setup.
 Also this document is long, that's the price for not wanting to blindly follow the recommended setup instructions.</p>
 <h2 id="installing-lean-and-checking-files" class="markdown-heading">Installing Lean and checking files <a class="hover-link" href="#installing-lean-and-checking-files">#</a></h2>
@@ -147,6 +147,7 @@ The <code>bin</code> folder contains a <code>lean</code> executable which you ca
 <p>That's all, Lean is installed!</p>
 <p>You can make is slightly more convenient to use by ensuring this <code>bin</code> folder is in your path, or maybe by creating a link to
 <code>lean</code> from a folder which is in you path.</p>
+<p>Again, we write this for pedagogical purposes. <strong>This is not the recommended setup.</strong></p>
 <h3 id="proving-stuff" class="markdown-heading">Proving stuff <a class="hover-link" href="#proving-stuff">#</a></h3>
 <p>You can now check your first proof.
 In a file called <code>test.lean</code>, type:</p>
@@ -155,7 +156,7 @@ In a file called <code>test.lean</code>, type:</p>
 </pre></div>
 
 <p>Then you can ask Lean to check this proof by running <code>lean test.lean</code>.
-Lean will think for a second (most of it spend in intialization) and return control to you, without outputing anything.
+Lean will think for a second (most of it spend in initialization) and return control to you, without outputting anything.
 That's Lean's idea of a dignified triumph.
 If you start messing up with the file, say deleting the final <code>m</code> on the last line,
 Lean will output an error message.
@@ -188,7 +189,7 @@ to the lines in the &quot;path&quot; list.
 Notice this list does not contain the folder where <code>test.lean</code> is sitting.
 That all caps name in the error message suggests setting an environment variable called <code>LEAN_PATH</code> could help.
 Indeed you can run:</p>
-<div class="highlight"><pre><span></span><span class="nv">LEAN_PATH</span><span class="o">=</span>path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean 
+<div class="highlight"><pre><span></span><span class="nv">LEAN_PATH</span><span class="o">=</span>path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean
 </pre></div>
 
 <p>and this succeeds.
@@ -233,7 +234,7 @@ You can ask it to have a look at <code>test.lean</code> by typing:</p>
 
 <p>It will answer a couple of messages, claiming to start working, and then be to done before returning to silence.
 You can then ask for information about what's at column 27 of line 1 of <code>test.lean</code> by typing:</p>
-<div class="highlight"><pre><span></span><span class="err">{ &quot;command&quot;: &quot;info&quot;, &quot;file_name&quot;: &quot;test.lean&quot;, &quot;line&quot;: 1, &quot;column&quot;: 27, &quot;seq_num&quot;: 2 } </span>
+<div class="highlight"><pre><span></span><span class="err">{ &quot;command&quot;: &quot;info&quot;, &quot;file_name&quot;: &quot;test.lean&quot;, &quot;line&quot;: 1, &quot;column&quot;: 27, &quot;seq_num&quot;: 2 }</span>
 </pre></div>
 
 <p>Lean's answer will include the location of the file defining <code>max</code> as well as the type of
@@ -257,8 +258,8 @@ But you want to start using what other people did, so you'll need other Lean fil
 for instance from <a href="https://github.com/leanprover-community/mathlib">mathlib</a>.
 You could download mathlib, and add a line to your <code>leanpkg.path</code> pointing to
 <code>mathlib/src</code>.
-But of course you'll want to put your project under version control without versionning mathlib,
-which is already versionned somewhere else.
+But of course you'll want to put your project under version control without versioning mathlib,
+which is already versioned somewhere else.
 And you want to update mathlib regularly to enjoy all the latest goodies.
 And mathlib is very long to compile (ie. making olean files), so you'd like to get a precompiled version.</p>
 <p>All this means you need a Lean project manager.
@@ -278,7 +279,7 @@ both managers use the same configuration file for your project,
 called <code>leanpkg.toml</code>.
 This file should be at the root of your project.
 It is written in the config file language <a href="https://en.wikipedia.org/wiki/TOML">TOML</a> (which has nothing to do with <a href="https://en.wikipedia.org/wiki/ML_(programming_language)">ML</a> or <a href="https://en.wikipedia.org/wiki/Machine_learning">ML</a>).
-You don't need to know anything about the required fields of this configuation file, because the package manager
+You don't need to know anything about the required fields of this configuration file, because the package manager
 will write everything there for you.
 It will also handle writing the <code>leanpkg.path</code> file for you,
 and download and update a compiled mathlib for you.</p>
