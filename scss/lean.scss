@@ -1,56 +1,128 @@
 $enable-gradients:                            true;
 $enable-shadows : true;
+$body-color: black;
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-family-serif: 'Merriweather', sans-serif;
+$font-family-monospace: 'Source Code Pro', monospace;
+$code-color: black;
+$pre-color: black;
+$code-font-size: 100%;
+$link-color: hsl(210, 100%, 30%);
+$link-hover-color: $link-color;
+$kbd-color: black;
+$kbd-bg: white;
+$kbd-box-shadow: inset 0 -.15rem .2rem rgba(black, .50);
+
 @import "../bootstrap-4.4.1/scss/bootstrap";
 @import "pygments";
 
-// push the footer to the bottom of the screen
-// https://stackoverflow.com/a/54100290
-html {
-  height: 100%;
+.navbar-brand {
+  font-family: $font-family-serif;
+  display: block;
+  white-space: unset;
 }
 
-body {
-  min-height: 100%;
+@include media-breakpoint-up(sm) {
+  // push the footer to the bottom of the screen
+  // https://stackoverflow.com/a/54100290
+  html {
+    height: 100%;
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    #mainbox { flex-grow: 1; }
+  }
+}
+
+#mainbox {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+
+  & > #navbar { order: 1; }
+  & > main { order: 2; }
+
+  @include media-breakpoint-down(sm) {
+    & > * { padding: 0 1rem; }
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-up(sm) {
+    & > #navbar {
+      flex: 0 2 20em;
+    }
+
+    & > main {
+      flex: 0 1 60em;
+      max-width: 60em;
+    }
+
+    & > * { padding: 0 1.5rem; }
+
+    &::before {
+      order: 3;
+      display: block;
+      content: ' ';
+      flex: 0 100 20em;
+    }
+  }
 }
 
-body > #wrapper {
-  flex-grow: 1;
-}
+#mainbox > * { padding: 0 1rem; }
 
-code {
-  color: #931e53
+#navbar li {
+  a { display: block; }
+  @include media-breakpoint-down(sm) {
+    a { padding: 1em 0; }
+    &:not(:first-child) {
+      border-top: 1px solid $gray-300;
+    }
+  }
+  @include media-breakpoint-up(sm) {
+    a {
+      text-indent: -1em;
+      padding-left: 1em;
+    }
+  }
 }
 
 h1, h2, h3, h4 {
-	font-family: 'Merriweather';
+  font-family: $font-family-serif;
+  margin-top: 2rem;
 }
 
-li.nav-item.dropdown:hover .dropdown-menu {
-  display: block;
+code, pre {
+  font-family: 'Source Code Pro', monospace;
+  background-color: #f5f5f5;
+  border-radius: 5px;
 }
 
-.dropdown-menu {
-  margin-top: -1px !important; /* When the dropdown comes down on hover, this will make it easier to get to the dropdown contents without losing it. */
+code {
+  padding: 1px 3px;
 }
 
-.hover-link {
-  display: none;
+pre {
+  padding: 5px;
+  white-space: pre-wrap;
 }
 
-.markdown-heading:hover > .hover-link {
-  display: inline;
+.markdown-heading:not(:hover) > .hover-link {
+  visibility: hidden;
 }
 
 .card-header {
   background-color: white !important;
 }
 
+.card-body > *:first-child {
+  margin-top: unset;
+}
+
 /* Theorem statements in the 100 theorem list: */
 
 .doc-stmt {
-    font-family: monospace;
+    font-family: 'Source Code Pro', monospace;
     /* indent everything but first line twice as much as decl_type */
     text-indent: -8ex; padding-left: 8ex;
 }
@@ -75,4 +147,13 @@ li.nav-item.dropdown:hover .dropdown-menu {
 
 .doc-stmt a {
   color: inherit;
+}
+
+/* break long declaration names at periods where possible */
+.break_within {
+    word-break: break-all;
+}
+
+.break_within .name {
+    word-break: normal;
 }
