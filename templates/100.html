@@ -8,11 +8,9 @@
         Currently {{hundred_theorems|selectattr('author')|list|length}} of them are formalized in Lean.
         We also have a page with the theorems from the list <a href="100-missing.html">not yet in mathlib</a>.</p>
 
-  <div class="list-group">
     {% for theorem in hundred_theorems|selectattr('author') %}
-    <div class="list-group-item">
-        <h5 class="card-title markdown-heading" id="{{ theorem.number }}">{{ theorem.number }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.number }}">#</a></h5>
-        <h6 class="card-title">Author: {{ theorem.author }}</h6>
+        <h5 class="markdown-heading mt-5" id="{{ theorem.number }}">{{ theorem.number }}. {{ theorem.title }} <a class="hover-link" href="#{{ theorem.number }}">#</a></h5>
+        <p>Author{% if ',' in theorem.author %}s{% endif %}: {{ theorem.author }}</p>
         {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
         {% for doc in theorem.doc_decls|default([], true) %}
         <div class="doc-stmt">{{ doc.decl_header_html }}</div>
@@ -20,8 +18,6 @@
         {% endfor %}
         {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
         {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
-    </div>
     {% endfor %}
-  </div>
 
 {% endblock %}
