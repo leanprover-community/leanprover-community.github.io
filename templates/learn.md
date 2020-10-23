@@ -56,7 +56,7 @@ at hand, for reference.
 
 * If you have a computer science background, and are primarily interested
   in software verification, then you can read
-  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf),
+  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) ([tablet edition optimized for on-screen viewing](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide_tablet.pdf)),
   course notes for an [MSc-level course](https://lean-forward.github.io/logical-verification/2020/index.html) at VU Amsterdam.
 
 * If you want a systematic exposition of syntax and commands, then you
