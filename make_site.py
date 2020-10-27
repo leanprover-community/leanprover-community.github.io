@@ -285,6 +285,8 @@ for name, project in oprojects.items():
         descr = render_markdown(project['description'])
         projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
 
+num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+
 projects.sort(key = lambda p: p.stars, reverse=True)
 
 urllib.request.urlretrieve(
@@ -413,7 +415,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
-                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta}),
+                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('.*.md', get_contents)
                 ],
