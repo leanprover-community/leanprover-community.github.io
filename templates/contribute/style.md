@@ -94,7 +94,7 @@ See our [documentation requirements](doc.html) for more suggestions and examples
 
 ### Structuring definitions and theorems
 
-These guidelines hold for declarations starting with `def`, `lemma` and `theorem`. For "theorem statement", also read "type declaration of a definition" and for "proof" also read "definition body".
+These guidelines hold for declarations starting with `def`, `lemma` and `theorem`. For "theorem statement", also read "type of a definition" and for "proof" also read "definition body".
 
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
 than at the beginning of the next line.
