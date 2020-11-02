@@ -92,7 +92,7 @@ New bibliography entries should be added to `docs/references.bib`.
 
 See our [documentation requirements](doc.html) for more suggestions and examples.
 
-### Structuring definitions and theorems ###
+### Structuring definitions and theorems
 
 These guidelines hold for declarations starting with `def`, `lemma` and `theorem`. For "theorem statement", also read "type declaration of a definition" and for "proof" also read "definition body".
 
