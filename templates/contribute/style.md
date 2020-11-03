@@ -92,7 +92,9 @@ New bibliography entries should be added to `docs/references.bib`.
 
 See our [documentation requirements](doc.html) for more suggestions and examples.
 
-### Structuring definitions and theorems ###
+### Structuring definitions and theorems
+
+These guidelines hold for declarations starting with `def`, `lemma` and `theorem`. For "theorem statement", also read "type of a definition" and for "proof" also read "definition body".
 
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
 than at the beginning of the next line.
@@ -105,6 +107,22 @@ of a proof, so that the proof is "flush left" in the file.
 open nat
 theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) : P n :=
 nat.induction_on n H1 (assume m IH, H2 m)
+```
+
+If the theorem statement requires multiple lines, indent the subsequent lines:
+```lean
+namespace nat
+
+lemma le_induction {P : ℕ → Prop} {m}
+  (h0 : P m) (h1 : ∀ n, m ≤ n → P n → P (n + 1)) :
+  ∀ n, m ≤ n → P n :=
+by apply nat.less_than_or_equal.rec h0; exact h1
+
+def decreasing_induction {P : ℕ → Sort*} (h : ∀ n, P (n + 1) → P n) {m n : ℕ} (mn : m ≤ n)
+  (hP : P n) : P m :=
+le_rec_on mn (λ k ih hsk, ih $ h k hsk) (λ h, h) hP
+
+end nat
 ```
 
 When a proof term takes multiple arguments, it is sometimes clearer, and often
@@ -142,12 +160,13 @@ list.rec_on l
 
 ```
 
-A short definition can be written on a single line:
+A short declaration can be written on a single line:
 ```lean
 open nat
-definition square (x : nat) : nat := x * x
+lemma succ_pos : ∀ n : ℕ, 0 < succ n := zero_lt_succ
+
+def square (x : nat) : nat := x * x
 ```
-For longer definitions, use conventions like those for theorems.
 
 A "have" / "from" pair can be put on the same line.
 ```lean
