@@ -36,6 +36,7 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 
 ### Get Python
 
+* If you have the Windows Store version of Python, please uninstall it first.
 * Download the latest version of python [here](https://www.python.org/downloads/).
 * Run the downloaded file (`python-3.x.x.exe`)
 * Check `Add Python 3.x to PATH`.
