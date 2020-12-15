@@ -90,6 +90,18 @@ If `X` is a topological space, and `x ∈ X`, then the _neighbourhood filter_ `�
 
 Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ F` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
 
+As an example, below are three limits formulated in Lean.
+The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in an type equippred with an order.
+```lean
+-- The limit of 2 * x tends to 6 as x goes to 3
+example : tendsto (λ x : ℝ, 2 * x) (𝓝 3) (𝓝 6) := sorry
+-- The limit of 1 / x tends to 0 as x goes to ∞
+example : tendsto (λ x : ℝ, 1 / x) at_top (𝓝 0) := sorry
+-- The limit of x ^ 2 tends to ∞ as x goes to -∞
+example : tendsto (λ x : ℝ, x ^ 2) at_bot at_top := sorry
+```
+
+
 The _principal filter_ `principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
 
 ```lean
