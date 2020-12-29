@@ -392,6 +392,21 @@ We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.
 
+### Hypotheses Left of Colon ###
+
+Generally, having hypotheses to the left of the colon is preferred
+over having hypotheses in implications, when possible. For instance:
+
+```lean
+example (n : ℝ) (h : n > 1) : n > 0 := by linarith
+```
+
+is preferred over
+
+```lean
+example (n : ℝ) : (n > 1) → (n > 0) := λ h, (by linarith)
+```
+
 ## Comments
 
 Use module doc delimiters `/-! -/` to provide section headers and
