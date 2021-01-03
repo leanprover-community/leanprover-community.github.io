@@ -1,111 +1,254 @@
 # Simp
 
-The `simp` tactic works by applying a conditional term rewriting system to try and prove, or at
-least simplify, your goal. What this basically means is that `simp` is equipped with a list of
-lemmas (those tagged with the `simp` attribute), many of which are of the form `X = Y` or `X iff Y`,
-and attempts to match subterms of the goal with the left hand side of a rule, and then replaces the
-subterm with the right hand side. The system is conditional in the sense that lemmas are allowed to
-have preconditions (`P -> (X = Y)`) and in these cases it will try and prove the precondition using
-its simp lemmas before applying `X = Y`.
+## Overview
 
-You can watch `simp` in action by using `set_option trace.simplify true` in your code. For example
+In this document we will explain basic usage of Lean's simplifier,
+`simp`, and the related tactic `dsimp`.
+
+## Introduction
+
+Lean has a "simplifier", called `simp`. This is a tactic whose job,
+unfortunately for beginners, is *not* to prove an arbitrary simple
+statement. Lean's simplifier is what is called a "conditional term
+rewriting system". Rewriting is the act of changing a goal of the form
+`P(A)` into `P(B)`, given a hypothesis of the form `A = B` or `A ↔
+B`. The simplifier's job is to try and prove, or at least simplify,
+goals or hypotheses, by using repeated rewrites. Here is an example
+(using `mathlib`).
 
 ```lean
-namespace hidden
+import algebra.group.defs
 
-definition cong (a b m : ℤ) : Prop := ∃ n : ℤ, b - a = m * n
+variables (G : Type) [group G] (a b c : G)
 
-notation a ` ≡ ` b ` mod ` m  := cong a b m
-set_option trace.simplify true
-theorem cong_refl (m : ℤ) : ∀ a : ℤ, a ≡ a mod m :=
+example : a * a⁻¹ * 1 * b = b * c * c⁻¹ :=
 begin
-intro a,
-unfold cong,
-existsi (0:ℤ),
-simp
+  simp
 end
-
-end hidden
 ```
 
-If you do this exercise you will discover firstly that `simp` spends a lot of its time trying random
-lemmas and then giving up very shortly afterwards, and also that the `unfold` command is also
-underlined in green -- Lean seems to apply `simp` when you do an `unfold` as well (apparently
-`unfold` just asks `simp` to do its dirty work for it -- `unfold X` is close to `simp only [X]`).
-
-If you only want to see what worked rather than all the things that didn't, you could try
-`set_option trace.simplify.rewrite true`.
+How would a human solve that goal? They would notice that `a * a⁻¹ =
+1`, that `1 * 1 = 1` and so on, until they had simplified the example
+to `b = b`, which is obviously true. This is also what the simplifier
+is doing. Indeed, if you add `set_option trace.simplify.rewrite true`
+above the example, then a squiggly blue underline will appear under
+`simp` (in VS Code) and clicking on this will show you the sequence of
+rewrites that `simp` discovered.
 
 ## Simp lemmas
 
-In case you want to train `simp` to use certain extra lemmas (for example because they're coming up
-again and again in your work) you can add new lemmas for yourself. For example in mathlib in
-`algebra/ring.lean` we find the line
+So how did Lean's simplifier know that `a * a⁻¹ = 1`? It is because
+the corresponding lemma in `algebra.group.defs` is tagged with the
+`simp` attribute:
 
 ```lean
-@[simp] theorem ne_zero (u : units α) : (u : α) ≠ 0
+@[simp] lemma mul_right_inv (a : G) : a * a⁻¹ = 1 := ...
 ```
 
-This lemma is then added to `simp`'s armoury. Note several things however.
-
-1) It might not be wise to make a random theorem into a simp lemma. Ideally the result has to be of
-a certain kind, the most important kinds being those of the form `A=B` and `A↔B`. Note however that
-if you want to add `fact` to `simp`'s weaponry, you can prove
+This `@[simp]` at the beginning just "tags" `mul_right_inv` with the
+`simp` attribute. We call lemmas tagged in this way "`simp`
+lemmas". Here are some examples of `simp` lemmas in mathlib:
 
 ```lean
-@[simp] lemma my_lemma : fact ↔ true
+@[simp] theorem nat.dvd_one {n : ℕ} : n ∣ 1 ↔ n = 1 := ...
+@[simp] theorem mul_eq_zero {a b : ℕ} : a * b = 0 ↔ a = 0 ∨ b = 0 := ...
+@[simp] theorem list.mem_singleton {a b : α} : a ∈ [b] ↔ a = b := ...
+@[simp] theorem set.set_of_false : {a : α | false} = ∅ := ...
 ```
 
-(and in fact more recent versions of Lean do this automatically when you try to add random theorems
-to the simp dataset).
+When the simplifier is attempting to simplify a term `T` it looks
+through the `simp` lemmas known to the system at that time, in a
+sensible way (there are over ten thousand of them currently in
+`mathlib`!), and if it runs into a lemma of the form `A = B` or `A ↔
+B`, for which `A` shows up in `T`, it rewrites the lemma at `T` to
+replace it with a `B`, and starts again.
 
-2) If you are not careful you can add a bad simp lemma of the form
-`foo x y = [something mentioning foo]` and then `simp` will attempt to rewrite `foo` and then end up
-with another one, and attempt to rewrite that, and so on. This can be fixed by using `rw` instead of
-`simp`, or using the config option `{single_pass := tt}`.
+Note that the simplifier works in one direction only: if `A = B` is a
+`simp` lemma, then `simp` replaces `A`s with `B`s, but it doesn't
+replace `B`s with `A`s. Hence a `simp` lemma should have the property
+that its right hand side should be simpler than its left hand side. In
+particular, `=` and `↔` should not be viewed as symmetric operators in
+this situation. The following lemma
+
+```lean
+@[simp] lemma mul_right_inv_bad (a : G) : 1 = a * a⁻¹ := ...
+```
+
+would be a terrible `simp` lemma; the simplifier would then attempt to
+replace `1` with `a * a⁻¹`, which is usually not a sensible direction
+of travel. Furthermore, if both `mul_right_inv` and
+`mul_right_inv_bad` are tagged with `simp` then this would cause the
+simplifier to loop.
+
+However, `mathlib` has a linter, which one can call with `#lint` in a
+Lean file, and which will attempt to flag any problems with `simp`
+lemmas in the file.
+
+When making a new definition, it is very common to have `@[simp]`
+lemmas which train the simplifier how to use the definition in a
+sensible manner. An example of this is in mathlib's
+[data.complex.basic](https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean),
+which has almost 100 `simp` lemmas in. Theorems such as `@[simp] lemma
+add_re (z w : ℂ) : (z + w).re = z.re + w.re := rfl` are proved in that
+file, even though they are true by definition, because they are
+important `simp` lemmas. The very slick proof in that file that the
+complex numbers are a commutative ring uses `simp` at a key moment to
+reduce goals such as `(z + w).re = (w + z).re` into `z.re + w.re =
+w.re + z.re`, which is a statement about real numbers which the `ring`
+tactic can solve.
+
+## Basic usage 
+
+`simp` -- tries to simplify the goal using all `simp` lemmas known to
+          Lean at that time.
+
+`simp [h1, h2]` -- uses all `simp` lemmas and also `h1` and `h2`
+                   (which can either be local hypotheses or other lemmas which
+		   are not tagged `simp` for some reason).
+
+`simp [← h]` -- uses all `simp` lemmas, and also `h : A = B` but in
+                 the form `B = A` (so `simp` rewrites `B`s to `A`s)
+
+`simp [-h]` -- stops `simp` from using lemma `h`.
+
+`simp *` -- uses all `simp` lemmas and also all current local
+            hypotheses to try to simplify the goal.
+
+`simp at h` -- tries to simplify `h` using all `simp` lemmas.
+
+`simp [h1] at h2 ⊢` -- tries to simplify both `h2` and the goal using
+                       `h1` and all `simp` lemmas (note: type `⊢` with
+                       `\|-` in VS Code).
+
+`simp * at *` -- tries to simplify both the goal and all hypotheses,
+                 using all hypotheses and all `simp` lemmas. Sometimes
+                 worth a try.
+
+`simp only [h1, h2, ..., hn]` -- don't use all `simp` lemmas, but only
+                                 the lemmas `h1`, `h2`, ... .
 
 
-## When it is unadvisable to use simp
+Note that some `simp` lemmas have preconditions. For example, a
+theorem about cancelling a factor on both sides of an equation would
+only be valid under the hypothesis that the factor is non-zero. If `h`
+is a proof of hypothesis `P` and `P → A = B` is a `simp` lemma then
+`simp [h]` will replace `A`'s with `B`'s in the goal. The fact that
+`simp` works with preconditions is the reason it is called a
+*conditional* term rewriting system.
 
-Using `simp` in the middle of proofs is a `simp` anti-pattern, which will produce brittle code. In
-other words, don't use `simp` in the middle of proofs. Use it to finish proofs. If you really need
-to simplify a goal in the middle of a proof, then use `simp`, but afterwards cut and paste the goal
-into your code and write `suffices : (simplified thing), by simpa using this`. This is really
-important because the behaviour of `simp` changes sometimes, and if you put `simp` in the middle of
-proofs then your code might randomly stop compiling and it will be hard to figure out why if you
-didn't write down the exact thing which `simp` used to be reducing your goal to. See also
-[`squeeze_simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa%20/%20squeeze_scope).
+## Simp normal form
 
-## How to use simp better
+There are sometimes several ways to say the same thing. For example,
+if `n : ℕ` then the hypotheses `n ≠ 0`, `0 ≠ n`, `n > 0`, `0 < n`, `1
+≤ n` and `n ≥ 1` are all ways to say the same thing. This can be
+problematic for rewriting systems like the simplifier. The reason is
+that the simplifier works up to *syntactic equality*. If the
+simplifier is working on a term `T`, and `A = B` is a `simp` lemma,
+and there is a subterm `A'` in `T` which is logically equal or
+equivalent to `A`, but not literally the same string of characters as
+`A`, then the simplifier will in general not replace it with
+`B`. Similarly, if nonzeroness of `n` (stated in one way) is a
+precondition in a `simp` lemma of the form `A = B`, and `h` is a proof
+of nonzeroness of `n` stated in a different way, then `simp [h]` might
+not replace `A`'s with `B`'s.
 
-Conversely, if you ever manage to close a goal with `simp`, then take a look at the line before you
-ran `simp`. Could you have run simp one line earlier? How far back did simp start working? Even for
-goals where you didn't use simp at all -- could you have used `simp` for your last line? What about
-the last-but one? And so on.
+A bad solution to this would be to write essentially the same lemma
+many times, so each possible invariant is covered. Clearly this is not
+ideal. The way this issue is dealt with in `mathlib` is to fix once
+and for all a so-called "simp normal form" for a way of expressing
+something such that `n ≠ 0` above, and then trying to stick to this
+variant when stating lemmas in Lean. For example, most lemmas which
+assume a natural is non-zero do it via the hypothesis `0 < n`.
 
-Recall that `simp` lemmas are almost all of the form `X = Y` or `X ↔ Y`. Hence `simp` might work
-well for such goals. However what about goals of the form `X → Y`? You could try assuming `h : X`
-and then running either `simpa using h` or `simp {contextual := tt}` to see if Lean can deduce `Y`.
+In general, if you are writing a lemma, you should know the "normal
+form" way to express the ideas in the lemma. If you are writing a
+lemma about a definition you made yourself, you might want to make
+your own design decision about the "normal form" way of expressing any
+idea which can be naturally expressed in more than one way.
 
-## Simp options
+An example of a simp normal form is a way of expressing nonemptiness
+of a subset of a type.  If `α : Type` and `s : set α` then
+nonemptiness of `s` can be expressed as `s.nonempty` and as `s ≠ ∅`.
+In mathlib an effort is made to stick to `s.nonempty` as the normal
+form.
 
-The behaviour of `simp` can be tweaked by `simp` variants and also by passing options to the
-algorithm. A good place to start is to look at the docstring for `simp` (write `simp` in VS Code and
-hover your mouse over it to see the docstring). Here are some examples, some of which are covered by
-the docstring and some of which are not.
+Another example: if `s : finset α` and `a : α` then `a ∈ s` is defined
+to mean `a ∈ (s : set α)`. The simp normal form for this idea is `a ∈
+s`, and moreover the `simp` lemma
 
-1) `simp only [H1, H2, H3]` uses only lemmas `H1`, `H2`, and `H3` rather than `simp`s full
-collection of lemmas. Whyever might one want to do this in practice? Because sometimes `simp`
-simplifies things too much -- it might unfold things that you wanted to keep folded, for example.
-Another reason is that using `simp only` can speed up slow `simp` calls significantly.
+```
+@[simp] lemma mem_coe {a : α} {s : finset α} : a ∈ (s : set α) ↔ a ∈ s := ...
+```
 
-2) `simp [-X]` stops `simp` from using lemma `X`. One could imagine using this as another solution when one finds `simp` doing more than you would like. Recall from above that `set_option trace.simplify.rewrite true` shows you exactly which lemmas `simp` is using.
+will attempt to turn any occurrences of `a ∈ (s : set α)` into the
+correct normal form.
 
-3) `simp * at *`. This simplifies everything in sight. Use if life is getting complicated.
 
-4) `simp {single_pass := tt}` -- this `single_pass` is a config option, one of around 16 at the time of writing. One can use `single_pass` to avoid loops which would otherwise occur; for example `nat.gcd_def` is an equality with `gcd` on both the left and right hand side, so `simp [nat.gcd_def]` is risky behaviour whereas `simp [nat.gcd_def] {single_pass := tt}` is not. As you can imagine, `simp only [h] {single_pass := tt}` here makes simp behave pretty much like `rw h`.
+## non-terminal `simp`s, and `simpa`
 
-5) Search for `structure simp_config` in the file `init/meta/simp_tactic.lean` in core Lean to see the full list of config options. Others, many undocumented, are:
+The behaviour of `simp` can change over time. More precisely, as more
+`simp` lemmas are added to a repository, the smarter `simp` gets. This
+means that updates to your code can cause proofs which use `simp` in
+the middle, to break. For example if a proof looked like
+
+```
+  ...
+  simp,
+  rw foo_eq_bar,
+  ...
+```
+
+and then later on someone added the `@[simp]` tag to `foo_eq_bar`,
+then this rewrite would now fail, and errors like this can at times be
+quite confusing to fix. If you really want to apply `simp` in the
+middle of a proof and not close a goal completely, there are several
+"approved" ways to do it:
+
+1) Use `squeeze_simp` instead of `simp`. This produces output of the
+form `simp only [h1, h2, ..., hn]`, which can be used instead of
+`simp` to perform the same task. `simp only` is much safer to use in
+the middle of a proof, because the simplifier is now constrained to
+only using the lemmas in the list, so will not be affected by changes
+to the `simp` set (the collection of lemmas tagged `simp`).
+
+2) `simpa`. If `simp` turns your goal into `h`, then you can write
+```
+suffices : P,
+  simpa,
+```
+
+which will add an extra goal of `h`, and then prove it using `simp`
+and the hypothesis `this`, which is the proof of `P` which the
+`suffices` tactic adds.
+
+## `dsimp`
+
+`dsimp` is a variant of `simp` which only uses `simp` lemmas whose
+proof is `rfl` or `iff.rfl`, i.e. lemmas of the form `A = B` or `A ↔ B`
+where `A` and `B` are equal by definition. Like `simp` it is not
+recommended to use it in the middle of a proof, however if `dsimp`
+turns your goal into `h` then `change h` might well do the same thing.
+Another common use of `dsimp` is
+
+```
+dsimp only
+```
+
+which can be a very useful way of tidying up a goal. It can be safely
+used in the middle of a proof because of the `only`. This command
+tidies up lambdas (it will turn `(λ x, f x) 37` into `f 37`, and
+`{to_fun := f, ...}.to_fun` into `f`.
+
+## More advanced features.
+
+`simp {single_pass := tt}` -- this `single_pass` is a config option,
+one of around 16 at the time of writing. One can use `single_pass` to
+avoid loops which would otherwise occur.
+
+Searching for `structure simp_config` in the file
+`init/meta/simp_tactic.lean` in core Lean reveals other config
+options, not all of them documented.
+
 ```lean
 (max_steps : nat           := simp.default_max_steps)
 (contextual : bool         := ff)
@@ -125,9 +268,10 @@ Another reason is that using `simp only` can speed up slow `simp` calls signific
 (memoize                   := tt)
 ```
 
-We see from the changelog that setting `constructor_eq` to true will reduce equations of the form
-`X a1 a2... = Y b1 b2...` to false if `X` and `Y` are distinct constructors for the same type, and
-to `a1 = b1 and a2 = b2 and...` if `X = Y` are the same constructor. Another interesting example is
-`iota_eqn` : `simp!` is shorthand for `simp {iota_eqn := tt}`. This adds non-trivial equation lemmas
-generated by the equation/pattern-matching compiler to simp's weaponry. See the changelog for more
-details.
+Setting `constructor_eq` to true will reduce equations of the form `X
+a1 a2... = Y b1 b2...` to false if `X` and `Y` are distinct
+constructors for the same type, and to `a1 = b1 and a2 = b2 and...` if
+`X = Y` are the same constructor. Another interesting example is
+`iota_eqn`. In fact `simp!` is shorthand for `simp {iota_eqn :=
+tt}`. This adds non-trivial equation lemmas generated by the
+equation/pattern-matching compiler to simp's list of simp lemmas.
