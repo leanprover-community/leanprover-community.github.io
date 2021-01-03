@@ -10,7 +10,7 @@ rather than rigid rules.
 ### Variable conventions ###
 
 - `u`, `v`, `w`, ... for universes
-- `α`, `β`, `γ`, ... for generic types 
+- `α`, `β`, `γ`, ... for generic types
 - `a`, `b`, `c`, ... for propositions
 - `x`, `y`, `z`, ... for elements of a generic type
 - `h`, `h₁`, ...     for assumptions
