@@ -419,7 +419,7 @@ additional indentation in the rest of the proof.
 
 ```lean
 begin
-  rw [h], swap, { exact h'},
+  rw [h], swap, { exact h' },
   ... 
 end
 ```
