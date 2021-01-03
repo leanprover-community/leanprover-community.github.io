@@ -394,8 +394,9 @@ short definitions, or to group together a definition and notation.
 
 ### Hypotheses Left of Colon ###
 
-Generally, having hypotheses to the left of the colon is preferred
-over having hypotheses in implications, when possible. For instance:
+Generally, having arguments to the left of the colon is preferred
+over having arguments in universal quantifiers or implications, 
+if the proof starts by introducing these variables. For instance:
 
 ```lean
 example (n : ℝ) (h : n > 1) : n > 0 := by linarith
@@ -404,7 +405,7 @@ example (n : ℝ) (h : n > 1) : n > 0 := by linarith
 is preferred over
 
 ```lean
-example (n : ℝ) : (n > 1) → (n > 0) := λ h, (by linarith)
+example (n : ℝ) : n > 1 → n > 0 := λ h, by linarith
 ```
 
 ## Comments
