@@ -265,6 +265,18 @@ is preferred over
 example (n : ℝ) : n > 1 → n > 0 := λ h, by linarith
 ```
 
+and
+
+```lean
+example (n : ℕ) : n ≥ 0 := dec_trivial
+```
+
+is preferred over
+
+```lean
+example : ∀ (n : ℕ), n ≥ 0 := λ n, dec_trivial
+```
+
 ### Binders ###
 
 Use a space after binders:
