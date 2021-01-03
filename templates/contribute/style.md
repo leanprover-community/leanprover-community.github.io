@@ -249,6 +249,34 @@ instance : partial_order (topological_space α) :=
   le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
 ```
 
+### Hypotheses Left of Colon ###
+
+Generally, having arguments to the left of the colon is preferred
+over having arguments in universal quantifiers or implications, 
+if the proof starts by introducing these variables. For instance:
+
+```lean
+example (n : ℝ) (h : n > 1) : n > 0 := by linarith
+```
+
+is preferred over
+
+```lean
+example (n : ℝ) : n > 1 → n > 0 := λ h, by linarith
+```
+
+and
+
+```lean
+example (n : ℕ) : n ≥ 0 := dec_trivial
+```
+
+is preferred over
+
+```lean
+example : ∀ (n : ℕ), n ≥ 0 := λ n, dec_trivial
+```
+
 ### Binders ###
 
 Use a space after binders:
