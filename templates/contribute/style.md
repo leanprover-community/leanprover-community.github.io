@@ -10,7 +10,7 @@ rather than rigid rules.
 ### Variable conventions ###
 
 - `u`, `v`, `w`, ... for universes
-- `α`, `β`, `γ`, ... for types
+- `α`, `β`, `γ`, ... for generic types
 - `a`, `b`, `c`, ... for propositions
 - `x`, `y`, `z`, ... for elements of a generic type
 - `h`, `h₁`, ...     for assumptions
@@ -20,6 +20,11 @@ rather than rigid rules.
 - `m`, `n`, `k`, ... for natural numbers
 - `i`, `j`, `k`, ... for integers
 
+Types with a mathematical content are expressed with the usual
+mathematical notation, often with an upper case letter 
+(`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
+This convention is not followed in older files, where greek letters are used
+for all types. Pull requests renaming type variables in these files are welcome.
 
 
 ### Line length ###
@@ -32,8 +37,7 @@ easier to read, especially on a small screen or in a small window.
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
 a description of the contents. Do all `import`s right after the header,
-without a line break, on separate lines. You can also open namespaces
-in the same block.
+without a line break, on separate lines. 
 
 ```lean
 /-
@@ -43,7 +47,6 @@ Author: Joe Cool.
 -/
 import data.nat
 import algebra.group
-open nat eq.ops
 ```
 
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
@@ -116,7 +119,7 @@ namespace nat
 lemma le_induction {P : ℕ → Prop} {m}
   (h0 : P m) (h1 : ∀ n, m ≤ n → P n → P (n + 1)) :
   ∀ n, m ≤ n → P n :=
-by apply nat.less_than_or_equal.rec h0; exact h1
+by { apply nat.less_than_or_equal.rec h0, exact h1 }
 
 def decreasing_induction {P : ℕ → Sort*} (h : ∀ n, P (n + 1) → P n) {m n : ℕ} (mn : m ≤ n)
   (hP : P n) : P m :=
@@ -220,12 +223,10 @@ structure principal_seg {α β : Type*} (r : α → α → Prop) (s : β → β 
 (top : β)
 (down : ∀ b, s b top ↔ ∃ a, to_order_embedding a = b)
 
-class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
-  extends has_scalar α β, add_comm_group β :=
-(smul_add : ∀r (x y : β), r • (x + y) = r • x + r • y)
-(add_smul : ∀r s (x : β), (r + s) • x = r • x + s • x)
-(mul_smul : ∀r s (x : β), (r * s) • x = r • s • x)
-(one_smul : ∀x : β, (1 : α) • x = x)
+class semimodule (R : Type u) (M : Type v) [semiring R]
+  [add_comm_monoid M] extends distrib_mul_action R M :=
+(add_smul  : ∀(r s : R) (x : M), (r + s) • x = r • x + s • x)
+(zero_smul : ∀x : M, (0 : R) • x = 0)
 ```
 
 When using a constructor taking several arguments in a definition,
@@ -360,7 +361,8 @@ le_antisymm
 ```
 
 When new goals arise as side conditions or steps, they are enclosed in
-focussing braces and indented. Braces are not alone on their line.
+focussing braces and indented (except possibly the last goal, if its proof
+is much longer than the proofs of the other goals). Braces are not alone on their line.
 
 ```lean
 lemma mem_nhds_of_is_topological_basis {a : α} {s : set α} {b : set (set α)}
@@ -382,7 +384,7 @@ but there is no style rule requiring it.
 (Many authors prefer the comma, so that placing the cursor after it displays "goals accomplished"
 in the infoview, but others dislike it on the basis of the disconcerting grammar.)
 
-Often `t0 ; t1` is used to execute `t0` and then `t1` on all new goals. But `;` is not a `,` so
+Often `t0; t1` is used to execute `t0` and then `t1` on all new goals. But `;` is not a `,` so
 either write the tactics in one line, or indent the following tacic.
 
 ```lean
@@ -400,21 +402,31 @@ If you are using multiple tactics inside a `by ...` block, use braces
 which should only be used when multiple goals need to be processed by `tac2`.
 (This style rule is not yet followed in the older parts of mathlib.)
 
-### Sections ###
+In general, you should put a single tactic invocation per line, unless you are
+closing a goal with a proof that fits entirely on a single line. Short sequences of
+tactics that correspond to a single mathematical idea can also be put on a single line,
+as in `cases bla, clear h` or `induction n, { simp }` or `rw [foo], simp_rw [bar]`.
 
-Within a section, you can indent definitions and theorems to make the
-scope salient:
 ```lean
-section my_section
-  variable α : Type
-  variable P : Prop
-
-  definition foo (x : α) : α := x
-
-  theorem bar (H : P) : P := H
-end my_section
+begin
+  by_cases h : x = 0,
+  { rw h, exact hzero ha },
+  { rw h,
+    have h' : ..., from H ha,
+    simp_rw [h', hb],
+    ... }
+end
 ```
-If the section is long, however, you can omit the indents.
+
+Very short goals can be closed right away using `swap` or `work_on_goal` if needed, to avoid
+additional indentation in the rest of the proof.
+
+```lean
+begin
+  rw [h], swap, { exact h' },
+  ... 
+end
+```
 
 We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of

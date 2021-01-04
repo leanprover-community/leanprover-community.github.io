@@ -162,13 +162,12 @@ Places where projection notation is useful, for example:
 - `iff.symm`
 - `iff.refl`
 
-We generally restrict the use of dots to inductive types. So, for example, we use:
+It is useful to use dot notation even for types which are not
+inductive types. For instance, we use:
 
-- `dvd_intro`
-- `dvd_dest`
-- `dvd_elim`
-- `le_refl`
-- `le_trans`
+- `le.trans`
+- `lt.trans_le`
+- `le.trans_lt`
 
 ### Axiomatic descriptions ###
 
@@ -195,7 +194,7 @@ describing their conclusions.
 ### Variable conventions ###
 
 - `u`, `v`, `w`, ... for universes
-- `α`, `β`, `γ`, ... for types
+- `α`, `β`, `γ`, ... for generic types
 - `a`, `b`, `c`, ... for propositions
 - `x`, `y`, `z`, ... for elements of a generic type
 - `h`, `h₁`, ...     for assumptions
@@ -205,6 +204,11 @@ describing their conclusions.
 - `m`, `n`, `k`, ... for natural numbers
 - `i`, `j`, `k`, ... for integers
 
+Types with a mathematical content are expressed with the usual
+mathematical notation, often with an upper case letter 
+(`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
+This convention is not followed in older files, where greek letters are used
+for all types. Pull requests renaming type variables in these files are welcome.
 
 ### Names for symbols ###
 
