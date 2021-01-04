@@ -22,7 +22,9 @@ rather than rigid rules.
 
 Types with a mathematical content are expressed with the usual
 mathematical notation, often with an upper case letter 
-(`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...)
+(`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
+This convention is not followed in older files, where greek letters are used
+for all types. Pull requests renaming type variables in these files are welcome.
 
 
 ### Line length ###
