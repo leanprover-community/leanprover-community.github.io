@@ -401,7 +401,9 @@ which should only be used when multiple goals need to be processed by `tac2`.
 (This style rule is not yet followed in the older parts of mathlib.)
 
 In general, you should put a single tactic invocation per line, unless you are
-closing a goal with a proof that fits entirely on a single line.
+closing a goal with a proof that fits entirely on a single line. Short sequences of
+tactics that correspond to a single mathematical idea can also be put on a single line,
+as in `cases bla, clear h` or `induction n, { simp }` or `rw [foo], simp_rw [bar]`.
 
 ```lean
 begin
