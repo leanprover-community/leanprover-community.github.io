@@ -29,11 +29,17 @@ end
 
 How would a human solve that goal? They would notice that `a * a⁻¹ =
 1`, that `1 * 1 = 1` and so on, until they had simplified the example
-to `b = b`, which is obviously true. This is also what the simplifier
-is doing. Indeed, if you add `set_option trace.simplify.rewrite true`
-above the example, then a squiggly blue underline will appear under
-`simp` (in VS Code) and clicking on this will show you the sequence of
-rewrites that `simp` discovered.
+to `b = b`, which is obviously true.
+
+This is also what the simplifier is doing. Indeed, if you add
+`set_option trace.simplify.rewrite true` above the example, then a
+squiggly blue underline will appear under `simp` (in VS Code) and
+clicking on this will show you the sequence of rewrites that `simp`
+discovered.
+
+The more verbose option `set_option trace.simplify true` shows
+both the rewrites which works and those which failed during the
+simplification process.
 
 ## Simp lemmas
 
@@ -109,7 +115,7 @@ tactic can solve.
 `simp [← h]` -- uses all `simp` lemmas, and also `h : A = B` but in
                  the form `B = A` (so `simp` rewrites `B`s to `A`s)
 
-`simp [-h]` -- stops `simp` from using lemma `h`.
+`simp [-thm]` -- stops `simp` from using the simp lemma `thm`.
 
 `simp *` -- uses all `simp` lemmas and also all current local
             hypotheses to try to simplify the goal.
@@ -118,7 +124,7 @@ tactic can solve.
 
 `simp [h1] at h2 ⊢` -- tries to simplify both `h2` and the goal using
                        `h1` and all `simp` lemmas (note: type `⊢` with
-                       `\|-` in VS Code).
+                       `\|-` or `\vdash` in VS Code).
 
 `simp * at *` -- tries to simplify both the goal and all hypotheses,
                  using all hypotheses and all `simp` lemmas. Sometimes
@@ -211,7 +217,7 @@ the middle of a proof, because the simplifier is now constrained to
 only using the lemmas in the list, so will not be affected by changes
 to the `simp` set (the collection of lemmas tagged `simp`).
 
-2) `simpa`. If `simp` turns your goal into `h`, then you can write
+2) `simpa`. If `simp` turns your goal into `P`, then you can write
 ```
 suffices : P,
   simpa,
@@ -236,8 +242,9 @@ dsimp only
 
 which can be a very useful way of tidying up a goal. It can be safely
 used in the middle of a proof because of the `only`. This command
-tidies up lambdas (it will turn `(λ x, f x) 37` into `f 37`, and
-`{to_fun := f, ...}.to_fun` into `f`.
+tidies up lambdas (it will turn `(λ x, f x) 37` into `f 37`), and
+structure projections (it will turn `{to_fun := f, ...}.to_fun`
+into `f`).
 
 ## More advanced features.
 
@@ -247,7 +254,8 @@ avoid loops which would otherwise occur.
 
 Searching for `structure simp_config` in the file
 `init/meta/simp_tactic.lean` in core Lean reveals other config
-options, not all of them documented.
+options, not all of them documented, and most of them not very
+relevant for the average user.
 
 ```lean
 (max_steps : nat           := simp.default_max_steps)
