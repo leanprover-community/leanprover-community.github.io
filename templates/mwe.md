@@ -4,13 +4,13 @@
 
 When posting code on Zulip, please include all `import`s and `open`s and `universe`s and `variable`s, so others can simply just cut and paste what you post, and see the same issue that you are seeing. The best way to ensure you have done this is to make a completely new Lean file containing only what you are proposing to post, and checking that it compiles.
 
-Bad example:
+### Bad example:
 
 ```lean
 #check (univ : set X)
 ```
 
-Good example:
+### Good example:
 
 ```lean
 import data.set.basic
@@ -24,7 +24,36 @@ open set
 #check (univ : set X)
 ```
 
-Tip: If you are using [Mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
+### Bad example:
+
+```text
+Goal state:
+/-
+a b : blah,
+h : a.fst < b.fst,
+h2 : a.fst < b.snd
+⊢ false
+-/
+```
+
+### Good example:
+
+```lean
+def blah : Type := ℕ × ℕ
+
+example (a b : blah) (h : a.fst < b.fst) (h2 : a.fst < b.snd) : false :=
+begin 
+
+end 
+/-
+a b : blah,
+h : a.fst < b.fst,
+h2 : a.fst < b.snd
+⊢ false
+-/
+```
+
+Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
 
 Note you still need to include the corresponding `import`s and `open`s and `universe`s and `variable`s as mentioned above.
 
