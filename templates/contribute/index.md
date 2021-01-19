@@ -51,7 +51,7 @@ Here are some other frequently-used labels:
 
 - The **"blocked-by-other-PR"** label means that some specific other PR(s) should be resolved before addressing this one. If you add the "blocked-by-other-PR" label to your PR, please include the PR numbers of the dependencies in the title and PR comment so that others can see at a glance which PRs should be reviewed first.
 
-- The **easy** label should be used to mark PRs that can be immediately approved. Maintainers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally *not* easy if the diff is more than 25 lines, it adds any definitions, or it adds any `simp` lemmas or instances that are not immediately analogous to existing `simp` lemmas or instances.
+- The **easy** label should be used to mark PRs that can be immediately approved. Maintainers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally *not* easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any `simp` lemmas or instances that are not immediately analogous to existing `simp` lemmas or instances.
 
 ## Caching compilation
 
