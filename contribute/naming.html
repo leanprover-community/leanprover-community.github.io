@@ -471,49 +471,56 @@ as <code>Group</code>. In that case, use CamelCase for compound names, such as
 <p>We adopt the following naming guidelines to make it easier for users
 to guess the name of a theorem or find it using tab completion. Common
 &quot;axiomatic&quot; properties of an operation like conjunction or
-multiplication are put in a namespace that begins with the name of the
+disjunction are put in a namespace that begins with the name of the
 operation:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">logic.basic</span>
 
-<span class="n">check</span> <span class="n">and.comm</span>
-<span class="n">check</span> <span class="n">mul.comm</span>
-<span class="n">check</span> <span class="n">and.assoc</span>
-<span class="n">check</span> <span class="n">mul.assoc</span>
-<span class="n">check</span> <span class="bp">@</span><span class="n">mul.left_cancel</span>  <span class="c1">-- multiplication is left cancelative</span>
+<span class="k">#check</span> <span class="n">and.comm</span>
+<span class="k">#check</span> <span class="n">or.comm</span>
+<span class="k">#check</span> <span class="n">and.assoc</span>
+<span class="k">#check</span> <span class="n">or.assoc</span>
 </pre></div>
 
 <p>In particular, this includes <code>intro</code> and <code>elim</code> operations for logical
 connectives, and properties of relations:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">logic.basic</span>
 
-<span class="n">check</span> <span class="n">and.intro</span>
-<span class="n">check</span> <span class="n">and.elim</span>
-<span class="n">check</span> <span class="n">or.intro_left</span>
-<span class="n">check</span> <span class="n">or.intro_right</span>
-<span class="n">check</span> <span class="n">or.elim</span>
+<span class="k">#check</span> <span class="n">and.intro</span>
+<span class="k">#check</span> <span class="n">and.elim</span>
+<span class="k">#check</span> <span class="n">or.intro_left</span>
+<span class="k">#check</span> <span class="n">or.intro_right</span>
+<span class="k">#check</span> <span class="n">or.elim</span>
 
-<span class="n">check</span> <span class="n">eq.refl</span>
-<span class="n">check</span> <span class="n">eq.symm</span>
-<span class="n">check</span> <span class="n">eq.trans</span>
+<span class="k">#check</span> <span class="n">eq.refl</span>
+<span class="k">#check</span> <span class="n">eq.symm</span>
+<span class="k">#check</span> <span class="n">eq.trans</span>
+</pre></div>
+
+<p>Note however we do not do this for axiomatic arithmetic operations</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.group.basic</span>
+
+<span class="k">#check</span> <span class="n">mul_comm</span>
+<span class="k">#check</span> <span class="n">mul_assoc</span>
+<span class="k">#check</span> <span class="bp">@</span><span class="n">mul_left_cancel</span>  <span class="c1">-- multiplication is left cancelative</span>
 </pre></div>
 
 <p>For the most part, however, we rely on descriptive names. Often the
 name of theorem simply describes the conclusion:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.ring.basic</span>
 <span class="kn">open</span> <span class="n">nat</span>
-<span class="n">check</span> <span class="n">succ_ne_zero</span>
-<span class="n">check</span> <span class="n">mul_zero</span>
-<span class="n">check</span> <span class="n">mul_one</span>
-<span class="n">check</span> <span class="bp">@</span><span class="n">sub_add_eq_add_sub</span>
-<span class="n">check</span> <span class="bp">@</span><span class="n">le_iff_lt_or_eq</span>
+<span class="k">#check</span> <span class="n">succ_ne_zero</span>
+<span class="k">#check</span> <span class="n">mul_zero</span>
+<span class="k">#check</span> <span class="n">mul_one</span>
+<span class="k">#check</span> <span class="bp">@</span><span class="n">sub_add_eq_add_sub</span>
+<span class="k">#check</span> <span class="bp">@</span><span class="n">le_iff_lt_or_eq</span>
 </pre></div>
 
 <p>If only a prefix of the description is enough to convey the meaning,
 the name may be made even shorter:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
 
-<span class="n">check</span> <span class="bp">@</span><span class="n">neg_neg</span>
-<span class="n">check</span> <span class="n">nat.pred_succ</span>
+<span class="k">#check</span> <span class="bp">@</span><span class="n">neg_neg</span>
+<span class="k">#check</span> <span class="n">nat.pred_succ</span>
 </pre></div>
 
 <p>When an operation is written as infix, the theorem names follow
@@ -522,12 +529,12 @@ describe the patter <code>-a * -b</code>.</p>
 <p>Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
 hypotheses. The word &quot;of&quot; is used to separate these hypotheses:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
 <span class="kn">open</span> <span class="n">nat</span>
-<span class="n">check</span> <span class="n">lt_of_succ_le</span>
-<span class="n">check</span> <span class="n">lt_of_not_ge</span>
-<span class="n">check</span> <span class="n">lt_of_le_of_ne</span>
-<span class="n">check</span> <span class="n">add_lt_add_of_lt_of_le</span>
+<span class="k">#check</span> <span class="n">lt_of_succ_le</span>
+<span class="k">#check</span> <span class="n">lt_of_not_ge</span>
+<span class="k">#check</span> <span class="n">lt_of_le_of_ne</span>
+<span class="k">#check</span> <span class="n">add_lt_add_of_lt_of_le</span>
 </pre></div>
 
 <p>The hypotheses are listed in the order they appear, <em>not</em> reverse
@@ -536,12 +543,12 @@ order. For example, the theorem <code>A → B → C</code> would be named
 <p>Sometimes abbreviations or alternative descriptions are easier to work
 with. For example, we use <code>pos</code>, <code>neg</code>, <code>nonpos</code>, <code>nonneg</code> rather than
 <code>zero_lt</code>, <code>lt_zero</code>, <code>le_zero</code>, and <code>zero_le</code>.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
 <span class="kn">open</span> <span class="n">nat</span>
-<span class="n">check</span> <span class="n">mul_pos</span>
-<span class="n">check</span> <span class="n">mul_nonpos_of_nonneg_of_nonpos</span>
-<span class="n">check</span> <span class="n">add_lt_of_lt_of_nonpos</span>
-<span class="n">check</span> <span class="n">add_lt_of_nonpos_of_lt</span>
+<span class="k">#check</span> <span class="n">mul_pos</span>
+<span class="k">#check</span> <span class="n">mul_nonpos_of_nonneg_of_nonpos</span>
+<span class="k">#check</span> <span class="n">add_lt_of_lt_of_nonpos</span>
+<span class="k">#check</span> <span class="n">add_lt_of_nonpos_of_lt</span>
 </pre></div>
 
 <p>These conventions are not perfect. They cannot distinguish compound
@@ -550,12 +557,12 @@ pattern. For that, we make do as best we can. For example, <code>a + b - b = a</
 could be named either <code>add_sub_self</code> or <code>add_sub_cancel</code>.</p>
 <p>Sometimes the word &quot;left&quot; or &quot;right&quot; is helpful to describe variants
 of a theorem.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">standard</span> <span class="n">algebra.ordered_ring</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
 
-<span class="n">check</span> <span class="n">add_le_add_left</span>
-<span class="n">check</span> <span class="n">add_le_add_right</span>
-<span class="n">check</span> <span class="n">le_of_mul_le_mul_left</span>
-<span class="n">check</span> <span class="n">le_of_mul_le_mul_right</span>
+<span class="k">#check</span> <span class="n">add_le_add_left</span>
+<span class="k">#check</span> <span class="n">add_le_add_right</span>
+<span class="k">#check</span> <span class="n">le_of_mul_le_mul_left</span>
+<span class="k">#check</span> <span class="n">le_of_mul_le_mul_right</span>
 </pre></div>
 
 <h2 id="naming-of-structural-lemmas" class="markdown-heading">Naming of structural lemmas <a class="hover-link" href="#naming-of-structural-lemmas">#</a></h2>
@@ -571,8 +578,12 @@ of the structure projections, and often there is a better statement,
 e.g. using coercions, that should be written by hand then marked with <code>@[ext]</code>.)</p>
 <p>A lemma of the form <code>f = g ↔ ∀ x, f x = g x</code> should be named <code>.ext_iff</code>.</p>
 <h3 id="injectivity" class="markdown-heading">Injectivity <a class="hover-link" href="#injectivity">#</a></h3>
-<p>Injectivity lemmas should usually be written as bidirectional implications,
-e.g. as <code>f x = f y ↔ x = y</code>. Such lemmas should be named <code>f_inj</code>
+<p>Where possible, injectivity lemmas should be written in terms of an
+<code>injective f</code> conclusion which use the full word <code>injective</code>, typically as <code>f_injective</code>.
+The form <code>injective_f</code> still appears often in mathlib.</p>
+<p>In addition to these, a variant should usually be provided as a bidirectional implication,
+e.g. as <code>f x = f y ↔ x = y</code>, which can be obtained from <code>function.injective.eq_iff</code>.
+Such lemmas should be named <code>f_inj</code>
 (although if they are in an appropriate namespace <code>.inj</code> is good too).
 Bidirectional injectivity lemmas are often good candidates for <code>@[simp]</code>.
 There are still many unidirectional implications named <code>inj</code> in mathlib,
@@ -582,9 +593,6 @@ automatically generated unidirectional implications, named <code>.inj</code>,
 and there is no intention to change this.
 When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named <code>.inj_iff</code>.</p>
-<p>Injectivity lemmas written in terms of an <code>injective f</code> conclusion
-should instead use the full word <code>injective</code>, typically as <code>f_injective</code>.
-The form <code>injective_f</code> still appears often in mathlib.</p>
 <hr />
 <p>Copyright (c) 2016 Jeremy Avigad. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
