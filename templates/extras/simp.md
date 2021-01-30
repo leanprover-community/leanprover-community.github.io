@@ -67,9 +67,11 @@ through the `simp` lemmas known to the system at that time, in a
 sensible way (there are over ten thousand of them currently in
 `mathlib`!), and if it runs into a lemma of the form `A = B` or `A ↔
 B`, for which `A` shows up in `T`, it rewrites the lemma at `T` to
-replace it with a `B`, and starts again.
+replace it with a `B`, and starts again. Note that `simp` works
+frmo the inside out: it first simplifies the arguments of a function before
+simplifying the function.
 
-Note that the simplifier works in one direction only: if `A = B` is a
+The simplifier works in one direction only: if `A = B` is a
 `simp` lemma, then `simp` replaces `A`s with `B`s, but it doesn't
 replace `B`s with `A`s. Hence a `simp` lemma should have the property
 that its right hand side should be simpler than its left hand side. In
@@ -85,10 +87,6 @@ replace `1` with `a * a⁻¹`, which is usually not a sensible direction
 of travel. Furthermore, if both `mul_right_inv` and
 `mul_right_inv_bad` are tagged with `simp` then this would cause the
 simplifier to loop.
-
-However, `mathlib` has a linter, which one can call with `#lint` in a
-Lean file, and which will attempt to flag any problems with `simp`
-lemmas in the file.
 
 When making a new definition, it is very common to have `@[simp]`
 lemmas which train the simplifier how to use the definition in a
@@ -142,7 +140,7 @@ is a proof of hypothesis `P` and `P → A = B` is a `simp` lemma then
 `simp` works with preconditions is the reason it is called a
 *conditional* term rewriting system.
 
-## Simp normal form
+## Simp-normal form
 
 There are sometimes several ways to say the same thing. For example,
 if `n : ℕ` then the hypotheses `n ≠ 0`, `0 ≠ n`, `n > 0`, `0 < n`, `1
@@ -172,7 +170,7 @@ lemma about a definition you made yourself, you might want to make
 your own design decision about the "normal form" way of expressing any
 idea which can be naturally expressed in more than one way.
 
-An example of a simp normal form is a way of expressing nonemptiness
+An example of a simp-normal form is a way of expressing nonemptiness
 of a subset of a type.  If `α : Type` and `s : set α` then
 nonemptiness of `s` can be expressed as `s.nonempty` and as `s ≠ ∅`.
 In mathlib an effort is made to stick to `s.nonempty` as the normal
@@ -189,6 +187,11 @@ s`, and moreover the `simp` lemma
 will attempt to turn any occurrences of `a ∈ (s : set α)` into the
 correct normal form.
 
+Because the simplifier works from the inside out, simplifying arguments
+of a function before simplifying the function, a `simp` lemma should
+always have all of its arguments already in simp-normal form. Mathlib's
+`simp_nf` linter check for this (you can run mathlib's linters by putting
+`#lint` in a file).
 
 ## non-terminal `simp`s, and `simpa`
 
@@ -223,7 +226,7 @@ suffices : P,
   simpa,
 ```
 
-which will add an extra goal of `h`, and then prove it using `simp`
+which will add an extra goal of `P`, and then prove it using `simp`
 and the hypothesis `this`, which is the proof of `P` which the
 `suffices` tactic adds.
 
