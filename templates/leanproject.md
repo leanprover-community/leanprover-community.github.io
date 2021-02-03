@@ -6,6 +6,9 @@ Everything is done using the `leanproject` command-line tool. You can
 use `leanproject --help` to get the list of available commands and
 options.
 
+`leanproject` only supports Lean 3. If you are using Lean 4, the information 
+on this page is not relevant.
+
 ### Getting an existing Lean 3 project
 
 The command to fetch an existing project from GitHub and make sure it
