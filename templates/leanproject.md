@@ -6,7 +6,10 @@ Everything is done using the `leanproject` command-line tool. You can
 use `leanproject --help` to get the list of available commands and
 options.
 
-### Getting an existing Lean project
+`leanproject` only supports Lean 3. If you are using Lean 4, the information 
+on this page is not relevant.
+
+### Getting an existing Lean 3 project
 
 The command to fetch an existing project from GitHub and make sure it
 includes a copy of mathlib ready to go is `leanproject get name` where
@@ -58,6 +61,10 @@ to download a compiled mathlib at the commit currently specified in the
 project `leanpkg.toml` (see the next section if you want to update this
 commit and get the latest mathlib).
 
+If you have Lean 3 in VS Code open, you should restart Lean by opening the
+command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
+"Lean: Restart server" command.
+
 ### Upgrading mathlib
 
 In an existing project depending on mathlib, you can upgrade to the
@@ -66,15 +73,19 @@ latest mathlib version by running:
 leanproject upgrade-mathlib
 ```
 This can be abbreviated to `leanproject up`.
-By default, this will update the version of Lean used by this project to
+By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using `leanproject --no-lean-upgrade upgrade-mathlib`.
+
+If you have Lean 3 in VS Code open, you should restart Lean by opening the
+command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
+"Lean: Restart server" command.
 
 ## Advanced usage
 
 ### Global mathlib install
 
-If you want to use mathlib outside of a Lean project, you can run:
+If you want to use mathlib outside of a Lean 3 project, you can run:
 ```
 leanproject global-install
 ```
@@ -85,6 +96,10 @@ projects. You can upgrade this project using:
 leanproject global-upgrade
 ```
 
+This is generally discouraged, as this can lead to trouble if you end up
+working with Lean 3 projects that depend on different versions of Lean 3 / 
+mathlib.
+
 ### Adding mathlib to an existing project
 
 If you already have a Lean project but it doesn't use mathlib yet, you
@@ -92,13 +107,13 @@ can go to the project folder and run:
 ```
 leanproject add-mathlib
 ```
-By default, this will update the version of Lean used by this project to
+By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using `leanproject --no-lean-upgrade add-mathlib`.
 
 ### Project olean cache
 
-In any Lean project, it can be useful to store and retrieve olean files,
+In any Lean 3 project, it can be useful to store and retrieve olean files,
 especially if the project has several git branches. Storing oleans is
 done by:
 ```
@@ -130,6 +145,10 @@ When using `get-cache` inside the mathlib project, the local cache in
 You can force download by running 
 `leanproject --force-download get-cache`. This `--force-download` option
 can also be used with the `upgrade-mathlib` command.
+
+If you have Lean 3 in VS Code open, you should restart Lean by opening the
+command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
+"Lean: Restart server" command.
 
 ### Import graphs
 
