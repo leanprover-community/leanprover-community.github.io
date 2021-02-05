@@ -103,34 +103,24 @@ tactic can solve.
 
 ## Basic usage 
 
-`simp` -- tries to simplify the goal using all `simp` lemmas known to
+`simp` tries to simplify the goal using all `simp` lemmas known to
           Lean at that time.
 
-`simp [h1, h2]` -- uses all `simp` lemmas and also `h1` and `h2`
-                   (which can either be local hypotheses or other lemmas which
-		   are not tagged `simp` for some reason).
+`simp [h1, h2]` uses all `simp` lemmas and also `h1` and `h2` (which can either be local hypotheses or other lemmas which are not tagged `simp` for some reason).
 
-`simp [← h]` -- uses all `simp` lemmas, and also `h : A = B` but in
-                 the form `B = A` (so `simp` rewrites `B`s to `A`s)
+`simp [← h]` uses all `simp` lemmas, and also `h : A = B` but in the form `B = A` (so `simp` rewrites `B`s to `A`s)
 
-`simp [-thm]` -- stops `simp` from using the simp lemma `thm`.
+`simp [-thm]` stops `simp` from using the simp lemma `thm`.
 
-`simp *` -- uses all `simp` lemmas and also all current local
-            hypotheses to try to simplify the goal.
+`simp *` uses all `simp` lemmas and also all current local hypotheses to try to simplify the goal.
 
-`simp at h` -- tries to simplify `h` using all `simp` lemmas.
+`simp at h` tries to simplify `h` using all `simp` lemmas.
 
-`simp [h1] at h2 ⊢` -- tries to simplify both `h2` and the goal using
-                       `h1` and all `simp` lemmas (note: type `⊢` with
-                       `\|-` or `\vdash` in VS Code).
+`simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-` or `\vdash` in VS Code).
 
-`simp * at *` -- tries to simplify both the goal and all hypotheses,
-                 using all hypotheses and all `simp` lemmas. Sometimes
-                 worth a try.
+`simp * at *` : tries to simplify both the goal and all hypotheses, using all hypotheses and all `simp` lemmas. Sometimes worth a try.
 
-`simp only [h1, h2, ..., hn]` -- don't use all `simp` lemmas, but only
-                                 the lemmas `h1`, `h2`, ... .
-
+`simp only [h1, h2, ..., hn]` tells `simp` not to use all `simp` lemmas, but only the lemmas `h1`, `h2`, ... . Note that it is acceptable to use `simp only [...]` in the middle of a proof, because subsequent changes to the `simp` set will not interfere with the proof.
 
 Note that some `simp` lemmas have preconditions. For example, a
 theorem about cancelling a factor on both sides of an equation would
@@ -187,10 +177,7 @@ s`, and moreover the `simp` lemma
 will attempt to turn any occurrences of `a ∈ (s : set α)` into the
 correct normal form.
 
-Because the simplifier works from the inside out, simplifying arguments
-of a function before simplifying the function, a `simp` lemma should
-always have all of its arguments already in simp-normal form. Mathlib's
-`simp_nf` linter check for this (you can run mathlib's linters by putting
+Because the simplifier works from the inside out, simplifying arguments of a function before simplifying the function, a `simp` lemma needs to have the arguments to its left hand side in smip-normal form. For example `@[simp] lemma foo : f (g 0) = 0` will never fire if `simp` can simplify `g 0`. Mathlib's `simp_nf` linter checks for this (you can run mathlib's linters by putting
 `#lint` in a file).
 
 ## non-terminal `simp`s, and `simpa`
