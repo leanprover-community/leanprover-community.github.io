@@ -68,7 +68,7 @@ sensible way (there are over ten thousand of them currently in
 `mathlib`!), and if it runs into a lemma of the form `A = B` or `A ↔
 B`, for which `A` shows up in `T`, it rewrites the lemma at `T` to
 replace it with a `B`, and starts again. Note that `simp` works
-frmo the inside out: it first simplifies the arguments of a function before
+from the inside out: it first simplifies the arguments of a function before
 simplifying the function.
 
 The simplifier works in one direction only: if `A = B` is a
@@ -177,7 +177,7 @@ s`, and moreover the `simp` lemma
 will attempt to turn any occurrences of `a ∈ (s : set α)` into the
 correct normal form.
 
-Because the simplifier works from the inside out, simplifying arguments of a function before simplifying the function, a `simp` lemma needs to have the arguments to its left hand side in smip-normal form. For example `@[simp] lemma foo : f (g 0) = 0` will never fire if `simp` can simplify `g 0`. Mathlib's `simp_nf` linter checks for this (you can run mathlib's linters by putting
+Because the simplifier works from the inside out, simplifying arguments of a function before simplifying the function, a `simp` lemma needs to have the arguments to its left hand side in simp-normal form. For example `@[simp] lemma foo : f (g 0) = 0` will never fire if `simp` can simplify `g 0`. Mathlib's `simp_nf` linter checks for this (you can run mathlib's linters by putting
 `#lint` in a file).
 
 ## non-terminal `simp`s, and `simpa`
