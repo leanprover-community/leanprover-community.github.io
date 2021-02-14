@@ -213,7 +213,7 @@ name `H` stands for `hypothesis`, while `Hs`, following Haskell's naming
 conventions, stands for several hypotheses. The imperative analogue of
 what happens for non-empty lists would read something like the following
 imperative pseudo-code
-```
+```text
 if unify(e, infer_type(H)) then return H else find_matching_type(e, HS)
 ```
 We can now use this function for our interactive tactic. We first need

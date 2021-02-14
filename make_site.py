@@ -23,10 +23,10 @@ from pygments.lexers import get_lexer_by_name as get_lexer, guess_lexer
 from pygments.formatters.html import HtmlFormatter
 
 class CustomHTMLRenderer(HTMLRenderer):
-    """
-    Override the default heading to provide links like in GitHub.
-    """
     def render_heading(self, token) -> str:
+        """
+        Override the default heading to provide links like in GitHub.
+        """
         template = '<h{level} id="{anchor}" class="markdown-heading">{inner} <a class="hover-link" href="#{anchor}">#</a></h{level}>'
         inner: str = self.render_inner(token)
         # generate anchor following what github does
@@ -41,7 +41,8 @@ class CustomHTMLRenderer(HTMLRenderer):
     def render_block_code(self, token):
         code = token.children[0].content
         try:
-            lexer = get_lexer(token.language) if token.language else guess_lexer(code)
+            # default to 'lean' if no language is specified
+            lexer = get_lexer(token.language) if token.language else get_lexer('lean')
         except:
             lexer = get_lexer('text')
         return highlight(code, lexer, self.formatter)
