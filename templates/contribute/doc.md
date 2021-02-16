@@ -12,7 +12,8 @@ using the [Lean doc preview page](https://observablehq.com/@bryangingechen/githu
 Each mathlib file should start with:
 * a header comment with copyright information (see the [recommendations in our style guidelines](style.html#header-and-imports));
 * the list of imports (one on each line);
-* a module docstring containing general documentation, written using Markdown.
+* a module docstring containing general documentation, written
+  [using Markdown and LaTeX](#latex-and-markdown).
 
 (See the example below.)
 
@@ -75,7 +76,7 @@ by taking (prime p) as a type class argument.
 ## References
 
 * [F. Q. Gouêva, *p-adic numbers*][gouvea1997]
-* https://en.wikipedia.org/wiki/P-adic_number
+* <https://en.wikipedia.org/wiki/P-adic_number>
 
 ## Tags
 
@@ -88,10 +89,10 @@ p-adic, p adic, padic, norm, valuation
 Every definition and major theorem is required to have a doc string.
 (Doc strings on lemmas are also encouraged, particularly if the lemma has any mathematical content
 or might be useful in another file.)
-These are introduced using `/--` and closed by `-/` above the definition.
-They can contain some markdown, e.g. backtick quotes. LaTeX can be included between single dollar
-signs `$ ... $` to be rendered inline or double dollar signs `$$ ... $$` to be rendered in "display
-mode" by MathJax in [the online mathlib docs](https://leanprover-community.github.io/mathlib_docs/).
+These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
+single spaces between the markers and the text.
+They can contain Markdown and LaTeX as well, see the next section. If a doc string is a complete
+sentence, then it should end in a period.
 
 Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
 slightly about the actual implementation. The following is a doc string example:
@@ -110,7 +111,7 @@ An example that is slightly lying but still describes the mathematical content w
 ```lean
 /--
 For `p ≠ 1`, the p-adic valuation of an integer `z ≠ 0` is the largest natural number `n` such that
-p^n divides z.
+`p^n` divides `z`.
 `padic_val_rat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the
 valuation of `q.denom`.
 If `q = 0` or `p = 1`, then `padic_val_rat p q` defaults to 0.
@@ -126,6 +127,28 @@ else 0
 
 The `#doc_blame` command can be run at the bottom of a file to list all definitions that do not have
 doc strings. `#doc_blame!` will also list theorems and lemmas.
+
+## LaTeX and Markdown
+
+We generally put references to Lean declarations or variables in between backticks. Writing
+the fully-qualified name (e.g. `finset.card_pos` instead of just `card_pos`) will turn the name
+into a link on our [online docs](https://leanprover-community.github.io/mathlib_docs/).
+
+Raw URLs should be enclosed in angle brackets `<...>`, otherwise they will not be clickable online.
+
+When talking about mathematical symbols instead, it may be preferable to use LaTeX. LaTeX can be
+included in doc strings in three ways:
+- using single dollar signs `$ ... $` to render math inline,
+- using double dollar signs `$$ ... $$` to render math in "display mode", or
+- using environments `\begin{*} ... \end{*}` (without dollar signs).
+
+These correspond to the [MathJax](http://docs.mathjax.org/en/latest/basic/mathematics.html) settings
+of our online docs. The interaction between the Markdown and LaTeX there is similar to that on
+<https://math.stackexchange.com> and <https://mathoverflow.net>, so you can paste a doc string into
+[an editing sandbox there](https://math.meta.stackexchange.com/questions/4666/sandbox-for-drafts-of-long-complex-posts)
+to preview the final result. See also the math.stackexchange
+[MathJax tutorial](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
+
 
 ## Tactic doc entries
 
