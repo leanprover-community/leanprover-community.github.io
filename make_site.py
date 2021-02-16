@@ -5,47 +5,18 @@ import sys
 import subprocess
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional
-import re
 
 import yaml
 from staticjinja import Site
 import jinja2.ext
 import pybtex.database
-from mistletoe import Document, HTMLRenderer, block_token
+from mistletoe import Document, block_token
+from mistletoe_renderer import CustomHTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
 import gzip
 from github import Github
-from pygments import highlight
-from pygments.styles import get_style_by_name as get_style
-from pygments.lexers import get_lexer_by_name as get_lexer, guess_lexer
-from pygments.formatters.html import HtmlFormatter
-
-class CustomHTMLRenderer(HTMLRenderer):
-    def render_heading(self, token) -> str:
-        """
-        Override the default heading to provide links like in GitHub.
-        """
-        template = '<h{level} id="{anchor}" class="markdown-heading">{inner} <a class="hover-link" href="#{anchor}">#</a></h{level}>'
-        inner: str = self.render_inner(token)
-        # generate anchor following what github does
-        # See info and links at https://gist.github.com/asabaylus/3071099
-        anchor = inner.strip().lower()
-        anchor = re.sub(r'[^\w\- ]+', '', anchor).replace(' ', '-')
-        return template.format(level=token.level, inner=inner, anchor=anchor)
-
-    # Use pygments highlighting.
-    # https://github.com/miyuchina/mistletoe/blob/8f2f0161b2af92f8dd25a0a55cb7d437a67938bc/contrib/pygments_renderer.py
-    formatter = HtmlFormatter()
-    def render_block_code(self, token):
-        code = token.children[0].content
-        try:
-            # default to 'lean' if no language is specified
-            lexer = get_lexer(token.language) if token.language else get_lexer('lean')
-        except:
-            lexer = get_lexer('text')
-        return highlight(code, lexer, self.formatter)
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
@@ -75,7 +46,7 @@ class MarkdownExtension(jinja2.ext.Extension):
 markdown_renderer = CustomHTMLRenderer()
 
 def render_markdown(src: str) -> str:
-    return markdown_renderer.render(Document(src))
+    return markdown_renderer.render_md(src)
 
 ROOT = Path(__file__).parent
 DATA = ROOT/'data'
@@ -363,8 +334,6 @@ def render_site(target: Path, base_url: str, reloader=False):
             'menus': menus,
             }
 
-    md_renderer = CustomHTMLRenderer()
-
     def render_content(env, template, **kwargs):
         """Render a markdown template."""
         content_template = env.get_template("_markdown.html")
@@ -376,7 +345,7 @@ def render_site(target: Path, base_url: str, reloader=False):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
                 base_url+'/img/')
         doc = Document(src)
-        content = md_renderer.render(doc).strip()
+        content = render_markdown(src).strip()
         title = ''
         for child in doc.children:
             if isinstance(child, block_token.Heading):
