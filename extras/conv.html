@@ -66,7 +66,7 @@ conversion mode.  The following code block shows the current target after
 each line. Note that the target is prefixed by <code>|</code> where normal mode
 shows a goal prefixed by <code>⊢</code> (these targets are still called &quot;goals&quot;
 though).</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">conv</span>
   <span class="kd">begin</span>          <span class="c1">-- | a * (b * c) = a * (c * b)</span>
@@ -76,7 +76,7 @@ though).</p>
     <span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="c1">-- | c * b</span>
   <span class="kd">end</span>
 <span class="kd">end</span>
-</pre></div>
+</code></pre></div>
 
 <p>The above snippet show three navigation commands:</p>
 <ul>
@@ -94,14 +94,14 @@ needs to conclude by <code>refl</code> or <code>trivial</code> in this case).</p
 binders. Suppose we want to prove <code>example (λ x : ℕ, 0+x) = (λ x, x)</code>.
 The naive first attempt is to enter tactic mode and try <code>rw zero_add</code>.
 But this fails with a frustrating</p>
-<div class="highlight"><pre><span></span>rewrite tactic failed, did not find
+<div class="highlight"><pre><span></span><code>rewrite tactic failed, did not find
 instance of the pattern in the target expression 0 + ?m_3
 state:
 ⊢ (λ (x : ℕ), 0 + x) = λ (x : ℕ), x
-</pre></div>
+</code></pre></div>
 
 <p>The solution is:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">conv</span>
   <span class="kd">begin</span>           <span class="c1">-- | (λ (x : ℕ), 0 + x) = λ (x : ℕ), x</span>
@@ -110,50 +110,50 @@ state:
     <span class="n">rw</span> <span class="n">zero_add</span><span class="o">,</span>  <span class="c1">-- | x</span>
   <span class="kd">end</span>
 <span class="kd">end</span>
-</pre></div>
+</code></pre></div>
 
 <p>where <code>funext</code> is the navigation command entering inside the <code>λ</code> binder.
 Note that this example is somewhat artificial, one could also do:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span><span class="bp">+</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span><span class="bp">+</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="n">funext</span> <span class="bp">;</span> <span class="n">rw</span> <span class="n">zero_add</span>
-</pre></div>
+</code></pre></div>
 
 <p>All this is also available to rewrite an hypothesis <code>H</code> from the local context
 using <code>conv at H</code>.</p>
 <h2 id="pattern-matching" class="markdown-heading">Pattern matching <a class="hover-link" href="#pattern-matching">#</a></h2>
 <p>Navigation using the above commands can be tedious. One can shortcut it
 using pattern matching as follows:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">begin</span>
 <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span>
 <span class="kd">begin</span>          <span class="c1">-- | b * c</span>
   <span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="c1">-- | c * b</span>
 <span class="kd">end</span>
 <span class="kd">end</span>
-</pre></div>
+</code></pre></div>
 
 <p>As usual, <code>begin</code> and <code>end</code> can be replaced by curly brackets to
 delimit conversion mode and a single tactic invocation can be introduced
 by <code>by</code> to get the one liner:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">mul_comm</span> <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>Beware that a well known bug makes Lean printing: &quot;find converter
 failed, pattern was not found&quot; when the tactics inside conversion mode
 fail, even if the pattern was actually found.</p>
 <p>Of course wild-cards are allowed:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">_</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">mul_comm</span> <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>In all those cases, only the first match is affected.
 A more sophisticated version of pattern matching is available inside
 conversion mode using the <code>for</code> command. The following performs rewriting
 only for the second and third occurrences of <code>b * c</code>:</p>
-<div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>  <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">):=</span>
+<div class="highlight"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>  <span class="bp">*</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">):=</span>
 <span class="kd">by</span> <span class="n">conv</span> <span class="o">{</span> <span class="n">for</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">[</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">]</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">mul_comm</span> <span class="o">}</span> <span class="o">}</span>
-</pre></div>
+</code></pre></div>
 
 <h2 id="other-tactics-inside-conversion-mode" class="markdown-heading">Other tactics inside conversion mode <a class="hover-link" href="#other-tactics-inside-conversion-mode">#</a></h2>
 <p>Besides rewriting using <code>rw</code>, one can use <code>simp</code>, <code>dsimp</code>, <code>change</code> and <code>whnf</code>.

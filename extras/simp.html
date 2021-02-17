@@ -59,7 +59,7 @@ rewriting system&quot;. Rewriting is the act of changing a goal of the form
 <code>P(A)</code> into <code>P(B)</code>, given a hypothesis of the form <code>A = B</code> or <code>A ↔ B</code>. The simplifier's job is to try and prove, or at least simplify,
 goals or hypotheses, by using repeated rewrites. Here is an example
 (using <code>mathlib</code>).</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">algebra.group.defs</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.group.defs</span>
 
 <span class="kd">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
 
@@ -67,7 +67,7 @@ goals or hypotheses, by using repeated rewrites. Here is an example
 <span class="kd">begin</span>
   <span class="n">simp</span>
 <span class="kd">end</span>
-</pre></div>
+</code></pre></div>
 
 <p>How would a human solve that goal? They would notice that <code>a * a⁻¹ = 1</code>, that <code>1 * 1 = 1</code> and so on, until they had simplified the example
 to <code>b = b</code>, which is obviously true.</p>
@@ -83,17 +83,17 @@ simplification process.</p>
 <p>So how did Lean's simplifier know that <code>a * a⁻¹ = 1</code>? It is because
 the corresponding lemma in <code>algebra.group.defs</code> is tagged with the
 <code>simp</code> attribute:</p>
-<div class="highlight"><pre><span></span><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
+</code></pre></div>
 
 <p>This <code>@[simp]</code> at the beginning just &quot;tags&quot; <code>mul_right_inv</code> with the
 <code>simp</code> attribute. We call lemmas tagged in this way &quot;<code>simp</code>
 lemmas&quot;. Here are some examples of <code>simp</code> lemmas in mathlib:</p>
-<div class="highlight"><pre><span></span><span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">nat.dvd_one</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">∣</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
+<div class="highlight"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">nat.dvd_one</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">∣</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">mul_eq_zero</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">list.mem_singleton</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∈</span> <span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">set.set_of_false</span> <span class="o">:</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">false</span><span class="o">}</span> <span class="bp">=</span> <span class="bp">∅</span> <span class="o">:=</span> <span class="bp">...</span>
-</pre></div>
+</code></pre></div>
 
 <p>When the simplifier is attempting to simplify a term <code>T</code> it looks
 through the <code>simp</code> lemmas known to the system at that time, in a
@@ -108,8 +108,8 @@ replace <code>B</code>s with <code>A</code>s. Hence a <code>simp</code> lemma sh
 that its right hand side should be simpler than its left hand side. In
 particular, <code>=</code> and <code>↔</code> should not be viewed as symmetric operators in
 this situation. The following lemma</p>
-<div class="highlight"><pre><span></span><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv_bad</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">...</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv_bad</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">...</span>
+</code></pre></div>
 
 <p>would be a terrible <code>simp</code> lemma; the simplifier would then attempt to
 replace <code>1</code> with <code>a * a⁻¹</code>, which is usually not a sensible direction
@@ -176,8 +176,8 @@ In mathlib an effort is made to stick to <code>s.nonempty</code> as the normal
 form.</p>
 <p>Another example: if <code>s : finset α</code> and <code>a : α</code> then <code>a ∈ s</code> is defined
 to mean <code>a ∈ (s : set α)</code>. The simp normal form for this idea is <code>a ∈ s</code>, and moreover the <code>simp</code> lemma</p>
-<div class="highlight"><pre><span></span><span class="err">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span><span class="w"> </span><span class="n">lemma</span><span class="w"> </span><span class="n">mem_coe</span><span class="w"> </span><span class="err">{</span><span class="n">a</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="n">α</span><span class="err">}</span><span class="w"> </span><span class="err">{</span><span class="n">s</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="n">finset</span><span class="w"> </span><span class="n">α</span><span class="err">}</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">α</span><span class="p">)</span><span class="w"> </span><span class="err">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mem_coe</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∈</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">∈</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">...</span>
+</code></pre></div>
 
 <p>will attempt to turn any occurrences of <code>a ∈ (s : set α)</code> into the
 correct normal form.</p>
@@ -188,11 +188,11 @@ correct normal form.</p>
 <code>simp</code> lemmas are added to a repository, the smarter <code>simp</code> gets. This
 means that updates to your code can cause proofs which use <code>simp</code> in
 the middle, to break. For example if a proof looked like</p>
-<div class="highlight"><pre><span></span>  ...
-  simp,
-  rw foo_eq_bar,
-  ...
-</pre></div>
+<div class="highlight"><pre><span></span><code>  <span class="bp">...</span>
+  <span class="n">simp</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">foo_eq_bar</span><span class="o">,</span>
+  <span class="bp">...</span>
+</code></pre></div>
 
 <p>and then later on someone added the <code>@[simp]</code> tag to <code>foo_eq_bar</code>,
 then this rewrite would now fail, and errors like this can at times be
@@ -212,9 +212,9 @@ to the <code>simp</code> set (the collection of lemmas tagged <code>simp</code>)
 <p><code>simpa</code>. If <code>simp</code> turns your goal into <code>P</code>, then you can write</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><span class="n">suffices</span> <span class="o">:</span> <span class="n">P</span><span class="o">,</span>
+<div class="highlight"><pre><span></span><code><span class="k">suffices</span> <span class="o">:</span> <span class="n">P</span><span class="o">,</span>
   <span class="n">simpa</span><span class="o">,</span>
-</pre></div>
+</code></pre></div>
 
 <p>which will add an extra goal of <code>P</code>, and then prove it using <code>simp</code>
 and the hypothesis <code>this</code>, which is the proof of <code>P</code> which the
@@ -226,8 +226,8 @@ where <code>A</code> and <code>B</code> are equal by definition. Like <code>simp
 recommended to use it in the middle of a proof, however if <code>dsimp</code>
 turns your goal into <code>h</code> then <code>change h</code> might well do the same thing.
 Another common use of <code>dsimp</code> is</p>
-<div class="highlight"><pre><span></span>dsimp only
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">dsimp</span> <span class="n">only</span>
+</code></pre></div>
 
 <p>which can be a very useful way of tidying up a goal. It can be safely
 used in the middle of a proof because of the <code>only</code>. This command
@@ -242,7 +242,7 @@ avoid loops which would otherwise occur.</p>
 <code>init/meta/simp_tactic.lean</code> in core Lean reveals other config
 options, not all of them documented, and most of them not very
 relevant for the average user.</p>
-<div class="highlight"><pre><span></span><span class="o">(</span><span class="n">max_steps</span> <span class="o">:</span> <span class="n">nat</span>           <span class="o">:=</span> <span class="n">simp.default_max_steps</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="n">max_steps</span> <span class="o">:</span> <span class="n">nat</span>           <span class="o">:=</span> <span class="n">simp.default_max_steps</span><span class="o">)</span>
 <span class="o">(</span><span class="n">contextual</span> <span class="o">:</span> <span class="n">bool</span>         <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
 <span class="o">(</span><span class="n">lift_eq</span> <span class="o">:</span> <span class="n">bool</span>            <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
 <span class="o">(</span><span class="n">canonize_instances</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
@@ -258,7 +258,7 @@ relevant for the average user.</p>
 <span class="o">(</span><span class="n">single_pass</span> <span class="o">:</span> <span class="n">bool</span>        <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
 <span class="o">(</span><span class="n">fail_if_unchanged</span>         <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
 <span class="o">(</span><span class="n">memoize</span>                   <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-</pre></div>
+</code></pre></div>
 
 <p>Setting <code>constructor_eq</code> to true will reduce equations of the form <code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct
 constructors for the same type, and to <code>a1 = b1 and a2 = b2 and...</code> if
