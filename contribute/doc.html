@@ -58,7 +58,8 @@ using the <a href="https://observablehq.com/@bryangingechen/github-lean-doc-prev
 <ul>
 <li>a header comment with copyright information (see the <a href="style.html#header-and-imports">recommendations in our style guidelines</a>);</li>
 <li>the list of imports (one on each line);</li>
-<li>a module docstring containing general documentation, written using Markdown.</li>
+<li>a module docstring containing general documentation, written
+<a href="#latex-and-markdown">using Markdown and LaTeX</a>.</li>
 </ul>
 <p>(See the example below.)</p>
 <p>Headers use atx-style headers (with hash signs, no underlying dash).
@@ -116,7 +117,7 @@ something is covered)</li>
 <span class="cm">## References</span>
 
 <span class="cm">* [F. Q. Gouêva, *p-adic numbers*][gouvea1997]</span>
-<span class="cm">* https://en.wikipedia.org/wiki/P-adic_number</span>
+<span class="cm">* &lt;https://en.wikipedia.org/wiki/P-adic_number&gt;</span>
 
 <span class="cm">## Tags</span>
 
@@ -128,10 +129,10 @@ something is covered)</li>
 <p>Every definition and major theorem is required to have a doc string.
 (Doc strings on lemmas are also encouraged, particularly if the lemma has any mathematical content
 or might be useful in another file.)
-These are introduced using <code>/--</code> and closed by <code>-/</code> above the definition.
-They can contain some markdown, e.g. backtick quotes. LaTeX can be included between single dollar
-signs <code>$ ... $</code> to be rendered inline or double dollar signs <code>$$ ... $$</code> to be rendered in &quot;display
-mode&quot; by MathJax in <a href="https://leanprover-community.github.io/mathlib_docs/">the online mathlib docs</a>.</p>
+These are introduced using <code>/--</code> and closed by <code>-/</code> above the definition, with either newlines or
+single spaces between the markers and the text.
+They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
+sentence, then it should end in a period.</p>
 <p>Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
 slightly about the actual implementation. The following is a doc string example:</p>
 <div class="highlight"><pre><span></span><span class="sd">/--</span>
@@ -145,7 +146,7 @@ slightly about the actual implementation. The following is a doc string example:
 <p>An example that is slightly lying but still describes the mathematical content would be:</p>
 <div class="highlight"><pre><span></span><span class="sd">/--</span>
 <span class="sd">For `p ≠ 1`, the p-adic valuation of an integer `z ≠ 0` is the largest natural number `n` such that</span>
-<span class="sd">p^n divides z.</span>
+<span class="sd">`p^n` divides `z`.</span>
 <span class="sd">`padic_val_rat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the</span>
 <span class="sd">valuation of `q.denom`.</span>
 <span class="sd">If `q = 0` or `p = 1`, then `padic_val_rat p q` defaults to 0.</span>
@@ -161,6 +162,24 @@ slightly about the actual implementation. The following is a doc string example:
 
 <p>The <code>#doc_blame</code> command can be run at the bottom of a file to list all definitions that do not have
 doc strings. <code>#doc_blame!</code> will also list theorems and lemmas.</p>
+<h2 id="latex-and-markdown" class="markdown-heading">LaTeX and Markdown <a class="hover-link" href="#latex-and-markdown">#</a></h2>
+<p>We generally put references to Lean declarations or variables in between backticks. Writing
+the fully-qualified name (e.g. <code>finset.card_pos</code> instead of just <code>card_pos</code>) will turn the name
+into a link on our <a href="https://leanprover-community.github.io/mathlib_docs/">online docs</a>.</p>
+<p>Raw URLs should be enclosed in angle brackets <code>&lt;...&gt;</code>, otherwise they will not be clickable online.</p>
+<p>When talking about mathematical symbols instead, it may be preferable to use LaTeX. LaTeX can be
+included in doc strings in three ways:</p>
+<ul>
+<li>using single dollar signs <code>$ ... $</code> to render math inline,</li>
+<li>using double dollar signs <code>$$ ... $$</code> to render math in &quot;display mode&quot;, or</li>
+<li>using environments <code>\begin{*} ... \end{*}</code> (without dollar signs).</li>
+</ul>
+<p>These correspond to the <a href="http://docs.mathjax.org/en/latest/basic/mathematics.html">MathJax</a> settings
+of our online docs. The interaction between the Markdown and LaTeX there is similar to that on
+<a href="https://math.stackexchange.com">https://math.stackexchange.com</a> and <a href="https://mathoverflow.net">https://mathoverflow.net</a>, so you can paste a doc string into
+<a href="https://math.meta.stackexchange.com/questions/4666/sandbox-for-drafts-of-long-complex-posts">an editing sandbox there</a>
+to preview the final result. See also the math.stackexchange
+<a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">MathJax tutorial</a>.</p>
 <h2 id="tactic-doc-entries" class="markdown-heading">Tactic doc entries <a class="hover-link" href="#tactic-doc-entries">#</a></h2>
 <p>Interactive tactics, user commands, hole commands and user attributes should have doc strings
 explaining how they can be used. The <code>add_tactic_doc</code> command should be invoked afterwards to add a
