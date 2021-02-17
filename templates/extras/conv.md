@@ -51,7 +51,7 @@ The second main reason to use conversion mode is to rewrite under
 binders. Suppose we want to prove `example (λ x : ℕ, 0+x) = (λ x, x)`.
 The naive first attempt is to enter tactic mode and try `rw zero_add`.
 But this fails with a frustrating
-```
+```text
 rewrite tactic failed, did not find
 instance of the pattern in the target expression 0 + ?m_3
 state:

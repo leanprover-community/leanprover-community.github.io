@@ -27,7 +27,6 @@ The website relies on several components which are built in other repositories:
 
 ## TODO
 
-* Use pygments for syntax highlighting
 * Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?

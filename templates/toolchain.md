@@ -79,7 +79,7 @@ about natural numbers or equality.
 Setting this `LEAN_PATH` variable is clearly annoying.
 There is a much better way, and actually you should *never* set this environment variable.
 Now create, next to `test.lean` and `test2.lean`, a file `leanpkg.path` containing:
-```
+```text
 builtin_path
 path .
 ```
@@ -115,19 +115,19 @@ You can run Lean is interactive mode, also known as server mode, using `lean --s
 Again not much happens.
 Lean is waiting for instructions or questions on the standard input pipe.
 You can ask it to have a look at `test.lean` by typing:
-```
+```json
 { "command": "sync", "file_name": "test.lean", "seq_num": 1 }
 ```
 It will answer a couple of messages, claiming to start working, and then be to done before returning to silence.
 You can then ask for information about what's at column 27 of line 1 of `test.lean` by typing:
-```
+```json
 { "command": "info", "file_name": "test.lean", "line": 1, "column": 27, "seq_num": 2 }
 ```
 Lean's answer will include the location of the file defining `max` as well as the type of
 `max`.
 
 Now tell Lean you want to modify the file `test.lean` to remove the final `m` at the end:
-```
+```json
 { "command": "sync", "file_name": "test.lean", "content": "lemma zero_max (m : ℕ) : max 0 m = m :=\nmax_eq_right (nat.zero_le)", "seq_num": 3 }
 ```
 Lean will immediately reply with the error message we saw earlier,
