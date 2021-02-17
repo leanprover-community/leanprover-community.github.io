@@ -91,7 +91,7 @@ Every definition and major theorem is required to have a doc string.
 or might be useful in another file.)
 These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
 single spaces between the markers and the text.
-They can contain Markdown and LaTeX as well, see the next section. If a doc string is a complete
+They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
 sentence, then it should end in a period.
 
 Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
