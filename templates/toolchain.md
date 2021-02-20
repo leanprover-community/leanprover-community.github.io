@@ -32,7 +32,7 @@ lemma zero_max (m : ℕ) : max 0 m = m :=
 max_eq_right (nat.zero_le m)
 ```
 Then you can ask Lean to check this proof by running `lean test.lean`.
-Lean will think for a second (most of it spend in initialization) and return control to you, without outputting anything.
+Lean will think for a second (most of it spent in initialization) and return control to you, without outputting anything.
 That's Lean's idea of a dignified triumph.
 If you start messing up with the file, say deleting the final `m` on the last line,
 Lean will output an error message.
@@ -53,7 +53,7 @@ So you should not keep that `prelude` line.
 ###  Working with several files
 
 Your Lean work has grown quite a bit since you installed Lean,
-so let's start a second file, `test2.lean` that should build on the knowledge gathered in `test.lean`.
+so let's start a second file, `test2.lean`, that should build on the knowledge gathered in `test.lean`.
 In `test2.lean`, put an important special case of our `zero_max` lemma:
 ```lean
 lemma zero_max_one {m : nat} : max 0 1 = 1 :=
@@ -161,7 +161,7 @@ That one is written in Lean (you can see all the code in `lib/lean/leanpkg/`), s
 the required dependencies.
 However Lean, at least in its current series Lean 3.X.X, is not convenient at all to build a *powerful*
 project manager.
-So the Lean user community has build a more powerful project manager written in python: `leanproject`.
+So the Lean user community has built a more powerful project manager written in python: `leanproject`.
 The downside is you need to have a sane python3 environment to use it, so that you can
 run something like `pip install mathlibtools` to get it,
 see [mathlib-tools' webpage](https://github.com/leanprover-community/mathlib-tools/blob/master/README.md) for more information.
