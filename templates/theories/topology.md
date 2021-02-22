@@ -56,9 +56,9 @@ variables {X : Type} [topological_space X] {U V C D Y Z : set X}
 
 example : is_closed C → is_closed D → is_closed (C ∪ D) := is_closed_union
 
-example : is_open ( -C) ↔ is_closed C := is_open_compl_iff
+example : is_open Cᶜ ↔ is_closed C := is_open_compl_iff
 
-example : is_open U → is_closed C → is_open (U - C) := is_open_diff
+example : is_open U → is_closed C → is_open (U \ C) := is_open_diff
 
 example : interior Y = Y ↔ is_open Y := interior_eq_iff_open
 
@@ -68,7 +68,7 @@ example : is_open Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, is_open U ∧ x ∈ U := is_op
 
 example : closure Y = Y ↔ is_closed Y := closure_eq_iff_is_closed
 
-example : closure Y = - interior (- Y) := closure_eq_compl_interior_compl
+example : closure Y = (interior Yᶜ)ᶜ := closure_eq_compl_interior_compl
 ```
 
 ### Filters
@@ -82,7 +82,7 @@ two axioms:
 1) if `U ∈ F` and `U ⊆ V`, then `V ∈ F`; and
 2) if `U, V ∈ F` then there exists `W ∈ F` with `W ⊆ U ∩ V`.
 
-Informally, one can think of `F` as the set of "big" subsets of `X`. For example, if `X` is a set and `F` is the set of subsets `Y` of `X` such that `X - Y` is finite, then `F` is a filter. This is called the _cofinite filter_ on `X`.
+Informally, one can think of `F` as the set of "big" subsets of `X`. For example, if `X` is a set and `F` is the set of subsets `Y` of `X` such that `X \ Y` is finite, then `F` is a filter. This is called the _cofinite filter_ on `X`.
 
 Note that if `F` is a filter that contains the empty set, then it contains all subsets of `X` by the first axiom. This filter is sometimes called "bottom" (we will see why a little later on). Some references demand that the empty set is not allowed to be in a filter -- Lean does not have this restriction. A filter not containing the empty set is sometimes called a "proper filter".
 
