@@ -297,6 +297,9 @@ for key, data in bib.entries.items():
         eprint = data.fields['eprint']
         if eprint.startswith('arXiv:'):
             url = 'https://arxiv.org/abs/'+eprint[6:]
+        elif (('archivePrefix' in data.fields and data.fields['archivePrefix'] == 'arXiv') or
+            ('eprinttype' in data.fields and data.fields['eprinttype'] == 'arXiv')):
+            url = 'https://arxiv.org/abs/'+eprint
         else:
             url = eprint
     else:
