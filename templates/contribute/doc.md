@@ -34,6 +34,7 @@ The other sections, with second level headers are (in this order):
   something is covered)
 
 References should refer to bibtex entries in [the mathlib citations file](https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).
+See the [Citing other works](#citing-other-works) section below.
 
 The following code block is an example of a file header.
 
@@ -252,6 +253,51 @@ In addition to documentation living in Lean files, we have [theories documentati
 where we give overviews spanning several Lean files, and
 more mathematical explanations in cases where formalization requires slightly exotic points of view,
 see for instance the [topology documentation](../theories/topology.html).
+
+## Citing other works
+
+To cite papers and books in doc strings, the references should first be added
+to the BibTeX file: `docs/references.bib`. To normalize the file with `bibtool`, you
+can run:
+
+```text
+bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off -s -i docs/references.bib -o docs/references.bib
+```
+
+To ensure that your citations become links in the online docs, you can use either of the
+following two styles:
+
+First, you may enclose the citation key used in `docs/references.bib` in square brackets:
+
+```markdown
+The proof can be found in [Boole1854].
+```
+
+In the online docs, this will become something like:
+
+> The proof can be found in [[Boo54]](https://leanprover-community.github.io/mathlib_docs/references.html)
+
+(The key will change into an [`alpha` style label](https://www.bibtex.com/s/bibliography-style-base-alpha/)
+and become a link to the [References page](https://leanprover-community.github.io/mathlib_docs/references.html)
+of the docs.)
+
+Alternatively, you can use custom text for the citation by putting text in square brackets
+ahead of the citation key:
+
+```markdown
+See [Grundlagen der Geometrie][hilbert1999] for an alternative axiomatization.
+```
+
+> See [Grundlagen der Geometrie](https://leanprover-community.github.io/mathlib_docs/references.html) for an alternative axiomatization.
+
+Note that you currently cannot use the closing square bracket `]` symbol in the link text.
+So the following will not result in a working link:
+
+```markdown
+We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
+```
+
+> We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
 ## Examples
 
