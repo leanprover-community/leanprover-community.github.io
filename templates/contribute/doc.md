@@ -261,7 +261,7 @@ to the BibTeX file: `docs/references.bib`. To normalize the file with `bibtool`,
 can run:
 
 ```text
-bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off -s -i docs/references.bib -o docs/references.bib
+bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off --pass.comments=on -s -i docs/references.bib -o docs/references.bib
 ```
 
 To ensure that your citations become links in the online docs, you can use either of the
