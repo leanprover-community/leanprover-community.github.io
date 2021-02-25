@@ -66,7 +66,7 @@ The <code>bin</code> folder contains a <code>lean</code> executable which you ca
 <h3 id="proving-stuff" class="markdown-heading">Proving stuff <a class="hover-link" href="#proving-stuff">#</a></h3>
 <p>You can now check your first proof.
 In a file called <code>test.lean</code>, type:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">lemma</span> <span class="n">zero_max</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">max</span> <span class="mi">0</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">zero_max</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">max</span> <span class="mi">0</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
 <span class="n">max_eq_right</span> <span class="o">(</span><span class="n">nat.zero_le</span> <span class="n">m</span><span class="o">)</span>
 </code></pre></div>
 
@@ -90,7 +90,7 @@ So you should not keep that <code>prelude</code> line.</p>
 <p>Your Lean work has grown quite a bit since you installed Lean,
 so let's start a second file, <code>test2.lean</code>, that should build on the knowledge gathered in <code>test.lean</code>.
 In <code>test2.lean</code>, put an important special case of our <code>zero_max</code> lemma:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">lemma</span> <span class="n">zero_max_one</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span> <span class="n">max</span> <span class="mi">0</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">zero_max_one</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span> <span class="n">max</span> <span class="mi">0</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
 <span class="n">zero_max</span> <span class="mi">1</span>
 </code></pre></div>
 
@@ -104,7 +104,7 @@ to the lines in the &quot;path&quot; list.
 Notice this list does not contain the folder where <code>test.lean</code> is sitting.
 That all caps name in the error message suggests setting an environment variable called <code>LEAN_PATH</code> could help.
 Indeed you can run:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">LEAN_PATH</span><span class="o">=</span>path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean
+<div class="codehilite"><pre><span></span><code><span class="nv">LEAN_PATH</span><span class="o">=</span>path_to_our_lean_install_folder/lib/lean/library/:path_to_folder_containing_test lean test2.lean
 </code></pre></div>
 
 <p>and this succeeds.
@@ -113,7 +113,7 @@ about natural numbers or equality.</p>
 <p>Setting this <code>LEAN_PATH</code> variable is clearly annoying.
 There is a much better way, and actually you should <em>never</em> set this environment variable.
 Now create, next to <code>test.lean</code> and <code>test2.lean</code>, a file <code>leanpkg.path</code> containing:</p>
-<div class="highlight"><pre><span></span><code>builtin_path
+<div class="codehilite"><pre><span></span><code>builtin_path
 path .
 </code></pre></div>
 
@@ -144,18 +144,18 @@ You can run Lean is interactive mode, also known as server mode, using <code>lea
 Again not much happens.
 Lean is waiting for instructions or questions on the standard input pipe.
 You can ask it to have a look at <code>test.lean</code> by typing:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>It will answer a couple of messages, claiming to start working, and then be to done before returning to silence.
 You can then ask for information about what's at column 27 of line 1 of <code>test.lean</code> by typing:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;line&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;column&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;line&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;column&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>Lean's answer will include the location of the file defining <code>max</code> as well as the type of
 <code>max</code>.</p>
 <p>Now tell Lean you want to modify the file <code>test.lean</code> to remove the final <code>m</code> at the end:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;lemma zero_max (m : ℕ) : max 0 m = m :=\nmax_eq_right (nat.zero_le)&quot;</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;lemma zero_max (m : ℕ) : max 0 m = m :=\nmax_eq_right (nat.zero_le)&quot;</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
 </code></pre></div>
 
 <p>Lean will immediately reply with the error message we saw earlier,
