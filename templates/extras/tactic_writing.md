@@ -501,11 +501,11 @@ reading available tactics.
 * `return`: produce a value in the monad (type: `A → m A`)
 * `ma >>= f`: get the value of type `A` from `ma : m A` and pass it to `f : A → m B`. Alternate
   syntax: `do a ← ma, f a`
-* `f <$> ma`: apply the function `f : A → B` to the value in `ma : m A` to get a `m B`. Same as
+* `f <\$> ma`: apply the function `f : A → B` to the value in `ma : m A` to get a `m B`. Same as
   `do a ← ma, return (f a)`
 * `ma >> mb`: same as `do a ← ma, mb`; here the return value of `ma` is ignored and then `mb` is
   called. Alternate syntax: `do ma, mb`
-* `mf <*> ma`: same as `do f ← mf, f <$> ma`, or `do f ← mf, a ← ma, return (f a)`
+* `mf <*> ma`: same as `do f ← mf, f <\$> ma`, or `do f ← mf, a ← ma, return (f a)`
 * `ma <* mb`: same as `do a ← ma, mb, return a`
 * `ma *> mb`: same as `do ma, mb`, or `ma >> mb`. Why two notations for the same thing? Historical
   reasons.
@@ -513,5 +513,5 @@ reading available tactics.
 * `failure`: failed value (specific monads usually have a more useful form of this, like `fail` and
   `failed` for tactics).
 * `ma <|> ma'` recover from failure: runs `ma` and if it fails then runs `ma'`.
-* `a $> mb`: same as `do mb, return a`
-* `ma <$ b`: same as `do ma, return b`
+* `a \$> mb`: same as `do mb, return a`
+* `ma <\$ b`: same as `do ma, return b`
