@@ -183,6 +183,14 @@ do { `(%%l = %%r) ← tactic.target,
      tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r) }
    <|> tactic.trace "Goal is not an equality"
 ```
+This can also be written using `|` instead of `<|>`, which allows distinguishing a failure in
+pattern matching from a failure in a subsequent tactic:
+```lean
+meta def trace_goal_is_eq : tactic unit :=
+do `(%%l = %%r) ← tactic.target | tactic.trace "Goal is not an equality",
+   tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r)
+```
+
 ## A first real world tactic
 
 We have studied enough monadology to understand our first useful tactic:
