@@ -32,7 +32,7 @@ math and `replace_math` puts the math back in.
 import re
 from typing import Match, List
 
-SPLIT = re.compile(r'(\$\$?|\\(?:begin|end)\{[a-z]*\*?\}|\\[\\{}$]|[{}]|(?:\n\s*)+|@@\d+@@)', re.I)
+SPLIT = re.compile(r'(\$\$?|\\(?:begin|end)\{[a-z]*\*?\}|\\[\\{}$]|[{}]|(?:\n\s*)+|@@\d+@@|`+)', re.I)
 
 def remove_math(text: str, inline: str) -> dict:
     """

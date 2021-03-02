@@ -2,7 +2,7 @@
 
 This test page collects several examples of LaTeX in markdown.
 
-Compare: <https://math.meta.stackexchange.com/revisions/9386/162>
+Compare: <https://math.meta.stackexchange.com/revisions/9386/164>
 
 ## Examples from doc-gen issues
 
@@ -508,3 +508,23 @@ is produced by
 6. For small inline matrices use `\bigl(\begin{smallmatrix} ... \end{smallmatrix}\bigr)`, e.g.  $\bigl( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \bigr)$ is produced by:
 
          $\bigl( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \bigr)$
+
+## From `tactic_writing.md`
+
+* `return`: produce a value in the monad (type: `A → m A`)
+* `ma >>= f`: get the value of type `A` from `ma : m A` and pass it to `f : A → m B`. Alternate
+  syntax: `do a ← ma, f a`
+* `f <$> ma`: apply the function `f : A → B` to the value in `ma : m A` to get a `m B`. Same as
+  `do a ← ma, return (f a)`
+* `ma >> mb`: same as `do a ← ma, mb`; here the return value of `ma` is ignored and then `mb` is
+  called. Alternate syntax: `do ma, mb`
+* `mf <*> ma`: same as `do f ← mf, f <$> ma`, or `do f ← mf, a ← ma, return (f a)`
+* `ma <* mb`: same as `do a ← ma, mb, return a`
+* `ma *> mb`: same as `do ma, mb`, or `ma >> mb`. Why two notations for the same thing? Historical
+  reasons.
+* `pure`: same as `return`. Again, historical reasons.
+* `failure`: failed value (specific monads usually have a more useful form of this, like `fail` and
+  `failed` for tactics).
+* `ma <|> ma'` recover from failure: runs `ma` and if it fails then runs `ma'`.
+* `a $> mb`: same as `do mb, return a`
+* `ma <$ b`: same as `do ma, return b`
