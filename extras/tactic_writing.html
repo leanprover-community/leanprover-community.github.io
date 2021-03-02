@@ -213,13 +213,13 @@ in order to debug tactics, and works on any type which is an instance of <code>h
 <span class="o">(</span><span class="k">do</span>  <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
      <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">)</span>
    <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
-<span class="bp">```</span>
-<span class="n">The</span> <span class="n">parenthesis</span> <span class="k">in</span> <span class="n">the</span> <span class="n">above</span> <span class="n">code</span> <span class="n">don&#39;t</span> <span class="n">look</span> <span class="n">very</span> <span class="n">nice.</span> <span class="n">One</span> <span class="n">could</span> <span class="n">use</span>
-<span class="n">instead</span> <span class="n">curly</span> <span class="n">brackets</span> <span class="n">which</span> <span class="n">allow</span> <span class="n">to</span> <span class="n">delimit</span> <span class="n">a</span> <span class="bp">`</span><span class="k">do</span><span class="bp">`</span> <span class="n">block</span><span class="o">,</span> <span class="n">as</span> <span class="k">in</span><span class="o">:</span>
-<span class="bp">```</span><span class="n">lean</span>
-<span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+</code></pre></div>
+
+<p>The parenthesis in the above code don't look very nice. One could use
+instead curly brackets which allow to delimit a <code>do</code> block, as in:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
- <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">}</span>
+     <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">}</span>
    <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
 </code></pre></div>
 
@@ -531,11 +531,11 @@ reading available tactics.</p>
 <li><code>return</code>: produce a value in the monad (type: <code>A → m A</code>)</li>
 <li><code>ma &gt;&gt;= f</code>: get the value of type <code>A</code> from <code>ma : m A</code> and pass it to <code>f : A → m B</code>. Alternate
 syntax: <code>do a ← ma, f a</code></li>
-<li><code>f &lt;$> ma`: apply the function `f : A → B` to the value in `ma : m A` to get a `m B`. Same as
-  `do a ← ma, return (f a)`
-* `ma >> mb`: same as `do a ← ma, mb`; here the return value of `ma` is ignored and then `mb` is
-  called. Alternate syntax: `do ma, mb`
-* `mf <*> ma`: same as `do f ← mf, f <$&gt; ma</code>, or <code>do f ← mf, a ← ma, return (f a)</code></li>
+<li><code>f &lt;$&gt; ma</code>: apply the function <code>f : A → B</code> to the value in <code>ma : m A</code> to get a <code>m B</code>. Same as
+<code>do a ← ma, return (f a)</code></li>
+<li><code>ma &gt;&gt; mb</code>: same as <code>do a ← ma, mb</code>; here the return value of <code>ma</code> is ignored and then <code>mb</code> is
+called. Alternate syntax: <code>do ma, mb</code></li>
+<li><code>mf &lt;*&gt; ma</code>: same as <code>do f ← mf, f &lt;$&gt; ma</code>, or <code>do f ← mf, a ← ma, return (f a)</code></li>
 <li><code>ma &lt;* mb</code>: same as <code>do a ← ma, mb, return a</code></li>
 <li><code>ma *&gt; mb</code>: same as <code>do ma, mb</code>, or <code>ma &gt;&gt; mb</code>. Why two notations for the same thing? Historical
 reasons.</li>
@@ -543,8 +543,8 @@ reasons.</li>
 <li><code>failure</code>: failed value (specific monads usually have a more useful form of this, like <code>fail</code> and
 <code>failed</code> for tactics).</li>
 <li><code>ma &lt;|&gt; ma&#x27;</code> recover from failure: runs <code>ma</code> and if it fails then runs <code>ma&#x27;</code>.</li>
-<li><code>a $> mb`: same as `do mb, return a`
-* `ma <$ b</code>: same as <code>do ma, return b</code></li>
+<li><code>a $&gt; mb</code>: same as <code>do mb, return a</code></li>
+<li><code>ma &lt;$ b</code>: same as <code>do ma, return b</code></li>
 </ul>
 
   </main>
