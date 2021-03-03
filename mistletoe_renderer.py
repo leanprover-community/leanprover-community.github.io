@@ -27,7 +27,7 @@ class RawUrl(span_token.SpanToken):
         r'((([A-Za-z]{3,9}:(?:\/\/)?)'  # scheme
         r'(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+(:\[0-9]+)?'  # user@hostname:port
         r'|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)'  # www.|user@hostname
-        r'((?:\/[\+~%\/\.\w\-]*)?'  # path
+        r'((?:\/[\+~%\/\.\w\-–()]*)?'  # path
         r'\??(?:[\-\+=&;%@\.\w]*)'  # query parameters
         r'#?(?:[\.\!\/\\\w\-]*))?)'  # fragment
         r'(?![^<]*?(?:<\/\w+>|\/?>))'  # ignore anchor HTML tags
