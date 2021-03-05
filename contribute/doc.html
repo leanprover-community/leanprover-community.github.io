@@ -77,7 +77,8 @@ including use of type classes and <code>simp</code> canonical form for new defin
 <li><em>Tags</em> (a list of keywords that could be useful when doing text search in mathlib to find where
 something is covered)</li>
 </ul>
-<p>References should refer to bibtex entries in [the mathlib citations file](<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).">https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).</a></p>
+<p>References should refer to bibtex entries in [the mathlib citations file](<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).">https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).</a>
+See the <a href="#citing-other-works">Citing other works</a> section below.</p>
 <p>The following code block is an example of a file header.</p>
 <div class="codehilite"><pre><span></span><code><span class="c">/-</span><span class="cm"></span>
 <span class="cm">Copyright (c) 2018 Robert Y. Lewis. All rights reserved.</span>
@@ -267,6 +268,42 @@ lines.</p>
 where we give overviews spanning several Lean files, and
 more mathematical explanations in cases where formalization requires slightly exotic points of view,
 see for instance the <a href="../theories/topology.html">topology documentation</a>.</p>
+<h2 id="citing-other-works" class="markdown-heading">Citing other works <a class="hover-link" href="#citing-other-works">#</a></h2>
+<p>To cite papers and books in doc strings, the references should first be added
+to the BibTeX file: <code>docs/references.bib</code>. To normalize the file with <code>bibtool</code>, you
+can run:</p>
+<div class="codehilite"><pre><span></span><code>bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off --pass.comments=on -s -i docs/references.bib -o docs/references.bib
+</code></pre></div>
+
+<p>To ensure that your citations become links in the online docs, you can use either of the
+following two styles:</p>
+<p>First, you may enclose the citation key used in <code>docs/references.bib</code> in square brackets:</p>
+<div class="codehilite"><pre><span></span><code>The proof can be found in [Boole1854].
+</code></pre></div>
+
+<p>In the online docs, this will become something like:</p>
+<blockquote>
+<p>The proof can be found in <a href="https://leanprover-community.github.io/mathlib_docs/references.html">[Boo54]</a></p>
+</blockquote>
+<p>(The key will change into an <a href="https://www.bibtex.com/s/bibliography-style-base-alpha/"><code>alpha</code> style label</a>
+and become a link to the <a href="https://leanprover-community.github.io/mathlib_docs/references.html">References page</a>
+of the docs.)</p>
+<p>Alternatively, you can use custom text for the citation by putting text in square brackets
+ahead of the citation key:</p>
+<div class="codehilite"><pre><span></span><code>See [<span class="nt">Grundlagen der Geometrie</span>][<span class="nl">hilbert1999</span>] for an alternative axiomatization.
+</code></pre></div>
+
+<blockquote>
+<p>See <a href="https://leanprover-community.github.io/mathlib_docs/references.html">Grundlagen der Geometrie</a> for an alternative axiomatization.</p>
+</blockquote>
+<p>Note that you currently cannot use the closing square bracket <code>]</code> symbol in the link text.
+So the following will not result in a working link:</p>
+<div class="codehilite"><pre><span></span><code>We follow [Euclid&#39;s <span class="ge">*Elements*</span> [Prop. 1]][heath1956a].
+</code></pre></div>
+
+<blockquote>
+<p>We follow [Euclid's <em>Elements</em> [Prop. 1]][heath1956a].</p>
+</blockquote>
 <h2 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h2>
 <p>The following files are maintained as examples of good documentation style:</p>
 <ul>
