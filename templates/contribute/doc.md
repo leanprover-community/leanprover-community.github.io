@@ -135,7 +135,9 @@ We generally put references to Lean declarations or variables in between backtic
 the fully-qualified name (e.g. `finset.card_pos` instead of just `card_pos`) will turn the name
 into a link on our [online docs](https://leanprover-community.github.io/mathlib_docs/).
 
-Raw URLs should be enclosed in angle brackets `<...>`, otherwise they will not be clickable online.
+Raw URLs should be enclosed in angle brackets `<...>` to ensure that they will be clickable online.
+(Some URLs, especially those with parentheses or other special symbols,
+may not be parsed correctly by the markdown renderer.)
 
 When talking about mathematical symbols instead, it may be preferable to use LaTeX. LaTeX can be
 included in doc strings in three ways:
