@@ -125,7 +125,7 @@ with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
 
 decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
 
-num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'thm'])
+num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'theorem'])
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
