@@ -187,7 +187,7 @@ do `(%%l = %%r) ← tactic.target | tactic.trace "Goal is not an equality",
 ```
 
 If the `|` is ommitted, then the tactic fails if the pattern does not match.
-We can catch this failure using the `orelse` combinator mentioned ealier, but not that by
+We can catch this failure using the `orelse` combinator mentioned ealier, but note that by
 doing so we catch more types of failure than we did above:
 ```lean
 meta def trace_goal_is_eq : tactic unit :=
