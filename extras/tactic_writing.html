@@ -210,9 +210,29 @@ the left and right hand sides of the current goal. It also uses the
 <code>to_string</code> function which is very convenient in combination with <code>trace</code>
 in order to debug tactics, and works on any type which is an instance of <code>has_to_string</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">t</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+   <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+   <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
+   <span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+   <span class="kd">end</span>
+</code></pre></div>
+
+<p>Lean also provides a dedicated syntax for pattern matching with a single pattern and a wildcard,
+where execution only proceeds to the next line of the <code>do</code> block if the pattern matches, and otherwise
+executes the expression after the <code>|</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span> <span class="bp">|</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span><span class="o">,</span>
+   <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
+</code></pre></div>
+
+<p>If the <code>|</code> is ommitted, then the tactic fails if the pattern does not match.
+We can catch this failure using the <code>orelse</code> combinator mentioned ealier, but note that by
+doing so we catch more types of failure than we did above:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="o">(</span><span class="k">do</span>  <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
-     <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">)</span>
-   <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+     <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">),</span>
+     <span class="n">some_other_tactic</span><span class="o">)</span>
+   <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality, or `some_other_tactic` failed&quot;</span>
 </code></pre></div>
 
 <p>The parenthesis in the above code don't look very nice. One could use
