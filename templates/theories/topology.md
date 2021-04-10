@@ -1,4 +1,4 @@
-# Maths in lean : Topological Spaces.
+# Maths in Lean: Topological, uniform and metric spaces
 
 The `topological_space` typeclass is defined in mathlib,
 in `topology/basic.lean`. There are about 18000
@@ -8,7 +8,7 @@ topological groups and rings, and infinite sums. These docs
 are just concerned with the contents of the `topological_space.lean`
 file.
 
-### The basic typeclass.
+### The basic typeclass
 
 The `topological_space` typeclass is an inductive type, defined
 as a structure on a type `α` in the obvious way: there is an `is_open`

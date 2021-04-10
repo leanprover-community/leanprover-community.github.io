@@ -1,4 +1,4 @@
-# Maths in Lean : category theory
+# Maths in Lean: category theory
 
 The `category` typeclass is defined in [category_theory/default.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html).
 It depends on the type of the objects, so for example we might write `category (Type u)` if we're talking about a category whose objects are types (in universe `u`).

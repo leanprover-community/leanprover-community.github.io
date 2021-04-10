@@ -1,4 +1,4 @@
-# Maths in Lean : the natural numbers
+# Maths in Lean: the natural numbers
 
 The natural numbers begin with zero as is standard in computer
 science. You can call them `nat` or `ℕ` (you get the latter

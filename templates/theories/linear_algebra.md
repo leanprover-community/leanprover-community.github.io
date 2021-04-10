@@ -1,4 +1,4 @@
-# Maths in lean : Linear Algebra
+# Maths in Lean: linear algebra
 
 ### Semimodules, Modules and Vector Spaces ###
 
