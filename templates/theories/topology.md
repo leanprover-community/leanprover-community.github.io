@@ -92,6 +92,7 @@ Why are we interested in these filters? Well, given a map `f` from `ℕ` to a to
 
 As an example, below are three limits formulated in Lean.
 The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
+
 ```lean
 -- The limit of `2 * x` as `x` tends to `3` is `6`
 example : tendsto (λ x : ℝ, 2 * x) (𝓝 3) (𝓝 6) := sorry
@@ -100,7 +101,6 @@ example : tendsto (λ x : ℝ, 1 / x) at_top (𝓝 0) := sorry
 -- The limit of `x ^ 2` as `x` tends to `-∞` is `∞`
 example : tendsto (λ x : ℝ, x ^ 2) at_bot at_top := sorry
 ```
-
 
 The _principal filter_ `principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
 

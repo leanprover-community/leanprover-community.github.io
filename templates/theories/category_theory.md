@@ -27,16 +27,19 @@ We use `𝟙` (`\b1`) to denote identity morphisms, as in `𝟙 X`.
 
 We use `≫` (`\gg`) to denote composition of morphisms, as in `f ≫ g`, which means "`f` followed by `g`".
 You may prefer write composition in the usual convention, using `⊚` (`\oo` or `\circledcirc`), as in `f ⊚ g` which means "`g` followed by `f`". To do so you'll need to add this notation locally, via
-```
+
+```lean
 local notation f ` ⊚ `:80 g:80 := category.comp g f
 ```
 
 ### Isomorphisms
+
 We use `≅` for isomorphisms.
 
 ### Functors
+
 We use `⥤` (`\func`) to denote functors, as in `C ⥤ D` for the type of functors from `C` to `D`.
-(Unfortunately `⇒` is reserved in `logic.relator`: https://github.com/leanprover-community/mathlib/blob/master/src/logic/relator.lean, so we can't use that here.)
+(Unfortunately `⇒` is reserved in [`logic.relator`](https://github.com/leanprover-community/mathlib/blob/master/src/logic/relator.lean), so we can't use that here.)
 
 We use `F.obj X` to denote the action of a functor on an object.
 We use `F.map f` to denote the action of a functor on a morphism`.
@@ -44,6 +47,7 @@ We use `F.map f` to denote the action of a functor on a morphism`.
 Functor composition can be written as `F ⋙ G`.
 
 ### Natural transformations
+
 We use `τ.app X` for the components of a natural transformation.
 
 Otherwise, we mostly use the notation for morphisms in any category:

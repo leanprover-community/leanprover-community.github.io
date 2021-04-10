@@ -1,4 +1,4 @@
-# Library Style Guidelines #
+# Library Style Guidelines
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 In addition to the [naming conventions](naming.html),
@@ -7,7 +7,7 @@ and conventions. Having a uniform style makes it easier to browse the
 library and read the contents, but these are meant to be guidelines
 rather than rigid rules.
 
-### Variable conventions ###
+### Variable conventions
 
 - `u`, `v`, `w`, ... for universes
 - `α`, `β`, `γ`, ... for generic types
@@ -27,12 +27,12 @@ This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.
 
 
-### Line length ###
+### Line length
 
 Lines should not be longer than 100 characters. This makes files
 easier to read, especially on a small screen or in a small window.
 
-### Header and imports ###
+### Header and imports
 
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
@@ -250,7 +250,7 @@ instance : partial_order (topological_space α) :=
   le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
 ```
 
-### Hypotheses Left of Colon ###
+### Hypotheses Left of Colon
 
 Generally, having arguments to the left of the colon is preferred
 over having arguments in universal quantifiers or implications, 
@@ -278,7 +278,7 @@ is preferred over
 example : ∀ (n : ℕ), n ≥ 0 := λ n, dec_trivial
 ```
 
-### Binders ###
+### Binders
 
 Use a space after binders:
 ```lean
@@ -286,7 +286,7 @@ example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
 λ (α : Type) (x : α), exists.intro x rfl
 ```
 
-### Calculations ###
+### Calculations
 
 There is some flexibility in how you write calculational proofs. In
 general, it looks nice when the comparisons and justifications line up
@@ -325,7 +325,7 @@ theorem reverse_reverse : ∀ (l : list α), reverse (reverse l) = l
 ```
 
 
-### Tactic mode ###
+### Tactic mode
 
 When opening a tactic block, `begin` is not indented but everything
 inside is indented, as in:
