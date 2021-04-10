@@ -1,4 +1,4 @@
-# Maths in lean : Topological Spaces.
+# Maths in Lean: Topological, uniform and metric spaces
 
 The `topological_space` typeclass is defined in mathlib,
 in `topology/basic.lean`. There are about 18000
@@ -8,7 +8,7 @@ topological groups and rings, and infinite sums. These docs
 are just concerned with the contents of the `topological_space.lean`
 file.
 
-### The basic typeclass.
+### The basic typeclass
 
 The `topological_space` typeclass is an inductive type, defined
 as a structure on a type `α` in the obvious way: there is an `is_open`
@@ -92,6 +92,7 @@ Why are we interested in these filters? Well, given a map `f` from `ℕ` to a to
 
 As an example, below are three limits formulated in Lean.
 The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
+
 ```lean
 -- The limit of `2 * x` as `x` tends to `3` is `6`
 example : tendsto (λ x : ℝ, 2 * x) (𝓝 3) (𝓝 6) := sorry
@@ -100,7 +101,6 @@ example : tendsto (λ x : ℝ, 1 / x) at_top (𝓝 0) := sorry
 -- The limit of `x ^ 2` as `x` tends to `-∞` is `∞`
 example : tendsto (λ x : ℝ, x ^ 2) at_bot at_top := sorry
 ```
-
 
 The _principal filter_ `principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
 

@@ -1,7 +1,8 @@
-# Mathlib naming conventions #
+# Mathlib naming conventions
+
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
-### Names of symbols ###
+### Names of symbols
 
 When translating the statements of theorems into words, this dictionary is often used:
 
@@ -60,7 +61,7 @@ Lattices:
 | `⨆`    | `\Sup`   | `Sup` |       |
 | `⨅`    | `\Inf`   | `Inf` |       |
 
-### General conventions ###
+### General conventions
 
 Identifiers are generally lower case with underscores. For the most
 part, we rely on descriptive names. Often the name of theorem simply
@@ -113,8 +114,7 @@ We can also use the word "self" to indicate a repeated argument:
 - `mul_inv_self`
 - `neg_add_self`
 
-
-### Dots ###
+### Dots
 
 Dots are used for namespaces, and also for automatically generated names
 like recursors, eliminators and structure projections. They can also be
@@ -169,7 +169,7 @@ inductive types. For instance, we use:
 - `lt.trans_le`
 - `le.trans_lt`
 
-### Axiomatic descriptions ###
+### Axiomatic descriptions
 
 Some theorems are described using axiomatic names, rather than
 describing their conclusions.
@@ -190,8 +190,7 @@ describing their conclusions.
 - `mul_right_cancel`
 - `inj`  (injective)
 
-
-### Variable conventions ###
+### Variable conventions
 
 - `u`, `v`, `w`, ... for universes
 - `α`, `β`, `γ`, ... for generic types
@@ -205,12 +204,12 @@ describing their conclusions.
 - `i`, `j`, `k`, ... for integers
 
 Types with a mathematical content are expressed with the usual
-mathematical notation, often with an upper case letter 
+mathematical notation, often with an upper case letter
 (`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
 This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.
 
-### Names for symbols ###
+### Names for symbols
 
 - `imp`: implication
 - `forall`
@@ -218,8 +217,7 @@ for all types. Pull requests renaming type variables in these files are welcome.
 - `ball`: bounded forall
 - `bex`: bounded exists
 
-
-## Identifiers and theorem names ##
+## Identifiers and theorem names
 
 We generally use lower case with underscores for theorem names and
 definitions. Sometimes upper case is used for bundled structures, such
@@ -231,6 +229,7 @@ to guess the name of a theorem or find it using tab completion. Common
 "axiomatic" properties of an operation like conjunction or
 disjunction are put in a namespace that begins with the name of the
 operation:
+
 ```lean
 import logic.basic
 
@@ -239,8 +238,10 @@ import logic.basic
 #check and.assoc
 #check or.assoc
 ```
+
 In particular, this includes `intro` and `elim` operations for logical
 connectives, and properties of relations:
+
 ```lean
 import logic.basic
 
@@ -254,7 +255,9 @@ import logic.basic
 #check eq.symm
 #check eq.trans
 ```
+
 Note however we do not do this for axiomatic arithmetic operations
+
 ```lean
 import algebra.group.basic
 
@@ -265,6 +268,7 @@ import algebra.group.basic
 
 For the most part, however, we rely on descriptive names. Often the
 name of theorem simply describes the conclusion:
+
 ```lean
 import algebra.ring.basic
 open nat
@@ -274,14 +278,17 @@ open nat
 #check @sub_add_eq_add_sub
 #check @le_iff_lt_or_eq
 ```
+
 If only a prefix of the description is enough to convey the meaning,
 the name may be made even shorter:
+
 ```lean
 import algebra.ordered_ring
 
 #check @neg_neg
 #check nat.pred_succ
 ```
+
 When an operation is written as infix, the theorem names follow
 suit. For example, we write `neg_mul_neg` rather than `mul_neg_neg` to
 describe the patter `-a * -b`.
@@ -289,6 +296,7 @@ describe the patter `-a * -b`.
 Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
 hypotheses. The word "of" is used to separate these hypotheses:
+
 ```lean
 import algebra.ordered_ring
 open nat
@@ -297,6 +305,7 @@ open nat
 #check lt_of_le_of_ne
 #check add_lt_add_of_lt_of_le
 ```
+
 The hypotheses are listed in the order they appear, _not_ reverse
 order. For example, the theorem `A → B → C` would be named
 `C_of_A_of_B`.
@@ -304,6 +313,7 @@ order. For example, the theorem `A → B → C` would be named
 Sometimes abbreviations or alternative descriptions are easier to work
 with. For example, we use `pos`, `neg`, `nonpos`, `nonneg` rather than
 `zero_lt`, `lt_zero`, `le_zero`, and `zero_le`.
+
 ```lean
 import algebra.ordered_ring
 open nat
@@ -320,6 +330,7 @@ could be named either `add_sub_self` or `add_sub_cancel`.
 
 Sometimes the word "left" or "right" is helpful to describe variants
 of a theorem.
+
 ```lean
 import algebra.ordered_ring
 
@@ -329,12 +340,12 @@ import algebra.ordered_ring
 #check le_of_mul_le_mul_right
 ```
 
-## Naming of structural lemmas ##
+## Naming of structural lemmas
 
 We are trying to standardize certain naming patterns for structural lemmas.
 At present these are not uniform across mathlib.
 
-### Extensionality ###
+### Extensionality
 
 A lemma of the form `(∀ x, f x = g x) → f = g` should be named `.ext`,
 and labelled with the `@[ext]` attribute.
@@ -344,10 +355,9 @@ Often this type of lemma can be generated automatically by putting the
 of the structure projections, and often there is a better statement,
 e.g. using coercions, that should be written by hand then marked with `@[ext]`.)
 
-
 A lemma of the form `f = g ↔ ∀ x, f x = g x` should be named `.ext_iff`.
 
-### Injectivity ###
+### Injectivity
 
 Where possible, injectivity lemmas should be written in terms of an
 `injective f` conclusion which use the full word `injective`, typically as `f_injective`.

@@ -1,8 +1,8 @@
-# Maths in lean : Linear Algebra
+# Maths in Lean: linear algebra
 
-### Semimodules, Modules and Vector Spaces ###
+### Semimodules, Modules and Vector Spaces
 
-#### [`algebra.module`](https://leanprover-community.github.io/mathlib_docs/algebra/module.html) ####
+#### [`algebra.module`](https://leanprover-community.github.io/mathlib_docs/algebra/module.html)
 
 This file defines the typeclass `semimodule R M`, which gives an `R`-semimodule structure on the type `M`, and similarly `module R M` and `vector_space R M`.
 An additive commutative monoid `M` is a semimodule over the semiring `R` if there is a scalar multiplication `•` (`has_scalar.smul`) that satisfies the expected distributivity axioms for `+` (in `M` and `R`) and `*` (in `R`).
@@ -25,9 +25,10 @@ The file [`linear_algebra.dimension`](https://leanprover-community.github.io/mat
 The `rank` of a linear map is defined as the dimension of its image.
 Most definitions in this file are non-computable.
 
-### Matrices ###
+### Matrices
 
-#### [`data.matrix.basic`](https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html) ####
+#### [`data.matrix.basic`](https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html)
+
 The type `matrix m n α` contains rectangular, `m` by `n` arrays of elements of the type `α`.
 It is an alias for the type `m → n → α`, under the assumptions `[fintype m] [fintype n]` stating that `m` and `n` have finitely many elements.
 A matrix type can be indexed over arbitrary `fintype`s.
@@ -60,9 +61,9 @@ The adjugate and for nonsingular matrices, the inverse is defined in [`linear_al
 The type `special_linear_group m R` is the group of `m` by `m` matrices with determinant `1`,
 and is defined in [`linear_algebra.special_linear_group`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/special_linear_group.html).
 
-### Linear Maps and Equivalences ###
+### Linear Maps and Equivalences
 
-#### [`linear_algebra.basic`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html) ####
+#### [`linear_algebra.basic`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html)
 
 The type `M →[R]ₗ M₂`, or `linear_map R M M₂`, represents `R`-linear maps from the `R`-module `M` to the `R`-mdule `M₂`.
 These are defined by their action on elements of `M`.
@@ -87,21 +88,21 @@ The type [`general_linear_group R M`](https://leanprover-community.github.io/mat
 
 The dual space, consisting of linear maps `M →[R]ₗ R`, is defined in [`linear_algebra.dual`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/dual.html).
 
-### Bilinear, Sesquilinear and Quadratic Forms ###
+### Bilinear, Sesquilinear and Quadratic Forms
 
-#### [`linear_algebra.bilinear_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html) ####
+#### [`linear_algebra.bilinear_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html)
 
 For an `R`-module `M`, the type `bilin_form R M` is the type of maps `M → M → R` that are linear in both arguments.
 The equivalence between `bilin_form R M` and maps `M →ₗ[R] M →ₗ[R] R` that are linear in both arguments is called `bilin_linear_map_equiv`.
 A matrix `M` corresponds to a bilinear form that maps vectors `v` and `w` to `row v ⬝ M ⬝ col w`.
 The equivalence between `bilin_form R (n → R)` and `matrix n n R` is called [`bilin_form_equiv_matrix`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#bilin_form_equiv_matrix).
 
-#### [`linear_algebra.sesquilinear_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html) ####
+#### [`linear_algebra.sesquilinear_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html)
 
 For an `R`-module `M` and `I : ring_anti_equiv R R`, the type `sesq_form R M I` is the type of maps `M → M → R` that are linear in the first argument and that in the second argument are antilinear with respect to an `R`-[antiautomorphism](https://leanprover-community.github.io/mathlib_docs/ring_theory/maps.html#ring_anti_equiv) `I`.
 Antilinearity of `f` with respect to a ring antiautomorphism `I` means the following equations hold: `f x (a • y) = I a * f x y`, `I 1 = 1`, `I (x + y) = I x + I y` and `I (x * y) = I y * I x`.
 
-#### [`linear_algebra.quadratic_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html) ####
+#### [`linear_algebra.quadratic_form`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html)
 
 For an `R`-module `M`, the type `quadratic_form R M` is the type of maps `f : M → R` such that `f (a • x) = a * a * f x` and `λ x y, f (x + y) - f x - f y` is a bilinear map.
 
