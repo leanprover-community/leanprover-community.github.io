@@ -11,9 +11,9 @@ takes a natural as input and outputs the next one.
 
 Addition and multiplication are defined by recursion on the second
 variable and many proofs of basic stuff in the core library are by
-induction on the second variable. The notations `+,-,*` are shorthand
-for the functions `nat.add`, `nat.sub` and `nat.mul` and other notations
-(≤, <, |) mean the usual things (get the "divides" symbol with `\|`.
+induction on the second variable. The notations `+`, `-`, `*` are shorthand
+for the functions `nat.add`, `nat.sub` and `nat.mul`, and other notations
+(`≤`, `<`, `|`) mean the usual things (get the "divides" symbol with `\|`).
 The `%` symbol denotes modulus (remainder after division).
 
 Here are some of core Lean's functions for working with `nat`.
