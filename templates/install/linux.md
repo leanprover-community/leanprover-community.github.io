@@ -8,12 +8,12 @@ All commands below should be typed inside a terminal.
   needed by most users require `git`, `curl`, and `python3` (on Debian and
   Ubuntu also `python3-pip` and `python3-venv`). So the first step is to get those.
 
-* The next step installs a small tool called `elan` which will handle
+* The next step installs a small tool called [`elan`](https://github.com/leanprover/elan) which will handle
   updating Lean according to the needs of your current project (hit Enter
   when a question is asked). It will live in `$HOME/.elan` and add a
   line to `$HOME/.profile`.
   ```bash
-  curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh
+  curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
   ```
 
 * You will also need a code editor that has a Lean plugin. The
