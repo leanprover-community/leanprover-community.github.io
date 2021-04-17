@@ -8,7 +8,7 @@ assistance.
 There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
 
 We'll need to set up Lean, an editor that knows about Lean, and `mathlib` (the standard library).
-Rather than installing Lean directly, we'll install a small program called `elan` which
+Rather than installing Lean directly, we'll install a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
 
@@ -23,7 +23,7 @@ all users.
 
 2. In terminal, run the command
 
-   `curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh`
+   `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh`
 
    and hit enter when a question is asked.
    To make sure the terminal will find the installed files, run `echo 'PATH="$HOME/.elan/bin:$PATH"' >> $HOME/.profile`.
