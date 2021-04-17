@@ -5,7 +5,7 @@ mathlib on MacOS. There is a quicker way described in the main
 [install page](macos.html) but it requires more trust.  Of course you can get
 even more details about what is going on by reading the bash script that will
 be downloaded below:
-[elan_init](https://github.com/Kha/elan/blob/master/elan-init.sh).
+[elan_init](https://github.com/leanprover/elan/blob/master/elan-init.sh).
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
@@ -25,7 +25,7 @@ Installing `elan`
 
 2. At a terminal, run the command
 
-   `curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh`
+   `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh`
 
    and hit enter when a question is asked.
 
