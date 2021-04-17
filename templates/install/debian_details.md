@@ -6,7 +6,7 @@ Ubuntu, LMDE,...). There is a quicker way described in the main
 [install page](debian.html) but it requires more trust.
 Of course you can get even more details about what is going on by
 reading the bash script that will be downloaded below:
-[elan_init](https://github.com/Kha/elan/blob/master/elan-init.sh).
+[elan_init](https://github.com/leanprover/elan/blob/master/elan-init.sh).
 
 * Lean itself doesn't depend on much infrastructure, but supporting tools
   needed by most users require `git`, `curl`, and `python`. So the first step is:
@@ -19,7 +19,7 @@ reading the bash script that will be downloaded below:
   when a question is asked). It will live in `$HOME/.elan` and adds a
   line to `$HOME/.profile`.
   ```bash
-  curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh
+  curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
   ```
 
 * There are two editors you can use with Lean, VS Code and emacs. The
