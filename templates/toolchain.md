@@ -184,7 +184,7 @@ The core team around Leonardo de Moura at Microsoft research is developing Lean 
 which is not yet ready for end users,
 while the user community still develops Lean 3.
 So you'll want to frequently update Lean itself.
-Again you don't want to think about this, so [elan](https://github.com/Kha/elan) will handle it.
+Again you don't want to think about this, so [elan](https://github.com/leanprover/elan) will handle it.
 This version manager also reads your project `leanpkg.toml`,
 and uses it to decide which version of Lean you want to run,
 and download it if needed.
