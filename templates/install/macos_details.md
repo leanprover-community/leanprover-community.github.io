@@ -12,7 +12,7 @@ assistance.
 
 We'll need to set up Lean, an editor that knows about Lean, and `mathlib` (the standard library).
 
-Rather than installing Lean directly, we'll install a small program called `elan` which
+Rather than installing Lean directly, we'll install a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
 
