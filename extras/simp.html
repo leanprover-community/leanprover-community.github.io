@@ -235,6 +235,13 @@ tidies up lambdas (it will turn <code>(λ x, f x) 37</code> into <code>f 37</cod
 structure projections (it will turn <code>{to_fun := f, ...}.to_fun</code>
 into <code>f</code>).</p>
 <h2 id="more-advanced-features" class="markdown-heading">More advanced features. <a class="hover-link" href="#more-advanced-features">#</a></h2>
+<p>Using the command <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute"><code>mk_simp_attribute</code></a>,
+you can make your own <code>@[simp]</code> attribute, but with a key difference;
+lemmas tagged with <code>@[new_attr]</code> are <em>not</em> called by default with <code>simp</code>, but
+can be called at will with <code>simp with new_attr</code>. This can often replace lengthy
+<code>simp only [...]</code> calls, and facilitate easier-to-read code. Some examples of common usage are
+<a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.mfld_simps/src"><code>mfld_simps</code></a>,
+and <a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.field_simps/src"><code>field_simps</code></a>.</p>
 <p><code>simp {single_pass := tt}</code> -- this <code>single_pass</code> is a config option,
 one of around 16 at the time of writing. One can use <code>single_pass</code> to
 avoid loops which would otherwise occur.</p>
