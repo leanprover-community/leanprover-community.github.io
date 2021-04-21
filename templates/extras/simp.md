@@ -238,6 +238,14 @@ into `f`).
 
 ## More advanced features.
 
+Using the command [`mk_simp_attribute`](https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute),
+you can make your own `@[simp]` attribute, but with a key difference;
+lemmas tagged with `@[new_attr]` are _not_ called by default with `simp`, but
+can be called at will with `simp with new_attr`. This can often replace lengthy 
+`simp only [...]` calls, and facilitate easier-to-read code. Some examples of common usage are 
+[`mfld_simps`](https://github.com/leanprover-community/mathlib/blob/5993b90e4b3acc615a08f969c670b43275c1f7de/src/data/equiv/local_equiv.lean#L67),
+and [`field_simps`](https://github.com/leanprover-community/mathlib/blob/master/src/algebra/group_with_zero/basic.lean#L43).
+
 `simp {single_pass := tt}` -- this `single_pass` is a config option,
 one of around 16 at the time of writing. One can use `single_pass` to
 avoid loops which would otherwise occur.
