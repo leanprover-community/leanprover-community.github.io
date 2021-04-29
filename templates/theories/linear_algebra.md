@@ -4,35 +4,26 @@
 
 #### [`algebra.module`](https://leanprover-community.github.io/mathlib_docs/algebra/module.html)
 
-This file defines the typeclass `module R M`, which gives an `R`-module structure on the type `M`.
-An additive commutative monoid `M` is a module over the (semi)ring `R` if there is a scalar multiplication `•` (`has_scalar.smul`) that satisfies the expected distributivity axioms for `+` (in `M` and `R`) and `*` (in `R`).
-To define a `module R M` instance, you first need instances for `semiring R` and `add_comm_monoid M`.
+This file defines the typeclass `semimodule R M`, which gives an `R`-semimodule structure on the type `M`, and similarly `module R M` and `vector_space R M`.
+An additive commutative monoid `M` is a semimodule over the semiring `R` if there is a scalar multiplication `•` (`has_scalar.smul`) that satisfies the expected distributivity axioms for `+` (in `M` and `R`) and `*` (in `R`).
+To define a `semimodule R M` instance, you first need instances for `semiring R` and `add_comm_monoid M`.
 By splitting out these dependencies, we avoid instance loops and diamonds.
 
-In general mathematical usage, a module over a semiring is also called a semimodule, and a module over a field is also called a vector space.
-We do not have separate `semimodule` or `vector_space` typeclasses because those requirements are more easily expressed by changing the typeclass instances on `R` (and `M`).
-In this document, we'll use "module" as the general term for "semimodule, module or vector space" and "ring" as the general term for "(commutative) semiring, ring or field".
+A module (typeclass `module`) is a semimodule that additionally requires that `R` is a ring and `M` is a group.
+A vector space (typeclass `vector_space`) is a module that additionally requires that `R` is a field.
+All vector spaces are also modules, and all modules are also semimodules.
 
 Let `m` be an arbitrary type, e.g. `fin n`, then the typical examples are:
 `m → ℕ` is an `ℕ`-semimodule, `m → ℤ` is a `ℤ`-module and `m → ℚ` is a `ℚ`-vector space
 (outside of type theory, these are known as `ℕ^m`, `ℤ^m` and `ℚ^m` respectively).
 These instances are defined in [`algebra.pi_instances`](https://leanprover-community.github.io/mathlib_docs/algebra/pi_instances.html).
-A ring is a module over itself, with `•` defined as `*` (this equality is stated by the `simp` lemma [`smul_eq_mul`](https://leanprover-community.github.io/mathlib_docs/algebra/module.html#smul_eq_mul)).
-Each additive monoid has a canonical `ℕ`-module structure given by `n • x = x + x + ... + x` (`n` times), and each additive group has a canonical `ℤ`-module structure defined similarly; these also apply for (semi)rings.
+A (semi)ring is a (semi)module over itself, with `•` defined as `*` (this equality is stated by the `simp` lemma [`smul_eq_mul`](https://leanprover-community.github.io/mathlib_docs/algebra/module.html#smul_eq_mul)).
 
-The file [`linear_algebra.linear_independent`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/linear_independent.html) defines linear independence for an indexed family in a module.
-To express that a set `s : set M` is linear independent, we view it as a family indexed by itself, written as `linear_independent R (coe : s → M)`.
+The file [`linear_algebra.basis`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html) defines linear independence and bases for modules.
 
-The file [`linear_algebra.basis`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html) defines bases for modules.
-
-The file [`linear_algebra.dimension`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/dimension.html) defines the `rank` of a module as a cardinal.
-We also use `rank` for the dimension of a vector space, since the dimension is always equal to the rank.
-(In fact, `rank` is currently only defined for vector spaces, as the cardinality of a basis. A definition of rank for all modules still needs to be done.)
+The file [`linear_algebra.dimension`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/dimension.html) defines the dimension of a vector space as the minimum cardinality of a basis.
 The `rank` of a linear map is defined as the dimension of its image.
 Most definitions in this file are non-computable.
-
-The file [`linear_algebra.finite_dimensional`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html) defines the `finrank` of a module as a natural number.
-By convention, the `finrank` is equal to 0 if the rank is infinite.
 
 ### Matrices
 
@@ -72,9 +63,9 @@ and is defined in [`linear_algebra.special_linear_group`](https://leanprover-com
 
 ### Linear Maps and Equivalences
 
-#### [`algebra.module.linear_map`](https://leanprover-community.github.io/mathlib_docs/algebra/module/linear_map.html)
+#### [`linear_algebra.basic`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html)
 
-The type `M →[R]ₗ M₂`, or `linear_map R M M₂`, represents `R`-linear maps from the `R`-module `M` to the `R`-module `M₂`.
+The type `M →[R]ₗ M₂`, or `linear_map R M M₂`, represents `R`-linear maps from the `R`-module `M` to the `R`-mdule `M₂`.
 These are defined by their action on elements of `M`.
 The type `M ≃[R]ₗ M₂`, or `linear_equiv R M M₂`, is the type of invertible `R`-linear maps from `M` to `M₂`.
 
