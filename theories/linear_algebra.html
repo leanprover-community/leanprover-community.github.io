@@ -50,22 +50,29 @@
 <h1 id="maths-in-lean-linear-algebra" class="markdown-heading">Maths in Lean: linear algebra <a class="hover-link" href="#maths-in-lean-linear-algebra">#</a></h1>
 <h3 id="semimodules-modules-and-vector-spaces" class="markdown-heading">Semimodules, Modules and Vector Spaces <a class="hover-link" href="#semimodules-modules-and-vector-spaces">#</a></h3>
 <h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulehtmlcodealgebramodulecodea" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html"><code>algebra.module</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulehtmlcodealgebramodulecodea">#</a></h4>
-<p>This file defines the typeclass <code>semimodule R M</code>, which gives an <code>R</code>-semimodule structure on the type <code>M</code>, and similarly <code>module R M</code> and <code>vector_space R M</code>.
-An additive commutative monoid <code>M</code> is a semimodule over the semiring <code>R</code> if there is a scalar multiplication <code>•</code> (<code>has_scalar.smul</code>) that satisfies the expected distributivity axioms for <code>+</code> (in <code>M</code> and <code>R</code>) and <code>*</code> (in <code>R</code>).
-To define a <code>semimodule R M</code> instance, you first need instances for <code>semiring R</code> and <code>add_comm_monoid M</code>.
+<p>This file defines the typeclass <code>module R M</code>, which gives an <code>R</code>-module structure on the type <code>M</code>.
+An additive commutative monoid <code>M</code> is a module over the (semi)ring <code>R</code> if there is a scalar multiplication <code>•</code> (<code>has_scalar.smul</code>) that satisfies the expected distributivity axioms for <code>+</code> (in <code>M</code> and <code>R</code>) and <code>*</code> (in <code>R</code>).
+To define a <code>module R M</code> instance, you first need instances for <code>semiring R</code> and <code>add_comm_monoid M</code>.
 By splitting out these dependencies, we avoid instance loops and diamonds.</p>
-<p>A module (typeclass <code>module</code>) is a semimodule that additionally requires that <code>R</code> is a ring and <code>M</code> is a group.
-A vector space (typeclass <code>vector_space</code>) is a module that additionally requires that <code>R</code> is a field.
-All vector spaces are also modules, and all modules are also semimodules.</p>
+<p>In general mathematical usage, a module over a semiring is also called a semimodule, and a module over a field is also called a vector space.
+We do not have separate <code>semimodule</code> or <code>vector_space</code> typeclasses because those requirements are more easily expressed by changing the typeclass instances on <code>R</code> (and <code>M</code>).
+In this document, we'll use &quot;module&quot; as the general term for &quot;semimodule, module or vector space&quot; and &quot;ring&quot; as the general term for &quot;(commutative) semiring, ring or field&quot;.</p>
 <p>Let <code>m</code> be an arbitrary type, e.g. <code>fin n</code>, then the typical examples are:
 <code>m → ℕ</code> is an <code>ℕ</code>-semimodule, <code>m → ℤ</code> is a <code>ℤ</code>-module and <code>m → ℚ</code> is a <code>ℚ</code>-vector space
 (outside of type theory, these are known as <code>ℕ^m</code>, <code>ℤ^m</code> and <code>ℚ^m</code> respectively).
 These instances are defined in <a href="https://leanprover-community.github.io/mathlib_docs/algebra/pi_instances.html"><code>algebra.pi_instances</code></a>.
-A (semi)ring is a (semi)module over itself, with <code>•</code> defined as <code>*</code> (this equality is stated by the <code>simp</code> lemma <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#smul_eq_mul"><code>smul_eq_mul</code></a>).</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html"><code>linear_algebra.basis</code></a> defines linear independence and bases for modules.</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dimension.html"><code>linear_algebra.dimension</code></a> defines the dimension of a vector space as the minimum cardinality of a basis.
+A ring is a module over itself, with <code>•</code> defined as <code>*</code> (this equality is stated by the <code>simp</code> lemma <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#smul_eq_mul"><code>smul_eq_mul</code></a>).
+Each additive monoid has a canonical <code>ℕ</code>-module structure given by <code>n • x = x + x + ... + x</code> (<code>n</code> times), and each additive group has a canonical <code>ℤ</code>-module structure defined similarly; these also apply for (semi)rings.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/linear_independent.html"><code>linear_algebra.linear_independent</code></a> defines linear independence for an indexed family in a module.
+To express that a set <code>s : set M</code> is linear independent, we view it as a family indexed by itself, written as <code>linear_independent R (coe : s → M)</code>.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html"><code>linear_algebra.basis</code></a> defines bases for modules.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dimension.html"><code>linear_algebra.dimension</code></a> defines the <code>rank</code> of a module as a cardinal.
+We also use <code>rank</code> for the dimension of a vector space, since the dimension is always equal to the rank.
+(In fact, <code>rank</code> is currently only defined for vector spaces, as the cardinality of a basis. A definition of rank for all modules still needs to be done.)
 The <code>rank</code> of a linear map is defined as the dimension of its image.
 Most definitions in this file are non-computable.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html"><code>linear_algebra.finite_dimensional</code></a> defines the <code>finrank</code> of a module as a natural number.
+By convention, the <code>finrank</code> is equal to 0 if the rank is infinite.</p>
 <h3 id="matrices" class="markdown-heading">Matrices <a class="hover-link" href="#matrices">#</a></h3>
 <h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsdatamatrixbasichtmlcodedatamatrixbasiccodea" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html"><code>data.matrix.basic</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsdatamatrixbasichtmlcodedatamatrixbasiccodea">#</a></h4>
 <p>The type <code>matrix m n α</code> contains rectangular, <code>m</code> by <code>n</code> arrays of elements of the type <code>α</code>.
@@ -93,8 +100,8 @@ If you use <code>mul_vec</code> and <code>vec_mul</code> a lot, you might want t
 <p>The type <code>special_linear_group m R</code> is the group of <code>m</code> by <code>m</code> matrices with determinant <code>1</code>,
 and is defined in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/special_linear_group.html"><code>linear_algebra.special_linear_group</code></a>.</p>
 <h3 id="linear-maps-and-equivalences" class="markdown-heading">Linear Maps and Equivalences <a class="hover-link" href="#linear-maps-and-equivalences">#</a></h3>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrabasichtmlcodelinear_algebrabasiccodea" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html"><code>linear_algebra.basic</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrabasichtmlcodelinear_algebrabasiccodea">#</a></h4>
-<p>The type <code>M →[R]ₗ M₂</code>, or <code>linear_map R M M₂</code>, represents <code>R</code>-linear maps from the <code>R</code>-module <code>M</code> to the <code>R</code>-mdule <code>M₂</code>.
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulelinear_maphtmlcodealgebramodulelinear_mapcodea" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/module/linear_map.html"><code>algebra.module.linear_map</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulelinear_maphtmlcodealgebramodulelinear_mapcodea">#</a></h4>
+<p>The type <code>M →[R]ₗ M₂</code>, or <code>linear_map R M M₂</code>, represents <code>R</code>-linear maps from the <code>R</code>-module <code>M</code> to the <code>R</code>-module <code>M₂</code>.
 These are defined by their action on elements of <code>M</code>.
 The type <code>M ≃[R]ₗ M₂</code>, or <code>linear_equiv R M M₂</code>, is the type of invertible <code>R</code>-linear maps from <code>M</code> to <code>M₂</code>.</p>
 <p>The equivalence between matrices and linear maps is formalised in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html"><code>linear_algebra.matrix</code></a>.
