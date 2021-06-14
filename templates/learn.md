@@ -16,7 +16,7 @@ learning.
 * For a faster paced and broader dive, you can get the
   [tutorials project](https://github.com/leanprover-community/tutorials).
   (You already have it if you installed an autonomous bundle or
-  followed the instructions on [this page](install/project.html).)
+  followed the instructions on [this page](lean3/install/project.html).)
   This tutorial is specifically geared towards mathematics rather than
   computer science. The last files of this project are easier if you have
   already encountered the definition of limits of sequences of real
