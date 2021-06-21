@@ -92,7 +92,7 @@ Then click "Theorem Proving in Lean" and enjoy.
 Your project is already a git repository, and as it grows,
 you may want to host it on [GitHub](https://guides.github.com/activities/hello-world/).
 If you take this step, the community offers some
-[GitHub Actions scripts](../ci.html) that could help manage your repository.
+[GitHub Actions scripts](../../ci.html) that could help manage your repository.
 But don't worry if you don't know what this means.
 It's not necessary for using Lean.
 

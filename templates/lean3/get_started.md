@@ -15,7 +15,7 @@ You have several options for installing Lean, described below:
 
 After this installation procedure, it is crucial to read how to start or
 get a [Lean project](install/project.html). And of course you'll
-probably want to [learn Lean](learn.html)!
+probably want to [learn Lean](../learn.html)!
 
 A regular install following these instructions installs a few pieces of supporting software.
 You can read about [this infrastructure](toolchain.html) if you are
