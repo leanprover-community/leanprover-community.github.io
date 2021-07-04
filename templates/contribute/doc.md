@@ -92,7 +92,8 @@ or might be useful in another file.)
 These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
 single spaces between the markers and the text.
 They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
-sentence, then it should end in a period.
+sentence, then it should end in a period. Named theorems, such as the **mean value theorem** should be bold faced (i.e., with
+two asterisks before and after).
 
 Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
 slightly about the actual implementation. The following is a doc string example:
