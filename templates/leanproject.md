@@ -22,6 +22,7 @@ project is to run:
 ```text
 leanproject get tutorials
 ```
+
 You can specify a git branch name `my_branch` by appending
 `:my_branch` at the end of the specified name (without space).
 By default this branch should be an existing branch.
@@ -34,18 +35,22 @@ command.
 ### Creating a new project
 
 You can create a project in a new folder `my_project` by running:
+
 ```text
 leanproject new my_project
 ```
+
 If you omit the argument, the project will be created directly inside
 the current folder. This new project will be using the latest version of
 Lean compatible with mathlib, and include a pre-built mathlib.
 
 ### Building a project
 
-Only mathlib itself comes with pre-built olean files. In order to build
-oleans in a project (which is needed for every non-trivial project in
-order to get decent interactive Lean speed), you can use:
+Only mathlib itself comes with pre-built
+[olean files](https://github.com/leanprover/tutorial/blob/master/05_Interacting_with_Lean.org#projects).
+In order to build oleans in a project (which is needed for every non-trivial
+project in order to get decent interactive Lean speed), you can use:
+
 ```text
 leanproject build
 ```
@@ -54,9 +59,11 @@ leanproject build
 
 In an existing project depending on mathlib (or in mathlib itself), you
 can run:
+
 ```text
 leanproject get-mathlib-cache
 ```
+
 to download a compiled mathlib at the commit currently specified in the
 project `leanpkg.toml` (see the next section if you want to update this
 commit and get the latest mathlib).
@@ -69,9 +76,11 @@ command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 
 In an existing project depending on mathlib, you can upgrade to the
 latest mathlib version by running:
+
 ```text
 leanproject upgrade-mathlib
 ```
+
 This can be abbreviated to `leanproject up`.
 By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
@@ -86,12 +95,15 @@ command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 ### Global mathlib install
 
 If you want to use mathlib outside of a Lean 3 project, you can run:
+
 ```text
 leanproject global-install
 ```
+
 This will put a pre-compiled mathlib inside `$HOME/.lean`, the user-wide
 Lean project whose dependencies can be used by lean files outside
 projects. You can upgrade this project using:
+
 ```text
 leanproject global-upgrade
 ```
@@ -104,9 +116,11 @@ mathlib.
 
 If you already have a Lean project but it doesn't use mathlib yet, you
 can go to the project folder and run:
+
 ```text
 leanproject add-mathlib
 ```
+
 By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using `leanproject --no-lean-upgrade add-mathlib`.
@@ -116,13 +130,17 @@ upgrade by using `leanproject --no-lean-upgrade add-mathlib`.
 In any Lean 3 project, it can be useful to store and retrieve olean files,
 especially if the project has several git branches. Storing oleans is
 done by:
+
 ```text
 leanproject mk-cache
 ```
+
 while retrieving them is done by:
+
 ```text
 leanproject get-cache
 ```
+
 One should note that, although olean files are indeed the primary target
 here, these commands actually store everything from the
 `src` and `test` folders of the current project.
@@ -154,22 +172,28 @@ command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 
 If you want to generate a graph file showing your project import
 structure, you can run:
+
 ```text
 leanproject import-graph my_graph_file_name.suffix
 ```
+
 where the suffix will determine the output format. It must be either
 `dot` or `graphml` or `gexf`, (or `pdf`, `svg` or `png` if
 [graphviz](https://www.graphviz.org/) is installed).
 If you want to restrict the graph to files leading to a certain file
 `my_subproject/my_file.lean` then you can run:
+
 ```text
 leanproject import-graph --to my_subproject.my_file my_graph_file_name.suffix
 ```
+
 Dually, if you want to see all files using `my_subproject/my_file.lean`
 then you can run:
+
 ```text
 leanproject import-graph --from my_subproject.my_file my_graph_file_name.suffix
 ```
+
 Combining `--to` and `--from` is possible.
 
 ### Git hooks
@@ -177,9 +201,11 @@ Combining `--to` and `--from` is possible.
 If you want leanproject to fetch olean caches after each `git checkout`,
 and make olean caches after each `git commmit` in the current project,
 you can run:
+
 ```text
 leanproject hooks
 ```
+
 Beware this will overwrite any `post-checkout` or `post-commit` file you
 might have in your project `.git/hooks`.
 
@@ -187,9 +213,11 @@ might have in your project `.git/hooks`.
 
 By default, leanproject will try to find mathlib olean files hosted on an
 Azure server. You permanently override the base url it uses by running:
+
 ```text
 leanproject set-url my_url
 ```
+
 so that leanproject will look for caches at
 `my_url/relevant_git_hash.tar.gz`. You can override this base url
 for one invocation using `leanproject --from-url my_url ...`
