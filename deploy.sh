@@ -6,7 +6,7 @@ git clone --branch master "https://$DEPLOY_GITHUB_USER:$DEPLOY_GITHUB_TOKEN@gith
 ./make_site.py
 cd blog
 nikola build
-mv output ../build/blog
+mv output/* ../build/blog/
 cd ..
 
 if [ "$github_repo" = "leanprover-community/leanprover-community.github.io" -a "$github_ref" = "refs/heads/newsite" ]; then
