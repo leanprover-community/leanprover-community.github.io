@@ -14,9 +14,9 @@ This is our brand new blog where you'll be able to find news about what is
 happening in the Lean prover community. It will feature:
 
 * posts highlighting some new contributions to mathlib
-* news about ongoing project such as the Liquid tensor experiment or the sphere eversion project
+* news about ongoing projects such as the Liquid tensor experiment or the sphere eversion project
 * news about exciting developments in other proofs assistants
-* announcement of conferences and talks 
+* announcements of conferences and talks 
 * some explanations of specific topics in a less formal context than the documentations
 * speculations about future developments or somewhat philosophical discussions
 

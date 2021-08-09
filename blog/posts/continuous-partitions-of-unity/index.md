@@ -22,7 +22,7 @@ $f_i : X → ℝ$ such that:
 * the sum $\sum_i f_i(x)$ is equal to one for all $x$.
 
 While the above definition is completely standard, it is often useful to have a collection of
-function that act as a paritition of unity only on some part $s$ of $X$. In that more general case,
+functions that act as a paritition of unity only on some part $s$ of $X$. In that more general case,
 we keep the above two conditions everywhere but ask that the sum in the last item equals one on $s$
 and is less than or equal to one everywhere. This is encoded in the following Lean structure, from
 `topology.partition_of_unity`.
