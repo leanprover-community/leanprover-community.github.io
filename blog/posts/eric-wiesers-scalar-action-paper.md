@@ -19,8 +19,8 @@ them that a given type can easily get several ones from different origins. For i
 $ℤ$ acts on itself by left multiplication but it also has the $ℤ$ scalar action
 that every additive group has, by repeated addition or subtraction.
 In general those multiple actions can be proven to be equal, but type class
-inference need definitional equality. So a great deal of care has been taken,
-by Eric and others, when setting up or algebraic hierarchy. 
+inference needs definitional equality. So a great deal of care has been taken,
+by Eric and others, when setting up the algebraic hierarchy in mathlib. 
 
 The paper tells this fascinating story and is recommended for anyone interested
 in multiple inheritance handling in Lean 3 type class system.
