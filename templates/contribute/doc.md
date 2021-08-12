@@ -126,8 +126,28 @@ then (multiplicity (p : ℤ) q.num).get
 else 0
 ```
 
-The `#doc_blame` command can be run at the bottom of a file to list all definitions that do not have
-doc strings. `#doc_blame!` will also list theorems and lemmas.
+The `doc_blame` linter lists all definitions that do not have doc strings. The `doc_blame_thm` 
+linter will lists theorems and lemmas that do not have doc strings.
+
+To run only the `doc_blame` linter, add the following to the end of your lean file:
+```
+#lint only doc_blame
+```
+To run only the `doc_blame` and `doc_blame_thm` linters, add the following to the end of your lean 
+file:
+```
+#lint only doc_blame doc_blame_thm
+```
+To run the all default linters, including `doc_blame`, add the following to the end of your lean 
+file:
+```
+#lint
+```
+To run the all default linters, including `doc_blame` and run `doc_blame_thm`, add the following to 
+the end of your lean file:
+```
+#lint doc_blame_thm
+```
 
 ## LaTeX and Markdown
 
