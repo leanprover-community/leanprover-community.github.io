@@ -10,6 +10,9 @@ tags: ''
 title: This month in Lean (Aug 2021)
 type: text
 ---
+Lean 3.32.1c was released.
+jmc: what is the main diff?
+
 d75799616a feat(analysis/complex): prove that complex functions are conformal if and only if the functions are holomorphic/antiholomorphic with nonvanishing differential (#8424)
 
 f471b899c4 feat(topology,geometry/manifold): continuous and smooth partition of unity (#8281)
