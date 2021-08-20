@@ -240,7 +240,7 @@ middle of a proof, but the `simp` is closing the goal it introduces.
      simpa,
    ```
    This adds a new goal of `P` after the current one, introduces a new
-hypothesis called `this` into the current one, simultaneously
+hypothesis `this : P` into the current one, simultaneously
 simplifies both the goal and `this`, then attempts to close the goal
 with `this`.  The `simpa` tactic *requires* that a goal be closed, unlike
 `simp`, which makes it easier to know when it breaks.
