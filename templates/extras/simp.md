@@ -264,7 +264,7 @@ way to tidy up a goal: it does beta reduction for lambda expressions
 (it will turn `(λ x, f x) 37` into `f 37`) and it will reduce structure projections
 (it will turn `{to_fun := f, ...}.to_fun` into `f`).
 
-## More advanced features.
+## More advanced features
 
 ### Custom simp attributes
 
@@ -276,7 +276,7 @@ Instead, they are included using the syntax `simp with new_attr`. This can often
 [`mfld_simps`](https://leanprover-community.github.io/mathlib_docs/find/simp_attr.mfld_simps/src),
 and [`field_simps`](https://leanprover-community.github.io/mathlib_docs/find/simp_attr.field_simps/src).
 
-## Configuration options
+### Configuration options
 
 Both `simp` and `dsimp` can take additional configuration options using record syntax.
 For example, `simp {single_pass := tt}` runs `simp` with the `single_pass` configuration option set to true.
