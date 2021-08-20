@@ -3,7 +3,8 @@
 ## Overview
 
 In this document we will explain basic usage of Lean's simplifier
-tactic `simp`, and the related tactic `dsimp`.
+tactic [`simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#simp),
+and the related tactic [`dsimp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp).
 
 ## Introduction
 
@@ -292,7 +293,7 @@ The "max" default value refers to `simp.default_max_steps`, which is currently `
 
 | Option | `simp` | `dsimp` | Description |
 | --- | --- | --- | --- |
-| `md` | | `reducible` | Reduction mode: how aggressively constants are replaced with their definitions |
+| `md` | | `reducible` | Reduction mode: how aggressively constants are replaced with their definitions (`all`, `semireducible`, `instances`, `reducible`, or `none`) |
 | `max_steps` | max | max | The maximum number of steps allowed before failing |
 | `canonize_instances` | `tt` | `tt` | Replace each instance with a canonical defeq one |
 | `canonize_proofs` | `ff` |  |  |
