@@ -3,8 +3,12 @@
 ## Overview
 
 In this document we will explain basic usage of Lean's simplifier
-tactic [`simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#simp),
+tactic [`simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#simp)
 and the related tactic [`dsimp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp).
+
+We give some pointers for how to avoid "non-terminal `simp`s", and we
+also give a short description of the configuration options for `simp`
+and `dsimp`.
 
 ## Introduction
 
@@ -14,13 +18,18 @@ goals. The simplifier is what is known as a *conditional term
 rewriting system*: all it does is repeatedly replace (or *rewrite*)
 subterms of the form `A` by `B`, for all applicable facts of the form
 `A = B` or `A ↔ B`.
-
 The simplifier mindlessly rewrites until it can rewrite no more.  The
 `simp` lemmas are all oriented, with left-hand sides always being
-rewritten by right-hand sides, and never vice versa. The database of
-facts is curated such that things are put into some approximation of a normal
-form, and (at least ideally) the facts are *confluent*, meaning the
-order in which the simplifier considers rewrites does not matter.
+replaced by right-hand sides, and never vice versa.
+
+Ideally, the database of facts would result in expressions being simplified
+into a normal form.
+In practice, this is often unachievable (normal forms may not exist, or there
+may not exist a collection of rewrite rules that produce them),
+but nevertheless we aim to approximate this ideal where possible.
+Even better, we would like the database of facts to be *confluent*,
+meaning the order in which the simplifier considers rewrites does not matter.
+Again, we aim to be close to confluent where possible.
 
 While this system is able to prove many simple statements completely
 automatically, proving all simple statements is not part of its job
@@ -43,15 +52,33 @@ How would a human solve that goal? They would notice that `a * a⁻¹ = 1`,
 that `1 * 1 = 1`, and so on, until they had simplified the example
 to `b = b`, which is obviously true.
 
-This is also what the simplifier is doing. Indeed, if you add
+This is also what the simplifier is doing.  Indeed, if you add
 `set_option trace.simplify.rewrite true` above the example, then a
 squiggly blue underline will appear under `simp` (in VS Code) and
 clicking on this will show you the sequence of rewrites that `simp`
-performed.
+performed:
+```
+[mul_right_inv]: a * a⁻¹ ==> 1
+[mul_one]: 1 * 1 ==> 1
+[one_mul]: 1 * b ==> b
+[mul_inv_cancel_right]: b * c * c⁻¹ ==> b
+[eq_self_iff_true]: b = b ==> true
+```
+The `simp?` tactic is a useful way to extract the list of lemmas that `simp` applied.
+It suggests
+```lean
+simp only [mul_one, one_mul, mul_right_inv, eq_self_iff_true, mul_inv_cancel_right]
+```
+which is an invocation of `simp` that makes use of this particular set of five lemmas.
+A related tactic, `squeeze_simp`, will (after thinking *much* harder than `simp?` does)
+come up with some set of simp lemmas that are sufficient.
+In this case three suffice:
+```lean
+simp only [one_mul, mul_right_inv, mul_inv_cancel_right]
+```
 
-The more verbose option `set_option trace.simplify true` shows
-both the rewrites which works and those which failed during the
-simplification process.
+To see both those rewrites that work and those that fail during the simplification process,
+you can use the more verbose option `set_option trace.simplify true`.
 
 ## Simp lemmas
 
@@ -73,20 +100,20 @@ are some more examples of `simp` lemmas in mathlib:
 @[simp] theorem set.set_of_false : {a : α | false} = ∅ := ...
 ```
 
-When the simplifier is attempting to simplify a term `T` it looks
+When the simplifier is attempting to simplify a term `T`, it looks
 through the `simp` lemmas known to the system at that time, and if it
 runs into an applicable lemma of the form `A = B` or `A ↔ B` for which
-`A` shows up in `T`, it rewrites the instance of `A` in `T` with `B`
+`A` appears as a subexpression in `T`, it rewrites the instance of `A` in `T` with `B`
 and then starts again from the beginning. Note that `simp` starts on
 innermost terms, working outward: it first simplifies the arguments of
-a function before simplifying the function. Also, `simp` contains a some
+a function before simplifying the function. Also, `simp` contains some
 amount of cleverness to be able to avoid considering *all* `simp`
 lemmas every time (there are over ten thousand of them currently in `mathlib`!).
 
-The simplifier works in one direction only: if `A = B` is a `simp`
+The simplifier applies `simp` lemmas in one direction only: if `A = B` is a `simp`
 lemma, then `simp` replaces `A`s with `B`s, but it doesn't replace
 `B`s with `A`s. Hence a `simp` lemma should have the property that its
-right-hand side should be simpler than its left-hand side. In
+right-hand side is simpler than its left-hand side. In
 particular, `=` and `↔` should not be viewed as symmetric operators in
 this situation. The following would be a terrible `simp` lemma (if it
 were even allowed):
@@ -117,6 +144,26 @@ This one, for example, converts complex addition into real addition.
 If you give `simp` permission to use commutativity of real addition, then it is able to
 automatically prove `(z + w).re = (w + z).re` through `z.re + w.re =
 w.re + z.re`, which is half of the proof that complex addition is commutative.
+
+The Lean kernel itself is a rewrite system for lambda calculus, which has a definite
+notion of forward progress.  With this in mind, a useful family of
+`simp` lemmas are those that, in this sense, let `simp` partially evaluate an
+expression. For example, if you have a structure type `foo` and
+define a structure `my_foo` with that type,
+```lean
+structure foo := (n : ℕ)
+
+def my_foo : foo := {n := 37}
+```
+then if you add a `simp` lemma that `my_foo.n = 37`, you give the simplifier the
+ability to evaluate the `foo.n` projection for `my_foo`, which saves you from having
+to unfold the definition of `my_foo` (by default `simp` does not unfold most definitions).
+Creating these `simp` lemmas is so common that there is an attribute that creates
+them all for you automatically:
+```lean
+@[simps] def my_foo : foo := {n := 37}
+```
+This generates the lemma `@[simp] lemma my_foo_n : my_foo.n = 37`.
 
 ## Basic usage 
 
@@ -188,10 +235,10 @@ to `set α`, so for `a : α` one can write both `a ∈ s` and
 `a ∈ (s : set α)` to mean the same thing.  The simp normal form for
 membership in a finite set idea is `a ∈ s`, and moreover there is a
 normalizing `simp` lemma
-```
+```lean
 @[simp] lemma mem_coe {a : α} {s : finset α} : a ∈ (s : set α) ↔ a ∈ s := ...
 ```
-to replace occurrences of `a ∈ (s : set α)` by the correct normal form.
+to replace occurrences of `a ∈ (s : set α)` with the correct normal form.
 
 Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a `simp`
@@ -265,6 +312,23 @@ way to tidy up a goal: it does beta reduction for lambda expressions
 (it will turn `{to_fun := f, ...}.to_fun` into `f`).
 
 ## More advanced features
+
+### Full syntax
+
+This is the full syntax for the `dsimp` tactic:
+
+> `dsimp` (`only`)? (`*` | `[` list of lemmas `]`)? (`with` simp sets)? (`at` locations)? (`{` configuration options `}`)?
+
+where "( ... )?" means an optional part of the expression, and "|" gives mutually exclusive options.
+The list of lemmas is similar to that of `rw`, but additionally `-lemma_name` means a lemma is excluded from the set of `simp` lemmas.
+Configuration options are described below.
+
+This is the full syntax for the `simp` tactic:
+
+> `simp` (`!`)? (`?`)? (`only`)? (`*` | `[` list of arguments `]`)? (`with` simp sets)? (`at` locations)? (`{` configuration options `}`)?
+
+If `!` is present, it adds `iota := tt` to the configuration options.
+If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffice.
 
 ### Custom simp attributes
 
