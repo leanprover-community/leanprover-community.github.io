@@ -52,8 +52,7 @@ leanproject build
 
 ### Getting mathlib oleans
 
-In an existing project depending on mathlib (or in mathlib itself), you
-can run:
+In an existing project depending on mathlib, you can run:
 ```text
 leanproject get-mathlib-cache
 ```
@@ -123,9 +122,31 @@ while retrieving them is done by:
 ```text
 leanproject get-cache
 ```
-One should note that, although olean files are indeed the primary target
-here, these commands actually store everything from the
-`src` and `test` folders of the current project.
+Note that while olean files are indeed the primary target here, `mk-cache`
+actually stores everything from the `src` and `test` folders of the current
+project.
+
+Frequently a cache is not available for the current commit in a Lean3 project;
+typically due to new commits having been made on top of the one that a cache was
+built from. In this situation, `get-cache` will fail, but show which commits
+do have available caches:
+```
+$ leanproject get-cache
+Looking for my_project oleans for 3b19aed
+  locally...
+No cache available for revision 3b19aed
+Looking for my_project oleans for cf40a75
+  locally...
+  Found local my_project oleans
+No cache was available for 3b19aed. A cache was found for the ancestor cf40a75.
+To see the intermediate commits, run:
+  git log --graph 3b19aed cf40a75^!
+Run `leanproject get-cache --rev` on one of the available commits above.
+```
+In this scenario, running `leanproject get-cache --rev cf40a75` will fetch an
+older cache which will be partially valid. Another option is just to run
+`leanproject get-cache --fallback=download-first` which will automatically use
+the first cache found for a parent commit.
 
 If the project is mathlib itself, the caches will be stored in
 `$HOME/.mathlib/`. Otherwise, they will be stored in a folder `_cache` inside
