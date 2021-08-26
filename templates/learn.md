@@ -125,3 +125,6 @@ be of interest:
 * [Lean for the Curious Mathematician 2020](https://leanprover-community.github.io/lftcm2020/)
 * [Formal Methods in Mathematics / Lean Together 2020](https://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
 * [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)
+
+We also have a [YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg/playlists)
+which includes playlists of videos from the above conferences, and also other conferences with Lean-relevant content.
