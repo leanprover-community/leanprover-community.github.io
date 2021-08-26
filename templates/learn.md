@@ -127,6 +127,4 @@ be of interest:
 * [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)
 
 We also have a [YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg/playlists)
-which includes several playlists, including some of talks about Lean at conferences,
-such as
-* [Lean talks at CICM 2021](https://www.youtube.com/playlist?list=PLlF-CfQhukNlRnFgVMklVTZCvBUX2oaDC)
+which includes playlists of videos from the above conferences, and also other conferences with Lean-relevant content.
