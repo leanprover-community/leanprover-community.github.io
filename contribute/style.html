@@ -270,19 +270,19 @@ in:</p>
 <p>Generally, having arguments to the left of the colon is preferred
 over having arguments in universal quantifiers or implications,
 if the proof starts by introducing these variables. For instance:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">linarith</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">linarith</span>
 </code></pre></div>
 
 <p>is preferred over</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="kd">by</span> <span class="n">linarith</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="kd">by</span> <span class="n">linarith</span>
 </code></pre></div>
 
 <p>and</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
 </code></pre></div>
 
 <p>is preferred over</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">dec_trivial</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">dec_trivial</span>
 </code></pre></div>
 
 <h3 id="binders" class="markdown-heading">Binders <a class="hover-link" href="#binders">#</a></h3>
@@ -416,6 +416,23 @@ additional indentation in the rest of the proof.</p>
 <p>We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.</p>
+<h3 id="normal-forms" class="markdown-heading">Normal forms <a class="hover-link" href="#normal-forms">#</a></h3>
+<p>Some statements are equivalent. For instance, there are several equivalent
+ways to require that a subset <code>s</code> of a type is nonempty. For another example, given
+<code>a : α</code>, the corresponding element of <code>option α</code> can be equivalently written
+as <code>some a</code> or <code>(a : option α)</code>. In general, we try to settle
+on one standard form, called the normal form, and use it both in statements and
+conclusions of theorems. In the above examples, this would be <code>s.nonempty</code> (which
+gives access to dot notation) and <code>(a : option α)</code>. Often, simp lemmas will be
+registered to convert the other equivalent forms to the normal form.</p>
+<p>Here is a special case to this rule. When <code>n</code> is a natural number,
+it is equivalent to require <code>hlt : 0 &lt; n</code> or <code>hne : n ≠ 0</code>, and it is not clear which one would
+be better as a normal form since both have their pros and cons. Since it is very
+easy to convert from <code>hlt</code> to <code>hne</code> (by using <code>hlt.ne</code> or <code>hlt.ne&#x27;</code> depending
+on the direction we want) while the other conversion is more lengthy, we use <code>hne</code> in
+<em>assumptions</em> of theorems (as this is the easier assumption to check), and <code>hlt</code> in
+<em>conclusions</em> of theorems (as this is the more powerful result to use).
+The same rule holds in all ordered type with a bottom or a top element.</p>
 <h2 id="comments" class="markdown-heading">Comments <a class="hover-link" href="#comments">#</a></h2>
 <p>Use module doc delimiters <code>/-! -/</code> to provide section headers and
 separators since these get incorporated into the auto-generated docs,
