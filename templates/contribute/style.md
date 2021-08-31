@@ -257,25 +257,25 @@ over having arguments in universal quantifiers or implications,
 if the proof starts by introducing these variables. For instance:
 
 ```lean
-example (n : ℝ) (h : n > 1) : n > 0 := by linarith
+example (n : ℝ) (h : 1 < n) : 0 < n := by linarith
 ```
 
 is preferred over
 
 ```lean
-example (n : ℝ) : n > 1 → n > 0 := λ h, by linarith
+example (n : ℝ) : 1 < n → 0 < n := λ h, by linarith
 ```
 
 and
 
 ```lean
-example (n : ℕ) : n ≥ 0 := dec_trivial
+example (n : ℕ) : 0 ≤ n := dec_trivial
 ```
 
 is preferred over
 
 ```lean
-example : ∀ (n : ℕ), n ≥ 0 := λ n, dec_trivial
+example : ∀ (n : ℕ), 0 ≤ n := λ n, dec_trivial
 ```
 
 ### Binders
@@ -431,6 +431,26 @@ end
 We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.
+
+### Normal forms
+
+Some statements are equivalent. For instance, there are several equivalent
+ways to require that a subset `s` of a type is nonempty. For another example, given
+`a : α`, the corresponding element of `option α` can be equivalently written 
+as `some a` or `(a : option α)`. In general, we try to settle
+on one standard form, called the normal form, and use it both in statements and
+conclusions of theorems. In the above examples, this would be `s.nonempty` (which
+gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
+registered to convert the other equivalent forms to the normal form.
+
+Here is a special case to this rule. When `n` is a natural number,
+it is equivalent to require `hlt : 0 < n` or `hne : n ≠ 0`, and it is not clear which one would
+be better as a normal form since both have their pros and cons. Since it is very
+easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
+on the direction we want) while the other conversion is more lengthy, we use `hne` in
+*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in 
+*conclusions* of theorems (as this is the more powerful result to use). 
+The same rule holds in all ordered type with a bottom or a top element.
 
 ## Comments
 
