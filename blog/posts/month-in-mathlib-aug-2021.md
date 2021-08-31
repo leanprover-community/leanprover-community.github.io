@@ -53,7 +53,7 @@ type: text
 * [PR #8377](https://github.com/leanprover-community/mathlib/pull/8377) :: feat(analysis/complex/upper_half_plane): new file
 
   This PR defines the complex upper half plane, together with the $\mathrm{SL}_2$-action.
-  Upcoming PRs will work towards theory of modular forms.
+  Upcoming PRs will characterize the fundamental domain of the $\mathrm{SL}_2(\mathbb{Z})$-action.
 
 ## Other mathematical contributions
 
