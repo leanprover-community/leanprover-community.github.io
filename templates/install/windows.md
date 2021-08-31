@@ -80,9 +80,9 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
    (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
 4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
-5. Setup the default shell:
+5. Setup the default profile:
   * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
-    `Select Default Shell`, then select `git bash` from the menu.
+    `Select Default Profile`, then select `git bash` from the menu.
   * If you're using `msys2`, press `ctrl-comma` again to open the settings, and add two settings:
   ```text
   "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
