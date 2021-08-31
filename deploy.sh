@@ -4,11 +4,6 @@ set -x
 git clone --branch master "https://$DEPLOY_GITHUB_USER:$DEPLOY_GITHUB_TOKEN@github.com/leanprover-community/leanprover-community.github.io.git" ./build
 
 ./make_site.py
-cd blog
-nikola build
-rm -rf ../build/blog
-mv output ../build/blog
-cd ..
 
 if [ "$github_repo" = "leanprover-community/leanprover-community.github.io" -a "$github_ref" = "refs/heads/newsite" ]; then
   cd build/
