@@ -360,7 +360,7 @@ This is the full syntax for the `simp` tactic:
 
 > `simp` (`!`)? (`?`)? (`only`)? (`*` | `[` list of lemmas `]`)? (`with` simp sets)? (`at` locations)? (`{` configuration options `}`)?
 
-If `!` is present, it adds `iota := tt` to the configuration options.
+If `!` is present, it adds `iota_eqn := tt` to the configuration options.
 If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffice.
 
 This is the full syntax for the `simpa` tactic:
@@ -410,7 +410,7 @@ The "max" default value refers to `simp.default_max_steps`, which is currently `
 | `unfold_reducible` | | `ff` | Unfold definitions with `reducible` transparency (delta-reduce) |
 | `memoize` | `tt` | `tt` | Perform caching of simps of subterms |
 | `lift_eq` | `tt` | | Prove reflexive relations using proofs of equality (?) |
-| `use_axioms` | `tt` | | Allow simplifications that require `propext` or `funext` (?) |
+| `use_axioms` | `tt` | | Allow using `propext` and `funext` to rewrite under binders and to use `A ↔ B` `simp` lemmas |
 | `constructor_eq` | `tt` | | Use injectivity of constructors in equalities  |
 | `canonize_instances` | `tt` | `tt` | Replace instances with a canonical defeq one |
 | `canonize_proofs` | `ff` |  | Replace proofs with a canonical defeq one |
