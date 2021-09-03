@@ -259,7 +259,7 @@ and where `e` is an expression.  Commonly, `e` is the name of a hypothesis.
 Both the type of `e` and the goal are simplified, and `simpa` succeeds if they are both simplified to the same thing.
 
 Here is a simple example of `simpa`:
-```
+```lean
 example (n : ℕ) (h : n + 1 - 1 ≠ 0) : n + 1 ≠ 1 :=
 begin
   simpa using h,
@@ -358,14 +358,14 @@ Configuration options are described in a following section.
 
 This is the full syntax for the `simp` tactic:
 
-> `simp` (`!`)? (`?`)? (`only`)? (`*` | `[` list of arguments `]`)? (`with` simp sets)? (`at` locations)? (`{` configuration options `}`)?
+> `simp` (`!`)? (`?`)? (`only`)? (`*` | `[` list of lemmas `]`)? (`with` simp sets)? (`at` locations)? (`{` configuration options `}`)?
 
 If `!` is present, it adds `iota := tt` to the configuration options.
 If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffice.
 
 This is the full syntax for the `simpa` tactic:
 
-> `simpa` (`!`)? (`?`)? (`only`)? (`*` | `[` list of arguments `]`)? (`with` simp sets)? (`using` expr)? (`{` configuration options `}`)?
+> `simpa` (`!`)? (`?`)? (`only`)? (`*` | `[` list of lemmas `]`)? (`with` simp sets)? (`using` expr)? (`{` configuration options `}`)?
 
 The meanings are the same as for `simp`, but `using` can be given any expression, not just a local constant as required by `at`.
 
