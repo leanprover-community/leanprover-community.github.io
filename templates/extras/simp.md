@@ -247,7 +247,38 @@ form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) 
 Mathlib's `simp_nf` linter checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
 
-## Non-terminal `simp`s, and `simpa`
+## `simpa`
+
+The `simpa` tactic is a variation on `simp` for finishing a proof -- as a "finishing" tactic, it will fail
+if it's unable to close the goal.  The basic usage is
+```lean
+simpa [h1, h2] using e
+```
+where `[h1, h2]` refers to an optional list of `simp` lemmas (using the same syntax as for `simp`)
+and where `e` is an expression.  Commonly, `e` is the name of a hypothesis.
+Both the type of `e` and the goal are simplified, and `simpa` succeeds if they are both simplified to the same thing.
+
+Here is a simple example of `simpa`:
+```
+example (n : ℕ) (h : n + 1 - 1 ≠ 0) : n + 1 ≠ 1 :=
+begin
+  simpa using h,
+end
+```
+Without `simpa`, we might do `simp at ⊢ h, exact h`.
+So-called "non-terminal `simp`s", which are usages of `simp` that do not close a goal,
+are best to be avoided (see the next section), and `simpa` is a way to avoid them.
+
+If the `using` clause is not present, then `simpa` does the following three steps instead:
+
+1. The goal is simplified.
+2. If a hypothesis named `this` is in the local context, then its type is simplified.
+3. The `assumption` tactic is applied.
+
+Step 2 is to support a pattern where `simpa` follows a `have : P` or `suffices : P`, since
+both of these default to using `this` as the name of the hypothesis they introduce.
+
+## Non-terminal `simp`s
 
 The behaviour of `simp` changes over time as `simp` lemmas are added
 to (or removed from) the library.  This means that proofs that use
@@ -287,11 +318,13 @@ middle of a proof, but the `simp` is closing the goal it introduces.
      simpa,
    ```
    This adds a new goal of `P` after the current one, introduces a new
-hypothesis `this : P` into the current one, simultaneously
-simplifies both the goal and `this`, then attempts to close the goal
-with `this`.  The `simpa` tactic *requires* that a goal be closed, unlike
-`simp`, which makes it easier to know when it breaks.
-The explicit `P` in the source code helps with finding a fix.
+hypothesis `this : P`, simplifies both the goal and `this`,
+then attempts to close the goal with `this`.  The `simpa` tactic *requires*
+that a goal be closed, unlike `simp`, which makes it easier to know when it breaks.
+The explicit `P` in the source code helps in finding a fix.
+
+One way non-terminal `simp`s can appear is in a sequence of tactics like `simp at ⊢ h, exact h`.
+These can be replaced by `simpa using h`.
 
 ## `dsimp`
 
@@ -330,6 +363,12 @@ This is the full syntax for the `simp` tactic:
 If `!` is present, it adds `iota := tt` to the configuration options.
 If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffice.
 
+This is the full syntax for the `simpa` tactic:
+
+> `simpa` (`!`)? (`?`)? (`only`)? (`*` | `[` list of arguments `]`)? (`with` simp sets)? (`using` expr)? (`{` configuration options `}`)?
+
+The meanings are the same as for `simp`, but `using` can be given any expression, not just a local constant as required by `at`.
+
 ### Custom simp attributes
 
 Using the command [`mk_simp_attribute`](https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute),
@@ -344,11 +383,11 @@ and [`field_simps`](https://leanprover-community.github.io/mathlib_docs/find/sim
 
 Both `simp` and `dsimp` can take additional configuration options using record syntax.
 For example, `simp {single_pass := tt}` runs `simp` with the `single_pass` configuration option set to true.
-One can use `single_pass` to avoid loops which would otherwise occur.
+One can use `single_pass` to avoid loops that might otherwise occur.
 
-Searching for `structure dsimp_config` and `structure simp_config` in
-the core Lean file `init/meta/simp_tactic.lean` reveals other
-configuration options.  Most of them not very relevant for the average user,
+The core Lean file `init/meta/simp_tactic.lean` reveals other configuration options in
+the `dsimp_config` and `simp_config` structures.
+Most of them not very relevant for the average user,
 and some of them are not fully documented.  These are reproduced in the
 following table, where the default value for a configuration option
 for `simp` or `dsimp` is given in the respective column -- if no
@@ -361,20 +400,21 @@ The "max" default value refers to `simp.default_max_steps`, which is currently `
 | `single_pass` | `ff` | `ff` | Visit each subterm no more than once |
 | `md` | | `reducible` | Reduction mode: how aggressively constants are replaced with their definitions (`all`, `semireducible`, `instances`, `reducible`, or `none`) |
 | `max_steps` | max | max | The maximum number of steps allowed before failing |
-| `canonize_instances` | `tt` | `tt` | Replace each instance with a canonical defeq one |
-| `canonize_proofs` | `ff` |  |  |
 | `fail_if_unchanged` | `tt` | `tt` | Fail if no simplifications applied |
+| `beta` | `tt` | `tt` | Do beta-reductions: `(λ x, a) y` ↝ `a[x := y]` |
 | `eta` | `tt` | `tt` | Allow eta-equivalence: `(λ x, f x)` ↝ `f` |
 | `zeta`| `tt` | `tt` | Do zeta-reductions: `let x := a in b` ↝ `b[x := a]` |
-| `beta` | `tt` | `tt` | Do beta-reductions: `(λ x, a) y` ↝ `a[x := y]` |
 | `proj` | `tt` | `tt` | Reduce projections: `prod.fst (a, b)` ↝ `a` |
 | `iota` | `tt` | `tt` | Reduce recursors: `nat.rec_on (succ n) Z R` ↝ `R n (nat.rec_on n Z R)` |
 | `iota_eqn` | `ff` | | Reduce using all equation lemmas generated by the equation compiler |
 | `unfold_reducible` | | `ff` | Unfold definitions with `reducible` transparency (delta-reduce) |
 | `memoize` | `tt` | `tt` | Perform caching of simps of subterms |
-| `lift_eq` | `tt` | | |
-| `use_axioms` | `tt` | | |
+| `lift_eq` | `tt` | | Prove reflexive relations using proofs of equality (?) |
+| `use_axioms` | `tt` | | Allow simplifications that require `propext` or `funext` (?) |
 | `constructor_eq` | `tt` | | Use injectivity of constructors in equalities  |
+| `canonize_instances` | `tt` | `tt` | Replace instances with a canonical defeq one |
+| `canonize_proofs` | `ff` |  | Replace proofs with a canonical defeq one |
+| `discharger` | fail | | Tactic used to discharge new subgoals created during simplification; if it fails, the simplifier tries to discharge them by simplifying |
 
 The `b[x := a]` notation means to replace all free instances of `x` in `b` with `a`.
 
@@ -398,3 +438,8 @@ begin
   simp { contextual := tt},
 end
 ```
+
+Amusing trick: if you do `simp _` then Lean will interpret `_` as a placeholder for the configuration options.
+Since it can't figure out the configuration options through unification, it will instead print an error
+along with all the default configuration values.
+This works for other tactics that take a configuration as well, such as `rw`.
