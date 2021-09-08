@@ -158,8 +158,9 @@ def my_foo : foo := {n := 37}
 then if you add a `simp` lemma that `my_foo.n = 37`, you give the simplifier the
 ability to evaluate the `foo.n` projection for `my_foo`, which saves you from having
 to unfold the definition of `my_foo` (by default `simp` does not unfold most definitions).
-Creating these `simp` lemmas is so common that there is an attribute that creates
-them all for you automatically:
+Creating these `simp` lemmas is so common that there is
+[an attribute](https://leanprover-community.github.io/mathlib_docs/attributes.html#simps)
+that creates them all for you automatically:
 ```lean
 @[simps] def my_foo : foo := {n := 37}
 ```
@@ -244,7 +245,7 @@ Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a `simp`
 lemma should have the arguments to the function on its left-hand side in simp-normal
 form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) = 0` will never be used.
-Mathlib's `simp_nf` linter checks for this
+Mathlib's `simp_nf` [linter](https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands) checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
 
 ## `simpa`
@@ -386,7 +387,7 @@ For example, `simp {single_pass := tt}` runs `simp` with the `single_pass` confi
 One can use `single_pass` to avoid loops that might otherwise occur.
 
 The core Lean file `init/meta/simp_tactic.lean` reveals other configuration options in
-the `dsimp_config` and `simp_config` structures.
+the [`dsimp_config`](https://leanprover-community.github.io/mathlib_docs/find/tactic.dsimp_config/src) and [`simp_config`](https://leanprover-community.github.io/mathlib_docs/find/tactic.simp_config/src) structures.
 Most of them not very relevant for the average user,
 and some of them are not fully documented.  These are reproduced in the
 following table, where the default value for a configuration option
