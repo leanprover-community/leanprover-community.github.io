@@ -49,16 +49,34 @@
 	  
 <h1 id="simp" class="markdown-heading">Simp <a class="hover-link" href="#simp">#</a></h1>
 <h2 id="overview" class="markdown-heading">Overview <a class="hover-link" href="#overview">#</a></h2>
-<p>In this document we will explain basic usage of Lean's simplifier,
-<code>simp</code>, and the related tactic <code>dsimp</code>.</p>
+<p>In this document we will explain basic usage of Lean's simplifier
+tactic <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#simp"><code>simp</code></a>
+and the related tactic <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp"><code>dsimp</code></a>.</p>
+<p>We give some pointers for how to avoid &quot;non-terminal <code>simp</code>s&quot;, and we
+also give a short description of the configuration options for <code>simp</code>
+and <code>dsimp</code>.</p>
 <h2 id="introduction" class="markdown-heading">Introduction <a class="hover-link" href="#introduction">#</a></h2>
-<p>Lean has a &quot;simplifier&quot;, called <code>simp</code>. This is a tactic whose job,
-unfortunately for beginners, is <em>not</em> to prove an arbitrary simple
-statement. Lean's simplifier is what is called a &quot;conditional term
-rewriting system&quot;. Rewriting is the act of changing a goal of the form
-<code>P(A)</code> into <code>P(B)</code>, given a hypothesis of the form <code>A = B</code> or <code>A ↔ B</code>. The simplifier's job is to try and prove, or at least simplify,
-goals or hypotheses, by using repeated rewrites. Here is an example
-(using <code>mathlib</code>).</p>
+<p>Lean has a &quot;simplifier&quot;, called <code>simp</code>, that consults a database of
+facts called *<code>simp</code> lemmas* to (hopefully) simplify hypotheses and
+goals. The simplifier is what is known as a <em>conditional term
+rewriting system</em>: all it does is repeatedly replace (or <em>rewrite</em>)
+subterms of the form <code>A</code> by <code>B</code>, for all applicable facts of the form
+<code>A = B</code> or <code>A ↔ B</code>.
+The simplifier mindlessly rewrites until it can rewrite no more.  The
+<code>simp</code> lemmas are all oriented, with left-hand sides always being
+replaced by right-hand sides, and never vice versa.</p>
+<p>Ideally, the database of facts would result in expressions being simplified
+into a normal form.
+In practice, this is often unachievable (normal forms may not exist, or there
+may not exist a collection of rewrite rules that produce them),
+but nevertheless we aim to approximate this ideal where possible.
+Even better, we would like the database of facts to be <em>confluent</em>,
+meaning the order in which the simplifier considers rewrites does not matter.
+Again, we aim to be close to confluent where possible.</p>
+<p>While this system is able to prove many simple statements completely
+automatically, proving all simple statements is not part of its job
+description, as disappointing as that might be.</p>
+<p>Here is an example (using <code>mathlib</code>).</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.group.defs</span>
 
 <span class="kd">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
@@ -69,209 +87,470 @@ goals or hypotheses, by using repeated rewrites. Here is an example
 <span class="kd">end</span>
 </code></pre></div>
 
-<p>How would a human solve that goal? They would notice that <code>a * a⁻¹ = 1</code>, that <code>1 * 1 = 1</code> and so on, until they had simplified the example
+<p>How would a human solve that goal? They would notice that <code>a * a⁻¹ = 1</code>,
+that <code>1 * 1 = 1</code>, and so on, until they had simplified the example
 to <code>b = b</code>, which is obviously true.</p>
-<p>This is also what the simplifier is doing. Indeed, if you add
+<p>This is also what the simplifier is doing.  Indeed, if you add
 <code>set_option trace.simplify.rewrite true</code> above the example, then a
 squiggly blue underline will appear under <code>simp</code> (in VS Code) and
 clicking on this will show you the sequence of rewrites that <code>simp</code>
-discovered.</p>
-<p>The more verbose option <code>set_option trace.simplify true</code> shows
-both the rewrites which works and those which failed during the
-simplification process.</p>
+performed:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">mul_right_inv</span><span class="o">]:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">==&gt;</span> <span class="mi">1</span>
+<span class="o">[</span><span class="n">mul_one</span><span class="o">]:</span> <span class="mi">1</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">==&gt;</span> <span class="mi">1</span>
+<span class="o">[</span><span class="n">one_mul</span><span class="o">]:</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">==&gt;</span> <span class="n">b</span>
+<span class="o">[</span><span class="n">mul_inv_cancel_right</span><span class="o">]:</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">c</span><span class="bp">⁻¹</span> <span class="bp">==&gt;</span> <span class="n">b</span>
+<span class="o">[</span><span class="n">eq_self_iff_true</span><span class="o">]:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">==&gt;</span> <span class="n">true</span>
+</code></pre></div>
+
+<p>The <code>simp?</code> tactic is a useful way to extract the list of lemmas that <code>simp</code> applied.
+It suggests</p>
+<div class="codehilite"><pre><span></span><code><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mul_one</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">,</span> <span class="n">mul_right_inv</span><span class="o">,</span> <span class="n">eq_self_iff_true</span><span class="o">,</span> <span class="n">mul_inv_cancel_right</span><span class="o">]</span>
+</code></pre></div>
+
+<p>which is an invocation of <code>simp</code> that makes use of this particular set of five lemmas.
+A related tactic, <code>squeeze_simp</code>, will (after thinking <em>much</em> harder than <code>simp?</code> does)
+come up with some set of simp lemmas that are sufficient.
+In this case three suffice:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_mul</span><span class="o">,</span> <span class="n">mul_right_inv</span><span class="o">,</span> <span class="n">mul_inv_cancel_right</span><span class="o">]</span>
+</code></pre></div>
+
+<p>To see both those rewrites that work and those that fail during the simplification process,
+you can use the more verbose option <code>set_option trace.simplify true</code>.</p>
 <h2 id="simp-lemmas" class="markdown-heading">Simp lemmas <a class="hover-link" href="#simp-lemmas">#</a></h2>
 <p>So how did Lean's simplifier know that <code>a * a⁻¹ = 1</code>? It is because
-the corresponding lemma in <code>algebra.group.defs</code> is tagged with the
+there is a lemma in <code>algebra.group.defs</code> that is tagged with the
 <code>simp</code> attribute:</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
 </code></pre></div>
 
-<p>This <code>@[simp]</code> at the beginning just &quot;tags&quot; <code>mul_right_inv</code> with the
-<code>simp</code> attribute. We call lemmas tagged in this way &quot;<code>simp</code>
-lemmas&quot;. Here are some examples of <code>simp</code> lemmas in mathlib:</p>
+<p>We call lemmas tagged with the <code>simp</code> attribute &quot;<code>simp</code> lemmas&quot;. Here
+are some more examples of <code>simp</code> lemmas in mathlib:</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">nat.dvd_one</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">∣</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">mul_eq_zero</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">list.mem_singleton</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∈</span> <span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">...</span>
 <span class="kd">@[simp]</span> <span class="kd">theorem</span> <span class="n">set.set_of_false</span> <span class="o">:</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">false</span><span class="o">}</span> <span class="bp">=</span> <span class="bp">∅</span> <span class="o">:=</span> <span class="bp">...</span>
 </code></pre></div>
 
-<p>When the simplifier is attempting to simplify a term <code>T</code> it looks
-through the <code>simp</code> lemmas known to the system at that time, in a
-sensible way (there are over ten thousand of them currently in
-<code>mathlib</code>!), and if it runs into a lemma of the form <code>A = B</code> or <code>A ↔ B</code>, for which <code>A</code> shows up in <code>T</code>, it rewrites the lemma at <code>T</code> to
-replace it with a <code>B</code>, and starts again. Note that <code>simp</code> works
-from the inside out: it first simplifies the arguments of a function before
-simplifying the function.</p>
-<p>The simplifier works in one direction only: if <code>A = B</code> is a
-<code>simp</code> lemma, then <code>simp</code> replaces <code>A</code>s with <code>B</code>s, but it doesn't
-replace <code>B</code>s with <code>A</code>s. Hence a <code>simp</code> lemma should have the property
-that its right hand side should be simpler than its left hand side. In
+<p>When the simplifier is attempting to simplify a term <code>T</code>, it looks
+through the <code>simp</code> lemmas known to the system at that time, and if it
+runs into an applicable lemma of the form <code>A = B</code> or <code>A ↔ B</code> for which
+<code>A</code> appears as a subexpression in <code>T</code>, it rewrites the instance of <code>A</code> in <code>T</code> with <code>B</code>
+and then starts again from the beginning. Note that <code>simp</code> starts on
+innermost terms, working outward: it first simplifies the arguments of
+a function before simplifying the function. Also, <code>simp</code> contains some
+amount of cleverness to be able to avoid considering <em>all</em> <code>simp</code>
+lemmas every time (there are over ten thousand of them currently in <code>mathlib</code>!).</p>
+<p>The simplifier applies <code>simp</code> lemmas in one direction only: if <code>A = B</code> is a <code>simp</code>
+lemma, then <code>simp</code> replaces <code>A</code>s with <code>B</code>s, but it doesn't replace
+<code>B</code>s with <code>A</code>s. Hence a <code>simp</code> lemma should have the property that its
+right-hand side is simpler than its left-hand side. In
 particular, <code>=</code> and <code>↔</code> should not be viewed as symmetric operators in
-this situation. The following lemma</p>
+this situation. The following would be a terrible <code>simp</code> lemma (if it
+were even allowed):</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv_bad</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">...</span>
 </code></pre></div>
 
-<p>would be a terrible <code>simp</code> lemma; the simplifier would then attempt to
-replace <code>1</code> with <code>a * a⁻¹</code>, which is usually not a sensible direction
-of travel. Furthermore, if both <code>mul_right_inv</code> and
-<code>mul_right_inv_bad</code> are tagged with <code>simp</code> then this would cause the
-simplifier to loop.</p>
-<p>When making a new definition, it is very common to have <code>@[simp]</code>
-lemmas which train the simplifier how to use the definition in a
-sensible manner. An example of this is in mathlib's
+<p>Replacing <code>1</code> with <code>a * a⁻¹</code> is not a sensible default direction to
+travel. Even worse would be a lemma that causes expressions to grow
+without bound, causing <code>simp</code> to loop forever:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">even_worse_lemma</span><span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="mi">1</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">...</span>
+</code></pre></div>
+
+<p>When making a new definition, it is very common to also introduce
+<code>simp</code> lemmas to put expressions involving the definition into a
+sensible form. An example of this is in mathlib's
 <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean">data.complex.basic</a>,
-which has almost 100 <code>simp</code> lemmas in. Theorems such as <code>@[simp] lemma add_re (z w : ℂ) : (z + w).re = z.re + w.re := rfl</code> are proved in that
-file, even though they are true by definition, because they are
-important <code>simp</code> lemmas. The very slick proof in that file that the
-complex numbers are a commutative ring uses <code>simp</code> at a key moment to
-reduce goals such as <code>(z + w).re = (w + z).re</code> into <code>z.re + w.re = w.re + z.re</code>, which is a statement about real numbers which the <code>ring</code>
-tactic can solve.</p>
+which has almost 100 <code>simp</code> lemmas. Even though they are true by definition, theorems such as</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span>
+<span class="n">add_re</span> <span class="o">(</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">z</span> <span class="bp">+</span> <span class="n">w</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">z.re</span> <span class="bp">+</span> <span class="n">w.re</span> <span class="o">:=</span> <span class="n">rfl</span>
+</code></pre></div>
+
+<p>are introduced because they give <code>simp</code> the ability to reduce expressions and then make use of pre-existing facts.
+This one, for example, converts complex addition into real addition.
+If you give <code>simp</code> permission to use commutativity of real addition, then it is able to
+automatically prove <code>(z + w).re = (w + z).re</code> through <code>z.re + w.re = w.re + z.re</code>, which is half of the proof that complex addition is commutative.</p>
+<p>The Lean kernel itself is a rewrite system for lambda calculus, which has a definite
+notion of forward progress.  With this in mind, a useful family of
+<code>simp</code> lemmas are those that, in this sense, let <code>simp</code> partially evaluate an
+expression. For example, if you have a structure type <code>foo</code> and
+define a structure <code>my_foo</code> with that type,</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">structure</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span>
+
+<span class="kd">def</span> <span class="n">my_foo</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">n</span> <span class="o">:=</span> <span class="mi">37</span><span class="o">}</span>
+</code></pre></div>
+
+<p>then if you add a <code>simp</code> lemma that <code>my_foo.n = 37</code>, you give the simplifier the
+ability to evaluate the <code>foo.n</code> projection for <code>my_foo</code>, which saves you from having
+to unfold the definition of <code>my_foo</code> (by default <code>simp</code> does not unfold most definitions).
+Creating these <code>simp</code> lemmas is so common that there is
+<a href="https://leanprover-community.github.io/mathlib_docs/attributes.html#simps">an attribute</a>
+that creates them all for you automatically:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">@[simps]</span> <span class="kd">def</span> <span class="n">my_foo</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">n</span> <span class="o">:=</span> <span class="mi">37</span><span class="o">}</span>
+</code></pre></div>
+
+<p>This generates the lemma <code>@[simp] lemma my_foo_n : my_foo.n = 37</code>.</p>
 <h2 id="basic-usage" class="markdown-heading">Basic usage <a class="hover-link" href="#basic-usage">#</a></h2>
+<ul>
+<li>
 <p><code>simp</code> tries to simplify the goal using all <code>simp</code> lemmas known to
 Lean at that time.</p>
+</li>
+<li>
 <p><code>simp [h1, h2]</code> uses all <code>simp</code> lemmas and also <code>h1</code> and <code>h2</code> (which can either be local hypotheses or other lemmas which are not tagged <code>simp</code> for some reason).</p>
+</li>
+<li>
 <p><code>simp [← h]</code> uses all <code>simp</code> lemmas, and also <code>h : A = B</code> but in the form <code>B = A</code> (so <code>simp</code> rewrites <code>B</code>s to <code>A</code>s)</p>
-<p><code>simp [-thm]</code> stops <code>simp</code> from using the simp lemma <code>thm</code>.</p>
+</li>
+<li>
+<p><code>simp [-thm]</code> stops <code>simp</code> from using the <code>simp</code> lemma named <code>thm</code>.</p>
+</li>
+<li>
 <p><code>simp *</code> uses all <code>simp</code> lemmas and also all current local hypotheses to try to simplify the goal.</p>
+</li>
+<li>
 <p><code>simp at h</code> tries to simplify <code>h</code> using all <code>simp</code> lemmas.</p>
+</li>
+<li>
 <p><code>simp [h1] at h2 ⊢</code> tries to simplify both <code>h2</code> and the goal using <code>h1</code> and all <code>simp</code> lemmas (note: type <code>⊢</code> with <code>\|-</code> or <code>\vdash</code> in VS Code).</p>
+</li>
+<li>
 <p><code>simp * at *</code> : tries to simplify both the goal and all hypotheses, using all hypotheses and all <code>simp</code> lemmas. Sometimes worth a try.</p>
-<p><code>simp only [h1, h2, ..., hn]</code> tells <code>simp</code> not to use all <code>simp</code> lemmas, but only the lemmas <code>h1</code>, <code>h2</code>, ... . Note that it is acceptable to use <code>simp only [...]</code> in the middle of a proof, because subsequent changes to the <code>simp</code> set will not interfere with the proof.</p>
-<p>Note that some <code>simp</code> lemmas have preconditions. For example, a
-theorem about cancelling a factor on both sides of an equation would
+</li>
+<li>
+<p><code>simp only [h1, h2, ..., hn]</code> tells <code>simp</code> to use only the lemmas <code>h1</code>, <code>h2</code>, ..., rather than the full set of simp lemmas.
+(It is acceptable to use <code>simp only [...]</code> in the middle of a proof, because subsequent changes to the <code>simp</code> set will not break the proof.)</p>
+</li>
+</ul>
+<p>Note that some <code>simp</code> lemmas have additional hypotheses that must be satisfied.
+For example, a theorem about cancelling a factor on both sides of an equation would
 only be valid under the hypothesis that the factor is non-zero. If <code>h</code>
-is a proof of hypothesis <code>P</code> and <code>P → A = B</code> is a <code>simp</code> lemma then
+is a proof of hypothesis <code>P</code> and <code>P → A = B</code> is a <code>simp</code> lemma, then
 <code>simp [h]</code> will replace <code>A</code>'s with <code>B</code>'s in the goal. The fact that
-<code>simp</code> works with preconditions is the reason it is called a
+<code>simp</code> considers additional hypotheses is the reason it is called a
 <em>conditional</em> term rewriting system.</p>
 <h2 id="simp-normal-form" class="markdown-heading">Simp-normal form <a class="hover-link" href="#simp-normal-form">#</a></h2>
 <p>There are sometimes several ways to say the same thing. For example,
-if <code>n : ℕ</code> then the hypotheses <code>n ≠ 0</code>, <code>0 ≠ n</code>, <code>n &gt; 0</code>, <code>0 &lt; n</code>, <code>1 ≤ n</code> and <code>n ≥ 1</code> are all ways to say the same thing. This can be
-problematic for rewriting systems like the simplifier. The reason is
-that the simplifier works up to <em>syntactic equality</em>. If the
-simplifier is working on a term <code>T</code>, and <code>A = B</code> is a <code>simp</code> lemma,
-and there is a subterm <code>A&#x27;</code> in <code>T</code> which is logically equal or
-equivalent to <code>A</code>, but not literally the same string of characters as
-<code>A</code>, then the simplifier will in general not replace it with
-<code>B</code>. Similarly, if nonzeroness of <code>n</code> (stated in one way) is a
-precondition in a <code>simp</code> lemma of the form <code>A = B</code>, and <code>h</code> is a proof
-of nonzeroness of <code>n</code> stated in a different way, then <code>simp [h]</code> might
+if <code>n : ℕ</code> then the hypotheses <code>n ≠ 0</code>, <code>0 ≠ n</code>, <code>n &gt; 0</code>, <code>0 &lt; n</code>,
+<code>1 ≤ n</code> and <code>n ≥ 1</code> are all logically equivalent. This can be
+problematic for rewriting systems like the simplifier. The reason for this is
+that the simplifier looks for subterms using <em>syntactic equality</em>. If the
+simplifier is working on a term <code>T</code> and <code>A = B</code> is a <code>simp</code> lemma,
+then, unless a subterm <code>A&#x27;</code> of <code>T</code> is syntactically the same as <code>A</code>
+(approximately: they have literally the same textual representation), then <code>simp</code> won't
+in general notice the rule applies, so it won't
+be rewritten by <code>B</code>. Similarly, if nonzeroness of <code>n</code> (stated in
+one way) is a precondition in a <code>simp</code> lemma of the form <code>A = B</code>, and <code>h</code> is a proof
+of nonzeroness of <code>n</code> (stated in a different way), then <code>simp [h]</code> might
 not replace <code>A</code>'s with <code>B</code>'s.</p>
-<p>A bad solution to this would be to write essentially the same lemma
-many times, so each possible invariant is covered. Clearly this is not
-ideal. The way this issue is dealt with in <code>mathlib</code> is to fix once
-and for all a so-called &quot;simp normal form&quot; for a way of expressing
-something such that <code>n ≠ 0</code> above, and then trying to stick to this
-variant when stating lemmas in Lean. For example, most lemmas which
-assume a natural is non-zero do it via the hypothesis <code>0 &lt; n</code>.</p>
+<p>The way this issue is dealt with in <code>mathlib</code> is to fix once and for
+all a *<code>simp</code> normal form* for the way something is to be expressed
+(like <code>0 &lt; n</code> for nonzeroness) and then sticking to this variant when
+stating lemmas in Lean. This saves having to write duplicate lemmas
+for every variant. To help the simplifier out, many times there are
+normalizing lemmas whose only purpose is to put expressions into
+<code>simp</code> normal form.</p>
 <p>In general, if you are writing a lemma, you should know the &quot;normal
 form&quot; way to express the ideas in the lemma. If you are writing a
-lemma about a definition you made yourself, you might want to make
-your own design decision about the &quot;normal form&quot; way of expressing any
-idea which can be naturally expressed in more than one way.</p>
-<p>An example of a simp-normal form is a way of expressing nonemptiness
+lemma about a definition you made yourself, think about the normal
+forms for ideas that can be expressed in more than one way.</p>
+<p>An example of a <code>simp</code> normal form is a way of expressing nonemptiness
 of a subset of a type.  If <code>α : Type</code> and <code>s : set α</code> then
-nonemptiness of <code>s</code> can be expressed as <code>s.nonempty</code> and as <code>s ≠ ∅</code>.
+nonemptiness of <code>s</code> can be expressed as both <code>s.nonempty</code> and <code>s ≠ ∅</code>.
 In mathlib an effort is made to stick to <code>s.nonempty</code> as the normal
 form.</p>
-<p>Another example: if <code>s : finset α</code> and <code>a : α</code> then <code>a ∈ s</code> is defined
-to mean <code>a ∈ (s : set α)</code>. The simp normal form for this idea is <code>a ∈ s</code>, and moreover the <code>simp</code> lemma</p>
+<p>Another example: every finite set <code>s : finset α</code> can be coerced
+to <code>set α</code>, so for <code>a : α</code> one can write both <code>a ∈ s</code> and
+<code>a ∈ (s : set α)</code> to mean the same thing.  The simp normal form for
+membership in a finite set idea is <code>a ∈ s</code>, and moreover there is a
+normalizing <code>simp</code> lemma</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mem_coe</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∈</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">∈</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">...</span>
 </code></pre></div>
 
-<p>will attempt to turn any occurrences of <code>a ∈ (s : set α)</code> into the
-correct normal form.</p>
-<p>Because the simplifier works from the inside out, simplifying arguments of a function before simplifying the function, a <code>simp</code> lemma needs to have the arguments to its left hand side in simp-normal form. For example <code>@[simp] lemma foo : f (g 0) = 0</code> will never fire if <code>simp</code> can simplify <code>g 0</code>. Mathlib's <code>simp_nf</code> linter checks for this (you can run mathlib's linters by putting
-<code>#lint</code> in a file).</p>
-<h2 id="non-terminal-codesimpcodes-and-codesimpacode" class="markdown-heading">non-terminal <code>simp</code>s, and <code>simpa</code> <a class="hover-link" href="#non-terminal-codesimpcodes-and-codesimpacode">#</a></h2>
-<p>The behaviour of <code>simp</code> can change over time. More precisely, as more
-<code>simp</code> lemmas are added to a repository, the smarter <code>simp</code> gets. This
-means that updates to your code can cause proofs which use <code>simp</code> in
-the middle, to break. For example if a proof looked like</p>
+<p>to replace occurrences of <code>a ∈ (s : set α)</code> with the correct normal form.</p>
+<p>Because the simplifier works from the inside out, simplifying
+arguments of a function before simplifying the function, a <code>simp</code>
+lemma should have the arguments to the function on its left-hand side in simp-normal
+form. For example if <code>g 0</code> can be simplified, then <code>@[simp] lemma foo : f (g 0) = 0</code> will never be used.
+Mathlib's <code>simp_nf</code> <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands">linter</a> checks for this
+(you can run mathlib's linters for a module yourself by putting <code>#lint</code> at the end of the file).</p>
+<h2 id="codesimpacode" class="markdown-heading"><code>simpa</code> <a class="hover-link" href="#codesimpacode">#</a></h2>
+<p>The <code>simpa</code> tactic is a variation on <code>simp</code> for finishing a proof -- as a &quot;finishing&quot; tactic, it will fail
+if it's unable to close the goal.  The basic usage is</p>
+<div class="codehilite"><pre><span></span><code><span class="n">simpa</span> <span class="o">[</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">]</span> <span class="n">using</span> <span class="n">e</span>
+</code></pre></div>
+
+<p>where <code>[h1, h2]</code> refers to an optional list of <code>simp</code> lemmas (using the same syntax as for <code>simp</code>)
+and where <code>e</code> is an expression.  Commonly, <code>e</code> is the name of a hypothesis.
+Both the type of <code>e</code> and the goal are simplified, and <code>simpa</code> succeeds if they are both simplified to the same thing.</p>
+<p>Here is a simple example of <code>simpa</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≠</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">simpa</span> <span class="n">using</span> <span class="n">h</span><span class="o">,</span>
+<span class="kd">end</span>
+</code></pre></div>
+
+<p>Without <code>simpa</code>, we might do <code>simp at ⊢ h, exact h</code>.
+So-called &quot;non-terminal <code>simp</code>s&quot;, which are usages of <code>simp</code> that do not close a goal,
+are best to be avoided (see the next section), and <code>simpa</code> is a way to avoid them.</p>
+<p>If the <code>using</code> clause is not present, then <code>simpa</code> does the following three steps instead:</p>
+<ol>
+<li>The goal is simplified.</li>
+<li>If a hypothesis named <code>this</code> is in the local context, then its type is simplified.</li>
+<li>The <code>assumption</code> tactic is applied.</li>
+</ol>
+<p>Step 2 is to support a pattern where <code>simpa</code> follows a <code>have : P</code> or <code>suffices : P</code>, since
+both of these default to using <code>this</code> as the name of the hypothesis they introduce.</p>
+<h2 id="non-terminal-codesimpcodes" class="markdown-heading">Non-terminal <code>simp</code>s <a class="hover-link" href="#non-terminal-codesimpcodes">#</a></h2>
+<p>The behaviour of <code>simp</code> changes over time as <code>simp</code> lemmas are added
+to (or removed from) the library.  This means that proofs that use
+<code>simp</code> can break, and, unless you know how the set of <code>simp</code> lemmas has
+changed, it can be difficult to fix a proof.</p>
+<p>For example if a proof looked like</p>
 <div class="codehilite"><pre><span></span><code>  <span class="bp">...</span>
   <span class="n">simp</span><span class="o">,</span>
   <span class="n">rw</span> <span class="n">foo_eq_bar</span><span class="o">,</span>
   <span class="bp">...</span>
 </code></pre></div>
 
-<p>and then later on someone added the <code>@[simp]</code> tag to <code>foo_eq_bar</code>,
-then this rewrite would now fail, and errors like this can at times be
-quite confusing to fix. If you really want to apply <code>simp</code> in the
-middle of a proof and not close a goal completely, there are several
-&quot;approved&quot; ways to do it:</p>
+<p>and then later someone added the <code>@[simp]</code> attribute to <code>foo_eq_bar</code>,
+this rewrite would now fail.</p>
+<p>While it is fine using <code>simp</code> in the middle of a proof during initial development
+(&quot;non-terminal <code>simp</code>s&quot;), the rule of thumb is that it is
+easier to maintain Lean code when every <code>simp</code> closes a goal
+completely.  When such a <code>simp</code> later breaks, this ensures that the
+intended goal is known.</p>
+<p>There are a few &quot;approved&quot; uses of <code>simp</code> for the middle of a proof:</p>
 <ol>
 <li>
-<p>Use <code>squeeze_simp</code> instead of <code>simp</code>. This produces output of the
-form <code>simp only [h1, h2, ..., hn]</code>, which can be used instead of
-<code>simp</code> to perform the same task. <code>simp only</code> is much safer to use in
-the middle of a proof, because the simplifier is now constrained to
-only using the lemmas in the list, so will not be affected by changes
-to the <code>simp</code> set (the collection of lemmas tagged <code>simp</code>).</p>
+<p><code>simp only [h1, h2, ..., hn]</code> to constrain <code>simp</code> to using only
+lemmas from the given list, so it is not affected by changes to the
+set of <code>simp</code> lemmas. Hint: use <code>squeeze_simp</code> or <code>simp?</code> to
+automatically generate an appropriate <code>simp only</code>.</p>
 </li>
 <li>
-<p><code>simpa</code>. If <code>simp</code> turns your goal into <code>P</code>, then you can write</p>
+<p>Use a construct like <code>have h : P, { ..., simp }</code> to introduce a
+hypothesis proved by <code>simp</code>. The <code>have</code> expression might be in the
+middle of a proof, but the <code>simp</code> is closing the goal it introduces.</p>
 </li>
-</ol>
-<div class="codehilite"><pre><span></span><code><span class="k">suffices</span> <span class="o">:</span> <span class="n">P</span><span class="o">,</span>
+<li>
+<p>If <code>simp</code> turns your goal into <code>P</code>, then you can write</p>
+<div class="codehilite"><pre><span></span><code>  <span class="k">suffices</span> <span class="o">:</span> <span class="n">P</span><span class="o">,</span>
   <span class="n">simpa</span><span class="o">,</span>
 </code></pre></div>
 
-<p>which will add an extra goal of <code>P</code>, and then prove it using <code>simp</code>
-and the hypothesis <code>this</code>, which is the proof of <code>P</code> which the
-<code>suffices</code> tactic adds.</p>
+<p>This adds a new goal of <code>P</code> after the current one, introduces a new
+hypothesis <code>this : P</code>, simplifies both the goal and <code>this</code>,
+then attempts to close the goal with <code>this</code>.  The <code>simpa</code> tactic <em>requires</em>
+that a goal be closed, unlike <code>simp</code>, which makes it easier to know when it breaks.
+The explicit <code>P</code> in the source code helps in finding a fix.</p>
+</li>
+</ol>
+<p>One way non-terminal <code>simp</code>s can appear is in a sequence of tactics like <code>simp at ⊢ h, exact h</code>.
+These can be replaced by <code>simpa using h</code>.</p>
 <h2 id="codedsimpcode" class="markdown-heading"><code>dsimp</code> <a class="hover-link" href="#codedsimpcode">#</a></h2>
-<p><code>dsimp</code> is a variant of <code>simp</code> which only uses <code>simp</code> lemmas whose
-proof is <code>rfl</code> or <code>iff.rfl</code>, i.e. lemmas of the form <code>A = B</code> or <code>A ↔ B</code>
-where <code>A</code> and <code>B</code> are equal by definition. Like <code>simp</code> it is not
-recommended to use it in the middle of a proof, however if <code>dsimp</code>
-turns your goal into <code>h</code> then <code>change h</code> might well do the same thing.
-Another common use of <code>dsimp</code> is</p>
+<p><code>dsimp</code> is a variant of <code>simp</code> that only uses &quot;definitional&quot; <code>simp</code>
+lemmas.  These are <code>simp</code> lemmas whose proof is <code>rfl</code> or <code>iff.rfl</code>,
+that is, lemmas where the two sides are equal by definition.</p>
+<p>Like <code>simp</code> it is recommended that you do not use it in the middle of
+a proof.  However if <code>dsimp</code> turns your goal into <code>h</code> then <code>change h</code>
+will likely do the same thing.  Another common use of <code>dsimp</code> is</p>
 <div class="codehilite"><pre><span></span><code><span class="n">dsimp</span> <span class="n">only</span>
 </code></pre></div>
 
-<p>which can be a very useful way of tidying up a goal. It can be safely
-used in the middle of a proof because of the <code>only</code>. This command
-tidies up lambdas (it will turn <code>(λ x, f x) 37</code> into <code>f 37</code>), and
-structure projections (it will turn <code>{to_fun := f, ...}.to_fun</code>
-into <code>f</code>).</p>
-<h2 id="more-advanced-features" class="markdown-heading">More advanced features. <a class="hover-link" href="#more-advanced-features">#</a></h2>
+<p>which is short for <code>dsimp only []</code>, a <code>dsimp</code> with an empty set of <code>simp</code> lemmas.
+This can be safely used in the middle of a proof, and it can be a useful
+way to tidy up a goal: among other things, it does beta reduction for lambda expressions
+(it will turn <code>(λ x, f x) 37</code> into <code>f 37</code>) and it will reduce structure projections
+(it will turn <code>{to_fun := f, ...}.to_fun</code> into <code>f</code>).</p>
+<h2 id="more-advanced-features" class="markdown-heading">More advanced features <a class="hover-link" href="#more-advanced-features">#</a></h2>
+<h3 id="full-syntax" class="markdown-heading">Full syntax <a class="hover-link" href="#full-syntax">#</a></h3>
+<p>This is the full syntax for the <code>dsimp</code> tactic:</p>
+<blockquote>
+<p><code>dsimp</code> (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>at</code> locations)? (<code>{</code> configuration options <code>}</code>)?</p>
+</blockquote>
+<p>where &quot;( ... )?&quot; means an optional part of the expression, and &quot;|&quot; gives mutually exclusive options.
+The list of lemmas is similar to that of <code>rw</code>, but additionally <code>-lemma_name</code> means a lemma is excluded from the set of <code>simp</code> lemmas.
+Configuration options are described in a following section.</p>
+<p>This is the full syntax for the <code>simp</code> tactic:</p>
+<blockquote>
+<p><code>simp</code> (<code>!</code>)? (<code>?</code>)? (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>at</code> locations)? (<code>{</code> configuration options <code>}</code>)?</p>
+</blockquote>
+<p>If <code>!</code> is present, it adds <code>iota_eqn := tt</code> to the configuration options.
+If <code>?</code> is present, it causes <code>simp</code> to suggest a set of <code>simp</code> lemmas that suffice.</p>
+<p>This is the full syntax for the <code>simpa</code> tactic:</p>
+<blockquote>
+<p><code>simpa</code> (<code>!</code>)? (<code>?</code>)? (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>using</code> expr)? (<code>{</code> configuration options <code>}</code>)?</p>
+</blockquote>
+<p>The meanings are the same as for <code>simp</code>, but <code>using</code> can be given any expression, not just a local constant as required by <code>at</code>.</p>
+<h3 id="custom-simp-attributes" class="markdown-heading">Custom simp attributes <a class="hover-link" href="#custom-simp-attributes">#</a></h3>
 <p>Using the command <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute"><code>mk_simp_attribute</code></a>,
-you can make your own <code>@[simp]</code> attribute, but with a key difference;
-lemmas tagged with <code>@[new_attr]</code> are <em>not</em> called by default with <code>simp</code>, but
-can be called at will with <code>simp with new_attr</code>. This can often replace lengthy
-<code>simp only [...]</code> calls, and facilitate easier-to-read code. Some examples of common usage are
+you can make your own <code>@[simp]</code>-like attribute, but with a key difference:
+lemmas tagged with <code>@[new_attr]</code> are <em>not</em> in the default set of <code>simp</code> lemmas.
+Instead, they are included using the syntax <code>simp with new_attr</code>. This can often replace lengthy
+<code>simp only [...]</code> calls and facilitate easier-to-read code. Some examples of common usage are
 <a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.mfld_simps/src"><code>mfld_simps</code></a>,
 and <a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.field_simps/src"><code>field_simps</code></a>.</p>
-<p><code>simp {single_pass := tt}</code> -- this <code>single_pass</code> is a config option,
-one of around 16 at the time of writing. One can use <code>single_pass</code> to
-avoid loops which would otherwise occur.</p>
-<p>Searching for <code>structure simp_config</code> in the file
-<code>init/meta/simp_tactic.lean</code> in core Lean reveals other config
-options, not all of them documented, and most of them not very
-relevant for the average user.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">(</span><span class="n">max_steps</span> <span class="o">:</span> <span class="n">nat</span>           <span class="o">:=</span> <span class="n">simp.default_max_steps</span><span class="o">)</span>
-<span class="o">(</span><span class="n">contextual</span> <span class="o">:</span> <span class="n">bool</span>         <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
-<span class="o">(</span><span class="n">lift_eq</span> <span class="o">:</span> <span class="n">bool</span>            <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">canonize_instances</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">canonize_proofs</span> <span class="o">:</span> <span class="n">bool</span>    <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
-<span class="o">(</span><span class="n">use_axioms</span> <span class="o">:</span> <span class="n">bool</span>         <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">zeta</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">beta</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">eta</span>  <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">proj</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span> <span class="c1">-- reduce projections</span>
-<span class="o">(</span><span class="n">iota</span> <span class="o">:</span> <span class="n">bool</span>               <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">iota_eqn</span> <span class="o">:</span> <span class="n">bool</span>           <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span> <span class="c1">-- reduce using all equation lemmas generated by equation/pattern-matching compiler</span>
-<span class="o">(</span><span class="n">constructor_eq</span> <span class="o">:</span> <span class="n">bool</span>     <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">single_pass</span> <span class="o">:</span> <span class="n">bool</span>        <span class="o">:=</span> <span class="n">ff</span><span class="o">)</span>
-<span class="o">(</span><span class="n">fail_if_unchanged</span>         <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
-<span class="o">(</span><span class="n">memoize</span>                   <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
+<h3 id="configuration-options" class="markdown-heading">Configuration options <a class="hover-link" href="#configuration-options">#</a></h3>
+<p>Both <code>simp</code> and <code>dsimp</code> can take additional configuration options using record syntax.
+For example, <code>simp {single_pass := tt}</code> runs <code>simp</code> with the <code>single_pass</code> configuration option set to true.
+One can use <code>single_pass</code> to avoid loops that might otherwise occur.</p>
+<p>The core Lean file <code>init/meta/simp_tactic.lean</code> reveals other configuration options in
+the <a href="https://leanprover-community.github.io/mathlib_docs/find/tactic.dsimp_config/src"><code>dsimp_config</code></a> and <a href="https://leanprover-community.github.io/mathlib_docs/find/tactic.simp_config/src"><code>simp_config</code></a> structures.
+Most of them not very relevant for the average user,
+and some of them are not fully documented.  These are reproduced in the
+following table, where the default value for a configuration option
+for <code>simp</code> or <code>dsimp</code> is given in the respective column -- if no
+default value is present, that option is unavailable.
+The &quot;max&quot; default value refers to <code>simp.default_max_steps</code>, which is currently <code>10000000</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left"><code>simp</code></th>
+<th align="left"><code>dsimp</code></th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>contextual</code></td>
+<td align="left"><code>ff</code></td>
+<td align="left"></td>
+<td align="left">Use additional <code>simp</code> lemmas based on the context of the current subexpression (see example below)</td>
+</tr>
+<tr>
+<td align="left"><code>single_pass</code></td>
+<td align="left"><code>ff</code></td>
+<td align="left"><code>ff</code></td>
+<td align="left">Visit each subterm no more than once</td>
+</tr>
+<tr>
+<td align="left"><code>md</code></td>
+<td align="left"></td>
+<td align="left"><code>reducible</code></td>
+<td align="left">Reduction mode: how aggressively constants are replaced with their definitions (<code>all</code>, <code>semireducible</code>, <code>instances</code>, <code>reducible</code>, or <code>none</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>max_steps</code></td>
+<td align="left">max</td>
+<td align="left">max</td>
+<td align="left">The maximum number of steps allowed before failing</td>
+</tr>
+<tr>
+<td align="left"><code>fail_if_unchanged</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Fail if no simplifications applied</td>
+</tr>
+<tr>
+<td align="left"><code>beta</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Do beta-reductions: <code>(λ x, a) y</code> ↝ <code>a[x := y]</code></td>
+</tr>
+<tr>
+<td align="left"><code>eta</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Allow eta-equivalence: <code>(λ x, f x)</code> ↝ <code>f</code></td>
+</tr>
+<tr>
+<td align="left"><code>zeta</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Do zeta-reductions: <code>let x := a in b</code> ↝ <code>b[x := a]</code></td>
+</tr>
+<tr>
+<td align="left"><code>proj</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Reduce projections: <code>prod.fst (a, b)</code> ↝ <code>a</code></td>
+</tr>
+<tr>
+<td align="left"><code>iota</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Reduce recursors: <code>nat.rec_on (succ n) Z R</code> ↝ <code>R n (nat.rec_on n Z R)</code></td>
+</tr>
+<tr>
+<td align="left"><code>iota_eqn</code></td>
+<td align="left"><code>ff</code></td>
+<td align="left"></td>
+<td align="left">Reduce using all equation lemmas generated by the equation compiler</td>
+</tr>
+<tr>
+<td align="left"><code>unfold_reducible</code></td>
+<td align="left"></td>
+<td align="left"><code>ff</code></td>
+<td align="left">Unfold definitions with <code>reducible</code> transparency (delta-reduce)</td>
+</tr>
+<tr>
+<td align="left"><code>memoize</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Perform caching of simps of subterms</td>
+</tr>
+<tr>
+<td align="left"><code>lift_eq</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"></td>
+<td align="left">Prove reflexive relations using proofs of equality (?)</td>
+</tr>
+<tr>
+<td align="left"><code>use_axioms</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"></td>
+<td align="left">Allow using <code>propext</code> and <code>funext</code> to rewrite under binders and to use <code>A ↔ B</code> <code>simp</code> lemmas</td>
+</tr>
+<tr>
+<td align="left"><code>constructor_eq</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"></td>
+<td align="left">Use injectivity of constructors in equalities</td>
+</tr>
+<tr>
+<td align="left"><code>canonize_instances</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left"><code>tt</code></td>
+<td align="left">Replace instances with a canonical defeq one</td>
+</tr>
+<tr>
+<td align="left"><code>canonize_proofs</code></td>
+<td align="left"><code>ff</code></td>
+<td align="left"></td>
+<td align="left">Replace proofs with a canonical defeq one</td>
+</tr>
+<tr>
+<td align="left"><code>discharger</code></td>
+<td align="left">fail</td>
+<td align="left"></td>
+<td align="left">Tactic used to discharge new subgoals created during simplification; if it fails, the simplifier tries to discharge them by simplifying</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>b[x := a]</code> notation means to replace all free instances of <code>x</code> in <code>b</code> with <code>a</code>.</p>
+<p>Setting <code>constructor_eq</code> to <code>tt</code> will reduce equations of the form
+<code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct
+constructors for the same type, and to <code>a1 = b1 ∧ a2 = b2 ∧ ...</code> if
+<code>X</code> and <code>Y</code> are the same constructor.</p>
+<p>Another interesting option is <code>iota_eqn</code> (in fact, <code>simp!</code> is shorthand for
+<code>simp {iota_eqn := tt}</code>). This adds equation lemmas generated by the
+equation/pattern-matching compiler to the set of <code>simp</code> lemmas.</p>
+<p>The <code>contextual</code> option gives <code>simp</code> the ability to consider
+hypotheses as additional <code>simp</code> lemmas based on a subexpression's
+surrounding context. For example, as it simplifies the consequent of an
+implication it temporarily adds the antecedent as a <code>simp</code> lemma. This
+is necessary for the following example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">simp</span> <span class="o">{</span> <span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+<span class="kd">end</span>
 </code></pre></div>
 
-<p>Setting <code>constructor_eq</code> to true will reduce equations of the form <code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct
-constructors for the same type, and to <code>a1 = b1 and a2 = b2 and...</code> if
-<code>X = Y</code> are the same constructor. Another interesting example is
-<code>iota_eqn</code>. In fact <code>simp!</code> is shorthand for <code>simp {iota_eqn := tt}</code>. This adds non-trivial equation lemmas generated by the
-equation/pattern-matching compiler to simp's list of simp lemmas.</p>
+<p>Amusing trick: if you do <code>simp _</code> then Lean will interpret <code>_</code> as a placeholder for the configuration options.
+Since it can't figure out the configuration options through unification, it will instead print an error
+along with all the default configuration values.
+This works for other tactics that take a configuration as well, such as <code>rw</code>.</p>
 
   </main>
 
