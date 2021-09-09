@@ -12,9 +12,8 @@ There is a [video walkthrough](https://www.youtube.com/watch?v=NOGWsCNm_FY) of t
 Here we will discuss the fast way, assuming a lot of trust from you. It
 will install Lean, with supporting tools `elan` and `leanpkg`,
 the supporting tool `leanproject` for Lean's mathematical
-library, as well as the code editor VS Code and its Lean plugin, and
-other dependencies you probably already have, like `curl`, `git`,
-`python3`, and `pipx`. If you don't like this method, there is a
+library, as well as the code editor VS Code and its Lean plugin.
+If you don't like this method, there is a
 [detailed webpage](macos_details.html) which will decompose the
 process into described stages, and won't ask for a blind `sudo`.
 
