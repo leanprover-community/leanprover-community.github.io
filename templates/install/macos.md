@@ -9,6 +9,8 @@ There is a [video walkthrough](https://www.youtube.com/watch?v=NOGWsCNm_FY) of t
 
 ## Installing Lean and mathlib
 
+### Intel Macs
+
 Here we will discuss the fast way, assuming a lot of trust from you. It
 will install Lean, with supporting tools `elan` and `leanpkg`,
 the supporting tool `leanproject` for Lean's mathematical
@@ -21,6 +23,23 @@ The fast way is: open a terminal and type:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh)" && source ~/.profile
 ```
+
+### M1 Macs / Apple Silicon
+
+Given that GitHub Actions does [not yet support builds on Apple
+ARM](https://github.com/actions/virtual-environments/issues/2187), installation
+of Lean is for the moment a bit more complex.
+
+Specifically, `elan` – which is otherwise recommended (and installed)
+as part of the above instructions – will not be able to fetch Lean binaries on
+these devices.
+
+Until [a separate M1 installation is
+automated](https://github.com/leanprover-community/mathlib-tools/issues/107),
+manual compilation of Lean is required on Apple ARM hardware.
+
+There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
+with some interim further details and advice. If you have trouble, feel free to ask for help.
 
 ## Lean Projects
 
