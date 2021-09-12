@@ -25,6 +25,11 @@ Installing `elan` and mathlib supporting tools
     install `elan`, as well as the supporting toolset for working with
     `mathlib`.
 
+    Note that Homebrew also contains a formula named simply `lean`, but
+    that it installs a fixed version of Lean, rather than one provisioned
+    with `elan` as per the above.  Using this formula is as mentioned *not*
+    recommended.
+
 3.  Use `elan` to install the latest stable version of `lean` by running
     `elan toolchain install stable`. You can also set the newly-installed
     version to be the default version of `lean` you get when running outside of
