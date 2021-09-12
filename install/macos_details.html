@@ -50,39 +50,36 @@
 <h1 id="controlled-installation-of-lean-and-mathlib-on-macos" class="markdown-heading">Controlled installation of Lean and mathlib on MacOS <a class="hover-link" href="#controlled-installation-of-lean-and-mathlib-on-macos">#</a></h1>
 <p>This document explains a more controlled installation procedure for Lean and
 mathlib on MacOS. There is a quicker way described in the main
-<a href="macos.html">install page</a> but it requires more trust.  Of course you can get
-even more details about what is going on by reading the bash script that will
-be downloaded below:
-<a href="https://github.com/leanprover/elan/blob/master/elan-init.sh">elan_init</a>.</p>
+<a href="macos.html">install page</a> but it requires more trust.</p>
 <p>If you get stuck, please come to <a href="https://leanprover.zulipchat.com/">the chat room</a> to ask for
 assistance.</p>
-<p>We'll need to set up Lean, an editor that knows about Lean, and <code>mathlib</code> (the standard library).</p>
+<p>We'll need to set up Lean, an editor that knows about Lean, and <a href="https://github.com/leanprover-community/mathlib/"><code>mathlib</code></a> (the standard library).</p>
 <p>Rather than installing Lean directly, we'll install a small program called <a href="https://github.com/leanprover/elan"><code>elan</code></a> which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.</p>
-<h2 id="installing-codeelancode" class="markdown-heading">Installing <code>elan</code> <a class="hover-link" href="#installing-codeelancode">#</a></h2>
+<p>We'll also install <a href="https://github.com/leanprover-community/mathlib-tools"><code>mathlib-tools</code></a>,
+which, amongst other things, let you download compiled binaries for <code>mathlib</code>.</p>
+<h2 id="installing-codeelancode-and-mathlib-supporting-tools" class="markdown-heading">Installing <code>elan</code> and mathlib supporting tools <a class="hover-link" href="#installing-codeelancode-and-mathlib-supporting-tools">#</a></h2>
 <ol>
 <li>
-<p>We'll need a terminal, along with some basic prerequisites.
-Install <a href="https://brew.sh/">homebrew</a>, then run <code>brew install gmp coreutils</code> in a terminal
-(<code>gmp</code> is required by <code>lean</code>, <code>coreutils</code> by <code>leanpkg</code>).</p>
+<p>Install <a href="https://brew.sh/">Homebrew</a> if you do not already have it installed.</p>
 </li>
 <li>
-<p>At a terminal, run the command</p>
-<p><code>curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh</code></p>
-<p>and hit enter when a question is asked.</p>
-<p>It is recommended that you re-login, so that your environment knows about <code>elan</code>.
-(Alternatively, type <code>source $HOME/.elan/env</code> to update the current terminal.)</p>
+<p>Run <code>brew install elan mathlibtools</code> in a terminal window to
+install <code>elan</code>, as well as the supporting toolset for working with
+<code>mathlib</code>.</p>
+<p>Note that Homebrew also contains a formula named simply <code>lean</code>, but
+that it installs a fixed version of Lean, rather than one provisioned
+with <code>elan</code> as per the above.  Using this formula is as mentioned <em>not</em>
+recommended.</p>
+</li>
+<li>
+<p>Use <code>elan</code> to install the latest stable version of <code>lean</code> by running
+<code>elan toolchain install stable</code>. You can also set the newly-installed
+version to be the default version of <code>lean</code> you get when running outside of
+a project (discussed below) by running <code>elan default stable</code>.</p>
 </li>
 </ol>
-<h2 id="installing-mathlib-supporting-tools" class="markdown-heading">Installing mathlib supporting tools <a class="hover-link" href="#installing-mathlib-supporting-tools">#</a></h2>
-<p>At a terminal, run the command</p>
-<div class="codehilite"><pre><span></span><code>brew install python3 pipx
-pipx ensurepath
-pipx install mathlibtools
-</code></pre></div>
-
-<p>This will install tools that, amongst other things, let you download compiled binaries for mathlib.</p>
 <h2 id="installing-and-configuring-an-editor" class="markdown-heading">Installing and configuring an editor <a class="hover-link" href="#installing-and-configuring-an-editor">#</a></h2>
 <p>There are two editors you can use with Lean, VS Code and emacs.
 This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).</p>
@@ -99,6 +96,21 @@ displayed.</li>
 </ol>
 <h2 id="lean-projects" class="markdown-heading">Lean Projects <a class="hover-link" href="#lean-projects">#</a></h2>
 <p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
+<h2 id="aside-migrating-from-older-installations" class="markdown-heading">Aside: Migrating From Older Installations <a class="hover-link" href="#aside-migrating-from-older-installations">#</a></h2>
+<p>Older versions of this installation guide recommended a different method
+of installation, involving manually installing <code>elan</code> directly from
+GitHub, procuring <code>pipx</code> and using that to install <code>mathlib-tools</code>
+(<code>leanproject</code>).</p>
+<p>If you have installed things this way, you can migrate to the newer
+installation mechanism by running:</p>
+<div class="codehilite"><pre><span></span><code>pipx uninstall mathlibtools <span class="o">&amp;&amp;</span> brew install mathlibtools
+</code></pre></div>
+
+<p>and</p>
+<div class="codehilite"><pre><span></span><code>elan self uninstall <span class="o">&amp;&amp;</span> brew install elan
+</code></pre></div>
+
+<p>for <code>mathlib-tools</code> and <code>elan</code> respectively.</p>
 
   </main>
 
