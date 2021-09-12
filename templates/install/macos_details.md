@@ -30,7 +30,6 @@ Installing `elan` and mathlib supporting tools
     version to be the default version of `lean` you get when running outside of
     a project (discussed below) by running `elan default stable`.
 
-
 Installing and configuring an editor
 ---
 
@@ -50,3 +49,26 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 ## Lean Projects
 
 You can now read instructions about creating and working on [Lean projects](project.html)
+
+Aside: Migrating From Older Installations
+---
+
+Older versions of this installation guide recommended a different method
+of installation, involving manually installing `elan` directly from
+GitHub, procuring `pipx` and using that to install `mathlib-tools`
+(`leanproject`).
+
+If you have installed things this way, you can migrate to the newer
+installation mechanism by running:
+
+  ```sh
+  pipx uninstall mathlibtools && brew install mathlibtools
+  ```
+
+and
+
+  ```sh
+  elan self uninstall && brew install elan
+  ```
+
+for `mathlib-tools` and `elan` respectively.
