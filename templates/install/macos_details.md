@@ -2,48 +2,38 @@
 
 This document explains a more controlled installation procedure for Lean and
 mathlib on MacOS. There is a quicker way described in the main
-[install page](macos.html) but it requires more trust.  Of course you can get
-even more details about what is going on by reading the bash script that will
-be downloaded below:
-[elan_init](https://github.com/leanprover/elan/blob/master/elan-init.sh).
+[install page](macos.html) but it requires more trust.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
 
-We'll need to set up Lean, an editor that knows about Lean, and `mathlib` (the standard library).
+We'll need to set up Lean, an editor that knows about Lean, and [`mathlib`](https://github.com/leanprover-community/mathlib/) (the standard library).
 
 Rather than installing Lean directly, we'll install a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
 
-Installing `elan`
+We'll also install [`mathlib-tools`](https://github.com/leanprover-community/mathlib-tools),
+which, amongst other things, let you download compiled binaries for `mathlib`.
+
+Installing `elan` and mathlib supporting tools
 ---
 
-1. We'll need a terminal, along with some basic prerequisites.
-  Install [homebrew](https://brew.sh/), then run `brew install gmp coreutils` in a terminal
-    (`gmp` is required by `lean`, `coreutils` by `leanpkg`).
+1.  Install [Homebrew](https://brew.sh/) if you do not already have it installed.
 
-2. At a terminal, run the command
+2.  Run `brew install elan mathlibtools` in a terminal window to
+    install `elan`, as well as the supporting toolset for working with
+    `mathlib`.
 
-   `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh`
+    Note that Homebrew also contains a formula named simply `lean`, but
+    that it installs a fixed version of Lean, rather than one provisioned
+    with `elan` as per the above.  Using this formula is as mentioned *not*
+    recommended.
 
-   and hit enter when a question is asked.
-
-   It is recommended that you re-login, so that your environment knows about `elan`.
-   (Alternatively, type `source $HOME/.elan/env` to update the current terminal.)
-
-
-Installing mathlib supporting tools
----
-
-At a terminal, run the command
-  ```bash
-  brew install python3 pipx
-  pipx ensurepath
-  pipx install mathlibtools
-  ```
-
-This will install tools that, amongst other things, let you download compiled binaries for mathlib.
+3.  Use `elan` to install the latest stable version of `lean` by running
+    `elan toolchain install stable`. You can also set the newly-installed
+    version to be the default version of `lean` you get when running outside of
+    a project (discussed below) by running `elan default stable`.
 
 Installing and configuring an editor
 ---
@@ -64,3 +54,26 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 ## Lean Projects
 
 You can now read instructions about creating and working on [Lean projects](project.html)
+
+Aside: Migrating From Older Installations
+---
+
+Older versions of this installation guide recommended a different method
+of installation, involving manually installing `elan` directly from
+GitHub, procuring `pipx` and using that to install `mathlib-tools`
+(`leanproject`).
+
+If you have installed things this way, you can migrate to the newer
+installation mechanism by running:
+
+  ```sh
+  pipx uninstall mathlibtools && brew install mathlibtools
+  ```
+
+and
+
+  ```sh
+  elan self uninstall && brew install elan
+  ```
+
+for `mathlib-tools` and `elan` respectively.
