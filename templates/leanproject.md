@@ -52,7 +52,8 @@ leanproject build
 
 ### Getting mathlib oleans
 
-In an existing project *depending on* mathlib (but not mathlib itself), you can run:
+In an existing project *depending on* mathlib (but not mathlib itself), you can
+run:
 ```text
 leanproject get-mathlib-cache
 ```
@@ -76,28 +77,15 @@ By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using `leanproject --no-lean-upgrade upgrade-mathlib`.
 
+Note that when working in a shared repository, after pushing the changes made
+to `leanproject.toml` by this command, collaborators will need to run
+`get-mathlib-cache` as described above.
+
 If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 "Lean: Restart server" command.
 
 ## Advanced usage
-
-### Global mathlib install
-
-If you want to use mathlib outside of a Lean 3 project, you can run:
-```text
-leanproject global-install
-```
-This will put a pre-compiled mathlib inside `$HOME/.lean`, the user-wide
-Lean project whose dependencies can be used by lean files outside
-projects. You can upgrade this project using:
-```text
-leanproject global-upgrade
-```
-
-This is generally discouraged, as this can lead to trouble if you end up
-working with Lean 3 projects that depend on different versions of Lean 3 /
-mathlib.
 
 ### Adding mathlib to an existing project
 
@@ -112,9 +100,9 @@ upgrade by using `leanproject --no-lean-upgrade add-mathlib`.
 
 ### Project olean cache
 
-In any Lean 3 project, it can be useful to store and retrieve olean files,
-especially if the project has several git branches. Storing oleans is
-done by:
+In any Lean 3 project (including mathlib itself), it can be useful to store and
+retrieve olean files, especially if the project has several git branches.
+Storing oleans is done by:
 ```text
 leanproject mk-cache
 ```
@@ -219,6 +207,23 @@ so that leanproject will look for caches at
 `my_url/relevant_git_hash.tar.gz`. You can override this base url
 for one invocation using `leanproject --from-url my_url ...`
 (where `...` denotes a command and its arguments).
+
+### Global mathlib install
+
+If you want to use mathlib outside of a Lean 3 project, you can run:
+```text
+leanproject global-install
+```
+This will put a pre-compiled mathlib inside `$HOME/.lean`, the user-wide
+Lean project whose dependencies can be used by lean files outside
+projects. You can upgrade this project using:
+```text
+leanproject global-upgrade
+```
+
+This is generally discouraged, as this can lead to trouble if you end up
+working with Lean 3 projects that depend on different versions of Lean 3 /
+mathlib.
 
 ## Troubleshooting
 
