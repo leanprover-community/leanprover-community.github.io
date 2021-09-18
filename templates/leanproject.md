@@ -62,6 +62,14 @@ to download a compiled mathlib at the commit currently specified in the
 project `leanpkg.toml` (see the next section if you want to update this
 commit and get the latest mathlib).
 
+If you already have an existing project and you want to upgrade it then your can use
+```text
+leanproject pull
+```
+to run `git pull` and then get mathlib olean files. If the relevant git remote
+is not called `origin` then you can indicate its name as in
+`leanproject pull my_remote`.
+
 If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 "Lean: Restart server" command.
