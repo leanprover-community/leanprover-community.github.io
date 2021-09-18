@@ -52,7 +52,8 @@ leanproject build
 
 ### Getting mathlib oleans
 
-In an existing project *depending on* mathlib (but not mathlib itself), you can
+In an existing project *depending on* mathlib
+(for mathlib itself, use `leanproject get-cache`, see below), you can
 run:
 ```text
 leanproject get-mathlib-cache
