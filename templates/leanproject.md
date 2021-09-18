@@ -52,8 +52,9 @@ leanproject build
 
 ### Getting mathlib oleans
 
-In an existing project depending on mathlib (or in mathlib itself), you
-can run:
+In an existing project *depending on* mathlib
+(for mathlib itself, use `leanproject get-cache`, see below), you can
+run:
 ```text
 leanproject get-mathlib-cache
 ```
@@ -77,28 +78,15 @@ By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using `leanproject --no-lean-upgrade upgrade-mathlib`.
 
+Note that when working in a shared repository, after pushing the changes made
+to `leanproject.toml` by this command, collaborators will need to run
+`get-mathlib-cache` as described above.
+
 If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
 "Lean: Restart server" command.
 
 ## Advanced usage
-
-### Global mathlib install
-
-If you want to use mathlib outside of a Lean 3 project, you can run:
-```text
-leanproject global-install
-```
-This will put a pre-compiled mathlib inside `$HOME/.lean`, the user-wide
-Lean project whose dependencies can be used by lean files outside
-projects. You can upgrade this project using:
-```text
-leanproject global-upgrade
-```
-
-This is generally discouraged, as this can lead to trouble if you end up
-working with Lean 3 projects that depend on different versions of Lean 3 /
-mathlib.
 
 ### Adding mathlib to an existing project
 
@@ -113,9 +101,9 @@ upgrade by using `leanproject --no-lean-upgrade add-mathlib`.
 
 ### Project olean cache
 
-In any Lean 3 project, it can be useful to store and retrieve olean files,
-especially if the project has several git branches. Storing oleans is
-done by:
+In any Lean 3 project (including mathlib itself), it can be useful to store and
+retrieve olean files, especially if the project has several git branches.
+Storing oleans is done by:
 ```text
 leanproject mk-cache
 ```
@@ -123,28 +111,54 @@ while retrieving them is done by:
 ```text
 leanproject get-cache
 ```
-One should note that, although olean files are indeed the primary target
-here, these commands actually store everything from the
-`src` and `test` folders of the current project.
+
+#### Creating caches
+
+Note that while olean files are indeed the primary target here, `mk-cache`
+actually stores everything from the `src` and `test` folders of the current
+project. Since `mk-cache` uses the current git revision as the key to the
+cache, it will refuse to run if your repository is dirty.
 
 If the project is mathlib itself, the caches will be stored in
 `$HOME/.mathlib/`. Otherwise, they will be stored in a folder `_cache` inside
 the project top-level folder. They are named after the corresponding git
 commit hash.
 
-In general, using these commands in a dirty git repository (*ie* a
-repository whose working copy contains uncommitted changes) is a bad
-idea. You can do it anyway by running `leanproject mk-cache --force` or
-`leanproject get-cache --force` respectively.
-
-The `--force` option will also overwrite existing cache for the current
+The `--force` option can be used to overwrite existing cache for the current
 git revision.
+
+Note that the Mathlib github repository will automatically create caches for
+any commits pushed to it, so it is often unecessary to use `mk-cache`.
+
+#### Retrieving caches
 
 When using `get-cache` inside the mathlib project, the local cache in
 `$HOME/.mathlib/` will be searched first, before trying to download it.
 You can force download by running
 `leanproject --force-download get-cache`. This `--force-download` option
 can also be used with the `upgrade-mathlib` command.
+
+Frequently a cache is not available for the current commit in a Lean3 project;
+typically due to new commits having been made on top of the one that a cache
+was built from. In this situation, `get-cache` will fail, but show which
+commits do have available caches:
+```
+$ leanproject get-cache
+Looking for my_project oleans for 3b19aed
+  locally...
+No cache available for revision 3b19aed
+Looking for my_project oleans for cf40a75
+  locally...
+  Found local my_project oleans
+No cache was available for 3b19aed. A cache was found for the ancestor cf40a75.
+To see the intermediate commits, run:
+  git log --graph 3b19aed cf40a75^!
+Run `leanproject get-cache --rev` on one of the available commits above.
+```
+In this scenario, running `leanproject get-cache --rev cf40a75` will fetch an
+older cache which will be partially valid. Another option is just to run
+`leanproject get-cache --fallback=download-first` which will automatically use
+the first cache found for a parent commit.
 
 If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with `ctrl`+`p` (`cmd`+`p` on macOS) and running the
@@ -194,6 +208,23 @@ so that leanproject will look for caches at
 `my_url/relevant_git_hash.tar.gz`. You can override this base url
 for one invocation using `leanproject --from-url my_url ...`
 (where `...` denotes a command and its arguments).
+
+### Global mathlib install
+
+If you want to use mathlib outside of a Lean 3 project, you can run:
+```text
+leanproject global-install
+```
+This will put a pre-compiled mathlib inside `$HOME/.lean`, the user-wide
+Lean project whose dependencies can be used by lean files outside
+projects. You can upgrade this project using:
+```text
+leanproject global-upgrade
+```
+
+This is generally discouraged, as this can lead to trouble if you end up
+working with Lean 3 projects that depend on different versions of Lean 3 /
+mathlib.
 
 ## Troubleshooting
 
