@@ -89,8 +89,9 @@ order to get decent interactive Lean speed), you can use:</p>
 </code></pre></div>
 
 <h3 id="getting-mathlib-oleans" class="markdown-heading">Getting mathlib oleans <a class="hover-link" href="#getting-mathlib-oleans">#</a></h3>
-<p>In an existing project depending on mathlib (or in mathlib itself), you
-can run:</p>
+<p>In an existing project <em>depending on</em> mathlib
+(for mathlib itself, use <code>leanproject get-cache</code>, see below), you can
+run:</p>
 <div class="codehilite"><pre><span></span><code>leanproject get-mathlib-cache
 </code></pre></div>
 
@@ -110,24 +111,13 @@ latest mathlib version by running:</p>
 By default, this will update the version of Lean 3 used by this project to
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using <code>leanproject --no-lean-upgrade upgrade-mathlib</code>.</p>
+<p>Note that when working in a shared repository, after pushing the changes made
+to <code>leanproject.toml</code> by this command, collaborators will need to run
+<code>get-mathlib-cache</code> as described above.</p>
 <p>If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with <code>ctrl</code>+<code>p</code> (<code>cmd</code>+<code>p</code> on macOS) and running the
 &quot;Lean: Restart server&quot; command.</p>
 <h2 id="advanced-usage" class="markdown-heading">Advanced usage <a class="hover-link" href="#advanced-usage">#</a></h2>
-<h3 id="global-mathlib-install" class="markdown-heading">Global mathlib install <a class="hover-link" href="#global-mathlib-install">#</a></h3>
-<p>If you want to use mathlib outside of a Lean 3 project, you can run:</p>
-<div class="codehilite"><pre><span></span><code>leanproject global-install
-</code></pre></div>
-
-<p>This will put a pre-compiled mathlib inside <code>$HOME/.lean</code>, the user-wide
-Lean project whose dependencies can be used by lean files outside
-projects. You can upgrade this project using:</p>
-<div class="codehilite"><pre><span></span><code>leanproject global-upgrade
-</code></pre></div>
-
-<p>This is generally discouraged, as this can lead to trouble if you end up
-working with Lean 3 projects that depend on different versions of Lean 3 /
-mathlib.</p>
 <h3 id="adding-mathlib-to-an-existing-project" class="markdown-heading">Adding mathlib to an existing project <a class="hover-link" href="#adding-mathlib-to-an-existing-project">#</a></h3>
 <p>If you already have a Lean project but it doesn't use mathlib yet, you
 can go to the project folder and run:</p>
@@ -138,9 +128,9 @@ can go to the project folder and run:</p>
 match the latest version compatible with mathlib. You can forbid such an
 upgrade by using <code>leanproject --no-lean-upgrade add-mathlib</code>.</p>
 <h3 id="project-olean-cache" class="markdown-heading">Project olean cache <a class="hover-link" href="#project-olean-cache">#</a></h3>
-<p>In any Lean 3 project, it can be useful to store and retrieve olean files,
-especially if the project has several git branches. Storing oleans is
-done by:</p>
+<p>In any Lean 3 project (including mathlib itself), it can be useful to store and
+retrieve olean files, especially if the project has several git branches.
+Storing oleans is done by:</p>
 <div class="codehilite"><pre><span></span><code>leanproject mk-cache
 </code></pre></div>
 
@@ -148,24 +138,46 @@ done by:</p>
 <div class="codehilite"><pre><span></span><code>leanproject get-cache
 </code></pre></div>
 
-<p>One should note that, although olean files are indeed the primary target
-here, these commands actually store everything from the
-<code>src</code> and <code>test</code> folders of the current project.</p>
+<h4 id="creating-caches" class="markdown-heading">Creating caches <a class="hover-link" href="#creating-caches">#</a></h4>
+<p>Note that while olean files are indeed the primary target here, <code>mk-cache</code>
+actually stores everything from the <code>src</code> and <code>test</code> folders of the current
+project. Since <code>mk-cache</code> uses the current git revision as the key to the
+cache, it will refuse to run if your repository is dirty.</p>
 <p>If the project is mathlib itself, the caches will be stored in
 <code>$HOME/.mathlib/</code>. Otherwise, they will be stored in a folder <code>_cache</code> inside
 the project top-level folder. They are named after the corresponding git
 commit hash.</p>
-<p>In general, using these commands in a dirty git repository (<em>ie</em> a
-repository whose working copy contains uncommitted changes) is a bad
-idea. You can do it anyway by running <code>leanproject mk-cache --force</code> or
-<code>leanproject get-cache --force</code> respectively.</p>
-<p>The <code>--force</code> option will also overwrite existing cache for the current
+<p>The <code>--force</code> option can be used to overwrite existing cache for the current
 git revision.</p>
+<p>Note that the Mathlib github repository will automatically create caches for
+any commits pushed to it, so it is often unecessary to use <code>mk-cache</code>.</p>
+<h4 id="retrieving-caches" class="markdown-heading">Retrieving caches <a class="hover-link" href="#retrieving-caches">#</a></h4>
 <p>When using <code>get-cache</code> inside the mathlib project, the local cache in
 <code>$HOME/.mathlib/</code> will be searched first, before trying to download it.
 You can force download by running
 <code>leanproject --force-download get-cache</code>. This <code>--force-download</code> option
 can also be used with the <code>upgrade-mathlib</code> command.</p>
+<p>Frequently a cache is not available for the current commit in a Lean3 project;
+typically due to new commits having been made on top of the one that a cache
+was built from. In this situation, <code>get-cache</code> will fail, but show which
+commits do have available caches:</p>
+<div class="codehilite"><pre><span></span><code><span class="bp">$</span> <span class="n">leanproject</span> <span class="n">get</span><span class="bp">-</span><span class="n">cache</span>
+<span class="n">Looking</span> <span class="n">for</span> <span class="n">my_project</span> <span class="n">oleans</span> <span class="n">for</span> <span class="mi">3</span><span class="n">b19aed</span>
+  <span class="n">locally...</span>
+<span class="n">No</span> <span class="n">cache</span> <span class="n">available</span> <span class="n">for</span> <span class="n">revision</span> <span class="mi">3</span><span class="n">b19aed</span>
+<span class="n">Looking</span> <span class="n">for</span> <span class="n">my_project</span> <span class="n">oleans</span> <span class="n">for</span> <span class="n">cf40a75</span>
+  <span class="n">locally...</span>
+  <span class="n">Found</span> <span class="kn">local</span> <span class="n">my_project</span> <span class="n">oleans</span>
+<span class="n">No</span> <span class="n">cache</span> <span class="n">was</span> <span class="n">available</span> <span class="n">for</span> <span class="mi">3</span><span class="n">b19aed.</span> <span class="n">A</span> <span class="n">cache</span> <span class="n">was</span> <span class="n">found</span> <span class="n">for</span> <span class="n">the</span> <span class="n">ancestor</span> <span class="n">cf40a75.</span>
+<span class="n">To</span> <span class="n">see</span> <span class="n">the</span> <span class="n">intermediate</span> <span class="n">commits</span><span class="o">,</span> <span class="n">run</span><span class="o">:</span>
+  <span class="n">git</span> <span class="n">log</span> <span class="c1">--graph 3b19aed cf40a75^!</span>
+<span class="n">Run</span> <span class="bp">`</span><span class="n">leanproject</span> <span class="n">get</span><span class="bp">-</span><span class="n">cache</span> <span class="c1">--rev` on one of the available commits above.</span>
+</code></pre></div>
+
+<p>In this scenario, running <code>leanproject get-cache --rev cf40a75</code> will fetch an
+older cache which will be partially valid. Another option is just to run
+<code>leanproject get-cache --fallback=download-first</code> which will automatically use
+the first cache found for a parent commit.</p>
 <p>If you have Lean 3 in VS Code open, you should restart Lean by opening the
 command palette with <code>ctrl</code>+<code>p</code> (<code>cmd</code>+<code>p</code> on macOS) and running the
 &quot;Lean: Restart server&quot; command.</p>
@@ -208,6 +220,20 @@ Azure server. You permanently override the base url it uses by running:</p>
 <code>my_url/relevant_git_hash.tar.gz</code>. You can override this base url
 for one invocation using <code>leanproject --from-url my_url ...</code>
 (where <code>...</code> denotes a command and its arguments).</p>
+<h3 id="global-mathlib-install" class="markdown-heading">Global mathlib install <a class="hover-link" href="#global-mathlib-install">#</a></h3>
+<p>If you want to use mathlib outside of a Lean 3 project, you can run:</p>
+<div class="codehilite"><pre><span></span><code>leanproject global-install
+</code></pre></div>
+
+<p>This will put a pre-compiled mathlib inside <code>$HOME/.lean</code>, the user-wide
+Lean project whose dependencies can be used by lean files outside
+projects. You can upgrade this project using:</p>
+<div class="codehilite"><pre><span></span><code>leanproject global-upgrade
+</code></pre></div>
+
+<p>This is generally discouraged, as this can lead to trouble if you end up
+working with Lean 3 projects that depend on different versions of Lean 3 /
+mathlib.</p>
 <h2 id="troubleshooting" class="markdown-heading">Troubleshooting <a class="hover-link" href="#troubleshooting">#</a></h2>
 <p>If <code>leanproject</code> ends with a mysterious error message, you can run it
 using the <code>--debug</code> flag, e.g. <code>leanproject --debug new my_project</code>.
