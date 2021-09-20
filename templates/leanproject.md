@@ -194,10 +194,23 @@ leanproject import-graph --from my_subproject.my_file my_graph_file_name.suffix
 ```
 Combining `--to` and `--from` is possible.
 
+### Reducing imports
+
+When adding imports to a file incrementally it is easy to end up with a long list 
+of imports where some imports include others transitively.
+`leanproject` can be used to print a list of removable imports using the command
+```text
+leanproject reduce-imports --file my_file.lean
+```
+by adding the optional tag `--sed` a sed script will be produced instead that will 
+remove the unneeded lines for you when run.
+Calling this command with no file argument will print removable imports in the
+entire project.
+
 ### Git hooks
 
 If you want leanproject to fetch olean caches after each `git checkout`,
-and make olean caches after each `git commmit` in the current project,
+and make olean caches after each `git commit` in the current project,
 you can run:
 ```text
 leanproject hooks
