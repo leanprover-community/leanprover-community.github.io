@@ -6,6 +6,10 @@ physics background.
 Most users are either students or work in academia, but there also some
 data scientists and software engineers working in industry.
 
+## The blog
+
+You can get news from the community on our [blog](/blog/).
+
 ## The Lean Zulip chat
 
 The main gathering point of our community is a
