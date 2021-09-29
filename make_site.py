@@ -343,6 +343,7 @@ def render_site(target: Path, base_url: str, reloader=False):
         content_template = env.get_template("_markdown.html")
         path = Path(template.name)
         title = path.with_suffix('').name
+        (target/path.parent).mkdir(parents=True, exist_ok=True)
         content_template.stream(**kwargs).dump(str(target/path.parent/title)+'.html')
 
     def get_contents(template):
