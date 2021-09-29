@@ -16,6 +16,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
 import gzip
+import os
 from github import Github
 
 class MarkdownExtension(jinja2.ext.Extension):
@@ -241,7 +242,7 @@ class Project:
     maintainers: List[str]
     stars: int
 
-github = Github()
+github = Github(os.environ.get('GITHUB_TOKEN', None))
 
 urllib.request.urlretrieve(
     'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
@@ -342,6 +343,7 @@ def render_site(target: Path, base_url: str, reloader=False):
         content_template = env.get_template("_markdown.html")
         path = Path(template.name)
         title = path.with_suffix('').name
+        (target/path.parent).mkdir(parents=True, exist_ok=True)
         content_template.stream(**kwargs).dump(str(target/path.parent/title)+'.html')
 
     def get_contents(template):
