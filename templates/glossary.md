@@ -91,11 +91,24 @@ A *code linter* is a [linter](#lint) concerned with how code works. Concretely, 
 
 ### continuous integration
 
-
-
 ### core Lean
 
-The part of Lean written in Lean itself. mathlib was originally an annex of Lean. Since then, it outgrew it. But some basic lemmas and definitions are still held in *core Lean*, [the Lean repository](https://github.com/leanprover-community/lean), which renders it much less flexible.
+As differentiated from `mathlib` or other community-authored Lean code, core
+Lean refers to the portions of Lean which ship with the distribution of Lean
+itself.
+
+Historically, even the `mathlib` project itself was a part of "core
+Lean", and was split off into its own separately maintained project
+afterwards to facilitate development speed.
+
+Some fundamental lemmas and definitions remain part of core Lean even after
+the split. Occasionally additional lemmas and definitions are still removed
+or migrated from the core community Lean 3 repository and into mathlib, should
+they conflict with newly developed mathlib code.
+
+The current portions of core Lean 3 can be found in the [Lean 3 community
+repository](https://github.com/leanprover-community/lean/tree/master/library),
+and for Lean 4 [similarly](https://github.com/leanprover/lean4/tree/master/src).
 
 ### declaration
 
