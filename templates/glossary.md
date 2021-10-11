@@ -43,9 +43,30 @@ More precisely, it is the process of simplifying an expression such as
 
 * [Section 2.3 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#function-abstraction-and-evaluation)
 
-### big operator
+### big operators
+
+A [locale](#locale) within mathlib's [algebra
+library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html),
+enabled via `open_locale big_operators`.
+
+It defines notation for finite sums and products using the `∑` and `∏`
+characters.
 
 ### binder
+
+Expressions such as `(a : α)`, `[a : α]` or `{a : α}` for any
+identifier(s) `a` and type `α` which, as part of various Lean syntactical
+elements -- [declarations](#declaration), `fun`, quantifiers and others --
+represent identifiers which will be bound within the body of the
+syntactic element or declaration.
+
+Each type of binder has different implications for whether it will be bound
+implicitly (without being passed by a caller), explicitly or via [typeclass
+inference](#typeclass-inference).
+
+In some places, notably within a `def`, defining "simple" binders
+without surrounding brackets are allowed, such as a binder `a` (with no
+explicit type) for some identifier `a`.
 
 ### bundled vs unbundled
 
