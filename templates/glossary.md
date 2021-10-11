@@ -22,19 +22,38 @@ More precisely, it is the process of simplifying an expression such as
 
 ### binder
 
-### bundled / unbundled
+### bundled vs unbundled
+
+
+### cache
+
+As the compilation time of mathlib well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository. Each cache consists of [olean files](#olean-files) for all of mathlib.
 
 ### carrier
 
 ### class
 
-A class is a [structure](#structure), and therefore transitively an [inductive type](#inductive-type).
+A *class* (aka *typeclass*) is a [structure](#structure) that can be handled by [typeclass inference](#typeclass-inference).
 
 ### coercion / ↑
 
+### code linter
+
+A *code linter* is a [linter](#lint) concerned with how code works. Concretely, this is [a collection of Lean programs](https://leanprover-community.github.io/mathlib_docs/tactic/lint/frontend.html) checking that... Errors are flagged in the [nolint file](https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt).
+
+### concrete structure
+
+### continuous integration
+
+
+
 ### core Lean
 
+The part of Lean written in Lean itself. mathlib was originally an annex of Lean. Since then, it outgrew it. But some basic lemmas and definitions are still held in *core Lean*, [the Lean repository](https://github.com/leanprover-community/lean), which renders it much less flexible.
+
 ### declaration
+
+A *declaration* is anything that starts with `def`, `lemma`, `theorem`. This corresponds to creating an (or several) object in the background environment.
 
 ### defeq
 
@@ -46,6 +65,8 @@ A class is a [structure](#structure), and therefore transitively an [inductive t
 
 ### diamond
 
+There are often many ways to turn a given structure into another one. A *diamond* is a collection of such ways. Diamonds are abundant because of [hierarchies](#hierarchy). [Typeclass inference](#typeclass-inference) will unpredictably take one of the paths for a given diamond, so we want this path to not matter. This amounts to making the [Type-valued](#Prop-vs-Type) fields of the different inferable structures [defeq](#defeq). When this is the case, we have a *defeq diamond*.
+
 ### elaborator
 
 ### eliminator
@@ -56,7 +77,8 @@ A class is a [structure](#structure), and therefore transitively an [inductive t
 
 As distinct from mathematical equality,
 [`equiv`](mathlib_docs/data/equiv/basic.html) allows for defining an
-equivalence or congruence of types.
+equivalence or congruence of types. One important thing to note
+is that an `equiv` [holds data instead of being merely a proof](#bundled-vs-unbundled).
 
 ### eta reduction
 
@@ -64,13 +86,32 @@ equivalence or congruence of types.
 
 ### heavy `refl`
 
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds
+Some `refl` invokations take an obnoxiously long time. There can be many reasons for this. See [this Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds).
 
-### ``Ioc``, ``Ico``, ``Ioo``, ``Icc``, ``Ici``, ``Ioi``
+### hierarchy
+
+A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining. In mathlib, we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
+
+### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
+
+There are `9` types of intervals, depending on whether the interval is **c**losed, **o**pen or runs to **i**nfinity at each end. Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
+
+### import tree
 
 ### inductive type
 
+### infoview
+
 ### instance
+
+"instance" refers to two closely related concepts:
+* An *instance* is a [class](#class) argument to a `def`/`lemma`. They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
+* An *instance* is an `instance` [declaration](#declaration). Instances For example, `ℝ` has a linear
+
+
+### instance vs def
+
+Some `def` in mathlib could be promoted to `instance`. The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond). One way to still use the problematic
 
 ### `leanpkg`
 
@@ -84,25 +125,55 @@ repository](https://github.com/leanprover-community/mathlib-tools/).
 
 ### lint
 
+A *linter* is a small program that looks for hard-to-spot mistakes in code. For mathlib, we use [style linters](#style-linter)* and [code linters](#code-linter). Mathlib is linted at every [CI run](#continuous-integration) after being built.
+
 ### locale
+
+A *locale* is akin to a mathematical environment. 
+
+### module
+
+A mathlib *module* is a file. Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
+
+## module docstring
+
+[Module](#module)-level comment summarizing what's to be found in the file. We require that every file has one, but [some old files](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) still don't.
 
 ### motive
 
 ### metavariable
 
-### mwe
+### MWE
 
-*Minimum working example*, a way of making it easier to get help with a
+*Minimal Working Example*, a way of making it easier to get help with a
 snippet of Lean code by reducing it to its essential parts, whilst being
 still runnable by others.
 
-Further information can be found on [the mwe page](mwe.html).
+Further information can be found on [the MWE page](mwe.html).
+
+### non-terminal `simp`
+
+A `simp` invokation is deemed *non-terminal* when it is not `simp only` nor is the last tactic invoked. We avoid non-terminal `simp`s because they are hard to maintain. See [Non-terminal `simp`s](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes)
 
 ### old structure
+
+### olean files
+
+Lean code has to be compiled. The compiled version of file `x.lean` is file `x.olean` and all olean files together form the [cache](#cache).
+
+### orange bar of hell
+
+In VScode, the *orange bar of hell* refers to the orange bar that appears left to the current file when it persists. The reason is that the Lean extension has to (re)compile all the imported files whose [cache](#cache) does not match. Because of this, having branches that touch two files far apart (with respect to the [import tree](#import-tree)) related through imports is considered bad practice as **any** modification on the file upstream will force Lean to recompile all the files in the middle.
 
 ### pi type
 
 ### proof term
+
+## propeq
+
+*Proposition equality*. Two terms `a b : α`are *propositionally equal* if we can prove `a = b`.  This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
+
+### `Prop` vs `Type`
 
 ### recursor
 
@@ -122,6 +193,12 @@ page](simp.html#simp-normal-form).
 
 A structure is an [inductive type](#inductive-type).
 
+### style linter
+
+A *style linter* is a [linter](#lint) concerned with how code looks. Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
+
+### syntactical equality
+
 ### tactic mode
 
 In Lean 3 it is often entered via a `begin...end` block.
@@ -136,10 +213,16 @@ In Lean 3 it is often entered via a `begin...end` block.
 
 ### term mode
 
-### terminal (or non-terminal) `simp`
-
 ### type annotation
+
+### typeclass inference
+
+### unification
 
 ### universe
 
 ### whnf
+
+### well founded recursion
+
+See [The equation compiler and `using_well_founded`](https://leanprover-community.github.io/extras/well_founded_recursion.html).
