@@ -21,7 +21,7 @@ objects which interact with it. Attributes may be defined either within
 
 Applying an attribute to an object is done by prefixing its
 [declaration](#declaration) with `@[name-of-attribute]`, or by using the
-`attribute` statement.
+`attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
 
 The `@[simp]` attribute, for example, tags an object (ostensibly a `lemma` or
 `theorem`) as being a [simp lemma](#simp-lemma).
