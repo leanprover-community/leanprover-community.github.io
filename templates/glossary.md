@@ -2,7 +2,32 @@
 
 ### abbreviation
 
+In the context of editing Lean files, an abbreviation is a way of
+entering a symbol not generally found on standard keyboard layouts using
+a descriptive shortcut.
+
+For instance, the not-equal symbol "≠" can be entered using the sequence
+`\neq`.
+
+The full list of abbreviations (and their replacements) can be found [in the
+vscode-lean repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
+
 ### attribute
+
+One or more tags or markings which may be applied to a Lean object,
+and which may affect either its behavior or the behavior of other Lean
+objects which interact with it. Attributes may be defined either within
+[core Lean](#core-lean), within mathlib, or within any Lean code.
+
+Applying an attribute to an object is done by prefixing its
+[declaration](#declaration) with `@[name-of-attribute]`, or by using the
+`attribute` statement.
+
+The `@[simp]` attribute, for example, tags an object (ostensibly a `lemma` or
+`theorem`) as being a [simp lemma](#simp-lemma).
+
+For further details, including a list of commonly used attributes, see [this
+section of the Lean reference manual](https://leanprover.github.io/reference/other_commands.html#attributes).
 
 ### beta reduction
 
