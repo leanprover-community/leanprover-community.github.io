@@ -70,11 +70,11 @@ explicit type) for some identifier `a`.
 
 ### bundled vs unbundled
 
-Given a mathematical object `O` with property `P`, bundling `P` refers to the creation of a Lean [structure](#structure) containing a proof of `P` as one of its fields.
+Given a mathematical object `O` with property `P`, bundling `P` refers to the creation of a Lean [structure](#structure) containing a proof of `P` as one of its fields in addition to those needed to structurally define `O`.
 
 In contrast, an unbundled structure instead contains only the definition of `O`, and separately the creation of an `is_P` proposition which can be applied to terms of `O`.
 
-As a concrete example, given a [group homomorphism](https://en.wikipedia.org/wiki/Group_homomorphism) which can be viewed as a map `φ: G → H` between groups, along with a proof `h : φ(a * b) = φ(a) * φ(b)`, a bundled group homomorphism would contain both `φ` and `h` as fields, whereas a bundled one would instead have a separate `is_group_homomorphism` `Prop` applicable to any map.
+As a concrete example, a [group homomorphism](https://en.wikipedia.org/wiki/Group_homomorphism) can be viewed as a map `φ: G → H` between groups, along with a proof `h : φ(a * b) = φ(a) * φ(b)`. A bundled group homomorphism would contain both `φ` and `h` as fields, whereas an unbundled one would instead consist only of `φ`, with a separate `is_group_homomorphism` [declaration](#declaration) for the proof of `h`.
 
 There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling.
 Generally within [mathlib](#mathlib), bundled structures are preferred, but unbundled versions are often also present.
