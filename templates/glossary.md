@@ -63,7 +63,7 @@ The cache is built within the aforementioned continuous integration, and normall
 
 ### carrier
 
-For a [bundled](#bundled-vs-unbundled) mathematical subobject, it is the *set* of [terms](#term) considered within the subobject.
+For a [bundled](#bundled-vs-unbundled) mathematical subobject on a type `T`, it is the *set* of [terms of T](#term) considered within the subobject.
 
 Lean (sub-)[structures](#structure) will often correspondingly name one of their fields as such (`carrier`).
 
