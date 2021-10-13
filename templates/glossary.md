@@ -2,42 +2,27 @@
 
 ### abbreviation
 
-In the context of editing Lean files, an abbreviation is a way of
-entering a symbol not generally found on standard keyboard layouts using
-a descriptive shortcut.
+In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
 
-For instance, the not-equal symbol "≠" can be entered using the sequence
-`\neq`.
+For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
 
-The full list of abbreviations (and their replacements) can be found [in the
-vscode-lean repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
+The full list of abbreviations (and their replacements) can be found [in the vscode-lean repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
 
 ### attribute
 
-One or more tags or markings which may be applied to a Lean object,
-and which may affect either its behavior or the behavior of other Lean
-objects which interact with it. Attributes may be defined either within
-[core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
+One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
 
-Applying an attribute to an object is done by prefixing its
-[declaration](#declaration) with `@[name-of-attribute]`, or by using the
-`attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
+Applying an attribute to an object is done by prefixing its [declaration](#declaration) with `@[name-of-attribute]`, or by using the `attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
 
-The `@[simp]` attribute, for example, tags an object (ostensibly a `lemma` or
-`theorem`) as being a [simp lemma](#simp-lemma).
+The `@[simp]` attribute, for example, tags an object (ostensibly a `lemma` or `theorem`) as being a [simp lemma](#simp-lemma).
 
-For further details, including a list of commonly used attributes, see [this
-section of the Lean reference manual](https://leanprover.github.io/reference/other_commands.html#attributes).
+For further details, including a list of commonly used attributes, see [this section of the Lean reference manual](https://leanprover.github.io/reference/other_commands.html#attributes).
 
 ### beta reduction
 
-A specific simplification operation in [dependent type
-theory](#dependent-type-theory) (and Lean's implementation of it) which
-may be performed as part of deciding whether two [terms](#term) are
-[definitionally equal](#defeq).
+A specific simplification operation in [dependent type theory](#dependent-type-theory) (and Lean's implementation of it) which may be performed as part of deciding whether two [terms](#term) are [definitionally equal](#defeq).
 
-More precisely, it is the process of simplifying an expression such as
-`(λ x, x) a` by replacing appearances of the variable `x` with `a`.
+More precisely, it is the process of simplifying an expression such as `(λ x, x) a` by replacing appearances of the variable `x` with `a`.
 
 #### See also
 
@@ -45,28 +30,17 @@ More precisely, it is the process of simplifying an expression such as
 
 ### big operators
 
-A [locale](#locale) within [mathlib](#mathlib)'s [algebra
-library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html),
-enabled via `open_locale big_operators`.
+A [locale](#locale) within [mathlib](#mathlib)'s [algebra library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html), enabled via `open_locale big_operators`.
 
-It defines notation for finite sums and products using the `∑` and `∏`
-characters.
+It defines notation for finite sums and products using the `∑` and `∏` characters.
 
 ### binder
 
-Expressions such as `(a : α)`, `[a : α]` or `{a : α}` for any
-identifier(s) `a` and type `α` which, as part of various Lean syntactical
-elements -- [declarations](#declaration), `fun`, quantifiers and others --
-represent identifiers which will be bound within the body of the
-syntactic element or declaration.
+Expressions such as `(a : α)`, `[a : α]` or `{a : α}` for any identifier(s) `a` and type `α` which, as part of various Lean syntactical elements -- [declarations](#declaration), `fun`, quantifiers and others -- represent identifiers which will be bound within the body of the syntactic element or declaration.
 
-Each type of binder has different implications for whether it will be bound
-implicitly (without being passed by a caller), explicitly or via [typeclass
-inference](#typeclass-inference).
+Each type of binder has different implications for whether it will be bound implicitly (without being passed by a caller), explicitly or via [typeclass inference](#typeclass-inference).
 
-In some places, notably within a `def`, defining "simple" binders
-without surrounding brackets are allowed, such as a binder `a` (with no
-explicit type) for some identifier `a`.
+In some places, notably within a `def`, defining "simple" binders without surrounding brackets are allowed, such as a binder `a` (with no explicit type) for some identifier `a`.
 
 ### bundled vs unbundled
 
@@ -81,7 +55,8 @@ Generally within [mathlib](#mathlib), bundled structures are preferred, but unbu
 
 ### cache
 
-As the compilation time of [mathlib](#mathlib) well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository. Each cache consists of [olean files](#olean-files) for all of mathlib.
+As the compilation time of [mathlib](#mathlib) well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository.
+Each cache consists of [olean files](#olean-files) for all of mathlib.
 
 ### carrier
 
@@ -93,7 +68,8 @@ A *class* (aka *typeclass*) is a [structure](#structure) that can be handled by 
 
 ### code linter
 
-A *code linter* is a [linter](#lint) concerned with how code works. Concretely, this is [a collection of Lean programs](https://leanprover-community.github.io/mathlib_docs/tactic/lint/frontend.html) checking that... Errors are flagged in the [nolint file](https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt).
+A *code linter* is a [linter](#lint) concerned with how code works.
+Concretely, this is [a collection of Lean programs](https://leanprover-community.github.io/mathlib_docs/tactic/lint/frontend.html) checking that... Errors are flagged in the [nolint file](https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt).
 
 ### concrete structure
 
@@ -101,26 +77,19 @@ A *code linter* is a [linter](#lint) concerned with how code works. Concretely, 
 
 ### core Lean
 
-As differentiated from [mathlib](#mathlib) or other community-authored Lean code,
-core Lean (or the "core library") refers to the portions of Lean which
-ship with the distribution of Lean itself.
+As differentiated from [mathlib](#mathlib) or other community-authored Lean code, core Lean (or the "core library") refers to the portions of Lean which ship with the distribution of Lean itself.
 
-Historically, even the `mathlib` project itself was a part of "core
-Lean", and was split off into its own separately maintained project
-afterwards to facilitate development speed.
+Historically, even the `mathlib` project itself was a part of "core Lean", and was split off into its own separately maintained project afterwards to facilitate development speed.
 
-Some fundamental [declarations](#declarations) remain part of core Lean
-even after the split. Occasionally additional lemmas and definitions are
-still removed or migrated from the core community Lean 3 repository and
-into mathlib, should they conflict with newly developed mathlib code.
+Some fundamental [declarations](#declarations) remain part of core Lean even after the split.
+Occasionally additional lemmas and definitions are still removed or migrated from the core community Lean 3 repository and into mathlib, should they conflict with newly developed mathlib code.
 
-The current portions of core Lean 3 can be found in the [Lean 3 community
-repository](https://github.com/leanprover-community/lean/tree/master/library),
-and for Lean 4 [similarly](https://github.com/leanprover/lean4/tree/master/src).
+The current portions of core Lean 3 can be found in the [Lean 3 community repository](https://github.com/leanprover-community/lean/tree/master/library), and for Lean 4 [similarly](https://github.com/leanprover/lean4/tree/master/src).
 
 ### declaration
 
-A *declaration* is anything that starts with `def`, `lemma`, `theorem`. This corresponds to creating an (or several) object in the background environment.
+A *declaration* is anything that starts with `def`, `lemma`, `theorem`.
+This corresponds to creating an (or several) object in the background environment.
 
 ### defeq
 
@@ -132,7 +101,12 @@ A *declaration* is anything that starts with `def`, `lemma`, `theorem`. This cor
 
 ### diamond
 
-There are often many ways to turn a given structure into another one. A *diamond* is a collection of such ways. Diamonds are abundant because of [hierarchies](#hierarchy). [Typeclass inference](#typeclass-inference) will unpredictably take one of the paths for a given diamond, so we want this path to not matter. This amounts to making the [Type-valued](#Prop-vs-Type) fields of the different inferable structures [defeq](#defeq). When this is the case, we have a *defeq diamond*.
+There are often many ways to turn a given structure into another one.
+A *diamond* is a collection of such ways.
+Diamonds are abundant because of [hierarchies](#hierarchy).
+[Typeclass inference](#typeclass-inference) will unpredictably take one of the paths for a given diamond, so we want this path to not matter.
+This amounts to making the [Type-valued](#Prop-vs-Type) fields of the different inferable structures [defeq](#defeq).
+When this is the case, we have a *defeq diamond*.
 
 ### elaborator
 
@@ -142,10 +116,8 @@ There are often many ways to turn a given structure into another one. A *diamond
 
 ### `equiv`
 
-As distinct from mathematical equality,
-[`equiv`](mathlib_docs/data/equiv/basic.html) allows for defining an
-equivalence or congruence of types. One important thing to note
-is that an `equiv` [holds data instead of being merely a proof](#bundled-vs-unbundled).
+As distinct from mathematical equality, [`equiv`](mathlib_docs/data/equiv/basic.html) allows for defining an equivalence or congruence of types.
+One important thing to note is that an `equiv` [holds data instead of being merely a proof](#bundled-vs-unbundled).
 
 ### eta reduction
 
@@ -153,15 +125,19 @@ is that an `equiv` [holds data instead of being merely a proof](#bundled-vs-unbu
 
 ### heavy `refl`
 
-Some `refl` invokations take an obnoxiously long time. There can be many reasons for this. See [this Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds).
+Some `refl` invokations take an obnoxiously long time.
+There can be many reasons for this.
+See [this Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds).
 
 ### hierarchy
 
-A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining. In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
+A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining.
+In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
 
 ### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
 
-There are `9` types of intervals, depending on whether the interval is **c**losed, **o**pen or runs to **i**nfinity at each end. Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
+There are `9` types of intervals, depending on whether the interval is **c**losed, **o**pen or runs to **i**nfinity at each end.
+Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
 
 ### import tree
 
@@ -172,27 +148,31 @@ There are `9` types of intervals, depending on whether the interval is **c**lose
 ### instance
 
 "instance" refers to two closely related concepts:
-* An *instance* is a [class](#class) argument to a `def`/`lemma`. They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
+* An *instance* is a [class](#class) argument to a `def`/`lemma`.
+They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
 * An *instance* is an `instance` [declaration](#declaration). Instances For example, `ℝ` has a linear
 
 
 ### instance vs def
 
-Some `def` in [mathlib](#mathlib) could be promoted to `instance`. The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond). One way to still use the problematic
+Some `def` in [mathlib](#mathlib) could be promoted to `instance`.
+The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond).
+One way to still use the problematic
 
 ### `leanpkg`
 
 ### `leanproject`
 
-A higher-level supporting tool for working with projects, particularly
-mathlib, in Lean 3. It lives within the [community mathlib-tools
-repository](https://github.com/leanprover-community/mathlib-tools/).
+A higher-level supporting tool for working with projects, particularly mathlib, in Lean 3.
+It lives within the [community mathlib-tools repository](https://github.com/leanprover-community/mathlib-tools/).
 
 ### lift
 
 ### lint
 
-A *linter* is a small program that looks for hard-to-spot mistakes in code. For [mathlib](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter). Mathlib is linted at every [CI run](#continuous-integration) after being built.
+A *linter* is a small program that looks for hard-to-spot mistakes in code.
+For [mathlib](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter).
+Mathlib is linted at every [CI run](#continuous-integration) after being built.
 
 ### locale
 
@@ -206,11 +186,13 @@ In addition to its breadth of mathematical objects and proofs, `mathlib` serves 
 
 ### module
 
-A [mathlib](#mathlib) *module* is a file. Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
+A [mathlib](#mathlib) *module* is a file.
+Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
 
 ## module docstring
 
-[Module](#module)-level comment summarizing what's to be found in the file. We require that every file has one, but [some old files](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) still don't.
+[Module](#module)-level comment summarizing what's to be found in the file.
+We require that every file has one, but [some old files](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) still don't.
 
 ### motive
 
@@ -218,25 +200,28 @@ A [mathlib](#mathlib) *module* is a file. Not to be mistaken with `module` that 
 
 ### MWE
 
-*Minimal Working Example*, a way of making it easier to get help with a
-snippet of Lean code by reducing it to its essential parts, whilst being
-still runnable by others.
+*Minimal Working Example*, a way of making it easier to get help with a snippet of Lean code by reducing it to its essential parts, whilst being still runnable by others.
 
 Further information can be found on [the MWE page](mwe.html).
 
 ### non-terminal `simp`
 
-A `simp` invokation is deemed *non-terminal* when it is not `simp only` nor is the last tactic invoked. We avoid non-terminal `simp`s because they are hard to maintain. See [Non-terminal `simp`s](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes)
+A `simp` invocation is deemed *non-terminal* when it is not `simp only` nor is the last tactic invoked.
+We avoid non-terminal `simp`s because they are hard to maintain.
+See [Non-terminal `simp`s](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes)
 
 ### old structure
 
 ### olean files
 
-Lean code has to be compiled. The compiled version of file `x.lean` is file `x.olean` and all olean files together form the [cache](#cache).
+Lean code has to be compiled.
+The compiled version of file `x.lean` is file `x.olean` and all olean files together form the [cache](#cache).
 
 ### orange bar of hell
 
-In VScode, the *orange bar of hell* refers to the orange bar that appears left to the current file when it persists. The reason is that the Lean extension has to (re)compile all the imported files whose [cache](#cache) does not match. Because of this, having branches that touch two files far apart (with respect to the [import tree](#import-tree)) related through imports is considered bad practice as **any** modification on the file upstream will force Lean to recompile all the files in the middle.
+In VScode, the *orange bar of hell* refers to the orange bar that appears left to the current file when it persists.
+The reason is that the Lean extension has to (re)compile all the imported files whose [cache](#cache) does not match.
+Because of this, having branches that touch two files far apart (with respect to the [import tree](#import-tree)) related through imports is considered bad practice as **any** modification on the file upstream will force Lean to recompile all the files in the middle.
 
 ### pi type
 
@@ -244,7 +229,8 @@ In VScode, the *orange bar of hell* refers to the orange bar that appears left t
 
 ## propeq
 
-*Proposition equality*. Two terms `a b : α`are *propositionally equal* if we can prove `a = b`.  This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
+*Proposition equality*. Two terms `a b : α`are *propositionally equal* if we can prove `a = b`.
+This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
 
 ### `Prop` vs `Type`
 
@@ -256,11 +242,9 @@ In VScode, the *orange bar of hell* refers to the orange bar that appears left t
 
 ### `simp`-normal form
 
-A convention within [mathlib](#mathlib) for expressing propositions with multiple
-equivalent forms in a single conventional one.
+A convention within [mathlib](#mathlib) for expressing propositions with multiple equivalent forms in a single conventional one.
 
-Examples and further detail can found on [the `simp`
-page](simp.html#simp-normal-form).
+Examples and further detail can found on [the `simp` page](simp.html#simp-normal-form).
 
 ### structure
 
@@ -268,7 +252,8 @@ A structure is an [inductive type](#inductive-type).
 
 ### style linter
 
-A *style linter* is a [linter](#lint) concerned with how code looks. Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
+A *style linter* is a [linter](#lint) concerned with how code looks.
+Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
 
 ### syntactical equality
 
