@@ -159,10 +159,10 @@ Names have been made compact by calling each interval `I` + how it ends on the l
 ### instance
 
 "instance" refers to two closely related concepts:
+
 * An *instance* is a [class](#class) argument to a `def`/`lemma`.
 They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
 * An *instance* is an `instance` [declaration](#declaration). Instances For example, `ℝ` has a linear
-
 
 ### instance vs def
 
@@ -187,7 +187,7 @@ Mathlib is linted at every [CI run](#continuous-integration) after being built.
 
 ### locale
 
-A *locale* is akin to a mathematical environment. 
+A *locale* is akin to a mathematical environment.
 
 ### mathlib
 
@@ -250,6 +250,12 @@ This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equali
 ### sigma type
 
 ### `simp` lemma
+
+A lemma which has been tagged with an [attribute](#attribute) which enables it for use with the `simp` tactic.
+
+Good `simp` lemmas guide the `simp` tactic towards reducing complex expressions into simpler ones, often to the point where the `simp` tactic is able to close many goals itself.
+
+Further details can be found in the [`simp` documentation of mathlib](https://leanprover-community.github.io/extras/simp.html#simp-lemmas).
 
 ### `simp`-normal form
 
