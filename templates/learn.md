@@ -9,7 +9,7 @@ learning.
 ## Hands-on approaches
 
 * Whatever your background, if you want to dive right away, you can play the
-  [Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/)
+  [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/)
   by Kevin Buzzard and Mohammad Pedramfar. This is a online interactive tutorial to Lean
   focused on proving properties of the elementary operations on natural numbers.
 
@@ -56,8 +56,8 @@ at hand, for reference.
 
 * If you have a computer science background, and are primarily interested
   in software verification, then you can read
-  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) ([tablet edition optimized for on-screen viewing](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide_tablet.pdf)),
-  course notes for an [MSc-level course](https://lean-forward.github.io/logical-verification/2020/index.html) at VU Amsterdam.
+  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf) ([tablet edition optimized for on-screen viewing](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide_tablet.pdf)),
+  course notes for an [MSc-level course](https://lean-forward.github.io/logical-verification/2021/) at VU Amsterdam.
 
 * If you want a systematic exposition of syntax and commands, then you
   can read the [reference manual](https://leanprover.github.io/reference/).
@@ -82,7 +82,7 @@ still have a look at the following resources.
   covers the basics and enables you to read more advanced sources, for instance
   the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
-* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
+* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
 * The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
 * The [metaprogramming tutorial videos](https://www.youtube.com/watch?v=o6oUjcE6Nz4&list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) that Rob Lewis designed and recorderd for LftCM 2020.
