@@ -69,7 +69,11 @@ Lean (sub-)[structures](#structure) will often correspondingly name one of their
 
 ### class
 
-A *class* (aka *typeclass*) is a [structure](#structure) that can be handled by [typeclass inference](#typeclass-inference).
+More fully, a *typeclass* (or *type class*).
+
+A Lean [structure](#structure) whose [instances](#instance) can be retrieved via [typeclass inference](#typeclass-inference).
+
+Distinct from the use of *class* in object oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
 
 ### coercion / ↑
 
