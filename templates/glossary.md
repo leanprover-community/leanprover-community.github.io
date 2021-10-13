@@ -17,7 +17,7 @@ vscode-lean repository](https://github.com/leanprover/vscode-lean/blob/master/sr
 One or more tags or markings which may be applied to a Lean object,
 and which may affect either its behavior or the behavior of other Lean
 objects which interact with it. Attributes may be defined either within
-[core Lean](#core-lean), within mathlib, or within any Lean code.
+[core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
 
 Applying an attribute to an object is done by prefixing its
 [declaration](#declaration) with `@[name-of-attribute]`, or by using the
@@ -45,7 +45,7 @@ More precisely, it is the process of simplifying an expression such as
 
 ### big operators
 
-A [locale](#locale) within mathlib's [algebra
+A [locale](#locale) within [mathlib](#mathlib)'s [algebra
 library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html),
 enabled via `open_locale big_operators`.
 
@@ -70,11 +70,18 @@ explicit type) for some identifier `a`.
 
 ### bundled vs unbundled
 
+Given a mathematical object `O` with property `P`, bundling `P` refers to the creation of a Lean [structure](#structure) containing a proof of `P` as one of its fields.
 
+In contrast, an unbundled structure instead contains only the definition of `O`, and separately the creation of an `is_P` proposition which can be applied to terms of `O`.
+
+As a concrete example, given a [group homomorphism](https://en.wikipedia.org/wiki/Group_homomorphism) which can be viewed as a map `φ: G → H` between groups, along with a proof `h : φ(a * b) = φ(a) * φ(b)`, a bundled group homomorphism would contain both `φ` and `h` as fields, whereas a bundled one would instead have a separate `is_group_homomorphism` `Prop` applicable to any map.
+
+There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling.
+Generally within [mathlib](#mathlib), bundled structures are preferred, but unbundled versions are often also present.
 
 ### cache
 
-As the compilation time of mathlib well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository. Each cache consists of [olean files](#olean-files) for all of mathlib.
+As the compilation time of [mathlib](#mathlib) well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository. Each cache consists of [olean files](#olean-files) for all of mathlib.
 
 ### carrier
 
@@ -94,7 +101,7 @@ A *code linter* is a [linter](#lint) concerned with how code works. Concretely, 
 
 ### core Lean
 
-As differentiated from `mathlib` or other community-authored Lean code,
+As differentiated from [mathlib](#mathlib) or other community-authored Lean code,
 core Lean (or the "core library") refers to the portions of Lean which
 ship with the distribution of Lean itself.
 
@@ -150,7 +157,7 @@ Some `refl` invokations take an obnoxiously long time. There can be many reasons
 
 ### hierarchy
 
-A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining. In mathlib, we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
+A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining. In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
 
 ### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
 
@@ -171,7 +178,7 @@ There are `9` types of intervals, depending on whether the interval is **c**lose
 
 ### instance vs def
 
-Some `def` in mathlib could be promoted to `instance`. The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond). One way to still use the problematic
+Some `def` in [mathlib](#mathlib) could be promoted to `instance`. The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond). One way to still use the problematic
 
 ### `leanpkg`
 
@@ -185,15 +192,21 @@ repository](https://github.com/leanprover-community/mathlib-tools/).
 
 ### lint
 
-A *linter* is a small program that looks for hard-to-spot mistakes in code. For mathlib, we use [style linters](#style-linter)* and [code linters](#code-linter). Mathlib is linted at every [CI run](#continuous-integration) after being built.
+A *linter* is a small program that looks for hard-to-spot mistakes in code. For [mathlib](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter). Mathlib is linted at every [CI run](#continuous-integration) after being built.
 
 ### locale
 
 A *locale* is akin to a mathematical environment. 
 
+### mathlib
+
+A [large, community maintained collection of mathematics](https://github.com/leanprover-community/mathlib) for Lean 3.
+
+In addition to its breadth of mathematical objects and proofs, `mathlib` serves as the de facto standard (programmatic) library for Lean 3, containing additional functionality useful for non-mathematics related projects.
+
 ### module
 
-A mathlib *module* is a file. Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
+A [mathlib](#mathlib) *module* is a file. Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
 
 ## module docstring
 
@@ -243,7 +256,7 @@ In VScode, the *orange bar of hell* refers to the orange bar that appears left t
 
 ### `simp`-normal form
 
-A convention within `mathlib` for expressing propositions with multiple
+A convention within [mathlib](#mathlib) for expressing propositions with multiple
 equivalent forms in a single conventional one.
 
 Examples and further detail can found on [the `simp`
