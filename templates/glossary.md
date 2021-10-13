@@ -63,6 +63,10 @@ The cache is built within the aforementioned continuous integration, and normall
 
 ### carrier
 
+For a [bundled](#bundled-vs-unbundled) mathematical subobject, it is the *set* of [terms](#term) considered within the subobject.
+
+Lean (sub-)[structures](#structure) will often correspondingly name one of their fields as such (`carrier`).
+
 ### class
 
 A *class* (aka *typeclass*) is a [structure](#structure) that can be handled by [typeclass inference](#typeclass-inference).
