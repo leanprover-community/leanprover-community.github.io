@@ -139,6 +139,13 @@ One important thing to note is that an `equiv` [holds data instead of being mere
 
 ### `ext` lemma
 
+### goal
+
+Within the context of interactively proving theorems in Lean, each targeted statement whose proof is in-progress.
+
+Or more broadly, type theoretically, the process of exhibiting a term of a specific desired type.
+For propositions, exhibiting a [term](#term) reduces to the aforementioned process.
+
 ### heavy `refl`
 
 Some `refl` invocations take an obnoxiously long time.
@@ -160,6 +167,8 @@ Names have been made compact by calling each interval `I` + how it ends on the l
 ### inductive type
 
 ### infoview
+
+Within the context of interactively editing Lean files, a window or interface which displays incremental [goal](#goal) state, diagnostics, errors and Lean [widgets](#widget) output.
 
 ### instance
 
@@ -303,7 +312,7 @@ In Lean 3 it is often entered via a `begin...end` block.
 
 ### whnf
 
-A Lean expression is in *weak head normal form*, often abbreviated to `whnf`, if it meets a number of normalization criteria mentioned below.
+A Lean expression is in *weak head normal form*, often abbreviated to `whnf`, if it meets a number of normalization criteria mentioned in the resources linked below.
 Informally, expressions in whnf have had their outermost parts evaluated, though inner subexpressions may not have been evaluated.
 
 Within [core Lean](#core-lean), it also may refer to a tactic helper which reduces expressions to this form.
@@ -312,6 +321,8 @@ Within [core Lean](#core-lean), it also may refer to a tactic helper which reduc
 
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
 * [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
+
+### widget
 
 ### well founded recursion
 
