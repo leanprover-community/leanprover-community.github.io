@@ -71,6 +71,7 @@ explicit type) for some identifier `a`.
 ### bundled vs unbundled
 
 
+
 ### cache
 
 As the compilation time of mathlib well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository. Each cache consists of [olean files](#olean-files) for all of mathlib.
@@ -281,6 +282,16 @@ In Lean 3 it is often entered via a `begin...end` block.
 ### universe
 
 ### whnf
+
+A Lean expression is in *weak head normal form*, often abbreviated to `whnf`, if it meets a number of normalization criteria mentioned below.
+Informally, expressions in whnf have had their outermost parts evaluated, though inner subexpressions may not have been evaluated.
+
+Within [core Lean](#core-lean), it also may refer to a tactic helper which reduces expressions to this form.
+
+#### See also
+
+* [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
+* [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
 
 ### well founded recursion
 
