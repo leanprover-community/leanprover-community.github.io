@@ -75,7 +75,7 @@ A Lean [structure](#structure) whose [instances](#instance) can be retrieved via
 
 Distinct from the use of *class* in object oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
 
-### coercion / ↑
+### coercion / ↑ / `coe`
 
 ### code linter
 
@@ -99,8 +99,13 @@ The current portions of core Lean 3 can be found in the [Lean 3 community reposi
 
 ### declaration
 
-A *declaration* is anything that starts with `def`, `lemma`, `theorem`.
-This corresponds to creating an (or several) object in the background environment.
+A single Lean runtime object within its environment.
+
+Or, ambiguously, any of a number of Lean commands which may define or declare such objects.
+
+Examples of such commands are the `def`, `theorem`, `constant` or `example` commands (and in Lean 3, the `lemma` command), amongst others.
+
+Further detail can be found in the [Lean documentation](https://leanprover.github.io/lean4/doc/declarations.html#basic-declarations).
 
 ### defeq
 
