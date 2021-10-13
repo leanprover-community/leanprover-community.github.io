@@ -6,11 +6,11 @@ In the context of editing Lean files, an abbreviation is a way of entering a sym
 
 For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
 
-The full list of abbreviations (and their replacements) can be found [in the vscode-lean repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
+The full list of abbreviations (and their replacements) can be found [in the `vscode-lean` repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
 
 ### attribute
 
-One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
+One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [`mathlib`](#mathlib), or within any Lean code.
 
 Applying an attribute to an object is done by prefixing its [declaration](#declaration) with `@[name-of-attribute]`, or by using the `attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
 
@@ -30,7 +30,7 @@ More precisely, it is the process of simplifying an expression such as `(λ x, x
 
 ### big operators
 
-A [locale](#locale) within [mathlib](#mathlib)'s [algebra library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html), enabled via `open_locale big_operators`.
+A [locale](#locale) within [`mathlib`](#mathlib)'s [algebra library](https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html), enabled via `open_locale big_operators`.
 
 It defines notation for finite sums and products using the `∑` and `∏` characters.
 
@@ -51,12 +51,15 @@ In contrast, an unbundled structure instead contains only the definition of `O`,
 As a concrete example, a [group homomorphism](https://en.wikipedia.org/wiki/Group_homomorphism) can be viewed as a map `φ: G → H` between groups, along with a proof `h : φ(a * b) = φ(a) * φ(b)`. A bundled group homomorphism would contain both `φ` and `h` as fields, whereas an unbundled one would instead consist only of `φ`, with a separate `is_group_homomorphism` [declaration](#declaration) for the proof of `h`.
 
 There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling.
-Generally within [mathlib](#mathlib), bundled structures are preferred, but unbundled versions are often also present.
+Generally within [`mathlib`](#mathlib), bundled structures are preferred, but unbundled versions are often also present.
 
 ### cache
 
-As the compilation time of [mathlib](#mathlib) well exceeds 2h on modest computers, we host a *cache* for each commit to the mathlib repository.
-Each cache consists of [olean files](#olean-files) for all of mathlib.
+Normally, a reference to a shared pre-built set of [olean files](#olean-file) built by [`mathlib`](#mathlib)'s [continuous integration](#continuous-integration) each time a commit is pushed to its repository.
+
+Its purpose is to alleviate the need for each [`mathlib`](#mathlib) user to build (or rebuild) the same Lean files locally, when doing so can take a significant number of time (multiple hours on a modest computer).
+
+The cache is built within the aforementioned continuous integration, and normally users of `mathlib` retrieve its built files using [`leanproject`](#leanproject).
 
 ### carrier
 
@@ -77,7 +80,7 @@ Concretely, this is [a collection of Lean programs](https://leanprover-community
 
 ### core Lean
 
-As differentiated from [mathlib](#mathlib) or other community-authored Lean code, core Lean (or the "core library") refers to the portions of Lean which ship with the distribution of Lean itself.
+As differentiated from [`mathlib`](#mathlib) or other community-authored Lean code, core Lean (or the "core library") refers to the portions of Lean which ship with the distribution of Lean itself.
 
 Historically, even the `mathlib` project itself was a part of "core Lean", and was split off into its own separately maintained project afterwards to facilitate development speed.
 
@@ -125,14 +128,14 @@ One important thing to note is that an `equiv` [holds data instead of being mere
 
 ### heavy `refl`
 
-Some `refl` invokations take an obnoxiously long time.
+Some `refl` invocations take an obnoxiously long time.
 There can be many reasons for this.
 See [this Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds).
 
 ### hierarchy
 
 A *hierarchy* is a collection of [typeclasses](#typeclass) which are more and more constraining.
-In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
+In [`mathlib`](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersection of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, ...
 
 ### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
 
@@ -155,7 +158,7 @@ They are put in square brackets `[]` for [typeclass inference](#typeclass-infere
 
 ### instance vs def
 
-Some `def` in [mathlib](#mathlib) could be promoted to `instance`.
+Some `def` in [`mathlib`](#mathlib) could be promoted to `instance`.
 The reason they are not is usually because doing so would cause [nondefeq diamonds](#diamond).
 One way to still use the problematic
 
@@ -171,7 +174,7 @@ It lives within the [community mathlib-tools repository](https://github.com/lean
 ### lint
 
 A *linter* is a small program that looks for hard-to-spot mistakes in code.
-For [mathlib](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter).
+For [`mathlib`](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter).
 Mathlib is linted at every [CI run](#continuous-integration) after being built.
 
 ### locale
@@ -186,7 +189,7 @@ In addition to its breadth of mathematical objects and proofs, `mathlib` serves 
 
 ### module
 
-A [mathlib](#mathlib) *module* is a file.
+A [`mathlib`](#mathlib) *module* is a file.
 Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
 
 ## module docstring
@@ -212,7 +215,7 @@ See [Non-terminal `simp`s](https://leanprover-community.github.io/extras/simp.ht
 
 ### old structure
 
-### olean files
+### olean file
 
 Lean code has to be compiled.
 The compiled version of file `x.lean` is file `x.olean` and all olean files together form the [cache](#cache).
@@ -242,7 +245,7 @@ This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equali
 
 ### `simp`-normal form
 
-A convention within [mathlib](#mathlib) for expressing propositions with multiple equivalent forms in a single conventional one.
+A convention within [`mathlib`](#mathlib) for expressing propositions with multiple equivalent forms in a single conventional one.
 
 Examples and further detail can found on [the `simp` page](simp.html#simp-normal-form).
 
