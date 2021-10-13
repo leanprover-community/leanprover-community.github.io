@@ -99,7 +99,7 @@ The current portions of core Lean 3 can be found in the [Lean 3 community reposi
 
 ### declaration
 
-A single Lean runtime object within its environment.
+A single Lean runtime object within a Lean environment.
 
 Or, ambiguously, any of a number of Lean commands which may define or declare such objects.
 
