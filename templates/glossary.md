@@ -286,6 +286,7 @@ Within [core Lean](#core-lean), it also may refer to a tactic helper which reduc
 
 #### See also
 
+* [Section 8.4 of Programming in Lean](https://leanprover.github.io/programming_in_lean/#08_Writing_Tactics.html), which is still in progress, but will cover `whnf`
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
 * [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
 
