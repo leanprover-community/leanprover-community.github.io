@@ -67,17 +67,6 @@ A Lean [structure](#structure) whose [instances](#instance) can be retrieved via
 
 Distinct from the use of *class* in object oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
 
-### coercion / ↑ / `coe`
-
-### code linter
-
-A *code linter* is a [linter](#lint) concerned with how code works.
-Concretely, this is [a collection of Lean programs](https://leanprover-community.github.io/mathlib_docs/tactic/lint/frontend.html) checking that... Errors are flagged in the [nolint file](https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt).
-
-### concrete structure
-
-### continuous integration
-
 ### core Lean
 
 As differentiated from [mathlib](#mathlib) or other community-authored Lean code, core Lean (or the "core library") refers to the portions of Lean which ship with the distribution of Lean itself.
@@ -99,18 +88,6 @@ Examples of such commands are the `def`, `theorem`, `constant` or `example` comm
 
 Further detail can be found in the [Lean documentation](https://leanprover.github.io/lean4/doc/declarations.html#basic-declarations).
 
-### defeq
-
-#### See also
-
-[Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
-
-### delaborator
-
-### dependent type
-
-### dependent type theory
-
 ### diamond
 
 There are often many ways to turn a given structure into another one.
@@ -120,20 +97,10 @@ Diamonds are abundant because of [hierarchies](#hierarchy).
 This amounts to making the [Type-valued](#Prop-vs-Type) fields of the different inferable structures [defeq](#defeq).
 When this is the case, we have a *defeq diamond*.
 
-### elaborator
-
-### eliminator
-
-### equation compiler
-
 ### `equiv`
 
 As distinct from mathematical equality, [`equiv`](mathlib_docs/data/equiv/basic.html) allows for defining an equivalence or congruence of types.
 One important thing to note is that an `equiv` [holds data instead of being merely a proof](#bundled-vs-unbundled).
-
-### eta reduction
-
-### `ext` lemma
 
 ### goal
 
@@ -158,10 +125,6 @@ In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `
 There are `9` types of intervals, depending on whether the interval is **c**losed, **o**pen or runs to **i**nfinity at each end.
 Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
 
-### import tree
-
-### inductive type
-
 ### infoview
 
 Within the context of interactively editing Lean files, a window or interface which displays incremental [goal](#goal) state, diagnostics, errors and Lean [widgets](#widget) output.
@@ -174,30 +137,16 @@ Within the context of interactively editing Lean files, a window or interface wh
 They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
 * An *instance* is an `instance` [declaration](#declaration). Instances For example, `ℝ` has a linear
 
-### instance vs def
-
-Some `def` in [mathlib](#mathlib) could be promoted to `instance`.
-The reason they are not is usually because doing so would cause [non-defeq diamonds](#diamond).
-One way to still use the problematic
-
-### `leanpkg`
-
 ### `leanproject`
 
 A higher-level supporting tool for working with projects, particularly [mathlib](#mathlib), in Lean 3.
 It lives within the [community `mathlib-tools` repository](https://github.com/leanprover-community/mathlib-tools/).
-
-### lift
 
 ### lint
 
 A *linter* is a small program that looks for hard-to-spot mistakes in code.
 For [mathlib](#mathlib), we use [style linters](#style-linter)* and [code linters](#code-linter).
 Mathlib is linted at every [CI run](#continuous-integration) after being built.
-
-### locale
-
-A *locale* is akin to a mathematical environment.
 
 ### mathlib
 
@@ -215,10 +164,6 @@ Not to be mistaken with `module` that represents a maths semimodule/module/vecto
 [Module](#module)-level comment summarizing what's to be found in the file.
 We require that every file has one, but [some old files](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) still don't.
 
-### motive
-
-### metavariable
-
 ### MWE
 
 *Minimal Working Example*, a way of making it easier to get help with a snippet of Lean code by reducing it to its essential parts, whilst being still runnable by others.
@@ -234,8 +179,6 @@ Non-terminal `simp`s are avoided because they are hard to maintain, given that t
 
 The ["non-terminal `simp`" section](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes) of the `simp` documentation
 
-### old structure
-
 ### olean file
 
 Lean code has to be compiled.
@@ -247,10 +190,6 @@ In VScode, the *orange bar of hell* refers to the orange bar that appears left t
 The reason is that the Lean extension has to (re)compile all the imported files whose [cache](#cache) does not match.
 Because of this, having branches that touch two files far apart (with respect to the [import tree](#import-tree)) related through imports is considered bad practice as **any** modification on the file upstream will force Lean to recompile all the files in the middle.
 
-### pi type
-
-### proof term
-
 ## propeq
 
 *Propositional equality*. Two [term](#term)s `a b : α` are propositionally equal if we can prove `a = b`.
@@ -261,10 +200,6 @@ This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equali
 [Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
 
 ### `Prop` vs `Type`
-
-### recursor
-
-### sigma type
 
 ### `simp` lemma
 
@@ -280,38 +215,10 @@ A convention within [mathlib](#mathlib) for expressing propositions with multipl
 
 Examples and further detail can found on [the `simp` page](simp.html#simp-normal-form).
 
-### structure
-
-A structure is an [inductive type](#inductive-type).
-
 ### style linter
 
 A *style linter* is a [linter](#lint) concerned with how code looks.
 Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
-
-### syntactical equality
-
-#### See also
-
-[Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
-
-### tactic mode
-
-In Lean 3 it is often entered via a `begin...end` block.
-
-#### See also
-
-* [Section 5 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/tactics.html)
-
-* [The mathlib tactics documentation](https://leanprover-community.github.io/mathlib_docs/tactics.html)
-
-### term
-
-### term mode
-
-### type annotation
-
-### typeclass inference
 
 ### unicode abbreviation
 
@@ -320,10 +227,6 @@ In the context of editing Lean files, an abbreviation is a way of entering a sym
 For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
 
 The full list of abbreviations (and their replacements) can be found [in the `vscode-lean` repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
-
-### unification
-
-### universe
 
 ### whnf
 
@@ -336,9 +239,3 @@ Within [core Lean](#core-lean), it also may refer to a tactic helper which reduc
 
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
 * [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
-
-### widget
-
-### well founded recursion
-
-See [The equation compiler and `using_well_founded`](https://leanprover-community.github.io/extras/well_founded_recursion.html).
