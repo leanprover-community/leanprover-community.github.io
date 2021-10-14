@@ -154,6 +154,18 @@ A [large, community maintained collection of mathematics](https://github.com/lea
 
 In addition to its breadth of mathematical objects and proofs, mathlib serves as the de facto standard (programmatic) library for Lean 3, containing additional functionality useful for non-mathematics related projects.
 
+### mathlib4
+
+An [experimental attempt](https://github.com/leanprover-community/mathlib4/) to port portions of [mathlib](#mathlib) to Lean 4.
+mathlib4 is a manual, exploratory attempt to suss out points of difficulty, identify areas for redesign, and prepare for a more targeted effort which will occur as part of moving mathlib to Lean 4.
+Learnings from both the mathlib4 effort as well as from [mathport](#mathport) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.
+
+### mathport
+
+An [in-development tool](https://github.com/leanprover/mathport/) for automated or semi-automated translation of Lean 3 code into Lean 4 code.
+It consists of both fully automated generation of Lean 4 [olean files](#olean-file) from Lean 3 source files, as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code.
+Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.
+
 ### module
 
 A [mathlib](#mathlib) *module* is a file.
