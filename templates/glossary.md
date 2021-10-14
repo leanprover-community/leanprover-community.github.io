@@ -174,6 +174,13 @@ An [in-development tool](https://github.com/leanprover/mathport/) for automated 
 It consists of both fully automated generation of Lean 4 [olean files](#olean-file) from Lean 3 source files, as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code.
 Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.
 
+### mode
+
+In the context of writing Lean code, a set of related syntactical elements or keywords which make a particular style of formal reasoning or construction of [proof terms](#proof-term) efficient.
+Lean, especially as restricted to [mathlib](#mathlib), has a small number of such modes -- [tactic mode](#tactic-mode), [term mode](#term-mode), [calc mode](#calc-mode) and [conv-mode](#conv-mode).
+A particular mode may make progress towards specific kinds of [goals](#goal) easier.
+A proof may often, however, mix various modes in the course of constructing a [proof term](#proof-term).
+
 ### module
 
 A single file containing Lean source code.
@@ -239,6 +246,29 @@ Examples and further detail can found on [the `simp` page](simp.html#simp-normal
 A *style linter* is a [linter](#lint) concerned with how code looks.
 Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
 
+### tactic mode
+
+A Lean [mode](#mode) characterized by its reliance on sequences of [tactics](#tactic) which often facilitate proofs quite similar to paper-based reasoning, albeit often with the use of sophisticated tactics which automate tedious portions of a proof.
+There are various means to [enter tactic mode](https://leanprover.github.io/theorem_proving_in_lean/tactics.html#entering-tactic-mode).
+It may be entered using the `by` keyword from [term mode](#term-mode), though in Lean 3 it is most often entered via a `begin...end` block whenever its body is made up of multiple commands.
+Other modes can also be interspersed within it, often to collaboratively produce an understandable, efficient, short or readable overall proof.
+Ultimately, the result of a tactic mode block is a [term](#term), assembled via the tactics within it.
+
+#### See also
+
+* [Section 5 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), which discusses tactics, as well as moving into and out of tactic mode
+
+* [The `show_term` tactic](https://leanprover-community.github.io/mathlib_docs/tactic/show_term.html) which can reveal the assembled [term](#term)
+
+* [The mathlib tactics documentation](https://leanprover-community.github.io/mathlib_docs/tactics.html), with a comprehensive list of tactics
+
+### term mode
+
+A Lean [mode](#mode) which assembles a single [term](#term) through the use of functional subexpressions.
+In contrast to [tactic mode](#tactic-mode), term mode proofs are often short in length, though potentially harder to read for humans.
+There are various means to enter term mode.
+The body of a [declaration](#declaration) begins in term mode, or within [tactic mode](#tactic-mode) it is often entered using the `exact` [tactic](#tactic).
+Efficient term mode proofs often contribute to [code golfing](#golfing).
 ### unicode abbreviation
 
 In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
