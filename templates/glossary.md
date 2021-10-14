@@ -71,7 +71,7 @@ Distinct from the use of *class* in object oriented languages -- the word usage 
 
 As differentiated from [mathlib](#mathlib) or other community-authored Lean code, core Lean (or the "core library") refers to the portions of Lean which ship with the distribution of Lean itself.
 
-Historically, even the mathlib project itself was a part of "core Lean", and was split off into its own separately maintained project afterwards to facilitate development speed.
+Historically, even the mathlib project itself was a part of core Lean, and was split off into its own separately maintained project afterwards to facilitate development speed.
 
 Some fundamental [declarations](#declarations) remain part of core Lean even after the split.
 Occasionally additional lemmas and definitions are still removed or migrated from the core community Lean 3 repository and into mathlib, should they conflict with newly developed mathlib code.
