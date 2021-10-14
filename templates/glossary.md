@@ -109,6 +109,12 @@ Within the context of interactively proving theorems in Lean, each targeted stat
 Or more broadly, type theoretically, an individual type for which a [term](#term) is to be exhibited.
 For propositions, exhibiting a [term](#term) reduces equivalently to the aforementioned idea of proof.
 
+### golfing
+
+An attempt or effort to make a particular functional piece of code as short as possible; within the context of Lean, often it is a proof's length which is golfed or optimized.
+Golfed proofs often make use of [term mode](#term-mode), and in general prioritize terseness over readability.
+This obfuscation often is used intentionally or advantageously to signal to readers that a proof is mechanical or trivial.
+
 ### heavy `rfl` / heavy `refl`
 
 A use of `rfl` (or `refl`) which performs slowly when it is evaluated by Lean.
