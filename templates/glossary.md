@@ -231,9 +231,12 @@ Further information can be found on [the MWE page](mwe.html).
 
 ### non-terminal `simp`
 
-A `simp` invocation is deemed *non-terminal* when it is not `simp only` nor is the last tactic invoked.
-We avoid non-terminal `simp`s because they are hard to maintain.
-See [Non-terminal `simp`s](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes)
+An invocation of the `simp` tactic which is not the last tactic invoked on a particular [subgoal](#goal), nor uses `simp only` to explicitly limit which [simp lemmas](#simp-lemma) it considers.
+Non-terminal `simp`s are avoided because they are hard to maintain, given that their behavior or runtime will change as mathlib adds or modifies the set of `simp` lemmas over time.
+
+#### See also
+
+The ["non-terminal `simp`" section](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes) of the `simp` documentation
 
 ### old structure
 
