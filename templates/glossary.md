@@ -106,7 +106,7 @@ One important thing to note is that an `equiv` [holds data instead of being mere
 
 Within the context of interactively proving theorems in Lean, each targeted statement whose proof is in-progress.
 
-Or more broadly, type theoretically, the process of exhibiting a term of a specific desired type.
+Or more broadly, type theoretically, an individual type for which a [term](#term) is to be exhibited.
 For propositions, exhibiting a [term](#term) reduces to the aforementioned process.
 
 ### heavy `rfl` / heavy `refl`
