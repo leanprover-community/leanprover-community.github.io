@@ -109,11 +109,12 @@ Within the context of interactively proving theorems in Lean, each targeted stat
 Or more broadly, type theoretically, the process of exhibiting a term of a specific desired type.
 For propositions, exhibiting a [term](#term) reduces to the aforementioned process.
 
-### heavy `refl`
+### heavy `rfl` / heavy `refl`
 
-Some `refl` invocations take an obnoxiously long time.
-There can be many reasons for this.
-See [this Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds).
+A use of `rfl` (or `refl`) which performs slowly when it is evaluated by Lean.
+A heavy `rfl` often occurs when `rfl` is asked to perform too many steps of definitional reduction at once, resulting in a proof term which is small but which requires Lean to do a lot of computation to ensure that it type checks.
+
+[This Zulip discussion](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds) has a particularly slow example.
 
 ### hierarchy
 
