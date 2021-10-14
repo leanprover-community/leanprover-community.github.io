@@ -101,6 +101,10 @@ Further detail can be found in the [Lean documentation](https://leanprover.githu
 
 ### defeq
 
+#### See also
+
+[Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
+
 ### delaborator
 
 ### dependent type
@@ -249,8 +253,12 @@ Because of this, having branches that touch two files far apart (with respect to
 
 ## propeq
 
-*Proposition equality*. Two terms `a b : α` are *propositionally equal* if we can prove `a = b`.
+*Propositional equality*. Two [term](#term)s `a b : α` are propositionally equal if we can prove `a = b`.
 This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
+
+#### See also
+
+[Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
 
 ### `Prop` vs `Type`
 
@@ -282,6 +290,10 @@ A *style linter* is a [linter](#lint) concerned with how code looks.
 Concretely, this is [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) checking that all lines are less than `100` characters long, that every file has a [module docstring](#module-docstring)... Errors are flagged in the [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt).
 
 ### syntactical equality
+
+#### See also
+
+[Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
 
 ### tactic mode
 
