@@ -137,6 +137,12 @@ One of two closely related concepts:
 * A [class](#class) argument taken by a `def`, `lemma` or other [declaration](#declaration) which is enclosed by square brackets (`[]`) such that it is resolved by the [typeclass inference](#typeclass-inference) system when the declaration is used.
 * A [declaration](#declaration) created with the eponymous `instance` command, which registers an object with the typeclass inference system for use in the above. As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order` for `ℝ`, enabling reals to be compared with `<`.
 
+
+### Lean Together
+
+An [annual meeting](https://leanprover-community.github.io/lt2021/) for the Lean user community, its [mathlib](#mathlib) library users, as well as the broader theorem prover community.
+
+Previous talks or presentations from the events have been [shared on the community YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg).
 ### `leanproject`
 
 A higher-level supporting tool for working with projects, particularly [mathlib](#mathlib), in Lean 3.
