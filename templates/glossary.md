@@ -123,8 +123,10 @@ In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `
 
 ### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
 
-There are `9` types of intervals, depending on whether the interval is **c**losed, **o**pen or runs to **i**nfinity at each end.
+Shorthand notation used within [mathlib](#mathlib) for referring to one of 8 kinds of mathematical intervals.
+There are `8` types of intervals, depending on whether the interval is *c*losed, *o*pen or runs to *i*nfinity at each end.
 Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
+`Iii`, which in the naming convention would refer to an interval infinite at both ends, is not in use.
 
 ### infoview
 
