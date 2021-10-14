@@ -249,3 +249,18 @@ Within [core Lean](#core-lean), it also may refer to a tactic helper which reduc
 
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
 * [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
+
+### widget
+
+An extensible framework for defining interactive, componentized graphical elements via Lean code, which render in [infoviews](#infoview) during interactive theorem proving.
+
+A widget may also refer to an individual graphical element being rendered by the aforementioned framework.
+
+Widgets provide a mechanism to show additional context or information which updates in the course of interactive theorem proving.
+
+Support is present both in Lean 3 and Lean 4, albeit with different out-of-the-box functionality.
+
+#### See also
+
+* [Lean Together 2021: Widgets, interactive output in VSCode](https://www.youtube.com/watch?v=8NUBQEZYuis), a presentation by Edward Ayers from [Lean Together 2021](#lean-together) which shows off some of the capabilities widgets enable
+* [The Lean 3 Widget Server Protocol](https://github.com/leanprover-community/lean/blob/master/doc/widget_server.md), a document intended for low-level protocol information more suitable for learning about widget implementation details
