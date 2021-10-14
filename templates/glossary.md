@@ -1,13 +1,5 @@
 # Lean Glossary
 
-### abbreviation
-
-In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
-
-For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
-
-The full list of abbreviations (and their replacements) can be found [in the `vscode-lean` repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
-
 ### attribute
 
 One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
@@ -308,6 +300,14 @@ In Lean 3 it is often entered via a `begin...end` block.
 ### type annotation
 
 ### typeclass inference
+
+### unicode abbreviation
+
+In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
+
+For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
+
+The full list of abbreviations (and their replacements) can be found [in the `vscode-lean` repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
 
 ### unification
 
