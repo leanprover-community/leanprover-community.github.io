@@ -199,8 +199,6 @@ This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equali
 
 [Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
 
-### `Prop` vs `Type`
-
 ### `simp` lemma
 
 A lemma which has been tagged with an [attribute](#attribute) which enables it for use with the `simp` tactic.
