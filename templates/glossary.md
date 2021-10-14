@@ -53,6 +53,15 @@ Its purpose is to alleviate the need for each [mathlib](#mathlib) user to build 
 
 The cache is built within the aforementioned continuous integration, and normally users of mathlib retrieve its built files using [`leanproject`](#leanproject).
 
+### `calc` mode
+
+A [mode](#mode) which consists of sequences of successive transformations of expressions involving a transitive relation such as `=`, `<` or others tagged with `trans` [attributes](#attribute).
+It is entered via the `calc` keyword.
+
+#### See also
+
+[The `calc` mode community documentation](https://leanprover-community.github.io/extras/calc.html)
+
 ### carrier
 
 For a [bundled](#bundled-vs-unbundled) mathematical subobject on a type `T`, it is the *set* of [terms of `T`](#term) considered within the subobject.
@@ -66,6 +75,16 @@ More fully, a *typeclass* (or *type class*).
 A Lean [structure](#structure) whose [instances](#instance) can be retrieved via [typeclass inference](#typeclass-inference).
 
 Distinct from the use of *class* in object oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
+
+
+### `conv` mode
+
+A submode of [tactic mode](#tactic-mode) which facilitates navigating within assumptions or [goals](#goal), in order to rewrite or simplify targeted portions of them.
+It is entered from tactic mode via the `conv` keyword.
+
+#### See also
+
+[The `conv` mode community documentation](https://leanprover-community.github.io/extras/conv.html)
 
 ### core Lean
 
@@ -288,7 +307,7 @@ The full list of abbreviations (and their replacements) can be found [in the `vs
 A Lean expression is in *weak head normal form*, often abbreviated to `whnf`, if it meets a number of normalization criteria mentioned in the resources linked below.
 Informally, expressions in whnf have had their outermost parts evaluated, though inner subexpressions may not have been evaluated.
 
-Within [core Lean](#core-lean), it also may refer to a tactic helper which reduces expressions to this form.
+It also may refer to a command which reduces expressions to this form.
 
 #### See also
 
