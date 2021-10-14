@@ -174,8 +174,9 @@ Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) of
 
 ### module
 
-A [mathlib](#mathlib) *module* is a file.
-Not to be mistaken with `module` that represents a maths semimodule/module/vector space.
+A single file containing Lean source code.
+
+Not to be mistaken with a `module` within mathematics, i.e. the generalization of a vector space.
 
 ## module docstring
 
