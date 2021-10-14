@@ -132,11 +132,10 @@ Within the context of interactively editing Lean files, a window or interface wh
 
 ### instance
 
-"instance" refers to two closely related concepts:
+One of two closely related concepts:
 
-* An *instance* is a [class](#class) argument to a `def`/`lemma`.
-They are put in square brackets `[]` for [typeclass inference](#typeclass-inference) to pick them up when processing the statement.
-* An *instance* is an `instance` [declaration](#declaration). Instances For example, `ℝ` has a linear
+* A [class](#class) argument taken by a `def`, `lemma` or other [declaration](#declaration) which is enclosed by square brackets (`[]`) such that it is resolved by the [typeclass inference](#typeclass-inference) system when the declaration is used.
+* A [declaration](#declaration) created with the eponymous `instance` command, which registers an object with the typeclass inference system for use in the above. As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order` for `ℝ`, enabling reals to be compared with `<`.
 
 ### `leanproject`
 
