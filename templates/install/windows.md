@@ -96,3 +96,39 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 ## Lean Projects
 
 You can now read instructions about creating and working on [Lean projects](project.html)
+
+# Installing Lean, Mathlib, and VS Code through the Windows Subsystem for Linux (WSL) 
+
+## Install WSL and your preferred Linux distribution
+
+For Windows 10, follow the instructions [here](https://docs.microsoft.com/en-us/windows/wsl/install). 
+
+For Windows 11, you can install through the Windows Store. [This link](https://aka.ms/wslstorepage) will 
+open the WLS app page in the store. Next you will want to install the Virtual Machine Platform 
+component. Open up a Powershell with Administrator privileges by searching in the Windows omnisearch box 
+for Powershell and right clicking to select Administrator. Enter
+```
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all 
+```
+Finally you can [choose](https://aka.ms/wslstore) which Linux distribution exists. Continuing, we 
+will be assuming you choose Debian or Ubuntu. 
+
+## Install Lean and Mathlib 
+
+Open up your WSL terminal and enter 
+```bash
+wget -q https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_debian.sh && bash install_debian.sh ; rm -f install_debian.sh && source ~/.profile
+```
+If you in fact did not select Debian or Ubuntu see the [installation instructions for other distributions](https://leanprover-community.github.io/install/linux.html).
+
+## Remove WSL VS Code, Install Windows VS Code and the extensions
+
+The installation script for Mathlib also installed VS Code into WSL. Remove VS Code by entering 
+```bash
+sudo apt remove code 
+```
+into the WSL terminal.
+
+[Download](https://code.visualstudio.com/download) and install VS Code for Windows. Next install the WSL Remote VS Code [Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) and the Lean [Extension](https://marketplace.visualstudio.com/items?itemName=jroesch.lean). 
+
+[Create a Lean project](https://leanprover-community.github.io/install/project.html) in WSL and open in Windows VS Code with `code . `. 
