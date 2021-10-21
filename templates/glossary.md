@@ -1,5 +1,9 @@
 # Lean Glossary
 
+This document collects short explanations of terminology one may encounter within the Lean community.
+
+Whilst many of the entries below have precise technical definitions, preference is given below to explanations of their typical informal or conversational use, with occasional additional references linked for further more detailed information.
+
 ### attribute
 
 One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
