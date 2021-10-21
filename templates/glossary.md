@@ -256,9 +256,13 @@ The compiled version of file `x.lean` is file `x.olean` and all olean files toge
 
 ### orange bar of hell
 
-In VScode, the *orange bar of hell* refers to the orange bar that appears left to the current file when it persists.
-The reason is that the Lean extension has to (re)compile all the imported files whose [cache](#cache) does not match.
-Because of this, having branches that touch two files far apart (with respect to the [import tree](#import-tree)) related through imports is considered bad practice as **any** modification on the file upstream will force Lean to recompile all the files in the middle.
+Interactive editing of Lean in VSCode (or other editors) is typically fairly responsive.
+
+*Orange bars of hell*, however, refer to occasional instances where orange bars in the sidebar alongside a Lean file do not disappear or update.
+Normally these bars indicate which parts of a file Lean is still evaluating, but if these bars persist, it indicates that progress isn't being made.
+Fixing these bars can often be done by closing any inactive editor tabs, followed by opening the VSCode Command Palette (`ctrl-shift-p` or `cmd-shift-p`) and running `Lean: Restart`.
+Another common reason this occurs is if Lean is having to (re)compile all imported [mathlib](#mathlib) files due to a mismatched set of [cached](#cache) [olean files](#olean-file).
+In these cases, ensuring that the mathlib cache is properly downloaded via `leanpkg configure && leanproject get-mathlib-cache` should fix the issue.
 
 ## propeq
 
