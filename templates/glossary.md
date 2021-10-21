@@ -75,9 +75,7 @@ It is entered via the `calc` keyword.
 
 ### carrier
 
-For a [bundled](#bundled-vs-unbundled) mathematical subobject on a type `T`, it is the *set* of [terms of `T`](#term) considered within the subobject.
-
-Lean (sub-)[structures](#structure) will often correspondingly name one of their fields as such (`carrier`).
+For a Lean [structure](#structure) which [bundles](#bundled-vs-unbundled) a type `T` along with some additional mathematical structure (represented as additional fields), it is the type `T` of underlying elements.
 
 ### class
 
