@@ -48,8 +48,13 @@ In contrast, an unbundled structure instead contains only the definition of `O`,
 
 As a concrete example, a [group homomorphism](https://en.wikipedia.org/wiki/Group_homomorphism) can be viewed as a map `φ: G → H` between groups, along with a proof `h : φ(a * b) = φ(a) * φ(b)`. A bundled group homomorphism would contain both `φ` and `h` as fields, whereas an unbundled one would instead consist only of `φ`, with a separate `is_group_homomorphism` [declaration](#declaration) for the proof of `h`.
 
-There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling.
-Generally within [mathlib](#mathlib), bundled structures are preferred, but unbundled versions are often also present.
+There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling, as well as shades of grey which partially bundle some parts of a structure whilst leaving others unbundled.
+[Type classes](#class) within [mathlib](#mathlib) are primarily semi-bundled, generally unbundling only the [carrier](#carrier) type itself.
+Morphisms within mathlib are more often fully bundled, though traces of both approaches are present and discussed in the resource below.
+
+#### See also
+
+Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from [The Lean Mathematical Library](https://arxiv.org/pdf/1910.09336.pdf) (PDF), a paper by the mathlib community describing many of [mathlib](#mathlib)'s architecture and design choices.
 
 ### cache
 
