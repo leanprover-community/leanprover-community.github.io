@@ -2,7 +2,7 @@
 
 This document collects short explanations of terminology one may encounter within the Lean community.
 
-Whilst many of the entries below have precise technical definitions, preference is given below to explanations of their typical informal or conversational use, with occasional additional references linked for further more detailed information.
+Whilst many of the entries below have precise technical definitions, preference is given below to explanations of their conversational use, with additional references linked for further information.
 
 ### attribute
 
