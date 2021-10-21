@@ -298,6 +298,8 @@ In contrast to [tactic mode](#tactic-mode), term mode proofs are often short in 
 There are various means to enter term mode.
 The body of a [declaration](#declaration) begins in term mode, or within [tactic mode](#tactic-mode) it is often entered using the `exact` [tactic](#tactic).
 Efficient term mode proofs often contribute to [code golfing](#golfing).
+
+Commands such as `have`, `suffices`, and `show` can be used to write structured term mode proofs that are more legible than bare proof terms.
 ### unicode abbreviation
 
 In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
