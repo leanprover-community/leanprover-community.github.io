@@ -8,11 +8,11 @@ n.b.: a small number of interlinks below represent entries which have not yet be
 
 ### attribute
 
-One or more tags or markings which may be applied to a Lean object, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
+One or more tags or markings which may be applied to a Lean [declaration](#declaration), and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within [core Lean](#core-lean), within [mathlib](#mathlib), or within any Lean code.
 
-Applying an attribute to an object is done by prefixing its [declaration](#declaration) with `@[name-of-attribute]`, or by using the `attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
+Applying an attribute is done either by prefixing a declaration command with `@[name-of-attribute]`, or afterwards by using the `attribute` command, as in `attribute [name-of-attribute] name-of-declaration`.
 
-The `@[simp]` attribute, for example, tags an object (ostensibly a `lemma` or `theorem`) as being a [simp lemma](#simp-lemma).
+The `@[simp]` attribute, for example, tags a declaration (typically a `lemma`, `theorem` or `def`) as being a [simp lemma](#simp-lemma).
 
 For further details, including a list of commonly used attributes, see [this section of the Lean reference manual](https://leanprover.github.io/reference/other_commands.html#attributes).
 
@@ -60,7 +60,7 @@ Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from [The Le
 
 Normally, a reference to a shared pre-built set of [`olean` files](#olean-file) built by [mathlib](#mathlib)'s [continuous integration](#continuous-integration) each time a commit is pushed to its repository.
 
-Its purpose is to alleviate the need for each [mathlib](#mathlib) user to build (or rebuild) the same Lean files locally, when doing so can take a significant number of time (multiple hours on a modest computer).
+Its purpose is to alleviate the need for each [mathlib](#mathlib) user to build (or rebuild) the same Lean files locally when doing so can take a significant amount of time (multiple hours on a modest computer).
 
 The cache is built within the aforementioned continuous integration, and normally users of mathlib retrieve its built files using [`leanproject`](#leanproject).
 
@@ -178,7 +178,7 @@ Within the context of interactively editing Lean files, a window or interface wh
 One of two closely related concepts:
 
 * A [class](#class) argument taken by a `def`, `lemma` or other [declaration](#declaration) which is enclosed by square brackets (`[]`) such that it is resolved by the [typeclass inference](#typeclass-inference) system when the declaration is used.
-* A [declaration](#declaration) created with the eponymous `instance` command, which registers an object with the typeclass inference system for use in the above. As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order` for `ℝ`, enabling reals to be compared with `<`.
+* A [declaration](#declaration) created with the eponymous `instance` command, or equivalently one marked with the `instance` [attribute](#attributes), either of which register the declaration with the typeclass inference system for use in the above. As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order` for `ℝ`, enabling reals to be compared with `<`.
 
 ### Lean Together
 
@@ -195,7 +195,7 @@ It lives within the [community `mathlib-tools` repository](https://github.com/le
 
 A *linter* is a small program that looks for hard-to-spot mistakes in code.
 [mathlib](#mathlib) defines both [style linters](#style-linter) and [code linters](#code-linter).
-Mathlib is linted on every [CI run](#continuous-integration), after it is built.
+Mathlib is linted on every [CI run](#continuous-integration) when pull requests are submitted.
 
 ### mathlib
 
@@ -212,7 +212,7 @@ Learnings from both the mathlib4 effort as well as from [mathport](#mathport) of
 ### mathport
 
 An [in-development tool](https://github.com/leanprover/mathport/) for automated or semi-automated translation of Lean 3 code into Lean 4 code.
-It consists of both fully automated generation of Lean 4 [olean files](#olean-file) from Lean 3 source files, as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code.
+It consists of both fully automated generation of Lean 4 [olean files](#olean-file) from Lean 3 source files (*binport*), as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code (*synport*).
 Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.
 
 ### mode
