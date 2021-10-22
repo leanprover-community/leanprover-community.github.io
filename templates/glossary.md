@@ -14,7 +14,11 @@ Applying an attribute is done either by prefixing a declaration command with `@[
 
 The `@[simp]` attribute, for example, tags a declaration (typically a `lemma`, `theorem` or `def`) as being a [simp lemma](#simp-lemma).
 
-For further details, including a list of commonly used attributes, see [this section of the Lean reference manual](https://leanprover.github.io/reference/other_commands.html#attributes).
+#### See also
+
+* [The mathlib attributes documentation](https://leanprover-community.github.io/mathlib_docs/attributes.html), for a list of those defined and used throughout [mathlib](#mathlib)
+
+* [Section 5.4 of *The Lean Reference Manual*](https://leanprover.github.io/reference/other_commands.html#attributes), for a list of those defined within [core lean](#core-lean)
 
 ### beta reduction
 
