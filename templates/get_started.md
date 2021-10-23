@@ -31,7 +31,7 @@ You need to wait for the orange bar at the top to turn green and say
 pairs to see the state of proofs evolving.
 
 With a bit more time, you can play
-[The Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/),
+[The Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/),
 in your browser.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
