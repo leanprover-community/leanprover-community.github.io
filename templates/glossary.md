@@ -79,7 +79,9 @@ It is entered via the `calc` keyword.
 
 ### carrier
 
-For a Lean [structure](#structure) which [bundles](#bundled-vs-unbundled) a type `T` along with some additional mathematical structure (represented as additional fields), it is the type `T` of underlying elements.
+For a Lean [structure](#structure) which [bundles](#bundled-vs-unbundled) a type `T` along with some additional mathematical structure represented as additional fields (e.g., [`Group`](https://leanprover-community.github.io/mathlib_docs/algebra/category/Group/basic.html#Group)), it is the type `T` of underlying elements.
+
+For a Lean [structure](#structure) which [bundles](#bundled-vs-unbundled) a set `S` along with some additional properties represented as additional fields (e.g., [`subgroup`](https://leanprover-community.github.io/mathlib_docs/group_theory/subgroup/basic.html#subgroup)), it is the type underlying set `S`.
 
 ### class
 
