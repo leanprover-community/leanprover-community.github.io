@@ -58,7 +58,7 @@ Morphisms within mathlib are more often fully bundled, though traces of both app
 
 #### See also
 
-Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from [The Lean Mathematical Library](https://arxiv.org/pdf/1910.09336.pdf) (PDF), a paper by the mathlib community describing many of [mathlib](#mathlib)'s architecture and design choices.
+* Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from [The Lean Mathematical Library](https://arxiv.org/pdf/1910.09336.pdf) (PDF), a paper by the mathlib community describing many of [mathlib](#mathlib)'s architecture and design choices.
 
 ### cache
 
@@ -75,7 +75,7 @@ It is entered via the `calc` keyword.
 
 #### See also
 
-[The `calc` mode community documentation](https://leanprover-community.github.io/extras/calc.html)
+* [The `calc` mode community documentation](https://leanprover-community.github.io/extras/calc.html)
 
 ### carrier
 
@@ -106,7 +106,7 @@ It is entered from tactic mode via the `conv` keyword.
 
 #### See also
 
-[The `conv` mode community documentation](https://leanprover-community.github.io/extras/conv.html)
+* [The `conv` mode community documentation](https://leanprover-community.github.io/extras/conv.html)
 
 ### core Lean
 
@@ -174,6 +174,10 @@ Shorthand notation used within [mathlib](#mathlib) for referring to one of 8 kin
 There are `8` types of intervals, depending on whether the interval is *c*losed, *o*pen or runs to *i*nfinity at each end.
 Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
 `Iii`, which in the naming convention would refer to an interval infinite at both ends, is not in use.
+
+#### See also
+
+* [mathlib's `data.set.intervals.unordered_interval`](https://leanprover-community.github.io/mathlib_docs/data/set/intervals/unordered_interval.html), which builds unordered intervals (where the endpoints may be specified in either order) on top of these intervals.
 
 ### infoview
 
