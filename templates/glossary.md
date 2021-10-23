@@ -131,12 +131,18 @@ Further detail can be found in the [Lean documentation](https://leanprover.githu
 
 ### diamond
 
-There are often many ways to turn a given structure into another one.
-A *diamond* is a collection of such ways.
-Diamonds are abundant because of [hierarchies](#hierarchy).
-[Typeclass inference](#typeclass-inference) will unpredictably take one of the paths for a given diamond, so we want this path to not matter.
-This amounts to making the [Type-valued](#Prop-vs-Type) fields of the different inferable structures [defeq](#defeq).
-When this is the case, we have a *defeq diamond*.
+The existence of multiple conflicting [terms](#term) of a [class](#class) found within the typeclass [instance](#instance) graph.
+A diamond is likely to cause issues during [typeclass inference](#typeclass-inference), which attempts to construct a single term of the class and may therefore be unable to do so.
+When unqualified, "diamond" refers most often to this undesirable case, where non-[defeq](#defeq) terms in the diamond may cause errors, lead to [goals](#goal) which are not provable via `refl`, or potentially ones not provably equal at all.
+Within [mathlib](#mathlib), diamonds are abundant because of its many [hierarchies](#hierarchy).
+Fixing or mitigating diamonds often involves refactoring the fields or instance priorities for the offending class.
+Diamonds which cross library boundaries -- such as ones in which part of the typeclass graph lives within mathlib and part within a library depending on mathlib which adds new instances or classes -- may be particularly hard to fix or avoid without modification.
+
+#### See Also
+
+* [mathlib's Design note on `add_monoid` and `monoid`](https://leanprover-community.github.io/mathlib_docs/algebra/group/defs.html#design-note-on-codeadd_monoidcode-and-codemonoidcode), for a specific example of evading a diamond
+
+* [Forgetful Inheritance](https://leanprover-community.github.io/mathlib_docs/notes.html#forgetful%20inheritance), also from the mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of "richer" and poorer structures on a type
 
 ### `equiv`
 
