@@ -19,7 +19,7 @@ Applying an attribute is done either by prefixing a declaration command with `@[
 
 The `@[simp]` attribute, for example, tags a declaration (typically a `lemma`, `theorem` or `def`) as being a [simp lemma](#simp-lemma).
 
-#### See also
+##### See also
 
 * [The mathlib attributes documentation](https://leanprover-community.github.io/mathlib_docs/attributes.html), for a list of those defined and used throughout [mathlib](#mathlib)
 
@@ -31,7 +31,7 @@ A specific simplification operation in [dependent type theory](#dependent-type-t
 
 More precisely, it is the process of simplifying an expression such as `(λ x, t) a` to `t[a/x]`, where appearances of the variable `x` in `t` have been replaced with `a`.
 
-#### See also
+##### See also
 
 * [Section 2.3 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#function-abstraction-and-evaluation)
 
@@ -61,7 +61,7 @@ There are performance, stylistic or implementation-related reasons to prefer bun
 [Type classes](#class) within [mathlib](#mathlib) are primarily semi-bundled, generally unbundling only the [carrier](#carrier) type itself.
 Morphisms within mathlib are more often fully bundled, though traces of both approaches are present and discussed in the resource below.
 
-#### See also
+##### See also
 
 * Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from [The Lean Mathematical Library](https://arxiv.org/pdf/1910.09336.pdf) (PDF), a paper by the mathlib community describing many of [mathlib](#mathlib)'s architecture and design choices.
 
@@ -80,7 +80,7 @@ The cache is built within the aforementioned continuous integration, and normall
 A [mode](#mode) which consists of sequences of successive transformations of expressions involving a transitive relation such as `=`, `<` or others tagged with `trans` [attributes](#attribute).
 It is entered via the `calc` keyword.
 
-#### See also
+##### See also
 
 * [The `calc` mode community documentation](https://leanprover-community.github.io/extras/calc.html)
 
@@ -113,7 +113,7 @@ Linting can be disabled for a particular piece of code by using the `nolint` [at
 A submode of [tactic mode](#tactic-mode) which facilitates navigating within assumptions or [goals](#goal), in order to rewrite or simplify targeted portions of them.
 It is entered from tactic mode via the `conv` keyword.
 
-#### See also
+##### See also
 
 * [The `conv` mode community documentation](https://leanprover-community.github.io/extras/conv.html)
 
@@ -147,7 +147,7 @@ Within [mathlib](#mathlib), diamonds are abundant because of its many [hierarchi
 Fixing or mitigating diamonds often involves refactoring the fields or instance priorities for the offending class.
 Diamonds which cross library boundaries -- such as ones in which part of the typeclass graph lives within mathlib and part within a library depending on mathlib which adds new instances or classes -- may be particularly hard to fix or avoid without modification.
 
-#### See Also
+##### See Also
 
 * [mathlib's Design note on `add_monoid` and `monoid`](https://leanprover-community.github.io/mathlib_docs/algebra/group/defs.html#design-note-on-codeadd_monoidcode-and-codemonoidcode), for a specific example of evading a diamond
 
@@ -196,7 +196,7 @@ There are `8` types of intervals, depending on whether the interval is *c*losed,
 Names have been made compact by calling each interval `I` + how it ends on the left + how it ends on the right.
 `Iii`, which in the naming convention would refer to an interval infinite at both ends, is not in use.
 
-#### See also
+##### See also
 
 * [mathlib's `data.set.intervals.unordered_interval`](https://leanprover-community.github.io/mathlib_docs/data/set/intervals/unordered_interval.html), which builds unordered intervals (where the endpoints may be specified in either order) on top of these intervals.
 
@@ -279,7 +279,7 @@ Further information can be found on [the MWE page](mwe.html).
 An invocation of the `simp` tactic which is not the last tactic invoked on a particular [subgoal](#goal), nor uses `simp only` to explicitly limit which [simp lemmas](#simp-lemma) it considers.
 Non-terminal `simp`s are avoided because they are hard to maintain, given that their behavior or runtime will change as mathlib adds or modifies the set of `simp` lemmas over time.
 
-#### See also
+##### See also
 
 The ["non-terminal `simp`" section](https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes) of the `simp` documentation
 
@@ -303,7 +303,7 @@ In these cases, ensuring that the mathlib cache is properly downloaded via `lean
 *Propositional equality*. Two [term](#term)s `a b : α` are propositionally equal if we can prove `a = b`.
 This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
 
-#### See also
+##### See also
 
 [Equality, specifications and implementations](https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/), from the Xena Project
 
@@ -340,7 +340,7 @@ It may be entered using the `by` keyword from [term mode](#term-mode), though in
 Other modes can also be interspersed within it, often to collaboratively produce an understandable, efficient, short or readable overall proof.
 Ultimately, the result of a tactic mode block is a [term](#term), assembled via the tactics within it.
 
-#### See also
+##### See also
 
 * [Section 5 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), which discusses tactics, as well as moving into and out of tactic mode
 
@@ -373,7 +373,7 @@ Informally, expressions in whnf have had their outermost parts evaluated, though
 
 It also may refer to a command which reduces expressions to this form.
 
-#### See also
+##### See also
 
 * [Section 8.4 of Programming in Lean](https://leanprover.github.io/programming_in_lean/#08_Writing_Tactics.html), which is still in progress, but will cover `whnf`
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
@@ -389,7 +389,7 @@ Widgets provide a mechanism to show additional context or information which upda
 
 Support is present both in Lean 3 and Lean 4, albeit with different out-of-the-box functionality.
 
-#### See also
+##### See also
 
 * [Lean Together 2021: Widgets, interactive output in VSCode](https://www.youtube.com/watch?v=8NUBQEZYuis), a presentation by Edward Ayers from [Lean Together 2021](#lean-together) which shows off some of the capabilities widgets enable
 * [The Lean 3 Widget Server Protocol](https://github.com/leanprover-community/lean/blob/master/doc/widget_server.md), a document intended for low-level protocol information more suitable for learning about widget implementation details
