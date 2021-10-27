@@ -4,7 +4,12 @@ This document collects short explanations of terminology one may encounter withi
 
 Whilst many of the entries below have precise technical definitions, preference is given below to explanations of their conversational use, with additional references linked for further information.
 
-n.b.: a small number of interlinks below represent entries which have not yet been added, and will therefore not lead to entry definitions until they are completed
+A small number of interlinks below represent entries which have not yet been added, and will therefore not lead to entry definitions until they are completed.
+To request that an additional entry be added to this glossary, feel free to [file an issue](https://github.com/leanprover-community/leanprover-community.github.io/issues/new?title=Add%20a%20glossary%20entry%20for%20).
+
+The entries on this page can be linked to via anchor links (e.g. `https://leanprover-community.github.io/glossary.html#widget`).
+For some entries, there are additional easier-to-type anchors which can be found just before the entry heading -- e.g. [`#heavy-rfl`](#heavy-rfl) will lead to the "heavy `rfl` / heavy `refl`" entry.
+Authors of new glossary entries should consider adding these additional anchors if the entry title is long, contains backticks, or is otherwise hard to type.
 
 ### attribute
 
