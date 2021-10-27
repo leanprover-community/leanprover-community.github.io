@@ -285,8 +285,9 @@ The ["non-terminal `simp`" section](https://leanprover-community.github.io/extra
 
 ### olean file
 
-Lean code has to be compiled.
-The compiled version of file `x.lean` is file `x.olean` and all olean files together form the [cache](#cache).
+A cached, compiled binary file produced by Lean as part of building a Lean [module](#module).
+`olean` files are tied to the specific Lean version which built them, and their names match the module they correspond to (so a file named `foo.lean` will have a corresponding `foo.olean` file).
+Building an `olean` file can be done manually (via e.g. `lean --make foo.lean`), but for collaborative projects like [mathlib](#mathlib) they are built via [CI](#continuous-integration) as a shared [olean cache](#cache), and then can simply be retrieved by each mathlib user.
 
 ### orange bar of hell
 
