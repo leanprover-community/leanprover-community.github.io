@@ -25,15 +25,22 @@ It's okay to do this in your own fork of the `mathlib` repository,
 or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
 Please include your GitHub username in your request.
 It's polite to prefix the branch name with your username, so it's easier for us to clean up clutter.
+(Once you're making a pull request, we'll ask you to do so from a branch of the mathlib repository,
+rather than from your own fork, as CI works better this way.)
 
 Typical workflow:
+* To get started, you'll need a local copy of mathlib.
 * At https://github.com/leanprover-community/mathlib, click "Fork" in the top right, to make your own fork of the repository.
   Your fork is at https://github.com/USER/mathlib.
   Alternatively, if you've asked for write access you can just use https://github.com/leanprover-community/mathlib.
-* Now make a local clone of the repository, and create a new branch.
+* Now make a local clone of the repository.
 ```
 git clone https://github.com/USER/mathlib.git
 cd mathlib
+```
+* The steps above only need to be done once (not once for each contribution).
+* Now, each time you want to work on a new change to mathlib, create a new branch:
+```
 git checkout -b my_new_branch   # This creates a new branch
 ```
   It's also fine to simply clone https://github.com/leanprover-community/mathlib.git,
