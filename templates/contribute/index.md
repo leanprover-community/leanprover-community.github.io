@@ -20,7 +20,7 @@ The `master` branch is the "production" version of mathlib.
 It is essential that everything in the master branch compiles without errors, and there are no `sorry`s.
 To ensure this, we only commit changes to `master` that have passed CI tests, and have been approved by mathlib maintainers.
 
-While you're working on a new contribution to `mathlib`, you should do this on a branch.
+While you're working on a new contribution to `mathlib`, you should do this on a different branch.
 It's okay to do this in your own fork of the `mathlib` repository,
 or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
 Please include your GitHub username in your request.
@@ -34,22 +34,22 @@ Typical workflow:
   Your fork is at https://github.com/USER/mathlib.
   Alternatively, if you've asked for write access you can just use https://github.com/leanprover-community/mathlib.
 * Now make a local clone of the repository.
-```
-git clone https://github.com/USER/mathlib.git
-cd mathlib
-```
+  ```
+  git clone https://github.com/USER/mathlib.git
+  cd mathlib
+  ```
 * The steps above only need to be done once (not once for each contribution).
 * Now, each time you want to work on a new change to mathlib, create a new branch:
-```
-git checkout -b my_new_branch   # This creates a new branch
-```
+  ```
+  git checkout -b my_new_branch   # This creates a new branch
+  ```
   It's also fine to simply clone https://github.com/leanprover-community/mathlib.git,
   but you won't be able to push changes unless you've asked for permission.
   An alternative at this step is to use `leanproject`.
   The command
-```
-leanproject get -b mathlib:my_new_branch
-```
+  ```
+  leanproject get -b mathlib:my_new_branch
+  ```
   has the same effect as the `git clone` and `git checkout -b` commands described above,
   except that it will clone into the directory `mathlib_my_new_branch`.
 * Sometimes you may not want to create a new branch, but instead work on a branch
@@ -61,9 +61,13 @@ leanproject get -b mathlib:my_new_branch
 `leanproject build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you.
 * In order to push your changes back to the repository on github, use
-```git push```
-If this complains about the remote not being configured, follow the advice in the output from `git` and run
-```git push --set-upstream origin my_new_branch```
+  ```
+  git push
+  ```
+  If this complains about the remote not being configured, follow the advice in the output from `git` and run
+  ```
+  git push --set-upstream origin my_new_branch
+  ```
 * If you're working on the main `mathlib` repository rather than your own fork,
   continuous integration will automatically kick in at this point.
   You can view the output by visiting
