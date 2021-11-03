@@ -130,4 +130,5 @@ We also have a [YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI97
 which includes playlists of videos from the above conferences, and also other conferences with Lean-relevant content.
 
 ## Miscellaneous resources
-* [lean-for-hackers](https://agentultra.github.io/lean-for-hackers/)
+* [lean-for-hackers](https://agentultra.github.io/lean-for-hackers/):
+  a hands-on guide to using Lean 3 as a programming language.
