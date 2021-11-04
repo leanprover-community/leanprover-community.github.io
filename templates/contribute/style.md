@@ -108,7 +108,7 @@ After stating the theorem, we generally do not indent the first line
 of a proof, so that the proof is "flush left" in the file.
 ```lean
 open nat
-theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) : P n :=
+theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀ m, P (succ m)) : P n :=
 nat.induction_on n H1 (assume m IH, H2 m)
 ```
 
@@ -134,7 +134,7 @@ indent each argument.
 ```lean
 open nat
 axiom zero_or_succ (n : nat) : n = zero ∨ n = succ (pred n)
-theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀m, n = succ m → B) : B :=
+theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀ m, n = succ m → B) : B :=
 or.elim (zero_or_succ n)
   (assume H3 : n = zero, H1 H3)
   (assume H3 : n = succ (pred n), H2 (pred n) H3)
@@ -146,17 +146,17 @@ Here is a longer example.
 open list
 variable {T : Type}
 
-theorem mem_split {x : T} {l : list T} : x ∈ l → ∃s t : list T, l = s ++ (x::t) :=
+theorem mem_split {x : T} {l : list T} : x ∈ l → ∃ s t : list T, l = s ++ (x::t) :=
 list.rec_on l
   (assume H : x ∈ [], false.elim (iff.elim_left (mem_nil_iff _) H))
   (assume y l,
-    assume IH : x ∈ l → ∃s t : list T, l = s ++ (x::t),
+    assume IH : x ∈ l → ∃ s t : list T, l = s ++ (x::t),
     assume H : x ∈ y::l,
     or.elim (eq_or_mem_of_mem_cons H)
       (assume H1 : x = y,
         exists.intro [] (exists.intro l (by rw H1; refl)))
       (assume H1 : x ∈ l,
-        let ⟨s, (H2 : ∃t : list T, l = s ++ (x::t))⟩ := IH H1,
+        let ⟨s, (H2 : ∃ t : list T, l = s ++ (x::t))⟩ := IH H1,
             ⟨t, (H3 : l = s ++ (x::t))⟩ := H2 in
         have H4 : y :: l = (y::s) ++ (x::t), by rw H3; refl,
         exists.intro (y::s) (exists.intro t H4)))
@@ -225,8 +225,8 @@ structure principal_seg {α β : Type*} (r : α → α → Prop) (s : β → β 
 
 class semimodule (R : Type u) (M : Type v) [semiring R]
   [add_comm_monoid M] extends distrib_mul_action R M :=
-(add_smul  : ∀(r s : R) (x : M), (r + s) • x = r • x + s • x)
-(zero_smul : ∀x : M, (0 : R) • x = 0)
+(add_smul  : ∀ (r s : R) (x : M), (r + s) • x = r • x + s • x)
+(zero_smul : ∀ x : M, (0 : R) • x = 0)
 ```
 
 When using a constructor taking several arguments in a definition,
@@ -244,7 +244,7 @@ in:
 
 ```lean
 instance : partial_order (topological_space α) :=
-{ le          := λt s, t.is_open ≤ s.is_open,
+{ le          := λ t s, t.is_open ≤ s.is_open,
   le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,
   le_refl     := assume t, le_refl t.is_open,
   le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
@@ -366,7 +366,7 @@ is much longer than the proofs of the other goals). Braces are not alone on thei
 
 ```lean
 lemma mem_nhds_of_is_topological_basis {a : α} {s : set α} {b : set (set α)}
-  (hb : is_topological_basis b) : s ∈ (𝓝 a).sets ↔ ∃t∈b, a ∈ t ∧ t ⊆ s :=
+  (hb : is_topological_basis b) : s ∈ (𝓝 a).sets ↔ ∃ t ∈ b, a ∈ t ∧ t ⊆ s :=
 begin
   rw [hb.2.2, nhds_generate_from, infi_sets_eq'],
   { simpa [and_comm, and.left_comm] },
