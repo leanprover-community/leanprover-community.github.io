@@ -79,8 +79,10 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
    (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
-4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
-5. Setup the default profile:
+4. Select the `lean` extension (unique name `jroesch.lean`). There is also a
+   `lean4` extension, but that one does not work with mathlib.
+5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
+6. Setup the default profile:
   * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
     `Select Default Profile`, then select `git bash` from the menu.
   * If you're using `msys2`, press `ctrl-comma` again to open the settings, and add two settings:
@@ -88,8 +90,8 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
   "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
   "terminal.integrated.shellArgs.windows": ["--login", "-i"]
   ```
-6. Restart VS Code.
-7. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
+7. Restart VS Code.
+8. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
    A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
    displayed.
 
