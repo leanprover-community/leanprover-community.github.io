@@ -149,6 +149,8 @@ Diamonds which cross library boundaries -- such as ones in which part of the typ
 
 * [Forgetful Inheritance](https://leanprover-community.github.io/mathlib_docs/notes.html#forgetful%20inheritance), also from the mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of "richer" and poorer structures on a type
 
+<a name="dot-notation"></a>
+
 ### dot notation / generalized field notation / generalized projections
 
 The syntax sugar allowing notations such as `((foo a b c).bar x.y).baz`.
