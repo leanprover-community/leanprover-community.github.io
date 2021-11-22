@@ -32,11 +32,11 @@
   {% for area in overviews %}
     {% if area.has_missing_child %}
     <h4>{{ area.title }}</h4>
-      {% for subarea in area.has_missing_children %}
+      {% for subarea in area.missing_children %}
         <p class="ml-4 mb-2">
         <b>{{ subarea.title }}: </b>
-        {% for item in subarea.has_missing_children %}
-          {{ item.title }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% for item in subarea.missing_children %}
+	{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}{% if not loop.last %}, {% else %}.{% endif %}
         {% endfor %}
         </p>
       {% endfor %}
