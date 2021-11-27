@@ -1,6 +1,6 @@
 # Installing Lean and mathlib on Linux
 
-This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distribtions such as Ubuntu).
+This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distributions such as Ubuntu).
 
 All commands below should be typed inside a terminal.
 
