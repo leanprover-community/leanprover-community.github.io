@@ -216,6 +216,10 @@ Previous talks or presentations from the events have been [shared on the communi
 A higher-level supporting tool for working with projects, particularly [mathlib](#mathlib), in Lean 3.
 It lives within the [community `mathlib-tools` repository](https://github.com/leanprover-community/mathlib-tools/).
 
+##### See also
+
+* [The Lean projects documentation page](https://leanprover-community.github.io/install/project.html), for details of using `leanproject` with existing or new projects.
+
 ### lint
 
 A *linter* is a small program that looks for hard-to-spot mistakes in code.
