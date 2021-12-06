@@ -253,7 +253,7 @@ A single file containing Lean source code.
 
 Not to be mistaken with a `module` within mathematics, i.e. the generalization of a vector space.
 
-## module docstring
+### module docstring
 
 [Module](#module)-level comment summarizing what's to be found in the file.
 We require that every file has one, but [some old files](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) still don't.
@@ -289,7 +289,7 @@ Fixing these bars can often be done by closing any inactive editor tabs, followe
 Another common reason this occurs is if Lean is having to (re)compile all imported [mathlib](#mathlib) files due to a mismatched set of [cached](#cache) [olean files](#olean-file).
 In these cases, ensuring that the mathlib cache is properly downloaded via `leanpkg configure && leanproject get-mathlib-cache` should fix the issue.
 
-## propeq
+### propeq
 
 *Propositional equality*. Two [term](#term)s `a b : α` are propositionally equal if we can prove `a = b`.
 This is weaker than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
