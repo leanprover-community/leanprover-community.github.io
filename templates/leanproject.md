@@ -253,3 +253,27 @@ If `leanproject` ends with a mysterious error message, you can run it
 using the `--debug` flag, e.g. `leanproject --debug new my_project`.
 It will then probably output a python trace that you'll be able to paste
 in a GitHub issue or on [Zulip](https://leanprover.zulipchat.com/).
+
+Another common problem you may encounter when editing mathlib files is the 
+["orange bars of hell"](https://leanprover-community.github.io/glossary.html#orange-bar-of-hell).
+When this problem arises the orange bars in the sidebar of the editor 
+(e.g. VSCode) alongside a Lean file, which normally indicate which parts of 
+the file Lean is still evaluating, refuse to disappear or update.  
+
+* The first thing to try if this occurs is to close any inactive editor 
+tabs and then restart Lean. (In VSCode, press `ctrl-shift-p` or `cmd-shift-p` 
+to open the Command Palette and then run the command `Lean: Restart`). 
+
+* If the problem persists after restarting, this may be because your local 
+copy of the 
+(pre-compiled olean files)[https://leanprover-community.github.io/glossary.html#cache] 
+is mismatched or faulty in some other way, and so Lean is having to (re)compile 
+all the imported mathlib files.  This taks a long time, making Lean appear 
+unresponsive.  In this case, make sure any changes in your current branch 
+are committed, switch to the `master` branch, and then re-download the mathlib 
+cache by typing `leanpkg configure && leanproject get-mathlib-cache` at the terminal.
+
+* If this still fails to fix the problem, or if you get some other error message
+when following the above procedure, post a message in the `#new members` channel 
+of the [Zulip](https://leanprover.zulipchat.com/) chat, and our friendly 
+community will do our best to help get you going again!
