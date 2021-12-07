@@ -268,7 +268,7 @@ to open the Command Palette and then run the command `Lean: Restart`).
 copy of the 
 (pre-compiled olean files)[https://leanprover-community.github.io/glossary.html#cache] 
 is mismatched or faulty in some other way, and so Lean is having to (re)compile 
-all the imported mathlib files.  This taks a long time, making Lean appear 
+all the imported mathlib files.  This takes a long time, making Lean appear 
 unresponsive.  In this case, make sure any changes in your current branch 
 are committed, switch to the `master` branch, and then re-download the mathlib 
 cache by typing `leanpkg configure && leanproject get-mathlib-cache` at the terminal.
