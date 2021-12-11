@@ -30,13 +30,31 @@ Given that GitHub Actions does [not yet support builds on Apple
 ARM](https://github.com/actions/virtual-environments/issues/2187), installation
 of Lean is for the moment a bit more complex.
 
-Specifically, `elan` – which is otherwise recommended (and installed)
+Specifically, `elan` – which is installed
 as part of the above instructions – will not be able to fetch Lean binaries on
-these devices.
+these devices if installed the normal way.
 
-Until [a separate M1 installation is
-automated](https://github.com/leanprover-community/mathlib-tools/issues/107),
-manual compilation of Lean is required on Apple ARM hardware.
+The following instructions are adapted from [Fedor Pavutnitskiy](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20Macs.3A.20Installing.20the.20Lean.203.20toolchain/near/262832039), and allow you to install elan through [Rosetta](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment).
+
+1. Open new terminal window and install xcode command line tools and rosetta 2 using ```xcode-select --install``` and ```softwareupdate --install-rosetta```.
+
+2. Switch to the x86 architechture in the current terminal window by ```arch -x86_64 zsh ``` as boris suggests. Everything below should happen in the same window.
+
+3. Install brew with ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
+
+4. The same steps as described in [controlled installation for macos](https://leanprover-community.github.io/install/macos_details.html) using the brew you just installed:
+
+```
+/usr/local/bin/brew install elan mathlibtools
+elan toolchain install stable 
+elan default stable  
+```
+
+5. Use ```leanproject get``` to get the repositories needed.
+
+6. Install vs-code from the website and set it up as usual.
+
+```leanproject``` should always be called from ```arch -x86_64```. Also, there may be some performance downsides to using lean under rosetta vs natively.
 
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
