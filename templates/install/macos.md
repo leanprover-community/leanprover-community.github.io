@@ -36,7 +36,7 @@ these devices if installed the normal way.
 
 The following instructions are adapted from [Fedor Pavutnitskiy](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20Macs.3A.20Installing.20the.20Lean.203.20toolchain/near/262832039), and allow you to install elan through [Rosetta](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment).
 
-1. Open new terminal window and install xcode command line tools and rosetta 2 using ```xcode-select --install``` and ```softwareupdate --install-rosetta```.
+1. Open a new terminal window and install XCode Command Line Tools and Rosetta 2 using `xcode-select --install` and `softwareupdate --install-rosetta`.
 
 2. Switch to the x86 architechture in the current terminal window by ```arch -x86_64 zsh ``` as boris suggests. Everything below should happen in the same window.
 
