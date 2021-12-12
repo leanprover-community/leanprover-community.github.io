@@ -42,7 +42,7 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 
 3. Install a second installation of Homebrew for `x86` with `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
 
-4. The same steps as described in [controlled installation for macos](https://leanprover-community.github.io/install/macos_details.html) using the brew you just installed:
+4. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
 
 ```
 /usr/local/bin/brew install elan mathlibtools
