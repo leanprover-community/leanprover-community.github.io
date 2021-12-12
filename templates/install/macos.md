@@ -50,7 +50,7 @@ elan toolchain install stable
 elan default stable  
 ```
 
-5. Install vs-code from the website and set it up as usual.
+5. Install Visual Studio Code and the Lean extension via `brew install --cask visual-studio-code && code --install-extension jroesch.lean`.
 
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
