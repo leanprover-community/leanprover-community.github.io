@@ -50,9 +50,7 @@ elan toolchain install stable
 elan default stable  
 ```
 
-5. Use ```leanproject get``` to get the repositories needed.
-
-6. Install vs-code from the website and set it up as usual.
+5. Install vs-code from the website and set it up as usual.
 
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
