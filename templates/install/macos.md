@@ -54,8 +54,6 @@ elan default stable
 
 6. Install vs-code from the website and set it up as usual.
 
-```leanproject``` should always be called from ```arch -x86_64```. Also, there may be some performance downsides to using lean under rosetta vs natively.
-
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
 
