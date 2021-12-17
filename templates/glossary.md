@@ -349,6 +349,10 @@ Efficient term mode proofs often contribute to [code golfing](#golfing).
 
 Commands such as `have`, `suffices`, and `show` can be used to write structured term mode proofs that are more legible than bare proof terms.
 
+### TPIL
+
+"[Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/index.html)", a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, "designed to teach you to develop and verify proofs in Lean".  Starting with a simple introduction to the [type theory](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html) used in Lean, the text proceeds to explain topics such as [tactics](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), [inductive types](https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html), and [type classes](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html).
+
 ### unicode abbreviation
 
 In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.
