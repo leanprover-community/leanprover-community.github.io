@@ -181,7 +181,7 @@ A heavy `rfl` occurs when `rfl` is asked to perform many steps of definitional r
 
 ### hierarchy
 
-A collection of successively more constrained [typeclasses](#typeclass) within a related area of mathematics.
+A collection of successively more constrained [typeclasses](#class) within a related area of mathematics.
 In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersections of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, and others.
 
 <a name="intervals"></a>
