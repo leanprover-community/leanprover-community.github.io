@@ -137,6 +137,24 @@ Examples of such commands are the `def`, `theorem`, `constant` or `example` comm
 
 Further detail can be found in the [Lean documentation](https://leanprover.github.io/lean4/doc/declarations.html#basic-declarations).
 
+### dependent type theory
+
+A [type theory](#type-theory) in which one additionally may have types which depend on a parameter, such as the type of "days of a calendar month", whose specific values depend on the particular month, given that different months have different numbers of days.
+Further examples may be found in the resources below.
+Lean's implementation of dependent type theory is based on what is known as the *Calculus of Constructions*, allowing for its use both in complex mathematical reasoning as well as software verification.
+
+##### See Also
+
+* [Section 2 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html), which discusses Lean's specific version of dependent type theory
+
+* [Calculus of Constructions, from Wikipedia](https://en.wikipedia.org/wiki/Calculus_of_constructions), for a further overview of the calculus of constructions
+
+* [Dependent Type Theory from nLab](https://ncatlab.org/nlab/show/dependent+type+theory), for a general treatment of dependent type theories
+
+* [Mike Shulman's In Praise of Dependent Types](https://golem.ph.utexas.edu/category/2010/03/in_praise_of_dependent_types.html)
+
+* [Andrej Bauer's answer to "What makes dependent type theory more suitable than set theory for proof assistants?"](https://mathoverflow.net/a/376973)
+
 ### diamond
 
 The existence of multiple conflicting [terms](#term) of a [class](#class) found within the typeclass [instance](#instance) graph.
@@ -357,6 +375,18 @@ Commands such as `have`, `suffices`, and `show` can be used to write structured 
 
 "[Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/index.html)", a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, "designed to teach you to develop and verify proofs in Lean".
 Starting with a simple introduction to the [type theory](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html) used in Lean, the text proceeds to explain topics such as [tactics](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), [inductive types](https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html), and [type classes](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html).
+
+### type theory
+
+A formal system with two fundamental kinds of objects, [terms](#term) and types.
+It also may refer to the field of study of such languages, as there are nuances between various additional properties or features a specific type theory may contain.
+
+Lean's [dependent](#dependent-type-theory) type theory underlies its foundational system of mathematics in contrast to set theory.
+Foundationally in set theory, all objects of interest are in a formal sense built out of a single kind of primitive object -- sets, and one reasons about whether constructed sets are or are not members of other sets.
+This membership notion may be asked about any two formal sets, which can allow statements to be formally meaningful even if they would be mathematically meaningless to a human -- such as asking whether the number 2 is a member of the number 37 (with numbers defined [set theoretically](https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers)).
+By contrast, in type theory, each term has an associated type, as indeed do statements or propositions themselves.
+One has for instance the type of natural numbers (in [mathlib](#mathlib), `ℕ`), or the type of propositions (`Prop`), or the type of *proofs* of `2 + 2 = 4`, or of functions from `ℕ` to `Prop` (`ℕ → Prop`), and can construct terms of these types -- perhaps the terms `2`, `2 + 2 = 37`, `rfl`, and `λ n, true`, respectively.
+Not every term *is* a type however, so in contrast to the aforementioned set theoretic difficulties, one may not construct statements asking whether 37 is of *type* 2 if doing so is not meaningful.
 
 ### unicode abbreviation
 
