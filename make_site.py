@@ -174,6 +174,7 @@ class Overview:
     depth: int
     title: str
     decl: Optional[str] = None
+    url: Optional[str] = None
     parent: Optional['Overview'] = None
     children: List['Overview'] = field(default_factory=list)
 
@@ -196,21 +197,30 @@ class Overview:
         return [item for item in self.children if item.is_nonempty]
 
     @property
-    def has_missing_children(self) -> List['Overview']:
+    def missing_children(self) -> List['Overview']:
         return [item for item in self.children if item.has_missing_child]
 
 
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
+        is_leaf = not isinstance(children, dict)
+        decl = None
+        url = None
+        if is_leaf:
+            if children and 'http' in children:
+                url = children
+            else:
+                decl = replace_link((children or '').strip(), identifier)
         node = cls(
                 id=identifier,
                 depth=depth,
                 title=title,
-                decl=replace_link((children or '').strip(), identifier) if not isinstance(children, dict) else None,
+                decl=decl,
+                url=url,
                 parent=parent,
                 children=[])
 
-        if isinstance(children, dict):
+        if not is_leaf:
             node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
 
         return node

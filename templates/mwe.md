@@ -74,9 +74,9 @@ It is fine for your example to throw compiler errors or warnings. In particular,
 
 You should *test* this by making a new Lean file, pasting your code snippet into it, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
 
-## What if I'm asking about the [Natural Number Game](https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/)?
+## What if I'm asking about the [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/)?
 
-If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/?world=9&level=4) of the Natural Number Game and my proof script is _blah_", rather than "I am on Advanced Multiplication World Level 4 of the Natural Number Game and my proof script is _blah_".
+If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/?world=9&level=4) of the Natural Number Game and my proof script is _blah_", rather than "I am on Advanced Multiplication World Level 4 of the Natural Number Game and my proof script is _blah_".
 
 If you post a code snippet on Zulip, please make sure it is surrounded in triple backticks.
 

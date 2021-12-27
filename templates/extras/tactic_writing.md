@@ -8,7 +8,7 @@ experience working with monads in a functional programming langauge
 Other useful resources while learning to write tactics include:
 * Rob Lewis' [video tutorials](https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) on metaprogramming in Lean from
   Lean for the Curious Mathematician 2020
-* Chapter 7 of the [Hitchhiker's guide to Logical Verification](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf)
+* Chapter 7 of the [Hitchhiker's Guide to Logical Verification](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf)
 * the original paper about metaprogramming Lean
   [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf)
 

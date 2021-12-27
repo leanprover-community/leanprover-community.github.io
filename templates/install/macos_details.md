@@ -46,8 +46,10 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
    (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>⇧ Shift</kbd><kbd>⌘ Command</kbd><kbd>X</kbd>) and search for `leanprover`.
-4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
-5. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
+4. Select the `lean` extension (unique name `jroesch.lean`). There is also a
+   `lean4` extension, but that one does not work with mathlib.
+5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
+6. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
    A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
    displayed.
 
