@@ -101,6 +101,12 @@ You can now read instructions about creating and working on [Lean projects](proj
 
 # Installing Lean, Mathlib, and VS Code through the Windows Subsystem for Linux (WSL) 
 
+As [advertised](https://docs.microsoft.com/en-us/windows/wsl/about), WSL lets developers run a GNU/Linux environment -- including most command-line tools, utilities, and applications -- directly on Windows, unmodified, without the overhead of a traditional virtual machine or dualboot setup.
+
+WSL is useful if you want work in a Unix terminal environment, e.g. if you are most comfortable in Linux. 
+
+It also provides an alternative install path if the direct Windows install is problematic for you. 
+
 ## Install WSL and your preferred Linux distribution
 
 For Windows 10, follow the instructions [here](https://docs.microsoft.com/en-us/windows/wsl/install). 
