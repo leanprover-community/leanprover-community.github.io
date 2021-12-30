@@ -382,7 +382,7 @@ A formal system with two fundamental kinds of objects, [terms](#term) and types.
 It also may refer to the field of study of such languages, as there are nuances between various additional properties or features a specific type theory may contain.
 
 Lean's [dependent](#dependent-type-theory) type theory underlies its foundational system of mathematics in contrast to set theory.
-Foundationally in set theory, all objects of interest are in a formal sense built out of a single kind of primitive object -- sets, and one reasons about whether constructed sets are or are not members of other sets.
+Foundationally in set theory, all objects are in a formal sense built out of a single kind of primitive object, sets. One reasons about whether constructed sets are or are not members of other sets.
 This membership notion may be asked about any two formal sets, which can allow statements to be formally meaningful even if they would be mathematically meaningless to a human -- such as asking whether the number 2 is a member of the number 37 (with numbers defined [set theoretically](https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers)).
 By contrast, in type theory, each term has an associated type, as indeed do statements or propositions themselves.
 One has for instance the type of natural numbers (in [mathlib](#mathlib), `ℕ`), or the type of propositions (`Prop`), or the type of *proofs* of `2 + 2 = 4`, or of functions from `ℕ` to `Prop` (`ℕ → Prop`), and can construct terms of these types -- perhaps the terms `2`, `2 + 2 = 37`, `rfl`, and `λ n, true`, respectively.
