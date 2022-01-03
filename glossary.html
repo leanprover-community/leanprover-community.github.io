@@ -49,14 +49,15 @@
 	  
 <h1 id="lean-glossary" class="markdown-heading">Lean Glossary <a class="hover-link" href="#lean-glossary">#</a></h1>
 <p>This document collects short explanations of terminology one may encounter within the Lean community.</p>
-<p>Whilst many of the entries below have precise technical definitions, preference is given below to explanations of their conversational use, with additional references linked for further information.</p>
-<p>A small number of interlinks below represent entries which have not yet been added, and will therefore not lead to entry definitions until they are completed.
+<p>Whilst many of the entries below have precise technical definitions, preference is given to explanations of their conversational use, with additional references linked for further information.</p>
+<p>A small number of interlinks found below represent entries which have not yet been added, and which therefore will not yet lead to entry definitions until they are completed.
 To request that an additional entry be added to this glossary, feel free to <a href="https://github.com/leanprover-community/leanprover-community.github.io/issues/new?title=Add%20a%20glossary%20entry%20for%20">file an issue</a>.</p>
 <p>The entries on this page can be linked to via anchor links (e.g. <code>https://leanprover-community.github.io/glossary.html#widget</code>).
 For some entries, there are additional easier-to-type anchors which can be found just before the entry heading -- e.g. <a href="#heavy-rfl"><code>#heavy-rfl</code></a> will lead to the &quot;heavy <code>rfl</code> / heavy <code>refl</code>&quot; entry.
 Authors of new glossary entries should consider adding these additional anchors if the entry title is long, contains backticks, or is otherwise hard to type.</p>
 <h3 id="attribute" class="markdown-heading">attribute <a class="hover-link" href="#attribute">#</a></h3>
-<p>One or more tags or markings which may be applied to a Lean <a href="#declaration">declaration</a>, and which may affect either its behavior or the behavior of other Lean objects which interact with it. Attributes may be defined either within <a href="#core-lean">core Lean</a>, within <a href="#mathlib">mathlib</a>, or within any Lean code.</p>
+<p>One or more tags or markings which may be applied to a Lean <a href="#declaration">declaration</a>, and which may affect either its behavior or the behavior of other Lean objects which interact with it.
+Attributes may be defined either within <a href="#core-lean">core Lean</a>, within <a href="#mathlib">mathlib</a>, or within any Lean code.</p>
 <p>Applying an attribute is done either by prefixing a declaration command with <code>@[name-of-attribute]</code>, or afterwards by using the <code>attribute</code> command, as in <code>attribute [name-of-attribute] name-of-declaration</code>.</p>
 <p>The <code>@[simp]</code> attribute, for example, tags a declaration (typically a <code>lemma</code>, <code>theorem</code> or <code>def</code>) as being a <a href="#simp-lemma">simp lemma</a>.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
@@ -85,7 +86,8 @@ Authors of new glossary entries should consider adding these additional anchors 
 <h3 id="bundled-vs-unbundled" class="markdown-heading">bundled vs unbundled <a class="hover-link" href="#bundled-vs-unbundled">#</a></h3>
 <p>Given a mathematical object <code>O</code> with property <code>P</code>, bundling <code>P</code> refers to the creation of a Lean <a href="#structure">structure</a> containing a proof of <code>P</code> as one of its fields in addition to those needed to structurally define <code>O</code>.</p>
 <p>In contrast, an unbundled structure instead contains only the definition of <code>O</code>, and separately the creation of an <code>is_P</code> proposition which can be applied to terms of <code>O</code>.</p>
-<p>As a concrete example, a <a href="https://en.wikipedia.org/wiki/Group_homomorphism">group homomorphism</a> can be viewed as a map <code>φ: G → H</code> between groups, along with a proof <code>h : φ(a * b) = φ(a) * φ(b)</code>. A bundled group homomorphism would contain both <code>φ</code> and <code>h</code> as fields, whereas an unbundled one would instead consist only of <code>φ</code>, with a separate <code>is_group_homomorphism</code> <a href="#declaration">declaration</a> for the proof of <code>h</code>.</p>
+<p>As a concrete example, a <a href="https://en.wikipedia.org/wiki/Group_homomorphism">group homomorphism</a> can be viewed as a map <code>φ: G → H</code> between groups, along with a proof <code>h : φ(a * b) = φ(a) * φ(b)</code>.
+A bundled group homomorphism would contain both <code>φ</code> and <code>h</code> as fields, whereas an unbundled one would instead consist only of <code>φ</code>, with a separate <code>is_group_homomorphism</code> <a href="#declaration">declaration</a> for the proof of <code>h</code>.</p>
 <p>There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling, as well as shades of grey which partially bundle some parts of a structure whilst leaving others unbundled.
 <a href="#class">Type classes</a> within <a href="#mathlib">mathlib</a> are primarily semi-bundled, generally unbundling only the <a href="#carrier">carrier</a> type itself.
 Morphisms within mathlib are more often fully bundled, though traces of both approaches are present and discussed in the resource below.</p>
@@ -116,7 +118,8 @@ It is entered via the <code>calc</code> keyword.</p>
 Concretely, mathlib includes <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lint/frontend.html">a collection of Lean programs</a> which check for a variety of potential issues which may be introduced in new mathlib code.
 New linters are occasionally introduced to detect additional classes of mistakes.
 Mathlib's <a href="#continuous-integration">continuous integration</a> ensures that any new such code passes the defined linters.
-Linting can be disabled for a particular piece of code by using the <code>nolint</code> <a href="#attribute">attribute</a>. Some linter failures that predate the CI code linters are indicated in an autogenerated <a href="https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt">nolint file</a>; the length of this file should tend to zero over time as these errors are fixed.</p>
+Linting can be disabled for a particular piece of code by using the <code>nolint</code> <a href="#attribute">attribute</a>.
+Some linter failures that predate the CI code linters are indicated in an autogenerated <a href="https://github.com/leanprover-community/mathlib/blob/master/scripts/nolints.txt">nolint file</a>; the length of this file should tend to zero over time as these errors are fixed.</p>
 <h3 id="conv-mode" class="markdown-heading"><code>conv</code> mode <a class="hover-link" href="#conv-mode">#</a></h3>
 <p>A submode of <a href="#tactic-mode">tactic mode</a> which facilitates navigating within assumptions or <a href="#goal">goals</a>, in order to rewrite or simplify targeted portions of them.
 It is entered from tactic mode via the <code>conv</code> keyword.</p>
@@ -135,6 +138,28 @@ Occasionally additional lemmas and definitions are still removed or migrated fro
 <p>Or, ambiguously, any of a number of Lean commands which may define or declare such objects.</p>
 <p>Examples of such commands are the <code>def</code>, <code>theorem</code>, <code>constant</code> or <code>example</code> commands (and in Lean 3, the <code>lemma</code> command), amongst others.</p>
 <p>Further detail can be found in the <a href="https://leanprover.github.io/lean4/doc/declarations.html#basic-declarations">Lean documentation</a>.</p>
+<h3 id="dependent-type-theory" class="markdown-heading">dependent type theory <a class="hover-link" href="#dependent-type-theory">#</a></h3>
+<p>A <a href="#type-theory">type theory</a> in which one additionally may have types which depend on a parameter, such as the type of &quot;days of a calendar month&quot;, whose specific values depend on the particular month, given that different months have different numbers of days.
+Further examples may be found in the resources below.
+Lean's implementation of dependent type theory is based on what is known as the <em>Calculus of Constructions</em>, allowing for its use both in complex mathematical reasoning as well as software verification.</p>
+<h5 id="see-also" class="markdown-heading">See Also <a class="hover-link" href="#see-also">#</a></h5>
+<ul>
+<li>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html">Section 2 of Theorem Proving in Lean</a>, which discusses Lean's specific version of dependent type theory</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Calculus_of_constructions">Calculus of Constructions, from Wikipedia</a>, for a further overview of the calculus of constructions</p>
+</li>
+<li>
+<p><a href="https://ncatlab.org/nlab/show/dependent+type+theory">Dependent Type Theory from nLab</a>, for a general treatment of dependent type theories</p>
+</li>
+<li>
+<p><a href="https://golem.ph.utexas.edu/category/2010/03/in_praise_of_dependent_types.html">Mike Shulman's In Praise of Dependent Types</a></p>
+</li>
+<li>
+<p><a href="https://mathoverflow.net/a/376973">Andrej Bauer's answer to &quot;What makes dependent type theory more suitable than set theory for proof assistants?&quot;</a></p>
+</li>
+</ul>
 <h3 id="diamond" class="markdown-heading">diamond <a class="hover-link" href="#diamond">#</a></h3>
 <p>The existence of multiple conflicting <a href="#term">terms</a> of a <a href="#class">class</a> found within the typeclass <a href="#instance">instance</a> graph.
 A diamond is likely to cause issues during <a href="#typeclass-inference">typeclass inference</a>, which attempts to construct a single term of the class and may therefore be unable to do so.
@@ -168,7 +193,7 @@ This obfuscation often is used intentionally or advantageously to signal to read
 A heavy <code>rfl</code> occurs when <code>rfl</code> is asked to perform many steps of definitional reduction at once, resulting in a proof term which is small but which requires Lean to do a lot of computation to ensure that it type checks.</p>
 <p><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds">This Zulip discussion</a> has a particularly slow example.</p>
 <h3 id="hierarchy" class="markdown-heading">hierarchy <a class="hover-link" href="#hierarchy">#</a></h3>
-<p>A collection of successively more constrained <a href="#typeclass">typeclasses</a> within a related area of mathematics.
+<p>A collection of successively more constrained <a href="#class">typeclasses</a> within a related area of mathematics.
 In <a href="#mathlib">mathlib</a>, we have the <em>algebraic hierarchy</em> (<code>semiring</code>, <code>ring</code>, <code>field</code>, ...), the <em>order hierarchy</em> (<code>preorder</code>, <code>partial_order</code>, <code>linear_order</code>, ...), the <em>topological hierarchy</em> (<code>t1_space</code>, <code>t2_space</code>, <code>normal_space</code>, ...), the <em>categorical hierarchy</em> (<code>preadditive</code>, <code>abelian</code>, <code>monoidal</code>, ...) but also the <em>scalar hierarchy</em> (<code>mul_action</code>, <code>distrib_mul_action</code>, <code>module</code>, ...), the <em>norm hierarchy</em>, and intersections of previous ones like the <em>order-algebraic hierarchy</em>, the <em>topologico-algebraic hierarchy</em>, and others.</p>
 <p><a name="intervals"></a></p>
 <h3 id="icc-ico-ioc-ioo-ici-ioi-iic-iio" class="markdown-heading"><code>Icc</code>, <code>Ico</code>, <code>Ioc</code>, <code>Ioo</code>, <code>Ici</code>, <code>Ioi</code>, <code>Iic</code>, <code>Iio</code> <a class="hover-link" href="#icc-ico-ioc-ioo-ici-ioi-iic-iio">#</a></h3>
@@ -186,7 +211,8 @@ Names have been made compact by calling each interval <code>I</code> + how it en
 <p>One of two closely related concepts:</p>
 <ul>
 <li>A <a href="#class">class</a> argument taken by a <code>def</code>, <code>lemma</code> or other <a href="#declaration">declaration</a> which is enclosed by square brackets (<code>[]</code>) such that it is resolved by the <a href="#typeclass-inference">typeclass inference</a> system when the declaration is used.</li>
-<li>A <a href="#declaration">declaration</a> created with the eponymous <code>instance</code> command, or equivalently one marked with the <code>instance</code> <a href="#attributes">attribute</a>, either of which register the declaration with the typeclass inference system for use in the above. As a concrete example, <a href="#mathlib">mathlib</a> defines an instance of <code>linear_order</code> for <code>ℝ</code>, enabling reals to be compared with <code>&lt;</code>.</li>
+<li>A <a href="#declaration">declaration</a> created with the eponymous <code>instance</code> command, or equivalently one marked with the <code>instance</code> <a href="#attributes">attribute</a>, either of which register the declaration with the typeclass inference system for use in the above.
+As a concrete example, <a href="#mathlib">mathlib</a> defines an instance of <code>linear_order</code> for <code>ℝ</code>, enabling reals to be compared with <code>&lt;</code>.</li>
 </ul>
 <h3 id="lean-together" class="markdown-heading">Lean Together <a class="hover-link" href="#lean-together">#</a></h3>
 <p>An <a href="https://leanprover-community.github.io/lt2021/">annual meeting</a> for the Lean user community, its <a href="#mathlib">mathlib</a> library users, as well as the broader theorem prover community.</p>
@@ -286,7 +312,17 @@ The body of a <a href="#declaration">declaration</a> begins in term mode, or wit
 Efficient term mode proofs often contribute to <a href="#golfing">code golfing</a>.</p>
 <p>Commands such as <code>have</code>, <code>suffices</code>, and <code>show</code> can be used to write structured term mode proofs that are more legible than bare proof terms.</p>
 <h3 id="tpil" class="markdown-heading">TPIL <a class="hover-link" href="#tpil">#</a></h3>
-<p>&quot;<a href="https://leanprover.github.io/theorem_proving_in_lean/index.html">Theorem Proving in Lean</a>&quot;, a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, &quot;designed to teach you to develop and verify proofs in Lean&quot;.  Starting with a simple introduction to the <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html">type theory</a> used in Lean, the text proceeds to explain topics such as <a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html">tactics</a>, <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html">inductive types</a>, and <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">type classes</a>.</p>
+<p>&quot;<a href="https://leanprover.github.io/theorem_proving_in_lean/index.html">Theorem Proving in Lean</a>&quot;, a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, &quot;designed to teach you to develop and verify proofs in Lean&quot;.
+Starting with a simple introduction to the <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html">type theory</a> used in Lean, the text proceeds to explain topics such as <a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html">tactics</a>, <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html">inductive types</a>, and <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">type classes</a>.</p>
+<h3 id="type-theory" class="markdown-heading">type theory <a class="hover-link" href="#type-theory">#</a></h3>
+<p>A formal system with two fundamental kinds of objects, <a href="#term">terms</a> and types.
+It also may refer to the field of study of such languages, as there are nuances between various additional properties or features a specific type theory may contain.</p>
+<p>Lean's <a href="#dependent-type-theory">dependent</a> type theory underlies its foundational system of mathematics in contrast to set theory.
+Foundationally in set theory, all objects are in a formal sense built out of a single kind of primitive object, sets. One reasons about whether constructed sets are or are not members of other sets.
+This membership notion may be asked about any two formal sets, which can allow statements to be formally meaningful even if they would be mathematically meaningless to a human -- such as asking whether the number 2 is a member of the number 37 (with numbers defined <a href="https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers">set theoretically</a>).
+By contrast, in type theory, each term has an associated type, as indeed do statements or propositions themselves.
+One has for instance the type of natural numbers (in <a href="#mathlib">mathlib</a>, <code>ℕ</code>), or the type of propositions (<code>Prop</code>), or the type of <em>proofs</em> of <code>2 + 2 = 4</code>, or of functions from <code>ℕ</code> to <code>Prop</code> (<code>ℕ → Prop</code>), and can construct terms of these types -- perhaps the terms <code>2</code>, <code>2 + 2 = 37</code>, <code>rfl</code>, and <code>λ n, true</code>, respectively.
+Not every term <em>is</em> a type however, so in contrast to the aforementioned set theoretic difficulties, one may not construct statements asking whether 37 is of <em>type</em> 2 if doing so is not meaningful.</p>
 <h3 id="unicode-abbreviation" class="markdown-heading">unicode abbreviation <a class="hover-link" href="#unicode-abbreviation">#</a></h3>
 <p>In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.</p>
 <p>For instance, the not-equal symbol &quot;≠&quot; can be entered using the sequence <code>\neq</code>.</p>
