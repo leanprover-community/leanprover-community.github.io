@@ -1,6 +1,6 @@
 # Lean Tips and Tricks
 
-This document contains some tips for intermediate and advanced users of Lean
+This document contains some tips for intermediate and advanced users of Lean.
 It is currently focussed around Lean 3.
 
 ### Commenting out large proofs using `sorry`
