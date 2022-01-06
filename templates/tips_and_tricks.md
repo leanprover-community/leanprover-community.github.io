@@ -5,14 +5,14 @@ It is currently focussed around Lean 3.
 
 ### Commenting out large proofs using `sorry`
 
-Sometimes commenting out large chunks of a proof is helpful, while the default comment characters are `--` or `/- multi-line comment-/`, however often a more convenient way is to temporarily skip a long subproof (of a focussed goal surrounded by braces) by prepending `sorry;`
+Sometimes commenting out chunks of a proof is helpful, often a convenient way to systematically do disable some proofs steps (rather than commenting out subsections) is to temporarily skip a long subproof (of a subgoal which has been surrounded by braces), you can do this by prepending `sorry;`
 ```
 sorry; { rw blah,
   ...
   HUGE PROOF,
   ... }
 ```
-With this method only one line needs to be changed, syntax highlighting is usually preserved, and jumping to definition still works. It also has the advantage that it is extremely easy to remove all instances of `sorry;` from a file when finished using find and replace.
+With this method only one line needs to be changed, syntax highlighting is usually preserved, and jumping to definition still works. It also has the advantage that it is extremely easy to remove all instances of `sorry;` from a file when finished using find and replace, and to quickly toggle this on and off to check things still work when desired.
 
 ### Memory and deterministic timeout
 Lean has two configurable flags for configuring its resource usage, memory and execution time.
@@ -40,6 +40,7 @@ This can be helpful when working on proofs in the middle of a file with many res
 This is related to switching to `check visible lines` mode, but gives the user more precise control over which parts of the file are slow.
 
 Likewise when working at the start of a file Lean will recheck the import lines, this can be prevented by placing a `.` character (which delimits lean declarations) on a newline after the import lines.
+This can also be useful in other situations when Lean wants to recheck things above the lemma or definition you are changing unnecessarily.
 
 ### Profiling proofs
 
