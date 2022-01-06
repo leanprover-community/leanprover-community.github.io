@@ -26,7 +26,7 @@ In VSCode this can be configured by opening the settings and searching for `Lean
 ### Old mode
 If you change a file early on in the import hierarchy and then attempt to work on a file that depends on it much later, then Lean will try to check all files in between to ensure they didn't break.
 This behaviour can cause the Lean server to become unresponsive, or simply slow down development.
-You can also call lean with the "--old" flag to help in these situations, though it does come with some caveats.
+You can call lean with the "--old" flag to help in these situations, though it does come with some caveats.
 In VSCode you can enable it by opening the VSCode settings and searching for "Lean: extra options" then add the flag `--old`.
 This causes lean not to recompile oleans for unedited files and just assume everything worked, so in this situation it is helpful to avoid recompilation.
 However you do then run the risk that your change broke or changed the meaning of some file in-between. Thus it most applicable when you are adding a new lemma/definition early in the hierarchy that you are sure won't break things in between, rather than changing existing definitions.
