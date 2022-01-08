@@ -31,8 +31,8 @@ You can call lean with the "--old" flag to help in these situations, though it d
 In VSCode you can enable it by opening the VSCode settings and searching for "Lean: extra options" then add the flag `--old`.
 For Emacs the variable `lean-extra-arguments` can be modified to add this flag.
 This causes lean not to recompile oleans for unedited files and just assume everything worked, so in this situation it is helpful to avoid recompilation.
-However you do then run the risk that your change broke or changed the meaning of some file in-between. Thus it most applicable when you are adding a new lemma/definition early in the hierarchy that you are sure won't break things in between, rather than changing existing definitions.
-It is possible to "prove false" running lean with the old flag on, by changing a definition in an early file later results about that definition may become incorrect if Lean is asked not to rebuild those files.
+However you do then run the risk that your change broke or changed the meaning of some file in-between. Thus it most applicable when you are adding a new lemma/definition early in the hierarchy that you are sure won't break later files, rather than when you are changing existing definitions in an incompatible way.
+It is possible to "prove false" when running lean with the old flag on; by changing a definition in an early file, later results about that definition may become incorrect if Lean is asked not to rebuild those files.
 The old flag should therefore not be used when consistency of the whole project is important (e.g. in CI), though it can speed up development.
 
 ### The `#exit` command and `.`
