@@ -91,9 +91,7 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
   "terminal.integrated.shellArgs.windows": ["--login", "-i"]
   ```
 7. Restart VS Code.
-8. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
-   A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
-   displayed.
+
 
 ## Lean Projects
 
