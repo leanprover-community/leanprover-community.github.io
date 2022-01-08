@@ -54,18 +54,18 @@ Commenting out subproofs (with the sorry trick above) you can isolate the slow p
 
 ### Avoiding many nested parentheses with `$`
 
-As Lean is a functional language that uses parentheses `(..)` as the basic tool for grouping terms together that should be evaluated first.
-In the following lemma we have to use 5 sets of nested parentheses in order to keep applying `or.inl` and `or.inr` (which only take one argument) correctly.
+Lean is a functional language that uses parentheses `(..)` as the basic tool for grouping terms together that should be evaluated first.
+In the following lemma we have to use 5 sets of nested parentheses in order to tell Lean we want to repeatedly apply `or.inl` and `or.inr`, each of these only take one argument so the bracketing starts to feel a bit excessive.
 ```lean
-lemma foo : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
+lemma many_ors : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
 or.inr (or.inr (or.inr (or.inr (or.inr (or.inl trivial)))))
 ```
-Such proofs take up a lot of unnecessary space, and the parenthesis do not aid understanding when the function being applied only has one argument. Additionally manually inserting the right amount of parentheses can lead to annoying to find errors.
+Such proofs take up a lot of unnecessary space, and the parenthesis do not aid understanding when the function being applied only has one argument. Additionally, manually inserting the right amount of parentheses is tricky, and sometimes results in annoying to find errors.
 The `$` symbol may be used in this situation to give a cleaner looking proof.
 This symbol can be thought of as inserting a left parenthesis at the point of the `$` and then adding a closing right parenthesis as far right as possible.
 In this case its use looks like
 ```lean
-lemma foo : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
+lemma many_ors : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
 or.inr $ or.inr $ or.inr $ or.inr $ or.inr $ or.inl trivial
 ```
 
@@ -74,13 +74,24 @@ By as far right as possible we mean that in the following example
 some_function (a $ really $ long $ chain $ of $ applications) another_argument
 ```
 lean evaluates as `some_function (a (really (long (chain (of applications))))) another_argument` together as intended, as the outer set of brackets still limits the scope of the `$` symbol.
+If we were to remove the parentheses here, Lean would interpret `another_argument` as an argument to `applications` rather than to `some_function`.
 
 In the first example another even more succinct explicit term mode proof is possible via the use of dot notation.
 ```lean
-lemma foo : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
+lemma many_ors : false ∨ false ∨ false ∨ false ∨ false ∨ true ∨ false :=
 (or.inl trivial).inr.inr.inr.inr.inr
 ```
-Here `(...).inr` causes Lean to look at the type of the bracketed term, find that it is of the form `or _ _`, and therefore expand this into `or.inr (...)`, as this function is in the or namespace.
+Here `(...).inr` causes Lean to look at the type of the bracketed term, find that it is of the form `or _ _`, and therefore expand this into `or.inr (...)`, as this function is in the `or` namespace.
 All steps in this proof are nested `or`s therefore we can repeatedly use dot notation to write this proof.
 
 This style is used often in mathlib to write nested function applications when the namespaces allow for a lot of information to be inferred by Lean.
+For instance if we want to say that 7 times the square of a continuous real-valued function is continuous we can use dot notation to give a very short but still readable proof:
+```lean
+lemma a (f : ℝ → ℝ) (hf : continuous f) : continuous ((7 : ℝ) • f ^ 2) :=
+(hf.pow 2).const_smul (7 : ℝ)
+```
+rather than
+```lean
+continuous.const_smul (continuous.pow hf 2) (7 : ℝ)
+```
+Using dot notation allows us to refer to namespaced declarations succinctly without having to open all namespaces (and thus run the risk of overridden names).
