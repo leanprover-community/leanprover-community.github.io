@@ -87,11 +87,11 @@ All steps in this proof are nested `or`s therefore we can repeatedly use dot not
 This style is used often in mathlib to write nested function applications when the namespaces allow for a lot of information to be inferred by Lean.
 For instance if we want to say that 7 times the square of a continuous real-valued function is continuous we can use dot notation to give a very short but still readable proof:
 ```lean
-lemma a (f : ℝ → ℝ) (hf : continuous f) : continuous ((7 : ℝ) • f ^ 2) :=
-(hf.pow 2).const_smul (7 : ℝ)
+lemma a (f : ℝ → ℝ) (hf : continuous f) : continuous (7 • f ^ 2) :=
+(hf.pow 2).nsmul 7
 ```
 rather than
 ```lean
-continuous.const_smul (continuous.pow hf 2) (7 : ℝ)
+continuous.nsmul (continuous.pow hf 2) 7
 ```
 Using dot notation allows us to refer to namespaced declarations succinctly without having to open all namespaces (and thus run the risk of overridden names).
