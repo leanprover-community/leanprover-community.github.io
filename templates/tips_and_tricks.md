@@ -5,7 +5,7 @@ It is currently focussed around Lean 3.
 
 ### Commenting out large proofs using `sorry`
 
-Sometimes commenting out chunks of a proof is helpful, often a convenient way to systematically do disable some proofs steps (rather than commenting out subsections) is to temporarily skip a long subproof (of a subgoal which has been surrounded by braces), you can do this by prepending `sorry;`
+Sometimes skipping subportions of a proof is helpful (e.g. to disable a portion which is slow while working on the rest). The straightforward way to do so is to comment out the lines which constitute the subportion, but if a subgoal has been surrounded by braces, you can also temporarily skip it by prepending `sorry;`
 ```
 sorry; { rw blah,
   ...
