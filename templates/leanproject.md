@@ -200,11 +200,11 @@ When adding imports to a file incrementally it is easy to end up with a long lis
 of imports where some imports include others transitively.
 `leanproject` can be used to print a list of removable imports using the command
 ```text
-leanproject reduce-imports --file my_file.lean
+leanproject reduce-imports lean.module.name
 ```
 by adding the optional tag `--sed` a sed script will be produced instead that will 
-remove the unneeded lines for you when run.
-Calling this command with no file argument will print removable imports in the
+remove the unneeded lines for you when the script is executed.
+Calling this command with no module argument will print removable imports in the
 entire project.
 
 ### Git hooks
