@@ -95,3 +95,10 @@ rather than
 continuous.nsmul (continuous.pow hf 2) 7
 ```
 Using dot notation allows us to refer to namespaced declarations succinctly without having to open all namespaces (and thus run the risk of overridden names).
+
+
+### Finding instance names
+
+When instances are unnamed Lean will attempt to automatically name them.
+If you have just written an instance and want to check the name Lean has given it, the quickest way is to use `#print instances`.
+The command `#print instances my_class` will show all instances of `my_class` with the most recently declared last.
