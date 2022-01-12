@@ -26,7 +26,7 @@ all users.
    `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh`
 
    and hit enter when a question is asked.
-   To make sure the terminal will find the installed files, run `echo 'PATH="$HOME/.elan/bin:$PATH"' >> $HOME/.profile`.
+   To make sure the terminal will find the installed files, run `echo 'PATH="$HOME/.elan/bin:$PATH"' >> "$HOME/.profile"`.
 
   Then close and reopen Git Bash.
 
