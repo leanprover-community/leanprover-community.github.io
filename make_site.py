@@ -18,6 +18,7 @@ import json
 import gzip
 import os
 from github import Github
+from slugify import slugify
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
@@ -200,6 +201,9 @@ class Overview:
     def missing_children(self) -> List['Overview']:
         return [item for item in self.children if item.has_missing_child]
 
+    @property
+    def slug(self) -> str:
+        return slugify(self.title)
 
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
