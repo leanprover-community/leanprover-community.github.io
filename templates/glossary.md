@@ -202,6 +202,21 @@ A heavy `rfl` occurs when `rfl` is asked to perform many steps of definitional r
 A collection of successively more constrained [typeclasses](#class) within a related area of mathematics.
 In [mathlib](#mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `field`, ...), the *order hierarchy* (`preorder`, `partial_order`, `linear_order`, ...), the *topological hierarchy* (`t1_space`, `t2_space`, `normal_space`, ...), the *categorical hierarchy* (`preadditive`, `abelian`, `monoidal`, ...) but also the *scalar hierarchy* (`mul_action`, `distrib_mul_action`, `module`, ...), the *norm hierarchy*, and intersections of previous ones like the *order-algebraic hierarchy*, the *topologico-algebraic hierarchy*, and others.
 
+### HoTT
+
+*Homotopy Type Theory*, a [type theory](#type-theory) distinguished by the inclusion of an additional *univalence axiom*, which makes precise the notion that two disparate implementations of a type which would be thought of as equivalent are also in a mathematical sense equal.
+
+In Lean 2, there was native support within [core Lean](#core-lean) itself for a side-by-side [homotopy type theory-based library](https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md).
+
+Lean 3's [kernel](kernel) introduced singleton elimination, which is inconsistent with HoTT's univalence axiom.
+As a result, core Lean 3 no longer shipped a HoTT library.
+A partial port of the Lean 2 HoTT library for Lean 3 was made in [an external project by Gabriel Ebner and fellow contributors](https://github.com/gebner/hott3).
+
+As an illustrative concrete example, there are many [definitions of the type of natural numbers](https://en.wikipedia.org/wiki/Natural_number#Formal_definitions) which can be viewed as constructing equivalent mathematical objects.
+Core Lean has a [Peano-esque implementation](https://leanprover-community.github.io/mathlib_docs/init/core.html#nat) of them, and [mathlib](#mathlib) has an additional [binary representation-based one](https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num) which is shown to be equivalent.
+Given that Lean does *not* have the univalence axiom, these two types are equivalent, but they are not *equal* as types.
+A HoTT-based language (or library) would additionally call these types equal.
+
 <a name="intervals"></a>
 
 ### `Icc`, `Ico`, `Ioc`, `Ioo`, `Ici`, `Ioi`, `Iic`, `Iio`
@@ -226,6 +241,22 @@ One of two closely related concepts:
 * A [class](#class) argument taken by a `def`, `lemma` or other [declaration](#declaration) which is enclosed by square brackets (`[]`) such that it is resolved by the [typeclass inference](#typeclass-inference) system when the declaration is used.
 * A [declaration](#declaration) created with the eponymous `instance` command, or equivalently one marked with the `instance` [attribute](#attributes), either of which register the declaration with the typeclass inference system for use in the above.
 As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order` for `ℝ`, enabling reals to be compared with `<`.
+
+### kernel
+
+In the context of Lean's implementation (and proof assistants more generally), the kernel is the central component which verifies the correctness of each proof.
+
+The goal of a proof assistant's kernel is to support all of the reasoning of the language with a small and bug-free, at the expense of expressivity or user-friendliness.
+Specifically, the kernel uses a simpler but less featureful representation of proofs -- one a Lean user would normally not interact with, but which is intended to prevent the possibility that a bug allows invalid proofs to be accepted.
+The user-facing portions of the Lean language are instead provided by its higher-level [modes](#mode), which ultimately are compiled into this internal kernel representation by the elaborator.
+
+##### See also
+
+* [The components of a proof assistant, from Andrej Bauer's answer to "What makes dependent type theory more suitable than set theory for proof assistants?"](https://mathoverflow.net/a/376973)
+
+* [Lean 4's kernel implementation](https://github.com/leanprover/lean4/tree/master/src/kernel)
+
+* [Lean 3's kernel implementation](https://github.com/leanprover-community/lean/tree/master/src/kernel)
 
 ### Lean Together
 
