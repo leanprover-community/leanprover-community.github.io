@@ -214,7 +214,7 @@ A partial port of the Lean 2 HoTT library for Lean 3 was made in [an external pr
 
 As an illustrative concrete example, there are many [definitions of the type of natural numbers](https://en.wikipedia.org/wiki/Natural_number#Formal_definitions) which can be viewed as constructing equivalent mathematical objects.
 Core Lean has a [Peano-esque implementation](https://leanprover-community.github.io/mathlib_docs/init/core.html#nat) of them, and [mathlib](#mathlib) has an additional [binary representation-based one](https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num) which is shown to be equivalent.
-Given that Lean does *not* have the univalence axiom, these two types are equivalent, but they are not *equal* as types.
+Given that Lean does *not* have the univalence axiom, these two types are equivalent, but they are not provably *equal* as types.
 A HoTT-based language (or library) would additionally call these types equal.
 
 <a name="intervals"></a>
