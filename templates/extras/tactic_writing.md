@@ -153,7 +153,7 @@ do
 ```
 Next, we want to write tactics returning something, as `tactic.target`
 is doing. The only extra ingredient is the `return` function. The
-following function tries to return `tt` is there is no more goal, `ff`
+following function tries to return `tt` if there is no more goal, `ff`
 otherwise. The next one can be used interactively and traces the result
 (note that using the first one interactively won't have any visible
 effect since interactive use ignores the returned value).
