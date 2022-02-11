@@ -5,6 +5,7 @@ import sys
 import subprocess
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional
+from datetime import datetime
 
 import yaml
 from staticjinja import Site
@@ -117,6 +118,16 @@ class HundredTheorem:
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+
+@dataclass
+class Event:
+    title: str 
+    url: str 
+    start_date: str 
+    end_date: str
+    location: str
+    type: str
+    date_range: str = None
 
 urllib.request.urlretrieve(
     'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
@@ -247,6 +258,29 @@ with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
+
+with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
+    events = [Event(**e) for e in yaml.safe_load(h_file)]
+
+def format_date_range(event):
+    start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
+    end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
+    if start_date.year != end_date.year:
+        return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+    elif start_date.month != end_date.month:
+        return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+    elif start_date.day != end_date.day:
+        return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+    else:
+        return start_date.strftime("%B %-d, %Y")
+
+present = datetime.now().date()
+old_events = sorted((e for e in events if datetime.strptime(e.end_date, '%B %d %Y').date() < present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date(), reverse=True)
+new_events = sorted((e for e in events if datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
+
+for e in old_events + new_events:
+    e.date_range = format_date_range(e)
+
 
 @dataclass
 class Project:
@@ -406,6 +440,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
+                ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
