@@ -244,19 +244,21 @@ As a concrete example, [mathlib](#mathlib) defines an instance of `linear_order`
 
 ### kernel
 
-In the context of Lean's implementation (and proof assistants more generally), the kernel is the central component which verifies the correctness of each proof.
+In the context of Lean's implementation (and proof assistants [more generally](https://en.wikipedia.org/wiki/Proof_assistant#System_comparison)), the kernel is the central component which verifies the correctness of each proof.
 
-The goal of a proof assistant's kernel is to support all of the reasoning of the language with a small and bug-free, at the expense of expressivity or user-friendliness.
-Specifically, the kernel uses a simpler but less featureful representation of proofs -- one a Lean user would normally not interact with, but which is intended to prevent the possibility that a bug allows invalid proofs to be accepted.
-The user-facing portions of the Lean language are instead provided by its higher-level [modes](#mode), which ultimately are compiled into this internal kernel representation by the elaborator.
+Lean's kernel implementation is relatively small compared to the size of Lean's [tactic](#tactic) implementation code[1^], or certainly compared to [mathlib](#mathlib), allowing for greater confidence that proofs are free of mistakes without reliance on large or complex higher level constructs.
+
+[1^]: this relative smallness, and ergo independent verifiability, is known as the *de Bruijn criterion* for a proof assistant's implementation
 
 ##### See also
-
-* [The components of a proof assistant, from Andrej Bauer's answer to "What makes dependent type theory more suitable than set theory for proof assistants?"](https://mathoverflow.net/a/376973)
 
 * [Lean 4's kernel implementation](https://github.com/leanprover/lean4/tree/master/src/kernel)
 
 * [Lean 3's kernel implementation](https://github.com/leanprover-community/lean/tree/master/src/kernel)
+
+* [The challenge of computer mathematics, by Henk Barendregt and Freek Wiedijk (2005)](https://royalsocietypublishing.org/doi/full/10.1098/rsta.2005.1650)
+
+* [The components of a proof assistant, from Andrej Bauer's answer to "What makes dependent type theory more suitable than set theory for proof assistants?"](https://mathoverflow.net/a/376973)
 
 ### Lean Together
 
