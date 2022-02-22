@@ -75,7 +75,7 @@ by taking (prime p) as a type class argument.
 
 ## References
 
-* [F. Q. Gouêva, *p-adic numbers*][gouvea1997]
+* [F. Q. Gouvêa, *p-adic numbers*][gouvea1997]
 * <https://en.wikipedia.org/wiki/P-adic_number>
 
 ## Tags
