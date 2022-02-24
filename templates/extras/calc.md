@@ -12,6 +12,17 @@ calc a = b + 1 : H1
 ...    = c + 1 : by rw H2
 ```
 
+`calc` is also available in tactic mode. You can leave `_`s to create a new goal:
+```lean
+example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
+begin
+  calc a = b + 1 : H1
+  ...    = c + 1 : _,
+  { rw H2 }
+end
+```
+In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `refine (calc A = B : H ...)`.
+
 ## Error messages, and how to avoid them
 
 Note that the error messages can be quite obscure when things aren't quite right, and often the red
@@ -24,13 +35,12 @@ calc A = B : sorry
 ...    = C : sorry
 ...    = D : sorry
 ```
-(in tactic mode this might look more like
-
+(in tactic mode, 
 ```lean
 have H : A = D,
-  exact calc A = B : sorry
-  ...          = C : sorry
-  ...          = D : sorry,
+{ calc A = B : _
+  ...    = C : _
+  ...    = D : _, }
 ```
 with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
 one write a VS Code snippet to write this skeleton?)
