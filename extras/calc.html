@@ -57,6 +57,16 @@
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="kd">by</span> <span class="n">rw</span> <span class="n">H2</span>
 </code></pre></div>
 
+<p><code>calc</code> is also available in tactic mode. You can leave <code>_</code>s to create a new goal:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">calc</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">H1</span>
+  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">H2</span> <span class="o">}</span>
+<span class="kd">end</span>
+</code></pre></div>
+
+<p>In fact, <code>calc A = B : H ...</code> in tactic mode functions exactly like a call to <code>refine (calc A = B : H ...)</code>.</p>
 <h2 id="error-messages-and-how-to-avoid-them" class="markdown-heading">Error messages, and how to avoid them <a class="hover-link" href="#error-messages-and-how-to-avoid-them">#</a></h2>
 <p>Note that the error messages can be quite obscure when things aren't quite right, and often the red
 squiggles end up under a random <code>...</code>. A tip to avoid these problems with calc usage is to first
@@ -67,11 +77,11 @@ populate a skeleton proof such as</p>
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="gr">sorry</span>
 </code></pre></div>
 
-<p>(in tactic mode this might look more like</p>
+<p>(in tactic mode,</p>
 <div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span><span class="o">,</span>
-  <span class="n">exact</span> <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="gr">sorry</span>
-  <span class="bp">...</span>          <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="gr">sorry</span>
-  <span class="bp">...</span>          <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="gr">sorry</span><span class="o">,</span>
+<span class="o">{</span> <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="n">_</span>
+  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="n">_</span>
+  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span> <span class="o">}</span>
 </code></pre></div>
 
 <p>with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
