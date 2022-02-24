@@ -195,6 +195,16 @@ A heavy <code>rfl</code> occurs when <code>rfl</code> is asked to perform many s
 <h3 id="hierarchy" class="markdown-heading">hierarchy <a class="hover-link" href="#hierarchy">#</a></h3>
 <p>A collection of successively more constrained <a href="#class">typeclasses</a> within a related area of mathematics.
 In <a href="#mathlib">mathlib</a>, we have the <em>algebraic hierarchy</em> (<code>semiring</code>, <code>ring</code>, <code>field</code>, ...), the <em>order hierarchy</em> (<code>preorder</code>, <code>partial_order</code>, <code>linear_order</code>, ...), the <em>topological hierarchy</em> (<code>t1_space</code>, <code>t2_space</code>, <code>normal_space</code>, ...), the <em>categorical hierarchy</em> (<code>preadditive</code>, <code>abelian</code>, <code>monoidal</code>, ...) but also the <em>scalar hierarchy</em> (<code>mul_action</code>, <code>distrib_mul_action</code>, <code>module</code>, ...), the <em>norm hierarchy</em>, and intersections of previous ones like the <em>order-algebraic hierarchy</em>, the <em>topologico-algebraic hierarchy</em>, and others.</p>
+<h3 id="hott" class="markdown-heading">HoTT <a class="hover-link" href="#hott">#</a></h3>
+<p><em>Homotopy Type Theory</em>, a <a href="#type-theory">type theory</a> distinguished by the inclusion of an additional <em>univalence axiom</em>, which makes precise the notion that two disparate implementations of a type which would be thought of as equivalent are also in a mathematical sense equal.</p>
+<p>In Lean 2, there was native support within <a href="#core-lean">core Lean</a> itself for a side-by-side <a href="https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md">homotopy type theory-based library</a>.</p>
+<p>Lean 3's <a href="kernel">kernel</a> introduced singleton elimination, which is inconsistent with HoTT's univalence axiom.
+As a result, core Lean 3 no longer shipped a HoTT library.
+A partial port of the Lean 2 HoTT library for Lean 3 was made in <a href="https://github.com/gebner/hott3">an external project by Gabriel Ebner and fellow contributors</a>.</p>
+<p>As an illustrative concrete example, there are many <a href="https://en.wikipedia.org/wiki/Natural_number#Formal_definitions">definitions of the type of natural numbers</a> which can be viewed as constructing equivalent mathematical objects.
+Core Lean has a <a href="https://leanprover-community.github.io/mathlib_docs/init/core.html#nat">Peano-esque implementation</a> of them, and <a href="#mathlib">mathlib</a> has an additional <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">binary representation-based one</a> which is shown to be equivalent.
+Given that Lean does <em>not</em> have the univalence axiom, these two types are equivalent, but they are not provably <em>equal</em> as types.
+A HoTT-based language (or library) would additionally call these types equal.</p>
 <p><a name="intervals"></a></p>
 <h3 id="icc-ico-ioc-ioo-ici-ioi-iic-iio" class="markdown-heading"><code>Icc</code>, <code>Ico</code>, <code>Ioc</code>, <code>Ioo</code>, <code>Ici</code>, <code>Ioi</code>, <code>Iic</code>, <code>Iio</code> <a class="hover-link" href="#icc-ico-ioc-ioo-ici-ioi-iic-iio">#</a></h3>
 <p>Shorthand notation used within <a href="#mathlib">mathlib</a> for referring to one of 8 kinds of mathematical intervals.
@@ -213,6 +223,25 @@ Names have been made compact by calling each interval <code>I</code> + how it en
 <li>A <a href="#class">class</a> argument taken by a <code>def</code>, <code>lemma</code> or other <a href="#declaration">declaration</a> which is enclosed by square brackets (<code>[]</code>) such that it is resolved by the <a href="#typeclass-inference">typeclass inference</a> system when the declaration is used.</li>
 <li>A <a href="#declaration">declaration</a> created with the eponymous <code>instance</code> command, or equivalently one marked with the <code>instance</code> <a href="#attributes">attribute</a>, either of which register the declaration with the typeclass inference system for use in the above.
 As a concrete example, <a href="#mathlib">mathlib</a> defines an instance of <code>linear_order</code> for <code>ℝ</code>, enabling reals to be compared with <code>&lt;</code>.</li>
+</ul>
+<h3 id="kernel" class="markdown-heading">kernel <a class="hover-link" href="#kernel">#</a></h3>
+<p>In the context of Lean's implementation (and proof assistants <a href="https://en.wikipedia.org/wiki/Proof_assistant#System_comparison">more generally</a>), the kernel is the central component which verifies the correctness of each proof.</p>
+<p>Lean's kernel implementation is relatively small compared to the size of Lean's <a href="#tactic">tactic</a> implementation code[1^], or certainly compared to <a href="#mathlib">mathlib</a>, allowing for greater confidence that proofs are free of mistakes without reliance on large or complex higher level constructs.</p>
+<p>[1^]: this relative smallness, and ergo independent verifiability, is known as the <em>de Bruijn criterion</em> for a proof assistant's implementation</p>
+<h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
+<ul>
+<li>
+<p><a href="https://github.com/leanprover/lean4/tree/master/src/kernel">Lean 4's kernel implementation</a></p>
+</li>
+<li>
+<p><a href="https://github.com/leanprover-community/lean/tree/master/src/kernel">Lean 3's kernel implementation</a></p>
+</li>
+<li>
+<p><a href="https://royalsocietypublishing.org/doi/full/10.1098/rsta.2005.1650">The challenge of computer mathematics, by Henk Barendregt and Freek Wiedijk (2005)</a></p>
+</li>
+<li>
+<p><a href="https://mathoverflow.net/a/376973">The components of a proof assistant, from Andrej Bauer's answer to &quot;What makes dependent type theory more suitable than set theory for proof assistants?&quot;</a></p>
+</li>
 </ul>
 <h3 id="lean-together" class="markdown-heading">Lean Together <a class="hover-link" href="#lean-together">#</a></h3>
 <p>An <a href="https://leanprover-community.github.io/lt2021/">annual meeting</a> for the Lean user community, its <a href="#mathlib">mathlib</a> library users, as well as the broader theorem prover community.</p>
