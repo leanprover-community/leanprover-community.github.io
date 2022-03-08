@@ -170,6 +170,16 @@ Diamonds which cross library boundaries -- such as ones in which part of the typ
 
 * [Forgetful Inheritance](https://leanprover-community.github.io/mathlib_docs/notes.html#forgetful%20inheritance), also from the mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of "richer" and poorer structures on a type
 
+<a name="dot-notation"></a>
+
+### dot notation / generalized field notation / generalized projections
+
+The syntax sugar allowing notations such as `((foo a b c).bar x.y).baz`.
+
+Lean provides two interpretations of the syntax `foo.bar`: it can mean the declaration `bar` in the `foo` namespace, or it can be generalized field notation. We expand here on the latter. 
+
+Suppose `foo` has type `C x1 ... xn`, with `C` some constant and `x1 ... xn` arbitrary, and suppose that there is a declaration in the context named `C.bar` which takes an argument of type `C x1 ... xn`. Then `foo.bar` is sugar for `C.bar foo`. For calls of the form `foo.bar _ ... _` with (implicit or explicit) arguments, Lean is smart enough to expand to `C.bar _ ... foo _ ... _`, so that everything typechecks. In these previous examples, `foo` can also be a more complicated expression such as the function application in `(foo bar baz).quux`.
+
 ### `equiv`
 
 As distinct from mathematical equality, [`equiv`](mathlib_docs/data/equiv/basic.html) allows for defining an equivalence or congruence of types.
