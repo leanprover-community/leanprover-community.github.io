@@ -176,6 +176,11 @@ Diamonds which cross library boundaries -- such as ones in which part of the typ
 <p><a href="https://leanprover-community.github.io/mathlib_docs/notes.html#forgetful%20inheritance">Forgetful Inheritance</a>, also from the mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of &quot;richer&quot; and poorer structures on a type</p>
 </li>
 </ul>
+<p><a name="dot-notation"></a></p>
+<h3 id="dot-notation--generalized-field-notation--generalized-projections" class="markdown-heading">dot notation / generalized field notation / generalized projections <a class="hover-link" href="#dot-notation--generalized-field-notation--generalized-projections">#</a></h3>
+<p>The syntax sugar allowing notations such as <code>((foo a b c).bar x.y).baz</code>.</p>
+<p>Lean provides two interpretations of the syntax <code>foo.bar</code>: it can mean the declaration <code>bar</code> in the <code>foo</code> namespace, or it can be generalized field notation. We expand here on the latter.</p>
+<p>Suppose <code>foo</code> has type <code>C x1 ... xn</code>, with <code>C</code> some constant and <code>x1 ... xn</code> arbitrary, and suppose that there is a declaration in the context named <code>C.bar</code> which takes an argument of type <code>C x1 ... xn</code>. Then <code>foo.bar</code> is sugar for <code>C.bar foo</code>. For calls of the form <code>foo.bar _ ... _</code> with (implicit or explicit) arguments, Lean is smart enough to expand to <code>C.bar _ ... foo _ ... _</code>, so that everything typechecks. In these previous examples, <code>foo</code> can also be a more complicated expression such as the function application in <code>(foo bar baz).quux</code>.</p>
 <h3 id="equiv" class="markdown-heading"><code>equiv</code> <a class="hover-link" href="#equiv">#</a></h3>
 <p>As distinct from mathematical equality, <a href="mathlib_docs/data/equiv/basic.html"><code>equiv</code></a> allows for defining an equivalence or congruence of types.
 One important thing to note is that an <code>equiv</code> <a href="#bundled-vs-unbundled">holds data instead of being merely a proof</a>.</p>
