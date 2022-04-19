@@ -10,7 +10,7 @@ You have several options for installing Lean, described below:
 
 * [Debian/Ubuntu](install/debian.html)
 * [Other linux](install/linux.html)
-* [MacOS](install/macos.html)
+* [macOS](install/macos.html)
 * [Windows](install/windows.html)
 
 After this installation procedure, it is crucial to read how to start or
@@ -42,12 +42,12 @@ If you are more serious about trying Lean, or can't stand waiting for
 your web browser, but don't want to start installing too many things,
 then you can try one of our autonomous bundles for:
 - [Linux](https://oleanstorage.azureedge.net/releases/bundles/trylean_linux.tar.gz),
-- [MacOS](https://oleanstorage.azureedge.net/releases/bundles/trylean_darwin.tar.gz), or
+- [macOS](https://oleanstorage.azureedge.net/releases/bundles/trylean_darwin.tar.gz), or
 - [Windows](https://oleanstorage.azureedge.net/releases/bundles/trylean_windows.zip).
 
 Each of these bundles contains a folder `trylean` from which you can run
 the program `trylean` without installing anything anywhere else on your
-computer (although MacOS users will need to tell their system
+computer (although macOS users will need to tell their system
 they really want to run it). On Windows this is a batch file, and there will be a Microsoft 
 Defender warning when running it. To allow the batch file to execute, click on "More Info" 
 then "Run anyway". These bundles contain Lean itself,
