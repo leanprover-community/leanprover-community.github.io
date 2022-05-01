@@ -80,7 +80,7 @@ something is covered)</li>
 <p>References should refer to bibtex entries in <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib">the mathlib citations file</a>.
 See the <a href="#citing-other-works">Citing other works</a> section below.</p>
 <p>The following code block is an example of a file header.</p>
-<div class="codehilite"><pre><span></span><code><span class="c">/-</span><span class="cm"></span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c">/-</span><span class="cm"></span>
 <span class="cm">Copyright (c) 2018 Robert Y. Lewis. All rights reserved.</span>
 <span class="cm">Released under Apache 2.0 license as described in the file LICENSE.</span>
 <span class="cm">Authors: Robert Y. Lewis</span>
@@ -124,6 +124,7 @@ See the <a href="#citing-other-works">Citing other works</a> section below.</p>
 <span class="cm">p-adic, p adic, padic, norm, valuation</span>
 <span class="cm">-/</span>
 </code></pre></div>
+</div>
 
 <h2 id="doc-strings" class="markdown-heading">Doc strings <a class="hover-link" href="#doc-strings">#</a></h2>
 <p>Every definition and major theorem is required to have a doc string.
@@ -136,16 +137,17 @@ sentence, then it should end in a period. Named theorems, such as the <strong>me
 two asterisks before and after).</p>
 <p>Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
 slightly about the actual implementation. The following is a doc string example:</p>
-<div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
 <span class="sd">If `q ≠ 0`, the p-adic norm of a rational `q` is `p ^ (-(padic_val_rat p q))`.</span>
 <span class="sd">If `q = 0`, the p-adic norm of `q` is 0.</span>
 <span class="sd">-/</span>
 <span class="kd">def</span> <span class="n">padic_norm</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span>
 <span class="k">if</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">^</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">padic_val_rat</span> <span class="n">p</span> <span class="n">q</span><span class="o">))</span>
 </code></pre></div>
+</div>
 
 <p>An example that is slightly lying but still describes the mathematical content would be:</p>
-<div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
 <span class="sd">For `p ≠ 1`, the p-adic valuation of an integer `z ≠ 0` is the largest natural number `n` such that</span>
 <span class="sd">`p^n` divides `z`.</span>
 <span class="sd">`padic_val_rat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the</span>
@@ -160,27 +162,32 @@ slightly about the actual implementation. The following is a doc string example:
     <span class="o">(</span><span class="n">multiplicity.finite_int_iff.2</span> <span class="o">⟨</span><span class="n">h.2</span><span class="o">,</span> <span class="kd">by</span> <span class="n">exact_mod_cast</span> <span class="n">rat.denom_ne_zero</span> <span class="n">_</span><span class="o">⟩)</span>
 <span class="k">else</span> <span class="mi">0</span>
 </code></pre></div>
+</div>
 
 <p>The <code>doc_blame</code> linter lists all definitions that do not have doc strings. The <code>doc_blame_thm</code>
 linter will lists theorems and lemmas that do not have doc strings.</p>
 <p>To run only the <code>doc_blame</code> linter, add the following to the end of your lean file:</p>
-<div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span>
 </code></pre></div>
+</div>
 
 <p>To run only the <code>doc_blame</code> and <code>doc_blame_thm</code> linters, add the following to the end of your lean
 file:</p>
-<div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span> <span class="n">doc_blame_thm</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span> <span class="n">doc_blame_thm</span>
 </code></pre></div>
+</div>
 
 <p>To run the all default linters, including <code>doc_blame</code>, add the following to the end of your lean
 file:</p>
-<div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span>
 </code></pre></div>
+</div>
 
 <p>To run the all default linters, including <code>doc_blame</code> and run <code>doc_blame_thm</code>, add the following to
 the end of your lean file:</p>
-<div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">doc_blame_thm</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">doc_blame_thm</span>
 </code></pre></div>
+</div>
 
 <h2 id="latex-and-markdown" class="markdown-heading">LaTeX and Markdown <a class="hover-link" href="#latex-and-markdown">#</a></h2>
 <p>We generally put references to Lean declarations or variables in between backticks. Writing
@@ -207,7 +214,7 @@ to preview the final result. See also the math.stackexchange
 explaining how they can be used. The <code>add_tactic_doc</code> command should be invoked afterwards to add a
 doc entry to the appropriate page in the online docs.</p>
 <p>Example:</p>
-<div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
 <span class="sd">describe what the command does here</span>
 <span class="sd">-/</span>
 <span class="n">add_tactic_doc</span>
@@ -217,6 +224,7 @@ doc entry to the appropriate page in the online docs.</p>
   <span class="n">tags</span> <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;tag_1&quot;</span><span class="o">,</span> <span class="s2">&quot;tag_2&quot;</span><span class="o">]</span>
 <span class="o">}</span>
 </code></pre></div>
+</div>
 
 <p>The argument to <code>add_tactic_doc</code> is a structure of type <code>tactic_doc_entry</code>.</p>
 <ul>
@@ -253,7 +261,7 @@ have multiple sections or namespaces following one sectioning comment.</p>
 <p>If the comment is more than one line long, the delimiters <code>/-!</code> and <code>-/</code> should appear on their own
 lines.</p>
 <p>See <a href="https://github.com/leanprover-community/mathlib/blob/master/src/meta/expr.lean">meta/expr.lean</a> for an example in practice.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">namespace</span> <span class="n">binder_info</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">namespace</span> <span class="n">binder_info</span>
 
 <span class="c">/-</span><span class="cm">!</span>
 <span class="cm">### Declarations about `binder_info`</span>
@@ -283,6 +291,7 @@ lines.</p>
 <span class="bp">|</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">n&#39;</span><span class="o">))</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="bp">$</span> <span class="n">map_prefix</span> <span class="n">n&#39;</span><span class="o">)</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="n">n&#39;</span><span class="o">))</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="bp">$</span> <span class="n">map_prefix</span> <span class="n">n&#39;</span><span class="o">)</span>
 </code></pre></div>
+</div>
 
 <h2 id="theories-documentation" class="markdown-heading">Theories documentation <a class="hover-link" href="#theories-documentation">#</a></h2>
 <p>In addition to documentation living in Lean files, we have <a href="../theories.html">theories documentation</a>
@@ -293,14 +302,16 @@ see for instance the <a href="../theories/topology.html">topology documentation<
 <p>To cite papers and books in doc strings, the references should first be added
 to the BibTeX file: <code>docs/references.bib</code>. To normalize the file with <code>bibtool</code>, you
 can run:</p>
-<div class="codehilite"><pre><span></span><code>bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off --pass.comments=on -s -i docs/references.bib -o docs/references.bib
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>bibtool --preserve.key.case=on --preserve.keys=on --print.use.tab=off --pass.comments=on -s -i docs/references.bib -o docs/references.bib
 </code></pre></div>
+</div>
 
 <p>To ensure that your citations become links in the online docs, you can use either of the
 following two styles:</p>
 <p>First, you may enclose the citation key used in <code>docs/references.bib</code> in square brackets:</p>
-<div class="codehilite"><pre><span></span><code>The proof can be found in [Boole1854].
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>The proof can be found in [Boole1854].
 </code></pre></div>
+</div>
 
 <p>In the online docs, this will become something like:</p>
 <blockquote>
@@ -311,16 +322,18 @@ and become a link to the <a href="https://leanprover-community.github.io/mathlib
 of the docs.)</p>
 <p>Alternatively, you can use custom text for the citation by putting text in square brackets
 ahead of the citation key:</p>
-<div class="codehilite"><pre><span></span><code>See [<span class="nt">Grundlagen der Geometrie</span>][<span class="nl">hilbert1999</span>] for an alternative axiomatization.
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>See [<span class="nt">Grundlagen der Geometrie</span>][<span class="nl">hilbert1999</span>] for an alternative axiomatization.
 </code></pre></div>
+</div>
 
 <blockquote>
 <p>See <a href="https://leanprover-community.github.io/mathlib_docs/references.html">Grundlagen der Geometrie</a> for an alternative axiomatization.</p>
 </blockquote>
 <p>Note that you currently cannot use the closing square bracket <code>]</code> symbol in the link text.
 So the following will not result in a working link:</p>
-<div class="codehilite"><pre><span></span><code>We follow [Euclid&#39;s <span class="ge">*Elements*</span> [Prop. 1]][heath1956a].
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>We follow [Euclid&#39;s <span class="ge">*Elements*</span> [Prop. 1]][heath1956a].
 </code></pre></div>
+</div>
 
 <blockquote>
 <p>We follow [Euclid's <em>Elements</em> [Prop. 1]][heath1956a].</p>

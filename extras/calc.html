@@ -52,37 +52,41 @@
 <a href="conv.html">conv mode</a>. Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
 <a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs">section 4.3</a>.</p>
 <p>Basic example usage:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
 <span class="k">calc</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">H1</span>
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="kd">by</span> <span class="n">rw</span> <span class="n">H2</span>
 </code></pre></div>
+</div>
 
 <p><code>calc</code> is also available in tactic mode. You can leave <code>_</code>s to create a new goal:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="k">calc</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">H1</span>
   <span class="bp">...</span>    <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span>
   <span class="o">{</span> <span class="n">rw</span> <span class="n">H2</span> <span class="o">}</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>In fact, <code>calc A = B : H ...</code> in tactic mode functions exactly like a call to <code>refine (calc A = B : H ...)</code>.</p>
 <h2 id="error-messages-and-how-to-avoid-them" class="markdown-heading">Error messages, and how to avoid them <a class="hover-link" href="#error-messages-and-how-to-avoid-them">#</a></h2>
 <p>Note that the error messages can be quite obscure when things aren't quite right, and often the red
 squiggles end up under a random <code>...</code>. A tip to avoid these problems with calc usage is to first
 populate a skeleton proof such as</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span> <span class="o">:=</span>
 <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="gr">sorry</span>
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="gr">sorry</span>
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="gr">sorry</span>
 </code></pre></div>
+</div>
 
 <p>(in tactic mode,</p>
-<div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span><span class="o">,</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span><span class="o">,</span>
 <span class="o">{</span> <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="n">_</span>
   <span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="n">_</span>
   <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span> <span class="o">}</span>
 </code></pre></div>
+</div>
 
 <p>with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
 one write a VS Code snippet to write this skeleton?)</p>
@@ -90,7 +94,7 @@ one write a VS Code snippet to write this skeleton?)</p>
 <p>Many of the basic examples in TPIL use equality for most or all of
 the operators, but actually <code>calc</code> will work with any relation for which
 the corresponding transitivity statement is tagged <code>[trans]</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">definition</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">definition</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
 <span class="kd">@[trans]</span> <span class="kd">theorem</span> <span class="n">r_trans</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">r</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">r</span> <span class="n">a</span> <span class="n">c</span> <span class="o">:=</span> <span class="gr">sorry</span>
 <span class="kd">infix</span> <span class="bp">`***`</span><span class="o">:</span> <span class="mi">50</span> <span class="o">:=</span> <span class="n">r</span>
 
@@ -98,10 +102,11 @@ the corresponding transitivity statement is tagged <code>[trans]</code>:</p>
 <span class="k">calc</span> <span class="n">a</span> <span class="bp">***</span> <span class="n">b</span> <span class="o">:</span> <span class="n">H1</span>
 <span class="bp">...</span>    <span class="bp">***</span> <span class="n">c</span> <span class="o">:</span> <span class="n">H2</span>
 </code></pre></div>
+</div>
 
 <h2 id="using-more-than-one-operator" class="markdown-heading">Using more than one operator <a class="hover-link" href="#using-more-than-one-operator">#</a></h2>
 <p>This is possible; TPIL has the following example:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">T2</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">T2</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span>
   <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h3</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">d</span> <span class="o">:=</span>
 <span class="k">calc</span>
   <span class="n">a</span>     <span class="bp">=</span> <span class="n">b</span>     <span class="o">:</span> <span class="n">h1</span>
@@ -109,6 +114,7 @@ the corresponding transitivity statement is tagged <code>[trans]</code>:</p>
     <span class="bp">...</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">nat.succ_le_succ</span> <span class="n">h2</span>
     <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">d</span>     <span class="o">:</span> <span class="n">h3</span>
 </code></pre></div>
+</div>
 
 <p>What is actually going on here? The proofs themselves are not a mystery,
 for example <code>nat.succ_le_succ h2</code> is a proof of <code>b + 1 ≤ c + 1</code>. The
@@ -118,32 +124,35 @@ Kevin thinks (can someone verify this?) is that Lean continually tries
 to amalgamate the first two operators in the list, until there
 is only one left. In other words, Lean will attempt to reduce
 the equations thus:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">U</span> <span class="bp">=</span> <span class="n">V</span> <span class="bp">&lt;</span> <span class="n">W</span> <span class="bp">≤</span> <span class="n">X</span> <span class="bp">&lt;</span> <span class="n">Y</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">U</span> <span class="bp">=</span> <span class="n">V</span> <span class="bp">&lt;</span> <span class="n">W</span> <span class="bp">≤</span> <span class="n">X</span> <span class="bp">&lt;</span> <span class="n">Y</span>
 <span class="n">U</span> <span class="bp">&lt;</span> <span class="n">W</span> <span class="bp">≤</span> <span class="n">X</span> <span class="bp">&lt;</span> <span class="n">Y</span>
 <span class="n">U</span> <span class="bp">&lt;</span> <span class="n">X</span> <span class="bp">&lt;</span> <span class="n">Y</span>
 <span class="n">U</span> <span class="bp">&lt;</span> <span class="n">Y</span>
 </code></pre></div>
+</div>
 
 <p>Note the following subtlety: given <code>U op1 V</code> and <code>V op2 W</code> Lean
 has to conclude <code>U op3 W</code> for some operator, which might be <code>op1</code>
 or <code>op2</code> (or even, as we shall see, a new operator). How is Lean
 doing this? The easiest case is when one of <code>op1</code> and <code>op2</code>
 is <code>=</code>. Lean knows</p>
-<div class="codehilite"><pre><span></span><code><span class="k">#check</span> <span class="bp">@</span><span class="n">trans_rel_right</span> <span class="c1">-- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), a = b → r b c → r a c</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#check</span> <span class="bp">@</span><span class="n">trans_rel_right</span> <span class="c1">-- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), a = b → r b c → r a c</span>
 <span class="k">#check</span> <span class="bp">@</span><span class="n">trans_rel_left</span> <span class="c1">-- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), r a b → b = c → r a c</span>
 </code></pre></div>
+</div>
 
 <p>and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
 operator is the equality operator, Lean looks through the theorems in its database which are tagged
 <code>[trans]</code> and applies these instead. For example Lean has the following definitions:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">@[trans]</span> <span class="kd">lemma</span> <span class="n">lt_of_lt_of_le</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">c</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[trans]</span> <span class="kd">lemma</span> <span class="n">lt_of_lt_of_le</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">c</span>
 <span class="kd">@[trans]</span> <span class="kd">lemma</span> <span class="n">lt_trans</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">c</span>
 </code></pre></div>
+</div>
 
 <p>and it is easily seen that these lemmas can be used to justify the example in the manual.</p>
 <h2 id="using-user-defined-operators" class="markdown-heading">Using user-defined operators <a class="hover-link" href="#using-user-defined-operators">#</a></h2>
 <p>It is as simple as tagging the relevant results with <code>trans</code>. For example</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">definition</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">definition</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
 <span class="kd">definition</span> <span class="n">s</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
 <span class="kd">definition</span> <span class="n">t</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
 <span class="kd">@[trans]</span> <span class="kd">theorem</span> <span class="n">rst_trans</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">s</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">t</span> <span class="n">a</span> <span class="n">c</span> <span class="o">:=</span> <span class="gr">sorry</span>
@@ -155,6 +164,7 @@ operator is the equality operator, Lean looks through the theorems in its databa
 <span class="k">calc</span> <span class="n">a</span> <span class="bp">***</span> <span class="n">b</span> <span class="o">:</span> <span class="n">H1</span>
 <span class="bp">...</span>    <span class="bp">&amp;&amp;&amp;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">H2</span>
 </code></pre></div>
+</div>
 
 <p>This example shows us that the third operator <code>op3</code> can be different to both <code>op1</code> and <code>op2</code>.</p>
 

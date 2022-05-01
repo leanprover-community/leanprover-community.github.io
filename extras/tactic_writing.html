@@ -100,7 +100,7 @@ that they generate. By prefacing them with the keyword <code>meta</code>, we tel
 they are for &quot;evaluation purposes only,&quot; which disables some of the checks that
 non-<code>meta</code> declarations must pass.
 This is enough knowledge to write a first tactic.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_first_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Hello, World.&quot;</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_first_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Hello, World.&quot;</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
 <span class="kd">begin</span>
@@ -108,6 +108,7 @@ This is enough knowledge to write a first tactic.</p>
   <span class="n">trivial</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>In the example, <code>my_first_tactic</code> is underlined in green (in VS Code) and
 moving the cursor on that line will display our message in the Lean
@@ -116,34 +117,38 @@ messages buffer.</p>
 all about composing functions, but the monadic notations hide this and
 emulate imperative programming. We need to use the <code>and_then</code>
 combinator. The first way is to use the infix notation <code>&gt;&gt;</code>, as in:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">tactic.trace</span> <span class="s2">&quot;Hello,&quot;</span> <span class="bp">&gt;&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;World.&quot;</span>
 </code></pre></div>
+</div>
 
 <p>which now prints our message in two pieces. Alternatively, one can use
 the <code>do</code> syntax, which has other goodies. This introduces a
 comma-separated list of instructions to perform in sequence.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
   <span class="n">tactic.trace</span> <span class="s2">&quot;Hello,&quot;</span><span class="o">,</span>
   <span class="n">tactic.trace</span> <span class="s2">&quot;World.&quot;</span>
 </code></pre></div>
+</div>
 
 <p>Besides displaying messages, the next thing tactics can do is to fail,
 potentially with some explanation.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_failing_tactic</span>  <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.failed</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_failing_tactic</span>  <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.failed</span>
 
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_failing_tactic&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">tactic.fail</span> <span class="s2">&quot;This tactic failed, we apologize for the inconvenience.&quot;</span>
 </code></pre></div>
+</div>
 
 <p>When chaining instructions, the first failure interrupts the process.
 However the <code>orelse</code> combinator, denoted by an infix <code>&lt;|&gt;</code> allows to try
 its right-hand side if its left-hand side failed. The following will
 successfully deliver its message.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_orelse_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_orelse_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">my_failing_tactic</span> <span class="bp">&lt;|&gt;</span> <span class="n">my_first_tactic</span>
 </code></pre></div>
+</div>
 
 <p>The next composite thing to do is to use some function that, after
 reading or altering the proof state, actually tries to return
@@ -151,45 +156,50 @@ something. For instance the built-in <code>tactic.target</code> (tries to) retur
 the current goal. This goal has type <code>expr</code> (more on that type later).
 The type of <code>tactic.target</code> is thus <code>tactic expr</code>. Say we want to trace
 the current goal. A naive attempt would be:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">tactic.trace</span> <span class="n">tactic.target</span>    <span class="c1">-- WRONG!</span>
 </code></pre></div>
+</div>
 
 <p>This cannot be correct because <code>tactic.target</code> could fail (there could
 be no more goal) and <code>tactic.trace</code> cannot take that failure as an
 input. We need the bind combinator, with infix notation <code>&gt;&gt;=</code>, sending
 the output of its left-hand side to its right-hand side in case of
 success and failing otherwise.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
  <span class="n">tactic.target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span>
 </code></pre></div>
+</div>
 
 <p>Alternatively, especially if the output of <code>tactic.target</code> could be used
 several times, one can use the <code>do</code> blocks assignments using <code>←</code> (the
 same arrow as in the rewrite syntax). This emulation of imperative
 variable assignment will of course fail (as the failing tactics above)
 if the right-hand side of the assignment fails.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
  <span class="n">goal</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
  <span class="n">tactic.trace</span> <span class="n">goal</span>
 </code></pre></div>
+</div>
 
 <p>Beware that this kind of assignment is only trying to extract data of type
 <code>α</code> from something of type <code>tactic α</code>. It cannot be used to store
 regular stuff. The following doesn't work.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_assignment</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_assignment</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
  <span class="n">message</span> <span class="bp">←</span> <span class="s2">&quot;Hello, World.&quot;</span><span class="o">,</span>  <span class="c1">-- WRONG!</span>
  <span class="n">tactic.trace</span> <span class="n">message</span>
 </code></pre></div>
+</div>
 
 <p>However, one can use <code>let</code> in <code>do</code> blocks, as in:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">let_example</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">let_example</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
  <span class="k">let</span> <span class="n">message</span> <span class="o">:=</span> <span class="s2">&quot;Hello, World.&quot;</span><span class="o">,</span>
  <span class="n">tactic.trace</span> <span class="n">message</span>
 </code></pre></div>
+</div>
 
 <p>Next, we want to write tactics returning something, as <code>tactic.target</code>
 is doing. The only extra ingredient is the <code>return</code> function. The
@@ -197,51 +207,56 @@ following function tries to return <code>tt</code> if there is no more goal, <co
 otherwise. The next one can be used interactively and traces the result
 (note that using the first one interactively won't have any visible
 effect since interactive use ignores the returned value).</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">bool</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">bool</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">tactic.target</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">ff</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">return</span> <span class="n">tt</span>
 
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">is_done</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span>
 </code></pre></div>
+</div>
 
 <p>The last thing we will need about monadic assignment is pattern-matching
 assignment. The following tactic tries to define expressions <code>l</code> and <code>r</code> as
 the left and right hand sides of the current goal. It also uses the
 <code>to_string</code> function which is very convenient in combination with <code>trace</code>
 in order to debug tactics, and works on any type which is an instance of <code>has_to_string</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="n">t</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
    <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
    <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
    <span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
    <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>Lean also provides a dedicated syntax for pattern matching with a single pattern and a wildcard,
 where execution only proceeds to the next line of the <code>do</code> block if the pattern matches, and otherwise
 executes the expression after the <code>|</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span> <span class="bp">|</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span><span class="o">,</span>
    <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
 </code></pre></div>
+</div>
 
 <p>If the <code>|</code> is ommitted, then the tactic fails if the pattern does not match.
 We can catch this failure using the <code>orelse</code> combinator mentioned ealier, but note that by
 doing so we catch more types of failure than we did above:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="o">(</span><span class="k">do</span>  <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
      <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">),</span>
      <span class="n">some_other_tactic</span><span class="o">)</span>
    <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality, or `some_other_tactic` failed&quot;</span>
 </code></pre></div>
+</div>
 
 <p>The parenthesis in the above code don't look very nice. One could use
 instead curly brackets which allow to delimit a <code>do</code> block, as in:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
      <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">}</span>
    <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
 </code></pre></div>
+</div>
 
 <h2 id="a-first-real-world-tactic" class="markdown-heading">A first real world tactic <a class="hover-link" href="#a-first-real-world-tactic">#</a></h2>
 <p>We have studied enough monadology to understand our first useful tactic:
@@ -258,11 +273,12 @@ two expressions and succeeds if and only if they are definitionally equal.
 The first piece of the assumption tactic is a helper function searching
 an expression sharing the type of some expression <code>e</code> in a list of
 expressions, returning the first match (or failing if nothing matches).</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">find_matching_type</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">find_matching_type</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="o">[]</span>         <span class="o">:=</span> <span class="n">tactic.failed</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">H</span> <span class="o">::</span> <span class="n">Hs</span><span class="o">)</span>  <span class="o">:=</span> <span class="k">do</span> <span class="n">t</span> <span class="bp">←</span> <span class="n">tactic.infer_type</span> <span class="n">H</span><span class="o">,</span>
                    <span class="o">(</span><span class="n">tactic.unify</span> <span class="n">e</span> <span class="n">t</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">H</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">find_matching_type</span> <span class="n">Hs</span>
 </code></pre></div>
+</div>
 
 <p>Make sure you really understand the control flow in the above code using
 the previous section. The basic pattern is classical recursive find in a
@@ -272,8 +288,9 @@ name <code>H</code> stands for <code>hypothesis</code>, while <code>Hs</code>, f
 conventions, stands for several hypotheses. The imperative analogue of
 what happens for non-empty lists would read something like the following
 imperative pseudo-code</p>
-<div class="codehilite"><pre><span></span><code>if unify(e, infer_type(H)) then return H else find_matching_type(e, HS)
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>if unify(e, infer_type(H)) then return H else find_matching_type(e, HS)
 </code></pre></div>
+</div>
 
 <p>We can now use this function for our interactive tactic. We first need
 to grab the local context using <code>local_context</code>, which returns a list of
@@ -285,12 +302,13 @@ different parameters, so it's not an exact copy of the non-interactive
 one). This is good opportunity to point out that the beginning of this
 tutorial uses fully qualified names everywhere for clarity, but of
 course the real world workflow is to open the <code>tactic</code> namespace.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_assumption</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_assumption</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="o">{</span> <span class="n">ctx</span> <span class="bp">←</span> <span class="n">tactic.local_context</span><span class="o">,</span>
      <span class="n">t</span>   <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
      <span class="n">find_matching_type</span> <span class="n">t</span> <span class="n">ctx</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.exact</span> <span class="o">}</span>
 <span class="bp">&lt;|&gt;</span> <span class="n">tactic.fail</span> <span class="s2">&quot;my_assumption tactic failed&quot;</span>
 </code></pre></div>
+</div>
 
 <p>Bonus question: what if we remove the brackets? Will it still
 type-check? If yes, will the resulting tactic be the same?</p>
@@ -301,12 +319,13 @@ emulate this. We already know from usual Lean that <code>list.map</code> and
 version that interacts nicely with the monad world (consuming and
 returning terms of type <code>tactic stuff</code>). Those versions are prefixed with
 &quot;m&quot; for monad, as in <code>list.mmap</code>, <code>list.mfoldr</code> etc. Our tactic is then:</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">list_types</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">list_types</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
   <span class="n">l</span> <span class="bp">←</span> <span class="n">tactic.local_context</span><span class="o">,</span>
   <span class="n">l.mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">tactic.infer_type</span> <span class="n">h</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span><span class="o">),</span>
   <span class="n">return</span> <span class="o">()</span>
 </code></pre></div>
+</div>
 
 <p>The last line is a bit silly: it's there because what we get from the
 previous line has type <code>list unit</code>, so it cannot be the final
@@ -322,13 +341,14 @@ We will write a tactic that produces a new assumption by adding two known
 equalities (or failing miserably if this operation doesn't make sense). At
 first the names of thoses two equalities will be stupidly hardwired in our
 tactic. So we want a tactic performing the first line in the following proof.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
   <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="k">have</span> <span class="o">:=</span> <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="n">h₁</span><span class="o">)</span> <span class="n">h₂</span><span class="o">,</span>
   <span class="n">exact</span> <span class="n">this</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>The first new concept we need is that of a name. In order to allow for
 namespace management, names in Lean are actually defined as an inductive
@@ -345,7 +365,7 @@ pre-expression is constructed using the double-backtick-parenthesis notation:
 <code>``(...)</code>. Inside such a construction, previously assigned expressions
 are accessed using the anti-quotation prefix <code>%%</code>. This syntax is very close
 to the pattern matching syntax we saw above (but different).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">tactic.interactive</span> <span class="o">(</span><span class="bp">«</span><span class="k">have</span><span class="bp">»</span><span class="o">)</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">tactic.interactive</span> <span class="o">(</span><span class="bp">«</span><span class="k">have</span><span class="bp">»</span><span class="o">)</span>
 <span class="kn">open</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">get_local</span> <span class="n">infer_type</span><span class="o">)</span>
 
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq_h₁_h₂</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
@@ -360,6 +380,7 @@ to the pattern matching syntax we saw above (but different).</p>
   <span class="n">exact</span> <span class="n">this</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>A last remark about the above tactic: the names <code>`h₁</code> and <code>`h₂</code> are resolved
 when the tactic is executed. In order to trigger name resolution when
@@ -369,7 +390,7 @@ in sight at tactic parsing time. But it can be useful in other cases.</p>
 <h2 id="tactic-arguments-parsing" class="markdown-heading">Tactic arguments parsing <a class="hover-link" href="#tactic-arguments-parsing">#</a></h2>
 <h3 id="parsing-identifiers" class="markdown-heading">Parsing identifiers <a class="hover-link" href="#parsing-identifiers">#</a></h3>
 <p>Obviously the previous tactic is useless if the assumption names are hardwired. So we replace it by:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">parse</span><span class="o">)</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">parse</span><span class="o">)</span>
 <span class="kn">open</span> <span class="n">lean.parser</span> <span class="o">(</span><span class="n">ident</span><span class="o">)</span>
 
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
@@ -377,13 +398,15 @@ in sight at tactic parsing time. But it can be useful in other cases.</p>
    <span class="n">e2</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h2</span><span class="o">,</span>
    <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="n">none</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="n">_root_.congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="bp">%%</span><span class="n">e1</span><span class="o">)</span> <span class="bp">%%</span><span class="n">e2</span><span class="o">)</span>
 </code></pre></div>
+</div>
 
 <p>The arguments <code>h1</code> and <code>h2</code> tell lean to parse identifiers. There is quite a
 bit of trickery going one here. The Lean parser sees <code>parse</code> left of colon,
 so it knows it must do some argument parsing, but then the resulting type is
 nothing but a name, as demonstrated below.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="bp">=</span> <span class="n">name</span> <span class="o">:=</span> <span class="n">rfl</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="bp">=</span> <span class="n">name</span> <span class="o">:=</span> <span class="n">rfl</span>
 </code></pre></div>
+</div>
 
 <h3 id="parsing-optional-arguments-and-using-tokens" class="markdown-heading">Parsing optional arguments and using tokens <a class="hover-link" href="#parsing-optional-arguments-and-using-tokens">#</a></h3>
 <p>The next improvement to this tactic offers the opportunity to name the new
@@ -398,7 +421,7 @@ elements are added to this list when literals are used in <code>notation</code>,
 And then the combination is wrapped into <code>optional</code> to make it optional. The term <code>h</code> we
 get below has then type <code>option name</code> and can be passed as the first argument
 of <code>«have»</code>, which will use it if provided, and otherwise use the name <code>this</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">lean.parser</span> <span class="o">(</span><span class="n">tk</span><span class="o">)</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">lean.parser</span> <span class="o">(</span><span class="n">tk</span><span class="o">)</span>
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq&#39;</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span>
   <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;with&quot;</span> <span class="bp">*&gt;</span> <span class="n">ident</span><span class="o">)))</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="n">e1</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h1</span><span class="o">,</span>
@@ -412,16 +435,18 @@ of <code>«have»</code>, which will use it if provided, and otherwise use the n
   <span class="n">exact</span> <span class="n">new</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <h3 id="parsing-locations-and-expressions" class="markdown-heading">Parsing locations and expressions <a class="hover-link" href="#parsing-locations-and-expressions">#</a></h3>
 <p>Our next tactic multiplies from the left an equality by a given expression
 (or fails if this operation wouldn't make sense). We want to mechanize the following proof.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">b</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">b</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">replace</span> <span class="n">hyp</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="n">hyp</span><span class="o">,</span>
   <span class="n">exact</span> <span class="n">hyp</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>The main new skills here consist in indicating at what location we want to
 act, using the traditional token <code>at</code>, and passing an expression to the
@@ -437,7 +462,7 @@ converted to an actual expression using <code>tactic.i_to_expr</code>. This is a
 opportunity for our first serious use of pattern matching assignment, and
 for using the second optional argument of <code>«have»</code> which is the expected type
 (otherwise we would get unapplied multiplication, with an explicit lambda, try it!).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">loc.ns</span><span class="o">)</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">loc.ns</span><span class="o">)</span>
 <span class="kn">open</span> <span class="n">interactive.types</span> <span class="o">(</span><span class="n">texpr</span> <span class="n">location</span><span class="o">)</span>
 <span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.mul_left</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">loc.ns</span> <span class="o">[</span><span class="n">some</span> <span class="n">h</span><span class="o">])</span> <span class="o">:=</span> <span class="k">do</span>
@@ -454,13 +479,14 @@ for using the second optional argument of <code>«have»</code> which is the exp
   <span class="n">exact</span> <span class="n">hyp</span>
 <span class="kd">end</span>
 </code></pre></div>
+</div>
 
 <p>As a last refinement, let us make a version of this tactic which names the
 multiplied equality by appending <code>.mul</code>, and optionally removes the original
 one if the tactic name is followed by <code>!</code>. This is the opportunity to use
 <code>when</code> which is the monadic version of <code>ite</code> (with else branch doing nothing).
 See <a href="https://github.com/leanprover-community/lean/blob/master/library/init/control/combinators.lean">control/combinators.lean</a> in core library for other variations on this idea.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.mul_left_bis</span> <span class="o">(</span><span class="n">clear_hyp</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="bp">$</span> <span class="n">tk</span> <span class="s2">&quot;!&quot;</span><span class="o">))</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.mul_left_bis</span> <span class="o">(</span><span class="n">clear_hyp</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="bp">$</span> <span class="n">tk</span> <span class="s2">&quot;!&quot;</span><span class="o">))</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span>
 <span class="n">parse</span> <span class="n">location</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">loc.ns</span> <span class="o">[</span><span class="n">some</span> <span class="n">h</span><span class="o">])</span> <span class="o">:=</span> <span class="k">do</span>
    <span class="n">e</span> <span class="bp">←</span> <span class="n">tactic.i_to_expr</span> <span class="n">q</span><span class="o">,</span>
@@ -470,6 +496,7 @@ See <a href="https://github.com/leanprover-community/lean/blob/master/library/in
    <span class="n">when</span> <span class="n">clear_hyp.is_some</span> <span class="o">(</span><span class="n">tactic.clear</span> <span class="n">H</span><span class="o">)</span>
 <span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.fail</span> <span class="s2">&quot;mul_left_bis takes exactly one location&quot;</span>
 </code></pre></div>
+</div>
 
 <h2 id="what-to-read-now" class="markdown-heading">What to read now? <a class="hover-link" href="#what-to-read-now">#</a></h2>
 <p>This is the end of this tutorial (although there are two cheat sheets below).
@@ -514,12 +541,13 @@ of type <code>expr</code>.</p>
 <p>The <code>reflect</code> function turns a term <code>t : T</code> into an <code>expr</code> that reflects <code>t</code>, if Lean can infer
 an instance <code>reflected t</code>. This can be used, for example, to refer to local variables from a
 tactic definition inside a quotation, using <code>%%(reflect n)</code>. As an example, we could write</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">assert_ge_zero</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">assert_ge_zero</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="n">v</span> <span class="bp">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">nat.zero_le</span> <span class="bp">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">n</span><span class="o">)),</span>
    <span class="n">t</span> <span class="bp">←</span> <span class="n">infer_type</span> <span class="n">v</span><span class="o">,</span>
    <span class="n">assertv</span> <span class="bp">`</span><span class="n">h</span> <span class="n">t</span> <span class="n">v</span><span class="o">,</span>
    <span class="n">skip</span>
 </code></pre></div>
+</div>
 
 <p>If you just wrote <code>n</code> directly here you'd get a &quot;unexpected local in quotation expression&quot;
 error.</p>
