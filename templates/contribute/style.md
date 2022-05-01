@@ -108,7 +108,7 @@ After stating the theorem, we generally do not indent the first line
 of a proof, so that the proof is "flush left" in the file.
 ```lean
 open nat
-theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀ m, P (succ m)) : P n :=
+theorem nat_case {P : nat → Prop} (n : nat) (H1 : P 0) (H2 : ∀ m, P (succ m)) : P n :=
 nat.induction_on n H1 (assume m IH, H2 m)
 ```
 
