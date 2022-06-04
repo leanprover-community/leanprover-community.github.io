@@ -1,7 +1,8 @@
 # How to use calc
 
 `calc` is an environment -- so a "mode" like tactic mode, term mode and
-[conv mode](conv.html). Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+[conv mode](conv.html). Documentation and basic examples for how to use 
+it are in Theorem Proving In Lean, in
 [section 4.3](https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs).
 
 Basic example usage:
@@ -12,7 +13,8 @@ calc a = b + 1 : H1
 ...    = c + 1 : by rw H2
 ```
 
-`calc` is also available in tactic mode. You can leave `_`s to create a new goal:
+`calc` is also available in tactic mode. You can leave `_`s to create a 
+new goal:
 ```lean
 example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
 begin
@@ -21,7 +23,8 @@ begin
   { rw H2 }
 end
 ```
-In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `refine (calc A = B : H ...)`.
+In fact, `calc A = B : H ...` in tactic mode functions exactly like a 
+call to `refine (calc A = B : H ...)`.
 
 ## Getting effective feedback while using calc
 
