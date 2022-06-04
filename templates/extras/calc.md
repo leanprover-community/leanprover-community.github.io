@@ -23,16 +23,20 @@ end
 ```
 In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `refine (calc A = B : H ...)`.
 
-## Error messages, and how to avoid them
+## Getting effective feedback while using calc
 
-Note that the error messages can be quite obscure when things aren't quite right, and often the red
-squiggles end up under a random `...`. A tip to avoid these problems with calc usage is to first
+To get helpful error messages, keep the calc structure even before the proof is complete. Use `_` as in the 
+example above or `sorry` to stand for missing justifications. `sorry` will supress error messages entirely, 
+while `_` will either generate a nice error message, or in tactic mode, a new subgoal. 
+
+If the structure of calc is incorrect (e.g., (missing `:` or the justification after it), you may see error 
+messages that are obscure, and/or red squiggles end up under a random `...`. To avoid these, you might first 
 populate a skeleton proof such as
 
 ```lean
-example : A = D :=
+example (A B C D : ℝ ) : A = D :=
 calc A = B : sorry
-...    = C : sorry
+...    = C : _
 ...    = D : sorry
 ```
 (in tactic mode, 
@@ -40,9 +44,9 @@ calc A = B : sorry
 have H : A = D,
 { calc A = B : _
   ...    = C : _
-  ...    = D : _, }
+  ...    = D : _, },
 ```
-with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
+with a comma at the end), and then to start filling in the `sorry` and `_` after that. (Idle thought: could
 one write a VS Code snippet to write this skeleton?)
 
 ## Using operators other than equality
