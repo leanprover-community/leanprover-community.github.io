@@ -25,13 +25,15 @@ In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `r
 
 ## Getting effective feedback while using calc
 
-To get helpful error messages, keep the calc structure even before the proof is complete. Use `_` as in the 
-example above or `sorry` to stand for missing justifications. `sorry` will supress error messages entirely, 
-while `_` will either generate a nice error message or, in tactic mode, a new subgoal. 
+To get helpful error messages, keep the calc structure even before the 
+proof is complete. Use `_` as in the example above or `sorry` to stand 
+for missing justifications. `sorry` will supress error messages 
+entirely, while `_` will generate a guiding error message. 
 
-If the structure of calc is incorrect (e.g., missing `:` or the justification after it), you may see error 
-messages that are obscure and/or red squiggles that end up under a random `...`. To avoid these, you might first 
-populate a skeleton proof such as
+If the structure of calc is incorrect (e.g., missing `:` or the 
+justification after it), you may see error messages that are obscure 
+and/or red squiggles that end up under a random `...`. To avoid these, 
+you might first populate a skeleton proof such as:
 
 ```lean
 example (A B C D : ℝ ) : A = D :=
@@ -39,15 +41,22 @@ calc A = B : sorry
 ...    = C : _
 ...    = D : sorry
 ```
-(in tactic mode, 
+
+and then fill in the `sorry` and `_` gradually.
+
+In tactic mode calc should be terminated with a comma:
 ```lean
 have H : A = D,
-{ calc A = B : _
-  ...    = C : _
-  ...    = D : _, },
+{ calc A = B : sorry
+  ...    = C : sorry
+  ...    = D : _, 
+  sorry
+},
 ```
-with a comma at the end), and then to start filling in the `sorry` and `_` after that. (Idle thought: could
-one write a VS Code snippet to write this skeleton?)
+and the `_` can be left in as they generate a subgoal to be resolved 
+after calc (here by the last `sorry`).
+
+(Idle thought: could one write a VS Code snippet to write this skeleton?)
 
 ## Using operators other than equality
 
