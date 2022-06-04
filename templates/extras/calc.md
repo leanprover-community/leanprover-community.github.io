@@ -27,7 +27,7 @@ In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `r
 
 To get helpful error messages, keep the calc structure even before the proof is complete. Use `_` as in the 
 example above or `sorry` to stand for missing justifications. `sorry` will supress error messages entirely, 
-while `_` will either generate a nice error message, or in tactic mode, a new subgoal. 
+while `_` will either generate a nice error message or, in tactic mode, a new subgoal. 
 
 If the structure of calc is incorrect (e.g., missing `:` or the justification after it), you may see error 
 messages that are obscure, and/or red squiggles end up under a random `...`. To avoid these, you might first 
