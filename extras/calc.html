@@ -50,7 +50,8 @@
 	  
 <h1 id="how-to-use-calc" class="markdown-heading">How to use calc <a class="hover-link" href="#how-to-use-calc">#</a></h1>
 <p><code>calc</code> is an environment -- so a &quot;mode&quot; like tactic mode, term mode and
-<a href="conv.html">conv mode</a>. Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+<a href="conv.html">conv mode</a>. Documentation and basic examples for how to use
+it are in Theorem Proving In Lean, in
 <a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs">section 4.3</a>.</p>
 <p>Basic example usage:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
@@ -59,7 +60,8 @@
 </code></pre></div>
 </div>
 
-<p><code>calc</code> is also available in tactic mode. You can leave <code>_</code>s to create a new goal:</p>
+<p><code>calc</code> is also available in tactic mode. You can leave <code>_</code>s to create a
+new goal:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="k">calc</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">H1</span>
@@ -69,28 +71,37 @@
 </code></pre></div>
 </div>
 
-<p>In fact, <code>calc A = B : H ...</code> in tactic mode functions exactly like a call to <code>refine (calc A = B : H ...)</code>.</p>
-<h2 id="error-messages-and-how-to-avoid-them" class="markdown-heading">Error messages, and how to avoid them <a class="hover-link" href="#error-messages-and-how-to-avoid-them">#</a></h2>
-<p>Note that the error messages can be quite obscure when things aren't quite right, and often the red
-squiggles end up under a random <code>...</code>. A tip to avoid these problems with calc usage is to first
-populate a skeleton proof such as</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span> <span class="o">:=</span>
+<p>In fact, <code>calc A = B : H ...</code> in tactic mode functions exactly like a
+call to <code>refine (calc A = B : H ...)</code>.</p>
+<h2 id="getting-effective-feedback-while-using-calc" class="markdown-heading">Getting effective feedback while using calc <a class="hover-link" href="#getting-effective-feedback-while-using-calc">#</a></h2>
+<p>To get helpful error messages, keep the calc structure even before the
+proof is complete. Use <code>_</code> as in the example above or <code>sorry</code> to stand
+for missing justifications. <code>sorry</code> will supress error messages
+entirely, while <code>_</code> will generate a guiding error message.</p>
+<p>If the structure of calc is incorrect (e.g., missing <code>:</code> or the
+justification after it), you may see error messages that are obscure
+and/or red squiggles that end up under a random <code>...</code>. To avoid these,
+you might first populate a skeleton proof such as:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="n">D</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span> <span class="o">:=</span>
 <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="gr">sorry</span>
-<span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="gr">sorry</span>
+<span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="n">_</span>
 <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="gr">sorry</span>
 </code></pre></div>
 </div>
 
-<p>(in tactic mode,</p>
+<p>and then fill in the <code>sorry</code> and <code>_</code> gradually.</p>
+<p>In tactic mode calc should be terminated with a comma:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span><span class="o">,</span>
-<span class="o">{</span> <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="n">_</span>
-  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="n">_</span>
-  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span> <span class="o">}</span>
+<span class="o">{</span> <span class="k">calc</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:</span> <span class="gr">sorry</span>
+  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">C</span> <span class="o">:</span> <span class="gr">sorry</span>
+  <span class="bp">...</span>    <span class="bp">=</span> <span class="n">D</span> <span class="o">:</span> <span class="n">_</span><span class="o">,</span> 
+  <span class="gr">sorry</span> <span class="o">},</span>
 </code></pre></div>
 </div>
 
-<p>with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
-one write a VS Code snippet to write this skeleton?)</p>
+<p>and the <code>_</code> can be left in as they generate a subgoal to be resolved
+after calc (here by the last <code>sorry</code>).</p>
+<p>(Idle thought: could one write a VS Code snippet to write this skeleton?)</p>
 <h2 id="using-operators-other-than-equality" class="markdown-heading">Using operators other than equality <a class="hover-link" href="#using-operators-other-than-equality">#</a></h2>
 <p>Many of the basic examples in TPIL use equality for most or all of
 the operators, but actually <code>calc</code> will work with any relation for which
