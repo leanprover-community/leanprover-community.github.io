@@ -53,8 +53,7 @@ have H : A = D,
 { calc A = B : sorry
   ...    = C : sorry
   ...    = D : _, 
-  sorry
-},
+  sorry },
 ```
 and the `_` can be left in as they generate a subgoal to be resolved 
 after calc (here by the last `sorry`).
