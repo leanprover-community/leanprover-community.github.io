@@ -1,7 +1,8 @@
 # How to use calc
 
 `calc` is an environment -- so a "mode" like tactic mode, term mode and
-[conv mode](conv.html). Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+[conv mode](conv.html). Documentation and basic examples for how to use 
+it are in Theorem Proving In Lean, in
 [section 4.3](https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs).
 
 Basic example usage:
@@ -12,7 +13,8 @@ calc a = b + 1 : H1
 ...    = c + 1 : by rw H2
 ```
 
-`calc` is also available in tactic mode. You can leave `_`s to create a new goal:
+`calc` is also available in tactic mode. You can leave `_`s to create a 
+new goal:
 ```lean
 example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
 begin
@@ -21,29 +23,42 @@ begin
   { rw H2 }
 end
 ```
-In fact, `calc A = B : H ...` in tactic mode functions exactly like a call to `refine (calc A = B : H ...)`.
+In fact, `calc A = B : H ...` in tactic mode functions exactly like a 
+call to `refine (calc A = B : H ...)`.
 
-## Error messages, and how to avoid them
+## Getting effective feedback while using calc
 
-Note that the error messages can be quite obscure when things aren't quite right, and often the red
-squiggles end up under a random `...`. A tip to avoid these problems with calc usage is to first
-populate a skeleton proof such as
+To get helpful error messages, keep the calc structure even before the 
+proof is complete. Use `_` as in the example above or `sorry` to stand 
+for missing justifications. `sorry` will supress error messages 
+entirely, while `_` will generate a guiding error message. 
+
+If the structure of calc is incorrect (e.g., missing `:` or the 
+justification after it), you may see error messages that are obscure 
+and/or red squiggles that end up under a random `...`. To avoid these, 
+you might first populate a skeleton proof such as:
 
 ```lean
-example : A = D :=
+example (A B C D : ℝ ) : A = D :=
 calc A = B : sorry
-...    = C : sorry
+...    = C : _
 ...    = D : sorry
 ```
-(in tactic mode, 
+
+and then fill in the `sorry` and `_` gradually.
+
+In tactic mode calc should be terminated with a comma:
 ```lean
 have H : A = D,
-{ calc A = B : _
-  ...    = C : _
-  ...    = D : _, }
+{ calc A = B : sorry
+  ...    = C : sorry
+  ...    = D : _, 
+  sorry },
 ```
-with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
-one write a VS Code snippet to write this skeleton?)
+and the `_` can be left in as they generate a subgoal to be resolved 
+after calc (here by the last `sorry`).
+
+(Idle thought: could one write a VS Code snippet to write this skeleton?)
 
 ## Using operators other than equality
 
