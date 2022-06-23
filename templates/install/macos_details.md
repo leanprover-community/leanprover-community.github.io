@@ -21,7 +21,7 @@ Installing `elan` and mathlib supporting tools
 
 1.  Install [Homebrew](https://brew.sh/) if you do not already have it installed.
 
-2.  Run `brew install elan mathlibtools` in a terminal window to
+2.  Run `brew install elan-init mathlibtools` in a terminal window to
     install `elan`, as well as the supporting toolset for working with
     `mathlib`.
 
