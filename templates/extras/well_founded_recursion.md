@@ -13,7 +13,7 @@ def gcd : nat → nat → nat
 
 Because < is a well founded relation on naturals, and because `y % succ x < succ x` this recursive function is well_founded.
 
-Whenever you use the equation compiler there will be a default well founded relation on the type being recursed on (given by the `has_well_founded` instance) and the equation compiler will automatically attempt to prove the function is well founded.
+Whenever you use the equation compiler there will be a default well founded relation on the type being recursed on (given by the `has_well_founded` instance) and the equation compiler will automatically attempt to prove the function is well founded under said relation.
 
 When the equation compiler fails, there are two main causes.
 
