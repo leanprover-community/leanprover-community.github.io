@@ -13,7 +13,7 @@ def gcd : nat → nat → nat
 
 Because < is a well founded relation on naturals, and because `y % succ x < succ x` this recursive function is well_founded.
 
-Whenever you use the equation compiler there will be a default well founded relation on the type being recursed on and the equation compiler will automatically attempt to prove the function is well founded.
+Whenever you use the equation compiler there will be a default well founded relation on the type being recursed on (given by the `has_well_founded` instance) and the equation compiler will automatically attempt to prove the function is well founded.
 
 When the equation compiler fails, there are two main causes.
 
@@ -84,7 +84,7 @@ Now the error message is asking us to prove `succ x < y`. This is because by def
 Sometimes moving an argument outside of the equation compiler, can help the equation compiler prove a recursion is well_founded. For example the following proof from `data.nat.prime` fails.
 
 ```lean
-lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
+lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
 | 0       h := (lt_irrefl _).elim h
 | 1       h := rfl
 | n@(k+2) h :=
@@ -100,7 +100,7 @@ lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
 But moving the `h` into a lambda after the `:=` makes it work
 
 ```lean
-lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
+lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
 | 0       := λ h, (lt_irrefl _).elim h
 | 1       := λ h, rfl
 | n@(k+2) := λ h,
@@ -125,7 +125,7 @@ The following proof in `data.multiset` uses this relation.
 
 ```lean
 @[elab_as_eliminator] lemma strong_induction_on {p : multiset α → Sort*} :
-  ∀ (s : multiset α), (∀ s, (∀t < s, p t) → p s) → p s
+  ∀ (s : multiset α), (∀ s, (∀ t < s, p t) → p s) → p s
 | s := λ ih, ih s $ λ t h,
   have card t < card s, from card_lt_of_lt h,
   strong_induction_on t ih
