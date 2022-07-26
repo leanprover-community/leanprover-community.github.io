@@ -78,9 +78,9 @@ The type `M →[R]ₗ M₂`, or `linear_map R M M₂`, represents `R`-linear map
 These are defined by their action on elements of `M`.
 The type `M ≃[R]ₗ M₂`, or `linear_equiv R M M₂`, is the type of invertible `R`-linear maps from `M` to `M₂`.
 
-The equivalence between matrices and linear maps is formalised in [`linear_algebra.matrix`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html).
-[`linear_equiv_matrix'`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html#linear_equiv_matrix') shows that `matrix.mul_vec` is a linear equivalence between `matrix m n R` and `(n → R) →[R]ₗ (m → R)`.
-In addition, `linear_equiv_matrix` takes a basis `ι` for `M₁` and `κ` for `M₂`
+The equivalence between matrices and linear maps is formalised in [`linear_algebra.matrix`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix/to_lin.html).
+[`to_lin`](https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix/to_lin.html#matrix.to_lin) shows that `matrix.mul_vec` is a linear equivalence between `matrix m n R` and `(n → R) →[R]ₗ (m → R)`.
+In addition, `linear_map.to_matrix` takes a basis `ι` for `M₁` and `κ` for `M₂`
 and gives the equivalence between `R`-linear maps between `M₁` and `M₂` and `matrix ι κ R`.
 If you have an explicit basis for your maps, this equivalence allows you to do calculations such as getting the determinant.
 
