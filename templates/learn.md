@@ -121,11 +121,11 @@ to use Lean.
 A number of meetings have helped welcome newcomers to the Lean community.
 The following have links to online talks and other material that may
 be of interest:
+* [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
 * [Lean Together 2021](https://leanprover-community.github.io/lt2021/)
 * [Lean for the Curious Mathematician 2020](https://leanprover-community.github.io/lftcm2020/)
 * [Formal Methods in Mathematics / Lean Together 2020](https://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
 * [Lean Together 2019](https://lean-forward.github.io/lean-together/2019/)
-* [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
 
 We also have a [YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg/playlists)
 which includes playlists of videos from the above conferences, and also other conferences with Lean-relevant content.
