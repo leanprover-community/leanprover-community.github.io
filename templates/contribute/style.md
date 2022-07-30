@@ -444,8 +444,8 @@ gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.
 
 There is a special case to this rule. In types with a bottom element, it is equivalent
-to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would be
-better as a normal form since both have their pros and cons. An analogous situation
+to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would 
+be better as a normal form since both have their pros and cons. An analogous situation
 occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is
 very easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
 on the direction we want) while the other conversion is more lengthy, we use `hne` in
