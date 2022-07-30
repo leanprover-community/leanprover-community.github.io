@@ -443,7 +443,7 @@ conclusions of theorems. In the above examples, this would be `s.nonempty` (whic
 gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.
 
-There is an exception to this rule. In types with a bottom element, it is equivalent
+There is a special case to this rule. In types with a bottom element, it is equivalent
 to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would be
 better as a normal form since both have their pros and cons. An analogous situation
 occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is
