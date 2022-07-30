@@ -450,8 +450,8 @@ occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. S
 easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
 on the direction we want) while the other conversion is more lengthy, we use `hne` in
 *assumptions* of theorems (as this is the easier assumption to check), and `hlt` in 
-*conclusions* of theorems (as this is the more powerful result to use). A common
-usage of this rule is with naturals, where `⊥ = 0`.
+*conclusions* of theorems (as this is the more powerful result to use). 
+A common usage of this rule is with naturals, where `⊥ = 0`.
 
 ## Comments
 
