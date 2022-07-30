@@ -448,8 +448,8 @@ to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one w
 be better as a normal form since both have their pros and cons. An analogous situation
 occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is very 
 easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
-on the direction we want) while the other conversion is more lengthy, we use `hne` in 
-*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in
+on the direction we want) while the other conversion is more lengthy, we use `hne` in
+*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in 
 *conclusions* of theorems (as this is the more powerful result to use). A common
 usage of this rule is with naturals, where `⊥ = 0`.
 
