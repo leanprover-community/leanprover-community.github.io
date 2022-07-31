@@ -453,14 +453,15 @@ on one standard form, called the normal form, and use it both in statements and
 conclusions of theorems. In the above examples, this would be <code>s.nonempty</code> (which
 gives access to dot notation) and <code>(a : option α)</code>. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.</p>
-<p>Here is a special case to this rule. When <code>n</code> is a natural number,
-it is equivalent to require <code>hlt : 0 &lt; n</code> or <code>hne : n ≠ 0</code>, and it is not clear which one would
-be better as a normal form since both have their pros and cons. Since it is very
+<p>There is a special case to this rule. In types with a bottom element, it is equivalent
+to require <code>hlt : ⊥ &lt; x</code> or <code>hne : x ≠ ⊥</code>, and it is not clear which one would
+be better as a normal form since both have their pros and cons. An analogous situation
+occurs with <code>hlt : x &lt; ⊤</code> and <code>hne : x ≠ ⊤</code> in types with a top element. Since it is very
 easy to convert from <code>hlt</code> to <code>hne</code> (by using <code>hlt.ne</code> or <code>hlt.ne&#x27;</code> depending
 on the direction we want) while the other conversion is more lengthy, we use <code>hne</code> in
 <em>assumptions</em> of theorems (as this is the easier assumption to check), and <code>hlt</code> in
 <em>conclusions</em> of theorems (as this is the more powerful result to use).
-The same rule holds in all ordered type with a bottom or a top element.</p>
+A common usage of this rule is with naturals, where <code>⊥ = 0</code>.</p>
 <h2 id="comments" class="markdown-heading">Comments <a class="hover-link" href="#comments">#</a></h2>
 <p>Use module doc delimiters <code>/-! -/</code> to provide section headers and
 separators since these get incorporated into the auto-generated docs,
