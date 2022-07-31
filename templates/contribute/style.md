@@ -443,14 +443,15 @@ conclusions of theorems. In the above examples, this would be `s.nonempty` (whic
 gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.
 
-Here is a special case to this rule. When `n` is a natural number,
-it is equivalent to require `hlt : 0 < n` or `hne : n ≠ 0`, and it is not clear which one would
-be better as a normal form since both have their pros and cons. Since it is very
+There is a special case to this rule. In types with a bottom element, it is equivalent
+to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would 
+be better as a normal form since both have their pros and cons. An analogous situation
+occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is very 
 easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
 on the direction we want) while the other conversion is more lengthy, we use `hne` in
 *assumptions* of theorems (as this is the easier assumption to check), and `hlt` in 
 *conclusions* of theorems (as this is the more powerful result to use). 
-The same rule holds in all ordered type with a bottom or a top element.
+A common usage of this rule is with naturals, where `⊥ = 0`.
 
 ## Comments
 
