@@ -6,7 +6,7 @@ Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 When translating the statements of theorems into words, this dictionary is often used:
 
-Logic:
+#### Logic
 
 | symbol | shortcut | name                      | notes                                                               |
 |--------|----------|---------------------------|---------------------------------------------------------------------|
@@ -21,19 +21,22 @@ Logic:
 | `≠`    | `\ne`    | `ne`                      |                                                                     |
 | `∘`    | `\o`     | `comp`                    |                                                                     |
 
-Set:
+#### Set
 
-| symbol | shortcut  | name               | notes |
-|--------|-----------|--------------------|-------|
-| `∈`    | `\in`     | `mem`              |       |
-| `∪`    | `\cup`    | `union`            |       |
-| `∩`    | `\cap`    | `inter`            |       |
-| `⋃`    | `\bigcup` | `Union` / `bUnion` |       |
-| `⋂`    | `\bigcap` | `Inter` / `bInter` |       |
-| `\`    | `\\`      | `sdiff`            |       |
-| `ᶜ`    | `\^c`     | `compl`            |       |
+| symbol      | shortcut  | name               | notes |
+|-------------|-----------|--------------------|-------|
+| `∈`         | `\in`     | `mem`              |       |
+| `∪`         | `\cup`    | `union`            |       |
+| `∩`         | `\cap`    | `inter`            |       |
+| `⋃`         | `\bigcup` | `Union` / `bUnion` |       |
+| `⋂`         | `\bigcap` | `Inter` / `bInter` |       |
+| `\`         | `\\`      | `sdiff`            |       |
+| `ᶜ`         | `\^c`     | `compl`            |       |
+| <code>{x &#124; p x}</code> |           | `set_of`           |       |
+| `{x}`       |           | `singleton`        |       |
+| `{x, y}`    |           | `pair`             |       |
 
-Algebra:
+#### Algebra
 
 | symbol | shortcut              | name          | notes                                                       |
 | ------ | --------------------- | ------------- | ----------------------------------------------------------- |
@@ -46,20 +49,23 @@ Algebra:
 | `/`    |                       | `div`         |                                                             |
 | `•`    | `\bu`                 | `smul`        |                                                             |
 | `⁻¹`   | `\-1`                 | `inv`         |                                                             |
+| `⅟`   | `\frac1`              | `inv_of`      |                                                             |
 | `∣`    | <code>\\&#124;</code> | `dvd`         |                                                             |
 | `∑`    | `\sum`                | `sum`         |                                                             |
 | `∏`    | `\prod`               | `prod`        |                                                             |
 
-Lattices:
+#### Lattices
 
-| symbol | shortcut | name  | notes |
-|--------|----------|-------|-------|
-| `<`    |          | `lt`  |       |
-| `≤`    | `\le`    | `le`  |       |
-| `⊔`    | `\sup`   | `sup` |       |
-| `⊓`    | `\inf`   | `inf` |       |
-| `⨆`    | `\Sup`   | `Sup` |       |
-| `⨅`    | `\Inf`   | `Inf` |       |
+| symbol | shortcut | name             | notes |
+|--------|----------|------------------|-------|
+| `<`    |          | `lt`             |       |
+| `≤`    | `\le`    | `le`             |       |
+| `⊔`    | `\sup`   | `sup`            |       |
+| `⊓`    | `\inf`   | `inf`            |       |
+| `⨆`    | `\supr`  | `supr` / `bsupr` |       |
+| `⨅`    | `\infi`  | `infi` / `binfi` |       |
+| `⊥`    | `\bot`   | `bot`            |       |
+| `⊤`    | `\top`   | `top`            |       |
 
 ### General conventions
 
