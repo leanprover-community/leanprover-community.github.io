@@ -55,6 +55,7 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 * Run `cp "$(which python)" "$(which python)"3`. This ensures that we can use the command `python3` to call Python.
 * Test whether everything is working by typing `python3 --version` and `pip3 --version`. If both commands give a short output and no error, everything is set up correctly.
   * If `pip3 --version` doesn't give any output, run the command `python3 -m pip install --upgrade pip`, which should fix it.
+    * If you get command not found, you should add the Pip directory (usually it's within /Scripts of your python's directory) to your path. Google how to do this, or ask on Zulip.
 
 
 ### Configure Git
