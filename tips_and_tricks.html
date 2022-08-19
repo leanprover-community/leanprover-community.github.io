@@ -69,13 +69,13 @@ This is especially helpful when using tactics like <a href="/mathlib_docs/tactic
 In VSCode this can be configured by opening the settings and searching for <code>Lean Memory Limit</code> and <code>Lean Time Limit</code>.
 Mathlib itself enforces a deterministic timeout of 100000, and often tries to have individual tactic calls use much less, so it is good practice not to rely on a large value for this setting.</p>
 <h3 id="old-mode" class="markdown-heading">Old mode <a class="hover-link" href="#old-mode">#</a></h3>
-<p>If you change a file early on in the import hierarchy and then attempt to work on a file that depends on it much later, then Lean will try to check all files in between to ensure they didn't break.
+<p>If you change a file early on in the import hierarchy and then attempt to work on a file that depends on it much later, then Lean will try to check all files in between to ensure they didn&#x27;t break.
 This behaviour can cause the Lean server to become unresponsive, or simply slow down development.
 You can call lean with the &quot;--old&quot; flag to help in these situations, though it does come with some caveats.
 In VSCode you can enable it by opening the VSCode settings and searching for &quot;Lean: extra options&quot; then add the flag <code>--old</code>.
 For Emacs the variable <code>lean-extra-arguments</code> can be modified to add this flag.
 This causes lean not to recompile oleans for unedited files and just assume everything worked, so in this situation it is helpful to avoid recompilation.
-However you do then run the risk that your change broke or changed the meaning of some file in-between. Thus this suggestion mostly applies when you are adding a new lemma/definition early in the hierarchy that you are sure won't break later files, rather than when you are changing existing definitions in an incompatible way.
+However you do then run the risk that your change broke or changed the meaning of some file in-between. Thus this suggestion mostly applies when you are adding a new lemma/definition early in the hierarchy that you are sure won&#x27;t break later files, rather than when you are changing existing definitions in an incompatible way.
 It is possible to &quot;prove false&quot; when running lean with the old flag on; by changing a definition in an early file, later results about that definition may become incorrect if Lean is asked not to rebuild those files.
 The old flag should therefore not be used when consistency of the whole project is important (e.g. in CI), though it can speed up development.</p>
 <h3 id="the-exit-command-and-" class="markdown-heading">The <code>#exit</code> command and <code>.</code> <a class="hover-link" href="#the-exit-command-and-">#</a></h3>
