@@ -45,7 +45,7 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 4. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
 
 ```
-/usr/local/bin/brew install elan mathlibtools
+/usr/local/bin/brew install elan-init mathlibtools
 elan toolchain install stable 
 elan default stable  
 ```

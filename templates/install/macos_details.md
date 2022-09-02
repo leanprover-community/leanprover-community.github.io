@@ -75,7 +75,7 @@ installation mechanism by running:
 and
 
   ```sh
-  elan self uninstall && brew install elan
+  elan self uninstall && brew install elan-init
   ```
 
 for `mathlib-tools` and `elan` respectively.
