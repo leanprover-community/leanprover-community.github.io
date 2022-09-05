@@ -327,4 +327,4 @@ The following files are maintained as examples of good documentation style:
 
 * [data/padics/padic_norm](https://github.com/leanprover-community/mathlib/blob/master/src/number_theory/padics/padic_norm.lean)
 * [topology/basic](https://github.com/leanprover-community/mathlib/blob/master/src/topology/basic.lean)
-* [analysis/calculus/times_cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/times_cont_diff.lean)
+* [analysis/calculus/cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/cont_diff.lean)
