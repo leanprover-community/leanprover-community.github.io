@@ -38,11 +38,13 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 
 1. Open a new terminal window and install XCode Command Line Tools and Rosetta 2 using `xcode-select --install` and `softwareupdate --install-rosetta`.
 
-2. We will install a second, separate x86 installation of Homebrew, which is easiest done by running a shell entirely using Rosetta 2. Do so by running `arch -x86_64 zsh`. The remainder of the commands below should be run from within this `x86`-running window, though once the steps have been completed, the installed tools will work in any future shell.
+2. If you have never done so before (or if you are unsure), tell Git your email address by running `git config --global user.email your@email.com`. This is needed because Homebrew uses Git during installation, and failure to do so may result in Git errors (such as `Not a valid ref: refs/remotes/origin/master`) on the next steps.
 
-3. Install a second installation of Homebrew for `x86` with `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
+3. We will install a second, separate x86 installation of Homebrew, which is easiest done by running a shell entirely using Rosetta 2. Do so by running `arch -x86_64 zsh`. The remainder of the commands below should be run from within this `x86`-running window, though once the steps have been completed, the installed tools will work in any future shell.
 
-4. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
+4. Install a second installation of Homebrew for `x86` with `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
+
+5. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
 
 ```
 /usr/local/bin/brew install elan-init mathlibtools
@@ -50,7 +52,7 @@ elan toolchain install stable
 elan default stable  
 ```
 
-5. Install Visual Studio Code and the Lean extension via `brew install --cask visual-studio-code && code --install-extension jroesch.lean` (both the x86 and ARM versions of `brew` should work).
+6. Install Visual Studio Code and the Lean extension via `brew install --cask visual-studio-code && code --install-extension jroesch.lean` (both the x86 and ARM versions of `brew` should work).
 
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
