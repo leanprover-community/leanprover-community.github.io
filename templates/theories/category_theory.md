@@ -1,15 +1,15 @@
 # Maths in Lean: category theory
 
-The `category` typeclass is defined in [category_theory/default.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html).
+The `category` typeclass is defined in [category_theory/category/basic.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/category/basic.html).
 It depends on the type of the objects, so for example we might write `category (Type u)` if we're talking about a category whose objects are types (in universe `u`).
 
-Functors (which are a structure, not a typeclass) are defined in [category_theory/functor.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html),
+Functors (which are a structure, not a typeclass) are defined in [category_theory/functor/basic.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor/basic.html),
 along with identity functors and functor composition.
 
 Natural transformations, and their compositions, are defined in [category_theory/natural_transformation.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/natural_transformation.html).
 
 The category of functors and natural transformations between fixed categories `C` and `D`
-is defined in [category_theory/functor_category.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor_category.html).
+is defined in [category_theory/functor/category.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/functor/category.html).
 
 Cartesian products of categories, functors, and natural transformations appear in
 [category_theory/products/basic.lean](https://leanprover-community.github.io/mathlib_docs/category_theory/products/basic.html). (Product in the sense of limits will appear elsewhere soon!)
