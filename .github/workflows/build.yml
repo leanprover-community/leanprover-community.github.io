@@ -35,7 +35,9 @@ jobs:
           team_slug: mathlib-reviewers
           token: ${{ secrets.REVIEWERS_TEAM }}
 
-      - run: "echo ${{ steps.get-members.outputs.members }}"
+      - run: |
+          echo "${{ steps.get-members.outputs.members }}" > reviewers
+          cat reviewers
 
       - name: build and deploy
         run:
