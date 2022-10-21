@@ -2,19 +2,23 @@
 
 The main gathering point of our community is a
 [Zulip chat instance](https://leanprover.zulipchat.com).
-Since this chatroom is only visible to registered users, we provide an
-[openly accessible archive](https://leanprover-community.github.io/archive/)
-of the public discussions.
-This is useful for quick reference; for a better browsing interface,
-and to participate in the discussions, we strongly suggest joining the chat.
-Registering with your real name is preferred.
-Starting with briefly introducing youself is also appreciated.
+You can browse public discussions on the most popular "streams" without registering.
+There is also a web-indexed [archive](https://leanprover-community.github.io/archive/),
+with a less convenient interface.
+
+We welcome you to register for the Zulip chat,
+which will let you participate in the discussions.
+Registering with your real name is preferred, but not required.
+Starting by briefly introducing youself in the
+[*new members* stream](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
+is also appreciated.
 
 Questions from users at all levels of expertise are welcomed.
-Asking your first questions in the *new members* stream will ensure the answers
+Asking your first questions in the new members stream will ensure the answers
 won't asssume you know much about Lean. But you are welcome to use more specialized streams.
 Please start new discussion topics rather than using unrelated existing topics.
-If you need coding help, you may be asked to provide a [MWE](mwe.html).
+If you need coding help, you may be asked to provide a "minimal working example"
+([MWE](mwe.html)).
 Also beware of [XY problems](https://mywiki.wooledge.org/XyProblem): try to give enough context.
 
 To post a snippet of code inline, enclose it in single backticks: `` `my code here` ``.
