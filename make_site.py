@@ -115,7 +115,7 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
     teams = [Team(team['name'], team['short_description'],
                   team['description'], team['url'],
                   [peoples.get(name, People(name)) for name in team['members']],
-                  use_biography=team['use_biography'])
+                  use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
 @dataclass
@@ -159,9 +159,9 @@ num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'theorem']
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
-    DATA/'100.yaml')
+#urllib.request.urlretrieve(
+#    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
+#    DATA/'100.yaml')
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
@@ -316,14 +316,15 @@ with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
     oprojects = yaml.safe_load(h_file)
 
 projects = []
-for name, project in oprojects.items():
-    if project.get('display', True):
-        github_repo = github.get_repo(project['organization'] + '/' + name)
-        stars = github_repo.stargazers_count
-        descr = render_markdown(project['description'])
-        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+#for name, project in oprojects.items():
+#    if project.get('display', True):
+#        github_repo = github.get_repo(project['organization'] + '/' + name)
+#        stars = github_repo.stargazers_count
+#        descr = render_markdown(project['description'])
+#        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
 
-num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+num_contrib = 0
+#num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
 
 projects.sort(key = lambda p: p.stars, reverse=True)
 
@@ -450,14 +451,14 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
-                ('meet.html', {'community': (DATA/'community.md').read_text( encoding='utf-8')}),
+                ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
-                ('teams.html', {'teams': teams}),
+                ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
@@ -468,8 +469,8 @@ def render_site(target: Path, base_url: str, reloader=False):
     env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
     team_tpl = env.get_template('_team.html')
     for team in teams:
-        with (target/(team.url + '.html')).open('w') as tgt_file:
-            team_tpl.stream(team=team, **default_context()).dump(tgt_file)
+        with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
+            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
 
 
     for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
