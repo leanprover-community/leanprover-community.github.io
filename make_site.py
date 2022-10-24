@@ -102,6 +102,10 @@ class People:
 with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
 
+# TODO: remove that once the maintainer team is no longer a special case
+with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
+    maintainers = [People(**mtr) for mtr in yaml.safe_load(m_file)]
+
 @dataclass
 class Team:
     name: str
