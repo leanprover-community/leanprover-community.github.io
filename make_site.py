@@ -10,6 +10,7 @@ from datetime import datetime
 import yaml
 from staticjinja import Site
 import jinja2.ext
+from jinja2 import Environment, FileSystemLoader
 import pybtex.database
 from mistletoe import Document, block_token
 from mistletoe_renderer import CustomHTMLRenderer
@@ -93,13 +94,29 @@ with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
     formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
 
 @dataclass
-class Maintainer:
+class People:
     name: str
-    descr: str
-    img: str
+    descr: str = ''
+    img: str = ''
 
-with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
-    maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
+with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
+    peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+@dataclass
+class Team:
+    name: str
+    short_description: str
+    description: str
+    url: str
+    members: List[People]
+    use_biography: bool = False
+
+with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
+    teams = [Team(team['name'], team['short_description'],
+                  team['description'], team['url'],
+                  [peoples.get(name, People(name)) for name in team['members']],
+                  use_biography=team.get('use_biography', True))
+             for team in yaml.safe_load(t_file)]
 
 @dataclass
 class DocDecl:
@@ -121,9 +138,9 @@ class HundredTheorem:
 
 @dataclass
 class Event:
-    title: str 
-    url: str 
-    start_date: str 
+    title: str
+    url: str
+    start_date: str
     end_date: str
     location: str
     type: str
@@ -434,19 +451,30 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
                 ('meet.html', {'maintainers': maintainers,
-                               'community': (DATA/'community.md').read_text( encoding='utf-8')}),
+                               'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
+                ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True)
 
-    for folder in ['css', 'js', 'img', 'papers']:
+    # Now build the individual team pages
+    (target/'teams').mkdir(exist_ok=True)
+    env = Environment(loader=FileSystemLoader('templates'))
+    env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
+    team_tpl = env.get_template('_team.html')
+    for team in teams:
+        with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
+            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+
+
+    for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'robots.txt', str(target).rstrip('/')])
