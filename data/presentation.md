@@ -9,11 +9,13 @@ Lean proof assistant. The library also contains definitions
 useful for programming. This project is very active, with many
 regular contributors and daily activity.
 
-The contents, design, and community organization of mathlib are
-described in the paper
-[The Lean mathematical library](https://arxiv.org/abs/1910.09336), which appeared
-at CPP 2020. You can get a bird's eye view of what is in the library by
-reading [the library overview](mathlib-overview.html).
+You can get a bird's-eye view of what is in the mathlib library by
+reading [the library overview](mathlib-overview.html), and read about
+recent additions on our [blog](blog.html).
+The design and community organization of mathlib are
+described in the 2020 article
+[The Lean mathematical library](https://arxiv.org/abs/1910.09336), although
+the library has grown by an order of magnitude since that article appeared. 
 You can also have a look at our [repository statistics](mathlib_stats.html)
-to see how it grows and who contributes to it.
+to see how the library grows and who contributes to it.
 
