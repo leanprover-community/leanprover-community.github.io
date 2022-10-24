@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Mathlib statistics</title>
+	<title>Mathlib reviewers</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,49 +48,91 @@
 
   <main>
 	  
+       <h1>Mathlib reviewers</h1>
+       <div>
+       
+       </div>
 
-      <h1>Mathlib statistics</h1>
-
-    <h2>Counts</h2>
-
-    <table class="table table-borderless table-sm mt-4 ml-5" style="font-size: 1.25rem">
-        <tr>
-            <th>Definitions</th>
-            <th>Theorems</th>
-            <th>Contributors</th>
-        </tr>
-        <tr>
-            <td>42620</td>
-            <td>102344</td>
-            <td>280</td>
-        </tr>
-    </table>
-
-    <h2>Code growth</h2>
-
-      <canvas id="files_by_date"></canvas>
-
-      <canvas id="lines_by_date"></canvas>
-
-    <h2>Temporal distribution</h2>
-
-      <canvas id="by_year_month"></canvas>
-
-      <canvas id="by_year"></canvas>
-
-    <h2>Authors</h2>
-
-    <div>
-       <div id="authors_table"></div>
-    </div>
-
-    <canvas id="lines_by_authors" class="mt-5"></canvas>
-
-      <canvas id="commits_by_authors"></canvas>
-
-    <h2>Dependency graph</h2>
-
-    <p>A visualization showing how the various topics in mathlib interact and their relative sizes can be found <a href="https://eric-wieser.github.io/mathlib-import-graph">here</a>.</p>
+       <h3>Members</h3>
+       
+        <ul>
+        
+          <li>Anne Baanen</li>
+        
+          <li>Reid Barton</li>
+        
+          <li>Riccardo Brasca</li>
+        
+          <li>Mario Carneiro</li>
+        
+          <li>Bryan Gin-ge Chen</li>
+        
+          <li>Johan Commelin</li>
+        
+          <li>Rémy Degenne</li>
+        
+          <li>Floris van Doorn</li>
+        
+          <li>Frédéric Dupuis</li>
+        
+          <li>Gabriel Ebner</li>
+        
+          <li>Sébastien Gouëzel</li>
+        
+          <li>Markus Himmel</li>
+        
+          <li>Simon Hudon</li>
+        
+          <li>Chris Hughes</li>
+        
+          <li>Yury G. Kudryashov</li>
+        
+          <li>Robert Y. Lewis</li>
+        
+          <li>Heather Macbeth</li>
+        
+          <li>Patrick Massot</li>
+        
+          <li>Bhavik Mehta</li>
+        
+          <li>Kyle Miller</li>
+        
+          <li>Scott Morrison</li>
+        
+          <li>Oliver Nash</li>
+        
+          <li>Adam Topaz</li>
+        
+          <li>Eric Wieser</li>
+        
+          <li>Alex J. Best</li>
+        
+          <li>Junyan Xu</li>
+        
+          <li>Jireh Loreaux</li>
+        
+          <li>Joseph Myers</li>
+        
+          <li>Thomas Browning</li>
+        
+          <li>Yaël Dillies</li>
+        
+          <li>Moritz Doll</li>
+        
+          <li>Andrew Yang</li>
+        
+          <li>Joël Riou</li>
+        
+          <li>Anatole Dedecker</li>
+        
+          <li>Kexing Ying</li>
+        
+          <li>Aaron Anderson</li>
+        
+          <li>Kevin Buzzard</li>
+        
+        </ul>
+      
 
   </main>
 
@@ -203,119 +245,5 @@
       crossorigin="anonymous"></script>
     <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
     
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-<link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
-
-<script type="text/javascript" src="https://leanprover-community.github.io//mathlib_stats/gitstats.js"></script>
-
-<script>
-
-var color = Chart.helpers.color;
-var blue = 'rgb(54, 162, 235)'
-
-function makeBarChart(id, title, data) {
-    var barChartData = {
-        labels: data.labels,
-        datasets: [{
-            backgroundColor: color(blue).alpha(0.5).rgbString(),
-            borderColor: blue,
-            borderWidth: 1,
-            data: data.data
-        }]
-    };
-
-    var ctx = document.getElementById(id).getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                display: false,
-            },
-            title: {
-                display: true,
-                text: title
-            }
-        }
-    });
-}
-
-colors = ['#377eb8',
-    '#ff0029',  '#66a61e', '#984ea3', '#00d2d5', '#ff7f00',
-    '#af8d00', '#7f80cd', '#b3e900', '#c42e60', '#a65628', '#f781bf',
-    '#8dd3c7', '#bebada', '#fb8072']
-
-function makeLineChart(id, title, stamps, datas, show_title = true,
-    show_legend = true) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var datasets = []
-    colidx = 0
-    for (const [name, data] of Object.entries(datas)) {
-        datasets.push(
-           { label: name,
-             fill: false,
-             borderColor: colors[colidx],
-             data: data,
-             cubicInterpolationMode: 'monotone',
-             pointRadius: 1,
-           })
-        colidx = colidx + 1
-    };
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: stamps,
-            datasets : datasets
-        },
-        options: {
-            title: {
-                display: show_title,
-                text: title
-            },
-            legend: {
-                display: show_legend,
-            },
-            scales: {
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'month',
-                        parser: moment.unix,
-                    },
-                }]
-            },
-        },
-    });
-}
-window.onload = function() {
-    makeBarChart('by_year_month', 'Commits by month', by_year_month)
-    makeBarChart('by_year', 'Commits by year', by_year)
-
-    makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
-    makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
-    makeLineChart('files_by_date', 'Number of files', files_stamps,
-        files_by_date, true, false)
-    makeLineChart('lines_by_date', 'Number of lines', lines_stamps,
-        lines_by_date, true, false)
-
-    var table = new Tabulator("#authors_table", {
-        data: authors, //set initial table data
-        layout:"fitColumns",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:true,
-        columns: authors_cols,
-        height: "600px",
-    });
-    table.redraw(true);
-
-};
-
-
-</script>
-
   </body>
 </html>

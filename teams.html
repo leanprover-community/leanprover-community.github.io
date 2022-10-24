@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Mathlib statistics</title>
+	<title>Community teams</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,49 +48,78 @@
 
   <main>
 	  
+  <h1 id="community-teams" class="markdown-heading">Community teams <a class="hover-link" href="#community-teams">#</a></h1>
 
-      <h1>Mathlib statistics</h1>
 
-    <h2>Counts</h2>
+  <div class="justify-content-center mt-3">
+   <div class="card-deck">
+      
+      <div class="card">
+        <div class="card-body">
+          <h4>Admin team</h4>
+          <div>
+            <p>The admin team oversees the activities of the Lean community organization and in particular the mathlib project. It is responsible for ensuring the mathlib project continues to reflect the general views and interests of the Lean/mathlib community.</p>
 
-    <table class="table table-borderless table-sm mt-4 ml-5" style="font-size: 1.25rem">
-        <tr>
-            <th>Definitions</th>
-            <th>Theorems</th>
-            <th>Contributors</th>
-        </tr>
-        <tr>
-            <td>42620</td>
-            <td>102344</td>
-            <td>280</td>
-        </tr>
-    </table>
+          </div>
+        </div>
+        <div class="card-footer text-right bg-white">
+            <small><a href="teams/admin.html" class="card-link">More info</a></small>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h4>Maintainer team</h4>
+          <div>
+            <p>The mathlib maintainers have the power to approve changes and additions to mathlib.</p>
 
-    <h2>Code growth</h2>
+          </div>
+        </div>
+        <div class="card-footer text-right bg-white">
+            <small><a href="teams/maintainers.html" class="card-link">More info</a></small>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h4>Mathlib reviewers</h4>
+          <div>
+            
+          </div>
+        </div>
+        <div class="card-footer text-right bg-white">
+            <small><a href="teams/reviewers.html" class="card-link">More info</a></small>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h4>Continuous integration</h4>
+          <div>
+            <p>In charge of Azure, bors administration, continuous integration virtual machines root access, GitHub actions on various projects of the Lean user community.</p>
 
-      <canvas id="files_by_date"></canvas>
+          </div>
+        </div>
+        <div class="card-footer text-right bg-white">
+            <small><a href="teams/ci.html" class="card-link">More info</a></small>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h4>Code of conduct</h4>
+          <div>
+            <p>This team handles incident reports and maintains community standards.</p>
 
-      <canvas id="lines_by_date"></canvas>
-
-    <h2>Temporal distribution</h2>
-
-      <canvas id="by_year_month"></canvas>
-
-      <canvas id="by_year"></canvas>
-
-    <h2>Authors</h2>
-
-    <div>
-       <div id="authors_table"></div>
+          </div>
+        </div>
+        <div class="card-footer text-right bg-white">
+            <small><a href="teams/coc.html" class="card-link">More info</a></small>
+        </div>
+      </div>
+      
     </div>
-
-    <canvas id="lines_by_authors" class="mt-5"></canvas>
-
-      <canvas id="commits_by_authors"></canvas>
-
-    <h2>Dependency graph</h2>
-
-    <p>A visualization showing how the various topics in mathlib interact and their relative sizes can be found <a href="https://eric-wieser.github.io/mathlib-import-graph">here</a>.</p>
+  </div>
 
   </main>
 
@@ -203,119 +232,5 @@
       crossorigin="anonymous"></script>
     <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
     
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-<link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
-
-<script type="text/javascript" src="https://leanprover-community.github.io//mathlib_stats/gitstats.js"></script>
-
-<script>
-
-var color = Chart.helpers.color;
-var blue = 'rgb(54, 162, 235)'
-
-function makeBarChart(id, title, data) {
-    var barChartData = {
-        labels: data.labels,
-        datasets: [{
-            backgroundColor: color(blue).alpha(0.5).rgbString(),
-            borderColor: blue,
-            borderWidth: 1,
-            data: data.data
-        }]
-    };
-
-    var ctx = document.getElementById(id).getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                display: false,
-            },
-            title: {
-                display: true,
-                text: title
-            }
-        }
-    });
-}
-
-colors = ['#377eb8',
-    '#ff0029',  '#66a61e', '#984ea3', '#00d2d5', '#ff7f00',
-    '#af8d00', '#7f80cd', '#b3e900', '#c42e60', '#a65628', '#f781bf',
-    '#8dd3c7', '#bebada', '#fb8072']
-
-function makeLineChart(id, title, stamps, datas, show_title = true,
-    show_legend = true) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var datasets = []
-    colidx = 0
-    for (const [name, data] of Object.entries(datas)) {
-        datasets.push(
-           { label: name,
-             fill: false,
-             borderColor: colors[colidx],
-             data: data,
-             cubicInterpolationMode: 'monotone',
-             pointRadius: 1,
-           })
-        colidx = colidx + 1
-    };
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: stamps,
-            datasets : datasets
-        },
-        options: {
-            title: {
-                display: show_title,
-                text: title
-            },
-            legend: {
-                display: show_legend,
-            },
-            scales: {
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'month',
-                        parser: moment.unix,
-                    },
-                }]
-            },
-        },
-    });
-}
-window.onload = function() {
-    makeBarChart('by_year_month', 'Commits by month', by_year_month)
-    makeBarChart('by_year', 'Commits by year', by_year)
-
-    makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
-    makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
-    makeLineChart('files_by_date', 'Number of files', files_stamps,
-        files_by_date, true, false)
-    makeLineChart('lines_by_date', 'Number of lines', lines_stamps,
-        lines_by_date, true, false)
-
-    var table = new Tabulator("#authors_table", {
-        data: authors, //set initial table data
-        layout:"fitColumns",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:true,
-        columns: authors_cols,
-        height: "600px",
-    });
-    table.redraw(true);
-
-};
-
-
-</script>
-
   </body>
 </html>
