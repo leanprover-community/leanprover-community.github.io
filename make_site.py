@@ -159,9 +159,9 @@ num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'theorem']
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
-#urllib.request.urlretrieve(
-#    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
-#    DATA/'100.yaml')
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
+    DATA/'100.yaml')
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
@@ -316,15 +316,14 @@ with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
     oprojects = yaml.safe_load(h_file)
 
 projects = []
-#for name, project in oprojects.items():
-#    if project.get('display', True):
-#        github_repo = github.get_repo(project['organization'] + '/' + name)
-#        stars = github_repo.stargazers_count
-#        descr = render_markdown(project['description'])
-#        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+for name, project in oprojects.items():
+    if project.get('display', True):
+        github_repo = github.get_repo(project['organization'] + '/' + name)
+        stars = github_repo.stargazers_count
+        descr = render_markdown(project['description'])
+        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
 
-num_contrib = 0
-#num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
 
 projects.sort(key = lambda p: p.stars, reverse=True)
 
