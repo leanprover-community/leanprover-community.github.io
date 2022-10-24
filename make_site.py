@@ -464,6 +464,7 @@ def render_site(target: Path, base_url: str, reloader=False):
             mergecontexts=True)
 
     # Now build the individual team pages
+    (target/'teams').mkdir(exist_ok=True)
     env = Environment(loader=FileSystemLoader('templates'))
     env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
     team_tpl = env.get_template('_team.html')
