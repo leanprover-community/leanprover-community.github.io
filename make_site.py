@@ -118,7 +118,7 @@ class Team:
 with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
     teams = [Team(team['name'], team['short_description'],
                   team['description'], team['url'],
-                  [peoples.get(name, People(name)) for name in team['members']],
+                  [peoples.get(name, People(name)) for name in sorted(team['members'])],
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
