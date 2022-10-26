@@ -102,10 +102,6 @@ class People:
 with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
 
-# TODO: remove that once the maintainer team is no longer a special case
-with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
-    maintainers = [People(**mtr) for mtr in yaml.safe_load(m_file)]
-
 @dataclass
 class Team:
     name: str
@@ -454,8 +450,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
-                ('meet.html', {'maintainers': maintainers,
-                               'community': (DATA/'community.md').read_text(encoding='utf-8')}),
+                ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
