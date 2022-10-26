@@ -1,14 +1,11 @@
 # Meet the community
 
-The Lean community is rather diverse. We have users coming from computer
-science as well as mathematics, and even a couple of people with a
-physics background.
-Most users are either students or work in academia, but there also some
+The Lean community is rather diverse. We have many users coming from mathematics, and
+some from computer science, and a few from other areas such as physics.
+Most users are students or academics, but there also some
 data scientists and software engineers working in industry.
 
-## The blog
-
-You can get news from the community on our [blog](/blog/).
+Several [teams](teams.html) of community members have designated responsibilities.
 
 ## The Lean Zulip chat
 
@@ -61,8 +58,10 @@ The next gathering point after Zulip is GitHub, which hosts all the
 In particular, the
 [mathlib pull requests](https://github.com/leanprover-community/mathlib/pulls)
 page is the right place to see our ongoing efforts.
+You can also read about recent work on our [blog](/blog/).
 
-If you want to participate in our projects then you can read our
+There are many ways to contribute: developing new mathematical theories, adding to and writing documentation for existing theories, developing supporting software tools, and reviewing other people's proposed contributions.
+If you want to contribute to our projects then you can read our
 [contributing guide](contribute/index.html).
 
 ## Community guidelines
@@ -76,8 +75,7 @@ These guidelines apply to the
 [Lean Zulip chat](https://leanprover.zulipchat.com/) 
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
 
-The [maintainer team](#maintainers) enforces this code of conduct.
-Jeremy Avigad, Anne Baanen, and Simon Hudon serve as first points of contact
+The [code of conduct team](#coc) serves as first point of contact
 for reporting any concerns.
 We also provide an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
 to report incidents that violate the community guidelines.
@@ -86,22 +84,3 @@ We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,
 please do not respond in the same way; instead, take action to correct the behavior,
 such as reporting it to the moderators.
-
-## Maintainers
-
-Mathlib maintainers are community members who are actively
-developing mathlib and reviewing pull requests.
-Their number grows naturally when new users become
-frequent contributors.
-
-Maintainers have permission to merge pull requests to mathlib
-and access to GitHub administration settings.
-Otherwise they are community members like everyone else.
-Community decisions are discussed and made in public channels.
-In particular, everyone is encouraged to review pull requests
-and to contribute to the [supporting tools](http://github.com/leanprover-community/)
-for Lean and mathlib.
-
-If you are interested in eventually joining the maintainer team,
-we encourage you to participate as much as possible in the review process.
-Please contact the current maintainers when you feel prepared.
