@@ -75,7 +75,7 @@ These guidelines apply to the
 [Lean Zulip chat](https://leanprover.zulipchat.com/) 
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
 
-The [code of conduct team](#coc) serves as first point of contact
+The [code of conduct team](/teams/coc.html) serves as first point of contact
 for reporting any concerns.
 We also provide an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
 to report incidents that violate the community guidelines.
