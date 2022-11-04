@@ -20,7 +20,7 @@ While the defaults for these are usually fairly sensible, when writing proofs it
 This is especially helpful when using tactics like [`library_search`](/mathlib_docs/tactics.html#library_search), which may run for a long time but then produce a result that tells us a much faster tactic to use if they succeed.
 
 To change these settings we can add the flags `-M <some number of megabytes>` (default 4096) for the memory limit and `-T <number of allocations>` (default 100000).
-In VSCode this can be configured by opening the settings and searching for `Lean Memory Limit` and `Lean Time Limit`.
+In VSCode this can be configured by opening the settings (`ctrl+,`) and searching for `Lean Memory Limit` and `Lean Time Limit`.
 Mathlib itself enforces a deterministic timeout of 100000, and often tries to have individual tactic calls use much less, so it is good practice not to rely on a large value for this setting.
 
 
