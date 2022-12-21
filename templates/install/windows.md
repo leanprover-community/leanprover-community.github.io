@@ -1,4 +1,4 @@
-# Installing Lean and mathlib on Windows
+# Installing Lean 3 and mathlib on Windows
 
 This document explains how to get started with Lean 3 and mathlib.
 
