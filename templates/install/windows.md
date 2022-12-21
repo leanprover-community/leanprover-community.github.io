@@ -1,6 +1,6 @@
 # Installing Lean and mathlib on Windows
 
-This document explains how to get started with Lean 3 and mathlib3.
+This document explains how to get started with Lean 3 and mathlib.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
@@ -80,7 +80,7 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
    (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
 4. Select the `lean` extension (unique name `jroesch.lean`). There is also a
-   `lean4` extension, but that one does not work with mathlib3.
+   `lean4` extension, but that one would require us to work with mathlib4.
 5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
 6. Setup the default profile:
   * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
