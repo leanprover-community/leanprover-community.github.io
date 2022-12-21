@@ -2,6 +2,8 @@
 
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
+This guide is written for Lean 3.
+
 ### Names of symbols
 
 When translating the statements of theorems into words, this dictionary is often used:
@@ -49,7 +51,7 @@ When translating the statements of theorems into words, this dictionary is often
 | `/`    |                       | `div`         |                                                             |
 | `•`    | `\bu`                 | `smul`        |                                                             |
 | `⁻¹`   | `\-1`                 | `inv`         |                                                             |
-| `⅟`   | `\frac1`              | `inv_of`      |                                                             |
+| `⅟`    | `\frac1`              | `inv_of`      |                                                             |
 | `∣`    | <code>\\&#124;</code> | `dvd`         |                                                             |
 | `∑`    | `\sum`                | `sum`         |                                                             |
 | `∏`    | `\prod`               | `prod`        |                                                             |
