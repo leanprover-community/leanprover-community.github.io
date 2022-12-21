@@ -1,6 +1,6 @@
 # Get started with Lean
 
-You have several options for installing Lean, described below:
+You have several options for installing Lean 3, described below:
 
 * a regular install (recommended)
 * using Lean in a web browser
