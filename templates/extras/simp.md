@@ -2,9 +2,10 @@
 
 ## Overview
 
-In this document we will explain basic usage of Lean's simplifier
+In this document we will explain basic usage of the simplifier
 tactic [`simp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#simp)
-and the related tactic [`dsimp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp).
+and the related tactic [`dsimp`](https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp)
+in Lean 3.
 
 We give some pointers for how to avoid "non-terminal `simp`s", and we
 also give a short description of the configuration options for `simp`
