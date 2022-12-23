@@ -139,12 +139,12 @@ class HundredTheorem:
 @dataclass
 class Event:
     title: str
-    url: str
-    start_date: str
-    end_date: str
+    url: str = 'TBA'
+    start_date: str = ''
+    end_date: str = ''
     location: str
     type: str
-    date_range: str = None
+    date_range: str = 'TBA'
 
 urllib.request.urlretrieve(
     'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
@@ -280,20 +280,23 @@ with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
     events = [Event(**e) for e in yaml.safe_load(h_file)]
 
 def format_date_range(event):
-    start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
-    end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
-    if start_date.year != end_date.year:
-        return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
-    elif start_date.month != end_date.month:
-        return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
-    elif start_date.day != end_date.day:
-        return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+    if event.start_date and event.end_date:
+        start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
+        end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
+        if start_date.year != end_date.year:
+            return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.month != end_date.month:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.day != end_date.day:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+        else:
+            return start_date.strftime("%B %-d, %Y")
     else:
-        return start_date.strftime("%B %-d, %Y")
+        return 'TBA'
 
 present = datetime.now().date()
-old_events = sorted((e for e in events if datetime.strptime(e.end_date, '%B %d %Y').date() < present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date(), reverse=True)
-new_events = sorted((e for e in events if datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
+old_events = sorted((e for e in events if e.end_date and datetime.strptime(e.end_date, '%B %d %Y').date() < present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date(), reverse=True)
+new_events = sorted((e for e in events if (not e.end_date) or datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
 
 for e in old_events + new_events:
     e.date_range = format_date_range(e)
