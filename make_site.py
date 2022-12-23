@@ -139,11 +139,11 @@ class HundredTheorem:
 @dataclass
 class Event:
     title: str
+    location: str
+    type: str
     url: str = 'TBA'
     start_date: str = ''
     end_date: str = ''
-    location: str
-    type: str
     date_range: str = 'TBA'
 
 urllib.request.urlretrieve(
