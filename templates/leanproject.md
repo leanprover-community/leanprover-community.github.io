@@ -136,7 +136,7 @@ The `--force` option can be used to overwrite existing cache for the current
 git revision.
 
 Note that the Mathlib github repository will automatically create caches for
-any commits pushed to it, so it is often unecessary to use `mk-cache`.
+any commits pushed to it, so it is often unnecessary to use `mk-cache`.
 
 #### Retrieving caches
 

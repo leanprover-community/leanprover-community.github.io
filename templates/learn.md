@@ -85,7 +85,7 @@ still have a look at the following resources.
 * [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
 * The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
-* The [metaprogramming tutorial videos](https://www.youtube.com/watch?v=o6oUjcE6Nz4&list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) that Rob Lewis designed and recorderd for LftCM 2020.
+* The [metaprogramming tutorial videos](https://www.youtube.com/watch?v=o6oUjcE6Nz4&list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) that Rob Lewis designed and recorded for LftCM 2020.
 
 ## More on foundations
 

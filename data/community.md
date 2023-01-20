@@ -18,13 +18,13 @@ with a less convenient interface.
 We welcome you to register for the Zulip chat,
 which will let you participate in the discussions.
 Registering with your real name is preferred, but not required.
-Starting by briefly introducing youself in the
+Starting by briefly introducing yourself in the
 [*new members* stream](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
 is also appreciated.
 
 Questions from users at all levels of expertise are welcomed.
 Asking your first questions in the new members stream will ensure the answers
-won't asssume you know much about Lean. But you are welcome to use more specialized streams.
+won't assume you know much about Lean. But you are welcome to use more specialized streams.
 Please start new discussion topics rather than using unrelated existing topics.
 If you need coding help, you may be asked to provide a "minimal working example"
 ([MWE](mwe.html)).
