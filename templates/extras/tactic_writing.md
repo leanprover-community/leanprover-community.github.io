@@ -186,7 +186,7 @@ do `(%%l = %%r) ← tactic.target | tactic.trace "Goal is not an equality",
    tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r)
 ```
 
-If the `|` is ommitted, then the tactic fails if the pattern does not match.
+If the `|` is omitted, then the tactic fails if the pattern does not match.
 We can catch this failure using the `orelse` combinator mentioned ealier, but note that by
 doing so we catch more types of failure than we did above:
 ```lean
