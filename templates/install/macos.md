@@ -42,7 +42,7 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 
 3. Install a second installation of Homebrew for `x86` with `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
 
-4. Make an alias for your Intel brew: `alias brew86='arch --x86_64 /usr/local/Homebrew/bin/brew'` so you can simply call this alias for your intel-based installations.  then set your default arm-based brew to your system path whenever you call `brew`: `path=('/opt/homebrew/bin' $path)` (If you don't, you have to call `/opt/homebrew/bin/brew` instead of `brew` each time you want to natively install brew apps)
+4. Make an alias for your Intel brew: `alias brew86='arch --x86_64 /usr/local/Homebrew/bin/brew'` so you can simply call `brew86` for your intel-based installations.  then return your default arm-based brew to your system path whenever you call brew: `path=('/opt/homebrew/bin' $path)` (If you don't, you have to call `/opt/homebrew/bin/brew` instead of `brew` each time you want to natively install arm-based brew apps)
 
 5. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew86` you just installed:
 
