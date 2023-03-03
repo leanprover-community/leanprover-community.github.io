@@ -23,8 +23,8 @@
   {% macro flat_child(item) -%}
     {%- if item.children -%}
       {{ item.title }}(
-      {%- for item in subarea.nonempty_children -%}
-        {{ flat_child(item) }}{% if not loop.last %}, {% endif %}
+      {%- for inner_item in item.nonempty_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
       {%- endfor -%})
     {%- else -%}
       <a href="{{ item.decl }}">{{ item.title }}</a>
