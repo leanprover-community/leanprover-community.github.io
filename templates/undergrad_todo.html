@@ -32,8 +32,8 @@
   {% macro flat_child(item) -%}
     {%- if item.missing_children -%}
       {{ item.title }}(
-      {%- for item in subarea.missing_children -%}
-        {{ flat_child(item) }}{% if not loop.last %}, {% endif %}
+      {%- for inner_item in item.missing_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
       {%- endfor -%})
     {%- else -%}
       {% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
