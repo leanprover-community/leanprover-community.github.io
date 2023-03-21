@@ -119,6 +119,18 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
              for team in yaml.safe_load(t_file)]
 
 @dataclass
+class Course:
+    name: str
+    location: str
+    website: str
+    repo: str
+    tags: List[str]
+    summary: str
+
+with (DATA/'teaching.yaml').open('r', encoding='utf-8') as t_file:
+    courses = yaml.safe_load(t_file).values()
+
+@dataclass
 class DocDecl:
     name: str
     decl_header_html: str
@@ -461,6 +473,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
+                ('teaching.html', {'introduction': (DATA/'teaching.md').read_text(encoding='utf-8'), 'courses': courses}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },

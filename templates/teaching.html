@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% block title %}Teaching using Lean{% endblock %}
+{% block content %}
+
+  {{ introduction | md }}
+
+      <div class="row row-cols-1 row-cols-md-3">
+        {% for course in courses %}
+        <div class="col mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h4>{{ course.name }} at {{ course.location }}</h4>
+              <div>
+                {{ course.summary | md }}
+              </div>
+              <div>{% for tag in course.tags %}{{ tag }}{% endfor %}</div>
+            </div>
+            <div class="card-footer text-right bg-white">
+                <small><a href="{{ course.website }}.html" class="card-link">Website</a></small>
+                <small><a href="{{ course.repo }}.html" class="card-link">Repository</a></small>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+{% endblock %}
