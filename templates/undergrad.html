@@ -20,6 +20,17 @@
         docs/undergrad.yaml</a> in the mathlib repository.
       </p>
 
+  {% macro flat_child(item) -%}
+    {%- if item.children -%}
+      {{ item.title }}(
+      {%- for inner_item in item.nonempty_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+      {%- endfor -%})
+    {%- else -%}
+      <a href="{{ item.decl }}">{{ item.title }}</a>
+    {%- endif -%}
+  {%- endmacro -%}
+
   {% for area in overviews %}
     {% if area.is_nonempty %}
     <h4>{{ area.title }}</h4>
@@ -27,7 +38,7 @@
         <p class="ml-4 mb-2">
         <b>{{ subarea.title }}</b>
         {% for item in subarea.nonempty_children %}
-          <a href="{{ item.decl }}">{{ item.title }}</a>{% if not loop.last %}, {% else %}.{% endif %}
+          {{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
         {% endfor %}
         </p>
       {% endfor %}
