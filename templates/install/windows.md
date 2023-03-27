@@ -40,11 +40,12 @@ In order to use mathlib supporting tools, you need to [get python](https://www.p
 * Run the downloaded file (`python-3.x.x.exe`)
 * Check `Add Python 3.x to PATH`.
 * Choose the default installation.
+* If asked, choose `Disable path length limit`.
 * Open Git Bash (type `git bash` in the Start Menu)
 * Run `which python`
   * The expected output is something like `/c/Users/<user>/AppData/Local/Programs/Python/Pythonxx-xx/python`. In this case, proceed to the next step.
   * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then
-    * Did you follow the instruction to select `Add Python 3.x to PATH` during the installation?
+    * Did you follow the instruction to select `Add Python 3.x to PATH` and `Disable path length limit` during the installation?
       * If not, re-run the python installer to uninstall python and try again.
     * Otherwise, you need to disable a Windows setting.
       * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
