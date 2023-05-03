@@ -3,6 +3,9 @@
 The [Lean theorem prover](https://leanprover.github.io)
 is a proof assistant developed principally by Leonardo de Moura at Microsoft Research.
 
+The current stable version of Lean is Lean 3, and this website is mostly about Lean 3. 
+But the community is currently switching to Lean 4.
+
 The Lean mathematical library, *mathlib*, is a community-driven effort
 to build a unified library of mathematics formalized in the
 Lean proof assistant. The library also contains definitions
