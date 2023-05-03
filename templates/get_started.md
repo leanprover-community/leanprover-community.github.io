@@ -1,8 +1,10 @@
 # Get started with Lean
 
+<div class="alert alert-info">
 This webpage is about the current stable version of Lean, which is Lean 3, although 
 the community is currently switching to Lean 4. 
-See the [Lean 4 manual](https://leanprover.github.io/lean4/doc/) for information about installing Lean 4.
+See the <a href="https://leanprover.github.io/lean4/doc/">Lean 4 manual</a> for information about installing Lean 4.
+</div>
 
 You have several options for installing Lean 3, described below:
 
