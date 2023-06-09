@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Maths in Lean: Topological, uniform and metric spaces</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+	  
+<h1 id="maths-in-lean-topological-uniform-and-metric-spaces" class="markdown-heading">Maths in Lean: Topological, uniform and metric spaces <a class="hover-link" href="#maths-in-lean-topological-uniform-and-metric-spaces">#</a></h1>
+<p>The <code>topological_space</code> typeclass is defined in mathlib,
+in <code>topology/basic.lean</code>. There are about 18000
+lines of code in <code>topology</code> at the time of writing,
+covering the basics of topological spaces, continuous functions,
+topological groups and rings, and infinite sums. These docs
+are just concerned with the contents of the <code>topological_space.lean</code>
+file.</p>
+<h3 id="the-basic-typeclass" class="markdown-heading">The basic typeclass <a class="hover-link" href="#the-basic-typeclass">#</a></h3>
+<p>The <code>topological_space</code> typeclass is an inductive type, defined
+as a structure on a type <code>α</code> in the obvious way: there is an <code>is_open</code>
+predicate, telling us when <code>U : set α</code> is open, and then the axioms
+for a topology (pedantic note: the axiom that the empty set is open
+is omitted, as it follows from the fact that a union of open sets
+is open, applied to the empty union!).</p>
+<p>Note that there are two ways of formalising the axiom that an arbitrary
+union of open sets is open: one could either ask that given a set
+of open sets, their union is open, or one could ask that given
+a function from some index set <code>I</code> to the set of open sets, the union
+of the values of the function is open. Mathlib goes for the first
+one, so the axiom is</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">is_open_sUnion</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)),</span> <span class="o">(</span><span class="bp">∀</span><span class="n">t</span><span class="bp">∈</span><span class="n">s</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">t</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">⋃₀</span> <span class="n">s</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>and then the index set version is a lemma:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">is_open_Union</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">i</span><span class="o">,</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">⋃</span><span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>Note the naming conventions, standard across mathlib, that <code>sUnion</code>
+is a union over sets and <code>Union</code> (with a capital U) is a union over
+the image of a function on an indexing set. The capital U&#x27;s are
+to indicate a union of arbitrary size, as opposed to <code>union</code>, which
+indicates a union of two sets:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">is_open_union</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">s₁</span> <span class="bp">∪</span> <span class="n">s₂</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>The predicate <code>is_closed</code>, and functions <code>interior</code>, <code>closure</code>, and
+<code>frontier</code> (closure minus interior,
+sometimes called boundary in mathematics) are defined, and basic
+properties about them are proved. For example</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">topology.basic</span>
+<span class="kn">open</span> <span class="n">topological_space</span>
+<span class="kd">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="n">C</span> <span class="n">D</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="n">D</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">C</span> <span class="bp">∪</span> <span class="n">D</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_closed_union</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">C</span><span class="bp">ᶜ</span> <span class="bp">↔</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="o">:=</span> <span class="n">is_open_compl_iff</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">U</span> <span class="bp">\</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_open_diff</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">interior_eq_iff_open</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="n">Z</span> <span class="bp">→</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="n">interior</span> <span class="n">Z</span> <span class="o">:=</span> <span class="n">interior_mono</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">U</span> <span class="bp">⊆</span> <span class="n">Y</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="o">:=</span> <span class="n">is_open_iff_forall_mem_open</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">closure</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="n">is_closed</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">closure_eq_iff_is_closed</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">closure</span> <span class="n">Y</span> <span class="bp">=</span> <span class="o">(</span><span class="n">interior</span> <span class="n">Y</span><span class="bp">ᶜ</span><span class="o">)</span><span class="bp">ᶜ</span> <span class="o">:=</span> <span class="n">closure_eq_compl_interior_compl</span>
+</code></pre></div>
+</div>
+
+<h3 id="filters" class="markdown-heading">Filters <a class="hover-link" href="#filters">#</a></h3>
+<p>In mathlib, unlike the typical approach in a mathematics textbook, extensive
+use is made of filters as a tool in the theory of topological spaces. Let
+us briefly review the notion of a filter in mathematics. A filter on a set
+<code>X</code> is a non-empty collection <code>F</code> of subsets of <code>X</code> satisfying the following
+two axioms:</p>
+<ol>
+<li>if <code>U ∈ F</code> and <code>U ⊆ V</code>, then <code>V ∈ F</code>; and</li>
+<li>if <code>U, V ∈ F</code> then there exists <code>W ∈ F</code> with <code>W ⊆ U ∩ V</code>.</li>
+</ol>
+<p>Informally, one can think of <code>F</code> as the set of &quot;big&quot; subsets of <code>X</code>. For example, if <code>X</code> is a set and <code>F</code> is the set of subsets <code>Y</code> of <code>X</code> such that <code>X \ Y</code> is finite, then <code>F</code> is a filter. This is called the <em>cofinite filter</em> on <code>X</code>.</p>
+<p>Note that if <code>F</code> is a filter that contains the empty set, then it contains all subsets of <code>X</code> by the first axiom. This filter is sometimes called &quot;bottom&quot; (we will see why a little later on). Some references demand that the empty set is not allowed to be in a filter -- Lean does not have this restriction. A filter not containing the empty set is sometimes called a &quot;proper filter&quot;.</p>
+<p>If <code>X</code> is a topological space, and <code>x ∈ X</code>, then the <em>neighbourhood filter</em> <code>𝓝 x</code> of <code>x</code> is the set of subsets <code>Y</code> of <code>X</code> such that <code>x</code> is in the interior of <code>Y</code>. One checks easily that this is a filter (technical point: to see that this is actually the definition of <code>𝓝 x</code> in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using <code>F ≤ G</code> iff <code>G ⊆ F</code>, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but <code>lemma nhds_sets</code> says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).</p>
+<p>Why are we interested in these filters? Well, given a map <code>f</code> from <code>ℕ</code> to a topological space <code>X</code>, one can check that the resulting sequence <code>f 0</code>, <code>f 1</code>, <code>f 2</code>... tends to <code>x ∈ X</code> if and only if the pre-image of any element in the filter <code>𝓝 x</code> is in the cofinite filter on <code>ℕ</code> -- this is just another way of saying that given any open set <code>U</code> containing <code>x</code>, there exists <code>N</code> such that for all <code>n ≥ N</code>, <code>f n ∈ U</code>. So filters provide a way of thinking about limits.</p>
+<p>As an example, below are three limits formulated in Lean.
+The example uses the filters <code>at_top</code> and <code>at_bot</code> that represent &quot;tends to <code>∞</code>&quot; and &quot;tends to <code>-∞</code>&quot; in a type equipped with an order.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- The limit of `2 * x` as `x` tends to `3` is `6`</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="mi">6</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="c1">-- The limit of `1 / x` as `x` tends to `∞` is `0`</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">x</span><span class="o">)</span> <span class="n">at_top</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="c1">-- The limit of `x ^ 2` as `x` tends to `-∞` is `∞`</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="n">at_bot</span> <span class="n">at_top</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>The <em>principal filter</em> <code>principal Y</code> attached to a subset <code>Y</code> of a set <code>X</code> is the collection of all subsets of <code>X</code> that contain <code>Y</code>. So it&#x27;s not difficult to convince yourself that the following results should be true:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="bp">𝓝</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">filter.principal</span> <span class="n">Y</span><span class="o">}</span> <span class="o">:=</span> <span class="n">interior_eq_nhds</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="bp">∈</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="o">:=</span> <span class="n">is_open_iff_mem_nhds</span>
+</code></pre></div>
+</div>
+
+<h3 id="compactness-with-filters" class="markdown-heading">Compactness with filters <a class="hover-link" href="#compactness-with-filters">#</a></h3>
+<p>As a consequence of the filter-centric approach, some definitions in mathlib
+look rather strange to a mathematician who is not used to this approach.
+We have already seen a definition using filters
+for what it means for a sequence to tend to a limit. The definition
+of compactness is also written in filter-theoretic terms:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- A set `s` is compact if every filter that contains `s` also meets every</span>
+<span class="sd">  neighborhood of some `a ∈ s`. -/</span>
+<span class="kd">def</span> <span class="n">compact</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span><span class="n">F</span><span class="o">,</span> <span class="n">F</span> <span class="bp">≠</span> <span class="bp">⊥</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≤</span> <span class="n">principal</span> <span class="n">Y</span> <span class="bp">→</span> <span class="bp">∃</span><span class="n">y</span><span class="bp">∈</span><span class="n">Y</span><span class="o">,</span> <span class="n">F</span> <span class="bp">⊓</span> <span class="bp">𝓝</span> <span class="n">y</span> <span class="bp">≠</span> <span class="bp">⊥</span>
+</code></pre></div>
+</div>
+
+<p>Translated, this says that a subset <code>Y</code> of a topological space <code>X</code> is compact if for every proper filter <code>F</code> on <code>X</code>, if <code>Y</code> is an element of <code>F</code> then there&#x27;s an element <code>y</code> of <code>Y</code> such that the smallest filter containing both F and the neighbourhood filter of <code>y</code> is not the filter of all subsets of <code>X</code> either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of <code>ℝ^n</code>, any sequence has a convergent subsequence.</p>
+<p>One might ask why this definition of compactness has been chosen, rather than the standard one about open covers having finite subcovers. The reasons for this are in some sense computer-scientific rather than mathematical -- the issue should not be what definition is ultimately chosen (indeed the developers should feel free to choose whatever definition they like as long as it is logically equivalent to the usual one, and they might have reasons related to non-mathematical points such as running times), the issue should be how to prove that the inbuilt definition is equivalent to the one you want to use in practice. And fortunately, we have</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span> <span class="bp">↔</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">cov</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">U</span> <span class="bp">∈</span> <span class="n">cov</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="bp">⋃₀</span> <span class="n">cov</span> <span class="bp">→</span>
+    <span class="bp">∃</span> <span class="n">fincov</span> <span class="bp">⊆</span> <span class="n">cov</span><span class="o">,</span> <span class="n">set.finite</span> <span class="n">fincov</span> <span class="bp">∧</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="bp">⋃₀</span> <span class="n">fincov</span><span class="o">)</span> <span class="o">:=</span> <span class="n">compact_iff_finite_subcover</span>
+</code></pre></div>
+</div>
+
+<p>so the Lean definition is equivalent to the standard one.</p>
+<h3 id="hausdorff-spaces" class="markdown-heading">Hausdorff spaces <a class="hover-link" href="#hausdorff-spaces">#</a></h3>
+<p>In Lean they chose the terminology <code>t2_space</code> to mean Hausdorff (perhaps because it is shorter!).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="n">t2_space</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">t2</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="bp">∃</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">is_open</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">U</span> <span class="bp">∩</span> <span class="n">V</span> <span class="bp">=</span> <span class="bp">∅</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>Of course Hausdorffness is what we need to ensure that limits are unique, but because limits are defined using filters this statements ends up reading as follows:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">tendsto_nhds_unique</span> <span class="o">[</span><span class="n">t2_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hl</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">≠</span> <span class="bp">⊥</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">l</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">l</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span>
+</code></pre></div>
+</div>
+
+<p>Note that actually this statement is more general than the classical statement that if a sequence tends to two limits in a Hausdorff space then the limits are the same, because it applies to any non-trivial filter on any set rather than just the cofinite filter on the natural numbers.</p>
+<h3 id="bases-for-topologies" class="markdown-heading">Bases for topologies. <a class="hover-link" href="#bases-for-topologies">#</a></h3>
+<p>If <code>X</code> is a <em>set</em>, and <code>S</code> is a collection of subsets of <code>X</code>, then one can
+consider the topology &quot;generated by&quot; <code>S</code>, which (as is typical in these
+situations) can be defined in two ways: firstly as the intersection
+of all the topologies on <code>X</code> containing <code>S</code> (where we are here identifying
+a topology with the underlying collection of open sets), or more constructively
+as the sets &quot;generated by&quot; <code>S</code> using the axioms of a topological space.
+Unsurprisingly, it is this latter definition which is used in Lean, as the
+open sets are naturally an inductive type; the open sets are called
+<code>generate_open S</code> and the topology is <code>generate_from S</code>.</p>
+<p>The definition of a basis for a topology in mathlib includes an axiom
+that the topology is generated from the basis in the sense above, which may make
+it hard to prove for an end user that a given set satisfies the definition
+directly. However again we have a theorem which reduces us to checking
+the two usual axioms for a basis:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">h_open</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">V</span> <span class="bp">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">V</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h_nhds</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="n">U</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">V</span> <span class="bp">∈</span> <span class="n">B</span><span class="o">,</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">V</span> <span class="bp">⊆</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">is_topological_basis</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="n">is_topological_basis_of_open_of_nhds</span> <span class="n">h_open</span> <span class="n">h_nhds</span>
+</code></pre></div>
+</div>
+
+<h3 id="other-things" class="markdown-heading">Other things <a class="hover-link" href="#other-things">#</a></h3>
+<p>There are other things involving filters, there are separable, first-countable
+and second-countable spaces, product spaces, subspace and quotient
+topologies (and more generally pull-back and push-forward of a topology)
+and things like t1 and t3 spaces.</p>
+<h2 id="file-organization" class="markdown-heading">File organization <a class="hover-link" href="#file-organization">#</a></h2>
+<p>The following &quot;core&quot; modules form a linear chain of imports. A theorem involving concepts defined in several of these files should be found in the last such file in this ordering.</p>
+<ul>
+<li><code>basic</code>
+Topological spaces. Open and closed subsets, interior, closure and frontier (boundary). Neighborhood filters. Limit of a filter. Locally finite families. Continuity and continuity at a point.</li>
+<li><code>order</code>
+The complete lattice structure on topologies on a fixed set. Induced and coinduced topologies.</li>
+<li><code>maps</code>
+Open and closed maps. &quot;Inducing&quot; maps. Embeddings, open embeddings and closed embeddings. Quotient maps.</li>
+<li><code>constructions</code>
+Building new topological spaces from old ones: products, sums, subspaces and quotients.</li>
+<li><code>subset_properties</code>
+Compactness. Clopen subsets, irreducibility and connectedness. Totally disconnected and totally separated sets and spaces.</li>
+<li><code>separation</code>
+Separation axioms T₀ through T₄, also known as Kolmogorov, Tychonoff or Fréchet, Hausdorff, regular, and normal spaces respectively.</li>
+</ul>
+<p>The remaining directories and files, in no particular order:</p>
+<ul>
+<li><code>algebra</code>
+Topological spaces with compatible algebraic or ordered structure.</li>
+<li><code>category</code>
+The categories of topological spaces, uniform spaces, etc.</li>
+<li><code>instances</code>
+Specific topological spaces such as the real numbers and the complex numbers.</li>
+<li><code>metric_space</code>
+The theory of metric spaces; but some notions one might expect to find here are instead generalized to uniform spaces.</li>
+<li><code>sheaves</code>
+Presheaves on a topological space.</li>
+<li><code>uniform_space</code>
+The theory of uniform spaces, including notions such as completeness, uniform continuity and totally bounded sets.</li>
+<li><code>bases</code>
+Bases for filters and topological spaces. Separable, first countable and second countable spaces.</li>
+<li><code>bounded_continuous_function</code>
+Bounded continuous functions from a topological space to a metric space.</li>
+<li><code>compact_open</code>
+The compact-open topology on the space of continuous maps between two topological spaces.</li>
+<li><code>continuous_on</code>
+Neighborhoods within a subset. Continuity on a subset, and continuity within a subset at a point.</li>
+<li><code>dense_embedding</code>
+Embeddings and other functions with dense image.</li>
+<li><code>homeomorph</code>
+Homeomorphisms between topological spaces.</li>
+<li><code>list</code>
+Topologies on lists and vectors.</li>
+<li><code>local_homeomorph</code>
+Homeomorphisms between open subsets of topological spaces.</li>
+<li><code>opens</code>
+The complete lattice of open subsets of a topological space. The types of closed and nonempty compact subsets.</li>
+<li><code>sequences</code>
+Sequential closure and sequential spaces. Sequentially continuous functions.</li>
+<li><code>stone_cech</code>
+The Stone-Čech compactification of a topological space.</li>
+</ul>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/tactic_writing.html">Tactic writing tutorial</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theory docs</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category theory</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and set-like objects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/theories/topology.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

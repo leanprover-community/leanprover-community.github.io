@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>How to contribute to mathlib</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+	  
+<h1 id="how-to-contribute-to-mathlib" class="markdown-heading">How to contribute to mathlib <a class="hover-link" href="#how-to-contribute-to-mathlib">#</a></h1>
+<p>Here are some tips and tricks
+to make the process of contributing as smooth as possible.</p>
+<ol>
+<li>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
+discuss your contribution before and while you are working on it.</li>
+<li>Adhere to the guidelines:
+<ul>
+<li>The <a href="style.html">style guide</a> for contributors.</li>
+<li>The explanation of <a href="naming.html">naming conventions</a>.</li>
+<li>The <a href="doc.html">documentation guidelines</a>.</li>
+</ul>
+</li>
+</ol>
+<p>Once you have code that you&#x27;d like to contribute, you should open a PR.
+There is a <a href="https://www.youtube.com/watch?v=Bnc8w9lxe8A">video tutorial</a> walking you through the process of making a PR on YouTube.</p>
+<h2 id="making-a-pull-request-pr" class="markdown-heading">Making a Pull Request (PR) <a class="hover-link" href="#making-a-pull-request-pr">#</a></h2>
+<ol start="3">
+<li>
+<p>Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Please include your GitHub username in your request. Make your changes on a branch of the main repository.</p>
+</li>
+<li>
+<p>If you&#x27;ve made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.</p>
+</li>
+<li>
+<p>The title of the PR should follow our <a href="https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md">commit conventions</a>.</p>
+</li>
+<li>
+<p>You can use <code>leanproject</code> to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:</p>
+<ul>
+<li><code>leanproject get -b mathlib:shiny_lemma</code> This will create a (local) branch called <code>shiny_lemma</code> and also create a local folder called <code>mathlib_shiny_lemma</code> with a copy of mathlib for you to work on.</li>
+<li><code>cd mathlib_shiny_lemma</code>, so that your working directory is at the root of the git repository.</li>
+<li>edit the necessary files, e.g. <code>src/data/set/basic.lean</code></li>
+<li>If you are anxious, <code>leanproject build</code> to check you didn&#x27;t break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.</li>
+<li><code>git commit -a</code></li>
+<li><code>git push origin</code> This pushes your branch to GitHub. You might get a complaint from git that the remote is not configured. In that case, follow the advice, and run <code>git push --set-upstream origin shiny_lemma</code>.</li>
+<li>Visit <a href="https://github.com/leanprover/mathlib">mathlib on GitHub</a> to see an invitation to open a PR based on what you just did.</li>
+<li>Wait for continuous integration to build your branch if you didn&#x27;t do it locally, <code>leanproject get-cache</code> will then download what was built by CI (Continuous Integration)</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
+</ul>
+<h2 id="lifecycle-of-a-pr" class="markdown-heading">Lifecycle of a PR <a class="hover-link" href="#lifecycle-of-a-pr">#</a></h2>
+<p>We use GitHub &quot;labels&quot; to manage review. (Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have completed step 3 above&quot;.)</p>
+<p>On the main page for a PR, on the right-hand side,
+there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quot;, &quot;labels&quot;, etc.
+Click on the &quot;labels&quot; header to add or remove labels from the current project.</p>
+<p>The most important labels are &quot;awaiting-review&quot; and &quot;awaiting-author&quot;. If you label your PR with <strong>&quot;awaiting-review&quot;</strong>, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;awaiting-review&quot; to start the process over again.</p>
+<p>After some iteration, a reviewer will &quot;approve&quot; the PR and the &quot;ready-to-merge&quot; label will be automatically applied to the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
+After responding appropriately to bors (if necessary), the PR will get added to the <a href="https://app.bors.tech/repositories/24316">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
+<p>Here are some other frequently-used labels:</p>
+<ul>
+<li>
+<p>A <strong>&quot;WIP&quot;</strong> (= work in progress) PR still needs some foundational work (e.g. maybe it still contains <code>sorry</code>s) before getting reviewed. Post a WIP if you want to announce that you&#x27;re working on something you expect to finish soon.</p>
+</li>
+<li>
+<p>Consider adding the <strong>&quot;help wanted&quot;</strong> label to directly solicit contributions.</p>
+</li>
+<li>
+<p>The <strong>&quot;blocked-by-other-PR&quot;</strong> label means that some specific other PR(s) should be resolved before addressing this one. If you add the &quot;blocked-by-other-PR&quot; label to your PR, please include the PR numbers of the dependencies in the title and PR comment so that others can see at a glance which PRs should be reviewed first.</p>
+</li>
+<li>
+<p>The <strong>easy</strong> label should be used to mark PRs that can be immediately approved. Maintainers and reviewers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally <em>not</em> easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any <code>simp</code> lemmas or instances that are not immediately analogous to existing <code>simp</code> lemmas or instances.</p>
+</li>
+</ul>
+<h3 id="dealing-with-merge-conflicts" class="markdown-heading">Dealing with merge conflicts <a class="hover-link" href="#dealing-with-merge-conflicts">#</a></h3>
+<p>Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on <code>master</code> that conflicts with a change that you&#x27;re proposing on your PR. If it happens with your PR, check <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github">this GitHub tutorial</a> on how to resolve merge conflicts by using their online tool.</p>
+<h2 id="caching-compilation" class="markdown-heading">Caching compilation <a class="hover-link" href="#caching-compilation">#</a></h2>
+<p>In the <code>mathlib</code> git repository, you can run the following in a terminal:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>mathlibtools
+leanproject<span class="w"> </span>hooks
+</code></pre></div>
+</div>
+
+<p>This will install the <code>leanproject</code> tool.  The call to <code>leanproject hooks</code>
+sets up git hooks that will call cache the olean files when making a commit
+and fetching the olean files when checking out a branch.
+See the <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md">mathlib-tools documentation</a>
+for more information.</p>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/tactic_writing.html">Tactic writing tutorial</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theory docs</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category theory</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and set-like objects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/index.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

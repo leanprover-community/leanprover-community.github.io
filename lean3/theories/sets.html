@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Maths in Lean: Sets and set-like objects</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+	  
+<h1 id="maths-in-lean-sets-and-set-like-objects" class="markdown-heading">Maths in Lean: Sets and set-like objects <a class="hover-link" href="#maths-in-lean-sets-and-set-like-objects">#</a></h1>
+<h3 id="lists" class="markdown-heading">Lists <a class="hover-link" href="#lists">#</a></h3>
+<h4 id="datalistbasic" class="markdown-heading"><code>data.list.basic</code> <a class="hover-link" href="#datalistbasic">#</a></h4>
+<p><code>list α</code> is the type of lists of elements of type α. Lists are finite and ordered, and can contain duplicates. Lists can only contain elements of the same type. Lists are constructed using the cons function, which appends an element of α to the top of a list. Lists are discussed in more detail in TPIL, chapter 7.5</p>
+<p><code>[1, 1, 2, 4] ≠ [1, 2, 1, 4]</code></p>
+<p><code>[1, 2, 1, 4] ≠ [1, 2, 4]</code></p>
+<h3 id="multisets" class="markdown-heading">Multisets <a class="hover-link" href="#multisets">#</a></h3>
+<h4 id="datamultiset" class="markdown-heading"><code>data.multiset</code> <a class="hover-link" href="#datamultiset">#</a></h4>
+<p><code>multiset α</code> is the type of multisets of elements of type α. Multisets are finite and can contain duplicates, but are not ordered. They are defined as the quotient of lists over the <code>perm</code> equivalence relation. Multisets can only contain elements of the same type.</p>
+<p><code>{1, 1, 2, 4} = {1, 2, 1, 4}</code></p>
+<p><code>{1, 1, 2, 4} ≠ {1, 2, 4}</code></p>
+<h3 id="finsets" class="markdown-heading">Finsets <a class="hover-link" href="#finsets">#</a></h3>
+<h4 id="datafinset" class="markdown-heading"><code>data.finset</code> <a class="hover-link" href="#datafinset">#</a></h4>
+<p><code>finset α</code> is the type of unordered lists of distinct elements of type α. A finset is contructed from a multiset and a proof that the multiset contains no duplicates. Finsets are finite. Finsets can only contain elements of the same type.</p>
+<p><code>{1, 1, 2, 4} = {1, 2, 1, 4}</code></p>
+<p><code>{1, 1, 2, 4} = {1, 2, 4}</code></p>
+<h3 id="sets-and-subtypes" class="markdown-heading">Sets and subtypes <a class="hover-link" href="#sets-and-subtypes">#</a></h3>
+<h4 id="datasetbasic" class="markdown-heading"><code>data.set.basic</code> <a class="hover-link" href="#datasetbasic">#</a></h4>
+<p><code>set α</code>. A set is defined as a predicate, i.e. a function <code>α → Prop</code>. The notation used is <code>{n : ℕ | 4 ≤ n}</code> for the set of naturals greater than or equal to 4. Sets can be infinite, and can only contain elements of the same type.</p>
+<p>A subtype is similar to a set in that it is defined by a predicate. The notation used is <code>{n : ℕ // 4 ≤ n}</code> for the type of naturals greater than or equal to 4. However, a subtype is a type rather than a set, and the elements the aforementioned subtype do not have type <code>ℕ</code>, they have type <code>{n : ℕ // 4 ≤ n}</code>. This means that addition is not defined on this type, and equality between naturals and this type is also undefined. However it is possible to coerce an element of this subtype back into a natural, in the same way that a natural can be coerced into an integer, and then addition and equality behave as normal (see TPIL, chapter 6.7 for more on coercions). To construct an element of a subtype of α, you need an element of α and a proof that it satisfies the predicate, <code>4</code> and <code>le_refl 4</code> in the example below.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">//</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">}</span> <span class="o">:=</span> <span class="o">⟨</span><span class="mi">4</span><span class="o">,</span> <span class="n">le_refl</span> <span class="mi">4</span><span class="o">⟩</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">↑</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">6</span> <span class="bp">=</span> <span class="mi">10</span> <span class="o">:=</span> <span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>Any set can be used where a type is expected, in which case the set will be coerced into the corresponding subtype.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">|</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">}</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="mi">4</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">⟩,</span> <span class="n">hn</span>
+</code></pre></div>
+</div>
+
+<p>It is useful to use a subtype rather than a set when you need to define functions on subtypes, or when using the cardinal of a subtype.</p>
+<h3 id="finite-types" class="markdown-heading">Finite types <a class="hover-link" href="#finite-types">#</a></h3>
+<h4 id="datafintypebasic" class="markdown-heading"><code>data.fintype.basic</code> <a class="hover-link" href="#datafintypebasic">#</a></h4>
+<p><code>fintype α</code> means that a type α is finite. It is constructed from a finset containing all elements of a type.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">elems</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">complete</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">elems</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p><code>fintype α</code> is not a proposition, because it contains data, however it is a subsingleton, meaning that any two elements of type <code>fintype α</code> are equal.</p>
+<p><code>finset.univ</code> is the finset containing all elements of a type, given a <code>fintype α</code> instance.</p>
+<h3 id="finite-sets" class="markdown-heading">Finite sets <a class="hover-link" href="#finite-sets">#</a></h3>
+<h4 id="datasetfinite" class="markdown-heading"><code>data.set.finite</code> <a class="hover-link" href="#datasetfinite">#</a></h4>
+<p>The definition of a finite set, distinct from a finset is</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span> <span class="n">finite</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">fintype</span> <span class="n">s</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>This means when the set is coerced into a subtype, the type <code>fintype s</code> is nonempty.
+Using <code>classical.choice</code>, you can produce an object of type <code>fintype s</code> from a proof of <code>finite s</code>. There is a function <code>set.finite.to_finset</code> which produces a finset from a finite set.</p>
+<h3 id="cardinals" class="markdown-heading">Cardinals <a class="hover-link" href="#cardinals">#</a></h3>
+<p>There are three functions <code>finset.card</code>, <code>fintype.card</code> and <code>multiset.card</code>, which refer to the sizes of finsets, multisets and finite types. For finite cardinals of sets, <code>fintype.card</code> can be used, given a proof that the set is finite.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="n">fintype.card</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">fintype.card_fin</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="n">finset.card</span> <span class="o">(</span><span class="n">finset.range</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">finset.card_range</span>
+</code></pre></div>
+</div>
+
+<p>Here, <code>fin n</code> is the type of naturals less than n, and <code>finset.range n</code> is the finset of naturals less than n.</p>
+<p><code>set_theory.cardinal</code> contains theory on infinite cardinals</p>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/tactic_writing.html">Tactic writing tutorial</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theory docs</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category theory</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and set-like objects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/theories/sets.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

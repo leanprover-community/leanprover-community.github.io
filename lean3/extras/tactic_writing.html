@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Tutorial: tactic writing in Lean</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+	  
+<h1 id="tutorial-tactic-writing-in-lean" class="markdown-heading">Tutorial: tactic writing in Lean <a class="hover-link" href="#tutorial-tactic-writing-in-lean">#</a></h1>
+<p>This is a tutorial for getting started writing your own tactics in Lean.
+It is intended for an audience that does not necessarily have
+experience working with monads in a functional programming langauge
+(e.g. most mathematicians).</p>
+<p>Other useful resources while learning to write tactics include:</p>
+<ul>
+<li>Rob Lewis&#x27; <a href="https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2">video tutorials</a> on metaprogramming in Lean from
+Lean for the Curious Mathematician 2020</li>
+<li>Chapter 7 of the <a href="https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf">Hitchhiker&#x27;s Guide to Logical Verification</a></li>
+<li>the original paper about metaprogramming Lean
+<a href="https://leanprover.github.io/papers/tactic.pdf">A Metaprogramming Framework for Formal Verification</a></li>
+</ul>
+<h2 id="monadology" class="markdown-heading">Monadology <a class="hover-link" href="#monadology">#</a></h2>
+<p>Tactics are programs that act on the proof state. But Lean is a
+functional programming language. It means all you can do is
+define and evaluate functions. Each function takes input with a
+predefined type, and gives output with a predefined type. It seems to
+prevent having a global state (like the current assumptions and goals),
+and having output type depending on the input value (for instance a
+tactic can succeed or fail), or outputting messages. These issues are
+resolved by three layers of tricks (the following brief descriptions
+will hopefully become clearer later):</p>
+<ul>
+<li>using complicated types carrying the proof state and tactic running
+state around</li>
+<li>using clever notations that hide most of the complicated type
+bookkeeping and composition</li>
+<li>using interactive tactic blocks, introduced by <code>by</code> or delimited by
+<code>begin</code>/<code>end</code></li>
+</ul>
+<p>The first two points are collectively known as monadic programming (of
+course there is a more precise definition, but we will try to ignore it).</p>
+<p>The type of a function that can inspect the proof state, modify it, and
+potentially return something of type <code>α</code> (or fail) is called <code>tactic α</code>. In
+particular <code>tactic unit</code> is only about manipulating proof state, without
+trying to return anything (technically it will return something of type
+<code>unit</code>, which is the type having exactly one term, denoted by <code>()</code>).
+Such functions are either called by other
+tactics---those are typically in the <code>tactic</code> namespace---or called
+interactively by users inside tactic blocks---those must be in the
+<code>tactic.interactive</code> namespace (this is not quite necessary for very simple
+tactics, but weird things will happen in general when ignoring this rule). A
+shortcut which is sometimes convenient is: one can copy definitions with name
+<code>my_tac1</code>, <code>my_tac2</code>, <code>my_tac3</code>, into the <code>tactic.interactive</code> namespace using
+<code>run_cmd add_interactive [`my_tac1,`my_tac2, `my_tac3]</code>.
+These functions will be used to generate Lean proofs, but we will not prove
+anything about these functions themselves, nor will the constants <code>my_tac1</code>,
+<code>my_tac2</code>, etc. appear in the proofs
+that they generate. By prefacing them with the keyword <code>meta</code>, we tell Lean that
+they are for &quot;evaluation purposes only,&quot; which disables some of the checks that
+non-<code>meta</code> declarations must pass.
+This is enough knowledge to write a first tactic.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_first_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Hello, World.&quot;</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">my_first_tactic</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>In the example, <code>my_first_tactic</code> is underlined in green (in VS Code) and
+moving the cursor on that line will display our message in the Lean
+messages buffer.</p>
+<p>Next we need to learn how to chain several actions. Deep down, this is
+all about composing functions, but the monadic notations hide this and
+emulate imperative programming. We need to use the <code>and_then</code>
+combinator. The first way is to use the infix notation <code>&gt;&gt;</code>, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic.trace</span> <span class="s2">&quot;Hello,&quot;</span> <span class="bp">&gt;&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;World.&quot;</span>
+</code></pre></div>
+</div>
+
+<p>which now prints our message in two pieces. Alternatively, one can use
+the <code>do</code> syntax, which has other goodies. This introduces a
+comma-separated list of instructions to perform in sequence.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_second_tactic&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span>
+  <span class="n">tactic.trace</span> <span class="s2">&quot;Hello,&quot;</span><span class="o">,</span>
+  <span class="n">tactic.trace</span> <span class="s2">&quot;World.&quot;</span>
+</code></pre></div>
+</div>
+
+<p>Besides displaying messages, the next thing tactics can do is to fail,
+potentially with some explanation.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_failing_tactic</span>  <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic.failed</span>
+
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_failing_tactic&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic.fail</span> <span class="s2">&quot;This tactic failed, we apologize for the inconvenience.&quot;</span>
+</code></pre></div>
+</div>
+
+<p>When chaining instructions, the first failure interrupts the process.
+However the <code>orelse</code> combinator, denoted by an infix <code>&lt;|&gt;</code> allows to try
+its right-hand side if its left-hand side failed. The following will
+successfully deliver its message.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_orelse_tactic</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">my_failing_tactic</span> <span class="bp">&lt;|&gt;</span> <span class="n">my_first_tactic</span>
+</code></pre></div>
+</div>
+
+<p>The next composite thing to do is to use some function that, after
+reading or altering the proof state, actually tries to return
+something. For instance the built-in <code>tactic.target</code> (tries to) return
+the current goal. This goal has type <code>expr</code> (more on that type later).
+The type of <code>tactic.target</code> is thus <code>tactic expr</code>. Say we want to trace
+the current goal. A naive attempt would be:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic.trace</span> <span class="n">tactic.target</span>    <span class="c1">-- WRONG!</span>
+</code></pre></div>
+</div>
+
+<p>This cannot be correct because <code>tactic.target</code> could fail (there could
+be no more goal) and <code>tactic.trace</code> cannot take that failure as an
+input. We need the bind combinator, with infix notation <code>&gt;&gt;=</code>, sending
+the output of its left-hand side to its right-hand side in case of
+success and failing otherwise.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+ <span class="n">tactic.target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span>
+</code></pre></div>
+</div>
+
+<p>Alternatively, especially if the output of <code>tactic.target</code> could be used
+several times, one can use the <code>do</code> blocks assignments using <code>←</code> (the
+same arrow as in the rewrite syntax). This emulation of imperative
+variable assignment will of course fail (as the failing tactics above)
+if the right-hand side of the assignment fails.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal&#39;</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span>
+ <span class="n">goal</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+ <span class="n">tactic.trace</span> <span class="n">goal</span>
+</code></pre></div>
+</div>
+
+<p>Beware that this kind of assignment is only trying to extract data of type
+<code>α</code> from something of type <code>tactic α</code>. It cannot be used to store
+regular stuff. The following doesn&#x27;t work.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_assignment</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span>
+ <span class="n">message</span> <span class="bp">←</span> <span class="s2">&quot;Hello, World.&quot;</span><span class="o">,</span>  <span class="c1">-- WRONG!</span>
+ <span class="n">tactic.trace</span> <span class="n">message</span>
+</code></pre></div>
+</div>
+
+<p>However, one can use <code>let</code> in <code>do</code> blocks, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">let_example</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span>
+ <span class="k">let</span> <span class="n">message</span> <span class="o">:=</span> <span class="s2">&quot;Hello, World.&quot;</span><span class="o">,</span>
+ <span class="n">tactic.trace</span> <span class="n">message</span>
+</code></pre></div>
+</div>
+
+<p>Next, we want to write tactics returning something, as <code>tactic.target</code>
+is doing. The only extra ingredient is the <code>return</code> function. The
+following function tries to return <code>tt</code> if there is no more goal, <code>ff</code>
+otherwise. The next one can be used interactively and traces the result
+(note that using the first one interactively won&#x27;t have any visible
+effect since interactive use ignores the returned value).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">tactic.target</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">ff</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">return</span> <span class="n">tt</span>
+
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">is_done</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span>
+</code></pre></div>
+</div>
+
+<p>The last thing we will need about monadic assignment is pattern-matching
+assignment. The following tactic tries to define expressions <code>l</code> and <code>r</code> as
+the left and right hand sides of the current goal. It also uses the
+<code>to_string</code> function which is very convenient in combination with <code>trace</code>
+in order to debug tactics, and works on any type which is an instance of <code>has_to_string</code>.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">t</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+   <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+   <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
+   <span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+   <span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>Lean also provides a dedicated syntax for pattern matching with a single pattern and a wildcard,
+where execution only proceeds to the next line of the <code>do</code> block if the pattern matches, and otherwise
+executes the expression after the <code>|</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span> <span class="bp">|</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span><span class="o">,</span>
+   <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>If the <code>|</code> is omitted, then the tactic fails if the pattern does not match.
+We can catch this failure using the <code>orelse</code> combinator mentioned ealier, but note that by
+doing so we catch more types of failure than we did above:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="o">(</span><span class="k">do</span>  <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+     <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">),</span>
+     <span class="n">some_other_tactic</span><span class="o">)</span>
+   <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality, or `some_other_tactic` failed&quot;</span>
+</code></pre></div>
+</div>
+
+<p>The parenthesis in the above code don&#x27;t look very nice. One could use
+instead curly brackets which allow to delimit a <code>do</code> block, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+     <span class="n">tactic.trace</span> <span class="bp">$</span> <span class="s2">&quot;Goal is equality between &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">l</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot; and &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">r</span><span class="o">)</span> <span class="o">}</span>
+   <span class="bp">&lt;|&gt;</span> <span class="n">tactic.trace</span> <span class="s2">&quot;Goal is not an equality&quot;</span>
+</code></pre></div>
+</div>
+
+<h2 id="a-first-real-world-tactic" class="markdown-heading">A first real world tactic <a class="hover-link" href="#a-first-real-world-tactic">#</a></h2>
+<p>We have studied enough monadology to understand our first useful tactic:
+the <code>assumption</code> tactic, which searches the local context for an
+assumption which closes the current goal. It uses a couple more builtin
+tactics, both declared and briefly documented in the core library in
+<a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean">init/meta/tactic.lean</a> but actually implemented in C++.
+First <code>infer_type : expr → tactic expr</code>
+tries to determine the type of an expression (since it returns a
+<code>tactic expr</code>, it must be chained with either <code>&gt;&gt;=</code> or <code>←</code>, as explained
+above).
+Next <code>tactic.unify</code> which, modulo a couple of optional parameters, takes
+two expressions and succeeds if and only if they are definitionally equal.
+The first piece of the assumption tactic is a helper function searching
+an expression sharing the type of some expression <code>e</code> in a list of
+expressions, returning the first match (or failing if nothing matches).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">find_matching_type</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="o">[]</span>         <span class="o">:=</span> <span class="n">tactic.failed</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">H</span> <span class="o">::</span> <span class="n">Hs</span><span class="o">)</span>  <span class="o">:=</span> <span class="k">do</span> <span class="n">t</span> <span class="bp">←</span> <span class="n">tactic.infer_type</span> <span class="n">H</span><span class="o">,</span>
+                   <span class="o">(</span><span class="n">tactic.unify</span> <span class="n">e</span> <span class="n">t</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">H</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">find_matching_type</span> <span class="n">Hs</span>
+</code></pre></div>
+</div>
+
+<p>Make sure you really understand the control flow in the above code using
+the previous section. The basic pattern is classical recursive find in a
+list. Notice the expression <code>e</code> is left of colon, hence it will be passed
+unchanged to the recursive call <code>find_matching_type Hs</code>. The choice of
+name <code>H</code> stands for <code>hypothesis</code>, while <code>Hs</code>, following Haskell&#x27;s naming
+conventions, stands for several hypotheses. The imperative analogue of
+what happens for non-empty lists would read something like the following
+imperative pseudo-code</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>if unify(e, infer_type(H)) then return H else find_matching_type(e, HS)
+</code></pre></div>
+</div>
+
+<p>We can now use this function for our interactive tactic. We first need
+to grab the local context using <code>local_context</code>, which returns a list of
+expressions that we can pass to our <code>find_matching_type</code>. If that
+function succeeds, its output is passed to the builtin tactic
+<code>tactic.exact</code>. Here we need to use the fully qualified name because of
+possible confusion with the interactive version of <code>exact</code> (which takes
+different parameters, so it&#x27;s not an exact copy of the non-interactive
+one). This is good opportunity to point out that the beginning of this
+tutorial uses fully qualified names everywhere for clarity, but of
+course the real world workflow is to open the <code>tactic</code> namespace.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">my_assumption</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="o">{</span> <span class="n">ctx</span> <span class="bp">←</span> <span class="n">tactic.local_context</span><span class="o">,</span>
+     <span class="n">t</span>   <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
+     <span class="n">find_matching_type</span> <span class="n">t</span> <span class="n">ctx</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.exact</span> <span class="o">}</span>
+<span class="bp">&lt;|&gt;</span> <span class="n">tactic.fail</span> <span class="s2">&quot;my_assumption tactic failed&quot;</span>
+</code></pre></div>
+</div>
+
+<p>Bonus question: what if we remove the brackets? Will it still
+type-check? If yes, will the resulting tactic be the same?</p>
+<h2 id="monadic-loops" class="markdown-heading">Monadic loops <a class="hover-link" href="#monadic-loops">#</a></h2>
+<p>A crucial tool of imperative programming is loops, so monads must
+emulate this. We already know from usual Lean that <code>list.map</code> and
+<code>list.foldr</code>/<code>list.foldl</code> allow to loop on elements of list. But we need
+version that interacts nicely with the monad world (consuming and
+returning terms of type <code>tactic stuff</code>). Those versions are prefixed with
+&quot;m&quot; for monad, as in <code>list.mmap</code>, <code>list.mfoldr</code> etc. Our tactic is then:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">list_types</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span>
+  <span class="n">l</span> <span class="bp">←</span> <span class="n">tactic.local_context</span><span class="o">,</span>
+  <span class="n">l.mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">tactic.infer_type</span> <span class="n">h</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic.trace</span><span class="o">),</span>
+  <span class="n">return</span> <span class="o">()</span>
+</code></pre></div>
+</div>
+
+<p>The last line is a bit silly: it&#x27;s there because what we get from the
+previous line has type <code>list unit</code>, so it cannot be the final
+piece of our do block. Hence we add <code>return ()</code> where <code>()</code> is the
+only term of type <code>unit</code>. One can also use the tactic <code>skip</code> to achieve
+the same goal. This special case is so common that we actually have a
+variant <code>list.mmap&#x27;</code> of <code>list.mmap</code> which discards the result of
+the function applied to elements of the list, and returns <code>()</code> when it&#x27;s
+done traversing the list.</p>
+<h2 id="manipulating-the-local-context" class="markdown-heading">Manipulating the local context <a class="hover-link" href="#manipulating-the-local-context">#</a></h2>
+<p>Our next goal is to be able to use and create assumptions in the local context.
+We will write a tactic that produces a new assumption by adding two known
+equalities (or failing miserably if this operation doesn&#x27;t make sense). At
+first the names of thoses two equalities will be stupidly hardwired in our
+tactic. So we want a tactic performing the first line in the following proof.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="n">h₁</span><span class="o">)</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">this</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>The first new concept we need is that of a name. In order to allow for
+namespace management, names in Lean are actually defined as an inductive
+type, in core library <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/name.lean">meta/name.lean</a>. Manipulating its constructors is not
+convenient, so we use instead the backtick notation (this is the first of
+many uses of backticks in tactic writing). Actually we already did that when
+discussing the <code>add_interactive</code> command at the very beginning. Accessing an
+item of the local context by its name is done by <code>tactic.get_local</code>. The next
+new piece we need is <code>tactic.interactive.«have»</code> which will create our new
+context item. Its weird name works around the fact that <code>have</code> is a keyword,
+hence not a valid name. It takes two optional arguments that we ignore for
+now, and a pre-expression which is a proof of our new item. Such a
+pre-expression is constructed using the double-backtick-parenthesis notation:
+<code>``(...)</code>. Inside such a construction, previously assigned expressions
+are accessed using the anti-quotation prefix <code>%%</code>. This syntax is very close
+to the pattern matching syntax we saw above (but different).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">tactic.interactive</span> <span class="o">(</span><span class="bp">«</span><span class="k">have</span><span class="bp">»</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">get_local</span> <span class="n">infer_type</span><span class="o">)</span>
+
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq_h₁_h₂</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">e1</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">h₁</span><span class="o">,</span>
+   <span class="n">e2</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">h₂</span><span class="o">,</span>
+   <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="n">none</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="n">_root_.congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="bp">%%</span><span class="n">e1</span><span class="o">)</span> <span class="bp">%%</span><span class="n">e2</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">add_eq_h₁_h₂</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">this</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>A last remark about the above tactic: the names <code>`h₁</code> and <code>`h₂</code> are resolved
+when the tactic is executed. In order to trigger name resolution when
+the tactic is parsed, one should use double-backtick, as in <code>``h₁</code>. Of course
+in the above context, that would trigger an error since nothing named <code>h₁</code> is
+in sight at tactic parsing time. But it can be useful in other cases.</p>
+<h2 id="tactic-arguments-parsing" class="markdown-heading">Tactic arguments parsing <a class="hover-link" href="#tactic-arguments-parsing">#</a></h2>
+<h3 id="parsing-identifiers" class="markdown-heading">Parsing identifiers <a class="hover-link" href="#parsing-identifiers">#</a></h3>
+<p>Obviously the previous tactic is useless if the assumption names are hardwired. So we replace it by:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">parse</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">lean.parser</span> <span class="o">(</span><span class="n">ident</span><span class="o">)</span>
+
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">e1</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h1</span><span class="o">,</span>
+   <span class="n">e2</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h2</span><span class="o">,</span>
+   <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="n">none</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="n">_root_.congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="bp">%%</span><span class="n">e1</span><span class="o">)</span> <span class="bp">%%</span><span class="n">e2</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>The arguments <code>h1</code> and <code>h2</code> tell lean to parse identifiers. There is quite a
+bit of trickery going one here. The Lean parser sees <code>parse</code> left of colon,
+so it knows it must do some argument parsing, but then the resulting type is
+nothing but a name, as demonstrated below.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="bp">=</span> <span class="n">name</span> <span class="o">:=</span> <span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<h3 id="parsing-optional-arguments-and-using-tokens" class="markdown-heading">Parsing optional arguments and using tokens <a class="hover-link" href="#parsing-optional-arguments-and-using-tokens">#</a></h3>
+<p>The next improvement to this tactic offers the opportunity to name the new
+local assumption (which is currently named <code>this</code>). Such names are
+traditionally introduced by the token <code>with</code>, followed by the desired identifier.
+The &quot;followed by&quot; is expressed by the <code>seq_right</code> combinator (there is again
+a monad lurking here), with notation <code>*&gt;</code>. Parsing a token is introduced by
+<code>lean.parser.tk</code> followed by a string which must be taken from a
+predetermined list (the initial value of this list can be found in
+Lean source code, in <a href="https://github.com/leanprover-community/lean/blob/master/src/frontends/lean/token_table.cpp">frontends/lean/token_table.cpp</a>,
+elements are added to this list when literals are used in <code>notation</code>, <code>infix</code>, or <code>precedence</code>).
+And then the combination is wrapped into <code>optional</code> to make it optional. The term <code>h</code> we
+get below has then type <code>option name</code> and can be passed as the first argument
+of <code>«have»</code>, which will use it if provided, and otherwise use the name <code>this</code>.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">lean.parser</span> <span class="o">(</span><span class="n">tk</span><span class="o">)</span>
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.add_eq&#39;</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;with&quot;</span> <span class="bp">*&gt;</span> <span class="n">ident</span><span class="o">)))</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">e1</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h1</span><span class="o">,</span>
+   <span class="n">e2</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h2</span><span class="o">,</span>
+   <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="n">h</span> <span class="n">none</span> <span class="bp">``</span><span class="o">(</span><span class="n">_root_.congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">has_add.add</span> <span class="bp">%%</span><span class="n">e1</span><span class="o">)</span> <span class="bp">%%</span><span class="n">e2</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hj</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">Hk</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">add_eq&#39;</span> <span class="n">Hj</span> <span class="n">Hk</span> <span class="k">with</span> <span class="n">new</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">new</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<h3 id="parsing-locations-and-expressions" class="markdown-heading">Parsing locations and expressions <a class="hover-link" href="#parsing-locations-and-expressions">#</a></h3>
+<p>Our next tactic multiplies from the left an equality by a given expression
+(or fails if this operation wouldn&#x27;t make sense). We want to mechanize the following proof.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">b</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">replace</span> <span class="n">hyp</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="n">hyp</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hyp</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>The main new skills here consist in indicating at what location we want to
+act, using the traditional token <code>at</code>, and passing an expression to the
+tactic. Locations are defined in the core library <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/interactive_base.lean">meta/interactive_base.lean</a> as
+an inductive type having two constructors: <code>wildcard</code> which indicates all
+locations, and <code>loc.ns</code> which takes a <code>list (option name)</code>, where <code>none</code> in
+the <code>option name</code> means the current goal, whereas <code>some n</code> means the thing
+named <code>n</code> in the local context. In our case we will pattern-match on the
+parsed location and reject everything except specifying a single name from
+the local context. The second new piece is how to parse a user-provided
+expression. The relevant parser is <code>interactive.types.texpr</code>, whose result is
+converted to an actual expression using <code>tactic.i_to_expr</code>. This is also the
+opportunity for our first serious use of pattern matching assignment, and
+for using the second optional argument of <code>«have»</code> which is the expected type
+(otherwise we would get unapplied multiplication, with an explicit lambda, try it!).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">interactive</span> <span class="o">(</span><span class="n">loc.ns</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">interactive.types</span> <span class="o">(</span><span class="n">texpr</span> <span class="n">location</span><span class="o">)</span>
+<span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.mul_left</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">loc.ns</span> <span class="o">[</span><span class="n">some</span> <span class="n">h</span><span class="o">])</span> <span class="o">:=</span> <span class="k">do</span>
+   <span class="n">e</span> <span class="bp">←</span> <span class="n">tactic.i_to_expr</span> <span class="n">q</span><span class="o">,</span>
+   <span class="n">H</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h</span><span class="o">,</span>
+   <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">infer_type</span> <span class="n">H</span><span class="o">,</span>
+   <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="n">h</span> <span class="bp">``</span><span class="o">(</span><span class="bp">%%</span><span class="n">e</span><span class="bp">*%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">e</span><span class="bp">*%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">``</span><span class="o">(</span><span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">%%</span><span class="n">e</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="bp">%%</span><span class="n">H</span><span class="o">),</span>
+   <span class="n">tactic.clear</span> <span class="n">H</span>
+<span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.fail</span> <span class="s2">&quot;mul_left takes exactly one location&quot;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">b</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">mul_left</span> <span class="n">c</span> <span class="n">at</span> <span class="n">hyp</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hyp</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<p>As a last refinement, let us make a version of this tactic which names the
+multiplied equality by appending <code>.mul</code>, and optionally removes the original
+one if the tactic name is followed by <code>!</code>. This is the opportunity to use
+<code>when</code> which is the monadic version of <code>ite</code> (with else branch doing nothing).
+See <a href="https://github.com/leanprover-community/lean/blob/master/library/init/control/combinators.lean">control/combinators.lean</a> in core library for other variations on this idea.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">tactic.interactive.mul_left_bis</span> <span class="o">(</span><span class="n">clear_hyp</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="bp">$</span> <span class="n">tk</span> <span class="s2">&quot;!&quot;</span><span class="o">))</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">parse</span> <span class="n">location</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">loc.ns</span> <span class="o">[</span><span class="n">some</span> <span class="n">h</span><span class="o">])</span> <span class="o">:=</span> <span class="k">do</span>
+   <span class="n">e</span> <span class="bp">←</span> <span class="n">tactic.i_to_expr</span> <span class="n">q</span><span class="o">,</span>
+   <span class="n">H</span> <span class="bp">←</span> <span class="n">get_local</span> <span class="n">h</span><span class="o">,</span>
+   <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">infer_type</span> <span class="n">H</span><span class="o">,</span>
+   <span class="bp">«</span><span class="k">have</span><span class="bp">»</span> <span class="o">(</span><span class="n">H.local_pp_name</span> <span class="bp">++</span> <span class="s2">&quot;mul&quot;</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="bp">``</span><span class="o">(</span><span class="bp">%%</span><span class="n">e</span><span class="bp">*%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">e</span><span class="bp">*%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">``</span><span class="o">(</span><span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">%%</span><span class="n">e</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="bp">%%</span><span class="n">H</span><span class="o">),</span>
+   <span class="n">when</span> <span class="n">clear_hyp.is_some</span> <span class="o">(</span><span class="n">tactic.clear</span> <span class="n">H</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">tactic.fail</span> <span class="s2">&quot;mul_left_bis takes exactly one location&quot;</span>
+</code></pre></div>
+</div>
+
+<h2 id="what-to-read-now" class="markdown-heading">What to read now? <a class="hover-link" href="#what-to-read-now">#</a></h2>
+<p>This is the end of this tutorial (although there are two cheat sheets below).
+If you want to learn more, you can read the definitions of tactics in either
+the core library or mathlib, see what you can understand, and ask specific
+questions on Zulip. For more theory, especially a proper explanation of monads, you can read
+<a href="https://leanprover.github.io/programming_in_lean/">Programming in Lean</a>, but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
+the paper <a href="https://leanprover.github.io/papers/tactic.pdf">A Metaprogramming Framework for Formal Verification</a>.</p>
+<h2 id="mariox27s-backtick-cheat-sheet" class="markdown-heading">Mario&#x27;s backtick cheat sheet <a class="hover-link" href="#mariox27s-backtick-cheat-sheet">#</a></h2>
+<p>This section is a direct compilation of messages from Mario on Zulip.</p>
+<ul>
+<li>
+<p><code>`my.name</code> is the way to refer to a name. It is essentially a form of string quoting; no
+checks are done besides parsing dots into namespaced names.</p>
+</li>
+<li>
+<p><code>``some</code> does name resolution at parse time, so this example expands to  <code>`option.some</code>
+and will error if the given name doesn&#x27;t exist.</p>
+</li>
+<li>
+<p><code>`(my expr)</code> constructs an expression at parse time, resolving what it can in the current (of
+the tactic) namespace.</p>
+</li>
+<li>
+<p><code>``(my pexpr)</code> constructs a pre-expression at parse time, resolving in the current (of the
+tactic) namespace.</p>
+</li>
+<li>
+<p><code>```(my pexpr)</code> constructs a <code>pexpr</code>, but defers resolution to run time (of the tactic),
+meaning that any references will be resolved in the namespace of the <code>begin</code> <code>end</code> block of the
+user, rather than the tactic itself.</p>
+</li>
+<li>
+<p><code>%%</code>: This is called anti-quotation, and is supported in all the expr and pexpr quoting
+expressions <code>`(expr)</code>, <code>``(pexpr)</code>, <code>```(pexpr)</code>, as well as <code>`[tacs]</code>.
+Wherever an expression is expected inside one of these quoting constructs, you can use <code>%%e</code>
+instead, where <code>e</code> has type <code>expr</code> in the outer context of the tactic, and it will be spliced
+into the constructed <code>expr</code>/<code>pexpr</code>/etc. For example, if <code>a b : expr</code> then  <code>`(%%a + %%b)</code> is
+of type <code>expr</code>.</p>
+</li>
+<li>
+<p>The <code>reflect</code> function turns a term <code>t : T</code> into an <code>expr</code> that reflects <code>t</code>, if Lean can infer
+an instance <code>reflected t</code>. This can be used, for example, to refer to local variables from a
+tactic definition inside a quotation, using <code>%%(reflect n)</code>. As an example, we could write</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">assert_ge_zero</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">do</span> <span class="n">v</span> <span class="bp">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">nat.zero_le</span> <span class="bp">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">n</span><span class="o">)),</span>
+   <span class="n">t</span> <span class="bp">←</span> <span class="n">infer_type</span> <span class="n">v</span><span class="o">,</span>
+   <span class="n">assertv</span> <span class="bp">`</span><span class="n">h</span> <span class="n">t</span> <span class="n">v</span><span class="o">,</span>
+   <span class="n">skip</span>
+</code></pre></div>
+</div>
+
+<p>If you just wrote <code>n</code> directly here you&#x27;d get a &quot;unexpected local in quotation expression&quot;
+error.</p>
+</li>
+<li>
+<p><code>`[tac...]</code> is exactly the same as <code>begin tac... end</code> in the sense that it parses <code>tac...</code>
+using the interactive mode parser, but instead of evaluating the tactic to produce a term, it just
+wraps up the list of tactics as a single tactic of type <code>tactic unit</code>. This is useful for writing
+&quot;macros&quot; or light-weight tactic writing</p>
+</li>
+</ul>
+<p>Also worth mentioning are <code>expr</code> pattern matches, which have the same syntax
+like <code>`(%%a + %%b)</code>. These can be used in the pattern position of a match or on
+the left side of a <code>←</code> in do notation, and will destruct an expression and
+bind the antiquoted variables.
+For example, if <code>e</code> is an expression then <code>do `(%%a = %%b) ← return e, ...</code> will check that
+<code>e</code> is an equality, and bind the LHS and RHS to <code>a</code> and <code>b</code> (of type <code>expr</code>), and if it is not an
+equality the tactic will fail.</p>
+<p>(It&#x27;s worth noting that this sort of pattern matching works at a syntactic level. Sometimes
+it is more flexible to use unification, instead.)</p>
+<h2 id="mariox27s-monadic-symbols-cheat-sheet" class="markdown-heading">Mario&#x27;s monadic symbols cheat sheet <a class="hover-link" href="#mariox27s-monadic-symbols-cheat-sheet">#</a></h2>
+<p>All functions and notations from the list below apply to more general monads than <code>tactic</code>, so they
+are listed in a generic form but, for the purposes
+of this tutorial <code>m</code> is always <code>tactic</code> (or <code>lean.parser</code>). Although
+everything can be done with the symbols introduced in this tutorials, more
+esoteric symbols allow to compress code, and understanding them is useful for
+reading available tactics.</p>
+<ul>
+<li><code>return</code>: produce a value in the monad (type: <code>A → m A</code>)</li>
+<li><code>ma &gt;&gt;= f</code>: get the value of type <code>A</code> from <code>ma : m A</code> and pass it to <code>f : A → m B</code>. Alternate
+syntax: <code>do a ← ma, f a</code></li>
+<li><code>f &lt;$&gt; ma</code>: apply the function <code>f : A → B</code> to the value in <code>ma : m A</code> to get a <code>m B</code>. Same as
+<code>do a ← ma, return (f a)</code></li>
+<li><code>ma &gt;&gt; mb</code>: same as <code>do a ← ma, mb</code>; here the return value of <code>ma</code> is ignored and then <code>mb</code> is
+called. Alternate syntax: <code>do ma, mb</code></li>
+<li><code>mf &lt;*&gt; ma</code>: same as <code>do f ← mf, f &lt;$&gt; ma</code>, or <code>do f ← mf, a ← ma, return (f a)</code></li>
+<li><code>ma &lt;* mb</code>: same as <code>do a ← ma, mb, return a</code></li>
+<li><code>ma *&gt; mb</code>: same as <code>do ma, mb</code>, or <code>ma &gt;&gt; mb</code>. Why two notations for the same thing? Historical
+reasons.</li>
+<li><code>pure</code>: same as <code>return</code>. Again, historical reasons.</li>
+<li><code>failure</code>: failed value (specific monads usually have a more useful form of this, like <code>fail</code> and
+<code>failed</code> for tactics).</li>
+<li><code>ma &lt;|&gt; ma&#x27;</code> recover from failure: runs <code>ma</code> and if it fails then runs <code>ma&#x27;</code>.</li>
+<li><code>a $&gt; mb</code>: same as <code>do mb, return a</code></li>
+<li><code>ma &lt;$ b</code>: same as <code>do ma, return b</code></li>
+</ul>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/tactic_writing.html">Tactic writing tutorial</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theory docs</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category theory</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and set-like objects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/tactic_writing.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
