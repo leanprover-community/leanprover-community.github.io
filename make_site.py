@@ -485,7 +485,7 @@ def render_site(target: Path, base_url: str, reloader=False):
 
 if __name__ == '__main__':
     if '--local' in sys.argv:
-        base_url = f"file://{(Path(__file__).parent/'build').absolute()}/"
+        base_url = f"file://{(Path(__file__).parent/'build'/'lean3').absolute()}/"
     else:
-        base_url = 'https://leanprover-community.github.io/'
-    render_site(ROOT/'build', base_url, reloader='--reload' in sys.argv)
+        base_url = 'https://leanprover-community.github.io/lean3/'
+    render_site(ROOT/'build'/'lean3', base_url, reloader='--reload' in sys.argv)
