@@ -1,3 +1,22 @@
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 # Lean Glossary
 
 This document collects short explanations of terminology one may encounter within the Lean community.
@@ -176,7 +195,7 @@ Diamonds which cross library boundaries -- such as ones in which part of the typ
 
 The syntax sugar allowing notations such as `((foo a b c).bar x.y).baz`.
 
-Lean provides two interpretations of the syntax `foo.bar`: it can mean the declaration `bar` in the `foo` namespace, or it can be generalized field notation. We expand here on the latter. 
+Lean provides two interpretations of the syntax `foo.bar`: it can mean the declaration `bar` in the `foo` namespace, or it can be generalized field notation. We expand here on the latter.
 
 Suppose `foo` has type `C x1 ... xn`, with `C` some constant and `x1 ... xn` arbitrary, and suppose that there is a declaration in the context named `C.bar` which takes an argument of type `C x1 ... xn`. Then `foo.bar` is sugar for `C.bar foo`. For calls of the form `foo.bar _ ... _` with (implicit or explicit) arguments, Lean is smart enough to expand to `C.bar _ ... foo _ ... _`, so that everything typechecks. In these previous examples, `foo` can also be a more complicated expression such as the function application in `(foo bar baz).quux`.
 

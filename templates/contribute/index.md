@@ -1,3 +1,22 @@
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 # How to contribute to mathlib
 
 Here are some tips and tricks
@@ -9,13 +28,13 @@ to make the process of contributing as smooth as possible.
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
    - The [documentation guidelines](doc.html).
-   
+
 Once you have code that you'd like to contribute, you should open a PR.
 There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking you through the process of making a PR on YouTube.
-  
+
 ## Making a Pull Request (PR)
 3. Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Please include your GitHub username in your request. Make your changes on a branch of the main repository.
-   
+
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
 5. The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
 6. You can use `leanproject` to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:
@@ -34,9 +53,9 @@ There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking
 
 We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have completed step 3 above".)
 
-On the main page for a PR, on the right-hand side, 
-there should be a sidebar with panels "reviewers", "assignees", "labels", etc. 
-Click on the "labels" header to add or remove labels from the current project. 
+On the main page for a PR, on the right-hand side,
+there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
+Click on the "labels" header to add or remove labels from the current project.
 
 The most important labels are "awaiting-review" and "awaiting-author". If you label your PR with **"awaiting-review"**, someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "awaiting-review" to start the process over again.
 
@@ -45,7 +64,7 @@ After responding appropriately to bors (if necessary), the PR will get added to 
 
 Here are some other frequently-used labels:
 
-- A **"WIP"** (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon. 
+- A **"WIP"** (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon.
 
 - Consider adding the **"help wanted"** label to directly solicit contributions.
 

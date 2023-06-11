@@ -1,3 +1,22 @@
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 # Library Style Guidelines
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
@@ -21,7 +40,7 @@ rather than rigid rules.
 - `i`, `j`, `k`, ... for integers
 
 Types with a mathematical content are expressed with the usual
-mathematical notation, often with an upper case letter 
+mathematical notation, often with an upper case letter
 (`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
 This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.
@@ -37,7 +56,7 @@ easier to read, especially on a small screen or in a small window.
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
 a description of the contents. Do all `import`s right after the header,
-without a line break, on separate lines. 
+without a line break, on separate lines.
 
 ```lean
 /-
@@ -253,7 +272,7 @@ instance : partial_order (topological_space α) :=
 ### Hypotheses Left of Colon
 
 Generally, having arguments to the left of the colon is preferred
-over having arguments in universal quantifiers or implications, 
+over having arguments in universal quantifiers or implications,
 if the proof starts by introducing these variables. For instance:
 
 ```lean
@@ -424,7 +443,7 @@ additional indentation in the rest of the proof.
 ```lean
 begin
   rw [h], swap, { exact h' },
-  ... 
+  ...
 end
 ```
 
@@ -436,7 +455,7 @@ short definitions, or to group together a definition and notation.
 
 Some statements are equivalent. For instance, there are several equivalent
 ways to require that a subset `s` of a type is nonempty. For another example, given
-`a : α`, the corresponding element of `option α` can be equivalently written 
+`a : α`, the corresponding element of `option α` can be equivalently written
 as `some a` or `(a : option α)`. In general, we try to settle
 on one standard form, called the normal form, and use it both in statements and
 conclusions of theorems. In the above examples, this would be `s.nonempty` (which
@@ -444,13 +463,13 @@ gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.
 
 There is a special case to this rule. In types with a bottom element, it is equivalent
-to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would 
+to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would
 be better as a normal form since both have their pros and cons. An analogous situation
-occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is very 
+occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is very
 easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
 on the direction we want) while the other conversion is more lengthy, we use `hne` in
-*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in 
-*conclusions* of theorems (as this is the more powerful result to use). 
+*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in
+*conclusions* of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where `⊥ = 0`.
 
 ## Comments

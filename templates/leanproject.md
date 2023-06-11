@@ -1,3 +1,22 @@
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 # Using leanproject
 
 ## Basic usage
@@ -196,13 +215,13 @@ Combining `--to` and `--from` is possible.
 
 ### Reducing imports
 
-When adding imports to a file incrementally it is easy to end up with a long list 
+When adding imports to a file incrementally it is easy to end up with a long list
 of imports where some imports include others transitively.
 `leanproject` can be used to print a list of removable imports using the command
 ```text
 leanproject reduce-imports lean.module.name
 ```
-by adding the optional tag `--sed` a sed script will be produced instead that will 
+by adding the optional tag `--sed` a sed script will be produced instead that will
 remove the unneeded lines for you when the script is executed.
 Calling this command with no module argument will print removable imports in the
 entire project.

@@ -1,3 +1,22 @@
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 # Simp
 
 ## Overview
@@ -167,7 +186,7 @@ that creates them all for you automatically:
 ```
 This generates the lemma `@[simp] lemma my_foo_n : my_foo.n = 37`.
 
-## Basic usage 
+## Basic usage
 
 * `simp` tries to simplify the goal using all `simp` lemmas known to
           Lean at that time.
@@ -376,8 +395,8 @@ The meanings are the same as for `simp`, but `using` can be given any expression
 Using the command [`mk_simp_attribute`](https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute),
 you can make your own `@[simp]`-like attribute, but with a key difference:
 lemmas tagged with `@[new_attr]` are _not_ in the default set of `simp` lemmas.
-Instead, they are included using the syntax `simp with new_attr`. This can often replace lengthy 
-`simp only [...]` calls and facilitate easier-to-read code. Some examples of common usage are 
+Instead, they are included using the syntax `simp with new_attr`. This can often replace lengthy
+`simp only [...]` calls and facilitate easier-to-read code. Some examples of common usage are
 [`mfld_simps`](https://leanprover-community.github.io/mathlib_docs/find/simp_attr.mfld_simps/src),
 and [`field_simps`](https://leanprover-community.github.io/mathlib_docs/find/simp_attr.field_simps/src).
 
