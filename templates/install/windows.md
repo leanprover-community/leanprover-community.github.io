@@ -44,15 +44,15 @@ and click the install button.
 
 ## Setting up `elan` and `lean`
 
-You can either have the `lean4` extension install `elan` and `lean` for you,
-or do it manually. We recommmend have the extension do it, but give instructions for both.
+You can either have the `VS Code` extension install `elan` and `lean` for you,
+or do it manually. We recommmend having the extension do it, but give instructions for both.
 
 ### Have the extension install `elan` and `lean`
 
 Under the `File` menu, select `New text file`.
 A new window labelled `Untitled-1` will appear.
 
-There will be a prompt in this windows saying `Select a language`,
+There will be a prompt in this window saying `Select a language`,
 which you should click on and select `Lean4`.
 (You can alternatively find where `VS Code` says `Plain text` in the bottom right of your screen, and change the language here,
 or press `ctrl+shift+p` to open the command palette, and select `Change language mode`.)
@@ -76,18 +76,19 @@ You can skip ahead to read the instructions about creating and working on [Lean 
 This page will show you how to work with mathlib4, the main mathematical library for Lean,
 or to work with a new or existing project that depends on mathlib4.
 
-### Installing `elan` yourself.
+### Installing `elan` yourself
 
 Open a command prompt (`cmd`) and execute the following commands:
 
-```
+```shell
 curl -O --location https://raw.githubusercontent.com/leanprover/elan/master/elan-init.ps1
 powershell -ExecutionPolicy Bypass -f elan-init.ps1
 del elan-init.ps1
 ```
 
 Alternatively you can open a `git bash` window, and run
-```
+
+```shell
 curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
 ```
 
