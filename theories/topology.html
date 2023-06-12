@@ -47,25 +47,7 @@
 <div id="mainbox">
 
   <main>
-    
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
+	  
 <h1 id="maths-in-lean-topological-uniform-and-metric-spaces" class="markdown-heading">Maths in Lean: Topological, uniform and metric spaces <a class="hover-link" href="#maths-in-lean-topological-uniform-and-metric-spaces">#</a></h1>
 <p>The <code>topological_space</code> typeclass is defined in mathlib,
 in <code>topology/basic.lean</code>. There are about 18000
@@ -98,7 +80,7 @@ one, so the axiom is</p>
 
 <p>Note the naming conventions, standard across mathlib, that <code>sUnion</code>
 is a union over sets and <code>Union</code> (with a capital U) is a union over
-the image of a function on an indexing set. The capital U&#x27;s are
+the image of a function on an indexing set. The capital U's are
 to indicate a union of arbitrary size, as opposed to <code>union</code>, which
 indicates a union of two sets:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">is_open_union</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">s₁</span> <span class="bp">∪</span> <span class="n">s₂</span><span class="o">)</span>
@@ -156,7 +138,7 @@ The example uses the filters <code>at_top</code> and <code>at_bot</code> that re
 </code></pre></div>
 </div>
 
-<p>The <em>principal filter</em> <code>principal Y</code> attached to a subset <code>Y</code> of a set <code>X</code> is the collection of all subsets of <code>X</code> that contain <code>Y</code>. So it&#x27;s not difficult to convince yourself that the following results should be true:</p>
+<p>The <em>principal filter</em> <code>principal Y</code> attached to a subset <code>Y</code> of a set <code>X</code> is the collection of all subsets of <code>X</code> that contain <code>Y</code>. So it's not difficult to convince yourself that the following results should be true:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">interior</span> <span class="n">Y</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="bp">𝓝</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">filter.principal</span> <span class="n">Y</span><span class="o">}</span> <span class="o">:=</span> <span class="n">interior_eq_nhds</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="bp">∈</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="o">:=</span> <span class="n">is_open_iff_mem_nhds</span>
@@ -175,7 +157,7 @@ of compactness is also written in filter-theoretic terms:</p>
 </code></pre></div>
 </div>
 
-<p>Translated, this says that a subset <code>Y</code> of a topological space <code>X</code> is compact if for every proper filter <code>F</code> on <code>X</code>, if <code>Y</code> is an element of <code>F</code> then there&#x27;s an element <code>y</code> of <code>Y</code> such that the smallest filter containing both F and the neighbourhood filter of <code>y</code> is not the filter of all subsets of <code>X</code> either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of <code>ℝ^n</code>, any sequence has a convergent subsequence.</p>
+<p>Translated, this says that a subset <code>Y</code> of a topological space <code>X</code> is compact if for every proper filter <code>F</code> on <code>X</code>, if <code>Y</code> is an element of <code>F</code> then there's an element <code>y</code> of <code>Y</code> such that the smallest filter containing both F and the neighbourhood filter of <code>y</code> is not the filter of all subsets of <code>X</code> either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of <code>ℝ^n</code>, any sequence has a convergent subsequence.</p>
 <p>One might ask why this definition of compactness has been chosen, rather than the standard one about open covers having finite subcovers. The reasons for this are in some sense computer-scientific rather than mathematical -- the issue should not be what definition is ultimately chosen (indeed the developers should feel free to choose whatever definition they like as long as it is logically equivalent to the usual one, and they might have reasons related to non-mathematical points such as running times), the issue should be how to prove that the inbuilt definition is equivalent to the one you want to use in practice. And fortunately, we have</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">Y</span> <span class="bp">↔</span>
   <span class="o">(</span><span class="bp">∀</span> <span class="n">cov</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">U</span> <span class="bp">∈</span> <span class="n">cov</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">⊆</span> <span class="bp">⋃₀</span> <span class="n">cov</span> <span class="bp">→</span>
@@ -288,7 +270,7 @@ The Stone-Čech compactification of a topological space.</li>
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
         
-          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
         
@@ -315,7 +297,7 @@ The Stone-Čech compactification of a topological space.</li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
         
-          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
         
@@ -326,7 +308,7 @@ The Stone-Čech compactification of a topological space.</li>
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
         
           <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
@@ -392,7 +374,7 @@ The Stone-Čech compactification of a topological space.</li>
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/theories/topology.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/theories/topology.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>

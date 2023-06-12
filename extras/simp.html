@@ -47,25 +47,7 @@
 <div id="mainbox">
 
   <main>
-    
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
+	  
 <h1 id="simp" class="markdown-heading">Simp <a class="hover-link" href="#simp">#</a></h1>
 <h2 id="overview" class="markdown-heading">Overview <a class="hover-link" href="#overview">#</a></h2>
 <p>In this document we will explain basic usage of the simplifier
@@ -141,7 +123,7 @@ In this case three suffice:</p>
 <p>To see both those rewrites that work and those that fail during the simplification process,
 you can use the more verbose option <code>set_option trace.simplify true</code>.</p>
 <h2 id="simp-lemmas" class="markdown-heading">Simp lemmas <a class="hover-link" href="#simp-lemmas">#</a></h2>
-<p>So how did Lean&#x27;s simplifier know that <code>a * a⁻¹ = 1</code>? It is because
+<p>So how did Lean's simplifier know that <code>a * a⁻¹ = 1</code>? It is because
 there is a lemma in <code>algebra.group.defs</code> that is tagged with the
 <code>simp</code> attribute:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span> <span class="n">mul_right_inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">...</span>
@@ -167,7 +149,7 @@ a function before simplifying the function. Also, <code>simp</code> contains som
 amount of cleverness to be able to avoid considering <em>all</em> <code>simp</code>
 lemmas every time (there are over ten thousand of them currently in <code>mathlib</code>!).</p>
 <p>The simplifier applies <code>simp</code> lemmas in one direction only: if <code>A = B</code> is a <code>simp</code>
-lemma, then <code>simp</code> replaces <code>A</code>s with <code>B</code>s, but it doesn&#x27;t replace
+lemma, then <code>simp</code> replaces <code>A</code>s with <code>B</code>s, but it doesn't replace
 <code>B</code>s with <code>A</code>s. Hence a <code>simp</code> lemma should have the property that its
 right-hand side is simpler than its left-hand side. In
 particular, <code>=</code> and <code>↔</code> should not be viewed as symmetric operators in
@@ -186,7 +168,7 @@ without bound, causing <code>simp</code> to loop forever:</p>
 
 <p>When making a new definition, it is very common to also introduce
 <code>simp</code> lemmas to put expressions involving the definition into a
-sensible form. An example of this is in mathlib&#x27;s
+sensible form. An example of this is in mathlib's
 <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean">data.complex.basic</a>,
 which has almost 100 <code>simp</code> lemmas. Even though they are true by definition, theorems such as</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[simp]</span> <span class="kd">lemma</span>
@@ -256,7 +238,7 @@ Lean at that time.</p>
 For example, a theorem about cancelling a factor on both sides of an equation would
 only be valid under the hypothesis that the factor is non-zero. If <code>h</code>
 is a proof of hypothesis <code>P</code> and <code>P → A = B</code> is a <code>simp</code> lemma, then
-<code>simp [h]</code> will replace <code>A</code>&#x27;s with <code>B</code>&#x27;s in the goal. The fact that
+<code>simp [h]</code> will replace <code>A</code>'s with <code>B</code>'s in the goal. The fact that
 <code>simp</code> considers additional hypotheses is the reason it is called a
 <em>conditional</em> term rewriting system.</p>
 <h2 id="simp-normal-form" class="markdown-heading">Simp-normal form <a class="hover-link" href="#simp-normal-form">#</a></h2>
@@ -266,13 +248,13 @@ if <code>n : ℕ</code> then the hypotheses <code>n ≠ 0</code>, <code>0 ≠ n<
 problematic for rewriting systems like the simplifier. The reason for this is
 that the simplifier looks for subterms using <em>syntactic equality</em>. If the
 simplifier is working on a term <code>T</code> and <code>A = B</code> is a <code>simp</code> lemma,
-then, unless a subterm <code>A&#x27;</code> of <code>T</code> is syntactically the same as <code>A</code>
-(approximately: they have literally the same textual representation), then <code>simp</code> won&#x27;t
-in general notice the rule applies, so it won&#x27;t
+then, unless a subterm <code>A'</code> of <code>T</code> is syntactically the same as <code>A</code>
+(approximately: they have literally the same textual representation), then <code>simp</code> won't
+in general notice the rule applies, so it won't
 be rewritten by <code>B</code>. Similarly, if nonzeroness of <code>n</code> (stated in
 one way) is a precondition in a <code>simp</code> lemma of the form <code>A = B</code>, and <code>h</code> is a proof
 of nonzeroness of <code>n</code> (stated in a different way), then <code>simp [h]</code> might
-not replace <code>A</code>&#x27;s with <code>B</code>&#x27;s.</p>
+not replace <code>A</code>'s with <code>B</code>'s.</p>
 <p>The way this issue is dealt with in <code>mathlib</code> is to fix once and for
 all a <em><code>simp</code> normal form</em> for the way something is to be expressed
 (like <code>0 &lt; n</code> for nonzeroness) and then sticking to this variant when
@@ -303,11 +285,11 @@ normalizing <code>simp</code> lemma</p>
 arguments of a function before simplifying the function, a <code>simp</code>
 lemma should have the arguments to the function on its left-hand side in simp-normal
 form. For example if <code>g 0</code> can be simplified, then <code>@[simp] lemma foo : f (g 0) = 0</code> will never be used.
-Mathlib&#x27;s <code>simp_nf</code> <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands">linter</a> checks for this
-(you can run mathlib&#x27;s linters for a module yourself by putting <code>#lint</code> at the end of the file).</p>
+Mathlib's <code>simp_nf</code> <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands">linter</a> checks for this
+(you can run mathlib's linters for a module yourself by putting <code>#lint</code> at the end of the file).</p>
 <h2 id="simpa" class="markdown-heading"><code>simpa</code> <a class="hover-link" href="#simpa">#</a></h2>
 <p>The <code>simpa</code> tactic is a variation on <code>simp</code> for finishing a proof -- as a &quot;finishing&quot; tactic, it will fail
-if it&#x27;s unable to close the goal.  The basic usage is</p>
+if it's unable to close the goal.  The basic usage is</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">simpa</span> <span class="o">[</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">]</span> <span class="n">using</span> <span class="n">e</span>
 </code></pre></div>
 </div>
@@ -574,7 +556,7 @@ constructors for the same type, and to <code>a1 = b1 ∧ a2 = b2 ∧ ...</code> 
 <code>simp {iota_eqn := tt}</code>). This adds equation lemmas generated by the
 equation/pattern-matching compiler to the set of <code>simp</code> lemmas.</p>
 <p>The <code>contextual</code> option gives <code>simp</code> the ability to consider
-hypotheses as additional <code>simp</code> lemmas based on a subexpression&#x27;s
+hypotheses as additional <code>simp</code> lemmas based on a subexpression's
 surrounding context. For example, as it simplifies the consequent of an
 implication it temporarily adds the antecedent as a <code>simp</code> lemma. This
 is necessary for the following example:</p>
@@ -586,7 +568,7 @@ is necessary for the following example:</p>
 </div>
 
 <p>Amusing trick: if you do <code>simp _</code> then Lean will interpret <code>_</code> as a placeholder for the configuration options.
-Since it can&#x27;t figure out the configuration options through unification, it will instead print an error
+Since it can't figure out the configuration options through unification, it will instead print an error
 along with all the default configuration values.
 This works for other tactics that take a configuration as well, such as <code>rw</code>.</p>
 
@@ -599,7 +581,7 @@ This works for other tactics that take a configuration as well, such as <code>rw
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
         
-          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
         
@@ -626,7 +608,7 @@ This works for other tactics that take a configuration as well, such as <code>rw
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
         
-          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
         
@@ -637,7 +619,7 @@ This works for other tactics that take a configuration as well, such as <code>rw
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
         
           <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
@@ -703,7 +685,7 @@ This works for other tactics that take a configuration as well, such as <code>rw
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/simp.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/extras/simp.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>

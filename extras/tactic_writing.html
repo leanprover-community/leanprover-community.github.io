@@ -47,25 +47,7 @@
 <div id="mainbox">
 
   <main>
-    
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
+	  
 <h1 id="tutorial-tactic-writing-in-lean" class="markdown-heading">Tutorial: tactic writing in Lean <a class="hover-link" href="#tutorial-tactic-writing-in-lean">#</a></h1>
 <p>This is a tutorial for getting started writing your own tactics in Lean.
 It is intended for an audience that does not necessarily have
@@ -73,9 +55,9 @@ experience working with monads in a functional programming langauge
 (e.g. most mathematicians).</p>
 <p>Other useful resources while learning to write tactics include:</p>
 <ul>
-<li>Rob Lewis&#x27; <a href="https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2">video tutorials</a> on metaprogramming in Lean from
+<li>Rob Lewis' <a href="https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2">video tutorials</a> on metaprogramming in Lean from
 Lean for the Curious Mathematician 2020</li>
-<li>Chapter 7 of the <a href="https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf">Hitchhiker&#x27;s Guide to Logical Verification</a></li>
+<li>Chapter 7 of the <a href="https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf">Hitchhiker's Guide to Logical Verification</a></li>
 <li>the original paper about metaprogramming Lean
 <a href="https://leanprover.github.io/papers/tactic.pdf">A Metaprogramming Framework for Formal Verification</a></li>
 </ul>
@@ -204,7 +186,7 @@ if the right-hand side of the assignment fails.</p>
 
 <p>Beware that this kind of assignment is only trying to extract data of type
 <code>α</code> from something of type <code>tactic α</code>. It cannot be used to store
-regular stuff. The following doesn&#x27;t work.</p>
+regular stuff. The following doesn't work.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">broken_assignment</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span>
  <span class="n">message</span> <span class="bp">←</span> <span class="s2">&quot;Hello, World.&quot;</span><span class="o">,</span>  <span class="c1">-- WRONG!</span>
@@ -224,7 +206,7 @@ regular stuff. The following doesn&#x27;t work.</p>
 is doing. The only extra ingredient is the <code>return</code> function. The
 following function tries to return <code>tt</code> if there is no more goal, <code>ff</code>
 otherwise. The next one can be used interactively and traces the result
-(note that using the first one interactively won&#x27;t have any visible
+(note that using the first one interactively won't have any visible
 effect since interactive use ignores the returned value).</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">is_done</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">bool</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">tactic.target</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">ff</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">return</span> <span class="n">tt</span>
@@ -268,7 +250,7 @@ doing so we catch more types of failure than we did above:</p>
 </code></pre></div>
 </div>
 
-<p>The parenthesis in the above code don&#x27;t look very nice. One could use
+<p>The parenthesis in the above code don't look very nice. One could use
 instead curly brackets which allow to delimit a <code>do</code> block, as in:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">meta</span> <span class="kd">def</span> <span class="n">trace_goal_is_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="k">do</span> <span class="o">{</span> <span class="bp">`</span><span class="o">(</span><span class="bp">%%</span><span class="n">l</span> <span class="bp">=</span> <span class="bp">%%</span><span class="n">r</span><span class="o">)</span> <span class="bp">←</span> <span class="n">tactic.target</span><span class="o">,</span>
@@ -303,7 +285,7 @@ expressions, returning the first match (or failing if nothing matches).</p>
 the previous section. The basic pattern is classical recursive find in a
 list. Notice the expression <code>e</code> is left of colon, hence it will be passed
 unchanged to the recursive call <code>find_matching_type Hs</code>. The choice of
-name <code>H</code> stands for <code>hypothesis</code>, while <code>Hs</code>, following Haskell&#x27;s naming
+name <code>H</code> stands for <code>hypothesis</code>, while <code>Hs</code>, following Haskell's naming
 conventions, stands for several hypotheses. The imperative analogue of
 what happens for non-empty lists would read something like the following
 imperative pseudo-code</p>
@@ -317,7 +299,7 @@ expressions that we can pass to our <code>find_matching_type</code>. If that
 function succeeds, its output is passed to the builtin tactic
 <code>tactic.exact</code>. Here we need to use the fully qualified name because of
 possible confusion with the interactive version of <code>exact</code> (which takes
-different parameters, so it&#x27;s not an exact copy of the non-interactive
+different parameters, so it's not an exact copy of the non-interactive
 one). This is good opportunity to point out that the beginning of this
 tutorial uses fully qualified names everywhere for clarity, but of
 course the real world workflow is to open the <code>tactic</code> namespace.</p>
@@ -346,18 +328,18 @@ returning terms of type <code>tactic stuff</code>). Those versions are prefixed 
 </code></pre></div>
 </div>
 
-<p>The last line is a bit silly: it&#x27;s there because what we get from the
+<p>The last line is a bit silly: it's there because what we get from the
 previous line has type <code>list unit</code>, so it cannot be the final
 piece of our do block. Hence we add <code>return ()</code> where <code>()</code> is the
 only term of type <code>unit</code>. One can also use the tactic <code>skip</code> to achieve
 the same goal. This special case is so common that we actually have a
-variant <code>list.mmap&#x27;</code> of <code>list.mmap</code> which discards the result of
-the function applied to elements of the list, and returns <code>()</code> when it&#x27;s
+variant <code>list.mmap'</code> of <code>list.mmap</code> which discards the result of
+the function applied to elements of the list, and returns <code>()</code> when it's
 done traversing the list.</p>
 <h2 id="manipulating-the-local-context" class="markdown-heading">Manipulating the local context <a class="hover-link" href="#manipulating-the-local-context">#</a></h2>
 <p>Our next goal is to be able to use and create assumptions in the local context.
 We will write a tactic that produces a new assumption by adding two known
-equalities (or failing miserably if this operation doesn&#x27;t make sense). At
+equalities (or failing miserably if this operation doesn't make sense). At
 first the names of thoses two equalities will be stupidly hardwired in our
 tactic. So we want a tactic performing the first line in the following proof.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
@@ -458,7 +440,7 @@ of <code>«have»</code>, which will use it if provided, and otherwise use the n
 
 <h3 id="parsing-locations-and-expressions" class="markdown-heading">Parsing locations and expressions <a class="hover-link" href="#parsing-locations-and-expressions">#</a></h3>
 <p>Our next tactic multiplies from the left an equality by a given expression
-(or fails if this operation wouldn&#x27;t make sense). We want to mechanize the following proof.</p>
+(or fails if this operation wouldn't make sense). We want to mechanize the following proof.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">b</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">replace</span> <span class="n">hyp</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="n">hyp</span><span class="o">,</span>
@@ -524,7 +506,7 @@ the core library or mathlib, see what you can understand, and ask specific
 questions on Zulip. For more theory, especially a proper explanation of monads, you can read
 <a href="https://leanprover.github.io/programming_in_lean/">Programming in Lean</a>, but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
 the paper <a href="https://leanprover.github.io/papers/tactic.pdf">A Metaprogramming Framework for Formal Verification</a>.</p>
-<h2 id="mariox27s-backtick-cheat-sheet" class="markdown-heading">Mario&#x27;s backtick cheat sheet <a class="hover-link" href="#mariox27s-backtick-cheat-sheet">#</a></h2>
+<h2 id="marios-backtick-cheat-sheet" class="markdown-heading">Mario's backtick cheat sheet <a class="hover-link" href="#marios-backtick-cheat-sheet">#</a></h2>
 <p>This section is a direct compilation of messages from Mario on Zulip.</p>
 <ul>
 <li>
@@ -533,7 +515,7 @@ checks are done besides parsing dots into namespaced names.</p>
 </li>
 <li>
 <p><code>``some</code> does name resolution at parse time, so this example expands to  <code>`option.some</code>
-and will error if the given name doesn&#x27;t exist.</p>
+and will error if the given name doesn't exist.</p>
 </li>
 <li>
 <p><code>`(my expr)</code> constructs an expression at parse time, resolving what it can in the current (of
@@ -568,7 +550,7 @@ tactic definition inside a quotation, using <code>%%(reflect n)</code>. As an ex
 </code></pre></div>
 </div>
 
-<p>If you just wrote <code>n</code> directly here you&#x27;d get a &quot;unexpected local in quotation expression&quot;
+<p>If you just wrote <code>n</code> directly here you'd get a &quot;unexpected local in quotation expression&quot;
 error.</p>
 </li>
 <li>
@@ -585,9 +567,9 @@ bind the antiquoted variables.
 For example, if <code>e</code> is an expression then <code>do `(%%a = %%b) ← return e, ...</code> will check that
 <code>e</code> is an equality, and bind the LHS and RHS to <code>a</code> and <code>b</code> (of type <code>expr</code>), and if it is not an
 equality the tactic will fail.</p>
-<p>(It&#x27;s worth noting that this sort of pattern matching works at a syntactic level. Sometimes
+<p>(It's worth noting that this sort of pattern matching works at a syntactic level. Sometimes
 it is more flexible to use unification, instead.)</p>
-<h2 id="mariox27s-monadic-symbols-cheat-sheet" class="markdown-heading">Mario&#x27;s monadic symbols cheat sheet <a class="hover-link" href="#mariox27s-monadic-symbols-cheat-sheet">#</a></h2>
+<h2 id="marios-monadic-symbols-cheat-sheet" class="markdown-heading">Mario's monadic symbols cheat sheet <a class="hover-link" href="#marios-monadic-symbols-cheat-sheet">#</a></h2>
 <p>All functions and notations from the list below apply to more general monads than <code>tactic</code>, so they
 are listed in a generic form but, for the purposes
 of this tutorial <code>m</code> is always <code>tactic</code> (or <code>lean.parser</code>). Although
@@ -609,7 +591,7 @@ reasons.</li>
 <li><code>pure</code>: same as <code>return</code>. Again, historical reasons.</li>
 <li><code>failure</code>: failed value (specific monads usually have a more useful form of this, like <code>fail</code> and
 <code>failed</code> for tactics).</li>
-<li><code>ma &lt;|&gt; ma&#x27;</code> recover from failure: runs <code>ma</code> and if it fails then runs <code>ma&#x27;</code>.</li>
+<li><code>ma &lt;|&gt; ma'</code> recover from failure: runs <code>ma</code> and if it fails then runs <code>ma'</code>.</li>
 <li><code>a $&gt; mb</code>: same as <code>do mb, return a</code></li>
 <li><code>ma &lt;$ b</code>: same as <code>do ma, return b</code></li>
 </ul>
@@ -623,7 +605,7 @@ reasons.</li>
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
         
-          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
         
@@ -650,7 +632,7 @@ reasons.</li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
         
-          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
         
@@ -661,7 +643,7 @@ reasons.</li>
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
         
           <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
@@ -727,7 +709,7 @@ reasons.</li>
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/tactic_writing.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/extras/tactic_writing.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>

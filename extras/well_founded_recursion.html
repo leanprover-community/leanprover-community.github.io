@@ -47,25 +47,7 @@
 <div id="mainbox">
 
   <main>
-    
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
+	  
 <h1 id="the-equation-compiler-and-using_well_founded" class="markdown-heading">The equation compiler and using_well_founded <a class="hover-link" href="#the-equation-compiler-and-using_well_founded">#</a></h1>
 <p>To define functions and proofs recursively you can use the equation compiler, if you have a well founded relation on that type</p>
 <p>For example the definition of gcd on naturals uses well founded recursion</p>
@@ -136,7 +118,7 @@ x y : ℕ
 </code></pre></div>
 </div>
 
-<p>Now the error message is asking us to prove <code>succ x &lt; y</code>. This is because by default the equation compiler tries to recurse on the first argument. More precisely, the relation that the equation compiler tries to use in this example is on the type of pairs of natural numbers <code>Σ&#x27; (a : ℕ), ℕ</code>, and it uses a lexicographical relation where the pair <code>⟨a, b⟩ ≺ ⟨c, d⟩</code> iff <code>a &lt; c ∨ (a = c ∧ b &lt; d)</code> This situation can be resolved, either by changing the order of the arguments or by specifying a <code>rel_tac</code> as decribed later in this doc.</p>
+<p>Now the error message is asking us to prove <code>succ x &lt; y</code>. This is because by default the equation compiler tries to recurse on the first argument. More precisely, the relation that the equation compiler tries to use in this example is on the type of pairs of natural numbers <code>Σ' (a : ℕ), ℕ</code>, and it uses a lexicographical relation where the pair <code>⟨a, b⟩ ≺ ⟨c, d⟩</code> iff <code>a &lt; c ∨ (a = c ∧ b &lt; d)</code> This situation can be resolved, either by changing the order of the arguments or by specifying a <code>rel_tac</code> as decribed later in this doc.</p>
 <p>Sometimes moving an argument outside of the equation compiler, can help the equation compiler prove a recursion is well_founded. For example the following proof from <code>data.nat.prime</code> fails.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">prod_factors</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">list.prod</span> <span class="o">(</span><span class="n">factors</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span>
 <span class="bp">|</span> <span class="mi">0</span>       <span class="n">h</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span>
@@ -182,7 +164,7 @@ x y : ℕ
 </div>
 
 <p>The final line tells the equation compiler to use this relation. It is not necessary to fully understand the final line to be able to use well_founded tactics. The most important part is <code>⟨_, measure_wf card⟩</code> This is the well_founded instance. <code>measure_wf</code> is a proof that for any relation generated from a function to the natural numbers, i.e. for a function <code>f : α → ℕ</code>, the relation <code>λ x y, f x &lt; f y</code> is well founded. The underscore is a placeholder for the relation, as it can be inferred from the type of the proof. Note that the well founded relation must be on a <code>psigma</code> type corresponding to the product of the types of the arguments after the vertical bar, if there are multiple arguments after the vertical bar.</p>
-<p>In the gcd example the <code>psigma</code> type is <code>Σ&#x27; (a : ℕ), ℕ</code>. In order to solve the problem in the example where the order of the arguments was flipped, you could define a well founded relation on <code>Σ&#x27; (a : ℕ), ℕ</code> using the function <code>psigma.snd</code>, the function giving the second element of the pair, and then the error disappears.</p>
+<p>In the gcd example the <code>psigma</code> type is <code>Σ' (a : ℕ), ℕ</code>. In order to solve the problem in the example where the order of the arguments was flipped, you could define a well founded relation on <code>Σ' (a : ℕ), ℕ</code> using the function <code>psigma.snd</code>, the function giving the second element of the pair, and then the error disappears.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span> <span class="n">gcd</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span>
 <span class="bp">|</span> <span class="n">y</span> <span class="mi">0</span>        <span class="o">:=</span> <span class="n">y</span>
 <span class="bp">|</span> <span class="n">y</span> <span class="o">(</span><span class="n">succ</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">y</span> <span class="bp">%</span> <span class="n">succ</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">x</span><span class="o">,</span> <span class="k">from</span> <span class="n">mod_lt</span> <span class="n">_</span> <span class="bp">$</span> <span class="n">succ_pos</span> <span class="n">_</span><span class="o">,</span>
@@ -200,7 +182,7 @@ x y : ℕ
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
         
-          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
         
@@ -227,7 +209,7 @@ x y : ℕ
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
         
-          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
         
@@ -238,7 +220,7 @@ x y : ℕ
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
         
           <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
@@ -304,7 +286,7 @@ x y : ℕ
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/well_founded_recursion.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/extras/well_founded_recursion.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>
