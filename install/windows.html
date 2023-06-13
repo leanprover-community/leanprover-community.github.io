@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Installing Lean 3 and mathlib on Windows</title>
+	<title>Installing Lean 4 and mathlib4 on Windows</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -47,114 +47,82 @@
 <div id="mainbox">
 
   <main>
-	  
-<h1 id="installing-lean-3-and-mathlib-on-windows" class="markdown-heading">Installing Lean 3 and mathlib on Windows <a class="hover-link" href="#installing-lean-3-and-mathlib-on-windows">#</a></h1>
-<p>This document explains how to get started with Lean 3 and mathlib.</p>
+    
+<h1 id="installing-lean-4-and-mathlib4-on-windows" class="markdown-heading">Installing Lean 4 and mathlib4 on Windows <a class="hover-link" href="#installing-lean-4-and-mathlib4-on-windows">#</a></h1>
+<p>This document explains how to get started with Lean 4 and mathlib.</p>
 <p>If you get stuck, please come to <a href="https://leanprover.zulipchat.com/">the chat room</a> to ask for
 assistance.</p>
-<p>There is a <a href="https://www.youtube.com/watch?v=y3GsHIe4wZ4">video walkthrough</a> of these instructions on YouTube.</p>
-<p>We'll need to set up Lean, an editor that knows about Lean, and <code>mathlib</code> (the standard library).
-Rather than installing Lean directly, we'll install a small program called <a href="https://github.com/leanprover/elan"><code>elan</code></a> which
+<!--
+TODO: make a new video walkthrough.
+There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
+-->
+<p>We'll need to set up Lean, an editor that knows about Lean, and <code>mathlib4</code> (the standard library).
+Rather than installing Lean directly, we'll rely on a small program called <a href="https://github.com/leanprover/elan"><code>elan</code></a> which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.</p>
-<h2 id="installing-elan" class="markdown-heading">Installing <code>elan</code> <a class="hover-link" href="#installing-elan">#</a></h2>
-<ol>
-<li>
-<p>We'll need a terminal, along with some basic prerequisites.</p>
-<p>We recommend that you use <code>git bash</code> and not <code>msys2</code>, since installing the supporting tools (below) causes issues in <code>msys2</code>.</p>
-<p>Install <a href="https://gitforwindows.org/">Git for Windows</a> (you can accept all default answers during installation).
-Then open a terminal by typing <code>git bash</code> in the Windows search bar.</p>
-</li>
-<li>
-<p>In terminal, run the command</p>
-<p><code>curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh</code></p>
-<p>and hit enter when a question is asked.
-To make sure the terminal will find the installed files, run <code>echo 'PATH=&quot;$HOME/.elan/bin:$PATH&quot;' &gt;&gt; &quot;$HOME/.profile&quot;</code>.</p>
-</li>
-</ol>
-<p>Then close and reopen Git Bash.</p>
-<h2 id="installing-mathlib-supporting-tools" class="markdown-heading">Installing mathlib supporting tools <a class="hover-link" href="#installing-mathlib-supporting-tools">#</a></h2>
-<p>In order to use mathlib supporting tools, you need to <a href="https://www.python.org/downloads/">get python</a> first.</p>
-<h3 id="get-python" class="markdown-heading">Get Python <a class="hover-link" href="#get-python">#</a></h3>
-<ul>
-<li>Download the latest version of python <a href="https://www.python.org/downloads/">here</a>.</li>
-<li>Run the downloaded file (<code>python-3.x.x.exe</code>)</li>
-<li>Check <code>Add Python 3.x to PATH</code>.</li>
-<li>Choose the default installation.</li>
-<li>Open Git Bash (type <code>git bash</code> in the Start Menu)</li>
-<li>Run <code>which python</code>
-<ul>
-<li>The expected output is something like <code>/c/Users/&lt;user&gt;/AppData/Local/Programs/Python/Pythonxx-xx/python</code>. In this case, proceed to the next step.</li>
-<li>If it's something like <code>/c/Users/&lt;user&gt;/AppData/Local/Microsoft/WindowsApps/python</code>, then
-<ul>
-<li>Did you follow the instruction to select <code>Add Python 3.x to PATH</code> during the installation?
-<ul>
-<li>If not, re-run the python installer to uninstall python and try again.</li>
-</ul>
-</li>
-<li>Otherwise, you need to disable a Windows setting.
-<ul>
-<li>Type <code>manage app execution aliases</code> into the Windows search prompt (start menu) and open the corresponding System Settings page.</li>
-<li>There should be two entries <code>App Installer python.exe</code> and <code>App Installer python3.exe</code>. Ensure that both of these are set to <code>Off</code>.</li>
-</ul>
-</li>
-<li>Close and reopen Git Bash and restart this step.</li>
-</ul>
-</li>
-<li>If it is any other directory, you might have an existing version of Python. Ask for help in the Zulip chat room (linked above).</li>
-<li>If you get <code>command not found</code>, you should add the Python directory to your path. Google how to do this, or ask on Zulip.</li>
-</ul>
-</li>
-<li>Run <code>cp &quot;$(which python)&quot; &quot;$(which python)&quot;3</code>. This ensures that we can use the command <code>python3</code> to call Python.</li>
-<li>Test whether everything is working by typing <code>python3 --version</code> and <code>pip3 --version</code>. If both commands give a short output and no error, everything is set up correctly.
-<ul>
-<li>If <code>pip3 --version</code> doesn't give any output, run the command <code>python3 -m pip install --upgrade pip</code>, which should fix it.</li>
-</ul>
-</li>
-</ul>
-<h3 id="configure-git" class="markdown-heading">Configure Git <a class="hover-link" href="#configure-git">#</a></h3>
-<ul>
-<li>Run <code>git config --global core.autocrlf input</code> in Git Bash
-<ul>
-<li>Alternatively, you can set it to <code>false</code>. If it is set to <code>true</code>, you might run into issues when running <code>leanproject</code>.</li>
-</ul>
-</li>
-</ul>
-<h3 id="get-scripts" class="markdown-heading">Get Scripts <a class="hover-link" href="#get-scripts">#</a></h3>
-<p>Then, at a terminal, run the command</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>mathlibtools
+<h2 id="installing-visual-studio-code" class="markdown-heading">Installing <code>Visual Studio Code</code> <a class="hover-link" href="#installing-visual-studio-code">#</a></h2>
+<p>We recommend that everyone use <code>VS Code</code> as their editor for working in Lean.
+You can install <code>VS Code</code> for your operating system from <a href="https://code.visualstudio.com/download"><a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></a>.</p>
+<h2 id="installing-git" class="markdown-heading">Installing <code>git</code> <a class="hover-link" href="#installing-git">#</a></h2>
+<p>Dependencies between Lean 4 projects are implemented via pointers to git repositories,
+so you will need <code>git</code> installed on your computer.</p>
+<p>You may have this set up already, in which case you can skip this step.</p>
+<p>Otherwise, we recommend that you install <a href="https://gitforwindows.org/"><code>Git for Windows</code></a>.
+You will be asked many questions during installation, and we recommend you accept the defaults for all of them
+<em>except</em> for the default editor, for which you should select <code>Visual Studio Code</code>, rather than the default choice of <code>vi</code>.</p>
+<p>We recommend running <code>git config --global core.autocrlf input</code> to make sure
+that you don't change the line endings of text files you edit.</p>
+<h2 id="installing-the-lean4-extension-in-vs-code" class="markdown-heading">Installing the <code>lean4</code> extension in <code>VS Code</code> <a class="hover-link" href="#installing-the-lean4-extension-in-vs-code">#</a></h2>
+<p>Open <code>VS Code</code>, and in the &quot;activity bar&quot; along the left hand edge of the screen
+click on the &quot;extension&quot; icon <img src="https://leanprover-community.github.io//img/new-extensions-icon.png" alt="(image of icon)" />.</p>
+<p>In the search box that appears, type <code>lean4</code>, and then select the <code>lean4</code> extension that appears,
+and click the install button.</p>
+<h2 id="setting-up-elan-and-lean" class="markdown-heading">Setting up <code>elan</code> and <code>lean</code> <a class="hover-link" href="#setting-up-elan-and-lean">#</a></h2>
+<p>You can either have the <code>VS Code</code> extension install <code>elan</code> and <code>lean</code> for you,
+or do it manually. We recommmend having the extension do it, but give instructions for both.</p>
+<h3 id="have-the-extension-install-elan-and-lean" class="markdown-heading">Have the extension install <code>elan</code> and <code>lean</code> <a class="hover-link" href="#have-the-extension-install-elan-and-lean">#</a></h3>
+<p>Under the <code>File</code> menu, select <code>New text file</code>.
+A new window labelled <code>Untitled-1</code> will appear.</p>
+<p>There will be a prompt in this window saying <code>Select a language</code>,
+which you should click on and select <code>Lean4</code>.
+(You can alternatively find where <code>VS Code</code> says <code>Plain text</code> in the bottom right of your screen, and change the language here,
+or press <code>ctrl+shift+p</code> to open the command palette, and select <code>Change language mode</code>.)</p>
+<p>Once you've set the langauge to <code>Lean4</code>, a dialog will appear in the bottom right of your screen,
+saying <code>Failed to start 'lean' language server</code> with a button <code>Install Lean using Elan</code>.</p>
+<p>Click this button, and inside a terminal window within <code>VS Code</code> you should see the installation process begin.
+It will take on the order of a minute to download and install <code>Lean</code>.</p>
+<p>When this finishes, return to the <code>Untitled-1</code> editor, and type</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span> <span class="mi">18</span> <span class="bp">+</span> <span class="mi">19</span>
 </code></pre></div>
 </div>
 
-<h2 id="installing-and-configuring-an-editor" class="markdown-heading">Installing and configuring an editor <a class="hover-link" href="#installing-and-configuring-an-editor">#</a></h2>
-<p>There are two Lean-aware editors, VS Code and emacs.
-This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).</p>
-<ol>
-<li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
-<li>Launch VS Code.</li>
-<li>Click on the extension icon <img src="https://leanprover-community.github.io//img/new-extensions-icon.png" alt="(image of icon)" />
-(or <img src="https://leanprover-community.github.io//img/extensions-icon.png" alt="(image of icon)" /> in older versions) in the side bar on the left edge of
-the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for <code>leanprover</code>.</li>
-<li>Select the <code>lean</code> extension (unique name <code>jroesch.lean</code>). There is also a
-<code>lean4</code> extension, but that one isn't relevant here.</li>
-<li>Click &quot;install&quot; (In old versions of VS Code, you might need to click &quot;reload&quot; afterwards)</li>
-<li>Setup the default profile:</li>
-</ol>
-<ul>
-<li>If you're using <code>git bash</code>, press <code>ctrl-shift-p</code> to open the command palette, and type
-<code>Select Default Profile</code>, then select <code>git bash</code> from the menu.</li>
-<li>If you're using <code>msys2</code>, press <code>ctrl-comma</code> again to open the settings, and add two settings:</li>
-</ul>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>&quot;terminal.integrated.shell.windows&quot;: &quot;C:\\msys64\\usr\\bin\\bash.exe&quot;,
-&quot;terminal.integrated.shellArgs.windows&quot;: [&quot;--login&quot;, &quot;-i&quot;]
+<p>If you see a blue underline appear under <code>#eval</code>, and the result <code>37</code> displayed in the right hand side <code>Lean info view</code> panel,
+then you have successfully installed Lean 4!</p>
+<p>You can skip ahead to read the instructions about creating and working on <a href="project.html">Lean projects</a>.
+This page will show you how to work with mathlib4, the main mathematical library for Lean,
+or to work with a new or existing project that depends on mathlib4.</p>
+<h3 id="installing-elan-yourself" class="markdown-heading">Installing <code>elan</code> yourself <a class="hover-link" href="#installing-elan-yourself">#</a></h3>
+<p>Open a command prompt (<code>cmd</code>) and execute the following commands:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-O<span class="w"> </span>--location<span class="w"> </span>https://raw.githubusercontent.com/leanprover/elan/master/elan-init.ps1
+powershell<span class="w"> </span>-ExecutionPolicy<span class="w"> </span>Bypass<span class="w"> </span>-f<span class="w"> </span>elan-init.ps1
+del<span class="w"> </span>elan-init.ps1
 </code></pre></div>
 </div>
 
-<ol start="7">
-<li>Restart VS Code.</li>
-</ol>
-<h2 id="lean-projects" class="markdown-heading">Lean Projects <a class="hover-link" href="#lean-projects">#</a></h2>
-<p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
+<p>Alternatively you can open a <code>git bash</code> window, and run</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh<span class="w"> </span>-sSf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre></div>
+</div>
+
+<p>In either case, it should take about a minute to install <code>elan</code>.
+Afterwards, in <code>VS Code</code> you can open a text file and either set the language to <code>Lean4</code> (or just save it with a <code>.lean</code> extension),
+and then try</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span> <span class="mi">18</span> <span class="bp">+</span> <span class="mi">19</span>
+</code></pre></div>
+</div>
+
+<p>as described above to check that Lean is responding to you.</p>
+<p>You can now read the instructions about creating and working on <a href="project.html">Lean projects</a>.</p>
 
   </main>
 
@@ -165,7 +133,7 @@ the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
         
-          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib">GitHub</a></li>
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
         
@@ -192,7 +160,7 @@ the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean-web-editor">Online version (no installation)</a></li>
+          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/leanproject.html">Using leanproject</a></li>
         
@@ -203,7 +171,7 @@ the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for
         <ul class="nav">
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
-          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_docs">API documentation</a></li>
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
         
           <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
@@ -269,7 +237,7 @@ the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/templates/install/windows.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/install/windows.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>
