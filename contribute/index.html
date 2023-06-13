@@ -69,7 +69,7 @@ If you need to link to Lean 3 specific resources please link there.
 <h1 id="how-to-contribute-to-mathlib" class="markdown-heading">How to contribute to mathlib <a class="hover-link" href="#how-to-contribute-to-mathlib">#</a></h1>
 <p>Here are some tips and tricks
 to make the process of contributing as smooth as possible.</p>
-<ol>
+<ul>
 <li>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
 discuss your contribution before and while you are working on it.</li>
 <li>Adhere to the guidelines:
@@ -79,13 +79,89 @@ discuss your contribution before and while you are working on it.</li>
 <li>The <a href="doc.html">documentation guidelines</a>.</li>
 </ul>
 </li>
-</ol>
+</ul>
 <p>Once you have code that you'd like to contribute, you should open a PR.
 There is a <a href="https://www.youtube.com/watch?v=Bnc8w9lxe8A">video tutorial</a> walking you through the process of making a PR on YouTube.</p>
+<h2 id="working-on-mathlib" class="markdown-heading">Working on mathlib <a class="hover-link" href="#working-on-mathlib">#</a></h2>
+<p>We use <code>git</code> to manage and version control <code>mathlib</code>.
+The <code>master</code> branch is the &quot;production&quot; version of mathlib.
+It is essential that everything in the master branch compiles without errors, and there are no <code>sorry</code>s.
+To ensure this, we only commit changes to <code>master</code> that have passed CI tests, and have been approved by mathlib maintainers.</p>
+<p>While you're working on a new contribution to <code>mathlib</code>, you should do this on a different branch.
+It's okay to do this in your own fork of the <code>mathlib</code> repository,
+or you can introduce yourself on Zulip and ask for write access to non-<code>master</code> branches of the mathlib repository.
+Please include your GitHub username in your request.
+It's polite to prefix the branch name with your username, so it's easier for us to clean up clutter.
+(Once you're making a pull request, we'll ask you to do so from a branch of the mathlib repository,
+rather than from your own fork, as CI works better this way.)</p>
+<p>Typical workflow:</p>
+<ul>
+<li>To get started, you'll need a local copy of mathlib.</li>
+<li>At <a href="https://github.com/leanprover-community/mathlib">https://github.com/leanprover-community/mathlib</a>, click &quot;Fork&quot; in the top right, to make your own fork of the repository.
+Your fork is at <a href="https://github.com/USER/mathlib.">https://github.com/USER/mathlib.</a>
+Alternatively, if you've asked for write access you can just use <a href="https://github.com/leanprover-community/mathlib.">https://github.com/leanprover-community/mathlib.</a></li>
+<li>Now make a local clone of the repository.
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">USER</span><span class="bp">/</span><span class="n">mathlib.git</span>
+<span class="n">cd</span> <span class="n">mathlib</span>
+</code></pre></div>
+</div>
+
+</li>
+<li>The steps above only need to be done once (not once for each contribution).</li>
+<li>Now, each time you want to work on a new change to mathlib, create a new branch:
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">checkout</span> <span class="bp">-</span><span class="n">b</span> <span class="n">my_new_branch</span>   <span class="bp">#</span> <span class="n">This</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">branch</span>
+</code></pre></div>
+</div>
+
+It's also fine to simply clone <a href="https://github.com/leanprover-community/mathlib.git">https://github.com/leanprover-community/mathlib.git</a>,
+but you won't be able to push changes unless you've asked for permission.
+An alternative at this step is to use <code>leanproject</code>.
+The command
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">leanproject</span> <span class="n">get</span> <span class="bp">-</span><span class="n">b</span> <span class="n">mathlib</span><span class="o">:</span><span class="n">my_new_branch</span>
+</code></pre></div>
+</div>
+
+has the same effect as the <code>git clone</code> and <code>git checkout -b</code> commands described above,
+except that it will clone into the directory <code>mathlib_my_new_branch</code>.</li>
+<li>Sometimes you may not want to create a new branch, but instead work on a branch
+that someone else created, or you created from a different computer.
+In that case you need to use <code>git checkout their_new_branch</code> (note there is no <code>-b</code> here).</li>
+<li>Make local changes, e.g. using Visual Studio Code using the Lean extension.</li>
+<li>Commit your changes using <code>git commit -a</code>.</li>
+<li>If you'd like to compile everthing locally to check you didn't break anything, run
+<code>leanproject build</code>. This may take a long time if you modified files low down in the import hierarchy.
+It's also okay to let our central CI servers do this for you.</li>
+<li>In order to push your changes back to the repository on github, use
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">push</span>
+</code></pre></div>
+</div>
+
+If this complains about the remote not being configured, follow the advice in the output from <code>git</code> and run
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">push</span> <span class="c1">--set-upstream origin my_new_branch</span>
+</code></pre></div>
+</div>
+
+</li>
+<li>If you're working on the main <code>mathlib</code> repository rather than your own fork,
+continuous integration will automatically kick in at this point.
+You can view the output by visiting
+<a href="https://github.com/leanprover-community/mathlib/tree/my_new_branch">https://github.com/leanprover-community/mathlib/tree/my_new_branch</a>
+(There will be a green tick on the line describing the most recent commit if everything works,
+otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
+Click on the red cross to see details.)
+You can also check CI status on the command line by installing <code>hub</code> and running <code>hub ci-status</code>.</li>
+<li>After CI finishes, you can run <code>leanproject get-cache</code> to download compiled oleans.
+See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
+</ul>
 <h2 id="making-a-pull-request-pr" class="markdown-heading">Making a Pull Request (PR) <a class="hover-link" href="#making-a-pull-request-pr">#</a></h2>
-<ol start="3">
+<p>Once you're happy with your local changes, it's time to make a pull request.</p>
+<ul>
 <li>
-<p>Introduce yourself on Zulip and ask for write access to non-master branches of the mathlib repository. Please include your GitHub username in your request. Make your changes on a branch of the main repository.</p>
+<p>If you haven't already asked for write access to non-master branches of the mathlib repository,
+please come to <a href="https://leanprover.zulipchat.com/">https://leanprover.zulipchat.com/</a>, introduce yourself, and ask for this permission.</p>
+</li>
+<li>
+<p>Push your changes to a branch on the main repository, if they weren't already there.</p>
 </li>
 <li>
 <p>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.</p>
@@ -93,29 +169,13 @@ There is a <a href="https://www.youtube.com/watch?v=Bnc8w9lxe8A">video tutorial<
 <li>
 <p>The title of the PR should follow our <a href="https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md">commit conventions</a>.</p>
 </li>
-<li>
-<p>You can use <code>leanproject</code> to manage your work. Here are some detailed steps for sharing your shiny new lemmas about sets:</p>
-<ul>
-<li><code>leanproject get -b mathlib:shiny_lemma</code> This will create a (local) branch called <code>shiny_lemma</code> and also create a local folder called <code>mathlib_shiny_lemma</code> with a copy of mathlib for you to work on.</li>
-<li><code>cd mathlib_shiny_lemma</code>, so that your working directory is at the root of the git repository.</li>
-<li>edit the necessary files, e.g. <code>src/data/set/basic.lean</code></li>
-<li>If you are anxious, <code>leanproject build</code> to check you didn't break anything. This will be long because you edit a fundamental file, imported by pretty much everything else.</li>
-<li><code>git commit -a</code></li>
-<li><code>git push origin</code> This pushes your branch to GitHub. You might get a complaint from git that the remote is not configured. In that case, follow the advice, and run <code>git push --set-upstream origin shiny_lemma</code>.</li>
-<li>Visit <a href="https://github.com/leanprover/mathlib">mathlib on GitHub</a> to see an invitation to open a PR based on what you just did.</li>
-<li>Wait for continuous integration to build your branch if you didn't do it locally, <code>leanproject get-cache</code> will then download what was built by CI (Continuous Integration)</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
 </ul>
 <h2 id="lifecycle-of-a-pr" class="markdown-heading">Lifecycle of a PR <a class="hover-link" href="#lifecycle-of-a-pr">#</a></h2>
-<p>We use GitHub &quot;labels&quot; to manage review. (Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have completed step 3 above&quot;.)</p>
+<p>We use GitHub &quot;labels&quot; to manage review. (Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have asked for write access&quot;.)</p>
 <p>On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quot;, &quot;labels&quot;, etc.
 Click on the &quot;labels&quot; header to add or remove labels from the current project.</p>
-<p>The most important labels are &quot;awaiting-review&quot; and &quot;awaiting-author&quot;. If you label your PR with <strong>&quot;awaiting-review&quot;</strong>, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;awaiting-review&quot; to start the process over again.</p>
+<p>The most important labels are &quot;awaiting-review&quot; and &quot;awaiting-author&quot;. If your PR builds (has a green checkmark) and you label your PR with <strong>&quot;awaiting-review&quot;</strong>, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;awaiting-review&quot; to start the process over again.</p>
 <p>After some iteration, a reviewer will &quot;approve&quot; the PR and the &quot;ready-to-merge&quot; label will be automatically applied to the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
 After responding appropriately to bors (if necessary), the PR will get added to the <a href="https://app.bors.tech/repositories/24316">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
 <p>Here are some other frequently-used labels:</p>
@@ -124,10 +184,18 @@ After responding appropriately to bors (if necessary), the PR will get added to 
 <p>A <strong>&quot;WIP&quot;</strong> (= work in progress) PR still needs some foundational work (e.g. maybe it still contains <code>sorry</code>s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon.</p>
 </li>
 <li>
+<p>A <strong>&quot;RFC&quot;</strong> (= request for comment) is a PR about a change that might be controversial or need a decision from an expert about
+whether to proceed at all.</p>
+</li>
+<li>
+<p>You can add <strong>&quot;awaiting-CI&quot;</strong>, which will temporarily hide the PR on the main review queue.
+This label will be automatically removed when CI is complete.</p>
+</li>
+<li>
 <p>Consider adding the <strong>&quot;help wanted&quot;</strong> label to directly solicit contributions.</p>
 </li>
 <li>
-<p>The <strong>&quot;blocked-by-other-PR&quot;</strong> label means that some specific other PR(s) should be resolved before addressing this one. If you add the &quot;blocked-by-other-PR&quot; label to your PR, please include the PR numbers of the dependencies in the title and PR comment so that others can see at a glance which PRs should be reviewed first.</p>
+<p>The <strong>&quot;blocked-by-other-PR&quot;</strong> label means that some specific other PR(s) should be resolved before addressing this one. To add the &quot;blocked-by-other-PR&quot; label to your PR, include the PR numbers of the dependencies in the PR comment (following the example hidden in the comment there) so that others can see at a glance which PRs should be reviewed first. The label will be added automatically by a bot and will also be removed automatically when the other PRs have been merged.</p>
 </li>
 <li>
 <p>The <strong>easy</strong> label should be used to mark PRs that can be immediately approved. Maintainers and reviewers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally <em>not</em> easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any <code>simp</code> lemmas or instances that are not immediately analogous to existing <code>simp</code> lemmas or instances.</p>
