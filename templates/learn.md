@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Learning Lean
 
 There are many ways to start learning Lean, depending on your background and
@@ -9,7 +28,7 @@ learning.
 ## Hands-on approaches
 
 * Whatever your background, if you want to dive right away, you can play the
-  [Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/)
+  [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/)
   by Kevin Buzzard and Mohammad Pedramfar. This is a online interactive tutorial to Lean
   focused on proving properties of the elementary operations on natural numbers.
 
@@ -32,7 +51,7 @@ learning.
   It can be [read online](https://leanprover-community.github.io/mathematics_in_lean/),
   or downloaded [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
   but it is really meant to be used in VSCode, doing exercises
-  on the fly (see the [instructions](https://leanprover-community.github.io/mathematics_in_lean/introduction.html#getting-started)).
+  on the fly (see the [instructions](https://leanprover-community.github.io/mathematics_in_lean/01_Introduction.html#getting-started)).
   It currently covers roughly the same ground as the tutorials project.
 
 * Once you know the basics, you can also learn by solving Lean puzzles
@@ -56,8 +75,8 @@ at hand, for reference.
 
 * If you have a computer science background, and are primarily interested
   in software verification, then you can read
-  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) ([tablet edition optimized for on-screen viewing](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide_tablet.pdf)),
-  course notes for an [MSc-level course](https://lean-forward.github.io/logical-verification/2020/index.html) at VU Amsterdam.
+  [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf) ([tablet edition optimized for on-screen viewing](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide_tablet.pdf)),
+  course notes for an [MSc-level course](https://lean-forward.github.io/logical-verification/2021/) at VU Amsterdam.
 
 * If you want a systematic exposition of syntax and commands, then you
   can read the [reference manual](https://leanprover.github.io/reference/).
@@ -82,10 +101,10 @@ still have a look at the following resources.
   covers the basics and enables you to read more advanced sources, for instance
   the code of
   [existing tactics](https://leanprover-community.github.io/mathlib_docs/tactics.html).
-* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
+* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf) also has a chapter on metaprogramming.
 * The reference paper on
   [Lean metaprogramming](https://leanprover.github.io/papers/tactic.pdf).
-* The [metaprogramming tutorial videos](https://www.youtube.com/watch?v=o6oUjcE6Nz4&list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) that Rob Lewis designed and recorderd for LftCM 2020.
+* The [metaprogramming tutorial videos](https://www.youtube.com/watch?v=o6oUjcE6Nz4&list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) that Rob Lewis designed and recorded for LftCM 2020.
 
 ## More on foundations
 
@@ -121,6 +140,7 @@ to use Lean.
 A number of meetings have helped welcome newcomers to the Lean community.
 The following have links to online talks and other material that may
 be of interest:
+* [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
 * [Lean Together 2021](https://leanprover-community.github.io/lt2021/)
 * [Lean for the Curious Mathematician 2020](https://leanprover-community.github.io/lftcm2020/)
 * [Formal Methods in Mathematics / Lean Together 2020](https://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/)
@@ -128,3 +148,7 @@ be of interest:
 
 We also have a [YouTube channel](https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg/playlists)
 which includes playlists of videos from the above conferences, and also other conferences with Lean-relevant content.
+
+## Miscellaneous resources
+* [lean-for-hackers](https://agentultra.github.io/lean-for-hackers/):
+  a hands-on guide to using Lean 3 as a programming language.

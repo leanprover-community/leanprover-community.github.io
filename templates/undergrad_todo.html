@@ -1,6 +1,25 @@
 {% extends '_base.html' %}
 {% block title %}Undergrad math not in mathlib{% endblock %}
 {% block content %}
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
+
 
     <h1>Missing undergraduate mathematics in mathlib</h1>
 
@@ -29,14 +48,25 @@
       docs/undergrad.yaml</a> in the mathlib repository.
     </p>
 
+  {% macro flat_child(item) -%}
+    {%- if item.missing_children -%}
+      {{ item.title }}(
+      {%- for inner_item in item.missing_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+      {%- endfor -%})
+    {%- else -%}
+      {% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
+    {%- endif -%}
+  {%- endmacro -%}
+
   {% for area in overviews %}
     {% if area.has_missing_child %}
     <h4>{{ area.title }}</h4>
-      {% for subarea in area.has_missing_children %}
+      {% for subarea in area.missing_children %}
         <p class="ml-4 mb-2">
         <b>{{ subarea.title }}: </b>
-        {% for item in subarea.has_missing_children %}
-          {{ item.title }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% for item in subarea.missing_children %}
+	{{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
         {% endfor %}
         </p>
       {% endfor %}

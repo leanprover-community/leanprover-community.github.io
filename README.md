@@ -14,8 +14,8 @@ In order to rebuild the CSS from SCSS, you also need:
 
 The website relies on several components which are built in other repositories:
 - [`mathlib_stats`](https://github.com/leanprover-community/mathlib_stats)
-- [`lean-web-editor`](https://github.com/leanprover-community/lean-web-editor)
-- [`mathlib_docs`](https://github.com/leanprover-community/mathlib_docs) (built by CI in [doc-gen](https://github.com/leanprover-community/doc-gen/))
+- [`lean4web`](https://github.com/leanprover-community/lean4web)
+- [`mathlib4_docs`](https://github.com/leanprover-community/mathlib4_docs) (built by CI in [doc-gen4](https://github.com/leanprover/doc-gen4/))
 
 ## Building
 
@@ -30,6 +30,11 @@ The website relies on several components which are built in other repositories:
 * Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?
+
+## Lean 3 website
+
+The files and history for the leanprover-community Lean 3 website can be found in the
+[`lean3`](https://github.com/leanprover-community/leanprover-community.github.io/tree/lean3) branch of this repo.
 
 ## Old website
 

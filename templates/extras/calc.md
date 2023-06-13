@@ -1,7 +1,27 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # How to use calc
 
 `calc` is an environment -- so a "mode" like tactic mode, term mode and
-[conv mode](conv.html). Documentation and basic examples for how to use it are in Theorem Proving In Lean, in
+[conv mode](conv.html). Documentation and basic examples for how to use
+it are in Theorem Proving In Lean, in
 [section 4.3](https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs).
 
 Basic example usage:
@@ -12,28 +32,52 @@ calc a = b + 1 : H1
 ...    = c + 1 : by rw H2
 ```
 
-## Error messages, and how to avoid them
+`calc` is also available in tactic mode. You can leave `_`s to create a
+new goal:
+```lean
+example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
+begin
+  calc a = b + 1 : H1
+  ...    = c + 1 : _,
+  { rw H2 }
+end
+```
+In fact, `calc A = B : H ...` in tactic mode functions exactly like a
+call to `refine (calc A = B : H ...)`.
 
-Note that the error messages can be quite obscure when things aren't quite right, and often the red
-squiggles end up under a random `...`. A tip to avoid these problems with calc usage is to first
-populate a skeleton proof such as
+## Getting effective feedback while using calc
+
+To get helpful error messages, keep the calc structure even before the
+proof is complete. Use `_` as in the example above or `sorry` to stand
+for missing justifications. `sorry` will supress error messages
+entirely, while `_` will generate a guiding error message.
+
+If the structure of calc is incorrect (e.g., missing `:` or the
+justification after it), you may see error messages that are obscure
+and/or red squiggles that end up under a random `...`. To avoid these,
+you might first populate a skeleton proof such as:
 
 ```lean
-example : A = D :=
+example (A B C D : ℝ ) : A = D :=
 calc A = B : sorry
-...    = C : sorry
+...    = C : _
 ...    = D : sorry
 ```
-(in tactic mode this might look more like
 
+and then fill in the `sorry` and `_` gradually.
+
+In tactic mode calc should be terminated with a comma:
 ```lean
 have H : A = D,
-  exact calc A = B : sorry
-  ...          = C : sorry
-  ...          = D : sorry,
+{ calc A = B : sorry
+  ...    = C : sorry
+  ...    = D : _,
+  sorry },
 ```
-with a comma at the end), and then to start filling in the sorries after that. (Idle thought: could
-one write a VS Code snippet to write this skeleton?)
+and the `_` can be left in as they generate a subgoal to be resolved
+after calc (here by the last `sorry`).
+
+(Idle thought: could one write a VS Code snippet to write this skeleton?)
 
 ## Using operators other than equality
 

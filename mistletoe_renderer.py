@@ -73,7 +73,11 @@ class CustomHTMLRenderer(HTMLRenderer):
         inner: str = self.render_inner(token)
         # generate anchor following what github does
         # See info and links at https://gist.github.com/asabaylus/3071099
+        # We additionally "coarsely" attempt to strip out HTML tags from
+        # anchors so that foo <code>bar</code> baz becomes foo-bar-baz not
+        # foo-codebarcode-baz.
         anchor = inner.strip().lower()
+        anchor = re.sub(r'<[^>]+>([^<]*)</[^>]+>', r'\1', anchor)
         anchor = re.sub(r'[^\w\- ]+', '', anchor).replace(' ', '-')
         return template.format(level=token.level, inner=inner, anchor=anchor)
 
@@ -91,7 +95,7 @@ class CustomHTMLRenderer(HTMLRenderer):
                 yield tup
             yield 0, "</code>"
 
-        def wrap(self, source, outfile):
+        def wrap(self, source):
             """Return the source with a code, pre, and div."""
             return self._wrap_div(self._wrap_pre(self._wrap_code(source)))
 

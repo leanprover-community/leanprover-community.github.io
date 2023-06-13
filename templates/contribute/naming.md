@@ -1,12 +1,33 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Mathlib naming conventions
 
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
+
+This guide is written for Lean 3.
 
 ### Names of symbols
 
 When translating the statements of theorems into words, this dictionary is often used:
 
-Logic:
+#### Logic
 
 | symbol | shortcut | name                      | notes                                                               |
 |--------|----------|---------------------------|---------------------------------------------------------------------|
@@ -21,19 +42,22 @@ Logic:
 | `≠`    | `\ne`    | `ne`                      |                                                                     |
 | `∘`    | `\o`     | `comp`                    |                                                                     |
 
-Set:
+#### Set
 
-| symbol | shortcut  | name               | notes |
-|--------|-----------|--------------------|-------|
-| `∈`    | `\in`     | `mem`              |       |
-| `∪`    | `\cup`    | `union`            |       |
-| `∩`    | `\cap`    | `inter`            |       |
-| `⋃`    | `\bigcup` | `Union` / `bUnion` |       |
-| `⋂`    | `\bigcap` | `Inter` / `bInter` |       |
-| `\`    | `\\`      | `sdiff`            |       |
-| `ᶜ`    | `\^c`     | `compl`            |       |
+| symbol      | shortcut  | name               | notes |
+|-------------|-----------|--------------------|-------|
+| `∈`         | `\in`     | `mem`              |       |
+| `∪`         | `\cup`    | `union`            |       |
+| `∩`         | `\cap`    | `inter`            |       |
+| `⋃`         | `\bigcup` | `Union` / `bUnion` |       |
+| `⋂`         | `\bigcap` | `Inter` / `bInter` |       |
+| `\`         | `\\`      | `sdiff`            |       |
+| `ᶜ`         | `\^c`     | `compl`            |       |
+| <code>{x &#124; p x}</code> |           | `set_of`           |       |
+| `{x}`       |           | `singleton`        |       |
+| `{x, y}`    |           | `pair`             |       |
 
-Algebra:
+#### Algebra
 
 | symbol | shortcut              | name          | notes                                                       |
 | ------ | --------------------- | ------------- | ----------------------------------------------------------- |
@@ -46,20 +70,23 @@ Algebra:
 | `/`    |                       | `div`         |                                                             |
 | `•`    | `\bu`                 | `smul`        |                                                             |
 | `⁻¹`   | `\-1`                 | `inv`         |                                                             |
+| `⅟`    | `\frac1`              | `inv_of`      |                                                             |
 | `∣`    | <code>\\&#124;</code> | `dvd`         |                                                             |
 | `∑`    | `\sum`                | `sum`         |                                                             |
 | `∏`    | `\prod`               | `prod`        |                                                             |
 
-Lattices:
+#### Lattices
 
-| symbol | shortcut | name  | notes |
-|--------|----------|-------|-------|
-| `<`    |          | `lt`  |       |
-| `≤`    | `\le`    | `le`  |       |
-| `⊔`    | `\sup`   | `sup` |       |
-| `⊓`    | `\inf`   | `inf` |       |
-| `⨆`    | `\Sup`   | `Sup` |       |
-| `⨅`    | `\Inf`   | `Inf` |       |
+| symbol | shortcut | name             | notes |
+|--------|----------|------------------|-------|
+| `<`    |          | `lt`             |       |
+| `≤`    | `\le`    | `le`             |       |
+| `⊔`    | `\sup`   | `sup`            |       |
+| `⊓`    | `\inf`   | `inf`            |       |
+| `⨆`    | `\supr`  | `supr` / `bsupr` |       |
+| `⨅`    | `\infi`  | `infi` / `binfi` |       |
+| `⊥`    | `\bot`   | `bot`            |       |
+| `⊤`    | `\top`   | `top`            |       |
 
 ### General conventions
 

@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+{% block title %}{{ team.name }}{% endblock %}
+{% block content %}
+       <h1>{{ team.name }}</h1>
+       <div>
+       {{ team.description | md }}
+       </div>
+
+       <h3>Members</h3>
+       {% if team.use_biography %}
+         <div class="row mt-5">
+         {% for member in team.members %}
+		<div class="col-md-6">
+			<div class="media mb-3">
+				<img src="/img/{{ member.img }}" class="mr-3" alt="{{member.name}} picture">
+				<div class="media-body">
+					<h5 class="mt-0">{{ member.name }}</h5>
+					<p>{{ member.descr }}</p>
+				</div>
+			</div>
+		</div>
+         {% endfor %}
+         </div>
+      {% else %}
+        <ul>
+        {% for member in team.members %}
+          <li>{{ member.name }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+{% endblock %}
+

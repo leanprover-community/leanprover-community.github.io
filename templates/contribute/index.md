@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # How to contribute to mathlib
 
 Here are some tips and tricks
@@ -121,7 +140,11 @@ whether to proceed at all.
 
 - The **"blocked-by-other-PR"** label means that some specific other PR(s) should be resolved before addressing this one. To add the "blocked-by-other-PR" label to your PR, include the PR numbers of the dependencies in the PR comment (following the example hidden in the comment there) so that others can see at a glance which PRs should be reviewed first. The label will be added automatically by a bot and will also be removed automatically when the other PRs have been merged.
 
-- The **easy** label should be used to mark PRs that can be immediately approved. Maintainers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally *not* easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any `simp` lemmas or instances that are not immediately analogous to existing `simp` lemmas or instances.
+- The **easy** label should be used to mark PRs that can be immediately approved. Maintainers and reviewers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally *not* easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any `simp` lemmas or instances that are not immediately analogous to existing `simp` lemmas or instances.
+
+### Dealing with merge conflicts
+
+Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on `master` that conflicts with a change that you're proposing on your PR. If it happens with your PR, check [this GitHub tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github) on how to resolve merge conflicts by using their online tool.
 
 ## Caching compilation
 

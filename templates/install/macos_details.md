@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Controlled installation of Lean and mathlib on MacOS
 
 This document explains a more controlled installation procedure for Lean and
@@ -21,7 +40,7 @@ Installing `elan` and mathlib supporting tools
 
 1.  Install [Homebrew](https://brew.sh/) if you do not already have it installed.
 
-2.  Run `brew install elan mathlibtools` in a terminal window to
+2.  Run `brew install elan-init mathlibtools` in a terminal window to
     install `elan`, as well as the supporting toolset for working with
     `mathlib`.
 
@@ -46,8 +65,10 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
 3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
    (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
    the screen (or press <kbd>⇧ Shift</kbd><kbd>⌘ Command</kbd><kbd>X</kbd>) and search for `leanprover`.
-4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
-5. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
+4. Select the `lean` extension (unique name `jroesch.lean`). There is also a
+   `lean4` extension, but that one does not work with mathlib.
+5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
+6. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
    A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
    displayed.
 
@@ -73,7 +94,7 @@ installation mechanism by running:
 and
 
   ```sh
-  elan self uninstall && brew install elan
+  elan self uninstall && brew install elan-init
   ```
 
 for `mathlib-tools` and `elan` respectively.

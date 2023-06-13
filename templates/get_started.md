@@ -1,6 +1,31 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Get started with Lean
 
-You have several options for installing Lean, described below:
+<div class="alert alert-info">
+This webpage is about the current stable version of Lean, which is Lean 3, although
+the community is currently switching to Lean 4.
+See the <a href="https://leanprover.github.io/lean4/doc/">Lean 4 manual</a> for information about installing Lean 4.
+</div>
+
+You have several options for installing Lean 3, described below:
 
 * a regular install (recommended)
 * using Lean in a web browser
@@ -31,7 +56,7 @@ You need to wait for the orange bar at the top to turn green and say
 pairs to see the state of proofs evolving.
 
 With a bit more time, you can play
-[The Natural Number Game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/),
+[The Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/),
 in your browser.
 
 You can also use Lean on [CoCalc](https://cocalc.com/).
@@ -48,8 +73,8 @@ then you can try one of our autonomous bundles for:
 Each of these bundles contains a folder `trylean` from which you can run
 the program `trylean` without installing anything anywhere else on your
 computer (although MacOS users will need to tell their system
-they really want to run it). On Windows this is a batch file, and there will be a Microsoft 
-Defender warning when running it. To allow the batch file to execute, click on "More Info" 
+they really want to run it). On Windows this is a batch file, and there will be a Microsoft
+Defender warning when running it. To allow the batch file to execute, click on "More Info"
 then "Run anyway". These bundles contain Lean itself,
 [VScodium](https://vscodium.com/)
 which is a distributable version of the VS Code editor, the Lean VS Code extension,

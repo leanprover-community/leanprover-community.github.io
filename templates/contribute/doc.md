@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Documentation style
 
 All pull requests must meet the following documentation standards. See
@@ -75,7 +94,7 @@ by taking (prime p) as a type class argument.
 
 ## References
 
-* [F. Q. Gouêva, *p-adic numbers*][gouvea1997]
+* [F. Q. Gouvêa, *p-adic numbers*][gouvea1997]
 * <https://en.wikipedia.org/wiki/P-adic_number>
 
 ## Tags
@@ -126,24 +145,24 @@ then (multiplicity (p : ℤ) q.num).get
 else 0
 ```
 
-The `doc_blame` linter lists all definitions that do not have doc strings. The `doc_blame_thm` 
+The `doc_blame` linter lists all definitions that do not have doc strings. The `doc_blame_thm`
 linter will lists theorems and lemmas that do not have doc strings.
 
 To run only the `doc_blame` linter, add the following to the end of your lean file:
 ```
 #lint only doc_blame
 ```
-To run only the `doc_blame` and `doc_blame_thm` linters, add the following to the end of your lean 
+To run only the `doc_blame` and `doc_blame_thm` linters, add the following to the end of your lean
 file:
 ```
 #lint only doc_blame doc_blame_thm
 ```
-To run the all default linters, including `doc_blame`, add the following to the end of your lean 
+To run the all default linters, including `doc_blame`, add the following to the end of your lean
 file:
 ```
 #lint
 ```
-To run the all default linters, including `doc_blame` and run `doc_blame_thm`, add the following to 
+To run the all default linters, including `doc_blame` and run `doc_blame_thm`, add the following to
 the end of your lean file:
 ```
 #lint doc_blame_thm
@@ -325,6 +344,6 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
 The following files are maintained as examples of good documentation style:
 
-* [data/padics/padic_norm](https://github.com/leanprover-community/mathlib/blob/master/src/data/padics/padic_norm.lean)
+* [data/padics/padic_norm](https://github.com/leanprover-community/mathlib/blob/master/src/number_theory/padics/padic_norm.lean)
 * [topology/basic](https://github.com/leanprover-community/mathlib/blob/master/src/topology/basic.lean)
-* [analysis/calculus/times_cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/times_cont_diff.lean)
+* [analysis/calculus/cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/cont_diff.lean)

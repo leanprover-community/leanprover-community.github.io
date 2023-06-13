@@ -1,12 +1,39 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Lean projects
 
+In general, if you just open a single `.lean` file in your text editor
+and try to compile it, you'll get a bunch of confusing errors.
 Every non-trivial piece of Lean code needs to live inside a *Lean project*
-(sometimes also called Lean package).
-This means a folder containing in particular a git repository and a file
+(sometimes also called a Lean package).
+A "Lean project" is more than just a folder that you've named "My Lean stuff".
+Rather, it's a folder containing some very specific things:
+in particular, a *git repository* and a file
 `leanpkg.toml` that gathers information about dependencies of the
 project, including for instance the version of Lean that should be used.
 
-Managing all this is done by a little python program called `leanproject`.
+If you're interested in contributing to mathlib you only need to set up
+a Lean project once, which you can use for all your contributions —
+you don't need to set up a new Lean project for each new contribution.
+
+Setting up and managing all this is done by a little python program called `leanproject`.
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the

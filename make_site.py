@@ -5,10 +5,12 @@ import sys
 import subprocess
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional
+from datetime import datetime
 
 import yaml
 from staticjinja import Site
 import jinja2.ext
+from jinja2 import Environment, FileSystemLoader
 import pybtex.database
 from mistletoe import Document, block_token
 from mistletoe_renderer import CustomHTMLRenderer
@@ -18,6 +20,7 @@ import json
 import gzip
 import os
 from github import Github
+from slugify import slugify
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
@@ -91,13 +94,29 @@ with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
     formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
 
 @dataclass
-class Maintainer:
+class People:
     name: str
-    descr: str
-    img: str
+    descr: str = ''
+    img: str = ''
 
-with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
-    maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
+with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
+    peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+@dataclass
+class Team:
+    name: str
+    short_description: str
+    description: str
+    url: str
+    members: List[People]
+    use_biography: bool = False
+
+with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
+    teams = [Team(team['name'], team['short_description'],
+                  team['description'], team['url'],
+                  [peoples.get(name, People(name)) for name in sorted(team['members'])],
+                  use_biography=team.get('use_biography', True))
+             for team in yaml.safe_load(t_file)]
 
 @dataclass
 class DocDecl:
@@ -116,6 +135,16 @@ class HundredTheorem:
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+
+@dataclass
+class Event:
+    title: str
+    location: str
+    type: str
+    url: str = 'TBA'
+    start_date: str = ''
+    end_date: str = ''
+    date_range: str = 'TBA'
 
 urllib.request.urlretrieve(
     'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
@@ -174,6 +203,7 @@ class Overview:
     depth: int
     title: str
     decl: Optional[str] = None
+    url: Optional[str] = None
     parent: Optional['Overview'] = None
     children: List['Overview'] = field(default_factory=list)
 
@@ -196,21 +226,33 @@ class Overview:
         return [item for item in self.children if item.is_nonempty]
 
     @property
-    def has_missing_children(self) -> List['Overview']:
+    def missing_children(self) -> List['Overview']:
         return [item for item in self.children if item.has_missing_child]
 
+    @property
+    def slug(self) -> str:
+        return slugify(self.title)
 
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
+        is_leaf = not isinstance(children, dict)
+        decl = None
+        url = None
+        if is_leaf:
+            if children and 'http' in children:
+                url = children
+            else:
+                decl = replace_link((children or '').strip(), identifier)
         node = cls(
                 id=identifier,
                 depth=depth,
                 title=title,
-                decl=replace_link((children or '').strip(), identifier) if not isinstance(children, dict) else None,
+                decl=decl,
+                url=url,
                 parent=parent,
                 children=[])
 
-        if isinstance(children, dict):
+        if not is_leaf:
             node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
 
         return node
@@ -233,6 +275,32 @@ with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
+
+with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
+    events = [Event(**e) for e in yaml.safe_load(h_file)]
+
+def format_date_range(event):
+    if event.start_date and event.end_date:
+        start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
+        end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
+        if start_date.year != end_date.year:
+            return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.month != end_date.month:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.day != end_date.day:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+        else:
+            return start_date.strftime("%B %-d, %Y")
+    else:
+        return 'TBA'
+
+present = datetime.now().date()
+old_events = sorted((e for e in events if e.end_date and datetime.strptime(e.end_date, '%B %d %Y').date() < present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date(), reverse=True)
+new_events = sorted((e for e in events if (not e.end_date) or datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
+
+for e in old_events + new_events:
+    e.date_range = format_date_range(e)
+
 
 @dataclass
 class Project:
@@ -385,19 +453,30 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
-                ('meet.html', {'maintainers': maintainers,
-                               'community': (DATA/'community.md').read_text( encoding='utf-8')}),
+                ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
+                ('events.html', {'old_events': old_events, 'new_events': new_events}),
+                ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True)
 
-    for folder in ['css', 'js', 'img', 'papers']:
+    # Now build the individual team pages
+    (target/'teams').mkdir(exist_ok=True)
+    env = Environment(loader=FileSystemLoader('templates'))
+    env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
+    team_tpl = env.get_template('_team.html')
+    for team in teams:
+        with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
+            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+
+
+    for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'robots.txt', str(target).rstrip('/')])

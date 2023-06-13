@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Maths in Lean: Topological, uniform and metric spaces
 
 The `topological_space` typeclass is defined in mathlib,
@@ -88,7 +107,7 @@ Note that if `F` is a filter that contains the empty set, then it contains all s
 
 If `X` is a topological space, and `x ∈ X`, then the _neighbourhood filter_ `𝓝 x` of `x` is the set of subsets `Y` of `X` such that `x` is in the interior of `Y`. One checks easily that this is a filter (technical point: to see that this is actually the definition of `𝓝 x` in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using `F ≤ G` iff `G ⊆ F`, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but `lemma nhds_sets` says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).
 
-Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ F` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
+Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ X` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
 
 As an example, below are three limits formulated in Lean.
 The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
