@@ -37,7 +37,7 @@ There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking
 
 4. If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
 5. The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
-6. You can use `leanproject` to manage your work. Here are some detailed steps for for sharing your shiny new lemmas about sets:
+6. You can use `leanproject` to manage your work. Here are some detailed steps for sharing your shiny new lemmas about sets:
    * `leanproject get -b mathlib:shiny_lemma` This will create a (local) branch called `shiny_lemma` and also create a local folder called `mathlib_shiny_lemma` with a copy of mathlib for you to work on.
    * `cd mathlib_shiny_lemma`, so that your working directory is at the root of the git repository.
    * edit the necessary files, e.g. `src/data/set/basic.lean`
