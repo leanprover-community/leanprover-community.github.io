@@ -1,32 +1,11 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
+# How to install Lean 4 and mathlib on MacOS
 
-# How to install Lean and mathlib on MacOS
-
-This document explains how to get started with Lean and mathlib if you
+This document explains how to get started with Lean 4 and mathlib if you
 are using MacOS.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for assistance.
 
-There is a [video walkthrough](https://www.youtube.com/watch?v=NOGWsCNm_FY) of these instructions on YouTube.
-
-## Installing Lean and mathlib
+## Installing Lean 4 and mathlib
 
 ### Intel Macs
 
@@ -40,7 +19,7 @@ process into described stages, and won't ask for a blind `sudo`.
 
 The fast way is: open a terminal and type:
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/install_macos.sh)" && source ~/.profile
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/leanprover-community/mathlib4/master/scripts/install_macos.sh)" && source ~/.profile
 ```
 
 ### M1 Macs / Apple Silicon
@@ -69,7 +48,7 @@ elan toolchain install stable
 elan default stable
 ```
 
-5. Install Visual Studio Code and the Lean extension via `brew install --cask visual-studio-code && code --install-extension jroesch.lean` (both the x86 and ARM versions of `brew` should work).
+5. Install Visual Studio Code and the Lean extension via `brew install --cask visual-studio-code && code --install-extension leanprover.lean4` (both the x86 and ARM versions of `brew` should work).
 
 There is a [Zulip thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/M1.20macs)
 with some interim further details and advice. If you have trouble, feel free to ask for help.
