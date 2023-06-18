@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Controlled installation of Lean and mathlib on Debian/Ubuntu</title>
+	<title>Controlled installation of Lean 4 and mathlib on Debian/Ubuntu</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,28 +48,10 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-<h1 id="controlled-installation-of-lean-and-mathlib-on-debianubuntu" class="markdown-heading">Controlled installation of Lean and mathlib on Debian/Ubuntu <a class="hover-link" href="#controlled-installation-of-lean-and-mathlib-on-debianubuntu">#</a></h1>
+<h1 id="controlled-installation-of-lean-4-and-mathlib-on-debianubuntu" class="markdown-heading">Controlled installation of Lean 4 and mathlib on Debian/Ubuntu <a class="hover-link" href="#controlled-installation-of-lean-4-and-mathlib-on-debianubuntu">#</a></h1>
 <p>This document explains a more controlled installation procedure
-for Lean and mathlib on Linux distributions derived from Debian (Debian itself,
-Ubuntu, LMDE,...). There is a quicker way described in the main
+for Lean 4 and mathlib on Linux distributions derived from Debian (Debian
+itself, Ubuntu, LMDE,...). There is a quicker way described in the main
 <a href="debian.html">install page</a> but it requires more trust.
 Of course you can get even more details about what is going on by
 reading the bash script that will be downloaded below:
@@ -77,8 +59,8 @@ reading the bash script that will be downloaded below:
 <ul>
 <li>
 <p>Lean itself doesn't depend on much infrastructure, but supporting tools
-needed by most users require <code>git</code>, <code>curl</code>, and <code>python</code>. So the first step is:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>curl<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>python3-venv
+needed by most users require <code>git</code> and <code>curl</code>. So the first step is:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>curl
 </code></pre></div>
 </div>
 
@@ -94,31 +76,21 @@ line to <code>$HOME/.profile</code>.</p>
 
 </li>
 <li>
-<p>There are two editors you can use with Lean, VS Code and emacs. The
-recommended choice is <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+<p>There are three editors you can use with Lean, VS Code, emacs and neovim. The
+recommended choice is <a href="https://code.visualstudio.com/">Visual Studio Code</a> which has
+the most complete and well-tested support for Lean.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code>wget<span class="w"> </span>-O<span class="w"> </span>code.deb<span class="w"> </span>https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./code.deb
 rm<span class="w"> </span>code.deb
-code<span class="w"> </span>--install-extension<span class="w"> </span>jroesch.lean
+code<span class="w"> </span>--install-extension<span class="w"> </span>leanprover.lean4
 </code></pre></div>
 </div>
 
 <p>Now open VS Code, and verify Lean is working, for example by saving a file <code>test.lean</code> and entering <code>#eval 1+1</code>.
 A green line should appear underneath <code>#eval 1+1</code>, and hovering the mouse over it you should see <code>2</code>
 displayed.</p>
-<p>The alternative is to use Emacs, and its <a href="https://github.com/leanprover/lean-mode">lean-mode</a>.</p>
-</li>
-<li>
-<p>Then we install a small tool called <code>leanproject</code> that which will handle
-updating mathlib according to the needs of your current project. We use
-<a href="https://pipxproject.github.io/pipx/">pipx</a> to perform the installation.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>pipx
-python3<span class="w"> </span>-m<span class="w"> </span>pipx<span class="w"> </span>ensurepath
-<span class="nb">source</span><span class="w"> </span>~/.profile
-pipx<span class="w"> </span>install<span class="w"> </span>mathlibtools
-</code></pre></div>
-</div>
-
+<p>Alternatively, you can use Emacs and its <a href="https://github.com/leanprover/lean4-mode">lean4-mode</a> or
+neovim and its <a href="https://github.com/Julian/lean.nvim">lean.nvim extension</a>.</p>
 </li>
 </ul>
 <h2 id="lean-projects" class="markdown-heading">Lean Projects <a class="hover-link" href="#lean-projects">#</a></h2>

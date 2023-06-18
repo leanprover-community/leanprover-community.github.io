@@ -48,24 +48,6 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="lean-projects" class="markdown-heading">Lean projects <a class="hover-link" href="#lean-projects">#</a></h1>
 <p>In general, if you just open a single <code>.lean</code> file in your text editor
 and try to compile it, you'll get a bunch of confusing errors.
@@ -74,22 +56,20 @@ Every non-trivial piece of Lean code needs to live inside a <em>Lean project</em
 A &quot;Lean project&quot; is more than just a folder that you've named &quot;My Lean stuff&quot;.
 Rather, it's a folder containing some very specific things:
 in particular, a <em>git repository</em> and a file
-<code>leanpkg.toml</code> that gathers information about dependencies of the
+<code>lakefile.lean</code> that gathers information about dependencies of the
 project, including for instance the version of Lean that should be used.</p>
 <p>If you're interested in contributing to mathlib you only need to set up
 a Lean project once, which you can use for all your contributions —
 you don't need to set up a new Lean project for each new contribution.</p>
-<p>Setting up and managing all this is done by a little python program called <code>leanproject</code>.
+<p>Setting up and managing all this is done by a program called <code>lake</code> (this is
+a contraction of <code>lean</code> and <code>make</code>).
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the
-full <a href="../leanproject.html">leanproject documentation</a>.
-If you are really curious, you can also read
-<a href="../toolchain.html">how pieces fit together</a>.</p>
-<p>There is a <a href="https://www.youtube.com/watch?v=y3GsHIe4wZ4">video walkthrough</a> of these instructions on YouTube.</p>
+full <a href="https://github.com/leanprover/lake/blob/master/README.md">lake documentation</a>.</p>
 <h2 id="working-on-an-existing-project" class="markdown-heading">Working on an existing project <a class="hover-link" href="#working-on-an-existing-project">#</a></h2>
 <p>Suppose you want to work on an existing project. As example, we will take
-<a href="https://github.com/leanprover-community/tutorials">the tutorial project</a>.
+<a href="https://github.com/leanprover-community/mathematics_in_lean">the Mathematics in Lean book</a>.
 Open a terminal.</p>
 <ul>
 <li>
@@ -101,24 +81,30 @@ you may need to first type <code>source ~/.profile</code> or
 <p>Go the the directory where you would like this package to live.</p>
 </li>
 <li>
-<p>Run <code>leanproject get tutorials</code>.</p>
+<p>Run <code>git clone https://github.com/leanprover-community/mathematics_in_lean.git</code>.</p>
+</li>
+<li>
+<p>Run <code>cd mathematics_in_lean</code></p>
+</li>
+<li>
+<p>Run <code>lake exe cache get</code> (note: this command currently only works in projects which import <code>mathlib4</code> as a dependency)</p>
 </li>
 <li>
 <p>Launch VS Code, either through your application menu or by typing
-<code>code tutorials</code>. (MacOS users need to take a one-off
+<code>code .</code>. (MacOS users need to take a one-off
 <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">extra step</a>
 to be able to launch VS Code from the command line.)</p>
 </li>
 <li>
 <p>If you launched VS Code from a menu, on the main screen, or in the File menu,
 click &quot;Open folder&quot; (just &quot;Open&quot; on a Mac), and choose the folder
-<code>tutorials</code> (<em>not</em> one of its subfolders).</p>
+<code>mathematics_in_lean</code> (<em>not</em> one of its subfolders).</p>
 </li>
 <li>
 <p>Using the file explorer on the left-hand side, explore everything you
-want in <code>tutorials/src</code>.
-See the <a href="https://github.com/leanprover-community/tutorials/blob/master/README.md">tutorials instructions</a>
-for advice about how to do the exercises in this project.</p>
+want in <code>MIL</code>.
+See the <a href="https://github.com/leanprover-community/mathematics_in_lean/blob/master/README.md">MIL instructions</a>
+for advice about how to do the exercises in this book.</p>
 </li>
 </ul>
 <h2 id="creating-a-lean-project" class="markdown-heading">Creating a Lean project <a class="hover-link" href="#creating-a-lean-project">#</a></h2>
@@ -127,14 +113,18 @@ commands should be typed in a terminal.</p>
 <ul>
 <li>
 <p>Go to a folder where you want to create a project in a subfolder
-<code>my_project</code>, and type <code>leanproject new my_project</code>. If you get an
-error message saying <code>leanproject</code> is an unknown command and
-you have not logged in since you installed Lean and mathlib, then
-you may need to first type <code>source ~/.profile</code> or <code>source ~/.bash_profile</code>.</p>
+<code>my_project</code>, and type <code>lake +leanprover/lean4:nightly-2023-02-04 new my_project math</code>. Do not worry about the date in the previous command, it ensures you will use a sufficiently recent version of <code>lake</code> but has no impact on the version of <code>lean</code> your project will use. If you get an
+error message saying <code>lake</code> is an unknown command and
+you have not logged in since you installed Lean, then
+you may need to first type <code>source ~/.profile</code> or <code>source ~/.bash_profile</code>.
+The keyword <code>math</code> at the end of this command adds <code>mathlib4</code> to the dependencies of your project, so that you can use <code>import Mathlib</code> in your project files.</p>
+</li>
+<li>
+<p>Go inside the <code>my_project</code> folder and type <code>lake update</code>, then <code>lake exe cache get</code> and then <code>mkdir MyProject</code>.</p>
 </li>
 <li>
 <p>Launch VS Code, either through your application menu or by typing
-<code>code my_project</code>.</p>
+<code>code .</code>.</p>
 </li>
 <li>
 <p>If you launched VS Code through a menu: on the main screen, or in the
@@ -143,30 +133,33 @@ choose the folder <code>my_project</code> (<em>not</em> one of its subfolders).<
 </li>
 <li>
 <p>Your Lean code should now be put inside files with extension <code>.lean</code>
-living in <code>my_project/src/</code> or a subfolder thereof. In the file explorer
-on the left-hand side of VS Code, you can right-click on <code>src</code>, choose
+living in <code>my_project/MyProject/</code> or a subfolder thereof. In the file explorer
+on the left-hand side of VS Code, you can right-click on <code>MyProject</code>, choose
 <code>New file</code>, and type a filename to create a file there.</p>
 </li>
 </ul>
 <p>If you want to make sure everything is working, you can start by
-creating, say <code>my_project/src/test.lean</code> containing:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">topology.basic</span>
+creating, say <code>my_project/MyProject/test.lean</code> containing:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Topology.Basic</span>
 
-<span class="k">#check</span> <span class="n">topological_space</span>
+<span class="k">#check</span> <span class="n">TopologicalSpace</span>
 </code></pre></div>
 </div>
 
 <p>When the cursor is on the last line, the right hand part of VS Code
-should display a &quot;Lean Goal&quot; area saying:
-<code>topological_space : Type u_1 → Type u_1</code></p>
-<p>If, for some reason, you happen to lose the &quot;Lean Goal&quot; area, you
+should display a &quot;Lean Infoview&quot; area saying:
+<code>TopologicalSpace.{u} (α : Type u) : Type u</code>.</p>
+<p>Note that you can import you own files in the project. For instance if you created a
+file <code>my_project/MyProject/Definitions.lean</code>, you can start a new file
+<code>my_project/MyProject/Lemmas.lean</code> with <code>import MyProject.Definitions</code>.</p>
+<p>If, for some reason, you happen to lose the &quot;Lean Infoview&quot; area, you
 can get it back with <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd>
 (<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>Enter</kbd> on MacOS).
 Also, you can get the Lean documentation inside VS Code using
 <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd>
 (<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then,
 inside the text field that appears, type &quot;lean doc&quot; and hit <kbd>Enter</kbd>.
-Then click &quot;Theorem Proving in Lean&quot; and enjoy.</p>
+Then click &quot;Mathematics in Lean&quot; or &quot;Theorem Proving in Lean&quot; and enjoy.</p>
 <h2 id="hosting-your-project-on-github" class="markdown-heading">Hosting your project on GitHub <a class="hover-link" href="#hosting-your-project-on-github">#</a></h2>
 <p>Your project is already a git repository, and as it grows,
 you may want to host it on <a href="https://guides.github.com/activities/hello-world/">GitHub</a>.

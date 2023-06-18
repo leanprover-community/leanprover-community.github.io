@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Controlled installation of Lean and mathlib on MacOS</title>
+	<title>Controlled installation of Lean 4 and mathlib on MacOS</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,45 +48,24 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-<h1 id="controlled-installation-of-lean-and-mathlib-on-macos" class="markdown-heading">Controlled installation of Lean and mathlib on MacOS <a class="hover-link" href="#controlled-installation-of-lean-and-mathlib-on-macos">#</a></h1>
+<h1 id="controlled-installation-of-lean-4-and-mathlib-on-macos" class="markdown-heading">Controlled installation of Lean 4 and mathlib on MacOS <a class="hover-link" href="#controlled-installation-of-lean-4-and-mathlib-on-macos">#</a></h1>
 <p>This document explains a more controlled installation procedure for Lean and
 mathlib on MacOS. There is a quicker way described in the main
 <a href="macos.html">install page</a> but it requires more trust.</p>
 <p>If you get stuck, please come to <a href="https://leanprover.zulipchat.com/">the chat room</a> to ask for
 assistance.</p>
-<p>We'll need to set up Lean, an editor that knows about Lean, and <a href="https://github.com/leanprover-community/mathlib/"><code>mathlib</code></a> (the standard library).</p>
+<p>We'll need to set up Lean, an editor that knows about Lean, and <a href="https://github.com/leanprover-community/mathlib4/"><code>mathlib</code></a> (the math library).</p>
 <p>Rather than installing Lean directly, we'll install a small program called <a href="https://github.com/leanprover/elan"><code>elan</code></a> which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.</p>
-<p>We'll also install <a href="https://github.com/leanprover-community/mathlib-tools"><code>mathlib-tools</code></a>,
-which, amongst other things, let you download compiled binaries for <code>mathlib</code>.</p>
 <h2 id="installing-elan-and-mathlib-supporting-tools" class="markdown-heading">Installing <code>elan</code> and mathlib supporting tools <a class="hover-link" href="#installing-elan-and-mathlib-supporting-tools">#</a></h2>
 <ol>
 <li>
 <p>Install <a href="https://brew.sh/">Homebrew</a> if you do not already have it installed.</p>
 </li>
 <li>
-<p>Run <code>brew install elan-init mathlibtools</code> in a terminal window to
-install <code>elan</code>, as well as the supporting toolset for working with
-<code>mathlib</code>.</p>
+<p>Run <code>brew install elan-init</code> in a terminal window to
+install <code>elan</code>.</p>
 <p>Note that Homebrew also contains a formula named simply <code>lean</code>, but
 that it installs a fixed version of Lean, rather than one provisioned
 with <code>elan</code> as per the above.  Using this formula is as mentioned <em>not</em>
@@ -100,16 +79,17 @@ a project (discussed below) by running <code>elan default stable</code>.</p>
 </li>
 </ol>
 <h2 id="installing-and-configuring-an-editor" class="markdown-heading">Installing and configuring an editor <a class="hover-link" href="#installing-and-configuring-an-editor">#</a></h2>
-<p>There are two editors you can use with Lean, VS Code and emacs.
-This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).</p>
+<p>There are three editors you can use with Lean, VS Code emacs and neovim.
+This document describes using VS Code which currently has the best support for Lean.
+For emacs, look at https://github.com/leanprover/lean4-mode.
+For neovim, look at https://github.com/Julian/lean.nvim)</p>
 <ol>
 <li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
 <li>Launch VS Code.</li>
 <li>Click on the extension icon <img src="https://leanprover-community.github.io//img/new-extensions-icon.png" alt="(image of icon)" />
 (or <img src="https://leanprover-community.github.io//img/extensions-icon.png" alt="(image of icon)" /> in older versions) in the side bar on the left edge of
 the screen (or press <kbd>⇧ Shift</kbd><kbd>⌘ Command</kbd><kbd>X</kbd>) and search for <code>leanprover</code>.</li>
-<li>Select the <code>lean</code> extension (unique name <code>jroesch.lean</code>). There is also a
-<code>lean4</code> extension, but that one does not work with mathlib.</li>
+<li>Select the <code>lean4</code> extension (unique name <code>leanprover.lean4</code>).</li>
 <li>Click &quot;install&quot; (In old versions of VS Code, you might need to click &quot;reload&quot; afterwards)</li>
 <li>Verify Lean is working, for example by saving a file <code>test.lean</code> and entering <code>#eval 1+1</code>.
 A green line should appear underneath <code>#eval 1+1</code>, and hovering the mouse over it you should see <code>2</code>
@@ -117,23 +97,6 @@ displayed.</li>
 </ol>
 <h2 id="lean-projects" class="markdown-heading">Lean Projects <a class="hover-link" href="#lean-projects">#</a></h2>
 <p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
-<h2 id="aside-migrating-from-older-installations" class="markdown-heading">Aside: Migrating From Older Installations <a class="hover-link" href="#aside-migrating-from-older-installations">#</a></h2>
-<p>Older versions of this installation guide recommended a different method
-of installation, involving manually installing <code>elan</code> directly from
-GitHub, procuring <code>pipx</code> and using that to install <code>mathlib-tools</code>
-(<code>leanproject</code>).</p>
-<p>If you have installed things this way, you can migrate to the newer
-installation mechanism by running:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>pipx<span class="w"> </span>uninstall<span class="w"> </span>mathlibtools<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>mathlibtools
-</code></pre></div>
-</div>
-
-<p>and</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>elan<span class="w"> </span>self<span class="w"> </span>uninstall<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>elan-init
-</code></pre></div>
-</div>
-
-<p>for <code>mathlib-tools</code> and <code>elan</code> respectively.</p>
 
   </main>
 
