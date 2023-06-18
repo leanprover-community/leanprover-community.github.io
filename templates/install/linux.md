@@ -1,31 +1,11 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
-# Installing Lean and mathlib on Linux
+# Installing Lean 4 and mathlib on Linux
 
 This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distributions such as Ubuntu).
 
 All commands below should be typed inside a terminal.
 
 * Lean itself doesn't depend on much infrastructure, but supporting tools
-  needed by most users require `git`, `curl`, and `python3` (on Debian and
-  Ubuntu also `python3-pip` and `python3-venv`). So the first step is to get those.
+  needed by most users require `git` and `curl`. So the first step is to get those.
 
 * The next step installs a small tool called [`elan`](https://github.com/leanprover/elan) which will handle
   updating Lean according to the needs of your current project (hit Enter
@@ -36,30 +16,21 @@ All commands below should be typed inside a terminal.
   ```
 
 * You will also need a code editor that has a Lean plugin. The
-  recommended choice is [Visual Studio Code](https://code.visualstudio.com/).
-  The alternative is to use Emacs, and its [lean-mode](https://github.com/leanprover/lean-mode).
+  recommended choice is [Visual Studio Code](https://code.visualstudio.com/) which currently
+  has the best Lean support.
+  The alternatives are to use Emacs and its [lean-mode](https://github.com/leanprover/lean-mode)
+  or neovim and its  [lean.nvim extension](https://github.com/Julian/lean.nvim).
 
   1. Install [VS Code](https://code.visualstudio.com/).
   2. Launch VS Code.
   3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
      (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
      the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
-  4. Select the `lean` extension (unique name `jroesch.lean`). There is also a
-     `lean4` extension, but that one does not work with mathlib.
+  4. Select the `lean4` extension (unique name `leanprover.lean4`). 
   5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
   6. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
     A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
     displayed.
-
-* Then we install a small tool called `leanproject` that which will handle
-  updating mathlib according to the needs of your current project. We use
-  [pipx](https://pipxproject.github.io/pipx/) to perform the installation.
-  ```bash
-  python3 -m pip install --user pipx
-  python3 -m pipx ensurepath
-  source ~/.profile
-  pipx install mathlibtools
-  ```
 
 ## Lean Projects
 
