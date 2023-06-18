@@ -37,7 +37,7 @@ Open a terminal.
 
 * Run `cd mathematics_in_lean`
 
-* Run `lake exe cache get`
+* Run `lake exe cache get` (note: this command currently only works in projects which import `mathlib4` as a dependency)
 
 * Launch VS Code, either through your application menu or by typing
   `code .`. (MacOS users need to take a one-off
@@ -63,6 +63,7 @@ commands should be typed in a terminal.
   error message saying `lake` is an unknown command and
   you have not logged in since you installed Lean, then
   you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
+The keyword `math` at the end of this command adds `mathlib4` to the dependencies of your project, so that you can use `import Mathlib` in your project files.
 
 * Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
 
