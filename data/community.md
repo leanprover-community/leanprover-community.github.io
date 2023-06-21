@@ -12,8 +12,6 @@ Several [teams](teams.html) of community members have designated responsibilitie
 The main gathering point of our community is a
 [Zulip chat instance](https://leanprover.zulipchat.com).
 You can browse public discussions on the most popular "streams" without registering.
-There is also a web-indexed [archive](https://leanprover-community.github.io/archive/),
-with a less convenient interface.
 
 We welcome you to register for the Zulip chat,
 which will let you participate in the discussions.
@@ -37,8 +35,8 @@ If your code contains backticks itself, enclose it in more backticks than it con
 Longer snippets should be enclosed between two lines containing three back-quotes, as in:
 ````md
 ```
-def my_nat : n := 5
-#check my_nat
+def n : myNat := 5
+#check n
 ```
 ````
 
@@ -56,7 +54,7 @@ for displayed math.
 The next gathering point after Zulip is GitHub, which hosts all the
 [community repositories](https://github.com/leanprover-community).
 In particular, the
-[mathlib pull requests](https://github.com/leanprover-community/mathlib/pulls)
+[mathlib pull requests](https://github.com/leanprover-community/mathlib4/pulls)
 page is the right place to see our ongoing efforts.
 You can also read about recent work on our [blog](/blog/).
 
@@ -72,7 +70,7 @@ Behavior that is offensive, discriminatory, or aggressive
 will not be tolerated in any form.
 We adopt the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
 These guidelines apply to the
-[Lean Zulip chat](https://leanprover.zulipchat.com/) 
+[Lean Zulip chat](https://leanprover.zulipchat.com/)
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
 
 The [code of conduct team](/teams/coc.html) serves as first point of contact
