@@ -1,27 +1,8 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # Documentation style
 
 All pull requests must meet the following documentation standards. See
-[the `doc-gen` repo](https://github.com/leanprover-community/doc-gen) for information about the
-[automatically generated doc pages](https://leanprover-community.github.io/mathlib_docs/).
+[the `doc-gen` repo](https://github.com/leanprover/doc-gen4) for information about the
+[automatically generated doc pages](https://leanprover-community.github.io/mathlib4_docs/).
 
 You can preview the markdown processing of a GitHub page or pull request
 using the [Lean doc preview page](https://observablehq.com/@bryangingechen/github-lean-doc-preview).
@@ -52,7 +33,7 @@ The other sections, with second level headers are (in this order):
 * *Tags* (a list of keywords that could be useful when doing text search in mathlib to find where
   something is covered)
 
-References should refer to bibtex entries in [the mathlib citations file](https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib).
+References should refer to bibtex entries in [the mathlib citations file](https://github.com/leanprover-community/mathlib4/blob/master/docs/references.bib).
 See the [Citing other works](#citing-other-works) section below.
 
 The following code block is an example of a file header.
@@ -62,39 +43,36 @@ The following code block is an example of a file header.
 Copyright (c) 2018 Robert Y. Lewis. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Y. Lewis
+
+! This file was ported from Lean 3 source module number_theory.padics.padic_norm
+! leanprover-community/mathlib commit 92ca63f0fb391a9ca5f22d2409a6080e786d99f7
+! Please do not edit these lines, except to modify the commit id
+! if you have ported upstream changes.
 -/
-import data.rat
-import algebra.gcd_domain
-import algebra.field_power
-import ring_theory.multiplicity
-import tactic.ring
-import data.real.cau_seq
-import tactic.norm_cast
+import Mathlib.Algebra.Order.Field.Power
+import Mathlib.NumberTheory.Padics.PadicVal
 
 /-!
 # p-adic norm
 
-This file defines the p-adic valuation and the p-adic norm on ℚ.
+This file defines the `p`-adic norm on `ℚ`.
 
-The p-adic valuation on ℚ is the difference of the multiplicities of `p` in the numerator and
+The `p`-adic valuation on `ℚ` is the difference of the multiplicities of `p` in the numerator and
 denominator of `q`. This function obeys the standard properties of a valuation, with the appropriate
-assumptions on p.
+assumptions on `p`.
 
-The valuation induces a norm on ℚ. This norm is a nonarchimedean absolute value.
+The valuation induces a norm on `ℚ`. This norm is a nonarchimedean absolute value.
 It takes values in {0} ∪ {1/p^k | k ∈ ℤ}.
-
-## Notations
-
-This file uses the local notation `/.` for `rat.mk`.
 
 ## Implementation notes
 
 Much, but not all, of this file assumes that `p` is prime. This assumption is inferred automatically
-by taking (prime p) as a type class argument.
+by taking `[Fact p.Prime]` as a type class argument.
 
 ## References
 
 * [F. Q. Gouvêa, *p-adic numbers*][gouvea1997]
+* [R. Y. Lewis, *A formal proof of Hensel's lemma over the p-adic integers*][lewis2019]
 * <https://en.wikipedia.org/wiki/P-adic_number>
 
 ## Tags
@@ -118,61 +96,49 @@ Doc strings should convey the mathematical meaning of the definition. They are a
 slightly about the actual implementation. The following is a doc string example:
 
 ```lean
-/--
-If `q ≠ 0`, the p-adic norm of a rational `q` is `p ^ (-(padic_val_rat p q))`.
-If `q = 0`, the p-adic norm of `q` is 0.
--/
-def padic_norm (p : ℕ) (q : ℚ) : ℚ :=
-if q = 0 then 0 else (p : ℚ) ^ (-(padic_val_rat p q))
+/-- If `q ≠ 0`, the `p`-adic norm of a rational `q` is `p ^ (-padicValRat p q)`.
+If `q = 0`, the `p`-adic norm of `q` is `0`. -/
+def padicNorm (p : ℕ) (q : ℚ) : ℚ :=
+  if q = 0 then 0 else (p : ℚ) ^ (-padicValRat p q)
 ```
 
 An example that is slightly lying but still describes the mathematical content would be:
 
 ```lean
-/--
-For `p ≠ 1`, the p-adic valuation of an integer `z ≠ 0` is the largest natural number `n` such that
-`p^n` divides `z`.
-`padic_val_rat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the
-valuation of `q.denom`.
-If `q = 0` or `p = 1`, then `padic_val_rat p q` defaults to 0.
--/
-def padic_val_rat (p : ℕ) (q : ℚ) : ℤ :=
-if h : q ≠ 0 ∧ p ≠ 1
-then (multiplicity (p : ℤ) q.num).get
-    (multiplicity.finite_int_iff.2 ⟨h.2, rat.num_ne_zero_of_ne_zero h.1⟩) -
-  (multiplicity (p : ℤ) q.denom).get
-    (multiplicity.finite_int_iff.2 ⟨h.2, by exact_mod_cast rat.denom_ne_zero _⟩)
-else 0
+/-- `padicValRat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the
+valuation of `q.den`. If `q = 0` or `p = 1`, then `padicValRat p q` defaults to `0`. -/
+def padicValRat (p : ℕ) (q : ℚ) : ℤ :=
+  padicValInt p q.num - padicValNat p q.den
 ```
 
-The `doc_blame` linter lists all definitions that do not have doc strings. The `doc_blame_thm`
+The `docBlame` linter lists all definitions that do not have doc strings. The `docBlameThm`
 linter will lists theorems and lemmas that do not have doc strings.
 
-To run only the `doc_blame` linter, add the following to the end of your lean file:
+To run only the `docBlame` linter, add the following to the end of your lean file:
 ```
-#lint only doc_blame
+#lint only docBlame
 ```
-To run only the `doc_blame` and `doc_blame_thm` linters, add the following to the end of your lean
+To run only the `docBlame` and `docBlameThm` linters, add the following to the end of your lean
 file:
 ```
-#lint only doc_blame doc_blame_thm
+#lint only docBlame docBlameThm
 ```
-To run the all default linters, including `doc_blame`, add the following to the end of your lean
+To run the all default linters, including `docBlame`, add the following to the end of your lean
 file:
 ```
 #lint
 ```
-To run the all default linters, including `doc_blame` and run `doc_blame_thm`, add the following to
+To run the all default linters, including `docBlame` and run `docBlameThm`, add the following to
 the end of your lean file:
 ```
-#lint doc_blame_thm
+#lint docBlameThm
 ```
 
 ## LaTeX and Markdown
 
 We generally put references to Lean declarations or variables in between backticks. Writing
 the fully-qualified name (e.g. `finset.card_pos` instead of just `card_pos`) will turn the name
-into a link on our [online docs](https://leanprover-community.github.io/mathlib_docs/).
+into a link on our [online docs](https://leanprover-community.github.io/mathlib4_docs/).
 
 Raw URLs should be enclosed in angle brackets `<...>` to ensure that they will be clickable online.
 (Some URLs, especially those with parentheses or other special symbols,
@@ -192,50 +158,6 @@ to preview the final result. See also the math.stackexchange
 [MathJax tutorial](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
 
 
-## Tactic doc entries
-
-Interactive tactics, user commands, hole commands and user attributes should have doc strings
-explaining how they can be used. The `add_tactic_doc` command should be invoked afterwards to add a
-doc entry to the appropriate page in the online docs.
-
-Example:
-```lean
-/--
-describe what the command does here
--/
-add_tactic_doc
-{ name := "display name of the tactic",
-  category := cat,
-  decl_names := [`dcl_1, `dcl_2],
-  tags := ["tag_1", "tag_2"]
-}
-```
-
-The argument to `add_tactic_doc` is a structure of type `tactic_doc_entry`.
-* `name` refers to the display name of the tactic; it is used as the header of the doc entry.
-* `cat` refers to the category of doc entry.
-  Options: `doc_category.tactic`, `doc_category.cmd`, `doc_category.hole_cmd`, `doc_category.attr`
-* `decl_names` is a list of the declarations associated with this doc. For instance,
-  the entry for `linarith` would set ``decl_names := [`tactic.interactive.linarith]``.
-  Some entries may cover multiple declarations.
-  It is only necessary to list the interactive versions of tactics.
-* `tags` is an optional list of strings used to categorize entries.
-* The doc string is the body of the entry. It can be formatted with markdown.
-  What you are reading now is taken from the description of `add_tactic_doc`.
-
-If only one related declaration is listed in `decl_names` and if this
-invocation of `add_tactic_doc` does not have a doc string, the doc string of
-that declaration will become the body of the tactic doc entry. If there are
-multiple declarations, you can select the one to be used by passing a name to
-the `inherit_description_from` field.
-
-If you prefer a tactic to have a doc string that is different then the doc entry, then between
-the `/--` `-/` markers, write the desired doc string first, then `---` surrounded by new lines,
-and then the doc entry.
-
-Note that providing a badly formed `tactic_doc_entry` to the command can result in strange error
-messages.
-
 ## Sectioning comments
 
 It is common to structure a file in sections, where each section contains related declarations.
@@ -253,39 +175,34 @@ Third-level headers `###` should be used for titles inside sectioning comments.
 If the comment is more than one line long, the delimiters `/-!` and `-/` should appear on their own
 lines.
 
-See [meta/expr.lean](https://github.com/leanprover-community/mathlib/blob/master/src/meta/expr.lean) for an example in practice.
+See [Lean/Expr/Basic.lean](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Lean/Expr/Basic.lean) for an example in practice.
 
 ```lean
-namespace binder_info
+namespace BinderInfo
 
-/-!
-### Declarations about `binder_info`
+/-! ### Declarations about `BinderInfo` -/
 
-This section develops an extended API for the type `binder_info`.
--/
+/-- The brackets corresponding to a given `BinderInfo`. -/
+def brackets : BinderInfo → String × String
+  | BinderInfo.implicit => ("{", "}")
+  | BinderInfo.strictImplicit => ("{{", "}}")
+  | BinderInfo.instImplicit => ("[", "]")
+  | _ => ("(", ")")
 
-instance : inhabited binder_info := ⟨ binder_info.default ⟩
+end BinderInfo
 
-/-- The brackets corresponding to a given binder_info. -/
-def brackets : binder_info → string × string
-| binder_info.implicit        := ("{", "}")
-| binder_info.strict_implicit := ("{{", "}}")
-| binder_info.inst_implicit   := ("[", "]")
-| _                           := ("(", ")")
-
-end binder_info
-
-namespace name
+namespace Name
 
 /-! ### Declarations about `name` -/
 
-/-- Find the largest prefix `n` of a `name` such that `f n ≠ none`, then replace this prefix
+/-- Find the largest prefix `n` of a `Name` such that `f n != none`, then replace this prefix
 with the value of `f n`. -/
-def map_prefix (f : name → option name) : name → name
-| anonymous := anonymous
-| (mk_string s n') := (f (mk_string s n')).get_or_else (mk_string s $ map_prefix n')
-| (mk_numeral d n') := (f (mk_numeral d n')).get_or_else (mk_numeral d $ map_prefix n')
-
+def mapPrefix (f : Name → Option Name) (n : Name) : Name := Id.run do
+  if let some n' := f n then return n'
+  match n with
+  | anonymous => anonymous
+  | str n' s => mkStr (mapPrefix f n') s
+  | num n' i => mkNum (mapPrefix f n') i
 ```
 
 ## Theories documentation
@@ -316,10 +233,10 @@ The proof can be found in [Boole1854].
 
 In the online docs, this will become something like:
 
-> The proof can be found in [[Boo54]](https://leanprover-community.github.io/mathlib_docs/references.html)
+> The proof can be found in [[Boo54]](https://leanprover-community.github.io/mathlib4_docs/references.html)
 
 (The key will change into an [`alpha` style label](https://www.bibtex.com/s/bibliography-style-base-alpha/)
-and become a link to the [References page](https://leanprover-community.github.io/mathlib_docs/references.html)
+and become a link to the [References page](https://leanprover-community.github.io/mathlib4_docs/references.html)
 of the docs.)
 
 Alternatively, you can use custom text for the citation by putting text in square brackets
@@ -329,7 +246,7 @@ ahead of the citation key:
 See [Grundlagen der Geometrie][hilbert1999] for an alternative axiomatization.
 ```
 
-> See [Grundlagen der Geometrie](https://leanprover-community.github.io/mathlib_docs/references.html) for an alternative axiomatization.
+> See [Grundlagen der Geometrie](https://leanprover-community.github.io/mathlib4_docs/references.html) for an alternative axiomatization.
 
 Note that you currently cannot use the closing square bracket `]` symbol in the link text.
 So the following will not result in a working link:
@@ -344,6 +261,6 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
 The following files are maintained as examples of good documentation style:
 
-* [data/padics/padic_norm](https://github.com/leanprover-community/mathlib/blob/master/src/number_theory/padics/padic_norm.lean)
-* [topology/basic](https://github.com/leanprover-community/mathlib/blob/master/src/topology/basic.lean)
-* [analysis/calculus/cont_diff](https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/cont_diff.lean)
+* [Mathlib.NumberTheory.Padics.PadicNorm](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Padics/PadicNorm.lean)
+* [Mathlib.Topology.Basic](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Topology/Basic.lean)
+* [Analysis.Calculus.ContDiff](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Analysis/Calculus/ContDiff.lean)
