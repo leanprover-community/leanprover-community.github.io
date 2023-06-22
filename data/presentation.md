@@ -1,10 +1,12 @@
 ## Lean and its Mathematical Library
 
 The [Lean theorem prover](https://leanprover.github.io)
-is a proof assistant developed principally by Leonardo de Moura at Microsoft Research.
+is a proof assistant developed principally by Leonardo de Moura.
 
-The current stable version of Lean is Lean 3, and this website is mostly about Lean 3. 
-But the community is currently switching to Lean 4.
+The community is currently in the middle of switching from using Lean 3 to using Lean 4.
+This website is still being updated, and some pages have outdated information about Lean 3
+(these pages are marked with a prominent banner).
+The old Lean 3 community website has been [archived](lean3/).
 
 The Lean mathematical library, *mathlib*, is a community-driven effort
 to build a unified library of mathematics formalized in the
@@ -18,7 +20,7 @@ recent additions on our [blog](blog.html).
 The design and community organization of mathlib are
 described in the 2020 article
 [The Lean mathematical library](https://arxiv.org/abs/1910.09336), although
-the library has grown by an order of magnitude since that article appeared. 
+the library has grown by an order of magnitude since that article appeared.
 You can also have a look at our [repository statistics](mathlib_stats.html)
 to see how the library grows and who contributes to it.
 

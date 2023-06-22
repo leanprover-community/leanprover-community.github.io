@@ -1,5 +1,11 @@
 # Lean prover community website
 
+The deployed website lives on the `master` branch of this repository.
+To make changes to the website, please make a PR against the
+[`lean4`](https://github.com/leanprover-community/leanprover-community.github.io/tree/lean4)
+branch.
+Once your PR is merged, CI will automatically deploy the changes to the `master` branch.
+
 ## Dependencies
 
 * `pip install -r requirements.txt`
