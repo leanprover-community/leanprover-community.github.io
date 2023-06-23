@@ -10,9 +10,8 @@ If you get stuck, please come to [the chat room](https://leanprover.zulipchat.co
 ### Intel Macs
 
 Here we will discuss the fast way, assuming a lot of trust from you. It
-will install Lean, with supporting tools `elan` and `leanpkg`,
-the supporting tool `leanproject` for Lean's mathematical
-library, as well as the code editor VS Code and its Lean plugin.
+will install Lean, with supporting tools `elan` and `lake`, 
+as well as the code editor VS Code and its Lean plugin.
 If you don't like this method, there is a
 [detailed webpage](macos_details.html) which will decompose the
 process into described stages, and won't ask for a blind `sudo`.
@@ -43,7 +42,7 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 4. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
 
 ```
-/usr/local/bin/brew install elan-init mathlibtools
+/usr/local/bin/brew install elan-init
 elan toolchain install stable
 elan default stable
 ```
