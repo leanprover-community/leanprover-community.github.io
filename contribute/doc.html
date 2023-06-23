@@ -48,28 +48,10 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="documentation-style" class="markdown-heading">Documentation style <a class="hover-link" href="#documentation-style">#</a></h1>
 <p>All pull requests must meet the following documentation standards. See
-<a href="https://github.com/leanprover-community/doc-gen">the <code>doc-gen</code> repo</a> for information about the
-<a href="https://leanprover-community.github.io/mathlib_docs/">automatically generated doc pages</a>.</p>
+<a href="https://github.com/leanprover/doc-gen4">the <code>doc-gen</code> repo</a> for information about the
+<a href="https://leanprover-community.github.io/mathlib4_docs/">automatically generated doc pages</a>.</p>
 <p>You can preview the markdown processing of a GitHub page or pull request
 using the <a href="https://observablehq.com/@bryangingechen/github-lean-doc-preview">Lean doc preview page</a>.</p>
 <h2 id="header-comment" class="markdown-heading">Header comment <a class="hover-link" href="#header-comment">#</a></h2>
@@ -96,46 +78,43 @@ including use of type classes and <code>simp</code> canonical form for new defin
 <li><em>Tags</em> (a list of keywords that could be useful when doing text search in mathlib to find where
 something is covered)</li>
 </ul>
-<p>References should refer to bibtex entries in <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/references.bib">the mathlib citations file</a>.
+<p>References should refer to bibtex entries in <a href="https://github.com/leanprover-community/mathlib4/blob/master/docs/references.bib">the mathlib citations file</a>.
 See the <a href="#citing-other-works">Citing other works</a> section below.</p>
 <p>The following code block is an example of a file header.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c">/-</span>
 <span class="cm">Copyright (c) 2018 Robert Y. Lewis. All rights reserved.</span>
 <span class="cm">Released under Apache 2.0 license as described in the file LICENSE.</span>
 <span class="cm">Authors: Robert Y. Lewis</span>
+
+<span class="cm">! This file was ported from Lean 3 source module number_theory.padics.padic_norm</span>
+<span class="cm">! leanprover-community/mathlib commit 92ca63f0fb391a9ca5f22d2409a6080e786d99f7</span>
+<span class="cm">! Please do not edit these lines, except to modify the commit id</span>
+<span class="cm">! if you have ported upstream changes.</span>
 <span class="cm">-/</span>
-<span class="kn">import</span> <span class="n">data.rat</span>
-<span class="kn">import</span> <span class="n">algebra.gcd_domain</span>
-<span class="kn">import</span> <span class="n">algebra.field_power</span>
-<span class="kn">import</span> <span class="n">ring_theory.multiplicity</span>
-<span class="kn">import</span> <span class="n">tactic.ring</span>
-<span class="kn">import</span> <span class="n">data.real.cau_seq</span>
-<span class="kn">import</span> <span class="n">tactic.norm_cast</span>
+<span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Field.Power</span>
+<span class="kn">import</span> <span class="n">Mathlib.NumberTheory.Padics.PadicVal</span>
 
 <span class="c">/-</span><span class="cm">!</span>
 <span class="cm"># p-adic norm</span>
 
-<span class="cm">This file defines the p-adic valuation and the p-adic norm on ℚ.</span>
+<span class="cm">This file defines the `p`-adic norm on `ℚ`.</span>
 
-<span class="cm">The p-adic valuation on ℚ is the difference of the multiplicities of `p` in the numerator and</span>
+<span class="cm">The `p`-adic valuation on `ℚ` is the difference of the multiplicities of `p` in the numerator and</span>
 <span class="cm">denominator of `q`. This function obeys the standard properties of a valuation, with the appropriate</span>
-<span class="cm">assumptions on p.</span>
+<span class="cm">assumptions on `p`.</span>
 
-<span class="cm">The valuation induces a norm on ℚ. This norm is a nonarchimedean absolute value.</span>
+<span class="cm">The valuation induces a norm on `ℚ`. This norm is a nonarchimedean absolute value.</span>
 <span class="cm">It takes values in {0} ∪ {1/p^k | k ∈ ℤ}.</span>
-
-<span class="cm">## Notations</span>
-
-<span class="cm">This file uses the local notation `/.` for `rat.mk`.</span>
 
 <span class="cm">## Implementation notes</span>
 
 <span class="cm">Much, but not all, of this file assumes that `p` is prime. This assumption is inferred automatically</span>
-<span class="cm">by taking (prime p) as a type class argument.</span>
+<span class="cm">by taking `[Fact p.Prime]` as a type class argument.</span>
 
 <span class="cm">## References</span>
 
 <span class="cm">* [F. Q. Gouvêa, *p-adic numbers*][gouvea1997]</span>
+<span class="cm">* [R. Y. Lewis, *A formal proof of Hensel&#39;s lemma over the p-adic integers*][lewis2019]</span>
 <span class="cm">* &lt;https://en.wikipedia.org/wiki/P-adic_number&gt;</span>
 
 <span class="cm">## Tags</span>
@@ -156,62 +135,50 @@ sentence, then it should end in a period. Named theorems, such as the <strong>me
 two asterisks before and after).</p>
 <p>Doc strings should convey the mathematical meaning of the definition. They are allowed to lie
 slightly about the actual implementation. The following is a doc string example:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
-<span class="sd">If `q ≠ 0`, the p-adic norm of a rational `q` is `p ^ (-(padic_val_rat p q))`.</span>
-<span class="sd">If `q = 0`, the p-adic norm of `q` is 0.</span>
-<span class="sd">-/</span>
-<span class="kd">def</span> <span class="n">padic_norm</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span>
-<span class="k">if</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">^</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">padic_val_rat</span> <span class="n">p</span> <span class="n">q</span><span class="o">))</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- If `q ≠ 0`, the `p`-adic norm of a rational `q` is `p ^ (-padicValRat p q)`.</span>
+<span class="sd">If `q = 0`, the `p`-adic norm of `q` is `0`. -/</span>
+<span class="kd">def</span> <span class="n">padicNorm</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">^</span> <span class="o">(</span><span class="bp">-</span><span class="n">padicValRat</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span>
 </code></pre></div>
 </div>
 
 <p>An example that is slightly lying but still describes the mathematical content would be:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
-<span class="sd">For `p ≠ 1`, the p-adic valuation of an integer `z ≠ 0` is the largest natural number `n` such that</span>
-<span class="sd">`p^n` divides `z`.</span>
-<span class="sd">`padic_val_rat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the</span>
-<span class="sd">valuation of `q.denom`.</span>
-<span class="sd">If `q = 0` or `p = 1`, then `padic_val_rat p q` defaults to 0.</span>
-<span class="sd">-/</span>
-<span class="kd">def</span> <span class="n">padic_val_rat</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℤ</span> <span class="o">:=</span>
-<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="n">p</span> <span class="bp">≠</span> <span class="mi">1</span>
-<span class="k">then</span> <span class="o">(</span><span class="n">multiplicity</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="n">q.num</span><span class="o">)</span><span class="bp">.</span><span class="n">get</span>
-    <span class="o">(</span><span class="n">multiplicity.finite_int_iff.2</span> <span class="o">⟨</span><span class="n">h.2</span><span class="o">,</span> <span class="n">rat.num_ne_zero_of_ne_zero</span> <span class="n">h.1</span><span class="o">⟩)</span> <span class="bp">-</span>
-  <span class="o">(</span><span class="n">multiplicity</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">)</span> <span class="n">q.denom</span><span class="o">)</span><span class="bp">.</span><span class="n">get</span>
-    <span class="o">(</span><span class="n">multiplicity.finite_int_iff.2</span> <span class="o">⟨</span><span class="n">h.2</span><span class="o">,</span> <span class="kd">by</span> <span class="n">exact_mod_cast</span> <span class="n">rat.denom_ne_zero</span> <span class="n">_</span><span class="o">⟩)</span>
-<span class="k">else</span> <span class="mi">0</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- `padicValRat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the</span>
+<span class="sd">valuation of `q.den`. If `q = 0` or `p = 1`, then `padicValRat p q` defaults to `0`. -/</span>
+<span class="kd">def</span> <span class="n">padicValRat</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℤ</span> <span class="o">:=</span>
+  <span class="n">padicValInt</span> <span class="n">p</span> <span class="n">q.num</span> <span class="bp">-</span> <span class="n">padicValNat</span> <span class="n">p</span> <span class="n">q.den</span>
 </code></pre></div>
 </div>
 
-<p>The <code>doc_blame</code> linter lists all definitions that do not have doc strings. The <code>doc_blame_thm</code>
+<p>The <code>docBlame</code> linter lists all definitions that do not have doc strings. The <code>docBlameThm</code>
 linter will lists theorems and lemmas that do not have doc strings.</p>
-<p>To run only the <code>doc_blame</code> linter, add the following to the end of your lean file:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span>
+<p>To run only the <code>docBlame</code> linter, add the following to the end of your lean file:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">docBlame</span>
 </code></pre></div>
 </div>
 
-<p>To run only the <code>doc_blame</code> and <code>doc_blame_thm</code> linters, add the following to the end of your lean
+<p>To run only the <code>docBlame</code> and <code>docBlameThm</code> linters, add the following to the end of your lean
 file:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">doc_blame</span> <span class="n">doc_blame_thm</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">only</span> <span class="n">docBlame</span> <span class="n">docBlameThm</span>
 </code></pre></div>
 </div>
 
-<p>To run the all default linters, including <code>doc_blame</code>, add the following to the end of your lean
+<p>To run the all default linters, including <code>docBlame</code>, add the following to the end of your lean
 file:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span>
 </code></pre></div>
 </div>
 
-<p>To run the all default linters, including <code>doc_blame</code> and run <code>doc_blame_thm</code>, add the following to
+<p>To run the all default linters, including <code>docBlame</code> and run <code>docBlameThm</code>, add the following to
 the end of your lean file:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">doc_blame_thm</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="bp">#</span><span class="n">lint</span> <span class="n">docBlameThm</span>
 </code></pre></div>
 </div>
 
 <h2 id="latex-and-markdown" class="markdown-heading">LaTeX and Markdown <a class="hover-link" href="#latex-and-markdown">#</a></h2>
 <p>We generally put references to Lean declarations or variables in between backticks. Writing
 the fully-qualified name (e.g. <code>finset.card_pos</code> instead of just <code>card_pos</code>) will turn the name
-into a link on our <a href="https://leanprover-community.github.io/mathlib_docs/">online docs</a>.</p>
+into a link on our <a href="https://leanprover-community.github.io/mathlib4_docs/">online docs</a>.</p>
 <p>Raw URLs should be enclosed in angle brackets <code>&lt;...&gt;</code> to ensure that they will be clickable online.
 (Some URLs, especially those with parentheses or other special symbols,
 may not be parsed correctly by the markdown renderer.)</p>
@@ -228,46 +195,6 @@ of our online docs. The interaction between the Markdown and LaTeX there is simi
 <a href="https://math.meta.stackexchange.com/questions/4666/sandbox-for-drafts-of-long-complex-posts">an editing sandbox there</a>
 to preview the final result. See also the math.stackexchange
 <a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">MathJax tutorial</a>.</p>
-<h2 id="tactic-doc-entries" class="markdown-heading">Tactic doc entries <a class="hover-link" href="#tactic-doc-entries">#</a></h2>
-<p>Interactive tactics, user commands, hole commands and user attributes should have doc strings
-explaining how they can be used. The <code>add_tactic_doc</code> command should be invoked afterwards to add a
-doc entry to the appropriate page in the online docs.</p>
-<p>Example:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/--</span>
-<span class="sd">describe what the command does here</span>
-<span class="sd">-/</span>
-<span class="n">add_tactic_doc</span>
-<span class="o">{</span> <span class="n">name</span> <span class="o">:=</span> <span class="s2">&quot;display name of the tactic&quot;</span><span class="o">,</span>
-  <span class="n">category</span> <span class="o">:=</span> <span class="n">cat</span><span class="o">,</span>
-  <span class="n">decl_names</span> <span class="o">:=</span> <span class="o">[</span><span class="bp">`</span><span class="n">dcl_1</span><span class="o">,</span> <span class="bp">`</span><span class="n">dcl_2</span><span class="o">],</span>
-  <span class="n">tags</span> <span class="o">:=</span> <span class="o">[</span><span class="s2">&quot;tag_1&quot;</span><span class="o">,</span> <span class="s2">&quot;tag_2&quot;</span><span class="o">]</span>
-<span class="o">}</span>
-</code></pre></div>
-</div>
-
-<p>The argument to <code>add_tactic_doc</code> is a structure of type <code>tactic_doc_entry</code>.</p>
-<ul>
-<li><code>name</code> refers to the display name of the tactic; it is used as the header of the doc entry.</li>
-<li><code>cat</code> refers to the category of doc entry.
-Options: <code>doc_category.tactic</code>, <code>doc_category.cmd</code>, <code>doc_category.hole_cmd</code>, <code>doc_category.attr</code></li>
-<li><code>decl_names</code> is a list of the declarations associated with this doc. For instance,
-the entry for <code>linarith</code> would set <code>decl_names := [`tactic.interactive.linarith]</code>.
-Some entries may cover multiple declarations.
-It is only necessary to list the interactive versions of tactics.</li>
-<li><code>tags</code> is an optional list of strings used to categorize entries.</li>
-<li>The doc string is the body of the entry. It can be formatted with markdown.
-What you are reading now is taken from the description of <code>add_tactic_doc</code>.</li>
-</ul>
-<p>If only one related declaration is listed in <code>decl_names</code> and if this
-invocation of <code>add_tactic_doc</code> does not have a doc string, the doc string of
-that declaration will become the body of the tactic doc entry. If there are
-multiple declarations, you can select the one to be used by passing a name to
-the <code>inherit_description_from</code> field.</p>
-<p>If you prefer a tactic to have a doc string that is different then the doc entry, then between
-the <code>/--</code> <code>-/</code> markers, write the desired doc string first, then <code>---</code> surrounded by new lines,
-and then the doc entry.</p>
-<p>Note that providing a badly formed <code>tactic_doc_entry</code> to the command can result in strange error
-messages.</p>
 <h2 id="sectioning-comments" class="markdown-heading">Sectioning comments <a class="hover-link" href="#sectioning-comments">#</a></h2>
 <p>It is common to structure a file in sections, where each section contains related declarations.
 By describing the sections with module documentation <code>/-! ... -/</code> at the beginning,
@@ -279,36 +206,32 @@ have multiple sections or namespaces following one sectioning comment.</p>
 <p>Third-level headers <code>###</code> should be used for titles inside sectioning comments.</p>
 <p>If the comment is more than one line long, the delimiters <code>/-!</code> and <code>-/</code> should appear on their own
 lines.</p>
-<p>See <a href="https://github.com/leanprover-community/mathlib/blob/master/src/meta/expr.lean">meta/expr.lean</a> for an example in practice.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">namespace</span> <span class="n">binder_info</span>
+<p>See <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Lean/Expr/Basic.lean">Lean/Expr/Basic.lean</a> for an example in practice.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">namespace</span> <span class="n">BinderInfo</span>
 
-<span class="c">/-</span><span class="cm">!</span>
-<span class="cm">### Declarations about `binder_info`</span>
+<span class="c">/-</span><span class="cm">! ### Declarations about `BinderInfo` -/</span>
 
-<span class="cm">This section develops an extended API for the type `binder_info`.</span>
-<span class="cm">-/</span>
+<span class="sd">/-- The brackets corresponding to a given `BinderInfo`. -/</span>
+<span class="kd">def</span> <span class="n">brackets</span> <span class="o">:</span> <span class="n">BinderInfo</span> <span class="bp">→</span> <span class="n">String</span> <span class="bp">×</span> <span class="n">String</span>
+  <span class="bp">|</span> <span class="n">BinderInfo.implicit</span> <span class="bp">=&gt;</span> <span class="o">(</span><span class="s2">&quot;{&quot;</span><span class="o">,</span> <span class="s2">&quot;}&quot;</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">BinderInfo.strictImplicit</span> <span class="bp">=&gt;</span> <span class="o">(</span><span class="s2">&quot;{{&quot;</span><span class="o">,</span> <span class="s2">&quot;}}&quot;</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">BinderInfo.instImplicit</span> <span class="bp">=&gt;</span> <span class="o">(</span><span class="s2">&quot;[&quot;</span><span class="o">,</span> <span class="s2">&quot;]&quot;</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">_</span> <span class="bp">=&gt;</span> <span class="o">(</span><span class="s2">&quot;(&quot;</span><span class="o">,</span> <span class="s2">&quot;)&quot;</span><span class="o">)</span>
 
-<span class="kd">instance</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">binder_info</span> <span class="o">:=</span> <span class="o">⟨</span> <span class="n">binder_info.default</span> <span class="o">⟩</span>
+<span class="kd">end</span> <span class="n">BinderInfo</span>
 
-<span class="sd">/-- The brackets corresponding to a given binder_info. -/</span>
-<span class="kd">def</span> <span class="n">brackets</span> <span class="o">:</span> <span class="n">binder_info</span> <span class="bp">→</span> <span class="n">string</span> <span class="bp">×</span> <span class="n">string</span>
-<span class="bp">|</span> <span class="n">binder_info.implicit</span>        <span class="o">:=</span> <span class="o">(</span><span class="s2">&quot;{&quot;</span><span class="o">,</span> <span class="s2">&quot;}&quot;</span><span class="o">)</span>
-<span class="bp">|</span> <span class="n">binder_info.strict_implicit</span> <span class="o">:=</span> <span class="o">(</span><span class="s2">&quot;{{&quot;</span><span class="o">,</span> <span class="s2">&quot;}}&quot;</span><span class="o">)</span>
-<span class="bp">|</span> <span class="n">binder_info.inst_implicit</span>   <span class="o">:=</span> <span class="o">(</span><span class="s2">&quot;[&quot;</span><span class="o">,</span> <span class="s2">&quot;]&quot;</span><span class="o">)</span>
-<span class="bp">|</span> <span class="n">_</span>                           <span class="o">:=</span> <span class="o">(</span><span class="s2">&quot;(&quot;</span><span class="o">,</span> <span class="s2">&quot;)&quot;</span><span class="o">)</span>
-
-<span class="kd">end</span> <span class="n">binder_info</span>
-
-<span class="kn">namespace</span> <span class="n">name</span>
+<span class="kn">namespace</span> <span class="n">Name</span>
 
 <span class="c">/-</span><span class="cm">! ### Declarations about `name` -/</span>
 
-<span class="sd">/-- Find the largest prefix `n` of a `name` such that `f n ≠ none`, then replace this prefix</span>
+<span class="sd">/-- Find the largest prefix `n` of a `Name` such that `f n != none`, then replace this prefix</span>
 <span class="sd">with the value of `f n`. -/</span>
-<span class="kd">def</span> <span class="n">map_prefix</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">name</span>
-<span class="bp">|</span> <span class="n">anonymous</span> <span class="o">:=</span> <span class="n">anonymous</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">n&#39;</span><span class="o">))</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">mk_string</span> <span class="n">s</span> <span class="bp">$</span> <span class="n">map_prefix</span> <span class="n">n&#39;</span><span class="o">)</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="n">n&#39;</span><span class="o">))</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">mk_numeral</span> <span class="n">d</span> <span class="bp">$</span> <span class="n">map_prefix</span> <span class="n">n&#39;</span><span class="o">)</span>
+<span class="kd">def</span> <span class="n">mapPrefix</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Name</span> <span class="bp">→</span> <span class="n">Option</span> <span class="n">Name</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Name</span><span class="o">)</span> <span class="o">:</span> <span class="n">Name</span> <span class="o">:=</span> <span class="n">Id.run</span> <span class="k">do</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="n">some</span> <span class="n">n&#39;</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span> <span class="k">then</span> <span class="n">return</span> <span class="n">n&#39;</span>
+  <span class="k">match</span> <span class="n">n</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">anonymous</span> <span class="bp">=&gt;</span> <span class="n">anonymous</span>
+  <span class="bp">|</span> <span class="n">str</span> <span class="n">n&#39;</span> <span class="n">s</span> <span class="bp">=&gt;</span> <span class="n">mkStr</span> <span class="o">(</span><span class="n">mapPrefix</span> <span class="n">f</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="n">s</span>
+  <span class="bp">|</span> <span class="n">num</span> <span class="n">n&#39;</span> <span class="n">i</span> <span class="bp">=&gt;</span> <span class="n">mkNum</span> <span class="o">(</span><span class="n">mapPrefix</span> <span class="n">f</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="n">i</span>
 </code></pre></div>
 </div>
 
@@ -334,10 +257,10 @@ following two styles:</p>
 
 <p>In the online docs, this will become something like:</p>
 <blockquote>
-<p>The proof can be found in <a href="https://leanprover-community.github.io/mathlib_docs/references.html">[Boo54]</a></p>
+<p>The proof can be found in <a href="https://leanprover-community.github.io/mathlib4_docs/references.html">[Boo54]</a></p>
 </blockquote>
 <p>(The key will change into an <a href="https://www.bibtex.com/s/bibliography-style-base-alpha/"><code>alpha</code> style label</a>
-and become a link to the <a href="https://leanprover-community.github.io/mathlib_docs/references.html">References page</a>
+and become a link to the <a href="https://leanprover-community.github.io/mathlib4_docs/references.html">References page</a>
 of the docs.)</p>
 <p>Alternatively, you can use custom text for the citation by putting text in square brackets
 ahead of the citation key:</p>
@@ -346,7 +269,7 @@ ahead of the citation key:</p>
 </div>
 
 <blockquote>
-<p>See <a href="https://leanprover-community.github.io/mathlib_docs/references.html">Grundlagen der Geometrie</a> for an alternative axiomatization.</p>
+<p>See <a href="https://leanprover-community.github.io/mathlib4_docs/references.html">Grundlagen der Geometrie</a> for an alternative axiomatization.</p>
 </blockquote>
 <p>Note that you currently cannot use the closing square bracket <code>]</code> symbol in the link text.
 So the following will not result in a working link:</p>
@@ -360,9 +283,9 @@ So the following will not result in a working link:</p>
 <h2 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h2>
 <p>The following files are maintained as examples of good documentation style:</p>
 <ul>
-<li><a href="https://github.com/leanprover-community/mathlib/blob/master/src/number_theory/padics/padic_norm.lean">data/padics/padic_norm</a></li>
-<li><a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/basic.lean">topology/basic</a></li>
-<li><a href="https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/cont_diff.lean">analysis/calculus/cont_diff</a></li>
+<li><a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Padics/PadicNorm.lean">Mathlib.NumberTheory.Padics.PadicNorm</a></li>
+<li><a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Topology/Basic.lean">Mathlib.Topology.Basic</a></li>
+<li><a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Analysis/Calculus/ContDiff.lean">Analysis.Calculus.ContDiff</a></li>
 </ul>
 
   </main>
@@ -413,8 +336,6 @@ So the following will not result in a working link:</p>
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
-        
-          <li class="nav-item col-12"><a href="https://mathlib-changelog.vercel.app/">Changelog</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
         
