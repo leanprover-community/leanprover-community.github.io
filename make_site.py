@@ -295,6 +295,13 @@ with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
+for course in courses:
+    for field in ['experiences', 'notes', 'summary', 'experiences']:
+        val = getattr(course, field)
+        if isinstance(val, str):
+            setattr(course, field, render_markdown(val))
+        elif isinstance(val, list):
+            setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 
 def format_date_range(event):
     if event.start_date and event.end_date:
