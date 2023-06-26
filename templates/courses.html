@@ -12,15 +12,30 @@
 	</p>
 
     <!-- TODO:
-        This template drops the "repo", "material", "tags", "notes", "summary", and "experiences" fields from
-        courses.yaml.
+        This template drops the "tags" fields from courses.yaml.
     -->
-    <ul>
+    <dl>
     {% for e in courses %}
-        <li> <a href="{{ e.website }}">{{ e.name }}</a> ({{ e.instructor }}, {{ e.location }}. {{ e.dates }})
-            <small class="align-middle">
-                <span class="badge badge-secondary align-middle">{{ e.summary }}</span>
-            </small></li>
+        <dt>
+            <a href="{{ e.website }}">{{ e.name }}</a> ({{ e.instructor }}, {{ e.location }}. {{ e.dates }})
+        </dt>
+        <dd>
+            <ul>
+                {% if e.repo %}
+                <li>Course repository: <a href="{{ e.repo }}">{{ e.repo }}</a></li>
+                {% endif %}
+                {% if e.material %}
+                <li>Course materials: <a href="{{ e.material }}">{{ e.material }}</a></li>
+                {% endif %}
+                <li>Summary: {{ e.summary }}</li>
+                {% if e.notes %}
+                <li>Notes: {{ e.notes }}</li>
+                {% endif %}
+                {% if e.experiences %}
+                <li>Experiences: {{ e.experiences }}</li>
+                {% endif %}
+            </ul>
+        </dd>
     {% endfor %}
-     </ul>
+    </dl>
 {% endblock %}
