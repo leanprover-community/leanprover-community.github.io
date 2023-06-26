@@ -485,6 +485,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('courses.html', {'courses': courses}),
+                ('courses_alt.html', {'courses': courses}),
                 ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
