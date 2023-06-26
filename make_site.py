@@ -146,6 +146,20 @@ class Event:
     end_date: str = ''
     date_range: str = 'TBA'
 
+@dataclass
+class Course:
+    name: str
+    instructor: str
+    location: str
+    website: str
+    repo: Optional[str] = None
+    material: Optional[str] = None
+    notes : Optional[str] = None
+    tags: Optional[List[str]] = None
+    dates: str = ''
+    summary : Optional[str] = None
+    experiences : Optional[str] = None
+
 urllib.request.urlretrieve(
     'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
     'export_db.json.gz')
@@ -278,6 +292,9 @@ with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
     events = [Event(**e) for e in yaml.safe_load(h_file)]
+
+with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
+    courses = [Course(**e) for e in yaml.safe_load(h_file)]
 
 def format_date_range(event):
     if event.start_date and event.end_date:
