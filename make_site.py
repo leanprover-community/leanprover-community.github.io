@@ -477,6 +477,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
+                ('courses.html', {'courses': courses}),
                 ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
