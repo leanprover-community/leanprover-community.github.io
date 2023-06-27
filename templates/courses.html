@@ -2,40 +2,54 @@
 {% block title %}Courses using Lean{% endblock %}
 {% block content %}
 
-	<h1>Courses using Lean</h1>
+<h1>Courses using Lean</h1>
 
-	<p>
-        We maintain a list here of past and future courses either using Lean to teach mathematics,
-        or directly teaching Lean as an interactive theorem prover or programming language.
-        Please add courses by making a pull request editing
-        <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/courses.yaml">courses.yaml</a>.
-	</p>
+<p>
+  We maintain a list here of past and future courses either using Lean to teach mathematics,
+  or directly teaching Lean as an interactive theorem prover or programming language.
+  Please add courses by making a pull request editing
+  <a
+    href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/courses.yaml">courses.yaml</a>.
+</p>
 
-    <!-- TODO:
+<!-- TODO:
         This template drops the "tags" fields from courses.yaml.
     -->
-    <dl>
-    {% for e in courses %}
-        <dt>
-            <a href="{{ e.website }}">{{ e.name }}</a> ({{ e.instructor }}, {{ e.location }}. {{ e.dates }})
-        </dt>
-        <dd>
-            <ul>
-                {% if e.repo %}
-                <li>Course repository: <a href="{{ e.repo }}">{{ e.repo }}</a></li>
-                {% endif %}
-                {% if e.material %}
-                <li>Course materials: <a href="{{ e.material }}">{{ e.material }}</a></li>
-                {% endif %}
-                <li>Summary: {{ e.summary }}</li>
-                {% if e.notes %}
-                <li>Notes: {{ e.notes }}</li>
-                {% endif %}
-                {% if e.experiences %}
-                <li>Experiences: {{ e.experiences }}</li>
-                {% endif %}
-            </ul>
-        </dd>
-    {% endfor %}
-    </dl>
+<div class="row row-cols-1 row-cols-md-2">
+  {% for e in courses %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ e.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">by {{ e.instructor }} at {{ e.location }}. {{ e.dates }}</h6>
+        <div class="card-text">{{ e.summary }}</div>
+      </div>
+      {% if e.repo or e.material or e.notes or e.experiences %}
+      <div class="card-footer bg-white">
+        <small>
+          <a class="card-link" data-toggle="collapse" href="#collapseCourse{{ loop.index }}" role="button"
+            aria-expanded="false" aria-controls="collapseCourse{{ loop.index }}">
+            Details
+          </a>
+          <div class="collapse mt-2" id="collapseCourse{{ loop.index }}">
+            {% if e.repo %}
+            <p>Course repository: <a href="{{ e.repo }}">{{ e.repo }}</a></p>
+            {% endif %}
+            {% if e.material %}
+            <p>Course materials: <a href="{{ e.material }}">{{ e.material }}</a></p>
+            {% endif %}
+            {% if e.notes %}
+            <p>Notes: {{ e.notes }}</p>
+            {% endif %}
+            {% if e.experiences %}
+            <p>Experiences: {{ e.experiences }}</p>
+            {% endif %}
+          </div>
+        </small>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
