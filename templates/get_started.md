@@ -6,6 +6,7 @@ We have installation instructions for the following operating systems:
 * [Other linux](install/linux.html)
 * [MacOS](install/macos.html)
 * [Windows](install/windows.html)
+* [Docker](install/docker.html)
 
 After this installation procedure, it is crucial to read how to start or
 get a [Lean project](install/project.html). And of course you'll
