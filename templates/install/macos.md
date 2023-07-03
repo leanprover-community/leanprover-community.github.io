@@ -7,8 +7,6 @@ If you get stuck, please come to [the chat room](https://leanprover.zulipchat.co
 
 ## Installing Lean 4 and mathlib
 
-### Intel Macs
-
 Here we will discuss the fast way, assuming a lot of trust from you. It
 will install Lean, with supporting tools `elan` and `lake`, 
 as well as the code editor VS Code and its Lean plugin.
