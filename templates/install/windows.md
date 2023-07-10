@@ -1,4 +1,4 @@
-# Installing Lean 4 and mathlib4 on Windows
+# Installing Lean 4 on Windows
 
 This document explains how to get started with Lean 4 and mathlib.
 
