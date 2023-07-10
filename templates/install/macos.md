@@ -1,11 +1,11 @@
-# How to install Lean 4 and mathlib on MacOS
+# How to install Lean 4 on MacOS
 
-This document explains how to get started with Lean 4 and mathlib if you
+This document explains how to get started with Lean 4 if you
 are using MacOS.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for assistance.
 
-## Installing Lean 4 and mathlib
+## Installing Lean 4
 
 ### Intel Macs
 
