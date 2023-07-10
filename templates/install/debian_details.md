@@ -1,4 +1,4 @@
-# Controlled installation of Lean 4 and mathlib on Debian/Ubuntu
+# Controlled installation of Lean 4 on Debian/Ubuntu
 
 This document explains a more controlled installation procedure
 for Lean 4 and mathlib on Linux distributions derived from Debian (Debian
