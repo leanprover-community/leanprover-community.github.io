@@ -5,7 +5,7 @@ taste. They are all fun and rewarding, but also difficult and
 occasionally frustrating. Proof assistants are still difficult to use,
 and you cannot expect to become proficient after one afternoon of
 learning. Note that all resources listed on that page are about Lean 4. 
-There is not point learning Lean 3 at this stage.
+There is no point learning Lean 3 at this stage.
 
 ## Hands-on approaches
 
