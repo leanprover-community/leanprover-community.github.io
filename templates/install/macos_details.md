@@ -1,7 +1,6 @@
-# Controlled installation of Lean 4 and mathlib on MacOS
+# Controlled installation of Lean 4 on MacOS
 
-This document explains a more controlled installation procedure for Lean and
-mathlib on MacOS. There is a quicker way described in the main
+This document explains a more controlled installation procedure for Lean on MacOS. There is a quicker way described in the main
 [install page](macos.html) but it requires more trust.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
