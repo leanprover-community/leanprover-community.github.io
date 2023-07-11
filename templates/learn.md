@@ -29,6 +29,10 @@ There is no point learning Lean 3 at this stage.
   but it is really meant to be used in VSCode, doing exercises on the fly (see the
   [instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
 
+* [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) is also mathematics-oriented.
+  It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
+  experience.
+
 * If you prefer something more computer-science oriented, the standard reference is
   [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/).
   You almost certainly want to read it at some point anyway, since it
