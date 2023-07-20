@@ -41,8 +41,10 @@ To ensure this, we only commit changes to `master` that have passed CI tests, an
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
 It's okay to do this in your own fork of the `mathlib` repository,
-or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
-Please include your GitHub username in your request.
+or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository,
+you can either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
+[this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
+Please include your GitHub username in your request (and add this username to your Zulip profile, using the personal settings panel).
 It's polite to prefix the branch name with your username, so it's easier for us to clean up clutter.
 (Once you're making a pull request, we'll ask you to do so from a branch of the mathlib repository,
 rather than from your own fork, as CI works better this way.)
