@@ -174,7 +174,7 @@ num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
 urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
+    'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
     DATA/'100.yaml')
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
@@ -204,7 +204,7 @@ def replace_link(name, id):
     if name == '':
         return name
     elif '/' in name:
-        return '/mathlib_docs/' + name
+        return '/mathlib4_docs/' + name
     else:
         try:
             return decl_loc_map[name]['docs_link']
@@ -276,13 +276,13 @@ class Overview:
         return cls.from_node(f"{index}", title, children, 0)
 
 urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib_docs/overview.yaml',
+    'https://leanprover-community.github.io/mathlib4_docs/overview.yaml',
     DATA/'overview.yaml')
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
 urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib_docs/undergrad.yaml',
+    'https://leanprover-community.github.io/mathlib4_docs/undergrad.yaml',
     DATA/'undergrad.yaml')
 with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
     undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
