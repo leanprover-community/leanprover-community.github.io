@@ -17,7 +17,7 @@ If you need to link to Lean 3 specific resources please link there.
 </p>
 </div>
 
-# How to contribute to mathlib
+# How to contribute to mathlib4
 
 Here are some tips and tricks
 to make the process of contributing as smooth as possible.
@@ -25,14 +25,14 @@ to make the process of contributing as smooth as possible.
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
 * Adhere to the guidelines:
-   - The [style guide](style.html) for contributors.
-   - The explanation of [naming conventions](naming.html).
-   - The [documentation guidelines](doc.html).
+   - The [style guide](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/style.md) for contributors.
+   - The explanation of [naming conventions](https://github.com/adomani/leanprover-community.github.io/blob/patch-2/templates/contribute/naming.md).
+   - The [documentation guidelines](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/doc.md).
 
 Once you have code that you'd like to contribute, you should open a PR.
 There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking you through the process of making a PR on YouTube.
 
-## Working on mathlib
+## Working on mathlib4
 
 We use `git` to manage and version control `mathlib`.
 The `master` branch is the "production" version of mathlib.
@@ -50,21 +50,21 @@ It's polite to prefix the branch name with your username, so it's easier for us 
 rather than from your own fork, as CI works better this way.)
 
 Typical workflow:
-* To get started, you'll need a local copy of mathlib.
-* At https://github.com/leanprover-community/mathlib, click "Fork" in the top right, to make your own fork of the repository.
-  Your fork is at [https://github.com/USER/mathlib](https://github.com/USER/mathlib4).
+* To get started, you'll need a local copy of mathlib4.
+* At https://github.com/leanprover-community/mathlib4, click "Fork" in the top right, to make your own fork of the repository.
+  Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
   Alternatively, if you've asked for write access you can just use [https://github.com/leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4).
 * Now make a local clone of the repository.
   ```
-  git clone https://github.com/USER/mathlib.git
-  cd mathlib
+  git clone https://github.com/USER/mathlib4.git
+  cd mathlib4
   ```
 * The steps above only need to be done once (not once for each contribution).
-* Now, each time you want to work on a new change to mathlib, create a new branch:
+* Now, each time you want to work on a new change to mathlib4, create a new branch:
   ```
   git checkout -b my_new_branch   # This creates a new branch
   ```
-  It's also fine to simply clone https://github.com/leanprover-community/mathlib.git,
+  It's also fine to simply clone https://github.com/leanprover-community/mathlib4.git,
   but you won't be able to push changes unless you've asked for permission.
   An alternative at this step is to use `leanproject`.
   The command
@@ -89,10 +89,10 @@ It's also okay to let our central CI servers do this for you.
   ```
   git push --set-upstream origin my_new_branch
   ```
-* If you're working on the main `mathlib` repository rather than your own fork,
+* If you're working on the main `mathlib4` repository rather than your own fork,
   continuous integration will automatically kick in at this point.
   You can view the output by visiting
-  https://github.com/leanprover-community/mathlib/tree/my_new_branch
+  https://github.com/leanprover-community/mathlib4/tree/my_new_branch
   (There will be a green tick on the line describing the most recent commit if everything works,
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
@@ -105,7 +105,7 @@ It's also okay to let our central CI servers do this for you.
 
 Once you're happy with your local changes, it's time to make a pull request.
 
-* If you haven't already asked for write access to non-master branches of the mathlib repository,
+* If you haven't already asked for write access to non-master branches of the mathlib4 repository,
 please come to https://leanprover.zulipchat.com/, introduce yourself, and ask for this permission.
 
 * Push your changes to a branch on the main repository, if they weren't already there.
@@ -126,7 +126,7 @@ Click on the "labels" header to add or remove labels from the current project.
 The most important labels are "awaiting-review" and "awaiting-author". If your PR builds (has a green checkmark) and you label your PR with **"awaiting-review"**, someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "awaiting-review" to start the process over again.
 
 After some iteration, a reviewer will "approve" the PR and the "ready-to-merge" label will be automatically applied to the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
-After responding appropriately to bors (if necessary), the PR will get added to the ["merge queue"](https://app.bors.tech/repositories/24316). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+After responding appropriately to bors (if necessary), the PR will get added to the ["merge queue"](https://app.bors.tech/repositories/24316). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib4.
 
 Here are some other frequently-used labels:
 
@@ -146,11 +146,11 @@ whether to proceed at all.
 
 ### Dealing with merge conflicts
 
-Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on `master` that conflicts with a change that you're proposing on your PR. If it happens with your PR, check [this GitHub tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github) on how to resolve merge conflicts by using their online tool.
+Due to the fact that multiple people work on mathlib4 in parallel, someone might have introduced a change on `master` that conflicts with a change that you're proposing on your PR. If it happens with your PR, check [this GitHub tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github) on how to resolve merge conflicts by using their online tool.
 
 ## Caching compilation
 
-In the `mathlib` git repository, you can run the following in a terminal:
+In the `mathlib4` git repository, you can run the following in a terminal:
 
 ```sh
 sudo pip3 install mathlibtools
