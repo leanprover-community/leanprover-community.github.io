@@ -52,8 +52,8 @@ rather than from your own fork, as CI works better this way.)
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
 * At https://github.com/leanprover-community/mathlib, click "Fork" in the top right, to make your own fork of the repository.
-  Your fork is at [https://github.com/USER/mathlib](https://github.com/USER/mathlib).
-  Alternatively, if you've asked for write access you can just use [https://github.com/leanprover-community/mathlib](https://github.com/leanprover-community/mathlib).
+  Your fork is at [https://github.com/USER/mathlib](https://github.com/USER/mathlib4).
+  Alternatively, if you've asked for write access you can just use [https://github.com/leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4).
 * Now make a local clone of the repository.
   ```
   git clone https://github.com/USER/mathlib.git
