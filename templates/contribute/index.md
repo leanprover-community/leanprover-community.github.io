@@ -66,20 +66,13 @@ Typical workflow:
   ```
   It's also fine to simply clone https://github.com/leanprover-community/mathlib4.git,
   but you won't be able to push changes unless you've asked for permission.
-  An alternative at this step is to use `leanproject`.
-  The command
-  ```
-  leanproject get -b mathlib:my_new_branch
-  ```
-  has the same effect as the `git clone` and `git checkout -b` commands described above,
-  except that it will clone into the directory `mathlib_my_new_branch`.
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
   In that case you need to use `git checkout their_new_branch` (note there is no `-b` here).
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
 * Commit your changes using `git commit -a`.
 * If you'd like to compile everthing locally to check you didn't break anything, run
-`leanproject build`. This may take a long time if you modified files low down in the import hierarchy.
+`lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you.
 * In order to push your changes back to the repository on github, use
   ```
@@ -97,8 +90,8 @@ It's also okay to let our central CI servers do this for you.
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
   You can also check CI status on the command line by installing `hub` and running `hub ci-status`.
-* After CI finishes, you can run `leanproject get-cache` to download compiled oleans.
-  See [Caching compilation](#caching-compilation) for commands to automatically call `leanproject get-cache`.
+* After CI finishes, you can run `lake exe cache get` to download compiled oleans.
+  See [Caching compilation](#caching-compilation) for commands to automatically call `lake exe cache get`.
 
 
 ## Making a Pull Request (PR)
@@ -147,18 +140,3 @@ whether to proceed at all.
 ### Dealing with merge conflicts
 
 Due to the fact that multiple people work on mathlib4 in parallel, someone might have introduced a change on `master` that conflicts with a change that you're proposing on your PR. If it happens with your PR, check [this GitHub tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github) on how to resolve merge conflicts by using their online tool.
-
-## Caching compilation
-
-In the `mathlib4` git repository, you can run the following in a terminal:
-
-```sh
-sudo pip3 install mathlibtools
-leanproject hooks
-```
-
-This will install the `leanproject` tool.  The call to `leanproject hooks`
-sets up git hooks that will call cache the olean files when making a commit
-and fetching the olean files when checking out a branch.
-See the [mathlib-tools documentation](https://github.com/leanprover-community/mathlib-tools/blob/master/README.md)
-for more information.
