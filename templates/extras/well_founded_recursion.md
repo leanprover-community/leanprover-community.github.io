@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # The equation compiler and using_well_founded
 
 To define functions and proofs recursively you can use the equation compiler, if you have a well founded relation on that type
@@ -13,7 +32,7 @@ def gcd : nat → nat → nat
 
 Because < is a well founded relation on naturals, and because `y % succ x < succ x` this recursive function is well_founded.
 
-Whenever you use the equation compiler there will be a default well founded relation on the type being recursed on and the equation compiler will automatically attempt to prove the function is well founded.
+Whenever you use the equation compiler, there will be a default well founded relation on the type being recursed on (given by the `has_well_founded` instance) and the equation compiler will automatically attempt to prove the function is well founded under said relation.
 
 When the equation compiler fails, there are two main causes.
 
@@ -30,7 +49,7 @@ def gcd : nat → nat → nat
 | (succ x) y := gcd (y % succ x) (succ x)
 ```
 
-```
+```text
 failed to prove recursive application is decreasing, well founded relation
   @has_well_founded.r (Σ' (a : ℕ), ℕ)
     (@psigma.has_well_founded ℕ (λ (a : ℕ), ℕ) (@has_well_founded_of_has_sizeof ℕ nat.has_sizeof)
@@ -84,7 +103,7 @@ Now the error message is asking us to prove `succ x < y`. This is because by def
 Sometimes moving an argument outside of the equation compiler, can help the equation compiler prove a recursion is well_founded. For example the following proof from `data.nat.prime` fails.
 
 ```lean
-lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
+lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
 | 0       h := (lt_irrefl _).elim h
 | 1       h := rfl
 | n@(k+2) h :=
@@ -100,7 +119,7 @@ lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
 But moving the `h` into a lambda after the `:=` makes it work
 
 ```lean
-lemma prod_factors : ∀ (n), 0 < n → list.prod (factors n) = n
+lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
 | 0       := λ h, (lt_irrefl _).elim h
 | 1       := λ h, rfl
 | n@(k+2) := λ h,
@@ -125,14 +144,14 @@ The following proof in `data.multiset` uses this relation.
 
 ```lean
 @[elab_as_eliminator] lemma strong_induction_on {p : multiset α → Sort*} :
-  ∀ (s : multiset α), (∀ s, (∀t < s, p t) → p s) → p s
+  ∀ (s : multiset α), (∀ s, (∀ t < s, p t) → p s) → p s
 | s := λ ih, ih s $ λ t h,
   have card t < card s, from card_lt_of_lt h,
   strong_induction_on t ih
 using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf card⟩]}
 ```
 
-The final line tells the equation compiler to use this relation. It is not necessary to fully understand the final line to be able to use well_founded tactics. The most important part is `⟨_, measure_wf card⟩` This is the well_founded instance. `measure_wf` is a proof that any relation generated from a function to the natural numbers, i.e. for a function `f : α → ℕ`, the relation `λ x y, f x < f y`. The underscore is a placeholder for the relation, as it can be inferred from the type of the proof. Note that the well founded relation must be on a `psigma` type corresponding to the product of the types of the arguments after the vertical bar, if there are multiple arguments after the vertical bar.
+The final line tells the equation compiler to use this relation. It is not necessary to fully understand the final line to be able to use well_founded tactics. The most important part is `⟨_, measure_wf card⟩` This is the well_founded instance. `measure_wf` is a proof that for any relation generated from a function to the natural numbers, i.e. for a function `f : α → ℕ`, the relation `λ x y, f x < f y` is well founded. The underscore is a placeholder for the relation, as it can be inferred from the type of the proof. Note that the well founded relation must be on a `psigma` type corresponding to the product of the types of the arguments after the vertical bar, if there are multiple arguments after the vertical bar.
 
 In the gcd example the `psigma` type is `Σ' (a : ℕ), ℕ`. In order to solve the problem in the example where the order of the arguments was flipped, you could define a well founded relation on `Σ' (a : ℕ), ℕ` using the function `psigma.snd`, the function giving the second element of the pair, and then the error disappears.
 

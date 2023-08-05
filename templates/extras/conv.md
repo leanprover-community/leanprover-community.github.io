@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # The conversion tactic mode
 
 Inside a tactic block, one can use the keyword `conv` to enter conversion
@@ -51,7 +70,7 @@ The second main reason to use conversion mode is to rewrite under
 binders. Suppose we want to prove `example (λ x : ℕ, 0+x) = (λ x, x)`.
 The naive first attempt is to enter tactic mode and try `rw zero_add`.
 But this fails with a frustrating
-```
+```text
 rewrite tactic failed, did not find
 instance of the pattern in the target expression 0 + ?m_3
 state:

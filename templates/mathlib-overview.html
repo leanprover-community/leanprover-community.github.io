@@ -1,9 +1,26 @@
 {% extends '_base.html' %}
 {% block title %}Mathematics in mathlib{% endblock %}
 {% block content %}
+	<div class="alert alert-info">
+		<p>
+		We are currently updating the Lean community website to describe working with Lean 4,
+		but most of the information you will find here today still describes Lean 3.
+		</p>
+		<p>
+		Pull requests updating this page for Lean 4 are very welcome.
+		There is a link at the bottom of this page.
+		</p>
+		<p>
+		Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+		and ask for whatever help you need during this transitional period!
+		</p>
+		<p>
+		The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+		If you need to link to Lean 3 specific resources please link there.
+		</p>
+	</div>
 
-<div class="row mt-3">
-  <div class="col">
+
 	<h1>A mathlib overview</h1>
 
 	<p>
@@ -17,21 +34,23 @@
 	<p>
 	Here topics are listed in the greatest generality we currently have
 	in mathlib, hence some things may be difficult to recognize. We also
-	have a page dedicated to 
+	have a page dedicated to
 	<a href="undergrad.html">undergraduate mathematics</a> which may
 	be easier to read, as well as a page listing undergraduate maths topics
-	that are 
+	that are
 	<a href="undergrad_todo.html">not yet in mathlib</a>.
 	</p>
 
 	<p>
-	To make updates to this list, please make a pull request to this repository
-	after editing the 
-	<a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/newsite/data/overview.yaml">yaml source file</a>.
+	To make updates to this list, please <a href="contribute/index.html">make a pull request to mathlib</a>
+	after editing the
+	<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/overview.yaml">yaml source file</a>.
+	This can be done entirely on GitHub, see
+	<a href="https://docs.github.com/en/github/managing-files-in-a-repository/editing-files-in-another-users-repository">"Editing files in another user's repository"</a>.
 	</p>
 
 	{% for area in overviews %}
-	<h4>{{ area.title }}</h4>
+	<h4 id="{{ area.slug }}" class="markdown-heading">{{ area.title }}<a class="hover-link" href="#{{ area.slug }}">#</a></h4>
 	  {% for subarea in area.children %}
 	  <p class="ml-4 mb-2">
 	  <b>{{ subarea.title }}</b>
@@ -58,6 +77,4 @@
 	  {% endif %}
 	{% endfor %}
 
-  </div>
-</div>
 {% endblock %}

@@ -1,49 +1,65 @@
 {% extends '_base.html' %}
 {% block title %}Undergrad math in mathlib{% endblock %}
 {% block content %}
+    <div class="alert alert-info">
+      <p>
+      We are currently updating the Lean community website to describe working with Lean 4,
+      but most of the information you will find here today still describes Lean 3.
+      </p>
+      <p>
+      Pull requests updating this page for Lean 4 are very welcome.
+      There is a link at the bottom of this page.
+      </p>
+      <p>
+      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+      and ask for whatever help you need during this transitional period!
+      </p>
+      <p>
+      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+      If you need to link to Lean 3 specific resources please link there.
+      </p>
+    </div>
 
-<div class="row mt-3">
-        <div class="col">
-                <h1>Undergraduate mathematics in mathlib</h1>
+    <h1>Undergraduate mathematics in mathlib</h1>
 
-                <p>
-				This gives pointers to undergraduate maths topics that are
-				currently covered in mathlib.
-				There is also a page listing undergraduate maths topics
-				that are 
-				<a href="undergrad_todo.html">not yet in mathlib</a>.
-				</p>
+      <p>
+    This gives pointers to undergraduate maths topics that are
+    currently covered in mathlib.
+    The list is gathered from
+    <a href="http://media.devenirenseignant.gouv.fr/file/agreg_externe/59/7/p2020_agreg_ext_maths_1107597.pdf">
+    the French curriculum</a>.
+    There is also a page listing undergraduate maths topics
+    that are
+    <a href="undergrad_todo.html">not yet in mathlib</a>.
+    </p>
 
+    <p>To update this list, please submit a PR modifying
+      <a href="https://github.com/leanprover-community/mathlib/edit/master/docs/undergrad.yaml">
+        docs/undergrad.yaml</a> in the mathlib repository.
+      </p>
 
-                <div id="overview-accordion" class="accordion">
-                        {% for statement in overviews recursive %}
-                        {% if statement.children and statement.is_nonempty%}
-                        <div class="card statement-done">
-                                <div class="card-header" id="heading-{{statement.id}}">
-                                        <h5 class="card-title markdown-heading" id="{{ statement.id }}">
-                                                <a role="button" data-toggle="collapse" href="#collapse-{{statement.id}}" aria-expanded="false" aria-controls="collapse-{{statement.id}}">
-                                                        {{ statement.title }}
-                                                </a>
-                                                <a class="hover-link" href="#{{ statement.id }}">#</a>
-                                        </h5>
-                                        <div id="collapse-{{statement.id}}" class="collapse" data-parent="{% if statement.parent %}#overview-accordion-{{statement.parent.id}} {% else %}#overview-accordion{% endif %}">
-                                                <div class="card-body">
-                                                        <div id="overview-accordion-{{statement.id}}" class="accordion">
-                                                                {{ loop(statement.children) }}
-                                                        </div>
-                                                </div>
-                                        </div>
-                                </div>
-                        </div>
-                        {% else %}
-						{% if statement.is_nonempty %}
-                        <span class="statement-done">
-                                <a {% if statement.decl %} href="{{ statement.decl }}" {% endif %}>{{ statement.title }}</a>{% if not loop.last and not (loop.nextitem is defined and loop.nextitem.children) %}, {% endif %}
-                        </span>
-                        {% endif %}
-                        {% endif %}
-                        {% endfor %}
-                </div>
-        </div>
-</div>
+  {% macro flat_child(item) -%}
+    {%- if item.children -%}
+      {{ item.title }}(
+      {%- for inner_item in item.nonempty_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+      {%- endfor -%})
+    {%- else -%}
+      <a href="{{ item.decl }}">{{ item.title }}</a>
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {% for area in overviews %}
+    {% if area.is_nonempty %}
+    <h4>{{ area.title }}</h4>
+      {% for subarea in area.nonempty_children %}
+        <p class="ml-4 mb-2">
+        <b>{{ subarea.title }}</b>
+        {% for item in subarea.nonempty_children %}
+          {{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% endfor %}
+        </p>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
 {% endblock %}

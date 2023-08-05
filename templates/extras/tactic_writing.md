@@ -1,3 +1,22 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Tutorial: tactic writing in Lean
 
 This is a tutorial for getting started writing your own tactics in Lean.
@@ -7,8 +26,8 @@ experience working with monads in a functional programming langauge
 
 Other useful resources while learning to write tactics include:
 * Rob Lewis' [video tutorials](https://www.youtube.com/playlist?list=PLlF-CfQhukNnq2kDCw2P_vI5AfXN7egP2) on metaprogramming in Lean from
-  Lean for the Curious Mathematician 2020.
-* Chapter 7 of the [Hitchhiker's guide to Logical Verification](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf)
+  Lean for the Curious Mathematician 2020
+* Chapter 7 of the [Hitchhiker's Guide to Logical Verification](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf)
 * the original paper about metaprogramming Lean
   [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf)
 
@@ -153,7 +172,7 @@ do
 ```
 Next, we want to write tactics returning something, as `tactic.target`
 is doing. The only extra ingredient is the `return` function. The
-following function tries to return `tt` is there is no more goal, `ff`
+following function tries to return `tt` if there is no more goal, `ff`
 otherwise. The next one can be used interactively and traces the result
 (note that using the first one interactively won't have any visible
 effect since interactive use ignores the returned value).
@@ -171,9 +190,30 @@ the left and right hand sides of the current goal. It also uses the
 in order to debug tactics, and works on any type which is an instance of `has_to_string`.
 ```lean
 meta def trace_goal_is_eq : tactic unit :=
+do t ← tactic.target,
+   match t with
+   | `(%%l = %%r) := tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r)
+   | _ := tactic.trace "Goal is not an equality"
+   end
+```
+Lean also provides a dedicated syntax for pattern matching with a single pattern and a wildcard,
+where execution only proceeds to the next line of the `do` block if the pattern matches, and otherwise
+executes the expression after the `|`:
+```lean
+meta def trace_goal_is_eq : tactic unit :=
+do `(%%l = %%r) ← tactic.target | tactic.trace "Goal is not an equality",
+   tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r)
+```
+
+If the `|` is omitted, then the tactic fails if the pattern does not match.
+We can catch this failure using the `orelse` combinator mentioned ealier, but note that by
+doing so we catch more types of failure than we did above:
+```lean
+meta def trace_goal_is_eq : tactic unit :=
 (do  `(%%l = %%r) ← tactic.target,
-     tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r) )
-   <|> tactic.trace "Goal is not an equality"
+     tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r),
+     some_other_tactic)
+   <|> tactic.trace "Goal is not an equality, or `some_other_tactic` failed"
 ```
 The parenthesis in the above code don't look very nice. One could use
 instead curly brackets which allow to delimit a `do` block, as in:
@@ -183,6 +223,7 @@ do { `(%%l = %%r) ← tactic.target,
      tactic.trace $ "Goal is equality between " ++ (to_string l) ++ " and " ++ (to_string r) }
    <|> tactic.trace "Goal is not an equality"
 ```
+
 ## A first real world tactic
 
 We have studied enough monadology to understand our first useful tactic:
@@ -213,7 +254,7 @@ name `H` stands for `hypothesis`, while `Hs`, following Haskell's naming
 conventions, stands for several hypotheses. The imperative analogue of
 what happens for non-empty lists would read something like the following
 imperative pseudo-code
-```
+```text
 if unify(e, infer_type(H)) then return H else find_matching_type(e, HS)
 ```
 We can now use this function for our interactive tactic. We first need

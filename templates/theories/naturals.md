@@ -1,4 +1,23 @@
-# Maths in Lean : the natural numbers
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
+# Maths in Lean: the natural numbers
 
 The natural numbers begin with zero as is standard in computer
 science. You can call them `nat` or `ℕ` (you get the latter
@@ -11,9 +30,9 @@ takes a natural as input and outputs the next one.
 
 Addition and multiplication are defined by recursion on the second
 variable and many proofs of basic stuff in the core library are by
-induction on the second variable. The notations `+,-,*` are shorthand
-for the functions `nat.add`, `nat.sub` and `nat.mul` and other notations
-(≤, <, |) mean the usual things (get the "divides" symbol with `\|`.
+induction on the second variable. The notations `+`, `-`, `*` are shorthand
+for the functions `nat.add`, `nat.sub` and `nat.mul`, and other notations
+(`≤`, `<`, `|`) mean the usual things (get the "divides" symbol with `\|`).
 The `%` symbol denotes modulus (remainder after division).
 
 Here are some of core Lean's functions for working with `nat`.

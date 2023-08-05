@@ -1,4 +1,23 @@
-# Maths in lean : Topological Spaces.
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
+# Maths in Lean: Topological, uniform and metric spaces
 
 The `topological_space` typeclass is defined in mathlib,
 in `topology/basic.lean`. There are about 18000
@@ -8,7 +27,7 @@ topological groups and rings, and infinite sums. These docs
 are just concerned with the contents of the `topological_space.lean`
 file.
 
-### The basic typeclass.
+### The basic typeclass
 
 The `topological_space` typeclass is an inductive type, defined
 as a structure on a type `α` in the obvious way: there is an `is_open`
@@ -56,9 +75,9 @@ variables {X : Type} [topological_space X] {U V C D Y Z : set X}
 
 example : is_closed C → is_closed D → is_closed (C ∪ D) := is_closed_union
 
-example : is_open ( -C) ↔ is_closed C := is_open_compl_iff
+example : is_open Cᶜ ↔ is_closed C := is_open_compl_iff
 
-example : is_open U → is_closed C → is_open (U - C) := is_open_diff
+example : is_open U → is_closed C → is_open (U \ C) := is_open_diff
 
 example : interior Y = Y ↔ is_open Y := interior_eq_iff_open
 
@@ -68,7 +87,7 @@ example : is_open Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, is_open U ∧ x ∈ U := is_op
 
 example : closure Y = Y ↔ is_closed Y := closure_eq_iff_is_closed
 
-example : closure Y = - interior (- Y) := closure_eq_compl_interior_compl
+example : closure Y = (interior Yᶜ)ᶜ := closure_eq_compl_interior_compl
 ```
 
 ### Filters
@@ -82,13 +101,25 @@ two axioms:
 1) if `U ∈ F` and `U ⊆ V`, then `V ∈ F`; and
 2) if `U, V ∈ F` then there exists `W ∈ F` with `W ⊆ U ∩ V`.
 
-Informally, one can think of `F` as the set of "big" subsets of `X`. For example, if `X` is a set and `F` is the set of subsets `Y` of `X` such that `X - Y` is finite, then `F` is a filter. This is called the _cofinite filter_ on `X`.
+Informally, one can think of `F` as the set of "big" subsets of `X`. For example, if `X` is a set and `F` is the set of subsets `Y` of `X` such that `X \ Y` is finite, then `F` is a filter. This is called the _cofinite filter_ on `X`.
 
 Note that if `F` is a filter that contains the empty set, then it contains all subsets of `X` by the first axiom. This filter is sometimes called "bottom" (we will see why a little later on). Some references demand that the empty set is not allowed to be in a filter -- Lean does not have this restriction. A filter not containing the empty set is sometimes called a "proper filter".
 
 If `X` is a topological space, and `x ∈ X`, then the _neighbourhood filter_ `𝓝 x` of `x` is the set of subsets `Y` of `X` such that `x` is in the interior of `Y`. One checks easily that this is a filter (technical point: to see that this is actually the definition of `𝓝 x` in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using `F ≤ G` iff `G ⊆ F`, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but `lemma nhds_sets` says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).
 
-Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ F` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
+Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ X` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
+
+As an example, below are three limits formulated in Lean.
+The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
+
+```lean
+-- The limit of `2 * x` as `x` tends to `3` is `6`
+example : tendsto (λ x : ℝ, 2 * x) (𝓝 3) (𝓝 6) := sorry
+-- The limit of `1 / x` as `x` tends to `∞` is `0`
+example : tendsto (λ x : ℝ, 1 / x) at_top (𝓝 0) := sorry
+-- The limit of `x ^ 2` as `x` tends to `-∞` is `∞`
+example : tendsto (λ x : ℝ, x ^ 2) at_bot at_top := sorry
+```
 
 The _principal filter_ `principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
 

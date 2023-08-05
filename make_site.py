@@ -5,30 +5,22 @@ import sys
 import subprocess
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional
-import re
+from datetime import datetime
 
 import yaml
 from staticjinja import Site
 import jinja2.ext
+from jinja2 import Environment, FileSystemLoader
 import pybtex.database
-from mistletoe import Document, HTMLRenderer, block_token
+from mistletoe import Document, block_token
+from mistletoe_renderer import CustomHTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
 import urllib.request
 import json
 import gzip
-
-class CustomHTMLRenderer(HTMLRenderer):
-    """
-    Override the default heading to provide links like in GitHub.
-    """
-    def render_heading(self, token) -> str:
-        template = '<h{level} id="{anchor}" class="markdown-heading">{inner} <a class="hover-link" href="#{anchor}">#</a></h{level}>'
-        inner: str = self.render_inner(token)
-        # generate anchor following what github does
-        # See info and links at https://gist.github.com/asabaylus/3071099
-        anchor = inner.strip().lower()
-        anchor = re.sub(r'[^\w\- ]+', '', anchor).replace(' ', '-')
-        return template.format(level=token.level, inner=inner, anchor=anchor)
+import os
+from github import Github
+from slugify import slugify
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
@@ -58,7 +50,7 @@ class MarkdownExtension(jinja2.ext.Extension):
 markdown_renderer = CustomHTMLRenderer()
 
 def render_markdown(src: str) -> str:
-    return markdown_renderer.render(Document(src))
+    return markdown_renderer.render_md(src)
 
 ROOT = Path(__file__).parent
 DATA = ROOT/'data'
@@ -77,17 +69,11 @@ class MenuItem:
 class Menu:
     title: str
     items: List[MenuItem]
-    right: bool = False
-
-    @property
-    def class_right(self):
-        return ' dropdown-menu-right' if self.right else ''
 
     @classmethod
     def from_dict(cls, dic):
         return cls(dic['title'], [MenuItem.from_dict(item)
-                                  for item in dic['items']],
-                                  dic['open_right'])
+                                  for item in dic['items']])
 
 
 with (DATA/'menus.yaml').open('r', encoding='utf-8') as menu_file:
@@ -108,19 +94,34 @@ with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
     formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
 
 @dataclass
-class Maintainer:
+class People:
     name: str
-    descr: str
-    img: str
+    descr: str = ''
+    img: str = ''
 
-with (DATA/'maintainers.yaml').open('r', encoding='utf-8') as m_file:
-    maintainers = [Maintainer(**mtr) for mtr in yaml.safe_load(m_file)]
+with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
+    peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+@dataclass
+class Team:
+    name: str
+    short_description: str
+    description: str
+    url: str
+    members: List[People]
+    use_biography: bool = False
+
+with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
+    teams = [Team(team['name'], team['short_description'],
+                  team['description'], team['url'],
+                  [peoples.get(name, People(name)) for name in sorted(team['members'])],
+                  use_biography=team.get('use_biography', True))
+             for team in yaml.safe_load(t_file)]
 
 @dataclass
 class DocDecl:
     name: str
-    args: List[str]
-    tp: str
+    decl_header_html: str
     docs_link: str
     src_link: str
 
@@ -135,23 +136,46 @@ class HundredTheorem:
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
 
-urllib.request.urlretrieve('https://leanprover-community.github.io/mathlib_docs/export_db.json.gz', 'export_db.json.gz')
+@dataclass
+class Event:
+    title: str
+    location: str
+    type: str
+    url: str = 'TBA'
+    start_date: str = ''
+    end_date: str = ''
+    date_range: str = 'TBA'
+
+@dataclass
+class Course:
+    name: str
+    instructor: str
+    location: str
+    website: str
+    repo: Optional[str] = None
+    material: Optional[str] = None
+    notes : Optional[str] = None
+    tags: Optional[List[str]] = None
+    dates: str = ''
+    summary : Optional[str] = None
+    experiences : Optional[str] = None
+
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
+    'export_db.json.gz')
 with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
     json_bytes = json_file.read()
     json_file.close()
 
 decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
 
-num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'thm'])
+num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'theorem'])
 num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
 num_defns = len(decl_loc_map) - num_thms - num_meta
 
-def undecorate_arg(arg):
-    return ''.join(
-        match[4] if match[0] == '' else
-        match[1] + match[2] + match[3]
-        for match in re.findall(r'\ue000(.+?)\ue001(\s*)(.*?)(\s*)\ue002|([^\ue000]+)', arg))
-
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/100.yaml',
+    DATA/'100.yaml')
 with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
     hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
     for h in hundred_theorems:
@@ -168,8 +192,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     continue
                 doc_decls.append(DocDecl(
                     name=decl,
-                    args=[undecorate_arg(arg['arg']) for arg in decl_info['args']],
-                    tp=undecorate_arg(decl_info['type']),
+                    decl_header_html = decl_info['decl_header_html'] if 'decl_header_html' in decl_info else '',
                     docs_link=decl_info['docs_link'],
                     src_link=decl_info['src_link']))
             h.doc_decls = doc_decls
@@ -194,6 +217,7 @@ class Overview:
     depth: int
     title: str
     decl: Optional[str] = None
+    url: Optional[str] = None
     parent: Optional['Overview'] = None
     children: List['Overview'] = field(default_factory=list)
 
@@ -211,34 +235,130 @@ class Overview:
         else:
             return bool(self.decl)
 
+    @property
+    def nonempty_children(self) -> List['Overview']:
+        return [item for item in self.children if item.is_nonempty]
+
+    @property
+    def missing_children(self) -> List['Overview']:
+        return [item for item in self.children if item.has_missing_child]
+
+    @property
+    def slug(self) -> str:
+        return slugify(self.title)
+
     @classmethod
     def from_node(cls, identifier: str, title: str, children, depth: int, parent: 'Overview' = None) -> 'Overview':
+        is_leaf = not isinstance(children, dict)
+        decl = None
+        url = None
+        if is_leaf:
+            if children and 'http' in children:
+                url = children
+            else:
+                decl = replace_link((children or '').strip(), identifier)
         node = cls(
                 id=identifier,
                 depth=depth,
                 title=title,
-                decl=replace_link((children or '').strip(), identifier) if not isinstance(children, dict) else None,
+                decl=decl,
+                url=url,
                 parent=parent,
                 children=[])
 
-        if isinstance(children, dict):
+        if not is_leaf:
             node.children = [cls.from_node(f"{identifier}-{index}", title, subchildren, depth + 1, parent=node) for index, (title, subchildren) in enumerate(children.items())]
 
         return node
-
 
     @classmethod
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/overview.yaml',
+    DATA/'overview.yaml')
 with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
     overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/undergrad.yaml',
+    DATA/'undergrad.yaml')
 with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
     undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
+
+with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
+    events = [Event(**e) for e in yaml.safe_load(h_file)]
+
+with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
+    courses = [Course(**e) for e in yaml.safe_load(h_file)]
+for course in courses:
+    for field in ['experiences', 'notes', 'summary', 'experiences']:
+        val = getattr(course, field)
+        if isinstance(val, str):
+            setattr(course, field, render_markdown(val))
+        elif isinstance(val, list):
+            setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
+
+def format_date_range(event):
+    if event.start_date and event.end_date:
+        start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
+        end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
+        if start_date.year != end_date.year:
+            return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.month != end_date.month:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+        elif start_date.day != end_date.day:
+            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+        else:
+            return start_date.strftime("%B %-d, %Y")
+    else:
+        return 'TBA'
+
+present = datetime.now().date()
+old_events = sorted((e for e in events if e.end_date and datetime.strptime(e.end_date, '%B %d %Y').date() < present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date(), reverse=True)
+new_events = sorted((e for e in events if (not e.end_date) or datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
+
+for e in old_events + new_events:
+    e.date_range = format_date_range(e)
+
+
+@dataclass
+class Project:
+    name: str
+    organization: str
+    description: str
+    maintainers: List[str]
+    stars: int
+
+github = Github(os.environ.get('GITHUB_TOKEN', None))
+
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
+    DATA/'projects.yaml')
+with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
+    oprojects = yaml.safe_load(h_file)
+
+projects = []
+for name, project in oprojects.items():
+    if project.get('display', True):
+        github_repo = github.get_repo(project['organization'] + '/' + name)
+        stars = github_repo.stargazers_count
+        descr = render_markdown(project['description'])
+        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+
+num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+
+projects.sort(key = lambda p: p.stars, reverse=True)
+
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
+    DATA/'project_history.yaml')
+with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
+    project_history = yaml.safe_load(h_file)
 
 bib = pybtex.database.parse_file('lean.bib')
 
@@ -270,12 +390,16 @@ for key, data in bib.entries.items():
         eprint = data.fields['eprint']
         if eprint.startswith('arXiv:'):
             url = 'https://arxiv.org/abs/'+eprint[6:]
+        elif (('archivePrefix' in data.fields and data.fields['archivePrefix'] == 'arXiv') or
+            ('eprinttype' in data.fields and data.fields['eprinttype'] == 'arXiv')):
+            url = 'https://arxiv.org/abs/'+eprint
         else:
             url = eprint
     else:
         raise ValueError(f"Couldn't find a url for bib item {key}")
     if url.startswith(r'\url'):
         url = url[4:].strip('{}')
+    url = url.replace(r'\_', '_')
     if 'journal' in data.fields and data.fields['journal'] != 'CoRR':
         journal = data.fields['journal']
     elif 'booktitle' in data.fields:
@@ -303,23 +427,22 @@ paper_lists = [('Papers about Lean',
 def render_site(target: Path, base_url: str, reloader=False):
     default_context = lambda: {
             'base_url': base_url,
-            'menus': menus
+            'menus': menus,
             }
-
-    md_renderer = CustomHTMLRenderer()
 
     def render_content(env, template, **kwargs):
         """Render a markdown template."""
         content_template = env.get_template("_markdown.html")
         path = Path(template.name)
         title = path.with_suffix('').name
+        (target/path.parent).mkdir(parents=True, exist_ok=True)
         content_template.stream(**kwargs).dump(str(target/path.parent/title)+'.html')
 
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
                 base_url+'/img/')
         doc = Document(src)
-        content = md_renderer.render(doc).strip()
+        content = render_markdown(src).strip()
         title = ''
         for child in doc.children:
             if isinstance(child, block_token.Heading):
@@ -354,20 +477,34 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
-                ('meet.html', {'maintainers': maintainers,
-                               'community': (DATA/'community.md').read_text( encoding='utf-8')}),
+                ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
-                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta}),
+                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
+                ('lean_projects.html', {'projects': projects}),
+                ('events.html', {'old_events': old_events, 'new_events': new_events}),
+                ('courses.html', {'courses': courses}),
+                ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True)
 
-    for folder in ['css', 'js', 'img', 'papers']:
+    # Now build the individual team pages
+    (target/'teams').mkdir(exist_ok=True)
+    env = Environment(loader=FileSystemLoader('templates'))
+    env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
+    team_tpl = env.get_template('_team.html')
+    for team in teams:
+        with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
+            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+
+
+    for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
         subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
     subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
+    subprocess.call(['rsync', '-a', 'robots.txt', str(target).rstrip('/')])
 
     site.render(use_reloader=reloader)
 

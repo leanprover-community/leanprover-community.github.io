@@ -1,102 +1,105 @@
-Installing Lean and mathlib on Windows
-===
+# Installing Lean 4 on Windows
 
-This document explains how to get started with Lean and mathlib.
+This document explains how to get started with Lean 4 and mathlib.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
 
+<!--
+TODO: make a new video walkthrough.
 There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
+-->
 
-We'll need to set up Lean, an editor that knows about Lean, and `mathlib` (the standard library).
-Rather than installing Lean directly, we'll install a small program called `elan` which
+We'll need to set up Lean, an editor that knows about Lean, and `mathlib4` (the standard library).
+Rather than installing Lean directly, we'll rely on a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
 
-Installing `elan`
----
+## Installing `Visual Studio Code`
 
-1. We'll need a terminal, along with some basic prerequisites.
+We recommend that everyone use `VS Code` as their editor for working in Lean.
+You can install `VS Code` for your operating system from [https://code.visualstudio.com/download](https://code.visualstudio.com/download).
 
-   We recommend that you use `git bash` and not `msys2`, since installing the supporting tools (below) causes issues in `msys2`.
+## Installing `git`
 
-   Install [Git for Windows](https://gitforwindows.org/) (you can accept all default answers during installation).
-   Then open a terminal by typing `git bash` in the Windows search bar.
+Dependencies between Lean 4 projects are implemented via pointers to git repositories,
+so you will need `git` installed on your computer.
 
-2. In terminal, run the command
+You may have this set up already, in which case you can skip this step.
 
-   `curl https://raw.githubusercontent.com/Kha/elan/master/elan-init.sh -sSf | sh`
+Otherwise, we recommend that you install [`Git for Windows`](https://gitforwindows.org/).
+You will be asked many questions during installation, and we recommend you accept the defaults for all of them
+*except* for the default editor, for which you should select `Visual Studio Code`, rather than the default choice of `vi`.
 
-   and hit enter when a question is asked.
-   To make sure the terminal will find the installed files, run `echo 'PATH="$HOME/.elan/bin:$PATH"' >> $HOME/.profile`.
+We recommend running ``git config --global core.autocrlf input`` to make sure
+that you don't change the line endings of text files you edit.
 
-  Then close and reopen Git Bash.
+## Installing the `lean4` extension in `VS Code`
 
-Installing mathlib supporting tools
----
+Open `VS Code`, and in the "activity bar" along the left hand edge of the screen
+click on the "extension" icon ![(image of icon)](img/new-extensions-icon.png).
 
-In order to use mathlib supporting tools, you need to [get python](https://www.python.org/downloads/) first.
+In the search box that appears, type `lean4`, and then select the `lean4` extension that appears,
+and click the install button.
 
-### Get Python
+## Setting up `elan` and `lean`
 
-* Download the latest version of python [here](https://www.python.org/downloads/).
-* Run the downloaded file (`python-3.x.x.exe`)
-* Check `Add Python 3.x to PATH`.
-* Choose the default installation.
-* Open Git Bash (type `git bash` in the Start Menu)
-* Run `which python`
-  * The expected output is something like `/c/Users/<user>/AppData/Local/Programs/Python/Pythonxx-xx/python`. In this case, proceed to the next step.
-  * If it's something like `/c/Users/<user>/AppData/Local/Microsoft/WindowsApps/python`, then
-    * Did you follow the instruction to select `Add Python 3.x to PATH` during the installation?
-      * If not, re-run the python installer to uninstall python and try again.
-    * Otherwise, you need to disable a Windows setting.
-      * Type `manage app execution aliases` into the Windows search prompt (start menu) and open the corresponding System Settings page.
-      * There should be two entries `App Installer python.exe` and `App Installer python3.exe`. Ensure that both of these are set to `Off`.
-    * Close and reopen Git Bash and restart this step.
-  * If it is any other directory, you might have an existing version of Python. Ask for help in the Zulip chat room (linked above).
-  * If you get `command not found`, you should add the Python directory to your path. Google how to do this, or ask on Zulip.
-* Run `cp "$(which python)" "$(which python)"3`. This ensures that we can use the command `python3` to call Python.
-* Test whether everything is working by typing `python3 --version` and `pip3 --version`. If both commands give a short output and no error, everything is set up correctly.
-  * If `pip3 --version` doesn't give any output, run the command `python3 -m pip install --upgrade pip`, which should fix it.
+You can either have the `VS Code` extension install `elan` and `lean` for you,
+or do it manually. We recommmend having the extension do it, but give instructions for both.
 
+### Have the extension install `elan` and `lean`
 
-### Configure Git
+Under the `File` menu, select `New text file`.
+A new window labelled `Untitled-1` will appear.
 
-* Run `git config --global core.autocrlf input` in Git Bash
-  * Alternatively, you can set it to `false`. If it is set to `true`, you might run into issues when running `leanproject`.
+There will be a prompt in this window saying `Select a language`,
+which you should click on and select `Lean4`.
+(You can alternatively find where `VS Code` says `Plain text` in the bottom right of your screen, and change the language here,
+or press `ctrl+shift+p` to open the command palette, and select `Change language mode`.)
 
-### Get Scripts
+Once you've set the langauge to `Lean4`, a dialog will appear in the bottom right of your screen,
+saying `Failed to start 'lean' language server` with a button `Install Lean using Elan`.
 
-Then, at a terminal, run the command
-  ```bash
-  pip3 install mathlibtools
-  ```
+Click this button, and inside a terminal window within `VS Code` you should see the installation process begin.
+It will take on the order of a minute to download and install `Lean`.
 
-Installing and configuring an editor
----
+When this finishes, return to the `Untitled-1` editor, and type
 
-There are two Lean-aware editors, VS Code and emacs.
-This document describes using VS Code (for emacs, look at https://github.com/leanprover/lean-mode).
+```lean
+#eval 18 + 19
+```
 
-1. Install [VS Code](https://code.visualstudio.com/).
-2. Launch VS Code.
-3. Click on the extension icon ![(image of icon)](img/new-extensions-icon.png)
-   (or ![(image of icon)](img/extensions-icon.png) in older versions) in the side bar on the left edge of
-   the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for `leanprover`.
-4. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
-5. Setup the default shell:
-  * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
-    `Select Default Shell`, then select `git bash` from the menu.
-  * If you're using `msys2`, press `ctrl-comma` again to open the settings, and add two settings:
-  ```
-  "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
-  "terminal.integrated.shellArgs.windows": ["--login", "-i"]
-  ```
-6. Restart VS Code.
-7. Verify Lean is working, for example by saving a file `test.lean` and entering `#eval 1+1`.
-   A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
-   displayed.
+If you see a blue underline appear under `#eval`, and the result `37` displayed in the right hand side `Lean info view` panel,
+then you have successfully installed Lean 4!
 
-## Lean Projects
+You can skip ahead to read the instructions about creating and working on [Lean projects](project.html).
+This page will show you how to work with mathlib4, the main mathematical library for Lean,
+or to work with a new or existing project that depends on mathlib4.
 
-You can now read instructions about creating and working on [Lean projects](project.html)
+### Installing `elan` yourself
+
+Open a command prompt (`cmd`) and execute the following commands:
+
+```shell
+curl -O --location https://raw.githubusercontent.com/leanprover/elan/master/elan-init.ps1
+powershell -ExecutionPolicy Bypass -f elan-init.ps1
+del elan-init.ps1
+```
+
+Alternatively you can open a `git bash` window, and run
+
+```shell
+curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+```
+
+In either case, it should take about a minute to install `elan`.
+Afterwards, in `VS Code` you can open a text file and either set the language to `Lean4` (or just save it with a `.lean` extension),
+and then try
+
+```lean
+#eval 18 + 19
+```
+
+as described above to check that Lean is responding to you.
+
+You can now read the instructions about creating and working on [Lean projects](project.html).

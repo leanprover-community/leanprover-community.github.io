@@ -1,4 +1,23 @@
-# Library Style Guidelines #
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
+# Library Style Guidelines
 Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 In addition to the [naming conventions](naming.html),
@@ -7,10 +26,10 @@ and conventions. Having a uniform style makes it easier to browse the
 library and read the contents, but these are meant to be guidelines
 rather than rigid rules.
 
-### Variable conventions ###
+### Variable conventions
 
 - `u`, `v`, `w`, ... for universes
-- `α`, `β`, `γ`, ... for types
+- `α`, `β`, `γ`, ... for generic types
 - `a`, `b`, `c`, ... for propositions
 - `x`, `y`, `z`, ... for elements of a generic type
 - `h`, `h₁`, ...     for assumptions
@@ -20,20 +39,24 @@ rather than rigid rules.
 - `m`, `n`, `k`, ... for natural numbers
 - `i`, `j`, `k`, ... for integers
 
+Types with a mathematical content are expressed with the usual
+mathematical notation, often with an upper case letter
+(`G` for a group, `R` for a ring, `K` or `𝕜` for a field, `E` for a vector space, ...).
+This convention is not followed in older files, where greek letters are used
+for all types. Pull requests renaming type variables in these files are welcome.
 
 
-### Line length ###
+### Line length
 
 Lines should not be longer than 100 characters. This makes files
 easier to read, especially on a small screen or in a small window.
 
-### Header and imports ###
+### Header and imports
 
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
 a description of the contents. Do all `import`s right after the header,
-without a line break, on separate lines. You can also open namespaces
-in the same block.
+without a line break, on separate lines.
 
 ```lean
 /-
@@ -43,7 +66,6 @@ Author: Joe Cool.
 -/
 import data.nat
 import algebra.group
-open nat eq.ops
 ```
 
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
@@ -92,7 +114,9 @@ New bibliography entries should be added to `docs/references.bib`.
 
 See our [documentation requirements](doc.html) for more suggestions and examples.
 
-### Structuring definitions and theorems ###
+### Structuring definitions and theorems
+
+These guidelines hold for declarations starting with `def`, `lemma` and `theorem`. For "theorem statement", also read "type of a definition" and for "proof" also read "definition body".
 
 Use spaces around ":", ":=" or infix operators. Put them before a line break rather
 than at the beginning of the next line.
@@ -103,8 +127,24 @@ After stating the theorem, we generally do not indent the first line
 of a proof, so that the proof is "flush left" in the file.
 ```lean
 open nat
-theorem nat_case {P : nat → Prop} (n : nat) (H1: P 0) (H2 : ∀m, P (succ m)) : P n :=
+theorem nat_case {P : nat → Prop} (n : nat) (H1 : P 0) (H2 : ∀ m, P (succ m)) : P n :=
 nat.induction_on n H1 (assume m IH, H2 m)
+```
+
+If the theorem statement requires multiple lines, indent the subsequent lines:
+```lean
+namespace nat
+
+lemma le_induction {P : ℕ → Prop} {m}
+  (h0 : P m) (h1 : ∀ n, m ≤ n → P n → P (n + 1)) :
+  ∀ n, m ≤ n → P n :=
+by { apply nat.less_than_or_equal.rec h0, exact h1 }
+
+def decreasing_induction {P : ℕ → Sort*} (h : ∀ n, P (n + 1) → P n) {m n : ℕ} (mn : m ≤ n)
+  (hP : P n) : P m :=
+le_rec_on mn (λ k ih hsk, ih $ h k hsk) (λ h, h) hP
+
+end nat
 ```
 
 When a proof term takes multiple arguments, it is sometimes clearer, and often
@@ -113,7 +153,7 @@ indent each argument.
 ```lean
 open nat
 axiom zero_or_succ (n : nat) : n = zero ∨ n = succ (pred n)
-theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀m, n = succ m → B) : B :=
+theorem nat_discriminate {B : Prop} {n : nat} (H1: n = 0 → B) (H2 : ∀ m, n = succ m → B) : B :=
 or.elim (zero_or_succ n)
   (assume H3 : n = zero, H1 H3)
   (assume H3 : n = succ (pred n), H2 (pred n) H3)
@@ -125,29 +165,30 @@ Here is a longer example.
 open list
 variable {T : Type}
 
-theorem mem_split {x : T} {l : list T} : x ∈ l → ∃s t : list T, l = s ++ (x::t) :=
+theorem mem_split {x : T} {l : list T} : x ∈ l → ∃ s t : list T, l = s ++ (x::t) :=
 list.rec_on l
   (assume H : x ∈ [], false.elim (iff.elim_left (mem_nil_iff _) H))
   (assume y l,
-    assume IH : x ∈ l → ∃s t : list T, l = s ++ (x::t),
+    assume IH : x ∈ l → ∃ s t : list T, l = s ++ (x::t),
     assume H : x ∈ y::l,
     or.elim (eq_or_mem_of_mem_cons H)
       (assume H1 : x = y,
         exists.intro [] (exists.intro l (by rw H1; refl)))
       (assume H1 : x ∈ l,
-        let ⟨s, (H2 : ∃t : list T, l = s ++ (x::t))⟩ := IH H1,
+        let ⟨s, (H2 : ∃ t : list T, l = s ++ (x::t))⟩ := IH H1,
             ⟨t, (H3 : l = s ++ (x::t))⟩ := H2 in
         have H4 : y :: l = (y::s) ++ (x::t), by rw H3; refl,
         exists.intro (y::s) (exists.intro t H4)))
 
 ```
 
-A short definition can be written on a single line:
+A short declaration can be written on a single line:
 ```lean
 open nat
-definition square (x : nat) : nat := x * x
+lemma succ_pos : ∀ n : ℕ, 0 < succ n := zero_lt_succ
+
+def square (x : nat) : nat := x * x
 ```
-For longer definitions, use conventions like those for theorems.
 
 A "have" / "from" pair can be put on the same line.
 ```lean
@@ -201,12 +242,10 @@ structure principal_seg {α β : Type*} (r : α → α → Prop) (s : β → β 
 (top : β)
 (down : ∀ b, s b top ↔ ∃ a, to_order_embedding a = b)
 
-class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
-  extends has_scalar α β, add_comm_group β :=
-(smul_add : ∀r (x y : β), r • (x + y) = r • x + r • y)
-(add_smul : ∀r s (x : β), (r + s) • x = r • x + s • x)
-(mul_smul : ∀r s (x : β), (r * s) • x = r • s • x)
-(one_smul : ∀x : β, (1 : α) • x = x)
+class semimodule (R : Type u) (M : Type v) [semiring R]
+  [add_comm_monoid M] extends distrib_mul_action R M :=
+(add_smul  : ∀ (r s : R) (x : M), (r + s) • x = r • x + s • x)
+(zero_smul : ∀ x : M, (0 : R) • x = 0)
 ```
 
 When using a constructor taking several arguments in a definition,
@@ -224,13 +263,41 @@ in:
 
 ```lean
 instance : partial_order (topological_space α) :=
-{ le          := λt s, t.is_open ≤ s.is_open,
+{ le          := λ t s, t.is_open ≤ s.is_open,
   le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,
   le_refl     := assume t, le_refl t.is_open,
   le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
 ```
 
-### Binders ###
+### Hypotheses Left of Colon
+
+Generally, having arguments to the left of the colon is preferred
+over having arguments in universal quantifiers or implications,
+if the proof starts by introducing these variables. For instance:
+
+```lean
+example (n : ℝ) (h : 1 < n) : 0 < n := by linarith
+```
+
+is preferred over
+
+```lean
+example (n : ℝ) : 1 < n → 0 < n := λ h, by linarith
+```
+
+and
+
+```lean
+example (n : ℕ) : 0 ≤ n := dec_trivial
+```
+
+is preferred over
+
+```lean
+example : ∀ (n : ℕ), 0 ≤ n := λ n, dec_trivial
+```
+
+### Binders
 
 Use a space after binders:
 ```lean
@@ -238,7 +305,7 @@ example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
 λ (α : Type) (x : α), exists.intro x rfl
 ```
 
-### Calculations ###
+### Calculations
 
 There is some flexibility in how you write calculational proofs. In
 general, it looks nice when the comparisons and justifications line up
@@ -277,7 +344,7 @@ theorem reverse_reverse : ∀ (l : list α), reverse (reverse l) = l
 ```
 
 
-### Tactic mode ###
+### Tactic mode
 
 When opening a tactic block, `begin` is not indented but everything
 inside is indented, as in:
@@ -313,11 +380,12 @@ le_antisymm
 ```
 
 When new goals arise as side conditions or steps, they are enclosed in
-focussing braces and indented. Braces are not alone on their line.
+focussing braces and indented (except possibly the last goal, if its proof
+is much longer than the proofs of the other goals). Braces are not alone on their line.
 
 ```lean
 lemma mem_nhds_of_is_topological_basis {a : α} {s : set α} {b : set (set α)}
-  (hb : is_topological_basis b) : s ∈ (𝓝 a).sets ↔ ∃t∈b, a ∈ t ∧ t ⊆ s :=
+  (hb : is_topological_basis b) : s ∈ (𝓝 a).sets ↔ ∃ t ∈ b, a ∈ t ∧ t ⊆ s :=
 begin
   rw [hb.2.2, nhds_generate_from, infi_sets_eq'],
   { simpa [and_comm, and.left_comm] },
@@ -335,7 +403,7 @@ but there is no style rule requiring it.
 (Many authors prefer the comma, so that placing the cursor after it displays "goals accomplished"
 in the infoview, but others dislike it on the basis of the disconcerting grammar.)
 
-Often `t0 ; t1` is used to execute `t0` and then `t1` on all new goals. But `;` is not a `,` so
+Often `t0; t1` is used to execute `t0` and then `t1` on all new goals. But `;` is not a `,` so
 either write the tactics in one line, or indent the following tacic.
 
 ```lean
@@ -353,25 +421,56 @@ If you are using multiple tactics inside a `by ...` block, use braces
 which should only be used when multiple goals need to be processed by `tac2`.
 (This style rule is not yet followed in the older parts of mathlib.)
 
-### Sections ###
+In general, you should put a single tactic invocation per line, unless you are
+closing a goal with a proof that fits entirely on a single line. Short sequences of
+tactics that correspond to a single mathematical idea can also be put on a single line,
+as in `cases bla, clear h` or `induction n, { simp }` or `rw [foo], simp_rw [bar]`.
 
-Within a section, you can indent definitions and theorems to make the
-scope salient:
 ```lean
-section my_section
-  variable α : Type
-  variable P : Prop
-
-  definition foo (x : α) : α := x
-
-  theorem bar (H : P) : P := H
-end my_section
+begin
+  by_cases h : x = 0,
+  { rw h, exact hzero ha },
+  { rw h,
+    have h' : ..., from H ha,
+    simp_rw [h', hb],
+    ... }
+end
 ```
-If the section is long, however, you can omit the indents.
+
+Very short goals can be closed right away using `swap` or `work_on_goal` if needed, to avoid
+additional indentation in the rest of the proof.
+
+```lean
+begin
+  rw [h], swap, { exact h' },
+  ...
+end
+```
 
 We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.
+
+### Normal forms
+
+Some statements are equivalent. For instance, there are several equivalent
+ways to require that a subset `s` of a type is nonempty. For another example, given
+`a : α`, the corresponding element of `option α` can be equivalently written
+as `some a` or `(a : option α)`. In general, we try to settle
+on one standard form, called the normal form, and use it both in statements and
+conclusions of theorems. In the above examples, this would be `s.nonempty` (which
+gives access to dot notation) and `(a : option α)`. Often, simp lemmas will be
+registered to convert the other equivalent forms to the normal form.
+
+There is a special case to this rule. In types with a bottom element, it is equivalent
+to require `hlt : ⊥ < x` or `hne : x ≠ ⊥`, and it is not clear which one would
+be better as a normal form since both have their pros and cons. An analogous situation
+occurs with `hlt : x < ⊤` and `hne : x ≠ ⊤` in types with a top element. Since it is very
+easy to convert from `hlt` to `hne` (by using `hlt.ne` or `hlt.ne'` depending
+on the direction we want) while the other conversion is more lengthy, we use `hne` in
+*assumptions* of theorems (as this is the easier assumption to check), and `hlt` in
+*conclusions* of theorems (as this is the more powerful result to use).
+A common usage of this rule is with naturals, where `⊥ = 0`.
 
 ## Comments
 

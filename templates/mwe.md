@@ -1,18 +1,37 @@
+<div class="alert alert-info">
+<p>
+We are currently updating the Lean community website to describe working with Lean 4,
+but most of the information you will find here today still describes Lean 3.
+</p>
+<p>
+Pull requests updating this page for Lean 4 are very welcome.
+There is a link at the bottom of this page.
+</p>
+<p>
+Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+and ask for whatever help you need during this transitional period!
+</p>
+<p>
+The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+If you need to link to Lean 3 specific resources please link there.
+</p>
+</div>
+
 # Minimal working examples
 
 ## tl;dr
 
 When posting code on Zulip, please include all `import`s and `open`s and `universe`s and `variable`s, so others can simply just cut and paste what you post, and see the same issue that you are seeing. The best way to ensure you have done this is to make a completely new Lean file containing only what you are proposing to post, and checking that it compiles.
 
-Bad example:
+### Bad example:
 
-```
+```lean
 #check (univ : set X)
 ```
 
-Good example:
+### Good example:
 
-```
+```lean
 import data.set.basic
 
 universe u
@@ -23,6 +42,39 @@ open set
 
 #check (univ : set X)
 ```
+
+### Bad example:
+
+```text
+Goal state:
+/-
+a b : blah,
+h : a.fst < b.fst,
+h2 : a.fst < b.snd
+⊢ false
+-/
+```
+
+### Good example:
+
+```lean
+def blah : Type := ℕ × ℕ
+
+example (a b : blah) (h : a.fst < b.fst) (h2 : a.fst < b.snd) : false :=
+begin
+
+end
+/-
+a b : blah,
+h : a.fst < b.fst,
+h2 : a.fst < b.snd
+⊢ false
+-/
+```
+
+Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
+
+Note you still need to include the corresponding `import`s and `open`s and `universe`s and `variable`s as mentioned above.
 
 ## Formal Definition
 
@@ -41,9 +93,9 @@ It is fine for your example to throw compiler errors or warnings. In particular,
 
 You should *test* this by making a new Lean file, pasting your code snippet into it, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
 
-## What if I'm asking about the [Natural Number Game](https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/)?
+## What if I'm asking about the [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/)?
 
-If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/?world=9&level=4) of the Natural Number Game and my proof script is _blah_", rather than "I am on Advanced Multiplication World Level 4 of the Natural Number Game and my proof script is _blah_".
+If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/?world=9&level=4) of the Natural Number Game and my proof script is _blah_", rather than "I am on Advanced Multiplication World Level 4 of the Natural Number Game and my proof script is _blah_".
 
 If you post a code snippet on Zulip, please make sure it is surrounded in triple backticks.
 

@@ -1,89 +1,79 @@
 {% extends '_base.html' %}
 {% block title %}Mathlib statistics{% endblock %}
-{% block extracss %}
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-<link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
-{% endblock %}
 
 {% block content %}
 
-  <div class="row mt-5">
-    <div class="col-12">
-      <h1>Mathlib statistics</h1>
+    <div class="alert alert-info">
+        <p>
+        We are currently updating the Lean community website to describe working with Lean 4,
+        but most of the information you will find here today still describes Lean 3.
+        </p>
+        <p>
+        Pull requests updating this page for Lean 4 are very welcome.
+        There is a link at the bottom of this page.
+        </p>
+        <p>
+        Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
+        and ask for whatever help you need during this transitional period!
+        </p>
+        <p>
+        The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
+        If you need to link to Lean 3 specific resources please link there.
+        </p>
     </div>
-  </div>
-  <div class="row mt-5">
-    <h2>Declaration Counts</h2>
-  </div>
-  <div class="row mt-5">
-    <div class="col-md-4">
-      <h3>Definitions</h3>
-      <h4>{{ num_defns }}</h4>
-    </div>
-    <div class="col-md-4">
-      <h3>Theorems</h3>
-      <h4>{{ num_thms }}</h4>
-    </div>
-    <div class="col-md-4">
-      <h3>Meta declarations</h3>
-      <h4>{{ num_meta }}</h4>
-    </div>
-  </div>
- 
-  <div class="row mt-5">
+
+
+    <h1>Mathlib statistics</h1>
+
+    <h2>Counts</h2>
+
+    <table class="table table-borderless table-sm mt-4 ml-5" style="font-size: 1.25rem">
+        <tr>
+            <th>Definitions</th>
+            <th>Theorems</th>
+            <th>Contributors</th>
+        </tr>
+        <tr>
+            <td>{{ num_defns }}</td>
+            <td>{{ num_thms }}</td>
+            <td>{{ num_contrib }}</td>
+        </tr>
+    </table>
+
     <h2>Code growth</h2>
-  </div>
-  <div class="row mt-5">
-    <div class="col-md-6">
+
       <canvas id="files_by_date"></canvas>
-    </div>
 
-    <div class="col-md-6">
       <canvas id="lines_by_date"></canvas>
-    </div>
-  </div>
 
-  <div class="row mt-5">
     <h2>Temporal distribution</h2>
-  </div>
-  <div class="row mt-5">
-    <div class="col-md-6">
+
       <canvas id="by_year_month"></canvas>
-    </div>
 
-    <div class="col-md-6">
       <canvas id="by_year"></canvas>
-    </div>
-  </div>
 
-  <div class="row mt-5">
     <h2>Authors</h2>
 
-    <div class="col-12">
+    <div>
        <div id="authors_table"></div>
     </div>
-  </div>
-  <div class="row mt-5">
 
-    <div class="col-md-12">
-      <canvas id="lines_by_authors"></canvas>
-    </div>
+    <canvas id="lines_by_authors" class="mt-5"></canvas>
 
-    <div class="col-md-12">
       <canvas id="commits_by_authors"></canvas>
-    </div>
-  </div>
 
-  <div class="row mt-5">
+    <h2>Dependency graph</h2>
 
-  </div>
+    <p>A visualization showing how the various topics in mathlib interact and their relative sizes can be found <a href="https://eric-wieser.github.io/mathlib-import-graph">here</a>.</p>
 {% endblock %}
 
 {% block extrajs %}
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
+
 <script type="text/javascript" src="{{ base_url }}/mathlib_stats/gitstats.js"></script>
 
 <script>
