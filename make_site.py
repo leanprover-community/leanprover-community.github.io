@@ -137,6 +137,17 @@ class HundredTheorem:
     note: Optional[str] = None
 
 @dataclass
+class KnillTheorem:
+    number: str
+    satz: str
+    decl: Optional[str] = None
+    decls: Optional[List[str]] = None
+    doc_decls: Optional[List[DocDecl]] = None
+    author: Optional[str] = None
+    links: Optional[Mapping[str, str]] = None
+    note: Optional[str] = None
+
+@dataclass
 class Event:
     title: str
     location: str
@@ -286,6 +297,12 @@ urllib.request.urlretrieve(
     DATA/'undergrad.yaml')
 with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
     undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib_docs/knill.yaml',
+    DATA/'knill.yaml')
+with (DATA/'knill.yaml').open('r', encoding='utf-8') as h_file:
+    knill_theorems = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
@@ -477,6 +494,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
+                ('knill.html', {'knill_theorems': knill_theorems}),
                 ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),

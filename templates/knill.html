@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+{% block title %}Knill's list of theorems in mathlib{% endblock %}
+{% block content %}
+    <h1>Knill's list of theorems in mathlib</h1>
+
+    <p>
+    Knill assembled a
+    <a href="https://people.math.harvard.edu/~knill/graphgeometry/papers/fundamental.pdf">list</a>
+    of 172 elegant, beautiful, theorems in mathematics,
+    which he describes as
+    <em>An expository hitchhikers guide to some theorems in mathematics.</em>
+
+    This page lists these theorems, and indicates which ones have been formalized in Lean.
+    </p>
+
+    <p>To update this list, please submit a PR modifying
+      <a href="https://github.com/leanprover-community/mathlib/edit/master/docs/knill.yaml">
+        docs/knill.yaml</a> in the mathlib repository.
+      </p>
+
+  {% macro flat_child(item) -%}
+    {%- if item.children -%}
+      {{ item.title }}(
+      {%- for inner_item in item.nonempty_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+      {%- endfor -%})
+    {%- else -%}
+      <a href="{{ item.decl }}">{{ item.title }}</a>
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {% for area in knill_theorems %}
+    {% if area.is_nonempty %}
+    <h4>{{ area.title }}</h4>
+      {% for subarea in area.nonempty_children %}
+        <p class="ml-4 mb-2">
+        <b>{{ subarea.title }}</b>
+        {% for item in subarea.nonempty_children %}
+          {{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% endfor %}
+        </p>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
