@@ -183,7 +183,7 @@ class DeclarationDataEntry:
     doc: str
 
 declarations = {
-    k: DeclarationDataEntry(*d) for k, d in declaration_data['declarations'].items()
+    k: DeclarationDataEntry(**d) for k, d in declaration_data['declarations'].items()
 }
 
 num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
