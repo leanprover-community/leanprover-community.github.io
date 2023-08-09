@@ -223,7 +223,7 @@ def replace_link(name, id):
         return '/mathlib4_docs/' + name
     else:
         try:
-            return decl_loc_map[name].docsLink
+            return declarations[name].docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
