@@ -161,17 +161,33 @@ class Course:
     experiences : Optional[str] = None
 
 urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib_docs/export_db.json.gz',
-    'export_db.json.gz')
-with gzip.GzipFile('export_db.json.gz', 'r') as json_file:
-    json_bytes = json_file.read()
-    json_file.close()
+    'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
+    DATA/'header-data.json'
+)
+with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
+    header_data = json.load(h_file)
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib4_docs/declarations/declaration-data.bmp',
+    DATA/'declaration-data.json'
+)
+with (DATA/'declaration-data.json').open('r', encoding='utf-8') as h_file:
+    declaration_data = json.load(h_file)
 
-decl_loc_map = json.loads(json_bytes.decode('utf-8'), strict=False)
+@dataclass
+class DeclarationDataEntry:
+    sourceLink: str
+    name: str
+    line: int
+    kind: str
+    docLink: str
+    doc: str
 
-num_thms = len([d for d in decl_loc_map if decl_loc_map[d]['kind'] == 'theorem'])
-num_meta = len([d for d in decl_loc_map if decl_loc_map[d]['is_meta']])
-num_defns = len(decl_loc_map) - num_thms - num_meta
+declarations = {
+    k: DeclarationDataEntry(*d) for k, d in deciaration_data['declarations'].items()
+}
+
+num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
+num_defns = len(declarations) - num_thms
 
 urllib.request.urlretrieve(
     'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
@@ -186,15 +202,15 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
             doc_decls = []
             for decl in h.decls:
                 try:
-                    decl_info = decl_loc_map[decl]
+                    decl_info = declarations[decl]
                 except KeyError:
                     print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
                     continue
                 doc_decls.append(DocDecl(
                     name=decl,
-                    decl_header_html = decl_info['decl_header_html'] if 'decl_header_html' in decl_info else '',
-                    docs_link=decl_info['docs_link'],
-                    src_link=decl_info['src_link']))
+                    decl_header_html = header_data.get(decl, ''),
+                    docs_link=decl_info.docsLink,
+                    src_link=decl_info.sourceLink))
             h.doc_decls = doc_decls
         else:
             h.doc_decls = []
@@ -207,7 +223,7 @@ def replace_link(name, id):
         return '/mathlib4_docs/' + name
     else:
         try:
-            return decl_loc_map[name]['docs_link']
+            return decl_loc_map[name].docsLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
