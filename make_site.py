@@ -183,7 +183,7 @@ class DeclarationDataEntry:
     doc: str
 
 declarations = {
-    k: DeclarationDataEntry(*d) for k, d in deciaration_data['declarations'].items()
+    k: DeclarationDataEntry(*d) for k, d in declaration_data['declarations'].items()
 }
 
 num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
@@ -209,7 +209,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                 doc_decls.append(DocDecl(
                     name=decl,
                     decl_header_html = header_data.get(decl, ''),
-                    docs_link=decl_info.docsLink,
+                    docs_link=decl_info.docLink,
                     src_link=decl_info.sourceLink))
             h.doc_decls = doc_decls
         else:
@@ -497,7 +497,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
-                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_meta': num_meta, 'num_contrib': num_contrib}),
+                ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('courses.html', {'courses': courses}),
