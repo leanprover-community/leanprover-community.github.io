@@ -49,7 +49,7 @@ better approaches or new ideas.
 ## What to consider when reviewing
 
 Reviewing is essentially about looking at code and asking yourself questions.
-The foundational issues, organized approximately from easiet to hardest, are:
+The foundational issues, organized approximately from easiest to hardest, are:
 style, documentation, location, improvements and library integration.
 
 Note that new reviewers are certainly capable of commenting on the first two
@@ -135,11 +135,9 @@ In case you're unaware, please familiarize yourself with the mathlib
 You need spaces around `*`, `:` at the end of the line and the `rw` to 
 be on the same line.
 ```suggestion
-theorem mul_assoc_assoc {α : Type _} [Semigroup α] (a b c d : α)
-: a*b*c*d=a*(b*(c*d)) :=
-by
-rw [mul_assoc,
-    mul_assoc]
+theorem mul_assoc_assoc {α : Type _} [Semigroup α] (a b c d : α) :
+    a * b * c * d = a * (b * (c * d)) := by
+  rw [mul_assoc, mul_assoc]
 ```
 ````
 
@@ -525,7 +523,7 @@ add it to `X.Y.Z`." Upon trying to add the theorem there, the contributor realiz
 I don't have access to `helper_lemma`, I need to `import A.B.C`." During review, the 
 reviewer is focused on other things, and the PR is merged with this import change.
 This is the story of how, at one time, `Analysis.NormedSpace.Star.Basic` imported 
-`Anlaysis.NormedSpace.OperatorNorm`!
+`Analysis.NormedSpace.OperatorNorm`!
 
 As another example, in [#6239](https://github.com/leanprover-community/mathlib4/pull/6239),
 the contributor had added the import `Data.IsROrC.Basic` to
@@ -686,7 +684,7 @@ with an equality proof on the lengths.
 
 ### Library integration
 
-Many of the questions here are a bit nebulous generally require a large amount of
+Many of the questions here are a bit nebulous and generally require a large amount of
 familiarity with the structure of mathlib, or at least significant prior expertise
 in formalization. Don't be discouraged if you find it difficult to address these
 questions when reviewing.
@@ -694,7 +692,7 @@ questions when reviewing.
 #### Does it provide a sensible API?
 
 - Are attributes added appropriately (e.g., `@[simp]`, `@[ext]`, `@[gcongr]`, `@[aesop]`, etc.)?
-- Are rewrite lemmas provided to avoid the need to pass through eqialities definitionally all the time?
+- Are rewrite lemmas provided to avoid the need to pass through equalities definitionally all the time?
 - Does a new type provide convenient constructors in common use cases?
 
 #### Is it general enough to support known future needs?
