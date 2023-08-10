@@ -34,9 +34,7 @@ a handful of pull requests, and this may even be their first! As such it is
 important to avoid comments like "This result is useless, we already have a
 version of it." Instead you could be more gentle and say, for example, "Thanks
 for proving this, but I think we already have a lemma to this effect. It is
-`my_generic_lemma`. Please try to use that instead."
-
-Try to find the
+`my_generic_lemma`. Please try to use that instead." Try to find the
 good in what they have done, even while pointing out room for improvement.
 
 ### Humility
@@ -529,9 +527,15 @@ reviewer is focused on other things, and the PR is merged with this import chang
 This is the story of how, at one time, `Analysis.NormedSpace.Star.Basic` imported 
 `Anlaysis.NormedSpace.OperatorNorm`!
 
+As another example, in [#6239](https://github.com/leanprover-community/mathlib4/pull/6239),
+the contributor had added the import `Data.IsROrC.Basic` to
+`LinearAlgebra.Matrix.DotProduct`. This is probably a hard thing for a new 
+contributor to recognize, because it sometimes requires decent familiarity with the
+way the library is organized.
+
 Of course, reviewers should do their best to catch the most egregious examples
 (e.g., importing `Analysis` files into `Algebra` files is generally rather suspect),
-but asking the questions is always warranted. It can often mean that the results belong
+but asking the question is always warranted. It can often mean that the results belong
 elsewhere, the file should be split along a natural boundary, or the new results should
 go in a new a file.
 
@@ -554,13 +558,131 @@ lookout for a natural boundaries where the file can be split into coherent piece
 
 #### Splitting into supporting lemmas or definitions (especially for long proofs)?
 
-
+I don't have an example of this on hand.
 
 #### Different tactics to improve readability
 
+A good example where using better tactics, or golfing, can *improve* readability
+can be found in this suggestion from [#6140](https://github.com/leanprover-community/mathlib4/pull/6140/files/d2506ba26543b630722124dbf030339f43f6590a#r1287284988).
+In this case, the original subsequence of tactics in the proof was:
+
+```lean
+  have h₀ : log b = log (- -b) := by simp
+  rw [h₀, log_neg_eq_log]
+  have hb' : 0 < -b := by linarith
+  have h₁ : log (-b) < 0 := by rw [log_neg_iff hb']; linarith
+  refine tendsto_exp_atBot.comp ?_
+  rw [tendsto_const_mul_atBot_of_neg h₁]
+  show atTop ≤ atTop
+  rfl
+```
+
+and the suggestion was to golf it to:
+
+```lean
+  refine tendsto_exp_atBot.comp <| (tendsto_const_mul_atBot_of_neg ?_).mpr tendsto_id
+  rw [←log_neg_eq_log, log_neg_iff (by linarith)]
+  linarith
+```
+
+from the golfed version, we can easily see that this is essentially just composing some
+library lemmas about `Filter.Tendsto`, along with a single hypothesis to one of these
+theorems which is proven with some basic rewriting and calls to `linarith`.
+
+An example where using a better tactic can improve readability can be found in the 
+entire diff of [#4702](https://github.com/leanprover-community/mathlib4/pull/4702/files),
+which golfed lemmas throughout the library using the new `gcongr` tactic.  We'll
+highlight one particularly nice example for reference. The original code was:
+
+```lean
+  _ ≤ ε / 2 * ‖∑ i in range n, g i‖ + ε / 2 * ∑ i in range n, g i := by
+    rw [← mul_sum]
+    exact add_le_add hn (mul_le_mul_of_nonneg_left le_rfl (half_pos εpos).le)
+```
+
+which was improved using `gcongr` to:
+
+```lean
+  _ ≤ ε / 2 * ‖∑ i in range n, g i‖ + ε / 2 * ∑ i in range n, g i := by rw [← mul_sum]; gcongr
+```
+
+Or, from the same PR, this example which used `positivity` to go from:
+
+```lean
+  · have ha' := mul_le_mul_of_nonneg_left ha (inv_pos.2 hab).le
+    rwa [MulZeroClass.mul_zero, ← div_eq_inv_mul] at ha'
+  · have hb' := mul_le_mul_of_nonneg_left hb (inv_pos.2 hab).le
+    rwa [MulZeroClass.mul_zero, ← div_eq_inv_mul] at hb'
+```
+
+to:
+
+```lean
+  · positivity
+  · positivity
+```
+
 #### Does a different proof structure greatly simplify the argument?
 
+A great example of this occurred in the review for
+[#5602](https://github.com/leanprover-community/mathlib4/pull/5602/files/ea99653c047046bae3a109ee980314eec0bb9e81#r1282044795)
+In this case, the PR author proved:
+
+```lean
+variable {R S A : Type _} [CommSemiring R] [Semiring A] [Algebra R A] [SetLike S A]
+  [hSA : NonUnitalSubsemiringClass S A] [hSRA : SMulMemClass S R A] (s : S)
+
+-- `NonUnitalSubalgebra.unitization s : Unitization R s →ₐ[R] Algebra.adjoin R (s : Set A)`
+theorem NonUnitalSubalgebra.unitization_surjective :
+    Function.Surjective (NonUnitalSubalgebra.unitization s) := by
+  apply Algebra.adjoin_induction'
+  · refine' fun x hx => ⟨(0, ⟨x, hx⟩), Subtype.ext _⟩
+    simp only [NonUnitalSubalgebra.unitization_apply_coe, Subtype.coe_mk]
+    change (algebraMap R { x // x ∈ Algebra.adjoin R (s : Set A) } 0 : A) + x = x
+    rw [map_zero, Subsemiring.coe_zero, zero_add]
+  · exact fun r => ⟨algebraMap R (Unitization R s) r, AlgHom.commutes _ r⟩
+  · rintro _ _ ⟨x, rfl⟩ ⟨y, rfl⟩
+    exact ⟨x + y, map_add _ _ _⟩
+  · rintro _ _ ⟨x, rfl⟩ ⟨y, rfl⟩
+    exact ⟨x * y, map_mul _ _ _⟩
+```
+
+The reviewer commented:
+
+```markdown
+I see why it's not immediate (you'd have to get back to the full codomain),
+but is there really no good way of using `Algebra.adjoin_le` here?
+```
+
+which resulted in the vastly improved three-line proof:
+
+```lean
+theorem NonUnitalSubalgebra.unitization_surjective :
+    Function.Surjective (NonUnitalSubalgebra.unitization s) := by
+  have : Algebra.adjoin R s ≤ ((Algebra.adjoin R (s : Set A)).val.comp (unitization s)).range :=
+    Algebra.adjoin_le fun a ha ↦ ⟨(⟨a, ha⟩ : s), by simp⟩
+  fun x ↦ match this x.property with | ⟨y, hy⟩ => ⟨y, Subtype.ext hy⟩
+```
+
+In this case, appealing to the lemma `Algebra.adjoin_le` was a tremendous
+simplification over using `Algebra.adjoin_induction'`.
+
 #### Are the definitions introduced the best way to formalize the concept (very difficult!)?
+
+This is incredibly hard to describe in general, but perhaps the simplest
+rule of thumb that can be given is this: the more definitions avoid 
+dependent types, the better.
+
+As an example, consider the definition of [Vector](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Vector.html#Vector).
+Many introductory expositions of dependent type theory define `Vector`
+as an inductive type and give it as the canonical example of a dependent
+type. While the dependent typing is unavoidable, mathlib's definition 
+instead opts for a simple subtype of `List`, and the dependence on `ℕ`
+appears only in `List.length` equality proposition. This has the 
+advantage that we can easily pass out of the dependent type world by
+coercing to `List` and then life is much easier. In fact, most operations
+on `Vector` are precisely the corresponding operation on `List` combined
+with an equality proof on the lengths.
 
 ### Library integration
 
@@ -571,12 +693,25 @@ questions when reviewing.
 
 #### Does it provide a sensible API?
 
-
+- Are attributes added appropriately (e.g., `@[simp]`, `@[ext]`, `@[gcongr]`, `@[aesop]`, etc.)?
+- Are rewrite lemmas provided to avoid the need to pass through eqialities definitionally all the time?
+- Does a new type provide convenient constructors in common use cases?
 
 #### Is it general enough to support known future needs?
 
-
+This requires knowing what some of the future needs may be! Being active on Zulip
+can help make a reviewer aware of these needs. However, one may use a proxy for this question, 
+namely, "is there a more general version of this result in the literature which invokes pre-existing
+concepts in mathlib?" If there is, perhaps the existing PR should be generalized.
 
 #### Does it fit the design and collective vision of mathlib?
 
+Again, this is a vague question and requires knowing what the design and collective vision are!
+However, as some practical examples:
 
+- If a user is adding a new kind of morphism (not in the category theory library), they should 
+  more likely than not be defining a bundled morphism type, and probably an associated morphism
+  class using the `FunLike` API.
+- Similarly, if a contributor is adding a new subobject, they should probably be using bundled
+  subobjects and making use of the `SetLike` API.
+- Follow the advice of any existing [library note](we-need-a-link-to-these).
