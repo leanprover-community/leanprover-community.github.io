@@ -389,7 +389,7 @@ and it is reasonable to update and replace these as you come across them.
 Note however that constructors for inductive types have
 automatically generated unidirectional implications, named `.inj`,
 and there is no intention to change this.
-xWhen such an automatically generated lemma already exists,
+When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named `.inj_iff`.
 
 ------
