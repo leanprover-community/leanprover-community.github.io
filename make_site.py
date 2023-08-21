@@ -211,7 +211,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     # TODO: add missing `/mathlib4_docs/` prefix to links within this header
                     decl_header_html = header_data.get(decl, ''),
                     # note: the `.bmp` data files use doc-relative links
-                    docs_link= '/mathlib4_docs/' + decl_info.docLink,
+                    docs_link='/mathlib4_docs/' + decl_info.docLink,
                     src_link=decl_info.sourceLink))
             h.doc_decls = doc_decls
         else:
@@ -226,7 +226,7 @@ def replace_link(name, id):
     else:
         try:
             # note: the `.bmp` data files use doc-relative links
-            return  '/mathlib4_docs/' + declarations[name].docLink
+            return '/mathlib4_docs/' + declarations[name].docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
