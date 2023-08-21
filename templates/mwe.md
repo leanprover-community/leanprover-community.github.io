@@ -21,26 +21,30 @@ If you need to link to Lean 3 specific resources please link there.
 
 ## tl;dr
 
-When posting code on Zulip, please include all `import`s and `open`s and `universe`s and `variable`s, so others can simply just cut and paste what you post, and see the same issue that you are seeing. The best way to ensure you have done this is to make a completely new Lean file containing only what you are proposing to post, and checking that it compiles.
+When posting code on Zulip, please include all `import`s, `open`s, `universe`s, and `variable`s, so others can simply just copy-paste what you post, and see the same issue that you are seeing.
+
+The best way to ensure you have done this is to copy-paste the code snipped you are about to post into the [lean web editor](https://lean.math.hhu.de) (or an empty Lean file) and check it compiles.
+
+## Examples
 
 ### Bad example:
 
 ```lean
-#check (univ : set X)
+#check (univ : Set X)
 ```
 
 ### Good example:
 
 ```lean
-import data.set.basic
+import Mathlib
 
 universe u
 
 variable (X : Type u)
 
-open set
+open Set
 
-#check (univ : set X)
+#check (univ : Set X)
 ```
 
 ### Bad example:
@@ -58,21 +62,23 @@ h2 : a.fst < b.snd
 ### Good example:
 
 ```lean
-def blah : Type := ℕ × ℕ
+def blah : Type := Nat × Nat
 
-example (a b : blah) (h : a.fst < b.fst) (h2 : a.fst < b.snd) : false :=
-begin
-
-end
-/-
-a b : blah,
-h : a.fst < b.fst,
-h2 : a.fst < b.snd
-⊢ false
--/
+example (a b : blah) (h : a.fst < b.fst) (h2 : a.fst < b.snd) : False := by
+  /-
+  a b : blah,
+  h : a.fst < b.fst,
+  h2 : a.fst < b.snd
+  ⊢ False
+  -/
+  done
 ```
 
-Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib) and have `import tactic` in your file, there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
+<!---
+TODO: update link to `extract_goal` once the lean4-equivalent of `tactics.html` exists.
+-->
+
+Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib4) (e.g. with `import Mathlib`), there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
 
 Note you still need to include the corresponding `import`s and `open`s and `universe`s and `variable`s as mentioned above.
 
@@ -91,24 +97,25 @@ It is fine for your example to throw compiler errors or warnings. In particular,
 
 ## How do I know if my code is a MWE?
 
-You should *test* this by making a new Lean file, pasting your code snippet into it, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
+You should *test* this by copy-pasting your code snippet into the [lean web editor](https://lean.math.hhu.de), or into a new Lean file, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
 
-## What if I'm asking about the [Natural Number Game](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/)?
+## What if I'm asking about the [Natural Number Game](https://adam.math.hhu.de/)?
 
-If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/?world=9&level=4) of the Natural Number Game and my proof script is _blah_", rather than "I am on Advanced Multiplication World Level 4 of the Natural Number Game and my proof script is _blah_".
+If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://adam.math.hhu.de/#/g/hhu-adam/NNG4/world/Addition/level/2) of the Natural Number Game and my proof script is _blah_", rather than "I am on Addition World Level 2 of the Natural Number Game and my proof script is _blah_".
 
 If you post a code snippet on Zulip, please make sure it is surrounded in triple backticks.
 
 ````text
 ```
-def my_nat : nat := 5
+def myNat : Nat := 5
 ```
 ````
 
 ## Tips for minimizing code
-
+- A simple `import Mathlib` is a perfectly fine import in a MWE.
 - For the purposes of making a MWE, you can replace all proofs of `theorem`s and `lemma`s (outside of the one you're working on) with `sorry`. Lean will give you extra warnings, but these are harmless.
 
 - Remove all declarations (`def`s, `theorem`s, `lemma`s, `example`s, etc.) that are irrelevant to the issue you're seeing. In general, if you can comment out some code without throwing errors, then it can be removed.
 
 - After deleting some code, you can then delete all the declarations that were only referenced there. By repeating this process a few times, you may be able to shorten a long file to just a few lines.
+- Finally, you can add a comment into the code like `-- HERE`, `-- TODO`, `-- ERROR: yada yada`, or similar to guide the attention to a certain part in your MWE.
