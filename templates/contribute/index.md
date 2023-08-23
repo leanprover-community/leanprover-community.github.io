@@ -52,27 +52,20 @@ rather than from your own fork, as CI works better this way.)
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
 * At https://github.com/leanprover-community/mathlib, click "Fork" in the top right, to make your own fork of the repository.
-  Your fork is at https://github.com/USER/mathlib.
-  Alternatively, if you've asked for write access you can just use https://github.com/leanprover-community/mathlib.
+  Your fork is at `https://github.com/USER/mathlib4`.
+  Alternatively, if you've asked for write access you can just use `https://github.com/leanprover-community/mathlib4`.
 * Now make a local clone of the repository.
   ```
-  git clone https://github.com/USER/mathlib.git
-  cd mathlib
+  git clone https://github.com/USER/mathlib4.git
+  cd mathlib4
   ```
 * The steps above only need to be done once (not once for each contribution).
 * Now, each time you want to work on a new change to mathlib, create a new branch:
   ```
   git checkout -b my_new_branch   # This creates a new branch
   ```
-  It's also fine to simply clone https://github.com/leanprover-community/mathlib.git,
+  It's also fine to simply clone `https://github.com/leanprover-community/mathlib4.git`,
   but you won't be able to push changes unless you've asked for permission.
-  An alternative at this step is to use `leanproject`.
-  The command
-  ```
-  leanproject get -b mathlib:my_new_branch
-  ```
-  has the same effect as the `git clone` and `git checkout -b` commands described above,
-  except that it will clone into the directory `mathlib_my_new_branch`.
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
   In that case you need to use `git checkout their_new_branch` (note there is no `-b` here).
