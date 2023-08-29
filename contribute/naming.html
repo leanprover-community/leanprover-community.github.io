@@ -48,29 +48,66 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="mathlib-naming-conventions" class="markdown-heading">Mathlib naming conventions <a class="hover-link" href="#mathlib-naming-conventions">#</a></h1>
 <p>Author: <a href="http://www.andrew.cmu.edu/user/avigad">Jeremy Avigad</a></p>
-<p>This guide is written for Lean 3.</p>
+<p>This guide is written for Lean 4.</p>
+<h2 id="general-conventions" class="markdown-heading">General conventions <a class="hover-link" href="#general-conventions">#</a></h2>
+<p>Unlike Lean 3, in which the convention was that all declarations used <code>snake_case</code>,
+in mathlib under Lean 4 we use a combination of <code>snake_case</code>, <code>lowerCamelCase</code> and
+<code>UpperCamelCase</code> according to the following naming scheme.</p>
+<ol>
+<li>Terms of <code>Prop</code>s (e.g. proofs, theorem names) use <code>snake_case</code>.</li>
+<li><code>Prop</code>s and <code>Type</code>s (or <code>Sort</code>) (inductive types, structures, classes) are in <code>UpperCamelCase</code>.</li>
+<li>Functions are named the same way as their return values (e.g. a function of type <code>A → B → C</code> is named as though it is a term of type <code>C</code>).</li>
+<li>All other terms of <code>Type</code>s (basically anything else) are in <code>lowerCamelCase</code>.</li>
+<li>When something named with <code>UpperCamelCase</code> is part of something named with <code>snake_case</code>, it is referenced in <code>lowerCamelCase</code>.</li>
+<li>Acronyms like <code>LE</code> are written upper-/lowercase as a group, depending on what the first character would be.</li>
+<li>Rules 1-6 apply to fields of a structure or constructors of an inductive type in the same way.</li>
+</ol>
+<p>There are some rare exceptions to preserve local naming symmetry: e.g., we use <code>Ne</code> rather than <code>NE</code> to follow the example of <code>Eq</code>; <code>outParam</code> has a <code>Sort</code> output but is not <code>UpperCamelCase</code>. Some other exceptions include intervals (<code>Set.Icc</code>, <code>Set.Iic</code>, etc.), where the <code>I</code>
+is capitalized despite the fact that it should be <code>lowerCamelCase</code> according to the convention. Any such exceptions should be discussed on Zulip.</p>
+<h3 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h3>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- follows rule 2</span>
+<span class="kd">structure</span> <span class="n">OneHom</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">One</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">One</span> <span class="n">N</span><span class="o">]</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="c1">-- follows rule 4 via rule 3 and rule 7</span>
+  <span class="n">map_one&#39;</span> <span class="o">:</span> <span class="n">toFun</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="c1">-- follows rule 1 via rule 7</span>
+
+<span class="c1">-- follows rule 2 via rule 3</span>
+<span class="kd">class</span> <span class="n">CoeIsOneHom</span> <span class="o">[</span><span class="n">One</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">One</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="n">where</span>
+  <span class="n">coe_one</span> <span class="o">:</span> <span class="o">(</span><span class="bp">↑</span><span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="c1">-- follows rule 1 via rule 6</span>
+
+<span class="c1">-- follows rule 1 via rule 3</span>
+<span class="kd">theorem</span> <span class="n">map_one</span> <span class="o">[</span><span class="n">OneHomClass</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="c1">-- follows rules 1 and 5</span>
+<span class="kd">theorem</span> <span class="n">MonoidHom.toOneHom_injective</span> <span class="o">[</span><span class="n">MulOneClass</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">MulOneClass</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">Function.Injective</span> <span class="o">(</span><span class="n">MonoidHom.toOneHom</span> <span class="o">:</span> <span class="o">(</span><span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="bp">→</span> <span class="n">OneHom</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="c1">-- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`</span>
+<span class="bp">#</span><span class="n">align</span> <span class="n">monoid_hom.to_one_hom_injective</span> <span class="n">MonoidHom.toOneHom_injective</span>
+
+<span class="c1">-- follows rule 2</span>
+<span class="kd">class</span> <span class="n">HPow</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">hPow</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="c1">-- follows rule 3 via rule 6; note that rule 5 does not apply</span>
+
+<span class="c1">-- follows rules 2 and 6</span>
+<span class="kd">class</span> <span class="n">LT</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="c1">-- follows rule 4 and 6</span>
+
+<span class="c1">-- follows rules 1 and 6</span>
+<span class="kd">theorem</span> <span class="n">gt_iff_lt</span> <span class="o">[</span><span class="n">LT</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="c1">-- follows rule 2; `Ne` is an exception to rule 6</span>
+<span class="kd">class</span> <span class="n">NeZero</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="c1">-- follows rules 1 and 5</span>
+<span class="kd">theorem</span> <span class="n">neZero_iff</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">NeZero</span> <span class="n">n</span> <span class="bp">↔</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="c1">-- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`</span>
+<span class="bp">#</span><span class="n">align</span> <span class="n">ne_zero_iff</span> <span class="n">neZero_iff</span>
+</code></pre></div>
+</div>
+
 <h3 id="names-of-symbols" class="markdown-heading">Names of symbols <a class="hover-link" href="#names-of-symbols">#</a></h3>
-<p>When translating the statements of theorems into words, this dictionary is often used:</p>
+<p>When translating the statements of theorems into words, the following dictionary is often used.</p>
 <h4 id="logic" class="markdown-heading">Logic <a class="hover-link" href="#logic">#</a></h4>
 <table>
 <thead>
@@ -97,7 +134,7 @@ If you need to link to Lean 3 specific resources please link there.
 <tr>
 <td align="left"><code>→</code></td>
 <td align="left"><code>\r</code></td>
-<td align="left"><code>of</code></td>
+<td align="left"><code>of</code> / <code>imp</code></td>
 <td align="left">the conclusion is stated first and the hypotheses are often omitted</td>
 </tr>
 <tr>
@@ -176,14 +213,26 @@ If you need to link to Lean 3 specific resources please link there.
 <tr>
 <td align="left"><code>⋃</code></td>
 <td align="left"><code>\bigcup</code></td>
-<td align="left"><code>Union</code> / <code>bUnion</code></td>
-<td align="left"></td>
+<td align="left"><code>iUnion</code> / <code>biUnion</code></td>
+<td align="left"><code>i</code> for &quot;indexed&quot;, <code>bi</code> for &quot;bounded indexed&quot;</td>
 </tr>
 <tr>
 <td align="left"><code>⋂</code></td>
 <td align="left"><code>\bigcap</code></td>
-<td align="left"><code>Inter</code> / <code>bInter</code></td>
-<td align="left"></td>
+<td align="left"><code>iInter</code> / <code>biInter</code></td>
+<td align="left"><code>i</code> for &quot;indexed&quot;, <code>bi</code> for &quot;bounded indexed&quot;</td>
+</tr>
+<tr>
+<td align="left"><code>⋃₀</code></td>
+<td align="left"><code>\bigcup\0</code></td>
+<td align="left"><code>sUnion</code></td>
+<td align="left"><code>s</code> for &quot;set&quot;</td>
+</tr>
+<tr>
+<td align="left"><code>⋂₀</code></td>
+<td align="left"><code>\bigcap\0</code></td>
+<td align="left"><code>sInter</code></td>
+<td align="left"><code>s</code> for &quot;set&quot;</td>
 </tr>
 <tr>
 <td align="left"><code>\</code></td>
@@ -200,7 +249,7 @@ If you need to link to Lean 3 specific resources please link there.
 <tr>
 <td align="left"><code>{x | p x}</code></td>
 <td align="left"></td>
-<td align="left"><code>set_of</code></td>
+<td align="left"><code>setOf</code></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -285,7 +334,7 @@ If you need to link to Lean 3 specific resources please link there.
 <tr>
 <td align="left"><code>⅟</code></td>
 <td align="left"><code>\frac1</code></td>
-<td align="left"><code>inv_of</code></td>
+<td align="left"><code>invOf</code></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -335,25 +384,25 @@ If you need to link to Lean 3 specific resources please link there.
 <td align="left"><code>⊔</code></td>
 <td align="left"><code>\sup</code></td>
 <td align="left"><code>sup</code></td>
-<td align="left"></td>
+<td align="left">a binary operator</td>
 </tr>
 <tr>
 <td align="left"><code>⊓</code></td>
 <td align="left"><code>\inf</code></td>
 <td align="left"><code>inf</code></td>
-<td align="left"></td>
+<td align="left">a binary operator</td>
 </tr>
 <tr>
 <td align="left"><code>⨆</code></td>
 <td align="left"><code>\supr</code></td>
-<td align="left"><code>supr</code> / <code>bsupr</code></td>
-<td align="left"></td>
+<td align="left"><code>iSup</code> / <code>biSup</code> / <code>ciSup</code></td>
+<td align="left"><code>c</code> for &quot;conditionally complete&quot;</td>
 </tr>
 <tr>
 <td align="left"><code>⨅</code></td>
 <td align="left"><code>\infi</code></td>
-<td align="left"><code>infi</code> / <code>binfi</code></td>
-<td align="left"></td>
+<td align="left"><code>iInf</code> / <code>biInf</code> / <code>ciInf</code></td>
+<td align="left"><code>c</code> for &quot;conditionally complete&quot;</td>
 </tr>
 <tr>
 <td align="left"><code>⊥</code></td>
@@ -369,109 +418,64 @@ If you need to link to Lean 3 specific resources please link there.
 </tr>
 </tbody>
 </table>
-<h3 id="general-conventions" class="markdown-heading">General conventions <a class="hover-link" href="#general-conventions">#</a></h3>
-<p>Identifiers are generally lower case with underscores. For the most
-part, we rely on descriptive names. Often the name of theorem simply
-describes the conclusion:</p>
-<ul>
-<li><code>succ_ne_zero</code></li>
-<li><code>mul_zero</code></li>
-<li><code>mul_one</code></li>
-<li><code>sub_add_eq_add_sub</code></li>
-<li><code>le_iff_lt_or_eq</code></li>
-</ul>
-<p>If only a prefix of the description is enough to convey the meaning,
-the name may be made even shorter:</p>
-<ul>
-<li><code>neg_neg</code></li>
-<li><code>pred_succ</code></li>
-</ul>
-<p>Sometimes, to disambiguate the name of theorem or better convey the
-intended reference, it is necessary to describe some of the
-hypotheses. The word &quot;of&quot; is used to separate these hypotheses:</p>
-<ul>
-<li><code>lt_of_succ_le</code></li>
-<li><code>lt_of_not_ge</code></li>
-<li><code>lt_of_le_of_ne</code></li>
-<li><code>add_lt_add_of_lt_of_le</code></li>
-</ul>
-<p>Sometimes abbreviations or alternative descriptions are easier to work
-with. For example, we use <code>pos</code>, <code>neg</code>, <code>nonpos</code>, <code>nonneg</code> rather than
-<code>zero_lt</code>, <code>lt_zero</code>, <code>le_zero</code>, and <code>zero_le</code>.</p>
-<ul>
-<li><code>mul_pos</code></li>
-<li><code>mul_nonpos_of_nonneg_of_nonpos</code></li>
-<li><code>add_lt_of_lt_of_nonpos</code></li>
-<li><code>add_lt_of_nonpos_of_lt</code></li>
-</ul>
-<p>Sometimes the word &quot;left&quot; or &quot;right&quot; is helpful to describe variants
-of a theorem.</p>
-<ul>
-<li><code>add_le_add_left</code></li>
-<li><code>add_le_add_right</code></li>
-<li><code>le_of_mul_le_mul_left</code></li>
-<li><code>le_of_mul_le_mul_right</code></li>
-</ul>
-<p>An injectivity lemma that uses &quot;left&quot; or &quot;right&quot; should refer to the
-argument that &quot;changes&quot;. For example, a lemma with the statement
-<code>a - b = a - c ↔ b = c</code> could be called <code>sub_right_inj</code>.</p>
-<p>We can also use the word &quot;self&quot; to indicate a repeated argument:</p>
-<ul>
-<li><code>mul_inv_self</code></li>
-<li><code>neg_add_self</code></li>
-</ul>
 <h3 id="dots" class="markdown-heading">Dots <a class="hover-link" href="#dots">#</a></h3>
 <p>Dots are used for namespaces, and also for automatically generated names
 like recursors, eliminators and structure projections. They can also be
 introduced manually, for example, where projector notation is
 useful. Thus they are used in all of the following situations.</p>
+<p>Note: since <code>And</code> is a (binary function into) <code>Prop</code>, it is <code>UpperCamelCased</code>
+according to the naming conventions, and so its namespace is <code>And.*</code>.
+This may seem at odds with the dictionary <code>∧</code> --&gt; <code>and</code> but because
+upper camel case types get lower camel cased when they appear in names
+of theorems, the dictionary is still valid in general. The same applies to
+<code>Or</code>, <code>Iff</code>, <code>Not</code>, <code>Eq</code>, <code>HEq</code>, <code>Ne</code>, etc.</p>
 <p>Intro, elim, and destruct rules for logical connectives, whether they
 are automatically generated or not:</p>
 <ul>
-<li><code>and.intro</code></li>
-<li><code>and.elim</code></li>
-<li><code>and.left</code></li>
-<li><code>and.right</code></li>
-<li><code>or.inl</code></li>
-<li><code>or.inr</code></li>
-<li><code>or.intro_left</code></li>
-<li><code>or.intro_right</code></li>
-<li><code>iff.intro</code></li>
-<li><code>iff.elim</code></li>
-<li><code>iff.mp</code></li>
-<li><code>iff.mpr</code></li>
-<li><code>not.intro</code></li>
-<li><code>not.elim</code></li>
-<li><code>eq.refl</code></li>
-<li><code>eq.rec</code></li>
-<li><code>eq.subst</code></li>
-<li><code>heq.refl</code></li>
-<li><code>heq.rec</code></li>
-<li><code>heq.subst</code></li>
-<li><code>exists.intro</code></li>
-<li><code>exists.elim</code></li>
-<li><code>true.intro</code></li>
-<li><code>false.elim</code></li>
+<li><code>And.intro</code></li>
+<li><code>And.elim</code></li>
+<li><code>And.left</code></li>
+<li><code>And.right</code></li>
+<li><code>Or.inl</code></li>
+<li><code>Or.inr</code></li>
+<li><code>Or.intro_left</code></li>
+<li><code>Or.intro_right</code></li>
+<li><code>Iff.intro</code></li>
+<li><code>Iff.elim</code></li>
+<li><code>Iff.mp</code></li>
+<li><code>Iff.mpr</code></li>
+<li><code>Not.intro</code></li>
+<li><code>Not.elim</code></li>
+<li><code>Eq.refl</code></li>
+<li><code>Eq.rec</code></li>
+<li><code>Eq.subst</code></li>
+<li><code>HEq.refl</code></li>
+<li><code>HEq.rec</code></li>
+<li><code>HEq.subst</code></li>
+<li><code>Exists.intro</code></li>
+<li><code>Exists.elim</code></li>
+<li><code>True.intro</code></li>
+<li><code>False.elim</code></li>
 </ul>
 <p>Places where projection notation is useful, for example:</p>
 <ul>
-<li><code>and.symm</code></li>
-<li><code>or.symm</code></li>
-<li><code>or.resolve_left</code></li>
-<li><code>or.resolve_right</code></li>
-<li><code>eq.symm</code></li>
-<li><code>eq.trans</code></li>
-<li><code>heq.symm</code></li>
-<li><code>heq.trans</code></li>
-<li><code>iff.symm</code></li>
-<li><code>iff.refl</code></li>
+<li><code>And.symm</code></li>
+<li><code>Or.symm</code></li>
+<li><code>Or.resolve_left</code></li>
+<li><code>Or.resolve_right</code></li>
+<li><code>Eq.symm</code></li>
+<li><code>Eq.trans</code></li>
+<li><code>HEq.symm</code></li>
+<li><code>HEq.trans</code></li>
+<li><code>Iff.symm</code></li>
+<li><code>Iff.refl</code></li>
 </ul>
 <p>It is useful to use dot notation even for types which are not
 inductive types. For instance, we use:</p>
 <ul>
-<li><code>le.trans</code></li>
-<li><code>lt.trans_le</code></li>
-<li><code>le.trans_lt</code></li>
+<li><code>LE.trans</code></li>
+<li><code>LT.trans_le</code></li>
+<li><code>LE.trans_lt</code></li>
 </ul>
 <h3 id="axiomatic-descriptions" class="markdown-heading">Axiomatic descriptions <a class="hover-link" href="#axiomatic-descriptions">#</a></h3>
 <p>Some theorems are described using axiomatic names, rather than
@@ -511,51 +515,39 @@ mathematical notation, often with an upper case letter
 (<code>G</code> for a group, <code>R</code> for a ring, <code>K</code> or <code>𝕜</code> for a field, <code>E</code> for a vector space, ...).
 This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.</p>
-<h3 id="names-for-symbols" class="markdown-heading">Names for symbols <a class="hover-link" href="#names-for-symbols">#</a></h3>
-<ul>
-<li><code>imp</code>: implication</li>
-<li><code>forall</code></li>
-<li><code>exists</code></li>
-<li><code>ball</code>: bounded forall</li>
-<li><code>bex</code>: bounded exists</li>
-</ul>
 <h2 id="identifiers-and-theorem-names" class="markdown-heading">Identifiers and theorem names <a class="hover-link" href="#identifiers-and-theorem-names">#</a></h2>
-<p>We generally use lower case with underscores for theorem names and
-definitions. Sometimes upper case is used for bundled structures, such
-as <code>Group</code>. In that case, use CamelCase for compound names, such as
-<code>AbelianGroup</code>.</p>
 <p>We adopt the following naming guidelines to make it easier for users
 to guess the name of a theorem or find it using tab completion. Common
 &quot;axiomatic&quot; properties of an operation like conjunction or
 disjunction are put in a namespace that begins with the name of the
 operation:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">logic.basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Logic.Basic</span>
 
-<span class="k">#check</span> <span class="n">and.comm</span>
-<span class="k">#check</span> <span class="n">or.comm</span>
-<span class="k">#check</span> <span class="n">and.assoc</span>
-<span class="k">#check</span> <span class="n">or.assoc</span>
+<span class="k">#check</span> <span class="n">And.comm</span>
+<span class="k">#check</span> <span class="n">Or.comm</span>
+<span class="k">#check</span> <span class="n">And.assoc</span>
+<span class="k">#check</span> <span class="n">Or.assoc</span>
 </code></pre></div>
 </div>
 
 <p>In particular, this includes <code>intro</code> and <code>elim</code> operations for logical
 connectives, and properties of relations:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">logic.basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Logic.Basic</span>
 
-<span class="k">#check</span> <span class="n">and.intro</span>
-<span class="k">#check</span> <span class="n">and.elim</span>
-<span class="k">#check</span> <span class="n">or.intro_left</span>
-<span class="k">#check</span> <span class="n">or.intro_right</span>
-<span class="k">#check</span> <span class="n">or.elim</span>
+<span class="k">#check</span> <span class="n">And.intro</span>
+<span class="k">#check</span> <span class="n">And.elim</span>
+<span class="k">#check</span> <span class="n">Or.intro_left</span>
+<span class="k">#check</span> <span class="n">Or.intro_right</span>
+<span class="k">#check</span> <span class="n">Or.elim</span>
 
-<span class="k">#check</span> <span class="n">eq.refl</span>
-<span class="k">#check</span> <span class="n">eq.symm</span>
-<span class="k">#check</span> <span class="n">eq.trans</span>
+<span class="k">#check</span> <span class="n">Eq.refl</span>
+<span class="k">#check</span> <span class="n">Eq.symm</span>
+<span class="k">#check</span> <span class="n">Eq.trans</span>
 </code></pre></div>
 </div>
 
 <p>Note however we do not do this for axiomatic arithmetic operations</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.group.basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Group.Basic</span>
 
 <span class="k">#check</span> <span class="n">mul_comm</span>
 <span class="k">#check</span> <span class="n">mul_assoc</span>
@@ -565,7 +557,7 @@ connectives, and properties of relations:</p>
 
 <p>For the most part, however, we rely on descriptive names. Often the
 name of theorem simply describes the conclusion:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.ring.basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Ring.Basic</span>
 <span class="kn">open</span> <span class="n">nat</span>
 <span class="k">#check</span> <span class="n">succ_ne_zero</span>
 <span class="k">#check</span> <span class="n">mul_zero</span>
@@ -577,7 +569,7 @@ name of theorem simply describes the conclusion:</p>
 
 <p>If only a prefix of the description is enough to convey the meaning,
 the name may be made even shorter:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Ring.Basic</span>
 
 <span class="k">#check</span> <span class="bp">@</span><span class="n">neg_neg</span>
 <span class="k">#check</span> <span class="n">nat.pred_succ</span>
@@ -590,8 +582,10 @@ describe the patter <code>-a * -b</code>.</p>
 <p>Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
 hypotheses. The word &quot;of&quot; is used to separate these hypotheses:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
-<span class="kn">open</span> <span class="n">nat</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
+
+<span class="kn">open</span> <span class="n">Nat</span>
+
 <span class="k">#check</span> <span class="n">lt_of_succ_le</span>
 <span class="k">#check</span> <span class="n">lt_of_not_ge</span>
 <span class="k">#check</span> <span class="n">lt_of_le_of_ne</span>
@@ -605,8 +599,10 @@ order. For example, the theorem <code>A → B → C</code> would be named
 <p>Sometimes abbreviations or alternative descriptions are easier to work
 with. For example, we use <code>pos</code>, <code>neg</code>, <code>nonpos</code>, <code>nonneg</code> rather than
 <code>zero_lt</code>, <code>lt_zero</code>, <code>le_zero</code>, and <code>zero_le</code>.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
-<span class="kn">open</span> <span class="n">nat</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
+
+<span class="kn">open</span> <span class="n">Nat</span>
+
 <span class="k">#check</span> <span class="n">mul_pos</span>
 <span class="k">#check</span> <span class="n">mul_nonpos_of_nonneg_of_nonpos</span>
 <span class="k">#check</span> <span class="n">add_lt_of_lt_of_nonpos</span>
@@ -620,7 +616,9 @@ pattern. For that, we make do as best we can. For example, <code>a + b - b = a</
 could be named either <code>add_sub_self</code> or <code>add_sub_cancel</code>.</p>
 <p>Sometimes the word &quot;left&quot; or &quot;right&quot; is helpful to describe variants
 of a theorem.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">algebra.ordered_ring</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
+
+<span class="kn">open</span> <span class="n">Nat</span>
 
 <span class="k">#check</span> <span class="n">add_le_add_left</span>
 <span class="k">#check</span> <span class="n">add_le_add_right</span>
@@ -643,10 +641,10 @@ e.g. using coercions, that should be written by hand then marked with <code>@[ex
 <p>A lemma of the form <code>f = g ↔ ∀ x, f x = g x</code> should be named <code>.ext_iff</code>.</p>
 <h3 id="injectivity" class="markdown-heading">Injectivity <a class="hover-link" href="#injectivity">#</a></h3>
 <p>Where possible, injectivity lemmas should be written in terms of an
-<code>injective f</code> conclusion which use the full word <code>injective</code>, typically as <code>f_injective</code>.
+<code>Function.Injective f</code> conclusion which use the full word <code>injective</code>, typically as <code>f_injective</code>.
 The form <code>injective_f</code> still appears often in mathlib.</p>
 <p>In addition to these, a variant should usually be provided as a bidirectional implication,
-e.g. as <code>f x = f y ↔ x = y</code>, which can be obtained from <code>function.injective.eq_iff</code>.
+e.g. as <code>f x = f y ↔ x = y</code>, which can be obtained from <code>Function.Injective.eq_iff</code>.
 Such lemmas should be named <code>f_inj</code>
 (although if they are in an appropriate namespace <code>.inj</code> is good too).
 Bidirectional injectivity lemmas are often good candidates for <code>@[simp]</code>.
