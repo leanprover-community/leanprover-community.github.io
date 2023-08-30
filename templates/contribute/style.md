@@ -309,6 +309,8 @@ represent the squaring function. However, sometimes it is necessary to refer to 
 arguments by name (e.g., if they appear in multiple places in the function body). The
 Lean default for this is `fun x => x * x`, but mathlib introduces an alternative 
 notation which we prefer to use in mathlib: `fun x ↦ x * x` (inserted with `\mapsto`).
+The lambda notation `λ x ↦ x * x`, while syntactically valid, is discouraged in favor
+of the `fun` keyword.
 
 ### Calculations
 
