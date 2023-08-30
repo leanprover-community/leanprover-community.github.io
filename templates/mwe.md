@@ -1,10 +1,3 @@
-<div class="alert alert-info">
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/mwe">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # Minimal working examples
 
 ## tl;dr
