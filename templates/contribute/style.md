@@ -319,7 +319,7 @@ guidelines.
 As with `by`, the `calc` keyword should be placed on the line *prior* to the start of the 
 calculation, with the calculation indented. Whichever relations are involved (e.g.,
 `=` or `≤`) should be aligned from one line to the next. The underscores `_` used as 
-placeholders for terms indicating the continuation of the calculation shold be left-justified.
+placeholders for terms indicating the continuation of the calculation should be left-justified.
 
 As for the justifications, it is not necessary to align the `:=` symbols, but it can be
 nice if the expressions are short enough. The terms on either side of the first relation can either
@@ -361,7 +361,8 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
 
 ### Tactic mode
 
-When opening a tactic block, `by` is placed at the end of the line 
+As we have already mentioned, when opening a tactic block,
+`by` is placed at the end of the line 
 *preceding* the start of the tactic block, but not on its own line
 Everything within the tactic block is indented, as in:
 
