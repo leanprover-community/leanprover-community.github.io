@@ -203,13 +203,11 @@ PR author is a relatively new contributor.
 
 #### do the definitions have sufficiently informative docstrings?
 
-Normally there is a linter to inform the user that *all* definitions should be 
-equipped with docstrings, but it was determined to be a hindrance to porting
-and was therefore turned off. At some point, it may be turned back on for 
-continuous integration (CI), at which point, PRs won't pass CI without docstrings
-on `def`s. Nevertheless, reviewers should do their best to make sure all new 
-`def`s are so equipped, and that the provided docstring accurately describes the
-`def` in an easily intelligible way.
+The `docBlame` linter should ensure that users add docstrings to all their
+definitions. However, just because a docstring *exists* doesn't necessarily
+mean it's *useful* and *accurate*. Reviewers should do their best to make sure
+the provided docstring accurately describes the `def` in an easily intelligible
+way.
 
 #### do important theorems have docstrings?
 
@@ -556,7 +554,17 @@ lookout for a natural boundaries where the file can be split into coherent piece
 
 #### Splitting into supporting lemmas or definitions (especially for long proofs)?
 
-I don't have an example of this on hand.
+Long standalone proofs are frequently an indication that there is a worthwhile
+refactor lurking close at hand. Often new contributors are unaware of existing
+lemmas in the library, or may not know how to split their theorem into more 
+manageable chunks. In these cases, the reviewer has a few options including:
+rolling up their sleeves and refactoring the result into multiple lemmas 
+themselves in the form of a `suggestion` on GitHub; looking for a potential
+refactor and mentioning it, as in "you might consider splitting out the 
+argument on lines xx into its own lemma, which will simplify the proof"; or 
+simply asking, "this proof seems rather long and unwieldy, have you considered
+at all how it might be split into more manageable pieces?"; or even, "this 
+proof seems like it might be easier if you make use of theorem X."
 
 #### Different tactics to improve readability
 
