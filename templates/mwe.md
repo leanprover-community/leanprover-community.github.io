@@ -11,7 +11,7 @@ If you need to link to Lean 3 specific resources please link there.
 
 When posting code on Zulip, please include all `import`s, `open`s, `universe`s, and `variable`s, so others can simply just copy-paste what you post, and see the same issue that you are seeing.
 
-The best way to ensure you have done this is to copy-paste the code snipped you are about to post into the [lean web editor](https://lean.math.hhu.de) (or an empty Lean file) and check it compiles.
+The best way to ensure you have done this is to copy-paste the code snipped you into an empty Lean file, or into the [lean web editor](https://lean.math.hhu.de), and check it compiles.
 
 ## Examples
 
@@ -62,11 +62,7 @@ example (a b : blah) (h : a.fst < b.fst) (h2 : a.fst < b.snd) : False := by
   done
 ```
 
-<!---
-TODO: update link to `extract_goal` once the lean4-equivalent of `tactics.html` exists.
--->
-
-Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib4) (e.g. with `import Mathlib`), there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib_docs/tactics.html#extract_goal) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
+Tip: If you are using [mathlib](https://github.com/leanprover-community/mathlib4) (e.g. with `import Mathlib`), there's a tactic called [`extract_goal`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/ExtractGoal.html) that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of `extract_goal` to further minimize your example.
 
 Note you still need to include the corresponding `import`s and `open`s and `universe`s and `variable`s as mentioned above.
 
@@ -85,9 +81,9 @@ It is fine for your example to throw compiler errors or warnings. In particular,
 
 ## How do I know if my code is a MWE?
 
-You should *test* this by copy-pasting your code snippet into the [lean web editor](https://lean.math.hhu.de), or into a new Lean file, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
+You should *test* this by copy-pasting your code snippet into a new Lean file, or the [lean web editor](https://lean.math.hhu.de), and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
 
-## What if I'm asking about the [Natural Number Game](https://adam.math.hhu.de/)?
+## What if I'm asking about games like the [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4)?
 
 If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://adam.math.hhu.de/#/g/hhu-adam/NNG4/world/Addition/level/2) of the Natural Number Game and my proof script is _blah_", rather than "I am on Addition World Level 2 of the Natural Number Game and my proof script is _blah_".
 
