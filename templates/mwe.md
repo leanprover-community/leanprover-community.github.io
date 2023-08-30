@@ -11,7 +11,7 @@ If you need to link to Lean 3 specific resources please link there.
 
 When posting code on Zulip, please include all `import`s, `open`s, `universe`s, and `variable`s, so others can simply just copy-paste what you post, and see the same issue that you are seeing.
 
-The best way to ensure you have done this is to copy-paste the code snipped you into an empty Lean file, or into the [lean web editor](https://lean.math.hhu.de), and check it compiles.
+The best way to ensure you have done this is to copy-paste the code snipped you are proposing to post into an empty Lean file, or into the [lean web editor](https://lean.math.hhu.de), and check it compiles.
 
 ## Examples
 
