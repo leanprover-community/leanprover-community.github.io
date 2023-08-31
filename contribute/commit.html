@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Installing Lean 4 on Linux</title>
+	<title>Pull request title and description conventions</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,46 +48,93 @@
 
   <main>
     
-<h1 id="installing-lean-4-on-linux" class="markdown-heading">Installing Lean 4 on Linux <a class="hover-link" href="#installing-lean-4-on-linux">#</a></h1>
-<p>This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a <a href="debian.html">specific page</a> for Debian and derived distributions such as Ubuntu).</p>
-<p>All commands below should be typed inside a terminal.</p>
-<ul>
-<li>
-<p>Lean itself doesn't depend on much infrastructure, but supporting tools
-needed by most users require <code>git</code> and <code>curl</code>. So the first step is to get those.</p>
-</li>
-<li>
-<p>The next step installs a small tool called <a href="https://github.com/leanprover/elan"><code>elan</code></a> which will handle
-updating Lean according to the needs of your current project (hit Enter
-when a question is asked). It will live in <code>$HOME/.elan</code> and add a
-line to <code>$HOME/.profile</code>.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh<span class="w"> </span>-sSf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<h1 id="pull-request-title-and-description-conventions" class="markdown-heading">Pull request title and description conventions <a class="hover-link" href="#pull-request-title-and-description-conventions">#</a></h1>
+<p>We are using the following convention for writing pull request titles and descriptions.</p>
+<h2 id="format" class="markdown-heading">Format <a class="hover-link" href="#format">#</a></h2>
+<p>Note: &quot;Title:&quot; and &quot;Description:&quot; do not actually appear</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  Title:
+  &lt;type&gt;(&lt;optional-scope&gt;): &lt;subject&gt;
+
+  Description:
+  &lt;body&gt;
+  &lt;NEWLINE&gt;
+  &lt;footer&gt;
+  &lt;NEWLINE&gt;
+  &lt;dependencies&gt;
 </code></pre></div>
 </div>
 
-</li>
-<li>
-<p>You will also need a code editor that has a Lean plugin. The
-recommended choice is <a href="https://code.visualstudio.com/">Visual Studio Code</a> which currently
-has the best Lean support.
-The alternatives are to use Emacs and its <a href="https://github.com/leanprover/lean-mode">lean-mode</a>
-or neovim and its  <a href="https://github.com/Julian/lean.nvim">lean.nvim extension</a>.</p>
-<ol>
-<li>Install <a href="https://code.visualstudio.com/">VS Code</a>.</li>
-<li>Launch VS Code.</li>
-<li>Click on the extension icon <img src="https://leanprover-community.github.io//img/new-extensions-icon.png" alt="(image of icon)" />
-(or <img src="https://leanprover-community.github.io//img/extensions-icon.png" alt="(image of icon)" /> in older versions) in the side bar on the left edge of
-the screen (or press <kbd>Shift</kbd><kbd>Ctrl</kbd><kbd>X</kbd>) and search for <code>leanprover</code>.</li>
-<li>Select the <code>lean4</code> extension (unique name <code>leanprover.lean4</code>).</li>
-<li>Click &quot;install&quot; (In old versions of VS Code, you might need to click &quot;reload&quot; afterwards)</li>
-<li>Verify Lean is working, for example by saving a file <code>test.lean</code> and entering <code>#eval 1+1</code>.
-A green line should appear underneath <code>#eval 1+1</code>, and hovering the mouse over it you should see <code>2</code>
-displayed.</li>
-</ol>
-</li>
+<p><code>&lt;type&gt;</code> is:</p>
+<ul>
+<li>feat (feature)</li>
+<li>fix (bug fix)</li>
+<li>doc (documentation)</li>
+<li>style (formatting, missing semicolons, ...)</li>
+<li>refactor</li>
+<li>test (when adding missing tests)</li>
+<li>chore (maintain)</li>
+<li>perf (performance improvement, optimization, ...)</li>
 </ul>
-<h2 id="lean-projects" class="markdown-heading">Lean Projects <a class="hover-link" href="#lean-projects">#</a></h2>
-<p>You can now read instructions about creating and working on <a href="project.html">Lean projects</a></p>
+<p><code>&lt;optional-scope&gt;</code> is a name of module or a directory which contains changed modules.
+This is not necessary to include, but may be useful if the <code>&lt;subject&gt;</code> is insufficient.
+The <code>Mathlib</code> directory prefix is always omitted.
+For instance, it could be</p>
+<ul>
+<li>Data/Nat/Basic</li>
+<li>Algebra/Group/Defs</li>
+<li>Topology/Constructions</li>
+</ul>
+<p><code>&lt;subject&gt;</code> has the following constraints:</p>
+<ul>
+<li>use imperative, present tense: &quot;change&quot; not &quot;changed&quot; nor &quot;changes&quot;</li>
+<li>do not capitalize the first letter</li>
+<li>no dot(.) at the end</li>
+</ul>
+<p><code>&lt;body&gt;</code> has the following constraints:</p>
+<ul>
+<li>just as in <code>&lt;subject&gt;</code>, use imperative, present tense</li>
+<li>include motivation for the change and contrast with previous
+behavior</li>
+</ul>
+<p><code>&lt;footer&gt;</code> is optional and may contain two items:</p>
+<ul>
+<li>Breaking changes: All breaking changes have to be mentioned in
+footer with the description of the change, justification and
+migration notes</li>
+<li>Referencing issues: Closed bugs should be listed on a separate line
+in the footer prefixed with &quot;Closes&quot; keyword like this: Closes #123, #456</li>
+</ul>
+<p><code>&lt;dependencies&gt;</code> if this PR depends on others, they should be listed
+in checkbox format, i.e., <code>- [ ] depends on: #XXXX</code></p>
+<h2 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h2>
+<p>An example where <code>&lt;scope&gt;</code> is not necessary might be:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>feat: have library search use the whole range for replacement
+
+previously <span class="sb">`apply? using h`</span> would replace to <span class="sb">`refine blah using h`</span> rather than <span class="sb">`refine blah`</span>.
+
+This also changes the diagnostic message to be on the whole syntax <span class="sb">`apply? using h`</span> rather than just the <span class="sb">`apply?`</span> bit, which seems fine to me.
+</code></pre></div>
+</div>
+
+<p>And an example where including <code>&lt;scope&gt;</code> does add value:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>docs(CategoryTheory/EssentialImage): typo and punctuation
+
+Fix a typo, add two periods.
+</code></pre></div>
+</div>
+
+<p>an example with dependent PRs:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>feat: The norm on <span class="sb">`Unitization`</span> is a C⋆-norm
+
+This shows that C⋆-algebras are always <span class="sb">`RegularNormedAlgebra`</span>s, so that their <span class="sb">`Unitization`</span> is equipped with a norm. Moreover, we show this norm is a C⋆-norm.
+
+<span class="k">- [ ]</span> depends on: <span class="ni">#5330</span>
+<span class="k">- [ ]</span> depends on: <span class="ni">#5741</span>
+<span class="k">- [ ]</span> depends on: <span class="ni">#5742</span> 
+<span class="k">- [ ]</span> depends on: <span class="ni">#5743</span> 
+```
+</code></pre></div>
+</div>
 
   </main>
 
@@ -202,7 +249,7 @@ displayed.</li>
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/install/linux.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/commit.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>

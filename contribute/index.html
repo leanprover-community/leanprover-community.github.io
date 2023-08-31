@@ -48,24 +48,6 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="how-to-contribute-to-mathlib" class="markdown-heading">How to contribute to mathlib <a class="hover-link" href="#how-to-contribute-to-mathlib">#</a></h1>
 <p>Here are some tips and tricks
 to make the process of contributing as smooth as possible.</p>
@@ -99,40 +81,33 @@ rather than from your own fork, as CI works better this way.)</p>
 <p>Typical workflow:</p>
 <ul>
 <li>To get started, you'll need a local copy of mathlib.</li>
-<li>At <a href="https://github.com/leanprover-community/mathlib">https://github.com/leanprover-community/mathlib</a>, click &quot;Fork&quot; in the top right, to make your own fork of the repository.
-Your fork is at <a href="https://github.com/USER/mathlib.">https://github.com/USER/mathlib.</a>
-Alternatively, if you've asked for write access you can just use <a href="https://github.com/leanprover-community/mathlib.">https://github.com/leanprover-community/mathlib.</a></li>
+<li>If you've asked for write access (recommended above), you can just use <a href="https://github.com/leanprover-community/mathlib4.">https://github.com/leanprover-community/mathlib4.</a>
+Otherwise, you'll need to go to <a href="https://github.com/leanprover-community/mathlib4">https://github.com/leanprover-community/mathlib4</a> and click &quot;Fork&quot; in the top right,
+to make your own fork of the repository.
+Your fork is at <a href="https://github.com/USER/mathlib4.">https://github.com/USER/mathlib4.</a></li>
 <li>Now make a local clone of the repository.
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">USER</span><span class="bp">/</span><span class="n">mathlib.git</span>
-<span class="n">cd</span> <span class="n">mathlib</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">leanprover</span><span class="bp">-</span><span class="n">community</span><span class="bp">/</span><span class="n">mathlib4.git</span>
+<span class="n">cd</span> <span class="n">mathlib4</span>
 </code></pre></div>
 </div>
 
 </li>
 <li>The steps above only need to be done once (not once for each contribution).</li>
 <li>Now, each time you want to work on a new change to mathlib, create a new branch:
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">checkout</span> <span class="bp">-</span><span class="n">b</span> <span class="n">my_new_branch</span>   <span class="bp">#</span> <span class="n">This</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">branch</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">switch</span> <span class="bp">-</span><span class="n">c</span> <span class="n">my_new_branch</span>   <span class="bp">#</span> <span class="n">This</span> <span class="n">creates</span> <span class="n">a</span> <span class="n">new</span> <span class="n">branch</span> <span class="n">and</span> <span class="n">switches</span> <span class="n">to</span> <span class="n">it</span>
 </code></pre></div>
 </div>
 
-It's also fine to simply clone <a href="https://github.com/leanprover-community/mathlib.git">https://github.com/leanprover-community/mathlib.git</a>,
-but you won't be able to push changes unless you've asked for permission.
-An alternative at this step is to use <code>leanproject</code>.
-The command
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">leanproject</span> <span class="n">get</span> <span class="bp">-</span><span class="n">b</span> <span class="n">mathlib</span><span class="o">:</span><span class="n">my_new_branch</span>
-</code></pre></div>
-</div>
-
-has the same effect as the <code>git clone</code> and <code>git checkout -b</code> commands described above,
-except that it will clone into the directory <code>mathlib_my_new_branch</code>.</li>
+If you've asked for write access you can push your new branch to mathlib which
+comes with some advantages (see below).</li>
 <li>Sometimes you may not want to create a new branch, but instead work on a branch
 that someone else created, or you created from a different computer.
-In that case you need to use <code>git checkout their_new_branch</code> (note there is no <code>-b</code> here).</li>
+In that case you need to use <code>git switch their_new_branch</code> (note there is no <code>-c</code> here).</li>
 <li>Make local changes, e.g. using Visual Studio Code using the Lean extension.</li>
-<li>Commit your changes using <code>git commit -a</code>.</li>
+<li>Commit your changes using <code>git commit -a</code> (or via the VS Code interface).</li>
 <li>If you'd like to compile everthing locally to check you didn't break anything, run
-<code>leanproject build</code>. This may take a long time if you modified files low down in the import hierarchy.
-It's also okay to let our central CI servers do this for you.</li>
+<code>lake build</code>. This may take a long time if you modified files low down in the import hierarchy.
+It's also okay to let our central CI servers do this for you by pushing your changes.</li>
 <li>In order to push your changes back to the repository on github, use
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span> <span class="n">push</span>
 </code></pre></div>
@@ -151,9 +126,8 @@ You can view the output by visiting
 (There will be a green tick on the line describing the most recent commit if everything works,
 otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
 Click on the red cross to see details.)
-You can also check CI status on the command line by installing <code>hub</code> and running <code>hub ci-status</code>.</li>
-<li>After CI finishes, you can run <code>leanproject get-cache</code> to download compiled oleans.
-See <a href="#caching-compilation">Caching compilation</a> for commands to automatically call <code>leanproject get-cache</code>.</li>
+You can also check CI status on the command line by installing <a href="https://hub.github.com/"><code>hub</code></a> and running <code>hub ci-status</code>.</li>
+<li>After CI finishes, you can run <code>lake exe cache get</code> to download compiled oleans.</li>
 </ul>
 <h2 id="making-a-pull-request-pr" class="markdown-heading">Making a Pull Request (PR) <a class="hover-link" href="#making-a-pull-request-pr">#</a></h2>
 <p>Once you're happy with your local changes, it's time to make a pull request.</p>
@@ -166,10 +140,12 @@ please come to <a href="https://leanprover.zulipchat.com/">https://leanprover.zu
 <p>Push your changes to a branch on the main repository, if they weren't already there.</p>
 </li>
 <li>
-<p>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.</p>
+<p>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
+This helps you get feedback as you go along, and it is much easier to review.
+This is especially important for new contributors as it prevents wasted effort.</p>
 </li>
 <li>
-<p>The title of the PR should follow our <a href="https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md">commit conventions</a>.</p>
+<p>The title and description of the PR should follow our <a href="commit.html">commit conventions</a>.</p>
 </li>
 </ul>
 <h2 id="lifecycle-of-a-pr" class="markdown-heading">Lifecycle of a PR <a class="hover-link" href="#lifecycle-of-a-pr">#</a></h2>
@@ -179,7 +155,7 @@ there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quo
 Click on the &quot;labels&quot; header to add or remove labels from the current project.</p>
 <p>The most important labels are &quot;awaiting-review&quot; and &quot;awaiting-author&quot;. If your PR builds (has a green checkmark) and you label your PR with <strong>&quot;awaiting-review&quot;</strong>, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;awaiting-review&quot; to start the process over again.</p>
 <p>After some iteration, a reviewer will &quot;approve&quot; the PR and the &quot;ready-to-merge&quot; label will be automatically applied to the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
-After responding appropriately to bors (if necessary), the PR will get added to the <a href="https://app.bors.tech/repositories/24316">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
+After responding appropriately to bors (if necessary), the PR will get added to the <a href="https://app.bors.tech/repositories/37904">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
 <p>Here are some other frequently-used labels:</p>
 <ul>
 <li>
@@ -205,18 +181,6 @@ This label will be automatically removed when CI is complete.</p>
 </ul>
 <h3 id="dealing-with-merge-conflicts" class="markdown-heading">Dealing with merge conflicts <a class="hover-link" href="#dealing-with-merge-conflicts">#</a></h3>
 <p>Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on <code>master</code> that conflicts with a change that you're proposing on your PR. If it happens with your PR, check <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github">this GitHub tutorial</a> on how to resolve merge conflicts by using their online tool.</p>
-<h2 id="caching-compilation" class="markdown-heading">Caching compilation <a class="hover-link" href="#caching-compilation">#</a></h2>
-<p>In the <code>mathlib</code> git repository, you can run the following in a terminal:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>pip3<span class="w"> </span>install<span class="w"> </span>mathlibtools
-leanproject<span class="w"> </span>hooks
-</code></pre></div>
-</div>
-
-<p>This will install the <code>leanproject</code> tool.  The call to <code>leanproject hooks</code>
-sets up git hooks that will call cache the olean files when making a commit
-and fetching the olean files when checking out a branch.
-See the <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md">mathlib-tools documentation</a>
-for more information.</p>
 
   </main>
 
@@ -315,6 +279,8 @@ for more information.</p>
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
         
