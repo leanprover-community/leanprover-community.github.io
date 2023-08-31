@@ -71,7 +71,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
   (There will be a green tick on the line describing the most recent commit if everything works,
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
-  You can also check CI status on the command line by installing `hub` and running `hub ci-status`.
+  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/) and running `hub ci-status`.
 * After CI finishes, you can run `lake exe cache get` to download compiled oleans.
 
 
