@@ -59,6 +59,8 @@ requires several months of developing familiarity with mathlib and contributing
 toward the reviewing process.
 
 Here are some explicit questions you can ask yourself as a reviewer.
+This is just an outline; in later sections we investigate each question
+in more detail with examples.
 
 - [does it adhere to style?](#style)
     + [code formatting](style.html)
@@ -72,11 +74,12 @@ Here are some explicit questions you can ask yourself as a reviewer.
     + are there warnings to the user when code should only be used in certain ways?
     + is it formalizing something from the literature?
 - [location, location, location](#location)
-    + are the declarations in the appropriate files? `#find_home` can be useful here.
+    + are the declarations in the appropriate files?
+      [`#find_home`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Util/Imports.html#«command#find_home_») can be useful here.
     + do the results already exist? possibly in a more general form with a different name? 
       The `apply?` or `exact?` tactics can help answer this sometimes.
-    + are new `import`s introduced that exacerbate import creep for unnecessary reasons?
-    + should some of the results be placed into a new file to avoid import creep?
+    + are new `import`s introduced, and if so, do they import too much material for this file?
+    + should some of the results be placed into a new file to minimize import requirements?
     + should a file be split into multiple pieces because its getting too long (e.g., > 1000 lines),
       or touches on too many different topics?
 - [are there obvious improvements that can be made?](#improvements)
@@ -516,7 +519,7 @@ greater generality.
 The `apply?` and `exact?` tactics can help answer this sometimes. If you suspect a 
 result already exists, just copy it to a new file with `import Mathlib` and try `exact?`.
 
-#### Do new `import`s exacerbate import creep?
+#### Are new `import`s introduced? Do they import too much?
 
 Maintaining the organization of the mathlib import hierarchy is an important task, 
 but it can easily get out of hand without careful review. Generally, the problem occurs
@@ -527,7 +530,9 @@ add it to `X.Y.Z`." Upon trying to add the theorem there, the contributor realiz
 I don't have access to `helper_lemma`, I need to `import A.B.C`." During review, the 
 reviewer is focused on other things, and the PR is merged with this import change.
 This is the story of how, at one time, `Analysis.NormedSpace.Star.Basic` imported 
-`Analysis.NormedSpace.OperatorNorm`!
+`Analysis.NormedSpace.OperatorNorm`! This occurred in
+[#16964](https://github.com/leanprover-community/mathlib/pull/16964)
+and then had to be fixed in [#18194](https://github.com/leanprover-community/mathlib/pull/18194).
 
 As another example, in [#6239](https://github.com/leanprover-community/mathlib4/pull/6239),
 the contributor had added the import `Data.IsROrC.Basic` to
