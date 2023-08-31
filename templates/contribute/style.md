@@ -199,12 +199,13 @@ be placed on the same line, regardless of whether the justification
 spans multiple lines.
 ```lean
 example (n k : Nat) (h : n < k) : ... :=
-  have h1 : n ≠ k := by exact ne_of_lt h
+  have h1 : n ≠ k := by apply ne_of_lt; exact h
   ...
 
 example (n k : Nat) (h : n < k) : ... :=
   have h1 : n ≠ k := by
-    exact ne_of_lt h
+    apply ne_of_lt
+    exact h
   ...
 ```
 
@@ -284,7 +285,7 @@ example (n : ℝ) : 1 < n → 0 < n := fun h ↦ by linarith
 and
 
 ```lean
-example (n : ℕ) : 0 ≤ n := Nat.zero_le n
+example (n : ℕ) : 0 ≤ n := dec_trivial __Nat.zero_le n
 ```
 
 is preferred over
@@ -307,10 +308,10 @@ Lean has several nice syntax options for declaring anonymous functions. For very
 functions, one can use the centered dot as the function argument, as in `(· ^ 2)` to 
 represent the squaring function. However, sometimes it is necessary to refer to the 
 arguments by name (e.g., if they appear in multiple places in the function body). The
-Lean default for this is `fun x => x * x`, but mathlib introduces an alternative 
-notation which we prefer to use in mathlib: `fun x ↦ x * x` (inserted with `\mapsto`).
-The lambda notation `λ x ↦ x * x`, while syntactically valid, is discouraged in favor
-of the `fun` keyword.
+Lean default for this is `fun x => x * x`, but the `↦` arrow (inserted with `\mapsto`)
+is also valid. In mathlib the pretty printer displays `↦`, and we slightly prefer this
+in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
+is discouraged in favor of the `fun` keyword.
 
 ### Calculations
 
