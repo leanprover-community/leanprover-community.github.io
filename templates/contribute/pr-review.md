@@ -478,6 +478,12 @@ cases, especially when the contributor is mimicking an existing published proof 
 paper, they should be encouraged to add an entry to the `references.bib` file and
 cite it in the module documentation and / or the docstring of the relevant theorem.
 
+In addition, having mathematics in mathlib that is connected to the literature is
+an extra sanity check that what is being added is relevant, and that hopefully
+someone will care about it and use it later. Incorporating mathematics into mathlib
+places a burden to maintain what was added, and there's no reason to take on that 
+burden if it won't ever be used.
+
 ### Location
 
 #### Are the declarations in the appropriate files?
