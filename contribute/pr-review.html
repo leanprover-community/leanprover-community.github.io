@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Pull Request Review Guide</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+<h1 id="pull-request-review-guide" class="markdown-heading">Pull Request Review Guide <a class="hover-link" href="#pull-request-review-guide">#</a></h1>
+<p>Author: Jireh Loreaux</p>
+<p>This guide provides a detailed look at how to conduct PR reviews for mathlib. You may
+wonder whether this guide applies to you, and the answer is &quot;yes!&quot;</p>
+<p>While the mathlib maintainers are the only users with authority to <em>merge</em> pull requests,
+everyone is welcome, and even encouraged, to <em>review</em> pull requests. (Note: there is in
+fact another category of people, mathlib <em>reviewers</em>, who have shown that they can provide
+valuable PR reviews; approving reviews from these users with <code>maintainer merge</code> are more
+quickly merged by maintainers).</p>
+<p>A history of helpful reviews is a key criterion for membership on either the mathlib
+reviewer or mathlib maintainer teams.</p>
+<p>This guide starts with general <a href="#guidelines-for-review">guidelines</a> for conducting reviews,
+a high-level <a href="#what-to-consider-when-reviewing">overview</a> of what reviewers should be
+considering and then focuses on a few practical <a href="#examples">examples</a>.</p>
+<p>While this guide is rather long, it is not required to comprehend everything before
+starting to review. Partial reviews are themselves helpful, and you can learn about the
+various considerations in a piecemeal fashion as you progress in your understanding
+of Lean and mathlib.</p>
+<h2 id="guidelines-for-review" class="markdown-heading">Guidelines for review <a class="hover-link" href="#guidelines-for-review">#</a></h2>
+<h3 id="respect-and-encouragment" class="markdown-heading">Respect and encouragment <a class="hover-link" href="#respect-and-encouragment">#</a></h3>
+<p>As with all interactions in the mathlib community, be sure to adhere to the
+<a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/">Code of Conduct</a>.
+In short, be respectful. However, when reviewing please be
+sure to also be <em>encouraging</em>. The majority of contributors have only made
+a handful of pull requests, and this may even be their first! As such it is
+important to avoid comments like &quot;This result is useless, we already have a
+version of it.&quot; Instead you could be more gentle and say, for example, &quot;Thanks
+for proving this, but I think we already have a lemma to this effect. It is
+<code>my_generic_lemma</code>. Please try to use that instead.&quot; Try to find the
+good in what they have done, even while pointing out room for improvement.</p>
+<h3 id="humility" class="markdown-heading">Humility <a class="hover-link" href="#humility">#</a></h3>
+<p>None of us, including the mathlib maintainers, is perfect or has a monopoly
+on best practices. As such, reviewers should always leave room for someone
+to suggest a better approach. In addition, it's important to recognize that
+<em>you may be wrong</em>, and to allow for this possibility. Of course, perfect is
+the enemy of the good, so it is not necessary to wait indefinitely for
+better approaches or new ideas.</p>
+<h2 id="what-to-consider-when-reviewing" class="markdown-heading">What to consider when reviewing <a class="hover-link" href="#what-to-consider-when-reviewing">#</a></h2>
+<p>Reviewing is essentially about looking at code and asking yourself questions.
+The foundational issues, organized approximately from easiest to hardest, are:
+style, documentation, location, improvements and library integration.</p>
+<p>Note that new reviewers are certainly capable of commenting on the first two
+or three issues, whereas answering questions of library integration generally
+requires several months of developing familiarity with mathlib and contributing
+toward the reviewing process.</p>
+<p>Here are some explicit questions you can ask yourself as a reviewer.
+This is just an outline; in later sections we investigate each question
+in more detail with examples.</p>
+<ul>
+<li><a href="#style">does it adhere to style?</a>
+<ul>
+<li><a href="style.html">code formatting</a></li>
+<li><a href="naming.html">naming conventions</a></li>
+<li>is the <a href="commit.html">PR title and description</a> appropriately informative?</li>
+</ul>
+</li>
+<li><a href="#documentation">is there useful documentation?</a>
+<ul>
+<li>do the definitions have sufficiently informative docstrings?</li>
+<li>are there cross references to related declarations?</li>
+<li>do complicated proofs have a sketch in comments interspersed throughout?</li>
+<li>do important theorems have docstrings?</li>
+<li>are there warnings to the user when code should only be used in certain ways?</li>
+<li>is it formalizing something from the literature?</li>
+</ul>
+</li>
+<li><a href="#location">location, location, location</a>
+<ul>
+<li>are the declarations in the appropriate files?
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Util/Imports.html#%C2%ABcommand#find_home_%C2%BB"><code>#find_home</code></a> can be useful here.</li>
+<li>do the results already exist? possibly in a more general form with a different name?
+The <code>apply?</code> or <code>exact?</code> tactics can help answer this sometimes.</li>
+<li>are new <code>import</code>s introduced, and if so, do they import too much material for this file?</li>
+<li>should some of the results be placed into a new file to minimize import requirements?</li>
+<li>should a file be split into multiple pieces because its getting too long (e.g., &gt; 1000 lines),
+or touches on too many different topics?</li>
+</ul>
+</li>
+<li><a href="#improvements">are there obvious improvements that can be made?</a>
+<ul>
+<li>can pieces be split into supporting lemmas or definitions (especially for long proofs)?</li>
+<li>can different / better tactics be used to improve readability (e.g., using <code>gcongr</code>
+instead of <code>mul_le_mul_of_nonneg_left</code>)?
+Note: code golfing is okay as long as it <em>doesn't sacrifice readability</em>, although golfing
+trivial results is generally okay.</li>
+<li>does a different proof structure greatly simplify the argument?</li>
+<li>are the definitions introduced the best way to formalize the concept (very difficult!)?</li>
+</ul>
+</li>
+<li><a href="#library-integration">does it advance or improve the library?</a>
+<ul>
+<li>does it provide a sensible API?</li>
+<li>is it general enough to support known future needs?</li>
+<li>does it fit the design and collective vision of mathlib?</li>
+</ul>
+</li>
+<li>more specific considerations
+<ul>
+<li>do declarations use <code>α β : Type*</code> instead of <code>α β : Type _</code> to refer to arbitrary universe levels?
+(Note: this is a performance issue because using <code>Type _</code> introduces unification problems that
+need solving.)</li>
+<li>are lemmas tagged <code>@[simp]</code>, <code>@[ext]</code>, et cetera where they should be? or shouldn't be?</li>
+<li>do new definitions come with lemmas about them (perhaps even just those generated by <code>@[simps]</code>)</li>
+<li>do any newly declared instances create diamonds? non-defeq or non-propeq?</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h2>
+<p>The remainder of this guide is devoted to considering both contrived and real-world
+examples of the review process. We attempt to provide examples for each of the following
+questions above. Parties involved in the real-world examples have been consulted for
+permission for inclusion in this style guide.</p>
+<p>Not every question has a corresponding example, but we attempt to provide at least a
+discussion about what should be considered in each case.</p>
+<h3 id="style" class="markdown-heading">Style <a class="hover-link" href="#style">#</a></h3>
+<h4 id="code-formatting" class="markdown-heading">Code formatting <a class="hover-link" href="#code-formatting">#</a></h4>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- do NOT write code in this style!</span>
+<span class="kd">theorem</span> <span class="n">mul_assoc_assoc</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="bp">*</span><span class="n">d</span><span class="bp">=</span><span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="o">(</span><span class="n">c</span><span class="bp">*</span><span class="n">d</span><span class="o">))</span> <span class="o">:=</span>
+<span class="kd">by</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">,</span>
+    <span class="n">mul_assoc</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>The code above violates several formatting guidelines: there are no
+spaces around binary operations, the line starts with a <code>:</code> instead of
+ending it on the previous line, <code>by</code> should be moved to the previous line
+instead of by itself (a style linter should catch this anyway in CI),
+and the <code>rw</code> tactic is unnecessarily split across multiple lines.</p>
+<p>The author of the PR in this situation, by virtue of violating so many
+style guidelines, is probably a new contributor and is unfamiliar with,
+or doesn't recall, the style guide. An appropriate review comment would
+be something like:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>In case you&#39;re unaware, please familiarize yourself with the mathlib
+[<span class="nt">style guide</span>](<span class="na">https://leanprover-community.github.io/contribute/style.html</span>).
+You need spaces around <span class="sb">`*`</span>, <span class="sb">`:`</span> at the end of the line and the <span class="sb">`rw`</span> to 
+be on the same line.
+<span class="sb">```suggestion</span>
+<span class="s">theorem mul_assoc_assoc {α : Type*} [Semigroup α] (a b c d : α) :</span>
+<span class="s">    a * b * c * d = a * (b * (c * d)) := by</span>
+<span class="s">  rw [mul_assoc, mul_assoc]</span>
+<span class="sb">```</span>
+</code></pre></div>
+</div>
+
+<h4 id="naming-conventions" class="markdown-heading">Naming conventions <a class="hover-link" href="#naming-conventions">#</a></h4>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">inv_is_unit_times_self_eq_1</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">IsUnit</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">↑</span><span class="o">(</span><span class="n">IsUnit.unit</span> <span class="n">h</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>The above lemma is taken directly from the library, can you guess its actual name?
+It is <code>IsUnit.inv_val_mul</code>. An appropriate review to suggest a new name might look
+something like:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>In order to accord with the 
+[<span class="nt">naming conventions</span>](<span class="na">https://leanprover-community.github.io/contribute/naming.html</span>)
+for mathlib, I suggest renaming this to: <span class="sb">`IsUnit.inv_val_mul`</span>. Note that:
+
+<span class="k">-</span><span class="w"> </span>we use <span class="sb">`mul`</span> instead of <span class="sb">`times`</span>, and <span class="sb">`one`</span> instead of <span class="sb">`1`</span>
+<span class="k">-</span><span class="w"> </span>the lemma is sufficiently clear without the reference to <span class="sb">`1`</span>
+<span class="k">-</span><span class="w"> </span>If we are referencing an <span class="sb">`IsUnit`</span> hypothesis, we would use <span class="sb">`isUnit`</span>, not <span class="sb">`is_unit`</span>
+<span class="k">-</span><span class="w"> </span>However, since we have an <span class="sb">`IsUnit`</span> hypothesis, putting it in the <span class="sb">`IsUnit.`</span> 
+  namespace allows for use with dot notation.
+<span class="k">-</span><span class="w"> </span>we should reference the coercion that appears here, which is <span class="sb">`Subtype.val`</span>, hence
+  the <span class="sb">`val`</span> in the suggested name.
+</code></pre></div>
+</div>
+
+<p>This provides the PR author with a link to the naming conventions in case they
+haven't yet seen it, but also points out the specific issues so that they don't
+have to read through the entire guide again. This is probably helpful also if
+they have only made one error in the naming convention.</p>
+<p>Note: not all declarations have exactly one suitable name, there may be a few,
+each with their own advantages and disadvantages.</p>
+<h4 id="is-the-pr-title-and-description-appropriately-informative" class="markdown-heading">Is the PR title and description appropriately informative? <a class="hover-link" href="#is-the-pr-title-and-description-appropriately-informative">#</a></h4>
+<p>Consider the following PR title and description:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>Title: feat(Analysis/SpecificLimits)
+Description: Where should we put these lemmas?
+</code></pre></div>
+</div>
+
+<p>This has two issues: the title doesn't provide any information about the changes
+and the description includes a discussion question, as opposed to information
+about the changes. A reasonable review comment might be something like:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>Please update the PR title and description to be more informative about what 
+you have added or changed as these will be permanently included in the git
+history when this is merged. Questions or topics for discussion are allowed
+in the PR description, but should be placed after the <span class="sb">`---`</span>, as then they
+will be treated as comments and not included in the git history.
+</code></pre></div>
+</div>
+
+<p>Of course, you could provide suggestions, or even update the PR title and
+description yourself, but you may want to point it out, especially if the
+PR author is a relatively new contributor.</p>
+<h3 id="documentation" class="markdown-heading">Documentation <a class="hover-link" href="#documentation">#</a></h3>
+<h4 id="do-the-definitions-have-sufficiently-informative-docstrings" class="markdown-heading">Do the definitions have sufficiently informative docstrings? <a class="hover-link" href="#do-the-definitions-have-sufficiently-informative-docstrings">#</a></h4>
+<p>The <code>docBlame</code> linter should ensure that users add docstrings to all their
+definitions. However, just because a docstring <em>exists</em> doesn't necessarily
+mean it's <em>useful</em> and <em>accurate</em>. Reviewers should do their best to make sure
+the provided docstring accurately describes the <code>def</code> in an easily intelligible
+way.</p>
+<h4 id="do-important-theorems-have-docstrings" class="markdown-heading">Do important theorems have docstrings? <a class="hover-link" href="#do-important-theorems-have-docstrings">#</a></h4>
+<p>The following example makes reference to the review in
+<a href="https://github.com/leanprover-community/mathlib4/pull/5580/files">#5580</a>.
+In that PR, the following theorem was added:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">protected</span> <span class="kd">theorem</span> <span class="n">_root_.WithSeminorms.equicontinuous_TFAE</span> <span class="o">{</span><span class="n">κ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+    <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">SeminormFamily</span> <span class="bp">𝕜₂</span> <span class="n">F</span> <span class="n">ι&#39;</span><span class="o">}</span> <span class="o">[</span><span class="n">UniformSpace</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">UniformAddGroup</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">u</span> <span class="o">:</span> <span class="n">UniformSpace</span> <span class="n">F</span><span class="o">]</span>
+    <span class="o">[</span><span class="n">hu</span> <span class="o">:</span> <span class="n">UniformAddGroup</span> <span class="n">F</span><span class="o">]</span> <span class="o">(</span><span class="n">hq</span> <span class="o">:</span> <span class="n">WithSeminorms</span> <span class="n">q</span><span class="o">)</span> <span class="o">[</span><span class="n">ContinuousSMul</span> <span class="bp">𝕜</span> <span class="n">E</span><span class="o">]</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">κ</span> <span class="bp">→</span> <span class="n">E</span> <span class="bp">→ₛₗ</span><span class="o">[</span><span class="n">σ₁₂</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">TFAE</span>
+    <span class="o">[</span> <span class="n">EquicontinuousAt</span> <span class="o">((</span><span class="bp">↑</span><span class="o">)</span> <span class="bp">∘</span> <span class="n">f</span><span class="o">)</span> <span class="mi">0</span><span class="o">,</span>
+      <span class="n">Equicontinuous</span> <span class="o">((</span><span class="bp">↑</span><span class="o">)</span> <span class="bp">∘</span> <span class="n">f</span><span class="o">),</span>
+      <span class="n">UniformEquicontinuous</span> <span class="o">((</span><span class="bp">↑</span><span class="o">)</span> <span class="bp">∘</span> <span class="n">f</span><span class="o">),</span>
+      <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">p</span> <span class="o">:</span> <span class="n">Seminorm</span> <span class="bp">𝕜</span> <span class="n">E</span><span class="o">,</span> <span class="n">Continuous</span> <span class="n">p</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">q</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="n">k</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">p</span><span class="o">,</span>
+      <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">BddAbove</span> <span class="o">(</span><span class="n">range</span> <span class="k">fun</span> <span class="n">k</span> <span class="bp">↦</span> <span class="o">(</span><span class="n">q</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="n">k</span><span class="o">))</span> <span class="bp">∧</span> <span class="n">Continuous</span> <span class="o">(</span><span class="bp">⨆</span> <span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">q</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="n">k</span><span class="o">))</span> <span class="o">]</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>This theorem is useful, but also a bit long and takes time to parse (for humans).
+As such, it should probably have a docstring, which lead to the
+<a href="https://github.com/leanprover-community/mathlib4/pull/5580/files#r1286511394">following comment</a></p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>Can you please add a docstring explaining the statement of the theorem, as well as a cross reference to
+<span class="sb">`NormedSpace.equicontinuous_TFAE`</span>?
+</code></pre></div>
+</div>
+
+<p>The PR author then updated the theorem with the following informative docstring, and here we can
+see tremendous added value:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- Let `E` and `F` be two topological vector spaces over a `NontriviallyNormedField`, and assume</span>
+<span class="sd">that the topology of `F` is generated by some family of seminorms `q`. For a family `f` of linear</span>
+<span class="sd">maps from `E` to `F`, the following are equivalent:</span>
+<span class="sd">* `f` is equicontinuous at `0`.</span>
+<span class="sd">* `f` is equicontinuous.</span>
+<span class="sd">* `f` is uniformly equicontinuous.</span>
+<span class="sd">* For each `q i`, the family of seminorms `k ↦ (q i) ∘ (f k)` is bounded by some continuous</span>
+<span class="sd">  seminorm `p` on `E`.</span>
+<span class="sd">* For each `q i`, the seminorm `⊔ k, (q i) ∘ (f k)` is well-defined and continuous.</span>
+<span class="sd">In particular, if you can determine all continuous seminorms on `E`, that gives you a complete</span>
+<span class="sd">characterization of equicontinuity for linear maps from `E` to `F`. For example `E` and `F` are</span>
+<span class="sd">both normed spaces, you get `NormedSpace.equicontinuous_TFAE`. -/</span>
+</code></pre></div>
+</div>
+
+<h4 id="are-there-cross-references-to-related-declarations" class="markdown-heading">Are there cross references to related declarations? <a class="hover-link" href="#are-there-cross-references-to-related-declarations">#</a></h4>
+<p>See the previous example, where a cross reference was requested for a related declaration.</p>
+<h4 id="do-complicated-proofs-have-a-sketch-in-comments-interspersed-throughout" class="markdown-heading">Do complicated proofs have a sketch in comments interspersed throughout? <a class="hover-link" href="#do-complicated-proofs-have-a-sketch-in-comments-interspersed-throughout">#</a></h4>
+<p>In this example, we just show an existing example of how interspersed comments can
+significantly add to the value of a proof in Lean. This is copied directly from the
+source for <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gromov_hausdorff.html#Gromov_Hausdorff.GH_space.topological_space.second_countable_topology">Gromov_Hausdorff.GH_space.topological_space.second_countable_topology</a>.</p>
+<p>Whenever a complicated proof isn't documented like this, please encourage the PR
+author to do so. You can point them to this code. Another suitable and less complicated
+example can be found in the source for
+<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/banach_steinhaus.html#banach_steinhaus">banach_steinhaus</a>.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- The Gromov-Hausdorff space is second countable. -/</span>
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">second_countable_topology</span> <span class="n">GH_space</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">refine</span> <span class="n">second_countable_of_countable_discretization</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">δ</span> <span class="n">δpos</span><span class="o">,</span> <span class="n">_</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">ε</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">2</span><span class="bp">/</span><span class="mi">5</span><span class="o">)</span> <span class="bp">*</span> <span class="n">δ</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">εpos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="o">:=</span> <span class="n">mul_pos</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span> <span class="n">δpos</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span><span class="o">:</span><span class="n">GH_space</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">p.rep</span><span class="o">,</span> <span class="n">s.finite</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">univ</span> <span class="bp">⊆</span> <span class="o">(</span><span class="bp">⋃</span><span class="n">x</span><span class="bp">∈</span><span class="n">s</span><span class="o">,</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">subset_univ</span><span class="o">,</span> <span class="n">exists_true_left</span><span class="o">]</span>
+      <span class="n">using</span> <span class="n">finite_cover_balls_of_compact</span> <span class="n">is_compact_univ</span> <span class="n">εpos</span><span class="o">,</span>
+  <span class="c1">-- for each `p`, `s p` is a finite `ε`-dense subset of `p` (or rather the metric space</span>
+  <span class="c1">-- `p.rep` representing `p`)</span>
+  <span class="n">choose</span> <span class="n">s</span> <span class="n">hs</span> <span class="n">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span><span class="o">:</span><span class="n">GH_space</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">:</span><span class="n">set</span> <span class="n">p.rep</span><span class="o">,</span> <span class="n">t.finite</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">:</span><span class="n">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">e</span><span class="o">:</span><span class="n">equiv</span> <span class="n">t</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">true</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">assume</span> <span class="n">p</span> <span class="n">t</span> <span class="n">ht</span><span class="o">,</span>
+    <span class="n">letI</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">finite.fintype</span> <span class="n">ht</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">⟨</span><span class="n">fintype.card</span> <span class="n">t</span><span class="o">,</span> <span class="n">fintype.equiv_fin</span> <span class="n">t</span><span class="o">,</span> <span class="n">trivial</span><span class="o">⟩</span> <span class="o">},</span>
+  <span class="n">choose</span> <span class="n">N</span> <span class="n">e</span> <span class="n">hne</span> <span class="n">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="c1">-- cardinality of the nice finite subset `s p` of `p.rep`, called `N p`</span>
+  <span class="k">let</span> <span class="n">N</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">:</span><span class="n">GH_space</span><span class="o">,</span> <span class="n">N</span> <span class="n">p</span> <span class="o">(</span><span class="n">s</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="c1">-- equiv from `s p`, a nice finite subset of `p.rep`, to `fin (N p)`, called `E p`</span>
+  <span class="k">let</span> <span class="n">E</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">:</span><span class="n">GH_space</span><span class="o">,</span> <span class="n">e</span> <span class="n">p</span> <span class="o">(</span><span class="n">s</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="c1">-- A function `F` associating to `p : GH_space` the data of all distances between points</span>
+  <span class="c1">-- in the `ε`-dense set `s p`.</span>
+  <span class="k">let</span> <span class="n">F</span> <span class="o">:</span> <span class="n">GH_space</span> <span class="bp">→</span> <span class="bp">Σ</span><span class="n">n</span><span class="o">:</span><span class="n">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="bp">λ</span><span class="n">p</span><span class="o">,</span> <span class="o">⟨</span><span class="n">N</span> <span class="n">p</span><span class="o">,</span> <span class="bp">λ</span><span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="bp">⌊</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a</span><span class="o">)</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="n">b</span><span class="o">)</span><span class="bp">⌋</span><span class="o">⟩,</span>
+  <span class="n">refine</span> <span class="o">⟨</span><span class="bp">Σ</span> <span class="n">n</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℤ</span><span class="o">,</span> <span class="kd">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="n">F</span><span class="o">,</span> <span class="bp">λ</span><span class="n">p</span> <span class="n">q</span> <span class="n">hpq</span><span class="o">,</span> <span class="n">_</span><span class="o">⟩,</span>
+  <span class="c">/-</span><span class="cm"> As the target space of F is countable, it suffices to show that two points</span>
+<span class="cm">  `p` and `q` with `F p = F q` are at distance `≤ δ`.</span>
+<span class="cm">  For this, we construct a map `Φ` from `s p ⊆ p.rep` (representing `p`)</span>
+<span class="cm">  to `q.rep` (representing `q`) which is almost an isometry on `s p`, and</span>
+<span class="cm">  with image `s q`. For this, we compose the identification of `s p` with `fin (N p)`</span>
+<span class="cm">  and the inverse of the identification of `s q` with `fin (N q)`. Together with</span>
+<span class="cm">  the fact that `N p = N q`, this constructs `Ψ` between `s p` and `s q`, and then</span>
+<span class="cm">  composing with the canonical inclusion we get `Φ`. -/</span>
+  <span class="k">have</span> <span class="n">Npq</span> <span class="o">:</span> <span class="n">N</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">N</span> <span class="n">q</span> <span class="o">:=</span> <span class="o">(</span><span class="n">sigma.mk.inj_iff.1</span> <span class="n">hpq</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="k">let</span> <span class="bp">Ψ</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">s</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">fin.cast</span> <span class="n">Npq</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">x</span><span class="o">)),</span>
+  <span class="k">let</span> <span class="bp">Φ</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q.rep</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">Ψ</span> <span class="n">x</span><span class="o">,</span>
+  <span class="c1">-- Use the almost isometry `Φ` to show that `p.rep` and `q.rep`</span>
+  <span class="c1">-- are within controlled Gromov-Hausdorff distance.</span>
+  <span class="k">have</span> <span class="n">main</span> <span class="o">:</span> <span class="n">GH_dist</span> <span class="n">p.rep</span> <span class="n">q.rep</span> <span class="bp">≤</span> <span class="n">ε</span> <span class="bp">+</span> <span class="n">ε</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">ε</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">GH_dist_le_of_approx_subsets</span> <span class="bp">Φ</span>  <span class="n">_</span> <span class="n">_</span> <span class="n">_</span><span class="o">,</span>
+    <span class="k">show</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">p.rep</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">p.rep</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">∈</span> <span class="n">s</span> <span class="n">p</span><span class="o">),</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">,</span>
+    <span class="o">{</span> <span class="c1">-- by construction, `s p` is `ε`-dense</span>
+      <span class="k">assume</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="bp">⋃</span><span class="n">y</span><span class="bp">∈</span><span class="o">(</span><span class="n">s</span> <span class="n">p</span><span class="o">),</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε</span> <span class="o">:=</span> <span class="o">(</span><span class="n">hs</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">mem_univ</span> <span class="n">_</span><span class="o">),</span>
+      <span class="n">rcases</span> <span class="n">mem_Union₂.1</span> <span class="n">this</span> <span class="k">with</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">,</span> <span class="n">hy</span><span class="o">⟩,</span>
+      <span class="n">exact</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">,</span> <span class="n">le_of_lt</span> <span class="n">hy</span><span class="o">⟩</span> <span class="o">},</span>
+    <span class="k">show</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">q.rep</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span><span class="o">),</span> <span class="n">dist</span> <span class="n">x</span> <span class="o">(</span><span class="bp">Φ</span> <span class="n">z</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">,</span>
+    <span class="o">{</span> <span class="c1">-- by construction, `s q` is `ε`-dense, and it is the range of `Φ`</span>
+      <span class="k">assume</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="bp">⋃</span><span class="n">y</span><span class="bp">∈</span><span class="o">(</span><span class="n">s</span> <span class="n">q</span><span class="o">),</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε</span> <span class="o">:=</span> <span class="o">(</span><span class="n">hs</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">mem_univ</span> <span class="n">_</span><span class="o">),</span>
+      <span class="n">rcases</span> <span class="n">mem_Union₂.1</span> <span class="n">this</span> <span class="k">with</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">,</span> <span class="n">hy</span><span class="o">⟩,</span>
+      <span class="k">let</span> <span class="n">i</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="n">E</span> <span class="n">q</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">⟩,</span>
+      <span class="k">let</span> <span class="n">hi</span> <span class="o">:=</span> <span class="o">((</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">⟩)</span><span class="bp">.</span><span class="n">is_lt</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">ihi_eq</span> <span class="o">:</span> <span class="o">(⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="o">⟩</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">N</span> <span class="n">q</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">⟩,</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">fin.ext_iff</span><span class="o">,</span> <span class="n">fin.coe_mk</span><span class="o">],</span>
+      <span class="k">have</span> <span class="n">hiq</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">q</span> <span class="o">:=</span> <span class="n">hi</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hip</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">p</span><span class="o">,</span> <span class="o">{</span> <span class="n">rwa</span> <span class="n">Npq.symm</span> <span class="n">at</span> <span class="n">hiq</span> <span class="o">},</span>
+      <span class="k">let</span> <span class="n">z</span> <span class="o">:=</span> <span class="o">(</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩,</span>
+      <span class="n">use</span> <span class="n">z</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">C1</span> <span class="o">:</span> <span class="o">(</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩</span> <span class="o">:=</span> <span class="o">(</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">apply_symm_apply</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩,</span>
+      <span class="k">have</span> <span class="n">C2</span> <span class="o">:</span> <span class="n">fin.cast</span> <span class="n">Npq</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩</span> <span class="bp">=</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="o">⟩</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">C3</span> <span class="o">:</span> <span class="o">(</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="o">⟩</span> <span class="bp">=</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">⟩,</span>
+      <span class="o">{</span> <span class="n">rw</span> <span class="n">ihi_eq</span><span class="o">,</span> <span class="n">exact</span> <span class="o">(</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="n">symm_apply_apply</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">ys</span><span class="o">⟩</span> <span class="o">},</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="bp">Φ</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="bp">Φ</span><span class="o">,</span> <span class="bp">Ψ</span><span class="o">],</span> <span class="n">rw</span> <span class="o">[</span><span class="n">C1</span><span class="o">,</span> <span class="n">C2</span><span class="o">,</span> <span class="n">C3</span><span class="o">],</span> <span class="n">refl</span> <span class="o">},</span>
+      <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">le_of_lt</span> <span class="n">hy</span> <span class="o">},</span>
+    <span class="k">show</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span><span class="o">,</span> <span class="bp">|</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Φ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Φ</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">,</span>
+    <span class="o">{</span> <span class="c">/-</span><span class="cm"> the distance between `x` and `y` is encoded in `F p`, and the distance between</span>
+<span class="cm">      `Φ x` and `Φ y` (two points of `s q`) is encoded in `F q`, all this up to `ε`.</span>
+<span class="cm">      As `F p = F q`, the distances are almost equal. -/</span>
+      <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Φ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Φ</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+      <span class="c1">-- introduce `i`, that codes both `x` and `Φ x` in `fin (N p) = fin (N q)`</span>
+      <span class="k">let</span> <span class="n">i</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="n">E</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hip</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">p</span> <span class="o">:=</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hiq</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">q</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="n">Npq</span> <span class="n">at</span> <span class="n">hip</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">i&#39;</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">=</span> <span class="o">((</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)),</span> <span class="kd">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">equiv.apply_symm_apply</span><span class="o">,</span> <span class="n">fin.coe_cast</span><span class="o">]</span> <span class="o">},</span>
+      <span class="c1">-- introduce `j`, that codes both `y` and `Φ y` in `fin (N p) = fin (N q)`</span>
+      <span class="k">let</span> <span class="n">j</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="o">:=</span> <span class="n">E</span> <span class="n">p</span> <span class="n">y</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hjp</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">p</span> <span class="o">:=</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hjq</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&lt;</span> <span class="n">N</span> <span class="n">q</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="n">Npq</span> <span class="n">at</span> <span class="n">hjp</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">j&#39;</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">=</span> <span class="o">((</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">equiv.apply_symm_apply</span><span class="o">,</span> <span class="n">fin.val_eq_coe</span><span class="o">,</span> <span class="n">fin.coe_cast</span><span class="o">]</span> <span class="o">},</span>
+      <span class="c1">-- Express `dist x y` in terms of `F p`</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">((</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">floor</span> <span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span><span class="o">),</span>
+        <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">F</span><span class="o">,</span> <span class="o">(</span><span class="n">E</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">],</span>
+      <span class="k">have</span> <span class="n">Ap</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hjp</span><span class="o">⟩</span> <span class="bp">=</span> <span class="n">floor</span> <span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span><span class="o">),</span>
+        <span class="kd">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="bp">←</span> <span class="n">this</span><span class="o">,</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">fin.ext_iff.2</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+      <span class="c1">-- Express `dist (Φ x) (Φ y)` in terms of `F q`</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">((</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">))</span> <span class="o">((</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="n">floor</span> <span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)),</span>
+        <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">F</span><span class="o">,</span> <span class="o">(</span><span class="n">E</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">],</span>
+      <span class="k">have</span> <span class="n">Aq</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hiq</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hjq</span><span class="o">⟩</span> <span class="bp">=</span> <span class="n">floor</span> <span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)),</span>
+        <span class="kd">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="bp">←</span> <span class="n">this</span><span class="o">,</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">fin.ext_iff.2</span><span class="bp">;</span> <span class="o">[</span><span class="n">exact</span> <span class="n">i&#39;</span><span class="o">,</span> <span class="n">exact</span> <span class="n">j&#39;</span><span class="o">]</span> <span class="o">},</span>
+      <span class="c1">-- use the equality between `F p` and `F q` to deduce that the distances have equal</span>
+      <span class="c1">-- integer parts</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="n">F</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hip</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hjp</span><span class="o">⟩</span> <span class="bp">=</span> <span class="o">(</span><span class="n">F</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hiq</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hjq</span><span class="o">⟩,</span>
+      <span class="o">{</span> <span class="c1">-- we want to `subst hpq` where `hpq : F p = F q`, except that `subst` only works</span>
+        <span class="c1">-- with a constant, so replace `F q` (and everything that depends on it) by a constant `f`</span>
+        <span class="c1">-- then `subst`</span>
+        <span class="n">revert</span> <span class="n">hiq</span> <span class="n">hjq</span><span class="o">,</span>
+        <span class="n">change</span> <span class="n">N</span> <span class="n">q</span> <span class="k">with</span> <span class="o">(</span><span class="n">F</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">generalize_hyp</span> <span class="o">:</span> <span class="n">F</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">at</span> <span class="n">hpq</span> <span class="bp">⊢</span><span class="o">,</span>
+        <span class="n">subst</span> <span class="n">hpq</span><span class="o">,</span>
+        <span class="n">intros</span><span class="o">,</span>
+        <span class="n">refl</span> <span class="o">},</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">Ap</span><span class="o">,</span> <span class="n">Aq</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+      <span class="c1">-- deduce that the distances coincide up to `ε`, by a straightforward computation</span>
+      <span class="c1">-- that should be automated</span>
+      <span class="k">have</span> <span class="n">I</span> <span class="o">:=</span> <span class="k">calc</span>
+        <span class="bp">|</span><span class="n">ε</span><span class="bp">⁻¹|</span> <span class="bp">*</span> <span class="bp">|</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="bp">=</span>
+          <span class="bp">|</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">))</span><span class="bp">|</span> <span class="o">:</span> <span class="o">(</span><span class="n">abs_mul</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="bp">|</span><span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">ε</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">))</span><span class="bp">|</span> <span class="o">:</span> <span class="kd">by</span> <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="n">ring</span> <span class="o">}</span>
+        <span class="bp">...</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">abs_sub_lt_one_of_floor_eq_floor</span> <span class="n">this</span><span class="o">),</span>
+      <span class="k">calc</span>
+        <span class="bp">|</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="bp">=</span> <span class="o">(</span><span class="n">ε</span> <span class="bp">*</span> <span class="n">ε</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">*</span> <span class="bp">|</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="o">:</span>
+          <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_inv_cancel</span> <span class="o">(</span><span class="n">ne_of_gt</span> <span class="n">εpos</span><span class="o">),</span> <span class="n">one_mul</span><span class="o">]</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">ε</span> <span class="bp">*</span> <span class="o">(</span><span class="bp">|</span><span class="n">ε</span><span class="bp">⁻¹|</span> <span class="bp">*</span> <span class="bp">|</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">dist</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">Ψ</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span><span class="o">)</span> <span class="o">:</span>
+          <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_nonneg</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="o">(</span><span class="n">inv_pos.2</span> <span class="n">εpos</span><span class="o">)),</span> <span class="n">mul_assoc</span><span class="o">]</span>
+        <span class="bp">...</span> <span class="bp">≤</span> <span class="n">ε</span> <span class="bp">*</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">mul_le_mul_of_nonneg_left</span> <span class="n">I</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">εpos</span><span class="o">)</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">mul_one</span> <span class="n">_</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="k">calc</span> <span class="n">dist</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">GH_dist</span> <span class="n">p.rep</span> <span class="o">(</span><span class="n">q.rep</span><span class="o">)</span> <span class="o">:</span> <span class="n">dist_GH_dist</span> <span class="n">p</span> <span class="n">q</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">ε</span> <span class="bp">+</span> <span class="n">ε</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">main</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">δ</span> <span class="o">:</span> <span class="kd">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">ε</span><span class="o">],</span> <span class="n">ring</span> <span class="o">}</span>
+<span class="kd">end</span>
+</code></pre></div>
+</div>
+
+<h4 id="are-there-warnings-to-the-user-when-code-should-only-be-used-in-certain-ways" class="markdown-heading">Are there warnings to the user when code should only be used in certain ways? <a class="hover-link" href="#are-there-warnings-to-the-user-when-code-should-only-be-used-in-certain-ways">#</a></h4>
+<p>Some declarations are only intended for use within a particular file, perhaps because they are auxiliary.
+Others can be used anywhere, but should be use sparingly, and only when the preferred method is
+unavailable or downside of using it is irrelevant.</p>
+<h5 id="use-in-a-particular-file" class="markdown-heading">Use in a particular file <a class="hover-link" href="#use-in-a-particular-file">#</a></h5>
+<p>An example of the former is:
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Analysis/NormedSpace/PiLp.html#PiLp.iSup_edist_ne_top_aux">PiLp.iSup_edist_ne_top_aux</a>
+which contains the following docstring.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- An auxiliary lemma used twice in the proof of `PiLp.pseudoMetricAux` below. Not intended for use outside this file. -/</span>
+</code></pre></div>
+</div>
+
+<p>This lemma signals to the reader both with its name (contains <code>aux</code>) and its docstring that it is not intended for
+general purpose use. The reason for this is that the declaration immediately preceding it,
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Analysis/NormedSpace/PiLp.html#PiLp.pseudoEmetricAux">PiLp.pseudoEmetricAux</a>,
+is an instance which is only activated temporarily to build the proper pseudo extended metric structure.
+Its docstring also makes this clear:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- Endowing the space `PiLp p β` with the `L^p` pseudoemetric structure. This definition is not</span>
+<span class="sd">satisfactory, as it does not register the fact that the topology and the uniform structure coincide</span>
+<span class="sd">with the product one. Therefore, we do not register it as an instance. Using this as a temporary</span>
+<span class="sd">pseudoemetric space instance, we will show that the uniform structure is equal (but not defeq) to</span>
+<span class="sd">the product one, and then register an instance in which we replace the uniform structure by the</span>
+<span class="sd">product one using this pseudoemetric space and `PseudoEMetricSpace.replaceUniformity`. -/</span>
+</code></pre></div>
+</div>
+
+<h5 id="conditions-for-use" class="markdown-heading">Conditions for use <a class="hover-link" href="#conditions-for-use">#</a></h5>
+<p>An example of the latter is:
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/CompleteLattice.html#completeLatticeOfSup">completeLatticeOfSup</a>,
+which contains the following docstring.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="sd">/-- Create a `CompleteLattice` from a `PartialOrder` and `SupSet`</span>
+<span class="sd">that returns the least upper bound of a set. Usually this constructor provides</span>
+<span class="sd">poor definitional equalities.  If other fields are known explicitly, they should be</span>
+<span class="sd">provided; for example, if `inf` is known explicitly, construct the `CompleteLattice`</span>
+<span class="sd">instance as</span>
+<span class="sd">```</span>
+<span class="sd">instance : CompleteLattice my_T :=</span>
+<span class="sd">  { inf := better_inf,</span>
+<span class="sd">    le_inf := ...,</span>
+<span class="sd">    inf_le_right := ...,</span>
+<span class="sd">    inf_le_left := ...</span>
+<span class="sd">    -- don&#39;t care to fix sup, sInf, bot, top</span>
+<span class="sd">    ..completeLatticeOfSup my_T _ }</span>
+<span class="sd">```</span>
+<span class="sd">-/</span>
+</code></pre></div>
+</div>
+
+<p>In this case, a <code>CompleteLattice</code> is constructed, but the data-carrying <code>sup</code>, <code>sInf</code>,
+<code>bot</code> and <code>top</code> fields are defined in terms of <code>sSup</code>, and will therefore be
+inconvenient to prove things about when access to the definition is required. This
+docstring therefore serves as an important warning to the user that this constructor
+should be used sparingly, and these data-carrying fields should be provided if they
+are known explicitly.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>
+</code></pre></div>
+</div>
+
+<h4 id="is-it-formalizing-something-from-the-literature" class="markdown-heading">Is it formalizing something from the literature? <a class="hover-link" href="#is-it-formalizing-something-from-the-literature">#</a></h4>
+<p>Some objects in mathlib exist only to serve formalization (e.g., <code>AddMonoidWithOne</code>),
+but most ideas formalized come directly from the mathematical literature. In such
+cases, especially when the contributor is mimicking an existing published proof on
+paper, they should be encouraged to add an entry to the <code>references.bib</code> file and
+cite it in the module documentation and / or the docstring of the relevant theorem.</p>
+<p>In addition, having mathematics in mathlib that is connected to the literature is
+an extra sanity check that what is being added is relevant, and that hopefully
+someone will care about it and use it later. Incorporating mathematics into mathlib
+places a burden to maintain what was added, and there's no reason to take on that
+burden if it won't ever be used.</p>
+<h3 id="location" class="markdown-heading">Location <a class="hover-link" href="#location">#</a></h3>
+<h4 id="are-the-declarations-in-the-appropriate-files" class="markdown-heading">Are the declarations in the appropriate files? <a class="hover-link" href="#are-the-declarations-in-the-appropriate-files">#</a></h4>
+<p>Consider the following example from <a href="github.com/leanprover-community/mathlib4/pull/5742">#5742</a>
+where the PR author was placing a norm structure on the <code>Unitization</code>. The author was
+creating a new file <code>Analysis.NormedSpace.Unitization</code> and at a certain point declared the
+instance:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">instance</span> <span class="n">Unitization.instNontrivial</span> <span class="o">{</span><span class="bp">𝕜</span> <span class="n">A</span><span class="o">}</span> <span class="o">[</span><span class="n">Nontrivial</span> <span class="bp">𝕜</span><span class="o">]</span> <span class="o">[</span><span class="n">Nonempty</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+    <span class="n">Nontrivial</span> <span class="o">(</span><span class="n">Unitization</span> <span class="bp">𝕜</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">nontrivial_prod_left</span>
+</code></pre></div>
+</div>
+
+<p>Notice that this instance has nothing to do with norms, and so it likely belongs in an
+earlier file. A reviewer could use the <code>#find_home Unitization.instNontrivial</code> to determine
+that the natural place to put this declaration is <code>Algebra.Algebra.Unitization</code>. A helpful
+reviewer could comment:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>It seems like this instance doesn&#39;t have anything to do with the norm structure on the 
+<span class="sb">`Unitization`</span>. Perhaps you could place this instance in <span class="sb">`Algebra.Algebra.Unitization`</span> instead.
+</code></pre></div>
+</div>
+
+<h4 id="do-the-results-already-exist-possibly-in-a-more-general-form-with-a-different-name" class="markdown-heading">Do the results already exist? possibly in a more general form with a different name? <a class="hover-link" href="#do-the-results-already-exist-possibly-in-a-more-general-form-with-a-different-name">#</a></h4>
+<p>Mathlib is by now quite a large library, and it's difficult for anyone, especially new
+users, to be familiar with all the different corners and exactly which results are
+available. This is exacerbated by the fact that we aspire for generality, and eschew
+code duplication; this leads to the canonical questions by new users: &quot;is mathlib really
+missing vector spaces and group homomorphisms?&quot;, and its answer: &quot;no, these are <code>Module</code>
+and <code>MonoidHom</code>, respectively.&quot;</p>
+<p>As a result, it is not uncommon for new contributors (or even experienced ones!) to
+create a PR for a result that already exists, sometimes verbatim, and other times in
+greater generality.</p>
+<p>The <code>apply?</code> and <code>exact?</code> tactics can help answer this sometimes. If you suspect a
+result already exists, just copy it to a new file with <code>import Mathlib</code> and try <code>exact?</code>.</p>
+<h4 id="are-new-imports-introduced-do-they-import-too-much" class="markdown-heading">Are new <code>import</code>s introduced? Do they import too much? <a class="hover-link" href="#are-new-imports-introduced-do-they-import-too-much">#</a></h4>
+<p>Maintaining the organization of the mathlib import hierarchy is an important task,
+but it can easily get out of hand without careful review. Generally, the problem occurs
+in the following manner.</p>
+<p>A contributor thinks: &quot;I would like to add <code>my_theorem</code> and it's all about <code>Z</code>, so I'll
+add it to <code>X.Y.Z</code>.&quot; Upon trying to add the theorem there, the contributor realizes: &quot;oh,
+I don't have access to <code>helper_lemma</code>, I need to <code>import A.B.C</code>.&quot; During review, the
+reviewer is focused on other things, and the PR is merged with this import change.
+This is the story of how, at one time, <code>Analysis.NormedSpace.Star.Basic</code> imported
+<code>Analysis.NormedSpace.OperatorNorm</code>! This occurred in
+<a href="https://github.com/leanprover-community/mathlib/pull/16964">#16964</a>
+and then had to be fixed in <a href="https://github.com/leanprover-community/mathlib/pull/18194">#18194</a>.</p>
+<p>As another example, in <a href="https://github.com/leanprover-community/mathlib4/pull/6239">#6239</a>,
+the contributor had added the import <code>Data.IsROrC.Basic</code> to
+<code>LinearAlgebra.Matrix.DotProduct</code>. This is probably a hard thing for a new
+contributor to recognize, because it sometimes requires decent familiarity with the
+way the library is organized.</p>
+<p>Of course, reviewers should do their best to catch the most egregious examples
+(e.g., importing <code>Analysis</code> files into <code>Algebra</code> files is generally rather suspect),
+but asking the question is always warranted. It can often mean that the results belong
+elsewhere, the file should be split along a natural boundary, or the new results should
+go in a new a file.</p>
+<h4 id="should-a-file-be-split-into-multiple-pieces" class="markdown-heading">Should a file be split into multiple pieces? <a class="hover-link" href="#should-a-file-be-split-into-multiple-pieces">#</a></h4>
+<p>There are essentially three reasons to split a file:</p>
+<ol>
+<li>It is simply too long to be nice to use.
+A good rule of thumb here is that it exceeds 1000 lines.</li>
+<li>The file is sectioned into multiple pieces that are only loosely related.</li>
+<li>To avoid import creep from the introduction of new results that are closely
+related to existing ones.</li>
+</ol>
+<p>Let's say some results, about 500 lines worth, are added to an existing file which
+already contains 700 lines, and suppose further that the new material is closely
+related to some of the existing material in the file. A reviewer should be on the
+lookout for a natural boundaries where the file can be split into coherent pieces.</p>
+<h3 id="improvements" class="markdown-heading">Improvements <a class="hover-link" href="#improvements">#</a></h3>
+<h4 id="splitting-into-supporting-lemmas-or-definitions-especially-for-long-proofs" class="markdown-heading">Splitting into supporting lemmas or definitions (especially for long proofs)? <a class="hover-link" href="#splitting-into-supporting-lemmas-or-definitions-especially-for-long-proofs">#</a></h4>
+<p>Long standalone proofs are frequently an indication that there is a worthwhile
+refactor lurking close at hand. Often new contributors are unaware of existing
+lemmas in the library, or may not know how to split their theorem into more
+manageable chunks. In these cases, the reviewer has a few options including:
+rolling up their sleeves and refactoring the result into multiple lemmas
+themselves in the form of a <code>suggestion</code> on GitHub; looking for a potential
+refactor and mentioning it, as in &quot;you might consider splitting out the
+argument on lines xx into its own lemma, which will simplify the proof&quot;; or
+simply asking, &quot;this proof seems rather long and unwieldy, have you considered
+at all how it might be split into more manageable pieces?&quot;; or even, &quot;this
+proof seems like it might be easier if you make use of theorem X.&quot;</p>
+<h4 id="different-tactics-to-improve-readability" class="markdown-heading">Different tactics to improve readability <a class="hover-link" href="#different-tactics-to-improve-readability">#</a></h4>
+<p>A good example where using better tactics, or golfing, can <em>improve</em> readability
+can be found in this suggestion from <a href="https://github.com/leanprover-community/mathlib4/pull/6140/files/d2506ba26543b630722124dbf030339f43f6590a#r1287284988">#6140</a>.
+In this case, the original subsequence of tactics in the proof was:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="k">have</span> <span class="n">h₀</span> <span class="o">:</span> <span class="n">log</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">log</span> <span class="o">(</span><span class="bp">-</span> <span class="bp">-</span><span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h₀</span><span class="o">,</span> <span class="n">log_neg_eq_log</span><span class="o">]</span>
+  <span class="k">have</span> <span class="n">hb&#39;</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="bp">-</span><span class="n">b</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">linarith</span>
+  <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">log</span> <span class="o">(</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">log_neg_iff</span> <span class="n">hb&#39;</span><span class="o">]</span><span class="bp">;</span> <span class="n">linarith</span>
+  <span class="n">refine</span> <span class="n">tendsto_exp_atBot.comp</span> <span class="bp">?</span><span class="n">_</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">tendsto_const_mul_atBot_of_neg</span> <span class="n">h₁</span><span class="o">]</span>
+  <span class="k">show</span> <span class="n">atTop</span> <span class="bp">≤</span> <span class="n">atTop</span>
+  <span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>and the suggestion was to golf it to:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="n">refine</span> <span class="n">tendsto_exp_atBot.comp</span> <span class="bp">&lt;|</span> <span class="o">(</span><span class="n">tendsto_const_mul_atBot_of_neg</span> <span class="bp">?</span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">tendsto_id</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">←</span><span class="n">log_neg_eq_log</span><span class="o">,</span> <span class="n">log_neg_iff</span> <span class="o">(</span><span class="kd">by</span> <span class="n">linarith</span><span class="o">)]</span>
+  <span class="n">linarith</span>
+</code></pre></div>
+</div>
+
+<p>from the golfed version, we can easily see that this is essentially just composing some
+library lemmas about <code>Filter.Tendsto</code>, along with a single hypothesis to one of these
+theorems which is proven with some basic rewriting and calls to <code>linarith</code>.</p>
+<p>An example where using a better tactic can improve readability can be found in the
+entire diff of <a href="https://github.com/leanprover-community/mathlib4/pull/4702/files">#4702</a>,
+which golfed lemmas throughout the library using the new <code>gcongr</code> tactic.  We'll
+highlight one particularly nice example for reference. The original code was:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="n">_</span> <span class="bp">≤</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">‖∑</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span><span class="bp">‖</span> <span class="bp">+</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">∑</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="bp">←</span> <span class="n">mul_sum</span><span class="o">]</span>
+    <span class="n">exact</span> <span class="n">add_le_add</span> <span class="n">hn</span> <span class="o">(</span><span class="n">mul_le_mul_of_nonneg_left</span> <span class="n">le_rfl</span> <span class="o">(</span><span class="n">half_pos</span> <span class="n">εpos</span><span class="o">)</span><span class="bp">.</span><span class="n">le</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>which was improved using <code>gcongr</code> to:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="n">_</span> <span class="bp">≤</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">‖∑</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span><span class="bp">‖</span> <span class="bp">+</span> <span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">∑</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="bp">←</span> <span class="n">mul_sum</span><span class="o">]</span><span class="bp">;</span> <span class="n">gcongr</span>
+</code></pre></div>
+</div>
+
+<p>Or, from the same PR, this example which used <code>positivity</code> to go from:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="bp">·</span> <span class="k">have</span> <span class="n">ha&#39;</span> <span class="o">:=</span> <span class="n">mul_le_mul_of_nonneg_left</span> <span class="n">ha</span> <span class="o">(</span><span class="n">inv_pos.2</span> <span class="n">hab</span><span class="o">)</span><span class="bp">.</span><span class="n">le</span>
+    <span class="n">rwa</span> <span class="o">[</span><span class="n">MulZeroClass.mul_zero</span><span class="o">,</span> <span class="bp">←</span> <span class="n">div_eq_inv_mul</span><span class="o">]</span> <span class="n">at</span> <span class="n">ha&#39;</span>
+  <span class="bp">·</span> <span class="k">have</span> <span class="n">hb&#39;</span> <span class="o">:=</span> <span class="n">mul_le_mul_of_nonneg_left</span> <span class="n">hb</span> <span class="o">(</span><span class="n">inv_pos.2</span> <span class="n">hab</span><span class="o">)</span><span class="bp">.</span><span class="n">le</span>
+    <span class="n">rwa</span> <span class="o">[</span><span class="n">MulZeroClass.mul_zero</span><span class="o">,</span> <span class="bp">←</span> <span class="n">div_eq_inv_mul</span><span class="o">]</span> <span class="n">at</span> <span class="n">hb&#39;</span>
+</code></pre></div>
+</div>
+
+<p>to:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="bp">·</span> <span class="n">positivity</span>
+  <span class="bp">·</span> <span class="n">positivity</span>
+</code></pre></div>
+</div>
+
+<h4 id="does-a-different-proof-structure-greatly-simplify-the-argument" class="markdown-heading">Does a different proof structure greatly simplify the argument? <a class="hover-link" href="#does-a-different-proof-structure-greatly-simplify-the-argument">#</a></h4>
+<p>A great example of this occurred in the review for
+<a href="https://github.com/leanprover-community/mathlib4/pull/5602/files/ea99653c047046bae3a109ee980314eec0bb9e81#r1282044795">#5602</a>
+In this case, the PR author proved:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">variable</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommSemiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">Semiring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">Algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">SetLike</span> <span class="n">S</span> <span class="n">A</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">hSA</span> <span class="o">:</span> <span class="n">NonUnitalSubsemiringClass</span> <span class="n">S</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">hSRA</span> <span class="o">:</span> <span class="n">SMulMemClass</span> <span class="n">S</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span>
+
+<span class="c1">-- `NonUnitalSubalgebra.unitization s : Unitization R s →ₐ[R] Algebra.adjoin R (s : Set A)`</span>
+<span class="kd">theorem</span> <span class="n">NonUnitalSubalgebra.unitization_surjective</span> <span class="o">:</span>
+    <span class="n">Function.Surjective</span> <span class="o">(</span><span class="n">NonUnitalSubalgebra.unitization</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">Algebra.adjoin_induction&#39;</span>
+  <span class="bp">·</span> <span class="n">refine&#39;</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">hx</span> <span class="bp">=&gt;</span> <span class="o">⟨(</span><span class="mi">0</span><span class="o">,</span> <span class="o">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">⟩),</span> <span class="n">Subtype.ext</span> <span class="n">_</span><span class="o">⟩</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">NonUnitalSubalgebra.unitization_apply_coe</span><span class="o">,</span> <span class="n">Subtype.coe_mk</span><span class="o">]</span>
+    <span class="n">change</span> <span class="o">(</span><span class="n">algebraMap</span> <span class="n">R</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">Algebra.adjoin</span> <span class="n">R</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">A</span><span class="o">)</span> <span class="o">}</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">map_zero</span><span class="o">,</span> <span class="n">Subsemiring.coe_zero</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">]</span>
+  <span class="bp">·</span> <span class="n">exact</span> <span class="k">fun</span> <span class="n">r</span> <span class="bp">=&gt;</span> <span class="o">⟨</span><span class="n">algebraMap</span> <span class="n">R</span> <span class="o">(</span><span class="n">Unitization</span> <span class="n">R</span> <span class="n">s</span><span class="o">)</span> <span class="n">r</span><span class="o">,</span> <span class="n">AlgHom.commutes</span> <span class="n">_</span> <span class="n">r</span><span class="o">⟩</span>
+  <span class="bp">·</span> <span class="n">rintro</span> <span class="n">_</span> <span class="n">_</span> <span class="o">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="o">⟩</span>
+    <span class="n">exact</span> <span class="o">⟨</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">,</span> <span class="n">map_add</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span><span class="o">⟩</span>
+  <span class="bp">·</span> <span class="n">rintro</span> <span class="n">_</span> <span class="n">_</span> <span class="o">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">⟩</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="o">⟩</span>
+    <span class="n">exact</span> <span class="o">⟨</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">,</span> <span class="n">map_mul</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span><span class="o">⟩</span>
+</code></pre></div>
+</div>
+
+<p>The reviewer commented:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>I see why it&#39;s not immediate (you&#39;d have to get back to the full codomain),
+but is there really no good way of using <span class="sb">`Algebra.adjoin_le`</span> here?
+</code></pre></div>
+</div>
+
+<p>which resulted in the vastly improved three-line proof:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">NonUnitalSubalgebra.unitization_surjective</span> <span class="o">:</span>
+    <span class="n">Function.Surjective</span> <span class="o">(</span><span class="n">NonUnitalSubalgebra.unitization</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">Algebra.adjoin</span> <span class="n">R</span> <span class="n">s</span> <span class="bp">≤</span> <span class="o">((</span><span class="n">Algebra.adjoin</span> <span class="n">R</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">A</span><span class="o">))</span><span class="bp">.</span><span class="n">val.comp</span> <span class="o">(</span><span class="n">unitization</span> <span class="n">s</span><span class="o">))</span><span class="bp">.</span><span class="n">range</span> <span class="o">:=</span>
+    <span class="n">Algebra.adjoin_le</span> <span class="k">fun</span> <span class="n">a</span> <span class="n">ha</span> <span class="bp">↦</span> <span class="o">⟨(⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">ha</span><span class="o">⟩</span> <span class="o">:</span> <span class="n">s</span><span class="o">),</span> <span class="kd">by</span> <span class="n">simp</span><span class="o">⟩</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="bp">↦</span> <span class="k">match</span> <span class="n">this</span> <span class="n">x.property</span> <span class="k">with</span> <span class="bp">|</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="o">⟩</span> <span class="bp">=&gt;</span> <span class="o">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">Subtype.ext</span> <span class="n">hy</span><span class="o">⟩</span>
+</code></pre></div>
+</div>
+
+<p>In this case, appealing to the lemma <code>Algebra.adjoin_le</code> was a tremendous
+simplification over using <code>Algebra.adjoin_induction'</code>.</p>
+<h4 id="are-the-definitions-introduced-the-best-way-to-formalize-the-concept-very-difficult" class="markdown-heading">Are the definitions introduced the best way to formalize the concept (very difficult!)? <a class="hover-link" href="#are-the-definitions-introduced-the-best-way-to-formalize-the-concept-very-difficult">#</a></h4>
+<p>This is incredibly hard to describe in general, but perhaps the simplest
+rule of thumb that can be given is this: the more definitions avoid
+dependent types, the better.</p>
+<p>As an example, consider the definition of <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Vector.html#Vector">Vector</a>.
+Many introductory expositions of dependent type theory define <code>Vector</code>
+as an inductive type and give it as the canonical example of a dependent
+type. While the dependent typing is unavoidable, mathlib's definition
+instead opts for a simple subtype of <code>List</code>, and the dependence on <code>ℕ</code>
+appears only in <code>List.length</code> equality proposition. This has the
+advantage that we can easily pass out of the dependent type world by
+coercing to <code>List</code> and then life is much easier. In fact, most operations
+on <code>Vector</code> are precisely the corresponding operation on <code>List</code> combined
+with an equality proof on the lengths.</p>
+<h3 id="library-integration" class="markdown-heading">Library integration <a class="hover-link" href="#library-integration">#</a></h3>
+<p>Many of the questions here are a bit nebulous and generally require a large amount of
+familiarity with the structure of mathlib, or at least significant prior expertise
+in formalization. Don't be discouraged if you find it difficult to address these
+questions when reviewing.</p>
+<h4 id="does-it-provide-a-sensible-api" class="markdown-heading">Does it provide a sensible API? <a class="hover-link" href="#does-it-provide-a-sensible-api">#</a></h4>
+<ul>
+<li>Are attributes added appropriately (e.g., <code>@[simp]</code>, <code>@[ext]</code>, <code>@[gcongr]</code>, <code>@[aesop]</code>, etc.)?</li>
+<li>Are rewrite lemmas provided to avoid the need to pass through equalities definitionally all the time?</li>
+<li>Does a new type provide convenient constructors in common use cases?</li>
+</ul>
+<h4 id="is-it-general-enough-to-support-known-future-needs" class="markdown-heading">Is it general enough to support known future needs? <a class="hover-link" href="#is-it-general-enough-to-support-known-future-needs">#</a></h4>
+<p>This requires knowing what some of the future needs may be! Being active on Zulip
+can help make a reviewer aware of these needs. However, one may use a proxy for this question,
+namely, &quot;is there a more general version of this result in the literature which invokes pre-existing
+concepts in mathlib?&quot; If there is, perhaps the existing PR should be generalized.</p>
+<h4 id="does-it-fit-the-design-and-collective-vision-of-mathlib" class="markdown-heading">Does it fit the design and collective vision of mathlib? <a class="hover-link" href="#does-it-fit-the-design-and-collective-vision-of-mathlib">#</a></h4>
+<p>Again, this is a vague question and requires knowing what the design and collective vision are!
+However, as some practical examples:</p>
+<ul>
+<li>If a user is adding a new kind of morphism (not in the category theory library), they should
+more likely than not be defining a bundled morphism type, and probably an associated morphism
+class using the <code>FunLike</code> API.</li>
+<li>Similarly, if a contributor is adding a new subobject, they should probably be using bundled
+subobjects and making use of the <code>SetLike</code> API. For reference, see the <a href="https://leanprover-community.github.io/mathematics_in_lean/C07_Hierarchies.html#sub-objects">relevant section
+in Mathematics in Lean</a>.</li>
+<li>Follow the advice of any existing library note.</li>
+</ul>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/project.html">Using Lake (build system)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/tactic_writing.html">Tactic writing tutorial</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theory docs</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category theory</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and set-like objects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/pr-review.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
