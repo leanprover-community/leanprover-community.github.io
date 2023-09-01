@@ -15,7 +15,7 @@ a Lean project once, which you can use for all your contributions —
 you don't need to set up a new Lean project for each new contribution.
 
 Setting up and managing all this is done by a program called `lake` (this is
-a contraction of `lean` and `make`).
+a portmanteau of `lean` and `make`).
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the
@@ -90,7 +90,7 @@ When the cursor is on the last line, the right hand part of VS Code
 should display a "Lean Infoview" area saying:
 `TopologicalSpace.{u} (α : Type u) : Type u`.
 
-Note that you can import you own files in the project. For instance if you created a
+Note that you can import your own files in the project. For instance if you created a
 file `my_project/MyProject/Definitions.lean`, you can start a new file
 `my_project/MyProject/Lemmas.lean` with `import MyProject.Definitions`.
 
