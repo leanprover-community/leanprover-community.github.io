@@ -48,24 +48,6 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="library-style-guidelines" class="markdown-heading">Library Style Guidelines <a class="hover-link" href="#library-style-guidelines">#</a></h1>
 <p>Author: <a href="http://www.andrew.cmu.edu/user/avigad">Jeremy Avigad</a></p>
 <p>In addition to the <a href="naming.html">naming conventions</a>,
@@ -93,7 +75,9 @@ This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.</p>
 <h3 id="line-length" class="markdown-heading">Line length <a class="hover-link" href="#line-length">#</a></h3>
 <p>Lines should not be longer than 100 characters. This makes files
-easier to read, especially on a small screen or in a small window.</p>
+easier to read, especially on a small screen or in a small window.
+If you are editing with VS Code, there is a visual marker which
+will indicate a 100 character limit.</p>
 <h3 id="header-and-imports" class="markdown-heading">Header and imports <a class="hover-link" href="#header-and-imports">#</a></h3>
 <p>The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
@@ -104,8 +88,8 @@ without a line break, on separate lines.</p>
 <span class="cm">Released under Apache 2.0 license as described in the file LICENSE.</span>
 <span class="cm">Author: Joe Cool.</span>
 <span class="cm">-/</span>
-<span class="kn">import</span> <span class="n">data.nat</span>
-<span class="kn">import</span> <span class="n">algebra.group</span>
+<span class="kn">import</span> <span class="n">Mathlib.Data.Nat.Basic</span>
+<span class="kn">import</span> <span class="n">Mathlib.Algebra.Group.Defs</span>
 </code></pre></div>
 </div>
 
@@ -151,151 +135,167 @@ See [Thales600BC] for the original account on Xyzzyology.
 <p>New bibliography entries should be added to <code>docs/references.bib</code>.</p>
 <p>See our <a href="doc.html">documentation requirements</a> for more suggestions and examples.</p>
 <h3 id="structuring-definitions-and-theorems" class="markdown-heading">Structuring definitions and theorems <a class="hover-link" href="#structuring-definitions-and-theorems">#</a></h3>
-<p>These guidelines hold for declarations starting with <code>def</code>, <code>lemma</code> and <code>theorem</code>. For &quot;theorem statement&quot;, also read &quot;type of a definition&quot; and for &quot;proof&quot; also read &quot;definition body&quot;.</p>
-<p>Use spaces around &quot;:&quot;, &quot;:=&quot; or infix operators. Put them before a line break rather
-than at the beginning of the next line.</p>
-<p>Use two spaces to indent.</p>
-<p>After stating the theorem, we generally do not indent the first line
-of a proof, so that the proof is &quot;flush left&quot; in the file.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">nat</span>
-<span class="kd">theorem</span> <span class="n">nat_case</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">P</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">))</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="o">:=</span>
-<span class="n">nat.induction_on</span> <span class="n">n</span> <span class="n">H1</span> <span class="o">(</span><span class="k">assume</span> <span class="n">m</span> <span class="n">IH</span><span class="o">,</span> <span class="n">H2</span> <span class="n">m</span><span class="o">)</span>
+<p>These guidelines hold for declarations starting with <code>def</code>, <code>lemma</code> and <code>theorem</code>.
+For &quot;theorem statement&quot;, also read &quot;type of a definition&quot; and for &quot;proof&quot; also read
+&quot;definition body&quot;.</p>
+<p>Use spaces on both sides of &quot;:&quot;, &quot;:=&quot; or infix operators. Put them before a line break
+rather than at the beginning of the next line.</p>
+<p>In what follows, &quot;indent&quot; without an explicit indication of the amount means
+&quot;indent by 2 additional spaces&quot;.</p>
+<p>After stating the theorem, we indent the lines in the subesequent proof by 2 spaces.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">Nat</span>
+<span class="kd">theorem</span> <span class="n">nat_case</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">Nat</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">P</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">))</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="o">:=</span>
+  <span class="n">Nat.recOn</span> <span class="n">n</span> <span class="n">H1</span> <span class="o">(</span><span class="k">fun</span> <span class="n">m</span> <span class="n">IH</span> <span class="bp">↦</span> <span class="n">H2</span> <span class="n">m</span><span class="o">)</span>
 </code></pre></div>
 </div>
 
-<p>If the theorem statement requires multiple lines, indent the subsequent lines:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">namespace</span> <span class="n">nat</span>
+<p>If the theorem statement requires multiple lines, indent the subsequent lines by 4 spaces.
+The proof is still indented only 2 spaces (<em>not</em> 6 = 4 + 2).
+When providing a proof in tactic mode, the <code>by</code> is placed on the line <em>prior</em> to the
+first tactic; however, <code>by</code> should not be placed on a line by itself.
+In practice this means you will often see <code>:= by</code> at the end of a theorem statement.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Data.Nat.Basic</span>
 
-<span class="kd">lemma</span> <span class="n">le_induction</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span>
-  <span class="o">(</span><span class="n">h0</span> <span class="o">:</span> <span class="n">P</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:</span>
-  <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span> <span class="o">:=</span>
-<span class="kd">by</span> <span class="o">{</span> <span class="n">apply</span> <span class="n">nat.less_than_or_equal.rec</span> <span class="n">h0</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h1</span> <span class="o">}</span>
+<span class="kd">theorem</span> <span class="n">le_induction</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">Nat</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">h0</span> <span class="o">:</span> <span class="n">P</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:</span>
+    <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">Nat.le.rec</span>
+  <span class="bp">·</span> <span class="n">exact</span> <span class="n">h0</span>
+  <span class="bp">·</span> <span class="n">exact</span> <span class="n">h1</span> <span class="n">_</span>
 
-<span class="kd">def</span> <span class="n">decreasing_induction</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">mn</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span>
-  <span class="o">(</span><span class="n">hP</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">m</span> <span class="o">:=</span>
-<span class="n">le_rec_on</span> <span class="n">mn</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">ih</span> <span class="n">hsk</span><span class="o">,</span> <span class="n">ih</span> <span class="bp">$</span> <span class="n">h</span> <span class="n">k</span> <span class="n">hsk</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="o">)</span> <span class="n">hP</span>
-
-<span class="kd">end</span> <span class="n">nat</span>
+<span class="kd">def</span> <span class="n">decreasingInduction</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">ℕ</span> <span class="bp">→</span> <span class="kt">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">mn</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">hP</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">m</span> <span class="o">:=</span>
+  <span class="n">Nat.leRecOn</span> <span class="n">mn</span> <span class="o">(</span><span class="k">fun</span> <span class="o">{</span><span class="n">k</span><span class="o">}</span> <span class="n">ih</span> <span class="n">hsk</span> <span class="bp">=&gt;</span> <span class="n">ih</span> <span class="bp">&lt;|</span> <span class="n">h</span> <span class="n">k</span> <span class="n">hsk</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="n">h</span><span class="o">)</span> <span class="n">hP</span>
 </code></pre></div>
 </div>
 
 <p>When a proof term takes multiple arguments, it is sometimes clearer, and often
 necessary, to put some of the arguments on subsequent lines. In that case,
-indent each argument.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">nat</span>
-<span class="kd">axiom</span> <span class="n">zero_or_succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">zero</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span>
-<span class="kd">theorem</span> <span class="n">nat_discriminate</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span><span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">B</span> <span class="o">:=</span>
-<span class="n">or.elim</span> <span class="o">(</span><span class="n">zero_or_succ</span> <span class="n">n</span><span class="o">)</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">zero</span><span class="o">,</span> <span class="n">H1</span> <span class="n">H3</span><span class="o">)</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">),</span> <span class="n">H2</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span> <span class="n">H3</span><span class="o">)</span>
+indent each argument. This rule, i.e., indent an additional two spaces, applies
+more generally whenever a term spans multiple lines.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">Nat</span>
+<span class="kd">axiom</span> <span class="n">zero_or_succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">zero</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span>
+<span class="kd">theorem</span> <span class="n">nat_discriminate</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span><span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">B</span> <span class="o">:=</span>
+  <span class="n">Or.elim</span> <span class="o">(</span><span class="n">zero_or_succ</span> <span class="n">n</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">zero</span> <span class="bp">↦</span> <span class="n">H1</span> <span class="n">H3</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span> <span class="bp">↦</span> <span class="n">H2</span> <span class="o">(</span><span class="n">pred</span> <span class="n">n</span><span class="o">)</span> <span class="n">H3</span><span class="o">)</span>
 </code></pre></div>
 </div>
 
 <p>Don't orphan parentheses; keep them with their arguments.</p>
 <p>Here is a longer example.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">list</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Init.Data.List.Lemmas</span>
+
+<span class="kn">open</span> <span class="n">List</span>
 <span class="kd">variable</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
 
-<span class="kd">theorem</span> <span class="n">mem_split</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">T</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span><span class="o">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
-<span class="n">list.rec_on</span> <span class="n">l</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="o">[],</span> <span class="n">false.elim</span> <span class="o">(</span><span class="n">iff.elim_left</span> <span class="o">(</span><span class="n">mem_nil_iff</span> <span class="n">_</span><span class="o">)</span> <span class="n">H</span><span class="o">))</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="n">y</span> <span class="n">l</span><span class="o">,</span>
-    <span class="k">assume</span> <span class="n">IH</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span><span class="o">::</span><span class="n">t</span><span class="o">),</span>
-    <span class="k">assume</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">y</span><span class="o">::</span><span class="n">l</span><span class="o">,</span>
-    <span class="n">or.elim</span> <span class="o">(</span><span class="n">eq_or_mem_of_mem_cons</span> <span class="n">H</span><span class="o">)</span>
-      <span class="o">(</span><span class="k">assume</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">,</span>
-        <span class="n">exists.intro</span> <span class="o">[]</span> <span class="o">(</span><span class="n">exists.intro</span> <span class="n">l</span> <span class="o">(</span><span class="kd">by</span> <span class="n">rw</span> <span class="n">H1</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)))</span>
-      <span class="o">(</span><span class="k">assume</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span><span class="o">,</span>
-        <span class="k">let</span> <span class="o">⟨</span><span class="n">s</span><span class="o">,</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span><span class="o">::</span><span class="n">t</span><span class="o">))⟩</span> <span class="o">:=</span> <span class="n">IH</span> <span class="n">H1</span><span class="o">,</span>
-            <span class="o">⟨</span><span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span><span class="o">::</span><span class="n">t</span><span class="o">))⟩</span> <span class="o">:=</span> <span class="n">H2</span> <span class="k">in</span>
-        <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">y</span> <span class="o">::</span> <span class="n">l</span> <span class="bp">=</span> <span class="o">(</span><span class="n">y</span><span class="o">::</span><span class="n">s</span><span class="o">)</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span><span class="o">::</span><span class="n">t</span><span class="o">),</span> <span class="kd">by</span> <span class="n">rw</span> <span class="n">H3</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
-        <span class="n">exists.intro</span> <span class="o">(</span><span class="n">y</span><span class="o">::</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">exists.intro</span> <span class="n">t</span> <span class="n">H4</span><span class="o">)))</span>
+<span class="kd">theorem</span> <span class="n">mem_split</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">T</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">List</span> <span class="n">T</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">List</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">List.recOn</span> <span class="n">l</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="o">[]</span> <span class="bp">↦</span> <span class="n">False.elim</span> <span class="o">((</span><span class="n">mem_nil_iff</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">H</span><span class="o">))</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="n">y</span> <span class="n">l</span> <span class="bp">↦</span>
+      <span class="k">fun</span> <span class="n">IH</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">List</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">t</span><span class="o">)</span> <span class="bp">↦</span>
+      <span class="k">fun</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">y</span> <span class="o">::</span> <span class="n">l</span> <span class="bp">↦</span>
+      <span class="n">Or.elim</span> <span class="o">(</span><span class="n">eq_or_mem_of_mem_cons</span> <span class="n">H</span><span class="o">)</span>
+        <span class="o">(</span><span class="k">fun</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">↦</span>
+          <span class="n">Exists.intro</span> <span class="o">[]</span> <span class="o">(</span><span class="n">Exists.intro</span> <span class="n">l</span> <span class="o">(</span><span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">H1</span><span class="o">]</span><span class="bp">;</span> <span class="n">rfl</span><span class="o">)))</span>
+        <span class="o">(</span><span class="k">fun</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">∈</span> <span class="n">l</span> <span class="bp">↦</span> 
+          <span class="k">let</span> <span class="o">⟨</span><span class="n">s</span><span class="o">,</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">t</span> <span class="o">:</span> <span class="n">List</span> <span class="n">T</span><span class="o">,</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">t</span><span class="o">))⟩</span> <span class="o">:=</span> <span class="n">IH</span> <span class="n">H1</span>
+          <span class="k">let</span> <span class="o">⟨</span><span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">t</span><span class="o">))⟩</span> <span class="o">:=</span> <span class="n">H2</span>
+          <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">y</span>  <span class="o">::</span>  <span class="n">l</span> <span class="bp">=</span> <span class="o">(</span><span class="n">y</span> <span class="o">::</span> <span class="n">s</span><span class="o">)</span> <span class="bp">++</span> <span class="o">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">H3</span><span class="o">]</span><span class="bp">;</span> <span class="n">rfl</span>
+          <span class="n">Exists.intro</span> <span class="o">(</span><span class="n">y</span> <span class="o">::</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">Exists.intro</span> <span class="n">t</span> <span class="n">H4</span><span class="o">)))</span> 
 </code></pre></div>
 </div>
 
 <p>A short declaration can be written on a single line:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">nat</span>
-<span class="kd">lemma</span> <span class="n">succ_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">zero_lt_succ</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">Nat</span>
+<span class="kd">theorem</span> <span class="n">succ_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">zero_lt_succ</span>
 
-<span class="kd">def</span> <span class="n">square</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span>
+<span class="kd">def</span> <span class="n">square</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">Nat</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span>
 </code></pre></div>
 </div>
 
-<p>A &quot;have&quot; / &quot;from&quot; pair can be put on the same line.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="n">subst</span> <span class="o">(</span><span class="n">ne_symm</span> <span class="o">(</span><span class="n">succ_ne_zero</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">symm</span> <span class="n">H</span><span class="o">),</span>
-<span class="o">[</span><span class="bp">...</span><span class="o">]</span>
+<p>A <code>have</code> can be put on a single line when the justification is short.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">h</span>
+  <span class="bp">...</span>
 </code></pre></div>
 </div>
 
-<p>You can also put it on the next line, if the justification is long.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span>
-  <span class="k">from</span> <span class="n">subst</span> <span class="o">(</span><span class="n">ne_symm</span> <span class="o">(</span><span class="n">succ_ne_zero</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">symm</span> <span class="n">H</span><span class="o">),</span>
-<span class="o">[</span><span class="bp">...</span><span class="o">]</span>
+<p>When the justification is too long, you should put it on the next line,
+indented by an additional two spaces.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">k</span> <span class="o">:=</span>
+    <span class="n">ne_of_lt</span> <span class="n">h</span>
+  <span class="bp">...</span>
 </code></pre></div>
 </div>
 
-<p>If the justification takes more than a single line, keep the &quot;from&quot; on the same
-line as the &quot;have&quot;, and then begin the justification indented on the next line.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">have</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span>
-  <span class="n">not_intro</span>
-    <span class="o">(</span><span class="k">assume</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span>
-      <span class="k">have</span> <span class="n">H5</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="n">trans</span> <span class="o">(</span><span class="n">symm</span> <span class="n">H</span><span class="o">)</span> <span class="n">H4</span><span class="o">,</span>
-      <span class="k">have</span> <span class="n">H6</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="n">succ_inj</span> <span class="n">H5</span><span class="o">,</span>
-      <span class="n">absurd</span> <span class="n">H6</span> <span class="n">H2</span><span class="o">)))),</span>
-<span class="o">[</span><span class="bp">...</span><span class="o">]</span>
+<p>When the justification of the <code>have</code> uses tactic mode, the <code>by</code> should
+be placed on the same line, regardless of whether the justification
+spans multiple lines.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">k</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">apply</span> <span class="n">ne_of_lt</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
+  <span class="bp">...</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">k</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">apply</span> <span class="n">ne_of_lt</span>
+    <span class="n">exact</span> <span class="n">h</span>
+  <span class="bp">...</span>
 </code></pre></div>
 </div>
 
 <p>When the arguments themselves are long enough to require line breaks, use
 an additional indent for every line after the first, as in the following
 example:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span> <span class="n">nat</span> <span class="n">eq</span> <span class="n">algebra</span>
-<span class="kd">theorem</span> <span class="n">add_right_inj</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
-<span class="n">nat.rec_on</span> <span class="n">n</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">k</span><span class="o">,</span>
-    <span class="k">calc</span>
-        <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:</span> <span class="n">eq.symm</span> <span class="o">(</span><span class="n">zero_add</span> <span class="n">m</span><span class="o">)</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="n">H</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">k</span>     <span class="o">:</span> <span class="n">zero_add</span> <span class="n">_</span><span class="o">)</span>
-  <span class="o">(</span><span class="k">assume</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">IH</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">),</span>
-    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">),</span> <span class="k">from</span>
-      <span class="k">calc</span>
-        <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>   <span class="o">:</span> <span class="n">eq.symm</span> <span class="o">(</span><span class="n">succ_add</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
-                 <span class="bp">...</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span>   <span class="o">:</span> <span class="n">H</span>
-                 <span class="bp">...</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="n">succ_add</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
-    <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="n">succ.inj</span> <span class="n">H2</span><span class="o">,</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Data.Nat.Basic</span>
+
+<span class="kd">theorem</span> <span class="n">Nat.add_right_inj</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="n">Nat.recOn</span> <span class="n">n</span>
+  <span class="o">(</span><span class="k">fun</span> <span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">↦</span> <span class="k">calc</span>
+    <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">Eq.symm</span> <span class="o">(</span><span class="n">zero_add</span> <span class="n">m</span><span class="o">)</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">H</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">k</span>     <span class="o">:=</span> <span class="n">zero_add</span> <span class="n">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">IH</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">↦</span>
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="k">calc</span>
+      <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span>   <span class="o">:=</span> <span class="n">Eq.symm</span> <span class="o">(</span><span class="n">succ_add</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+      <span class="n">_</span>            <span class="bp">=</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span>   <span class="o">:=</span> <span class="n">H</span>
+      <span class="n">_</span>            <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ_add</span> <span class="n">n</span> <span class="n">k</span>
+    <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">succ.inj</span> <span class="n">H2</span>
     <span class="n">IH</span> <span class="n">H3</span><span class="o">)</span>
 </code></pre></div>
 </div>
 
-<p>In a class or structure definition, we do not indent fields, as in:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span> <span class="n">principal_seg</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">r</span> <span class="bp">≼</span><span class="n">o</span> <span class="n">s</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">top</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
-<span class="o">(</span><span class="n">down</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">s</span> <span class="n">b</span> <span class="n">top</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">to_order_embedding</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+<p>In a class or structure definition, fields are indented 2 spaces, and moreover
+each field should have a docstring, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span> <span class="n">PrincipalSeg</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">r</span> <span class="bp">↪</span><span class="n">r</span> <span class="n">s</span> <span class="n">where</span>
+  <span class="sd">/-- The supremum of the principal segment -/</span>
+  <span class="n">top</span> <span class="o">:</span> <span class="n">β</span>
+  <span class="sd">/-- The image of the order embedding is the set of elements `b` such that `s b top` -/</span>
+  <span class="n">down&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span><span class="o">,</span> <span class="n">s</span> <span class="n">b</span> <span class="n">top</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">toRelEmbedding</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
 
-<span class="kd">class</span> <span class="n">semimodule</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">R</span><span class="o">]</span>
-  <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">M</span><span class="o">]</span> <span class="kd">extends</span> <span class="n">distrib_mul_action</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">add_smul</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">s</span> <span class="bp">•</span> <span class="n">x</span><span class="o">)</span>
-<span class="o">(</span><span class="n">zero_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="kd">class</span> <span class="n">Module</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">Semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">AddCommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="kd">extends</span>
+    <span class="n">DistribMulAction</span> <span class="n">R</span> <span class="n">M</span> <span class="n">where</span>
+  <span class="sd">/-- Scalar multiplication distributes over addition from the right. -/</span>
+  <span class="kn">protected</span> <span class="n">add_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">s</span> <span class="bp">•</span> <span class="n">x</span>
+  <span class="sd">/-- Scalar multiplication by zero gives zero. -/</span>
+  <span class="kn">protected</span> <span class="n">zero_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span>
 </code></pre></div>
 </div>
 
 <p>When using a constructor taking several arguments in a definition,
 arguments line up, as in:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">sub_eq_zero_iff_le</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ordinal</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span>
-<span class="o">⟨</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="n">using</span> <span class="n">le_add_sub</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
- <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="bp">←</span> <span class="n">le_zero</span><span class="o">,</span> <span class="n">sub_le</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]⟩</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">Ordinal.sub_eq_zero_iff_le</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Ordinal</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="o">⟨</span><span class="k">fun</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span> <span class="n">using</span> <span class="n">le_add_sub</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+   <span class="k">fun</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="bp">←</span> <span class="n">Ordinal.le_zero</span><span class="o">,</span> <span class="n">sub_le</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]⟩</span>
 </code></pre></div>
 </div>
 
-<p>When defining instances, opening and closing braces are not alone on
-their line. The content is indented by two spaces and <code>:=</code> line up, as
-in:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">instance</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
-<span class="o">{</span> <span class="n">le</span>          <span class="o">:=</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">s</span><span class="o">,</span> <span class="n">t.is_open</span> <span class="bp">≤</span> <span class="n">s.is_open</span><span class="o">,</span>
-  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span> <span class="n">s</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">topological_space_eq</span> <span class="bp">$</span> <span class="n">le_antisymm</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span>
-  <span class="n">le_refl</span>     <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span><span class="o">,</span> <span class="n">le_refl</span> <span class="n">t.is_open</span><span class="o">,</span>
-  <span class="n">le_trans</span>    <span class="o">:=</span> <span class="k">assume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="bp">@</span><span class="n">le_trans</span> <span class="n">_</span> <span class="n">_</span> <span class="n">a.is_open</span> <span class="n">b.is_open</span> <span class="n">c.is_open</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">}</span>
+<p>When providing terms of structures or instances of classes, the <code>where</code>
+syntax should be used to avoid the need for enclosing braces, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">instance</span> <span class="n">orderBot</span> <span class="o">:</span> <span class="n">OrderBot</span> <span class="n">ℕ</span> <span class="n">where</span>
+  <span class="n">bot</span> <span class="o">:=</span> <span class="mi">0</span>
+  <span class="n">bot_le</span> <span class="o">:=</span> <span class="n">Nat.zero_le</span>
 </code></pre></div>
 </div>
 
@@ -308,168 +308,199 @@ if the proof starts by introducing these variables. For instance:</p>
 </div>
 
 <p>is preferred over</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="kd">by</span> <span class="n">linarith</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">h</span> <span class="bp">↦</span> <span class="kd">by</span> <span class="n">linarith</span>
 </code></pre></div>
 </div>
 
 <p>and</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">dec_trivial</span> <span class="n">__Nat.zero_le</span> <span class="n">n</span>
 </code></pre></div>
 </div>
 
 <p>is preferred over</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">dec_trivial</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">Nat.zero_le</span>
 </code></pre></div>
 </div>
 
 <h3 id="binders" class="markdown-heading">Binders <a class="hover-link" href="#binders">#</a></h3>
 <p>Use a space after binders:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
-<span class="bp">λ</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">exists.intro</span> <span class="n">x</span> <span class="n">rfl</span>
+  <span class="k">fun</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↦</span> <span class="n">Exists.intro</span> <span class="n">x</span> <span class="n">rfl</span>
 </code></pre></div>
 </div>
 
+<h3 id="the-anonymous-function-arrow" class="markdown-heading">The anonymous function arrow <a class="hover-link" href="#the-anonymous-function-arrow">#</a></h3>
+<p>Lean has several nice syntax options for declaring anonymous functions. For very simple
+functions, one can use the centered dot as the function argument, as in <code>(· ^ 2)</code> to
+represent the squaring function. However, sometimes it is necessary to refer to the
+arguments by name (e.g., if they appear in multiple places in the function body). The
+Lean default for this is <code>fun x =&gt; x * x</code>, but the <code>↦</code> arrow (inserted with <code>\mapsto</code>)
+is also valid. In mathlib the pretty printer displays <code>↦</code>, and we slightly prefer this
+in the source as well.  The lambda notation <code>λ x ↦ x * x</code>, while syntactically valid,
+is discouraged in favor of the <code>fun</code> keyword.</p>
 <h3 id="calculations" class="markdown-heading">Calculations <a class="hover-link" href="#calculations">#</a></h3>
-<p>There is some flexibility in how you write calculational proofs. In
-general, it looks nice when the comparisons and justifications line up
-neatly:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">data.list</span>
-<span class="kn">open</span> <span class="n">list</span>
-<span class="kd">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<p>There is some flexibility in how you write calculational proofs, although there are some
+rules enforced by the syntax requirements of <code>calc</code> itself. However, there are some general
+guidelines.</p>
+<p>As with <code>by</code>, the <code>calc</code> keyword should be placed on the line <em>prior</em> to the start of the
+calculation, with the calculation indented. Whichever relations are involved (e.g.,
+<code>=</code> or <code>≤</code>) should be aligned from one line to the next. The underscores <code>_</code> used as
+placeholders for terms indicating the continuation of the calculation should be left-justified.</p>
+<p>As for the justifications, it is not necessary to align the <code>:=</code> symbols, but it can be
+nice if the expressions are short enough. The terms on either side of the first relation can either
+go on one line or separate lines, which may be decided by the size of the expressions.</p>
+<p>An example of adequate style which can more easily accommodate longer expressions is:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Init.Data.List.Basic</span>
 
-<span class="kd">theorem</span> <span class="n">reverse_reverse</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">),</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l</span>
-<span class="bp">|</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">rfl</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="k">calc</span>
-    <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">))</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">concat</span> <span class="n">a</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">))</span>     <span class="o">:</span> <span class="n">rfl</span>
-                           <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>         <span class="o">:</span> <span class="n">concat_eq_append</span>
-                           <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="o">:</span> <span class="n">reverse_append</span>
-                           <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span>                   <span class="o">:</span> <span class="n">reverse_reverse</span>
-                           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">::</span> <span class="n">l</span>                             <span class="o">:</span> <span class="n">rfl</span>
+<span class="kn">open</span> <span class="n">List</span>
+
+<span class="kd">theorem</span> <span class="n">reverse_reverse</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">List</span> <span class="n">α</span><span class="o">),</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="bp">=&gt;</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=&gt;</span> <span class="k">calc</span>
+    <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">))</span>
+      <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">reverse_cons</span><span class="o">]</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">reverse_append</span> <span class="n">_</span> <span class="n">_</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">reverse_reverse</span> <span class="n">l</span><span class="o">]</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">::</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">rfl</span>
 </code></pre></div>
 </div>
 
-<p>To be more compact, for example, you may do this only after the first line:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">data.list</span>
-<span class="kn">open</span> <span class="n">list</span>
-<span class="kd">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<p>However, because the expressions and proofs are relatively short, the following style
+might be preferable in this situation.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Init.Data.List.Basic</span>
 
-<span class="kd">theorem</span> <span class="n">reverse_reverse</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">),</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l</span>
-<span class="bp">|</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">rfl</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="k">calc</span>
-    <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">))</span>
-          <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">concat</span> <span class="n">a</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">))</span>     <span class="o">:</span> <span class="n">rfl</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>         <span class="o">:</span> <span class="n">concat_eq_append</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="o">:</span> <span class="n">reverse_append</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span>                   <span class="o">:</span> <span class="n">reverse_reverse</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">::</span> <span class="n">l</span>                             <span class="o">:</span> <span class="n">rfl</span>
+<span class="kn">open</span> <span class="n">List</span>
+
+<span class="kd">theorem</span> <span class="n">reverse_reverse</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">List</span> <span class="n">α</span><span class="o">),</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="bp">=&gt;</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=&gt;</span> <span class="k">calc</span>
+    <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">l</span><span class="o">))</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>         <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">reverse_cons</span><span class="o">]</span>
+    <span class="n">_</span>                          <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">reverse_append</span> <span class="n">_</span> <span class="n">_</span>
+    <span class="n">_</span>                          <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span>                   <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">reverse_reverse</span> <span class="n">l</span><span class="o">]</span>
+    <span class="n">_</span>                          <span class="bp">=</span> <span class="n">a</span> <span class="o">::</span> <span class="n">l</span>                             <span class="o">:=</span> <span class="n">rfl</span>
 </code></pre></div>
 </div>
 
 <h3 id="tactic-mode" class="markdown-heading">Tactic mode <a class="hover-link" href="#tactic-mode">#</a></h3>
-<p>When opening a tactic block, <code>begin</code> is not indented but everything
-inside is indented, as in:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">div_self</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">/</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
-<span class="kd">begin</span>
-  <span class="n">intro</span> <span class="n">hna</span><span class="o">,</span>
-  <span class="k">have</span> <span class="n">wit_aa</span> <span class="o">:=</span> <span class="n">quotient_mul_add_remainder_eq</span> <span class="n">a</span> <span class="n">a</span><span class="o">,</span>
-  <span class="k">have</span> <span class="n">a_mod_a</span> <span class="o">:=</span> <span class="n">mod_self</span> <span class="n">a</span><span class="o">,</span>
-  <span class="n">dsimp</span> <span class="o">[(</span><span class="bp">%</span><span class="o">)]</span> <span class="n">at</span> <span class="n">a_mod_a</span><span class="o">,</span>
-  <span class="n">simp</span> <span class="o">[</span><span class="n">a_mod_a</span><span class="o">]</span> <span class="n">at</span> <span class="n">wit_aa</span><span class="o">,</span>
-  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">one_mul</span> <span class="n">a</span><span class="o">,</span>
-  <span class="n">conv</span> <span class="n">at</span> <span class="n">wit_aa</span> <span class="o">{</span><span class="n">for</span> <span class="n">a</span> <span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">{</span><span class="n">rw</span> <span class="bp">←</span><span class="n">h1</span><span class="o">}},</span>
-  <span class="n">exact</span> <span class="n">eq_of_mul_eq_mul_right</span> <span class="n">hna</span> <span class="n">wit_aa</span>
-<span class="kd">end</span>
+<p>As we have already mentioned, when opening a tactic block,
+<code>by</code> is placed at the end of the line
+<em>preceding</em> the start of the tactic block, but not on its own line
+Everything within the tactic block is indented, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">continuous_uncurry_of_discreteTopology</span> <span class="o">[</span><span class="n">DiscreteTopology</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">Continuous</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="o">(</span><span class="n">uncurry</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">continuous_iff_continuousAt.2</span>
+  <span class="n">rintro</span> <span class="o">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">x</span><span class="o">⟩</span>
+  <span class="n">change</span> <span class="n">map</span> <span class="n">_</span> <span class="n">_</span> <span class="bp">≤</span> <span class="n">_</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nhds_prod_eq</span><span class="o">,</span> <span class="n">nhds_discrete</span><span class="o">,</span> <span class="n">Filter.map_pure_prod</span><span class="o">]</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">hf</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">continuousAt</span>
 </code></pre></div>
 </div>
 
-<p>A more complicated example, mixing term mode and tactic mode:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">nhds_supr</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Sort</span> <span class="n">w</span><span class="o">}</span> <span class="o">{</span><span class="n">t</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
-  <span class="bp">@</span><span class="n">nhds</span> <span class="n">α</span> <span class="o">(</span><span class="n">supr</span> <span class="n">t</span><span class="o">)</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">⨅</span><span class="n">i</span><span class="o">,</span> <span class="bp">@</span><span class="n">nhds</span> <span class="n">α</span> <span class="o">(</span><span class="n">t</span> <span class="n">i</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
-<span class="n">le_antisymm</span>
-  <span class="o">(</span><span class="n">le_infi</span> <span class="bp">$</span> <span class="k">assume</span> <span class="n">i</span><span class="o">,</span> <span class="n">nhds_mono</span> <span class="bp">$</span> <span class="n">le_supr</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span>
-  <span class="kd">begin</span>
-    <span class="n">rw</span> <span class="o">[</span><span class="n">supr_eq_generate_from</span><span class="o">,</span> <span class="n">nhds_generate_from</span><span class="o">],</span>
-    <span class="n">exact</span> <span class="o">(</span><span class="n">le_infi</span> <span class="bp">$</span> <span class="k">assume</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_infi</span> <span class="bp">$</span> <span class="k">assume</span> <span class="o">⟨</span><span class="n">hs</span><span class="o">,</span> <span class="n">hi</span><span class="o">⟩,</span>
-      <span class="kd">begin</span>
-        <span class="n">simp</span> <span class="n">at</span> <span class="n">hi</span><span class="o">,</span> <span class="n">cases</span> <span class="n">hi</span> <span class="k">with</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
-        <span class="n">exact</span> <span class="o">(</span><span class="n">infi_le_of_le</span> <span class="n">i</span> <span class="bp">$</span> <span class="n">le_principal_iff.mpr</span> <span class="bp">$</span> <span class="bp">@</span><span class="n">mem_nhds_sets</span> <span class="n">α</span> <span class="o">(</span><span class="n">t</span> <span class="n">i</span><span class="o">)</span> <span class="n">_</span> <span class="n">_</span> <span class="n">hi</span> <span class="n">hs</span><span class="o">)</span>
-      <span class="kd">end</span><span class="o">)</span>
-  <span class="kd">end</span>
+<p>One can mix term mode and tactic mode, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span> <span class="n">Units.isUnit_units_mul</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">M</span><span class="bp">ˣ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">IsUnit</span> <span class="o">(</span><span class="bp">↑</span><span class="n">u</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">IsUnit</span> <span class="n">a</span> <span class="o">:=</span>
+  <span class="n">Iff.intro</span>
+    <span class="o">(</span><span class="k">fun</span> <span class="o">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">hv</span><span class="o">⟩</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="n">IsUnit</span> <span class="o">(</span><span class="bp">↑</span><span class="n">u</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="bp">↑</span><span class="n">u</span> <span class="bp">*</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">exists</span> <span class="n">u</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">v</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="bp">←</span> <span class="n">hv</span><span class="o">,</span> <span class="n">Units.val_mul</span><span class="o">]</span>
+      <span class="n">rwa</span> <span class="o">[</span><span class="bp">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">Units.inv_mul</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">)</span>
+    <span class="n">u.isUnit.mul</span>
 </code></pre></div>
 </div>
 
-<p>When new goals arise as side conditions or steps, they are enclosed in
-focussing braces and indented (except possibly the last goal, if its proof
-is much longer than the proofs of the other goals). Braces are not alone on their line.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">mem_nhds_of_is_topological_basis</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)}</span>
-  <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">is_topological_basis</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">∈</span> <span class="o">(</span><span class="bp">𝓝</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">t</span> <span class="bp">∈</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">∈</span> <span class="n">t</span> <span class="bp">∧</span> <span class="n">t</span> <span class="bp">⊆</span> <span class="n">s</span> <span class="o">:=</span>
-<span class="kd">begin</span>
-  <span class="n">rw</span> <span class="o">[</span><span class="n">hb.2.2</span><span class="o">,</span> <span class="n">nhds_generate_from</span><span class="o">,</span> <span class="n">infi_sets_eq&#39;</span><span class="o">],</span>
-  <span class="o">{</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">and_comm</span><span class="o">,</span> <span class="n">and.left_comm</span><span class="o">]</span> <span class="o">},</span>
-  <span class="o">{</span> <span class="n">exact</span> <span class="k">assume</span> <span class="n">s</span> <span class="o">⟨</span><span class="n">hs₁</span><span class="o">,</span> <span class="n">hs₂</span><span class="o">⟩</span> <span class="n">t</span> <span class="o">⟨</span><span class="n">ht₁</span><span class="o">,</span> <span class="n">ht₂</span><span class="o">⟩,</span>
-      <span class="k">have</span> <span class="n">a</span> <span class="bp">∈</span> <span class="n">s</span> <span class="bp">∩</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="o">⟨</span><span class="n">hs₁</span><span class="o">,</span> <span class="n">ht₁</span><span class="o">⟩,</span>
-      <span class="k">let</span> <span class="o">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu₁</span><span class="o">,</span> <span class="n">hu₂</span><span class="o">,</span> <span class="n">hu₃</span><span class="o">⟩</span> <span class="o">:=</span> <span class="n">hb.1</span> <span class="n">_</span> <span class="n">hs₂</span> <span class="n">_</span> <span class="n">ht₂</span> <span class="n">_</span> <span class="n">this</span> <span class="k">in</span>
-      <span class="o">⟨</span><span class="n">u</span><span class="o">,</span> <span class="o">⟨</span><span class="n">hu₂</span><span class="o">,</span> <span class="n">hu₁</span><span class="o">⟩,</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="n">using</span> <span class="n">hu₃</span><span class="o">⟩</span> <span class="o">},</span>
-  <span class="o">{</span> <span class="k">suffices</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∈</span> <span class="o">(</span><span class="bp">⋃₀</span> <span class="n">b</span><span class="o">),</span> <span class="o">{</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">and_comm</span><span class="o">]</span> <span class="o">},</span>
-    <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hb.2.1</span><span class="o">],</span> <span class="n">trivial</span> <span class="o">}</span> <span class="o">}</span>
-<span class="kd">end</span>
+<p>When new goals arise as side conditions or steps, they are indented and preceded by
+a focusing dot <code>·</code> (inserted as <code>\.</code>); the dot is not indented.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Group.Basic</span>
+
+<span class="kd">theorem</span> <span class="n">exists_npow_eq_one_of_zpow_eq_one&#39;</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">^</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">^</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">cases</span> <span class="n">n</span>
+  <span class="bp">·</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">Int.ofNat_eq_coe</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">zpow_ofNat</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span>
+    <span class="n">refine&#39;</span> <span class="o">⟨</span><span class="n">_</span><span class="o">,</span> <span class="n">Nat.pos_of_ne_zero</span> <span class="k">fun</span> <span class="n">n0</span> <span class="bp">↦</span> <span class="n">hn</span> <span class="bp">?</span><span class="n">_</span><span class="o">,</span> <span class="n">h</span><span class="o">⟩</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">n0</span><span class="o">]</span>
+    <span class="n">rfl</span>
+  <span class="bp">·</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zpow_negSucc</span><span class="o">,</span> <span class="n">inv_eq_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span>
+    <span class="n">refine&#39;</span> <span class="o">⟨</span><span class="n">_</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">Nat.succ_pos</span> <span class="n">_</span><span class="o">,</span> <span class="n">h</span><span class="o">⟩</span>
 </code></pre></div>
 </div>
 
-<p>The final step in a <code>begin ... end</code> block may be followed by comma,
-but there is no style rule requiring it.
-(Many authors prefer the comma, so that placing the cursor after it displays &quot;goals accomplished&quot;
-in the infoview, but others dislike it on the basis of the disconcerting grammar.)</p>
-<p>Often <code>t0; t1</code> is used to execute <code>t0</code> and then <code>t1</code> on all new goals. But <code>;</code> is not a <code>,</code> so
-either write the tactics in one line, or indent the following tacic.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">begin</span>
-  <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span>
+<p>Certain tactics, such as <code>refine</code>, can create <em>named</em> subgoals which
+be proven in whichever order is desired using <code>case</code>. This feature
+is also useful in aiding readability. However, it is not required to
+use this instead of the focusing dot (<code>·</code>).</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">↔</span> <span class="n">q</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">refine</span> <span class="o">⟨</span><span class="bp">?</span><span class="n">imp</span><span class="o">,</span> <span class="bp">?</span><span class="n">converse</span><span class="o">⟩</span>
+  <span class="n">case</span> <span class="n">converse</span> <span class="bp">=&gt;</span> <span class="n">exact</span> <span class="n">h₂</span>
+  <span class="n">case</span> <span class="n">imp</span> <span class="bp">=&gt;</span> <span class="n">exact</span> <span class="n">h₁</span>
+</code></pre></div>
+</div>
+
+<p>Often <code>t0 &lt;;&gt; t1</code> is used to execute <code>t0</code> and then <code>t1</code> on all new goals.
+Either write the tactics in one line, or indent the following tactic.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>  <span class="n">cases</span> <span class="n">x</span> <span class="bp">&lt;;&gt;</span>
     <span class="n">simp</span> <span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">]</span>
-<span class="kd">end</span>
 </code></pre></div>
 </div>
 
 <p>For single line tactic proofs (or short tactic proofs embedded in a term),
-it is preferable to use <code>by ...</code> rather than <code>begin ... end</code>.</p>
-<p>If you are using multiple tactics inside a <code>by ...</code> block, use braces
-<code>by { tac1, tac2 }</code> rather than abusing the <code>;</code> operator <code>by tac1; tac2</code>,
-which should only be used when multiple goals need to be processed by <code>tac2</code>.
-(This style rule is not yet followed in the older parts of mathlib.)</p>
+it is acceptable to use <code>by tac1; tac2; tac3</code> with semicolons instead of
+a new line with indentation.</p>
 <p>In general, you should put a single tactic invocation per line, unless you are
 closing a goal with a proof that fits entirely on a single line. Short sequences of
 tactics that correspond to a single mathematical idea can also be put on a single line,
-as in <code>cases bla, clear h</code> or <code>induction n, { simp }</code> or <code>rw [foo], simp_rw [bar]</code>.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">begin</span>
-  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
-  <span class="o">{</span> <span class="n">rw</span> <span class="n">h</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hzero</span> <span class="n">ha</span> <span class="o">},</span>
-  <span class="o">{</span> <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
-    <span class="k">have</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">...</span><span class="o">,</span> <span class="k">from</span> <span class="n">H</span> <span class="n">ha</span><span class="o">,</span>
-    <span class="n">simp_rw</span> <span class="o">[</span><span class="n">h&#39;</span><span class="o">,</span> <span class="n">hb</span><span class="o">],</span>
-    <span class="bp">...</span> <span class="o">}</span>
-<span class="kd">end</span>
+separated by semicolons as in <code>cases bla; clear h</code> or <code>induction n; simp</code> or
+<code>rw [foo]; simp_rw [bar]</code>, but even in these scenarios, newlines are preferred.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span>
+  <span class="bp">·</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">hzero</span> <span class="n">ha</span>
+  <span class="bp">·</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+    <span class="k">have</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">ha</span>
+    <span class="n">simp_rw</span> <span class="o">[</span><span class="n">h&#39;</span><span class="o">,</span> <span class="n">hb</span><span class="o">]</span>
+    <span class="bp">...</span> 
 </code></pre></div>
 </div>
 
-<p>Very short goals can be closed right away using <code>swap</code> or <code>work_on_goal</code> if needed, to avoid
+<p>Very short goals can be closed right away using <code>swap</code> or <code>pick_goal</code> if needed, to avoid
 additional indentation in the rest of the proof.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">begin</span>
-  <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="n">swap</span><span class="o">,</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">h&#39;</span> <span class="o">},</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">:</span> <span class="bp">...</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+  <span class="n">swap</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h&#39;</span>
   <span class="bp">...</span>
-<span class="kd">end</span>
 </code></pre></div>
 </div>
 
 <p>We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.</p>
+<h3 id="whitespace-and-delimiters" class="markdown-heading">Whitespace and delimiters <a class="hover-link" href="#whitespace-and-delimiters">#</a></h3>
+<p>Lean is whitespace-sensitive, and in general we opt for a style which avoids
+delimiting code. For instance, when writing tactics, it is possible to write
+them as <code>tac1; tac2; tac3</code>, separated by <code>;</code>, in order to override the default
+whitespace sensitivity. However, as mentioned above, we generally try to avoid
+this except in a few special cases.</p>
+<p>Similarly, sometimes parentheses can be avoided by judicious use of the <code>&lt;|</code>
+operator (or its cousin <code>|&gt;</code>). A common example is when providing a term which
+is a function applied to multiple arguments whose last argument is a proof in
+tactic mode, especially one that spans multiple lines. In that case, it is
+natural to use <code>&lt;| by ...</code> instead of <code>(by ...)</code>, as in:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hxy</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">ε</span> <span class="bp">≤</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="n">le_antisymm</span> <span class="n">hxy</span> <span class="bp">&lt;|</span> <span class="n">le_of_forall_pos_le_add</span> <span class="bp">&lt;|</span> <span class="kd">by</span>
+    <span class="n">intro</span> <span class="n">ε</span> <span class="n">hε</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">ε</span> <span class="n">hε</span>
+    <span class="n">linarith</span>  
+</code></pre></div>
+</div>
+
 <h3 id="normal-forms" class="markdown-heading">Normal forms <a class="hover-link" href="#normal-forms">#</a></h3>
 <p>Some statements are equivalent. For instance, there are several equivalent
 ways to require that a subset <code>s</code> of a type is nonempty. For another example, given
-<code>a : α</code>, the corresponding element of <code>option α</code> can be equivalently written
-as <code>some a</code> or <code>(a : option α)</code>. In general, we try to settle
+<code>a : α</code>, the corresponding element of <code>Option α</code> can be equivalently written
+as <code>Some a</code> or <code>(a : Option α)</code>. In general, we try to settle
 on one standard form, called the normal form, and use it both in statements and
-conclusions of theorems. In the above examples, this would be <code>s.nonempty</code> (which
-gives access to dot notation) and <code>(a : option α)</code>. Often, simp lemmas will be
+conclusions of theorems. In the above examples, this would be <code>s.Nonempty</code> (which
+gives access to dot notation) and <code>(a : Option α)</code>. Often, simp lemmas will be
 registered to convert the other equivalent forms to the normal form.</p>
 <p>There is a special case to this rule. In types with a bottom element, it is equivalent
 to require <code>hlt : ⊥ &lt; x</code> or <code>hne : x ≠ ⊥</code>, and it is not clear which one would
@@ -492,7 +523,7 @@ and examples.</p>
 <hr />
 <p>Copyright (c) 2016 Jeremy Avigad. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad</p>
+Authors: Jeremy Avigad, Jireh Loreaux</p>
 
   </main>
 
