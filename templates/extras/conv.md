@@ -140,7 +140,7 @@ conversion mode using the `for` command. The following performs rewriting
 only for the second and third occurrences of `b * c`:
 
 ```lean
-example (a b c : ℕ) : (b * c) * (b * c) * (b * c) = (b * c) * (c * b) * (c * b):=
+example (a b c : ℕ) : (b * c) * (b * c) * (b * c) = (b * c) * (c * b)  * (c * b):=
 by conv { for (b * c) [2, 3] { rw mul_comm } }
 ```
 
