@@ -67,7 +67,7 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
 
 * Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
 
-  * Some Windows users have reported an error like this:
+  * Some Windows users have reported an error like this when running `lake exe cache get`:
     ```
       curl: (35) schannel: next InitializeSecurityContext failed: Unknown error (0x80092012) - The revocation function was unable to check revocation for the certificate
     ```
