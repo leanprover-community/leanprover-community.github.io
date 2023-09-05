@@ -67,12 +67,6 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
 
 * Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
 
-  * Some Windows users have reported an error like this:
-    ```
-      curl: (35) schannel: next InitializeSecurityContext failed: Unknown error (0x80092012) - The revocation function was unable to check revocation for the certificate
-    ```
-    If you see this error, you likely have an antivirus program that is unhappy that `lake` downloads the compiled files from mathlib. You can temporarily disable your antivirus program, or tell it to ignore/allow the operation of `lean.exe`. After you do this, run `lake exe cache get!`. The exclamation mark forces `lake` to re-download the cache files it failed to download before.
-
 * Launch VS Code, either through your application menu or by typing
   `code .`.
 
