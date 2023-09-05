@@ -86,7 +86,7 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
   `New file`, and type a filename to create a file there.
 
 If you want to make sure everything is working, you can start by
-creating, say `my_project/MyProject/test.lean` containing:
+creating, say `my_project/MyProject/Test.lean` containing:
 ```lean
 import Mathlib.Topology.Basic
 
