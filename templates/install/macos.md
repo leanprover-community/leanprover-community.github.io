@@ -37,7 +37,7 @@ The following instructions are adapted from [Fedor Pavutnitskiy](https://leanpro
 
 2. We will install a second, separate x86 installation of Homebrew, which is easiest done by running a shell entirely using Rosetta 2. Do so by running `arch -x86_64 zsh`. The remainder of the commands below should be run from within this `x86`-running window, though once the steps have been completed, the installed tools will work in any future shell.
 
-3. Install a second installation of Homebrew for `x86` with `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
+3. Install a second installation of Homebrew for `x86` with `arch -x86_64 zsh && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`. It will automatically install itself into a second location (`/usr/local`, rather than `/opt/`).
 
 4. Follow the same steps described in [Controlled Installation for macOS](https://leanprover-community.github.io/install/macos_details.html) using the `brew` you just installed:
 
