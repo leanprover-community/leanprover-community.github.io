@@ -479,7 +479,7 @@ as `>`).
 
 A common example of the usage of `|>` occurs with dot notation when the term
 preceding the `.` is a function applied to some arguments. For instance,
-`((foo a).bar b).baz` can be rewritten as `foo x |>.bar y |>.baz`
+`((foo a).bar b).baz` can be rewritten as `foo a |>.bar b |>.baz`
 
 A common example of the usage of `<|` is when the user provides a term which
 is a function applied to multiple arguments whose last argument is a proof in 
