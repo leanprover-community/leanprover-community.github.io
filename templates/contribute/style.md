@@ -302,7 +302,7 @@ example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
   fun (α : Type) (x : α) ↦ Exists.intro x rfl
 ```
 
-### The anonymous function arrow
+### Anonymous functions
 
 Lean has several nice syntax options for declaring anonymous functions. For very simple
 functions, one can use the centered dot as the function argument, as in `(· ^ 2)` to 
@@ -311,7 +311,7 @@ arguments by name (e.g., if they appear in multiple places in the function body)
 Lean default for this is `fun x => x * x`, but the `↦` arrow (inserted with `\mapsto`)
 is also valid. In mathlib the pretty printer displays `↦`, and we slightly prefer this
 in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
-is discouraged in favor of the `fun` keyword.
+is disallowed in mathlib in favor of the `fun` keyword.
 
 ### Calculations
 
@@ -470,7 +470,18 @@ whitespace sensitivity. However, as mentioned above, we generally try to avoid
 this except in a few special cases.
 
 Similarly, sometimes parentheses can be avoided by judicious use of the `<|`
-operator (or its cousin `|>`). A common example is when providing a term which
+operator (or its cousin `|>`). Note: while `$` is a synonym for `<|`, its
+use in mathlib is disallowed in favor of `<|` for consistency as well as 
+because of the symmetry with `|>`. These operators have the effect of 
+parenthesizing everything to the right of `<|` (note that `(` is curved the 
+same direction as `<`) or to the left of `|>` (and `)` curves the same way
+as `>`).
+
+A common example of the usage of `|>` occurs with dot notation when the term
+preceding the `.` is a function applied to some arguments. For instance,
+`((foo a).bar b).baz` can be rewritten as `foo a |>.bar b |>.baz`
+
+A common example of the usage of `<|` is when the user provides a term which
 is a function applied to multiple arguments whose last argument is a proof in 
 tactic mode, especially one that spans multiple lines. In that case, it is
 natural to use `<| by ...` instead of `(by ...)`, as in:
