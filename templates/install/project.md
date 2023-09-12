@@ -72,7 +72,7 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
       curl: (35) schannel: next InitializeSecurityContext failed: Unknown error (0x80092012) - The revocation function was unable to check revocation for the certificate
     ```
     If you see this error, you likely have an antivirus program that scans each downloaded file, which results in errors. Please disable your antivirus program and then run
-    `lake exe cache get!`. The exclamation mark forces `lake` to re-download the cache files it failed to download before.before running this command. (If you are uncomfortable disabling your antivirus, try to follow [these instructions](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/lake.20exe.20cache.20get.20errors/near/389019448) and then run `lake exe cache get!`).
+    `lake exe cache get!`. The exclamation mark forces `lake` to re-download the cache files it failed to download before running this command. (If you are uncomfortable disabling your antivirus, try to follow [these instructions](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/lake.20exe.20cache.20get.20errors/near/389019448) and then run `lake exe cache get!`).
     You can turn on your antivirus program on afterwards. However, some users also reported that the antivirus programs significantly slow down Lean during normal usage. If Lean is slower than what is expected, either turn off your antivirus program or tell it to ignore/allow the operation of `lean.exe`.
 
 * Launch VS Code, either through your application menu or by typing
