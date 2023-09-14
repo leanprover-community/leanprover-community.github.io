@@ -170,7 +170,7 @@ with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
 @dataclass
 class HeaderDataEntry:
     @dataclass
-    class InfoEntry
+    class InfoEntry:
         sourceLink: str
         name: str
         line: int
