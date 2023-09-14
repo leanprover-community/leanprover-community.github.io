@@ -166,24 +166,25 @@ urllib.request.urlretrieve(
 )
 with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
     header_data = json.load(h_file)
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/declarations/declaration-data.bmp',
-    DATA/'declaration-data.json'
-)
-with (DATA/'declaration-data.json').open('r', encoding='utf-8') as h_file:
-    declaration_data = json.load(h_file)
 
 @dataclass
-class DeclarationDataEntry:
-    sourceLink: str
-    name: str
-    line: int
-    kind: str
-    docLink: str
-    doc: str
+class HeaderDataEntry:
+    @dataclass
+    class InfoEntry
+        sourceLink: str
+        name: str
+        line: int
+        kind: str
+        docLink: str
+        doc: str
+    info: InfoEntry
+    header: str
 
 declarations = {
-    k: DeclarationDataEntry(**d) for k, d in declaration_data['declarations'].items()
+    k: HeaderDataEntry(
+        info=HeaderDataEntry.InfoEntry(**d['info']),
+        header=d['header'],
+    ) for k, d in header_data.items()
 }
 
 num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
@@ -209,7 +210,7 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                 doc_decls.append(DocDecl(
                     name=decl,
                     # TODO: add missing `/mathlib4_docs/` prefix to links within this header
-                    decl_header_html = header_data.get(decl, ''),
+                    decl_header_html = decl_info.header,
                     # note: the `.bmp` data files use doc-relative links
                     docs_link='/mathlib4_docs/' + decl_info.docLink,
                     src_link=decl_info.sourceLink))
