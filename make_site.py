@@ -187,7 +187,7 @@ declarations = {
     ) for k, d in header_data.items()
 }
 
-num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
+num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
 urllib.request.urlretrieve(
@@ -212,8 +212,8 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     # TODO: add missing `/mathlib4_docs/` prefix to links within this header
                     decl_header_html = decl_info.header,
                     # note: the `.bmp` data files use doc-relative links
-                    docs_link='/mathlib4_docs/' + decl_info.docLink,
-                    src_link=decl_info.sourceLink))
+                    docs_link='/mathlib4_docs/' + decl_info.info.docLink,
+                    src_link=decl_info.info.sourceLink))
             h.doc_decls = doc_decls
         else:
             h.doc_decls = []
@@ -227,7 +227,7 @@ def replace_link(name, id):
     else:
         try:
             # note: the `.bmp` data files use doc-relative links
-            return '/mathlib4_docs/' + declarations[name].docLink
+            return '/mathlib4_docs/' + declarations[name].info.docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
