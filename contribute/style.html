@@ -329,7 +329,7 @@ if the proof starts by introducing these variables. For instance:</p>
 </code></pre></div>
 </div>
 
-<h3 id="the-anonymous-function-arrow" class="markdown-heading">The anonymous function arrow <a class="hover-link" href="#the-anonymous-function-arrow">#</a></h3>
+<h3 id="anonymous-functions" class="markdown-heading">Anonymous functions <a class="hover-link" href="#anonymous-functions">#</a></h3>
 <p>Lean has several nice syntax options for declaring anonymous functions. For very simple
 functions, one can use the centered dot as the function argument, as in <code>(· ^ 2)</code> to
 represent the squaring function. However, sometimes it is necessary to refer to the
@@ -337,7 +337,7 @@ arguments by name (e.g., if they appear in multiple places in the function body)
 Lean default for this is <code>fun x =&gt; x * x</code>, but the <code>↦</code> arrow (inserted with <code>\mapsto</code>)
 is also valid. In mathlib the pretty printer displays <code>↦</code>, and we slightly prefer this
 in the source as well.  The lambda notation <code>λ x ↦ x * x</code>, while syntactically valid,
-is discouraged in favor of the <code>fun</code> keyword.</p>
+is disallowed in mathlib in favor of the <code>fun</code> keyword.</p>
 <h3 id="calculations" class="markdown-heading">Calculations <a class="hover-link" href="#calculations">#</a></h3>
 <p>There is some flexibility in how you write calculational proofs, although there are some
 rules enforced by the syntax requirements of <code>calc</code> itself. However, there are some general
@@ -479,7 +479,16 @@ them as <code>tac1; tac2; tac3</code>, separated by <code>;</code>, in order to 
 whitespace sensitivity. However, as mentioned above, we generally try to avoid
 this except in a few special cases.</p>
 <p>Similarly, sometimes parentheses can be avoided by judicious use of the <code>&lt;|</code>
-operator (or its cousin <code>|&gt;</code>). A common example is when providing a term which
+operator (or its cousin <code>|&gt;</code>). Note: while <code>$</code> is a synonym for <code>&lt;|</code>, its
+use in mathlib is disallowed in favor of <code>&lt;|</code> for consistency as well as
+because of the symmetry with <code>|&gt;</code>. These operators have the effect of
+parenthesizing everything to the right of <code>&lt;|</code> (note that <code>(</code> is curved the
+same direction as <code>&lt;</code>) or to the left of <code>|&gt;</code> (and <code>)</code> curves the same way
+as <code>&gt;</code>).</p>
+<p>A common example of the usage of <code>|&gt;</code> occurs with dot notation when the term
+preceding the <code>.</code> is a function applied to some arguments. For instance,
+<code>((foo a).bar b).baz</code> can be rewritten as <code>foo a |&gt;.bar b |&gt;.baz</code></p>
+<p>A common example of the usage of <code>&lt;|</code> is when the user provides a term which
 is a function applied to multiple arguments whose last argument is a proof in
 tactic mode, especially one that spans multiple lines. In that case, it is
 natural to use <code>&lt;| by ...</code> instead of <code>(by ...)</code>, as in:</p>
