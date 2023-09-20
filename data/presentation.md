@@ -16,7 +16,7 @@ regular contributors and daily activity.
 
 You can get a bird's-eye view of what is in the mathlib library by
 reading [the library overview](mathlib-overview.html), and read about
-recent additions on our [blog](blog.html).
+recent additions on our [blog](blog).
 The design and community organization of mathlib are
 described in the 2020 article
 [The Lean mathematical library](https://arxiv.org/abs/1910.09336), although

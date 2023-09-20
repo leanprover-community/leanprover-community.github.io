@@ -15,7 +15,7 @@ a Lean project once, which you can use for all your contributions —
 you don't need to set up a new Lean project for each new contribution.
 
 Setting up and managing all this is done by a program called `lake` (this is
-a contraction of `lean` and `make`).
+a portmanteau of `lean` and `make`).
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the
@@ -67,6 +67,14 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
 
 * Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
 
+  * Some Windows users have reported an error like this when running `lake exe cache get`:
+    ```
+      curl: (35) schannel: next InitializeSecurityContext failed: Unknown error (0x80092012) - The revocation function was unable to check revocation for the certificate
+    ```
+    If you see this error, you likely have an antivirus program that scans each downloaded file, which results in errors. Please disable your antivirus program and then run
+    `lake exe cache get!`. The exclamation mark forces `lake` to re-download the cache files it failed to download before running this command. (If you are uncomfortable disabling your antivirus, try to follow [these instructions](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/lake.20exe.20cache.20get.20errors/near/389019448) and then run `lake exe cache get!`).
+    You can turn on your antivirus program on afterwards. However, some users also reported that the antivirus programs significantly slow down Lean during normal usage. If Lean is slower than what is expected, either turn off your antivirus program or tell it to ignore/allow the operation of `lean.exe`.
+
 * Launch VS Code, either through your application menu or by typing
   `code .`.
 
@@ -80,7 +88,7 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
   `New file`, and type a filename to create a file there.
 
 If you want to make sure everything is working, you can start by
-creating, say `my_project/MyProject/test.lean` containing:
+creating, say `my_project/MyProject/Test.lean` containing:
 ```lean
 import Mathlib.Topology.Basic
 
@@ -90,7 +98,7 @@ When the cursor is on the last line, the right hand part of VS Code
 should display a "Lean Infoview" area saying:
 `TopologicalSpace.{u} (α : Type u) : Type u`.
 
-Note that you can import you own files in the project. For instance if you created a
+Note that you can import your own files in the project. For instance if you created a
 file `my_project/MyProject/Definitions.lean`, you can start a new file
 `my_project/MyProject/Lemmas.lean` with `import MyProject.Definitions`.
 

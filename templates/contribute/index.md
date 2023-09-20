@@ -68,9 +68,9 @@ Typical workflow:
   but you won't be able to push changes unless you've asked for permission.
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
-  In that case you need to use `git checkout their_new_branch` (note there is no `-b` here).
+  In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
-* Commit your changes using `git commit -a`.
+* Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everthing locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you.
@@ -103,10 +103,11 @@ please come to https://leanprover.zulipchat.com/, introduce yourself, and ask fo
 
 * Push your changes to a branch on the main repository, if they weren't already there.
 
-* If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces. This helps you get feedback as you go along, and it is much easier to review. This is especially important for new contributors.
+* If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
+  This helps you get feedback as you go along, and it is much easier to review.
+  This is especially important for new contributors as it prevents wasted effort.
 
-* The title of the PR should follow our [commit conventions](https://github.com/leanprover-community/lean/blob/master/doc/commit_convention.md).
-
+* The title and description of the PR should follow our [commit conventions](commit.html).
 
 ## Lifecycle of a PR
 
