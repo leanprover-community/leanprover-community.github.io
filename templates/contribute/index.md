@@ -25,9 +25,9 @@ to make the process of contributing as smooth as possible.
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
 * Adhere to the guidelines:
-   - The [style guide](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/style.md) for contributors.
-   - The explanation of [naming conventions](https://github.com/adomani/leanprover-community.github.io/blob/patch-2/templates/contribute/naming.md).
-   - The [documentation guidelines](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/doc.md).
+   - The [style guide](style.html) for contributors.
+   - The explanation of [naming conventions](naming.html).
+   - The [documentation guidelines](doc.html).
 
 Once you have code that you'd like to contribute, you should open a PR.
 There is a [video tutorial](https://www.youtube.com/watch?v=Bnc8w9lxe8A) walking you through the process of making a PR on YouTube.
@@ -62,10 +62,10 @@ Typical workflow:
 * The steps above only need to be done once (not once for each contribution).
 * Now, each time you want to work on a new change to mathlib4, create a new branch:
   ```
-  git checkout -b my_new_branch   # This creates a new branch
+  git clone https://github.com/leanprover-community/mathlib4.git
   ```
-  It's also fine to simply clone https://github.com/leanprover-community/mathlib4.git,
-  but you won't be able to push changes unless you've asked for permission.
+  If you've asked for write access you can push your new branch to mathlib which
+  comes with some advantages (see below).
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
   In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
@@ -89,9 +89,8 @@ It's also okay to let our central CI servers do this for you.
   (There will be a green tick on the line describing the most recent commit if everything works,
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
-  You can also check CI status on the command line by installing `hub` and running `hub ci-status`.
+  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/)
 * After CI finishes, you can run `lake exe cache get` to download compiled oleans.
-  See [Caching compilation](#caching-compilation) for commands to automatically call `lake exe cache get`.
 
 
 ## Making a Pull Request (PR)
