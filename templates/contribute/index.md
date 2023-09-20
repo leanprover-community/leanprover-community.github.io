@@ -1,22 +1,3 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # How to contribute to mathlib4
 
 Here are some tips and tricks
@@ -51,18 +32,19 @@ rather than from your own fork, as CI works better this way.)
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib4.
-* At https://github.com/leanprover-community/mathlib4, click "Fork" in the top right, to make your own fork of the repository.
-  Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
-  Alternatively, if you've asked for write access you can just use [https://github.com/leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4).
+* If you've asked for write access (recommended above), you can just use https://github.com/leanprover-community/mathlib4.
+  Otherwise, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
+  to make your own fork of the repository.
+  Your fork is at https://github.com/USER/mathlib4.
 * Now make a local clone of the repository.
   ```
-  git clone https://github.com/USER/mathlib4.git
+  git clone https://github.com/leanprover-community/mathlib4.git
   cd mathlib4
   ```
 * The steps above only need to be done once (not once for each contribution).
 * Now, each time you want to work on a new change to mathlib4, create a new branch:
   ```
-  git clone https://github.com/leanprover-community/mathlib4.git
+  git switch -c my_new_branch   # This creates a new branch and switches to it
   ```
   If you've asked for write access you can push your new branch to mathlib which
   comes with some advantages (see below).
@@ -73,7 +55,7 @@ Typical workflow:
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everthing locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
-It's also okay to let our central CI servers do this for you.
+It's also okay to let our central CI servers do this for you by pushing your changes.
 * In order to push your changes back to the repository on github, use
   ```
   git push
@@ -89,7 +71,7 @@ It's also okay to let our central CI servers do this for you.
   (There will be a green tick on the line describing the most recent commit if everything works,
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
-  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/)
+  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/) and running `hub ci-status`.
 * After CI finishes, you can run `lake exe cache get` to download compiled oleans.
 
 
@@ -106,7 +88,7 @@ please come to https://leanprover.zulipchat.com/, introduce yourself, and ask fo
   This helps you get feedback as you go along, and it is much easier to review.
   This is especially important for new contributors as it prevents wasted effort.
 
-* The title and description of the PR should follow our [commit conventions](commit.html).
+* The title and description of the PR should follow our [commit conventions](commit.md).
 
 ## Lifecycle of a PR
 
