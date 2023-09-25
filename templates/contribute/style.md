@@ -336,13 +336,13 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-| []       => rfl
-| (a :: l) => calc
-    reverse (reverse (a :: l))
-      = reverse (reverse l ++ [a]) := by rw [reverse_cons]
-    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-    _ = reverse [a] ++ l := by rw [reverse_reverse l]
-    _ = a :: l := rfl
+  | []       => rfl
+  | (a :: l) => calc
+      reverse (reverse (a :: l))
+        = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+      _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+      _ = reverse [a] ++ l := by rw [reverse_reverse l]
+      _ = a :: l := rfl
 ```
 
 However, because the expressions and proofs are relatively short, the following style 
@@ -354,12 +354,12 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-| []       => rfl
-| (a :: l) => calc
-    reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
-    _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-    _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
-    _                          = a :: l                             := rfl
+  | []       => rfl
+  | (a :: l) => calc
+      reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
+      _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+      _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
+      _                          = a :: l                             := rfl
 ```
 
 ### Tactic mode
