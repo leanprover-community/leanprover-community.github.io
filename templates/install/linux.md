@@ -32,6 +32,14 @@ All commands below should be typed inside a terminal.
     A green line should appear underneath `#eval 1+1`, and hovering the mouse over it you should see `2`
     displayed.
 
+## Don't use your distribution's package manager!
+
+It might be tempting to use your Linux distribution's package manager (APT, DNF, AUR, etc.) to install Lean instead. **Don't do this!**
+
+Lean changes quickly. The distribution version might work for a while, but it will go out of date as soon as a new Lean version is released. Then you'll waste time waiting for the distribution to update it (or patching it yourself).
+
+Unless you're building something for the Linux distribution itself, use `elan`.
+
 ## Lean Projects
 
 You can now read instructions about creating and working on [Lean projects](project.html)
