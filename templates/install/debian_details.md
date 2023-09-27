@@ -43,7 +43,7 @@ reading the bash script that will be downloaded below:
 
 It might be tempting to use your Linux distribution's package manager (APT, DNF, AUR, etc.) to install Lean instead. **Don't do this!**
 
-Lean changes quickly. The distribution version might work for a while, but it will go out of date as soon as a new Lean version is released. Then you'll waste time waiting for the distribution to update it (or patching it yourself).
+Lean cuts a new release every few weeks. The version provided by your distribution is likely out of date. Moreover, different projects might require incompatible versions of Lean, which most distributions don't handle but `elan` can.
 
 Unless you're building something for the Linux distribution itself, use `elan`.
 
