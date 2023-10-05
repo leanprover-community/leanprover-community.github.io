@@ -108,7 +108,7 @@ rather than at the beginning of the next line.
 In what follows, "indent" without an explicit indication of the amount means
 "indent by 2 additional spaces".
 
-After stating the theorem, we indent the lines in the subesequent proof by 2 spaces.
+After stating the theorem, we indent the lines in the subsequent proof by 2 spaces.
 ```lean
 open Nat
 theorem nat_case {P : Nat → Prop} (n : Nat) (H1 : P 0) (H2 : ∀ m, P (succ m)) : P n :=
