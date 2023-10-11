@@ -22,13 +22,13 @@ all users.
    Then open a terminal by typing `git bash` in the Windows search bar.
 
 2. In terminal, run the command
-
-   `curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh`
-
+   ```
+   curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+   ```
    and hit enter when a question is asked.
    To make sure the terminal will find the installed files, run `echo 'PATH="$HOME/.elan/bin:$PATH"' >> "$HOME/.profile"`.
 
-  Then close and reopen Git Bash.
+   Then close and reopen Git Bash.
 
 ## Installing mathlib supporting tools
 
@@ -83,13 +83,13 @@ This document describes using VS Code (for emacs, look at https://github.com/lea
    `lean4` extension, but that one isn't relevant here.
 5. Click "install" (In old versions of VS Code, you might need to click "reload" afterwards)
 6. Setup the default profile:
-  * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
-    `Select Default Profile`, then select `git bash` from the menu.
-  * If you're using `msys2`, press `ctrl-comma` again to open the settings, and add two settings:
-  ```text
-  "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
-  "terminal.integrated.shellArgs.windows": ["--login", "-i"]
-  ```
+   * If you're using `git bash`, press `ctrl-shift-p` to open the command palette, and type
+     `Select Default Profile`, then select `git bash` from the menu.
+   * If you're using `msys2`, press `ctrl-comma` again to open the settings, and add two settings:
+     ```text
+     "terminal.integrated.shell.windows": "C:\\msys64\\usr\\bin\\bash.exe",
+     "terminal.integrated.shellArgs.windows": ["--login", "-i"]
+     ```
 7. Restart VS Code.
 
 
