@@ -31,7 +31,7 @@ Open a terminal.
   you may need to first type `source ~/.profile` or
   `source ~/.bash_profile` depending on your OS.
 
-* Go the the directory where you would like this package to live.
+* Go the the directory where you would like this package to live. You do not need to create a new folder yourself, the next command will create a `mathematics_in_lean` subfolder for you.
 
 * Run `git clone https://github.com/leanprover-community/mathematics_in_lean.git`.
 
