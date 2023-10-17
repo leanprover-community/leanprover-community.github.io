@@ -1,6 +1,6 @@
 # Tips and suggestions for teaching with Lean 
 
-In an attempt to encourage "best practices" for teaching, 
+In order to help people interested in teaching with Lean,
 we've collected some strategies and approaches here 
 that have worked well for people in the community. 
 Depending on the context of your course, these approaches may or may not make sense.
