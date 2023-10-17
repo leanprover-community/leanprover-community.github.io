@@ -62,22 +62,29 @@ to take advantage of extra Codespaces hours.
 ## Renaming and redefining tactics 
 
 The Lean/mathlib names for tactics may not match how you present these topics in class.
-In Lean 4 it is easy to create [aliases for certain tactic calls](https://github.com/brown-cs22/CS22-Lean-2023/blob/main/BrownCs22/Library/Tactics.lean#L59)
-or [change the behavior of existing tactics](https://github.com/brown-cs22/CS22-Lean-2023/blob/main/BrownCs22/Library/Tactics.lean#L61)
+In Lean 4 it is easy to create [aliases for certain tactic calls](https://github.com/brown-cs22/CS22-Lean-2023/blob/0a0a8e168559462a39e33a7b2940b11bd5a59e90/BrownCs22/Library/Tactics.lean#L59)
+or [change the behavior of existing tactics](https://github.com/brown-cs22/CS22-Lean-2023/blob/0a0a8e168559462a39e33a7b2940b11bd5a59e90/BrownCs22/Library/Tactics.lean#L61)
 within a course project.
 (In the linked examples, in any course file importing `Tactics.lean`, the behavior of `linarith` will be redefined.)
 
 ## Ending proofs with `done`
 
-Lean 3's `begin...end` blocks conveniently grouped proof steps into one block,
-with a clear error message at the bottom when a proof was incomplete.
-Lean 4's `by` is not as verbose but provides a more subtle sign of an incomplete proof.
+It can sometimes be confusing to tell when a tactic proof is complete,
+since the error message appears at the top of the proof but not at the bottom.
 Some instructors have had success teaching students to begin writing a proof 
 with the tactic `done` at the end.
-This effectively simulates the `end` of a Lean 3 proof.
 
 ```lean
 example (x : ℕ) : x = x := by 
   -- fill in your proof here
   done
 ```
+
+An alternative is to use curly braces after `by`:
+```lean
+```lean
+example (x : ℕ) : x = x := by {
+  -- fill in your proof here
+}
+```
+
