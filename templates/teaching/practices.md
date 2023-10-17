@@ -1,0 +1,83 @@
+# Tips and suggestions for teaching with Lean 
+
+In an attempt to encourage "best practices" for teaching, 
+we've collected some strategies and approaches here 
+that have worked well for people in the community. 
+Depending on the context of your course, these approaches may or may not make sense.
+
+## Organizing course projects
+
+It is common to use a "course project" to distribute lecture notes, examples, assignments, etc. 
+while ensuring that students all remain on a fixed version of Lean and mathlib.
+Here are examples from [a course at Fordham](https://github.com/hrmacbeth/math2001/)
+and [a course at Brown](https://github.com/BrownCS1951x/fpv2023).
+The former includes detailed notes that get compiled to HTML; 
+the latter relies on an external textbook reference.
+
+Without some kind of structure like this -- for example, if students receive bare .lean files -- 
+it is hard to ensure that they all use the same version of Lean.
+It is also a good way to provide a "library" file or files 
+containing basic definitions, tactics, and such that are useful for your course.
+
+These projects are often hosted on GitHub. 
+Students are asked to clone the project, or create a Codespace or Gitpod instance, 
+at the start of the course.
+They are instructed to pull updates periodically, for instance, when new homeworks are released.
+If students are not expected to be proficient with `git`, you can provide 
+[helper scripts](https://github.com/brown-cs22/CS22-Lean-2023/tree/main/scripts)
+that attempt to do this management automatically.
+
+Some instructors recommend that students copy homework files before beginning an assignment,
+working on the copied version, 
+to avoid merge conflicts if the assignment should change.
+
+Other instructors have used GitHub Classrooms for assignment releases.
+In this setup, each assignment must be its own standalone Lean project.
+
+## Lean-in-the-cloud setups 
+
+Our [resources page](resources.html) has pointers to setting up GitHub Codespaces and Gitpod
+for use with a course project.
+Especially for large courses aimed at students who might struggle to install Lean locally,
+the use of cloud resources to run Lean can greatly simplify the beginning of a course.
+
+In both approaches, students will be able to use VSCode in a browser
+to edit Lean files with a Lean server running remotely.
+With Codespaces, a convenient [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces)
+makes it possible to work from a local VSCode installation too.
+The obvious upsides are that there is a uniform environment for all students,
+without installation headaches,
+and that no student is using an underpowered machine.
+Downsides include that student files are saved on the cloud, and students might struggle to 
+download and submit them; 
+these cloud services limit the number of free hours per student per month;
+and internet access is required to work on the course.
+
+Some instructors have successfully run large courses using these resources,
+and many offer them as an option to students.
+For GitHub Codespaces, it is important to remind students to sign up for 
+GitHub's [student benefits](https://education.github.com/pack) 
+to take advantage of extra Codespaces hours.
+
+## Renaming and redefining tactics 
+
+The Lean/mathlib names for tactics may not match how you present these topics in class.
+In Lean 4 it is easy to create [aliases for certain tactic calls](https://github.com/brown-cs22/CS22-Lean-2023/blob/main/BrownCs22/Library/Tactics.lean#L59)
+or [change the behavior of existing tactics](https://github.com/brown-cs22/CS22-Lean-2023/blob/main/BrownCs22/Library/Tactics.lean#L61)
+within a course project.
+(In the linked examples, in any course file importing `Tactics.lean`, the behavior of `linarith` will be redefined.)
+
+## Ending proofs with `done`
+
+Lean 3's `begin...end` blocks conveniently grouped proof steps into one block,
+with a clear error message at the bottom when a proof was incomplete.
+Lean 4's `by` is not as verbose but provides a more subtle sign of an incomplete proof.
+Some instructors have had success teaching students to begin writing a proof 
+with the tactic `done` at the end.
+This effectively simulates the `end` of a Lean 3 proof.
+
+```lean
+example (x : ℕ) : x = x := by 
+  -- fill in your proof here
+  done
+```
