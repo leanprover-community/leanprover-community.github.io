@@ -98,6 +98,13 @@ See our [documentation requirements](doc.html) for more suggestions and examples
 
 ### Structuring definitions and theorems
 
+All declarations (e.g., `def`, `lemma`, `theorem`, `class`, `structure`, `inductive`, `instance`, etc.)
+and commands (e.g., `variable`, `open`, `section`, `namespace`, `notation`, etc.) are considered 
+top-level and these words should appear flush-left in the document. In particular, opening a 
+namespace or section does not result in indenting the contents of that namespace or section.
+(Note: within VS Code, hovering over any declaration such as `def Foo ...` will show the fully
+qualified name, like `MyNamespace Foo` if `Foo` is declared while the namespace `MyNamespace` is open.)
+
 These guidelines hold for declarations starting with `def`, `lemma` and `theorem`.
 For "theorem statement", also read "type of a definition" and for "proof" also read
 "definition body".
