@@ -10,6 +10,10 @@ div.dtsp-searchPane div.dataTables_scrollBody {
   height: 160px !important;
   max-height: 5rem !important;
 }
+
+.selected-tag {
+  font-weight: bolder
+}
 </style>
 {% endblock %}
 {% block content %}
@@ -23,6 +27,13 @@ div.dtsp-searchPane div.dataTables_scrollBody {
   <a
     href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/courses.yaml">courses.yaml</a>.
 </p>
+<p>
+Select tags to start filtering:
+{% for tag in tags %}
+<span class="course-tag">{{ tag }}</span>{{ ", " if not loop.last else "." }}
+{% endfor %}
+</p>
+
 <table id="courses-table" class="display">
   <thead>
     <tr>
@@ -33,7 +44,7 @@ div.dtsp-searchPane div.dataTables_scrollBody {
       <th>Year</th>
       <th>Tags</th>
     </tr>
-  </thead>	
+  </thead>      
   <tbody>
   {% for e in courses %}
     <tr data-id="{{ loop.index }}">
@@ -48,17 +59,15 @@ div.dtsp-searchPane div.dataTables_scrollBody {
 {% block extrajs %}
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.2.0/css/searchPanes.dataTables.min.css" />  
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
-<script src="https://cdn.datatables.net/searchpanes/2.2.0/js/dataTables.searchPanes.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
 
 <script type="text/javascript">
 var coursesData = {
   {% for e in courses %}
-	{{ loop.index }}: { summary: `{{ e.summary }}`, website: "{{ e.website }}", material: "{{ e.material }}", repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
+        {{ loop.index }}: { summary: `{{ e.summary }}`, website: "{{ e.website }}", material: "{{ e.material }}", repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
   {% endfor %}
 };
 
@@ -67,22 +76,22 @@ var formatExtra = function(idx){
     contents = "<ul class=\"course-details\">";
 
     if (data.website != "None") {
-	    contents += "<li><strong>Website: </strong><a href=\"" + data.website + "\">" + data.website + "</a></li>" 
+            contents += "<li><strong>Website: </strong><a href=\"" + data.website + "\">" + data.website + "</a></li>" 
     };
     if (data.repository != "None") {
-	    contents += "<li><strong>Repository: </strong><a href=\"" + data.repository + "\">" + data.repository + "</a></li>" 
+            contents += "<li><strong>Repository: </strong><a href=\"" + data.repository + "\">" + data.repository + "</a></li>" 
     };
     if (data.material != "None") {
-	    contents += "<li><strong>Material: </strong><a href=\"" + data.material + "\">" + data.material + "</a></li>" 
+            contents += "<li><strong>Material: </strong><a href=\"" + data.material + "\">" + data.material + "</a></li>" 
     };
     if (data.summary != "None") {
-	    contents += "<li><strong>Summary: </strong>" + data.summary + "</a></li>" 
+            contents += "<li><strong>Summary: </strong>" + data.summary + "</a></li>" 
     };
     if (data.notes != "None") {
-	    contents += "<li><strong>Notes: </strong> " + data.notes + "</li>" 
+            contents += "<li><strong>Notes: </strong> " + data.notes + "</li>" 
     };
     if (data.experiences != "None") {
-	    contents += "<li><strong>Experiences: </strong> " + data.experiences + "</li>" 
+            contents += "<li><strong>Experiences: </strong> " + data.experiences + "</li>" 
     };
     contents += "</ul>";
 
@@ -91,37 +100,13 @@ var formatExtra = function(idx){
 
 $(document).ready( function () {
   var dt = $('#courses-table').DataTable({
-    dom: 'Plfrtip',
+    dom: 'lfrtip',
     order: [],
     columnDefs: [
-      { searchPanes: { show: true,
-                       options: [
-			  { label: 'Lean 4',
-			    value: function(rowData, rowIdx) {
-				  return rowData[5].includes('lean4');
-			      } }, 
-			  { label: 'Lean 3',
-			    value: function(rowData, rowIdx) {
-				  return rowData[5].includes('lean3');
-			      } }, 
-		       ]
-                      },
-	orderable: false,
-        targets: [5],
-      },	
       { orderable: false,
-	  targets: [0],
+          targets: [0],
       },
-      { searchPanes: { show: false },
-        targets: [0, 1, 2, 3, 4]}
     ]
-  });
-  dt.on('select.dt', () => {          
-        dt.searchPanes.rebuildPane(0, true);
-    });
- 
-  dt.on('deselect.dt', () => {
-      dt.searchPanes.rebuildPane(0, true);
   });
   
   // Add event listener for opening and closing details
@@ -135,7 +120,25 @@ $(document).ready( function () {
     else {
         row.child(formatExtra(row.index()+1)).show();
     }
-});
+  });
+  
+  var selectedTags = new Array;
+ 
+  // Tag filtering controls
+  $('.course-tag').on('click', function ()  {
+    if (this.classList.contains("selected-tag")) {
+      selectedTags.pop(this.innerHTML);      
+    } else {
+      selectedTags.push(this.innerHTML);
+    };
+    $(this).toggleClass(["selected-tag", "badge", "badge-secondary"]);
+    if (selectedTags.length === 0) {
+      dt.search('').draw() 
+    } else {
+      dt.search(selectedTags.join(' ')).draw() 
+    }
+    
+  })
 } );
 </script>
 {% endblock %}
