@@ -16,6 +16,12 @@ Here we list texts that are explicitly designed for university courses.
   by Jasmin Blanchette
   is a textbook that introduces the reader to interactive theorem proving using the Lean 4 proof assistant as its vehicle. The textbook is accompanied by Lean demonstration and exercise files.
 
+## Games 
+
+* [The Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4) by Kevin Buzzard, Jon Eugster, and Mohammad Pedramfar is a popular introduction to Lean.
+* The [engine behind the NNG](https://github.com/leanprover-community/lean4game)
+  can be used to design custom games for courses.
+
 ## Autograders
 
 * [A Gradescope autograder](https://github.com/robertylewis/lean4-autograder-main) for Lean 4
