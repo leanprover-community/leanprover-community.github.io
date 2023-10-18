@@ -85,6 +85,7 @@ var formatExtra = function(idx){
 $(document).ready( function () {
   var dt = $('#courses-table').DataTable({
     dom: 'Plfrtip',
+    order: [],
     columnDefs: [
       { searchPanes: { show: true,
                        options: [
@@ -98,8 +99,12 @@ $(document).ready( function () {
 			      } }, 
 		       ]
                       },
+	orderable: false,
         targets: [4],
-    }]
+      },	
+      { orderable: false,
+	  targets: [0],
+      }]
   });
   dt.on('select.dt', () => {          
         dt.searchPanes.rebuildPane(0, true);
@@ -108,7 +113,6 @@ $(document).ready( function () {
   dt.on('deselect.dt', () => {
       dt.searchPanes.rebuildPane(0, true);
   });
-  console.log(dt);
   
   // Add event listener for opening and closing details
   dt.on('click', 'td.dt-control', function (e) {
