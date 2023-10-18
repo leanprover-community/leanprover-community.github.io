@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+{% block title %}Undergrad math not in mathlib{% endblock %}
+{% block content %}
+    <h1>Missing undergraduate mathematics in mathlib</h1>
+
+    <p>
+    This gives pointers to undergraduate maths topics that are
+    currently missing in mathlib.
+    The list is gathered from
+    <a href="http://media.devenirenseignant.gouv.fr/file/agreg_externe/59/7/p2020_agreg_ext_maths_1107597.pdf">
+    the French curriculum</a>.
+    There is also a page listing undergraduate maths topics
+    that are
+    <a href="undergrad.html">already in mathlib</a>.
+    </p>
+
+    <p>If you want to work on an item from this list then
+    you should first check the
+    <a href="https://github.com/leanprover-community/mathlib4/pulls">pull requests list</a>
+    to see whether it is already coming, then the
+    <a href="https://github.com/leanprover-community/mathlib4/issues">issues list</a>
+    to see whether it is discussed there, and finally talk
+    about this idea on <a href="https://leanprover.zulipchat.com/">Zulip</a>.
+    </p>
+
+    <p>To update this list, please submit a PR modifying
+    <a href="https://github.com/leanprover-community/mathlib4/edit/master/docs/undergrad.yaml">
+      docs/undergrad.yaml</a> in the mathlib repository.
+    </p>
+
+  {% macro flat_child(item) -%}
+    {%- if item.missing_children -%}
+      {{ item.title }}(
+      {%- for inner_item in item.missing_children -%}
+        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+      {%- endfor -%})
+    {%- else -%}
+      {% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {% for area in overviews %}
+    {% if area.has_missing_child %}
+    <h4>{{ area.title }}</h4>
+      {% for subarea in area.missing_children %}
+        <p class="ml-4 mb-2">
+        <b>{{ subarea.title }}: </b>
+        {% for item in subarea.missing_children %}
+	{{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
+        {% endfor %}
+        </p>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

@@ -19,6 +19,7 @@ import urllib.request
 import json
 import gzip
 import os
+from github import Github
 from slugify import slugify
 
 class MarkdownExtension(jinja2.ext.Extension):
@@ -160,7 +161,12 @@ class Course:
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
-header_data = dict()
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
+    DATA/'header-data.json'
+)
+with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
+    header_data = json.load(h_file)
 
 @dataclass
 class HeaderDataEntry:
@@ -185,7 +191,34 @@ declarations = {
 num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
-hundred_theorems = []
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
+    DATA/'100.yaml')
+with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
+    hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+    for h in hundred_theorems:
+        if h.decl:
+            assert not h.decls
+            h.decls = [h.decl]
+        if h.decls:
+            doc_decls = []
+            for decl in h.decls:
+                try:
+                    decl_info = declarations[decl]
+                except KeyError:
+                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                    continue
+                doc_decls.append(DocDecl(
+                    name=decl,
+                    # TODO: add missing `/mathlib4_docs/` prefix to links within this header
+                    decl_header_html = decl_info.header,
+                    # note: the `.bmp` data files use doc-relative links
+                    docs_link='/mathlib4_docs/' + decl_info.info.docLink,
+                    src_link=decl_info.info.sourceLink))
+            h.doc_decls = doc_decls
+        else:
+            h.doc_decls = []
+
 
 def replace_link(name, id):
     if name == '':
@@ -263,11 +296,23 @@ class Overview:
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib4_docs/overview.yaml',
+    DATA/'overview.yaml')
+with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
+    overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
 
-overviews = []
-undergrad_overviews = []
-theories = []
-events = []
+urllib.request.urlretrieve(
+    'https://leanprover-community.github.io/mathlib4_docs/undergrad.yaml',
+    DATA/'undergrad.yaml')
+with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
+    undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+
+with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
+    theories = yaml.safe_load(h_file)
+
+with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
+    events = [Event(**e) for e in yaml.safe_load(h_file)]
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
@@ -316,12 +361,32 @@ class Project:
     maintainers: List[str]
     stars: int
 
+github = Github(os.environ.get('GITHUB_TOKEN', None))
+
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
+    DATA/'projects.yaml')
+with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
+    oprojects = yaml.safe_load(h_file)
 
 projects = []
+for name, project in oprojects.items():
+    if project.get('display', True):
+        github_repo = github.get_repo(project['organization'] + '/' + name)
+        stars = github_repo.stargazers_count
+        descr = render_markdown(project['description'])
+        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
 
-num_contrib = 0
+num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
 
-project_history = dict()
+projects.sort(key = lambda p: p.stars, reverse=True)
+
+urllib.request.urlretrieve(
+    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
+    DATA/'project_history.yaml')
+with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
+    project_history = yaml.safe_load(h_file)
+
 bib = pybtex.database.parse_file('lean.bib')
 
 about_lean_dic = {}

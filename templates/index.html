@@ -1,0 +1,97 @@
+{% extends '_base.html' %}
+{% block content %}
+
+  <div class="mx-auto mt-5" style="max-width: 30em">
+    <img src="img/community_logo_emb.svg" alt="Lean community"
+      height="146" width="278"
+                class="img-fluid w-100"/>
+  </div>
+
+		{{ presentation | md }}
+
+  <div class="justify-content-center mt-3">
+   <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+		  <h4>Try it!</h4>
+          <p>
+          You can
+          try Lean in your web browser,
+          install it in an isolated folder,
+          or go for the full install.
+          Lean is free, open source software. It works on
+          Linux, Windows, and MacOS.
+          </p>
+		</div>
+		<ul class="list-group list-group-flush border-top">
+          <li class="list-group-item"><a href="https://lean.math.hhu.de/"
+                 >Try the online version of Lean</a></li>
+          <li class="list-group-item"><a href="get_started.html#regular-install"
+                 >Installation instructions</a></li>
+          <li class="list-group-item"><a href="install/project.html">Working on Lean projects</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-body">
+		<h4>Learn to Lean!</h4>
+		<p>
+    You can learn by playing a game, following tutorials,
+    or reading books.
+		</p>
+		</div>
+		<ul class="list-group list-group-flush border-top">
+          <li class="list-group-item"><a href="learn.html">Learning resources</a></li>
+          <li class="list-group-item"><a href="https://leanprover.github.io/theorem_proving_in_lean4/"
+                 >Theorem Proving in Lean 4</a> (an introduction)</li>
+          <li class="list-group-item"><a href="https://leanprover-community.github.io/mathlib4_docs"
+                 >API documentation of mathlib</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-body">
+		<h4>Meet the community!</h4>
+		<p>
+        Lean has very diverse and active community. It gathers mostly on
+    a <a href="https://leanprover.zulipchat.com/">Zulip chat</a>
+    and on <a href="https://github.com/leanprover-community/mathlib4">GitHub</a>.
+    You can get involved and join the fun!
+		</p>
+		</div>
+		<ul class="list-group list-group-flush border-top">
+          <li class="list-group-item"><a href="meet.html">Meet us</a></li>
+          <li class="list-group-item"><a href="contribute/index.html"
+                 >How to contribute</a></li>
+          <li class="list-group-item"><a href="papers.html"
+                 >Papers involving Lean</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+		{{ what_is | md }}
+
+  <h2>Formalized with Lean and mathlib</h2>
+
+  <div class="row row-cols-1 row-cols-md-2">
+	{% for formalization in formalizations %}
+	  <div class="col mb-4">
+		<div class="card" >
+		  <div class="card-body">
+			  <h5 class="card-title">{{ formalization.title }}</h5>
+			<h6 class="card-subtitle mb-2 text-muted">by {{ formalization.authors }}</h6>
+			<p class="card-text">{{ formalization.abstract }}</p>
+		  </div>
+          <div class="card-footer text-right bg-white">
+            <small><a href="{{ formalization.url | url }}" class="card-link">Learn more</a></small>
+          </div>
+		</div>
+	  </div>
+	{% endfor %}
+  </div>
+
+  <p class="mt-2">
+    You can find many more in the <a href="papers.html">list of papers</a>
+    and <a href="lean_projects.html">list of projects</a>.
+  </p>
+
+  {% endblock %}

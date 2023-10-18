@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+{% block title %}100 theorems in Lean{% endblock %}
+{% block content %}
+
+        <h1>100 theorems</h1>
+
+        <p><a href="https://www.cs.ru.nl/~freek/">Freek Wiedijk</a> maintains <a href="https://www.cs.ru.nl/~freek/100/">a list</a> tracking progress of theorem provers in formalizing 100 classic theorems in mathematics as a way of comparing prominent theorem provers.
+        Currently {{hundred_theorems|selectattr('author')|list|length}} of them are formalized in Lean.
+        We also have a page with the theorems from the list <a href="100-missing.html">not yet in Lean</a>.</p>
+
+    {% for theorem in hundred_theorems|selectattr('author') %}
+        <h5 class="markdown-heading mt-5" id="{{ theorem.number }}">{{ theorem.number }}. {{ theorem.title }} <a class="hover-link" href="#{{ theorem.number }}">#</a></h5>
+        <p>Author{% if ',' in theorem.author %}s{% endif %}: {{ theorem.author }}</p>
+        {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
+        {% for doc in theorem.doc_decls|default([], true) %}
+        <div class="doc-stmt">{{ doc.decl_header_html }}</div>
+        <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
+        {% endfor %}
+        {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
+        {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
+    {% endfor %}
+
+{% endblock %}
