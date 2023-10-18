@@ -5,6 +5,27 @@ we've collected some strategies and approaches here
 that have worked well for people in the community. 
 Depending on the context of your course, these approaches may or may not make sense.
 
+## Planning your course
+
+If you are thinking about introducing Lean into a course,
+or designing a course around Lean,
+there are some important questions you should ask yourself.
+Your answers to these questions can help find comparable courses that people have already taught,
+and can help you choose materials to use.
+
+* Do you want to teach Lean, or do you want to teach *using* Lean?
+  In other words, what are the learning objectives of your course?
+  Some courses try to teach math or CS topics with Lean as an "implementation language,"
+  without expecting that students develop strong Lean skills.
+  Others explicitly teach verification and formal proof.
+
+* What technological prerequisites will you assume from your students?
+  Should they have a GitHub account and understand `git`? 
+  Have they programmed in a functional language, or in any language?
+  Can they be expected to install Lean locally on their own computer?
+
+* 
+
 ## Organizing course projects
 
 It is common to use a "course project" to distribute lecture notes, examples, assignments, etc. 
