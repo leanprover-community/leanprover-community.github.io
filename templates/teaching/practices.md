@@ -57,7 +57,7 @@ In this setup, each assignment must be its own standalone Lean project.
 
 ## Lean-in-the-cloud setups 
 
-Our [resources page](resources.html) has pointers to setting up GitHub Codespaces and Gitpod
+Our [resources page](resources.html#lean-in-the-cloud-setups) has pointers to setting up GitHub Codespaces and Gitpod
 for use with a course project.
 Especially for large courses aimed at students who might struggle to install Lean locally,
 the use of cloud resources to run Lean can greatly simplify the beginning of a course.
