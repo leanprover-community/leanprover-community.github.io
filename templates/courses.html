@@ -4,7 +4,7 @@
 <style>
 .course-details {
   margin-top: .1rem;
-  margin-left: 1rem;
+  list-style-type: none;
 }
 div.dtsp-searchPane div.dataTables_scrollBody {
   height: 160px !important;
@@ -30,13 +30,14 @@ div.dtsp-searchPane div.dataTables_scrollBody {
       <th>Instructor</th>
       <th>Title</th>
       <th>Location</th>
+      <th>Year</th>
       <th>Tags</th>
     </tr>
   </thead>	
   <tbody>
   {% for e in courses %}
     <tr data-id="{{ loop.index }}">
-      <td class="dt-control"></td><td>{{ e.instructor }}</td><td>{{ e.name }}</td><td>{{ e.location }}</td><td>{{ ', '.join(e.tags or []) }}</td>
+      <td class="dt-control"></td><td>{{ e.instructor }}</td><td>{{ e.name }}</td><td>{{ e.location }}</td><td>{{ e.year }}</td><td>{{ ', '.join(e.tags or []) }}</td>
     </tr>
   {% endfor %}
   </tbody>
@@ -57,7 +58,7 @@ div.dtsp-searchPane div.dataTables_scrollBody {
 <script type="text/javascript">
 var coursesData = {
   {% for e in courses %}
-  {{ loop.index }}: { material: "{{ e.material }}", repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
+	{{ loop.index }}: { summary: `{{ e.summary }}`, website: "{{ e.website }}", material: "{{ e.material }}", repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
   {% endfor %}
 };
 
@@ -65,11 +66,17 @@ var formatExtra = function(idx){
     var data = coursesData[idx];
     contents = "<ul class=\"course-details\">";
 
+    if (data.website != "None") {
+	    contents += "<li><strong>Website: </strong><a href=\"" + data.website + "\">" + data.website + "</a></li>" 
+    };
     if (data.repository != "None") {
 	    contents += "<li><strong>Repository: </strong><a href=\"" + data.repository + "\">" + data.repository + "</a></li>" 
     };
     if (data.material != "None") {
 	    contents += "<li><strong>Material: </strong><a href=\"" + data.material + "\">" + data.material + "</a></li>" 
+    };
+    if (data.summary != "None") {
+	    contents += "<li><strong>Summary: </strong>" + data.summary + "</a></li>" 
     };
     if (data.notes != "None") {
 	    contents += "<li><strong>Notes: </strong> " + data.notes + "</li>" 
@@ -100,11 +107,14 @@ $(document).ready( function () {
 		       ]
                       },
 	orderable: false,
-        targets: [4],
+        targets: [5],
       },	
       { orderable: false,
 	  targets: [0],
-      }]
+      },
+      { searchPanes: { show: false },
+        targets: [0, 1, 2, 3, 4]}
+    ]
   });
   dt.on('select.dt', () => {          
         dt.searchPanes.rebuildPane(0, true);
