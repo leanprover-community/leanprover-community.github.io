@@ -16,7 +16,7 @@ You can get the Lean documentation inside VS Code using `Ctrl-Shift-p` (`Cmd-Shi
 If you encounter any command not found errors when opening a new terminal, try the following quick-fixes in order:
 * If you are on macOS and have not tinkered with your shell you are most likely using a shell called `zsh`. Run the command `source ~/.zshrc` and try again.
 * If you are on linux, currently the default shell in popular distributions like Ubuntu or Linux Mint is `bash`. In this case, run `source ~/.bashrc`.   
-* If this still doesn't work, logging out from MacOS and logging in again should fix it. 
+* If this still doesn't work, logging out and logging in again should fix it. 
 
 ### InitializeSecurityContext error on Windows
 
