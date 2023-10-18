@@ -154,8 +154,8 @@ class Course:
     repo: Optional[str] = None
     material: Optional[str] = None
     notes : Optional[str] = None
-    tags: Optional[List[str]] = None
-    dates: str = ''
+    tags: List[str] = field(default_factory=list)
+    year: int = 2023
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
@@ -270,6 +270,7 @@ events = []
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
+courses.sort(key=lambda c: (0 if 'lean4' in c.tags else 1, -c.year, c.name))
 for course in courses:
     for field in ['experiences', 'notes', 'summary', 'experiences']:
         val = getattr(course, field)
