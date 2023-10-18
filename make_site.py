@@ -150,13 +150,14 @@ class Event:
 class Course:
     name: str
     instructor: str
-    location: str
-    website: str
+    institution: str
+    lean_version: int
+    website: Optional[str] = None
     repo: Optional[str] = None
     material: Optional[str] = None
     notes : Optional[str] = None
-    tags: Optional[List[str]] = None
-    dates: str = ''
+    tags: List[str] = field(default_factory=list)
+    year: int = 2023
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
@@ -315,13 +316,19 @@ with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
+courses_tags = set()
+courses.sort(key=lambda c: (-c.lean_version, -c.year, c.name))
 for course in courses:
+    courses_tags.update(course.tags)
+    course.tags.sort()
+    course.tags.append(f'lean{course.lean_version}')
     for field in ['experiences', 'notes', 'summary', 'experiences']:
         val = getattr(course, field)
         if isinstance(val, str):
             setattr(course, field, render_markdown(val))
         elif isinstance(val, list):
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
+courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
 
 def format_date_range(event):
     if event.start_date and event.end_date:
@@ -504,7 +511,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
-                ('courses.html', {'courses': courses}),
+                ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
