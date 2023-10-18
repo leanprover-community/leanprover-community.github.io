@@ -1,5 +1,17 @@
 {% extends '_base.html' %}
 {% block title %}Courses using Lean{% endblock %}
+{% block extracss %}
+<style>
+.course-details {
+  margin-top: .1rem;
+  margin-left: 1rem;
+}
+div.dtsp-searchPane div.dataTables_scrollBody {
+  height: 160px !important;
+  max-height: 5rem !important;
+}
+</style>
+{% endblock %}
 {% block content %}
 
 <h1>Courses using Lean</h1>
@@ -11,95 +23,105 @@
   <a
     href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/courses.yaml">courses.yaml</a>.
 </p>
-
-<div id="courses-table"></div>
-<!-- TODO:
-        This template drops the "tags" fields from courses.yaml.
-    -->
-<div class="row row-cols-1 row-cols-md-2">
+<table id="courses-table" class="display">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Instructor</th>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Tags</th>
+    </tr>
+  </thead>	
+  <tbody>
   {% for e in courses %}
-  <div class="col mb-4">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">{{ e.name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">by {{ e.instructor }} at {{ e.location }}. {{ e.dates }}</h6>
-        <div class="card-text">{{ e.summary }}</div>
-      </div>
-      {% if e.repo or e.material or e.notes or e.experiences %}
-      <div class="card-footer bg-white">
-        <small>
-          <a class="card-link" data-toggle="collapse" href="#collapseCourse{{ loop.index }}" role="button"
-            aria-expanded="false" aria-controls="collapseCourse{{ loop.index }}">
-            Details
-          </a>
-          <div class="collapse mt-2" id="collapseCourse{{ loop.index }}">
-            {% if e.repo %}
-            <p>Course repository: <a href="{{ e.repo }}">{{ e.repo }}</a></p>
-            {% endif %}
-            {% if e.material %}
-            <p>Course materials: <a href="{{ e.material }}">{{ e.material }}</a></p>
-            {% endif %}
-            {% if e.notes %}
-            <p>Notes: {{ e.notes }}</p>
-            {% endif %}
-            {% if e.experiences %}
-            <p>Experiences: {{ e.experiences }}</p>
-            {% endif %}
-          </div>
-        </small>
-      </div>
-      {% endif %}
-    </div>
-  </div>
+    <tr data-id="{{ loop.index }}">
+      <td class="dt-control"></td><td>{{ e.instructor }}</td><td>{{ e.name }}</td><td>{{ e.location }}</td><td>{{ ', '.join(e.tags or []) }}</td>
+    </tr>
   {% endfor %}
-</div>
+  </tbody>
+</table>
+
 {% endblock %}
 
 {% block extrajs %}
-<link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.2.0/css/searchPanes.dataTables.min.css" />  
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+<script src="https://cdn.datatables.net/searchpanes/2.2.0/js/dataTables.searchPanes.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+
 
 <script type="text/javascript">
-var coursesData = [
+var coursesData = {
   {% for e in courses %}
-	{id: {{ loop.index }}, instructor: "{{ e.instructor }}", title: "{{ e.name }}", location: "{{ e.location }}", material: "{{ e.material }}",
-	 repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
+  {{ loop.index }}: { material: "{{ e.material }}", repository: "{{ e.repo }}", notes: `{{ e.notes }}`, experiences: `{{ e.experiences }}` },
   {% endfor %}
-];
+};
 
-var rowPopupFormatter = function(e, row, onRendered){
-    var data = row.getData(),
-    container = document.createElement("div"),
-    contents = "<strong style='font-size:1.2rem;margin:.5rem'>Course details</strong><br/><ul style='padding:0;  margin-top:10px; margin-bottom:0;'>";
+var formatExtra = function(idx){
+    var data = coursesData[idx];
+    contents = "<ul class=\"course-details\">";
 
     if (data.repository != "None") {
-	    contents += "<li><strong>Repository:</strong><a href=\"" + data.repository + "\">" + data.repository + "</a></li>" 
+	    contents += "<li><strong>Repository: </strong><a href=\"" + data.repository + "\">" + data.repository + "</a></li>" 
     };
     if (data.material != "None") {
-	    contents += "<li><strong>Material:</strong><a href=\"" + data.material + "\">" + data.material + "</a></li>" 
+	    contents += "<li><strong>Material: </strong><a href=\"" + data.material + "\">" + data.material + "</a></li>" 
     };
     if (data.notes != "None") {
-	    contents += "<li><strong>Notes:</strong> " + data.notes + "</li>" 
+	    contents += "<li><strong>Notes: </strong> " + data.notes + "</li>" 
     };
     if (data.experiences != "None") {
-	    contents += "<li><strong>Experiences:</strong> " + data.experiences + "</li>" 
+	    contents += "<li><strong>Experiences: </strong> " + data.experiences + "</li>" 
     };
     contents += "</ul>";
 
-    container.innerHTML = contents;
-
-    return container;
+    return contents;
 };
 
-var table = new Tabulator("#courses-table", {
- 	data:coursesData, 
- 	layout:"fitColumns", //fit columns to width of table (optional)
-        rowClickPopup:rowPopupFormatter, //add click popup to row
- 	columns:[ 
-	 	{title:"Instructor", field:"instructor", width:150},
-	 	{title:"Title", field:"title", hozAlign:"left"},
-	 	{title:"Location", field:"location"},
- 	],
+$(document).ready( function () {
+  var dt = $('#courses-table').DataTable({
+    dom: 'Plfrtip',
+    columnDefs: [
+      { searchPanes: { show: true,
+                       options: [
+			  { label: 'Lean 4',
+			    value: function(rowData, rowIdx) {
+				  return rowData[4].includes('lean4');
+			      } }, 
+			  { label: 'Lean 3',
+			    value: function(rowData, rowIdx) {
+				  return rowData[4].includes('lean3');
+			      } }, 
+		       ]
+                      },
+        targets: [4],
+    }]
+  });
+  dt.on('select.dt', () => {          
+        dt.searchPanes.rebuildPane(0, true);
+    });
+ 
+  dt.on('deselect.dt', () => {
+      dt.searchPanes.rebuildPane(0, true);
+  });
+  console.log(dt);
+  
+  // Add event listener for opening and closing details
+  dt.on('click', 'td.dt-control', function (e) {
+    let tr = e.target.closest('tr');
+    let row = dt.row(tr);
+ 
+    if (row.child.isShown()) {
+        row.child.hide();
+    }
+    else {
+        row.child(formatExtra(row.index()+1)).show();
+    }
 });
+} );
 </script>
 {% endblock %}
