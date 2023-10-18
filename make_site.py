@@ -150,7 +150,7 @@ class Course:
     name: str
     instructor: str
     location: str
-    website: str = ''
+    website: Optional[str] = None
     repo: Optional[str] = None
     material: Optional[str] = None
     notes : Optional[str] = None
