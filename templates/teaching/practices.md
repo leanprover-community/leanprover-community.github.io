@@ -24,7 +24,11 @@ and can help you choose materials to use.
   Have they programmed in a functional language, or in any language?
   Can they be expected to install Lean locally on their own computer?
 
-* 
+* [warning about not introducing too many tactic variants]
+
+* [discussing type theory vs set theory]
+
+* [how much Lean to use -- essential or incidental? Do students use it mandatory, optional, just you?]
 
 ## Organizing course projects
 
@@ -39,6 +43,7 @@ Without some kind of structure like this -- for example, if students receive bar
 it is hard to ensure that they all use the same version of Lean.
 It is also a good way to provide a "library" file or files 
 containing basic definitions, tactics, and such that are useful for your course.
+[if you are distributing bare Lean files...]
 
 These projects are often hosted on GitHub. 
 Students are asked to clone the project, or create a Codespace or Gitpod instance, 
