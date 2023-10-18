@@ -19,16 +19,29 @@ and can help you choose materials to use.
   without expecting that students develop strong Lean skills.
   Others explicitly teach verification and formal proof.
 
+* How much Lean will your course actually use? 
+  Especially in courses that try to teach *using* Lean, the amount of formalization
+  can be minimal, e.g. optional exercises for extra credit or only instructor-produced demos.
+
 * What technological prerequisites will you assume from your students?
   Should they have a GitHub account and understand `git`? 
   Have they programmed in a functional language, or in any language?
   Can they be expected to install Lean locally on their own computer?
 
-* [warning about not introducing too many tactic variants]
+* Some courses start with an introduction to the type theory of Lean,
+  perhaps contrasting it with the set theory that mathematicians are used to.
+  Other courses assume that students will pick up the analogy on their own -- 
+  if they're familiar with set theory at all -- 
+  and don't focus on the differences.
+  Both approaches are reasonable, but it's a good idea to pick one early,
+  and stick to it in your teaching materials.
 
-* [discussing type theory vs set theory]
+* The syntax of Lean, and variety of options, can be overwhelming to students.
+  It's important to choose a "dialect" for your course, that may grow as the course progresses.
+  Limiting which tactics you introduce, avoiding library lemmas, 
+  and teaching tactic or term mode (but not both) 
+  are all ways in which people restrict the amount of language detail that students need to absorb at once.
 
-* [how much Lean to use -- essential or incidental? Do students use it mandatory, optional, just you?]
 
 ## Organizing course projects
 
