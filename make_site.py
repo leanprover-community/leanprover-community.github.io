@@ -149,7 +149,7 @@ class Event:
 class Course:
     name: str
     instructor: str
-    location: str
+    institution: str
     lean_version: int
     website: Optional[str] = None
     repo: Optional[str] = None
