@@ -150,6 +150,7 @@ class Course:
     name: str
     instructor: str
     location: str
+    lean_version: int
     website: Optional[str] = None
     repo: Optional[str] = None
     material: Optional[str] = None
@@ -270,8 +271,10 @@ events = []
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
-courses.sort(key=lambda c: (0 if 'lean4' in c.tags else 1, -c.year, c.name))
+courses.sort(key=lambda c: (-c.lean_version, -c.year, c.name))
 for course in courses:
+    course.tags.sort()
+    course.tags.append(f'lean{course.lean_version}')
     for field in ['experiences', 'notes', 'summary', 'experiences']:
         val = getattr(course, field)
         if isinstance(val, str):
