@@ -518,6 +518,20 @@ def render_site(target: Path, base_url: str, reloader=False):
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True)
 
+    # Now build the individual team pages
+    (target/'teams').mkdir(exist_ok=True)
+    env = Environment(loader=FileSystemLoader('templates'))
+    env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
+    team_tpl = env.get_template('_team.html')
+    for team in teams:
+        with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
+            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+
+
+    for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
+        subprocess.call(['rsync', '-a', folder, str(target).rstrip('/')])
+    subprocess.call(['rsync', '-a', 'googlef0c00cb4d31b246f.html', str(target).rstrip('/')])
+    subprocess.call(['rsync', '-a', 'robots.txt', str(target).rstrip('/')])
 
     site.render(use_reloader=reloader)
 
