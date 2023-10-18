@@ -103,7 +103,6 @@ example (x : ℕ) : x = x := by
 
 An alternative is to use curly braces after `by`:
 ```lean
-```lean
 example (x : ℕ) : x = x := by {
   -- fill in your proof here
 }
