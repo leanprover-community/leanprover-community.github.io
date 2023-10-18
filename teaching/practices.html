@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Tips and suggestions for teaching with Lean</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+<h1 id="tips-and-suggestions-for-teaching-with-lean" class="markdown-heading">Tips and suggestions for teaching with Lean <a class="hover-link" href="#tips-and-suggestions-for-teaching-with-lean">#</a></h1>
+<p>In order to help people interested in teaching with Lean,
+we've collected some strategies and approaches here
+that have worked well for people in the community.
+Depending on the context of your course, these approaches may or may not make sense.</p>
+<h2 id="planning-your-course" class="markdown-heading">Planning your course <a class="hover-link" href="#planning-your-course">#</a></h2>
+<p>If you are thinking about introducing Lean into a course,
+or designing a course around Lean,
+there are some important questions you should ask yourself.
+Your answers to these questions can help find comparable courses that people have already taught,
+and can help you choose materials to use.</p>
+<ul>
+<li>
+<p>Do you want to teach Lean, or do you want to teach <em>using</em> Lean?
+In other words, what are the learning objectives of your course?
+Some courses try to teach math or CS topics with Lean as an &quot;implementation language,&quot;
+without expecting that students develop strong Lean skills.
+Others explicitly teach verification and formal proof.</p>
+</li>
+<li>
+<p>How much Lean will your course actually use?
+Especially in courses that try to teach <em>using</em> Lean, the amount of formalization
+can be minimal, e.g. optional exercises for extra credit or only instructor-produced demos.</p>
+</li>
+<li>
+<p>What technological prerequisites will you assume from your students?
+Should they have a GitHub account and understand <code>git</code>?
+Have they programmed in a functional language, or in any language?
+Can they be expected to install Lean locally on their own computer?</p>
+</li>
+<li>
+<p>Some courses start with an introduction to the type theory of Lean,
+perhaps contrasting it with the set theory that mathematicians are used to.
+Other courses assume that students will pick up the analogy on their own --
+if they're familiar with set theory at all --
+and don't focus on the differences.
+Both approaches are reasonable, but it's a good idea to pick one early,
+and stick to it in your teaching materials.</p>
+</li>
+<li>
+<p>The syntax of Lean, and variety of options, can be overwhelming to students.
+It's important to choose a &quot;dialect&quot; for your course, that may grow as the course progresses.
+Limiting which tactics you introduce, avoiding library lemmas,
+and teaching tactic or term mode (but not both)
+are all ways in which people restrict the amount of language detail that students need to absorb at once.</p>
+</li>
+</ul>
+<h2 id="organizing-course-projects" class="markdown-heading">Organizing course projects <a class="hover-link" href="#organizing-course-projects">#</a></h2>
+<p>It is common to use a &quot;course project&quot; to distribute lecture notes, examples, assignments, etc.
+while ensuring that students all remain on a fixed version of Lean and mathlib.
+Here are examples from <a href="https://github.com/hrmacbeth/math2001/">a course at Fordham</a>
+and <a href="https://github.com/BrownCS1951x/fpv2023">a course at Brown</a>.
+The former includes detailed notes that get compiled to HTML;
+the latter relies on an external textbook reference.</p>
+<p>Without some kind of structure like this -- for example, if students receive bare .lean files --
+it is hard to ensure that they all use the same version of Lean.
+It is also a good way to provide a &quot;library&quot; file or files
+containing basic definitions, tactics, and such that are useful for your course.
+[if you are distributing bare Lean files...]</p>
+<p>These projects are often hosted on GitHub.
+Students are asked to clone the project, or create a Codespace or Gitpod instance,
+at the start of the course.
+They are instructed to pull updates periodically, for instance, when new homeworks are released.
+If students are not expected to be proficient with <code>git</code>, you can provide
+<a href="https://github.com/brown-cs22/CS22-Lean-2023/tree/main/scripts">helper scripts</a>
+that attempt to do this management automatically.</p>
+<p>Some instructors recommend that students copy homework files before beginning an assignment,
+working on the copied version,
+to avoid merge conflicts if the assignment should change.</p>
+<p>Other instructors have used GitHub Classrooms for assignment releases.
+In this setup, each assignment must be its own standalone Lean project.</p>
+<h2 id="lean-in-the-cloud-setups" class="markdown-heading">Lean-in-the-cloud setups <a class="hover-link" href="#lean-in-the-cloud-setups">#</a></h2>
+<p>Our <a href="resources.html#lean-in-the-cloud-setups">resources page</a> has pointers to setting up GitHub Codespaces and Gitpod
+for use with a course project.
+Especially for large courses aimed at students who might struggle to install Lean locally,
+the use of cloud resources to run Lean can greatly simplify the beginning of a course.</p>
+<p>In both approaches, students will be able to use VSCode in a browser
+to edit Lean files with a Lean server running remotely.
+With Codespaces, a convenient <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces">VSCode plugin</a>
+makes it possible to work from a local VSCode installation too.
+The obvious upsides are that there is a uniform environment for all students,
+without installation headaches,
+and that no student is using an underpowered machine.
+Downsides include that student files are saved on the cloud, and students might struggle to
+download and submit them;
+these cloud services limit the number of free hours per student per month;
+and internet access is required to work on the course.</p>
+<p>Some instructors have successfully run large courses using these resources,
+and many offer them as an option to students.
+For GitHub Codespaces, it is important to remind students to sign up for
+GitHub's <a href="https://education.github.com/pack">student benefits</a>
+to take advantage of extra Codespaces hours.</p>
+<h2 id="renaming-and-redefining-tactics" class="markdown-heading">Renaming and redefining tactics <a class="hover-link" href="#renaming-and-redefining-tactics">#</a></h2>
+<p>The Lean/mathlib names for tactics may not match how you present these topics in class.
+In Lean 4 it is easy to create <a href="https://github.com/brown-cs22/CS22-Lean-2023/blob/0a0a8e168559462a39e33a7b2940b11bd5a59e90/BrownCs22/Library/Tactics.lean#L59">aliases for certain tactic calls</a>
+or <a href="https://github.com/brown-cs22/CS22-Lean-2023/blob/0a0a8e168559462a39e33a7b2940b11bd5a59e90/BrownCs22/Library/Tactics.lean#L61">change the behavior of existing tactics</a>
+within a course project.
+(In the linked examples, in any course file importing <code>Tactics.lean</code>, the behavior of <code>linarith</code> will be redefined.)</p>
+<h2 id="ending-proofs-with-done" class="markdown-heading">Ending proofs with <code>done</code> <a class="hover-link" href="#ending-proofs-with-done">#</a></h2>
+<p>It can sometimes be confusing to tell when a tactic proof is complete,
+since the error message appears at the top of the proof but not at the bottom.
+Some instructors have had success teaching students to begin writing a proof
+with the tactic <code>done</code> at the end.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span> 
+  <span class="c1">-- fill in your proof here</span>
+  <span class="n">done</span>
+</code></pre></div>
+</div>
+
+<p>An alternative is to use curly braces after <code>by</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span> <span class="o">{</span>
+  <span class="c1">-- fill in your proof here</span>
+<span class="o">}</span>
+</code></pre></div>
+</div>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/courses.html">Courses using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/debian.html">Debian/Ubuntu installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/linux.html">Generic Linux installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/macos.html">MacOS installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/windows.html">Windows installation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean.math.hhu.de/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/project.html">Using Lake (build system)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/toolchain.html">The Lean toolchain</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/tips_and_tricks.html">Tips and tricks</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/ci.html">CI for 3rd party projects</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/teaching/practices.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
