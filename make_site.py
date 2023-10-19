@@ -150,13 +150,14 @@ class Event:
 class Course:
     name: str
     instructor: str
-    location: str
-    website: str
+    institution: str
+    lean_version: int
+    website: Optional[str] = None
     repo: Optional[str] = None
     material: Optional[str] = None
     notes : Optional[str] = None
-    tags: Optional[List[str]] = None
-    dates: str = ''
+    tags: List[str] = field(default_factory=list)
+    year: int = 2023
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
@@ -166,27 +167,28 @@ urllib.request.urlretrieve(
 )
 with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
     header_data = json.load(h_file)
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/declarations/declaration-data.bmp',
-    DATA/'declaration-data.json'
-)
-with (DATA/'declaration-data.json').open('r', encoding='utf-8') as h_file:
-    declaration_data = json.load(h_file)
 
 @dataclass
-class DeclarationDataEntry:
-    sourceLink: str
-    name: str
-    line: int
-    kind: str
-    docLink: str
-    doc: str
+class HeaderDataEntry:
+    @dataclass
+    class InfoEntry:
+        sourceLink: str
+        name: str
+        line: int
+        kind: str
+        docLink: str
+        doc: str
+    info: InfoEntry
+    header: str
 
 declarations = {
-    k: DeclarationDataEntry(**d) for k, d in declaration_data['declarations'].items()
+    k: HeaderDataEntry(
+        info=HeaderDataEntry.InfoEntry(**d['info']),
+        header=d['header'],
+    ) for k, d in header_data.items()
 }
 
-num_thms = len([d for d in declarations if declarations[d].kind == 'theorem'])
+num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
 urllib.request.urlretrieve(
@@ -208,9 +210,11 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                     continue
                 doc_decls.append(DocDecl(
                     name=decl,
-                    decl_header_html = header_data.get(decl, ''),
-                    docs_link=decl_info.docLink,
-                    src_link=decl_info.sourceLink))
+                    # TODO: add missing `/mathlib4_docs/` prefix to links within this header
+                    decl_header_html = decl_info.header,
+                    # note: the `.bmp` data files use doc-relative links
+                    docs_link='/mathlib4_docs/' + decl_info.info.docLink,
+                    src_link=decl_info.info.sourceLink))
             h.doc_decls = doc_decls
         else:
             h.doc_decls = []
@@ -223,7 +227,8 @@ def replace_link(name, id):
         return '/mathlib4_docs/' + name
     else:
         try:
-            return declarations[name].docLink
+            # note: the `.bmp` data files use doc-relative links
+            return '/mathlib4_docs/' + declarations[name].info.docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
 
@@ -311,13 +316,19 @@ with (DATA/'events.yaml').open('r', encoding='utf-8') as h_file:
 
 with (DATA/'courses.yaml').open('r', encoding='utf-8') as h_file:
     courses = [Course(**e) for e in yaml.safe_load(h_file)]
+courses_tags = set()
+courses.sort(key=lambda c: (-c.lean_version, -c.year, c.name))
 for course in courses:
+    courses_tags.update(course.tags)
+    course.tags.sort()
+    course.tags.append(f'lean{course.lean_version}')
     for field in ['experiences', 'notes', 'summary', 'experiences']:
         val = getattr(course, field)
         if isinstance(val, str):
             setattr(course, field, render_markdown(val))
         elif isinstance(val, list):
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
+courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
 
 def format_date_range(event):
     if event.start_date and event.end_date:
@@ -500,7 +511,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
-                ('courses.html', {'courses': courses}),
+                ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
