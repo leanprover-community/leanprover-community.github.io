@@ -56,7 +56,6 @@ Without some kind of structure like this -- for example, if students receive bar
 it is hard to ensure that they all use the same version of Lean.
 It is also a good way to provide a "library" file or files 
 containing basic definitions, tactics, and such that are useful for your course.
-[if you are distributing bare Lean files...]
 
 These projects are often hosted on GitHub. 
 Students are asked to clone the project, or create a Codespace or Gitpod instance, 
