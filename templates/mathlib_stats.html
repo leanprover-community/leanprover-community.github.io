@@ -3,26 +3,6 @@
 
 {% block content %}
 
-    <div class="alert alert-info">
-        <p>
-        We are currently updating the Lean community website to describe working with Lean 4,
-        but most of the information you will find here today still describes Lean 3.
-        </p>
-        <p>
-        Pull requests updating this page for Lean 4 are very welcome.
-        There is a link at the bottom of this page.
-        </p>
-        <p>
-        Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-        and ask for whatever help you need during this transitional period!
-        </p>
-        <p>
-        The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-        If you need to link to Lean 3 specific resources please link there.
-        </p>
-    </div>
-
-
     <h1>Mathlib statistics</h1>
 
     <h2>Counts</h2>
@@ -74,111 +54,216 @@
 <link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
 
+
+<script type="text/javascript" src="{{ base_url }}/mathlib4/gitstats4.js"></script>
+<script>
+    // because both gitstats files use the same variable names, rename the mathlib4 ones before importing the mathlib3 ones
+    by_year_month4 = by_year_month
+    by_year4 = by_year 
+    files_stamps4 = files_stamps
+    lines_stamps4 = lines_stamps 
+    files_by_date4 = files_by_date 
+    lines_by_date4 = lines_by_date
+</script>
 <script type="text/javascript" src="{{ base_url }}/mathlib_stats/gitstats.js"></script>
 
 <script>
 
-var color = Chart.helpers.color;
-var blue = 'rgb(54, 162, 235)'
-
-function makeBarChart(id, title, data) {
-    var barChartData = {
-        labels: data.labels,
-        datasets: [{
-            backgroundColor: color(blue).alpha(0.5).rgbString(),
-            borderColor: blue,
-            borderWidth: 1,
-            data: data.data
-        }]
-    };
-
-    var ctx = document.getElementById(id).getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                display: false,
-            },
-            title: {
-                display: true,
-                text: title
-            }
+    var color = Chart.helpers.color;
+    var blue ='#377eb8'
+    var red = '#ff0029'
+    
+    function pad_mathlib4_data(mathlib3_data, mathlib4_data) {
+      missing_len = mathlib3_data.labels.length - mathlib4_data.labels.length 
+      mathlib4_data.data = Array(missing_len).fill(0).concat(mathlib4_data.data)
+    }
+    
+    function merge_timestamps_and_values(mathlib3_ts, mathlib3_vals, mathlib4_ts, mathlib4_vals) {
+      // Initialize arrays for merged timestamps, mathlib3 values, and mathlib4 values
+      const mergedTimestamps = [];
+      const mergedMathlib3Vals = [];
+      const mergedMathlib4Vals = [];
+    
+      // Initialize variables to track the previous values
+      let prevMathlib3Val = 0;
+      let prevMathlib4Val = 0;
+    
+      // Initialize index variables for both arrays
+      let index3 = 0;
+      let index4 = 0;
+    
+      // Merge timestamps and values with previous values
+      while (index3 < mathlib3_ts.length && index4 < mathlib4_ts.length) {
+        const timestamp3 = mathlib3_ts[index3];
+        const timestamp4 = mathlib4_ts[index4];
+    
+        if (timestamp3 < timestamp4) {
+          // Timestamp from mathlib3 is earlier
+          mergedTimestamps.push(timestamp3);
+          mergedMathlib3Vals.push(mathlib3_vals[index3]);
+          mergedMathlib4Vals.push(prevMathlib4Val);
+          prevMathlib3Val = mathlib3_vals[index3];
+          index3++;
+        } else if (timestamp4 < timestamp3) {
+          // Timestamp from mathlib4 is earlier
+          mergedTimestamps.push(timestamp4);
+          mergedMathlib4Vals.push(mathlib4_vals[index4]);
+          mergedMathlib3Vals.push(prevMathlib3Val);
+          prevMathlib4Val = mathlib4_vals[index4];
+          index4++;
+        } else {
+          // Timestamps are equal
+          mergedTimestamps.push(timestamp3);
+          mergedMathlib3Vals.push(mathlib3_vals[index3]);
+          mergedMathlib4Vals.push(mathlib4_vals[index4]);
+          prevMathlib3Val = mathlib3_vals[index3];
+          prevMathlib4Val = mathlib4_vals[index4];
+          index3++;
+          index4++;
         }
-    });
-}
-
-colors = ['#377eb8',
-    '#ff0029',  '#66a61e', '#984ea3', '#00d2d5', '#ff7f00',
-    '#af8d00', '#7f80cd', '#b3e900', '#c42e60', '#a65628', '#f781bf',
-    '#8dd3c7', '#bebada', '#fb8072']
-
-function makeLineChart(id, title, stamps, datas, show_title = true,
-    show_legend = true) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var datasets = []
-    colidx = 0
-    for (const [name, data] of Object.entries(datas)) {
-        datasets.push(
-           { label: name,
-             fill: false,
-             borderColor: colors[colidx],
-             data: data,
-             cubicInterpolationMode: 'monotone',
-             pointRadius: 1,
-           })
-        colidx = colidx + 1
+      }
+    
+      // If there are remaining elements in either array, add them
+      while (index3 < mathlib3_ts.length) {
+        mergedTimestamps.push(mathlib3_ts[index3]);
+        mergedMathlib3Vals.push(mathlib3_vals[index3]);
+        mergedMathlib4Vals.push(prevMathlib4Val);
+        prevMathlib3Val = mathlib3_vals[index3];
+        index3++;
+      }
+    
+      while (index4 < mathlib4_ts.length) {
+        mergedTimestamps.push(mathlib4_ts[index4]);
+        mergedMathlib4Vals.push(mathlib4_vals[index4]);
+        mergedMathlib3Vals.push(prevMathlib3Val);
+        prevMathlib4Val = mathlib4_vals[index4];
+        index4++;
+      }
+    
+      return {
+        mergedTimestamps,
+        mergedMathlib3Vals,
+        mergedMathlib4Vals,
+      };
+    }
+    
+    
+    function makeBarChart(id, title, mathlib3_data, mathlib4_data, show_legend = true) {
+        var barChartData = {
+            labels: mathlib3_data.labels,
+            datasets: [{
+                label: "mathlib3",
+                backgroundColor: color(blue).alpha(0.5).rgbString(),
+                borderColor: blue,
+                borderWidth: 1,
+                data: mathlib3_data.data
+            },
+            {
+                label: "mathlib4",
+                backgroundColor: color(red).alpha(0.5).rgbString(),
+                borderColor: red,
+                borderWidth: 1,
+                data: mathlib4_data.data
+            }]
+        };
+    
+        var ctx = document.getElementById(id).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    display: show_legend,
+                },
+                title: {
+                    display: true,
+                    text: title
+                }
+            }
+        });
+    }
+    
+    colors = [blue, red]
+    
+    function makeLineChart(id, title, stamps, mathlib3_datas, mathlib4_datas, show_title = true,
+        show_legend = true) {
+        var ctx = document.getElementById(id).getContext('2d');
+        var datasets = []
+        colidx = 0
+        for (const [name, data] of Object.entries(mathlib3_datas)) {
+            datasets.push(
+               { label: "mathlib3",
+                 fill: false,
+                 borderColor: colors[colidx],
+                 data: data,
+                 cubicInterpolationMode: 'monotone',
+                 pointRadius: 1,
+               })
+            colidx = colidx + 1
+        };
+        for (const [name, data] of Object.entries(mathlib4_datas)) {
+            datasets.push(
+               { label: "mathlib4",
+                 fill: false,
+                 borderColor: colors[colidx],
+                 data: data,
+                 cubicInterpolationMode: 'monotone',
+                 pointRadius: 1,
+               })
+            colidx = colidx + 1
+        };
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: stamps,
+                datasets : datasets
+            },
+            options: {
+                title: {
+                    display: show_title,
+                    text: title
+                },
+                legend: {
+                    display: show_legend,
+                },
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            parser: moment.unix,
+                        },
+                    }]
+                },
+            },
+        });
+    }
+    
+    
+    window.onload = function() {
+        pad_mathlib4_data(by_year_month, by_year_month4)
+        pad_mathlib4_data(by_year, by_year4)
+    
+        makeBarChart('by_year_month', 'Commits by month', by_year_month, by_year_month4)
+        makeBarChart('by_year', 'Commits by year', by_year, by_year4)
+    
+        files_data = merge_timestamps_and_values(files_stamps, files_by_date['Number of files'], files_stamps4, files_by_date4['Number of files'])
+    
+        lines_data = merge_timestamps_and_values(lines_stamps, lines_by_date['Number of lines'], lines_stamps4, lines_by_date4['Number of lines'])
+    
+        // makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
+        // makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
+        makeLineChart('files_by_date', 'Number of files', files_data.mergedTimestamps,
+        {'Number of files' : files_data.mergedMathlib3Vals}, {'Number of files' : files_data.mergedMathlib4Vals}, true)
+        makeLineChart('lines_by_date', 'Number of lines', lines_data.mergedTimestamps,
+        {'Number of lines' : lines_data.mergedMathlib3Vals}, {'Number of lines' : lines_data.mergedMathlib4Vals}, true)
+        // makeLineChart('lines_by_date', 'Number of lines', lines_data[0],
+        // lines_data[1],lines_data[2], true, false)
+    
+    
     };
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: stamps,
-            datasets : datasets
-        },
-        options: {
-            title: {
-                display: show_title,
-                text: title
-            },
-            legend: {
-                display: show_legend,
-            },
-            scales: {
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'month',
-                        parser: moment.unix,
-                    },
-                }]
-            },
-        },
-    });
-}
-window.onload = function() {
-    makeBarChart('by_year_month', 'Commits by month', by_year_month)
-    makeBarChart('by_year', 'Commits by year', by_year)
-
-    makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors)
-    makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors)
-    makeLineChart('files_by_date', 'Number of files', files_stamps,
-        files_by_date, true, false)
-    makeLineChart('lines_by_date', 'Number of lines', lines_stamps,
-        lines_by_date, true, false)
-
-    var table = new Tabulator("#authors_table", {
-        data: authors, //set initial table data
-        layout:"fitColumns",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:true,
-        columns: authors_cols,
-        height: "600px",
-    });
-    table.redraw(true);
-
-};
-
-
+    
+    
 </script>
 {% endblock %}
