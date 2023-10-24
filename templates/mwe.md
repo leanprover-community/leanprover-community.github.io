@@ -4,7 +4,7 @@
 
 When posting code on Zulip, please include all `import`s, `open`s, `universe`s, and `variable`s, so others can simply just copy-paste what you post, and see the same issue that you are seeing.
 
-The best way to ensure you have done this is to copy-paste the code snipped you are proposing to post into an empty Lean file, or into the [lean web editor](https://lean.math.hhu.de), and check it compiles.
+The best way to ensure you have done this is to copy-paste the code snipped you are proposing to post into an empty Lean file, or into the [lean web editor](https://live.lean-lang.org/), and check it compiles.
 
 ## Examples
 
@@ -74,7 +74,7 @@ It is fine for your example to throw compiler errors or warnings. In particular,
 
 ## How do I know if my code is a MWE?
 
-You should *test* this by copy-pasting your code snippet into a new Lean file, or the [lean web editor](https://lean.math.hhu.de), and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
+You should *test* this by copy-pasting your code snippet into a new Lean file, or the [lean web editor](https://live.lean-lang.org/), and seeing if you get the expected behavior. This is exactly what people who try to help you will do!
 
 ## What if I'm asking about games like the [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4)?
 
