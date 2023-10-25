@@ -20,8 +20,8 @@ example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 := by
   calc a = b + 1 := H1
        _ = c + 1 := by rw[H2]
 ```
-In fact, `calc A = B : H ...` in tactic mode functions exactly like a
-call to `refine (calc A = B : H ...)`.
+In fact, `calc A = B := H ...` in tactic mode functions exactly like a
+call to `refine (calc A = B := H ...)`.
 
 ## Getting effective feedback while using calc
 
@@ -30,30 +30,19 @@ proof is complete. Use `_` as in the example above or `sorry` to stand
 for missing justifications. `sorry` will supress error messages
 entirely, while `_` will generate a guiding error message.
 
-If the structure of calc is incorrect (e.g., missing `:` or the
+If the structure of calc is incorrect (e.g., missing `:=` or the
 justification after it), you may see error messages that are obscure
-and/or red squiggles that end up under a random `...`. To avoid these,
+and/or red squiggles that end up under a random `_`. To avoid these,
 you might first populate a skeleton proof such as:
 
 ```lean
 example (A B C D : ℝ ) : A = D :=
-calc A = B : sorry
-...    = C : _
-...    = D : sorry
+calc A = B := sorry
+     _ = C := _
+     _ = D := sorry
 ```
 
 and then fill in the `sorry` and `_` gradually.
-
-In tactic mode calc should be terminated with a comma:
-```lean
-have H : A = D,
-{ calc A = B : sorry
-  ...    = C : sorry
-  ...    = D : _,
-  sorry },
-```
-and the `_` can be left in as they generate a subgoal to be resolved
-after calc (here by the last `sorry`).
 
 (Idle thought: could one write a VS Code snippet to write this skeleton?)
 
