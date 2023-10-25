@@ -3,7 +3,7 @@
 `calc` is an environment -- so a "mode" like tactic mode, term mode and
 [conv mode](conv.html). Documentation and basic examples for how to use
 it are in Theorem Proving In Lean, in
-[section 4.3](https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs).
+[section 4](https://lean-lang.org/theorem_proving_in_lean4/quantifiers_and_equality.html#calculational-proofs).
 
 Basic example usage:
 
