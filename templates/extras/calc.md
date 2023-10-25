@@ -53,13 +53,18 @@ the operators, but actually `calc` will work with any relation for which
 the corresponding transitivity statement is tagged `[trans]`:
 
 ```lean
-definition r : ℕ → ℕ → Prop := sorry
-@[trans] theorem r_trans (a b c : ℕ) : r a b → r b c → r a c := sorry
-infix `***`: 50 := r
+def r : ℕ → ℕ → Prop := sorry
+variable (a b c: ℕ)
+def r_trans (h₁ : r a b) (h₂ : r b c) : r a c := sorry
+
+instance : Trans r r r where
+  trans := r_trans _ _ _
+
+infix:50 "***" => r
 
 example (a b c : ℕ) (H1 : a *** b) (H2 : b *** c) : a *** c :=
-calc a *** b : H1
-...    *** c : H2
+calc a *** b := H1
+     _ *** c := H2
 ```
 
 ## Using more than one operator
