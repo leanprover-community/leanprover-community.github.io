@@ -55,10 +55,10 @@ the corresponding transitivity statement is tagged `[trans]`:
 ```lean
 def r : ℕ → ℕ → Prop := sorry
 variable (a b c: ℕ)
-def r_trans (h₁ : r a b) (h₂ : r b c) : r a c := sorry
+def r_trans {a b c} (h₁ : r a b) (h₂ : r b c) : r a c := sorry
 
 instance : Trans r r r where
-  trans := r_trans _ _ _
+  trans := r_trans
 
 infix:50 "***" => r
 
@@ -69,20 +69,21 @@ calc a *** b := H1
 
 ## Using more than one operator
 
-This is possible; TPIL has the following example:
+This is possible, for example:
 
 ```lean
 theorem T2 (a b c d : ℕ)
-  (h1 : a = b) (h2 : b ≤ c) (h3 : c + 1 < d) : a < d :=
-calc
-  a     = b     : h1
-    ... < b + 1 : nat.lt_succ_self b
-    ... ≤ c + 1 : nat.succ_le_succ h2
-    ... < d     : h3
+  (h1 : a = b) (h2 : b ≤ c) (h3 : c + 1 < d) : a < d := 
+  calc
+    a = b     := h1
+    _ < b + 1 := Nat.lt_succ_self b
+    _ ≤ c + 1 := Nat.succ_le_succ h2
+    _ < d     := h3
+
  ```
 
 What is actually going on here? The proofs themselves are not a mystery,
-for example `nat.succ_le_succ h2` is a proof of `b + 1  ≤ c + 1`. The
+for example `Nat.succ_le_succ h2` is a proof of `b + 1  ≤ c + 1`. The
 clever part is that lean can put all of these together to correctly
 deduce that if `U = V < W ≤ X < Y` then `U < Y`. The way this is done,
 Kevin thinks (can someone verify this?) is that Lean continually tries
@@ -104,37 +105,33 @@ doing this? The easiest case is when one of `op1` and `op2`
 is `=`. Lean knows
 
 ```lean
-#check @trans_rel_right -- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), a = b → r b c → r a c
-#check @trans_rel_left -- ∀ {α : Sort u_1} {a b c : α} (r : α → α → Prop), r a b → b = c → r a c
-```
+#check trans_rel_right -- {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : a = b) (h₂ : r b c) : r a c
+#check trans_rel_left -- {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : r a b) (h₂ : b = c) : r a c
 
 and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
-operator is the equality operator, Lean looks through the theorems in its database which are tagged
-`[trans]` and applies these instead. For example Lean has the following definitions:
-
-```
-@[trans] lemma lt_of_lt_of_le [preorder α] : ∀ {a b c : α}, a < b → b ≤ c → a < c
-@[trans] lemma lt_trans [preorder α] : ∀ {a b c : α}, a < b → b < c → a < c
-```
-
-and it is easily seen that these lemmas can be used to justify the example in the manual.
+operator is the equality operator, Lean looks through the instances of
+`Trans`` and applies these instead.
 
 ## Using user-defined operators
 
-It is as simple as tagging the relevant results with `trans`. For example
+It is as simple as tagging the relevant adding new `Trans`. For example
 
 ```lean
-definition r : ℕ → ℕ → Prop := sorry
-definition s : ℕ → ℕ → Prop := sorry
-definition t : ℕ → ℕ → Prop := sorry
-@[trans] theorem rst_trans (a b c : ℕ) : r a b → s b c → t a c := sorry
-infix `***`: 50 := r
-infix `&&&` : 50 := s
-infix `%%%` : 50 := t
+def r : ℕ → ℕ → Prop := sorry
+def s : ℕ → ℕ → Prop := sorry
+def t : ℕ → ℕ → Prop := sorry
 
-example (a b c : ℕ) (H1 : a *** b) (H2 : b &&& c) : a %%% c :=
-calc a *** b : H1
-...    &&& c : H2
+theorem rst_trans {a b c : ℕ} : r a b → s b c → t a c := sorry
+infix:50 "****" => r
+infix:50 "^^^^" => s
+infix:50 "%%%%" => t
+
+instance : Trans r s t  where
+  trans := rst_trans
+
+example (a b c : ℕ) (H1 : a **** b) (H2 : b ^^^^ c) : a %%%% c :=
+calc a **** b := H1
+     _ ^^^^ c := H2
 ```
 
 This example shows us that the third operator `op3` can be different to both `op1` and `op2`.
