@@ -44,6 +44,16 @@ calc A = B := sorry
 
 and then fill in the `sorry` and `_` gradually.
 
+In tactic mode a `?_` can be used to generate a subgoal to be resolved.
+
+```lean
+example (A B C D : ℝ ) : A = D := by
+     calc A = B := sorry
+          _ = C := ?_
+          _ = D := sorry
+     sorry
+```
+
 (Idle thought: could one write a VS Code snippet to write this skeleton?)
 
 ## Using operators other than equality
