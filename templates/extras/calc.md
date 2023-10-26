@@ -50,7 +50,7 @@ and then fill in the `sorry` and `_` gradually.
 
 Many of the basic examples in TPIL use equality for most or all of
 the operators, but actually `calc` will work with any relation for which
-the corresponding transitivity statement is tagged `[trans]`:
+we have created an instance of `Trans`
 
 ```lean
 def r : ℕ → ℕ → Prop := sorry
@@ -110,7 +110,7 @@ is `=`. Lean knows
 
 and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
 operator is the equality operator, Lean looks through the instances of
-`Trans`` and applies these instead.
+`Trans` and applies these instead.
 
 ## Using user-defined operators
 
