@@ -54,6 +54,13 @@ Mathlib.
   * may have any changes from `bump/v4.X.0` merged into it manually
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
     branch working again recent nightly releases.
+* Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
+  "Mathlib reviewers" stream.
+* Success in CI on the `nightly-testing` branch results in the creation or updating of a branch
+  `nightly-testing-YYYY-MM-DD` to match that commit.
+  * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that:
+    * the `lean-toolchain` is `leanprover/lean4:nightly-YYYY-MM-DD`, and
+    * CI succeeds.
 * When changes are required to Std to adapt to a breaking change in Lean,
   please open a PR.
   * Typically, if the change was made in `leanprover/lean4#NNNN`,
@@ -83,13 +90,6 @@ Mathlib.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Std.
 * Mathlib adaptation PRs on `lean-pr-testing-NNNN` branches may need to change the Std dependency
   to use a `lean-pr-testing-NNNN` branch of Std, if Std also experiences breakages.
-* Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
-  "Mathlib reviewers" stream.
-* Success in CI on the `nightly-testing` branch results in the creation or updating of a branch
-  `nightly-testing-YYYY-MM-DD` to match that commit.
-  * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that:
-    * the `lean-toolchain` is `leanprover/lean4:nightly-YYYY-MM-DD`, and
-    * CI succeeds.
 
 ### Combined CI between Lean and Mathlib
 
@@ -98,7 +98,7 @@ Mathlib.
   * If you have not done this, a bot will comment saying that it can not run Mathlib CI,
     and advising that if you need this you will need to rebase your PR onto `nightly`.
 * Further, the latest nightly release may or may not have a corresponding
-  `nightly-testing-YYYY-MM-DD` branch on Mathlib (see above).
+  `nightly-testing-YYYY-MM-DD` branch on Std and Mathlib (see above).
   * If this branch does not yet exist, a bot will comment on your PR notifying you
     that it can not run Mathlib CI, and advising that it will try again when you either
     * push more commits, or
