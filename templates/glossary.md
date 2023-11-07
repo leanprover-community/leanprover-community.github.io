@@ -390,9 +390,9 @@ Examples and further detail can found on [the `simp` page](simp.html#simp-normal
 ### style linter
 
 A *style linter* is a [linter](#lint) which attempt to ensure uniform appearance or style of code within [mathlib](#mathlib), without affecting its working behavior.
-Concretely, mathlib includes [a short Python program](https://github.com/leanprover-community/mathlib/blob/master/scripts/lint-style.py) which checks for instance that lines are less than 100 characters long, that every file has a [module docstring](#module-docstring), et cetera.
+Concretely, mathlib includes [a short Python program](https://github.com/leanprover-community/mathlib4/blob/master/scripts/lint-style.py) which checks for instance that lines are less than 100 characters long, that every file has a [module docstring](#module-docstring), et cetera.
 Mathlib's [continuous integration](#continuous-integration) ensures that new code passes the defined linters.
-Allowed style linting exceptions are stored in a [style exceptions file](https://github.com/leanprover-community/mathlib/blob/master/scripts/style-exceptions.txt) within the repository.
+Allowed style linting exceptions are stored in a [style exceptions file](https://github.com/leanprover-community/mathlib4/blob/master/scripts/style-exceptions.txt) within the repository.
 
 ### tactic mode
 
@@ -443,7 +443,7 @@ In the context of editing Lean files, an abbreviation is a way of entering a sym
 
 For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
 
-The full list of abbreviations (and their replacements) can be found [in the `vscode-lean` repository](https://github.com/leanprover/vscode-lean/blob/master/src/abbreviation/abbreviations.json).
+The full list of abbreviations (and their replacements) can be found [in the `vscode-lean4` repository](https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/src/abbreviation/abbreviations.json).
 
 ### whnf
 
