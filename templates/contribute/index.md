@@ -67,7 +67,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
 * If you're working on the main `mathlib` repository rather than your own fork,
   continuous integration will automatically kick in at this point.
   You can view the output by visiting
-  https://github.com/leanprover-community/mathlib/tree/my_new_branch
+  https://github.com/leanprover-community/mathlib4/tree/my_new_branch
   (There will be a green tick on the line describing the most recent commit if everything works,
   otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
   Click on the red cross to see details.)
