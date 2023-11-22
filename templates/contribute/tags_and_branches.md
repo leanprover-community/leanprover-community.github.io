@@ -22,7 +22,7 @@ Mathlib.
 
 * Development occurs on the `master` branch.
 * Stable releases and release candidates have tags, e.g. `v4.2.0` or `v4.3.0-rc1`.
-  * To use these release in a project, your `lean-toolchain` should contain e.g. `leanprover/lean4:v4.2.0`.
+  * To use one of these releases in a project, your `lean-toolchain` should contain e.g. `leanprover/lean4:v4.2.0`.
 * Stable releases arrive at the end of each month, and are identical to the last release candidate.
 * The first release candidate of the next version is released immediately after the stable release.
 * Each version has a `releases/v4.X.0` feature branch, which may contain
@@ -74,37 +74,37 @@ Mathlib.
   (Note that the steps below happen automatically at Mathlib,
   but need to be done manually for Std.)
   * If the change was made in `leanprover/lean4#NNNN`,
-    then this branch should be called `lean-pr-testing-NNNN`.
-  * This branch should be based off the branch `nightly-testing-YYYY-MM-DD`
+    then the Std adaptation branch should be called `lean-pr-testing-NNNN`.
+  * The Std adaptation branch should be based off the branch `nightly-testing-YYYY-MM-DD`
     where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off
     (you can check this will `script/most-recent-nightly-tag.sh` in the Lean repository).
-  * If this branch does not yet exist, you will need to wait
+  * If the `nightly-testing-YYYY-MM-DD` branch does not yet exist, you will need to wait
     (and possibly move forward to a subsequent nightly).
     Contact @semorrison for assistance if needed.
-  * Ideally you will push this branch to the main Std repository; we can provide write access if needed.
+  * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Std repository;
+    we can provide write access if needed.
   * The `lean-toolchain` on this branch must contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
   * You may open a PR from the `lean-pr-testing-NNNN` branch, either before or after
     making the required adaptations.
   * When opening the PR, remember to set the base branch to `nightly-testing-YYYY-MM-DD`.
-  * Note that the PR, when approved, will not actually be merged into `nightly-testing-YYYY-MM-DD`
-    but rather into the `bump/v4.X.0` branch.
   * Please label the PR with the `v4.X.0` and 'depends on core changes' labels.
     (Or ask for this to be done if you don't have write access.)
   * Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
     * should have its `lean-toolchain` updated to `leanprover/lean4:nightly-YYYY-MM-DD`
-    * may be merged into `nightly-testing` as needed.
-  * Once the Std adaptation PR has been approved, it can be merged to `bump/v4.X.0`.
-* It is always allowed to merged `bump/v4.X.0` into `nightly-testing`, but not conversely.
-  (Changes to `bump/v4.X.0` have been reviewed, but changes to `nightly-testing` may nothave been.)
+    * may be merged into `nightly-testing` as needed to keep `nightly-testing` working
+  * Once the Std adaptation PR has been approved,
+    a maintainer will merge it into `bump/v4.X.0` (not `nightly-testing-YYYY-MM-DD`).
+* It is always allowed to merge `bump/v4.X.0` into `nightly-testing`, but not conversely.
+  (Changes to `bump/v4.X.0` have been reviewed, but changes to `nightly-testing` may not have been.)
 * When it is time to update Std to a new Lean release,
   *hopefully* all that is required is to make a new PR
   consisting of squash merging `bump/v4.X.0` to `main`.
 
-### `leanprover-community/mathilb4` (aka 'Mathlib')
+### `leanprover-community/mathlib4` (aka 'Mathlib')
 
 * Everything said above about Std applies to Mathlib, except:
   * Development occurs on `master`.
-  * PRs to Mathlib should be made from branches of the Mathlib repository itself.
+  * All PRs to Mathlib should be made from branches of the Mathlib repository itself.
     * This is required for Mathlib's `.olean` caching mechanism.
     * Please ask on the [zulip chat](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission) for "write" permission to Mathlib.
       Please write a sentence about your background and plans.
