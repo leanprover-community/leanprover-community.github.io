@@ -1,0 +1,33 @@
+name: check bib
+
+on:
+  pull_request:
+    paths:
+      - lean.bib
+
+jobs:
+  build:
+    name: Run bibtool
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install bibtool
+        run: |
+          sudo apt-get update --fix-missing
+          sudo apt-get install -y bibtool
+
+      - name: produce normalized file
+        run: |
+          bibtool --preserve.key.case=on \
+                  --preserve.keys=on \
+                  --pass.comments=on \
+                  --print.use.tab=off \
+                  -s -i lean.bib -o lean2.bib
+      - name: check diff
+        run: |
+          diff lean.bib lean2.bib || {
+            echo "::error::lean.bib is not normalized."
+            echo "::error::run 'bibtool --preserve.key.case=on --preserve.keys=on --pass.comments=on --print.use.tab=off -s -i lean.bib -o lean.bib' to fix the issue."
+            exit 1
+          }
