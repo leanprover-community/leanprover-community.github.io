@@ -507,16 +507,6 @@ When using the rewrite tactic `rw`, after the left arrow (`←`) there should be
 `rw [← add_comm a b]`.
 Same for the `do` notation: `do return (← f) + (← g)`
 
-
-```lean
-import Mathlib.Data.Nat.ModEq
-import Mathlib.Data.Nat.Parity
-
-example {n : ℕ} : n % 4 = 1 ∨ n % 4 = 3 → Odd n := by
-  rw [← Nat.odd_mod_four_iff, ← Nat.odd_iff, imp_self]
-  trivial
-```
-
 ### Normal forms
 
 Some statements are equivalent. For instance, there are several equivalent
