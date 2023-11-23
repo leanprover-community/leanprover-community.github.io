@@ -503,7 +503,10 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
     linarith  
 ```
 
-When using the rewrite tactic `rw`, there should be a space after the left arrow (`←`):
+When using the rewrite tactic `rw`, after the left arrow (`←`) there should be a space:
+`rw [← add_comm a b]`.
+Same for the `do` notation: `do return (← f) + (← g)`
+
 
 ```lean
 import Mathlib.Data.Nat.ModEq
