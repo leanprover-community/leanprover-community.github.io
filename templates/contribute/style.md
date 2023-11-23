@@ -503,8 +503,16 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
     linarith  
 ```
 
-Both when using the rewrite tactic (`rw`) and the `do` notation, there should
-be a space after the left arrow (`←`).
+When using the rewrite tactic `rw`, there should be a space after the left arrow (`←`):
+
+```lean
+import Mathlib.Data.Nat.ModEq
+import Mathlib.Data.Nat.Parity
+
+example {n : ℕ} : n % 4 = 1 ∨ n % 4 = 3 → Odd n := by
+  rw [← Nat.odd_mod_four_iff, ← Nat.odd_iff, imp_self]
+  trivial
+```
 
 ### Normal forms
 
