@@ -30,7 +30,7 @@ for all types. Pull requests renaming type variables in these files are welcome.
 
 Lines should not be longer than 100 characters. This makes files
 easier to read, especially on a small screen or in a small window.
-If you are editing with VS Code, there is a visual marker which 
+If you are editing with VS Code, there is a visual marker which
 will indicate a 100 character limit.
 
 ### Header and imports
@@ -99,8 +99,8 @@ See our [documentation requirements](doc.html) for more suggestions and examples
 ### Structuring definitions and theorems
 
 All declarations (e.g., `def`, `lemma`, `theorem`, `class`, `structure`, `inductive`, `instance`, etc.)
-and commands (e.g., `variable`, `open`, `section`, `namespace`, `notation`, etc.) are considered 
-top-level and these words should appear flush-left in the document. In particular, opening a 
+and commands (e.g., `variable`, `open`, `section`, `namespace`, `notation`, etc.) are considered
+top-level and these words should appear flush-left in the document. In particular, opening a
 namespace or section does not result in indenting the contents of that namespace or section.
 (Note: within VS Code, hovering over any declaration such as `def Foo ...` will show the fully
 qualified name, like `MyNamespace Foo` if `Foo` is declared while the namespace `MyNamespace` is open.)
@@ -124,7 +124,7 @@ theorem nat_case {P : Nat → Prop} (n : Nat) (H1 : P 0) (H2 : ∀ m, P (succ m)
 
 If the theorem statement requires multiple lines, indent the subsequent lines by 4 spaces.
 The proof is still indented only 2 spaces (*not* 6 = 4 + 2).
-When providing a proof in tactic mode, the `by` is placed on the line *prior* to the 
+When providing a proof in tactic mode, the `by` is placed on the line *prior* to the
 first tactic; however, `by` should not be placed on a line by itself.
 In practice this means you will often see `:= by` at the end of a theorem statement.
 ```lean
@@ -172,11 +172,11 @@ theorem mem_split {x : T} {l : List T} : x ∈ l → ∃ s t : List T, l = s ++ 
       Or.elim (eq_or_mem_of_mem_cons H)
         (fun H1 : x = y ↦
           Exists.intro [] (Exists.intro l (by rw [H1]; rfl)))
-        (fun H1 : x ∈ l ↦ 
+        (fun H1 : x ∈ l ↦
           let ⟨s, (H2 : ∃ t : List T, l = s ++ (x :: t))⟩ := IH H1
           let ⟨t, (H3 : l = s ++ (x :: t))⟩ := H2
           have H4 : y  ::  l = (y :: s) ++ (x :: t) := by rw [H3]; rfl
-          Exists.intro (y :: s) (Exists.intro t H4))) 
+          Exists.intro (y :: s) (Exists.intro t H4)))
 ```
 
 A short declaration can be written on a single line:
@@ -193,7 +193,7 @@ example (n k : Nat) (h : n < k) : ... :=
   have h1 : n ≠ k := ne_of_lt h
   ...
 ```
-When the justification is too long, you should put it on the next line, 
+When the justification is too long, you should put it on the next line,
 indented by an additional two spaces.
 ```lean
 example (n k : Nat) (h : n < k) : ... :=
@@ -312,8 +312,8 @@ example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
 ### Anonymous functions
 
 Lean has several nice syntax options for declaring anonymous functions. For very simple
-functions, one can use the centered dot as the function argument, as in `(· ^ 2)` to 
-represent the squaring function. However, sometimes it is necessary to refer to the 
+functions, one can use the centered dot as the function argument, as in `(· ^ 2)` to
+represent the squaring function. However, sometimes it is necessary to refer to the
 arguments by name (e.g., if they appear in multiple places in the function body). The
 Lean default for this is `fun x => x * x`, but the `↦` arrow (inserted with `\mapsto`)
 is also valid. In mathlib the pretty printer displays `↦`, and we slightly prefer this
@@ -326,9 +326,9 @@ There is some flexibility in how you write calculational proofs, although there 
 rules enforced by the syntax requirements of `calc` itself. However, there are some general
 guidelines.
 
-As with `by`, the `calc` keyword should be placed on the line *prior* to the start of the 
+As with `by`, the `calc` keyword should be placed on the line *prior* to the start of the
 calculation, with the calculation indented. Whichever relations are involved (e.g.,
-`=` or `≤`) should be aligned from one line to the next. The underscores `_` used as 
+`=` or `≤`) should be aligned from one line to the next. The underscores `_` used as
 placeholders for terms indicating the continuation of the calculation should be left-justified.
 
 As for the justifications, it is not necessary to align the `:=` symbols, but it can be
@@ -352,7 +352,7 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
       _ = a :: l := rfl
 ```
 
-However, because the expressions and proofs are relatively short, the following style 
+However, because the expressions and proofs are relatively short, the following style
 might be preferable in this situation.
 
 ```lean
@@ -372,7 +372,7 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
 ### Tactic mode
 
 As we have already mentioned, when opening a tactic block,
-`by` is placed at the end of the line 
+`by` is placed at the end of the line
 *preceding* the start of the tactic block, but not on its own line
 Everything within the tactic block is indented, as in:
 
@@ -407,14 +407,14 @@ theorem exists_npow_eq_one_of_zpow_eq_one' [Group G] {n : ℤ} (hn : n ≠ 0) {x
   cases n
   · simp only [Int.ofNat_eq_coe] at h
     rw [zpow_ofNat] at h
-    refine' ⟨_, Nat.pos_of_ne_zero fun n0 ↦ hn ?_, h⟩
+    refine ⟨_, Nat.pos_of_ne_zero fun n0 ↦ hn ?_, h⟩
     rw [n0]
     rfl
   · rw [zpow_negSucc, inv_eq_one] at h
-    refine' ⟨_ + 1, Nat.succ_pos _, h⟩
+    refine ⟨_ + 1, Nat.succ_pos _, h⟩
 ```
 
-Certain tactics, such as `refine`, can create *named* subgoals which 
+Certain tactics, such as `refine`, can create *named* subgoals which
 be proven in whichever order is desired using `case`. This feature
 is also useful in aiding readability. However, it is not required to
 use this instead of the focusing dot (`·`).
@@ -451,7 +451,7 @@ example : ... := by
   · rw [h]
     have h' : ... := H ha
     simp_rw [h', hb]
-    ... 
+    ...
 ```
 
 Very short goals can be closed right away using `swap` or `pick_goal` if needed, to avoid
@@ -470,7 +470,7 @@ short definitions, or to group together a definition and notation.
 
 ### Whitespace and delimiters
 
-Lean is whitespace-sensitive, and in general we opt for a style which avoids 
+Lean is whitespace-sensitive, and in general we opt for a style which avoids
 delimiting code. For instance, when writing tactics, it is possible to write
 them as `tac1; tac2; tac3`, separated by `;`, in order to override the default
 whitespace sensitivity. However, as mentioned above, we generally try to avoid
@@ -478,9 +478,9 @@ this except in a few special cases.
 
 Similarly, sometimes parentheses can be avoided by judicious use of the `<|`
 operator (or its cousin `|>`). Note: while `$` is a synonym for `<|`, its
-use in mathlib is disallowed in favor of `<|` for consistency as well as 
-because of the symmetry with `|>`. These operators have the effect of 
-parenthesizing everything to the right of `<|` (note that `(` is curved the 
+use in mathlib is disallowed in favor of `<|` for consistency as well as
+because of the symmetry with `|>`. These operators have the effect of
+parenthesizing everything to the right of `<|` (note that `(` is curved the
 same direction as `<`) or to the left of `|>` (and `)` curves the same way
 as `>`).
 
@@ -489,18 +489,18 @@ preceding the `.` is a function applied to some arguments. For instance,
 `((foo a).bar b).baz` can be rewritten as `foo a |>.bar b |>.baz`
 
 A common example of the usage of `<|` is when the user provides a term which
-is a function applied to multiple arguments whose last argument is a proof in 
+is a function applied to multiple arguments whose last argument is a proof in
 tactic mode, especially one that spans multiple lines. In that case, it is
 natural to use `<| by ...` instead of `(by ...)`, as in:
 
-```
+```lean
 import Mathlib.Tactic
 
 example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
   le_antisymm hxy <| le_of_forall_pos_le_add <| by
     intro ε hε
     have := h ε hε
-    linarith  
+    linarith
 ```
 
 ### Normal forms
