@@ -503,6 +503,9 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
     linarith  
 ```
 
+Both when using the rewrite tactic (`rw`) and the `do` notation, there should
+be a space after the left arrow (`←`).
+
 ### Normal forms
 
 Some statements are equivalent. For instance, there are several equivalent
