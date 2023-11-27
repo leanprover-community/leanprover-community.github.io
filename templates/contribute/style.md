@@ -503,6 +503,10 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
     linarith  
 ```
 
+When using the tactics `rw` or `simp` there should be a space after the left arrow  `←`.
+For instance `rw [← add_comm a b]` or `simp [← and_or_left]`.
+This rule applies the `do` notation as well: `do return (← f) + (← g)`
+
 ### Normal forms
 
 Some statements are equivalent. For instance, there are several equivalent
