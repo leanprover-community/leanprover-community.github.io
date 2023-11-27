@@ -108,6 +108,8 @@ Mathlib.
     * This is required for Mathlib's `.olean` caching mechanism.
     * Please ask on the [zulip chat](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission) for "write" permission to Mathlib.
       Please write a sentence about your background and plans.
+* The `nightly-testing-*` and `bump/v4*` branches are write protected,
+  so may only be modified via PRs, maintainers, or the relevant bots.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Std as required.
 * Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Std as required.
 * Branches `lean-pr-testing-NNNN` are automatically created for any Lean PR that passes CI,
