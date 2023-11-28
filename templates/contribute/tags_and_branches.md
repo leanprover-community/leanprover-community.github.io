@@ -136,3 +136,5 @@ Mathlib.
     and set the toolchain to `leanprover/lean4-pr-releases:pr-release-NNNN`.
     * Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
       in the form of comments.
+
+![Overview of branches at Mathlib/Std](/img/tags_and_branches.png)
