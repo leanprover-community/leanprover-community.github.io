@@ -40,6 +40,7 @@ Typical workflow:
   ```
   git clone https://github.com/leanprover-community/mathlib4.git
   cd mathlib4
+  lake exe cache get
   ```
 * The steps above only need to be done once (not once for each contribution).
 * Now, each time you want to work on a new change to mathlib, create a new branch:
