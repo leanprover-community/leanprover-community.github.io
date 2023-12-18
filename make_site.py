@@ -208,10 +208,11 @@ with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
                 except KeyError:
                     print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
                     continue
+                # note: the `.bmp` data files use doc-relative links
+                header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
                 doc_decls.append(DocDecl(
                     name=decl,
-                    # TODO: add missing `/mathlib4_docs/` prefix to links within this header
-                    decl_header_html = decl_info.header,
+                    decl_header_html = header,
                     # note: the `.bmp` data files use doc-relative links
                     docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                     src_link=decl_info.info.sourceLink))
