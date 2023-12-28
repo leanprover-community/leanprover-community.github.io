@@ -244,8 +244,6 @@ import Mathlib.Logic.Basic
 
 #check And.comm
 #check Or.comm
-#check And.assoc
-#check Or.assoc
 ```
 
 In particular, this includes `intro` and `elim` operations for logical
@@ -265,11 +263,12 @@ import Mathlib.Logic.Basic
 #check Eq.trans
 ```
 
-Note however we do not do this for axiomatic arithmetic operations
+Note however we do not do this for axiomatic logical and arithmetic operations.
 
 ```lean
 import Mathlib.Algebra.Group.Basic
 
+#check and_assoc
 #check mul_comm
 #check mul_assoc
 #check @mul_left_cancel  -- multiplication is left cancelative
@@ -280,7 +279,7 @@ name of theorem simply describes the conclusion:
 
 ```lean
 import Mathlib.Algebra.Ring.Basic
-open nat
+open Nat
 #check succ_ne_zero
 #check mul_zero
 #check mul_one
@@ -295,7 +294,7 @@ the name may be made even shorter:
 import Mathlib.Algebra.Ring.Basic
 
 #check @neg_neg
-#check nat.pred_succ
+#check Nat.pred_succ
 ```
 
 When an operation is written as infix, the theorem names follow
@@ -307,7 +306,7 @@ intended reference, it is necessary to describe some of the
 hypotheses. The word "of" is used to separate these hypotheses:
 
 ```lean
-import Mathlib.Algebra.Order.Ring.Lemmas
+import Mathlib.Algebra.Order.Monoid.Lemmas
 
 open Nat
 
@@ -326,6 +325,7 @@ with. For example, we use `pos`, `neg`, `nonpos`, `nonneg` rather than
 `zero_lt`, `lt_zero`, `le_zero`, and `zero_le`.
 
 ```lean
+import Mathlib.Algebra.Order.Monoid.Lemmas
 import Mathlib.Algebra.Order.Ring.Lemmas
 
 open Nat
@@ -345,6 +345,7 @@ Sometimes the word "left" or "right" is helpful to describe variants
 of a theorem.
 
 ```lean
+import Mathlib.Algebra.Order.Monoid.Lemmas
 import Mathlib.Algebra.Order.Ring.Lemmas
 
 open Nat
