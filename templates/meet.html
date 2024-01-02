@@ -1,7 +1,54 @@
 {% extends '_base.html' %}
 {% block title %}Meet the community{% endblock %}
+
+{% block extracss %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  <style>
+  #userMap { height: 500px; margin-bottom: 1rem;}
+  </style>
+{% endblock %}
+
 {% block content %}
 
         {{ community | md }}
 
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<script type="text/javascript">
+var userMap = L.map('userMap').setView([30, 0], 2);  
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(userMap);
+
+userMap.on('contextmenu', event => {
+  let content = document.createElement('p');
+  content.appendChild(document.createTextNode("lat: " + event.latlng.lat.toFixed(6)))
+  content.appendChild(document.createElement('br'))
+  content.appendChild(document.createTextNode("lon: " + event.latlng.lng.toFixed(6)))
+  let popup = L.popup()
+    .setLatLng(event.latlng)
+    .setContent(content)
+    .openOn(userMap); // openOn => popup is closed if another popup is opened
+
+  content.addEventListener('click', e => {
+    this.scene.add(new Marker(event.latlng.lat, event.latlng.lng));
+    popup.remove();
+    e.preventDefault();
+  }, false);
+});
+
+{% for user in users %}
+var marker = L.marker([{{user.lat}}, {{user.lon}}]).addTo(userMap);
+marker.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.firstname}} {{user.lastname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}")
+{% endfor %}
+</script>
 {% endblock %}

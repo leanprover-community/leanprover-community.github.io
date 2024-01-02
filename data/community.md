@@ -7,6 +7,12 @@ data scientists and software engineers working in industry.
 
 Several [teams](teams.html) of community members have designated responsibilities.
 
+The map below can help you find members of the community geographically close to you.
+
+<div id="userMap"></div>
+
+If you want to add yourself to the above map, you can open a pull-request to the corresponding [YAML source file](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/users.yaml). Follow this link and click the pen icon on the upper right corner to edit that file and create a pull-request. There are more instructions at the top of that file.
+
 ## The Lean Zulip chat
 
 The main gathering point of our community is a

@@ -450,6 +450,18 @@ paper_lists = [('Papers about Lean',
                     key=lambda e: e.fields['year'],
                     reverse=True))]
 
+@dataclass
+class User:
+    firstname: str
+    lastname: str
+    lon: float
+    lat: float
+    zulip: str
+    github: Optional[str] = None
+    website: Optional[str] = None
+
+with (DATA/'users.yaml').open('r', encoding='utf-8') as h_file:
+    users = [User(**e) for e in yaml.safe_load(h_file)]
 
 
 def render_site(target: Path, base_url: str, reloader=False):
@@ -491,6 +503,9 @@ def render_site(target: Path, base_url: str, reloader=False):
         '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
         str(target/'lean.bib')])
 
+    def read_md(src: str) -> str:
+        return (DATA/src).read_text(encoding='utf-8')
+
     site = Site.make_site(
             searchpath=TEMPLATE_SRC,
             outpath=str(target),
@@ -505,7 +520,9 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
-                ('meet.html', {'community': (DATA/'community.md').read_text(encoding='utf-8')}),
+                ('meet.html', {'users': users,
+                               'community': read_md('community.md')
+                               }),
                 ('mathlib-overview.html', {'overviews': overviews, 'theories': theories}),
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
@@ -513,7 +530,7 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('lean_projects.html', {'projects': projects}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
-                ('teams.html', {'introduction': (DATA/'teams_intro.md').read_text(encoding='utf-8'), 'teams': teams}),
+                ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
