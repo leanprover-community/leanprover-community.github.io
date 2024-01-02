@@ -10,6 +10,13 @@
   <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
     
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  <style>
+  #userMap { height: 500px; margin-bottom: 1rem;}
+  </style>
+
 
 	<script>
                 function buildShortcutsForStructures(names) {
@@ -55,6 +62,9 @@ some from computer science, and a few from other areas such as physics.
 Most users are students or academics, but there also some
 data scientists and software engineers working in industry.</p>
 <p>Several <a href="teams.html">teams</a> of community members have designated responsibilities.</p>
+<p>The map below can help you find members of the community geographically close to you.</p>
+<div id="userMap"></div>
+<p>If you want to add yourself to the above map, you can open a pull-request to the corresponding <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/users.yaml">YAML source file</a>. Follow this link and click the pen icon on the upper right corner to edit that file and create a pull-request. There are more instructions at the top of that file.</p>
 <h2 id="the-lean-zulip-chat" class="markdown-heading">The Lean Zulip chat <a class="hover-link" href="#the-lean-zulip-chat">#</a></h2>
 <p>The main gathering point of our community is a
 <a href="https://leanprover.zulipchat.com">Zulip chat instance</a>.
@@ -227,5 +237,43 @@ such as reporting it to the moderators.</p>
       crossorigin="anonymous"></script>
     <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
     
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<script type="text/javascript">
+var userMap = L.map('userMap').setView([30, 0], 2);  
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(userMap);
+
+userMap.on('contextmenu', event => {
+  let content = document.createElement('p');
+  content.appendChild(document.createTextNode("lat: " + event.latlng.lat.toFixed(6)))
+  content.appendChild(document.createElement('br'))
+  content.appendChild(document.createTextNode("lon: " + event.latlng.lng.toFixed(6)))
+  let popup = L.popup()
+    .setLatLng(event.latlng)
+    .setContent(content)
+    .openOn(userMap); // openOn => popup is closed if another popup is opened
+
+  content.addEventListener('click', e => {
+    this.scene.add(new Marker(event.latlng.lat, event.latlng.lng));
+    popup.remove();
+    e.preventDefault();
+  }, false);
+});
+
+
+var marker = L.marker([40.44155, -79.94496]).addTo(userMap);
+marker.bindPopup("<b><a href=\"https://www.imo.universite-paris-saclay.fr/~patrick.massot/\">Patrick Massot</a></b><br>Zulip: Patrick Massot<br>GitHub: <a href=\"https://github.com/PatrickMassot\">PatrickMassot</a>")
+
+var marker = L.marker([52.087681, 5.167399]).addTo(userMap);
+marker.bindPopup("<b>Johan Commelin</b><br>Zulip: Johan Commelin")
+
+</script>
+
   </body>
 </html>
