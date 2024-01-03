@@ -452,8 +452,7 @@ paper_lists = [('Papers about Lean',
 
 @dataclass
 class User:
-    firstname: str
-    lastname: str
+    fullname: str
     lon: float
     lat: float
     zulip: str
