@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
   <style>
   #userMap { height: 500px; margin-bottom: 1rem;}
   </style>
@@ -241,6 +243,8 @@ such as reporting it to the moderators.</p>
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+
 <script type="text/javascript">
 var userMap = L.map('userMap').setView([30, 0], 2);  
 
@@ -266,43 +270,59 @@ userMap.on('contextmenu', event => {
   }, false);
 });
 
+var markers = L.markerClusterGroup();
 
-var marker = L.marker([40.44155, -79.94496]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://www.imo.universite-paris-saclay.fr/~patrick.massot/\">Patrick Massot</a></b><br>Zulip: Patrick Massot<br>GitHub: <a href=\"https://github.com/PatrickMassot\">PatrickMassot</a>")
 
-var marker = L.marker([30.601389, -96.314444]).addTo(userMap);
-marker.bindPopup("<b>Yury Kudryashov</b><br>Zulip: Yury G. Kudryashov<br>GitHub: <a href=\"https://github.com/urkud\">urkud</a>")
+var marker = L.marker([40.44155, -79.94496]);
+marker.bindPopup("<b><a href=\"https://www.imo.universite-paris-saclay.fr/~patrick.massot/\">Patrick Massot</a></b><br>Zulip: Patrick Massot<br>GitHub: <a href=\"https://github.com/PatrickMassot\">PatrickMassot</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([52.087681, 5.167399]).addTo(userMap);
-marker.bindPopup("<b>Johan Commelin</b><br>Zulip: Johan Commelin")
+var marker = L.marker([30.601389, -96.314444]);
+marker.bindPopup("<b>Yury Kudryashov</b><br>Zulip: Yury G. Kudryashov<br>GitHub: <a href=\"https://github.com/urkud\">urkud</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([45.5010087, -73.6183527]).addTo(userMap);
-marker.bindPopup("<b><a href=\"http://www.iro.umontreal.ca/~dupuisf/\">Frédéric Dupuis</a></b><br>Zulip: Frédéric Dupuis<br>GitHub: <a href=\"https://github.com/dupuisf\">dupuisf</a>")
+var marker = L.marker([52.087681, 5.167399]);
+marker.bindPopup("<b>Johan Commelin</b><br>Zulip: Johan Commelin");
+markers.addLayer(marker);
 
-var marker = L.marker([48.827216, 2.381373]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://webusers.imj-prg.fr/~riccardo.brasca/\">Riccardo Brasca</a></b><br>Zulip: Riccardo Brasca<br>GitHub: <a href=\"https://github.com/riccardobrasca\">riccardobrasca</a>")
+var marker = L.marker([45.5010087, -73.6183527]);
+marker.bindPopup("<b><a href=\"http://www.iro.umontreal.ca/~dupuisf/\">Frédéric Dupuis</a></b><br>Zulip: Frédéric Dupuis<br>GitHub: <a href=\"https://github.com/dupuisf\">dupuisf</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([36.9957301, -122.0615848]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://people.ucsc.edu/~kymiller/\">Kyle Miller</a></b><br>Zulip: Kyle Miller<br>GitHub: <a href=\"https://github.com/kmill\">kmill</a>")
+var marker = L.marker([48.827216, 2.381373]);
+marker.bindPopup("<b><a href=\"https://webusers.imj-prg.fr/~riccardo.brasca/\">Riccardo Brasca</a></b><br>Zulip: Riccardo Brasca<br>GitHub: <a href=\"https://github.com/riccardobrasca\">riccardobrasca</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([51.498308, -0.176882]).addTo(userMap);
-marker.bindPopup("<b><a href=\"http://olivernash.org\">Oliver Nash</a></b><br>Zulip: Oliver Nash<br>GitHub: <a href=\"https://github.com/ocfnash\">ocfnash</a>")
+var marker = L.marker([36.9957301, -122.0615848]);
+marker.bindPopup("<b><a href=\"https://people.ucsc.edu/~kymiller/\">Kyle Miller</a></b><br>Zulip: Kyle Miller<br>GitHub: <a href=\"https://github.com/kmill\">kmill</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([40.441577, -79.945056]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://digama0.github.io/\">Mario Carneiro</a></b><br>Zulip: Mario Carneiro<br>GitHub: <a href=\"https://github.com/digama0\">digama0</a>")
+var marker = L.marker([51.498308, -0.176882]);
+marker.bindPopup("<b><a href=\"http://olivernash.org\">Oliver Nash</a></b><br>Zulip: Oliver Nash<br>GitHub: <a href=\"https://github.com/ocfnash\">ocfnash</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([53.5266942, -113.5244037]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://adamtopaz.com\">Adam Topaz</a></b><br>Zulip: Adam Topaz<br>GitHub: <a href=\"https://github.com/adamtopaz\">adamtopaz</a>")
+var marker = L.marker([40.441577, -79.945056]);
+marker.bindPopup("<b><a href=\"https://digama0.github.io/\">Mario Carneiro</a></b><br>Zulip: Mario Carneiro<br>GitHub: <a href=\"https://github.com/digama0\">digama0</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([40.7711, -73.9849]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://faculty.fordham.edu/hmacbeth1/\">Heather Macbeth</a></b><br>Zulip: Heather Macbeth<br>GitHub: <a href=\"https://github.com/hrmacbeth\">hrmacbeth</a>")
+var marker = L.marker([53.5266942, -113.5244037]);
+marker.bindPopup("<b><a href=\"https://adamtopaz.com\">Adam Topaz</a></b><br>Zulip: Adam Topaz<br>GitHub: <a href=\"https://github.com/adamtopaz\">adamtopaz</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([50.605678, 3.147983]).addTo(userMap);
-marker.bindPopup("<b><a href=\"https://remydegenne.github.io/\">Rémy Degenne</a></b><br>Zulip: Rémy Degenne<br>GitHub: <a href=\"https://github.com/RemyDegenne\">RemyDegenne</a>")
+var marker = L.marker([40.7711, -73.9849]);
+marker.bindPopup("<b><a href=\"https://faculty.fordham.edu/hmacbeth1/\">Heather Macbeth</a></b><br>Zulip: Heather Macbeth<br>GitHub: <a href=\"https://github.com/hrmacbeth\">hrmacbeth</a>");
+markers.addLayer(marker);
 
-var marker = L.marker([-35.246365, 149.120285]).addTo(userMap);
-marker.bindPopup("<b>Kim Morrison</b><br>Zulip: Scott Morrison<br>GitHub: <a href=\"https://github.com/semorrison\">semorrison</a>")
+var marker = L.marker([50.605678, 3.147983]);
+marker.bindPopup("<b><a href=\"https://remydegenne.github.io/\">Rémy Degenne</a></b><br>Zulip: Rémy Degenne<br>GitHub: <a href=\"https://github.com/RemyDegenne\">RemyDegenne</a>");
+markers.addLayer(marker);
 
+var marker = L.marker([-35.246365, 149.120285]);
+marker.bindPopup("<b>Kim Morrison</b><br>Zulip: Scott Morrison<br>GitHub: <a href=\"https://github.com/semorrison\">semorrison</a>");
+markers.addLayer(marker);
+
+
+userMap.addLayer(markers);
 </script>
 
   </body>
