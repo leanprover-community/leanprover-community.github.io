@@ -13,6 +13,7 @@ The map below can help you find members of the community geographically close to
 
 If you want to add yourself to the above map, 
 you can set the `latitude` and `longitude` fields in your Zulip profile.
+The map will be updated within 24 hours, the next time the website is built.
 We recommend indicating the coordinates of the main building where you work or study rather than the place where you live.
 
 ## The Lean Zulip chat
