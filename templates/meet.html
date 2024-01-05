@@ -26,7 +26,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
 
 <script type="text/javascript">
-var userMap = L.map('userMap', { zoomSnap: 0 }).setView([26.7, 11], 1.86);  
+var userMap = L.map('userMap', { zoomSnap: 0, minZoom: 2, worldCopyJump: true }).setView([26.7, 11], 1.86);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -56,6 +56,14 @@ var markers = L.markerClusterGroup();
 var marker = L.marker([{{user.lat}}, {{user.lon}}]);
 marker.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
 markers.addLayer(marker);
+
+var marker_left = L.marker([{{user.lat}}, {{user.lon - 360}}]);
+marker_left.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
+markers.addLayer(marker_left);
+
+var marker_right = L.marker([{{user.lat}}, {{user.lon + 360}}]);
+marker_right.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
+markers.addLayer(marker_right);
 {% endfor %}
 
 userMap.addLayer(markers);
