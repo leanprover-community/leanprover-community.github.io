@@ -460,7 +460,10 @@ class User:
     github: Optional[str] = None
     website: Optional[str] = None
 
-client = zulip.Client(email='map-scraper-bot@leanprover.zulipchat.com', site='https://leanprover.zulipchat.com', api_key=os.environ.get('ZULIP_KEY'))
+client = zulip.Client(
+    email='map-scraper-bot@leanprover.zulipchat.com', 
+    site='https://leanprover.zulipchat.com', 
+    api_key=os.environ.get('ZULIP_KEY')) if 'ZULIP_KEY' in os.environ else None
 
 # Zulip custom profile fields are tracked by ID, not by name
 profile_data_fields = {
