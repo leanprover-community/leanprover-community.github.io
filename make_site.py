@@ -497,8 +497,6 @@ users = [
         website=get_user_field(user, 'website')) 
     for user in zulip_users]
 
-# for testing purposes
-print(f'user count: {len(users)}')
 
 def render_site(target: Path, base_url: str, reloader=False):
     default_context = lambda: {
