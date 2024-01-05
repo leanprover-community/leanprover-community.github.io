@@ -474,8 +474,9 @@ profile_data_fields = {
 }
 
 def get_user_field(user, field):
+    field_id = profile_data_fields[field]
     try:
-        return user['profile_data'][profile_data_fields[field]]['value']
+        return user['profile_data'][field_id]['value']
     except KeyError:
         return None
 
