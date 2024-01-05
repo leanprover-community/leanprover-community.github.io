@@ -479,26 +479,26 @@ def get_user_field(user, field):
     except KeyError:
         return None
 
-def validate_coordinates(user):
-    try:
-        float(get_user_field(user, 'latitude'))
-        float(get_user_field(user, 'longitude'))
-        return True
-    except Exception:
-        return False
+def get_users():
+    if client is None:
+        return
 
-
-zulip_users = [user for user in client.get_members({"include_custom_profile_fields": True})['members'] 
-               if not user['is_bot'] and user['is_active'] and validate_coordinates(user)] if 'ZULIP_KEY' in os.environ else []
-
-users = [
-    User(
-        fullname=user['full_name'], 
-        lon=float(get_user_field(user, 'longitude')), 
-        lat=float(get_user_field(user, 'latitude')), 
-        github=get_user_field(user, 'github'),
-        website=get_user_field(user, 'website')) 
-    for user in zulip_users]
+    for user in client.get_members({"include_custom_profile_fields": True})['members']:
+        if user['is_bot'] or not user['is_active']:
+            continue
+        try:
+            lat = float(get_user_field(user, 'latitude'))
+            lon = float(get_user_field(user, 'longitude'))
+        except Exception:
+            continue
+        yield User(
+            fullname=user['full_name'], 
+            lon=lon, 
+            lat=lat, 
+            github=get_user_field(user, 'github'),
+            website=get_user_field(user, 'website'))
+    
+users = list(get_users())
 
 
 def render_site(target: Path, base_url: str, reloader=False):
