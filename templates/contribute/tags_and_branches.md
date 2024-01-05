@@ -86,7 +86,7 @@ Mathlib.
     (Or ask for this to be done if you don't have write access.)
   * Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
     * should have its `lean-toolchain` updated to `leanprover/lean4:nightly-YYYY-MM-DD`
-    * it changes may be merged manually into `nightly-testing` as needed to keep `nightly-testing`
+    * its changes may be merged manually into `nightly-testing` as needed to keep `nightly-testing`
       working (do not change the base and merge the PR, we still need it).
   * Once the Std adaptation PR has been approved,
     a maintainer will merge it into `bump/v4.X.0` (not `nightly-testing-YYYY-MM-DD`).
@@ -123,7 +123,7 @@ Mathlib.
   or push an empty commit to it if it already exists.
 * Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
   in the form of comments.
-* If your PR does not branch of a nightly release for which Mathlib builds, a bot will comment on your
+* If your PR does not branch off a nightly release for which Mathlib builds, a bot will comment on your
   PR.
   It will try again whenever you push to your PR.
 * If `nightly-with-mathlib` is too old for your purposes, you can base off `nightly`, and mathlib CI
