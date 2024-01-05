@@ -480,6 +480,14 @@ def get_user_field(user, field):
     except KeyError:
         return None
 
+
+def httpize_website(user):
+    website = get_user_field(user, 'website')
+    if website is not None and not website.startswith('http'):
+        return 'https://' + website
+    else:
+        return website
+
 def get_users():
     if client is None:
         return
@@ -497,7 +505,7 @@ def get_users():
             lon=lon, 
             lat=lat, 
             github=get_user_field(user, 'github'),
-            website=get_user_field(user, 'website'))
+            website=httpize_website(user))
     
 users = list(get_users())
 
