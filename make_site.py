@@ -22,6 +22,8 @@ import os
 from github import Github
 from slugify import slugify
 
+import zulip
+
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
 
@@ -455,12 +457,49 @@ class User:
     fullname: str
     lon: float
     lat: float
-    zulip: str
     github: Optional[str] = None
     website: Optional[str] = None
 
-with (DATA/'users.yaml').open('r', encoding='utf-8') as h_file:
-    users = [User(**e) for e in yaml.safe_load(h_file)]
+client = zulip.Client(
+    email='map-scraper-bot@leanprover.zulipchat.com', 
+    site='https://leanprover.zulipchat.com', 
+    api_key=os.environ.get('ZULIP_KEY')) if 'ZULIP_KEY' in os.environ else None
+
+# Zulip custom profile fields are tracked by ID, not by name
+profile_data_fields = {
+    'website': '5150',
+    'latitude': '5148',
+    'longitude': '5149',
+    'github': '3658'
+}
+
+def get_user_field(user, field):
+    field_id = profile_data_fields[field]
+    try:
+        return user['profile_data'][field_id]['value']
+    except KeyError:
+        return None
+
+def get_users():
+    if client is None:
+        return
+
+    for user in client.get_members({"include_custom_profile_fields": True})['members']:
+        if user['is_bot'] or not user['is_active']:
+            continue
+        try:
+            lat = float(get_user_field(user, 'latitude'))
+            lon = float(get_user_field(user, 'longitude'))
+        except Exception:
+            continue
+        yield User(
+            fullname=user['full_name'], 
+            lon=lon, 
+            lat=lat, 
+            github=get_user_field(user, 'github'),
+            website=get_user_field(user, 'website'))
+    
+users = list(get_users())
 
 
 def render_site(target: Path, base_url: str, reloader=False):

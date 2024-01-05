@@ -54,15 +54,15 @@ var markers = L.markerClusterGroup();
 
 {% for user in users %}
 var marker = L.marker([{{user.lat}}, {{user.lon}}]);
-marker.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
+marker.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b>{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
 markers.addLayer(marker);
 
 var marker_left = L.marker([{{user.lat}}, {{user.lon - 360}}]);
-marker_left.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
+marker_left.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b>{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
 markers.addLayer(marker_left);
 
 var marker_right = L.marker([{{user.lat}}, {{user.lon + 360}}]);
-marker_right.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b><br>Zulip: {{user.zulip}}{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
+marker_right.bindPopup("<b>{% if user.website %}<a href=\"{{user.website}}\">{% endif %}{{user.fullname}}{% if user.website %}</a>{% endif %}</b>{% if user.github %}<br>GitHub: <a href=\"https://github.com/{{user.github}}\">{{user.github}}</a>{% endif %}");
 markers.addLayer(marker_right);
 {% endfor %}
 

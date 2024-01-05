@@ -11,7 +11,10 @@ The map below can help you find members of the community geographically close to
 
 <div id="userMap"></div>
 
-If you want to add yourself to the above map, you can open a pull-request to the corresponding [YAML source file](https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/users.yaml). Follow this link and click the pen icon on the upper right corner to edit that file and create a pull-request. There are more instructions at the top of that file.
+If you want to add yourself to the above map, 
+you can set the `latitude` and `longitude` fields in your Zulip profile.
+The map will be updated within 24 hours, the next time the website is built.
+We recommend indicating the coordinates of the main building where you work or study rather than the place where you live.
 
 ## The Lean Zulip chat
 
