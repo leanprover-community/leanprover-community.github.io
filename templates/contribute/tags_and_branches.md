@@ -10,7 +10,7 @@ Mathlib.
 ## Things you need to know
 
 * If you are making a pull request to `leanprover/lean4` which may involve breaking changes,
-  please rebase your PR onto the `nightly` branch. This will enable combined CI with Mathlib.
+  please rebase your PR onto the `nightly-with-mathlib` branch. This will enable combined CI with Mathlib.
 
 * If you are making a pull request to `leanprover-community/mathlib4`,
   please ask for "write" access to the repository via the [zulip chat](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission), and push your branch to that repo.
@@ -22,7 +22,7 @@ Mathlib.
 
 * Development occurs on the `master` branch.
 * Stable releases and release candidates have tags, e.g. `v4.2.0` or `v4.3.0-rc1`.
-  * To use one of these releases in a project, your `lean-toolchain` should contain e.g. `leanprover/lean4:v4.2.0`.
+  * To use one of these releases in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:v4.2.0`.
 * Stable releases arrive at the end of each month, and are identical to the last release candidate.
 * The first release candidate of the next version is released immediately after the stable release.
 * Each version has a `releases/v4.X.0` feature branch, which may contain
@@ -30,19 +30,15 @@ Mathlib.
   * cherry picked commits from `master` for critical fixes released via release candidates.
 * We make a regular nightly release from `master`, which has a tag e.g. `nightly-2023-11-01` on the
   `leanprover/lean4-nightly` repository.
-  * To use a nightly release in a project, your `lean-toolchain` should contain e.g. `leanprover/lean4:nightly-2023-11-01`.
+  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`.
 * There is a `nightly` branch on `leanprover/lean4` which follows the most recent commit which was
   used to construct a nightly release.
-* Every PR automatically receives a toolchain after CI completes successfully.
-  To use PR #NNNN in a project, your `lean-toolchain` should contain
+* Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
+  To use PR #NNNN in a project, your `lean-toolchain` file should contain
   `leanprover/lean4-pr-releases:pr-release-NNNN`.
-* Every PR automatically generates a `lean-pr-testing-NNNN` branch at Mathlib,
-  described in detail below, and results from this branch are reported via comments
-  in the PR discussion.
-* For any PR that potentially affects Std or Mathlib, you should base your PR off the HEAD of the `nightly` branch.
-  The combined CI for Std and Mathlib will not run automatically unless this is the case.
-* You can determine the most recent nightly release in the history of your PR by running
-  `script/most-recent-nightly-tag.sh` in the Lean repository.
+* For any PR that potentially affects Std or Mathlib, you should base your PR off the HEAD of the `nightly-with-mathlib` branch.
+  In that case, a `lean-pr-testing-NNNN` Mathlib branch is created, described in detail below, and results from this branch are
+  reported via comments in the PR discussion.
 
 ### `leanprover/std4` (aka 'Std')
 
@@ -76,8 +72,7 @@ Mathlib.
   * If the change was made in `leanprover/lean4#NNNN`,
     then the Std adaptation branch should be called `lean-pr-testing-NNNN`.
   * The Std adaptation branch should be based off the branch `nightly-testing-YYYY-MM-DD`
-    where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off
-    (you can check this will `script/most-recent-nightly-tag.sh` in the Lean repository).
+    where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off.
   * If the `nightly-testing-YYYY-MM-DD` branch does not yet exist, you will need to wait
     (and possibly move forward to a subsequent nightly).
     Contact @semorrison for assistance if needed.
@@ -91,7 +86,8 @@ Mathlib.
     (Or ask for this to be done if you don't have write access.)
   * Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
     * should have its `lean-toolchain` updated to `leanprover/lean4:nightly-YYYY-MM-DD`
-    * may be merged into `nightly-testing` as needed to keep `nightly-testing` working
+    * it changes may be merged manually into `nightly-testing` as needed to keep `nightly-testing`
+      working (do not change the base and merge the PR, we still need it).
   * Once the Std adaptation PR has been approved,
     a maintainer will merge it into `bump/v4.X.0` (not `nightly-testing-YYYY-MM-DD`).
 * It is always allowed to merge `bump/v4.X.0` into `nightly-testing`, but not conversely.
@@ -120,21 +116,20 @@ Mathlib.
 ### Combined CI between Lean and Mathlib
 
 * For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.
-* For this to work, you will need to rebase your PR onto the `nightly` branch.
-  * If you have not done this, a bot will comment saying that it can not run Mathlib CI,
-    and advising that if you need this you will need to rebase your PR onto `nightly`.
-* Further, the latest nightly release may or may not have a corresponding
-  `nightly-testing-YYYY-MM-DD` branch on Std and Mathlib (see above).
-  * If this branch does not yet exist, a bot will comment on your PR notifying you
-    that it can not run Mathlib CI, and advising that it will try again when you either
-    * push more commits, or
-    * rebase your PR onto a future update of the `nightly` branch
-      (note that this may be necessary if Mathlib is having persistent problems adapting
-      to the most recent nightly release).
-  * If this branch does exist, then the bot will automatically create a
-    `lean-pr-testing-NNNN` branch at Mathlib from the `nightly-testing-YYYY-MM-DD` branch,
-    and set the toolchain to `leanprover/lean4-pr-releases:pr-release-NNNN`.
-    * Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
-      in the form of comments.
+* For this to work, you will need to rebase your PR onto the `nightly-with-mathlib` branch.
+  The `nightly-with-mathlib` branch points to the latest nightly lean release which passes mathlib CI,
+  and for which a `nightly-testing-YYYY-MM-DD` branch exists on Mathlib (and possibly Std).
+* The bot will create a `lean-pr-testing-NNNN` branch at Mathlib from the `nightly-testing-YYYY-MM-DD` branch,
+  or push an empty commit to it if it already exists.
+* Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
+  in the form of comments.
+* If your PR does not branch of a nightly release for which Mathlib builds, a bot will comment on your
+  PR.
+  It will try again whenever you push to your PR.
+* If `nightly-with-mathlib` is too old for your purposes, you can base off `nightly`, and mathlib CI
+  will commence as soon as that nightly release itself passes the Mathlib CI and you push to the PR.
+* It may be the case that that nightly release never passes the Mathlib CI. In that case you may have
+  to wait for `nightly-with-mathlib` to be updated and rebase onto that.
+  
 
 <img src="img/tags_and_branches.png" alt="Overview of branches at Mathlib/Std" width="80%"/>
