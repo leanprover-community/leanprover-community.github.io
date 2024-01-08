@@ -60,8 +60,8 @@
             <th>Contributors</th>
         </tr>
         <tr>
-            <td>73509</td>
-            <td>133959</td>
+            <td>73516</td>
+            <td>134014</td>
             <td>310</td>
         </tr>
     </table>
@@ -213,6 +213,37 @@
     function pad_mathlib4_data(mathlib3_data, mathlib4_data) {
       missing_len = mathlib3_data.labels.length - mathlib4_data.labels.length 
       mathlib4_data.data = Array(missing_len).fill(0).concat(mathlib4_data.data)
+    }
+    
+    function pad_data(mathlib3_data, mathlib4_data) {
+      /* This function assumes mathlib3_data and mathlib4_data are objects with
+         fields labels and data which are arrays of the same length and labels is sorted.
+	 It also assumes mathlib3_data can have labels smaller than mathlib4_data and mathlib4_data can 
+	 have labels larger than mathlib3_data, but not the other way around. 
+	 The goal is to pad both to have the same labels, using 0 as the newly created data. 
+	 Efficiency is not crucial since we expect to have less than 200 labels during the lifetime 
+	 of this webpage. */
+      const length3 = mathlib3_data.labels.length
+      const length4 = mathlib4_data.labels.length
+      const mathlib4_start = mathlib4_data.labels[0]
+      const mathlib3_end = mathlib3_data.labels[length3 - 1]
+      
+      var nb_new4 = 0
+      for (let i = length3-1; i >= 0; i--) {
+	const label = mathlib3_data.labels[i]
+	if (label < mathlib4_start ) {
+	  mathlib4_data.labels.unshift(label);
+	  mathlib4_data.data.unshift(0);
+	  nb_new4 ++
+	}
+      }
+      for (let i = 0; i < length4; i++) {
+	const label = mathlib4_data.labels[nb_new4 + i]
+	if (label > mathlib3_end) {
+	  mathlib3_data.labels.push(label);
+	  mathlib3_data.data.push(0);
+	}
+      }
     }
     
     function merge_timestamps_and_values(mathlib3_ts, mathlib3_vals, mathlib4_ts, mathlib4_vals) {
@@ -379,8 +410,8 @@
     
     
     window.onload = function() {
-        pad_mathlib4_data(by_year_month, by_year_month4)
-        pad_mathlib4_data(by_year, by_year4)
+        pad_data(by_year_month, by_year_month4)
+        pad_data(by_year, by_year4)
     
         makeBarChart('by_year_month', 'Commits by month', by_year_month, by_year_month4)
         makeBarChart('by_year', 'Commits by year', by_year, by_year4)
