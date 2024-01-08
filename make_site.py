@@ -461,8 +461,8 @@ class User:
     website: Optional[str] = None
 
 client = zulip.Client(
-    email='map-scraper-bot@leanprover.zulipchat.com', 
-    site='https://leanprover.zulipchat.com', 
+    email='map-scraper-bot@leanprover.zulipchat.com',
+    site='https://leanprover.zulipchat.com',
     api_key=os.environ.get('ZULIP_KEY')) if 'ZULIP_KEY' in os.environ else None
 
 # Zulip custom profile fields are tracked by ID, not by name
@@ -501,12 +501,12 @@ def get_users():
         except Exception:
             continue
         yield User(
-            fullname=user['full_name'], 
-            lon=lon, 
-            lat=lat, 
+            fullname=user['full_name'],
+            lon=lon,
+            lat=lat,
             github=get_user_field(user, 'github'),
             website=httpize_website(user))
-    
+
 users = list(get_users())
 
 
@@ -515,6 +515,7 @@ def render_site(target: Path, base_url: str, reloader=False):
             'base_url': base_url,
             'menus': menus,
             }
+    target.mkdir(parents=True, exist_ok=True)
 
     def render_content(env, template, **kwargs):
         """Render a markdown template."""
