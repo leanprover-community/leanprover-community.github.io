@@ -3,8 +3,10 @@
 from pathlib import Path
 import sys
 import subprocess
+import pickle
+import re
 from dataclasses import dataclass, field
-from typing import List, Mapping, Optional
+from typing import List, Mapping, Optional, Any, Callable, TypeVar, Union
 from datetime import datetime
 
 import yaml
@@ -23,6 +25,39 @@ from github import Github
 from slugify import slugify
 
 import zulip
+
+FilePath = Union[str, Path]
+
+DOWNLOAD = not 'NODOWNLOAD' in os.environ
+
+def download(url: str, dest: Path) -> None:
+    if DOWNLOAD:
+        urllib.request.urlretrieve(url, dest)
+
+DATA_CACHE = Path(__file__).parent/'data_cache'
+DATA_CACHE.mkdir(exist_ok=True)
+
+if not DOWNLOAD:
+    print(f'NODOWNLOAD environment variable set, will try to recover data from {DATA_CACHE}')
+
+
+def pkl_dump(filename: str, data: Any) -> None:
+    """
+    Dump the given data using pickle.
+    """
+    with open(DATA_CACHE/filename, 'wb') as pkl:
+        pickle.dump(data, pkl, pickle.HIGHEST_PROTOCOL)
+
+def pkl_load(filename: str, default: Any) -> Any:
+    """
+    Load data from the given file and return it or print a warning and return the default value.
+    """
+    if (DATA_CACHE/filename).exists():
+        with open(DATA_CACHE/filename, 'rb') as pkl:
+            return pickle.load(pkl)
+    else:
+        print(f"Warning: NODOWNLOAD environment variable set but couldn't find previously downloaded data {filename}.\nWill use default value {default}")
+        return default
 
 class MarkdownExtension(jinja2.ext.Extension):
     tags = set(['markdown'])
@@ -163,12 +198,20 @@ class Course:
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
-    DATA/'header-data.json'
-)
-with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
-    header_data = json.load(h_file)
+if DOWNLOAD:
+    print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
+    download(
+        'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
+        DATA/'header-data.json'
+    )
+    print('Downloaded.')
+if (DATA/'header-data.json').exists():
+    print('Parsing header-data.json...') #  This is a slow operation, so let's inform readers.
+    with (DATA/'header-data.json').open('r', encoding='utf-8') as h_file:
+        header_data = json.load(h_file)
+    print('Parsed.')
+else:
+    header_data = dict()
 
 @dataclass
 class HeaderDataEntry:
@@ -193,34 +236,38 @@ declarations = {
 num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
-    DATA/'100.yaml')
-with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
-    hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
-    for h in hundred_theorems:
-        if h.decl:
-            assert not h.decls
-            h.decls = [h.decl]
-        if h.decls:
-            doc_decls = []
-            for decl in h.decls:
-                try:
-                    decl_info = declarations[decl]
-                except KeyError:
-                    print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
-                    continue
-                # note: the `.bmp` data files use doc-relative links
-                header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
-                doc_decls.append(DocDecl(
-                    name=decl,
-                    decl_header_html = header,
+if DOWNLOAD:
+    download(
+        'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
+        DATA/'100.yaml')
+    with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
+        hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+        for h in hundred_theorems:
+            if h.decl:
+                assert not h.decls
+                h.decls = [h.decl]
+            if h.decls:
+                doc_decls = []
+                for decl in h.decls:
+                    try:
+                        decl_info = declarations[decl]
+                    except KeyError:
+                        print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                        continue
                     # note: the `.bmp` data files use doc-relative links
-                    docs_link='/mathlib4_docs/' + decl_info.info.docLink,
-                    src_link=decl_info.info.sourceLink))
-            h.doc_decls = doc_decls
-        else:
-            h.doc_decls = []
+                    header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
+                    doc_decls.append(DocDecl(
+                        name=decl,
+                        decl_header_html = header,
+                        # note: the `.bmp` data files use doc-relative links
+                        docs_link='/mathlib4_docs/' + decl_info.info.docLink,
+                        src_link=decl_info.info.sourceLink))
+                h.doc_decls = doc_decls
+            else:
+                h.doc_decls = []
+    pkl_dump('hundred_theorems', hundred_theorems)
+else:
+     hundred_theorems = pkl_load('hundred_theorems', dict())
 
 
 def replace_link(name, id):
@@ -299,17 +346,25 @@ class Overview:
     def from_top_level(cls, index: int, title: str, children) -> 'Overview':
         return cls.from_node(f"{index}", title, children, 0)
 
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/overview.yaml',
-    DATA/'overview.yaml')
-with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
-    overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+if DOWNLOAD:
+    download(
+        'https://leanprover-community.github.io/mathlib4_docs/overview.yaml',
+        DATA/'overview.yaml')
+    with (DATA/'overview.yaml').open('r', encoding='utf-8') as h_file:
+        overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+    pkl_dump('overviews', overviews)
+else:
+    overviews = pkl_load('overviews', [])
 
-urllib.request.urlretrieve(
-    'https://leanprover-community.github.io/mathlib4_docs/undergrad.yaml',
-    DATA/'undergrad.yaml')
-with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
-    undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+if DOWNLOAD:
+    download(
+        'https://leanprover-community.github.io/mathlib4_docs/undergrad.yaml',
+        DATA/'undergrad.yaml')
+    with (DATA/'undergrad.yaml').open('r', encoding='utf-8') as h_file:
+        undergrad_overviews = [Overview.from_top_level(index, title, elements) for index, (title, elements) in enumerate(yaml.safe_load(h_file).items())]
+    pkl_dump('undergrad_overviews', undergrad_overviews)
+else:
+    undergrad_overviews = pkl_load('undergrad_overviews', [])
 
 with (DATA/'theories_index.yaml').open('r', encoding='utf-8') as h_file:
     theories = yaml.safe_load(h_file)
@@ -366,29 +421,46 @@ class Project:
 
 github = Github(os.environ.get('GITHUB_TOKEN', None))
 
-urllib.request.urlretrieve(
-    'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
-    DATA/'projects.yaml')
-with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
-    oprojects = yaml.safe_load(h_file)
+if DOWNLOAD:
+    download(
+        'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
+        DATA/'projects.yaml')
+    with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects = yaml.safe_load(h_file)
+    pkl_dump('oprojects', oprojects)
+else:
+    oprojects = pkl_load('oprojects', [])
+
 
 projects = []
-for name, project in oprojects.items():
-    if project.get('display', True):
-        github_repo = github.get_repo(project['organization'] + '/' + name)
-        stars = github_repo.stargazers_count
-        descr = render_markdown(project['description'])
-        projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+if DOWNLOAD:
+    for name, project in oprojects.items():
+        if project.get('display', True):
+            github_repo = github.get_repo(project['organization'] + '/' + name)
+            stars = github_repo.stargazers_count
+            descr = render_markdown(project['description'])
+            projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
+            projects.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects', projects)
+else:
+    projects = pkl_load('projects', [])
 
-num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+if DOWNLOAD:
+    num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+    pkl_dump('num_contrib', num_contrib)
+else:
+    num_contrib = pkl_load('num_contrib', 0)
 
-projects.sort(key = lambda p: p.stars, reverse=True)
+if DOWNLOAD:
+    download(
+        'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
+        DATA/'project_history.yaml')
+    with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
+        project_history = yaml.safe_load(h_file)
+    pkl_dump('project_history', project_history)
+else:
+    project_history = pkl_load('project_history', dict())
 
-urllib.request.urlretrieve(
-    'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
-    DATA/'project_history.yaml')
-with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
-    project_history = yaml.safe_load(h_file)
 
 bib = pybtex.database.parse_file('lean.bib')
 
@@ -460,10 +532,13 @@ class User:
     github: Optional[str] = None
     website: Optional[str] = None
 
-client = zulip.Client(
-    email='map-scraper-bot@leanprover.zulipchat.com',
-    site='https://leanprover.zulipchat.com',
-    api_key=os.environ.get('ZULIP_KEY')) if 'ZULIP_KEY' in os.environ else None
+if DOWNLOAD and 'ZULIP_KEY' in os.environ:
+    client = zulip.Client(
+        email='map-scraper-bot@leanprover.zulipchat.com',
+        site='https://leanprover.zulipchat.com',
+        api_key=os.environ.get('ZULIP_KEY'))
+else:
+    client = None
 
 # Zulip custom profile fields are tracked by ID, not by name
 profile_data_fields = {
@@ -488,10 +563,17 @@ def httpize_website(user):
     else:
         return website
 
-def get_users():
-    if client is None:
-        return
-
+if client is None:
+    # Here we don't use pkl_load because its potential failure
+    # message would be confusing in the absence of a Zulip API key.
+    if (DATA_CACHE/'users').exists():
+        with open(DATA_CACHE/'users', 'rb') as pkl:
+            users = pickle.load(pkl)
+    else:
+        print(f"Warning: Could not find Zulip authentication information and couldn't find previously downloaded data. \nWill use an empty users list.")
+        users = []
+else:
+    users = []
     for user in client.get_members({"include_custom_profile_fields": True})['members']:
         if user['is_bot'] or not user['is_active']:
             continue
@@ -500,17 +582,60 @@ def get_users():
             lon = float(get_user_field(user, 'longitude'))
         except Exception:
             continue
-        yield User(
+        users.append(User(
             fullname=user['full_name'],
             lon=lon,
             lat=lat,
             github=get_user_field(user, 'github'),
-            website=httpize_website(user))
+            website=httpize_website(user)))
+    pkl_dump('users', users)
 
-users = list(get_users())
+class LeanSite(Site):
+    """
+    Very light customization of the staticjinja Site class that allow
+    template filtering.
+    """
+    def __init__(
+        self,
+        environment: Environment,
+        searchpath: FilePath,
+        outpath: FilePath = ".",
+        encoding = "utf8",
+        contexts= None,
+        rules = None,
+        staticpaths = None,
+        mergecontexts = False,
+        template_filter: Callable[[str], bool] = lambda s: True
+    ) -> None:
+        super().__init__(environment, searchpath, outpath, encoding, contexts, rules, staticpaths, mergecontexts)
+        self.template_filter = template_filter
 
+    @classmethod
+    def make_site(
+        cls,
+        searchpath: FilePath = "templates",
+        outpath: FilePath = ".",
+        contexts = None,
+        rules = None,
+        encoding = "utf8",
+        followlinks = True,
+        extensions = None,
+        staticpaths = None,
+        filters = {},
+        env_globals = {},
+        env_kwargs = None,
+        mergecontexts: bool = False,
+        template_filter: Callable[[str], bool] = lambda s: True
+    ):
+        site = super().make_site(searchpath, outpath, contexts, rules, encoding, followlinks, extensions, staticpaths, filters, env_globals, env_kwargs, mergecontexts)
+        site.template_filter = template_filter
+        return site
 
-def render_site(target: Path, base_url: str, reloader=False):
+    @property
+    def template_names(self) -> List[str]:
+        return self.env.list_templates(filter_func=lambda s: self.is_template(s) and self.template_filter(s))
+
+def render_site(target: Path, base_url: str, reloader=False, only: Optional[str] = None):
     default_context = lambda: {
             'base_url': base_url,
             'menus': menus,
@@ -553,7 +678,13 @@ def render_site(target: Path, base_url: str, reloader=False):
     def read_md(src: str) -> str:
         return (DATA/src).read_text(encoding='utf-8')
 
-    site = Site.make_site(
+    if only:
+        tpl_filter_re = re.compile(only)
+        template_filter = tpl_filter_re.match
+    else:
+        template_filter = lambda n: True
+
+    site = LeanSite.make_site(
             searchpath=TEMPLATE_SRC,
             outpath=str(target),
             extensions=[MarkdownExtension],
@@ -581,7 +712,8 @@ def render_site(target: Path, base_url: str, reloader=False):
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
-            mergecontexts=True)
+            mergecontexts=True,
+            template_filter=template_filter)
 
     # Now build the individual team pages
     (target/'teams').mkdir(exist_ok=True)
@@ -601,8 +733,12 @@ def render_site(target: Path, base_url: str, reloader=False):
     site.render(use_reloader=reloader)
 
 if __name__ == '__main__':
+    try:
+        only = sys.argv[sys.argv.index('--only')+1]
+    except:
+        only = None
     if '--local' in sys.argv:
         base_url = f"file://{(Path(__file__).parent/'build').absolute()}/"
     else:
         base_url = 'https://leanprover-community.github.io/'
-    render_site(ROOT/'build', base_url, reloader='--reload' in sys.argv)
+    render_site(ROOT/'build', base_url, reloader='--reload' in sys.argv, only=only)

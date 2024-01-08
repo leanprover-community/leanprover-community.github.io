@@ -31,9 +31,33 @@ The website relies on several components which are built in other repositories:
   Use option `--reload` to continuously build when templates are
   changed (this won't work for watching changes in `data/`).
 
+
+If you want to retrieve the list of Zulip users to get the users map, the
+environment variable `ZULIP_KEY` should be set with the Zulip API key of the
+map scraper bot.
+
+If you want to work on a new feature, there are several helpful tricks to know.
+
+First you will very quickly hit the GitHub API rate limit without
+authentication. You can 
+[create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site --local` during
+your experiments.
+
+You can also run the script once normally and then run
+`NODOWNLOAD=1 ./make_site --local` to build the website using the information
+previously downloaded. This information is stored into the `data_cache` folder.
+If you need the script to download something but not everything you can 
+temporarily change the relevant `if DOWNLOAD:` into a `if not DOWNLOAD:`.
+
+You can also choose to render only certain templates using
+`./make_site --local --only my_template.html`.
+This argument can actually be a regular expression, but giving one template
+name is the most common use case.
+
+
 ## TODO
 
-* Better integration with Zulip archive
 * Better integration with API docs
 * Use webpack or similar to bundle all the javascript?
 
