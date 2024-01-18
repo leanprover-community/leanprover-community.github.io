@@ -98,7 +98,7 @@ def gcd : nat → nat → nat
                 gcd (succ x) (y % succ x)
 ```
 
-Now the error message is asking us to prove `succ x < y`. This is because by default the equation compiler tries to recurse on the first argument. More precisely, the relation that the equation compiler tries to use in this example is on the type of pairs of natural numbers `Σ' (a : ℕ), ℕ`, and it uses a lexicographical relation where the pair `⟨a, b⟩ ≺ ⟨c, d⟩` iff `a < c ∨ (a = c ∧ b < d)` This situation can be resolved, either by changing the order of the arguments or by specifying a `rel_tac` as decribed later in this doc.
+Now the error message is asking us to prove `succ x < y`. This is because by default the equation compiler tries to recurse on the first argument. More precisely, the relation that the equation compiler tries to use in this example is on the type of pairs of natural numbers `Σ' (a : ℕ), ℕ`, and it uses a lexicographical relation where the pair `⟨a, b⟩ ≺ ⟨c, d⟩` iff `a < c ∨ (a = c ∧ b < d)` This situation can be resolved, either by changing the order of the arguments or by specifying a `rel_tac` as described later in this doc.
 
 Sometimes moving an argument outside of the equation compiler, can help the equation compiler prove a recursion is well_founded. For example the following proof from `data.nat.prime` fails.
 
