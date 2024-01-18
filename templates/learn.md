@@ -59,6 +59,8 @@ If you want a bit more detail, you can read the first chapter
 of the [HoTT book](https://homotopytypetheory.org/book/), ignoring
 anything where univalence is mentioned.
 
+If you're interested the nuts and bolts of Lean's kernel, writing your own external type checker for Lean, or exporting proofs, you can read more in [Type Checking in Lean 4](https://ammkrn.github.io/type_checking_in_lean4/).
+
 Another potentially useful resource is
 [this page](https://coq.github.io/doc/master/refman/language/cic.html)
 from Coq's documentation. The foundations of Coq are very very close to
