@@ -21,7 +21,7 @@ If you need to link to Lean 3 specific resources please link there.
 
 This is a tutorial for getting started writing your own tactics in Lean.
 It is intended for an audience that does not necessarily have
-experience working with monads in a functional programming langauge
+experience working with monads in a functional programming language
 (e.g. most mathematicians).
 
 Other useful resources while learning to write tactics include:
@@ -206,7 +206,7 @@ do `(%%l = %%r) ← tactic.target | tactic.trace "Goal is not an equality",
 ```
 
 If the `|` is omitted, then the tactic fails if the pattern does not match.
-We can catch this failure using the `orelse` combinator mentioned ealier, but note that by
+We can catch this failure using the `orelse` combinator mentioned earlier, but note that by
 doing so we catch more types of failure than we did above:
 ```lean
 meta def trace_goal_is_eq : tactic unit :=
