@@ -45,7 +45,7 @@ and click the install button.
 ## Setting up `elan` and `lean`
 
 You can either have the `VS Code` extension install `elan` and `lean` for you,
-or do it manually. We recommmend having the extension do it, but give instructions for both.
+or do it manually. We recommend having the extension do it, but give instructions for both.
 
 ### Have the extension install `elan` and `lean`
 
@@ -57,7 +57,7 @@ which you should click on and select `Lean4`.
 (You can alternatively find where `VS Code` says `Plain text` in the bottom right of your screen, and change the language here,
 or press `ctrl+shift+p` to open the command palette, and select `Change language mode`.)
 
-Once you've set the langauge to `Lean4`, a dialog will appear in the bottom right of your screen,
+Once you've set the language to `Lean4`, a dialog will appear in the bottom right of your screen,
 saying `Failed to start 'lean' language server` with a button `Install Lean using Elan`.
 
 Click this button, and inside a terminal window within `VS Code` you should see the installation process begin.
