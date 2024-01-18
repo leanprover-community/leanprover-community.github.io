@@ -49,7 +49,7 @@ call to `refine (calc A = B : H ...)`.
 
 To get helpful error messages, keep the calc structure even before the
 proof is complete. Use `_` as in the example above or `sorry` to stand
-for missing justifications. `sorry` will supress error messages
+for missing justifications. `sorry` will suppress error messages
 entirely, while `_` will generate a guiding error message.
 
 If the structure of calc is incorrect (e.g., missing `:` or the
