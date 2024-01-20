@@ -129,8 +129,8 @@ branch working again recent nightly releases.</li>
 </li>
 <li>Failures in CI on the <code>nightly-testing</code> are reported by a bot to zulip in the private
 &quot;Mathlib reviewers&quot; stream.</li>
-<li>Success in CI on the <code>nightly-testing</code> branch results in the creation or updating of a branch
-<code>nightly-testing-YYYY-MM-DD</code> to match that commit.
+<li>Success in CI on the <code>nightly-testing</code> branch results in the creation of a tag
+<code>nightly-testing-YYYY-MM-DD</code> to match that commit, if this tag does not already exist.
 <ul>
 <li>Thus if <code>nightly-testing-YYYY-MM-DD</code> exists, we know that on it:
 <ul>
@@ -147,9 +147,9 @@ but need to be done manually for Std.)
 <ul>
 <li>If the change was made in <code>leanprover/lean4#NNNN</code>,
 then the Std adaptation branch should be called <code>lean-pr-testing-NNNN</code>.</li>
-<li>The Std adaptation branch should be based off the branch <code>nightly-testing-YYYY-MM-DD</code>
+<li>The Std adaptation branch should be based off the tag <code>nightly-testing-YYYY-MM-DD</code>
 where <code>YYYY-MM-DD</code> is the date of the nightly release that your Lean PR is based off.</li>
-<li>If the <code>nightly-testing-YYYY-MM-DD</code> branch does not yet exist, you will need to wait
+<li>If the <code>nightly-testing-YYYY-MM-DD</code> tag does not yet exist, you will need to wait
 (and possibly move forward to a subsequent nightly).
 Contact @semorrison for assistance if needed.</li>
 <li>Ideally you will push the <code>lean-pr-testing-NNNN</code> branch to the main Std repository;
@@ -157,7 +157,7 @@ we can provide write access if needed.</li>
 <li>The <code>lean-toolchain</code> on this branch must contain <code>leanprover/lean4-pr-releases:pr-release-NNNN</code>.</li>
 <li>You may open a PR from the <code>lean-pr-testing-NNNN</code> branch, either before or after
 making the required adaptations.</li>
-<li>When opening the PR, remember to set the base branch to <code>nightly-testing-YYYY-MM-DD</code>.</li>
+<li>When opening the PR, remember to set the base branch to <code>nightly-testing</code>.</li>
 <li>Please label the PR with the <code>v4.X.0</code> and 'depends on core changes' labels.
 (Or ask for this to be done if you don't have write access.)</li>
 <li>Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
@@ -191,7 +191,7 @@ Please write a sentence about your background and plans.</li>
 </li>
 </ul>
 </li>
-<li>The <code>nightly-testing-*</code> and <code>bump/v4*</code> branches are write protected,
+<li>The <code>nightly-testing-*</code> tags and <code>bump/v4*</code> branches are write protected,
 so may only be modified via PRs, maintainers, or the relevant bots.</li>
 <li>Note that the <code>nightly-testing</code> branch of Mathlib may use the <code>nightly-testing</code> branch of Std as required.</li>
 <li>Similarly a <code>bump/v4.X.0</code> branch of Mathlib may use the <code>bump/v4.X.0</code> branch of Std as required.</li>
@@ -205,8 +205,8 @@ to use a <code>lean-pr-testing-NNNN</code> branch of Std, if Std also experience
 <li>For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.</li>
 <li>For this to work, you will need to rebase your PR onto the <code>nightly-with-mathlib</code> branch.
 The <code>nightly-with-mathlib</code> branch points to the latest nightly lean release which passes mathlib CI,
-and for which a <code>nightly-testing-YYYY-MM-DD</code> branch exists on Mathlib (and possibly Std).</li>
-<li>The bot will create a <code>lean-pr-testing-NNNN</code> branch at Mathlib from the <code>nightly-testing-YYYY-MM-DD</code> branch,
+and for which a <code>nightly-testing-YYYY-MM-DD</code> tag exists on Mathlib (and possibly Std).</li>
+<li>The bot will create a <code>lean-pr-testing-NNNN</code> branch at Mathlib from the <code>nightly-testing-YYYY-MM-DD</code> tag,
 or push an empty commit to it if it already exists.</li>
 <li>Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
 in the form of comments.</li>
