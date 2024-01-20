@@ -60,8 +60,8 @@ Mathlib.
     branch working again recent nightly releases.
 * Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
   "Mathlib reviewers" stream.
-* Success in CI on the `nightly-testing` branch results in the creation or updating of a branch
-  `nightly-testing-YYYY-MM-DD` to match that commit.
+* Success in CI on the `nightly-testing` branch results in the creation of a tag
+  `nightly-testing-YYYY-MM-DD` to match that commit, if this tag does not already exist.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
     * the `lean-toolchain` is `leanprover/lean4:nightly-YYYY-MM-DD`, and
     * CI succeeds.
@@ -71,9 +71,9 @@ Mathlib.
   but need to be done manually for Std.)
   * If the change was made in `leanprover/lean4#NNNN`,
     then the Std adaptation branch should be called `lean-pr-testing-NNNN`.
-  * The Std adaptation branch should be based off the branch `nightly-testing-YYYY-MM-DD`
+  * The Std adaptation branch should be based off the tag `nightly-testing-YYYY-MM-DD`
     where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off.
-  * If the `nightly-testing-YYYY-MM-DD` branch does not yet exist, you will need to wait
+  * If the `nightly-testing-YYYY-MM-DD` tag does not yet exist, you will need to wait
     (and possibly move forward to a subsequent nightly).
     Contact @semorrison for assistance if needed.
   * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Std repository;
@@ -81,7 +81,7 @@ Mathlib.
   * The `lean-toolchain` on this branch must contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
   * You may open a PR from the `lean-pr-testing-NNNN` branch, either before or after
     making the required adaptations.
-  * When opening the PR, remember to set the base branch to `nightly-testing-YYYY-MM-DD`.
+  * When opening the PR, remember to set the base branch to `nightly-testing`.
   * Please label the PR with the `v4.X.0` and 'depends on core changes' labels.
     (Or ask for this to be done if you don't have write access.)
   * Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
@@ -104,7 +104,7 @@ Mathlib.
     * This is required for Mathlib's `.olean` caching mechanism.
     * Please ask on the [zulip chat](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission) for "write" permission to Mathlib.
       Please write a sentence about your background and plans.
-* The `nightly-testing-*` and `bump/v4*` branches are write protected,
+* The `nightly-testing-*` tags and `bump/v4*` branches are write protected,
   so may only be modified via PRs, maintainers, or the relevant bots.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Std as required.
 * Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Std as required.
@@ -118,8 +118,8 @@ Mathlib.
 * For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.
 * For this to work, you will need to rebase your PR onto the `nightly-with-mathlib` branch.
   The `nightly-with-mathlib` branch points to the latest nightly lean release which passes mathlib CI,
-  and for which a `nightly-testing-YYYY-MM-DD` branch exists on Mathlib (and possibly Std).
-* The bot will create a `lean-pr-testing-NNNN` branch at Mathlib from the `nightly-testing-YYYY-MM-DD` branch,
+  and for which a `nightly-testing-YYYY-MM-DD` tag exists on Mathlib (and possibly Std).
+* The bot will create a `lean-pr-testing-NNNN` branch at Mathlib from the `nightly-testing-YYYY-MM-DD` tag,
   or push an empty commit to it if it already exists.
 * Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
   in the form of comments.
@@ -130,6 +130,6 @@ Mathlib.
   will commence as soon as that nightly release itself passes the Mathlib CI and you push to the PR.
 * It may be the case that that nightly release never passes the Mathlib CI. In that case you may have
   to wait for `nightly-with-mathlib` to be updated and rebase onto that.
-  
+
 
 <img src="img/tags_and_branches.png" alt="Overview of branches at Mathlib/Std" width="80%"/>
