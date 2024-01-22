@@ -86,6 +86,7 @@ to use Lean.
 A number of meetings have helped welcome newcomers to the Lean community.
 The following have links to online talks and other material that may
 be of interest. Note that all items until year 2022 used Lean 3 but may still contain relevant information.
+* [Lean Together 2024](https://leanprover-community.github.io/lt2024/)
 * [Lean for the Curious Mathematician 2023](https://lftcm2023.github.io/tutorial/index.html)
 * [Formalization of mathematics 2023](https://www.msri.org/summer_schools/1021)
 * [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
