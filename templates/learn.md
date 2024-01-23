@@ -11,13 +11,13 @@ There is no point learning Lean 3 at this stage.
 
 * Whatever your background, if you want to dive right away, you can play the
   [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4). 
-  This is a online interactive tutorial to Lean
+  This is an online interactive tutorial to Lean
   focused on proving properties of the elementary operations on natural numbers.
 
 * For a faster paced and broader dive, you can get the
   [Glimpse of Lean tutorial](https://github.com/PatrickMassot/GlimpseOfLean).
   This contains four basic files covering some fundamental aspects of proving
-  using Lean, and then independents topic files about elementary analysis,
+  using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
 ## Books
@@ -59,7 +59,7 @@ If you want a bit more detail, you can read the first chapter
 of the [HoTT book](https://homotopytypetheory.org/book/), ignoring
 anything where univalence is mentioned.
 
-If you're interested the nuts and bolts of Lean's kernel, writing your own external type checker for Lean, or exporting proofs, you can read more in [Type Checking in Lean 4](https://ammkrn.github.io/type_checking_in_lean4/).
+If you're interested in the nuts and bolts of Lean's kernel, writing your own external type checker for Lean, or exporting proofs, you can read more in [Type Checking in Lean 4](https://ammkrn.github.io/type_checking_in_lean4/).
 
 Another potentially useful resource is
 [this page](https://coq.github.io/doc/master/refman/language/cic.html)
