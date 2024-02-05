@@ -20,26 +20,32 @@ There is no point learning Lean 3 at this stage.
   using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
-## Books
+## Documents
 
-* If you prefer reading a book (with exercises), the standard mathematics oriented reference is
-  [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
-  You can also download it 
+* [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) by Jeremy Avigad and 
+  Patrick Massot is the standard
+  reference on formalizing mathematics in Lean. You can download it 
   [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
-  but it is really meant to be used in VSCode, doing exercises on the fly (see the
+  but it can also be used within VSCode, in which case  you can do the exercises without copying them from
+  the document to the editor (see the
   [instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
 
-* [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) is also mathematics-oriented.
-  It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
-  experience.
+* [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) by Heather Macbeth is an undergraduate textbook that    
+  uses Lean to teach methods of proof in mathematics.
 
-* If you prefer something more computer-science oriented, the standard reference is
-  [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/).
-  You almost certainly want to read it at some point anyway, since it
-  contains a lot more explanations about foundational things.
+* [How To Prove It With Lean](https://djvelleman.github.io/HTPIwL/) by Daniel Velleman is a Lean supplement to the
+  author's undergraduate textbook (*How To Prove It: Third Edition*, Cambridge, University Press, 2019)  for teaching methods of proof in mathematics.
 
-* If you want something that is more focussed on Lean itself than on using Lean, then you 
-  can read the [reference manual](https://leanprover.github.io/lean4/doc/).
+* [A Gentle Introduction to Lean](https://github.com/motib/gentle-lean) by Moti Ben-Ari is a tutorial on the Lean proof 
+  assistant for novices that introduces the proof tactics step-by-step.
+
+* [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/) by Jeremy Avigad, 
+  Leonardo de Moura, Soonho Kong and Sebastian Ullrich is a formal description of the Lean proof assistant.
+  Unlike *Mathematics in Lean* which focuses on the *use* of Lean to prove mathematical theorems, this document
+  explains the meaning and the rationale of the Lean constructs. 
+  You will want to study this after achieving some familiarity with the use of Lean. 
+  
+* [Lean Manual](https://leanprover.github.io/lean4/doc/) is the Lean reference manual.
 
 ## (Meta)-programming and tactic writing
 
