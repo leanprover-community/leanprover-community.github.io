@@ -3,7 +3,7 @@
 The [Lean theorem prover](https://leanprover.github.io)
 is a proof assistant developed principally by Leonardo de Moura.
 
-The community is currently in the middle of switching from using Lean 3 to using Lean 4.
+The community recently switched from using Lean 3 to using Lean 4.
 This website is still being updated, and some pages have outdated information about Lean 3
 (these pages are marked with a prominent banner).
 The old Lean 3 community website has been [archived](lean3/).
