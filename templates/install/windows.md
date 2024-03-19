@@ -1,6 +1,6 @@
 # Installing Lean 4 on Windows
 
-This document explains how to get started with Lean 4 and mathlib.
+This document explains how to get started with Lean 4 and Mathlib.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
@@ -10,7 +10,7 @@ TODO: make a new video walkthrough.
 There is a [video walkthrough](https://www.youtube.com/watch?v=y3GsHIe4wZ4) of these instructions on YouTube.
 -->
 
-We'll need to set up Lean, an editor that knows about Lean, and `mathlib4` (the standard library).
+We'll need to set up Lean, an editor that knows about Lean, and `Mathlib` (the standard library).
 Rather than installing Lean directly, we'll rely on a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
 all users.
@@ -73,8 +73,8 @@ If you see a blue underline appear under `#eval`, and the result `37` displayed 
 then you have successfully installed Lean 4!
 
 You can skip ahead to read the instructions about creating and working on [Lean projects](project.html).
-This page will show you how to work with mathlib4, the main mathematical library for Lean,
-or to work with a new or existing project that depends on mathlib4.
+This page will show you how to work with Mathlib, the main mathematical library for Lean,
+or to work with a new or existing project that depends on Mathlib.
 
 ### Installing `elan` yourself
 

@@ -1,9 +1,9 @@
 # Controlled installation of Lean 4 on Debian/Ubuntu
 
 This document explains a more controlled installation procedure
-for Lean 4 and mathlib on Linux distributions derived from Debian (Debian
+for Lean 4 and Mathlib on Linux distributions derived from Debian (Debian
 itself, Ubuntu, LMDE,...). There is a quicker way described in the main
-[install page](debian.html) but it requires more trust.
+[install page](../get_started.html) but it requires more trust.
 Of course you can get even more details about what is going on by
 reading the bash script that will be downloaded below:
 [elan_init](https://github.com/leanprover/elan/blob/master/elan-init.sh).
