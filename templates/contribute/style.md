@@ -264,12 +264,22 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+### Instances
+
 When providing terms of structures or instances of classes, the `where`
 syntax should be used to avoid the need for enclosing braces, as in:
 
 ```lean
-instance orderBot : OrderBot ℕ where
+instance instOrderBot : OrderBot ℕ where
   bot := 0
+  bot_le := Nat.zero_le
+```
+
+If there is already an instance `instBot`, then one can write
+
+```lean
+instance instOrderBot : OrderBot ℕ where
+  __ := instBot
   bot_le := Nat.zero_le
 ```
 
