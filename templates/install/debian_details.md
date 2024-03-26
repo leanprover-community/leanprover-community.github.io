@@ -39,6 +39,14 @@ reading the bash script that will be downloaded below:
   Alternatively, you can use Emacs and its [lean4-mode](https://github.com/leanprover/lean4-mode) or
   neovim and its [lean.nvim extension](https://github.com/Julian/lean.nvim).
 
+## Don't use your distribution's package manager!
+
+It might be tempting to use your Linux distribution's package manager (APT, DNF, AUR, etc.) to install Lean instead. **Don't do this!**
+
+Lean cuts a new release every few weeks. The version provided by your distribution is likely out of date. Moreover, different projects might require incompatible versions of Lean, which most distributions don't handle but `elan` can.
+
+Unless you're building something for the Linux distribution itself, use `elan`.
+
 ## Lean Projects
 
 You can now read instructions about creating and working on [Lean projects](project.html)
