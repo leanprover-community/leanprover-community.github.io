@@ -505,6 +505,7 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
 
 When using the tactics `rw` or `simp` there should be a space after the left arrow  `←`.
 For instance `rw [← add_comm a b]` or `simp [← and_or_left]`.
+(There should also be a space between the tactic name and its arguments, as in `rw [h]`.)
 This rule applies the `do` notation as well: `do return (← f) + (← g)`
 
 ### Normal forms
