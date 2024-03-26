@@ -81,6 +81,8 @@ When translating the statements of theorems into words, the following dictionary
 | `≠`    | `\ne`    | `ne`                      |                                                                     |
 | `∘`    | `\o`     | `comp`                    |                                                                     |
 
+`ball` and `bex` are still used in Lean core, but should not be used in mathlib.
+
 #### Set
 
 | symbol                      | shortcut    | name                 | notes                                         |
