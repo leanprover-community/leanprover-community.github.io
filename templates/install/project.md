@@ -65,7 +65,7 @@ commands should be typed in a terminal.
   you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
 The keyword `math` at the end of this command adds `mathlib4` to the dependencies of your project, so that you can use `import Mathlib` in your project files.
 
-* Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
+* Go inside the `my_project` folder and type `lake update` and then `mkdir MyProject`.
   * Windows users seeing a `curl: (35) schannel: next InitializeSecurityContext failed` error should read [this note](#initializesecuritycontext-error-on-windows).
 
 * Launch VS Code, either through your application menu or by typing
