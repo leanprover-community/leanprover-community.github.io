@@ -17,7 +17,7 @@ Once you have code that you'd like to contribute, you should open a PR.
 We use `git` to manage and version control `mathlib`.
 The `master` branch is the "production" version of mathlib.
 It is essential that everything in the master branch compiles without errors, and there are no `sorry`s.
-To ensure this, we only commit changes to `master` that have passed CI tests, and have been approved by mathlib maintainers.
+To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
 It's okay to do this in your own fork of the `mathlib` repository,
@@ -53,7 +53,7 @@ Typical workflow:
   In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
 * Commit your changes using `git commit -a` (or via the VS Code interface).
-* If you'd like to compile everthing locally to check you didn't break anything, run
+* If you'd like to compile everything locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you by pushing your changes.
 * In order to push your changes back to the repository on github, use
