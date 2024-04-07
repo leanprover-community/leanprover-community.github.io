@@ -356,6 +356,25 @@ open Nat
 #check le_of_mul_le_mul_right
 ```
 
+When referring to a namespaced definition in a lemma name not in the
+same namespace, the definition should have its namespace removed. If
+the definition name is unambiguous without its namespace, it can be
+used as is. Else, the namespace is prepended back to it in
+`lowerCamelCase`. This is to ensure that `_`-separated strings in a
+lemma name correspond to a definition name or connective.
+```lean
+import Mathlib.Data.Int.Cast.Basic
+import Mathlib.Data.Nat.Cast.Basic
+import Mathlib.Topology.Constructions
+
+#check Prod.fst
+#check continuous_fst
+
+#check Nat.cast
+#check map_natCast
+#check Int.cast_natCast
+```
+
 ## Naming of structural lemmas
 
 We are trying to standardize certain naming patterns for structural lemmas.
