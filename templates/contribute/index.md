@@ -51,10 +51,7 @@ Typical workflow:
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
   In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
-* Make local changes, e.g. using Visual Studio Code using the Lean extension. If you created new files, use
-  ```
-  scripts/mk_all.sh
-  ```
+* Make local changes, e.g. using Visual Studio Code using the Lean extension. If you created new files, use `scripts/mk_all.sh`.
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everthing locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
