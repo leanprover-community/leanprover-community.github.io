@@ -69,7 +69,7 @@ The keyword `math` at the end of this command adds `mathlib4` to the dependencie
   * Windows users seeing a `curl: (35) schannel: next InitializeSecurityContext failed` error should read [this note](#initializesecuritycontext-error-on-windows).
 
 * Launch VS Code, either through your application menu or by typing
-  `code .`.
+  the `code .` command.
 
 * If you launched VS Code through a menu: on the main screen, or in the
   File menu, click "Open folder" (on a Mac, just "Open"), and

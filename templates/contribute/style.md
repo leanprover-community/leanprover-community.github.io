@@ -223,18 +223,18 @@ example:
 import Mathlib.Data.Nat.Basic
 
 theorem Nat.add_right_inj {n m k : Nat} : n + m = n + k → m = k :=
-Nat.recOn n
-  (fun H : 0 + m = 0 + k ↦ calc
-    m = 0 + m := Eq.symm (zero_add m)
-    _ = 0 + k := H
-    _ = k     := zero_add _)
-  (fun (n : Nat) (IH : n + m = n + k → m = k) (H : succ n + m = succ n + k) ↦
-    have H2 : succ (n + m) = succ (n + k) := calc
-      succ (n + m) = succ n + m   := Eq.symm (succ_add n m)
-      _            = succ n + k   := H
-      _            = succ (n + k) := succ_add n k
-    have H3 : n + m = n + k := succ.inj H2
-    IH H3)
+  Nat.recOn n
+    (fun H : 0 + m = 0 + k ↦ calc
+      m = 0 + m := Eq.symm (zero_add m)
+      _ = 0 + k := H
+      _ = k     := zero_add _)
+    (fun (n : Nat) (IH : n + m = n + k → m = k) (H : succ n + m = succ n + k) ↦
+      have H2 : succ (n + m) = succ (n + k) := calc
+        succ (n + m) = succ n + m   := Eq.symm (succ_add n m)
+        _            = succ n + k   := H
+        _            = succ (n + k) := succ_add n k
+      have H3 : n + m = n + k := succ.inj H2
+      IH H3)
 ```
 
 In a class or structure definition, fields are indented 2 spaces, and moreover
@@ -505,6 +505,7 @@ example {x y : ℝ} (hxy : x ≤ y) (h : ∀ ε > 0, y - ε ≤ x) : x = y :=
 
 When using the tactics `rw` or `simp` there should be a space after the left arrow  `←`.
 For instance `rw [← add_comm a b]` or `simp [← and_or_left]`.
+(There should also be a space between the tactic name and its arguments, as in `rw [h]`.)
 This rule applies the `do` notation as well: `do return (← f) + (← g)`
 
 ### Normal forms

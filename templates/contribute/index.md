@@ -56,6 +56,7 @@ Typical workflow:
 * If you'd like to compile everthing locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you by pushing your changes.
+* If you created new files, use `scripts/mk_all.sh`.
 * In order to push your changes back to the repository on github, use
   ```
   git push
