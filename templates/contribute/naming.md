@@ -51,7 +51,7 @@ class LT (α : Type u) where
   lt : α → α → Prop -- follows rule 4 and 6
 
 -- follows rules 2 (for `Semifield`) and 4 (for `toIsField`)
-theorem Semifield.toIsField(R : Type u) [Semifield R] :
+theorem Semifield.toIsField (R : Type u) [Semifield R] :
 IsField R -- follows rule 2
 
 -- follows rules 1 and 6
