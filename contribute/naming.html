@@ -181,6 +181,7 @@ is capitalized despite the fact that it should be <code>lowerCamelCase</code> ac
 </tr>
 </tbody>
 </table>
+<p><code>ball</code> and <code>bex</code> are still used in Lean core, but should not be used in mathlib.</p>
 <h4 id="set" class="markdown-heading">Set <a class="hover-link" href="#set">#</a></h4>
 <table>
 <thead>
@@ -625,6 +626,25 @@ of a theorem.</p>
 <span class="k">#check</span> <span class="n">add_le_add_right</span>
 <span class="k">#check</span> <span class="n">le_of_mul_le_mul_left</span>
 <span class="k">#check</span> <span class="n">le_of_mul_le_mul_right</span>
+</code></pre></div>
+</div>
+
+<p>When referring to a namespaced definition in a lemma name not in the
+same namespace, the definition should have its namespace removed. If
+the definition name is unambiguous without its namespace, it can be
+used as is. Else, the namespace is prepended back to it in
+<code>lowerCamelCase</code>. This is to ensure that <code>_</code>-separated strings in a
+lemma name correspond to a definition name or connective.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Data.Int.Cast.Basic</span>
+<span class="kn">import</span> <span class="n">Mathlib.Data.Nat.Cast.Basic</span>
+<span class="kn">import</span> <span class="n">Mathlib.Topology.Constructions</span>
+
+<span class="k">#check</span> <span class="n">Prod.fst</span>
+<span class="k">#check</span> <span class="n">continuous_fst</span>
+
+<span class="k">#check</span> <span class="n">Nat.cast</span>
+<span class="k">#check</span> <span class="n">map_natCast</span>
+<span class="k">#check</span> <span class="n">Int.cast_natCast</span>
 </code></pre></div>
 </div>
 
