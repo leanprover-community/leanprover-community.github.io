@@ -4,17 +4,20 @@ There are many ways to start learning Lean, depending on your background and
 taste. They are all fun and rewarding, but also difficult and
 occasionally frustrating. Proof assistants are still difficult to use,
 and you cannot expect to become proficient after one afternoon of
-learning. Note that all resources listed on that page are about Lean 4. 
-There is no point learning Lean 3 at this stage.
+learning.
+
+All the resources listed on this page are about Lean 4.
+Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
 
 ## Hands-on approaches
 
 * Whatever your background, if you want to dive right away, you can play the
   [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4). 
-  This is an online interactive tutorial to Lean
+  This is an online interactive Lean tutorial
   focused on proving properties of the elementary operations on natural numbers.
+  Similar games for [Logic and Set Theory](https://adam.math.hhu.de/#/) are available.
 
-* For a faster paced and broader dive, you can get the
+* For a faster-paced and broader dive, you can get the
   [Glimpse of Lean tutorial](https://github.com/PatrickMassot/GlimpseOfLean).
   This contains four basic files covering some fundamental aspects of proving
   using Lean, and then independent topic files about elementary analysis,
@@ -22,12 +25,19 @@ There is no point learning Lean 3 at this stage.
 
 ## Books
 
-* If you prefer reading a book (with exercises), the standard mathematics oriented reference is
+If you prefer reading a book (with exercises), there are a number of freely available Lean books.
+These are available as PDFs, but usually meant to be read interactively in VSCode,
+doing Lean exercises on the fly:
+
+* The [Hitchhiker's Guide to Logical Verification (2023 Edition)](https://github.com/blanchette/logical_verification_2023) is a good introduction to both the verification and programming aspects of Lean,
+with an associated VSCode project and exercises. [PDF here](https://github.com/blanchette/logical_verification_2023/blob/main/hitchhikers_guide.pdf).
+
+* The standard mathematics-oriented reference is
   [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
-  You can also download it 
-  [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
-  but it is really meant to be used in VSCode, doing exercises on the fly (see the
-  [instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
+  You can download it 
+  [as a PDF](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf);
+  here are the
+  [VSCode instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started).
 
 * [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) is also mathematics-oriented.
   It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
@@ -38,7 +48,7 @@ There is no point learning Lean 3 at this stage.
   You almost certainly want to read it at some point anyway, since it
   contains a lot more explanations about foundational things.
 
-* If you want something that is more focussed on Lean itself than on using Lean, then you 
+* If you want something more focused on Lean itself than on using Lean, then you 
   can read the [reference manual](https://leanprover.github.io/lean4/doc/).
 
 ## (Meta)-programming and tactic writing
@@ -78,14 +88,16 @@ If you can read the above Coq documentation then you are ready for
 [this paper](https://github.com/digama0/lean-type-theory/releases) by
 Mario Carneiro which precisely describes the type theory of Lean.
 
-Note that understanding type theoretic foundations is not at all necessary
+Note that understanding type-theoretic foundations is not at all necessary
 to use Lean.
 
 ## Meetings
 
 A number of meetings have helped welcome newcomers to the Lean community.
 The following have links to online talks and other material that may
-be of interest. Note that all items until year 2022 used Lean 3 but may still contain relevant information.
+be of interest.
+Note that all items until the year 2022 used Lean 3, but they may still contain relevant information.
+* [Lean Together 2024](https://leanprover-community.github.io/lt2024/schedule.html)
 * [Lean for the Curious Mathematician 2023](https://lftcm2023.github.io/tutorial/index.html)
 * [Formalization of mathematics 2023](https://www.msri.org/summer_schools/1021)
 * [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
