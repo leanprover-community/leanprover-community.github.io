@@ -59,13 +59,13 @@ We will now create a new project depending on mathlib. The following
 commands should be typed in a terminal.
 
 * Go to a folder where you want to create a project in a subfolder
-  `my_project`, and type `lake +leanprover/lean4:nightly-2023-02-04 new my_project math`. Do not worry about the date in the previous command, it ensures you will use a sufficiently recent version of `lake` but has no impact on the version of `lean` your project will use. If you get an
+  `my_project`, and type `lake +leanprover/lean4:nightly-2024-04-24 new my_project math`. Do not worry about the date in the previous command, it ensures you will use a sufficiently recent version of `lake` but has no impact on the version of `lean` your project will use. If you get an
   error message saying `lake` is an unknown command and
   you have not logged in since you installed Lean, then
   you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
 The keyword `math` at the end of this command adds `mathlib4` to the dependencies of your project, so that you can use `import Mathlib` in your project files.
 
-* Go inside the `my_project` folder and type `lake update`, then `lake exe cache get` and then `mkdir MyProject`.
+* Go inside the `my_project` folder and type `lake update` and then `mkdir MyProject`.
   * Windows users seeing a `curl: (35) schannel: next InitializeSecurityContext failed` error should read [this note](#initializesecuritycontext-error-on-windows).
 
 * Launch VS Code, either through your application menu or by typing
@@ -127,7 +127,7 @@ Some Windows users have reported an error like this when running `lake exe cache
 
 If you see this error, you likely have an antivirus program that scans each downloaded file, which results in errors.
 Please disable your antivirus program and then run `lake exe cache get!`.
-The exclamation mark forces `lake` to re-download the cache files it failed to download before running this command. 
+The exclamation mark forces `lake` to re-download the cache files it failed to download before running this command.
 (If you are uncomfortable disabling your antivirus, try to follow [these instructions](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/lake.20exe.20cache.20get.20errors/near/389019448)
 and then run `lake exe cache get!`).
 You can turn on your antivirus program on afterwards.
