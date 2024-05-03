@@ -13,7 +13,7 @@ the experiment carried out in Mathlib PR
    instructions below.
 3. The previous step can potentially be repeated with a lowered setting of
    `profiler.threshold`, to find and speed up things that are not very slow,
-   but also not very fast. This will eventually deliver diminshing returns, however.
+   but also not very fast. This will eventually deliver diminishing returns, however.
 4. Remove the profiler options again and PR!
 
 ## Dealing with specific slow steps
