@@ -68,41 +68,41 @@ in mathlib under Lean 4 we use a combination of <code>snake_case</code>, <code>l
 is capitalized despite the fact that it should be <code>lowerCamelCase</code> according to the convention. Any such exceptions should be discussed on Zulip.</p>
 <h3 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h3>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- follows rule 2</span>
-<span class="kd">structure</span> <span class="n">OneHom</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">One</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">One</span> <span class="n">N</span><span class="o">]</span> <span class="n">where</span>
-  <span class="n">toFun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="c1">-- follows rule 4 via rule 3 and rule 7</span>
-  <span class="n">map_one&#39;</span> <span class="o">:</span> <span class="n">toFun</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="c1">-- follows rule 1 via rule 7</span>
+<span class="kd">structure</span><span class="w"> </span><span class="n">OneHom</span><span class="w"> </span><span class="o">(</span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">One</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">One</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">toFun</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="c1">-- follows rule 4 via rule 3 and rule 7</span>
+<span class="w">  </span><span class="n">map_one&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">toFun</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- follows rule 1 via rule 7</span>
 
 <span class="c1">-- follows rule 2 via rule 3</span>
-<span class="kd">class</span> <span class="n">CoeIsOneHom</span> <span class="o">[</span><span class="n">One</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">One</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="n">where</span>
-  <span class="n">coe_one</span> <span class="o">:</span> <span class="o">(</span><span class="bp">↑</span><span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="c1">-- follows rule 1 via rule 6</span>
+<span class="kd">class</span><span class="w"> </span><span class="n">CoeIsOneHom</span><span class="w"> </span><span class="o">[</span><span class="n">One</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">One</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">coe_one</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="bp">↑</span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- follows rule 1 via rule 6</span>
 
 <span class="c1">-- follows rule 1 via rule 3</span>
-<span class="kd">theorem</span> <span class="n">map_one</span> <span class="o">[</span><span class="n">OneHomClass</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">map_one</span><span class="w"> </span><span class="o">[</span><span class="n">OneHomClass</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">F</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
 
 <span class="c1">-- follows rules 1 and 5</span>
-<span class="kd">theorem</span> <span class="n">MonoidHom.toOneHom_injective</span> <span class="o">[</span><span class="n">MulOneClass</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">MulOneClass</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span>
-  <span class="n">Function.Injective</span> <span class="o">(</span><span class="n">MonoidHom.toOneHom</span> <span class="o">:</span> <span class="o">(</span><span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="bp">→</span> <span class="n">OneHom</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">MonoidHom.toOneHom_injective</span><span class="w"> </span><span class="o">[</span><span class="n">MulOneClass</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">MulOneClass</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">:</span>
+<span class="w">  </span><span class="n">Function.Injective</span><span class="w"> </span><span class="o">(</span><span class="n">MonoidHom.toOneHom</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">M</span><span class="w"> </span><span class="bp">→*</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">OneHom</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
 <span class="c1">-- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`</span>
-<span class="bp">#</span><span class="n">align</span> <span class="n">monoid_hom.to_one_hom_injective</span> <span class="n">MonoidHom.toOneHom_injective</span>
+<span class="bp">#</span><span class="n">align</span><span class="w"> </span><span class="n">monoid_hom.to_one_hom_injective</span><span class="w"> </span><span class="n">MonoidHom.toOneHom_injective</span>
 
 <span class="c1">-- follows rule 2</span>
-<span class="kd">class</span> <span class="n">HPow</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="n">where</span>
-  <span class="n">hPow</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="c1">-- follows rule 3 via rule 6; note that rule 5 does not apply</span>
+<span class="kd">class</span><span class="w"> </span><span class="n">HPow</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">u</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">β</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">v</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">γ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">w</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">hPow</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">β</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">γ</span><span class="w"> </span><span class="c1">-- follows rule 3 via rule 6; note that rule 5 does not apply</span>
 
 <span class="c1">-- follows rules 2 and 6</span>
-<span class="kd">class</span> <span class="n">LT</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="n">where</span>
-  <span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="c1">-- follows rule 4 and 6</span>
+<span class="kd">class</span><span class="w"> </span><span class="n">LT</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">u</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">lt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="c1">-- follows rule 4 and 6</span>
 
 <span class="c1">-- follows rules 1 and 6</span>
-<span class="kd">theorem</span> <span class="n">gt_iff_lt</span> <span class="o">[</span><span class="n">LT</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">gt_iff_lt</span><span class="w"> </span><span class="o">[</span><span class="n">LT</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
 
 <span class="c1">-- follows rule 2; `Ne` is an exception to rule 6</span>
-<span class="kd">class</span> <span class="n">NeZero</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="kd">class</span><span class="w"> </span><span class="n">NeZero</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
 
 <span class="c1">-- follows rules 1 and 5</span>
-<span class="kd">theorem</span> <span class="n">neZero_iff</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">NeZero</span> <span class="n">n</span> <span class="bp">↔</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">neZero_iff</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">_</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Zero</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">NeZero</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
 <span class="c1">-- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`</span>
-<span class="bp">#</span><span class="n">align</span> <span class="n">ne_zero_iff</span> <span class="n">neZero_iff</span>
+<span class="bp">#</span><span class="n">align</span><span class="w"> </span><span class="n">ne_zero_iff</span><span class="w"> </span><span class="n">neZero_iff</span>
 </code></pre></div>
 </div>
 
@@ -522,57 +522,57 @@ to guess the name of a theorem or find it using tab completion. Common
 &quot;axiomatic&quot; properties of an operation like conjunction or
 disjunction are put in a namespace that begins with the name of the
 operation:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Logic.Basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Logic.Basic</span>
 
-<span class="k">#check</span> <span class="n">And.comm</span>
-<span class="k">#check</span> <span class="n">Or.comm</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">And.comm</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Or.comm</span>
 </code></pre></div>
 </div>
 
 <p>In particular, this includes <code>intro</code> and <code>elim</code> operations for logical
 connectives, and properties of relations:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Logic.Basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Logic.Basic</span>
 
-<span class="k">#check</span> <span class="n">And.intro</span>
-<span class="k">#check</span> <span class="n">And.elim</span>
-<span class="k">#check</span> <span class="n">Or.intro_left</span>
-<span class="k">#check</span> <span class="n">Or.intro_right</span>
-<span class="k">#check</span> <span class="n">Or.elim</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">And.intro</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">And.elim</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Or.intro_left</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Or.intro_right</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Or.elim</span>
 
-<span class="k">#check</span> <span class="n">Eq.refl</span>
-<span class="k">#check</span> <span class="n">Eq.symm</span>
-<span class="k">#check</span> <span class="n">Eq.trans</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Eq.refl</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Eq.symm</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Eq.trans</span>
 </code></pre></div>
 </div>
 
 <p>Note however we do not do this for axiomatic logical and arithmetic operations.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Group.Basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Group.Basic</span>
 
-<span class="k">#check</span> <span class="n">and_assoc</span>
-<span class="k">#check</span> <span class="n">mul_comm</span>
-<span class="k">#check</span> <span class="n">mul_assoc</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">mul_left_cancel</span>  <span class="c1">-- multiplication is left cancelative</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">and_assoc</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_comm</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_assoc</span>
+<span class="k">#check</span><span class="w"> </span><span class="bp">@</span><span class="n">mul_left_cancel</span><span class="w">  </span><span class="c1">-- multiplication is left cancelative</span>
 </code></pre></div>
 </div>
 
 <p>For the most part, however, we rely on descriptive names. Often the
 name of theorem simply describes the conclusion:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Ring.Basic</span>
-<span class="kn">open</span> <span class="n">Nat</span>
-<span class="k">#check</span> <span class="n">succ_ne_zero</span>
-<span class="k">#check</span> <span class="n">mul_zero</span>
-<span class="k">#check</span> <span class="n">mul_one</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">sub_add_eq_add_sub</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">le_iff_lt_or_eq</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Ring.Basic</span>
+<span class="kn">open</span><span class="w"> </span><span class="n">Nat</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">succ_ne_zero</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_zero</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_one</span>
+<span class="k">#check</span><span class="w"> </span><span class="bp">@</span><span class="n">sub_add_eq_add_sub</span>
+<span class="k">#check</span><span class="w"> </span><span class="bp">@</span><span class="n">le_iff_lt_or_eq</span>
 </code></pre></div>
 </div>
 
 <p>If only a prefix of the description is enough to convey the meaning,
 the name may be made even shorter:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Ring.Basic</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Ring.Basic</span>
 
-<span class="k">#check</span> <span class="bp">@</span><span class="n">neg_neg</span>
-<span class="k">#check</span> <span class="n">Nat.pred_succ</span>
+<span class="k">#check</span><span class="w"> </span><span class="bp">@</span><span class="n">neg_neg</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Nat.pred_succ</span>
 </code></pre></div>
 </div>
 
@@ -582,14 +582,14 @@ describe the patter <code>-a * -b</code>.</p>
 <p>Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
 hypotheses. The word &quot;of&quot; is used to separate these hypotheses:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
 
-<span class="kn">open</span> <span class="n">Nat</span>
+<span class="kn">open</span><span class="w"> </span><span class="n">Nat</span>
 
-<span class="k">#check</span> <span class="n">lt_of_succ_le</span>
-<span class="k">#check</span> <span class="n">lt_of_not_ge</span>
-<span class="k">#check</span> <span class="n">lt_of_le_of_ne</span>
-<span class="k">#check</span> <span class="n">add_lt_add_of_lt_of_le</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">lt_of_succ_le</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">lt_of_not_ge</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">lt_of_le_of_ne</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">add_lt_add_of_lt_of_le</span>
 </code></pre></div>
 </div>
 
@@ -599,15 +599,15 @@ order. For example, the theorem <code>A → B → C</code> would be named
 <p>Sometimes abbreviations or alternative descriptions are easier to work
 with. For example, we use <code>pos</code>, <code>neg</code>, <code>nonpos</code>, <code>nonneg</code> rather than
 <code>zero_lt</code>, <code>lt_zero</code>, <code>le_zero</code>, and <code>zero_le</code>.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
-<span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
 
-<span class="kn">open</span> <span class="n">Nat</span>
+<span class="kn">open</span><span class="w"> </span><span class="n">Nat</span>
 
-<span class="k">#check</span> <span class="n">mul_pos</span>
-<span class="k">#check</span> <span class="n">mul_nonpos_of_nonneg_of_nonpos</span>
-<span class="k">#check</span> <span class="n">add_lt_of_lt_of_nonpos</span>
-<span class="k">#check</span> <span class="n">add_lt_of_nonpos_of_lt</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_pos</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">mul_nonpos_of_nonneg_of_nonpos</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">add_lt_of_lt_of_nonpos</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">add_lt_of_nonpos_of_lt</span>
 </code></pre></div>
 </div>
 
@@ -617,15 +617,15 @@ pattern. For that, we make do as best we can. For example, <code>a + b - b = a</
 could be named either <code>add_sub_self</code> or <code>add_sub_cancel</code>.</p>
 <p>Sometimes the word &quot;left&quot; or &quot;right&quot; is helpful to describe variants
 of a theorem.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
-<span class="kn">import</span> <span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Monoid.Lemmas</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Ring.Lemmas</span>
 
-<span class="kn">open</span> <span class="n">Nat</span>
+<span class="kn">open</span><span class="w"> </span><span class="n">Nat</span>
 
-<span class="k">#check</span> <span class="n">add_le_add_left</span>
-<span class="k">#check</span> <span class="n">add_le_add_right</span>
-<span class="k">#check</span> <span class="n">le_of_mul_le_mul_left</span>
-<span class="k">#check</span> <span class="n">le_of_mul_le_mul_right</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">add_le_add_left</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">add_le_add_right</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">le_of_mul_le_mul_left</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">le_of_mul_le_mul_right</span>
 </code></pre></div>
 </div>
 
@@ -635,16 +635,16 @@ the definition name is unambiguous without its namespace, it can be
 used as is. Else, the namespace is prepended back to it in
 <code>lowerCamelCase</code>. This is to ensure that <code>_</code>-separated strings in a
 lemma name correspond to a definition name or connective.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="n">Mathlib.Data.Int.Cast.Basic</span>
-<span class="kn">import</span> <span class="n">Mathlib.Data.Nat.Cast.Basic</span>
-<span class="kn">import</span> <span class="n">Mathlib.Topology.Constructions</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Int.Cast.Basic</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Nat.Cast.Basic</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Topology.Constructions</span>
 
-<span class="k">#check</span> <span class="n">Prod.fst</span>
-<span class="k">#check</span> <span class="n">continuous_fst</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Prod.fst</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">continuous_fst</span>
 
-<span class="k">#check</span> <span class="n">Nat.cast</span>
-<span class="k">#check</span> <span class="n">map_natCast</span>
-<span class="k">#check</span> <span class="n">Int.cast_natCast</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Nat.cast</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">map_natCast</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">Int.cast_natCast</span>
 </code></pre></div>
 </div>
 
