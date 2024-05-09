@@ -34,7 +34,7 @@ There is no point learning Lean 3 at this stage.
   experience.
 
 * [Formalising Mathematics](https://www.ma.imperial.ac.uk/~buzzard/xena/formalising-mathematics-2024/)
-  is another book for mathematicians with useful tips and an overview of common tactics.
+  is some course notes for mathematicians with useful tips and an overview of common tactics.
 
 * If you prefer something more about the foundations of type theory, the standard reference is
   [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/).
