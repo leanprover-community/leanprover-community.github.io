@@ -46,7 +46,7 @@ theorem MonoidHom.toOneHom_injective [MulOneClass M] [MulOneClass N] :
 class HPow (α : Type u) (β : Type v) (γ : Type w) where
   hPow : α → β → γ -- follows rule 3 via rule 6; note that rule 5 does not apply
 
--- follows rules 2 and 6
+-- follows rules 2 and 6, because `LT` is an acronym for `LessThan`: in this sense, it is an exception to rule 2.
 class LT (α : Type u) where
   lt : α → α → Prop -- follows rule 4 and 6
 
