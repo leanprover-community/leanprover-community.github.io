@@ -16,7 +16,7 @@ There are some rare exceptions: some fields of structures are currently wrongly 
 3. Functions are named the same way as their return values (e.g. a function of type `A → B → C` is named as though it is a term of type `C`).
 4. All other terms of `Type`s (basically anything else) are in `lowerCamelCase`.
 5. When something named with `UpperCamelCase` is part of something named with `snake_case`, it is referenced in `lowerCamelCase`.
-6. Acronyms like `LE` are written upper-/lowercase as a group, depending on what the first character would be. 
+6. Acronyms like `LE` are written upper-/lowercase as a group, depending on what the first character would be.
 7. Rules 1-6 apply to fields of a structure or constructors of an inductive type in the same way.
 
 There are some rare exceptions to preserve local naming symmetry: e.g., we use `Ne` rather than `NE` to follow the example of `Eq`; `outParam` has a `Sort` output but is not `UpperCamelCase`. Some other exceptions include intervals (`Set.Icc`, `Set.Iic`, etc.), where the `I`
@@ -53,7 +53,7 @@ class LT (α : Type u) where
 
 -- follows rules 2 (for `Semifield`) and 4 (for `toIsField`)
 theorem Semifield.toIsField (R : Type u) [Semifield R] :
-IsField R -- follows rule 2
+    IsField R -- follows rule 2
 
 -- follows rules 1 and 6
 theorem gt_iff_lt [LT α] {a b : α} : a > b ↔ b < a := sorry
