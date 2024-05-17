@@ -57,7 +57,8 @@ in mathlib under Lean 4 we use a combination of <code>snake_case</code>, <code>l
 <code>UpperCamelCase</code> according to the following naming scheme.</p>
 <ol>
 <li>Terms of <code>Prop</code>s (e.g. proofs, theorem names) use <code>snake_case</code>.</li>
-<li><code>Prop</code>s and <code>Type</code>s (or <code>Sort</code>) (inductive types, structures, classes) are in <code>UpperCamelCase</code>.</li>
+<li><code>Prop</code>s and <code>Type</code>s (or <code>Sort</code>) (inductive types, structures, classes) are in <code>UpperCamelCase</code>.
+There are some rare exceptions: some fields of structures are currently wrongly lower-cased (see the example for the class <code>LT</code> below).</li>
 <li>Functions are named the same way as their return values (e.g. a function of type <code>A → B → C</code> is named as though it is a term of type <code>C</code>).</li>
 <li>All other terms of <code>Type</code>s (basically anything else) are in <code>lowerCamelCase</code>.</li>
 <li>When something named with <code>UpperCamelCase</code> is part of something named with <code>snake_case</code>, it is referenced in <code>lowerCamelCase</code>.</li>
@@ -91,7 +92,11 @@ is capitalized despite the fact that it should be <code>lowerCamelCase</code> ac
 
 <span class="c1">-- follows rules 2 and 6</span>
 <span class="kd">class</span><span class="w"> </span><span class="n">LT</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">u</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
-<span class="w">  </span><span class="n">lt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="c1">-- follows rule 4 and 6</span>
+<span class="w">  </span><span class="n">lt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="c1">-- this is an exception to rule 2</span>
+
+<span class="c1">-- follows rules 2 (for `Semifield`) and 4 (for `toIsField`)</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">Semifield.toIsField</span><span class="w"> </span><span class="o">(</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">u</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Semifield</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="n">IsField</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="c1">-- follows rule 2</span>
 
 <span class="c1">-- follows rules 1 and 6</span>
 <span class="kd">theorem</span><span class="w"> </span><span class="n">gt_iff_lt</span><span class="w"> </span><span class="o">[</span><span class="n">LT</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
