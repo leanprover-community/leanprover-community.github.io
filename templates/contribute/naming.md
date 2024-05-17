@@ -12,6 +12,7 @@ in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` a
 
 1. Terms of `Prop`s (e.g. proofs, theorem names) use `snake_case`.
 2. `Prop`s and `Type`s (or `Sort`) (inductive types, structures, classes) are in `UpperCamelCase`.
+There are some rare exceptions: some fields of structures are currently wrongly lower-cased (see the example for the class `LT` below).
 3. Functions are named the same way as their return values (e.g. a function of type `A → B → C` is named as though it is a term of type `C`).
 4. All other terms of `Type`s (basically anything else) are in `lowerCamelCase`.
 5. When something named with `UpperCamelCase` is part of something named with `snake_case`, it is referenced in `lowerCamelCase`.
@@ -46,9 +47,9 @@ theorem MonoidHom.toOneHom_injective [MulOneClass M] [MulOneClass N] :
 class HPow (α : Type u) (β : Type v) (γ : Type w) where
   hPow : α → β → γ -- follows rule 3 via rule 6; note that rule 5 does not apply
 
--- follows rules 2 and 6, because `LT` is an acronym for `LessThan`: in this sense, it is an exception to rule 2.
+-- follows rules 2 and 6
 class LT (α : Type u) where
-  lt : α → α → Prop -- follows rule 4 and 6
+  lt : α → α → Prop -- this is an exception to rule 2
 
 -- follows rules 2 (for `Semifield`) and 4 (for `toIsField`)
 theorem Semifield.toIsField (R : Type u) [Semifield R] :
