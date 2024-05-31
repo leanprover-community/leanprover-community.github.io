@@ -75,12 +75,12 @@ problem in most cases.
 Try to replace the slow tactic by calls to simpler ones.
 
 * For example, a slow `nontriviality ... using ...` can be replaced by
-```lean
+  ```lean
   rcases subsingleton_or_nontrivial ... with H | H
   · -- get `Subsingleton` case out of the way
     ...
   -- now we have `Nontrivial ...`
-```
+  ```
 
 * A slow `convert` can be avoided by doing the rewrites that are done following it
 first and then using `refine` or `exact`.
