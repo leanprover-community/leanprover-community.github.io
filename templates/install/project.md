@@ -117,6 +117,13 @@ It's not necessary for using Lean.
 
 See [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html).
 
+## Updating the toolchain in your project
+
+Eventually you might want to follow Lean development and upgrade the toolchain in your project.
+The main setting on which the `lake` tool depends is in the file `lean-toolchain` in the project directory.
+Updating to a new Lean version (and its dependencies) requires that you set the desired version in this file and run the `lake update` command inside the project directory.
+For details, see the full [lake documentation](https://github.com/leanprover/lake/blob/master/README.md).
+
 ## InitializeSecurityContext error on Windows
 
 Some Windows users have reported an error like this when running `lake exe cache get`:
