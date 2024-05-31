@@ -119,9 +119,12 @@ See [How to contribute to mathlib](https://leanprover-community.github.io/contri
 
 ## Updating the toolchain in your project
 
-Eventually you might want to follow Lean development and upgrade the toolchain in your project.
-The main setting on which the `lake` tool depends is in the file `lean-toolchain` in the project directory.
-Updating to a new Lean version (and its dependencies) requires that you set the desired version in this file and run the `lake update` command inside the project directory.
+Eventually you might want to follow Lean development and upgrade the toolchain in your project. The following commands should be given in the top directory of your project.
+You can find the current version in your project with the command `lake --version`.
+The normal way to upgrade the whole toolchain is with `elan toolchain install leanprover/lean4:XXX`, where `XXX` could be `stable` (the most recent stable version), or a version of your choice.
+This is usually all you need.
+
+In case of problems it might be necessary to set the version in the file `lean-toolchain` in the project directory and run the `lake update` command.
 For details, see the full [lake documentation](https://github.com/leanprover/lake/blob/master/README.md).
 
 ## InitializeSecurityContext error on Windows
