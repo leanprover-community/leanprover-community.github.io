@@ -133,4 +133,4 @@ The `whnf` command means "reduces to weak head normal form" and will eventually
 be explained in [Metaprogramming in Lean 4](https://leanprover-community.github.io/lean4-metaprogramming-book/main/04_metam.html#weak-head-normalisation) section 4.
 
 Extensions to `conv` provided by mathlib, such as `ring` and `norm_num`, can be
-found using `#help conv` command in `Mathlib.Tactic.HelpCmd`.
+found using `#help conv` command in [`Mathlib.Tactic.HelpCmd`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/HelpCmd.html).
