@@ -157,7 +157,7 @@ decreasing_by exact card_lt_card _h
 
 This example uses `card s` as a decreasing measure instead of the argument itself.
 
-### WellFoundedRelation instance
+## WellFoundedRelation instance
 
 We can specify not only an `Nat` value but also any types with `WellFoundedRelation` as a decreasing measure, as you can see in `Data.List.Defs`:
 
