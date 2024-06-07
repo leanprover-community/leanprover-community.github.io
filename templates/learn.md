@@ -34,8 +34,7 @@ with an associated VSCode project and exercises. [PDF here](https://github.com/b
 
 * The standard mathematics-oriented reference is
   [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
-  You can download it 
-  [as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
+  You can [download it as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
   but it is really meant to be used in VSCode, doing exercises on the fly (see the
   [instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
 
@@ -101,7 +100,6 @@ A number of meetings have helped welcome newcomers to the Lean community.
 The following have links to online talks and other material that may
 be of interest.
 Note that all items until the year 2022 used Lean 3, but they may still contain relevant information.
-* [Lean Together 2024](https://leanprover-community.github.io/lt2024/schedule.html)
 * [Lean for the Curious Mathematician 2023](https://lftcm2023.github.io/tutorial/index.html)
 * [Formalization of mathematics 2023](https://www.msri.org/summer_schools/1021)
 * [Lean for the Curious Mathematician 2022](https://icerm.brown.edu/topical_workshops/tw-22-lean/)
