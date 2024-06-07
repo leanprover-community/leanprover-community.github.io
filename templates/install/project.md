@@ -119,6 +119,8 @@ find MyProject -name "*.lean" | env LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/
 ```
 After that, you can run `lake build` to build all files in your repository.
 
+More information about Lake can be found [here](https://github.com/leanprover/lean4/tree/master/src/lake).
+
 ## Contributing to mathlib
 
 See [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html).
