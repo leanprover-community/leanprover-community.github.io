@@ -109,9 +109,9 @@ Then click "Mathematics in Lean" or "Theorem Proving in Lean" and enjoy.
 If you have a project depending on Mathlib, and you want to update to the latest version of Lean and Mathlib, you have to do two steps:
 * Update the `lean-toolchain` file in your repository to the latest version. You can do this automatically by running the following in the root directory of your repository.
 ```
-curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain > lean-toolchain
+curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 ```
-* run `lake update`. This will update Lean, Mathlib and download the new Mathlib cache for you.
+* run `lake -R -Kenv=dev update`. This will update Lean, Mathlib and download the new Mathlib cache for you.
 
 You should then check whether all files in your repository still compile. The most convenient way to do this is to have a root file that imports all files in your repository. You can do this by running the following (replace `MyProject` twice by your project name):
 ```
