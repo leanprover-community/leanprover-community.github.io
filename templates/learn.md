@@ -47,7 +47,7 @@ doing Lean exercises on the fly:
 
 * A computer-science/programming-oriented book is
   [The Hitchhiker's Guide to Logical Verification](https://raw.githubusercontent.com/blanchette/logical_verification_2023/main/hitchhikers_guide.pdf).
-  It also has useful information about the type theory of Lean, and an associated VSCode project and exercises.
+  It also has useful information about the type theory of Lean, and an associated VSCode project with exercises.
 
 * If you want something more focused on Lean itself than on using Lean, then you
   can read the [reference manual](https://leanprover.github.io/lean4/doc/).
