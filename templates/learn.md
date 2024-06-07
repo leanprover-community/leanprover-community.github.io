@@ -36,7 +36,7 @@ with an associated VSCode project and exercises. [PDF here](https://github.com/b
   [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
   You can [download it as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
   but see also the
-  [VSCODE instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
+  [VSCode instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
 
 * [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) is also mathematics-oriented.
   It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
