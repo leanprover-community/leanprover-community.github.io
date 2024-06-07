@@ -59,7 +59,7 @@ Mathlib.
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
     branch working again recent nightly releases.
 * Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
-  "Mathlib reviewers" stream.
+  "Mathlib reviewers" channel.
 * Success in CI on the `nightly-testing` branch results in the creation of a tag
   `nightly-testing-YYYY-MM-DD` to match that commit, if this tag does not already exist.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
