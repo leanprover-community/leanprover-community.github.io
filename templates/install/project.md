@@ -113,7 +113,10 @@ curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/l
 ```
 * run `lake -R -Kenv=dev update`. This will update Lean, Mathlib and download the new Mathlib cache for you.
 
-You should then check whether all files in your repository still compile. The most convenient way to do this is to have a root file that imports all files in your repository. You can do this by running the following (replace `MyProject` twice by your project name):
+You should then check whether all files in your repository still compile.
+The most convenient way to do this is to run `lake exe mk_all`. However, that might not work on Windows at the moment.
+The manual way is to have a root file that imports all files in your repository.
+You can do this by running the following (replace `MyProject` by your project name twice):
 ```
 find MyProject -name "*.lean" | env LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > MyProject.lean
 ```
