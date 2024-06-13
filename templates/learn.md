@@ -15,7 +15,8 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4). 
   This is an online interactive Lean tutorial
   focused on proving properties of the elementary operations on natural numbers.
-  Similar games for [Logic and Set Theory](https://adam.math.hhu.de/#/) are available.
+  The [Lean Game Server](https://adam.math.hhu.de/#/) hosts various learning games including 
+  [Set Theory, Logic, and Robo](https://adam.math.hhu.de/#/) (a story about undergrad mathematics).
 
 * For a faster-paced and broader dive, you can get the
   [Glimpse of Lean tutorial](https://github.com/PatrickMassot/GlimpseOfLean).
