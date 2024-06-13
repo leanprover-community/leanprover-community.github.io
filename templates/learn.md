@@ -16,7 +16,7 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   This is an online interactive Lean tutorial
   focused on proving properties of the elementary operations on natural numbers.
   The [Lean Game Server](https://adam.math.hhu.de/#/) hosts various learning games including
-  [Set Theory, Logic, and Robo (a story about undergrad mathematics)](https://adam.math.hhu.de/#/).
+  Set Theory, Logic, and Robo (a story about undergrad mathematics).
 
 * For a faster-paced dive, you can get the
   [Glimpse of Lean tutorial](https://github.com/PatrickMassot/GlimpseOfLean).
