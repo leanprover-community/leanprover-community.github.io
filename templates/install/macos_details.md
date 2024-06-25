@@ -18,8 +18,10 @@ Installing `elan` and mathlib supporting tools
 1.  Grab the [latest release](https://github.com/leanprover/elan/releases/latest) for your architecture,
     unpack it, and run the contained installation program.
 
-    The installation will tell you where it will install elan to (~/.elan by default),
-    and also ask you about editing your shell config to extend PATH. elan can be uninstalled via elan self uninstall, which should revert these changes.
+    The installation will tell you where it will install `elan` to (`~/.elan` by default),
+    and also ask you about editing your shell config to extend `PATH`. `elan` can be uninstalled via `elan self uninstall`, which should revert these changes.
+    
+(We discourage using the `homebrew` provided `elan-init` package, as users often find that this lags behind updates to the official release. We especially discourage using the `homebrew` formula named simply `lean`, which installs a fixed version of Lean.)
 
 2.  Use `elan` to install the latest stable version of `lean` by running
     `elan toolchain install stable`. You can also set the newly-installed
