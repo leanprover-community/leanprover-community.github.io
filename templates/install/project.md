@@ -111,16 +111,10 @@ If you have a project depending on Mathlib, and you want to update to the latest
 ```
 curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 ```
-* run `lake -R -Kenv=dev update`. This will update Lean, Mathlib and download the new Mathlib cache for you.
+* run `lake update`. This will update Lean, Mathlib and download the new Mathlib cache for you. (Note: on project that use `leanblueprint`/`doc-gen`, you currently have to run `lake -R -Kenv=dev update`).
 
 You should then check whether all files in your repository still compile.
-The most convenient way to do this is to run `lake exe mk_all`. However, that might not work on Windows at the moment.
-The manual way is to have a root file that imports all files in your repository.
-You can do this by running the following (replace `MyProject` by your project name twice):
-```
-find MyProject -name "*.lean" | env LC_ALL=C sort | sed 's/\.lean//;s,/,.,g;s/^/import /' > MyProject.lean
-```
-After that, you can run `lake build` to build all files in your repository.
+You can do this by running `lake exe mk_all && lake build`.
 
 More information about Lake can be found [here](https://github.com/leanprover/lean4/tree/master/src/lake).
 
