@@ -1,12 +1,12 @@
 # Controlled installation of Lean 4 on MacOS
 
 This document explains a more controlled installation procedure for Lean on MacOS. There is a quicker way described in the main
-[install page](macos.html) but it requires more trust.
+[install page](../get_started.html) but it requires more trust.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
 assistance.
 
-We'll need to set up Lean, an editor that knows about Lean, and [`mathlib`](https://github.com/leanprover-community/mathlib4/) (the math library).
+We'll need to set up Lean, an editor that knows about Lean, and [`Mathlib`](https://github.com/leanprover-community/mathlib4/) (the math library).
 
 Rather than installing Lean directly, we'll install a small program called [`elan`](https://github.com/leanprover/elan) which
 automatically provides the correct version of Lean on a per-project basis. This is recommended for
