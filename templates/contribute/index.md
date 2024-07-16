@@ -91,6 +91,20 @@ please come to https://leanprover.zulipchat.com/, introduce yourself, and ask fo
 
 * The title and description of the PR should follow our [commit conventions](commit.html).
 
+* If you are moving or deleting declarations, please include these lines at the bottom of the commit message
+(that is, before the `---`) using the following format:
+
+Moves:
+- Vector.* -> Mathlib.Vector.*
+- ...
+
+Deletions:
+- Nat.bit1_add_bit1
+- ...
+
+Any other comments you want to keep out of the PR commit should go
+below the `---`.
+
 ## Lifecycle of a PR
 
 We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
