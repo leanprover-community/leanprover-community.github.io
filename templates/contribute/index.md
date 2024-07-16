@@ -110,23 +110,23 @@ below the `---`.
 We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
 
 On the main page for a PR, on the right-hand side,
-there should be a sidebar with panels "reviewers", "assignees", "labels", etc. Click on the "labels" header to add or remove labels from the current project.
-By default all open PRs will be considered ready for review. To indicate otherwise, you should use one of the following:
-* Mark the PR as a draft PR, or add the **"WIP"** (= work in progress) label. Use this label if your PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP PR if you want to announce that you're working on something you expect to finish soon.
+there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
+Click on the "labels" header to add or remove labels from the current project.
 
-* Add the **"awaiting-CI label"**, to indicate you're not sure whether the PR will pass CI yet. This label will automatically be removed the first time your PR goes green.
-* Reviewers may add the **"awaiting-author"** label to your PR. This means that the PR is your responsibility again, and in particular it may not receive any further attention until you remember to remove awaiting-author!
+The most important labels are "awaiting-review" and "awaiting-author". If your PR builds (has a green checkmark) and you label your PR with **"awaiting-review"**, someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to "awaiting-review" to start the process over again.
 
-* CI failing. Please make sure that your PR builds, and the linter succeeds.
-* The **"merge-conflict label"**. This is managed automatically by a bot, so carefully merging master into your PR and pushing should result in this label disappearing.
-
-Once you have addressed all comments, a reviewer will "approve" the PR and the **"ready-to-merge"** label will be automatically applied to the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about `bors`.)
-After responding appropriately to `bors` (if necessary), the PR will get added to the ["merge queue"](https://app.bors.tech/repositories/37904). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+After some iteration, a reviewer will "approve" the PR and the "ready-to-merge" label will be automatically applied to the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
+After responding appropriately to bors (if necessary), the PR will get added to the ["merge queue"](https://app.bors.tech/repositories/37904). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 
 Here are some other frequently-used labels:
 
+- A **"WIP"** (= work in progress) PR still needs some foundational work (e.g. maybe it still contains `sorry`s) before getting reviewed. Post a WIP if you want to announce that you're working on something you expect to finish soon.
+
 - A **"RFC"** (= request for comment) is a PR about a change that might be controversial or need a decision from an expert about
 whether to proceed at all.
+
+- You can add **"awaiting-CI"**, which will temporarily hide the PR on the main review queue.
+  This label will be automatically removed when CI is complete.
 
 - Consider adding the **"help wanted"** label to directly solicit contributions.
 
