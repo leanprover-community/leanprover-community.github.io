@@ -26,7 +26,8 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
 
 ## Books
 
-If you prefer reading a book (with exercises), there are a number of freely available Lean books.
+If you prefer reading a book (with exercises), there are a number of freely available Lean books
+that have proven to be useful to beginners.
 These are available as html or PDFs, but are usually meant to be read interactively in VSCode,
 doing Lean exercises on the fly:
 
@@ -40,9 +41,6 @@ doing Lean exercises on the fly:
   It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
   experience.
 
-* [Formalising Mathematics](https://www.ma.imperial.ac.uk/~buzzard/xena/formalising-mathematics-2024/):
-  course notes for mathematicians, with useful tips and an overview of common tactics.
-
 * If you prefer something more about the foundations of type theory, the standard reference is
   [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/).
 
@@ -50,8 +48,8 @@ doing Lean exercises on the fly:
   [The Hitchhiker's Guide to Logical Verification](https://raw.githubusercontent.com/blanchette/logical_verification_2023/main/hitchhikers_guide.pdf).
   It also has useful information about the type theory of Lean, and an associated VSCode project with exercises.
 
-* If you want something more focused on Lean itself than on using Lean, then you
-  can read the [reference manual](https://leanprover.github.io/lean4/doc/).
+If you want something more focused on Lean itself than on using Lean, then you
+can read the [reference manual](https://leanprover.github.io/lean4/doc/).
 
 ## (Meta)-programming and tactic writing
 
