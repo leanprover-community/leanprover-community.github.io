@@ -93,11 +93,15 @@ please come to https://leanprover.zulipchat.com/, introduce yourself, and ask fo
 
 ## Lifecycle of a PR
 
-We use GitHub "labels" to manage review. (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
+Many reviewers use the [review queue](https://bit.ly/3zK9VEz) to identify PRs that are ready for review.
+The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
+Everyone is also invited to regularly look at the queue (it is linkified as `#queue` on Zulip), and write reviews of PRs within their expertise.
 
+The review queue is controlled by GitHub "labels". 
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
+(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".) 
 
 If your PR builds (has a green checkmark), someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
