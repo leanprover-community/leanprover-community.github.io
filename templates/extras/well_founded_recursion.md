@@ -1,164 +1,180 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
-# The equation compiler and using_well_founded
+# The equation compiler and WellFoundedRelation
 
 To define functions and proofs recursively you can use the equation compiler, if you have a well founded relation on that type
 
 For example the definition of gcd on naturals uses well founded recursion
 
 ```lean
-def gcd : nat → nat → nat
-| 0        y := y
-| (succ x) y := have y % succ x < succ x, from mod_lt _ $ succ_pos _,
-                gcd (y % succ x) (succ x)
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
+  termination_by m
+  decreasing_by simp_wf; apply mod_lt _ (zero_lt_of_ne_zero _); assumption
 ```
 
-Because < is a well founded relation on naturals, and because `y % succ x < succ x` this recursive function is well_founded.
+Because < is a well founded relation on naturals, and because `¬m = 0 → n % m < m` this recursive function is well-founded.
 
-Whenever you use the equation compiler, there will be a default well founded relation on the type being recursed on (given by the `has_well_founded` instance) and the equation compiler will automatically attempt to prove the function is well founded under said relation.
+Whenever you use the equation compiler, there will be a default well founded relation on the type being recursed on (given by the `WellFoundedRelation` instance) and the equation compiler will automatically attempt to prove the function is well founded under said relation.
 
 When the equation compiler fails, there are two main causes.
 
-1. It has failed to prove the required inequality.
-2. It is not using the correct well founded relation.
+1. It could not find a decreasing measure.
+2. It has failed to prove the required inequality.
 
 ## Proving required inequality
 
-If we modify the gcd example above, by removing the `have`, we get an error.
+If we modify the gcd example above, by removing the `termination_by` & `decreasing_by`, we get an error.
 
 ```lean
-def gcd : nat → nat → nat
-| 0        y := y
-| (succ x) y := gcd (y % succ x) (succ x)
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
 ```
 
 ```text
-failed to prove recursive application is decreasing, well founded relation
-  @has_well_founded.r (Σ' (a : ℕ), ℕ)
-    (@psigma.has_well_founded ℕ (λ (a : ℕ), ℕ) (@has_well_founded_of_has_sizeof ℕ nat.has_sizeof)
-       (λ (a : ℕ), @has_well_founded_of_has_sizeof ℕ nat.has_sizeof))
-Possible solutions:
-  - Use 'using_well_founded' keyword in the end of your definition to specify tactics for synthesizing well founded relations and decreasing proofs.
-  - The default decreasing tactic uses the 'assumption' tactic, thus hints (aka local proofs) can be provided using 'have'-expressions.
-The nested exception contains the failure state for the decreasing tactic.
-nested exception message:
-failed
-state:
-gcd : (Σ' (a : ℕ), ℕ) → ℕ,
-x y : ℕ
-⊢ y % succ x < succ x
+fail to show termination for
+  Nat.gcd
+with errors
+argument #1 was not used for structural recursion
+  failed to eliminate recursive application
+    (n % m).gcd m
+
+argument #2 was not used for structural recursion
+  failed to eliminate recursive application
+    (n % m).gcd m
+
+structural recursion cannot be used
+
+Could not find a decreasing measure.
+The arguments relate at each recursive call as follows:
+(<, ≤, =: relation proved, ? all proofs failed, _: no proof attempted)
+           m n
+1) 93:4-18 ? ?
+Please use `termination_by` to specify a decreasing measure.
 ```
 
-The error message has given us a goal, `y % succ x < succ x`. Including a proof of this goal as part of our definition using `have` removes the error.
+The error message says us to use `termination_by` to specify decreasing measure, so we use `m` as a decreasing measure, but we get an another error.
 
 ```lean
-def gcd : nat → nat → nat
-| 0        y := y
-| (succ x) y := have y % succ x < succ x, from mod_lt _ $ succ_pos _,
-                gcd (y % succ x) (succ x)
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
+  termination_by m
 ```
 
-Note that the `have` must not be in tactics mode, i.e. inside any `begin` `end`. If you are in tactics mode, there is the option of putting the `have` statement inside the exact statement, as in the following example.
-
-```lean
-def gcd : nat → nat → nat
-| 0        y := y
-| (succ x) y :=
-begin
-  exact have y % succ x < succ x := mod_lt _ (succ_pos _),
-  gcd (y % succ x) (succ x)
-end
+```text
+failed to prove termination, possible solutions:
+  - Use `have`-expressions to prove the remaining goals
+  - Use `termination_by` to specify a different well-founded relation
+  - Use `decreasing_by` to specify your own tactic for discharging this kind of goal
+m n : ℕ
+h✝ : ¬m = 0
+⊢ n % m < m
 ```
 
-## order of arguments
-
-Sometimes the default relation the equation compiler uses is not the correct one. For example swapping the order of x and y in the above example causes a failure
+We specified the correct decreasing measure, so our options are to use `have`-expressions or to use `decreasing_by`.
+Here, we use `decreasing_by tactics` to prove the termination of this function.
+At the first, let's placeholder by `sorry` to show the goal.
 
 ```lean
-def gcd : nat → nat → nat
-| y 0        := y
-| y (succ x) := have y % succ x < succ x, from mod_lt _ $ succ_pos _,
-                gcd (succ x) (y % succ x)
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
+  termination_by m
+  decreasing_by sorry
 ```
 
-Now the error message is asking us to prove `succ x < y`. This is because by default the equation compiler tries to recurse on the first argument. More precisely, the relation that the equation compiler tries to use in this example is on the type of pairs of natural numbers `Σ' (a : ℕ), ℕ`, and it uses a lexicographical relation where the pair `⟨a, b⟩ ≺ ⟨c, d⟩` iff `a < c ∨ (a = c ∧ b < d)` This situation can be resolved, either by changing the order of the arguments or by specifying a `rel_tac` as described later in this doc.
-
-Sometimes moving an argument outside of the equation compiler, can help the equation compiler prove a recursion is well_founded. For example the following proof from `data.nat.prime` fails.
-
-```lean
-lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
-| 0       h := (lt_irrefl _).elim h
-| 1       h := rfl
-| n@(k+2) h :=
-  let m := min_fac n in have n / m < n := factors_lemma,
-  show list.prod (m :: factors (n / m)) = n, from
-  have h₁ : 0 < n / m :=
-    nat.pos_of_ne_zero $ λ h,
-    have n = 0 * m := (nat.div_eq_iff_eq_mul_left (min_fac_pos _) (min_fac_dvd _)).1 h,
-    by rw zero_mul at this; exact (show k + 2 ≠ 0, from dec_trivial) this,
-  by rw [list.prod_cons, prod_factors _ h₁, nat.mul_div_cancel' (min_fac_dvd _)]
+```text
+m n : ℕ
+h✝ : ¬m = 0
+⊢ (invImage (fun x ↦ PSigma.casesOn x fun m n ↦ m) instWellFoundedRelationOfSizeOf).1 ⟨n % m, m⟩ ⟨m, n⟩
 ```
 
-But moving the `h` into a lambda after the `:=` makes it work
+This goal is compiler-generated so difficult to read, so we simplify the goal with `simp_wf`.
 
 ```lean
-lemma prod_factors : ∀ n, 0 < n → list.prod (factors n) = n
-| 0       := λ h, (lt_irrefl _).elim h
-| 1       := λ h, rfl
-| n@(k+2) := λ h,
-  let m := min_fac n in have n / m < n := factors_lemma,
-  show list.prod (m :: factors (n / m)) = n, from
-  have h₁ : 0 < n / m :=
-    nat.pos_of_ne_zero $ λ h,
-    have n = 0 * m := (nat.div_eq_iff_eq_mul_left (min_fac_pos _) (min_fac_dvd _)).1 h,
-    by rw zero_mul at this; exact (show k + 2 ≠ 0, from dec_trivial) this,
-  by rw [list.prod_cons, prod_factors _ h₁, nat.mul_div_cancel' (min_fac_dvd _)]
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
+  termination_by m
+  decreasing_by simp_wf; sorry
 ```
 
-This is because for some reason, in the first example, the equation compiler tries to use the always false relation.
-
-Conjecture : this is because the type of `h` depends on `n` and the equation compiler can only synthesize useful relations on non dependent products
-
-## using_well_founded rel_tac
-
-Sometimes you need to change the well founded relation to prove that a recursion is well founded. To do this you need a `has_well_founded` instance. This is a structure with two fields, a relation and a proof that this relation is well founded. The easiest way to define a well founded relation is using a function to the natural numbers. For example on multisets the relation `λ s t, card s < card t` is a well founded relation.
-
-The following proof in `data.multiset` uses this relation.
-
-```lean
-@[elab_as_eliminator] lemma strong_induction_on {p : multiset α → Sort*} :
-  ∀ (s : multiset α), (∀ s, (∀ t < s, p t) → p s) → p s
-| s := λ ih, ih s $ λ t h,
-  have card t < card s, from card_lt_of_lt h,
-  strong_induction_on t ih
-using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf card⟩]}
+```text
+m n : ℕ
+h✝ : ¬m = 0
+⊢ n % m < m
 ```
 
-The final line tells the equation compiler to use this relation. It is not necessary to fully understand the final line to be able to use well_founded tactics. The most important part is `⟨_, measure_wf card⟩` This is the well_founded instance. `measure_wf` is a proof that for any relation generated from a function to the natural numbers, i.e. for a function `f : α → ℕ`, the relation `λ x y, f x < f y` is well founded. The underscore is a placeholder for the relation, as it can be inferred from the type of the proof. Note that the well founded relation must be on a `psigma` type corresponding to the product of the types of the arguments after the vertical bar, if there are multiple arguments after the vertical bar.
+By the way, where the hypothesis `h✝ : ¬m = 0` come from? Indeed, during a proof of termination, `if p then t else f` is rewritten into `if h : p then t else f`, so
+the hypothesis `p` becomes available.
 
-In the gcd example the `psigma` type is `Σ' (a : ℕ), ℕ`. In order to solve the problem in the example where the order of the arguments was flipped, you could define a well founded relation on `Σ' (a : ℕ), ℕ` using the function `psigma.snd`, the function giving the second element of the pair, and then the error disappears.
+The remained task is only to prove this goal:
 
 ```lean
-def gcd : nat → nat → nat
-| y 0        := y
-| y (succ x) := have y % succ x < succ x, from mod_lt _ $ succ_pos _,
-                gcd (succ x) (y % succ x)
-using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf psigma.snd⟩]}
+def gcd (m n : Nat) : Nat :=
+  if m = 0 then
+    n
+  else
+    gcd (n % m) m
+  termination_by m
+  decreasing_by simp_wf; apply mod_lt _ (zero_lt_of_ne_zero _); assumption
+```
+
+For your information, if we use the option to use `have`-expressions, the function is the following form:
+
+```lean
+def gcd (m n : Nat) : Nat :=
+  if h : m = 0 then
+    n
+  else
+    have := mod_lt n (zero_lt_of_ne_zero h)
+    gcd (n % m) m
+```
+
+But the `have`-expressions may be an obstacle when we use the equation lemma.
+
+Another example is the following function in `Data.Multiset.Basic`.
+
+```lean
+def strongInductionOn {p : Multiset α → Sort*} (s : Multiset α) (ih : ∀ s, (∀ t < s, p t) → p s) :
+    p s :=
+    (ih s) fun t _h =>
+      strongInductionOn t ih
+termination_by card s
+decreasing_by exact card_lt_card _h
+```
+
+This example uses `card s` as a decreasing measure instead of the argument itself.
+
+## WellFoundedRelation instance
+
+We can specify not only an `Nat` value but also any types with `WellFoundedRelation` as a decreasing measure, as you can see in `Data.List.Defs`:
+
+```lean
+def permutationsAux.rec {C : List α → List α → Sort v} (H0 : ∀ is, C [] is)
+    (H1 : ∀ t ts is, C ts (t :: is) → C is [] → C (t :: ts) is) : ∀ l₁ l₂, C l₁ l₂
+  | [], is => H0 is
+  | t :: ts, is =>
+      H1 t ts is (permutationsAux.rec H0 H1 ts (t :: is)) (permutationsAux.rec H0 H1 is [])
+  termination_by ts is => (length ts + length is, length ts)
+  decreasing_by all_goals (simp_wf; omega)
+```
+
+This example uses an `Nat × Nat` value as a decreasing measure. The `WellFoundedRelation` on this type is a lexicographical order on natural numbers,
+defined by the following instance in `Init.WF`:
+
+```lean
+instance [ha : WellFoundedRelation α] [hb : WellFoundedRelation β] : WellFoundedRelation (α × β) :=
+  lex ha hb
 ```
