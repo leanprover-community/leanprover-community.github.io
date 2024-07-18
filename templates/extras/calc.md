@@ -10,7 +10,7 @@ Basic example usage:
 ```lean
 example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 :=
 calc a = b + 1 := H1
-     _ = c + 1 := by rw[H2]
+     _ = c + 1 := by rw [H2]
 ```
 
 `calc` is also available in tactic mode.
