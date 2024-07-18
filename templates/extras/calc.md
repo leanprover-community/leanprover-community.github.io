@@ -56,7 +56,7 @@ example (A B C D : ℝ ) : A = D := by
      sorry
 ```
 
-There is also a Calc widget that makes this easier here is a [video](https://youtu.be/8MFGhOWeCNE?t=1834). demonstrating it.
+There is also a Calc widget that makes this easier here is a [video](https://youtu.be/8MFGhOWeCNE?t=1834) demonstrating it.
 
 ## Using operators other than equality
 
