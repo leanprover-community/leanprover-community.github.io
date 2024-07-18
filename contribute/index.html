@@ -166,13 +166,18 @@ This is especially important for new contributors as it prevents wasted effort.<
 <p>Any other comments you want to keep out of the PR commit should go
 below the <code>---</code>.</p>
 <h2 id="lifecycle-of-a-pr" class="markdown-heading">Lifecycle of a PR <a class="hover-link" href="#lifecycle-of-a-pr">#</a></h2>
-<p>We use GitHub &quot;labels&quot; to manage review. (Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have asked for write access&quot;.)</p>
-<p>On the main page for a PR, on the right-hand side,
+<p>Many reviewers use the <a href="https://bit.ly/3zK9VEz">review queue</a> to identify PRs that are ready for review.
+The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
+Everyone is also invited to regularly look at the queue (it is linkified as <code>#queue</code> on Zulip), and write reviews of PRs within their expertise.</p>
+<p>The review queue is controlled by GitHub &quot;labels&quot;.
+On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quot;, &quot;labels&quot;, etc.
-Click on the &quot;labels&quot; header to add or remove labels from the current project.</p>
-<p>The most important labels are &quot;awaiting-review&quot; and &quot;awaiting-author&quot;. If your PR builds (has a green checkmark) and you label your PR with <strong>&quot;awaiting-review&quot;</strong>, someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and change the label to <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should change the label back to &quot;awaiting-review&quot; to start the process over again.</p>
-<p>After some iteration, a reviewer will &quot;approve&quot; the PR and the &quot;ready-to-merge&quot; label will be automatically applied to the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
-After responding appropriately to bors (if necessary), the PR will get added to the <a href="https://app.bors.tech/repositories/37904">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
+Click on the &quot;labels&quot; header to add or remove labels from the current project.
+(Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have asked for write access&quot;.)</p>
+<p>If your PR builds (has a green checkmark), someone will probably &quot;review&quot; it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the <strong>&quot;awaiting-author&quot;</strong> label to start the process over again.</p>
+<p>After some iteration, a reviewer will &quot;approve&quot; the PR and the <strong>&quot;ready-to-merge&quot;</strong> label will be automatically applied to the PR. A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
+The PR will get added to the <a href="https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16">&quot;merge queue&quot;</a>. The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
+<p>In some cases, a reviewer will &quot;delegate&quot; the PR. You'll see that your PR now has a <strong>&quot;delegated&quot;</strong> label. This either means that there are a few final changes requested, but that the reviewer trusts you to make these and send the PR to bors yourself, or that the reviewer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line &quot;bors merge&quot; will result in the PR being merged.</p>
 <p>Here are some other frequently-used labels:</p>
 <ul>
 <li>
@@ -183,21 +188,23 @@ After responding appropriately to bors (if necessary), the PR will get added to 
 whether to proceed at all.</p>
 </li>
 <li>
-<p>You can add <strong>&quot;awaiting-CI&quot;</strong>, which will temporarily hide the PR on the main review queue.
-This label will be automatically removed when CI is complete.</p>
+<p>You can add <strong>&quot;awaiting-CI&quot;</strong> if you're not certain whether CI will succeed.
+This will temporarily hide the PR on the main review queue.
+The label will be automatically removed when CI is complete.</p>
 </li>
 <li>
 <p>Consider adding the <strong>&quot;help wanted&quot;</strong> label to directly solicit contributions.</p>
 </li>
 <li>
-<p>The <strong>&quot;blocked-by-other-PR&quot;</strong> label means that some specific other PR(s) should be resolved before addressing this one. To add the &quot;blocked-by-other-PR&quot; label to your PR, include the PR numbers of the dependencies in the PR comment (following the example hidden in the comment there) so that others can see at a glance which PRs should be reviewed first. The label will be added automatically by a bot and will also be removed automatically when the other PRs have been merged.</p>
+<p>The <strong>&quot;blocked-by-other-PR&quot;</strong> label means that some specific other PR(s) should be resolved before addressing this one. To add the &quot;blocked-by-other-PR&quot; label to your PR, include the PR numbers of the dependencies in the PR comment (following the example hidden in the comment there) so that others can see at a glance which PRs should be reviewed first. The label will be added automatically by a bot and will also be removed automatically when the other PRs have been merged. PRs with this label do not appear on the review queue.</p>
 </li>
 <li>
 <p>The <strong>easy</strong> label should be used to mark PRs that can be immediately approved. Maintainers and reviewers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally <em>not</em> easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any <code>simp</code> lemmas or instances that are not immediately analogous to existing <code>simp</code> lemmas or instances.</p>
 </li>
 </ul>
 <h3 id="dealing-with-merge-conflicts" class="markdown-heading">Dealing with merge conflicts <a class="hover-link" href="#dealing-with-merge-conflicts">#</a></h3>
-<p>Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on <code>master</code> that conflicts with a change that you're proposing on your PR. If it happens with your PR, check <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github">this GitHub tutorial</a> on how to resolve merge conflicts by using their online tool.</p>
+<p>Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on <code>master</code> that conflicts with a change that you're proposing on your PR. If it happens with your PR, a bot will automatically add the <strong>&quot;merge-conflict&quot;</strong> label, and your PR will not appear on the review queue. Check <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github">this GitHub tutorial</a> on how to resolve merge conflicts by using their online tool.
+Once the conflict has been resolved, the <strong>&quot;merge-conflict&quot;</strong> label will automatically be removed, and your PR will return to the review queue.</p>
 
   </main>
 
