@@ -48,30 +48,12 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="simp" class="markdown-heading">Simp <a class="hover-link" href="#simp">#</a></h1>
 <h2 id="overview" class="markdown-heading">Overview <a class="hover-link" href="#overview">#</a></h2>
 <p>In this document we will explain basic usage of the simplifier
-tactic <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#simp"><code>simp</code></a>
-and the related tactic <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#dsimp"><code>dsimp</code></a>
-in Lean 3.</p>
+tactic <a href="https://leanprover-community.github.io/mathlib4_docs/Init/Tactics.html#Lean.Parser.Tactic.simp"><code>simp</code></a>
+and the related tactic <a href="https://leanprover-community.github.io/mathlib4_docs/Init/Tactics.html#Lean.Parser.Tactic.dsimp"><code>dsimp</code></a>
+in Lean 4.</p>
 <p>We give some pointers for how to avoid &quot;non-terminal <code>simp</code>s&quot;, and we
 also give a short description of the configuration options for <code>simp</code>
 and <code>dsimp</code>.</p>
@@ -97,14 +79,12 @@ Again, we aim to be close to confluent where possible.</p>
 automatically, proving all simple statements is not part of its job
 description, as disappointing as that might be.</p>
 <p>Here is an example (using <code>mathlib</code>).</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">algebra.group.defs</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Group.Defs</span>
 
-<span class="kd">variables</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">)</span>
+<span class="kd">variable</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">)</span>
 
-<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="bp">⁻¹</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="bp">⁻¹</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">simp</span>
-<span class="kd">end</span>
 </code></pre></div>
 </div>
 
@@ -112,37 +92,34 @@ description, as disappointing as that might be.</p>
 that <code>1 * 1 = 1</code>, and so on, until they had simplified the example
 to <code>b = b</code>, which is obviously true.</p>
 <p>This is also what the simplifier is doing.  Indeed, if you add
-<code>set_option trace.simplify.rewrite true</code> above the example, then a
+<code>set_option trace.Meta.Tactic.simp.rewrite true</code> above the example, then a
 squiggly blue underline will appear under <code>simp</code> (in VS Code) and
 clicking on this will show you the sequence of rewrites that <code>simp</code>
 performed:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">mul_right_inv</span><span class="o">]:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="mi">1</span>
-<span class="o">[</span><span class="n">mul_one</span><span class="o">]:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="mi">1</span>
-<span class="o">[</span><span class="n">one_mul</span><span class="o">]:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">b</span>
-<span class="o">[</span><span class="n">mul_inv_cancel_right</span><span class="o">]:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">b</span>
-<span class="o">[</span><span class="n">eq_self_iff_true</span><span class="o">]:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">true</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">Meta.Tactic.simp.rewrite</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">mul_right_inv</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="o">[</span><span class="n">Meta.Tactic.simp.rewrite</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">mul_one</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="o">[</span><span class="n">Meta.Tactic.simp.rewrite</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">one_mul</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">b</span>
+
+<span class="o">[</span><span class="n">Meta.Tactic.simp.rewrite</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">mul_inv_cancel_right</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">b</span>
+
+<span class="o">[</span><span class="n">Meta.Tactic.simp.rewrite</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">eq_self</span><span class="o">:</span><span class="mi">1000</span><span class="o">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">==&gt;</span><span class="w"> </span><span class="n">True</span>
 </code></pre></div>
 </div>
 
 <p>The <code>simp?</code> tactic is a useful way to extract the list of lemmas that <code>simp</code> applied.
 It suggests</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">mul_one</span><span class="o">,</span><span class="w"> </span><span class="n">one_mul</span><span class="o">,</span><span class="w"> </span><span class="n">mul_right_inv</span><span class="o">,</span><span class="w"> </span><span class="n">eq_self_iff_true</span><span class="o">,</span><span class="w"> </span><span class="n">mul_inv_cancel_right</span><span class="o">]</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">mul_right_inv</span><span class="o">,</span><span class="w"> </span><span class="n">mul_one</span><span class="o">,</span><span class="w"> </span><span class="n">one_mul</span><span class="o">,</span><span class="w"> </span><span class="n">mul_inv_cancel_right</span><span class="o">]</span>
 </code></pre></div>
 </div>
 
-<p>which is an invocation of <code>simp</code> that makes use of this particular set of five lemmas.
-A related tactic, <code>squeeze_simp</code>, will (after thinking <em>much</em> harder than <code>simp?</code> does)
-come up with some set of simp lemmas that are sufficient.
-In this case three suffice:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">one_mul</span><span class="o">,</span><span class="w"> </span><span class="n">mul_right_inv</span><span class="o">,</span><span class="w"> </span><span class="n">mul_inv_cancel_right</span><span class="o">]</span>
-</code></pre></div>
-</div>
-
+<p>which is an invocation of <code>simp</code> that makes use of this particular set of four lemmas.</p>
 <p>To see both those rewrites that work and those that fail during the simplification process,
-you can use the more verbose option <code>set_option trace.simplify true</code>.</p>
+you can use the more verbose option <code>set_option trace.Meta.Tactic.simp true</code>.</p>
 <h2 id="simp-lemmas" class="markdown-heading">Simp lemmas <a class="hover-link" href="#simp-lemmas">#</a></h2>
 <p>So how did Lean's simplifier know that <code>a * a⁻¹ = 1</code>? It is because
-there is a lemma in <code>algebra.group.defs</code> that is tagged with the
+there is a lemma in <code>Mathlib.Algebra.Group.Defs</code> that is tagged with the
 <code>simp</code> attribute:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span><span class="w"> </span><span class="n">mul_right_inv</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
 </code></pre></div>
@@ -150,10 +127,10 @@ there is a lemma in <code>algebra.group.defs</code> that is tagged with the
 
 <p>We call lemmas tagged with the <code>simp</code> attribute &quot;<code>simp</code> lemmas&quot;. Here
 are some more examples of <code>simp</code> lemmas in mathlib:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">nat.dvd_one</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">∣</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">Nat.dvd_one</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">∣</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
 <span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">mul_eq_zero</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
-<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">list.mem_singleton</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="o">[</span><span class="n">b</span><span class="o">]</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
-<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">set.set_of_false</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="n">false</span><span class="o">}</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">∅</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">List.mem_singleton</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="o">[</span><span class="n">b</span><span class="o">]</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">Set.setOf_false</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="n">False</span><span class="o">}</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">∅</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
 </code></pre></div>
 </div>
 
@@ -189,8 +166,7 @@ without bound, causing <code>simp</code> to loop forever:</p>
 sensible form. An example of this is in mathlib's
 <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean">data.complex.basic</a>,
 which has almost 100 <code>simp</code> lemmas. Even though they are true by definition, theorems such as</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span>
-<span class="n">add_re</span><span class="w"> </span><span class="o">(</span><span class="n">z</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℂ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">z</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">w</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">z.re</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">w.re</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span><span class="w"> </span><span class="n">add_re</span><span class="w"> </span><span class="o">(</span><span class="n">z</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℂ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">z</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">w</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">z.re</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">w.re</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
 </code></pre></div>
 </div>
 
@@ -202,24 +178,24 @@ automatically prove <code>(z + w).re = (w + z).re</code> through <code>z.re + w.
 notion of forward progress.  With this in mind, a useful family of
 <code>simp</code> lemmas are those that, in this sense, let <code>simp</code> partially evaluate an
 expression. For example, if you have a structure type <code>foo</code> and
-define a structure <code>my_foo</code> with that type,</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span>
+define a structure <code>myFoo</code> with that type,</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span>
 
-<span class="kd">def</span><span class="w"> </span><span class="n">my_foo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span><span class="o">}</span>
+<span class="kd">def</span><span class="w"> </span><span class="n">myFoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span>
 </code></pre></div>
 </div>
 
-<p>then if you add a <code>simp</code> lemma that <code>my_foo.n = 37</code>, you give the simplifier the
-ability to evaluate the <code>foo.n</code> projection for <code>my_foo</code>, which saves you from having
-to unfold the definition of <code>my_foo</code> (by default <code>simp</code> does not unfold most definitions).
+<p>then if you add a <code>simp</code> lemma that <code>myFoo.n = 37</code>, you give the simplifier the
+ability to evaluate the <code>Foo.n</code> projection for <code>myFoo</code>, which saves you from having
+to unfold the definition of <code>myFoo</code> (by default <code>simp</code> does not unfold most definitions).
 Creating these <code>simp</code> lemmas is so common that there is
-<a href="https://leanprover-community.github.io/mathlib_docs/attributes.html#simps">an attribute</a>
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Simps/Basic.html#simpsAttr">an attribute</a>
 that creates them all for you automatically:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simps</span><span class="kd">]</span><span class="w"> </span><span class="kd">def</span><span class="w"> </span><span class="n">my_foo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span><span class="o">}</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simps</span><span class="kd">]</span><span class="w"> </span><span class="kd">def</span><span class="w"> </span><span class="n">myFoo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span>
 </code></pre></div>
 </div>
 
-<p>This generates the lemma <code>@[simp] lemma my_foo_n : my_foo.n = 37</code>.</p>
+<p>This generates the lemma <code>@[simp] lemma myFoo_n : myFoo.n = 37</code>.</p>
 <h2 id="basic-usage" class="markdown-heading">Basic usage <a class="hover-link" href="#basic-usage">#</a></h2>
 <ul>
 <li>
@@ -236,7 +212,7 @@ Lean at that time.</p>
 <p><code>simp [-thm]</code> stops <code>simp</code> from using the <code>simp</code> lemma named <code>thm</code>.</p>
 </li>
 <li>
-<p><code>simp *</code> uses all <code>simp</code> lemmas and also all current local hypotheses to try to simplify the goal.</p>
+<p><code>simp [*]</code> uses all <code>simp</code> lemmas and also all current local hypotheses to try to simplify the goal.</p>
 </li>
 <li>
 <p><code>simp at h</code> tries to simplify <code>h</code> using all <code>simp</code> lemmas.</p>
@@ -245,11 +221,17 @@ Lean at that time.</p>
 <p><code>simp [h1] at h2 ⊢</code> tries to simplify both <code>h2</code> and the goal using <code>h1</code> and all <code>simp</code> lemmas (note: type <code>⊢</code> with <code>\|-</code> or <code>\vdash</code> in VS Code).</p>
 </li>
 <li>
-<p><code>simp * at *</code> : tries to simplify both the goal and all hypotheses, using all hypotheses and all <code>simp</code> lemmas. Sometimes worth a try.</p>
+<p><code>simp [*] at *</code> : tries to simplify both the goal and all hypotheses, using all hypotheses and all <code>simp</code> lemmas. Sometimes worth a try.</p>
 </li>
 <li>
 <p><code>simp only [h1, h2, ..., hn]</code> tells <code>simp</code> to use only the lemmas <code>h1</code>, <code>h2</code>, ..., rather than the full set of simp lemmas.
 (It is acceptable to use <code>simp only [...]</code> in the middle of a proof, because subsequent changes to the <code>simp</code> set will not break the proof.)</p>
+</li>
+<li>
+<p><code>simp [↓h1]</code> uses <code>h1</code> before entering the subterms. Usually, <code>simp</code> uses lemmas after entering the subterms.</p>
+</li>
+<li>
+<p><code>simp [↑h1]</code> uses <code>h1</code> after entering the subterms. This syntax is used for a lemma tagged with <code>simp↓</code>.</p>
 </li>
 </ul>
 <p>Note that some <code>simp</code> lemmas have additional hypotheses that must be satisfied.
@@ -285,25 +267,25 @@ form&quot; way to express the ideas in the lemma. If you are writing a
 lemma about a definition you made yourself, think about the normal
 forms for ideas that can be expressed in more than one way.</p>
 <p>An example of a <code>simp</code> normal form is a way of expressing nonemptiness
-of a subset of a type.  If <code>α : Type</code> and <code>s : set α</code> then
-nonemptiness of <code>s</code> can be expressed as both <code>s.nonempty</code> and <code>s ≠ ∅</code>.
-In mathlib an effort is made to stick to <code>s.nonempty</code> as the normal
+of a subset of a type.  If <code>α : Type</code> and <code>s : Set α</code> then
+nonemptiness of <code>s</code> can be expressed as both <code>s.Nonempty</code> and <code>s ≠ ∅</code>.
+In mathlib an effort is made to stick to <code>s.Nonempty</code> as the normal
 form.</p>
-<p>Another example: every finite set <code>s : finset α</code> can be coerced
-to <code>set α</code>, so for <code>a : α</code> one can write both <code>a ∈ s</code> and
-<code>a ∈ (s : set α)</code> to mean the same thing.  The simp normal form for
+<p>Another example: every finite set <code>s : Finset α</code> can be coerced
+to <code>Set α</code>, so for <code>a : α</code> one can write both <code>a ∈ s</code> and
+<code>a ∈ (s : Set α)</code> to mean the same thing.  The simp normal form for
 membership in a finite set idea is <code>a ∈ s</code>, and moreover there is a
 normalizing <code>simp</code> lemma</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span><span class="w"> </span><span class="n">mem_coe</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">finset</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span><span class="w"> </span><span class="n">mem_coe</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Finset</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
 </code></pre></div>
 </div>
 
-<p>to replace occurrences of <code>a ∈ (s : set α)</code> with the correct normal form.</p>
+<p>to replace occurrences of <code>a ∈ (s : Set α)</code> with the correct normal form.</p>
 <p>Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a <code>simp</code>
 lemma should have the arguments to the function on its left-hand side in simp-normal
 form. For example if <code>g 0</code> can be simplified, then <code>@[simp] lemma foo : f (g 0) = 0</code> will never be used.
-Mathlib's <code>simp_nf</code> <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands">linter</a> checks for this
+Batteries' <code>simpNF</code> <a href="https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html">linter</a> checks for this
 (you can run mathlib's linters for a module yourself by putting <code>#lint</code> at the end of the file).</p>
 <h2 id="simpa" class="markdown-heading"><code>simpa</code> <a class="hover-link" href="#simpa">#</a></h2>
 <p>The <code>simpa</code> tactic is a variation on <code>simp</code> for finishing a proof -- as a &quot;finishing&quot; tactic, it will fail
@@ -316,14 +298,12 @@ if it's unable to close the goal.  The basic usage is</p>
 and where <code>e</code> is an expression.  Commonly, <code>e</code> is the name of a hypothesis.
 Both the type of <code>e</code> and the goal are simplified, and <code>simpa</code> succeeds if they are both simplified to the same thing.</p>
 <p>Here is a simple example of <code>simpa</code>:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
-<span class="w">  </span><span class="n">simpa</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">h</span><span class="o">,</span>
-<span class="kd">end</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">simpa</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">h</span>
 </code></pre></div>
 </div>
 
-<p>Without <code>simpa</code>, we might do <code>simp at ⊢ h, exact h</code>.
+<p>Without <code>simpa</code>, we might do <code>simp at ⊢ h; exact h</code>.
 So-called &quot;non-terminal <code>simp</code>s&quot;, which are usages of <code>simp</code> that do not close a goal,
 are best to be avoided (see the next section), and <code>simpa</code> is a way to avoid them.</p>
 <p>If the <code>using</code> clause is not present, then <code>simpa</code> does the following three steps instead:</p>
@@ -341,8 +321,8 @@ to (or removed from) the library.  This means that proofs that use
 changed, it can be difficult to fix a proof.</p>
 <p>For example if a proof looked like</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="bp">...</span>
-<span class="w">  </span><span class="n">simp</span><span class="o">,</span>
-<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="n">foo_eq_bar</span><span class="o">,</span>
+<span class="w">  </span><span class="n">simp</span>
+<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">foo_eq_bar</span><span class="o">]</span>
 <span class="w">  </span><span class="bp">...</span>
 </code></pre></div>
 </div>
@@ -359,18 +339,19 @@ intended goal is known.</p>
 <li>
 <p><code>simp only [h1, h2, ..., hn]</code> to constrain <code>simp</code> to using only
 lemmas from the given list, so it is not affected by changes to the
-set of <code>simp</code> lemmas. Hint: use <code>squeeze_simp</code> or <code>simp?</code> to
+set of <code>simp</code> lemmas. Hint: use <code>simp?</code> to
 automatically generate an appropriate <code>simp only</code>.</p>
 </li>
 <li>
-<p>Use a construct like <code>have h : P, { ..., simp }</code> to introduce a
+<p>Use a construct like <code>have h : P := by ...; simp</code> to introduce a
 hypothesis proved by <code>simp</code>. The <code>have</code> expression might be in the
 middle of a proof, but the <code>simp</code> is closing the goal it introduces.</p>
 </li>
 <li>
 <p>If <code>simp</code> turns your goal into <code>P</code>, then you can write</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="k">suffices</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="o">,</span>
-<span class="w">  </span><span class="n">simpa</span><span class="o">,</span>
+</li>
+</ol>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="k">suffices</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simpa</span>
 </code></pre></div>
 </div>
 
@@ -379,13 +360,11 @@ hypothesis <code>this : P</code>, simplifies both the goal and <code>this</code>
 then attempts to close the goal with <code>this</code>.  The <code>simpa</code> tactic <em>requires</em>
 that a goal be closed, unlike <code>simp</code>, which makes it easier to know when it breaks.
 The explicit <code>P</code> in the source code helps in finding a fix.</p>
-</li>
-</ol>
-<p>One way non-terminal <code>simp</code>s can appear is in a sequence of tactics like <code>simp at ⊢ h, exact h</code>.
+<p>One way non-terminal <code>simp</code>s can appear is in a sequence of tactics like <code>simp at ⊢ h; exact h</code>.
 These can be replaced by <code>simpa using h</code>.</p>
 <h2 id="dsimp" class="markdown-heading"><code>dsimp</code> <a class="hover-link" href="#dsimp">#</a></h2>
 <p><code>dsimp</code> is a variant of <code>simp</code> that only uses &quot;definitional&quot; <code>simp</code>
-lemmas.  These are <code>simp</code> lemmas whose proof is <code>rfl</code> or <code>iff.rfl</code>,
+lemmas.  These are <code>simp</code> lemmas whose proof is <code>rfl</code> or <code>Iff.rfl</code>,
 that is, lemmas where the two sides are equal by definition.</p>
 <p>Like <code>simp</code> it is recommended that you do not use it in the middle of
 a proof.  However if <code>dsimp</code> turns your goal into <code>h</code> then <code>change h</code>
@@ -397,48 +376,79 @@ will likely do the same thing.  Another common use of <code>dsimp</code> is</p>
 <p>which is short for <code>dsimp only []</code>, a <code>dsimp</code> with an empty set of <code>simp</code> lemmas.
 This can be safely used in the middle of a proof, and it can be a useful
 way to tidy up a goal: among other things, it does beta reduction for lambda expressions
-(it will turn <code>(λ x, f x) 37</code> into <code>f 37</code>) and it will reduce structure projections
-(it will turn <code>{to_fun := f, ...}.to_fun</code> into <code>f</code>).</p>
+(it will turn <code>(fun x =&gt; f x) 37</code> into <code>f 37</code>) and it will reduce structure projections
+(it will turn <code>{ toFun := f, ... }.toFun</code> into <code>f</code>).</p>
 <h2 id="more-advanced-features" class="markdown-heading">More advanced features <a class="hover-link" href="#more-advanced-features">#</a></h2>
+<h3 id="discharger" class="markdown-heading">Discharger <a class="hover-link" href="#discharger">#</a></h3>
+<p>Lean has the following theorem:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">Nat.max_eq_left</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span>
+</code></pre></div>
+</div>
+
+<p>However, <code>simp</code> can't prove the following goal with only this theorem.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Nat.max_eq_left</span><span class="o">]</span>
+<span class="c1">-- simp made no progress</span>
+</code></pre></div>
+</div>
+
+<p>This is because <code>simp</code> fails to solve the side condition <code>(0 : ℕ) ≤ 1</code>; this can be seen with the command <code>set_option trace.Meta.Tactic.simp.discharge true</code>.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">Meta.Tactic.simp.discharge</span><span class="o">]</span><span class="w"> </span><span class="bp">@</span><span class="n">Nat.max_eq_left</span><span class="w"> </span><span class="n">discharge</span><span class="w"> </span><span class="bp">❌</span>
+<span class="w">      </span><span class="mi">0</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+</div>
+
+<p>This side condition can be solved simply using <code>decide</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">decide</span>
+</code></pre></div>
+</div>
+
+<p>How to use this tactic in <code>simp</code> to solve the side condition? Here is the answer:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">(</span><span class="n">disch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">decide</span><span class="o">)</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Nat.max_eq_left</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
 <h3 id="full-syntax" class="markdown-heading">Full syntax <a class="hover-link" href="#full-syntax">#</a></h3>
 <p>This is the full syntax for the <code>dsimp</code> tactic:</p>
 <blockquote>
-<p><code>dsimp</code> (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>at</code> locations)? (<code>{</code> configuration options <code>}</code>)?</p>
+<p><code>dsimp</code> (<code>?</code>)? (<code>!</code>)? (<code>(config :=</code> config <code>)</code>)? (<code>(disch :=</code> discharger <code>)</code>)? (<code>only</code>)? (<code>[</code>list of lemmas<code>]</code>)? (<code>at</code> locations)?</p>
 </blockquote>
 <p>where &quot;( ... )?&quot; means an optional part of the expression, and &quot;|&quot; gives mutually exclusive options.
 The list of lemmas is similar to that of <code>rw</code>, but additionally <code>-lemma_name</code> means a lemma is excluded from the set of <code>simp</code> lemmas.
 Configuration options are described in a following section.</p>
+<p>If <code>!</code> is present, it adds <code>autoUnfold := true</code> to the configuration options.
+If <code>?</code> is present, it causes <code>simp</code> to suggest a set of <code>simp</code> lemmas that suffice.</p>
 <p>This is the full syntax for the <code>simp</code> tactic:</p>
 <blockquote>
-<p><code>simp</code> (<code>!</code>)? (<code>?</code>)? (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>at</code> locations)? (<code>{</code> configuration options <code>}</code>)?</p>
+<p><code>simp</code> (<code>?</code>)? (<code>!</code>)? (<code>(config :=</code> config <code>)</code>)? (<code>(disch :=</code> discharger <code>)</code>)? (<code>only</code>)? (<code>[</code>list of <code>*</code> and lemmas<code>]</code>)? (<code>at</code> locations)?</p>
 </blockquote>
-<p>If <code>!</code> is present, it adds <code>iota_eqn := tt</code> to the configuration options.
-If <code>?</code> is present, it causes <code>simp</code> to suggest a set of <code>simp</code> lemmas that suffice.</p>
 <p>This is the full syntax for the <code>simpa</code> tactic:</p>
 <blockquote>
-<p><code>simpa</code> (<code>!</code>)? (<code>?</code>)? (<code>only</code>)? (<code>*</code> | <code>[</code> list of lemmas <code>]</code>)? (<code>with</code> simp sets)? (<code>using</code> expr)? (<code>{</code> configuration options <code>}</code>)?</p>
+<p><code>simpa</code> (<code>?</code>)? (<code>!</code>)? (<code>(config :=</code> config <code>)</code>)? (<code>(disch :=</code> discharger <code>)</code>)? (<code>only</code>)? (<code>[</code>list of <code>*</code> and lemmas<code>]</code>)? (<code>using</code> expr)?</p>
 </blockquote>
 <p>The meanings are the same as for <code>simp</code>, but <code>using</code> can be given any expression, not just a local constant as required by <code>at</code>.</p>
 <h3 id="custom-simp-attributes" class="markdown-heading">Custom simp attributes <a class="hover-link" href="#custom-simp-attributes">#</a></h3>
-<p>Using the command <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute"><code>mk_simp_attribute</code></a>,
+<p>Using the command <a href="https://leanprover-community.github.io/mathlib_docs/commands.html#mk_simp_attribute"><code>register_simp_attr</code></a>,
 you can make your own <code>@[simp]</code>-like attribute, but with a key difference:
 lemmas tagged with <code>@[new_attr]</code> are <em>not</em> in the default set of <code>simp</code> lemmas.
-Instead, they are included using the syntax <code>simp with new_attr</code>. This can often replace lengthy
+Instead, they should be included explicitly: <code>simp [new_attr]</code>. This can often replace lengthy
 <code>simp only [...]</code> calls and facilitate easier-to-read code. Some examples of common usage are
-<a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.mfld_simps/src"><code>mfld_simps</code></a>,
-and <a href="https://leanprover-community.github.io/mathlib_docs/find/simp_attr.field_simps/src"><code>field_simps</code></a>.</p>
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.mfld_simps"><code>mfld_simps</code></a>,
+and <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.field_simps"><code>field_simps</code></a>.</p>
 <h3 id="configuration-options" class="markdown-heading">Configuration options <a class="hover-link" href="#configuration-options">#</a></h3>
 <p>Both <code>simp</code> and <code>dsimp</code> can take additional configuration options using record syntax.
-For example, <code>simp {single_pass := tt}</code> runs <code>simp</code> with the <code>single_pass</code> configuration option set to true.
-One can use <code>single_pass</code> to avoid loops that might otherwise occur.</p>
-<p>The core Lean file <code>init/meta/simp_tactic.lean</code> reveals other configuration options in
-the <a href="https://leanprover-community.github.io/mathlib_docs/find/tactic.dsimp_config/src"><code>dsimp_config</code></a> and <a href="https://leanprover-community.github.io/mathlib_docs/find/tactic.simp_config/src"><code>simp_config</code></a> structures.
+For example, <code>simp (config := { singlePass := true })</code> runs <code>simp</code> with the <code>singlePass</code> configuration option set to true.
+One can use <code>singlePass</code> to avoid loops that might otherwise occur.</p>
+<p>The core Lean file <code>Init/MetaTypes.lean</code> reveals other configuration options in
+the <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config"><code>Lean.Meta.DSimp.Config</code></a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config"><code>Lean.Meta.Simp.Config</code></a> structures.
 Most of them not very relevant for the average user,
 and some of them are not fully documented.  These are reproduced in the
 following table, where the default value for a configuration option
 for <code>simp</code> or <code>dsimp</code> is given in the respective column -- if no
 default value is present, that option is unavailable.
-The &quot;max&quot; default value refers to <code>simp.default_max_steps</code>, which is currently <code>10000000</code>.</p>
+The &quot;max&quot; default value refers to <code>Lean.Meta.Simp.defaultMaxSteps</code>, which is currently <code>100000</code>.</p>
 <table>
 <thead>
 <tr>
@@ -450,145 +460,132 @@ The &quot;max&quot; default value refers to <code>simp.default_max_steps</code>,
 </thead>
 <tbody>
 <tr>
+<td align="left"><code>maxSteps</code></td>
+<td align="left">max</td>
+<td align="left"></td>
+<td align="left">The maximum number of steps allowed before failing</td>
+</tr>
+<tr>
+<td align="left"><code>maxDischargeDepth</code></td>
+<td align="left">2</td>
+<td align="left"></td>
+<td align="left">The maximum recursion depth when recursively applying simplification to side conditions</td>
+</tr>
+<tr>
 <td align="left"><code>contextual</code></td>
-<td align="left"><code>ff</code></td>
+<td align="left"><code>false</code></td>
 <td align="left"></td>
 <td align="left">Use additional <code>simp</code> lemmas based on the context of the current subexpression (see example below)</td>
 </tr>
 <tr>
-<td align="left"><code>single_pass</code></td>
-<td align="left"><code>ff</code></td>
-<td align="left"><code>ff</code></td>
-<td align="left">Visit each subterm no more than once</td>
-</tr>
-<tr>
-<td align="left"><code>md</code></td>
-<td align="left"></td>
-<td align="left"><code>reducible</code></td>
-<td align="left">Reduction mode: how aggressively constants are replaced with their definitions (<code>all</code>, <code>semireducible</code>, <code>instances</code>, <code>reducible</code>, or <code>none</code>)</td>
-</tr>
-<tr>
-<td align="left"><code>max_steps</code></td>
-<td align="left">max</td>
-<td align="left">max</td>
-<td align="left">The maximum number of steps allowed before failing</td>
-</tr>
-<tr>
-<td align="left"><code>fail_if_unchanged</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Fail if no simplifications applied</td>
-</tr>
-<tr>
-<td align="left"><code>beta</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Do beta-reductions: <code>(λ x, a) y</code> ↝ <code>a[x := y]</code></td>
-</tr>
-<tr>
-<td align="left"><code>eta</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Allow eta-equivalence: <code>(λ x, f x)</code> ↝ <code>f</code></td>
-</tr>
-<tr>
-<td align="left"><code>zeta</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Do zeta-reductions: <code>let x := a in b</code> ↝ <code>b[x := a]</code></td>
-</tr>
-<tr>
-<td align="left"><code>proj</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Reduce projections: <code>prod.fst (a, b)</code> ↝ <code>a</code></td>
-</tr>
-<tr>
-<td align="left"><code>iota</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Reduce recursors: <code>nat.rec_on (succ n) Z R</code> ↝ <code>R n (nat.rec_on n Z R)</code></td>
-</tr>
-<tr>
-<td align="left"><code>iota_eqn</code></td>
-<td align="left"><code>ff</code></td>
-<td align="left"></td>
-<td align="left">Reduce using all equation lemmas generated by the equation compiler</td>
-</tr>
-<tr>
-<td align="left"><code>unfold_reducible</code></td>
-<td align="left"></td>
-<td align="left"><code>ff</code></td>
-<td align="left">Unfold definitions with <code>reducible</code> transparency (delta-reduce)</td>
-</tr>
-<tr>
 <td align="left"><code>memoize</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"></td>
 <td align="left">Perform caching of simps of subterms</td>
 </tr>
 <tr>
-<td align="left"><code>lift_eq</code></td>
-<td align="left"><code>tt</code></td>
+<td align="left"><code>singlePass</code></td>
+<td align="left"><code>false</code></td>
 <td align="left"></td>
-<td align="left">Prove reflexive relations using proofs of equality (?)</td>
+<td align="left">Visit each subterm no more than once</td>
 </tr>
 <tr>
-<td align="left"><code>use_axioms</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"></td>
-<td align="left">Allow using <code>propext</code> and <code>funext</code> to rewrite under binders and to use <code>A ↔ B</code> <code>simp</code> lemmas</td>
+<td align="left"><code>zeta</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Do zeta-reductions: <code>let x := a; b</code> ↝ <code>b[x := a]</code></td>
 </tr>
 <tr>
-<td align="left"><code>constructor_eq</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"></td>
-<td align="left">Use injectivity of constructors in equalities</td>
+<td align="left"><code>beta</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Do beta-reductions: <code>(fun x =&gt; a) y</code> ↝ <code>a[x := y]</code></td>
 </tr>
 <tr>
-<td align="left"><code>canonize_instances</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left"><code>tt</code></td>
-<td align="left">Replace instances with a canonical defeq one</td>
+<td align="left"><code>eta</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Allow eta-equivalence: <code>(fun x =&gt; f x)</code> ↝ <code>f</code> (currently unimplemented)</td>
 </tr>
 <tr>
-<td align="left"><code>canonize_proofs</code></td>
-<td align="left"><code>ff</code></td>
-<td align="left"></td>
-<td align="left">Replace proofs with a canonical defeq one</td>
+<td align="left"><code>etaStruct</code></td>
+<td align="left"><code>.all</code></td>
+<td align="left"><code>.all</code></td>
+<td align="left">Configures how to determine definitional equality between two structure instances. See documentation for <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.EtaStructMode"><code>Lean.Meta.EtaStructMode</code></a></td>
 </tr>
 <tr>
-<td align="left"><code>discharger</code></td>
-<td align="left">fail</td>
+<td align="left"><code>iota</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Reduce recursors: <code>Nat.recOn (succ n) Z R</code> ↝ <code>R n (Nat.recOn n Z R)</code></td>
+</tr>
+<tr>
+<td align="left"><code>proj</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Reduce projections: <code>Prod.fst (a, b)</code> ↝ <code>a</code></td>
+</tr>
+<tr>
+<td align="left"><code>decide</code></td>
+<td align="left"><code>false</code></td>
+<td align="left"><code>false</code></td>
+<td align="left">Rewrites a proposition <code>p</code> to <code>True</code> or <code>False</code> by inferring a <code>Decidable p</code> instance and reducing it</td>
+</tr>
+<tr>
+<td align="left"><code>arith</code></td>
+<td align="left"><code>false</code></td>
 <td align="left"></td>
-<td align="left">Tactic used to discharge new subgoals created during simplification; if it fails, the simplifier tries to discharge them by simplifying</td>
+<td align="left">Simplifies simple arithmetic expressions</td>
+</tr>
+<tr>
+<td align="left"><code>autoUnfold</code></td>
+<td align="left"><code>false</code></td>
+<td align="left"><code>false</code></td>
+<td align="left">Reduce using all equation lemmas generated by the equation compiler</td>
+</tr>
+<tr>
+<td align="left"><code>dsimp</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"></td>
+<td align="left">When <code>true</code> then switches to <code>dsimp</code> on dependent arguments if there is no congruence theorem that would allow <code>simp</code> to visit them. When <code>dsimp</code> is <code>false</code>, then the argument is not visited.</td>
+</tr>
+<tr>
+<td align="left"><code>failIfUnchanged</code></td>
+<td align="left"><code>true</code></td>
+<td align="left"><code>true</code></td>
+<td align="left">Fail if no simplifications applied</td>
+</tr>
+<tr>
+<td align="left"><code>ground</code></td>
+<td align="left"><code>false</code></td>
+<td align="left"></td>
+<td align="left">Ground terms are reduced. A term is ground when it does not contain free or meta variables.</td>
+</tr>
+<tr>
+<td align="left"><code>unfoldPartialApp</code></td>
+<td align="left"><code>false</code></td>
+<td align="left"><code>false</code></td>
+<td align="left">Unfold even partial applications of <code>f</code> when we request <code>f</code> to be unfolded</td>
+</tr>
+<tr>
+<td align="left"><code>zetaDelta</code></td>
+<td align="left"><code>false</code></td>
+<td align="left"><code>false</code></td>
+<td align="left">Local definitions are unfolded. That is, given a local context containing entry <code>x : t := e</code>, the free variable <code>x</code> reduces to <code>e</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>The <code>b[x := a]</code> notation means to replace all free instances of <code>x</code> in <code>b</code> with <code>a</code>.</p>
-<p>Setting <code>constructor_eq</code> to <code>tt</code> will reduce equations of the form
-<code>X a1 a2... = Y b1 b2...</code> to false if <code>X</code> and <code>Y</code> are distinct
-constructors for the same type, and to <code>a1 = b1 ∧ a2 = b2 ∧ ...</code> if
-<code>X</code> and <code>Y</code> are the same constructor.</p>
-<p>Another interesting option is <code>iota_eqn</code> (in fact, <code>simp!</code> is shorthand for
-<code>simp {iota_eqn := tt}</code>). This adds equation lemmas generated by the
+<p><code>autoUnfold</code> adds equation lemmas generated by the
 equation/pattern-matching compiler to the set of <code>simp</code> lemmas.</p>
 <p>The <code>contextual</code> option gives <code>simp</code> the ability to consider
 hypotheses as additional <code>simp</code> lemmas based on a subexpression's
 surrounding context. For example, as it simplifies the consequent of an
 implication it temporarily adds the antecedent as a <code>simp</code> lemma. This
 is necessary for the following example:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
-<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contextual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">tt</span><span class="o">},</span>
-<span class="kd">end</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">(</span><span class="n">config</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contextual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="o">})</span>
 </code></pre></div>
 </div>
-
-<p>Amusing trick: if you do <code>simp _</code> then Lean will interpret <code>_</code> as a placeholder for the configuration options.
-Since it can't figure out the configuration options through unification, it will instead print an error
-along with all the default configuration values.
-This works for other tactics that take a configuration as well, such as <code>rw</code>.</p>
 
   </main>
 

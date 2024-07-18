@@ -48,36 +48,18 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="the-conversion-tactic-mode" class="markdown-heading">The conversion tactic mode <a class="hover-link" href="#the-conversion-tactic-mode">#</a></h1>
 <p>Inside a tactic block, one can use the keyword <code>conv</code> to enter conversion
 mode. This mode allows to travel inside assumptions and goals, even
-inside <code>λ</code> binders in them, to apply rewriting or simplifying steps.</p>
+inside <code>fun</code> binders in them, to apply rewriting or simplifying steps.</p>
 <p>This is similar to the conversion tacticals (tactic combinators) found in
 other theorem provers like HOL4, HOL Light or Isabelle.</p>
 <h2 id="basic-navigation-and-rewriting" class="markdown-heading">Basic navigation and rewriting <a class="hover-link" href="#basic-navigation-and-rewriting">#</a></h2>
 <p>As a first example, let us prove
 <code>example (a b c : ℕ) : a * (b * c) = a * (c * b)</code> (examples in this file
 are somewhat artificial since the <code>ring</code> tactic from
-<code>tactic.ring</code> could finish them immediately). The naive first attempt is
-to enter tactic mode and try <code>rw mul_comm</code>. But this transforms the goal
+<code>Tactic.Ring</code> could finish them immediately). The naive first attempt is
+to enter tactic mode and try <code>rw [mul_comm]</code>. But this transforms the goal
 into <code>b * c * a = a * (c * b)</code>, after commuting the very first
 multiplication appearing in the term. There are several ways to fix this
 issue, and one way is to use a more precise tool : the
@@ -85,23 +67,19 @@ conversion mode.  The following code block shows the current target after
 each line. Note that the target is prefixed by <code>|</code> where normal mode
 shows a goal prefixed by <code>⊢</code> (these targets are still called &quot;goals&quot;
 though).</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
-<span class="w">  </span><span class="n">conv</span>
-<span class="w">  </span><span class="kd">begin</span><span class="w">          </span><span class="c1">-- | a * (b * c) = a * (c * b)</span>
-<span class="w">    </span><span class="n">to_lhs</span><span class="o">,</span><span class="w">      </span><span class="c1">-- | a * (b * c)</span>
-<span class="w">    </span><span class="n">congr</span><span class="o">,</span><span class="w">       </span><span class="c1">-- 2 goals : | a and | b * c</span>
-<span class="w">    </span><span class="n">skip</span><span class="o">,</span><span class="w">        </span><span class="c1">-- | b * c</span>
-<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="n">mul_comm</span><span class="o">,</span><span class="w"> </span><span class="c1">-- | c * b</span>
-<span class="w">  </span><span class="kd">end</span>
-<span class="kd">end</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w">           </span><span class="c1">-- | a * (b * c) = a * (c * b)</span>
+<span class="w">    </span><span class="n">lhs</span><span class="w">             </span><span class="c1">-- | a * (b * c)</span>
+<span class="w">    </span><span class="n">congr</span><span class="w">           </span><span class="c1">-- | a and | b * c</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">skip</span><span class="w">          </span><span class="c1">-- | a</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span><span class="w"> </span><span class="c1">-- | c * b</span>
 </code></pre></div>
 </div>
 
 <p>The above snippet show three navigation commands:</p>
 <ul>
-<li><code>to_lhs</code> navigates to the left hand side of a relation (here
-equality), there is also a <code>to_rhs</code> navigating to the right hand side.</li>
+<li><code>lhs</code> navigates to the left hand side of a relation (here
+equality), there is also a <code>rhs</code> navigating to the right hand side.</li>
 <li><code>congr</code> creates as many targets as there are arguments to the current
 head function (here the head function is multiplication)</li>
 <li><code>skip</code> goes to the next target</li>
@@ -109,35 +87,38 @@ head function (here the head function is multiplication)</li>
 <p>Once arrived at the relevant target, we can use <code>rw</code> as in normal mode.
 Note that Lean tries to solves the current goal if it became <code>x = x</code> (in
 the strict syntactical sense, definitional equality is not enough: one
-needs to conclude by <code>refl</code> or <code>trivial</code> in this case).</p>
+needs to conclude by <code>rfl</code> or <code>trivial</code> in this case).</p>
+<p>For your information, we can write &quot;conv =&gt; lhs ..&quot; to &quot;conv_lhs =&gt; ..&quot;:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv_lhs</span><span class="w"> </span><span class="bp">=&gt;</span>
+<span class="w">    </span><span class="n">congr</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">skip</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
 <p>The second main reason to use conversion mode is to rewrite under
-binders. Suppose we want to prove <code>example (λ x : ℕ, 0+x) = (λ x, x)</code>.
-The naive first attempt is to enter tactic mode and try <code>rw zero_add</code>.
+binders. Suppose we want to prove <code>example (fun x : ℕ ↦ 0 + x) = (fun x ↦ x)</code>.
+The naive first attempt is to enter tactic mode and try <code>rw [zero_add]</code>.
 But this fails with a frustrating</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>rewrite tactic failed, did not find
-instance of the pattern in the target expression 0 + ?m_3
-state:
-⊢ (λ (x : ℕ), 0 + x) = λ (x : ℕ), x
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>tactic &#39;rewrite&#39; failed, did not find instance of the pattern in the target expression
+  0 + ?a
+⊢ (fun x ↦ 0 + x) = fun x ↦ x
 </code></pre></div>
 </div>
 
 <p>The solution is:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="bp">λ</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="bp">λ</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
-<span class="w">  </span><span class="n">conv</span>
-<span class="w">  </span><span class="kd">begin</span><span class="w">           </span><span class="c1">-- | (λ (x : ℕ), 0 + x) = λ (x : ℕ), x</span>
-<span class="w">    </span><span class="n">to_lhs</span><span class="o">,</span><span class="w">       </span><span class="c1">-- | λ (x : ℕ), 0 + x</span>
-<span class="w">    </span><span class="n">funext</span><span class="o">,</span><span class="w">       </span><span class="c1">-- | 0 + x</span>
-<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="n">zero_add</span><span class="o">,</span><span class="w">  </span><span class="c1">-- | x</span>
-<span class="w">  </span><span class="kd">end</span>
-<span class="kd">end</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv_lhs</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w">     </span><span class="c1">-- | fun x ↦ 0 + x</span>
+<span class="w">    </span><span class="n">ext</span><span class="w"> </span><span class="n">x</span><span class="w">         </span><span class="c1">-- | 0 + x</span>
+<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">zero_add</span><span class="o">]</span><span class="w"> </span><span class="c1">-- | x</span>
 </code></pre></div>
 </div>
 
-<p>where <code>funext</code> is the navigation command entering inside the <code>λ</code> binder.
+<p>where <code>ext</code> is the navigation command entering inside the <code>fun</code> binder.
 Note that this example is somewhat artificial, one could also do:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="bp">λ</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="bp">+</span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="bp">λ</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">by</span><span class="w"> </span><span class="n">funext</span><span class="w"> </span><span class="bp">;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="n">zero_add</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">funext</span><span class="w"> </span><span class="n">x</span><span class="bp">;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">zero_add</span><span class="o">]</span>
 </code></pre></div>
 </div>
 
@@ -146,30 +127,21 @@ using <code>conv at H</code>.</p>
 <h2 id="pattern-matching" class="markdown-heading">Pattern matching <a class="hover-link" href="#pattern-matching">#</a></h2>
 <p>Navigation using the above commands can be tedious. One can shortcut it
 using pattern matching as follows:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">begin</span>
-<span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span>
-<span class="kd">begin</span><span class="w">          </span><span class="c1">-- | b * c</span>
-<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="n">mul_comm</span><span class="o">,</span><span class="w"> </span><span class="c1">-- | c * b</span>
-<span class="kd">end</span>
-<span class="kd">end</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="c1">-- | b * c</span>
+<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span><span class="w">    </span><span class="c1">-- | c * b</span>
 </code></pre></div>
 </div>
 
-<p>As usual, <code>begin</code> and <code>end</code> can be replaced by curly brackets to
-delimit conversion mode and a single tactic invocation can be introduced
-by <code>by</code> to get the one liner:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">by</span><span class="w"> </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="n">mul_comm</span><span class="w"> </span><span class="o">}</span>
+<p>We can write this proof in one line:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
 </code></pre></div>
 </div>
 
-<p>Beware that a well known bug makes Lean printing: &quot;find converter
-failed, pattern was not found&quot; when the tactics inside conversion mode
-fail, even if the pattern was actually found.</p>
 <p>Of course wild-cards are allowed:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">by</span><span class="w"> </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">_</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="n">mul_comm</span><span class="w"> </span><span class="o">}</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">_</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
 </code></pre></div>
 </div>
 
@@ -177,8 +149,16 @@ fail, even if the pattern was actually found.</p>
 A more sophisticated version of pattern matching is available inside
 conversion mode using the <code>for</code> command. The following performs rewriting
 only for the second and third occurrences of <code>b * c</code>:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="kd">by</span><span class="w"> </span><span class="n">conv</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="n">mul_comm</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">occs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>We can write this proof in one line with &quot;all_goals&quot;:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="n">occs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">all_goals</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
 </code></pre></div>
 </div>
 
@@ -187,9 +167,9 @@ only for the second and third occurrences of <code>b * c</code>:</p>
 <code>change</code> is a useful tool -- it allows changing a term to something
 definitionally equal, rather like the <code>show</code> command in tactic mode.
 The <code>whnf</code> command means &quot;reduces to weak head normal form&quot; and will eventually
-be explained in <a href="https://leanprover.github.io/programming_in_lean/#08_Writing_Tactics.html">Programming in Lean</a> section 8.4.</p>
+be explained in <a href="https://leanprover-community.github.io/lean4-metaprogramming-book/main/04_metam.html#weak-head-normalisation">Metaprogramming in Lean 4</a> section 4.</p>
 <p>Extensions to <code>conv</code> provided by mathlib, such as <code>ring</code> and <code>norm_num</code>, can be
-found in the <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#conv">mathlib docs</a>.</p>
+found using <code>#help conv</code> command in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/HelpCmd.html"><code>Mathlib.Tactic.HelpCmd</code></a>.</p>
 
   </main>
 

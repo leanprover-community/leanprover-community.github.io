@@ -122,7 +122,7 @@ The keyword <code>math</code> at the end of this command adds <code>mathlib4</co
 <li>
 <p>Go inside the <code>my_project</code> folder and type <code>lake update</code> and then <code>mkdir MyProject</code>.</p>
 <ul>
-<li>Windows users seeing a <code>curl: (35) schannel: next InitializeSecurityContext failed</code> error should read <a href="#initializesecuritycontext-error-on-windows">this note</a>.</li>
+<li>Windows users seeing a <code>curl: (35) schannel: next InitializeSecurityContext failed</code> error should read <a href="#troubleshooting">this note</a>.</li>
 </ul>
 </li>
 <li>
@@ -163,17 +163,27 @@ Also, you can get the Lean documentation inside VS Code using
 (<kbd>Cmd</kbd>-<kbd>Shift</kbd>-<kbd>p</kbd> on MacOS) and then,
 inside the text field that appears, type &quot;lean doc&quot; and hit <kbd>Enter</kbd>.
 Then click &quot;Mathematics in Lean&quot; or &quot;Theorem Proving in Lean&quot; and enjoy.</p>
-<h2 id="hosting-your-project-on-github" class="markdown-heading">Hosting your project on GitHub <a class="hover-link" href="#hosting-your-project-on-github">#</a></h2>
-<p>Your project is already a git repository, and as it grows,
-you may want to host it on <a href="https://guides.github.com/activities/hello-world/">GitHub</a>.
-If you take this step, the community offers some
-<a href="../ci.html">GitHub Actions scripts</a> that could help manage your repository.
-But don't worry if you don't know what this means.
-It's not necessary for using Lean.</p>
+<h2 id="updating-mathlib-in-your-project" class="markdown-heading">Updating Mathlib in your project <a class="hover-link" href="#updating-mathlib-in-your-project">#</a></h2>
+<p>If you have a project depending on Mathlib, and you want to update to the latest version of Lean and Mathlib, you have to do two steps:</p>
+<ul>
+<li>Update the <code>lean-toolchain</code> file in your repository to the latest version. You can do this automatically by running the following in the root directory of your repository.</li>
+</ul>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="bp">-</span><span class="n">L</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">raw.githubusercontent.com</span><span class="bp">/</span><span class="n">leanprover</span><span class="bp">-</span><span class="n">community</span><span class="bp">/</span><span class="n">mathlib4</span><span class="bp">/</span><span class="n">master</span><span class="bp">/</span><span class="n">lean</span><span class="bp">-</span><span class="n">toolchain</span><span class="w"> </span><span class="bp">-</span><span class="n">o</span><span class="w"> </span><span class="n">lean</span><span class="bp">-</span><span class="n">toolchain</span>
+</code></pre></div>
+</div>
+
+<ul>
+<li>run <code>lake update</code>. This will update Lean, Mathlib and download the new Mathlib cache for you. (Note: on project that use <code>leanblueprint</code>/<code>doc-gen</code>, you currently have to run <code>lake -R -Kenv=dev update</code>).</li>
+</ul>
+<p>You should then check whether all files in your repository still compile.
+You can do this by running <code>lake exe mk_all &amp;&amp; lake build</code>.</p>
+<p>More information about Lake can be found <a href="https://github.com/leanprover/lean4/tree/master/src/lake">here</a>.</p>
 <h2 id="contributing-to-mathlib" class="markdown-heading">Contributing to mathlib <a class="hover-link" href="#contributing-to-mathlib">#</a></h2>
 <p>See <a href="https://leanprover-community.github.io/contribute/index.html">How to contribute to mathlib</a>.</p>
-<h2 id="initializesecuritycontext-error-on-windows" class="markdown-heading">InitializeSecurityContext error on Windows <a class="hover-link" href="#initializesecuritycontext-error-on-windows">#</a></h2>
-<p>Some Windows users have reported an error like this when running <code>lake exe cache get</code>:</p>
+<h2 id="troubleshooting" class="markdown-heading">Troubleshooting <a class="hover-link" href="#troubleshooting">#</a></h2>
+<ul>
+<li>Some Windows users have reported an error like this when running <code>lake exe cache get</code>:</li>
+</ul>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="n">curl</span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">35</span><span class="o">)</span><span class="w"> </span><span class="n">schannel</span><span class="o">:</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">InitializeSecurityContext</span><span class="w"> </span><span class="n">failed</span><span class="o">:</span><span class="w"> </span><span class="n">Unknown</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">(</span><span class="mi">0x80092012</span><span class="o">)</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">revocation</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">unable</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="n">revocation</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">certificate</span>
 </code></pre></div>
 </div>
@@ -186,6 +196,29 @@ and then run <code>lake exe cache get!</code>).
 You can turn on your antivirus program on afterwards.
 However, some users also reported that the antivirus programs significantly slow down Lean during normal usage.
 If Lean is slower than what is expected, either turn off your antivirus program or tell it to ignore/allow the operation of <code>lean.exe</code>.</p>
+<ul>
+<li>Sometimes under Windows a corrupted version of Lean is downloaded while installing/updating Lean. If this happens, this will result in an error</li>
+</ul>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">uncaught</span><span class="w"> </span><span class="n">exception</span><span class="o">:</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="o">(</span><span class="n">error</span><span class="w"> </span><span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>If this happens, you can manually delete your corrupted version of Lean by following the following two steps:</p>
+<ul>
+<li>Go to your user folder and navigate to <code>.elan &gt; toolchains</code> (typically <code>C:\Users\&lt;username&gt;\.elan\toolchains</code>), and delete the offending toolchain</li>
+<li>Go to <code>.elan &gt; update-hashes</code> (e.g. <code>C:\Users\&lt;username&gt;\.elan\update-hashes</code>) and delete the file with the same name.
+The toolchain will be automatically redownloaded the next time you call <code>lake update</code>, <code>lake exe cache get</code>, <code>lake build</code> or open a Lean file in VSCode in a repository that uses that toolchain.</li>
+</ul>
+<ul>
+<li>If you would like to cleanup Lean files, these are stored in the following places.
+<ul>
+<li>Dependencies of a project are in the <code>.lake</code> folder of that project.</li>
+<li>Lean toolchains are stored in <code>~/.elan/toolchains</code>. You can safely delete old toolchains from here. Whenever you delete toolchains, you should also delete the corresponding files from <code>~/.elan/update-hashes</code>.</li>
+<li>Compressed and compiled Mathlib files are stored in <code>~/.cache/mathlib</code>. These can be safely deleted.</li>
+<li>Lean 3 users might still have a folder <code>.mathlib</code> in their user directory.</li>
+</ul>
+</li>
+</ul>
 
   </main>
 
