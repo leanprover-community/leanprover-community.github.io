@@ -29,7 +29,8 @@ Open a terminal.
 
 * If you have not logged in since you installed Lean and mathlib, then
   you may need to first type `source ~/.profile` or
-  `source ~/.bash_profile` depending on your OS. (or simply restart your computer)
+  `source ~/.bash_profile` depending on your OS.
+  If you are on Windows, and don't know how to do this, another option is to restart your computer.
 
 * Go the the directory where you would like this package to live. You do not need to create a new folder yourself, the next command will create a `mathematics_in_lean` subfolder for you.
 
