@@ -119,8 +119,10 @@ Click on the "labels" header to add or remove labels from the current project.
 
 If your PR builds (has a green checkmark), someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
-After some iteration, a reviewer will "approve" the PR and the **"ready-to-merge"** label will be automatically applied to the PR. A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
-The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16). The merge queue gets cleared automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+After some iteration, a maintainer or reviewer will "approve" the PR. (If it's a reviewer, this will add a "maintainer-merge" label, and soon after a maintainer will give final approval). This will result in a **"ready-to-merge"** label being automatically applied to the PR.
+A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
+The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16).
+The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 
 In some cases, a reviewer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the reviewer trusts you to make these and send the PR to bors yourself, or that the reviewer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
 
@@ -140,6 +142,10 @@ whether to proceed at all.
 - The **"blocked-by-other-PR"** label means that some specific other PR(s) should be resolved before addressing this one. To add the "blocked-by-other-PR" label to your PR, include the PR numbers of the dependencies in the PR comment (following the example hidden in the comment there) so that others can see at a glance which PRs should be reviewed first. The label will be added automatically by a bot and will also be removed automatically when the other PRs have been merged. PRs with this label do not appear on the review queue.
 
 - The **easy** label should be used to mark PRs that can be immediately approved. Maintainers and reviewers often look at easy PRs first to keep the queue flowing. Easy PRs typically add a single lemma, correct typos in documentation, or similar. If you have any doubt whether your PR is trivial you should not add this label. In particular, a PR is generally *not* easy if the diff is more than 25 lines, it adds any definitions or new files, or it adds any `simp` lemmas or instances that are not immediately analogous to existing `simp` lemmas or instances.
+
+- The **delegated** label means that a maintainer has issued the "bors delegate" (or "bors d+") command. The author of the PR
+should now merge the PR themselves once any final requested changes have been made, and CI has succeeded. They can do this using
+"bors merge".
 
 ### Dealing with merge conflicts
 
