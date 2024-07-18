@@ -1,27 +1,8 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # The conversion tactic mode
 
 Inside a tactic block, one can use the keyword `conv` to enter conversion
 mode. This mode allows to travel inside assumptions and goals, even
-inside `λ` binders in them, to apply rewriting or simplifying steps.
+inside `fun` binders in them, to apply rewriting or simplifying steps.
 
 This is similar to the conversion tacticals (tactic combinators) found in
 other theorem provers like HOL4, HOL Light or Isabelle.
@@ -31,8 +12,8 @@ other theorem provers like HOL4, HOL Light or Isabelle.
 As a first example, let us prove
 `example (a b c : ℕ) : a * (b * c) = a * (c * b)` (examples in this file
 are somewhat artificial since the `ring` tactic from
-`tactic.ring` could finish them immediately). The naive first attempt is
-to enter tactic mode and try `rw mul_comm`. But this transforms the goal
+`Tactic.Ring` could finish them immediately). The naive first attempt is
+to enter tactic mode and try `rw [mul_comm]`. But this transforms the goal
 into `b * c * a = a * (c * b)`, after commuting the very first
 multiplication appearing in the term. There are several ways to fix this
 issue, and one way is to use a more precise tool : the
@@ -42,21 +23,17 @@ shows a goal prefixed by `⊢` (these targets are still called "goals"
 though).
 
 ```lean
-example (a b c : ℕ) : a * (b * c) = a * (c * b) :=
-begin
-  conv
-  begin          -- | a * (b * c) = a * (c * b)
-    to_lhs,      -- | a * (b * c)
-    congr,       -- 2 goals : | a and | b * c
-    skip,        -- | b * c
-    rw mul_comm, -- | c * b
-  end
-end
+example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
+  conv =>           -- | a * (b * c) = a * (c * b)
+    lhs             -- | a * (b * c)
+    congr           -- | a and | b * c
+    · skip          -- | a
+    · rw [mul_comm] -- | c * b
 ```
 
 The above snippet show three navigation commands:
-* `to_lhs` navigates to the left hand side of a relation (here
-  equality), there is also a `to_rhs` navigating to the right hand side.
+* `lhs` navigates to the left hand side of a relation (here
+  equality), there is also a `rhs` navigating to the right hand side.
 * `congr` creates as many targets as there are arguments to the current
   head function (here the head function is multiplication)
 * `skip` goes to the next target
@@ -64,36 +41,40 @@ The above snippet show three navigation commands:
 Once arrived at the relevant target, we can use `rw` as in normal mode.
 Note that Lean tries to solves the current goal if it became `x = x` (in
 the strict syntactical sense, definitional equality is not enough: one
-needs to conclude by `refl` or `trivial` in this case).
+needs to conclude by `rfl` or `trivial` in this case).
+
+For your information, we can write "conv => lhs .." to "conv_lhs => ..":
+
+```lean
+example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
+  conv_lhs =>
+    congr
+    · skip
+    · rw [mul_comm]
+```
 
 The second main reason to use conversion mode is to rewrite under
-binders. Suppose we want to prove `example (λ x : ℕ, 0+x) = (λ x, x)`.
-The naive first attempt is to enter tactic mode and try `rw zero_add`.
+binders. Suppose we want to prove `example (fun x : ℕ ↦ 0 + x) = (fun x ↦ x)`.
+The naive first attempt is to enter tactic mode and try `rw [zero_add]`.
 But this fails with a frustrating
 ```text
-rewrite tactic failed, did not find
-instance of the pattern in the target expression 0 + ?m_3
-state:
-⊢ (λ (x : ℕ), 0 + x) = λ (x : ℕ), x
+tactic 'rewrite' failed, did not find instance of the pattern in the target expression
+  0 + ?a
+⊢ (fun x ↦ 0 + x) = fun x ↦ x
 ```
 
 The solution is:
 ```lean
-example : (λ x : ℕ, 0 + x) = (λ x, x) :=
-begin
-  conv
-  begin           -- | (λ (x : ℕ), 0 + x) = λ (x : ℕ), x
-    to_lhs,       -- | λ (x : ℕ), 0 + x
-    funext,       -- | 0 + x
-    rw zero_add,  -- | x
-  end
-end
+example : (fun x : ℕ ↦ 0 + x) = (fun x ↦ x) := by
+  conv_lhs =>     -- | fun x ↦ 0 + x
+    ext x         -- | 0 + x
+    rw [zero_add] -- | x
 ```
-where `funext` is the navigation command entering inside the `λ` binder.
+where `ext` is the navigation command entering inside the `fun` binder.
 Note that this example is somewhat artificial, one could also do:
 ```lean
-example : (λ x : ℕ, 0+x) = (λ x, x) :=
-by funext ; rw zero_add
+example : (fun x : ℕ ↦ 0 + x) = (fun x ↦ x) := by
+  funext x; rw [zero_add]
 ```
 
 All this is also available to rewrite an hypothesis `H` from the local context
@@ -105,33 +86,23 @@ Navigation using the above commands can be tedious. One can shortcut it
 using pattern matching as follows:
 
 ```lean
-example (a b c : ℕ) : a * (b * c) = a * (c * b) :=
-begin
-conv in (b*c)
-begin          -- | b * c
-  rw mul_comm, -- | c * b
-end
-end
+example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
+  conv in (b * c) => -- | b * c
+    rw [mul_comm]    -- | c * b
 ```
 
-As usual, `begin` and `end` can be replaced by curly brackets to
-delimit conversion mode and a single tactic invocation can be introduced
-by `by` to get the one liner:
+We can write this proof in one line:
 
 ```lean
-example (a b c : ℕ) : a * (b * c) = a * (c * b) :=
-by conv in (b*c) { rw mul_comm }
+example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
+  conv in (b * c) => rw [mul_comm]
 ```
-
-Beware that a well known bug makes Lean printing: "find converter
-failed, pattern was not found" when the tactics inside conversion mode
-fail, even if the pattern was actually found.
 
 Of course wild-cards are allowed:
 
 ```lean
-example (a b c : ℕ) : a + (b * c) = a + (c * b) :=
-by conv in (_ * c) { rw mul_comm }
+example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
+  conv in (_ * c) => rw [mul_comm]
 ```
 
 In all those cases, only the first match is affected.
@@ -140,8 +111,17 @@ conversion mode using the `for` command. The following performs rewriting
 only for the second and third occurrences of `b * c`:
 
 ```lean
-example (a b c : ℕ) : (b * c) * (b * c) * (b * c) = (b * c) * (c * b) * (c * b) :=
-by conv { for (b * c) [2, 3] { rw mul_comm } }
+example (a b c : ℕ) : (b * c) * (b * c) * (b * c) = (b * c) * (c * b) * (c * b) := by
+  conv in (occs := 2 3) (b * c) =>
+    · rw [mul_comm]
+    · rw [mul_comm]
+```
+
+We can write this proof in one line with "all_goals":
+
+```lean
+example (a b c : ℕ) : (b * c) * (b * c) * (b * c) = (b * c) * (c * b) * (c * b) := by
+  conv in (occs := 2 3) (b * c) => all_goals rw [mul_comm]
 ```
 
 ## Other tactics inside conversion mode
@@ -150,7 +130,7 @@ Besides rewriting using `rw`, one can use `simp`, `dsimp`, `change` and `whnf`.
 `change` is a useful tool -- it allows changing a term to something
 definitionally equal, rather like the `show` command in tactic mode.
 The `whnf` command means "reduces to weak head normal form" and will eventually
-be explained in [Programming in Lean](https://leanprover.github.io/programming_in_lean/#08_Writing_Tactics.html) section 8.4.
+be explained in [Metaprogramming in Lean 4](https://leanprover-community.github.io/lean4-metaprogramming-book/main/04_metam.html#weak-head-normalisation) section 4.
 
 Extensions to `conv` provided by mathlib, such as `ring` and `norm_num`, can be
-found in the [mathlib docs](https://leanprover-community.github.io/mathlib_docs/tactics.html#conv).
+found using `#help conv` command in [`Mathlib.Tactic.HelpCmd`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/HelpCmd.html).
