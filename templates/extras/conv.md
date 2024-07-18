@@ -54,7 +54,7 @@ example (a b c : ℕ) : a * (b * c) = a * (c * b) := by
 ```
 
 The second main reason to use conversion mode is to rewrite under
-binders. Suppose we want to prove `example (fun x : ℕ => 0 + x) = (fun x => x)`.
+binders. Suppose we want to prove `example (fun x : ℕ ↦ 0 + x) = (fun x ↦ x)`.
 The naive first attempt is to enter tactic mode and try `rw [zero_add]`.
 But this fails with a frustrating
 ```text
@@ -65,7 +65,7 @@ tactic 'rewrite' failed, did not find instance of the pattern in the target expr
 
 The solution is:
 ```lean
-example : (fun x : ℕ => 0 + x) = (fun x => x) := by
+example : (fun x : ℕ ↦ 0 + x) = (fun x ↦ x) := by
   conv_lhs =>     -- | fun x ↦ 0 + x
     ext x         -- | 0 + x
     rw [zero_add] -- | x
@@ -73,7 +73,7 @@ example : (fun x : ℕ => 0 + x) = (fun x => x) := by
 where `ext` is the navigation command entering inside the `fun` binder.
 Note that this example is somewhat artificial, one could also do:
 ```lean
-example : (fun x : ℕ => 0 + x) = (fun x => x) := by
+example : (fun x : ℕ ↦ 0 + x) = (fun x ↦ x) := by
   funext x; rw [zero_add]
 ```
 
