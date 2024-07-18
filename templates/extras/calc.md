@@ -17,8 +17,11 @@ calc a = b + 1 := H1
 new goal:
 ```lean
 example (a b c : ℕ) (H1 : a = b + 1) (H2 : b = c) : a = c + 1 := by
-  calc a = b + 1 := H1
-       _ = c + 1 := by rw[H2]
+  calc
+    a = b + 1 := ?_
+    _ = c + 1 := ?_
+  · exact H1
+  · rw [H2]
 ```
 In fact, `calc A = B := H ...` in tactic mode functions exactly like a
 call to `refine (calc A = B := H ...)`.
