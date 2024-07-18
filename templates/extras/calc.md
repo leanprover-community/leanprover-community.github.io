@@ -126,7 +126,7 @@ operator is the equality operator, Lean looks through the instances of
 
 ## Using user-defined operators
 
-It is as simple as tagging the relevant adding new `Trans`. For example
+It is as simple as creating the relevant `Trans` instances. For example
 
 ```lean
 def r : ℕ → ℕ → Prop := sorry
