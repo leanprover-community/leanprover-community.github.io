@@ -56,7 +56,7 @@ Typical workflow:
 * If you'd like to compile everything locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you by pushing your changes.
-* If you created new files, run `lake exe mk_all`.
+* If you created new files, run `lake exe mk_all`. This will update `Mathlib.lean` to ensure that all files are imported there.
 * In order to push your changes back to the repository on github, use
   ```
   git push
