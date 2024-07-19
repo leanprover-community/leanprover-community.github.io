@@ -526,7 +526,6 @@ paper_lists = [('Papers about Lean',
 
 @dataclass
 class User:
-    user_id: int
     fullname: str
     lon: float
     lat: float
@@ -584,7 +583,6 @@ else:
         except Exception:
             continue
         users.append(User(
-            user_id=user['user_id'],
             fullname=user['full_name'],
             lon=lon,
             lat=lat,
