@@ -119,6 +119,7 @@ is `=`. Lean knows
 ```lean
 #check trans_rel_right -- {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : a = b) (h₂ : r b c) : r a c
 #check trans_rel_left -- {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : r a b) (h₂ : b = c) : r a c
+```
 
 and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
 operator is the equality operator, Lean looks through the instances of
