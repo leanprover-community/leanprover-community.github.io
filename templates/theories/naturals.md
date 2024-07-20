@@ -1,46 +1,27 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # Maths in Lean: the natural numbers
 
 The natural numbers begin with zero as is standard in computer
-science. You can call them `nat` or `ℕ` (you get the latter
+science. You can call them `Nat` or `ℕ` (you get the latter
 symbol by typing `\N` in VS Code).
 
 The naturals are what is called an inductive type, with two
-constructors. The first is `nat.zero`, usually written `0` or `(0:ℕ)` in
-practice, which is zero. The other constructor is `nat.succ`, which
+constructors. The first is `Nat.zero`, usually written `0` or `(0 : ℕ)` in
+practice, which is zero. The other constructor is `Nat.succ`, which
 takes a natural as input and outputs the next one.
 
 Addition and multiplication are defined by recursion on the second
 variable and many proofs of basic stuff in the core library are by
 induction on the second variable. The notations `+`, `-`, `*` are shorthand
-for the functions `nat.add`, `nat.sub` and `nat.mul`, and other notations
+for the functions `Nat.add`, `Nat.sub` and `Nat.mul`, and other notations
 (`≤`, `<`, `|`) mean the usual things (get the "divides" symbol with `\|`).
 The `%` symbol denotes modulus (remainder after division).
 
-Here are some of core Lean's functions for working with `nat`.
+Here are some of core Lean's functions for working with `Nat`.
 
 ```lean
 open nat
 
-example : nat.succ (nat.succ 4) = 6 := rfl
+example : Nat.succ (Nat.succ 4) = 6 := rfl
 
 example : 4 - 3 = 1 := rfl
 
@@ -54,7 +35,7 @@ example (m n p : ℕ) : m + p = n + p → m = n := add_right_cancel
 
 example (a b c : ℕ) : a * (b + c) = a * b + a * c := left_distrib a b c
 
-example (m n : ℕ) : succ m ≤ succ n → m ≤ n := le_of_succ_le_succ
+example (m n : ℕ) : succ m ≤ succ n → m ≤ n := Nat.le_of_succ_le_succ
 
 example (a b: ℕ) : a < b → ∀ n, 0 < n → a ^ n < b ^ n := pow_lt_pow_of_lt_left
 ```
@@ -64,18 +45,18 @@ factorials, lowest common multiples, primes, square roots, and some
 modular arithmetic.
 
 ```lean
-import data.nat.dist -- distance function
-import data.nat.gcd -- gcd
-import data.nat.modeq -- modular arithmetic
-import data.nat.prime -- prime number stuff
-import data.nat.sqrt  -- square roots
-import tactic.norm_num -- a tactic for fast computations
+import Mathlib.Data.Nat.Dist -- distance function
+import Mathlib.Data.Nat.GCD.Basic -- gcd
+import Mathlib.Data.Nat.ModEq -- modular arithmetic
+import Mathlib.Data.Nat.Prime.Basic -- prime number stuff
+import Mathlib.Data.Nat.Factors -- factors
+import Mathlib.Tactic.NormNum.Prime -- a tactic for fast computations
 
-open nat
+open Nat
 
-example : fact 4 = 24 := rfl -- factorial
+example : factorial 4 = 24 := rfl -- factorial
 
-example (a : ℕ) : fact a > 0 := fact_pos a
+example (a : ℕ) : factorial a > 0 := factorial_pos a
 
 example : dist 6 4 = 2 := rfl -- distance function
 
@@ -88,13 +69,9 @@ example : lcm 6 4 = 12 := rfl
 example (a b : ℕ) : lcm a b = lcm b a := lcm_comm a b
 example (a b : ℕ) : gcd a b * lcm a b = a * b := gcd_mul_lcm a b
 
-example (a b : ℕ) : (∀ k : ℕ, k > 1 → k ∣ a → ¬ (k ∣ b) ) → coprime a b := coprime_of_dvd
-
 -- type the congruence symbol with \==
 
 example : 5 ≡ 8 [MOD 3] := rfl
-
-example (a b c d m : ℕ) : a ≡ b [MOD m] → c ≡ d [MOD m] → a * c ≡ b * d [MOD m] := modeq.modeq_mul
 
 -- nat.sqrt is integer square root (it rounds down).
 
@@ -105,13 +82,7 @@ example (a : ℕ) : sqrt (a * a) = a := sqrt_eq a
 
 example (a b : ℕ) : sqrt a < b ↔ a < b * b := sqrt_lt
 
--- nat.prime n returns whether n is prime or not.
--- We can prove 59 is prime if we first tell Lean that primality
--- is decidable. But it's slow because the algorithms are
--- not optimised for the kernel.
-
-instance : decidable (prime 59) := decidable_prime_1 59
-example : prime 59 := dec_trivial
+example : Nat.Prime 59 := by decide
 
 -- (The default instance is `nat.decidable_prime`, which can't be
 -- used by `dec_trivial`, because the kernel would need to unfold
@@ -119,25 +90,26 @@ example : prime 59 := dec_trivial
 
 -- The tactic `norm_num`, amongst other things, provides faster primality testing.
 
-example : prime 104729 := by norm_num
+example : Nat.Prime 104729 := by
+  norm_num
 
-example (p : ℕ) : prime p → p ≥ 2 := prime.two_le
+example (p : ℕ) : Nat.Prime p → p ≥ 2 := Prime.two_le
 
-example (p : ℕ) : prime p ↔ p ≥ 2 ∧ ∀ m, 2 ≤ m → m ≤ sqrt p → ¬ (m ∣ p) := prime_def_le_sqrt
+example (p : ℕ) : Nat.Prime p ↔ p ≥ 2 ∧ ∀ m, 2 ≤ m → m ≤ sqrt p → ¬ (m ∣ p) := prime_def_le_sqrt
 
-example (p : ℕ) : prime p → (∀ m, coprime p m ∨ p ∣ m) := coprime_or_dvd_of_prime
+example (p : ℕ) : Nat.Prime p → (∀ m, Coprime p m ∨ p ∣ m) := coprime_or_dvd_of_prime
 
-example : ∀ n, ∃ p, p ≥ n ∧ prime p := exists_infinite_primes
+example : ∀ n, ∃ p, p ≥ n ∧ Nat.Prime p := exists_infinite_primes
 
--- min_fac returns the smallest prime factor of n (or junk if it doesn't have one)
+-- minFac returns the smallest prime factor of n (or junk if it doesn't have one)
 
-example : min_fac 12 = 2 := rfl
+example : minFac 12 = 2 := rfl
 
--- `factors n` is the prime factorization of `n`, listed in increasing order.
+-- `Nat.primeFactorsList n` is the prime factorization of `n`, listed in increasing order.
 -- This doesn't seem to reduce, and apparently there has not been
 -- an attempt to get the kernel to evaluate it sensibly.
 -- But we can evaluate it in the virtual machine using #eval .
 
-#eval factors (2^32+1)
+#eval primeFactorsList (2^32+1)
 -- [641, 6700417]
 ```
