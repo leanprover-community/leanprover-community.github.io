@@ -1,20 +1,20 @@
 # Maths in Lean: category theory
 
-The `Category` typeclass is defined in [Mathlib.CategoryTheory.Category.Basic](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html).
+The `Category` typeclass is defined in [`Mathlib.CategoryTheory.Category.Basic`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html).
 It depends on the type of the objects, so for example we might write `Category (Type u)` if we're talking about a category whose objects are types (in universe `u`).
 
-Functors (which are a structure, not a typeclass) are defined in [Mathlib.CategoryTheory.Functor.Basic](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html),
+Functors (which are a structure, not a typeclass) are defined in [`Mathlib.CategoryTheory.Functor.Basic`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Basic.html),
 along with identity functors and functor composition.
 
-Natural transformations, and their compositions, are defined in [Mathlib.CategoryTheory.NatTrans](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html).
+Natural transformations, and their compositions, are defined in [`Mathlib.CategoryTheory.NatTrans`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/NatTrans.html).
 
 The category of functors and natural transformations between fixed categories `C` and `D`
-is defined in [Mathlib.CategoryTheory.Functor.Category](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Category.html).
+is defined in [`Mathlib.CategoryTheory.Functor.Category`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Category.html).
 
 Cartesian products of categories, functors, and natural transformations appear in
-[Mathlib.CategoryTheory.Products.Basic](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Products/Basic.html).
+[`Mathlib.CategoryTheory.Products.Basic`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Products/Basic.html).
 
-The category of types, and the hom pairing functor, are defined in [Mathlib.CategoryTheory.Types](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Types.html).
+The category of types, and the hom pairing functor, are defined in [`Mathlib.CategoryTheory.Types`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Types.html).
 
 ## Notation
 
@@ -39,7 +39,7 @@ We use `≅` for isomorphisms.
 ### Functors
 
 We use `⥤` (`\func`) to denote functors, as in `C ⥤ D` for the type of functors from `C` to `D`.
-(Unfortunately `⇒` is reserved in [Mathlib.Logic.Relator](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Logic/Relator.html), so we can't use that here.)
+(Unfortunately `⇒` is reserved in [`Mathlib.Logic.Relator`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Logic/Relator.html), so we can't use that here.)
 
 We use `F.obj X` to denote the action of a functor on an object.
 We use `F.map f` to denote the action of a functor on a morphism`.
