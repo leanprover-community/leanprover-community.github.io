@@ -39,7 +39,6 @@ We use `≅` for isomorphisms.
 ### Functors
 
 We use `⥤` (`\func`) to denote functors, as in `C ⥤ D` for the type of functors from `C` to `D`.
-(Unfortunately `⇒` is reserved in [`Mathlib.Logic.Relator`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Logic/Relator.html), so we can't use that here.)
 
 We use `F.obj X` to denote the action of a functor on an object.
 We use `F.map f` to denote the action of a functor on a morphism`.
