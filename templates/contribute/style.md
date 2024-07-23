@@ -383,7 +383,7 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
 
 As we have already mentioned, when opening a tactic block,
 `by` is placed at the end of the line
-*preceding* the start of the tactic block, but not on its own line
+*preceding* the start of the tactic block, but not on its own line.
 Everything within the tactic block is indented, as in:
 
 ```lean
@@ -425,7 +425,7 @@ theorem exists_npow_eq_one_of_zpow_eq_one' [Group G] {n : ℤ} (hn : n ≠ 0) {x
 ```
 
 Certain tactics, such as `refine`, can create *named* subgoals which
-be proven in whichever order is desired using `case`. This feature
+can be proven in whichever order is desired using `case`. This feature
 is also useful in aiding readability. However, it is not required to
 use this instead of the focusing dot (`·`).
 
