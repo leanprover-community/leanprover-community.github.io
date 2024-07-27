@@ -306,7 +306,7 @@ import Mathlib.Algebra.Ring.Basic
 
 When an operation is written as infix, the theorem names follow
 suit. For example, we write `neg_mul_neg` rather than `mul_neg_neg` to
-describe the patter `-a * -b`.
+describe the pattern `-a * -b`.
 
 Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
