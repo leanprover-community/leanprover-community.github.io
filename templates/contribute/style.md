@@ -53,11 +53,11 @@ import Mathlib.Algebra.Group.Defs
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
 and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
 
-Regarding the list of authors: use `Authors` even when there is only a single author. 
-Don't end the line with a period, and use commas (`, `) to separate all author names 
-(so don't use `and` between the penultimate and ultimate author.) 
-We don't have strict rules on what contributions qualify for inclusion there. 
-The general idea is that the people listed there should be the ones we would 
+Regarding the list of authors: use `Authors` even when there is only a single author.
+Don't end the line with a period, and use commas (`, `) to separate all author names
+(so don't use `and` between the penultimate and ultimate author.)
+We don't have strict rules on what contributions qualify for inclusion there.
+The general idea is that the people listed there should be the ones we would
 reach out to if we had questions about the design or development of the Lean code.
 
 ### Module docstrings
