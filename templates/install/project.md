@@ -131,6 +131,7 @@ you can read [Tips and Tricks](tricks.html).
 This contains some notes about
 * Setting up a shared, *global/centralised* mathlib installation.
 * Automatically follow stable versions of dependencies.
+* Using build options to switch to local package versions.
 
 ## Troubleshooting
 
