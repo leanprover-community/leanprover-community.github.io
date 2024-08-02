@@ -74,7 +74,7 @@ and then suffix all `require`s with `@ leanVersion`:
 require "leanprover-community" / "mathlib" @ leanVersion
 ```
 
-*Note:* for this to work, the corresponding repository needs to have a tag (or branch) for the corresponding Lean version, see e.g. [the mathlib tags](https://github.com/leanprover-community/mathlib4/tags).
+*Note:* for this to work, the repository of each dependency needs to have a tag (or branch) for the Lean version you're using, e.g. look at [the mathlib tags](https://github.com/leanprover-community/mathlib4/tags).
 
 If you specified the version for all dependencies in your project, you can then update your project simply by
 
@@ -124,9 +124,14 @@ def LocalMathlib : Dependency := {
   opts := {}
 }
 
-/-- The remote dependency. Note that "master" is the version you want. -/
+/-- The remote dependency. Note that "master" is the tag/branch you want to clone from. -/
 def RemoteMathlib : Dependency := {
   name := `mathlib
+  /--
+  You can also write `src? := none` to get the package from Reservoir instead
+  (if `scope` is specified correctly),
+  or you can replace `"master"` with `none` to not specify the input branch/tag.
+  -/
   src? := some <| .git "https://github.com/leanprover-community/mathlib4.git" "master" none
   scope := "leanprover-community"
   version? := none
