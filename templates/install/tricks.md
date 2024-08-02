@@ -44,7 +44,7 @@ Here is a guide on best practise on how to achieve that.
    * Now inside `MyProject` you need to clean up lake:
      ```bash
      rm -rf .lake # because `lake clean` does not remove `.lake/packages/mathlib` which might have been downloaded by `lake new`.
-     lake clean
+     lake clean # or potentially `lake update -R mathlib` instead
      ````
      *(note: it looks like a bug that with a simple `lake clean`, there might still be a folder `.lake/packages/mathlib` floating around from before you changed the `lakefile.lean`. However, deleting `.lake/` is a reasonably save action as it only contains build artifacts that are fully recovered by the next `lake` call.)*
    * Your project should be ready and when you add `import Mathlib` in a file and click "Restart File" in VSCode, it should be reasonably quick without rebuilding mathlib.
