@@ -19,7 +19,7 @@ a portmanteau of `lean` and `make`).
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the
-full [lake documentation](https://github.com/leanprover/lake/blob/master/README.md).
+full [lake documentation](https://github.com/leanprover/lean4/tree/master/src/lake#readme).
 
 ## Working on an existing project
 
@@ -122,6 +122,15 @@ More information about Lake can be found [here](https://github.com/leanprover/le
 ## Contributing to mathlib
 
 See [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html).
+
+## Further Tips and Tricks
+
+If you are interested in a custom setup,
+you can read [Tips and Tricks](tricks.html).
+
+This contains some notes about
+* Setting up a shared, *global/centralised* mathlib installation.
+* Automatically follow stable versions of dependencies.
 
 ## Troubleshooting
 
