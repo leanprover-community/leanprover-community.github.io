@@ -58,9 +58,9 @@ Here is a guide on best practise on how to achieve that.
    * make sure `lakefile.lean` parses without error in the new version.
    * try `lake update -R mathlib` again.
 
-## Following stable versions of packages
+## Following stable versions of dependencies
 
-If your Lean project only wants to following the stable releases of packages (i.e. `v4.10.0`, `v4.11.0`, etc.) you could do the following trick:
+If your Lean project only wants to following the stable releases of dependencies (i.e. `v4.10.0`, `v4.11.0`, etc.) you could do the following trick:
 
 In your `lakefile.lean`, add
 
@@ -76,12 +76,12 @@ require "leanprover-community" / "mathlib" @ leanVersion
 
 *Note:* for this to work, the corresponding repository needs to have a tag (or branch) for the corresponding Lean version, see e.g. [the mathlib tags](https://github.com/leanprover-community/mathlib4/tags).
 
-If you specified the version for all packages in your project, you can then update your project simply by
+If you specified the version for all dependencies in your project, you can then update your project simply by
 
 * Edit `lean-toolchain` to have the new toolchain `leanprover/lean4:v4.11.0`.
 * Call `lake update -R`.
 
-  *(note: a blank `lake update -R` is only reasonable if **all** required packages in your project have a version specified with `@`)*
+  *(note: a blank `lake update -R` is only reasonable if **all** required dependencies in your project have a version specified with `@`)*
 
 
 
@@ -108,7 +108,7 @@ However, if you want to do this frequently, here might be a better setup. With t
   ```
   lake update -R mathlib
   ```
-* Anybody `require`-ing your package in there own project will automatically get the remote version of the packages.
+* Anybody `require`-ing your project as dependency in there own project will automatically get the remote version of the dependencies.
 
 (*Note:* make sure to read the chapter above about specifying versions when using `lake update`).
 
