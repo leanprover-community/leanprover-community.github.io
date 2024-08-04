@@ -97,20 +97,8 @@ theorem T2 (a b c d : ℕ)
 What is actually going on here? The proofs themselves are not a mystery,
 for example `Nat.succ_le_succ h2` is a proof of `b + 1  ≤ c + 1`. The
 clever part is that lean can put all of these together to correctly
-deduce that if `U = V < W ≤ X < Y` then `U < Y`. The way this is done,
-Kevin thinks (can someone verify this?) is that Lean continually tries
-to amalgamate the first two operators in the list, until there
-is only one left. In other words, Lean will attempt to reduce
-the equations thus:
-
-```
-U = V < W ≤ X < Y
-U < W ≤ X < Y
-U < X < Y
-U < Y
-```
-
-Note the following subtlety: given `U op1 V` and `V op2 W` Lean
+deduce that if `U = V < W ≤ X < Y` then `U < Y`. Note the following subtlety:
+given `U op1 V` and `V op2 W` Lean
 has to conclude `U op3 W` for some operator, which might be `op1`
 or `op2` (or even, as we shall see, a new operator). How is Lean
 doing this? The easiest case is when one of `op1` and `op2`
@@ -121,7 +109,7 @@ is `=`. Lean knows
 #check trans_rel_left -- {α : Sort u} {a b c : α} (r : α → α → Prop) (h₁ : r a b) (h₂ : b = c) : r a c
 ```
 
-and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
+and uses them if one of the operators is an equality operator. If however neither
 operator is the equality operator, Lean looks through the instances of
 `Trans` and applies these instead.
 
