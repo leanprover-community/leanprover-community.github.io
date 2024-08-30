@@ -19,7 +19,7 @@ a portmanteau of `lean` and `make`).
 This page describes the basic use of this tool, and should be sufficient
 for everyday use.
 If this is not enough for your purposes, you can read the
-full [lake documentation](https://github.com/leanprover/lake/blob/master/README.md).
+full [lake documentation](https://github.com/leanprover/lean4/blob/master/src/lake/README.md).
 
 ## Working on an existing project
 
