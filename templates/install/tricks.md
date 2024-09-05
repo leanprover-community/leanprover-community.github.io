@@ -5,8 +5,6 @@ Some care is adviced when trying these non-standard setups.
 
 *Note:* Things here might change as `lake` is being developed, as features described here are not necessarily officially supported by `lake`. This file has been written for Lean `v4.10.0`. If in doubt, ask for help on [Zulip](https://leanprover.zulipchat.com).
 
-*Note:* Whenever this guide talks of the `lakefile.lean`
-
 ## Shared Mathlib
 
 If you start many projects which all use the latest stable version of mathlib
