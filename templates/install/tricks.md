@@ -27,9 +27,9 @@ Here is the current best practice to achieve this.
    ```
    Note that `v4.10.0` is the tag of the latest release, you can look at [mathlib's tags](https://github.com/leanprover-community/mathlib4/tags) to find out which is the most recent release version.
 
-  The above line assumes you have set up git using an SSH key.
-  If you have not set this up correctly, you may want to
-  use `git clone --branch v4.10.0 https://github.com/leanprover-community/mathlib4.git` instead.
+   The above line assumes you have set up git using an SSH key.
+   If you have not set this up correctly, you may want to
+   use `git clone --branch v4.10.0 https://github.com/leanprover-community/mathlib4.git` instead.
 
 2) Go inside your mathlib and download the current cache:
    ```bash
