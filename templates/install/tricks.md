@@ -1,14 +1,25 @@
 # Tips and Tricks about Lean Projects
 
-These tips and tricks about managing Lean projects should be considered workarounds or common practice. Some care is adviced when trying these non-standard setups.
+These tips and tricks about managing Lean projects should be considered workarounds.
+Some care is adviced when trying these non-standard setups.
 
 *Note:* Things here might change as `lake` is being developed, as features described here are not necessarily officially supported by `lake`. This file has been written for Lean `v4.10.0`. If in doubt, ask for help on [Zulip](https://leanprover.zulipchat.com).
 
+*Note:* Whenever this guide talks of the `lakefile.lean`
+
 ## Shared Mathlib
 
-If you start many projects which all use the latest stable version of mathlib, e.g. because you have little
-disk space available, it might be worth setting them up using one centralised mathlib instead of
-letting every project download their own clone.
+If you start many projects which all use the latest stable version of mathlib
+by default each project will download its own clone.
+If you, for example, have little disk space available,
+it might be worth setting them up using one centralised copy of mathlib instead.
+
+*Note*: This means additional effort when upgrading the mathlib version,
+as you need to update all your projects at once.
+
+*Note*: Whenever this tutorial mentions the `lakefile.lean`, you should make the mentioned
+modifications to your `lakefile.toml` if you have this instead. Every Lean project
+has exactly one of these two configuration files.
 
 Here is the current best practice to achieve this.
 
@@ -18,8 +29,11 @@ Here is the current best practice to achieve this.
    ```
    Note that `v4.10.0` is the tag of the latest release, you can look at [mathlib's tags](https://github.com/leanprover-community/mathlib4/tags) to find out which is the most recent release version.
 
-   (If you don't have git setup correctly using an SSH key, you might want to use `git clone --branch v4.10.0 https://github.com/leanprover-community/mathlib4.git` instead.)
-2) Go inside your mathlib and download cache:
+  The above line assumes you have set up git using an SSH key.
+  If you have not set this up correctly, you may want to
+  use `git clone --branch v4.10.0 https://github.com/leanprover-community/mathlib4.git` instead.
+
+2) Go inside your mathlib and download the current cache:
    ```bash
    cd mathlib
    lake exe cache get
@@ -35,8 +49,8 @@ Here is the current best practice to achieve this.
    lake new MyProject math.lean
    cd MyProject
    ```
-5) In the project `MyProject` you need to modify two things:
-   <!-- 1) Make sure `lean-toolchain` contains the string `leanprover/lean4:v4.10.0` with the same version your shared mathlib is at. -->
+5) In the project `MyProject` you need to modify the following things:
+   * Make sure `lean-toolchain` contains the string `leanprover/lean4:v4.10.0` with the same version your shared mathlib is at.
    * In `lakefile.lean`, replace the line `require "leanprover-community" / "mathlib"` with
      ```
      require mathlib from ".." / "relative" / "path" / "to" / "mathlib4"
