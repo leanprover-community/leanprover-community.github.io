@@ -8,11 +8,11 @@ These tips and tricks about managing Lean projects should be considered workarou
 
 If you start many projects which all use the latest stable version of mathlib, e.g. because you have little
 disk space available, it might be worth setting them up using one centralised mathlib instead of
-letting every project download there own clone.
+letting every project download their own clone.
 
-Here is a guide on best practise on how to achieve that.
+Here is the current best practice to achieve this.
 
-1) First, clone the version of mathlib somewhere on your computer:
+1) First, clone a version of mathlib somewhere on your computer:
    ```bash
    git clone --branch v4.10.0 git@github.com:leanprover-community/mathlib4.git
    ```
@@ -30,7 +30,7 @@ Here is a guide on best practise on how to achieve that.
    lake exe cache get
    ```
    with the [version](https://github.com/leanprover-community/mathlib4/tags) you'd like to update to.
-4) Now if you don't already have a Lean project, create it
+4) If you don't already have a Lean project, create it.
    ```bash
    lake new MyProject math.lean
    cd MyProject
@@ -45,9 +45,9 @@ Here is a guide on best practise on how to achieve that.
      ```bash
      rm -rf .lake # because `lake clean` does not remove `.lake/packages/mathlib` which might have been downloaded by `lake new`.
      lake clean # or potentially `lake update -R mathlib` instead
-     ````
-     *(note: it looks like a bug that with a simple `lake clean`, there might still be a folder `.lake/packages/mathlib` floating around from before you changed the `lakefile.lean`. However, deleting `.lake/` is a reasonably save action as it only contains build artifacts that are fully recovered by the next `lake` call.)*
-   * Your project should be ready and when you add `import Mathlib` in a file and click "Restart File" in VSCode, it should be reasonably quick without rebuilding mathlib.
+     ```
+     *(note: it looks like a bug that with a simple `lake clean`, there might still be a folder `.lake/packages/mathlib` floating around from before you changed the `lakefile.lean`. However, deleting `.lake/` is a reasonably safe action as it only contains build artifacts that are fully recovered by the next `lake` call.)*
+   * Your project should be ready: when you add `import Mathlib` in a file and click "Restart File" in VSCode, it should be reasonably quick, without rebuilding mathlib.
 6) When you updated your global mathlib it might be enough to call
    ```
    lake update -R mathlib
