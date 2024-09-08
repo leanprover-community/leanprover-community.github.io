@@ -1,7 +1,5 @@
 # Mathlib naming conventions
 
-Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
-
 This guide is written for Lean 4.
 
 ## General conventions
@@ -418,8 +416,3 @@ automatically generated unidirectional implications, named `.inj`,
 and there is no intention to change this.
 When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named `.inj_iff`.
-
-------
-Copyright (c) 2016 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad
