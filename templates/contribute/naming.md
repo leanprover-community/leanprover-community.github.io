@@ -1,7 +1,5 @@
 # Mathlib naming conventions
 
-Authors: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad), Edward van de Meent
-
 This guide is written for Lean 4.
 
 ## General conventions
@@ -439,8 +437,3 @@ The following table summarizes these naming conventions.
 | constructions first  | `T.induction`    | `T.rec`   |
 
 Variation on these names are acceptable when neccessary (e.g. for disambiguation)
-
-------
-Copyright (c) 2024 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad, Edward van de Meent

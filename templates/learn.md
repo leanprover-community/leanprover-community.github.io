@@ -24,6 +24,12 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
+* If you wish to learn directly from source, the 
+  [Lean API documentation](https://leanprover-community.github.io/mathlib4_docs/) 
+  not only includes `Mathlib`, but also covers `Std`, `Batteries`, `Lake`, and the core compiler. 
+  As much of Lean is defined in terms of syntax extensions, this is the closest thing to a 
+  comprehensive reference manual that exists.
+
 ## Books
 
 If you prefer reading a book (with exercises), there are a number of freely available Lean books
