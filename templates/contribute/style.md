@@ -1,5 +1,4 @@
 # Library Style Guidelines
-Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 In addition to the [naming conventions](naming.html),
 files in the Lean library generally adhere to the following guidelines
@@ -553,8 +552,3 @@ Documentation strings for declarations are delimited with `/-- -/`.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
-
-------
-Copyright (c) 2016 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad, Jireh Loreaux
