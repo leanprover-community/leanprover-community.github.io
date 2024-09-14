@@ -431,9 +431,9 @@ Additionally, the name should contain `on` iff in the argument order, the value 
 
 The following table summarizes these naming conventions.
 
-|motive eliminates into: | `Prop`           | `Sort u` or `Type u`|
-|------------------------|------------------|---------------------|
-| value first            | `T.induction_on` | `T.recOn`           |
-| constructions first    | `T.induction`    | `T.rec`             |
+| motive eliminates into: | `Prop`           | `Sort u` or `Type u` |
+|-------------------------|------------------|----------------------|
+| value first             | `T.induction_on` | `T.recOn`            |
+| constructions first     | `T.induction`    | `T.rec`              |
 
 Variation on these names are acceptable when neccessary (e.g. for disambiguation)
