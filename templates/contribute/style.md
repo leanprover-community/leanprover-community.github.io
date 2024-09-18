@@ -1,5 +1,4 @@
 # Library Style Guidelines
-Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 In addition to the [naming conventions](naming.html),
 files in the Lean library generally adhere to the following guidelines
@@ -42,9 +41,9 @@ without a line break, on separate lines.
 
 ```lean
 /-
-Copyright (c) 2015 Joe Cool. All rights reserved.
+Copyright (c) 2024 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Author: Joe Cool.
+Authors: Joe Cool
 -/
 import Mathlib.Data.Nat.Basic
 import Mathlib.Algebra.Group.Defs
@@ -53,10 +52,12 @@ import Mathlib.Algebra.Group.Defs
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
 and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
 
-Regarding the list of authors: we don't have strict rules on what
-contributions qualify for inclusion there. The general idea is that
-the people listed there should be the ones we would reach out to if we had
-questions about the design or development of the Lean code.
+Regarding the list of authors: use `Authors` even when there is only a single author.
+Don't end the line with a period, and use commas (`, `) to separate all author names
+(so don't use `and` between the penultimate and ultimate author.)
+We don't have strict rules on what contributions qualify for inclusion there.
+The general idea is that the people listed there should be the ones we would
+reach out to if we had questions about the design or development of the Lean code.
 
 ### Module docstrings
 
@@ -383,7 +384,7 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
 
 As we have already mentioned, when opening a tactic block,
 `by` is placed at the end of the line
-*preceding* the start of the tactic block, but not on its own line
+*preceding* the start of the tactic block, but not on its own line.
 Everything within the tactic block is indented, as in:
 
 ```lean
@@ -425,7 +426,7 @@ theorem exists_npow_eq_one_of_zpow_eq_one' [Group G] {n : ℤ} (hn : n ≠ 0) {x
 ```
 
 Certain tactics, such as `refine`, can create *named* subgoals which
-be proven in whichever order is desired using `case`. This feature
+can be proven in whichever order is desired using `case`. This feature
 is also useful in aiding readability. However, it is not required to
 use this instead of the focusing dot (`·`).
 
@@ -551,8 +552,3 @@ Documentation strings for declarations are delimited with `/-- -/`.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
-
-------
-Copyright (c) 2016 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad, Jireh Loreaux

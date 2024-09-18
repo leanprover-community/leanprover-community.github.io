@@ -30,7 +30,7 @@ Mathlib.
   * cherry picked commits from `master` for critical fixes released via release candidates.
 * We make a regular nightly release from `master`, which has a tag e.g. `nightly-2023-11-01` on the
   `leanprover/lean4-nightly` repository.
-  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`.
+  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`. (Note that it should not be `leanprover/lean4-nightly:nightly-2023-11-01`, because `elan` applies some magic wisdom here.)
 * There is a `nightly` branch on `leanprover/lean4` which follows the most recent commit which was
   used to construct a nightly release.
 * Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
@@ -53,11 +53,11 @@ Mathlib.
   * which contains adaptations for breaking changes that have been approved by the maintainers
   * and which will be using a `leanprover-lean4:nightly-YYYY-MM-DD` toolchain.
 * Std has a branch `nightly-testing` which
-  * uses a recently nightly release (this is updated automatically)
+  * uses a recent nightly release (this is updated automatically)
   * has all commits from `main` merged into it automatically
   * may have any changes from `bump/v4.X.0` merged into it manually
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
-    branch working again recent nightly releases.
+    branch working against recent nightly releases.
 * Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
   "Mathlib reviewers" channel.
 * Success in CI on the `nightly-testing` branch results in the creation of a tag
