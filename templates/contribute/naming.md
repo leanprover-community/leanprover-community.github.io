@@ -436,4 +436,4 @@ The following table summarizes these naming conventions.
 | value first             | `T.induction_on` | `T.recOn`            |
 | constructions first     | `T.induction`    | `T.rec`              |
 
-Variation on these names are acceptable when neccessary (e.g. for disambiguation)
+Variation on these names are acceptable when necessary (e.g. for disambiguation)
