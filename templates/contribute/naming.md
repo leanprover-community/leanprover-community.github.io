@@ -421,7 +421,7 @@ and a bidirectional lemma is needed, it may be named `.inj_iff`.
 
 Inductive/recursive principles are ways to construct data or proofs for all elements of some type `T`,
 by providing ways to construct this data or proof in more constrained specific contexts. 
-These principles generally are phrased to first accept a *motive*,
+These principles should be phrased to accept a `motive` argument,
 which declares what property we are proving or what data we are constructing for all `T`.
 When the motive eliminates into `Prop`, it is an induction principle, and the name should contain
 `induction`. On the other hand, when the motive eliminates into `Sort u` or `Type u`,
