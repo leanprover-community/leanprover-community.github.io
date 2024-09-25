@@ -446,7 +446,7 @@ else:
     projects = pkl_load('projects', [])
 
 if DOWNLOAD:
-    num_contrib = github.get_repo('leanprover-community/mathlib').get_contributors(anon=True).totalCount
+    num_contrib = github.get_repo('leanprover-community/mathlib4').get_contributors(anon=True).totalCount
     pkl_dump('num_contrib', num_contrib)
 else:
     num_contrib = pkl_load('num_contrib', 0)
