@@ -127,7 +127,8 @@ To make this process as smooth as possible, we follow the following procedure:
   - The purpose of this branch is to adapt Mathlib to changes in the nightly toolchain releases of Lean.
   - Typically, a PR `#NNNN` to Lean core will be accompanied by adaptations to Mathlib in a branch `lean-pr-testing-NNNN`.
     Once the Lean core PR lands in a nightly toolchain, the Mathlib branch `lean-pr-testing-NNNN` can be merged into `nightly-testing`.
-  - If CI fails on this branch, then it posts a message to "nightly-testing > Mathlib status updates" on Zulip, indicating the failure.
+    Often one needs to fix merge conflicts in `lean-toolchain`, `lakefile.lean`, and/or `lake-manifest.json`.
+  - If CI fails on this branch, then it posts a message to ["nightly-testing > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
   - If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)
 * The `bump/v4.X.Y` branches of Mathlib also use nightly toolchain releases of Lean.
   - This branch should always build without errors.
