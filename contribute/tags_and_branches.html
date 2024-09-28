@@ -200,6 +200,50 @@ and is based off a nightly release. (Unlike for Std, where they must be created 
 <li>Mathlib adaptation PRs on <code>lean-pr-testing-NNNN</code> branches may need to change the Std dependency
 to use a <code>lean-pr-testing-NNNN</code> branch of Std, if Std also experiences breakages.</li>
 </ul>
+<h3 id="mathlib-nightly-and-bump-branches" class="markdown-heading">Mathlib nightly and bump branches <a class="hover-link" href="#mathlib-nightly-and-bump-branches">#</a></h3>
+<p>Every month there is a new Lean release,
+and Mathlib aims to migrate to the new Lean release as soon as possible.
+To make this process as smooth as possible, we follow the following procedure:</p>
+<ul>
+<li>The <code>nightly-testing</code> branch of Mathlib uses the nightly toolchain releases of Lean.
+In other words, the <code>lean-toolchain</code> file on that branch contains something like <code>leanprover/lean4:nightly-2024-09-26</code>.
+<ul>
+<li>This branch is not guaranteed to build without errors.</li>
+<li>Change to this branch are not reviewed by the Mathlib maintainer team.</li>
+<li>This branch is not protected: anybody can push fixes to it.</li>
+<li>The purpose of this branch is to adapt Mathlib to changes in the nightly toolchain releases of Lean.</li>
+<li>Typically, a PR <code>#NNNN</code> to Lean core will be accompanied by adaptations to Mathlib in a branch <code>lean-pr-testing-NNNN</code>.
+Once the Lean core PR lands in a nightly toolchain, the Mathlib branch <code>lean-pr-testing-NNNN</code> can be merged into <code>nightly-testing</code>.
+Often one needs to fix merge conflicts in <code>lean-toolchain</code>, <code>lakefile.lean</code>, and/or <code>lake-manifest.json</code>.</li>
+<li>If CI fails on this branch, then it posts a message to <a href="https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing/topic/Mathlib.20status.20updates">&quot;nightly-testing &gt; Mathlib status updates&quot;</a> on Zulip, indicating the failure.</li>
+<li>If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)</li>
+</ul>
+</li>
+<li>The <code>bump/v4.X.Y</code> branches of Mathlib also use nightly toolchain releases of Lean.
+<ul>
+<li>This branch should always build without errors.</li>
+<li>Changes to this branch are reviewed by the Mathlib maintainer team.</li>
+<li>This branch is protected: only Mathlib maintainers and certain bots can push to it.</li>
+<li>The purpose of this branch is to prepare a parallel version of Mathlib's <code>master</code> branch that builds on the upcoming version of Lean.
+Once that version is released, the <code>bump/v4.X.Y</code> branch is merged into <code>master</code>.
+This merge is essentially atomic, since the diff has already been reviewed via all the daily adaptation PRs. (See below.)</li>
+</ul>
+</li>
+<li>When <code>nightly-testing</code> passes CI, a bot posts to Zulip with instructions to create an &quot;adaptation PR&quot; to merge changes on <code>nightly-testing</code> into <code>bump/v4.X.Y</code>.
+<ul>
+<li>This PR can be prepared using <code>scripts/create-adaptation-pr.sh</code> as indicated in the Zulip message.</li>
+<li>This PR should be reviewed by the Mathlib maintainer team.</li>
+</ul>
+</li>
+<li>Over the course of the Lean release cycle (i.e., a month), <code>bump/v4.X.Y</code> accumulates adaptations to the future Lean release.
+<ul>
+<li>But <code>master</code> also accumulates thousands of lines of changes.</li>
+<li>Hence <code>master</code> should be merged into <code>bump/v4.X.Y</code> on a regular basis.</li>
+<li>At the time of writing, this step is combined into the <code>scripts/create-adaptation-pr.sh</code> process.</li>
+<li>Occasionally, merge conflicts occur. These ought to be reviewed by the Mathlib maintainer team, although that currently does not happen.</li>
+</ul>
+</li>
+</ul>
 <h3 id="combined-ci-between-lean-and-mathlib" class="markdown-heading">Combined CI between Lean and Mathlib <a class="hover-link" href="#combined-ci-between-lean-and-mathlib">#</a></h3>
 <ul>
 <li>For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.</li>
