@@ -1,6 +1,10 @@
 # Installing Lean 4 on Linux
 
-This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distributions such as Ubuntu).
+This document explains a more controlled installation procedure
+for Lean 4 and Mathlib on generic Linux distributions (there is a
+[specific page](debian_details.html) for Debian and derived distributions such as Ubuntu).
+There is a quicker way described in the main
+[install page](../get_started.html) but it requires more trust.
 
 All commands below should be typed inside a terminal.
 
