@@ -81,15 +81,17 @@ docs(CategoryTheory/EssentialImage): typo and punctuation
 Fix a typo, add two periods.
 ```
 
-an example with dependent PRs:
+An example with dependent PRs:
 
 ```markdown
 feat: The norm on `Unitization` is a C⋆-norm
 
 This shows that C⋆-algebras are always `RegularNormedAlgebra`s, so that their `Unitization` is equipped with a norm. Moreover, we show this norm is a C⋆-norm.
 
+---
+
 - [ ] depends on: #5330
 - [ ] depends on: #5741
-- [ ] depends on: #5742 
-- [ ] depends on: #5743 
+- [ ] depends on: #5742
+- [ ] depends on: #5743
 ```
