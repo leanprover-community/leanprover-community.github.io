@@ -1,42 +1,22 @@
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
-
 # Maths in Lean: Topological, uniform and metric spaces
 
-The `topological_space` typeclass is defined in mathlib,
-in `topology/basic.lean`. There are about 18000
-lines of code in `topology` at the time of writing,
-covering the basics of topological spaces, continuous functions,
+The `TopologicalSpace` typeclass is defined in mathlib,
+in `Mathlib.Topology.Defs.Basic`. There a lot of
+lines of code in `topology`,covering the basics of topological spaces, continuous functions,
 topological groups and rings, and infinite sums. These docs
-are just concerned with the contents of the `topological_space.lean`
-file.
+are just concerned with the contents of the `Mathlib.Topology`
+folder.
 
 ### The basic typeclass
 
-The `topological_space` typeclass is an inductive type, defined
-as a structure on a type `α` in the obvious way: there is an `is_open`
-predicate, telling us when `U : set α` is open, and then the axioms
+The `TopologicalSpace` typeclass is an inductive type, defined
+as a structure on a type `α` in the obvious way: there is an `IsOpen`
+predicate, telling us when `U : Set α` is open, and then the axioms
 for a topology (pedantic note: the axiom that the empty set is open
 is omitted, as it follows from the fact that a union of open sets
 is open, applied to the empty union!).
 
-Note that there are two ways of formalising the axiom that an arbitrary
+Note that there are two ways of formalizing the axiom that an arbitrary
 union of open sets is open: one could either ask that given a set
 of open sets, their union is open, or one could ask that given
 a function from some index set `I` to the set of open sets, the union
@@ -44,48 +24,50 @@ of the values of the function is open. Mathlib goes for the first
 one, so the axiom is
 
 ```lean
-is_open_sUnion : ∀(s : set (set α)), (∀t∈s, is_open t) → is_open (⋃₀ s)
+isOpen_sUnion : ∀ (s : Set (set α)), (∀ t ∈ s, IsOpen t) → IsOpen (⋃₀ s)
 ```
 
 and then the index set version is a lemma:
 
 ```lean
-lemma is_open_Union {f : ι → set α} (h : ∀i, is_open (f i)) : is_open (⋃i, f i)
+lemma isOpen_biUnion {f : ι → Set α} {s : Set ι} (h : ∀ i ∈ s, IsOpen (f i)) : IsOpen (⋃ i ∈ s, f i)
 ```
 
 Note the naming conventions, standard across mathlib, that `sUnion`
-is a union over sets and `Union` (with a capital U) is a union over
+is a union over sets and `biUnion` is a union over
 the image of a function on an indexing set. The capital U's are
 to indicate a union of arbitrary size, as opposed to `union`, which
 indicates a union of two sets:
 
 ```lean
-lemma is_open_union (h₁ : is_open s₁) (h₂ : is_open s₂) : is_open (s₁ ∪ s₂)
+lemma IsOpen.union (h₁ : is_open s₁) (h₂ : is_open s₂) : is_open (s₁ ∪ s₂)
 ```
 
-The predicate `is_closed`, and functions `interior`, `closure`, and
+The predicate `IsClosed`, and functions `interior`, `closure`, and
 `frontier` (closure minus interior,
 sometimes called boundary in mathematics) are defined, and basic
 properties about them are proved. For example
 
 ```lean
-import topology.basic
-open topological_space
-variables {X : Type} [topological_space X] {U V C D Y Z : set X}
+import Mathlib.Topology.Basic
 
-example : is_closed C → is_closed D → is_closed (C ∪ D) := is_closed_union
 
-example : is_open Cᶜ ↔ is_closed C := is_open_compl_iff
+open TopologicalSpace
+variable {X : Type} [TopologicalSpace X] {U V C D Y Z : Set X}
 
-example : is_open U → is_closed C → is_open (U \ C) := is_open_diff
+example : IsClosed C → IsClosed D → IsClosed (C ∪ D) := IsClosed.union
 
-example : interior Y = Y ↔ is_open Y := interior_eq_iff_open
+example : IsOpen Cᶜ ↔ IsClosed C := isOpen_compl_iff
+
+example : IsOpen U → IsClosed C → IsOpen (U \ C) := IsOpen.sdiff
+
+example : interior Y = Y ↔ IsOpen Y := interior_eq_iff_isOpen
 
 example : Y ⊆ Z → interior Y ⊆ interior Z := interior_mono
 
-example : is_open Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, is_open U ∧ x ∈ U := is_open_iff_forall_mem_open
+example : IsOpen Y ↔ ∀ x ∈ Y, ∃ U ⊆ Y, IsOpen U ∧ x ∈ U := isOpen_iff_forall_mem_open
 
-example : closure Y = Y ↔ is_closed Y := closure_eq_iff_is_closed
+example : closure Y = Y ↔ IsClosed Y := closure_eq_iff_isClosed
 
 example : closure Y = (interior Yᶜ)ᶜ := closure_eq_compl_interior_compl
 ```
@@ -105,28 +87,32 @@ Informally, one can think of `F` as the set of "big" subsets of `X`. For example
 
 Note that if `F` is a filter that contains the empty set, then it contains all subsets of `X` by the first axiom. This filter is sometimes called "bottom" (we will see why a little later on). Some references demand that the empty set is not allowed to be in a filter -- Lean does not have this restriction. A filter not containing the empty set is sometimes called a "proper filter".
 
-If `X` is a topological space, and `x ∈ X`, then the _neighbourhood filter_ `𝓝 x` of `x` is the set of subsets `Y` of `X` such that `x` is in the interior of `Y`. One checks easily that this is a filter (technical point: to see that this is actually the definition of `𝓝 x` in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using `F ≤ G` iff `G ⊆ F`, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but `lemma nhds_sets` says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).
+If `X` is a topological space, and `x ∈ X`, then the _neighborhood filter_ `𝓝 x` of `x` is the set of subsets `Y` of `X` such that `x` is in the interior of `Y`. One checks easily that this is a filter (technical point: to see that this is actually the definition of `𝓝 x` in mathlib, it helps to know that the set of all filters on a type is a complete lattice, partially ordered using `F ≤ G` iff `G ⊆ F`, so the definition, which involves an inf, is actually a union; also, the definition I give is not literally the definition in mathlib, but `lemma mem_nhds_iff` says that their definition is the one here. Note also that this is why the filter with the most sets is called bottom!).
 
 Why are we interested in these filters? Well, given a map `f` from `ℕ` to a topological space `X`, one can check that the resulting sequence `f 0`, `f 1`, `f 2`... tends to `x ∈ X` if and only if the pre-image of any element in the filter `𝓝 x` is in the cofinite filter on `ℕ` -- this is just another way of saying that given any open set `U` containing `x`, there exists `N` such that for all `n ≥ N`, `f n ∈ U`. So filters provide a way of thinking about limits.
 
 As an example, below are three limits formulated in Lean.
-The example uses the filters `at_top` and `at_bot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
+The example uses the filters `atTop` and `atBot` that represent "tends to `∞`" and "tends to `-∞`" in a type equipped with an order.
 
 ```lean
+open Filter Topology
+
 -- The limit of `2 * x` as `x` tends to `3` is `6`
-example : tendsto (λ x : ℝ, 2 * x) (𝓝 3) (𝓝 6) := sorry
+example : Tendsto (fun x : ℝ ↦ 2 * x) (𝓝 3) (𝓝 6) := sorry
 -- The limit of `1 / x` as `x` tends to `∞` is `0`
-example : tendsto (λ x : ℝ, 1 / x) at_top (𝓝 0) := sorry
+example : Tendsto (fun x : ℝ ↦ 1 / x) atTop (𝓝 0) := sorry
 -- The limit of `x ^ 2` as `x` tends to `-∞` is `∞`
-example : tendsto (λ x : ℝ, x ^ 2) at_bot at_top := sorry
+example : Tendsto (fun x : ℝ ↦ x ^ 2) atBot atTop := sorry
 ```
 
-The _principal filter_ `principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
+The _principal filter_ `Filter.principal Y` attached to a subset `Y` of a set `X` is the collection of all subsets of `X` that contain `Y`. So it's not difficult to convince yourself that the following results should be true:
 
 ```lean
-example : interior Y = {x | 𝓝 x ≤ filter.principal Y} := interior_eq_nhds
+variable (X : Type) [TopologicalSpace X] (Y : Set X)
 
-example : is_open Y ↔ ∀ y ∈ Y, Y ∈ (𝓝 y).sets := is_open_iff_mem_nhds
+example : interior Y = {x | 𝓝 x ≤ Filter.principal Y} := interior_eq_nhds
+
+example : IsOpen Y ↔ ∀ y ∈ Y, Y ∈ (𝓝 y).sets := isOpen_iff_eventually
 ```
 
 ### Compactness with filters
@@ -138,37 +124,39 @@ for what it means for a sequence to tend to a limit. The definition
 of compactness is also written in filter-theoretic terms:
 
 ```lean
-/-- A set `s` is compact if every filter that contains `s` also meets every
-  neighborhood of some `a ∈ s`. -/
-def compact (Y : set X) := ∀F, F ≠ ⊥ → F ≤ principal Y → ∃y∈Y, F ⊓ 𝓝 y ≠ ⊥
+/-- A set `s` is compact if for every nontrivial filter `f` that contains `s`,
+    there exists `a ∈ s` such that every set of `f` meets every neighborhood of `a`. -/
+def IsCompact (s : Set X) :=
+  ∀ ⦃f⦄ [NeBot f], f ≤ 𝓟 s → ∃ x ∈ s, ClusterPt x f
 ```
 
-Translated, this says that a subset `Y` of a topological space `X` is compact if for every proper filter `F` on `X`, if `Y` is an element of `F` then there's an element `y` of `Y` such that the smallest filter containing both F and the neighbourhood filter of `y` is not the filter of all subsets of `X` either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of `ℝ^n`, any sequence has a convergent subsequence.
+Translated, this says that a subset `Y` of a topological space `X` is compact if for every proper filter `F` on `X`, if `Y` is an element of `F` then there's an element `y` of `Y` such that the smallest filter containing both F and the neighborhood filter of `y` is not the filter of all subsets of `X` either. This should be thought of as being the correct general analogue of the Bolzano-Weierstrass theorem, that in a compact subspace of `ℝ^n`, any sequence has a convergent subsequence.
 
 One might ask why this definition of compactness has been chosen, rather than the standard one about open covers having finite subcovers. The reasons for this are in some sense computer-scientific rather than mathematical -- the issue should not be what definition is ultimately chosen (indeed the developers should feel free to choose whatever definition they like as long as it is logically equivalent to the usual one, and they might have reasons related to non-mathematical points such as running times), the issue should be how to prove that the inbuilt definition is equivalent to the one you want to use in practice. And fortunately, we have
 
 ```lean
-example : compact Y ↔
-  (∀ cov : set (set X), (∀ U ∈ cov, is_open U) → Y ⊆ ⋃₀ cov →
-    ∃ fincov ⊆ cov, set.finite fincov ∧ Y ⊆ ⋃₀ fincov) := compact_iff_finite_subcover
+example : IsCompact Y ↔ ∀ {ι : Type} (U : ι → Set X),
+      (∀ i, IsOpen (U i)) → (Y ⊆ ⋃ i, U i) → ∃ t : Finset ι, Y ⊆ ⋃ i ∈ t, U i :=
+    isCompact_iff_finite_subcover
 ```
 
 so the Lean definition is equivalent to the standard one.
 
 ### Hausdorff spaces
 
-In Lean they chose the terminology `t2_space` to mean Hausdorff (perhaps because it is shorter!).
+In Lean they chose the terminology `T2Space` to mean Hausdorff (perhaps because it is shorter!).
 
 ```lean
-class t2_space (X : Type) [topological_space X] :=
-(t2 : ∀x y, x ≠ y → ∃U V : set X, is_open U ∧ is_open V ∧ x ∈ U ∧ y ∈ V ∧ U ∩ V = ∅)
+class T2Space (X : Type u) [TopologicalSpace X] : Prop where
+  /-- Every two points in a Hausdorff space admit disjoint open neighbourhoods. -/
+  t2 : Pairwise fun x y => ∃ u v : Set X, IsOpen u ∧ IsOpen v ∧ x ∈ u ∧ y ∈ v ∧ Disjoint u v
 ```
 
 Of course Hausdorffness is what we need to ensure that limits are unique, but because limits are defined using filters this statements ends up reading as follows:
 
 ```lean
-lemma tendsto_nhds_unique [t2_space X] {f : β → X} {l : filter β} {x y : X}
-  (hl : l ≠ ⊥) (hx : tendsto f l (𝓝 x)) (hb : tendsto f l (𝓝 y)) : x = y
+lemma tendsto_nhds_unique [T2Space X] {f : β → X} {l : Filter β} {x y : X}
+  [l.NeBot] (hx : Tendsto f l (𝓝 x)) (hb : Tendsto f l (𝓝 y)) : x = y
 ```
 
 Note that actually this statement is more general than the classical statement that if a sequence tends to two limits in a Hausdorff space then the limits are the same, because it applies to any non-trivial filter on any set rather than just the cofinite filter on the natural numbers.
@@ -192,10 +180,10 @@ directly. However again we have a theorem which reduces us to checking
 the two usual axioms for a basis:
 
 ```lean
-example (B : set (set X)) (h_open : ∀ V ∈ B, is_open V)
-  (h_nhds : ∀ (x : X) (U : set X), x ∈ U → is_open U → ∃ V ∈ B, x ∈ V ∧ V ⊆ U) :
-is_topological_basis B :=
-is_topological_basis_of_open_of_nhds h_open h_nhds
+example (B : Set (Set X)) (h_open : ∀ V ∈ B, IsOpen V)
+  (h_nhds : ∀ (x : X) (U : Set X), x ∈ U → IsOpen U → ∃ V ∈ B, x ∈ V ∧ V ⊆ U) :
+IsTopologicalBasis B :=
+isTopologicalBasis_of_isOpen_of_nhds h_open h_nhds
 ```
 
 ### Other things
@@ -209,52 +197,44 @@ and things like t1 and t3 spaces.
 
 The following "core" modules form a linear chain of imports. A theorem involving concepts defined in several of these files should be found in the last such file in this ordering.
 
-* `basic`
+* `Mathlib.Topology.Basic`
   Topological spaces. Open and closed subsets, interior, closure and frontier (boundary). Neighborhood filters. Limit of a filter. Locally finite families. Continuity and continuity at a point.
-* `order`
+* `Mathlib.Topology.Order.Basic`
   The complete lattice structure on topologies on a fixed set. Induced and coinduced topologies.
 * `maps`
   Open and closed maps. "Inducing" maps. Embeddings, open embeddings and closed embeddings. Quotient maps.
-* `constructions`
+* `Mathlib.Topology.Constructions`
   Building new topological spaces from old ones: products, sums, subspaces and quotients.
-* `subset_properties`
-  Compactness. Clopen subsets, irreducibility and connectedness. Totally disconnected and totally separated sets and spaces.
-* `separation`
+* `Mathlib.Topology.Separation`
   Separation axioms T₀ through T₄, also known as Kolmogorov, Tychonoff or Fréchet, Hausdorff, regular, and normal spaces respectively.
 
-The remaining directories and files, in no particular order:
+Some of the remaining directories and files, in no particular order:
 
-* `algebra`
+* `Mathlib.Topology.Algebra`
   Topological spaces with compatible algebraic or ordered structure.
-* `category`
+* `Mathlib.Topology.Category`
   The categories of topological spaces, uniform spaces, etc.
-* `instances`
+* `Mathlib.Topology.Instances`
   Specific topological spaces such as the real numbers and the complex numbers.
-* `metric_space`
+* `Mathlib.Topology.MetricSpace`
   The theory of metric spaces; but some notions one might expect to find here are instead generalized to uniform spaces.
-* `sheaves`
+* `Mathlib.Topology.Sheaves`
   Presheaves on a topological space.
-* `uniform_space`
+* `Mathlib.Topology.UniformSpace`
   The theory of uniform spaces, including notions such as completeness, uniform continuity and totally bounded sets.
-* `bases`
+* `Mathlib.Topology.Bases`
   Bases for filters and topological spaces. Separable, first countable and second countable spaces.
-* `bounded_continuous_function`
-  Bounded continuous functions from a topological space to a metric space.
-* `compact_open`
+* `Mathlib.Topology.CompactOpen`
   The compact-open topology on the space of continuous maps between two topological spaces.
-* `continuous_on`
+* `Mathlib.Topology.ContinuousOn`
   Neighborhoods within a subset. Continuity on a subset, and continuity within a subset at a point.
-* `dense_embedding`
+* `Mathlib.Topology.DenseEmbedding`
   Embeddings and other functions with dense image.
-* `homeomorph`
+* `Mathlib.Topology.Homeomorph`
   Homeomorphisms between topological spaces.
-* `list`
+* `Mathlib.Topology.List`
   Topologies on lists and vectors.
-* `local_homeomorph`
-  Homeomorphisms between open subsets of topological spaces.
-* `opens`
-  The complete lattice of open subsets of a topological space. The types of closed and nonempty compact subsets.
-* `sequences`
+* `Mathlib.Topology.Sequences`
   Sequential closure and sequential spaces. Sequentially continuous functions.
-* `stone_cech`
+* `Mathlib.Topology.StoneCech`
   The Stone-Čech compactification of a topological space.
