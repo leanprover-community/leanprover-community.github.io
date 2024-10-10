@@ -133,19 +133,8 @@ we have created an instance of <code>Trans</code></p>
 <p>What is actually going on here? The proofs themselves are not a mystery,
 for example <code>Nat.succ_le_succ h2</code> is a proof of <code>b + 1  ≤ c + 1</code>. The
 clever part is that lean can put all of these together to correctly
-deduce that if <code>U = V &lt; W ≤ X &lt; Y</code> then <code>U &lt; Y</code>. The way this is done,
-Kevin thinks (can someone verify this?) is that Lean continually tries
-to amalgamate the first two operators in the list, until there
-is only one left. In other words, Lean will attempt to reduce
-the equations thus:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">U</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">Y</span>
-<span class="n">U</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">Y</span>
-<span class="n">U</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">Y</span>
-<span class="n">U</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">Y</span>
-</code></pre></div>
-</div>
-
-<p>Note the following subtlety: given <code>U op1 V</code> and <code>V op2 W</code> Lean
+deduce that if <code>U = V &lt; W ≤ X &lt; Y</code> then <code>U &lt; Y</code>. Note the following subtlety:
+given <code>U op1 V</code> and <code>V op2 W</code> Lean
 has to conclude <code>U op3 W</code> for some operator, which might be <code>op1</code>
 or <code>op2</code> (or even, as we shall see, a new operator). How is Lean
 doing this? The easiest case is when one of <code>op1</code> and <code>op2</code>
@@ -155,7 +144,7 @@ is <code>=</code>. Lean knows</p>
 </code></pre></div>
 </div>
 
-<p>and (Kevin believes) uses them if one of the operators is an equality operator. If however neither
+<p>and uses them if one of the operators is an equality operator. If however neither
 operator is the equality operator, Lean looks through the instances of
 <code>Trans</code> and applies these instead.</p>
 <h2 id="using-user-defined-operators" class="markdown-heading">Using user-defined operators <a class="hover-link" href="#using-user-defined-operators">#</a></h2>
@@ -245,6 +234,19 @@ operator is the equality operator, Lean looks through the instances of
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
         </ul>
       
         <h6 class="sidebar-heading mt-4">Contributing</h6>

@@ -48,111 +48,94 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="maths-in-lean-linear-algebra" class="markdown-heading">Maths in Lean: linear algebra <a class="hover-link" href="#maths-in-lean-linear-algebra">#</a></h1>
 <h3 id="semimodules-modules-and-vector-spaces" class="markdown-heading">Semimodules, Modules and Vector Spaces <a class="hover-link" href="#semimodules-modules-and-vector-spaces">#</a></h3>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulebasichtmlalgebramodulea" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/module/basic.html"><code>algebra.module</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulebasichtmlalgebramodulea">#</a></h4>
-<p>This file defines the typeclass <code>module R M</code>, which gives an <code>R</code>-module structure on the type <code>M</code>.
-An additive commutative monoid <code>M</code> is a module over the (semi)ring <code>R</code> if there is a scalar multiplication <code>•</code> (<code>has_scalar.smul</code>) that satisfies the expected distributivity axioms for <code>+</code> (in <code>M</code> and <code>R</code>) and <code>*</code> (in <code>R</code>).
-To define a <code>module R M</code> instance, you first need instances for <code>semiring R</code> and <code>add_comm_monoid M</code>.
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibalgebramoduledefshtmlmathlibalgebramoduledefsa" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Module/Defs.html"><code>Mathlib.Algebra.Module.Defs</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibalgebramoduledefshtmlmathlibalgebramoduledefsa">#</a></h4>
+<p>This file defines the typeclass <code>Module R M</code>, which gives an <code>R</code>-module structure on the type <code>M</code>.
+An additive commutative monoid <code>M</code> is a module over the (semi)ring <code>R</code> if there is a scalar multiplication <code>•</code> (<code>SMul</code>) that satisfies the expected distributivity axioms for <code>+</code> (in <code>M</code> and <code>R</code>) and <code>*</code> (in <code>R</code>).
+To define a <code>Module R M</code> instance, you first need instances for <code>Semiring R</code> and <code>AddCommMonoid M</code>.
 By splitting out these dependencies, we avoid instance loops and diamonds.</p>
 <p>In general mathematical usage, a module over a semiring is also called a semimodule, and a module over a field is also called a vector space.
-We do not have separate <code>semimodule</code> or <code>vector_space</code> typeclasses because those requirements are more easily expressed by changing the typeclass instances on <code>R</code> (and <code>M</code>).
+We do not have separate <code>Semimodule</code> or <code>VectorSpace</code> typeclasses because those requirements are more easily expressed by changing the typeclass instances on <code>R</code> (and <code>M</code>).
 In this document, we'll use &quot;module&quot; as the general term for &quot;semimodule, module or vector space&quot; and &quot;ring&quot; as the general term for &quot;(commutative) semiring, ring or field&quot;.</p>
-<p>Let <code>m</code> be an arbitrary type, e.g. <code>fin n</code>, then the typical examples are:
+<p>Let <code>m</code> be an arbitrary type, e.g. <code>Fin n</code>, then the typical examples are:
 <code>m → ℕ</code> is an <code>ℕ</code>-semimodule, <code>m → ℤ</code> is a <code>ℤ</code>-module and <code>m → ℚ</code> is a <code>ℚ</code>-vector space
 (outside of type theory, these are known as <code>ℕ^m</code>, <code>ℤ^m</code> and <code>ℚ^m</code> respectively).
-A ring is a module over itself, with <code>•</code> defined as <code>*</code> (this equality is stated by the <code>simp</code> lemma <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action/defs.html#smul_eq_mul"><code>smul_eq_mul</code></a>).
+A ring is a module over itself, with <code>•</code> defined as <code>*</code> (this equality is stated by the <code>simp</code> lemma <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Action/Defs.html#smul_eq_mul"><code>smul_eq_mul</code></a>).
 Each additive monoid has a canonical <code>ℕ</code>-module structure given by <code>n • x = x + x + ... + x</code> (<code>n</code> times), and each additive group has a canonical <code>ℤ</code>-module structure defined similarly; these also apply for (semi)rings.</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/linear_independent.html"><code>linear_algebra.linear_independent</code></a> defines linear independence for an indexed family in a module.
-To express that a set <code>s : set M</code> is linear independent, we view it as a family indexed by itself, written as <code>linear_independent R (coe : s → M)</code>.</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html"><code>linear_algebra.basis</code></a> defines bases for modules.</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dimension.html"><code>linear_algebra.dimension</code></a> defines the <code>rank</code> of a module as a cardinal.
+<p>The file <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/LinearIndependent.html"><code>Mathlib.LinearAlgebra.LinearIndependent</code></a> defines linear independence for an indexed family in a module.
+To express that a set <code>s : Set M</code> is linear independent, we view it as a family indexed by itself, written as <code>LinearIndependent R ((↑)  : s → M)</code>.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Basis.html"><code>Mathlib.LinearAlgebra.Basis</code></a> defines bases for modules.</p>
+<p>The file <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Dimension/Basic.html"><code>Mathlib.LinearAlgebra.Dimension.Basic</code></a> defines the <code>rank</code> of a module as a cardinal.
 We also use <code>rank</code> for the dimension of a vector space, since the dimension is always equal to the rank.
-(In fact, <code>rank</code> is currently only defined for vector spaces, as the cardinality of a basis. A definition of rank for all modules still needs to be done.)
 The <code>rank</code> of a linear map is defined as the dimension of its image.
 Most definitions in this file are non-computable.</p>
-<p>The file <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html"><code>linear_algebra.finite_dimensional</code></a> defines the <code>finrank</code> of a module as a natural number.
+<p>The file <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Dimension/Finrank.html"><code>Mathlib.LinearAlgebra.Dimension.Finrank</code></a> defines the <code>finrank</code> of a module as a natural number.
 By convention, the <code>finrank</code> is equal to 0 if the rank is infinite.</p>
 <h3 id="matrices" class="markdown-heading">Matrices <a class="hover-link" href="#matrices">#</a></h3>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsdatamatrixbasichtmldatamatrixbasica" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html"><code>data.matrix.basic</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsdatamatrixbasichtmldatamatrixbasica">#</a></h4>
-<p>The type <code>matrix m n α</code> contains rectangular, <code>m</code> by <code>n</code> arrays of elements of the type <code>α</code>.
-It is an alias for the type <code>m → n → α</code>, under the assumptions <code>[fintype m] [fintype n]</code> stating that <code>m</code> and <code>n</code> have finitely many elements.
-A matrix type can be indexed over arbitrary <code>fintype</code>s.
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibdatamatrixbasichtmlmathlibdatamatrixbasica" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Matrix/Basic.html"><code>Mathlib.Data.Matrix.Basic</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibdatamatrixbasichtmlmathlibdatamatrixbasica">#</a></h4>
+<p>The type <code>Matrix m n α</code> contains rectangular, <code>m</code> by <code>n</code> arrays of elements of the type <code>α</code>.
+It is an alias for the type <code>m → n → α</code>. A matrix type can be indexed over arbitrary types.
 For example, the adjacency matrix of a graph could be indexed over the nodes in that graph.
-If you want to specify the dimensions of a matrix as natural numbers <code>m n : ℕ</code>, you can use <code>fin m</code> and <code>fin n</code> as index types.</p>
-<p>A matrix is constructed by giving the map from indices to entries: <code>(λ (i : m) (j : n), (_ : α)) : matrix m n α</code>.
-For matrices indexed by natural numbers, you can also use the notation defined in <a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/notation.html"><code>data.matrix.notation</code></a>: <code>![![a, b, c], ![b, c, d]] : matrix (fin 2) (fin 3) α</code>.
-To get an entry of the matrix <code>M : matrix m n α</code> at row <code>i : m</code> and column <code>j : n</code>,
+If you want to specify the dimensions of a matrix as natural numbers <code>m n : ℕ</code>, you can use <code>Fin m</code> and <code>Fin n</code> as index types.</p>
+<p>A matrix is constructed by giving the map from indices to entries: <code>(fun (i : m) (j : n) ↦ (_ : α)) : Matrix m n α</code>.
+However, it is not advisable to construct matrices using terms of the form <code>fun i j ↦ _</code> or even <code>(fun i j ↦ _ : Matrix m n α)</code>,
+as these are not recognized by Lean as having the right type. Instead, <code>Matrix.of</code> should be used.
+For matrices indexed by natural numbers, you can also use the notation defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Matrix/Notation.html"><code>Mathlib.Data.Matrix.Notation</code></a>: <code>![![a, b, c], ![b, c, d]] : Matrix (Fin 2) (Fin 3) α</code>.
+To get an entry of the matrix <code>M : Matrix m n α</code> at row <code>i : m</code> and column <code>j : n</code>,
 you can apply <code>M</code> to the indices: <code>M i j : α</code>.
-Lemmas about the entries of a matrix typically end in <code>_val</code>: <code>add_val M N i j : (M + N) i j = M i j + N i j</code>.</p>
-<p>Matrix multiplication and transpose have notation that is made available by the command <code>open_locale matrix</code>.
-The infix operator <code>⬝</code> stands for <code>matrix.mul</code>,
-and a postfix operator <code>ᵀ</code> stands for <code>matrix.transpose</code>.</p>
-<p>When working with matrices, a <em>vector</em> means a function <code>m → α</code> for an arbitrary <code>fintype</code> <code>m</code>.
+Lemmas about the entries of a matrix typically end in <code>_apply</code>: <code>Matrix.add_apply M N i j : (M + N) i j = M i j + N i j</code>.</p>
+<p>Matrix multiplication and transpose have notation that is made available by the command <code>open scoped Matrix</code>.
+Multiplication of matrices is denoted using <code>*</code> as usual. The infix operator <code>⬝ᵥ</code> stands for <code>Matrix.dotProduct</code>,
+and a postfix operator <code>ᵀ</code> stands for <code>Matrix.transpose</code>.</p>
+<p>When working with matrices, a <em>vector</em> means a function <code>m → α</code> for an arbitrary <code>Fintype</code> <code>m</code>.
 These have a module (or vector space) structure defined in <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module/pi.html"><code>algebra.module.pi</code></a>
 consisting of pointwise addition and multiplication.
 The distinction between row and column vectors is only made by the choice of function.
-For example, <code>mul_vec M v</code> multiplies a matrix with a column vector <code>v : m → α</code> and <code>vec_mul v M</code> multiplies a row vector <code>v : m → α</code> with a matrix.
-If you use <code>mul_vec</code> and <code>vec_mul</code> a lot, you might want to consider using a linear map instead (see below).</p>
-<p>Permutation matrices are defined in <a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/pequiv.html"><code>data.matrix.pequiv</code></a>.</p>
-<p>The determinant of a matrix is defined in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/determinant.html"><code>linear_algebra.determinant</code></a>.</p>
-<p>The adjugate and for nonsingular matrices, the inverse is defined in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix/nonsingular_inverse.html"><code>linear_algebra.matrix.nonsingular_inverse</code></a>.</p>
-<p>The type <code>special_linear_group m R</code> is the group of <code>m</code> by <code>m</code> matrices with determinant <code>1</code>,
-and is defined in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/special_linear_group.html"><code>linear_algebra.special_linear_group</code></a>.</p>
+For example, <code>Matrix.mulVec M v</code> (denoted <code>M *ᵥ v</code>) multiplies a matrix with a column vector <code>v : m → α</code> and <code>Matrix.Vecmul v M</code>
+(denoted <code>v ᵥ* M</code>) multiplies a row vector <code>v : m → α</code> with a matrix.
+If you use <code>mulVec</code> and <code>Vecmul</code> a lot, you might want to consider using a linear map instead (see below).</p>
+<p>Permutation matrices are defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/Permutation.html"><code>Mathlib.LinearAlgebra.Matrix.Permutation</code></a>.</p>
+<p>The determinant of a matrix is defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.html"><code>Mathlib.LinearAlgebra.Matrix.Determinant.Basic</code></a>.</p>
+<p>The adjugate and for nonsingular matrices, the inverse are defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/Adjugate.html"><code>Mathlib.LinearAlgebra.Matrix.Adjugate</code></a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/NonsingularInverse.html"><code>Mathlib.LinearAlgebra.Matrix.NonsingularInverse</code></a>.</p>
+<p>The type <code>Matrix.SpecialLinearGroup m R</code> is the group of <code>m</code> by <code>m</code> matrices with determinant <code>1</code>,
+and is defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.html"><code>Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup</code></a>.</p>
 <h3 id="linear-maps-and-equivalences" class="markdown-heading">Linear Maps and Equivalences <a class="hover-link" href="#linear-maps-and-equivalences">#</a></h3>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulelinear_maphtmlalgebramodulelinear_mapa" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/module/linear_map.html"><code>algebra.module.linear_map</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docsalgebramodulelinear_maphtmlalgebramodulelinear_mapa">#</a></h4>
-<p>The type <code>M →[R]ₗ M₂</code>, or <code>linear_map R M M₂</code>, represents <code>R</code>-linear maps from the <code>R</code>-module <code>M</code> to the <code>R</code>-module <code>M₂</code>.
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibalgebramodulelinearmapdefshtmlmathlibalgebramodulelinearmapdefsa" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Module/LinearMap/Defs.html"><code>Mathlib.Algebra.Module.LinearMap.Defs</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathlibalgebramodulelinearmapdefshtmlmathlibalgebramodulelinearmapdefsa">#</a></h4>
+<p>The type <code>M →[R]ₗ M₂</code>, or <code>LinearMap R M M₂</code>, represents <code>R</code>-linear maps from the <code>R</code>-module <code>M</code> to the <code>R</code>-module <code>M₂</code>.
 These are defined by their action on elements of <code>M</code>.
-The type <code>M ≃[R]ₗ M₂</code>, or <code>linear_equiv R M M₂</code>, is the type of invertible <code>R</code>-linear maps from <code>M</code> to <code>M₂</code>.</p>
-<p>The equivalence between matrices and linear maps is formalised in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix/to_lin.html"><code>linear_algebra.matrix.to_lin</code></a>.
-<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix/to_lin.html#matrix.to_lin"><code>to_lin</code></a> shows that <code>matrix.mul_vec</code> is a linear equivalence between <code>matrix m n R</code> and <code>(n → R) →[R]ₗ (m → R)</code>.
-In addition, <code>linear_map.to_matrix</code> takes a basis <code>ι</code> for <code>M₁</code> and <code>κ</code> for <code>M₂</code>
-and gives the equivalence between <code>R</code>-linear maps between <code>M₁</code> and <code>M₂</code> and <code>matrix ι κ R</code>.
+The type <code>M ≃[R]ₗ M₂</code>, or <code>LinearEquiv R M M₂</code>, is the type of invertible <code>R</code>-linear maps from <code>M</code> to <code>M₂</code>.</p>
+<p>The equivalence between matrices and linear maps is formalized in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin"><code>Matrix.toLin</code></a>.
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin%27"><code>Matrix.toLin'</code></a> shows that <code>Matrix.mulVec</code> is a linear equivalence between <code>Matrix m n R</code> and <code>(n → R) →[R]ₗ (m → R)</code>.
+In addition, <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/ToLin.html#LinearMap.toMatrix"><code>LinearMap.toMatrix</code></a> takes a basis <code>ι</code> for <code>M₁</code> and <code>κ</code> for <code>M₂</code>
+and gives the equivalence between <code>R</code>-linear maps between <code>M₁</code> and <code>M₂</code> and <code>Matrix ι κ R</code>.
 If you have an explicit basis for your maps, this equivalence allows you to do calculations such as getting the determinant.</p>
 <p>The difference between matrices and linear maps is that matrices are in their essence an array of entries
-(which incidentally allows actions such as <code>matrix.mul_vec</code>),
+(which incidentally allows actions such as <code>Matrix.mulVec</code>),
 while linear maps are in their essence an action on vectors
 (which incidentally can be represented by a matrix if we have a finite basis).
 If you want to do computations, a matrix is a better choice.
 If you want to do proofs without computations, a linear map is a better choice.</p>
-<p>The type <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html#linear_map.general_linear_group"><code>general_linear_group R M</code></a> is the group of invertible <code>R</code>-linear maps from <code>M</code> to itself.
-<code>general_linear_equiv R M</code> is the equivalence between <code>general_linear_group</code> and <code>M ≃[R]ₗ M</code>.
-<code>special_linear_group.to_GL</code> is the embedding from the special linear group (of matrices) to the general linear group (of linear maps).</p>
-<p>The dual space, consisting of linear maps <code>M →[R]ₗ R</code>, is defined in <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/dual.html"><code>linear_algebra.dual</code></a>.</p>
+<p>The type <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.html#Matrix.GeneralLinearGroup"><code>Matrix.GeneralLinearGroup R M</code></a> is the group of invertible <code>R</code>-linear maps from <code>M</code> to itself.
+<code>LinearMap.GeneralLinearGroup.generalLinearEquiv R M</code> is the equivalence between <code>GeneralLinearGroup </code> and <code>M ≃[R]ₗ M</code>.
+<code>Matrix.SpecialLinearGroup.toGL</code> is the embedding from the special linear group (of matrices) to the general linear group (of linear maps).</p>
+<p>The dual space, consisting of linear maps <code>M →[R]ₗ R</code>, is defined in <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Dual.html"><code>Mathlib.LinearAlgebra.Dual</code></a>.</p>
 <h3 id="bilinear-sesquilinear-and-quadratic-forms" class="markdown-heading">Bilinear, Sesquilinear and Quadratic Forms <a class="hover-link" href="#bilinear-sesquilinear-and-quadratic-forms">#</a></h3>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrabilinear_formhtmllinear_algebrabilinear_forma" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html"><code>linear_algebra.bilinear_form</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrabilinear_formhtmllinear_algebrabilinear_forma">#</a></h4>
-<p>For an <code>R</code>-module <code>M</code>, the type <code>bilin_form R M</code> is the type of maps <code>M → M → R</code> that are linear in both arguments.
-The equivalence between <code>bilin_form R M</code> and maps <code>M →ₗ[R] M →ₗ[R] R</code> that are linear in both arguments is called <code>bilin_linear_map_equiv</code>.
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebrabilinearmaphtmlmathliblinearalgebrabilinearmapa" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/BilinearMap.html"><code>Mathlib.LinearAlgebra.BilinearMap</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebrabilinearmaphtmlmathliblinearalgebrabilinearmapa">#</a></h4>
+<p>For an <code>R</code>-module <code>M</code>, the type <code>LinearMap.BilinForm R M</code> is the type of maps <code>M → M → R</code> that are linear in both arguments.
+The equivalence between <code>LinearMap.BilinForm R M</code> and maps <code>M →ₗ[R] M →ₗ[R] R</code> that are linear in both arguments is called <code>bilin_linear_map_equiv</code>.
 A matrix <code>M</code> corresponds to a bilinear form that maps vectors <code>v</code> and <code>w</code> to <code>row v ⬝ M ⬝ col w</code>.
-The equivalence between <code>bilin_form R (n → R)</code> and <code>matrix n n R</code> is called <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/bilinear_form.html#bilin_form_equiv_matrix"><code>bilin_form_equiv_matrix</code></a>.</p>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrasesquilinear_formhtmllinear_algebrasesquilinear_forma" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html"><code>linear_algebra.sesquilinear_form</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebrasesquilinear_formhtmllinear_algebrasesquilinear_forma">#</a></h4>
+The equivalence between <code>BilinForm R (n → R)</code> and <code>Matrix n n R</code> is called <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/Matrix/BilinearForm.html#BilinForm.toMatrix"><code>BilinForm.toMatrix</code></a>.</p>
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebrasesquilinearformhtmlmathliblinearalgebrasesquilinearforma" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/SesquilinearForm.html"><code>Mathlib.LinearAlgebra.SesquilinearForm</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebrasesquilinearformhtmlmathliblinearalgebrasesquilinearforma">#</a></h4>
 <p>For an <code>R</code>-module <code>M</code> and <code>I : R →+* R</code>, the type <code>M →ₗ M →ₛₗ[I] R</code> is the type of maps <code>M → M → R</code> that are linear in the first argument
-and that in the second argument are <code>I</code>-<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module/linear_map.html#linear_map">semilinear</a>.
+and that in the second argument are <code>I</code>-<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">semilinear</a>.
 Semilinearity of <code>f</code> with respect to a ring homomorphism <code>I</code> means the following equation hold: <code>f x (a • y) = I a * f x y</code>.</p>
-<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebraquadratic_formbasichtmllinear_algebraquadratic_forma" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form/basic.html"><code>linear_algebra.quadratic_form</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib_docslinear_algebraquadratic_formbasichtmllinear_algebraquadratic_forma">#</a></h4>
-<p>For an <code>R</code>-module <code>M</code>, the type <code>quadratic_form R M</code> is the type of maps <code>f : M → R</code> such that <code>f (a • x) = a * a * f x</code> and <code>λ x y, f (x + y) - f x - f y</code> is a bilinear map.</p>
+<h4 id="a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebraquadraticformbasichtmlmathliblinearalgebraquadraticformbasica" class="markdown-heading"><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/QuadraticForm/Basic.html"><code>Mathlib.LinearAlgebra.QuadraticForm.Basic</code></a> <a class="hover-link" href="#a-hrefhttpsleanprover-communitygithubiomathlib4_docsmathliblinearalgebraquadraticformbasichtmlmathliblinearalgebraquadraticformbasica">#</a></h4>
+<p>For an <code>R</code>-module <code>M</code>, the type <code>QuadraticForm R M</code> is the type of maps <code>f : M → R</code> such that <code>f (a • x) = a * a * f x</code> and <code>fun x y ↦ f (x + y) - f x - f y</code> is a bilinear map.</p>
 <p>Up to a factor <code>2</code>, the theory of quadratic and bilinear forms is equivalent.
-<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form/basic.html#bilin_form.to_quadratic_form"><code>bilin_form.to_quadratic_form f</code></a> is the quadratic form given by <code>λ x, f x x</code>.
-<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html#quadratic_form.associated"><code>quadratic_form.associated f</code></a> is the bilinear form given by <code>λ x y, ⅟2 * (f (x + y) - f x - f y)</code> (if there is a multiplicative inverse of <code>2</code>).
-<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html#quadratic_form.to_matrix"><code>quadratic_form.to_matrix</code></a> and <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/quadratic_form.html#matrix.to_quadratic_form"><code>matrix.to_quadratic_form</code></a> are the maps between quadratic forms and matrices.</p>
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/QuadraticForm/Basic.html#LinearMap.BilinMap.toQuadraticMap"><code>LinearMap.BilinMap.toQuadraticMap f</code></a> is the quadratic form given by <code>fun x ↦ f x x</code>.
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/QuadraticForm/Basic.html#QuadraticMap.associatedHom"><code>QuadraticMap.associatedHom f</code></a> is the bilinear form given by <code>fun x y ↦ ⅟2 * (f (x + y) - f x - f y)</code> (if there is a multiplicative inverse of <code>2</code>).
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/QuadraticForm/Basic.html#QuadraticMap.toMatrix%27"><code>QuadraticMap.toMatrix'</code></a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/QuadraticForm/Basic.html#Matrix.toQuadraticMap%27"><code>Matrix.toQuadraticMap'</code></a> are the maps between quadratic forms and matrices.</p>
 
   </main>
 
@@ -219,6 +202,19 @@ Semilinearity of <code>f</code> with respect to a ring homomorphism <code>I</cod
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
         </ul>
       
         <h6 class="sidebar-heading mt-4">Contributing</h6>

@@ -48,85 +48,65 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="maths-in-lean-sets-and-set-like-objects" class="markdown-heading">Maths in Lean: Sets and set-like objects <a class="hover-link" href="#maths-in-lean-sets-and-set-like-objects">#</a></h1>
 <h3 id="lists" class="markdown-heading">Lists <a class="hover-link" href="#lists">#</a></h3>
-<h4 id="datalistbasic" class="markdown-heading"><code>data.list.basic</code> <a class="hover-link" href="#datalistbasic">#</a></h4>
-<p><code>list α</code> is the type of lists of elements of type α. Lists are finite and ordered, and can contain duplicates. Lists can only contain elements of the same type. Lists are constructed using the cons function, which appends an element of α to the top of a list. Lists are discussed in more detail in TPIL, chapter 7.5</p>
+<h4 id="mathlibdatalistbasic" class="markdown-heading"><code>Mathlib.Data.List.Basic</code> <a class="hover-link" href="#mathlibdatalistbasic">#</a></h4>
+<p><code>List α</code> is the type of lists of elements of type <code>α</code>. Lists are finite and ordered, and can contain duplicates. Lists can only contain elements of the same type. Lists are constructed using the cons function, which appends an element of <code>α</code> to the top of a list. Lists are discussed in more detail in TPIL, chapter 7.5</p>
 <p><code>[1, 1, 2, 4] ≠ [1, 2, 1, 4]</code></p>
 <p><code>[1, 2, 1, 4] ≠ [1, 2, 4]</code></p>
 <h3 id="multisets" class="markdown-heading">Multisets <a class="hover-link" href="#multisets">#</a></h3>
-<h4 id="datamultiset" class="markdown-heading"><code>data.multiset</code> <a class="hover-link" href="#datamultiset">#</a></h4>
-<p><code>multiset α</code> is the type of multisets of elements of type α. Multisets are finite and can contain duplicates, but are not ordered. They are defined as the quotient of lists over the <code>perm</code> equivalence relation. Multisets can only contain elements of the same type.</p>
+<h4 id="mathlibdatamultisetbasic" class="markdown-heading"><code>Mathlib.Data.Multiset.Basic</code> <a class="hover-link" href="#mathlibdatamultisetbasic">#</a></h4>
+<p><code>Multiset α</code> is the type of multisets of elements of type <code>α</code>. Multisets are finite and can contain duplicates, but are not ordered. They are defined as the quotient of lists over the <code>Perm</code> equivalence relation. Multisets can only contain elements of the same type.</p>
 <p><code>{1, 1, 2, 4} = {1, 2, 1, 4}</code></p>
 <p><code>{1, 1, 2, 4} ≠ {1, 2, 4}</code></p>
 <h3 id="finsets" class="markdown-heading">Finsets <a class="hover-link" href="#finsets">#</a></h3>
-<h4 id="datafinset" class="markdown-heading"><code>data.finset</code> <a class="hover-link" href="#datafinset">#</a></h4>
-<p><code>finset α</code> is the type of unordered lists of distinct elements of type α. A finset is contructed from a multiset and a proof that the multiset contains no duplicates. Finsets are finite. Finsets can only contain elements of the same type.</p>
+<h4 id="mathlibdatafinsetbasic" class="markdown-heading"><code>Mathlib.Data.Finset.Basic</code> <a class="hover-link" href="#mathlibdatafinsetbasic">#</a></h4>
+<p><code>Finset α</code> is the type of unordered lists of distinct elements of type α. A finset is constructed from a multiset and a proof that the multiset contains no duplicates. Finsets are finite. Finsets can only contain elements of the same type.</p>
 <p><code>{1, 1, 2, 4} = {1, 2, 1, 4}</code></p>
 <p><code>{1, 1, 2, 4} = {1, 2, 4}</code></p>
 <h3 id="sets-and-subtypes" class="markdown-heading">Sets and subtypes <a class="hover-link" href="#sets-and-subtypes">#</a></h3>
-<h4 id="datasetbasic" class="markdown-heading"><code>data.set.basic</code> <a class="hover-link" href="#datasetbasic">#</a></h4>
-<p><code>set α</code>. A set is defined as a predicate, i.e. a function <code>α → Prop</code>. The notation used is <code>{n : ℕ | 4 ≤ n}</code> for the set of naturals greater than or equal to 4. Sets can be infinite, and can only contain elements of the same type.</p>
+<h4 id="mathlibdatasetbasic" class="markdown-heading"><code>Mathlib.Data.Set.Basic</code> <a class="hover-link" href="#mathlibdatasetbasic">#</a></h4>
+<p><code>Set α</code>. A set is defined as a predicate, i.e. a function <code>α → Prop</code>. The notation used is <code>{n : ℕ | 4 ≤ n}</code> for the set of naturals greater than or equal to 4. Sets can be infinite, and can only contain elements of the same type.</p>
 <p>A subtype is similar to a set in that it is defined by a predicate. The notation used is <code>{n : ℕ // 4 ≤ n}</code> for the type of naturals greater than or equal to 4. However, a subtype is a type rather than a set, and the elements the aforementioned subtype do not have type <code>ℕ</code>, they have type <code>{n : ℕ // 4 ≤ n}</code>. This means that addition is not defined on this type, and equality between naturals and this type is also undefined. However it is possible to coerce an element of this subtype back into a natural, in the same way that a natural can be coerced into an integer, and then addition and equality behave as normal (see TPIL, chapter 6.7 for more on coercions). To construct an element of a subtype of α, you need an element of α and a proof that it satisfies the predicate, <code>4</code> and <code>le_refl 4</code> in the example below.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="bp">//</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">}</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">⟨</span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="n">le_refl</span><span class="w"> </span><span class="mi">4</span><span class="o">⟩</span>
-<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">↑</span><span class="n">x</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
 </code></pre></div>
 </div>
 
 <p>Any set can be used where a type is expected, in which case the set will be coerced into the corresponding subtype.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">}</span>
-<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">S</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">λ</span><span class="w"> </span><span class="o">⟨</span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">hn</span><span class="o">⟩,</span><span class="w"> </span><span class="n">hn</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">}</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">S</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="o">⟨</span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">hn</span><span class="o">⟩</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">hn</span>
 </code></pre></div>
 </div>
 
 <p>It is useful to use a subtype rather than a set when you need to define functions on subtypes, or when using the cardinal of a subtype.</p>
 <h3 id="finite-types" class="markdown-heading">Finite types <a class="hover-link" href="#finite-types">#</a></h3>
-<h4 id="datafintypebasic" class="markdown-heading"><code>data.fintype.basic</code> <a class="hover-link" href="#datafintypebasic">#</a></h4>
-<p><code>fintype α</code> means that a type α is finite. It is constructed from a finset containing all elements of a type.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="n">fintype</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
-<span class="o">(</span><span class="n">elems</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">finset</span><span class="w"> </span><span class="n">α</span><span class="o">)</span>
-<span class="o">(</span><span class="n">complete</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">elems</span><span class="o">)</span>
+<h4 id="mathlibdatafintypebasic" class="markdown-heading"><code>Mathlib.Data.Fintype.Basic</code> <a class="hover-link" href="#mathlibdatafintypebasic">#</a></h4>
+<p><code>Fintype α</code> means that a type α is finite. It is constructed from a finset containing all elements of a type.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="n">Fintype</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="sd">/-- The `Finset` containing all elements of a `Fintype` -/</span>
+<span class="w">  </span><span class="n">elems</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Finset</span><span class="w"> </span><span class="n">α</span>
+<span class="w">  </span><span class="sd">/-- A proof that `elems` contains every element of the type -/</span>
+<span class="w">  </span><span class="n">complete</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">elems</span>
 </code></pre></div>
 </div>
 
-<p><code>fintype α</code> is not a proposition, because it contains data, however it is a subsingleton, meaning that any two elements of type <code>fintype α</code> are equal.</p>
-<p><code>finset.univ</code> is the finset containing all elements of a type, given a <code>fintype α</code> instance.</p>
+<p><code>Fintype α</code> is not a proposition, because it contains data, however it is a subsingleton, meaning that any two elements of type <code>Fintype α</code> are equal.</p>
+<p><code>Finset.univ</code> is the finset containing all elements of a type, given a <code>Fintype α</code> instance.</p>
 <h3 id="finite-sets" class="markdown-heading">Finite sets <a class="hover-link" href="#finite-sets">#</a></h3>
-<h4 id="datasetfinite" class="markdown-heading"><code>data.set.finite</code> <a class="hover-link" href="#datasetfinite">#</a></h4>
-<p>The definition of a finite set, distinct from a finset is</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">finite</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nonempty</span><span class="w"> </span><span class="o">(</span><span class="n">fintype</span><span class="w"> </span><span class="n">s</span><span class="o">)</span>
-</code></pre></div>
-</div>
-
-<p>This means when the set is coerced into a subtype, the type <code>fintype s</code> is nonempty.
-Using <code>classical.choice</code>, you can produce an object of type <code>fintype s</code> from a proof of <code>finite s</code>. There is a function <code>set.finite.to_finset</code> which produces a finset from a finite set.</p>
+<h4 id="mathlibdatasetfinite" class="markdown-heading"><code>Mathlib.Data.Set.Finite</code> <a class="hover-link" href="#mathlibdatasetfinite">#</a></h4>
+<p>The definition of a finite set, distinct from a finset is that corresponding type is in bijection with <code>Fin n</code> for some <code>n : ℕ</code>.
+This means when the set is coerced into a subtype, the type <code>Fintype s</code> is nonempty.
+Using <code>Classical.choose</code>, you can produce an object of type <code>Fintype s</code> from a proof of <code>Finite s</code>. There is a function <code>Set.Finite.toFinset</code> which produces a finset from a finite set.</p>
 <h3 id="cardinals" class="markdown-heading">Cardinals <a class="hover-link" href="#cardinals">#</a></h3>
-<p>There are three functions <code>finset.card</code>, <code>fintype.card</code> and <code>multiset.card</code>, which refer to the sizes of finsets, multisets and finite types. For finite cardinals of sets, <code>fintype.card</code> can be used, given a proof that the set is finite.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="n">fintype.card</span><span class="w"> </span><span class="o">(</span><span class="n">fin</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">fintype.card_fin</span>
-<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="n">finset.card</span><span class="w"> </span><span class="o">(</span><span class="n">finset.range</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">finset.card_range</span>
+<p>There are three functions <code>Finset.card</code>, <code>Fintype.card</code> and <code>Multiset.card</code>, which refer to the sizes of finsets, multisets and finite types. For finite cardinals of sets, <code>Fintype.card</code> can be used, given a proof that the set is finite.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="n">Fintype.card</span><span class="w"> </span><span class="o">(</span><span class="n">Fin</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Fintype.card_fin</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="n">Finset.card</span><span class="w"> </span><span class="o">(</span><span class="n">Finset.range</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Finset.card_range</span>
 </code></pre></div>
 </div>
 
-<p>Here, <code>fin n</code> is the type of naturals less than n, and <code>finset.range n</code> is the finset of naturals less than n.</p>
-<p><code>set_theory.cardinal</code> contains theory on infinite cardinals</p>
+<p>Here, <code>Fin n</code> is the type of naturals less than n, and <code>Finset.range n</code> is the finset of naturals less than <code>n</code>.</p>
+<p><code>Mathlib.SetTheory.Cardinal.Basic</code> contains theory on infinite cardinals.</p>
 
   </main>
 
@@ -193,6 +173,19 @@ Using <code>classical.choice</code>, you can produce an object of type <code>fin
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
         
           <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
         </ul>
       
         <h6 class="sidebar-heading mt-4">Contributing</h6>
