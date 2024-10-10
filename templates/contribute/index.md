@@ -14,10 +14,12 @@ to make the process of contributing as smooth as possible.
 
 The first question you will need to consider is whether the material you want to contribute is a good fit for `mathlib`. Whilst there is no formal description of exactly what mathlib's remit is, here are some questions which you can ask about your proposed contribution.
 
-* Is the material typically covered in an undergraduate or graduate level course in a research mathematics department? If not, then the material may not in scope for `mathlib`.
+* Is the material typically taught or studied in a mathematics department? Would it naturally be part of an undergradute or graduate course, or research level study group? If not, then the material may not be in scope for `mathlib`.
 * Is the topic of the material contained within the [mathematical interests of the `mathlib` maintainers](https://github.com/leanprover-community/mathlib4?tab=readme-ov-file#maintainers)? If not, then the maintainers might find your code hard to maintain as lean and `mathlib` evolve over time, which again makes it not a good fit for `mathlib`.
 
 In particular the remit of mathlib should *not* be thought of as "all of mathematics and related areas". As the number of open PRs increases, the maintainers will sometimes need to make some hard decisions.
+
+An issue related to the fact that the expertise of the maintainers may not cover all of mathematics: you may want to think about *who* is going to review your potential PR. Contributors are encouraged to seek out reviewers for their PRs. A PR reviewer does *not* have to be a maintainer! Contributions from reviewers, especially new reviewers, are essentially always welcome.
 
 If it is not completely clear to you that the code in your project is a good fit for mathlib, you might want to consider creating a standalone repository, and adding `mathlib` as a dependency. There are many Lean repositories on github, indexed by [reservoir](https://reservoir.lean-lang.org). This solution is a particularly good fit for projects in areas which do not align with the expertise of the mathlib maintainers.
 
