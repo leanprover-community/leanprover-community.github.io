@@ -383,7 +383,6 @@ import Mathlib.Topology.Constructions
 ## Naming of structural lemmas
 
 We are trying to standardize certain naming patterns for structural lemmas.
-At present these are not uniform across mathlib.
 
 ### Extensionality
 
@@ -437,3 +436,11 @@ The following table summarizes these naming conventions.
 | constructions first     | `T.induction`    | `T.rec`              |
 
 Variation on these names are acceptable when necessary (e.g. for disambiguation)
+
+### Predicates as suffixes
+
+Most predicates should be added as prefixes. Eg `IsClosed (Icc a b)` should be called `isClosed_Icc`, not `Icc_isClosed`.
+
+Some widely used predicates don't follow this rule. Those are the predicates that are analogous to an atom already suffixed by the naming convention. Here is a non-exhaustive list:
+* We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
+* We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_mono` for `Monotone f`, `_anti` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...

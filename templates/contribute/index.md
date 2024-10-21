@@ -107,7 +107,7 @@ below the `---`.
 
 ## Lifecycle of a PR
 
-Many reviewers use the [review queue](https://bit.ly/3zK9VEz) to identify PRs that are ready for review.
+Many reviewers use the [review queue](https://bit.ly/4eIDoOJ) to identify PRs that are ready for review.
 The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
 Everyone is also invited to regularly look at the queue (it is linkified as `#queue` on Zulip), and write reviews of PRs within their expertise.
 
