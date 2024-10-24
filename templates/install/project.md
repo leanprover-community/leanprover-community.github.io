@@ -123,6 +123,16 @@ More information about Lake can be found [here](https://github.com/leanprover/le
 
 See [How to contribute to mathlib](https://leanprover-community.github.io/contribute/index.html).
 
+## Further Tips and Tricks
+
+If you are interested in a custom setup,
+you can read [Tips and Tricks](tricks.html).
+
+This contains some notes about
+* Setting up a shared, *global/centralised* mathlib installation.
+* Automatically follow stable versions of dependencies.
+* Using build options to switch to local package versions.
+
 ## Troubleshooting
 
 * Some Windows users have reported an error like this when running `lake exe cache get`:
