@@ -416,6 +416,10 @@ and there is no intention to change this.
 When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named `.inj_iff`.
 
+An injectivity lemma that uses "left" or "right" should refer to the
+argument that "changes". For example, a lemma with the statement
+`a - b = a - c ↔ b = c` could be called `sub_right_inj`.
+
 ### Induction and recursion principles
 
 Induction/recursion principles are ways to construct data or proofs for all elements of some type `T`,
