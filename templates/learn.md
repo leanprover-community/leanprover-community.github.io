@@ -24,10 +24,10 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
-* If you wish to learn directly from source, the 
-  [Lean API documentation](https://leanprover-community.github.io/mathlib4_docs/) 
-  not only includes `Mathlib`, but also covers `Std`, `Batteries`, `Lake`, and the core compiler. 
-  As much of Lean is defined in terms of syntax extensions, this is the closest thing to a 
+* If you wish to learn directly from source, the
+  [Lean API documentation](https://leanprover-community.github.io/mathlib4_docs/)
+  not only includes `Mathlib`, but also covers `Std`, `Batteries`, `Lake`, and the core compiler.
+  As much of Lean is defined in terms of syntax extensions, this is the closest thing to a
   comprehensive reference manual that exists.
 
 ## Books
@@ -48,19 +48,19 @@ doing Lean exercises on the fly:
   experience.
 
 * If you prefer something more about the foundations of type theory, the standard reference is
-  [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean4/).
+  [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/).
 
 * A computer-science/programming-oriented book is
   [The Hitchhiker's Guide to Logical Verification](https://raw.githubusercontent.com/blanchette/logical_verification_2023/main/hitchhikers_guide.pdf).
   It also has useful information about the type theory of Lean, and an associated VSCode project with exercises.
 
 If you want something more focused on Lean itself than on using Lean, then you
-can read the [reference manual](https://leanprover.github.io/lean4/doc/).
+can read the [reference manual](https://lean-lang.org/lean4/doc/).
 
 ## (Meta)-programming and tactic writing
 
 * If you are interested in Lean as a programming language then you should read
-  [Functional programming in Lean](https://leanprover.github.io/functional_programming_in_lean/).
+  [Functional programming in Lean](https://lean-lang.org/functional_programming_in_lean/).
 
 * If you specifically want to do meta-programming and write tactics then you can read
   [Metaprogramming in Lean 4](https://github.com/arthurpaulino/lean4-metaprogramming-book)
@@ -87,7 +87,7 @@ those of Lean. The most relevant differences to keep in mind are:
   to higher universes.
 * Lean natively supports quotient types and their associated reduction
   rule (see [this
-  section](https://leanprover.github.io/theorem_proving_in_lean4/axioms_and_computation.html#quotients)
+  section](https://lean-lang.org/theorem_proving_in_lean4/axioms_and_computation.html#quotients)
   of *Theorem proving in Lean*).
 
 If you can read the above Coq documentation then you are ready for

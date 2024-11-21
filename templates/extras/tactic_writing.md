@@ -29,7 +29,7 @@ Other useful resources while learning to write tactics include:
   Lean for the Curious Mathematician 2020
 * Chapter 7 of the [Hitchhiker's Guide to Logical Verification](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf)
 * the original paper about metaprogramming Lean
-  [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf)
+  [A Metaprogramming Framework for Formal Verification](https://lean-lang.org/papers/tactic.pdf)
 
 ## Monadology
 
@@ -476,8 +476,8 @@ This is the end of this tutorial (although there are two cheat sheets below).
 If you want to learn more, you can read the definitions of tactics in either
 the core library or mathlib, see what you can understand, and ask specific
 questions on Zulip. For more theory, especially a proper explanation of monads, you can read
-[Programming in Lean](https://leanprover.github.io/programming_in_lean/), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
-the paper [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf).
+[Programming in Lean](https://lean-lang.org/programming_in_lean/), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
+the paper [A Metaprogramming Framework for Formal Verification](https://lean-lang.org/papers/tactic.pdf).
 
 ## Mario's backtick cheat sheet
 
