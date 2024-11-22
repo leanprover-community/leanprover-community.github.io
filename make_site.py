@@ -174,6 +174,18 @@ class HundredTheorem:
     note: Optional[str] = None
 
 @dataclass
+class ThousandPlusTheorem:
+    # Wikidata identifier, e.g. "Q1008566"
+    number: str
+    title: str
+    decl: Optional[str] = None
+    decls: Optional[List[str]] = None
+    doc_decls: Optional[List[DocDecl]] = None
+    author: Optional[str] = None
+    links: Optional[Mapping[str, str]] = None
+    note: Optional[str] = None
+
+@dataclass
 class Event:
     title: str
     location: str
@@ -269,7 +281,7 @@ def download_N_theorems(fname: str, Type, name: str) -> dict:
         n_theorems = pkl_load(name, dict())
     return n_theorems
 hundred_theorems = download_N_theorems('100.yml', HundredTheorem, 'hundred_theorems')
-
+thousand_theorems = download_N_theorems('1000.yml', ThousandPlusTheorem, 'thousand_theorems')
 
 def replace_link(name, id):
     if name == '':
