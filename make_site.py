@@ -711,6 +711,8 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('papers.html', {'paper_lists': paper_lists}),
                 ('100.html', {'hundred_theorems': hundred_theorems}),
                 ('100-missing.html', {'hundred_theorems': hundred_theorems}),
+                ('1000.html', {'thousand_theorems': thousand_theorems}),
+                ('1000-missing.html', {'thousand_theorems': thousand_theorems}),
                 ('meet.html', {'users': users,
                                'community': read_md('community.md')
                                }),
