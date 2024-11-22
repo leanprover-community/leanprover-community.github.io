@@ -236,38 +236,39 @@ declarations = {
 num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
-if DOWNLOAD:
-    download(
-        'https://leanprover-community.github.io/mathlib4_docs/100.yaml',
-        DATA/'100.yaml')
-    with (DATA/'100.yaml').open('r', encoding='utf-8') as h_file:
-        hundred_theorems = [HundredTheorem(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
-        for h in hundred_theorems:
-            if h.decl:
-                assert not h.decls
-                h.decls = [h.decl]
-            if h.decls:
-                doc_decls = []
-                for decl in h.decls:
-                    try:
-                        decl_info = declarations[decl]
-                    except KeyError:
-                        print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
-                        continue
-                    # note: the `.bmp` data files use doc-relative links
-                    header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
-                    doc_decls.append(DocDecl(
-                        name=decl,
-                        decl_header_html = header,
+def download_N_theorems(fname: str, Type, name: str) -> dict:
+    if DOWNLOAD:
+        download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
+        with (DATA/fname).open('r', encoding='utf-8') as h_file:
+            n_theorems = [Type(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+            for h in n_theorems:
+                if h.decl:
+                    assert not h.decls
+                    h.decls = [h.decl]
+                if h.decls:
+                    doc_decls = []
+                    for decl in h.decls:
+                        try:
+                            decl_info = declarations[decl]
+                        except KeyError:
+                            print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                            continue
                         # note: the `.bmp` data files use doc-relative links
-                        docs_link='/mathlib4_docs/' + decl_info.info.docLink,
-                        src_link=decl_info.info.sourceLink))
-                h.doc_decls = doc_decls
-            else:
-                h.doc_decls = []
-    pkl_dump('hundred_theorems', hundred_theorems)
-else:
-     hundred_theorems = pkl_load('hundred_theorems', dict())
+                        header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
+                        doc_decls.append(DocDecl(
+                            name=decl,
+                            decl_header_html = header,
+                            # note: the `.bmp` data files use doc-relative links
+                            docs_link='/mathlib4_docs/' + decl_info.info.docLink,
+                            src_link=decl_info.info.sourceLink))
+                    h.doc_decls = doc_decls
+                else:
+                    h.doc_decls = []
+        pkl_dump(name, n_theorems)
+    else:
+        n_theorems = pkl_load(name, dict())
+    return n_theorems
+hundred_theorems = download_N_theorems('100.yml', HundredTheorem, 'hundred_theorems')
 
 
 def replace_link(name, id):
