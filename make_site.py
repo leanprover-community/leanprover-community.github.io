@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from enum import Enum, auto
 from pathlib import Path
 import sys
 import subprocess
@@ -176,7 +177,7 @@ class HundredTheorem:
 @dataclass
 class ThousandPlusTheorem:
     # Wikidata identifier, e.g. "Q1008566"
-    number: str
+    wikidata: str
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
@@ -248,7 +249,15 @@ declarations = {
 num_thms = len([d for d in declarations if declarations[d].info.kind == 'theorem'])
 num_defns = len(declarations) - num_thms
 
-def download_N_theorems(fname: str, Type, name: str) -> dict:
+class NTheorems(Enum):
+    Hundred = auto()
+    ThousandPlus = auto()
+
+def download_N_theorems(kind: NTheorems) -> dict:
+    if kind == NTheorems.Hundred:
+        (fname, Type, name) = ('100.yml', HundredTheorem, 'hundred_theorems')
+    else:
+        (fname, Type, name) = ('1000.yml', ThousandPlusTheorem, 'thousand_theorems')
     if DOWNLOAD:
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
@@ -263,7 +272,10 @@ def download_N_theorems(fname: str, Type, name: str) -> dict:
                         try:
                             decl_info = declarations[decl]
                         except KeyError:
-                            print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                            if kind == NTheorems.Hundred:
+                                print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
+                            else:
+                                print(f'Error: 1000 theorems entry {h.wikidata} refers to a nonexistent declaration {decl}')
                             continue
                         # note: the `.bmp` data files use doc-relative links
                         header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
@@ -280,8 +292,8 @@ def download_N_theorems(fname: str, Type, name: str) -> dict:
     else:
         n_theorems = pkl_load(name, dict())
     return n_theorems
-hundred_theorems = download_N_theorems('100.yml', HundredTheorem, 'hundred_theorems')
-thousand_theorems = download_N_theorems('1000.yml', ThousandPlusTheorem, 'thousand_theorems')
+hundred_theorems = download_N_theorems(NTheorems.Hundred)
+thousand_theorems = download_N_theorems(NTheorems.ThousandPlus)
 
 def replace_link(name, id):
     if name == '':
