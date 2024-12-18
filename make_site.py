@@ -176,7 +176,9 @@ class HundredTheorem:
 
 @dataclass
 class ThousandPlusTheorem:
-    # Wikidata identifier: the letter Q followed by a string as digits, e.g. "Q1008566"
+    # Wikidata identifier (the letter Q followed by a string as digits),
+    # optionally followed by a letter (such as "A", "B" or "X" for disambiguation).
+    # "Q1008566" and "Q4724004A" are valid identifiers, for example.
     wikidata: str
     title: str
     decl: Optional[str] = None
