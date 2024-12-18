@@ -255,7 +255,7 @@ class NTheorems(Enum):
 
 def download_N_theorems(kind: NTheorems) -> dict:
     if kind == NTheorems.Hundred:
-        (fname, Type, name) = ('100.yml', HundredTheorem, 'hundred_theorems')
+        (fname, Type, name) = ('100.yaml', HundredTheorem, 'hundred_theorems')
     else:
         (fname, Type, name) = ('1000.yml', ThousandPlusTheorem, 'thousand_theorems')
     if DOWNLOAD:
