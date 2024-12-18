@@ -187,6 +187,10 @@ class ThousandPlusTheorem:
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+    # TODO: workaround for build failure caused by tags in Q208416
+    url: Optional[str] = None
+    identifiers: Optional[str] = None
+    date: Optional[str] = None
 
 @dataclass
 class Event:
