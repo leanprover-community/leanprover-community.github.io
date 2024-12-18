@@ -176,7 +176,7 @@ class HundredTheorem:
 
 @dataclass
 class ThousandPlusTheorem:
-    # Wikidata identifier, e.g. "Q1008566"
+    # Wikidata identifier: the letter Q followed by a string as digits, e.g. "Q1008566"
     wikidata: str
     title: str
     decl: Optional[str] = None
@@ -257,7 +257,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
     if kind == NTheorems.Hundred:
         (fname, Type, name) = ('100.yaml', HundredTheorem, 'hundred_theorems')
     else:
-        (fname, Type, name) = ('1000.yml', ThousandPlusTheorem, 'thousand_theorems')
+        (fname, Type, name) = ('1000.yaml', ThousandPlusTheorem, 'thousand_theorems')
     if DOWNLOAD:
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
