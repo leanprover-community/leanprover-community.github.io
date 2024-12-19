@@ -176,6 +176,8 @@ class HundredTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
     doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
@@ -190,6 +192,8 @@ class ThousandPlusTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
     doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     date: Optional[str] = None
