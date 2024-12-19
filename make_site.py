@@ -218,6 +218,11 @@ class Course:
 
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
+    # header-data.json contains information for every single declaration in mathlib
+    # which has a generated documentation entry (e.g., skipping private declarations by default).
+    # The resulting file is huge (several hundred MB), hence we use a small HACK:
+    # doc-gen4 uploads this file as a .bmp file, so GitHub's servers will serve it in
+    # compressed form. When downloading it locally, we save it (decompressed) with the correct extension.
     download(
         'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
         DATA/'header-data.json'
