@@ -191,8 +191,6 @@ class ThousandPlusTheorem:
     date: Optional[str] = None
     url: Optional[str] = None
     note: Optional[str] = None
-    url: Optional[str] = None
-
 
 @dataclass
 class Event:
