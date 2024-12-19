@@ -156,11 +156,18 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
+# Data for a documentation entry for a single declaration.
 @dataclass
 class DocDecl:
+    # Fully qualified name of the declaration
     name: str
+    # Full HTML code for this declaration's entry on its generated documentation page.
     decl_header_html: str
+    # URL of this declaration's entry in the generated documentation.
+    # This is site-relative, and starts with "/mathlib4_docs/".
     docs_link: str
+    # URL for this declaration's generated source entry: currently,
+    # is simply a link to the right revision of the mathlib source code.
     src_link: str
 
 @dataclass
@@ -169,6 +176,8 @@ class HundredTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
     doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
@@ -183,6 +192,8 @@ class ThousandPlusTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
     doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     date: Optional[str] = None
@@ -218,6 +229,11 @@ class Course:
 
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
+    # header-data.json contains information for every single declaration in mathlib
+    # which has a generated documentation entry (e.g., skipping private declarations by default).
+    # The resulting file is huge (several hundred MB), hence we use a small HACK:
+    # doc-gen4 uploads this file as a .bmp file, so GitHub's servers will serve it in
+    # compressed form. When downloading it locally, we save it (decompressed) with the correct extension.
     download(
         'https://leanprover-community.github.io/mathlib4_docs/declarations/header-data.bmp',
         DATA/'header-data.json'
