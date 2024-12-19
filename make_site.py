@@ -156,6 +156,7 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
+# keep in sync with yaml_check.py in mathlib4 repo
 @dataclass
 class DocDecl:
     name: str
@@ -163,6 +164,7 @@ class DocDecl:
     docs_link: str
     src_link: str
 
+# keep in sync with yaml_check.py in mathlib4 repo
 @dataclass
 class HundredTheorem:
     number: str
@@ -174,6 +176,7 @@ class HundredTheorem:
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
 
+# keep in sync with yaml_check.py in mathlib4 repo
 @dataclass
 class ThousandPlusTheorem:
     # Wikidata identifier (the letter Q followed by a string as digits),
