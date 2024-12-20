@@ -156,8 +156,9 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
-# keep in sync with `scripts/yaml_check.py`` in mathlib4 repo
 # Data for a documentation entry for a single declaration.
+# DocDecl objects are created from data in `header-data.json` and processed into HTML
+# in `templates/100.thml` and `templates/1000.html`
 @dataclass
 class DocDecl:
     # Fully qualified name of the declaration
@@ -171,21 +172,23 @@ class DocDecl:
     # is simply a link to the right revision of the mathlib source code.
     src_link: str
 
-# keep in sync with `scripts/yaml_check.py` in mathlib4 repo
+# keep public fields in sync with `scripts/yaml_check.py` in mathlib4 repo
 @dataclass
 class HundredTheorem:
     number: str
     title: str
-    decl: Optional[str] = None
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
+    date: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+    # The following is a private field populated with data from `header-data.json` and
+    # should NOT be present in `100.yaml` or `scripts/yaml_check.py`
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
+    _doc_decls: Optional[List[DocDecl]] = None
 
-# keep in sync with `scripts/yaml_check.py` in mathlib4 repo
+# keep public fields in sync with `scripts/yaml_check.py` in mathlib4 repo
 @dataclass
 class ThousandPlusTheorem:
     # Wikidata identifier (the letter Q followed by a string as digits),
@@ -193,15 +196,17 @@ class ThousandPlusTheorem:
     # "Q1008566" and "Q4724004A" are valid identifiers, for example.
     wikidata: str
     title: str
-    decl: Optional[str] = None
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     date: Optional[str] = None
-    url: Optional[str] = None
+    links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
+    # The following is a private field populated with data from `header-data.json` and
+    # should NOT be present in `100.yaml` or `scripts/yaml_check.py`
+    # The HTML source code for the generated documentation entry
+    # for the declaration(s) in |decl| or |decls|.
+    _doc_decls: Optional[List[DocDecl]] = None
+
 
 @dataclass
 class Event:
@@ -285,9 +290,6 @@ def download_N_theorems(kind: NTheorems) -> dict:
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
             n_theorems = [Type(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
             for h in n_theorems:
-                if h.decl:
-                    assert not h.decls
-                    h.decls = [h.decl]
                 if h.decls:
                     doc_decls = []
                     for decl in h.decls:
@@ -307,9 +309,9 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `.bmp` data files use doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                    h.doc_decls = doc_decls
+                    h._doc_decls = doc_decls
                 else:
-                    h.doc_decls = []
+                    h._doc_decls = []
         pkl_dump(name, n_theorems)
     else:
         n_theorems = pkl_load(name, dict())
