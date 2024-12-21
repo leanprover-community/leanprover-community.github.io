@@ -176,9 +176,6 @@ class HundredTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
@@ -192,14 +189,22 @@ class ThousandPlusTheorem:
     title: str
     decl: Optional[str] = None
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
     author: Optional[str] = None
     date: Optional[str] = None
     url: Optional[str] = None
     note: Optional[str] = None
-    url: Optional[str] = None
+
+@dataclass
+class TheoremForWebpage:
+    id: str
+    title: str
+    # The HTML source code for the generated documentation entries
+    # for the declaration associated to this theorem.
+    doc_decls: Optional[List[DocDecl]]
+    links: Optional[Mapping[str, str]] = None
+    author: Optional[str] = None
+    date: Optional[str] = None
+    note: Optional[str] = None
 
 
 @dataclass
@@ -283,33 +288,32 @@ def download_N_theorems(kind: NTheorems) -> dict:
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
             n_theorems = [Type(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+            theorems = []
             for h in n_theorems:
-                if h.decl:
-                    assert not h.decls
-                    h.decls = [h.decl]
-                if h.decls:
-                    doc_decls = []
-                    for decl in h.decls:
+                assert not (h.decl and h.decls)
+                if kind == NTheorems.Hundred:
+                    (id, links, thms) = (h.number, h.links, '100 theorems')
+                else:
+                    (id, links, thms) = (h.wikidata, {'url': h.url}, '1000+ theorems')
+                decls = h.decls or [h.decl]
+                doc_decls = []
+                if decls:
+                    for decl in decls:
                         try:
                             decl_info = declarations[decl]
                         except KeyError:
-                            if kind == NTheorems.Hundred:
-                                print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
-                            else:
-                                print(f'Error: 1000 theorems entry {h.wikidata} refers to a nonexistent declaration {decl}')
+                            print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
-                        # note: the `.bmp` data files use doc-relative links
+                        # note: the `header-data.json` data file uses doc-relative links
                         header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
                         doc_decls.append(DocDecl(
                             name=decl,
                             decl_header_html = header,
-                            # note: the `.bmp` data files use doc-relative links
+                            # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                    h.doc_decls = doc_decls
-                else:
-                    h.doc_decls = []
-        pkl_dump(name, n_theorems)
+                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.data, h.note))
+        pkl_dump(name, theorems)
     else:
         n_theorems = pkl_load(name, dict())
     return n_theorems
@@ -323,7 +327,7 @@ def replace_link(name, id):
         return '/mathlib4_docs/' + name
     else:
         try:
-            # note: the `.bmp` data files use doc-relative links
+            # note: the `header-data.json` data file uses doc-relative links
             return '/mathlib4_docs/' + declarations[name].info.docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
