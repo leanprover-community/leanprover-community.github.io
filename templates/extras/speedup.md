@@ -53,7 +53,7 @@ Replace the relevant `simp/simpa` call by `simp?/simpa?` and click on the `Try t
 suggestion to replace it by a `simp/simpa only` call. In some cases it is also possible
 to prune the list of lemmas to some extent.
 
-**Trade-off:** Proofs can get several dense lines longer.
+**Trade-off:** Proofs can get several dense lines longer, and will now mention many lemmas by name, each of which might be renamed in the future, breaking your proof.
 
 ### `elaboration took <a long time>`
 
