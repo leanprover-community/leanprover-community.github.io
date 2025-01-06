@@ -487,6 +487,18 @@ additional indentation in the rest of the proof.</p>
 <p>We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.</p>
+<h3 id="squeezing-simp-calls" class="markdown-heading">Squeezing simp calls <a class="hover-link" href="#squeezing-simp-calls">#</a></h3>
+<p>Unless performance is particularly poor or the proof breaks otherwise, <em>terminal <code>simp</code> calls</em>
+(a <code>simp</code> call is terminal if it closes the current goal or is only followed by flexible tactics
+such as <code>ring</code>, <code>field_simp</code>, <code>aesop</code>) should not be <em>squeezed</em> (replaced by the output of <code>simp?</code>).</p>
+<p>There are two main reasons for this:</p>
+<ol>
+<li>A squeezed <code>simp</code> call might be several lines longer than the corresponding unsqueezed one, and
+therefore drown the useful information of what key lemmas were added to the unsqueezed <code>simp</code> call
+to close the goal in a sea of basic simp lemmas.</li>
+<li>A squeezed <code>simp</code> call refers to many lemmas by name, meaning that it will break when one such
+lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.</li>
+</ol>
 <h3 id="whitespace-and-delimiters" class="markdown-heading">Whitespace and delimiters <a class="hover-link" href="#whitespace-and-delimiters">#</a></h3>
 <p>Lean is whitespace-sensitive, and in general we opt for a style which avoids
 delimiting code. For instance, when writing tactics, it is possible to write
