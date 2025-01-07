@@ -208,7 +208,6 @@ class ThousandPlusTheorem:
     1000+ theorems project: the webpages 1000.html and 1000-missing.html
     are generated automatically using this data.
     """
-
     # Wikidata identifier (the letter Q followed by a string as digits),
     # optionally followed by a letter (such as "A", "B" or "X" for disambiguation).
     # "Q1008566" and "Q4724004A" are valid identifiers, for example.
