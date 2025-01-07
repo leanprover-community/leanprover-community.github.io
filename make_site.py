@@ -158,7 +158,12 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
 
 @dataclass
 class DocDecl:
-    """Data for a documentation entry for a single declaration."""
+    """
+    Data for a documentation entry for a single declaration.
+    DocDecl objects are created from data in `header-data.json` and processed into HTML
+    in `templates/100.thml` and `templates/1000.html`.
+    """
+
     name: str
     """Fully qualified name of the declaration"""
     decl_header_html: str
