@@ -175,6 +175,7 @@ class DocDecl:
     """URL for this declaration's generated source entry: currently,
     is simply a link to the right revision of the mathlib source code."""
 
+# keep in sync with scripts/yaml_check.py in the mathlib4 repo
 @dataclass
 class HundredTheorem:
     """Data of an entry about a single theorem in Freek's 100 theorems list:
@@ -196,6 +197,7 @@ class HundredTheorem:
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
 
+# keep in sync with scripts/yaml_check.py in the mathlib4 repo
 # These field names match the names in the data files of the 1000+ theorems project upstream.
 # See https://github.com/1000-plus/1000-plus.github.io/blob/main/README.md#file-format
 # for the specification. Compared to the README,
