@@ -350,7 +350,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                         try:
                             decl_info = declarations[decl]
                         except KeyError:
-                            print(f'Warning: {thms} entry {id} refers to a nonexistent declaration {decl}')
+                            print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
                         # note: the `header-data.json` data file uses doc-relative links
                         header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
