@@ -156,22 +156,25 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
-# Data for a documentation entry for a single declaration.
 @dataclass
 class DocDecl:
-    # Fully qualified name of the declaration
+    """Data for a documentation entry for a single declaration."""
     name: str
-    # Full HTML code for this declaration's entry on its generated documentation page.
+    """Fully qualified name of the declaration"""
     decl_header_html: str
-    # URL of this declaration's entry in the generated documentation.
-    # This is site-relative, and starts with "/mathlib4_docs/".
+    """Full HTML code for this declaration's entry on its generated documentation page."""
     docs_link: str
-    # URL for this declaration's generated source entry: currently,
-    # is simply a link to the right revision of the mathlib source code.
+    """URL of this declaration's entry in the generated documentation.
+    This is site-relative, and starts with "/mathlib4_docs/"."""
     src_link: str
+    """URL for this declaration's generated source entry: currently,
+    is simply a link to the right revision of the mathlib source code."""
 
 @dataclass
 class HundredTheorem:
+    """Data of an entry about a single theorem in Freek's 100 theorems list:
+    the webpages 100.html and 100-missing.html are generated automatically
+    using this data."""
     # this theorem's number in Freek's 100 theorems list
     number: str
     # a human-readable title
@@ -195,6 +198,12 @@ class HundredTheorem:
 # - we omit some fields (for now), e.g. the msc classification, and only care about Lean formalisations
 @dataclass
 class ThousandPlusTheorem:
+    """
+    Data of an entry about a single theorem in Freek's experimental
+    1000+ theorems project: the webpages 1000.html and 1000-missing.html
+    are generated automatically using this data.
+    """
+
     # Wikidata identifier (the letter Q followed by a string as digits),
     # optionally followed by a letter (such as "A", "B" or "X" for disambiguation).
     # "Q1008566" and "Q4724004A" are valid identifiers, for example.
@@ -217,6 +226,19 @@ class ThousandPlusTheorem:
 
 @dataclass
 class TheoremForWebpage:
+    """
+    Common abstraction for a theorem in the 100 or 1000+ theorems project lists.
+
+    Both lists have slightly different formats, but very similar
+    overall structure: this class allows sharing (almost) the same
+    template for the webpage, while retaining the different input
+    formats in both projects.
+
+    Compared to just the theorems list, this class contains *additional*
+    information, namely the full HTML source code for the generated
+    documentation entries for all mathlib/archive/counterexamples
+    declarations referenced there.
+    """
     id: str
     title: str
     # The HTML source code for the generated documentation entries
