@@ -343,7 +343,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                     (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url}, '1000+ theorems', h.comment)
-                decls = h.decls or [h.decl]
+                decls = h.decls or ([h.decl] if h.decl else [])
                 doc_decls = []
                 if decls:
                     for decl in decls:
