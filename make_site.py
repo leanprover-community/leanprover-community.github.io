@@ -172,10 +172,16 @@ class DocDecl:
 
 @dataclass
 class HundredTheorem:
+    # this theorem's number in Freek's 100 theorems list
     number: str
+    # a human-readable title
     title: str
+    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
+    # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
+    # name(s) of the author(s) of this formalization (optional)
     author: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
@@ -186,11 +192,18 @@ class ThousandPlusTheorem:
     # optionally followed by a letter (such as "A", "B" or "X" for disambiguation).
     # "Q1008566" and "Q4724004A" are valid identifiers, for example.
     wikidata: str
+    # a human-readable title
     title: str
+    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
+    # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
+    # name(s) of the author(s) of this formalization (optional)
     author: Optional[str] = None
+    # Date of the formalization, in the form YYYY-MM-DD
     date: Optional[str] = None
+    # for external projects, an URL referring to the result
     url: Optional[str] = None
     note: Optional[str] = None
 
@@ -202,6 +215,7 @@ class TheoremForWebpage:
     # for the declaration associated to this theorem.
     doc_decls: Optional[List[DocDecl]]
     links: Optional[Mapping[str, str]] = None
+    # See above for the meaning of |author|, |date| and |note|.
     author: Optional[str] = None
     date: Optional[str] = None
     note: Optional[str] = None
