@@ -205,7 +205,8 @@ class ThousandPlusTheorem:
     date: Optional[str] = None
     # for external projects, an URL referring to the result
     url: Optional[str] = None
-    note: Optional[str] = None
+    # any additional notes or comments
+    comment: Optional[str] = None
 
 @dataclass
 class TheoremForWebpage:
@@ -306,9 +307,9 @@ def download_N_theorems(kind: NTheorems) -> dict:
             for h in n_theorems:
                 assert not (h.decl and h.decls)
                 if kind == NTheorems.Hundred:
-                    (id, links, thms) = (h.number, h.links, '100 theorems')
+                    (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
-                    (id, links, thms) = (h.wikidata, {'url': h.url}, '1000+ theorems')
+                    (id, links, thms, note) = (h.wikidata, {'url': h.url}, '1000+ theorems', h.comment)
                 decls = h.decls or [h.decl]
                 doc_decls = []
                 if decls:
@@ -326,7 +327,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.data, h.note))
+                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.data, note))
         pkl_dump(name, theorems)
     else:
         n_theorems = pkl_load(name, dict())
