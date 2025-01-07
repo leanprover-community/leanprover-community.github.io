@@ -324,7 +324,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                         try:
                             decl_info = declarations[decl]
                         except KeyError:
-                            print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
+                            print(f'Warning: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
                         # note: the `header-data.json` data file uses doc-relative links
                         header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
@@ -334,11 +334,11 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.data, note))
+                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.date, note))
         pkl_dump(name, theorems)
     else:
-        n_theorems = pkl_load(name, dict())
-    return n_theorems
+        theorems = pkl_load(name, dict())
+    return theorems
 hundred_theorems = download_N_theorems(NTheorems.Hundred)
 thousand_theorems = download_N_theorems(NTheorems.ThousandPlus)
 
