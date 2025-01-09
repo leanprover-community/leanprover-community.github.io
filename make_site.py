@@ -156,50 +156,105 @@ with (DATA/'teams.yaml').open('r', encoding='utf-8') as t_file:
                   use_biography=team.get('use_biography', True))
              for team in yaml.safe_load(t_file)]
 
-# Data for a documentation entry for a single declaration.
 @dataclass
 class DocDecl:
-    # Fully qualified name of the declaration
-    name: str
-    # Full HTML code for this declaration's entry on its generated documentation page.
-    decl_header_html: str
-    # URL of this declaration's entry in the generated documentation.
-    # This is site-relative, and starts with "/mathlib4_docs/".
-    docs_link: str
-    # URL for this declaration's generated source entry: currently,
-    # is simply a link to the right revision of the mathlib source code.
-    src_link: str
+    """
+    Data for a documentation entry for a single declaration.
+    DocDecl objects are created from data in `header-data.json` and processed into HTML
+    in `templates/100.thml` and `templates/1000.html`.
+    """
 
+    name: str
+    """Fully qualified name of the declaration"""
+    decl_header_html: str
+    """Full HTML code for this declaration's entry on its generated documentation page."""
+    docs_link: str
+    """URL of this declaration's entry in the generated documentation.
+    This is site-relative, and starts with "/mathlib4_docs/"."""
+    src_link: str
+    """URL for this declaration's generated source entry: currently,
+    is simply a link to the right revision of the mathlib source code."""
+
+# keep in sync with scripts/yaml_check.py in the mathlib4 repo
 @dataclass
 class HundredTheorem:
+    """Data of an entry about a single theorem in Freek's 100 theorems list:
+    the webpages 100.html and 100-missing.html are generated automatically
+    using this data."""
+    # this theorem's number in Freek's 100 theorems list
     number: str
+    # a human-readable title
     title: str
+    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
+    # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
+    # name(s) of the author(s) of this formalization (optional)
     author: Optional[str] = None
+    # Date of the formalization, in the form `YYYY`, `YYYY-MM` or `YYYY-MM-DD` (optional)
+    date: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
     note: Optional[str] = None
 
+# keep in sync with scripts/yaml_check.py in the mathlib4 repo
+# These field names match the names in the data files of the 1000+ theorems project upstream.
+# See https://github.com/1000-plus/1000-plus.github.io/blob/main/README.md#file-format
+# for the specification. Compared to the README,
+# - this |wikidata| field concatenates the upstream fielcs |wikidata| and |id_suffix|
+# - we omit some fields (for now), e.g. the msc classification, and only care about Lean formalisations
 @dataclass
 class ThousandPlusTheorem:
+    """
+    Data of an entry about a single theorem in Freek's experimental
+    1000+ theorems project: the webpages 1000.html and 1000-missing.html
+    are generated automatically using this data.
+    """
     # Wikidata identifier (the letter Q followed by a string as digits),
     # optionally followed by a letter (such as "A", "B" or "X" for disambiguation).
     # "Q1008566" and "Q4724004A" are valid identifiers, for example.
     wikidata: str
+    # a human-readable title
     title: str
+    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
+    # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
-    # The HTML source code for the generated documentation entry
-    # for the declaration(s) in |decl| or |decls|.
-    doc_decls: Optional[List[DocDecl]] = None
+    # name(s) of the author(s) of this formalization (optional)
+    author: Optional[str] = None
+    # Date of the formalization, in the form `YYYY`, `YYYY-MM` or `YYYY-MM-DD` (optional)
+    date: Optional[str] = None
+    # for external projects, an URL referring to the result
+    url: Optional[str] = None
+    # any additional notes or comments
+    comment: Optional[str] = None
+
+@dataclass
+class TheoremForWebpage:
+    """
+    Common abstraction for a theorem in the 100 or 1000+ theorems project lists.
+
+    Both lists have slightly different formats, but very similar
+    overall structure: this class allows sharing (almost) the same
+    template for the webpage, while retaining the different input
+    formats in both projects.
+
+    Compared to just the theorems list, this class contains *additional*
+    information, namely the full HTML source code for the generated
+    documentation entries for all mathlib/archive/counterexamples
+    declarations referenced there.
+    """
+    id: str
+    title: str
+    # The HTML source code for the generated documentation entries
+    # for the declaration associated to this theorem.
+    doc_decls: Optional[List[DocDecl]]
+    links: Optional[Mapping[str, str]] = None
+    # See above for the meaning of |author|, |date| and |note|.
     author: Optional[str] = None
     date: Optional[str] = None
-    url: Optional[str] = None
     note: Optional[str] = None
-    url: Optional[str] = None
 
 
 @dataclass
@@ -283,36 +338,35 @@ def download_N_theorems(kind: NTheorems) -> dict:
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
             n_theorems = [Type(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+            theorems = []
             for h in n_theorems:
-                if h.decl:
-                    assert not h.decls
-                    h.decls = [h.decl]
-                if h.decls:
-                    doc_decls = []
-                    for decl in h.decls:
+                assert not (h.decl and h.decls)
+                if kind == NTheorems.Hundred:
+                    (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
+                else:
+                    (id, links, thms, note) = (h.wikidata, {'url': h.url}, '1000+ theorems', h.comment)
+                decls = h.decls or ([h.decl] if h.decl else [])
+                doc_decls = []
+                if decls:
+                    for decl in decls:
                         try:
                             decl_info = declarations[decl]
                         except KeyError:
-                            if kind == NTheorems.Hundred:
-                                print(f'Error: 100 theorems entry {h.number} refers to a nonexistent declaration {decl}')
-                            else:
-                                print(f'Error: 1000 theorems entry {h.wikidata} refers to a nonexistent declaration {decl}')
+                            print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
-                        # note: the `.bmp` data files use doc-relative links
+                        # note: the `header-data.json` data file uses doc-relative links
                         header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
                         doc_decls.append(DocDecl(
                             name=decl,
                             decl_header_html = header,
-                            # note: the `.bmp` data files use doc-relative links
+                            # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                    h.doc_decls = doc_decls
-                else:
-                    h.doc_decls = []
-        pkl_dump(name, n_theorems)
+                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.date, note))
+        pkl_dump(name, theorems)
     else:
-        n_theorems = pkl_load(name, dict())
-    return n_theorems
+        theorems = pkl_load(name, dict())
+    return theorems
 hundred_theorems = download_N_theorems(NTheorems.Hundred)
 thousand_theorems = download_N_theorems(NTheorems.ThousandPlus)
 
@@ -323,7 +377,7 @@ def replace_link(name, id):
         return '/mathlib4_docs/' + name
     else:
         try:
-            # note: the `.bmp` data files use doc-relative links
+            # note: the `header-data.json` data file uses doc-relative links
             return '/mathlib4_docs/' + declarations[name].info.docLink
         except KeyError:
             raise KeyError(f'Error: overview item {id} refers to a nonexistent declaration {name}')
