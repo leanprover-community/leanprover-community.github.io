@@ -255,6 +255,8 @@ class TheoremForWebpage:
     author: Optional[str] = None
     date: Optional[str] = None
     note: Optional[str] = None
+    # A boolean tagging theorems that have been formalized
+    formalized: bool
 
 
 @dataclass
@@ -362,7 +364,9 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.date, note))
+                # a theorem counts as formalized if the author field is nonempty or if doc_decls is nonempty
+                formalized = bool(h.author) or (len(doc_decls) > 0)
+                theorems.append(TheoremForWebpage(id, h.title, doc_decls, links, h.author, h.date, note, formalized))
         pkl_dump(name, theorems)
     else:
         theorems = pkl_load(name, dict())
