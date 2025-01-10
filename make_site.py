@@ -232,6 +232,7 @@ class ThousandPlusTheorem:
     # any additional notes or comments
     comment: Optional[str] = None
 
+
 @dataclass
 class TheoremForWebpage:
     """
@@ -249,8 +250,10 @@ class TheoremForWebpage:
     """
     id: str
     title: str
-    # A boolean tagging theorems that have been formalized
-    formalized: bool
+    # Whether just the theorem statement has been formalized
+    statement_formalized: bool
+    # Whether this theorem's proof has been formalized
+    proof_formalized: bool
     # The HTML source code for the generated documentation entries
     # for the declaration associated to this theorem.
     doc_decls: Optional[List[DocDecl]]
@@ -346,10 +349,13 @@ def download_N_theorems(kind: NTheorems) -> dict:
             for h in n_theorems:
                 assert not (h.decl and h.decls)
                 assert not h.statement and (h.decl or h.decls)
+                statement_formalised = False
                 if kind == NTheorems.Hundred:
                     (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
+                    if h.statement:
+                        statement_formalised = True
                 decls = h.decls or ([h.decl] if h.decl else []) or ([h.statement] if h.statement else [])
                 doc_decls = []
                 if decls:
@@ -367,9 +373,9 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                # A theorem counts as formalized if the author field or `doc_decls` is non-empty.
-                formalized = bool(h.author) or (len(doc_decls) > 0)
-                theorems.append(TheoremForWebpage(id, h.title, formalized, doc_decls, links, h.author, h.date, note))
+                # A theorem's proof's proof counts as formalized if the author field or `doc_decls` is non-empty.
+                proof_formalized = bool(h.author) or (len(doc_decls) > 0)
+                theorems.append(TheoremForWebpage(id, h.title, statement_formalised, proof_formalized, status, doc_decls, links, h.author, h.date, note))
         pkl_dump(name, theorems)
     else:
         theorems = pkl_load(name, dict())
