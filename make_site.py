@@ -161,7 +161,7 @@ class DocDecl:
     """
     Data for a documentation entry for a single declaration.
     DocDecl objects are created from data in `header-data.json` and processed into HTML
-    in `templates/100.thml` and `templates/1000.html`.
+    in `templates/100.html` and `templates/1000.html`.
     """
 
     name: str
@@ -346,7 +346,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                 if kind == NTheorems.Hundred:
                     (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
-                    (id, links, thms, note) = (h.wikidata, {'url': h.url}, '1000+ theorems', h.comment)
+                    (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
                 decls = h.decls or ([h.decl] if h.decl else [])
                 doc_decls = []
                 if decls:
