@@ -216,6 +216,8 @@ class ThousandPlusTheorem:
     wikidata: str
     # a human-readable title
     title: str
+    # If a theorem is merely *stated* in mathlib, the name of the declaration
+    statement: Optional[str] = None
     # if a theorem is formalised in mathlib, the archive or counterexamples,
     # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
@@ -339,15 +341,16 @@ def download_N_theorems(kind: NTheorems) -> dict:
     if DOWNLOAD:
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
-            n_theorems = [Type(thm,**content) for (thm,content) in yaml.safe_load(h_file).items()]
+            n_theorems = [Type(thm, **content) for (thm, content) in yaml.safe_load(h_file).items()]
             theorems = []
             for h in n_theorems:
                 assert not (h.decl and h.decls)
+                assert not h.statement and (h.decl or h.decls)
                 if kind == NTheorems.Hundred:
                     (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
-                decls = h.decls or ([h.decl] if h.decl else [])
+                decls = h.decls or ([h.decl] if h.decl else []) or ([h.statement] if h.statement else [])
                 doc_decls = []
                 if decls:
                     for decl in decls:
