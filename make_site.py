@@ -185,7 +185,9 @@ class HundredTheorem:
     number: str
     # a human-readable title
     title: str
-    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # If a theorem is merely *stated* in mathlib, the name of the declaration
+    statement: Optional[str] = None
+    # if a theorem is formalized in mathlib, the archive or counterexamples,
     # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
     # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
@@ -202,7 +204,7 @@ class HundredTheorem:
 # See https://github.com/1000-plus/1000-plus.github.io/blob/main/README.md#file-format
 # for the specification. Compared to the README,
 # - this |wikidata| field concatenates the upstream fielcs |wikidata| and |id_suffix|
-# - we omit some fields (for now), e.g. the msc classification, and only care about Lean formalisations
+# - we omit some fields (for now), e.g. the msc classification, and only care about Lean formalizations
 @dataclass
 class ThousandPlusTheorem:
     """
@@ -218,7 +220,7 @@ class ThousandPlusTheorem:
     title: str
     # If a theorem is merely *stated* in mathlib, the name of the declaration
     statement: Optional[str] = None
-    # if a theorem is formalised in mathlib, the archive or counterexamples,
+    # if a theorem is formalized in mathlib, the archive or counterexamples,
     # the name of the corresponding declaration (optional)
     decl: Optional[str] = None
     # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
@@ -348,14 +350,16 @@ def download_N_theorems(kind: NTheorems) -> dict:
             theorems = []
             for h in n_theorems:
                 assert not (h.decl and h.decls)
-                assert not h.statement and (h.decl or h.decls)
-                statement_formalised = False
+                assert not (h.statement and (h.decl or h.decls))
+                statement_formalized = False
                 if kind == NTheorems.Hundred:
                     (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
                 else:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
                     if h.statement:
-                        statement_formalised = True
+                        statement_formalized = True
+                # A theorem's proof counts as formalized if the author or `decl`(s) field is non-empty.
+                proof_formalized = bool(h.author) or h.decls or h.decl
                 decls = h.decls or ([h.decl] if h.decl else []) or ([h.statement] if h.statement else [])
                 doc_decls = []
                 if decls:
@@ -373,9 +377,8 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             # note: the `header-data.json` data file uses doc-relative links
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
-                # A theorem's proof's proof counts as formalized if the author field or `doc_decls` is non-empty.
-                proof_formalized = bool(h.author) or (len(doc_decls) > 0)
-                theorems.append(TheoremForWebpage(id, h.title, statement_formalised, proof_formalized, status, doc_decls, links, h.author, h.date, note))
+
+                theorems.append(TheoremForWebpage(id, h.title, statement_formalized, proof_formalized, doc_decls, links, h.author, h.date, note))
         pkl_dump(name, theorems)
     else:
         theorems = pkl_load(name, dict())
