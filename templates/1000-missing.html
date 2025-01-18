@@ -3,11 +3,26 @@
 {% block content %}
 {% markdown %}
 # Missing theorems from [Freek Wiedijk's](https://www.cs.ru.nl/~freek/) [1000+ theorems project](https://1000-plus.github.io/)
-These theorems are not yet formalized in Lean (or, these formalisations are not entered in the database yet).
-Currently there are {{thousand_theorems|rejectattr('formalized')|list|length}} of them.
+These theorems are not yet formalized in Lean (or, these formalizations are not entered in the database yet).
+Currently there are {{thousand_theorems|rejectattr('proof_formalized')|list|length}} of them.
+Among these, {{thousand_theorems|rejectattr('proof_formalized')|selectattr('statement_formalized')|list|length}} have their statement formalized.
 <a href="1000.html">Here</a> is the list of the formalized theorems.
-{% for theorem in thousand_theorems|rejectattr('formalized') %}
+{% for theorem in thousand_theorems|rejectattr('proof_formalized') %}
 * {{ theorem.id }}: {{ theorem.title }}
 {% endfor %}
+
+The following theorem(s) have just their statement formalized. Contributions to their proofs are welcome.
+{% for theorem in thousand_theorems|selectattr('statement_formalized') %}
+    <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
+    {% if theorem.author %}<p>Author{% if ' and ' in theorem.author %}s{% endif %}: {{ theorem.author }}</p>{% endif %}
+    {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
+    {% for doc in theorem.doc_decls|default([], true) %}
+    <div class="doc-stmt">{{ doc.decl_header_html }}</div>
+    <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
+    {% endfor %}
+    {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
+    {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
+{% endfor %}
+
 {% endmarkdown %}
 {% endblock %}
