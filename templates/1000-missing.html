@@ -11,18 +11,5 @@ Among these, {{thousand_theorems|rejectattr('proof_formalized')|selectattr('stat
 * {{ theorem.id }}: {{ theorem.title }}
 {% endfor %}
 
-The following theorem(s) have just their statement formalized. Contributions to their proofs are welcome.
-{% for theorem in thousand_theorems|selectattr('statement_formalized') %}
-    <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
-    {% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
-    {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
-    {% for doc in theorem.doc_decls|default([], true) %}
-    <div class="doc-stmt">{{ doc.decl_header_html }}</div>
-    <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
-    {% endfor %}
-    {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
-    {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
-{% endfor %}
-
 {% endmarkdown %}
 {% endblock %}
