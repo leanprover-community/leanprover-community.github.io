@@ -193,7 +193,7 @@ class HundredTheorem:
     # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
     # name(s) of the author(s) of this formalization (optional)
-    author: Optional[str] = None
+    authors: Optional[str] = None
     # Date of the formalization, in the form `YYYY`, `YYYY-MM` or `YYYY-MM-DD` (optional)
     date: Optional[str] = None
     links: Optional[Mapping[str, str]] = None
@@ -226,7 +226,7 @@ class ThousandPlusTheorem:
     # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
     decls: Optional[List[str]] = None
     # name(s) of the author(s) of this formalization (optional)
-    author: Optional[str] = None
+    authors: Optional[str] = None
     # Date of the formalization, in the form `YYYY`, `YYYY-MM` or `YYYY-MM-DD` (optional)
     date: Optional[str] = None
     # for external projects, an URL referring to the result
@@ -260,8 +260,8 @@ class TheoremForWebpage:
     # for the declaration associated to this theorem.
     doc_decls: Optional[List[DocDecl]]
     links: Optional[Mapping[str, str]] = None
-    # See above for the meaning of |author|, |date| and |note|.
-    author: Optional[str] = None
+    # See above for the meaning of |authors|, |date| and |note|.
+    authors: Optional[str] = None
     date: Optional[str] = None
     note: Optional[str] = None
 
@@ -358,8 +358,8 @@ def download_N_theorems(kind: NTheorems) -> dict:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
                     if h.statement:
                         statement_formalized = True
-                # A theorem's proof counts as formalized if the author or `decl`(s) field is non-empty.
-                proof_formalized = bool(h.author) or h.decls or h.decl
+                # A theorem's proof counts as formalized if the authors or `decl`(s) field is non-empty.
+                proof_formalized = bool(h.authors) or h.decls or h.decl
                 decls = h.decls or ([h.decl] if h.decl else []) or ([h.statement] if h.statement else [])
                 doc_decls = []
                 if decls:
@@ -378,7 +378,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             docs_link='/mathlib4_docs/' + decl_info.info.docLink,
                             src_link=decl_info.info.sourceLink))
 
-                theorems.append(TheoremForWebpage(id, h.title, statement_formalized, proof_formalized, doc_decls, links, h.author, h.date, note))
+                theorems.append(TheoremForWebpage(id, h.title, statement_formalized, proof_formalized, doc_decls, links, h.authors, h.date, note))
         pkl_dump(name, theorems)
     else:
         theorems = pkl_load(name, dict())
