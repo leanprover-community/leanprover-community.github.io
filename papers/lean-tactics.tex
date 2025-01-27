@@ -1,0 +1,243 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+%\usepackage[urw-garamond,expert,uppercase=upright,greeklowercase=upright]{mathdesign}
+%\usepackage[osf,swashQ]{garamondx}
+%
+%\usepackage{microtype}
+
+\usepackage[textwidth=17cm, textheight=27cm]{geometry}
+\usepackage{booktabs, xspace}
+\usepackage{amsmath,amsfonts,amssymb,longtable, fontawesome, hyperref}
+
+\newcommand{\lean}[1]{{\tt #1}}
+% \newcommand{\nv}{\textit{new\_name}\xspace}
+% \newcommand{\nom}{\textit{name}\xspace}
+\newcommand{\expr}[1][]{\textit{expr#1}\xspace}
+\newcommand{\proposition}{\textit{prop}\xspace}
+\newcommand{\tactic}[1][]{\textit{tac#1}\xspace} % also used for tactic sequences
+\newcommand{\type}{\textit{type}\xspace}
+\newcommand{\hyp}{\textit{hyp}\xspace}
+\newcommand{\light}{\faLightbulbO\xspace}
+\newcommand{\nat}{\textit{n}\xspace}
+\newcommand{\internet}{\faGlobe\xspace}
+\newcommand{\warning}{\faWarning\xspace}
+\setlength\parindent{0pt}
+
+% Original authors (Lean 3 version): Patrick Massot and Johan Commelin
+% https://github.com/leanprover-community/lftcm2020/blob/master/lean-tactics.tex
+
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\begin{document}
+\pagestyle{empty}
+\begin{center}
+ {\large\textsc{Lean 4 tactic cheatsheet}}
+
+ {\scriptsize Last updated: \today}
+\end{center}
+
+\begin{center}
+If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of your file.\\
+\smallskip
+
+\setlength\tabcolsep{5mm}
+\def\arraystretch{1.3}
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Logical symbol & Appears in goal & Appears in hypothesis \\
+  \midrule
+  $\forall$ (for all) & \lean{intro x} & \lean{apply h} or \lean{specialize h x}  \\
+  $\to$ (implies) & \lean{intro h} & \lean{apply h} or \lean{specialize h1 h2} \\
+  $\neg$ (not) & \lean{intro h} & \lean{apply h} or \lean{contradiction}  \\
+  $\leftrightarrow$ (if and only if)\qquad & \lean{constructor}  & \lean{rw [h]} or \lean{rw [← h]} or \lean{apply h.1} or \lean{apply h.2}\\
+  $\wedge$ (and) & \lean{constructor} & \lean{obtain ⟨h1, h2⟩ := h} \\
+  $\exists$ (there exists) & \lean{use x} & \lean{obtain ⟨x, hx⟩ := h} \\
+  $\vee$ (or) & \lean{left} or \lean{right} & \lean{obtain h1|h2 := h} \\
+  $a = b$ (equality) & \lean{rfl} or \lean{ext} & \lean{rw [h]} or \lean{rw [← h]} \\
+  \lean{True} & \lean{trivial} & --- \\
+  \lean{False} & --- & \lean{contradiction} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\setlength\tabcolsep{5mm}
+\def\arraystretch{1.3}
+\begin{longtable}{@{}lp{113mm}@{}}
+  \toprule
+  Tactic & Effect \\
+  \midrule
+  &\textbf{Applying Lemmas}\\
+  \lean{exact} \expr & prove the current goal exactly by \expr. \\
+  \lean{apply} \expr & prove the current goal by applying \expr to some arguments. \\
+  \lean{refine} \expr & like \lean{exact}, but \expr can contain \lean{?\_} that will be turned into a new goal. \\
+  \lean{convert} \expr & prove the goal by showing that it is equal to the type of \expr. \\
+  % assumption left out
+  \hline
+  &\textbf{Context manipulation}\\
+  \lean{have h :} \proposition\ \lean{:=} \expr & add a new hypothesis \lean{h} of type \proposition. \warning \textbf{Do not use for data!} \\
+  \lean{have h :} \proposition\ \lean{:= by} \tactic & add hypothesis \lean{h} after proving it using tactics. \warning \textbf{Do not use for data!} \\
+  \lean{set x :} \type\ \lean{:=} \expr & add an abbreviation \lean{x} with value \expr. \\
+  % let could be useful, but mostly superseded by set. let' allows underscores, but seems to niche to mention
+  \lean{clear h} & remove hypothesis \lean{h} from the context.\\
+  \lean{rename\_i x h} & rename the last inaccessible names with the given names.\\
+  \lean{show} \expr & replaces the goal by \expr, if they are equal by definition.\\
+  \lean{generalize\_proofs} & add all proofs occurring in the goal to the local context.\\
+  % rename, replace, revert
+  \hline
+  &\textbf{Rewriting and simplifying}\\
+  \lean{rw [}\expr\lean{]} & in the goal, replace (all occurrences of) the left-hand side
+  of \expr by its right-hand side. \expr must be an equality, iff statement or definition.\\
+  \lean{rw [←}\expr\lean{]} & $\ldots$ rewrites using \expr from right-to-left. \\
+  \lean{rw [}\expr\lean{] at h} & $\ldots$ rewrite in hypothesis \lean{h}. \\
+  \lean{nth\_rw} \nat\ \lean{[}\expr\lean{]} & rewrite only the \nat-th occurrence of the rewrite rule \expr.\\
+  \lean{simp} & simplify the goal using all lemmas tagged \lean{@[simp]} and basic reductions. \\
+  \lean{simp at h} & $\ldots$ simplify in hypothesis \lean{h}. \\
+  \lean{simp [*, }\expr\lean{]} & $\ldots$ also simplify with all hypotheses and \expr. \\
+  \lean{simp only [}\expr\lean{]}& $\ldots$ only simplify with \expr and basic reductions (not with simp-lemmas). \\
+  \lean{simp?}& $\ldots$ let Lean speed up \lean{simp} by specifying which lemmas were used. \\
+  \lean{simp\_rw [}\expr[1]\lean{, }\ldots\lean{]} & like \lean{rw}, but uses \lean{simp only} at each step. \\
+  \lean{simp\_all} & repeatedly simplify the goal and all hypothesis using all hypotheses.\\
+  % dsimp left out
+  \lean{norm\_num} & simplify numerical expressions by calculating. \\
+  \lean{norm\_cast} & simplify the expression by moving casts ($\uparrow$) outwards.\\
+  \lean{push\_cast} & push casts inwards.\\
+  % apply_mod_cast, exact_mod_cast, rw_mod_cast, assumption_mod_cast left out
+  \lean{conv =>} \textit{conv-tac} &
+    \makecell[lt]{apply rewrite rules to only part of the goal.
+    Use \lean{congr}, \lean{skip}, \lean{ext}, \\ \lean{lhs}, \lean{rhs}, \ldots to navigate to the desired subexpression.
+    See \href{https://docs.lean-lang.org/theorem_proving_in_lean4/conv.html}{TPIL}.}\\
+  \lean{change} \expr & change the current goal to \expr, if they are equal by definition. \\
+  \lean{split\_ifs} & case split on every occurrence of \lean{if} \textit{h} \lean{then} \expr\ \lean{else} \expr in the goal. \\
+  % is this obsolete by split?
+    \hline
+  % (stronger than \lean{simp [*] at *})
+  % \newpage
+  &\textbf{Reasoning with equalities, inequalities, and other relations}\\
+  % the technical difference is that the previous category can be applied to any subterm anywhere,
+  % while the tactics below require that the goal is an (in)equality
+  \makecell[lt]{\lean{calc} $a = b$ \lean{:= by} \tactic\\ \mbox{}\ \ $\_ \le c$ \lean{:= by} \tactic\\ \mbox{}\ \ $\_ < d$ \lean{:= by} \tactic} &
+  \makecell[lt]{perform a calculation \\ \light after writing ``\lean{calc \_}'' Lean can generate a basic calc-block for you. \\
+  \light after a \lean{by} shift-click on a subterm in the goal to create a new step.}\\
+  \lean{rfl} & prove the current goal by reflexivity. \\
+  \lean{symm} & swap a symmetric relation. \\
+  \lean{trans} \expr & split a transitive relation into two parts with \expr in the middle. \\
+  \lean{subst h} & if \lean{h} equates a variable with a value, substitute the value for the variable.\\
+  \lean{ext} & prove an equality in a specified type (e.g. functions). \\
+  \lean{apply\_fun} \expr\ \lean{at h} & apply \expr to both sides of the (in)equality \lean{h}. \\
+  \lean{linear\_combination} & prove an equality by specifying it as a linear combination of hypotheses.\\
+  % \lean{polyrith} & \internet query Sage to find a \lean{linear\_combination} invocation.\\
+  \lean{congr} & prove an equality using congruence rules. \\
+  % &\textbf{Reasoning with inequalities} (and other relations)\\
+  \lean{gcongr} & prove an inequality using congruence rules. \\
+  % mono obsoleted by gcongr?
+  \lean{positivity} & prove goals of the form $0 < x$, $0 \le x$ and $x \ne 0$.\\
+  \lean{bound} & prove inequalities based on the expression structure.\\
+  % (overlaps in scope with \lean{gcongr} and \lean{positivity})
+  \lean{omega} & solve linear arithmetic problems over $\mathbb{N}$ or $\mathbb{Z}$. \\
+  \lean{linarith} & prove linear (in)equalities from the hypotheses. \\
+  \lean{nlinarith} & stronger variant of \lean{linarith} that can solve some nonlinear inequalities. \\
+  \hline
+  &\textbf{Reasoning techniques}\\
+  \lean{exfalso} & replace the current goal by \lean{False}. \\
+  \lean{by\_contra h} & proof by contradiction; adds the negation of the goal as hypothesis \lean{h}. \\
+  \lean{push\_neg} or \lean{push\_neg at h} & push negations into quantifiers and connectives in the goal (or in \lean{h}).
+  %; e.g.~change $\neg\;\forall$ \lean{x, P x} to $\exists$ \lean{x,} $\neg\;$\lean{P x}.
+  \\
+  \lean{by\_cases h :} \proposition & case-split on \proposition. \\
+  \makecell[lt]{\lean{induction n with }\\ \lean{| zero      =>} \tactic \\ \lean{| succ n ih =>} \tactic} &
+  \makecell[lt]{prove a goal by induction on \lean{n}.\\ \\ \light after writing ``\lean{induction n}'' Lean can generate the cases for you.} \\
+  \lean{choose f h using} \expr & extract a function from a forall-exists statement \expr.\\
+  \lean{lift n to} \type\ \lean{using h} & lifts a variable to \type (e.g. $\mathbb{N}$) using side-condition \lean{h}.\\
+  \lean{zify} / \lean{qify} / \lean{rify} & shift an (in)equality to $\mathbb{Z}$ / $\mathbb{Q}$ / $\mathbb{R}$. \\
+  %maybe: classical
+  % contrapose, absurd intentionally left out
+  \hline
+  &\textbf{Searching}\\
+  \lean{exact?} & search for a single lemma that closes the goal using the current hypotheses. \\
+  \lean{apply?} & gives a list of lemmas that can apply to the current goal. \\
+  \lean{rw?} & gives a list of lemmas that can be used to rewrite the current goal. \\
+  \lean{have? using h1, h2} & try to find facts that can be concluded by using both \lean{h1} and \lean{h2}. \\
+  \lean{hint} & run a few common tactics on the goal, reporting which one succeeded. \\
+  \hline
+  &\textbf{General automation}\\
+  % \lean{ext} & prove an equality between elements of a specific type. \\
+  \makecell[lt]{\lean{ring} / \lean{noncomm\_ring} / \lean{module} \\ \lean{field\_simp} / \lean{abel} / \lean{group}} & prove the goal by using the axioms of a commutative ring / ring / module / field / abelian group / group. \\
+  \lean{aesop} & simplify the goal, and use various techniques to prove the goal. \\
+  \lean{tauto} & prove logical tautologies. \\
+  \lean{decide} & run a decision procedure to prove the goal (if it is decidable). \\
+  % \lean{slim\_check} & try to find a counterexample to the current goal.\\
+  \hline
+  % &\textbf{Goal manipulation}\\
+  % \hline
+  &\textbf{Operations on goals/tactics}\\
+  \lean{swap} & swap the first two goals. \\
+  \lean{pick\_goal} \nat & move goal \nat to the front. \\
+  \lean{all\_goals} \tactic & run \tactic to all goals. \\
+  \lean{try} \tactic & run \tactic only if it succeeds. \\
+  \tactic[1]\lean{;} \tactic[2] & run \tactic[1] and then \tactic[2] (same as putting them on separate lines). \\
+  \tactic[1] \lean{<;>} \tactic[2] & run \tactic[1] and then \tactic[2] on all goals generated by \tactic[1]. \\
+  \textcolor{red}{\lean{sorry}} & admit the current goal.\\
+  \hline
+  &\textbf{Domain-specific tactics}\\
+  % finiteness
+  \lean{fin\_cases h} & split a hypothesis \lean{h} into finitely many cases. \\
+  \lean{interval\_cases n} & if split the goal into cases for each of the possible values for \lean{n}.\\
+  % algebra
+  \lean{compute\_degree} & prove (in)equalities about the degree of a polynomial \\
+  \lean{monicity} & prove that a polynomial is monic \\
+  % topology/analysis
+  \lean{fun\_prop} & prove that a function satisfies a property (continuity, measurability, \ldots). \\
+  \lean{measurability} & prove that a set or function is measurable. \\
+  \lean{filter\_upwards [h1, h2]} & Show that an \lean{Eventually} goal follows from the given hypotheses. \\
+  \lean{slice\_lhs}, \lean{slice\_rhs} & Focus on a part of a composition in a category.\\
+    & See \href{https://github.com/leanprover-community/mathlib4/tree/master/Mathlib/Tactic/CategoryTheory}{the source code} for some other category theory tactics. \\
+  % continuity intentionally left out
+  % maybe mention bicategory, monoidal, mod_cases, reduce_mod_char
+  % low-level control tactics intentionally left out: beta, delta,
+  \bottomrule
+\end{longtable}
+\mbox{}\\
+% maybe: generalize_proofs, infer_instance, inhabit, nontriviality, peel, move_add
+% honourable mentions: \lean{zify}, qify,
+\end{center}
+
+\textbf{Usage note}
+
+This is a quick overview of the most common tactics in Lean with only a short description. To learn more about a tactic and to learn its precise syntax or variants, consult its docstring or use \lean{\#help tactic} \tactic.
+
+This list is not complete, and various tactics are intentionally left out.
+\bigskip
+
+\textbf{Some useful commands} (Some of these also work as tactics)
+
+\begin{longtable}{@{}lp{113mm}@{}}
+\lean{\#loogle} \textit{query} & \internet use \href{https://loogle.lean-lang.org/}{Loogle!} to find declarations. \\
+\lean{\#leansearch "}\textit{query}\lean{."} & \internet use \href{https://leansearch.net}{LeanSearch} to find declarations. \\
+\lean{\#exit} & don't compile code after this command.\\
+\lean{\#lint} & run linters to find common mistakes in the code \emph{above} this command.\\
+\lean{\#where} & print current opened namespaces, universes, variables and options.\\
+\lean{\#min\_imports} & print the minimal imports needed for what you've done so far.\\
+\lean{\#help tactic} \tactic & find information about \tactic.\\
+\lean{\#help} \textit{category} & list all tactics/commands/attributes/options/notations.\\
+\end{longtable}
+
+\textbf{Legend}\\
+\begin{tabular}{ll}
+\light & describes a code action for this tactic.\\
+\internet & requires internet access.\\
+\end{tabular}
+\bigskip
+
+% Do we want a list of commands?
+% Very common commands: import, open, variable, namespace, def, theorem, example,
+% Commands taught early: #check, #eval, #print
+% Somewhat useful: whatsnew in, #synth, #exit, #min_imports, #find_home, #where
+% Not useful to explain here IMO: #conv, #push_neg, #simp, #find,
+% Only for advanced users: #find_home, #reduce, #redundant_imports
+
+\end{document}
