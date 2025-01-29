@@ -28,7 +28,7 @@ It's polite to prefix the branch name with your github username, so it's easier 
 To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
 Either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
 [this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
-Please include your GitHub username in your request and add this username to your Zulip profile, using the personal settings panel.
+Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
 We also strongly encourage setting your display name on Zulip to be your real name.
 
 Typical workflow:
