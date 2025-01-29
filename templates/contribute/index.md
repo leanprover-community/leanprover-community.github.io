@@ -20,14 +20,16 @@ It is essential that everything in the master branch compiles without errors, an
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
-It's okay to do this in your own fork of the `mathlib` repository,
-or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository,
-you can either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
+It's okay to do this in your own fork of the `mathlib` repository.
+
+Eventually, to make a pull request, you'll need to migrate your work to a branch of the main mathlib repository,
+as our CI works better this way.
+It's polite to prefix the branch name with your github username, so it's easier for us to clean up clutter.
+To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
+Either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
 [this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
-Please include your GitHub username in your request (and add this username to your Zulip profile, using the personal settings panel).
-It's polite to prefix the branch name with your username, so it's easier for us to clean up clutter.
-(Once you're making a pull request, we'll ask you to do so from a branch of the mathlib repository,
-rather than from your own fork, as CI works better this way.)
+Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
+We also strongly encourage setting your display name on Zulip to be your real name.
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
