@@ -25,7 +25,7 @@ You can browse public discussions on the most popular “channels” without reg
 
 We welcome you to register for the Zulip chat,
 which will let you participate in the discussions.
-Registering with your real name is preferred, but not required.
+We strongly prefer that you use your real name as your display name.
 Starting by briefly introducing yourself in the
 [*new members* channel](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
 is also appreciated.
