@@ -24,6 +24,8 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
+* You can download the [tactic cheatsheet (pdf)](https://leanprover-community.github.io/papers/lean-tactics.pdf) for a reference of most common tactics.
+
 * If you wish to learn directly from source, the
   [Lean API documentation](https://leanprover-community.github.io/mathlib4_docs/)
   not only includes `Mathlib`, but also covers `Std`, `Batteries`, `Lake`, and the core compiler.
