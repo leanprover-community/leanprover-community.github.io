@@ -80,7 +80,8 @@ two main concepts in the theory of xyzzyology.
 ## Main results
 
 - `exists_foo`: the main existence theorem of `foo`s.
-- `bar_of_foo`: a construction of a `bar`, given a `foo`.
+- `bar_of_foo`: a construction of a `bar`, given a `foo` under very complicated
+  and intricate circumstances worth describing in excruciating detail.
 - `bar_eq`    : the main classification theorem of `bar`s.
 
 ## Notation
@@ -562,6 +563,8 @@ implementation notes) or for comments in proofs.
 Use `--` for short or in-line comments.
 
 Documentation strings for declarations are delimited with `/-- -/`.
+When a documentation string for a declaration spans multiple lines, do not indent
+subsequent lines.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
