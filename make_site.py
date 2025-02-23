@@ -562,7 +562,16 @@ else:
     projects = pkl_load('projects', [])
 
 if DOWNLOAD:
-    num_contrib = github.get_repo('leanprover-community/mathlib4').get_contributors(anon=True).totalCount
+    # We used to use this count but it didn't include mathlib3 contributors
+    # num_contrib = github.get_repo('leanprover-community/mathlib4').get_contributors(anon=True).totalCount
+    # The `contributor-count` file is uploaded by the github workflow in the mathlib_stats repo:
+    download(
+        'https://leanprover-community.github.io/mathlib_stats/contributor-count',
+        DATA/'contributor-count')
+    with (DATA/'contributor-count').open('r', encoding='utf-8') as h_file:
+        # we could just display the file contents directly,
+        # but better to try to convert to a number and error out if something unexpected is there
+        num_contrib = int(h_file.readline().strip())
     pkl_dump('num_contrib', num_contrib)
 else:
     num_contrib = pkl_load('num_contrib', 0)
