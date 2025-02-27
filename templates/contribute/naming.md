@@ -448,3 +448,19 @@ Most predicates should be added as prefixes. Eg `IsClosed (Icc a b)` should be c
 Some widely used predicates don't follow this rule. Those are the predicates that are analogous to an atom already suffixed by the naming convention. Here is a non-exhaustive list:
 * We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
 * We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_monotone` for `Monotone f`, `_antitone` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...
+
+### Prop-valued classes
+
+Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
+topological ring" is written `variable (R : Type*) [Ring R] [TopologicalSpace R] [IsTopologicalRing R]`
+and "let $G$ be a group and let $H$ be a normal subgroup" is written
+`variable (G : Type*) [Group G] (H : Subgroup G) [Normal H]`. Here `IsTopologicalRing R`
+and `Normal H` are not extra data, but are extra assumptions on data we have already.
+
+Mathlib currently strives towards the following naming convention for these `Prop`-valued
+classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
+for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
+`H` is normal" in informal language. However `IsTopologicalRing` is
+preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
+topological" informally. 
