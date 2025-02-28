@@ -4,10 +4,12 @@
 {% markdown %}
 # Missing theorems from [Freek Wiedijk's](https://www.cs.ru.nl/~freek/) [list of 100 theorems](https://www.cs.ru.nl/~freek/100/)
 These theorems are not yet formalized in Lean.
+Currently there are {{hundred_theorems|rejectattr('proof_formalized')|list|length}} of them.
+Among these, {{hundred_theorems|rejectattr('proof_formalized')|selectattr('statement_formalized')|list|length}} have their statement formalized.
 <a href="100.html">Here</a> is the list of the formalized theorems.
-{% for theorem in hundred_theorems|rejectattr('author') %}
-* {{ theorem.number }}: {{ theorem.title }}
+{% for theorem in hundred_theorems|rejectattr('proof_formalized') %}
+* {{ theorem.id }}: {{ theorem.title }}
 {% endfor %}
+
 {% endmarkdown %}
 {% endblock %}
-

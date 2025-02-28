@@ -43,7 +43,7 @@ The `@[simp]` attribute, for example, tags a declaration (typically a `lemma`, `
 
 * [The mathlib attributes documentation](https://leanprover-community.github.io/mathlib_docs/attributes.html), for a list of those defined and used throughout [mathlib](#mathlib)
 
-* [Section 5.4 of *The Lean Reference Manual*](https://leanprover.github.io/reference/other_commands.html#attributes), for a list of those defined within [core lean](#core-lean)
+* [Section 5.4 of *The Lean Reference Manual*](https://lean-lang.org/reference/other_commands.html#attributes), for a list of those defined within [core lean](#core-lean)
 
 ### beta reduction
 
@@ -53,7 +53,7 @@ More precisely, it is the process of simplifying an expression such as `(λ x, t
 
 ##### See also
 
-* [Section 2.3 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#function-abstraction-and-evaluation)
+* [Section 2.3 of Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html#function-abstraction-and-evaluation)
 
 ### big operators
 
@@ -154,7 +154,7 @@ Or, ambiguously, any of a number of Lean commands which may define or declare su
 
 Examples of such commands are the `def`, `theorem`, `constant` or `example` commands (and in Lean 3, the `lemma` command), amongst others.
 
-Further detail can be found in the [Lean documentation](https://leanprover.github.io/lean4/doc/declarations.html#basic-declarations).
+Further detail can be found in the [Lean documentation](https://lean-lang.org/lean4/doc/declarations.html#basic-declarations).
 
 ### dependent type theory
 
@@ -164,7 +164,7 @@ Lean's implementation of dependent type theory is based on what is known as the 
 
 ##### See Also
 
-* [Section 2 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html), which discusses Lean's specific version of dependent type theory
+* [Section 2 of Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html), which discusses Lean's specific version of dependent type theory
 
 * [Calculus of Constructions, from Wikipedia](https://en.wikipedia.org/wiki/Calculus_of_constructions), for a further overview of the calculus of constructions
 
@@ -313,7 +313,7 @@ A deprecated mathematics library for Lean 3.
 
 A [tool](https://github.com/leanprover/mathport/) for automated or semi-automated translation of Lean 3 code into Lean 4 code.
 It consists of both fully automated generation of Lean 4 [olean files](#olean-file) from Lean 3 source files (*binport*), as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code (*synport*).
-Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states. 
+Learnings from both the mathport effort as well as from [mathlib4](#mathlib4) often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.
 
 ### mode
 
@@ -397,14 +397,14 @@ Allowed style linting exceptions are stored in a [style exceptions file](https:/
 ### tactic mode
 
 A Lean [mode](#mode) characterized by its reliance on sequences of [tactics](#tactic) which often facilitate proofs quite similar to paper-based reasoning, albeit often with the use of sophisticated tactics which automate tedious portions of a proof.
-There are various means to [enter tactic mode](https://leanprover.github.io/theorem_proving_in_lean/tactics.html#entering-tactic-mode).
+There are various means to [enter tactic mode](https://lean-lang.org/theorem_proving_in_lean/tactics.html#entering-tactic-mode).
 It may be entered using the `by` keyword from [term mode](#term-mode), though in Lean 3 it is most often entered via a `begin...end` block whenever its body is made up of multiple commands.
 Other modes can also be interspersed within it, often to collaboratively produce an understandable, efficient, short or readable overall proof.
 Ultimately, the result of a tactic mode block is a [term](#term), assembled via the tactics within it.
 
 ##### See also
 
-* [Section 5 of Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), which discusses tactics, as well as moving into and out of tactic mode
+* [Section 5 of Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean/tactics.html), which discusses tactics, as well as moving into and out of tactic mode
 
 * [The `show_term` tactic](https://leanprover-community.github.io/mathlib_docs/tactic/show_term.html) which can reveal the assembled [term](#term)
 
@@ -422,8 +422,8 @@ Commands such as `have`, `suffices`, and `show` can be used to write structured 
 
 ### TPIL
 
-"[Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/index.html)", a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, "designed to teach you to develop and verify proofs in Lean".
-Starting with a simple introduction to the [type theory](https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html) used in Lean, the text proceeds to explain topics such as [tactics](https://leanprover.github.io/theorem_proving_in_lean/tactics.html), [inductive types](https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html), and [type classes](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html).
+"[Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean/index.html)", a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, "designed to teach you to develop and verify proofs in Lean".
+Starting with a simple introduction to the [type theory](https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html) used in Lean, the text proceeds to explain topics such as [tactics](https://lean-lang.org/theorem_proving_in_lean/tactics.html), [inductive types](https://lean-lang.org/theorem_proving_in_lean/inductive_types.html), and [type classes](https://lean-lang.org/theorem_proving_in_lean/type_classes.html).
 
 ### type theory
 
@@ -454,7 +454,7 @@ It also may refer to a command which reduces expressions to this form.
 
 ##### See also
 
-* [Section 8.4 of Programming in Lean](https://leanprover.github.io/programming_in_lean/#08_Writing_Tactics.html), which is still in progress, but will cover `whnf`
+* [Section 8.4 of Programming in Lean](https://lean-lang.org/programming_in_lean/#08_Writing_Tactics.html), which is still in progress, but will cover `whnf`
 * [What is weak head normal form? - Stack Overflow](https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form)
 * [Weak head normal form - The Haskell wiki](https://wiki.haskell.org/Weak_head_normal_form)
 

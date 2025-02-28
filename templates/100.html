@@ -2,15 +2,25 @@
 {% block title %}100 theorems in Lean{% endblock %}
 {% block content %}
 
-        <h1>100 theorems</h1>
+    <h1>100 theorems</h1>
 
-        <p><a href="https://www.cs.ru.nl/~freek/">Freek Wiedijk</a> maintains <a href="https://www.cs.ru.nl/~freek/100/">a list</a> tracking progress of theorem provers in formalizing 100 classic theorems in mathematics as a way of comparing prominent theorem provers.
-        Currently {{hundred_theorems|selectattr('author')|list|length}} of them are formalized in Lean.
-        We also have a page with the theorems from the list <a href="100-missing.html">not yet in Lean</a>.</p>
+    <p><a href="https://www.cs.ru.nl/~freek/">Freek Wiedijk</a> maintains <a href="https://www.cs.ru.nl/~freek/100/">a list</a> tracking progress of theorem provers in formalizing 100 classic theorems in mathematics as a way of comparing prominent theorem provers.
+    Currently {{hundred_theorems|selectattr('proof_formalized')|list|length}} of them are formalized in Lean,
+    and {{hundred_theorems|rejectattr('proof_formalized')|selectattr('statement_formalized')|list|length}} additional theorem(s) have just their statement formalized in Lean.
 
-    {% for theorem in hundred_theorems|selectattr('author') %}
-        <h5 class="markdown-heading mt-5" id="{{ theorem.number }}">{{ theorem.number }}. {{ theorem.title }} <a class="hover-link" href="#{{ theorem.number }}">#</a></h5>
-        <p>Author{% if ',' in theorem.author %}s{% endif %}: {{ theorem.author }}</p>
+    We also have a page with the theorems from the list <a href="100-missing.html">not yet in Lean</a>.</p>
+
+	<p>
+	To make updates to this list, please <a href="contribute/index.html">make a pull request to mathlib</a>
+	after editing the
+	<a href="https://github.com/leanprover-community/mathlib4/blob/master/docs/100.yaml">yaml source file</a>.
+	This can be done entirely on GitHub, see
+	<a href="https://docs.github.com/en/github/managing-files-in-a-repository/editing-files-in-another-users-repository">"Editing files in another user's repository"</a>.
+	</p>
+
+    {% for theorem in hundred_theorems|selectattr('proof_formalized') %}
+        <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}. {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
+        {% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
         {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
         {% for doc in theorem.doc_decls|default([], true) %}
         <div class="doc-stmt">{{ doc.decl_header_html }}</div>

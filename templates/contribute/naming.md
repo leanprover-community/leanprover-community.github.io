@@ -383,7 +383,6 @@ import Mathlib.Topology.Constructions
 ## Naming of structural lemmas
 
 We are trying to standardize certain naming patterns for structural lemmas.
-At present these are not uniform across mathlib.
 
 ### Extensionality
 
@@ -416,3 +415,52 @@ automatically generated unidirectional implications, named `.inj`,
 and there is no intention to change this.
 When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named `.inj_iff`.
+
+An injectivity lemma that uses "left" or "right" should refer to the
+argument that "changes". For example, a lemma with the statement
+`a - b = a - c ↔ b = c` could be called `sub_right_inj`.
+
+### Induction and recursion principles
+
+Induction/recursion principles are ways to construct data or proofs for all elements of some type `T`,
+by providing ways to construct this data or proof in more constrained specific contexts. 
+These principles should be phrased to accept a `motive` argument,
+which declares what property we are proving or what data we are constructing for all `T`.
+When the motive eliminates into `Prop`, it is an induction principle, and the name should contain
+`induction`. On the other hand, when the motive eliminates into `Sort u` or `Type u`,
+it is a recursive principle, and the name should contain `rec` instead.
+
+Additionally, the name should contain `on` iff in the argument order, the value comes before the constructions.
+
+The following table summarizes these naming conventions:
+
+| motive eliminates into: | `Prop`           | `Sort u` or `Type u` |
+|-------------------------|------------------|----------------------|
+| value first             | `T.induction_on` | `T.recOn`            |
+| constructions first     | `T.induction`    | `T.rec`              |
+
+Variation on these names are acceptable when necessary (e.g. for disambiguation).
+
+### Predicates as suffixes
+
+Most predicates should be added as prefixes. Eg `IsClosed (Icc a b)` should be called `isClosed_Icc`, not `Icc_isClosed`.
+
+Some widely used predicates don't follow this rule. Those are the predicates that are analogous to an atom already suffixed by the naming convention. Here is a non-exhaustive list:
+* We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
+* We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_monotone` for `Monotone f`, `_antitone` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...
+
+### Prop-valued classes
+
+Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
+topological ring" is written `variable (R : Type*) [Ring R] [TopologicalSpace R] [IsTopologicalRing R]`
+and "let $G$ be a group and let $H$ be a normal subgroup" is written
+`variable (G : Type*) [Group G] (H : Subgroup G) [Normal H]`. Here `IsTopologicalRing R`
+and `Normal H` are not extra data, but are extra assumptions on data we have already.
+
+Mathlib currently strives towards the following naming convention for these `Prop`-valued
+classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
+for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
+`H` is normal" in informal language. However `IsTopologicalRing` is
+preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
+topological" informally. 

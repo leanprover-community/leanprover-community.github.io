@@ -18,7 +18,7 @@ All commands below should be typed inside a terminal.
 * You will also need a code editor that has a Lean plugin. The
   recommended choice is [Visual Studio Code](https://code.visualstudio.com/) which currently
   has the best Lean support.
-  The alternatives are to use Emacs and its [lean-mode](https://github.com/leanprover/lean-mode)
+  The alternatives are to use Emacs and its [lean4-mode](https://github.com/leanprover/lean4-mode)
   or neovim and its  [lean.nvim extension](https://github.com/Julian/lean.nvim).
 
   1. Install [VS Code](https://code.visualstudio.com/).

@@ -58,9 +58,13 @@ It is essential that everything in the master branch compiles without errors, an
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
-It's okay to do this in your own fork of the `mathlib` repository,
-or you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository,
-you can either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
+It's okay to do this in your own fork of the `mathlib` repository.
+
+Eventually, to make a pull request, you'll need to migrate your work to a branch of the main mathlib repository,
+as our CI works better this way.
+It's polite to prefix the branch name with your github username, so it's easier for us to clean up clutter.
+To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
+Either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
 [this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
 Please include your GitHub username in your request (and add this username to your Zulip profile, using the personal settings panel).
 The maintainers strongly prefer that contributors to mathlib use their full real names on their Zulip profile.
@@ -146,15 +150,15 @@ below the `---`.
 
 ## Lifecycle of a PR
 
-Many reviewers use the [review queue](https://bit.ly/3zK9VEz) to identify PRs that are ready for review.
+Many reviewers use the [review queue](../queue-redirect) to identify PRs that are ready for review.
 The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
 Everyone is also invited to regularly look at the queue (it is linkified as `#queue` on Zulip), and write reviews of PRs within their expertise.
 
-The review queue is controlled by GitHub "labels". 
+The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".) 
+(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
 
 If your PR builds (has a green checkmark), someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 

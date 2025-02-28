@@ -130,7 +130,7 @@ without bound, causing `simp` to loop forever:
 When making a new definition, it is very common to also introduce
 `simp` lemmas to put expressions involving the definition into a
 sensible form. An example of this is in mathlib's
-[data.complex.basic](https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean),
+[Data.Complex.Basic](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Data/Complex/Basic.lean),
 which has almost 100 `simp` lemmas. Even though they are true by definition, theorems such as
 ```lean
 @[simp] lemma add_re (z w : ℂ) : (z + w).re = z.re + w.re := rfl

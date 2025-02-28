@@ -479,6 +479,19 @@ We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.
 
+### Squeezing simp calls
+
+Unless performance is particularly poor or the proof breaks otherwise, *terminal `simp` calls*
+(a `simp` call is terminal if it closes the current goal or is only followed by flexible tactics
+such as `ring`, `field_simp`, `aesop`) should not be *squeezed* (replaced by the output of `simp?`).
+
+There are two main reasons for this:
+1. A squeezed `simp` call might be several lines longer than the corresponding unsqueezed one, and
+  therefore drown the useful information of what key lemmas were added to the unsqueezed `simp` call
+  to close the goal in a sea of basic simp lemmas.
+2. A squeezed `simp` call refers to many lemmas by name, meaning that it will break when one such
+  lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.
+
 ### Whitespace and delimiters
 
 Lean is whitespace-sensitive, and in general we opt for a style which avoids

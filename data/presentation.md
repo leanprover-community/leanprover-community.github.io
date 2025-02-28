@@ -1,6 +1,6 @@
 ## Lean and its Mathematical Library
 
-The [Lean theorem prover](https://leanprover.github.io)
+The [Lean theorem prover](https://lean-lang.org)
 is a proof assistant developed principally by Leonardo de Moura.
 
 The community recently switched from using Lean 3 to using Lean 4.
