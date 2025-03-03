@@ -464,3 +464,26 @@ for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "as
 `H` is normal" in informal language. However `IsTopologicalRing` is
 preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
 topological" informally. 
+
+### Unexpanded and expanded forms of functions
+
+The multiplication of two functions `f` and `g` can be denoted equivalently as 
+`f * g` or `fun x ↦ f x * g x`. These expressions are definitionally equal, but not syntactically (and they don't
+share the same key in indexing trees), which means that tools like `rw`, `fun_prop` or `apply?` 
+will not use a theorem with one form on an expression with the other form. Therefore, it is
+sometimes convenient to have variants of the statements using the two forms. If one needs to 
+distinguish between them, statements involving the first unexpanded form are written using just `mul`, 
+while statements using the second expanded form should instead use `fun_mul`. If there is no need to
+disambiguate because a lemma is given using only the expanded form, the prefix `fun_` is not required.
+
+For instance, the fact that the multiplication of two continuous functions is continuous is
+```lean
+theorem Continuous.fun_mul (hf : Continuous f) (hg : Continuous g) : Continuous fun x ↦ f x * g x
+```
+and
+```lean
+theorem Continuous.mul (hf : Continuous f) (hg : Continuous g) : Continuous (f * g)
+```
+Both theorems deserve tagging with the `fun_prop` attribute.
+
+The same goes for addition, subtraction, negation, powers and compositions of functions.
