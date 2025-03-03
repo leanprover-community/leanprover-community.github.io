@@ -734,6 +734,27 @@ for the &quot;normal subgroup&quot; typeclass, but <code>Normal</code> is also f
 <code>H</code> is normal&quot; in informal language. However <code>IsTopologicalRing</code> is
 preferred for the &quot;topological ring&quot; typeclass, as we do not say &quot;assume the ring <code>R</code> is
 topological&quot; informally.</p>
+<h3 id="unexpanded-and-expanded-forms-of-functions" class="markdown-heading">Unexpanded and expanded forms of functions <a class="hover-link" href="#unexpanded-and-expanded-forms-of-functions">#</a></h3>
+<p>The multiplication of two functions <code>f</code> and <code>g</code> can be denoted equivalently as
+<code>f * g</code> or <code>fun x ↦ f x * g x</code>. These expressions are definitionally equal, but not syntactically (and they don't
+share the same key in indexing trees), which means that tools like <code>rw</code>, <code>fun_prop</code> or <code>apply?</code>
+will not use a theorem with one form on an expression with the other form. Therefore, it is
+sometimes convenient to have variants of the statements using the two forms. If one needs to
+distinguish between them, statements involving the first unexpanded form are written using just <code>mul</code>,
+while statements using the second expanded form should instead use <code>fun_mul</code>. If there is no need to
+disambiguate because a lemma is given using only the expanded form, the prefix <code>fun_</code> is not required.</p>
+<p>For instance, the fact that the multiplication of two continuous functions is continuous is</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">Continuous.fun_mul</span><span class="w"> </span><span class="o">(</span><span class="n">hf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hg</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="n">g</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">x</span>
+</code></pre></div>
+</div>
+
+<p>and</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">Continuous.mul</span><span class="w"> </span><span class="o">(</span><span class="n">hf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hg</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="n">g</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>Both theorems deserve tagging with the <code>fun_prop</code> attribute.</p>
+<p>The same goes for addition, subtraction, negation, powers and compositions of functions.</p>
 
   </main>
 
