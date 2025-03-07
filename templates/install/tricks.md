@@ -70,11 +70,12 @@ Here is the current best practice to achieve this.
    * Now inside `MyProject` you need to clean up lake:
      ```bash
      MATHLIB_NO_CACHE_ON_UPDATE=1 lake update -R mathlib # use the new path for mathlib
-     lake exe cache get # another bug, see below
+     lake exe cache get # see the bug/feature about duplicated dependencies below
      rm -rf .lake/packages/mathlib # delete the previous local clone of mathlib
      ```
 
-     *Note*: It seems like a bug that all dependencies of Mathlib are now duplicated, once in `../mathlib4/.lake/packages` and once in
+     *Note*: It seems like a bug/feature that all dependencies of Mathlib are duplicated,
+     once in `../relative/path/to/mathlib4/.lake/packages` and once in
      `.lake/packages`. Calling `lake exe cache get` seems to add the build files for the copies under `./.lake/packages`
 
      *Note*: deleting stuff in `.lake`, even `rm -rf .lake`, is a reasonably safe action as it only contains build artifacts that are fully recovered by the next `lake` call.
