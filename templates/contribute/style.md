@@ -568,7 +568,7 @@ and examples.
 
 ### Deprecation
 
-Deleting, renaming, or changing theorem definitions can cause downstreams projects
+Deleting, renaming, or changing declarations can cause downstreams projects
 that rely on these definitions to fail to compile. Any publicly exposed theorem
 definitions that are being changed should be gracefully transitioned by keeping the
 old theorem statement with a `@[deprecated]` attribute, to warn downstream projects to
