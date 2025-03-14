@@ -67,10 +67,10 @@
   const blue = '#377eb8';
   const red = '#ff0029';
 
-  function pad_mathlib4_data(mathlib3_data, mathlib4_data) {
-    missing_len = mathlib3_data.labels.length - mathlib4_data.labels.length;
-    mathlib4_data.data = Array(missing_len).fill(0).concat(mathlib4_data.data);
-  }
+  // function pad_mathlib4_data(mathlib3_data, mathlib4_data) {
+  //   missing_len = mathlib3_data.labels.length - mathlib4_data.labels.length;
+  //   mathlib4_data.data = Array(missing_len).fill(0).concat(mathlib4_data.data);
+  // }
 
   function pad_data(mathlib3_data, mathlib4_data) {
     /* This function assumes mathlib3_data and mathlib4_data are objects with
@@ -222,7 +222,9 @@
           label: "mathlib3",
           fill: false,
           borderColor: colors[colidx],
-          data: data,
+          // 1721779200 is the Unix timestamp of Wed Jul 24 2024 00:00:00 GMT+0000
+          // which is roughly the date when the mathlib3 repo was archived
+          data: data.map((val, i) => ({ x: stamps[i], y: val })).filter(({ x, _ }) => x < 1721779200),
           cubicInterpolationMode: 'monotone',
           pointRadius: 1,
         });
@@ -234,12 +236,14 @@
           label: "mathlib4",
           fill: false,
           borderColor: colors[colidx],
-          data: data,
+          // by filtering out datapoints with 0 files or lines, we avoid showing data from before mathlib4 was created
+          data: data.map((val, i) => ({ x: stamps[i], y: val })).filter(({ _, y }) => y > 0),
           cubicInterpolationMode: 'monotone',
           pointRadius: 1,
         });
       colidx = colidx + 1;
     };
+    console.log(datasets);
     new Chart(ctx, {
       type: 'line',
       data: {
