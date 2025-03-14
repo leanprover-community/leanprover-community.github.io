@@ -52,20 +52,20 @@
 <script type="text/javascript" src="{{ base_url }}mathlib_stats/gitstats4.js"></script>
 <script>
   // because both gitstats files use the same variable names, rename the mathlib4 ones before importing the mathlib3 ones
-  by_year_month4 = by_year_month;
-  by_year4 = by_year;
-  files_stamps4 = files_stamps;
-  lines_stamps4 = lines_stamps;
-  files_by_date4 = files_by_date;
-  lines_by_date4 = lines_by_date;
+  const by_year_month4 = by_year_month;
+  const by_year4 = by_year;
+  const files_stamps4 = files_stamps;
+  const lines_stamps4 = lines_stamps;
+  const files_by_date4 = files_by_date;
+  const lines_by_date4 = lines_by_date;
 </script>
 <script type="text/javascript" src="{{ base_url }}/mathlib_stats/gitstats.js"></script>
 
 <script>
 
-  var color = Chart.helpers.color;
-  var blue = '#377eb8';
-  var red = '#ff0029';
+  const color = Chart.helpers.color;
+  const blue = '#377eb8';
+  const red = '#ff0029';
 
   function pad_mathlib4_data(mathlib3_data, mathlib4_data) {
     missing_len = mathlib3_data.labels.length - mathlib4_data.labels.length;
@@ -85,7 +85,7 @@
     const mathlib4_start = mathlib4_data.labels[0];
     const mathlib3_end = mathlib3_data.labels[length3 - 1];
 
-    var nb_new4 = 0;
+    let nb_new4 = 0;
     for (let i = length3 - 1; i >= 0; i--) {
       const label = mathlib3_data.labels[i];
       if (label < mathlib4_start) {
@@ -174,7 +174,7 @@
 
 
   function makeBarChart(id, title, mathlib3_data, mathlib4_data, show_legend = true) {
-    var barChartData = {
+    const barChartData = {
       labels: mathlib3_data.labels,
       datasets: [{
         label: "mathlib3",
@@ -192,7 +192,7 @@
       }]
     };
 
-    var ctx = document.getElementById(id).getContext('2d');
+    const ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, {
       type: 'bar',
       data: barChartData,
@@ -209,13 +209,13 @@
     });
   }
 
-  colors = [blue, red];
+  const colors = [blue, red];
 
   function makeLineChart(id, title, stamps, mathlib3_datas, mathlib4_datas, show_title = true,
     show_legend = true) {
-    var ctx = document.getElementById(id).getContext('2d');
-    var datasets = [];
-    colidx = 0;
+    const ctx = document.getElementById(id).getContext('2d');
+    const datasets = [];
+    let colidx = 0;
     for (const [name, data] of Object.entries(mathlib3_datas)) {
       datasets.push(
         {
@@ -275,9 +275,9 @@
     makeBarChart('by_year_month', 'Commits by month', by_year_month, by_year_month4);
     makeBarChart('by_year', 'Commits by year', by_year, by_year4);
 
-    files_data = merge_timestamps_and_values(files_stamps, files_by_date['Number of files'], files_stamps4, files_by_date4['Number of files']);
+    const files_data = merge_timestamps_and_values(files_stamps, files_by_date['Number of files'], files_stamps4, files_by_date4['Number of files']);
 
-    lines_data = merge_timestamps_and_values(lines_stamps, lines_by_date['Number of lines'], lines_stamps4, lines_by_date4['Number of lines']);
+    const lines_data = merge_timestamps_and_values(lines_stamps, lines_by_date['Number of lines'], lines_stamps4, lines_by_date4['Number of lines']);
 
     // makeLineChart('lines_by_authors', 'Number of lines by author', stamps, lines_by_authors);
     // makeLineChart('commits_by_authors', 'Number of commits by author', stamps, commits_by_authors);
