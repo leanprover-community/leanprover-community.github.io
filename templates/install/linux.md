@@ -12,7 +12,7 @@ All commands below should be typed inside a terminal.
   when a question is asked). It will live in `$HOME/.elan` and add a
   line to `$HOME/.profile`.
   ```bash
-  curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+  curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
   ```
 
 * You will also need a code editor that has a Lean plugin. The

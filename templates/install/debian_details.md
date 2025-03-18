@@ -19,7 +19,7 @@ reading the bash script that will be downloaded below:
   when a question is asked). It will live in `$HOME/.elan` and adds a
   line to `$HOME/.profile`.
   ```bash
-  curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+  curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
   ```
 
 * There are three editors you can use with Lean, VS Code, emacs and neovim. The
