@@ -121,13 +121,16 @@ Click on the "labels" header to add or remove labels from the current project.
 
 If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
-There are diffent groups of people that can review your PR. Anyone who has something useful to say can review your PR. If they think
-your PR is ready to move to the next stage, they might leave an "approving" review on GitHub. Approving reviews are used as an indicator
-by [reviewers](../teams/reviewers.html) to prioritize PRs. If a reviewer considers your PR ready to be merged, they will
-add the "maintainer-merge" label to your PR. These are used by [maintainers](../teams/maintainers.html) to prioritize their review.
-Maintainers are always the one to give final approval. Depending on availability, a maintainer might look at your PR before
-a reviewer has. Review times can vary depending on availability of our volunteers, if you want to explicitly ask for a review,
-please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
+There are diffent groups of people that can review your PR. 
+Anyone who has something useful to say can review your PR. 
+If they think your PR is ready to move to the next stage, they might leave an "approving" review on GitHub. 
+Approving reviews are used as an indicator by [reviewers](../teams/reviewers.html) to prioritize PRs. 
+If a reviewer considers your PR ready to be merged, they will add the "maintainer-merge" label to your PR. 
+These are used by [maintainers](../teams/maintainers.html) to prioritize their review.
+Maintainers are always the one to give final approval. 
+Depending on availability, a maintainer might look at your PR before a reviewer has. 
+Review times can vary depending on availability of our volunteers. 
+If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
 
 If a maintainer has approved your PR, a **"ready-to-merge"** label is automatically applied to the PR.
 A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
