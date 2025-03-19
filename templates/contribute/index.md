@@ -127,7 +127,7 @@ If they think your PR is ready to move to the next stage, they might leave an "a
 Approving reviews are used as an indicator by [reviewers](../teams/reviewers.html) to prioritize PRs. 
 If a reviewer considers your PR ready to be merged, they will add the "maintainer-merge" label to your PR. 
 These are used by [maintainers](../teams/maintainers.html) to prioritize their review.
-Maintainers are always the one to give final approval. 
+Maintainers are always the ones to give final approval. 
 Depending on availability, a maintainer might look at your PR before a reviewer has. 
 Review times can vary depending on availability of our volunteers. 
 If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
