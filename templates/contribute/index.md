@@ -128,8 +128,10 @@ If they think your PR is ready to move to the next stage, they might leave an "a
 These reviews are taken into account by reviewers. 
 If a reviewer considers your PR ready to be merged, they will add the **"maintainer-merge"** label to your PR. 
 These are used by maintainers to prioritize their review.
-Maintainers are always the ones to give final approval. 
-Depending on availability, a maintainer might look at your PR before a reviewer has. 
+Maintainers are always the ones to give final approval.
+Maintainers have reviewer rights, but also further powers (such as merging PRs).
+Depending on availability, a maintainer could be the first reviewer to look at your PR: in this case,
+your PR could get merged without being "maintainer merge"d first. 
 Review times can vary depending on availability of our volunteers. 
 To speed up the process, you can look at the [review guidelines](pr-review.html) and try to make sure your PR adheres to them.
 If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
