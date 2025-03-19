@@ -109,7 +109,7 @@ below the `---`.
 
 ## Lifecycle of a PR
 
-Many reviewers use the [review queue](../queue-redirect) to identify PRs that are ready for review.
+Many reviewers use the [review queue](../queueboard/review_dashboard.html) to identify PRs that are ready for review.
 The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
 Everyone is also invited to regularly look at the queue (it is linkified as `#queue` on Zulip), and write reviews of PRs within their expertise.
 
@@ -119,14 +119,22 @@ there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
 (Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
 
-If your PR builds (has a green checkmark), someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
+If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
-After some iteration, a maintainer or reviewer will "approve" the PR. (If it's a reviewer, this will add a "maintainer-merge" label, and soon after a maintainer will give final approval). This will result in a **"ready-to-merge"** label being automatically applied to the PR.
+There are diffent groups of people that can review your PR. Anyone who has something useful to say can review your PR. If they think
+your PR is ready to move to the next stage, they might leave an "approving" review on GitHub. Approving reviews are used as an indicator
+by [reviewers](../teams/reviewers.html) to prioritize PRs. If a reviewer considers your PR ready to be merged, they will
+add the "maintainer-merge" label to your PR. These are used by [maintainers](../teams/maintainers.html) to prioritize their review.
+Maintainers are always the one to give final approval. Depending on availability, a maintainer might look at your PR before
+a reviewer has. Review times can vary depending on availability of our volunteers, if you want to explicitly ask for a review,
+please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
+
+If a maintainer has approved your PR, a **"ready-to-merge"** label is automatically applied to the PR.
 A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
 The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16).
 The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 
-In some cases, a reviewer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the reviewer trusts you to make these and send the PR to bors yourself, or that the reviewer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
+In some cases, a reviewer (or maintainer) will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the reviewer trusts you to make these and send the PR to bors yourself, or that the reviewer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
 
 Here are some other frequently-used labels:
 
