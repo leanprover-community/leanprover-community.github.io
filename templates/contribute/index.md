@@ -131,7 +131,7 @@ These are used by maintainers to prioritize their review.
 Maintainers are always the ones to give final approval. 
 Depending on availability, a maintainer might look at your PR before a reviewer has. 
 Review times can vary depending on availability of our volunteers. 
-
+To speed up the process, you can look at the [review guidelines](pr-review.html) and try to make sure your PR adheres to them.
 If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
 
 If a maintainer has approved your PR, a **"ready-to-merge"** label is automatically applied to the PR.
