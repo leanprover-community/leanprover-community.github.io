@@ -87,7 +87,7 @@ Every definition and major theorem is required to have a doc string.
 (Doc strings on lemmas are also encouraged, particularly if the lemma has any mathematical content
 or might be useful in another file.)
 These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
-single spaces between the markers and the text.
+single spaces between the markers and the text. When they require multiple lines, the delimiters should go on their own line.
 They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
 sentence, then it should end in a period. Named theorems, such as the **mean value theorem** should be bold faced (i.e., with
 two asterisks before and after).
@@ -96,8 +96,10 @@ Doc strings should convey the mathematical meaning of the definition. They are a
 slightly about the actual implementation. The following is a doc string example:
 
 ```lean
-/-- If `q ≠ 0`, the `p`-adic norm of a rational `q` is `p ^ (-padicValRat p q)`.
-If `q = 0`, the `p`-adic norm of `q` is `0`. -/
+/--
+If `q ≠ 0`, the `p`-adic norm of a rational `q` is `p ^ (-padicValRat p q)`.
+If `q = 0`, the `p`-adic norm of `q` is `0`.
+-/
 def padicNorm (p : ℕ) (q : ℚ) : ℚ :=
   if q = 0 then 0 else (p : ℚ) ^ (-padicValRat p q)
 ```
@@ -105,8 +107,10 @@ def padicNorm (p : ℕ) (q : ℚ) : ℚ :=
 An example that is slightly lying but still describes the mathematical content would be:
 
 ```lean
-/-- `padicValRat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the
-valuation of `q.den`. If `q = 0` or `p = 1`, then `padicValRat p q` defaults to `0`. -/
+/--
+`padicValRat` defines the valuation of a rational `q` to be the valuation of `q.num` minus the
+valuation of `q.den`. If `q = 0` or `p = 1`, then `padicValRat p q` defaults to `0`.
+-/
 def padicValRat (p : ℕ) (q : ℚ) : ℤ :=
   padicValInt p q.num - padicValNat p q.den
 ```
@@ -195,8 +199,10 @@ namespace Name
 
 /-! ### Declarations about `name` -/
 
-/-- Find the largest prefix `n` of a `Name` such that `f n != none`, then replace this prefix
-with the value of `f n`. -/
+/--
+Find the largest prefix `n` of a `Name` such that `f n != none`, then replace this prefix
+with the value of `f n`.
+-/
 def mapPrefix (f : Name → Option Name) (n : Name) : Name := Id.run do
   if let some n' := f n then return n'
   match n with
