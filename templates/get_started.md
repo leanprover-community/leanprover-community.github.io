@@ -1,6 +1,6 @@
 # Get started with Lean
 
-Please following the [instructions in the official Lean manual](https://docs.lean-lang.org/lean4/doc/quickstart.html) to install Lean.
+Please follow the [instructions in the official Lean manual](https://docs.lean-lang.org/lean4/doc/quickstart.html) to install Lean.
 
 After this installation procedure, it is crucial to read how to start or
 get a [Lean project](install/project.html). And of course you'll
