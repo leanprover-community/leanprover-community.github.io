@@ -4,6 +4,11 @@ We are currently updating the Lean community website to describe working with Le
 but most of the information you will find here today still describes Lean 3.
 </p>
 <p>
+<b>Warning: Lean 3 and Lean 4 are incompatible.</b> None of the examples in this page will work in Lean 4.
+See for example <a href="https://leanprover-community.github.io/lean4-metaprogramming-book/">Metaprogramming in Lean 4</a>
+for a reference on writing Lean 4 tactics.
+</p>
+<p>
 Pull requests updating this page for Lean 4 are very welcome.
 There is a link at the bottom of this page.
 </p>
@@ -17,7 +22,9 @@ If you need to link to Lean 3 specific resources please link there.
 </p>
 </div>
 
-# Tutorial: tactic writing in Lean
+# Tutorial: tactic writing in Lean 3
+
+**This page is about Lean 3:** *Please read the banner above before continuing.*
 
 This is a tutorial for getting started writing your own tactics in Lean.
 It is intended for an audience that does not necessarily have
