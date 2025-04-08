@@ -80,8 +80,9 @@ two main concepts in the theory of xyzzyology.
 ## Main results
 
 - `exists_foo`: the main existence theorem of `foo`s.
-- `bar_of_foo`: a construction of a `bar`, given a `foo` under very complicated
-  and intricate circumstances worth describing in excruciating detail.
+- `bar_of_foo_of_baz`: a construction of a `bar`, given a `foo` and a `baz`.
+  If this doc-string is longer than one line, subsequent lines should be indented by two spaces
+  (as required by markdown syntax).
 - `bar_eq`    : the main classification theorem of `bar`s.
 
 ## Notation
