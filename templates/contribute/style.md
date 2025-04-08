@@ -553,7 +553,7 @@ on the direction we want) while the other conversion is more lengthy, we use `hn
 *conclusions* of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where `⊥ = 0`.
 
-## Comments
+### Comments
 
 Use module doc delimiters `/-! -/` to provide section headers and
 separators since these get incorporated into the auto-generated docs,
@@ -565,3 +565,29 @@ Documentation strings for declarations are delimited with `/-- -/`.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
+
+### Deprecation
+
+Deleting, renaming, or changing declarations can cause downstreams projects
+that rely on these definitions to fail to compile. Any publicly exposed theorems and
+definitions that are being removed should be gracefully transitioned by keeping the
+old theorem statement with a `@[deprecated]` attribute, to warn downstream projects to
+transition away from deprecated definitions before they are deleted. Renamed theorems
+can use a deprecated `alias` to the new name, while in cases where the theorem is not
+being replaced, the deprecated theorem definition can be marked with an attribute, like so:
+
+```lean4
+theorem new_name : ... := ...
+@[deprecated new_name (since := "YYYY-MM-DD")] alias old_name := new_name
+
+@[deprecated "This theorem is deprecated in favor of using ... with ..." (since := "YYYY-MM-DD")]
+theorem example_thm ...
+```
+
+The `@[deprecated]` attribute should always include the deprecation date,
+and either the new name for the theorem when it is being renamed or kept substantially the same,
+or a string to explain how transition away from the old definition when a new version is no longer
+being provided.
+
+The [`deprecate to`](/mathlib4_docs/Mathlib/Tactic/DeprecateTo.html) command and
+`scripts/add_deprecations.sh` script can help generate alias definitions.
