@@ -88,6 +88,7 @@ Every definition and major theorem is required to have a doc string.
 or might be useful in another file.)
 These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
 single spaces between the markers and the text.
+Subsequent lines in a doc-string should not be indented.
 They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
 sentence, then it should end in a period. Named theorems, such as the **mean value theorem** should be bold faced (i.e., with
 two asterisks before and after).
