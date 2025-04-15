@@ -354,13 +354,13 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l))
-        = reverse (reverse l ++ [a]) := by rw [reverse_cons]
-      _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _ = reverse [a] ++ l := by rw [reverse_reverse l]
-      _ = a :: l := rfl
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l))
+      = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
 ```
 
 The following style has the substantial advantage of having all lines be interchangeable, which is
@@ -372,13 +372,13 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-          reverse (reverse (a :: l))
-      _ = reverse (reverse l ++ [a]) := by rw [reverse_cons]
-      _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _ = reverse [a] ++ l := by rw [reverse_reverse l]
-      _ = a :: l := rfl
+  | []     => rfl
+  | a :: l => calc
+        reverse (reverse (a :: l))
+    _ = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
 ```
 
 If the expressions and proofs are relatively short, the following style is also an option:
@@ -389,12 +389,12 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
-      _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
-      _                          = a :: l                             := rfl
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
+    _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
+    _                          = a :: l                             := rfl
 ```
 
 ### Tactic mode
