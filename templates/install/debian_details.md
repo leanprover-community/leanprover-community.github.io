@@ -1,5 +1,11 @@
 # Controlled installation of Lean 4 on Debian/Ubuntu
 
+Note that these are legacy instructions provided by the community. The recommended
+way to install Lean and to create a project is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Legacy instructions
+
 This document explains a more controlled installation procedure
 for Lean 4 and mathlib on Linux distributions derived from Debian (Debian
 itself, Ubuntu, LMDE,...). There is a quicker way described in the main
