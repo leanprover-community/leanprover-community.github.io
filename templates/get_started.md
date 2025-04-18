@@ -30,7 +30,7 @@ or downloading a project.
 
 After you have followed these instructions, you'll probably want to [learn Lean](learn.html)!
 
-## Legacy / command line
+## Command line
 
 The community used to maintain its own installation instructions. These contain more
 low-level instructions on how to install Lean and to create projects. They may
