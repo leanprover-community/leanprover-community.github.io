@@ -32,6 +32,19 @@
 
 <canvas id="by_year"></canvas>
 
+<details>
+
+  <summary>Temporal distribution of commits by type (
+    <pre>feat</pre>,
+    <pre>chore</pre>, etc.)
+  </summary>
+
+  <canvas id="by_labels_by_year_month"></canvas>
+
+  <canvas id="by_labels_by_year"></canvas>
+
+</details>
+
 <h2>Dependency graph</h2>
 
 <p>
@@ -54,6 +67,8 @@
   // because both gitstats files use the same variable names, rename the mathlib4 ones before importing the mathlib3 ones
   const by_year_month4 = by_year_month;
   const by_year4 = by_year;
+  const by_labels_by_year_month4 = by_labels_by_year_month;
+  const by_labels_by_year4 = by_labels_by_year;
   const files_stamps4 = files_stamps;
   const lines_stamps4 = lines_stamps;
   const files_by_date4 = files_by_date;
@@ -65,6 +80,71 @@
   const color = Chart.helpers.color;
   const blue = '#377eb8';
   const red = '#ff0029';
+  /* Given `by_labels_by_year_month` or `by_labels_by_year` objects, return an object with cleaned
+  `labels` as keys and datasets (objects containing `labels` and `data` arrays) as values.
+  Note that the initial format is the same, we just want to merge together some of the raw labels together.
+  */
+  function merge_commit_type_data(by_labels) {
+    /*
+    Commit types from https://leanprover-community.github.io/contribute/commit.html
+    "feat" (feature)
+    "fix" (bug fix)
+    "doc" (documentation)
+    "style" (formatting, missing semicolons, ...)
+    "refactor"
+    "test" (when adding missing tests)
+    "chore" (maintain)
+    "perf" (performance improvement, optimization, ...)
+
+    We also include:
+    "feat: port" (will not be included as part of "feat")
+    "ci"
+    "other"
+    */
+    const result = {};
+    for (const commit_label in by_labels) {
+      if (commit_label === "feat: port" ||
+        commit_label === "fix" ||
+        commit_label === "doc" ||
+        commit_label === "style" ||
+        commit_label === "refactor" ||
+        commit_label === "test" ||
+        commit_label === "chore" ||
+        commit_label === "perf" ||
+        commit_label === "ci") {
+        result[commit_label] = {
+          // copy the data since we may modify in place later
+          labels: by_labels[commit_label]["labels"].slice(),
+          data: by_labels[commit_label]["data"].slice(),
+        };
+      } else if (commit_label === "feat" || commit_label === "feature") {
+        // assume that for each of these, all the "labels" arrays are the same
+        if (!result["feat"])
+          result["feat"] = {
+            labels: by_labels[commit_label]["labels"].slice(),
+            data: by_labels[commit_label]["data"].slice(),
+          };
+        else {
+          result["feat"]["data"] = result["feat"]["data"].map(
+            (val, i) => val += by_labels[commit_label]["data"][i]
+          );
+        }
+      } else { // we could do more merging of commit labels with typos, etc. but they seem to be quite rare
+        // assume that for each of these, all the "labels" arrays are the same
+        if (!result["other"])
+          result["other"] = {
+            labels: by_labels[commit_label]["labels"].slice(),
+            data: by_labels[commit_label]["data"].slice(),
+          };
+        else {
+          result["other"]["data"] = result["feat"]["other"].map(
+            (val, i) => val += by_labels[commit_label]["data"][i]
+          );
+        }
+      }
+    }
+    return result;
+  }
 
   function pad_data(mathlib3_data, mathlib4_data) {
     /* This function assumes mathlib3_data and mathlib4_data are objects with
@@ -267,6 +347,9 @@
 
 
   window.onload = function () {
+    const by_labels_by_year_merged = merge_commit_type_data(by_labels_by_year);
+    const by_labels_by_year_merged4 = merge_commit_type_data(by_labels_by_year4);
+
     pad_data(by_year_month, by_year_month4);
     pad_data(by_year, by_year4);
 
