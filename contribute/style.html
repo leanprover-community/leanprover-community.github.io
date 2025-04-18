@@ -553,7 +553,7 @@ on the direction we want) while the other conversion is more lengthy, we use <co
 <em>assumptions</em> of theorems (as this is the easier assumption to check), and <code>hlt</code> in
 <em>conclusions</em> of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where <code>⊥ = 0</code>.</p>
-<h2 id="comments" class="markdown-heading">Comments <a class="hover-link" href="#comments">#</a></h2>
+<h3 id="comments" class="markdown-heading">Comments <a class="hover-link" href="#comments">#</a></h3>
 <p>Use module doc delimiters <code>/-! -/</code> to provide section headers and
 separators since these get incorporated into the auto-generated docs,
 and use <code>/- -/</code> for more technical comments (e.g. TODOs and
@@ -564,6 +564,43 @@ When a documentation string for a declaration spans multiple lines, do not inden
 subsequent lines.</p>
 <p>See our <a href="doc.html">documentation requirements</a> for more suggestions
 and examples.</p>
+<h3 id="deprecation" class="markdown-heading">Deprecation <a class="hover-link" href="#deprecation">#</a></h3>
+<p>Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
+definitions to fail to compile.
+Any publicly exposed theorems and definitions that are being removed should be gracefully
+transitioned by keeping the old declaration with a <code>@[deprecated]</code> attribute.
+This warns downstream projects about the change and gives them the opportunity to adjust before the
+declarations are deleted.
+Renamed definitions should use a deprecated <code>alias</code> to the new name.
+Otherwise, when the deprecated definition does not have a direct replacement, the definition should
+be deprecated with a message, like so:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">theorem</span><span class="w"> </span><span class="n">new_name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">...</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="kd">@[</span><span class="n">deprecated</span><span class="w"> </span><span class="o">(</span><span class="n">since</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="o">)</span><span class="kd">]</span><span class="w"> </span><span class="kn">alias</span><span class="w"> </span><span class="n">old_name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">new_name</span>
+
+<span class="kd">@[</span><span class="n">deprecated</span><span class="w"> </span><span class="s2">&quot;This theorem is deprecated in favor of using ... with ...&quot;</span><span class="w"> </span><span class="o">(</span><span class="n">since</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="o">)</span><span class="kd">]</span>
+<span class="kn">theorem</span><span class="w"> </span><span class="n">example_thm</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>The <code>@[deprecated]</code> attribute requires the deprecation date, and an alias to the new declaration
+or a string to explain how transition away from the old definition when a new version is no longer
+being provided.</p>
+<p>The <a href="/mathlib4_docs/Mathlib/Tactic/DeprecateTo.html"><code>deprecate to</code></a> command and
+<code>scripts/add_deprecations.sh</code> script can help generate alias definitions.</p>
+<p>Deprecations for declarations with the <code>to_additive</code> attribute should ensure the deprecation is
+also properly tagged with <code>to_additive</code>, like so:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">to_additive</span><span class="kd">]</span><span class="w"> </span><span class="kn">theorem</span><span class="w"> </span><span class="n">Group_bar</span><span class="w"> </span><span class="o">{</span><span class="n">G</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
+
+<span class="c1">-- Two deprecations required to include the `deprecated` tag on both the additive</span>
+<span class="c1">-- and multiplicative versions</span>
+<span class="kd">@[</span><span class="n">deprecated</span><span class="w"> </span><span class="o">(</span><span class="n">since</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="o">)</span><span class="kd">]</span><span class="w"> </span><span class="kn">alias</span><span class="w"> </span><span class="n">AddGroup_foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AddGroup_bar</span>
+<span class="kd">@[</span><span class="n">to_additive</span><span class="w"> </span><span class="n">existing</span><span class="o">,</span><span class="w"> </span><span class="n">deprecated</span><span class="w"> </span><span class="o">(</span><span class="n">since</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="o">)</span><span class="kd">]</span><span class="w"> </span><span class="kn">alias</span><span class="w"> </span><span class="n">Group_foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Group_bar</span>
+</code></pre></div>
+</div>
+
+<p>We allow, but discourage, contributors from simultaneously renaming declarations X to Y and W to X.
+In this case, no deprecation attribute is required for X, but it is for W.</p>
+<p>Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.</p>
 
   </main>
 
