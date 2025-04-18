@@ -555,7 +555,7 @@ on the direction we want) while the other conversion is more lengthy, we use `hn
 *conclusions* of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where `⊥ = 0`.
 
-## Comments
+### Comments
 
 Use module doc delimiters `/-! -/` to provide section headers and
 separators since these get incorporated into the auto-generated docs,
@@ -569,3 +569,46 @@ subsequent lines.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
+
+### Deprecation
+
+Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
+definitions to fail to compile.
+Any publicly exposed theorems and definitions that are being removed should be gracefully
+transitioned by keeping the old declaration with a `@[deprecated]` attribute.
+This warns downstream projects about the change and gives them the opportunity to adjust before the
+declarations are deleted.
+Renamed definitions should use a deprecated `alias` to the new name.
+Otherwise, when the deprecated definition does not have a direct replacement, the definition should
+be deprecated with a message, like so:
+
+```lean4
+theorem new_name : ... := ...
+@[deprecated (since := "YYYY-MM-DD")] alias old_name := new_name
+
+@[deprecated "This theorem is deprecated in favor of using ... with ..." (since := "YYYY-MM-DD")]
+theorem example_thm ...
+```
+
+The `@[deprecated]` attribute requires the deprecation date, and an alias to the new declaration
+or a string to explain how transition away from the old definition when a new version is no longer
+being provided.
+
+The [`deprecate to`](/mathlib4_docs/Mathlib/Tactic/DeprecateTo.html) command and
+`scripts/add_deprecations.sh` script can help generate alias definitions.
+
+Deprecations for declarations with the `to_additive` attribute should ensure the deprecation is
+also properly tagged with `to_additive`, like so:
+```lean4
+@[to_additive] theorem Group_bar {G} [Group G] {a : G} : a = a := rfl
+
+-- Two deprecations required to include the `deprecated` tag on both the additive
+-- and multiplicative versions
+@[deprecated (since := "YYYY-MM-DD")] alias AddGroup_foo := AddGroup_bar
+@[to_additive existing, deprecated (since := "YYYY-MM-DD")] alias Group_foo := Group_bar
+```
+
+We allow, but discourage, contributors from simultaneously renaming declarations X to Y and W to X.
+In this case, no deprecation attribute is required for X, but it is for W.
+
+Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.
