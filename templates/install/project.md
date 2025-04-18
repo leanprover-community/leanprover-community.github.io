@@ -1,14 +1,29 @@
 # Lean projects
 
+After you have installed Lean, to use it you *must* create or download a Lean project.
+The recommended way to create or install a project is within Visual Studio Code (VS Code).
+Within VS Code, click on the `∀` symbol in the top right (which should be visible if
+Lean is installed) and either select "New Project" or "Open Project". 
+
+If you have not yet installed Lean, then the recommended way is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Why a project?
+
 In general, if you just open a single `.lean` file in your text editor
-and try to compile it, you'll get a bunch of confusing errors.
+and try to compile it with Lean, you'll get a bunch of confusing errors.
 Every non-trivial piece of Lean code needs to live inside a *Lean project*
 (sometimes also called a Lean package).
 A "Lean project" is more than just a folder that you've named "My Lean stuff".
 Rather, it's a folder containing some very specific things:
 in particular, a *git repository* and a file
-`lakefile.lean` that gathers information about dependencies of the
+`lakefile.lean` or `lakefile.toml` that gathers information about dependencies of the
 project, including for instance the version of Lean that should be used.
+
+## Legacy instructions
+
+These legacy instructions give a command-line explanation of how to install a project
+manually.
 
 If you're interested in contributing to mathlib you only need to set up
 a Lean project once, which you can use for all your contributions —
@@ -66,7 +81,7 @@ commands should be typed in a terminal.
   you may need to first type `source ~/.profile` or `source ~/.bash_profile`.
 The keyword `math` at the end of this command adds `mathlib4` to the dependencies of your project, so that you can use `import Mathlib` in your project files.
 
-* Go inside the `my_project` folder and type `lake update` and then `mkdir MyProject`.
+* Go inside the `my_project` folder and type `lake update`.
   * Windows users seeing a `curl: (35) schannel: next InitializeSecurityContext failed` error should read [this note](#troubleshooting).
 
 * Launch VS Code, either through your application menu or by typing
