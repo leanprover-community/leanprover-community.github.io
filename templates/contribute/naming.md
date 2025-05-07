@@ -2,6 +2,12 @@
 
 This guide is written for Lean 4.
 
+## File names
+
+`.lean` files in mathlib should generally be named in `UpperCamelCase`.
+A (very rare) exception are files named after some specifically lower-cased object, e.g. `lp.lean` for a file specifically about the space $$\ell_p$$ (and not $$L^p$$).
+Such exceptions should be discussed on zulip first.
+
 ## General conventions
 
 Unlike Lean 3, in which the convention was that all declarations used `snake_case`,
