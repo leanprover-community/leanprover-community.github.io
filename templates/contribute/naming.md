@@ -140,7 +140,7 @@ When translating the statements of theorems into words, the following dictionary
 | `⊥`    | `\bot`   | `bot`                      |                                  |
 | `⊤`    | `\top`   | `top`                      |                                  |
 
-The symbols `≤` and `<` have a special naming convention. In mathlib, we always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`. There are a few reasons to use `ge`/`gt`:
+The symbols `≤` and `<` have a special naming convention. In mathlib, we almost always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`. There are a few reasons to use `ge`/`gt`:
 
 1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders. Then `ge`/`gt` indicates that the arguments are swapped.
 2. We use `ge`/`gt` to match the argument order to that of another relation, such as `=` or `≠`.
@@ -148,18 +148,18 @@ The symbols `≤` and `<` have a special naming convention. In mathlib, we alway
 4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
 ```lean
 -- follows rule 1
-#check lt_iff_le_not_ge
-#check LT.lt.not_gt
+theorem lt_iff_le_not_ge [Preorder α] {a b : α} : a < b ↔ a ≤ b ∧ ¬b ≤ a := sorry
+theorem LT.lt.not_ge [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
 
 -- follows rule 2
-#check Eq.ge
-#check ne_of_gt
+theorem Eq.ge [Preorder α] {a b : α} (h : a = b) : b ≤ a := sorry
+theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : b ≠ a := sorry
 
 -- follows rule 3
-#check ge_trans
+theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := sorry
 
 -- follows rule 4
-#check le_of_forall_gt
+theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
 ```
 
 ### Dots
