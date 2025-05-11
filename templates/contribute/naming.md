@@ -131,14 +131,36 @@ When translating the statements of theorems into words, the following dictionary
 
 | symbol | shortcut | name                       | notes                            |
 |--------|----------|----------------------------|----------------------------------|
-| `<`    |          | `lt`                       |                                  |
-| `≤`    | `\le`    | `le`                       |                                  |
+| `<`    |          | `lt` / `gt`                |                                  |
+| `≤`    | `\le`    | `le` / `ge`                |                                  |
 | `⊔`    | `\sup`   | `sup`                      | a binary operator                |
 | `⊓`    | `\inf`   | `inf`                      | a binary operator                |
 | `⨆`    | `\supr`  | `iSup` / `biSup` / `ciSup` | `c` for "conditionally complete" |
 | `⨅`    | `\infi`  | `iInf` / `biInf` / `ciInf` | `c` for "conditionally complete" |
 | `⊥`    | `\bot`   | `bot`                      |                                  |
 | `⊤`    | `\top`   | `top`                      |                                  |
+
+The symbols `≤` and `<` have a special naming convention. In mathlib, we always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`. There are a few reasons to use `ge`/`gt`:
+
+1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders. Then `ge`/`gt` indicates that the arguments are swapped.
+2. We use `ge`/`gt` to match the argument order to that of another relation, such as `=` or `≠`.
+3. We use `ge`/`gt` to describe the `≤` or `<` relation with its arguments swapped.
+4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
+```lean
+-- follows rule 1
+#check lt_iff_le_not_ge
+#check LT.lt.not_gt
+
+-- follows rule 2
+#check Eq.ge
+#check ne_of_gt
+
+-- follows rule 3
+#check ge_trans
+
+-- follows rule 4
+#check le_of_forall_gt
+```
 
 ### Dots
 
