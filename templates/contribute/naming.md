@@ -153,7 +153,7 @@ theorem LT.lt.not_ge [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
 
 -- follows rule 2
 theorem Eq.ge [Preorder α] {a b : α} (h : a = b) : b ≤ a := sorry
-theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : b ≠ a := sorry
+theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : a ≠ b := sorry
 
 -- follows rule 3
 theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := sorry
