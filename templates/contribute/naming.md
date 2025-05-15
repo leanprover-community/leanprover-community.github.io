@@ -131,14 +131,38 @@ When translating the statements of theorems into words, the following dictionary
 
 | symbol | shortcut | name                       | notes                            |
 |--------|----------|----------------------------|----------------------------------|
-| `<`    |          | `lt`                       |                                  |
-| `≤`    | `\le`    | `le`                       |                                  |
+| `<`    |          | `lt` / `gt`                |                                  |
+| `≤`    | `\le`    | `le` / `ge`                |                                  |
 | `⊔`    | `\sup`   | `sup`                      | a binary operator                |
 | `⊓`    | `\inf`   | `inf`                      | a binary operator                |
 | `⨆`    | `\supr`  | `iSup` / `biSup` / `ciSup` | `c` for "conditionally complete" |
 | `⨅`    | `\infi`  | `iInf` / `biInf` / `ciInf` | `c` for "conditionally complete" |
 | `⊥`    | `\bot`   | `bot`                      |                                  |
 | `⊤`    | `\top`   | `top`                      |                                  |
+
+The symbols `≤` and `<` have a special naming convention.
+In mathlib, we almost always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`.
+There are a few reasons to use `ge`/`gt`:
+
+1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders. Then `ge`/`gt` indicates that the arguments are swapped.
+2. We use `ge`/`gt` to match the argument order of another relation, such as `=` or `≠`.
+3. We use `ge`/`gt` to describe the `≤` or `<` relation with its arguments swapped.
+4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
+```lean
+-- follows rule 1
+theorem lt_iff_le_not_ge [Preorder α] {a b : α} : a < b ↔ a ≤ b ∧ ¬b ≤ a := sorry
+theorem LT.lt.not_ge [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
+
+-- follows rule 2
+theorem Eq.ge [Preorder α] {a b : α} (h : a = b) : b ≤ a := sorry
+theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : a ≠ b := sorry
+
+-- follows rule 3
+theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := sorry
+
+-- follows rule 4
+theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
+```
 
 ### Dots
 
