@@ -380,13 +380,13 @@ is capitalized despite the fact that it should be <code>lowerCamelCase</code> ac
 <tr>
 <td align="left"><code>&lt;</code></td>
 <td align="left"></td>
-<td align="left"><code>lt</code></td>
+<td align="left"><code>lt</code> / <code>gt</code></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left"><code>≤</code></td>
 <td align="left"><code>\le</code></td>
-<td align="left"><code>le</code></td>
+<td align="left"><code>le</code> / <code>ge</code></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -427,6 +427,31 @@ is capitalized despite the fact that it should be <code>lowerCamelCase</code> ac
 </tr>
 </tbody>
 </table>
+<p>The symbols <code>≤</code> and <code>&lt;</code> have a special naming convention.
+In mathlib, we almost always use <code>≤</code> and <code>&lt;</code> instead of <code>≥</code> and <code>&gt;</code>, so we can use both <code>le</code>/<code>lt</code> and <code>ge</code>/<code>gt</code> for naming <code>≤</code> and <code>&lt;</code>.
+There are a few reasons to use <code>ge</code>/<code>gt</code>:</p>
+<ol>
+<li>We use <code>ge</code>/<code>gt</code> if the arguments to <code>≤</code> or <code>&lt;</code> appear in different orders. Then <code>ge</code>/<code>gt</code> indicates that the arguments are swapped.</li>
+<li>We use <code>ge</code>/<code>gt</code> to match the argument order of another relation, such as <code>=</code> or <code>≠</code>.</li>
+<li>We use <code>ge</code>/<code>gt</code> to describe the <code>≤</code> or <code>&lt;</code> relation with its arguments swapped.</li>
+<li>We use <code>ge</code>/<code>gt</code> if the second argument to <code>≤</code> or <code>&lt;</code> is 'more variable'.</li>
+</ol>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- follows rule 1</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">lt_iff_le_not_ge</span><span class="w"> </span><span class="o">[</span><span class="n">Preorder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">∧</span><span class="w"> </span><span class="bp">¬</span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">LT.lt.not_ge</span><span class="w"> </span><span class="o">[</span><span class="n">Preorder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">¬</span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+
+<span class="c1">-- follows rule 2</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">Eq.ge</span><span class="w"> </span><span class="o">[</span><span class="n">Preorder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">ne_of_gt</span><span class="w"> </span><span class="o">[</span><span class="n">Preorder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+
+<span class="c1">-- follows rule 3</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">ge_trans</span><span class="w"> </span><span class="o">[</span><span class="n">Preorder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+
+<span class="c1">-- follows rule 4</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">le_of_forall_gt</span><span class="w"> </span><span class="o">[</span><span class="n">LinearOrder</span><span class="w"> </span><span class="n">α</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">H</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="o">(</span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">),</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
 <h3 id="dots" class="markdown-heading">Dots <a class="hover-link" href="#dots">#</a></h3>
 <p>Dots are used for namespaces, and also for automatically generated names
 like recursors, eliminators and structure projections. They can also be
