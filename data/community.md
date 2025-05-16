@@ -21,18 +21,18 @@ We recommend indicating the coordinates of the main building where you work or s
 
 The main gathering point of our community is a
 [Zulip chat instance](https://leanprover.zulipchat.com).
-You can browse public discussions on the most popular "streams" without registering.
+You can browse public discussions on the most popular “channels” without registering.
 
 We welcome you to register for the Zulip chat,
 which will let you participate in the discussions.
-Registering with your real name is preferred, but not required.
+We strongly prefer that you use your real name as your display name.
 Starting by briefly introducing yourself in the
-[*new members* stream](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
+[*new members* channel](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
 is also appreciated.
 
 Questions from users at all levels of expertise are welcomed.
-Asking your first questions in the new members stream will ensure the answers
-won't assume you know much about Lean. But you are welcome to use more specialized streams.
+Asking your first questions in the new members channel will ensure the answers
+won't assume you know much about Lean. But you are welcome to use more specialized channels.
 Please start new discussion topics rather than using unrelated existing topics.
 If you need coding help, you may be asked to provide a "minimal working example"
 ([MWE](mwe.html)).

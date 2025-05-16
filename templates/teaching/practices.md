@@ -97,6 +97,12 @@ For GitHub Codespaces, it is important to remind students to sign up for
 GitHub's [student benefits](https://education.github.com/pack) 
 to take advantage of extra Codespaces hours.
 
+To save students time when creating new codespaces, GitHub has a "prebuild" option.
+In your course repository, go to Settings -> Codespaces. 
+You likely want to prebuild on every push and store 1 version.
+There is a nominal cost to storing these images: 
+currently (Jan. 2025) the image for a course with a full mathlib build will cost about US $0.40 per month. 
+
 ## Renaming and redefining tactics 
 
 The Lean/mathlib names for tactics may not match how you present these topics in class.

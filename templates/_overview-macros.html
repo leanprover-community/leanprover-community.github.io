@@ -1,0 +1,10 @@
+{% macro flat_child(item) -%}
+  {%- if item.children -%}
+    {{ item.title }} (
+    {%- for inner_item in item.nonempty_children -%}
+      {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
+    {%- endfor -%})
+  {%- else -%}
+    <a href="{{ item.decl }}">{{ item.title }}</a>
+  {%- endif -%}
+{%- endmacro -%}

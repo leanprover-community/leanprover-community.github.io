@@ -1,5 +1,4 @@
 # Library Style Guidelines
-Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
 
 In addition to the [naming conventions](naming.html),
 files in the Lean library generally adhere to the following guidelines
@@ -42,9 +41,9 @@ without a line break, on separate lines.
 
 ```lean
 /-
-Copyright (c) 2015 Joe Cool. All rights reserved.
+Copyright (c) 2024 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Author: Joe Cool.
+Authors: Joe Cool
 -/
 import Mathlib.Data.Nat.Basic
 import Mathlib.Algebra.Group.Defs
@@ -53,10 +52,12 @@ import Mathlib.Algebra.Group.Defs
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
 and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
 
-Regarding the list of authors: we don't have strict rules on what
-contributions qualify for inclusion there. The general idea is that
-the people listed there should be the ones we would reach out to if we had
-questions about the design or development of the Lean code.
+Regarding the list of authors: use `Authors` even when there is only a single author.
+Don't end the line with a period, and use commas (`, `) to separate all author names
+(so don't use `and` between the penultimate and ultimate author.)
+We don't have strict rules on what contributions qualify for inclusion there.
+The general idea is that the people listed there should be the ones we would
+reach out to if we had questions about the design or development of the Lean code.
 
 ### Module docstrings
 
@@ -79,7 +80,9 @@ two main concepts in the theory of xyzzyology.
 ## Main results
 
 - `exists_foo`: the main existence theorem of `foo`s.
-- `bar_of_foo`: a construction of a `bar`, given a `foo`.
+- `bar_of_foo_of_baz`: a construction of a `bar`, given a `foo` and a `baz`.
+  If this doc-string is longer than one line, subsequent lines should be indented by two spaces
+  (as required by markdown syntax).
 - `bar_eq`    : the main classification theorem of `bar`s.
 
 ## Notation
@@ -383,7 +386,7 @@ theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
 
 As we have already mentioned, when opening a tactic block,
 `by` is placed at the end of the line
-*preceding* the start of the tactic block, but not on its own line
+*preceding* the start of the tactic block, but not on its own line.
 Everything within the tactic block is indented, as in:
 
 ```lean
@@ -425,7 +428,7 @@ theorem exists_npow_eq_one_of_zpow_eq_one' [Group G] {n : ℤ} (hn : n ≠ 0) {x
 ```
 
 Certain tactics, such as `refine`, can create *named* subgoals which
-be proven in whichever order is desired using `case`. This feature
+can be proven in whichever order is desired using `case`. This feature
 is also useful in aiding readability. However, it is not required to
 use this instead of the focusing dot (`·`).
 
@@ -477,6 +480,19 @@ example : ... := by
 We generally use a blank line to separate theorems and definitions,
 but this can be omitted, for example, to group together a number of
 short definitions, or to group together a definition and notation.
+
+### Squeezing simp calls
+
+Unless performance is particularly poor or the proof breaks otherwise, *terminal `simp` calls*
+(a `simp` call is terminal if it closes the current goal or is only followed by flexible tactics
+such as `ring`, `field_simp`, `aesop`) should not be *squeezed* (replaced by the output of `simp?`).
+
+There are two main reasons for this:
+1. A squeezed `simp` call might be several lines longer than the corresponding unsqueezed one, and
+  therefore drown the useful information of what key lemmas were added to the unsqueezed `simp` call
+  to close the goal in a sea of basic simp lemmas.
+2. A squeezed `simp` call refers to many lemmas by name, meaning that it will break when one such
+  lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.
 
 ### Whitespace and delimiters
 
@@ -539,7 +555,7 @@ on the direction we want) while the other conversion is more lengthy, we use `hn
 *conclusions* of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where `⊥ = 0`.
 
-## Comments
+### Comments
 
 Use module doc delimiters `/-! -/` to provide section headers and
 separators since these get incorporated into the auto-generated docs,
@@ -548,11 +564,51 @@ implementation notes) or for comments in proofs.
 Use `--` for short or in-line comments.
 
 Documentation strings for declarations are delimited with `/-- -/`.
+When a documentation string for a declaration spans multiple lines, do not indent
+subsequent lines.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
 
-------
-Copyright (c) 2016 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad, Jireh Loreaux
+### Deprecation
+
+Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
+definitions to fail to compile.
+Any publicly exposed theorems and definitions that are being removed should be gracefully
+transitioned by keeping the old declaration with a `@[deprecated]` attribute.
+This warns downstream projects about the change and gives them the opportunity to adjust before the
+declarations are deleted.
+Renamed definitions should use a deprecated `alias` to the new name.
+Otherwise, when the deprecated definition does not have a direct replacement, the definition should
+be deprecated with a message, like so:
+
+```lean4
+theorem new_name : ... := ...
+@[deprecated (since := "YYYY-MM-DD")] alias old_name := new_name
+
+@[deprecated "This theorem is deprecated in favor of using ... with ..." (since := "YYYY-MM-DD")]
+theorem example_thm ...
+```
+
+The `@[deprecated]` attribute requires the deprecation date, and an alias to the new declaration
+or a string to explain how transition away from the old definition when a new version is no longer
+being provided.
+
+The [`deprecate to`](/mathlib4_docs/Mathlib/Tactic/DeprecateTo.html) command and
+`scripts/add_deprecations.sh` script can help generate alias definitions.
+
+Deprecations for declarations with the `to_additive` attribute should ensure the deprecation is
+also properly tagged with `to_additive`, like so:
+```lean4
+@[to_additive] theorem Group_bar {G} [Group G] {a : G} : a = a := rfl
+
+-- Two deprecations required to include the `deprecated` tag on both the additive
+-- and multiplicative versions
+@[deprecated (since := "YYYY-MM-DD")] alias AddGroup_foo := AddGroup_bar
+@[to_additive existing, deprecated (since := "YYYY-MM-DD")] alias Group_foo := Group_bar
+```
+
+We allow, but discourage, contributors from simultaneously renaming declarations X to Y and W to X.
+In this case, no deprecation attribute is required for X, but it is for W.
+
+Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.

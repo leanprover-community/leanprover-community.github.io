@@ -1,7 +1,5 @@
 # Pull Request Review Guide
 
-Author: Jireh Loreaux
-
 This guide provides a detailed look at how to conduct PR reviews for mathlib. You may
 wonder whether this guide applies to you, and the answer is "yes!"
 

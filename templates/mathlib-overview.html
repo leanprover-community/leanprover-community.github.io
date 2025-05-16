@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% from '_overview-macros.html' import flat_child %}
 {% block title %}Mathematics in mathlib{% endblock %}
 {% block content %}
 	<h1>A mathlib overview</h1>
@@ -35,7 +36,7 @@
 	  <p class="ml-4 mb-2">
 	  <b>{{ subarea.title }}</b>
 		{% for item in subarea.children %}
-		<a href="{{ item.decl }}">{{ item.title }}</a>{% if not loop.last %}, {% else %}.{% endif %}
+                {{ flat_child(item) }}{% if not loop.last %}, {% else %}.{% endif %}
 		{% endfor %}
 		{% if subarea.title in theories %}
 		  {% if theories[subarea.title] | count > 1 %}

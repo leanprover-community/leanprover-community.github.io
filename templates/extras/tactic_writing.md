@@ -4,6 +4,12 @@ We are currently updating the Lean community website to describe working with Le
 but most of the information you will find here today still describes Lean 3.
 </p>
 <p>
+<b><em>Warning: Lean 3 and Lean 4 are incompatible.</em></b> None of the examples in this page will work in Lean 4.
+  For references on writing Lean 4 tactics, see for example
+  <a href="https://leanprover-community.github.io/lean4-metaprogramming-book/">Metaprogramming in Lean 4</a>
+  and <a href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Custom-Tactics/#custom-tactics">The Lean Language Reference</a>.
+</p>
+<p>
 Pull requests updating this page for Lean 4 are very welcome.
 There is a link at the bottom of this page.
 </p>
@@ -17,7 +23,9 @@ If you need to link to Lean 3 specific resources please link there.
 </p>
 </div>
 
-# Tutorial: tactic writing in Lean
+# Tutorial: tactic writing in Lean 3
+
+***This page is about Lean 3:** Please read the banner above before continuing.*
 
 This is a tutorial for getting started writing your own tactics in Lean.
 It is intended for an audience that does not necessarily have
@@ -29,7 +37,7 @@ Other useful resources while learning to write tactics include:
   Lean for the Curious Mathematician 2020
 * Chapter 7 of the [Hitchhiker's Guide to Logical Verification](https://github.com/blanchette/logical_verification_2021/raw/main/hitchhikers_guide.pdf)
 * the original paper about metaprogramming Lean
-  [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf)
+  [A Metaprogramming Framework for Formal Verification](https://lean-lang.org/papers/tactic.pdf)
 
 ## Monadology
 
@@ -476,8 +484,8 @@ This is the end of this tutorial (although there are two cheat sheets below).
 If you want to learn more, you can read the definitions of tactics in either
 the core library or mathlib, see what you can understand, and ask specific
 questions on Zulip. For more theory, especially a proper explanation of monads, you can read
-[Programming in Lean](https://leanprover.github.io/programming_in_lean/), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
-the paper [A Metaprogramming Framework for Formal Verification](https://leanprover.github.io/papers/tactic.pdf).
+[Programming in Lean](https://lean-lang.org/programming_in_lean/), but the actual tactic writing part is not up to date. The official documentation of the tactic framework is
+the paper [A Metaprogramming Framework for Formal Verification](https://lean-lang.org/papers/tactic.pdf).
 
 ## Mario's backtick cheat sheet
 

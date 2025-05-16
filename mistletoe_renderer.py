@@ -105,6 +105,12 @@ class CustomHTMLRenderer(HTMLRenderer):
     def render_block_code(self, token):
         # replace math before highlighting
         code = replace_math(token.children[0].content, self.math)
+        # render mermaid code separately so that the javascript renderer can detect it properly
+        if token.language == 'mermaid':
+            s = '<pre class="mermaid">'
+            s += code
+            s += '</pre>'
+            return s
         try:
             # default to 'lean' if no language is specified
             lexer = get_lexer(

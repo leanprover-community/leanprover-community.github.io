@@ -30,7 +30,7 @@ Mathlib.
   * cherry picked commits from `master` for critical fixes released via release candidates.
 * We make a regular nightly release from `master`, which has a tag e.g. `nightly-2023-11-01` on the
   `leanprover/lean4-nightly` repository.
-  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`.
+  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`. (Note that it should not be `leanprover/lean4-nightly:nightly-2023-11-01`, because `elan` applies some magic wisdom here.)
 * There is a `nightly` branch on `leanprover/lean4` which follows the most recent commit which was
   used to construct a nightly release.
 * Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
@@ -53,13 +53,13 @@ Mathlib.
   * which contains adaptations for breaking changes that have been approved by the maintainers
   * and which will be using a `leanprover-lean4:nightly-YYYY-MM-DD` toolchain.
 * Std has a branch `nightly-testing` which
-  * uses a recently nightly release (this is updated automatically)
+  * uses a recent nightly release (this is updated automatically)
   * has all commits from `main` merged into it automatically
   * may have any changes from `bump/v4.X.0` merged into it manually
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
-    branch working again recent nightly releases.
+    branch working against recent nightly releases.
 * Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
-  "Mathlib reviewers" stream.
+  "Mathlib reviewers" channel.
 * Success in CI on the `nightly-testing` branch results in the creation of a tag
   `nightly-testing-YYYY-MM-DD` to match that commit, if this tag does not already exist.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
@@ -112,6 +112,39 @@ Mathlib.
   and is based off a nightly release. (Unlike for Std, where they must be created manually.)
 * Mathlib adaptation PRs on `lean-pr-testing-NNNN` branches may need to change the Std dependency
   to use a `lean-pr-testing-NNNN` branch of Std, if Std also experiences breakages.
+
+### Mathlib nightly and bump branches
+
+Every month there is a new Lean release,
+and Mathlib aims to migrate to the new Lean release as soon as possible.
+To make this process as smooth as possible, we follow the following procedure:
+
+* The `nightly-testing` branch of Mathlib uses the nightly toolchain releases of Lean.
+  In other words, the `lean-toolchain` file on that branch contains something like `leanprover/lean4:nightly-2024-09-26`.
+  - This branch is not guaranteed to build without errors.
+  - Change to this branch are not reviewed by the Mathlib maintainer team.
+  - This branch is not protected: anybody can push fixes to it.
+  - The purpose of this branch is to adapt Mathlib to changes in the nightly toolchain releases of Lean.
+  - Typically, a PR `#NNNN` to Lean core will be accompanied by adaptations to Mathlib in a branch `lean-pr-testing-NNNN`.
+    Once the Lean core PR lands in a nightly toolchain, the Mathlib branch `lean-pr-testing-NNNN` can be merged into `nightly-testing`.
+    Often one needs to fix merge conflicts in `lean-toolchain`, `lakefile.lean`, and/or `lake-manifest.json`.
+  - If CI fails on this branch, then it posts a message to ["nightly-testing > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
+  - If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)
+* The `bump/v4.X.Y` branches of Mathlib also use nightly toolchain releases of Lean.
+  - This branch should always build without errors.
+  - Changes to this branch are reviewed by the Mathlib maintainer team.
+  - This branch is protected: only Mathlib maintainers and certain bots can push to it.
+  - The purpose of this branch is to prepare a parallel version of Mathlib's `master` branch that builds on the upcoming version of Lean.
+    Once that version is released, the `bump/v4.X.Y` branch is merged into `master`.
+    This merge is essentially atomic, since the diff has already been reviewed via all the daily adaptation PRs. (See below.)
+* When `nightly-testing` passes CI, a bot posts to Zulip with instructions to create an "adaptation PR" to merge changes on `nightly-testing` into `bump/v4.X.Y`.
+  - This PR can be prepared using `scripts/create-adaptation-pr.sh` as indicated in the Zulip message.
+  - This PR should be reviewed by the Mathlib maintainer team.
+* Over the course of the Lean release cycle (i.e., a month), `bump/v4.X.Y` accumulates adaptations to the future Lean release.
+  - But `master` also accumulates thousands of lines of changes.
+  - Hence `master` should be merged into `bump/v4.X.Y` on a regular basis.
+  - At the time of writing, this step is combined into the `scripts/create-adaptation-pr.sh` process.
+  - Occasionally, merge conflicts occur. These ought to be reviewed by the Mathlib maintainer team, although that currently does not happen.
 
 ### Combined CI between Lean and Mathlib
 

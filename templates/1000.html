@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+{% block title %}1000+ theorems in Lean{% endblock %}
+{% block content %}
+
+    <h1>1000+ theorems</h1>
+
+    <p><a href="https://www.cs.ru.nl/~freek/">Freek Wiedijk</a> started the <a href="https://1000-plus.github.io/">1000+ theorems project</a> tracking progress of theorem provers in formalizing named theorems on wikipedia, as a way of comparing prominent theorem provers.
+    Currently {{thousand_theorems|selectattr('proof_formalized')|list|length}} of them are formalized in Lean,
+    and {{thousand_theorems|selectattr('statement_formalized')|list|length}} additional theorem(s) have just their statement formalized in Lean.
+    We also have a page with the theorems from the list <a href="1000-missing.html">not yet in Lean</a>.</p>
+
+	<p>
+	To make updates to this list, please <a href="contribute/index.html">make a pull request to mathlib</a>
+	after editing the
+	<a href="https://github.com/leanprover-community/mathlib4/blob/master/docs/1000.yaml">yaml source file</a>.
+	This can be done entirely on GitHub, see
+	<a href="https://docs.github.com/en/github/managing-files-in-a-repository/editing-files-in-another-users-repository">"Editing files in another user's repository"</a>.
+	</p>
+
+    {% for theorem in thousand_theorems|selectattr('proof_formalized') %}
+        <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
+        {% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
+        {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
+        {% for doc in theorem.doc_decls|default([], true) %}
+        <div class="doc-stmt">{{ doc.decl_header_html }}</div>
+        <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
+        {% endfor %}
+        {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
+        {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
+    {% endfor %}
+
+    The following theorems have just their statement formalized. Contributions to their proofs are welcome.
+    {% for theorem in thousand_theorems|selectattr('statement_formalized') %}
+        <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
+        {% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
+        {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
+        {% for doc in theorem.doc_decls|default([], true) %}
+        <div class="doc-stmt">{{ doc.decl_header_html }}</div>
+        <p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
+        {% endfor %}
+        {% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{link}}">{{title}}</a></p>{% endfor %}
+        {% if theorem.note %}<p>{% markdown %}{{ theorem.note }}{% endmarkdown %}</p>{% endif %}
+    {% endfor %}
+
+{% endblock %}

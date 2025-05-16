@@ -1,8 +1,12 @@
 # Mathlib naming conventions
 
-Author: [Jeremy Avigad](http://www.andrew.cmu.edu/user/avigad)
-
 This guide is written for Lean 4.
+
+## File names
+
+`.lean` files in mathlib should generally be named in `UpperCamelCase`.
+A (very rare) exception are files named after some specifically lower-cased object, e.g. `lp.lean` for a file specifically about the space $\ell_p$ (and not $L^p$).
+Such exceptions should be discussed on Zulip first.
 
 ## General conventions
 
@@ -12,6 +16,7 @@ in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` a
 
 1. Terms of `Prop`s (e.g. proofs, theorem names) use `snake_case`.
 2. `Prop`s and `Type`s (or `Sort`) (inductive types, structures, classes) are in `UpperCamelCase`.
+There are some rare exceptions: some fields of structures are currently wrongly lower-cased (see the example for the class `LT` below).
 3. Functions are named the same way as their return values (e.g. a function of type `A → B → C` is named as though it is a term of type `C`).
 4. All other terms of `Type`s (basically anything else) are in `lowerCamelCase`.
 5. When something named with `UpperCamelCase` is part of something named with `snake_case`, it is referenced in `lowerCamelCase`.
@@ -48,7 +53,11 @@ class HPow (α : Type u) (β : Type v) (γ : Type w) where
 
 -- follows rules 2 and 6
 class LT (α : Type u) where
-  lt : α → α → Prop -- follows rule 4 and 6
+  lt : α → α → Prop -- this is an exception to rule 2
+
+-- follows rules 2 (for `Semifield`) and 4 (for `toIsField`)
+theorem Semifield.toIsField (R : Type u) [Semifield R] :
+    IsField R -- follows rule 2
 
 -- follows rules 1 and 6
 theorem gt_iff_lt [LT α] {a b : α} : a > b ↔ b < a := sorry
@@ -122,14 +131,38 @@ When translating the statements of theorems into words, the following dictionary
 
 | symbol | shortcut | name                       | notes                            |
 |--------|----------|----------------------------|----------------------------------|
-| `<`    |          | `lt`                       |                                  |
-| `≤`    | `\le`    | `le`                       |                                  |
+| `<`    |          | `lt` / `gt`                |                                  |
+| `≤`    | `\le`    | `le` / `ge`                |                                  |
 | `⊔`    | `\sup`   | `sup`                      | a binary operator                |
 | `⊓`    | `\inf`   | `inf`                      | a binary operator                |
 | `⨆`    | `\supr`  | `iSup` / `biSup` / `ciSup` | `c` for "conditionally complete" |
 | `⨅`    | `\infi`  | `iInf` / `biInf` / `ciInf` | `c` for "conditionally complete" |
 | `⊥`    | `\bot`   | `bot`                      |                                  |
 | `⊤`    | `\top`   | `top`                      |                                  |
+
+The symbols `≤` and `<` have a special naming convention.
+In mathlib, we almost always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`.
+There are a few reasons to use `ge`/`gt`:
+
+1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders. Then `ge`/`gt` indicates that the arguments are swapped.
+2. We use `ge`/`gt` to match the argument order of another relation, such as `=` or `≠`.
+3. We use `ge`/`gt` to describe the `≤` or `<` relation with its arguments swapped.
+4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
+```lean
+-- follows rule 1
+theorem lt_iff_le_not_ge [Preorder α] {a b : α} : a < b ↔ a ≤ b ∧ ¬b ≤ a := sorry
+theorem LT.lt.not_ge [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
+
+-- follows rule 2
+theorem Eq.ge [Preorder α] {a b : α} (h : a = b) : b ≤ a := sorry
+theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : a ≠ b := sorry
+
+-- follows rule 3
+theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := sorry
+
+-- follows rule 4
+theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
+```
 
 ### Dots
 
@@ -301,7 +334,7 @@ import Mathlib.Algebra.Ring.Basic
 
 When an operation is written as infix, the theorem names follow
 suit. For example, we write `neg_mul_neg` rather than `mul_neg_neg` to
-describe the patter `-a * -b`.
+describe the pattern `-a * -b`.
 
 Sometimes, to disambiguate the name of theorem or better convey the
 intended reference, it is necessary to describe some of the
@@ -380,7 +413,6 @@ import Mathlib.Topology.Constructions
 ## Naming of structural lemmas
 
 We are trying to standardize certain naming patterns for structural lemmas.
-At present these are not uniform across mathlib.
 
 ### Extensionality
 
@@ -414,7 +446,74 @@ and there is no intention to change this.
 When such an automatically generated lemma already exists,
 and a bidirectional lemma is needed, it may be named `.inj_iff`.
 
-------
-Copyright (c) 2016 Jeremy Avigad. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Jeremy Avigad
+An injectivity lemma that uses "left" or "right" should refer to the
+argument that "changes". For example, a lemma with the statement
+`a - b = a - c ↔ b = c` could be called `sub_right_inj`.
+
+### Induction and recursion principles
+
+Induction/recursion principles are ways to construct data or proofs for all elements of some type `T`,
+by providing ways to construct this data or proof in more constrained specific contexts. 
+These principles should be phrased to accept a `motive` argument,
+which declares what property we are proving or what data we are constructing for all `T`.
+When the motive eliminates into `Prop`, it is an induction principle, and the name should contain
+`induction`. On the other hand, when the motive eliminates into `Sort u` or `Type u`,
+it is a recursive principle, and the name should contain `rec` instead.
+
+Additionally, the name should contain `on` iff in the argument order, the value comes before the constructions.
+
+The following table summarizes these naming conventions:
+
+| motive eliminates into: | `Prop`           | `Sort u` or `Type u` |
+|-------------------------|------------------|----------------------|
+| value first             | `T.induction_on` | `T.recOn`            |
+| constructions first     | `T.induction`    | `T.rec`              |
+
+Variation on these names are acceptable when necessary (e.g. for disambiguation).
+
+### Predicates as suffixes
+
+Most predicates should be added as prefixes. Eg `IsClosed (Icc a b)` should be called `isClosed_Icc`, not `Icc_isClosed`.
+
+Some widely used predicates don't follow this rule. Those are the predicates that are analogous to an atom already suffixed by the naming convention. Here is a non-exhaustive list:
+* We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
+* We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_monotone` for `Monotone f`, `_antitone` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...
+
+### Prop-valued classes
+
+Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
+topological ring" is written `variable (R : Type*) [Ring R] [TopologicalSpace R] [IsTopologicalRing R]`
+and "let $G$ be a group and let $H$ be a normal subgroup" is written
+`variable (G : Type*) [Group G] (H : Subgroup G) [Normal H]`. Here `IsTopologicalRing R`
+and `Normal H` are not extra data, but are extra assumptions on data we have already.
+
+Mathlib currently strives towards the following naming convention for these `Prop`-valued
+classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
+for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
+`H` is normal" in informal language. However `IsTopologicalRing` is
+preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
+topological" informally. 
+
+### Unexpanded and expanded forms of functions
+
+The multiplication of two functions `f` and `g` can be denoted equivalently as 
+`f * g` or `fun x ↦ f x * g x`. These expressions are definitionally equal, but not syntactically (and they don't
+share the same key in indexing trees), which means that tools like `rw`, `fun_prop` or `apply?` 
+will not use a theorem with one form on an expression with the other form. Therefore, it is
+sometimes convenient to have variants of the statements using the two forms. If one needs to 
+distinguish between them, statements involving the first unexpanded form are written using just `mul`, 
+while statements using the second expanded form should instead use `fun_mul`. If there is no need to
+disambiguate because a lemma is given using only the expanded form, the prefix `fun_` is not required.
+
+For instance, the fact that the multiplication of two continuous functions is continuous is
+```lean
+theorem Continuous.fun_mul (hf : Continuous f) (hg : Continuous g) : Continuous fun x ↦ f x * g x
+```
+and
+```lean
+theorem Continuous.mul (hf : Continuous f) (hg : Continuous g) : Continuous (f * g)
+```
+Both theorems deserve tagging with the `fun_prop` attribute.
+
+The same goes for addition, subtraction, negation, powers and compositions of functions.

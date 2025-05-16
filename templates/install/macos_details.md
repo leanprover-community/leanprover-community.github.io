@@ -1,5 +1,11 @@
 # Controlled installation of Lean 4 on MacOS
 
+Note that these are legacy instructions provided by the community. The recommended
+way to install Lean and to create a project is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Legacy instructions
+
 This document explains a more controlled installation procedure for Lean on MacOS. There is a quicker way described in the main
 [install page](macos.html) but it requires more trust.
 
@@ -15,17 +21,15 @@ all users.
 Installing `elan` and mathlib supporting tools
 ---
 
-1.  Install [Homebrew](https://brew.sh/) if you do not already have it installed.
+1.  Grab the [latest release](https://github.com/leanprover/elan/releases/latest) for your architecture,
+    unpack it, and run the contained installation program.
 
-2.  Run `brew install elan-init` in a terminal window to
-    install `elan`.
+    The installation will tell you where it will install `elan` to (`~/.elan` by default),
+    and also ask you about editing your shell config to extend `PATH`. `elan` can be uninstalled via `elan self uninstall`, which should revert these changes.
+    
+(We discourage using the `homebrew` provided `elan-init` package, as users often find that this lags behind updates to the official release. We especially discourage using the `homebrew` formula named simply `lean`, which installs a fixed version of Lean.)
 
-    Note that Homebrew also contains a formula named simply `lean`, but
-    that it installs a fixed version of Lean, rather than one provisioned
-    with `elan` as per the above.  Using this formula is as mentioned *not*
-    recommended.
-
-3.  Use `elan` to install the latest stable version of `lean` by running
+2.  Use `elan` to install the latest stable version of `lean` by running
     `elan toolchain install stable`. You can also set the newly-installed
     version to be the default version of `lean` you get when running outside of
     a project (discussed below) by running `elan default stable`.
@@ -35,7 +39,7 @@ Installing and configuring an editor
 
 There are three editors you can use with Lean, VS Code emacs and neovim.
 This document describes using VS Code which currently has the best support for Lean.
-For emacs, look at https://github.com/leanprover/lean4-mode. 
+For emacs, look at https://github.com/leanprover/lean4-mode.
 For neovim, look at https://github.com/Julian/lean.nvim)
 
 1. Install [VS Code](https://code.visualstudio.com/).
