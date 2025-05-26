@@ -144,7 +144,9 @@ The symbols `≤` and `<` have a special naming convention.
 In mathlib, we almost always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`.
 There are a few reasons to use `ge`/`gt`:
 
-1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders. We use `le`/`lt` for the first occurrence of `≤`/`<` in the theorem name, and then `ge`/`gt` indicates that the arguments are swapped.
+1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders.
+  We use `le`/`lt` for the first occurrence of `≤`/`<` in the theorem name,
+  and then `ge`/`gt` indicates that the arguments are swapped.
 2. We use `ge`/`gt` to match the argument order of another relation, such as `=` or `≠`.
 3. We use `ge`/`gt` to describe the `≤` or `<` relation with its arguments swapped.
 4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
