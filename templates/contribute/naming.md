@@ -97,6 +97,7 @@ When translating the statements of theorems into words, the following dictionary
 | symbol                      | shortcut    | name                 | notes                                         |
 |-----------------------------|-------------|----------------------|-----------------------------------------------|
 | `∈`                         | `\in`       | `mem`                |                                               |
+| `∉`                         | `\notin`    | `notMem`             |                                               |
 | `∪`                         | `\cup`      | `union`              |                                               |
 | `∩`                         | `\cap`      | `inter`              |                                               |
 | `⋃`                         | `\bigcup`   | `iUnion` / `biUnion` | `i` for "indexed", `bi` for "bounded indexed" |
