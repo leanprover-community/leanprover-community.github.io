@@ -534,6 +534,15 @@ For instance `rw [← add_comm a b]` or `simp [← and_or_left]`.
 (There should also be a space between the tactic name and its arguments, as in `rw [h]`.)
 This rule applies the `do` notation as well: `do return (← f) + (← g)`
 
+### Empty lines inside declarations
+
+Empty lines inside declarations are discouraged and there is a linter that enforces
+that they are not present. This helps maintaining a uniform code style throughout
+all of mathlib.
+
+You are however encouraged to add comments to your code: even a short sentence communicates
+*much* more than an empty line in the middle of a proof ever will!
+
 ### Normal forms
 
 Some statements are equivalent. For instance, there are several equivalent
