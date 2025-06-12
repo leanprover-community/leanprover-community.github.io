@@ -5,6 +5,8 @@ to make the process of contributing as smooth as possible.
 
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
+* Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
+We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
@@ -20,10 +22,7 @@ It is essential that everything in the master branch compiles without errors, an
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
-It's okay to do this in your own fork of the `mathlib` repository.
-
-Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
-We also strongly encourage setting your display name on Zulip to be your real name.
+You should do this in your own fork of the `mathlib` repository.
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
