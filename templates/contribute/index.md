@@ -105,11 +105,11 @@ The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have write access".) Anyone can edit the labels by writing the following comments:
+(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have write access".) Anyone can edit the labels by writing the following commands in a comment on the PR (each on its own line):
 - `awaiting-author` will add the **"awaiting-author"** label
-- (To be added) will remove the **"awaiting-author"** label
+- `-awaiting-author` will remove the **"awaiting-author"** label
 - `WIP` will add the **"WIP"** label
-- (To be added) will remove the **"WIP"** label
+- `-WIP` will remove the **"WIP"** label
 
 If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
