@@ -5,6 +5,8 @@ to make the process of contributing as smooth as possible.
 
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
+* Create a GitHub account and add your GitHub username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
+We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
@@ -20,21 +22,11 @@ It is essential that everything in the master branch compiles without errors, an
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
-It's okay to do this in your own fork of the `mathlib` repository.
-
-Eventually, to make a pull request, you'll need to migrate your work to a branch of the main mathlib repository,
-as our CI works better this way.
-It's polite to prefix the branch name with your github username, so it's easier for us to clean up clutter.
-To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
-Either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
-[this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
-Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
-We also strongly encourage setting your display name on Zulip to be your real name.
+You should do this in your own fork of the `mathlib` repository.
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
-* If you've asked for write access (recommended above), you can just use <https://github.com/leanprover-community/mathlib4>.
-  Otherwise, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
+* First, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
   to make your own fork of the repository.
   Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
 * Now make a local clone of the repository.
@@ -48,8 +40,6 @@ Typical workflow:
   ```
   git switch -c my_new_branch   # This creates a new branch and switches to it
   ```
-  If you've asked for write access you can push your new branch to mathlib which
-  comes with some advantages (see below).
 * Sometimes you may not want to create a new branch, but instead work on a branch
   that someone else created, or you created from a different computer.
   In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
@@ -57,7 +47,7 @@ Typical workflow:
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everything locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
-It's also okay to let our central CI servers do this for you by pushing your changes.
+It's also okay to let our central CI servers do this for you by pushing your changes after you've opened a PR to the main repository.
 * If you created new files, run `lake exe mk_all`. This will update `Mathlib.lean` to ensure that all files are imported there.
 * In order to push your changes back to the repository on github, use
   ```
@@ -67,7 +57,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
   ```
   git push --set-upstream origin my_new_branch
   ```
-* If you're working on the main `mathlib` repository rather than your own fork,
+* Once you've opened a PR to the main `mathlib` repository (see below),
   continuous integration will automatically kick in at this point.
   You can view the output by visiting
   https://github.com/leanprover-community/mathlib4/tree/my_new_branch
@@ -82,10 +72,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
 
 Once you're happy with your local changes, it's time to make a pull request.
 
-* If you haven't already asked for write access to non-master branches of the mathlib repository,
-please come to https://leanprover.zulipchat.com/, introduce yourself, and ask for this permission.
-
-* Push your changes to a branch on the main repository, if they weren't already there.
+* If you haven't already, please come to https://leanprover.zulipchat.com/, introduce yourself, and mention your new PR.
 
 * If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
   This helps you get feedback as you go along, and it is much easier to review.
@@ -118,7 +105,11 @@ The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
+(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have write access".) Anyone can edit the labels by writing the following commands in a comment on the PR (each on its own line):
+- `awaiting-author` will add the **"awaiting-author"** label
+- `-awaiting-author` will remove the **"awaiting-author"** label
+- `WIP` will add the **"WIP"** label
+- `-WIP` will remove the **"WIP"** label
 
 If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
