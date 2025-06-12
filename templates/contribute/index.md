@@ -26,7 +26,7 @@ You should do this in your own fork of the `mathlib` repository.
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
-* Next, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
+* First, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
   to make your own fork of the repository.
   Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
 * Now make a local clone of the repository.
