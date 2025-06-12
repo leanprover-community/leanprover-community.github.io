@@ -54,6 +54,8 @@ to make the process of contributing as smooth as possible.</p>
 <ul>
 <li>Use <a href="https://leanprover.zulipchat.com/">Zulip</a> to
 discuss your contribution before and while you are working on it.</li>
+<li>Create a GitHub account and add your GitHub username to your Zulip profile, using <a href="https://leanprover.zulipchat.com/#settings/profile">the personal settings panel</a>.
+We also strongly encourage setting your display name on Zulip to be your real name.</li>
 <li>Adhere to the guidelines:
 <ul>
 <li>The <a href="style.html">style guide</a> for contributors.</li>
@@ -69,20 +71,11 @@ The <code>master</code> branch is the &quot;production&quot; version of mathlib.
 It is essential that everything in the master branch compiles without errors, and there are no <code>sorry</code>s.
 To ensure this, we only commit changes to <code>master</code> that have passed automated Continuous Integration (&quot;CI&quot;) tests, and have been approved by mathlib maintainers.</p>
 <p>While you're working on a new contribution to <code>mathlib</code>, you should do this on a different branch.
-It's okay to do this in your own fork of the <code>mathlib</code> repository.</p>
-<p>Eventually, to make a pull request, you'll need to migrate your work to a branch of the main mathlib repository,
-as our CI works better this way.
-It's polite to prefix the branch name with your github username, so it's easier for us to clean up clutter.
-To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-<code>master</code> branches of the mathlib repository.
-Either <a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new-members">make your own thread</a> to introduce yourself, or ask for access in
-<a href="https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission">this topic</a>.
-Please include your GitHub username in your request and add this username to your Zulip profile, using <a href="https://leanprover.zulipchat.com/#settings/profile">the personal settings panel</a>.
-We also strongly encourage setting your display name on Zulip to be your real name.</p>
+You should do this in your own fork of the <code>mathlib</code> repository.</p>
 <p>Typical workflow:</p>
 <ul>
 <li>To get started, you'll need a local copy of mathlib.</li>
-<li>If you've asked for write access (recommended above), you can just use <a href="https://github.com/leanprover-community/mathlib4">https://github.com/leanprover-community/mathlib4</a>.
-Otherwise, you'll need to go to <a href="https://github.com/leanprover-community/mathlib4">https://github.com/leanprover-community/mathlib4</a> and click &quot;Fork&quot; in the top right,
+<li>First, you'll need to go to <a href="https://github.com/leanprover-community/mathlib4">https://github.com/leanprover-community/mathlib4</a> and click &quot;Fork&quot; in the top right,
 to make your own fork of the repository.
 Your fork is at <a href="https://github.com/USER/mathlib4"><a href="https://github.com/USER/mathlib4">https://github.com/USER/mathlib4</a></a>.</li>
 <li>Now make a local clone of the repository.
@@ -99,8 +92,7 @@ Your fork is at <a href="https://github.com/USER/mathlib4"><a href="https://gith
 </code></pre></div>
 </div>
 
-If you've asked for write access you can push your new branch to mathlib which
-comes with some advantages (see below).</li>
+</li>
 <li>Sometimes you may not want to create a new branch, but instead work on a branch
 that someone else created, or you created from a different computer.
 In that case you need to use <code>git switch their_new_branch</code> (note there is no <code>-c</code> here).</li>
@@ -108,7 +100,7 @@ In that case you need to use <code>git switch their_new_branch</code> (note ther
 <li>Commit your changes using <code>git commit -a</code> (or via the VS Code interface).</li>
 <li>If you'd like to compile everything locally to check you didn't break anything, run
 <code>lake build</code>. This may take a long time if you modified files low down in the import hierarchy.
-It's also okay to let our central CI servers do this for you by pushing your changes.</li>
+It's also okay to let our central CI servers do this for you by pushing your changes after you've opened a PR to the main repository.</li>
 <li>If you created new files, run <code>lake exe mk_all</code>. This will update <code>Mathlib.lean</code> to ensure that all files are imported there.</li>
 <li>In order to push your changes back to the repository on github, use
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">git</span><span class="w"> </span><span class="n">push</span>
@@ -121,7 +113,7 @@ If this complains about the remote not being configured, follow the advice in th
 </div>
 
 </li>
-<li>If you're working on the main <code>mathlib</code> repository rather than your own fork,
+<li>Once you've opened a PR to the main <code>mathlib</code> repository (see below),
 continuous integration will automatically kick in at this point.
 You can view the output by visiting
 <a href="https://github.com/leanprover-community/mathlib4/tree/my_new_branch">https://github.com/leanprover-community/mathlib4/tree/my_new_branch</a>
@@ -135,11 +127,7 @@ You can also check CI status on the command line by installing <a href="https://
 <p>Once you're happy with your local changes, it's time to make a pull request.</p>
 <ul>
 <li>
-<p>If you haven't already asked for write access to non-master branches of the mathlib repository,
-please come to <a href="https://leanprover.zulipchat.com/">https://leanprover.zulipchat.com/</a>, introduce yourself, and ask for this permission.</p>
-</li>
-<li>
-<p>Push your changes to a branch on the main repository, if they weren't already there.</p>
+<p>If you haven't already, please come to <a href="https://leanprover.zulipchat.com/">https://leanprover.zulipchat.com/</a>, introduce yourself, and mention your new PR.</p>
 </li>
 <li>
 <p>If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
@@ -175,7 +163,13 @@ You can check if your <a href="../queueboard/on_the_queue.html">PR is on the que
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels &quot;reviewers&quot;, &quot;assignees&quot;, &quot;labels&quot;, etc.
 Click on the &quot;labels&quot; header to add or remove labels from the current project.
-(Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have asked for write access&quot;.)</p>
+(Labels can only be edited by &quot;GitHub collaborators&quot;, which is approximately the same as &quot;people who have write access&quot;.) Anyone can edit the labels by writing the following commands in a comment on the PR (each on its own line):</p>
+<ul>
+<li><code>awaiting-author</code> will add the <strong>&quot;awaiting-author&quot;</strong> label</li>
+<li><code>-awaiting-author</code> will remove the <strong>&quot;awaiting-author&quot;</strong> label</li>
+<li><code>WIP</code> will add the <strong>&quot;WIP&quot;</strong> label</li>
+<li><code>-WIP</code> will remove the <strong>&quot;WIP&quot;</strong> label</li>
+</ul>
 <p>If your PR builds (has a green checkmark), someone will &quot;review&quot; it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label <strong>&quot;awaiting-author&quot;</strong>. You should address each comment, clicking the &quot;resolve conversation&quot; button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the <strong>&quot;awaiting-author&quot;</strong> label to start the process over again.</p>
 <p>There are different groups of people that can review your PR: anyone, <a href="../teams/reviewers.html">reviewers</a> and <a href="../teams/maintainers.html">maintainers</a>.
 Anyone who has something useful to say can review your PR.
