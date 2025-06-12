@@ -5,7 +5,7 @@ to make the process of contributing as smooth as possible.
 
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
-* Please include your GitHub username in your request and add this username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
+* Create a GitHub account and add your GitHub username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
 We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
    - The [style guide](style.html) for contributors.
