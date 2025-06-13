@@ -34,9 +34,7 @@
 
 <details>
 
-  <summary>Temporal distribution of commits by type (
-    <pre>feat</pre>,
-    <pre>chore</pre>, etc.)
+  <summary>Temporal distribution of commits by type (<code>feat</code>, <code>chore</code>, etc.)
   </summary>
 
   <canvas id="by_labels_by_year_month"></canvas>
@@ -56,7 +54,7 @@
 
 {% block extrajs %}
 <script type="text/javascript" src="js/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
 <link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
@@ -80,9 +78,10 @@
   const color = Chart.helpers.color;
   const blue = '#377eb8';
   const red = '#ff0029';
+
   /* Given `by_labels_by_year_month` or `by_labels_by_year` objects, return an object with cleaned
   `labels` as keys and datasets (objects containing `labels` and `data` arrays) as values.
-  Note that the initial format is the same, we just want to merge together some of the raw labels together.
+  Note that the initial format is the same, we just want to merge some of the raw labels together.
   */
   function merge_commit_type_data(by_labels) {
     /*
@@ -137,7 +136,7 @@
             data: by_labels[commit_label]["data"].slice(),
           };
         else {
-          result["other"]["data"] = result["feat"]["other"].map(
+          result["other"]["data"] = result["other"]["data"].map(
             (val, i) => val += by_labels[commit_label]["data"][i]
           );
         }
@@ -176,6 +175,18 @@
         mathlib3_data.data.push(0);
       }
     }
+  }
+
+  /* Given both mathlib3 and mathlib4 `by_labels_by_year_month` or `by_labels_by_year` objects,
+  return an object with keys:
+  - labels: array of x-coordinates of the data points
+  - datasets: array of data objects, with keys:
+    - data: array of y-coordinates (padded, if necessary to align properly with labels)
+    - label: string containing mathlib3 / mathlib4 + commit label
+    - stack: string containing mathlib3 or mathlib4
+  */
+  function pad_labels_data(mathlib3_data, mathlib4_data) {
+
   }
 
   function merge_timestamps_and_values(mathlib3_ts, mathlib3_vals, mathlib4_ts, mathlib4_vals) {
@@ -247,7 +258,6 @@
     };
   }
 
-
   function makeBarChart(id, title, mathlib3_data, mathlib4_data, show_legend = true) {
     const barChartData = {
       labels: mathlib3_data.labels,
@@ -273,6 +283,45 @@
       data: barChartData,
       options: {
         responsive: true,
+        legend: {
+          display: show_legend,
+        },
+        title: {
+          display: true,
+          text: title
+        }
+      }
+    });
+  }
+
+  function makeStackedBarChart(id, title, data, show_legend = true) {
+    const barChartData = {
+      labels: data.labels,
+      datasets: data.datasets.map(({data, label, stack}, i) => ({
+        data,
+        label,
+        stack,
+        // TODO: distinct styles
+        backgroundColor: color(red).alpha(0.5).rgbString(),
+        borderColor: red,
+        borderWidth: 1,
+      }))
+    };
+
+    const ctx = document.getElementById(id).getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: barChartData,
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        },
         legend: {
           display: show_legend,
         },
@@ -318,7 +367,6 @@
         });
       colidx = colidx + 1;
     };
-    console.log(datasets);
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -348,14 +396,22 @@
 
 
   window.onload = function () {
-    const by_labels_by_year_merged = merge_commit_type_data(by_labels_by_year);
-    const by_labels_by_year_merged4 = merge_commit_type_data(by_labels_by_year4);
-
     pad_data(by_year_month, by_year_month4);
     pad_data(by_year, by_year4);
 
     makeBarChart('by_year_month', 'Commits by month', by_year_month, by_year_month4);
     makeBarChart('by_year', 'Commits by year', by_year, by_year4);
+
+    const by_labels_by_year_merged = merge_commit_type_data(by_labels_by_year);
+    const by_labels_by_year_merged4 = merge_commit_type_data(by_labels_by_year4);
+    const by_labels_by_year_padded = pad_labels_data(by_labels_by_year_merged, by_labels_by_year_merged4);
+
+    const by_labels_by_year_month_merged = merge_commit_type_data(by_labels_by_year_month);
+    const by_labels_by_year_month_merged4 = merge_commit_type_data(by_labels_by_year_month4);
+    const by_labels_by_year_month_padded = pad_labels_data(by_labels_by_year_merged, by_labels_by_year_merged4);
+
+    makeStackedBarChart('by_labels_by_year_month', 'Commits by month', by_labels_by_year_padded);
+    makeStackedBarChart('by_labels_by_year', 'Commits by year', by_labels_by_year_month_padded);
 
     const files_data = merge_timestamps_and_values(files_stamps, files_by_date['Number of files'], files_stamps4, files_by_date4['Number of files']);
 
