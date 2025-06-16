@@ -26,10 +26,9 @@ You have two options depending on whether you already have a clone of mathlib4:
 
 ### Option A: If you don't have mathlib4 cloned yet
 
-Clone your fork (not the original repository):
+Clone your fork (not the original repository). Replace `YOUR_USERNAME` with your GitHub username:
 
 ```bash
-# Replace YOUR_USERNAME with your GitHub username
 git clone https://github.com/YOUR_USERNAME/mathlib4.git
 cd mathlib4
 ```
@@ -53,19 +52,15 @@ The remote setup depends on which option you chose above:
 You need to add the original repository as `upstream`:
 
 ```bash
-# Add the original repository as 'upstream'
 git remote add upstream https://github.com/leanprover-community/mathlib4.git
 ```
 
 ### If you used an existing clone (Option B)
 
-You need to rename the existing remote and add your fork:
+You need to rename the existing remote and add your fork. Replace `YOUR_USERNAME` with your GitHub username:
 
 ```bash
-# Rename the existing remote to 'upstream'
 git remote rename origin upstream
-
-# Add your fork as 'origin' (replace YOUR_USERNAME with your GitHub username)
 git remote add origin https://github.com/YOUR_USERNAME/mathlib4.git
 ```
 
@@ -106,10 +101,9 @@ Run these commands regularly, especially before creating new branches.
 
 ## Step 6: Prevent Accidental Commits to Master
 
-To avoid accidentally committing directly to `master`, you can set up a pre-commit hook:
+To avoid accidentally committing directly to `master`, you can set up a pre-commit hook. First, create the hook file:
 
 ```bash
-# Create the hook file
 mkdir -p .git/hooks
 cat > .git/hooks/pre-commit << 'EOF'
 #!/bin/sh
@@ -119,8 +113,11 @@ if [ "$branch" = "master" ]; then
   exit 1
 fi
 EOF
+```
 
-# Make it executable
+Then make it executable:
+
+```bash
 chmod +x .git/hooks/pre-commit
 ```
 
@@ -137,14 +134,16 @@ git config push.autoSetupRemote true
 
 ### Create a New Branch
 
-Always create new branches from an up-to-date `master`:
+Always create new branches from an up-to-date `master`. First make sure master is up to date:
 
 ```bash
-# Make sure master is up to date
 git checkout master
 git pull
+```
 
-# Create and switch to a new branch
+Then create and switch to a new branch:
+
+```bash
 git checkout -b my-feature-branch
 ```
 
@@ -178,25 +177,29 @@ gh pr create --title "Your PR Title" --body "Description of your changes"
 
 ### Method 1: Manual Checkout
 
-To check out someone else's PR manually:
+To check out someone else's PR manually, first add their fork as a remote (replace `USERNAME` with their GitHub username):
 
 ```bash
-# Add their fork as a remote (replace USERNAME with their GitHub username)
 git remote add contributor-name https://github.com/USERNAME/mathlib4.git
+```
 
-# Fetch their branches
+Then fetch their branches:
+
+```bash
 git fetch contributor-name
+```
 
-# Checkout their branch
+Finally, checkout their branch:
+
+```bash
 git checkout contributor-name/their-branch-name
 ```
 
 ### Method 2: Using GitHub CLI (Recommended)
 
-This is much simpler:
+This is much simpler. To checkout PR #1234:
 
 ```bash
-# Checkout PR #1234
 gh pr checkout 1234
 ```
 
@@ -225,26 +228,42 @@ If you encounter issues or have questions about git workflows, please ask in the
 
 ## Quick Reference
 
-Here's a summary of the most common commands you'll use:
+Here's a summary of the most common commands you'll use.
+
+Update master:
 
 ```bash
-# Update master and push to your fork
 git checkout master
 git pull
+```
 
-# Create a new branch
+Create a new branch:
+
+```bash
 git checkout -b new-branch-name
+```
 
-# Push your branch and set up tracking
+Push your branch and set up tracking:
+
+```bash
 git push origin new-branch-name
+```
 
-# Check out someone else's PR
+Check out someone else's PR:
+
+```bash
 gh pr checkout PR_NUMBER
+```
 
-# Check remote configuration
+Check remote configuration:
+
+```bash
 git remote -v
+```
 
-# Check which branch you're on
+Check which branch you're on:
+
+```bash
 git branch
 ```
 
@@ -264,9 +283,8 @@ git push --set-upstream origin branch-name
 ```
 
 **Problem**: Accidentally committed to your copy of the master branch
-**Solution**: 
+**Solution**: Move the commits to a new branch:
 ```bash
-# Move the commits to a new branch
 git branch new-branch-name
 git checkout master
 git reset --hard upstream/master
