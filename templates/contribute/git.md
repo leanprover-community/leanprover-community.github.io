@@ -222,7 +222,7 @@ If you want to allow others to push directly to your PR branch:
 6. Choose "Write" permission level
 7. Send the invitation
 
-Once they accept, they can push directly to your PR branches.
+Once they accept, they can push directly to your PR branches by using `git push` after following one of the methods in step 9.
 
 ## ⚠️ Security Warning
 
