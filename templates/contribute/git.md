@@ -2,12 +2,22 @@
 
 This guide is designed for mathematicians who are new to git but want to contribute to mathlib4. We'll walk through the essential git workflows step by step.
 
+The guide is organized into two main sections:
+1. **One-time setup** (do this once when you first start contributing)
+2. **Daily workflow** (common operations for working on contributions)
+
 ## Prerequisites
 
 Before starting, make sure you have:
 - Git installed on your computer
 - A GitHub account
 - (Optional but recommended) The GitHub CLI tool (`gh`) installed
+
+---
+
+# Part 1: One-Time Setup
+
+These steps only need to be done once when you first start contributing to mathlib4.
 
 ## Step 1: Fork the Repository on GitHub
 
@@ -18,7 +28,7 @@ First, you need to create your own copy (fork) of the mathlib4 repository:
 3. Choose your GitHub account as the destination
 4. Wait for GitHub to create your fork
 
-You only ever need to do this step once. You can reuse your fork for many different branches and pull requests.
+**You only ever need to do this step once.** You can reuse your fork for many different branches and pull requests.
 
 ## Step 2: Get a Local Copy of the Repository
 
@@ -94,18 +104,18 @@ Then make sure your `master` branch tracks `upstream/master`:
 git branch --set-upstream-to=upstream/master master
 ```
 
-## Step 5: Keep Your Master Branch Up to Date
+## Step 5: Configure Git for Your Workflow
 
-Always keep your `master` branch synchronized with upstream:
+### Set Default Push Behavior
+
+Configure git to push new branches to `origin` by default:
 
 ```bash
-git switch master
-git pull
+git config push.default current
+git config push.autoSetupRemote true
 ```
 
-Run these commands regularly, especially before creating new branches.
-
-## Step 6: Prevent Accidental Commits to Master
+### Prevent Accidental Commits to Master (Optional but Recommended)
 
 To avoid accidentally committing directly to `master`, you can set up a pre-commit hook. First, create the hook file:
 
@@ -127,25 +137,24 @@ Then make it executable:
 chmod +x .git/hooks/pre-commit
 ```
 
-## Step 7: Create and Configure New Branches
+---
 
-### Set Default Push Behavior
+# Part 2: Daily Workflow
 
-Configure git to push new branches to `origin` by default:
+These are the operations you'll use regularly when working on contributions.
 
-```bash
-git config push.default current
-git config push.autoSetupRemote true
-```
+## Creating and Working on a New Branch
 
-### Create a New Branch
+### Keep Your Master Branch Up to Date
 
-Always create new branches from an up-to-date `master`. First make sure master is up to date:
+**Do this before creating a new branch** to ensure you're working with the latest changes:
 
 ```bash
 git switch master
 git pull
 ```
+
+### Create a New Branch
 
 Then create and switch to a new branch:
 
@@ -155,7 +164,7 @@ git switch -c my-feature-branch
 
 The branch will automatically track `origin/my-feature-branch` when you first push it.
 
-## Step 8: Push Your Branch and Open a PR
+## Push Your Branch and Open a PR
 
 ### Push Your Branch
 
@@ -179,7 +188,7 @@ Alternatively, if you have the GitHub CLI installed:
 gh pr create --title "Your PR Title" --body "Description of your changes"
 ```
 
-## Step 9: Working with Others' PRs
+## Working with Others' PRs
 
 ### Method 1: Manual Checkout
 
@@ -211,7 +220,7 @@ gh pr checkout 1234
 
 This automatically handles the remote setup and branch checkout.
 
-## Step 10: Giving Collaborator Access
+## Giving Collaborator Access
 
 If you want to allow others to push directly to your PR branch:
 
@@ -223,6 +232,10 @@ If you want to allow others to push directly to your PR branch:
 7. Send the invitation
 
 Once they accept, they can push directly to your PR branches by using `git push` after following one of the methods in step 9.
+
+---
+
+# Additional Information
 
 ## ⚠️ Security Warning
 
