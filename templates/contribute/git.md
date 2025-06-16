@@ -82,7 +82,13 @@ upstream  https://github.com/leanprover-community/mathlib4.git (push)
 
 ## Step 4: Configure the Master Branch
 
-Make sure your `master` branch tracks `upstream/master`:
+First, fetch the branches from upstream:
+
+```bash
+git fetch upstream
+```
+
+Then make sure your `master` branch tracks `upstream/master`:
 
 ```bash
 git branch --set-upstream-to=upstream/master master
@@ -93,7 +99,7 @@ git branch --set-upstream-to=upstream/master master
 Always keep your `master` branch synchronized with upstream:
 
 ```bash
-git checkout master
+git switch master
 git pull
 ```
 
@@ -137,14 +143,14 @@ git config push.autoSetupRemote true
 Always create new branches from an up-to-date `master`. First make sure master is up to date:
 
 ```bash
-git checkout master
+git switch master
 git pull
 ```
 
 Then create and switch to a new branch:
 
 ```bash
-git checkout -b my-feature-branch
+git switch -c my-feature-branch
 ```
 
 The branch will automatically track `origin/my-feature-branch` when you first push it.
@@ -233,14 +239,14 @@ Here's a summary of the most common commands you'll use.
 Update master:
 
 ```bash
-git checkout master
+git switch master
 git pull
 ```
 
 Create a new branch:
 
 ```bash
-git checkout -b new-branch-name
+git switch -c new-branch-name
 ```
 
 Push your branch and set up tracking:
@@ -272,7 +278,7 @@ git branch
 **Problem**: "Your branch is behind 'upstream/master'"
 **Solution**: 
 ```bash
-git checkout master
+git switch master
 git pull
 ```
 
@@ -286,7 +292,7 @@ git push --set-upstream origin branch-name
 **Solution**: Move the commits to a new branch:
 ```bash
 git branch new-branch-name
-git checkout master
+git switch master
 git reset --hard upstream/master
-git checkout new-branch-name
+git switch new-branch-name
 ```
