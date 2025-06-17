@@ -192,6 +192,7 @@ git push origin my-feature-branch
 4. Fill in the PR title and description
 5. Click "Create pull request"
 
+Alternatively, or if you do not see the banner, you can also go to https://github.com/leanprover-community/mathlib4/compare, and click `compare across forks`. You will need to select your fork in the "head repository" drop-down menu, and select the branch you want to merge in the "compare" drop-down menu.
 ## Working with Others' PRs
 
 ### Method 1: Manual Checkout
