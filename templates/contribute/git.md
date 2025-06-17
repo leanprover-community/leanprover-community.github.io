@@ -25,7 +25,7 @@ First, you need to create your own copy (fork) of the mathlib4 repository:
 
 1. Go to https://github.com/leanprover-community/mathlib4
 2. Click the "Fork" button in the top right corner
-3. Choose your GitHub account as the destination
+3. Choose your GitHub account as the destination. It is recommended to leave "copy the master branch only" checked.
 4. Wait for GitHub to create your fork
 
 **You only ever need to do this step once.** You can reuse your fork for many different branches and pull requests.
@@ -182,12 +182,6 @@ git push origin my-feature-branch
 4. Fill in the PR title and description
 5. Click "Create pull request"
 
-Alternatively, if you have the GitHub CLI installed:
-
-```bash
-gh pr create --title "Your PR Title" --body "Description of your changes"
-```
-
 ## Working with Others' PRs
 
 ### Method 1: Manual Checkout
@@ -209,6 +203,8 @@ Finally, checkout their branch:
 ```bash
 git checkout contributor-name/their-branch-name
 ```
+
+(Remotes can be removed with `git remote remove <contributor-name>`.)
 
 ### Method 2: Using GitHub CLI (Recommended)
 
@@ -243,7 +239,7 @@ Once they accept, they can push directly to your PR branches by using `git push`
 
 ## Getting Help
 
-If you encounter issues or have questions about git workflows, please ask in the `#new users` stream on the [Lean Zulip chat](https://leanprover.zulipchat.com). The community is very helpful and welcomes questions from newcomers!
+If you encounter issues or have questions about git workflows, please ask in the `#new users` stream on the [Lean Zulip chat](https://leanprover.zulipchat.com). The community is very helpful and welcomes questions!
 
 ## Quick Reference
 
@@ -309,3 +305,9 @@ git switch master
 git reset --hard upstream/master
 git switch new-branch-name
 ```
+
+## Additional resources
+
+* [The git glossary](https://git-scm.com/docs/gitglossary)
+* [Everyday git commands](https://git-scm.com/docs/giteveryday)
+* [The git user manual](https://git-scm.com/docs/user-manual)
