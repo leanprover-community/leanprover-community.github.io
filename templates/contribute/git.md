@@ -115,6 +115,16 @@ git config push.default current
 git config push.autoSetupRemote true
 ```
 
+### Configure GitHub CLI (if installed)
+
+If you have the GitHub CLI installed, set the default repository to the upstream mathlib4:
+
+```bash
+gh repo set-default leanprover-community/mathlib4
+```
+
+This ensures that GitHub CLI commands like `gh pr checkout` will work with the main mathlib4 repository rather than your fork.
+
 ### Prevent Accidental Commits to Master (Optional but Recommended)
 
 To avoid accidentally committing directly to `master`, you can set up a pre-commit hook. First, create the hook file:
