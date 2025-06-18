@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Git Guide for Mathlib4 Contributors</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+<h1 id="git-guide-for-mathlib4-contributors" class="markdown-heading">Git Guide for Mathlib4 Contributors <a class="hover-link" href="#git-guide-for-mathlib4-contributors">#</a></h1>
+<p>This guide is designed for mathematicians who are new to git but want to contribute to the mathlib4 library.
+Contributions are made via pull requests. We'll walk through the essential workflows step by step.
+Note that there are many other guides on the web describing how to contribute to open-source projects
+via pull requests.</p>
+<p>The guide is organized into three main sections:</p>
+<ol>
+<li><a href="#part-1-one-time-setup"><strong>One-time setup</strong></a> (do this once when you first start contributing)</li>
+<li><a href="#part-2-daily-workflow"><strong>Daily workflow</strong></a> (common operations for working on contributions)</li>
+<li><a href="#additional-information"><strong>Additional information</strong></a></li>
+</ol>
+<h2 id="prerequisites" class="markdown-heading">Prerequisites <a class="hover-link" href="#prerequisites">#</a></h2>
+<p>Before starting, make sure you have:</p>
+<ul>
+<li>Git installed on your computer</li>
+<li><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">A GitHub account</a></li>
+<li>(Optional but recommended) <a href="https://cli.github.com/">The GitHub CLI tool (<code>gh</code>)</a> installed</li>
+</ul>
+<hr />
+<h1 id="part-1-one-time-setup" class="markdown-heading">Part 1: One-Time Setup <a class="hover-link" href="#part-1-one-time-setup">#</a></h1>
+<p>These steps only need to be done once when you first start contributing to mathlib4.</p>
+<h2 id="step-1-fork-the-repository-on-github" class="markdown-heading">Step 1: Fork the Repository on GitHub <a class="hover-link" href="#step-1-fork-the-repository-on-github">#</a></h2>
+<p>First, you need to create your own copy (fork) of the mathlib4 repository:</p>
+<ol>
+<li>Go to <a href="https://github.com/leanprover-community/mathlib4">https://github.com/leanprover-community/mathlib4</a></li>
+<li>Click the &quot;Fork&quot; button in the top right corner</li>
+<li>Choose your GitHub account as the destination. It is recommended to leave &quot;copy the master branch only&quot; checked.</li>
+<li>Wait for GitHub to create your fork</li>
+</ol>
+<p><strong>You only ever need to do this step once.</strong>
+You can reuse your fork for many different branches and pull requests.</p>
+<h2 id="step-2-get-a-local-copy-of-the-repository" class="markdown-heading">Step 2: Get a Local Copy of the Repository <a class="hover-link" href="#step-2-get-a-local-copy-of-the-repository">#</a></h2>
+<p>The fork you created in the previous step is a &quot;remote&quot; copy of mathlib4, which lives on GitHub's servers.
+You'll now need to set up your local copy of mathlib4 on your computer (also referred to as a &quot;clone&quot;).</p>
+<p>You have two options depending on whether you already have a clone of mathlib4:</p>
+<h3 id="option-a-if-you-dont-have-mathlib4-cloned-yet" class="markdown-heading">Option A: If you don't have mathlib4 cloned yet <a class="hover-link" href="#option-a-if-you-dont-have-mathlib4-cloned-yet">#</a></h3>
+<h4 id="method-1-using-github-cli-recommended" class="markdown-heading">Method 1: Using GitHub CLI (recommended) <a class="hover-link" href="#method-1-using-github-cli-recommended">#</a></h4>
+<p>Replace <code>YOUR_USERNAME</code> with your GitHub username in the following shell commands:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>gh<span class="w"> </span>repo<span class="w"> </span>clone<span class="w"> </span>YOUR_USERNAME/mathlib4
+<span class="nb">cd</span><span class="w"> </span>mathlib4
+</code></pre></div>
+</div>
+
+<h4 id="method-2-manual-cloning" class="markdown-heading">Method 2: Manual cloning <a class="hover-link" href="#method-2-manual-cloning">#</a></h4>
+<p>Replace <code>YOUR_USERNAME</code> with your GitHub username in the following shell commands to clone your fork (not the original repository) into a directory named <code>mathlib4</code> in the current working directory and then navigate to it:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR_USERNAME/mathlib4.git
+<span class="nb">cd</span><span class="w"> </span>mathlib4
+</code></pre></div>
+</div>
+
+<p>This automatically sets up your fork as the <code>origin</code> remote, which is what we want.</p>
+<h3 id="option-b-if-you-already-have-mathlib4-cloned" class="markdown-heading">Option B: If you already have mathlib4 cloned <a class="hover-link" href="#option-b-if-you-already-have-mathlib4-cloned">#</a></h3>
+<p>If you already have a clone from the original repository (e.g. if you created one via the Lean 4 VS Code extension), you can reuse it. Just navigate to your existing mathlib4 directory:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path/to/your/existing/mathlib4
+</code></pre></div>
+</div>
+
+<h4 id="configure-github-cli-if-installed" class="markdown-heading">Configure GitHub CLI (if installed) <a class="hover-link" href="#configure-github-cli-if-installed">#</a></h4>
+<p>If you have the GitHub CLI installed, set the default repository to the upstream mathlib4:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>gh<span class="w"> </span>repo<span class="w"> </span>set-default<span class="w"> </span>leanprover-community/mathlib4
+</code></pre></div>
+</div>
+
+<p>This ensures that GitHub CLI commands like <code>gh pr checkout</code> will work with the main mathlib4 repository rather than your fork.</p>
+<h2 id="step-3-set-up-remotes-correctly" class="markdown-heading">Step 3: Set Up Remotes Correctly <a class="hover-link" href="#step-3-set-up-remotes-correctly">#</a></h2>
+<p>The remote setup depends on which option you chose above:</p>
+<h3 id="if-you-cloned-your-fork-using-the-github-cli-option-a-method-1" class="markdown-heading">If you cloned your fork using the GitHub CLI (Option A, Method 1) <a class="hover-link" href="#if-you-cloned-your-fork-using-the-github-cli-option-a-method-1">#</a></h3>
+<p><code>gh</code> has already taken care of this step for you.</p>
+<h3 id="if-you-cloned-your-fork-without-using-the-github-cli-option-a-method-2" class="markdown-heading">If you cloned your fork without using the GitHub CLI (Option A, Method 2) <a class="hover-link" href="#if-you-cloned-your-fork-without-using-the-github-cli-option-a-method-2">#</a></h3>
+<p>You need to add the original repository as <code>upstream</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/leanprover-community/mathlib4.git
+</code></pre></div>
+</div>
+
+<h3 id="if-you-used-an-existing-clone-option-b" class="markdown-heading">If you used an existing clone (Option B) <a class="hover-link" href="#if-you-used-an-existing-clone-option-b">#</a></h3>
+<p>You need to rename the existing remote and add your fork.
+Replace <code>YOUR_USERNAME</code> with your GitHub username:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>origin<span class="w"> </span>upstream
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/YOUR_USERNAME/mathlib4.git
+</code></pre></div>
+</div>
+
+<h3 id="verify-your-remotes" class="markdown-heading">Verify Your Remotes <a class="hover-link" href="#verify-your-remotes">#</a></h3>
+<p>Regardless of which option you chose, verify your remotes are set correctly:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div>
+</div>
+
+<p>You should see:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">origin</span><span class="w">    </span><span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">YOUR_USERNAME</span><span class="bp">/</span><span class="n">mathlib4.git</span><span class="w"> </span><span class="o">(</span><span class="n">fetch</span><span class="o">)</span>
+<span class="n">origin</span><span class="w">    </span><span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">YOUR_USERNAME</span><span class="bp">/</span><span class="n">mathlib4.git</span><span class="w"> </span><span class="o">(</span><span class="n">push</span><span class="o">)</span>
+<span class="n">upstream</span><span class="w">  </span><span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">leanprover</span><span class="bp">-</span><span class="n">community</span><span class="bp">/</span><span class="n">mathlib4.git</span><span class="w"> </span><span class="o">(</span><span class="n">fetch</span><span class="o">)</span>
+<span class="n">upstream</span><span class="w">  </span><span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github.com</span><span class="bp">/</span><span class="n">leanprover</span><span class="bp">-</span><span class="n">community</span><span class="bp">/</span><span class="n">mathlib4.git</span><span class="w"> </span><span class="o">(</span><span class="n">push</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<h2 id="step-4-configure-the-master-branch" class="markdown-heading">Step 4: Configure the Master Branch <a class="hover-link" href="#step-4-configure-the-master-branch">#</a></h2>
+<p>First, fetch the branches from upstream:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>fetch<span class="w"> </span>upstream
+</code></pre></div>
+</div>
+
+<p>Then make sure your <code>master</code> branch tracks <code>upstream/master</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>branch<span class="w"> </span>--set-upstream-to<span class="o">=</span>upstream/master<span class="w"> </span>master
+</code></pre></div>
+</div>
+
+<h2 id="step-5-configure-git-for-your-workflow" class="markdown-heading">Step 5: Configure Git for Your Workflow <a class="hover-link" href="#step-5-configure-git-for-your-workflow">#</a></h2>
+<h3 id="set-default-push-behavior" class="markdown-heading">Set Default Push Behavior <a class="hover-link" href="#set-default-push-behavior">#</a></h3>
+<p>Configure git to push new branches to <code>origin</code> by default:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>push.default<span class="w"> </span>current
+git<span class="w"> </span>config<span class="w"> </span>push.autoSetupRemote<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+</div>
+
+<h3 id="prevent-accidental-commits-to-master-optional-but-recommended" class="markdown-heading">Prevent Accidental Commits to Master (Optional but Recommended) <a class="hover-link" href="#prevent-accidental-commits-to-master-optional-but-recommended">#</a></h3>
+<p>To avoid accidentally committing directly to <code>master</code>, you can set up a pre-commit hook.
+First, create the hook file:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>.git/hooks
+cat<span class="w"> </span>&gt;<span class="w"> </span>.git/hooks/pre-commit<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">#!/bin/sh</span>
+<span class="s">branch=&quot;$(git rev-parse --abbrev-ref HEAD)&quot;</span>
+<span class="s">if [ &quot;$branch&quot; = &quot;master&quot; ]; then</span>
+<span class="s">  echo &quot;You can&#39;t commit directly to master branch&quot;</span>
+<span class="s">  exit 1</span>
+<span class="s">fi</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+
+<p>Then make it executable:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>.git/hooks/pre-commit
+</code></pre></div>
+</div>
+
+<hr />
+<h1 id="part-2-daily-workflow" class="markdown-heading">Part 2: Daily Workflow <a class="hover-link" href="#part-2-daily-workflow">#</a></h1>
+<p>These are the operations you'll use regularly when working on contributions.</p>
+<h2 id="creating-and-working-on-a-new-branch" class="markdown-heading">Creating and Working on a New Branch <a class="hover-link" href="#creating-and-working-on-a-new-branch">#</a></h2>
+<h3 id="keep-your-master-branch-up-to-date" class="markdown-heading">Keep Your Master Branch Up to Date <a class="hover-link" href="#keep-your-master-branch-up-to-date">#</a></h3>
+<p><strong>Do this before creating a new branch</strong> to ensure you're working with the latest changes:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>master
+git<span class="w"> </span>pull
+</code></pre></div>
+</div>
+
+<h3 id="create-a-new-branch" class="markdown-heading">Create a New Branch <a class="hover-link" href="#create-a-new-branch">#</a></h3>
+<p>Then create and switch to a new branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>my-feature-branch
+</code></pre></div>
+</div>
+
+<p>The branch will automatically track <code>origin/my-feature-branch</code> when you first push it.</p>
+<h3 id="basing-work-on-another-pr" class="markdown-heading">Basing Work on Another PR <a class="hover-link" href="#basing-work-on-another-pr">#</a></h3>
+<p>If you intend to make your work dependent on another PR:</p>
+<ol>
+<li>Check out the relevant PR branch by running <code>git switch &lt;pr-branch-name&gt;</code> if this is your own PR, or by following the instructions in the section <a href="#working-with-others-prs"><code>Working with Others' PRs</code></a> below if you intend to work on top of someone else's PR.</li>
+<li>Run <code>git pull</code> to ensure you are up-to-date with this pull request.</li>
+<li>Run <code>git switch -c my-feature-branch</code> to create a new branch on top of the current branch.</li>
+</ol>
+<h2 id="push-your-branch-and-open-a-pr" class="markdown-heading">Push Your Branch and Open a PR <a class="hover-link" href="#push-your-branch-and-open-a-pr">#</a></h2>
+<h3 id="push-your-branch" class="markdown-heading">Push Your Branch <a class="hover-link" href="#push-your-branch">#</a></h3>
+<p>After making your changes and commits:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>push
+</code></pre></div>
+</div>
+
+<h3 id="open-a-pull-request" class="markdown-heading">Open a Pull Request <a class="hover-link" href="#open-a-pull-request">#</a></h3>
+<ol>
+<li>Go to your fork on GitHub: <code>https://github.com/YOUR_USERNAME/mathlib4</code></li>
+<li>You should see a banner suggesting to open a PR for your recent push</li>
+<li>Click &quot;Compare &amp; pull request&quot;</li>
+<li>Fill in the PR title and description</li>
+<li>Click &quot;Create pull request&quot;</li>
+</ol>
+<p>Alternatively, or if you do not see the banner, you can also go to <a href="https://github.com/leanprover-community/mathlib4/compare">https://github.com/leanprover-community/mathlib4/compare</a>, and click <code>compare across forks</code>.
+You will need to select your fork in the &quot;head repository&quot; drop-down menu, and select the branch you want to merge in the &quot;compare&quot; drop-down menu.</p>
+<h2 id="working-with-others-prs" class="markdown-heading">Working with Others' PRs <a class="hover-link" href="#working-with-others-prs">#</a></h2>
+<p>Note that even just opening VS Code on Lean code from a branch from someone untrustworthy can end up executing code on your computer!
+Please check the <a href="#-security-warning">Security Warning in the Additional Information section</a>.</p>
+<h3 id="method-1-using-github-cli-recommended" class="markdown-heading">Method 1: Using GitHub CLI (Recommended) <a class="hover-link" href="#method-1-using-github-cli-recommended">#</a></h3>
+<p>This is much simpler than the manual method. To checkout PR #1234:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>gh<span class="w"> </span>pr<span class="w"> </span>checkout<span class="w"> </span><span class="m">1234</span>
+</code></pre></div>
+</div>
+
+<p>This automatically handles the remote setup and branch checkout.</p>
+<p>To switch back to your branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>my-feature-branch
+</code></pre></div>
+</div>
+
+<h3 id="method-2-manual-checkout" class="markdown-heading">Method 2: Manual Checkout <a class="hover-link" href="#method-2-manual-checkout">#</a></h3>
+<p>To check out someone else's PR manually, first add their fork as a remote (replace <code>USERNAME</code> with their GitHub username):</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>contributor-name<span class="w"> </span>https://github.com/USERNAME/mathlib4.git
+</code></pre></div>
+</div>
+
+<p>Then fetch their branches:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>fetch<span class="w"> </span>contributor-name
+</code></pre></div>
+</div>
+
+<p>Finally, checkout their branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>contributor-name/their-branch-name
+</code></pre></div>
+</div>
+
+<p>(Remotes can be removed with <code>git remote remove &lt;contributor-name&gt;</code>.)</p>
+<p>To switch back to your branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>my-feature-branch
+</code></pre></div>
+</div>
+
+<h2 id="giving-collaborator-access" class="markdown-heading">Giving Collaborator Access <a class="hover-link" href="#giving-collaborator-access">#</a></h2>
+<p>If you want to allow others to push directly to your PR branch:</p>
+<ol>
+<li>Go to your fork: <code>https://github.com/YOUR_USERNAME/mathlib4</code></li>
+<li>Click &quot;Settings&quot; tab</li>
+<li>Click &quot;Collaborators&quot; (you may have to reauthenticate)</li>
+<li>Enter their GitHub username</li>
+<li>Choose &quot;Write&quot; permission level</li>
+<li>Send the invitation</li>
+</ol>
+<p>Once they accept, they can push directly to your PR branches by using <code>git push</code> after following one of the methods in <a href="#basing-work-on-another-pr">&quot;Basing Work on Another PR&quot;</a>.</p>
+<hr />
+<h1 id="additional-information" class="markdown-heading">Additional Information <a class="hover-link" href="#additional-information">#</a></h1>
+<h2 id="-security-warning" class="markdown-heading">⚠️ Security Warning <a class="hover-link" href="#-security-warning">#</a></h2>
+<p><strong>Important</strong>: When you give someone collaborator access to your fork, or when you checkout and run someone else's code, you are potentially running unreviewed code on your computer. Only collaborate with people you trust, as they could potentially include malicious code that runs during the build process.</p>
+<h2 id="getting-help" class="markdown-heading">Getting Help <a class="hover-link" href="#getting-help">#</a></h2>
+<p>If you encounter issues or have questions about git workflows, please ask in the <code>#new users</code> stream on the <a href="https://leanprover.zulipchat.com">Lean Zulip chat</a>. The community is very helpful and welcomes questions!</p>
+<h2 id="quick-reference" class="markdown-heading">Quick Reference <a class="hover-link" href="#quick-reference">#</a></h2>
+<p>Here's a summary of the most common commands you'll use.</p>
+<p>Update master:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>master
+git<span class="w"> </span>pull
+</code></pre></div>
+</div>
+
+<p>Create a new branch on top of the current branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>new-branch-name
+</code></pre></div>
+</div>
+
+<p>Push your branch and set up tracking:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>new-branch-name
+</code></pre></div>
+</div>
+
+<p>If you've set the <a href="#set-default-push-behavior">default push options per the guide above</a>, the following will suffice:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>push
+</code></pre></div>
+</div>
+
+<p>Check out someone else's PR:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>gh<span class="w"> </span>pr<span class="w"> </span>checkout<span class="w"> </span>PR_NUMBER
+</code></pre></div>
+</div>
+
+<p>Check remote configuration:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div>
+</div>
+
+<p>Check which branch you're on:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>branch
+</code></pre></div>
+</div>
+
+<p>Switch to working on a different branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>your-branch-name
+</code></pre></div>
+</div>
+
+<h2 id="common-troubleshooting" class="markdown-heading">Common Troubleshooting <a class="hover-link" href="#common-troubleshooting">#</a></h2>
+<p><strong>Problem</strong>: &quot;Your branch is behind 'upstream/master'&quot;
+<strong>Solution</strong>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>switch<span class="w"> </span>master
+git<span class="w"> </span>pull
+</code></pre></div>
+</div>
+
+<p><strong>Problem</strong>: &quot;fatal: The current branch has no upstream branch&quot;
+<strong>Solution</strong>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>branch-name
+</code></pre></div>
+</div>
+
+<p><strong>Problem</strong>: Accidentally committed to your copy of the master branch
+<strong>Solution</strong>: Move the commits to a new branch:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code>git<span class="w"> </span>branch<span class="w"> </span>new-branch-name
+git<span class="w"> </span>switch<span class="w"> </span>master
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>upstream/master
+git<span class="w"> </span>switch<span class="w"> </span>new-branch-name
+</code></pre></div>
+</div>
+
+<h2 id="additional-resources" class="markdown-heading">Additional resources <a class="hover-link" href="#additional-resources">#</a></h2>
+<ul>
+<li><a href="https://git-scm.com/docs/gitglossary">The git glossary</a></li>
+<li><a href="https://git-scm.com/docs/giteveryday">Everyday git commands</a></li>
+<li><a href="https://git-scm.com/docs/user-manual">The git user manual</a></li>
+</ul>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html#community-guidelines">Community guidelines</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teaching/index.html">Teaching using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://live.lean-lang.org/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/project.html">Using Lake (build system)</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://loogle.lean-lang.org/">Declaration search (Loogle)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean-lang.org/doc/reference/latest/">Language reference</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-manual/html-multi/">Tactic list</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/speedup.html">Speeding up Lean files</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">Tags and branches</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/contribute/git.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
