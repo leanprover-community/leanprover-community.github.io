@@ -1,17 +1,23 @@
 # Git Guide for Mathlib4 Contributors
 
-This guide is designed for mathematicians who are new to git but want to contribute to mathlib4. We'll walk through the essential git workflows step by step.
+This guide is designed for mathematicians who are new to git but want to contribute to the mathlib4 library.
+Contributions are made via pull requests. We'll walk through the essential workflows step by step.
+Note that there are many other guides on the web describing how to contribute to open-source projects
+via pull requests.
 
-The guide is organized into two main sections:
-1. **One-time setup** (do this once when you first start contributing)
-2. **Daily workflow** (common operations for working on contributions)
+The guide is organized into three main sections:
+
+1. [**One-time setup**](#part-1-one-time-setup) (do this once when you first start contributing)
+2. [**Daily workflow**](#part-2-daily-workflow) (common operations for working on contributions)
+3. [**Additional information**](#additional-information)
 
 ## Prerequisites
 
 Before starting, make sure you have:
+
 - Git installed on your computer
-- A GitHub account
-- (Optional but recommended) The GitHub CLI tool (`gh`) installed
+- [A GitHub account](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)
+- (Optional but recommended) [The GitHub CLI tool (`gh`)](https://cli.github.com/) installed
 
 ---
 
@@ -28,15 +34,30 @@ First, you need to create your own copy (fork) of the mathlib4 repository:
 3. Choose your GitHub account as the destination. It is recommended to leave "copy the master branch only" checked.
 4. Wait for GitHub to create your fork
 
-**You only ever need to do this step once.** You can reuse your fork for many different branches and pull requests.
+**You only ever need to do this step once.**
+You can reuse your fork for many different branches and pull requests.
 
 ## Step 2: Get a Local Copy of the Repository
+
+The fork you created in the previous step is a "remote" copy of mathlib4, which lives on GitHub's servers.
+You'll now need to set up your local copy of mathlib4 on your computer (also referred to as a "clone").
 
 You have two options depending on whether you already have a clone of mathlib4:
 
 ### Option A: If you don't have mathlib4 cloned yet
 
-Clone your fork (not the original repository). Replace `YOUR_USERNAME` with your GitHub username:
+#### Method 1: Using GitHub CLI (recommended)
+
+Replace `YOUR_USERNAME` with your GitHub username in the following shell commands:
+
+```bash
+gh repo clone YOUR_USERNAME/mathlib4
+cd mathlib4
+```
+
+#### Method 2: Manual cloning
+
+Replace `YOUR_USERNAME` with your GitHub username in the following shell commands to clone your fork (not the original repository) into a directory named `mathlib4` in the current working directory and then navigate to it:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/mathlib4.git
@@ -47,17 +68,31 @@ This automatically sets up your fork as the `origin` remote, which is what we wa
 
 ### Option B: If you already have mathlib4 cloned
 
-If you already have a clone from the original repository, you can reuse it. Just navigate to your existing mathlib4 directory:
+If you already have a clone from the original repository (e.g. if you created one via the Lean 4 VS Code extension), you can reuse it. Just navigate to your existing mathlib4 directory:
 
 ```bash
 cd path/to/your/existing/mathlib4
 ```
 
+#### Configure GitHub CLI (if installed)
+
+If you have the GitHub CLI installed, set the default repository to the upstream mathlib4:
+
+```bash
+gh repo set-default leanprover-community/mathlib4
+```
+
+This ensures that GitHub CLI commands like `gh pr checkout` will work with the main mathlib4 repository rather than your fork.
+
 ## Step 3: Set Up Remotes Correctly
 
 The remote setup depends on which option you chose above:
 
-### If you cloned your fork (Option A)
+### If you cloned your fork using the GitHub CLI (Option A, Method 1)
+
+`gh` has already taken care of this step for you.
+
+### If you cloned your fork without using the GitHub CLI (Option A, Method 2)
 
 You need to add the original repository as `upstream`:
 
@@ -67,7 +102,8 @@ git remote add upstream https://github.com/leanprover-community/mathlib4.git
 
 ### If you used an existing clone (Option B)
 
-You need to rename the existing remote and add your fork. Replace `YOUR_USERNAME` with your GitHub username:
+You need to rename the existing remote and add your fork.
+Replace `YOUR_USERNAME` with your GitHub username:
 
 ```bash
 git remote rename origin upstream
@@ -83,6 +119,7 @@ git remote -v
 ```
 
 You should see:
+
 ```
 origin    https://github.com/YOUR_USERNAME/mathlib4.git (fetch)
 origin    https://github.com/YOUR_USERNAME/mathlib4.git (push)
@@ -115,19 +152,10 @@ git config push.default current
 git config push.autoSetupRemote true
 ```
 
-### Configure GitHub CLI (if installed)
-
-If you have the GitHub CLI installed, set the default repository to the upstream mathlib4:
-
-```bash
-gh repo set-default leanprover-community/mathlib4
-```
-
-This ensures that GitHub CLI commands like `gh pr checkout` will work with the main mathlib4 repository rather than your fork.
-
 ### Prevent Accidental Commits to Master (Optional but Recommended)
 
-To avoid accidentally committing directly to `master`, you can set up a pre-commit hook. First, create the hook file:
+To avoid accidentally committing directly to `master`, you can set up a pre-commit hook.
+First, create the hook file:
 
 ```bash
 mkdir -p .git/hooks
@@ -174,6 +202,15 @@ git switch -c my-feature-branch
 
 The branch will automatically track `origin/my-feature-branch` when you first push it.
 
+### Basing Work on Another PR
+
+If you intend to make your work dependent on another PR:
+
+1. Check out the relevant PR branch by running `git switch <pr-branch-name>` if this is your own PR, or by following the instructions in the section [`Working with Others' PRs`](#working-with-others-prs) below if you intend to work on top of someone else's PR.
+2. Run `git pull` to ensure you are up-to-date with this pull request.
+3. Run `git switch -c my-feature-branch` to create a new branch on top of the current branch.
+
+
 ## Push Your Branch and Open a PR
 
 ### Push Your Branch
@@ -181,7 +218,7 @@ The branch will automatically track `origin/my-feature-branch` when you first pu
 After making your changes and commits:
 
 ```bash
-git push origin my-feature-branch
+git push
 ```
 
 ### Open a Pull Request
@@ -192,10 +229,31 @@ git push origin my-feature-branch
 4. Fill in the PR title and description
 5. Click "Create pull request"
 
-Alternatively, or if you do not see the banner, you can also go to https://github.com/leanprover-community/mathlib4/compare, and click `compare across forks`. You will need to select your fork in the "head repository" drop-down menu, and select the branch you want to merge in the "compare" drop-down menu.
+Alternatively, or if you do not see the banner, you can also go to https://github.com/leanprover-community/mathlib4/compare, and click `compare across forks`.
+You will need to select your fork in the "head repository" drop-down menu, and select the branch you want to merge in the "compare" drop-down menu.
+
 ## Working with Others' PRs
 
-### Method 1: Manual Checkout
+Note that even just opening VS Code on Lean code from a branch from someone untrustworthy can end up executing code on your computer!
+Please check the [Security Warning in the Additional Information section](#-security-warning).
+
+### Method 1: Using GitHub CLI (Recommended)
+
+This is much simpler than the manual method. To checkout PR #1234:
+
+```bash
+gh pr checkout 1234
+```
+
+This automatically handles the remote setup and branch checkout.
+
+To switch back to your branch:
+
+```bash
+git switch my-feature-branch
+```
+
+### Method 2: Manual Checkout
 
 To check out someone else's PR manually, first add their fork as a remote (replace `USERNAME` with their GitHub username):
 
@@ -217,15 +275,11 @@ git checkout contributor-name/their-branch-name
 
 (Remotes can be removed with `git remote remove <contributor-name>`.)
 
-### Method 2: Using GitHub CLI (Recommended)
-
-This is much simpler. To checkout PR #1234:
+To switch back to your branch:
 
 ```bash
-gh pr checkout 1234
+git switch my-feature-branch
 ```
-
-This automatically handles the remote setup and branch checkout.
 
 ## Giving Collaborator Access
 
@@ -238,7 +292,7 @@ If you want to allow others to push directly to your PR branch:
 6. Choose "Write" permission level
 7. Send the invitation
 
-Once they accept, they can push directly to your PR branches by using `git push` after following one of the methods in step 9.
+Once they accept, they can push directly to your PR branches by using `git push` after following one of the methods in ["Basing Work on Another PR"](#basing-work-on-another-pr).
 
 ---
 
@@ -263,7 +317,7 @@ git switch master
 git pull
 ```
 
-Create a new branch:
+Create a new branch on top of the current branch:
 
 ```bash
 git switch -c new-branch-name
@@ -273,6 +327,11 @@ Push your branch and set up tracking:
 
 ```bash
 git push origin new-branch-name
+```
+
+If you've set the [default push options per the guide above](#set-default-push-behavior), the following will suffice:
+```bash
+git push
 ```
 
 Check out someone else's PR:
@@ -293,17 +352,23 @@ Check which branch you're on:
 git branch
 ```
 
+Switch to working on a different branch:
+
+```bash
+git switch your-branch-name
+```
+
 ## Common Troubleshooting
 
 **Problem**: "Your branch is behind 'upstream/master'"
-**Solution**: 
+**Solution**:
 ```bash
 git switch master
 git pull
 ```
 
 **Problem**: "fatal: The current branch has no upstream branch"
-**Solution**: 
+**Solution**:
 ```bash
 git push --set-upstream origin branch-name
 ```
