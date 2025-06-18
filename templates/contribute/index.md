@@ -17,6 +17,9 @@ Once you have code that you'd like to contribute, you should open a PR.
 ## Working on mathlib
 
 We use `git` to manage and version control `mathlib`.
+
+Please see [the Git Guide for Mathlib4 Contributors](git.html) for detailed instructions if you have not contributed to an open source project with git before.
+
 The `master` branch is the "production" version of mathlib.
 It is essential that everything in the master branch compiles without errors, and there are no `sorry`s.
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
@@ -114,16 +117,16 @@ Click on the "labels" header to add or remove labels from the current project.
 If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
 There are different groups of people that can review your PR: anyone, [reviewers](../teams/reviewers.html) and [maintainers](../teams/maintainers.html).
-Anyone who has something useful to say can review your PR. 
-If they think your PR is ready to move to the next stage, they might leave an "approving" review on GitHub. 
-These reviews are taken into account by reviewers. 
-If a reviewer considers your PR ready to be merged, they will add the **"maintainer-merge"** label to your PR. 
+Anyone who has something useful to say can review your PR.
+If they think your PR is ready to move to the next stage, they might leave an "approving" review on GitHub.
+These reviews are taken into account by reviewers.
+If a reviewer considers your PR ready to be merged, they will add the **"maintainer-merge"** label to your PR.
 These are used by maintainers to prioritize their review.
 Maintainers are always the ones to give final approval.
 Maintainers have reviewer rights, but also further powers (such as merging PRs).
 Depending on availability, a maintainer could be the first reviewer to look at your PR: in this case,
-your PR could get merged without being "maintainer merge"d first. 
-Review times can vary depending on availability of our volunteers. 
+your PR could get merged without being "maintainer merge"d first.
+Review times can vary depending on availability of our volunteers.
 To speed up the process, you can look at the [review guidelines](pr-review.html) and try to make sure your PR adheres to them.
 If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
 
