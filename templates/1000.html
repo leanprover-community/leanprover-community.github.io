@@ -18,7 +18,11 @@
 	</p>
 
     {% for theorem in thousand_theorems|selectattr('proof_formalized') %}
-        <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">{{ theorem.id }}: {{ theorem.title }} <a class="hover-link" href="#{{ theorem.id }}">#</a></h5>
+        <h5 class="markdown-heading mt-5" id="{{ theorem.id }}">
+            <a href="https://www.wikidata.org/wiki/{{ theorem.id }}">{{ theorem.id }}:</a>
+            {{ theorem.title }}
+            <a class="hover-link" href="#{{ theorem.id }}">#</a>
+        </h5>
         {% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
         {% if theorem.statement %}<p><code>{{ theorem.statement }}</code></p>{% endif %}
         {% for doc in theorem.doc_decls|default([], true) %}
