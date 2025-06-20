@@ -806,6 +806,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
         return latexnodes2text.latex_to_text(src)
 
     try:
+        # use bibtool to strip nonstandard fields used just for display on this website
         subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
             '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
             str(target/'lean.bib')], check=True)
