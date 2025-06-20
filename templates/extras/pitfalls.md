@@ -573,7 +573,7 @@ Additionally, if you write code whose behavior depends on the value of `n`, then
 Equality of types is poorly behaved in Lean's type theory.
 If `A` and `B` are distinct inductive types or structures in `Type u`, and if `A` and `B` have the same cardinality, then the statement `A = B` is neither provable nor disprovable in Lean.
 For example, `Int = Nat` is neither provable nor disprovable.
-For more information, please read Jason Rute's and Andrej Bauer's answers to this question: https://proofassistants.stackexchange.com/q/4046.
+For more information, please read Jason Rute's and Andrej Bauer's answers to this question: https://proofassistants.stackexchange.com/q/4046
 
 Roughly speaking, the only time that you can prove two types are equal is if
 they were defined from the same irreducible types. For example, `Fin n = Fin m` is provable when `n = m`, but `Fin 2 = Bool` is not provable.
