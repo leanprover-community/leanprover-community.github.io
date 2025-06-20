@@ -10,7 +10,7 @@ Once your PR is merged, CI will automatically deploy the changes to the `master`
 
 * `pip install -r requirements.txt`
 
-Building the bibliography requires [`bibtool`](https://github.com/ge-ne/bibtool).
+Building the bibliography requires [`bibtool`](https://github.com/ge-ne/bibtool). If `bibtool` is not found, the build script will print a warning and just copy the raw `lean.bib` file to the target.
 
 In order to rebuild the CSS from SCSS, you also need:
 
@@ -39,7 +39,7 @@ map scraper bot.
 If you want to work on a new feature, there are several helpful tricks to know.
 
 First you will very quickly hit the GitHub API rate limit without
-authentication. You can 
+authentication. You can
 [create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
 and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site --local` during
 your experiments.
@@ -47,7 +47,7 @@ your experiments.
 You can also run the script once normally and then run
 `NODOWNLOAD=1 ./make_site --local` to build the website using the information
 previously downloaded. This information is stored into the `data_cache` folder.
-If you need the script to download something but not everything you can 
+If you need the script to download something but not everything you can
 temporarily change the relevant `if DOWNLOAD:` into a `if not DOWNLOAD:`.
 
 You can also choose to render only certain templates using
