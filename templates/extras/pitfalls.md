@@ -2,7 +2,7 @@
 
 This document lists some common mistakes that Lean users frequently make, as well as unintuitive features of Lean that can lead to errors.
 
-If you find a mistake in this document or would like something added, please open an issue or pull request on this repository.
+If you find a mistake in this document or would like something added, please write about it on Zulip or open an issue or pull request on the [repository for this website](https://github.com/leanprover-community/leanprover-community.github.io).
 
 ## Table of contents
 - [Automatic implicit parameters](#automatic-implicit-parameters)
@@ -815,7 +815,7 @@ For example, then even though the `simp` in
 ```
 is in the middle of the proof, it is not considered a non-terminal simp because it fully closes a goal.
 
-For more information, see https://leanprover-community.github.io/extras/simp.html#non-terminal-simps
+For more information, see [these notes about non-terminal simps](simp.html#non-terminal-simps).
 
 ## Ignoring warnings
 
