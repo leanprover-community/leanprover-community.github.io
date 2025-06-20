@@ -247,7 +247,7 @@ In mathlib, `Prop` and `Bool` may be assigned different instances for typeclasse
 
 ## Not checking for distinctness
 
-Consider the following statement of the pigeonhole principle, which states that if $`f : A \to B`$ is a function betwen finite sets and $`|A| > |B|`$, then there exists two distinct elements in $`A`$ which $`f`$ map to the same element of $`B`$:
+Consider the following statement of the pigeonhole principle, which states that if $f : A \to B$ is a function betwen finite sets and $|A| > |B|$, then there exists two distinct elements in $A$ which $f$ map to the same element of $B$:
 ```lean
 import Mathlib.Data.Fintype.Card
 
@@ -294,8 +294,8 @@ example : False := by
 ```
 
 Division behaves this way because Lean is a pure functional language, so all functions must be total—functions cannot throw exceptions.
-In Lean, the preferred way of working with a partial function $`f : A \rightharpoonup B`$ is to instead define a function $`g : A \to B`$ such that $`g(x) = f(x)`$ whenever $`x \in \text{dom}(f)`$.
-The values of $`g`$ on $`A \setminus \text{dom}(f)`$ are arbitrary and are usually chosen to be whatever gives the nicest algebraic properties (these values are often known as "junk values").
+In Lean, the preferred way of working with a partial function $f : A \rightharpoonup B$ is to instead define a function $g : A \to B$ such that $g(x) = f(x)$ whenever $x \in \text{dom}(f)$.
+The values of $g$ on $A \setminus \text{dom}(f)$ are arbitrary and are usually chosen to be whatever gives the nicest algebraic properties (these values are often known as "junk values").
 
 It is possible to instead define division like
 ```lean
@@ -395,14 +395,14 @@ Consider adding `Summable f` hypotheses to theorems that involve `∑' i, f i`.
   For example, the alternating harmonic series is *not* `Summable` because it is only conditionally convergent.
   (By the [Riemann series theorem](https://en.wikipedia.org/wiki/Riemann_series_theorem), a real valued series is *unconditionally convergent* if
   and only if it is *absolutely convergent*.
-  In general, unconditional convergence is weaker than absolute convergence: If $`(e_n)_{n \in \mathbb{N}}`$ is an orthonormal basis of an countably-infinite dimensional Hilbert Space, then $`\sum (e_n)/n`$ converges unconditionally, but not absolutely.)
+  In general, unconditional convergence is weaker than absolute convergence: If $(e_n)_{n \in \mathbb{N}}$ is an orthonormal basis of an countably-infinite dimensional Hilbert Space, then $\sum (e_n)/n$ converges unconditionally, but not absolutely.)
 - `tprod f` (denoted `∏' i, f i`) is similar to `tsum`, but the junk value is `1` instead of `0`.
-- `Nat.sqrt x` takes the floor of $`\sqrt{x}`$.
+- `Nat.sqrt x` takes the floor of $\sqrt{x}$.
 - `Real.sqrt x` is `0` for negative inputs.
-- `Real.log x` actually means $`\log_e |x|`$ when $`x \ne 0`$ and is $`0`$ when $`x = 0`$.
-This gives nicer algebraic properties then setting it to be $`0`$ for negative all $`x`$.
+- `Real.log x` actually means $\log_e |x|$ when $x \ne 0$ and is $0$ when $x = 0$.
+This gives nicer algebraic properties then setting it to be $0$ for negative all $x$.
 - `Real.sSup` and `Real.iSup` are 0 if the set is empty or not bounded above, and likewise `Real.sInf`, and `Real.iInf` are 0 if the set is empty or not bounded below.
-This interacts nicely with `Real.sqrt`: it means that $`\sqrt{x} = \sup \{y \mid y^2 < x\}`$ for all $`x \in \mathbb{R}`$, since when $`x \le 0`$ both sides are $`0`$.
+This interacts nicely with `Real.sqrt`: it means that $\sqrt{x} = \sup \{y \mid y^2 < x\}$ for all $x \in \mathbb{R}$, since when $x \le 0$ both sides are $0$.
 
 ## Wrapping arithmetic in `Fin`
 
@@ -417,7 +417,7 @@ This applies to literals as well:
 #eval (15 : Fin 10) -- 5
 #eval (10 : Fin 10) -- 0
 ```
-Note that even though `Fin n` uses the same notion of addition, subtraction, and multiplication as `ZMod n` for positive `n`, they are not exactly the same because `Fin n` is ordered while `ZMod n` is unordered and `Fin n` uses truncating integer division while `ZMod n` uses the "mathematically correct" notion of division on $`\mathbb{Z}/n\mathbb{Z}`$ whenever $`n`$ is prime.
+Note that even though `Fin n` uses the same notion of addition, subtraction, and multiplication as `ZMod n` for positive `n`, they are not exactly the same because `Fin n` is ordered while `ZMod n` is unordered and `Fin n` uses truncating integer division while `ZMod n` uses the "mathematically correct" notion of division on $\mathbb{Z}/n\mathbb{Z}$ whenever $n$ is prime.
 Also `Fin 0` is empty while `ZMod 0 = Int` (this is so that `ZMod n` is always a ring of characteristic `n`, because empty types cannot be rings).
 
 One reason that `Fin` uses wrapping arithmetic instead of something like saturating arithmetic is that it is used to represent native fixed-width integer types like `UInt32`, and the operations on `Fin` need to agree with the overflow and underflow of machine-native arithmetic.
@@ -427,19 +427,19 @@ One reason that `Fin` uses wrapping arithmetic instead of something like saturat
 `Real.rpow x y` is defined somewhat arbitrarily for negative `x`.
 In particular, it is defined as the real part of the complex exponentiation function, which is itself somewhat arbitrary as it depends on the complex logarithm.
 This gives the function nice analytic properties, but it also means that taking roots of negative numbers can be unintuitive.
-For example, the value of `(-125 : ℝ) ^ (1/3 : ℝ)` is $`5\cos(\pi/3)`$, and not $`-5`$ like you might have expected.
+For example, the value of `(-125 : ℝ) ^ (1/3 : ℝ)` is $5\cos(\pi/3)$, and not $-5$ like you might have expected.
 
 ## Distance in `Fin n → ℝ`
 
-In many cases, `Fin n → ℝ` is the recommended way to represent $`\mathbb{R}^n`$ in Lean.
+In many cases, `Fin n → ℝ` is the recommended way to represent $\mathbb{R}^n$ in Lean.
 Vectors of this type can be written using the `![x,y,z,...]` notation.
-But note that in Lean, if $`(S_i)_{i \in I}`$ is a finite family of (pseudo)metric spaces, then $`\prod_{i \in I}S_i`$ uses the $`L^\infty`$ metric:
-```math
+But note that in Lean, if $(S_i)_{i \in I}$ is a finite family of (pseudo)metric spaces, then $\prod_{i \in I}S_i$ uses the $L^\infty$ metric:
+$$
 \text{dist}(\textbf{x},\textbf{y}) = \sup\left\{ \text{dist}(x_i,y_i) \mid i \in I\right\}
-```
+$$
 and `Fin n → ℝ` is a special case of this.
 
-This means that the distance between $`(1,0)`$ and $`(0,1)`$ is actually $`1`$:
+This means that the distance between $(1,0)$ and $(0,1)$ is actually $1$:
 ```lean
 import Mathlib.Analysis.InnerProductSpace.PiL2
 
@@ -452,14 +452,14 @@ example : dist ![(1 : ℝ),0] ![0,1] = 1 := by
     fin_cases b <;> simp
 ```
 
-To instead use the standard Euclidean metric (also called the $`L^2`$ metric), you must use instead use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
+To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use instead use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
 ```lean
 example : dist !₂[(1 : ℝ),0] !₂[0,1] = √2 := by
   norm_num [EuclideanSpace.dist_eq]
 ```
 
-One consequence of this is that `Fin n → ℝ` is not registered as an inner product space,because the norm corresponding to the inner product would disagree with the existing $`L^\infty`$ norm.
-If you need $`\mathbb{R}^n`$ as an inner product space, use `EuclideanSpace ℝ (Fin n)`.
+One consequence of this is that `Fin n → ℝ` is not registered as an inner product space,because the norm corresponding to the inner product would disagree with the existing $L^\infty$ norm.
+If you need $\mathbb{R}^n$ as an inner product space, use `EuclideanSpace ℝ (Fin n)`.
 
 ## Accidental double `iInf` or `iSup`
 
@@ -491,12 +491,12 @@ Note that:
 - When `x > 2`, `⨅ (h : x > 2), x ^ 2` means `⨅ (h : True), x ^ 2` which equals `x ^ 2`.
 - When `x ≤ 2`, `⨅ (h : x > 2), x ^ 2` means `⨅ (h : False), x ^ 2` which equals
 `sInf (∅ : Set ℝ)`.
-In traditional math, $`\inf \varnothing`$ over the reals is usually undefined or defined to equal $`+\infty`$. But in Lean, `sInf (∅ : Set ℝ) = 0` (see the partial functions section above for an explanation).
+In traditional math, $\inf \varnothing$ over the reals is usually undefined or defined to equal $+\infty$. But in Lean, `sInf (∅ : Set ℝ) = 0` (see the partial functions section above for an explanation).
 
 So, in summary, `⨅ x > 2, (x : ℝ) ^ 2` equals `⨅ (x : ℝ), f x` where
-```math
+$$
 f(x) = \begin{cases} x^2 &\text{ for } x > 2 \\ 0 &\text{ for } x \le 2 \end{cases}
-```
+$$
 and the infimum of this function is `0`.
 
 A similar situation arises for sets. `⨅ x ∈ s, f x` is shorthand for `⨅ x, ⨅ (_ : x ∈ s), f x` and might not be the same as `⨅ x : ↑s, f ↑x` (where the index type is `s` coerced to a type).
@@ -598,7 +598,7 @@ import Mathlib.Algebra.Polynomial.Cardinal
 theorem my_theorem [Ring ℤ] : CharZero ℤ := sorry
 ```
 
-In fact as stated, this statement says that *every* ring on $`\mathbb{Z}`$ has characteristic 0, which is false because there exist countably infinite rings (e.g. $`(\mathbb{Z}/2\mathbb{Z})[X]`$) with nonzero characteristic.
+In fact as stated, this statement says that *every* ring on $\mathbb{Z}$ has characteristic 0, which is false because there exist countably infinite rings (e.g. $(\mathbb{Z}/2\mathbb{Z})[X]$) with nonzero characteristic.
 The following proof is by Bhavik Mehta:
 ```lean
 open Cardinal in
