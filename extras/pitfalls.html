@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Common Lean Pitfalls</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+<h1 id="common-lean-pitfalls" class="markdown-heading">Common Lean Pitfalls <a class="hover-link" href="#common-lean-pitfalls">#</a></h1>
+<p>This document lists some common mistakes that Lean users frequently make, as well as unintuitive features of Lean that can lead to errors.</p>
+<p>If you find a mistake in this document or would like something added, please write about it on Zulip or open an issue or pull request on the <a href="https://github.com/leanprover-community/leanprover-community.github.io">repository for this website</a>.</p>
+<h2 id="table-of-contents" class="markdown-heading">Table of contents <a class="hover-link" href="#table-of-contents">#</a></h2>
+<ul>
+<li><a href="#automatic-implicit-parameters">Automatic implicit parameters</a></li>
+<li><a href="#forgetting-the-mathlib-cache">Forgetting the Mathlib cache</a></li>
+<li><a href="#using-have-for-data">Using <code>have</code> for data</a></li>
+<li><a href="#rewriting-under-binders">Rewriting under binders</a></li>
+<li><a href="#trusting-tactics-to-unfold-definitions">Trusting tactics to unfold definitions</a></li>
+<li><a href="#using-b-gt-a-instead-of-a-lt-b">Using <code>b &gt; a</code> instead of <code>a &lt; b</code></a></li>
+<li><a href="#confusing-prop-and-bool">Confusing <code>Prop</code> and <code>Bool</code></a></li>
+<li><a href="#not-checking-for-distinctness">Not checking for distinctness</a></li>
+<li><a href="#not-accounting-for-0">Not accounting for 0</a></li>
+<li><a href="#division-by-0">Division by 0</a></li>
+<li><a href="#integer-division">Integer division</a></li>
+<li><a href="#natural-number-subtraction">Natural number subtraction</a></li>
+<li><a href="#other-partial-functions">Other partial functions</a></li>
+<li><a href="#wrapping-arithmetic-in-fin">Wrapping arithmetic in <code>Fin</code></a></li>
+<li><a href="#real-power">Real power</a></li>
+<li><a href="#distance-in-fin-n--%E2%84%9D">Distance in <code>Fin n → ℝ</code></a></li>
+<li><a href="#accidental-double-iinf-or-isup">Accidental double <code>iInf</code> or <code>iSup</code></a></li>
+<li><a href="#trying-to-extract-data-from-proofs-of-propositions">Trying to extract data from proofs of propositions</a></li>
+<li><a href="#working-with-equality-of-types">Working with equality of types</a></li>
+<li><a href="#parameters-for-instances-that-already-exist">Parameters for instances that already exist</a></li>
+<li><a href="#using-sets-as-types">Using <code>Set</code>s as types</a></li>
+<li><a href="#sort-_">Sort _</a></li>
+<li><a href="#trying-to-prove-properties-about-float">Trying to prove properties about Float</a></li>
+<li><a href="#native_decide"><code>native_decide</code></a></li>
+<li><a href="#panic-does-not-abort">Panic does not abort</a></li>
+<li><a href="#lean-3-code">Lean 3 code</a></li>
+<li><a href="#non-terminal-simp">Non-terminal simp</a></li>
+<li><a href="#ignoring-warnings">Ignoring warnings</a></li>
+<li><a href="#ambiguous-unicode-characters">Ambiguous unicode characters</a></li>
+</ul>
+<h2 id="automatic-implicit-parameters" class="markdown-heading">Automatic implicit parameters <a class="hover-link" href="#automatic-implicit-parameters">#</a></h2>
+<p>By default, Lean's <a href="https://lean-lang.org/doc/reference/latest///Definitions/Headers-and-Signatures/#automatic-implicit-parameters">automatic implicit parameters</a> feature (<code>autoImplicit</code> for short) causes unbound variables to be converted to implicit parameters. For example, when this feature is enabled,</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">omega</span>
+</code></pre></div>
+</div>
+
+<p>is short for</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">omega</span>
+</code></pre></div>
+</div>
+
+<p>This feature can make your code more concise, but it also means that any typo in a theorem statement could make the theorem statement wrong.
+For example, the following statement</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>is false because <code>m</code> is an automatic implicit parameter.
+The automatic implicit feature makes it hard to see that <code>m</code> was typed when <code>n</code> should have been typed instead.
+In newer Lean versions, you should be able to see an inline <code>{m}</code> appear in your text editor next to <code>my_theorem</code>, which indicates that <code>m</code> is acting as an automatic implicit parameter; it is worth watching for these annotations because they can help you find unintentional uses of <code>autoImplicit</code>.</p>
+<p>Issues can also manifest in hard to predict ways.
+For example, if you haven't yet imported <code>Mathlib.Data.Nat.Notation</code>, then in</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">),</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p><code>ℕ</code> is actually an automatic implicit variable and can be any type, so this statement is actually false:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Exists.elim</span><span class="w"> </span><span class="o">(</span><span class="n">my_theorem</span><span class="w"> </span><span class="o">(</span><span class="n">ℕ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">False</span><span class="o">))</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">f</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>Automatic implicit parameters are enabled globally by default, but they are disabled if you are working on Mathlib.
+If you are new to Lean, I recommend that you disable them and use the <code>variable</code>
+command instead.
+This can be done either by adding</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">set_option</span><span class="w"> </span><span class="n">autoImplicit</span><span class="w"> </span><span class="n">false</span>
+</code></pre></div>
+</div>
+
+<p>at the top of every Lean file right after the <code>import</code> statements, or by disabling it globally in your <code>lakefile.toml</code> or <code>lakefile.lean</code>.</p>
+<h2 id="forgetting-the-mathlib-cache" class="markdown-heading">Forgetting the Mathlib cache <a class="hover-link" href="#forgetting-the-mathlib-cache">#</a></h2>
+<p>If you are working on <code>Mathlib</code> or a project depending on <code>Mathlib</code>, opening a file that depends on <code>Mathlib</code> or running <code>lake build</code> in the terminal may take upwards of an hour to complete the first time it is run.
+When Lean files are compiled for the first time, Lean caches the results of the compilation in <code>.olean</code> files so that subsequent runs are faster.</p>
+<p>Running <code>lake exe cache get</code> in the terminal or <a href="https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/manual/manual.md#project-actions">invoking &quot;Project: Fetch Mathlib Build Cache&quot; in VSCode</a> downloads <code>.olean</code> files for <code>Mathlib</code> from a central server, which prevents you from having to compile them yourself and can save over an hour of compute time.
+(You might want to try <code>lake exe cache get!</code> if <code>lake exe cache get</code> does not work.)
+If you find that your project is taking an unusually long amount of time to compile or start in VSCode, it could be because you forgot to run this command.</p>
+<p>Note that the decompressed compiled version of Mathlib is over 5 GB large, so make sure you have enough storage space and are connected to a suitable network (and not e.g. a phone hotspot with monthly limits) before downloading the cache.</p>
+<h2 id="using-have-for-data" class="markdown-heading">Using <code>have</code> for data <a class="hover-link" href="#using-have-for-data">#</a></h2>
+<p>Sometimes it can be convenient to introduce a new variable to represent a more complicated expression in a proof.
+For example, suppose you have a complicated predicate <code>MyPredicate</code> and would like to set <code>x := 37 * n + 42 * m + 76</code> inside a proof.
+If you do this with <code>have</code> and then prove <code>h : MyPredicate x</code>, you will notice that there's no way to use <code>h</code> to close the goal.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MyPredicate</span><span class="w"> </span><span class="o">(</span><span class="mi">37</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">76</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">76</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MyPredicate</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="w">  </span><span class="c">/-</span><span class="cm"> Tactic state is now:</span>
+<span class="cm">  n m x : Nat</span>
+<span class="cm">  h : MyPredicate x</span>
+<span class="cm">  ⊢ MyPredicate (37 * n + 42 * m + 76)</span>
+<span class="cm">  Now what? -/</span>
+</code></pre></div>
+</div>
+
+<p>Additionally, you might be unable to prove <code>MyPredicate x</code> if your proof depends on what the value of <code>x</code> is.</p>
+<p>The problem here is that when you use <code>have</code> to create a new variable in a proof, Lean forgets what value you assigned to <code>have</code>.
+So, after executing <code>have x : Nat := 37 * n + 42 * m + 76</code>, the proposition
+<code>x = 37 * n + 42 * m + 76</code> is now unprovable.</p>
+<p>The solution is to use <code>let</code> instead of <code>have</code> whenever you are introducing a
+new variable that is not a proof.
+Notice how in the following tactic state, <code>x</code> has a value attached to it.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MyPredicate</span><span class="w"> </span><span class="o">(</span><span class="mi">37</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">76</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">76</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MyPredicate</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="w">  </span><span class="c">/-</span><span class="cm"> Tactic state is now:</span>
+<span class="cm">  n m : Nat</span>
+<span class="cm">  x : Nat := 37 * n + 42 * m + 76</span>
+<span class="cm">  h : MyPredicate x</span>
+<span class="cm">  ⊢ MyPredicate (37 * n + 42 * m + 76)</span>
+<span class="cm">  -/</span>
+</code></pre></div>
+</div>
+
+<p>This means that for the rest of the proof, <code>x</code> is definitionally equal to
+<code>37 * n + 42 * m + 76</code>.
+Thus, the type of <code>h</code> is definitionally equal to the goal, so we can finish
+the proof with <code>exact h</code> without having to do any sort of manual conversion.
+If you do want access to a proof of <code>x = 37 * n + 42 * m + 76</code>, you can get
+one with <code>have hx : x = 37 * n + 42 * m + 76 := rfl</code>, where <code>rfl</code> is a valid
+proof of this fact because of the definitional equality.</p>
+<p>You may also be interested in the <code>set</code> tactic, which is like <code>let</code> but
+also automatically replaces instances of the expression in the proof state.</p>
+<h2 id="rewriting-under-binders" class="markdown-heading">Rewriting under binders <a class="hover-link" href="#rewriting-under-binders">#</a></h2>
+<p>It would be reasonable to expect <code>rw</code> to change <code>0 + i ^ 2</code> to <code>i ^ 2</code> in the following, but unfortunately <code>rw</code> fails:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.BigOperators.Group.Finset.Defs</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Finset</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∑</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">∑</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="o">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">Nat.zero_add</span><span class="o">]</span>
+<span class="w">  </span><span class="c">/-</span>
+<span class="cm">  tactic &#39;rewrite&#39; failed, did not find instance of the pattern in the target expression</span>
+<span class="cm">    0 + ?n</span>
+<span class="cm">  s : Finset ℕ</span>
+<span class="cm">  ⊢ ∑ i ∈ s, (0 + i ^ 2) = ∑ i ∈ s, i ^ 2</span>
+<span class="cm">  -/</span>
+</code></pre></div>
+</div>
+
+<p>This is because <code>∑ i ∈ s, (0 + i ^ 2)</code> is shorthand for <code>Finset.sum s (fun i ↦ 0 + i ^ 2)</code>, and <code>rw</code> is unable to look into the <code>fun</code> expression.</p>
+<p>In this case, you can use <code>simp_rw [Nat.zero_add]</code> to perform the rewrite, but in some cases you might have to make a precise rewrite using <a href="https://leanprover.github.io/theorem_proving_in_lean4/conv.html">conversion mode</a>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Finset</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∑</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">∑</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="o">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">conv</span><span class="w"> </span><span class="bp">=&gt;</span>
+<span class="w">    </span><span class="n">lhs</span>
+<span class="w">    </span><span class="n">congr</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">rfl</span>
+<span class="w">    </span><span class="bp">·</span><span class="w"> </span><span class="n">intro</span><span class="w"> </span><span class="n">i</span>
+<span class="w">      </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">Nat.zero_add</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<h2 id="trusting-tactics-to-unfold-definitions" class="markdown-heading">Trusting tactics to unfold definitions <a class="hover-link" href="#trusting-tactics-to-unfold-definitions">#</a></h2>
+<p>A common mistake in Lean is trying to use tactics like <code>rw</code> and <code>simp</code> in the hopes that they will &quot;see through&quot; <code>def</code>s and <code>let</code> statements.
+For example, in the following, you might hope that the <code>rw</code> would realize that <code>x</code> is just shorthand for <code>0 + n</code> and rewrite it to <code>n</code>, but this doesn't happen:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">mythm</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">True</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">n</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">Nat.zero_add</span><span class="o">]</span>
+<span class="w">    </span><span class="c">/-</span>
+<span class="cm">    tactic &#39;rewrite&#39; failed, did not find instance of the pattern in the target expression</span>
+<span class="cm">      0 + ?n</span>
+<span class="cm">    n : Nat</span>
+<span class="cm">    x : Nat := 0 + n</span>
+<span class="cm">    ⊢ x = n</span>
+<span class="cm">    -/</span>
+</code></pre></div>
+</div>
+
+<p>Similarly <code>simp</code> will also fail here with the error message &quot;simp made no progress&quot;.</p>
+<p>The solution here is to first <code>unfold x</code> or use <code>change 0 + n = n</code> before calling <code>rw [Nat.zero_add]</code> or <code>simp</code>.
+You could also use <code>simp [x]</code> instead of <code>simp</code>.
+Finally, if <code>x</code> were a <code>def</code> instead of a <code>let</code>, you could do <code>rw [x]</code>, which is equivalent to <code>rw [show x = 0 + n from rfl]</code>.
+Note that it is important you use <code>let</code> and not <code>have</code> for <code>x</code>; see the section above on using <code>have</code> for data.</p>
+<p>That being said, it's worth understanding why this is even a problem in the first place.
+Recall that there are three main types of equality in Lean: propositional equality, definitional equality, and synctactic equality.
+Propositional equality is the normal notion of equality in traditional mathematics, and the proposition <code>a = b</code> in Lean refers to propositional equality.
+In constrast, definitional and syntactic equality are not things you can prove or disprove; two expressions are either definitionally equal or they aren't, and they are either syntactically equal or they aren't.</p>
+<p>A rough way of thinking about this is that two terms are syntactically equal if they are written the same way in Lean, and two terms are definitionally equal if calling <code>#reduce</code> on both of them would result in the same expression.
+For example, when <code>n</code> is an unknown natural number:</p>
+<ul>
+<li><code>n + 0</code> is both syntactically, definitionally, and propositionally equal to <code>n + 0</code>.</li>
+<li><code>n + 0</code> is definitionally and propositionally equal to <code>n</code> but not syntactically equal. This is because <code>Nat.add</code> is defined by recursion on the second argument, so Lean can reduce <code>n + 0</code> to <code>n</code> even if it doesn't know what <code>n</code> is.</li>
+<li><code>0 + n</code> is propositionally equal to <code>n</code> but not definitionally or syntactically equal. This is because Lean doesn't know how to reduce <code>0 + n</code> when <code>n</code> is unknown, so this statement has to be proven by induction.</li>
+</ul>
+<p>For more information, please see <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/equality.html">https://b-mehta.github.io/formalising-mathematics-notes/Part_1/equality.html</a></p>
+<p>Unfortunately, the line between syntactic and definitional equality is often blurred in Lean.
+The important thing to remember is that some tactics, such as <code>exact</code>, work up to definitional equality, but others such as <code>rw</code> and <code>simp</code> work up to syntactic equality.
+Even though Lean's core typechecker only cares about definitional equality, tactics are free to use to use the extra information about the syntax of terms to help them operate.</p>
+<h2 id="using-b-gt-a-instead-of-a-lt-b" class="markdown-heading">Using <code>b &gt; a</code> instead of <code>a &lt; b</code> <a class="hover-link" href="#using-b-gt-a-instead-of-a-lt-b">#</a></h2>
+<p>Most of the time, <code>a &lt; b</code> and <code>b &gt; a</code> are definitionally equal in Lean.
+But in light of the above discussion about not trusting tactics to unfold definitions, even if two terms are definitionally equal they still might not be interchangable in all circumstances.
+For example, this rewrite fails because the right hand side of <code>Nat.mod_eq_iff_lt</code> is <code>m &lt; n</code>, not <code>n &gt; m</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h₁</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">m</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h₂</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="bp">←</span><span class="n">Nat.mod_eq_iff_lt</span><span class="w"> </span><span class="n">h₂</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>In Mathlib, <code>a &lt; b</code> is preferred over <code>b &gt; a</code>.
+In fact, <code>&gt;</code> hardly even appears at all in Mathlib.
+This means that if you want to avoid having to use <code>gt_iff_lt</code> all the time, you should prefer <code>a &lt; b</code> to <code>b &gt; a</code> everywhere in your code.
+Similarly, you should prefer <code>a ≤ b</code> to <code>b ≥ a</code>.
+Outside of expressions like <code>∀ ε &gt; 0, ∃ δ &gt; 0, _</code> where the <code>&gt;</code> is joined with the <code>∀</code> or <code>∃</code>, it is often best to not use <code>&gt;</code> or <code>≥</code> at all.</p>
+<h2 id="confusing-prop-and-bool" class="markdown-heading">Confusing <code>Prop</code> and <code>Bool</code> <a class="hover-link" href="#confusing-prop-and-bool">#</a></h2>
+<p>The types <code>Prop</code> and <code>Bool</code> both capture the notion of something being true or false,
+but they behave very differently in Lean.
+<code>Prop</code> is the type of <em>propositions</em>, which are mathematical statements that have a truth value,
+while <code>Bool</code> is the type of <em>booleans</em>; it consists of exactly two elements, <code>true</code> and <code>false</code>.
+Note that <code>True</code> and <code>False</code> are <em>propositions</em>, while <code>true</code> and <code>false</code> are <em>booleans</em>.</p>
+<p>Using booleans where propositions are expected or vice versa can lead to some counterintuitive errors. Additionally, because booleans can be implicitly coerced into propositions, the issues that arise might not be immediately apparent.
+For example, <code>a = b</code> is a proposition, while <code>a == b</code> is a boolean (see the <code>BEq</code> typeclass), and mixing them up can lead to issues.
+It is worth making sure you have a good grasp on the difference between <code>Prop</code> and <code>Bool</code>.</p>
+<p>In Lean, <code>Prop</code> and <code>Bool</code> are both types, but <code>Prop</code> is also a universe while <code>Bool</code> is just a regular type containing two elements.
+This means that if <code>p : Prop</code> and <code>q : Bool</code>, then <code>h : p</code> might be valid but <code>h : q</code> is never valid.
+On the other hand, you can use terms of type <code>Bool</code> in <code>match</code> statements, but you cannot <code>match</code> on terms of type <code>Prop</code> (the equivalent operation on <code>Prop</code> would be the <code>by_cases hp : p</code> tactic or the &quot;dependent&quot; if-then-else statement <code>if hp : p then ... else ...</code>).
+<code>Bool</code> is used sparingly in mathematics, but it is used much more often when <code>Lean</code> is used as a programming language.</p>
+<p>Intuitively, a proposition is a mathematical statement that might be either be proven or disproven.
+If <code>p</code> is a proposition, it might make sense to say <code>h : p</code>, which means that <code>h</code> is a proof of <code>p</code>.
+On the other hand, if <code>q</code> is a boolean, then <code>q</code> is literally equal to either <code>true</code> or <code>false</code>; it doesn't make sense to &quot;prove&quot; <code>q</code>, because <code>q</code> is a value, not a statement.</p>
+<p>If you have a boolean <code>q</code>, you can convert it to a proposition by writing <code>q = true</code>.
+Conversely, if <code>p</code> is a proposition and if Lean can synthesize an instance of <code>Decidable p</code>, then you can convert <code>p</code> to a boolean by writing <code>decide p</code>.
+(Here, the term <code>decide</code> should not be confused with the tactic <code>decide</code>.)
+Since the axiom <code>Classical.choice</code> can be used to produce a <code>Decidable p</code> instance for any proposition <code>p</code>, any proposition can be converted to a boolean, and thus <code>Prop</code> and <code>Bool</code> are <em>classically equivalent</em>.</p>
+<p>Despite this, it still makes sense to maintain a distinction between <code>Prop</code> and <code>Bool</code>.
+In mathlib, <code>Prop</code> and <code>Bool</code> may be assigned different instances for typeclasses; for example, <code>Prop</code> is given the Sierpiński space (with <code>{True}</code> open) as its topology while <code>Bool</code> is given the discrete topology.</p>
+<h2 id="not-checking-for-distinctness" class="markdown-heading">Not checking for distinctness <a class="hover-link" href="#not-checking-for-distinctness">#</a></h2>
+<p>Consider the following statement of the pigeonhole principle, which states that if $f : A \to B$ is a function betwen finite sets and $|A| > |B|$, then there exists two distinct elements in $A$ which $f$ map to the same element of $B$:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Fintype.Card</span>
+
+<span class="kd">variable</span><span class="w"> </span><span class="o">{</span><span class="n">A</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Fintype</span><span class="w"> </span><span class="n">A</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Fintype</span><span class="w"> </span><span class="n">B</span><span class="o">]</span>
+
+<span class="kd">theorem</span><span class="w"> </span><span class="n">pigeonhole_principle</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">B</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fintype.card</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">Fintype.card</span><span class="w"> </span><span class="n">A</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">A</span><span class="o">),</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Classical.choice</span><span class="w"> </span><span class="bp">&lt;|</span><span class="w"> </span><span class="n">Fintype.card_pos_iff.mp</span><span class="w"> </span><span class="o">(</span><span class="kd">by</span><span class="w"> </span><span class="n">omega</span><span class="o">)</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="o">⟨</span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="n">rfl</span><span class="o">⟩</span>
+</code></pre></div>
+</div>
+
+<p>If you look at the proof, you will notice that it is way too simple.
+Notice that the statement of the theorem forgets to require that <code>x</code> and <code>y</code> be distinct, so all we have to do is to show that there exists some element <code>a : α</code> and then we have <code>f(a) = f(a)</code> by definition.
+This is not a Lean specific issue, but it is more likely to lead to problems down the line in Lean than in informal math.</p>
+<h2 id="not-accounting-for-0" class="markdown-heading">Not accounting for 0 <a class="hover-link" href="#not-accounting-for-0">#</a></h2>
+<p>Consider the following statement of Fermat's Last Theorem:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">flt</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>Unfortunately, this statement is false:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">flt</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">le_rfl</span><span class="w"> </span><span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>Remember that in Lean, <code>0 : ℕ</code>, and that you should account for this case in your theorem statements.
+(This is also a case where using Mathlib definitions would have helped:
+Mathlib already has a definition <code>FermatLastTheorem</code> for the statement of Fermat's Last Theorem, which is much less likely to contain errors.)</p>
+<h2 id="division-by-0" class="markdown-heading">Division by 0 <a class="hover-link" href="#division-by-0">#</a></h2>
+<p>In Lean, <code>n / 0 = 0</code>. This is different from other programming languages, where division by zero usually results in an exception.</p>
+<p>This means that a statement like</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Real.Basic</span>
+
+<span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∃!</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>is actually false, because the equation <code>x / (1 + x) = 0</code> has two solutions over the reals in Lean:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">suffices</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">-</span><span class="mi">1</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">aesop</span>
+<span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">my_theorem.unique</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">simp</span>
+</code></pre></div>
+</div>
+
+<p>Division behaves this way because Lean is a pure functional language, so all functions must be total—functions cannot throw exceptions.
+In Lean, the preferred way of working with a partial function $f : A \rightharpoonup B$ is to instead define a function $g : A \to B$ such that $g(x) = f(x)$ whenever $x \in \text{dom}(f)$.
+The values of $g$ on $A \setminus \text{dom}(f)$ are arbitrary and are usually chosen to be whatever gives the nicest algebraic properties (these values are often known as &quot;junk values&quot;).</p>
+<p>It is possible to instead define division like</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">div</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>but in practice, providing a proof that the demoninator is nonzero every time we want to divide two numbers gets tedious very quickly.
+In contrast, <em>theorems</em> involving division usually have a hypothesis stating that the denominator is nonzero.
+It is recommended to add hypotheses making sure your denominator is nonzero to your own theorems, unless you have carefully thought through the case where the denominator is zero.
+For more information, please see <a href="https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/">this Xena project blog post</a>.</p>
+<h2 id="integer-division" class="markdown-heading">Integer division <a class="hover-link" href="#integer-division">#</a></h2>
+<p>When dividing two <code>Int</code>s or <code>Nat</code>s in Lean, the result is always rounded down (this is slightly different behavior from most languages, which round towards zero).
+This is so that using division does not cause the type of the number being worked with to change.
+For example, the following statement is false:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Field.Rat</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Order.Ring.Rat</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">thm₁</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℤ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="c">/-</span>
+<span class="cm">  ===================</span>
+<span class="cm">  Found a counter-example!</span>
+<span class="cm">  n := 3</span>
+<span class="cm">  guard: 2 &lt; 3</span>
+<span class="cm">  issue: 0 &lt; 0 does not hold</span>
+<span class="cm">  (0 shrinks)</span>
+<span class="cm">  -------------------</span>
+<span class="cm">  -/</span>
+<span class="w">  </span><span class="n">plausible</span>
+</code></pre></div>
+</div>
+
+<p>But at the same time, you might not want to rely on this behavior. For instance, this theorem is actually true:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">thm₂</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℚ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">inv_strictAnti₀</span><span class="w"> </span><span class="n">rfl</span><span class="w"> </span><span class="n">h</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>In this example, the left hand side of the <code>&lt;</code> is a rational number, so Lean interprets the right hand side as a rational number so integer division no longer applies.
+This is similar to what happens in the following:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">-- 0</span>
+<span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℚ</span><span class="o">)</span><span class="w"> </span><span class="c1">-- (1 : Rat)/2</span>
+</code></pre></div>
+</div>
+
+<p>This may surprise you if you're used to languages like Java where <code>(1 / 2) + 0.0</code> evaluates to <code>0.0</code> because in Java type information outside parentheses usually does not affect what happens inside the parentheses.</p>
+<p>In general, it is hard to determine the presence or absence of integer division.
+It is also possible that Lean's behavior with respect in the most recent example might change in the future.</p>
+<p>If this concerns you, you may want to consider adding <code>set_option pp.numericTypes true</code> near the top of your file, so that numeric literals are annotated with their corresponding
+type (e.g. <code>ℕ</code>, <code>ℤ</code>, <code>ℚ</code>, <code>ℝ</code>, <code>ℂ</code>) when they are displayed in the infoview.</p>
+<h2 id="natural-number-subtraction" class="markdown-heading">Natural number subtraction <a class="hover-link" href="#natural-number-subtraction">#</a></h2>
+<p>Subtraction of natural numbers truncates at <code>0</code> because we want the return type of natural subtraction to be <code>Nat</code>. That is, we have</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">-- 2</span>
+<span class="k">#eval</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="c1">-- 0</span>
+<span class="k">#eval</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="c1">-- 100</span>
+<span class="k">#eval</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">13</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">-- 11</span>
+</code></pre></div>
+</div>
+
+<p>As explained above in the integer division section, type annotations can affect which operations are performed:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="mi">100</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Int</span><span class="o">)</span><span class="w"> </span><span class="c1">-- 10</span>
+<span class="k">#eval</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">13</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="bp">-</span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="c1">-- 3</span>
+</code></pre></div>
+</div>
+
+<p>Trucating subtraction is also known as <a href="https://en.wikipedia.org/wiki/Monus">monus</a>.</p>
+<p>One place where natural number subtraction might arise is if you have a predicate <code>P : Nat → Prop</code> and want to show that <code>P n</code> holds for all <code>n ≥ 1</code>.
+If you try to prove</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">mythm</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hn</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>you might find that the proof of <code>mythm</code> requires you to frequently refer to <code>n - 1</code>.
+Even though no truncation occurs here, this statement may still be tedious to prove because automation often does not work well with natural number subtraction.
+In many cases, it makes sense to instead prove</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">mythm</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>because this completely avoids natural number subtraction.
+More generally, you can often rephrase a statement that involves natural number subtraction to one that doesn't.
+Additionally, in a lot of cases, the latter phrasing of <code>mythm</code> is easier to use than the former phrasing.</p>
+<h2 id="other-partial-functions" class="markdown-heading">Other partial functions <a class="hover-link" href="#other-partial-functions">#</a></h2>
+<p>You should also be aware that many other functions in Mathlib use junk values.
+For example,</p>
+<ul>
+<li><code>deriv f s x = 0</code> if <code>f</code> is not differentiable at <code>x</code> within <code>s</code>.
+Similarly, the Fréchet derivative <code>fderiv</code> returns the 0 linear map when
+<code>f</code> is not differentiable at the given point.
+You might need to add <code>HasDerivAt</code> or <code>HasFDerivAt</code> to your theorems' hypotheses.</li>
+<li>The &quot;topological sum&quot; <code>tsum f</code>, also denoted <code>∑' i, f i</code>, computes the sum of a series, or returns 0 if the sum does not converge.
+Consider adding <code>Summable f</code> hypotheses to theorems that involve <code>∑' i, f i</code>.
+<ul>
+<li>Note that because <code>tsum</code> does not assume an order structure on the domain, only unconditionally converging series are considered <code>Summable</code>.
+Intuitively, a series is unconditionally convergent if it doesn't matter which order you take the sum.
+For example, the alternating harmonic series is <em>not</em> <code>Summable</code> because it is only conditionally convergent.
+(By the <a href="https://en.wikipedia.org/wiki/Riemann_series_theorem">Riemann series theorem</a>, a real valued series is <em>unconditionally convergent</em> if
+and only if it is <em>absolutely convergent</em>.
+In general, unconditional convergence is weaker than absolute convergence: If $(e_n)_{n \in \mathbb{N}}$ is an orthonormal basis of an countably-infinite dimensional Hilbert Space, then $\sum (e_n)/n$ converges unconditionally, but not absolutely.)</li>
+</ul>
+</li>
+<li><code>tprod f</code> (denoted <code>∏' i, f i</code>) is similar to <code>tsum</code>, but the junk value is <code>1</code> instead of <code>0</code>.</li>
+<li><code>Nat.sqrt x</code> takes the floor of $\sqrt{x}$.</li>
+<li><code>Real.sqrt x</code> is <code>0</code> for negative inputs.</li>
+<li><code>Real.log x</code> actually means $\log_e |x|$ when $x \ne 0$ and is $0$ when $x = 0$.
+This gives nicer algebraic properties then setting it to be $0$ for negative all $x$.</li>
+<li><code>Real.sSup</code> and <code>Real.iSup</code> are 0 if the set is empty or not bounded above, and likewise <code>Real.sInf</code>, and <code>Real.iInf</code> are 0 if the set is empty or not bounded below.
+This interacts nicely with <code>Real.sqrt</code>: it means that $\sqrt{x} = \sup \{y \mid y^2 < x\}$ for all $x \in \mathbb{R}$, since when $x \le 0$ both sides are $0$.</li>
+</ul>
+<h2 id="wrapping-arithmetic-in-fin" class="markdown-heading">Wrapping arithmetic in <code>Fin</code> <a class="hover-link" href="#wrapping-arithmetic-in-fin">#</a></h2>
+<p>Arithmetic in <code>Fin</code> wraps around if it overflows or underflows:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">7</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="c1">-- 3</span>
+<span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">7</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="c1">-- 2</span>
+<span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="c1">-- 4</span>
+</code></pre></div>
+</div>
+
+<p>This applies to literals as well:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">15</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="c1">-- 5</span>
+<span class="k">#eval</span><span class="w"> </span><span class="o">(</span><span class="mi">10</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Fin</span><span class="w"> </span><span class="mi">10</span><span class="o">)</span><span class="w"> </span><span class="c1">-- 0</span>
+</code></pre></div>
+</div>
+
+<p>Note that even though <code>Fin n</code> uses the same notion of addition, subtraction, and multiplication as <code>ZMod n</code> for positive <code>n</code>, they are not exactly the same because <code>Fin n</code> is ordered while <code>ZMod n</code> is unordered and <code>Fin n</code> uses truncating integer division while <code>ZMod n</code> uses the &quot;mathematically correct&quot; notion of division on $\mathbb{Z}/n\mathbb{Z}$ whenever $n$ is prime.
+Also <code>Fin 0</code> is empty while <code>ZMod 0 = Int</code> (this is so that <code>ZMod n</code> is always a ring of characteristic <code>n</code>, because empty types cannot be rings).</p>
+<p>One reason that <code>Fin</code> uses wrapping arithmetic instead of something like saturating arithmetic is that it is used to represent native fixed-width integer types like <code>UInt32</code>, and the operations on <code>Fin</code> need to agree with the overflow and underflow of machine-native arithmetic.</p>
+<h2 id="real-power" class="markdown-heading">Real power <a class="hover-link" href="#real-power">#</a></h2>
+<p><code>Real.rpow x y</code> is defined somewhat arbitrarily for negative <code>x</code>.
+In particular, it is defined as the real part of the complex exponentiation function, which is itself somewhat arbitrary as it depends on the complex logarithm.
+This gives the function nice analytic properties, but it also means that taking roots of negative numbers can be unintuitive.
+For example, the value of <code>(-125 : ℝ) ^ (1/3 : ℝ)</code> is $5\cos(\pi/3)$, and not $-5$ like you might have expected.</p>
+<h2 id="distance-in-fin-n--ℝ" class="markdown-heading">Distance in <code>Fin n → ℝ</code> <a class="hover-link" href="#distance-in-fin-n--ℝ">#</a></h2>
+<p>In many cases, <code>Fin n → ℝ</code> is the recommended way to represent $\mathbb{R}^n$ in Lean.
+Vectors of this type can be written using the <code>![x,y,z,...]</code> notation.
+But note that in Lean, if $(S_i)_{i \in I}$ is a finite family of (pseudo)metric spaces, then $\prod_{i \in I}S_i$ uses the $L^\infty$ metric:
+$$
+\text{dist}(\textbf{x},\textbf{y}) = \sup\left\{ \text{dist}(x_i,y_i) \mid i \in I\right\}
+$$
+and <code>Fin n → ℝ</code> is a special case of this.</p>
+<p>This means that the distance between $(1,0)$ and $(0,1)$ is actually $1$:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Analysis.InnerProductSpace.PiL2</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="bp">!</span><span class="o">[(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">),</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="bp">!</span><span class="o">[</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">dist_pi_eq_iff</span><span class="w"> </span><span class="o">(</span><span class="kd">by</span><span class="w"> </span><span class="n">positivity</span><span class="o">)]</span>
+<span class="w">  </span><span class="n">constructor</span>
+<span class="w">  </span><span class="bp">·</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">simp</span>
+<span class="w">  </span><span class="bp">·</span><span class="w"> </span><span class="n">intro</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="n">fin_cases</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">simp</span>
+</code></pre></div>
+</div>
+
+<p>To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use instead use <code>EuclideanSpace ℝ (Fin n)</code>, which is an abbreviation for <code>WithLp 2 (Fin n → ℝ)</code>. Vectors of this type can be written using the <code>!₂[x,y,z,...]</code> notation.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="bp">!₂</span><span class="o">[(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">),</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="bp">!₂</span><span class="o">[</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">√</span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">norm_num</span><span class="w"> </span><span class="o">[</span><span class="n">EuclideanSpace.dist_eq</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>One consequence of this is that <code>Fin n → ℝ</code> is not registered as an inner product space,because the norm corresponding to the inner product would disagree with the existing $L^\infty$ norm.
+If you need $\mathbb{R}^n$ as an inner product space, use <code>EuclideanSpace ℝ (Fin n)</code>.</p>
+<h2 id="accidental-double-iinf-or-isup" class="markdown-heading">Accidental double <code>iInf</code> or <code>iSup</code> <a class="hover-link" href="#accidental-double-iinf-or-isup">#</a></h2>
+<p>You might expect <code>⨅ x &gt; 2, (x : ℝ) ^ 2</code> to be equal to <code>4</code>, because the image of <code>(2,∞)</code> under <code>fun x : ℝ ↦ x ^ 2</code> is <code>(4,∞)</code>. But in Lean, this expression actual equals <code>0</code>:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Real.Archimedean</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Order.ConditionallyCompleteLattice.Indexed</span>
+
+<span class="c1">-- The infimum of x^2 on (2,∞) is ... 0?</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">⨅</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">set</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="bp">⨅</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="o">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">hf₁</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">sInf</span><span class="w"> </span><span class="bp">∅</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ciInf_eq_ite</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">hf₂</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">hf₁</span><span class="o">]</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">hf₃</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">hf₁</span><span class="o">]</span>
+<span class="w">    </span><span class="n">split_ifs</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">sq_nonneg</span><span class="o">]</span>
+<span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">le_antisymm</span>
+<span class="w">  </span><span class="bp">·</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="bp">←</span><span class="n">hf₂</span><span class="o">]</span>
+<span class="w">    </span><span class="n">refine</span><span class="w"> </span><span class="n">ciInf_le</span><span class="w"> </span><span class="bp">?</span><span class="n">_</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">bddBelow_iff_exists_le</span><span class="w"> </span><span class="mi">0</span><span class="o">]</span>
+<span class="w">    </span><span class="n">use</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">hf₃</span><span class="o">]</span>
+<span class="w">  </span><span class="bp">·</span><span class="w"> </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">le_ciInf</span><span class="o">,</span><span class="w"> </span><span class="n">hf₃</span><span class="o">]</span>
+</code></pre></div>
+</div>
+
+<p>The reason for this is that <code>⨅ x &gt; 2, (x : ℝ) ^ 2</code> is shorthand for <code>⨅ (x : ℝ) (h : x &gt; 2), x ^ 2</code>, which is shorthand for <code>⨅ (x : ℝ), ⨅ (h : x &gt; 2), x ^ 2</code>.
+Note that:</p>
+<ul>
+<li>When <code>x &gt; 2</code>, <code>⨅ (h : x &gt; 2), x ^ 2</code> means <code>⨅ (h : True), x ^ 2</code> which equals <code>x ^ 2</code>.</li>
+<li>When <code>x ≤ 2</code>, <code>⨅ (h : x &gt; 2), x ^ 2</code> means <code>⨅ (h : False), x ^ 2</code> which equals
+<code>sInf (∅ : Set ℝ)</code>.
+In traditional math, $\inf \varnothing$ over the reals is usually undefined or defined to equal $+\infty$. But in Lean, <code>sInf (∅ : Set ℝ) = 0</code> (see the partial functions section above for an explanation).</li>
+</ul>
+<p>So, in summary, <code>⨅ x &gt; 2, (x : ℝ) ^ 2</code> equals <code>⨅ (x : ℝ), f x</code> where
+$$
+f(x) = \begin{cases} x^2 &\text{ for } x > 2 \\ 0 &\text{ for } x \le 2 \end{cases}
+$$
+and the infimum of this function is <code>0</code>.</p>
+<p>A similar situation arises for sets. <code>⨅ x ∈ s, f x</code> is shorthand for <code>⨅ x, ⨅ (_ : x ∈ s), f x</code> and might not be the same as <code>⨅ x : ↑s, f ↑x</code> (where the index type is <code>s</code> coerced to a type).
+Additionally, everything in this section applies as much to <code>iSup</code> as it does to <code>iInf</code>.</p>
+<p><code>⨅</code> and <code>⨆</code> behave this way for consistency with other binders such as <code>∀</code> and <code>∃</code>:
+<code>∀ x ∈ s, p x</code> is shorthand for <code>∀ x, ∀ h : x ∈ s, p x</code> and <code>∃ x ∈ s, p x</code> is shorthand for <code>∃ x, ∃ h : x ∈ s, p x</code>.
+However, there have been discussions about possibly changing this behavior in the future: see <a href="https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/topic/sup.20and.20inf.20over.20sets/with/472565284">this discussion on Zulip</a>.</p>
+<h2 id="trying-to-extract-data-from-proofs-of-propositions" class="markdown-heading">Trying to extract data from proofs of propositions <a class="hover-link" href="#trying-to-extract-data-from-proofs-of-propositions">#</a></h2>
+<p>Given a proof <code>h : ∃ n : Nat, p n</code>, you may wish to extract the particular <code>n</code> for which <code>p n</code>
+holds.
+Or given a term <code>q : Nonempty Nat</code> you may wish to obtain the particular <code>Nat</code> used to construct <code>q</code>.
+In each of these cases, it is possible to extract an <em>arbitrary</em> <code>n : Nat</code> from <code>h</code> or <code>q</code>, but obtaining the <em>particular</em> <code>n</code> used in <code>h</code> or <code>p</code>'s construction is impossible.</p>
+<p>To understand why, first recall that Lean has a single universe hierarchy <code>Sort 0</code>, <code>Sort 1</code>, <code>Sort 2</code>, <code>Sort 3</code>, ...,
+and that <code>Prop</code> is shorthand for <code>Sort 0</code>, <code>Type</code> is shorthand for <code>Sort 1</code>, <code>Type 1</code> is shorthand for <code>Sort 2</code>, etc.
+The distinction between <code>Prop</code> and <code>Type u</code> exists because <code>Prop</code> has some special behavior which sometimes requires us to treat it distinctly from the rest of the universes.
+The two most important special properties of <code>Prop</code> are <em>impredicativity</em> and <em>proof irrelevance</em>.
+In this section, I will mainly discuss the consequences of proof irrelevance.</p>
+<p>In essence, proof irrelevance states that every proposition has at most one proof; that is, any two proofs of the same proposition are equal.
+Another way to state this is that every proposition is a <em>subsingleton</em>—a type with zero or one elements.
+The way proof irrelevance is implemented in Lean is that if <code>P : Prop</code> and <code>p : P</code> and <code>q : P</code>, then <code>p</code> and <code>q</code> are defintionally equal, so <code>rfl : p = q</code>.
+This is a built-in rule in Lean's type theory, and should not be confused with <code>propext</code>, which is an axiom that states that if <code>P Q : Prop</code> and <code>P ↔ Q</code>, then <code>P = Q</code>.</p>
+<p>To see why this rule is necessary, recall that an element of the subtype <code>{x : X // p x}</code> is of the form <code>{ val := x, property := h }</code> where <code>x</code> is an element of <code>X</code> and <code>h</code> is a proof that <code>p x</code>. If we defined</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="bp">//</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">}</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">8</span><span class="o">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Nat.lt_of_sub_eq_succ</span><span class="w"> </span><span class="n">rfl</span><span class="w"> </span><span class="o">}</span>
+<span class="kd">def</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="bp">//</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">}</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">8</span><span class="o">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+</div>
+
+<p>then <code>x</code> and <code>y</code> have the same value, but have different proofs.
+We would like <code>x</code> and <code>y</code> to be equal despite their different proofs, and it would be very convenient if they were even definitionally equal, and it is proof irrelevance that makes this possible:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>Because of proof irrelevance, when a proof <code>h : ∃ n : Nat, p n</code> is constructed, it &quot;forgets&quot; which <code>n</code> was used to prove it.
+If there were some function <code>f : (∃ n : Nat, p n) → Nat</code> which extracted the natural number used in <code>h</code>'s construction, then we could make two different proofs <code>h₁ h₂ : ∃ n : Nat, p n</code> for which <code>f h₁ ≠ f h₂</code> but <code>h₁ = h₂</code> holds by proof irrelevance.
+This would be a contradiction, so no such <code>f</code> exists.</p>
+<p>More generally, when you define an inductive type <code>T</code> that lives in <code>Prop</code>, the return type of <code>T.rec</code> is only allowed to live in <code>Prop</code>.
+Practically speaking, this means that while the function</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">swap</span><span class="w"> </span><span class="o">{</span><span class="n">P</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span>
+<span class="w">  </span><span class="k">match</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">with</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Or.inl</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">Or.inr</span><span class="w"> </span><span class="n">hp</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Or.inr</span><span class="w"> </span><span class="n">hq</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="n">Or.inl</span><span class="w"> </span><span class="n">hq</span>
+</code></pre></div>
+</div>
+
+<p>is allowed because the return type of the match expression lives in <code>Prop</code>, the function</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">{</span><span class="n">P</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="o">:=</span>
+<span class="w">  </span><span class="k">match</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">with</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Or.inl</span><span class="w"> </span><span class="n">hp</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Or.inr</span><span class="w"> </span><span class="n">hq</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="mi">2</span>
+</code></pre></div>
+</div>
+
+<p>is not allowed, because the return type of the match expression lives in <code>Type</code>.
+Note that some inductive propositions, known as <em>syntactic subsingletons</em>, are exempt from this limitation via a process known as <em>subsingleton elimination</em>.</p>
+<p>If you must extract data from a proposition, there are a couple of things you can do:</p>
+<ul>
+<li>If you are extracting data in the middle of the proof of a proposition (as opposed to a <code>def</code> in <code>Type</code> or higher), then tactics like <code>cases</code> and <code>obtain</code> will work like normal. You can also apply eliminators like <code>Exists.elim</code> and <code>Nonempty.elim</code>, which only let you eliminate to propositions.</li>
+<li>If you just need to extract an <em>arbitrary</em> <code>α</code> out of a proof <code>h : Nonempty α</code>, you can use the axiom <code>Classical.choice</code> to do so. Note that no properties can be proven about the output of <code>Classical.choice</code> aside from the fact that it lives in <code>α</code>. For example, if you use <code>Classical.choice</code> on a proof <code>h : Nonempty Nat</code> to produce an element <code>n : Nat</code>, then statements like <code>n = 37</code> are neither provable nor disprovable in Lean.
+Additionally, if you write code whose behavior depends on the value of <code>n</code>, then you will be forced to mark such code as <code>noncomputable</code>.</li>
+<li>If you instead have an element <code>h : ∃ n : Nat, p n</code>. then you can use <code>Classical.choose</code> to get an element <code>n : Nat</code> and <code>Classical.choose_spec</code> to get a proof of <code>p n</code>.
+<code>Classical.choose</code> and <code>Classical.choose_spec</code> are defined internally by using <code>Classical.choice</code> to produce an element of <code>{n : Nat // p n}</code>, so the same stipulation about computability applies.</li>
+<li>If you need to depend on the <em>particular</em> value used in the proof of <code>∃ n : Nat, p n</code>, you should probably avoid the <code>Exists</code> type entirely and exhibit an element of <code>{n : Nat // p n}</code> instead.
+<code>∃ n : Nat, p n</code> and <code>{n : Nat // p n}</code> both consist of a <code>n : Nat</code> and a proof that <code>p n</code>; their only different is which universe the type lives in.</li>
+<li>If you are working over <code>Nat</code>, and you have a <code>h : ∃ n : Nat, p n</code> where <code>p</code> is a <code>DecidablePred</code>, then you can use <code>Nat.find</code> and <code>Nat.find_spec</code> similar to <code>Classical.choose</code> and <code>Classical.choose_spec</code>.
+<code>Nat.find</code> is computable, although it may not be particularly efficent since evaluating <code>Nat.find h</code> will check every natural number in order starting at 0 until it finds the smallest one satisfying <code>p</code>.</li>
+</ul>
+<h2 id="working-with-equality-of-types" class="markdown-heading">Working with equality of types <a class="hover-link" href="#working-with-equality-of-types">#</a></h2>
+<p>Equality of types is poorly behaved in Lean's type theory.
+If <code>A</code> and <code>B</code> are distinct inductive types or structures in <code>Type u</code>, and if <code>A</code> and <code>B</code> have the same cardinality, then the statement <code>A = B</code> is neither provable nor disprovable in Lean.
+For example, <code>Int = Nat</code> is neither provable nor disprovable.
+For more information, please read Jason Rute's and Andrej Bauer's answers to this question: <a href="https://proofassistants.stackexchange.com/q/4046">https://proofassistants.stackexchange.com/q/4046</a></p>
+<p>Roughly speaking, the only time that you can prove two types are equal is if
+they were defined from the same irreducible types. For example, <code>Fin n = Fin m</code> is provable when <code>n = m</code>, but <code>Fin 2 = Bool</code> is not provable.
+The only time that you can prove that two types are <em>not</em> equal is if they have different cardinalities. So, <code>Fin 3 ≠ Bool</code> is provable, but <code>Fin 2 ≠ Bool</code> is not provable.
+The exception is <code>Prop</code>, where the axiom <code>propext</code> can be thought of as saying that two <code>Prop</code>s are equal if they have the same cardinality.</p>
+<p>If you <em>are</em> able to prove that <code>A = B</code>, then you can use <code>cast</code> to convert an element of <code>A</code> to an element of <code>B</code>.
+But reliance upon <code>cast</code> often causes problems down the line and can lead to the poorly behaved <code>HEq</code>.
+Usually, instead of working with equality of types, it is much better to work with a suitable type of isomorphisms (or <code>Equiv</code> if you are not working with any sort of algebraic or topological structure).
+Alternatively, if you are working with equality of <code>Subtype</code>s of <code>α</code>, you might want to instead work with elements of <code>Set α</code>.
+Equality in <code>Set α</code> is well-behaved.</p>
+<h2 id="parameters-for-instances-that-already-exist" class="markdown-heading">Parameters for instances that already exist <a class="hover-link" href="#parameters-for-instances-that-already-exist">#</a></h2>
+<p>A common mistake is introducing <code>variable</code>s or parameters for instances that already exist.
+For instance, in the following theorem statement, note that the <code>[Ring ℤ]</code> is unnecessary because <code>ℤ</code> already has a <code>Ring</code> instance available.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Equiv.TransferInstance</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Field.ZMod</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Polynomial.Cardinal</span>
+
+<span class="kd">theorem</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="o">[</span><span class="n">Ring</span><span class="w"> </span><span class="n">ℤ</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">CharZero</span><span class="w"> </span><span class="n">ℤ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>In fact as stated, this statement says that <em>every</em> ring on $\mathbb{Z}$ has characteristic 0, which is false because there exist countably infinite rings (e.g. $(\mathbb{Z}/2\mathbb{Z})[X]$) with nonzero characteristic.
+The following proof is by Bhavik Mehta:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span><span class="w"> </span><span class="n">Cardinal</span><span class="w"> </span><span class="k">in</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">e1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">#</span><span class="o">(</span><span class="n">Polynomial</span><span class="w"> </span><span class="o">(</span><span class="n">ZMod</span><span class="w"> </span><span class="mi">2</span><span class="o">))</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">ℵ₀</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simpa</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="o">(</span><span class="n">Cardinal.nat_lt_aleph0</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">le</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="n">e2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">#</span><span class="n">ℤ</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">ℵ₀</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simp</span>
+<span class="w">  </span><span class="n">obtain</span><span class="w"> </span><span class="o">⟨</span><span class="n">e</span><span class="o">⟩</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Cardinal.eq</span><span class="bp">.</span><span class="mi">1</span><span class="w"> </span><span class="o">(</span><span class="n">e2.trans</span><span class="w"> </span><span class="n">e1.symm</span><span class="o">)</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Ring</span><span class="w"> </span><span class="n">ℤ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">e.ring</span>
+<span class="w">  </span><span class="n">cases</span><span class="w"> </span><span class="bp">@</span><span class="n">Nat.cast_injective</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">my_theorem</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>One symptom of this is that you might encounter expressions which look identical in the infoview but are not actually equal, resulting in tactics like <code>rfl</code>, <code>apply</code>, and <code>rw</code> failing with cryptic messages.
+For example, the tactic state below shows that the goal is to prove <code>dist 0 1 = dist 0 1</code> and you have to click three levels deep into the <code>dist</code> function on the right to find out that it is using the wrong instance.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Topology.MetricSpace.Basic</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">[</span><span class="n">inst</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MetricSpace</span><span class="w"> </span><span class="n">ℝ</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">inst.dist</span><span class="w"> </span><span class="o">(</span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="c">/-</span>
+<span class="cm">  Tactic state:</span>
+<span class="cm">  1 goal</span>
+<span class="cm">  inst : MetricSpace ℝ</span>
+<span class="cm">  ⊢ dist 0 1 = dist 0 1</span>
+<span class="cm">  -/</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>In this particular case, trying <code>rfl</code> will give you the error message</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">tactic</span><span class="w"> </span><span class="bp">&#39;</span><span class="n">rfl&#39;</span><span class="w"> </span><span class="n">failed</span><span class="o">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">left</span><span class="bp">-</span><span class="n">hand</span><span class="w"> </span><span class="n">side</span>
+<span class="w">  </span><span class="bp">@</span><span class="n">dist</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="o">(</span><span class="bp">@</span><span class="n">PseudoMetricSpace.toDist</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="n">Real.pseudoMetricSpace</span><span class="o">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">definitionally</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">right</span><span class="bp">-</span><span class="n">hand</span><span class="w"> </span><span class="n">side</span>
+<span class="w">  </span><span class="bp">@</span><span class="n">dist</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="o">(</span><span class="bp">@</span><span class="n">PseudoMetricSpace.toDist</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="n">MetricSpace.toPseudoMetricSpace</span><span class="o">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">inst</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MetricSpace</span><span class="w"> </span><span class="n">ℝ</span>
+<span class="bp">⊢</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+</div>
+
+<p>from which you can conclude that the type classes do not match. When tactics such as <code>congr</code> or <code>convert</code> generate subgoals, it is often worth running <code>rfl</code> on those goals to see if they were caused by mismatching typeclass instances.</p>
+<p>In actual code, you probably would not write <code>inst.dist</code> by accident, but in more complicated examples the bad instances can manifest in hard to detect ways.</p>
+<p>Thank you to Edward van de Meent for suggesting that I include this topic and finding a misleading statement, and to Bhavik Mehta to working out the details of the proof that the first example was <code>False</code>.</p>
+<h2 id="using-sets-as-types" class="markdown-heading">Using <code>Set</code>s as types <a class="hover-link" href="#using-sets-as-types">#</a></h2>
+<p>In Lean, <code>Set X</code> is defined as <code>X → Prop</code>, so sets are predicates, not types. However, there is an implicit coercion from <code>Set X</code> to <code>Type u</code>, so if you have parameters <code>(X : Type) (s : Set X) (a : s)</code>, the <code>(a : s)</code> really means <code>(a : {x : X // x ∈ s})</code>.
+Here, <code>{x : X // x ∈ s}</code> is notation for <code>Subtype (fun x ↦ x ∈ s)</code>.</p>
+<p>That is, <code>a</code> is really a pair <code>⟨x, hx⟩</code> where <code>x : X</code> and <code>hx</code> is a proof that <code>x ∈ s</code>.
+So, <code>a</code> is not actually an element of <code>X</code>, but you might not realize this because there is another implicit coercion from <code>{x : X // x ∈ s}</code> to <code>X</code> which makes <code>a</code> behave like an element of <code>X</code> in some, but not all, circumstances.</p>
+<p>This can lead to various issues. For example,</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Set.Basic</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="gr">sorry</span>
+</code></pre></div>
+</div>
+
+<p>fails to compile because Lean does not know what <code>0 + n</code> means, since technically <code>n</code> is not a natural number.
+You have to write <code>(n : ℕ)</code> to make the addition succeed.</p>
+<p>Additionally, if you try proving this by induction on <code>n</code>, you may find that your tactics do not do what you expect.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Set.Basic</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Tactic</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="c">/-</span><span class="cm"> Tactic state before:</span>
+<span class="cm">  s : Set ℕ</span>
+<span class="cm">  n : ↑s</span>
+<span class="cm">  ⊢ 0 + ↑n = ↑n</span>
+<span class="cm">  -/</span>
+<span class="w">  </span><span class="n">induction&#39;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="n">hd</span>
+<span class="w">  </span><span class="c">/-</span><span class="cm"> Tactic state after:</span>
+<span class="cm">  s : Set ℕ</span>
+<span class="cm">  d : ℕ</span>
+<span class="cm">  hd : d ∈ s</span>
+<span class="cm">  ⊢ 0 + ↑⟨d, hd⟩ = ↑⟨d, hd⟩</span>
+<span class="cm">  -/</span>
+</code></pre></div>
+</div>
+
+<p>Here, the tactic did not perform induction on <code>n</code> as a natural number; instead, it deconstructed the two components of the <code>Subtype</code>.
+If you had instead tried to use the unprimed <code>induction</code> tactic, you would have gotten an &quot;invalid alternative name 'zero', expected 'mk'&quot; error message.</p>
+<p>Note the presence of the <code>↑</code> in the tactic states. This represents a coercion, and it is one clue that the type of <code>n</code> might not be what you think it is.</p>
+<p>Becuase of these problems and others, if you have <code>(s : Set X)</code> as a parameter and you want to assume that <code>a</code> is an element of <code>s</code>, it is often better to add two parameters <code>(a : X) (ha : a ∈ S)</code> than to write <code>(a : s)</code>.
+Similarly, if you want <code>t</code> to be a subset of <code>s</code>, you should declare <code>(t : Set X) (h : t ⊆ s)</code> rather than <code>(t : Set s)</code>.
+Using this coercion from <code>Set</code>s to types should usually be reserved for cases where you need to pass in a <code>Set</code> to another function that requires a type as input.</p>
+<p>Mathlib's algebra library has been designed with this in mind. For example,
+<code>Subgroup</code> is defined like</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">Subgroup</span><span class="w"> </span><span class="o">(</span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">carrier</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">M</span>
+<span class="w">  </span><span class="n">mul_mem</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span>
+<span class="w">  </span><span class="n">one_mem</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span>
+<span class="w">  </span><span class="n">inv_mem</span><span class="w"> </span><span class="o">{</span><span class="n">x</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">x</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">carrier</span>
+</code></pre></div>
+</div>
+
+<p>This is so that if you have a <code>H : Subgroup G</code>, then you can work with elements of <code>H</code> by declaring <code>x : G</code> and <code>hx : x ∈ H</code> instead of having to write <code>x : H</code> and deal with <code>x</code> not actually having type <code>G</code>.</p>
+<h2 id="sort-_" class="markdown-heading">Sort _ <a class="hover-link" href="#sort-_">#</a></h2>
+<p>Writing <code>Sort _</code> and <code>Type _</code> causes Lean to fill in the universe level parameter automatically.
+Sometimes, this results in Lean specializing the universe level more than you might have anticipated.
+For example, in</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Data.Countable.Defs</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Sort</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">_</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Countable</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">inferInstance</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>the <code>inferInstance</code> default argument finds <code>Prop.countable</code>, which causes <code>Sort _</code> to be restricted to <code>Prop</code>.
+So, <code>α : Prop</code>, which means that <code>x : α</code> and <code>y : α</code> are definitionally equal due to proof irrelevance.</p>
+<p>In older Lean versions, this behavior was even more likely to trigger, because code after the <code>:=</code> could affect what <code>Sort _</code> was.
+For example, the following code compiles in Lean 4.8.0:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Sort</span><span class="w"> </span><span class="n">_</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="bp">∧</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="c1">-- Force α to have type Prop</span>
+<span class="w">  </span><span class="n">rfl</span>
+</code></pre></div>
+</div>
+
+<p>Because of this behavior, it is recommended to either use <code>Sort*</code> or <code>Type*</code> (which are stricter versions of <code>Sort _</code> and <code>Type _</code> that force Lean to generate a new universe parameter each time they are used) or to specify the universe parameter explicitly.</p>
+<h2 id="trying-to-prove-properties-about-float" class="markdown-heading">Trying to prove properties about Float <a class="hover-link" href="#trying-to-prove-properties-about-float">#</a></h2>
+<p>By default, entering a number like <code>5.42</code> creates a term of type <code>Float</code> rather than <code>Rat</code> or <code>Real</code>.
+It is very difficult to prove properties about <code>Float</code>.
+This is because within the mathematical portion of Lean, <code>Float</code> is defined as an opaque type and <code>Float = Unit</code> is consistent with Lean's core type theory (as long as <code>native_decide</code> is not used).
+But computationally, <code>Float</code> follows the IEEE 754 <em>binary64</em> format, which is like <code>double</code> in C or <code>f64</code> in Rust.
+(See <code>Float32</code> for 32-bit floating point numbers.)
+This means that to prove anything meaningful about <code>Float</code>, you have to use <code>native_decide</code>, which is a risky tactic (see the section in this document on <code>native_decide</code>).</p>
+<p>Additionally, because of the behavior of floating point numbers, <code>0.1 + 0.2 == 0.3</code> evaluates to <code>false</code>.
+(See https://0.30000000000000004.com/ for an explanation.)</p>
+<p>So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid <code>Float</code> and use another numeric type such as <code>Rat</code> or <code>Real</code>.</p>
+<h2 id="native_decide" class="markdown-heading"><code>native_decide</code> <a class="hover-link" href="#native_decide">#</a></h2>
+<p><code>native_decide</code>, also written as <code>decide +native</code>, is similar to the <code>decide</code> tactic except it uses <code>#eval</code> to run the decision procedure instead of reducing it in the kernel.
+This has the potential to be much faster than <code>decide</code>, and it is the only way to prove properties about <code>Float</code> and some other opaque types, but it is risky because it trusts the Lean compiler, which is more more complicated and likely to contain a bug than the Lean kernel.</p>
+<p>In particular, using <code>native_decide</code> makes your theorem depend on the <code>Lean.ofReduceBool</code> axiom, which states that the Lean compiler is trustworthy.
+You can check whether a proof relies on this axiom by using <code>#print axioms</code>.
+In addition to trusting the compiler, <code>Lean.ofReduceBool</code> also trusts all <code>@[extern]</code> and <code>@[implemented_by]</code> annotations as well as other extensions to the compiler.
+Since there are hundreds of these annotations in Lean core, at the present moment <code>native_decide</code> is almost certainly capable of proving <code>False</code>.
+It will also trust your <code>@[extern]</code> and <code>@[implemented_by]</code> annotations without keeping track of them:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span>
+
+<span class="kd">@[</span><span class="n">implemented_by</span><span class="w"> </span><span class="n">m</span><span class="kd">]</span>
+<span class="kd">def</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span>
+
+<span class="k">#reduce</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="c1">-- 22</span>
+<span class="k">#eval</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="c1">-- 37</span>
+
+<span class="kd">theorem</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">decide</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">native_decide</span>
+<span class="w">  </span><span class="n">contradiction</span>
+
+<span class="k">#print</span><span class="w"> </span><span class="kd">axioms</span><span class="w"> </span><span class="n">bad</span><span class="w"> </span><span class="c1">-- &#39;bad&#39; depends on axioms: [Lean.ofReduceBool]</span>
+</code></pre></div>
+</div>
+
+<p>Code contributed to Mathlib is not allowed to use <code>native_decide</code>.</p>
+<h2 id="panic-does-not-abort" class="markdown-heading">Panic does not abort <a class="hover-link" href="#panic-does-not-abort">#</a></h2>
+<p>If you are using Lean as a programming language, note that the <code>panic!</code> macro does not trigger a crash by default; instead, it just just prints an error message and lets the code keep running.
+This applies to functions like <code>Option.get!</code> as well. <code>panic</code> behaves this way because it is is a safe function, and it is formally equivalent to <code>default</code>.</p>
+<p>This can be dangerous if you are using panic to guard potentially dangerous <code>IO</code> operations or prevent data corruption.
+You may want to consider setting the environment variable <code>LEAN_ABORT_ON_PANIC</code> to <code>1</code>, although this might not be sufficient for user facing applications where environment variables are hard to control.</p>
+<h2 id="lean-3-code" class="markdown-heading">Lean 3 code <a class="hover-link" href="#lean-3-code">#</a></h2>
+<p>Lots of Lean 3 code can be found on the internet, and LLMs frequently generate Lean 3 code instead of Lean 4 code.
+If you are reading old Lean code or using an LLM, and you see details such as</p>
+<ul>
+<li>Names of types, like <code>nat</code> and <code>rat</code> starting with a lowercase letter</li>
+<li>Lowercase imports like <code>import data.real.basic</code> that don't start with a library
+name (the Lean 4 equivalent is <code>import Mathlib.Data.Real.Basic</code>).</li>
+<li>Usage of <code>begin</code> and <code>end</code> to surround tactic mode instead of <code>by</code></li>
+<li>Plural commands like <code>variables</code> and <code>universes</code> when introducing 2 or more variables or universes</li>
+<li>The <code>rw</code> tactic without square brackets</li>
+<li>The <code>refl</code> tactic (which is spelled <code>rfl</code> in Lean 4)</li>
+</ul>
+<p>then the code you are reading is probably Lean 3 code (or, if you are using an LLM, it could be an incoherent mix of Lean 3 and Lean 4).
+Lean 3 and Lean 4 are very different languages, so Lean 3 code will not work in Lean 4.</p>
+<h2 id="non-terminal-simp" class="markdown-heading">Non-terminal simp <a class="hover-link" href="#non-terminal-simp">#</a></h2>
+<p>This is not something you need to be concerned about when writing proofs for the first time, but if you are trying to tidy up a proof, perhaps so that it can be added to a library like mathlib, then note that using <code>simp</code> in the middle of a tactic block is considered bad practice.
+In the following</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">...</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="bp">...</span>
+<span class="w">  </span><span class="n">simp</span>
+<span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="bp">...</span><span class="o">]</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">h</span>
+</code></pre></div>
+</div>
+
+<p>the usage of <code>simp</code> is considered <em>non-terminal</em>.</p>
+<p>Non-terminal <code>simp</code>s create maintainability issues.
+In general, <code>simp</code> will become more powerful over time as more lemmas are added to mathlib, and that means that the goal state after <code>simp</code> can change when code in other parts of the library changes, potentially breaking any tactics that come after <code>simp</code>, such as the <code>rw</code> in this example.
+In the less common cases where lemmas are removed from mathlib, both terminal <code>simp</code>s and non-terminal <code>simp</code>s can break, but it is usually much easier to fix a terminal <code>simp</code> call.</p>
+<p>To avoid non-terminal <code>simp</code>s, you can use a simp variant like <code>simpa</code> or <code>simp_rw</code> to combine <code>simp</code> with the tactics that come after it, or you can &quot;squeeze&quot; your simp calls by using <code>simp?</code>.
+Note that it is fine for <code>simp</code> to appear in the middle of a proof as long as it fully closes a goal.
+For example, then even though the <code>simp</code> in</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="n">induction</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">with</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="bp">=&gt;</span>
+<span class="w">    </span><span class="n">simp</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">succ</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="n">hd</span><span class="w"> </span><span class="bp">=&gt;</span>
+<span class="w">    </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>is in the middle of the proof, it is not considered a non-terminal simp because it fully closes a goal.</p>
+<p>For more information, see <a href="simp.html#non-terminal-simps">these notes about non-terminal simps</a>.</p>
+<h2 id="ignoring-warnings" class="markdown-heading">Ignoring warnings <a class="hover-link" href="#ignoring-warnings">#</a></h2>
+<p>Pay close attention to warnings in your Lean files.
+An unused variables warning in a completed theorem could mean that not all hypotheses were used, which usually indicates that the theorem statement was wrong.
+Similarly, a warning that a declaration uses sorry when you did not type <code>sorry</code> yourself could indicate that a tactic failed and closed the proof with a synthetic sorry silently.</p>
+<p>If you are certain that a warning does not apply, you can disable it with an appropriate usage of <code>set_option</code>.
+This is better programming practice than ignoring the warnings and leaving others (or your future self!) to guess which warnings are expected and which you should be concerned about.</p>
+<p>Note that the <code>#lint</code> command (defined in <code>Batteries</code>) can detect some common issues,
+such as syntactic tautologies.
+It will only check parts of the file above the <code>#lint</code> command, so it should
+be run at the end of the file.</p>
+<h2 id="ambiguous-unicode-characters" class="markdown-heading">Ambiguous unicode characters <a class="hover-link" href="#ambiguous-unicode-characters">#</a></h2>
+<p>Lean makes extensive use of non-ASCII unicode characters, but a side effect of this is that many characters look similar but have very different functionality in Lean.
+If you are using VSCode with the Lean 4 extension, you can hover over unfamiliar characters to see instructions on how to type them.</p>
+<p>Some characters that are often confused include:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Character</th>
+<th align="left">Unicode Name</th>
+<th align="left">How to type</th>
+<th align="left">Usage in Lean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>|</code></td>
+<td align="left">Vertical Line (U+007C)</td>
+<td align="left">ASCII character</td>
+<td align="left">Set builder notation; Pattern matching, Absolute value</td>
+</tr>
+<tr>
+<td align="left"><code>∣</code></td>
+<td align="left">Divides (U+2223)</td>
+<td align="left"><code>\\|</code>, <code>\dvd</code>, <code>\mid</code>, <code>\shortmid</code></td>
+<td align="left">Divisibility</td>
+</tr>
+<tr>
+<td align="left"><code>Π</code></td>
+<td align="left">Greek Capital Letter Pi (U+03A0)</td>
+<td align="left"><code>\p</code>, <code>\P</code>, <code>\Pi</code></td>
+<td align="left">Dependent function type: <code>Π x : α, β x</code> is another way to write <code>(x : α) → β x</code></td>
+</tr>
+<tr>
+<td align="left"><code>∏</code></td>
+<td align="left">N-Ary Product (U+220F)</td>
+<td align="left"><code>\prod</code></td>
+<td align="left">Indexed products: see <code>BigOperators.bigprod</code></td>
+</tr>
+<tr>
+<td align="left"><code>⊓</code></td>
+<td align="left">Square Cap (U+2293)</td>
+<td align="left"><code>\inf</code>, <code>\meet</code>, <code>\glb</code>, <code>\sqcap</code></td>
+<td align="left">Infimum of two elements: <code>a ⊓ b</code> means <code>min a b</code>. See the <code>Min</code> typeclass, which is used even when the order is not linear</td>
+</tr>
+<tr>
+<td align="left"><code>⨅</code></td>
+<td align="left">N-Ary Square Intersection Operator (U+2A05)</td>
+<td align="left"><code>\infi</code>, <code>\Glb</code>, <code>\Inf</code>, <code>\Meet</code>, <code>\Sqcap</code>, <code>\bigglb</code>, <code>\biginf</code>, <code>\bigmeet</code>, <code>\bigsqcap</code></td>
+<td align="left">Indexed infimum operation, requires the <code>InfSet</code> typeclass.</td>
+</tr>
+<tr>
+<td align="left"><code>Σ</code></td>
+<td align="left">Greek Capital Letter Sigma (U+03A3)</td>
+<td align="left"><code>\S</code> <code>\GS</code>, <code>\Sigma</code></td>
+<td align="left">The <code>Sigma</code> (aka dependent pair/dependent sum) type</td>
+</tr>
+<tr>
+<td align="left"><code>∑</code></td>
+<td align="left">N-Ary Summation (U+2211)</td>
+<td align="left"><code>\sum</code></td>
+<td align="left">Indexed summations: see <code>BigOperators.bigsum</code></td>
+</tr>
+<tr>
+<td align="left"><code>×</code></td>
+<td align="left">Multiplication Sign (U+00D7)</td>
+<td align="left"><code>\x</code>, <code>\times</code>, <code>\multiplication</code></td>
+<td align="left">Cartesian product of types</td>
+</tr>
+<tr>
+<td align="left"><code>x</code></td>
+<td align="left">Latin Small Letter X (U+0078)</td>
+<td align="left">ASCII character</td>
+<td align="left">No special function</td>
+</tr>
+<tr>
+<td align="left"><code>X</code></td>
+<td align="left">Latin Capital Letter X (U+0058)</td>
+<td align="left">ASCII character</td>
+<td align="left">Normally no special function; when the <code>Polynomial</code> namespace is open, represents the polynomial variable/indeterminant</td>
+</tr>
+<tr>
+<td align="left"><code>*</code></td>
+<td align="left">Asterisk (U+002A)</td>
+<td align="left">ASCII character</td>
+<td align="left">Multiplication</td>
+</tr>
+<tr>
+<td align="left"><code>∨</code></td>
+<td align="left">Logical Or (U+2228)</td>
+<td align="left"><code>\v</code>, <code>\or</code>, <code>\vee</code></td>
+<td align="left">The Or symbol: <code>a ∨ b</code> means <code>Or a b</code></td>
+</tr>
+<tr>
+<td align="left"><code>\/</code></td>
+<td align="left"></td>
+<td align="left">ASCII characters</td>
+<td align="left">ASCII alternative for the Or symbol <code>∨</code></td>
+</tr>
+<tr>
+<td align="left"><code>v</code></td>
+<td align="left">Latin Small Letter V (U+0076)</td>
+<td align="left">ASCII character</td>
+<td align="left">No special function</td>
+</tr>
+<tr>
+<td align="left"><code>·</code></td>
+<td align="left">Middle Dot (U+00B7)</td>
+<td align="left"><code>\.</code>, <code>\centerdot</code></td>
+<td align="left">Indenting and focusing on subgoals in tactic mode; Anonymous function syntax like <code>(· + 2)</code>, which is short for <code>fun x ↦ x + 2</code></td>
+</tr>
+<tr>
+<td align="left"><code>•</code></td>
+<td align="left">Bullet (U+2022)</td>
+<td align="left"><code>\smul</code>, <code>\bub</code>, <code>\bu</code></td>
+<td align="left">scalar multiplication or left action (see the <code>HSMul</code> and <code>SMul</code> typeclasses)</td>
+</tr>
+<tr>
+<td align="left"><code>⬝</code></td>
+<td align="left">Black Very Small Square (U+2B1D)</td>
+<td align="left"><code>\cdot</code>, <code>\dot</code>, <code>\tr</code>, <code>\con</code></td>
+<td align="left">used only in <code>u ⬝ᵥ w = dotProduct u w</code> (enter <code>ᵥ</code> with <code>\_v</code>)</td>
+</tr>
+<tr>
+<td align="left"><code>→</code></td>
+<td align="left">Rightwards Arrow (U+2192)</td>
+<td align="left"><code>\r</code>, <code>\imp</code>, <code>\-&gt;</code>, <code>\to</code>, <code>\r-</code>, <code>\rightarrow</code></td>
+<td align="left">Function type <code>A → B</code></td>
+</tr>
+<tr>
+<td align="left"><code>-&gt;</code></td>
+<td align="left"></td>
+<td align="left">ASCII characters</td>
+<td align="left">ASCII alternative to <code>→</code> for function types</td>
+</tr>
+<tr>
+<td align="left"><code>↦</code></td>
+<td align="left">Rightwards Arrow From Bar (U+21A6)</td>
+<td align="left"><code>\mapsto</code>, <code>\\|-&gt;</code>, <code>\r-|</code></td>
+<td align="left">Used in Lambda binders like <code>fun x : Nat ↦ x + 2</code></td>
+</tr>
+<tr>
+<td align="left"><code>=&gt;</code></td>
+<td align="left"></td>
+<td align="left">ASCII characters</td>
+<td align="left">Pattern matching; ASCII alternative to <code>↦</code></td>
+</tr>
+<tr>
+<td align="left"><code>⟶</code></td>
+<td align="left">Long Rightwards Arrow (U+27F6)</td>
+<td align="left"><code>\hom</code>, <code>\--&gt;</code>, <code>\longrightarrow</code>, <code>\r--</code></td>
+<td align="left"><code>a ⟶ b</code> is the type of morphisms from <code>a</code> to <code>b</code> in a category or quiver: see <code>Quiver.Hom</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>↪</code></td>
+<td align="left">Rightwards Arrow With Hook (U+21AA)</td>
+<td align="left"><code>\hookrightarrow</code></td>
+<td align="left"><code>α ↪ β</code> is the type of injective functions from <code>α</code> to <code>β</code>: see <code>Function.Embedding</code></td>
+</tr>
+<tr>
+<td align="left"><code>=</code></td>
+<td align="left">Equals Sign (U+003D)</td>
+<td align="left">ASCII character</td>
+<td align="left">Equality between objects: see <code>Eq</code></td>
+</tr>
+<tr>
+<td align="left"><code>==</code></td>
+<td align="left"></td>
+<td align="left">ASCII characters</td>
+<td align="left">Boolean equality: see <code>BEq</code>. Boolean equality is type-dependent, but if a <code>LawfulBEq</code> instance exists, <code>BEq</code> agrees with <code>Eq</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>≃</code></td>
+<td align="left">Asymptotically Equal To (U+2243)</td>
+<td align="left"><code>\equiv</code>, <code>\~-</code>, <code>\simeq</code></td>
+<td align="left">Bijections: <code>α ≃ β = Equiv α β</code> is the type of functions from <code>α → β</code> equipped with a two-sided inverse; <code>≃o</code>, <code>≃r</code>, etc. instead refer to specific types of isomorphisms.</td>
+</tr>
+<tr>
+<td align="left"><code>≅</code></td>
+<td align="left">Approximately Equal To (U+2245)</td>
+<td align="left"><code>\iso</code>, <code>\~=</code>, <code>\cong</code></td>
+<td align="left">Isomorphisms in a category; when <code>open scoped Congruent</code> is active, refers instead to <code>Congruent</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>≈</code></td>
+<td align="left">Almost Equal To (U+2248)</td>
+<td align="left"><code>\~~</code>, <code>\approx</code>, <code>\thickapprox</code></td>
+<td align="left">Type-dependent equivalence notation: see <code>HasEquiv</code>. Usually refers to a typeclass inferred <code>Setoid</code> instance</td>
+</tr>
+<tr>
+<td align="left"><code>~</code></td>
+<td align="left">Tilde (U+007E)</td>
+<td align="left">ASCII character</td>
+<td align="left">Permutation equivalence relation for <code>List</code>s, <code>Array</code>s, and <code>Vector</code>s; some special meaning for other types</td>
+</tr>
+<tr>
+<td align="left"><code>≡</code></td>
+<td align="left">Identical To (U+2261)</td>
+<td align="left"><code>\==</code></td>
+<td align="left"><code>a ≡ b [MOD n]</code> means <code>Nat.ModEq n a b</code> and <code>a ≡ b [ZMOD n]</code> means <code>Int.ModEq n a b</code>. Some special meaning for other types</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html#community-guidelines">Community guidelines</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teaching/index.html">Teaching using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Installation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">Get started</a></li>
+        
+          <li class="nav-item col-12"><a href="https://live.lean-lang.org/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/install/project.html">Using Lake (build system)</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://loogle.lean-lang.org/">Declaration search (Loogle)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean-lang.org/doc/reference/latest/">Language reference</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-manual/html-multi/">Tactic list</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/calc.html">Calc mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/conv.html">Conv mode</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">Well-founded recursion</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/speedup.html">Speeding up Lean files</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/extras/pitfalls.html">Pitfalls and common mistakes</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">Tags and branches</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/pitfalls.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
