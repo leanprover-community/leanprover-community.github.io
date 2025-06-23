@@ -1,0 +1,51 @@
+name: Message Zulip when a PR is opened
+
+on:
+  pull_request: #pull_request_target
+    types: [opened]
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    if: github.repository == 'leanprover-community/leanprover-community.github.io'
+
+    steps:
+    - name: Checkout script
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        repository: 'leanprover-community/leanprover-community.github.io'
+
+    - name: Produce tables
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: tables
+      run: |
+        AUTHOR="${{ github.event.pull_request.user.login }}"
+        PR_NUMBER="${{ github.event.pull_request.number }}"
+        PR_URL="${{ github.event.pull_request.html_url }}"
+        PR_TITLE="${{ github.event.pull_request.title }}"
+
+        printf $'message<<EOF\n' | tee -a "$GITHUB_OUTPUT"
+        printf '%s opened PR [#%s](%s):\n' "${AUTHOR}" "${PR_NUMBER}" "${PR_URL}" | tee -a "$GITHUB_OUTPUT"
+        printf '> %s\n' "${PR_TITLE}" | tee -a "$GITHUB_OUTPUT"
+        printf $'EOF\n' | tee -a "$GITHUB_OUTPUT"
+
+    #- name: Post output to Zulip
+    #  uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
+    #  with:
+    #    api-key: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
+    #    email: 'leanprover-community-repo-update-bot@leanprover.zulipchat.com'
+    #    organization-url: 'https://leanprover.zulipchat.com'
+    #    to: 'mathlib reviewers'
+    #    type: 'stream'
+    #    topic: 'blog and website PRs'
+    #    content: |
+    #      ${{ steps.tables.outputs.message }}
+
+  #workflow-keepalive:
+  #  if: github.event_name == 'schedule'
+  #  runs-on: ubuntu-latest
+  #  permissions:
+  #    actions: write
+  #  steps:
+  #    - uses: liskin/gh-workflow-keepalive@f72ff1a1336129f29bf0166c0fd0ca6cf1bcb38c # v1.2.1
