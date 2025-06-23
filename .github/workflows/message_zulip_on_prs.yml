@@ -15,10 +15,10 @@ jobs:
       with:
         repository: 'leanprover-community/leanprover-community.github.io'
 
-    - name: Produce tables
+    - name: Produce message
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      id: tables
+      id: zulip_message
       run: |
         AUTHOR="${{ github.event.pull_request.user.login }}"
         PR_NUMBER="${{ github.event.pull_request.number }}"
@@ -31,7 +31,7 @@ jobs:
         printf '> %s\n' "${PR_TITLE}" | tee -a "$GITHUB_OUTPUT"
         printf $'EOF\n' | tee -a "$GITHUB_OUTPUT"
 
-    #- name: Post output to Zulip
+    #- name: Post message to Zulip
     #  uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
     #  with:
     #    api-key: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
     #    type: 'stream'
     #    topic: 'blog and website PRs'
     #    content: |
-    #      ${{ steps.tables.outputs.message }}
+    #      ${{ steps.zulip_message.outputs.message }}
 
   #workflow-keepalive:
   #  if: github.event_name == 'schedule'
