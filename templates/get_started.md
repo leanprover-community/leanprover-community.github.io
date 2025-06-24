@@ -1,4 +1,4 @@
-# Get started with Lean
+# Set up Lean
 
 There are two ways for you to start interacting with Lean. Installing it on your own computer
 will give you the most satisfactory experience. However some Lean projects offer ways of
