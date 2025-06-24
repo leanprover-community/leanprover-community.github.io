@@ -63,8 +63,9 @@ can read the [reference manual](https://lean-lang.org/doc/reference/latest/) ([o
 
 * If you are interested in Lean as a programming language then you should read
   [Functional programming in Lean](https://lean-lang.org/functional_programming_in_lean/).
-
-* If you specifically want to do meta-programming and write tactics then you can read
+* If you specifically want to implement custom tactics then you can start with a beginner-friendly
+  [Tactic Programming Guide](https://github.com/mirefek/lean-tactic-programming-guide)
+* To learn tactics and metaprogramming on a deeper level, we recommend
   [Metaprogramming in Lean 4](https://github.com/arthurpaulino/lean4-metaprogramming-book)
   (after at least checking you are comfortable with the monad chapters of Functional programming in Lean).
 
