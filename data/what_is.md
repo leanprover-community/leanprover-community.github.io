@@ -8,5 +8,5 @@ The system checks that these proofs are correct down to their logical foundation
 These tools are often used to verify the correctness of programs.
 But they can also be used for abstract mathematics,
 which is something of interest to the mathlib community.
-In a formalization, all definitions are precisely specified
+In a formalization, all definitions are precisely specified,
 and all proofs are virtually guaranteed to be correct.
