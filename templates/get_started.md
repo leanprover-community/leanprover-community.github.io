@@ -1,13 +1,13 @@
 # Get started with Lean
 
 There are two ways for you to start interacting with Lean. Installing it on your own computer
-will give you the most satisfactory experience. However some Lean projects offer ways of
+will give you the most satisfactory experience. However, some Lean projects offer ways of
 interacting with them via the cloud, which requires no local installation.
 
 ## Without a local installation
 
 If you only want to try Lean without installing it, you can try running it in
-the cloud using Gitpod or GitHub codespaces. For instance you can read
+the cloud using Gitpod or GitHub Codespaces. For instance, you can read
 the book [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) while 
 doing the exercises [on Gitpod](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean). 
 Note this Gitpod option requires you to create an account somewhere. Note also that 
@@ -15,7 +15,7 @@ Gitpod is being deprecated in April 2025.
 
 ## Installing Lean and creating a project
 
-The important thing to know about a local installation is that it is a two step process. 
+The important thing to know about a local installation is that it is a two-step process. 
 First you need to install the software. But this is not enough; to run Lean on a file,
 the file must be part of a Lean project. 
 
@@ -39,8 +39,8 @@ be out of date.
 ### Legacy installation instructions
 
 * [Debian/Ubuntu](install/debian.html)
-* [Other linux](install/linux.html)
-* [MacOS](install/macos.html)
+* [Other Linux](install/linux.html)
+* [macOS](install/macos.html)
 * [Windows](install/windows.html)
 
 ### Legacy project installation instructions
