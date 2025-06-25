@@ -32,9 +32,10 @@ Typical workflow:
 * First, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
   to make your own fork of the repository.
   Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
-* Now make a local clone of the repository.
+* Now make a local clone of your fork and configure it properly.
+  See [the Git Guide for Mathlib4 Contributors](git.html) for detailed step-by-step instructions on setting up your fork correctly.
   ```
-  git clone https://github.com/leanprover-community/mathlib4.git
+  git clone https://github.com/YOUR_USERNAME/mathlib4.git
   cd mathlib4
   lake exe cache get
   ```
@@ -43,9 +44,6 @@ Typical workflow:
   ```
   git switch -c my_new_branch   # This creates a new branch and switches to it
   ```
-* Sometimes you may not want to create a new branch, but instead work on a branch
-  that someone else created, or you created from a different computer.
-  In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everything locally to check you didn't break anything, run
@@ -62,12 +60,9 @@ It's also okay to let our central CI servers do this for you by pushing your cha
   ```
 * Once you've opened a PR to the main `mathlib` repository (see below),
   continuous integration will automatically kick in at this point.
-  You can view the output by visiting
-  https://github.com/leanprover-community/mathlib4/tree/my_new_branch
-  (There will be a green tick on the line describing the most recent commit if everything works,
-  otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
-  Click on the red cross to see details.)
-  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/) and running `hub ci-status`.
+  You can view the CI status on your PR page on GitHub (there will be a green tick if everything works,
+  otherwise a yellow circle if CI is still working, or a red cross if something went wrong).
+  You can also check CI status using the GitHub CLI: `gh pr status`.
 * After CI finishes, you can run `lake exe cache get` to download compiled oleans.
 
 
