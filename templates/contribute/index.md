@@ -44,10 +44,6 @@ Typical workflow:
   ```
   git switch -c my_new_branch   # This creates a new branch and switches to it
   ```
-* Sometimes you may not want to create a new branch, but instead work on a branch
-  that someone else created, or you created from a different computer.
-  In that case, the recommended approach is to use the GitHub CLI: `gh pr checkout 12345` (where `12345` is the pull request number).
-  See [the Git Guide](git.html#working-with-others-prs) for more details.
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everything locally to check you didn't break anything, run
