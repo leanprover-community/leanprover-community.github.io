@@ -1,4 +1,4 @@
-# Set up Lean
+# Options to use Lean
 
 There are two ways for you to start interacting with Lean. Installing it on your own computer
 will give you the most satisfactory experience. However, some Lean projects offer ways of
@@ -6,27 +6,17 @@ interacting with them via the cloud, which requires no local installation.
 
 ## Without a local installation
 
-If you only want to try Lean without installing it, you can try running it in
-the cloud using Gitpod or GitHub Codespaces. For instance, you can read
-the book [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) while 
-doing the exercises [on Gitpod](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean). 
-Note this Gitpod option requires you to create an account somewhere. Note also that 
-Gitpod is being deprecated in April 2025.
+If you only want to try Lean without installing it, you have a couple options.
+If you want to do a quick one-off experiment, you can use the [Online Lean editor](https://live.lean-lang.org/).
+If you want to work on a bigger project you can use GitHub Codespaces (or Gitpod, but that is deprecated as of April 2025).
+For instance, you can read
+the book [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/) while
+doing the exercises [on GitHub Codespaces](https://codespaces.new/leanprover-community/mathematics_in_lean).
+Note this requires you to create an account on GitHub.
 
-## Installing Lean and creating a project
+## Installing Lean
 
-The important thing to know about a local installation is that it is a two-step process. 
-First you need to install the software. But this is not enough; to run Lean on a file,
-the file must be part of a Lean project. 
-
-Once you have installed Lean, you can either install a Lean project from the internet
-(for example the [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/)
-project) or you can create your own project.
-
-The recommended way to install Lean and to get working with a project is to follow the
-[instructions in the official Lean manual](https://docs.lean-lang.org/lean4/doc/quickstart.html).
-The manual explains a simple point-and-click method for both installing Lean, and creating
-or downloading a project.
+[Click here for the instructions to install Lean](https://docs.lean-lang.org/lean4/doc/quickstart.html).
 
 After you have followed these instructions, you'll probably want to [learn Lean](learn.html)!
 
