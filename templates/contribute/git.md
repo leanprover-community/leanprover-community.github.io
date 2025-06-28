@@ -25,6 +25,17 @@ Before starting, make sure you have:
 
 These steps only need to be done once when you first start contributing to mathlib4.
 
+## Skip to Step 4 with the GitHub CLI
+
+The following command performs steps 1 to 3 for you:
+It forks the mathlib4 repo onto your GitHub account,
+clones the repo into your current directory,
+and sets up the remotes as recommended.
+
+```bash
+gh repo fork leanprover-community/mathlib4 --default-branch-only --clone
+```
+
 ## Step 1: Fork the Repository on GitHub
 
 First, you need to create your own copy (fork) of the mathlib4 repository:
