@@ -34,6 +34,7 @@ If you find a mistake in this document or would like something added, please wri
 - [Non-terminal simp](#non-terminal-simp)
 - [Ignoring warnings](#ignoring-warnings)
 - [Ambiguous unicode characters](#ambiguous-unicode-characters)
+- [Default values in structure fields](#default-values-in-structure-fields)
 
 ## Automatic implicit parameters
 
@@ -65,7 +66,7 @@ theorem my_theorem : ∃ (a b : ℕ), a ≠ b := sorry
 example : False := Exists.elim (my_theorem (ℕ := False)) (fun f _ ↦ f)
 ```
 
-Automatic implicit parameters are enabled globally by default, but they are disabled if you are working on Mathlib.
+Automatic implicit parameters are enabled globally by default.
 If you are new to Lean, I recommend that you disable them and use the `variable`
 command instead.
 This can be done either by adding
@@ -220,7 +221,7 @@ Outside of expressions like `∀ ε > 0, ∃ δ > 0, _` where the `>` is joined 
 
 The types `Prop` and `Bool` both capture the notion of something being true or false,
 but they behave very differently in Lean.
-`Prop` is the type of *propositions*, which are mathematical statements that have a truth value,
+`Prop` is the universe of *propositions*, which are mathematical statements that have a truth value,
 while `Bool` is the type of *booleans*; it consists of exactly two elements, `true` and `false`.
 Note that `True` and `False` are *propositions*, while `true` and `false` are *booleans*.
 
@@ -730,7 +731,7 @@ But computationally, `Float` follows the IEEE 754 *binary64* format, which is li
 This means that to prove anything meaningful about `Float`, you have to use `native_decide`, which is a risky tactic (see the section in this document on `native_decide`).
 
 Additionally, because of the behavior of floating point numbers, `0.1 + 0.2 == 0.3` evaluates to `false`.
-(See https://0.30000000000000004.com/ for an explanation.)
+(See [https://0.30000000000000004.com/] for an explanation.)
 
 So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid `Float` and use another numeric type such as `Rat` or `Real`.
 
@@ -871,3 +872,23 @@ Character | Unicode Name | How to type | Usage in Lean
 `≈` | Almost Equal To (U+2248) | `\~~`, `\approx`, `\thickapprox` | Type-dependent equivalence notation: see `HasEquiv`. Usually refers to a typeclass inferred `Setoid` instance
 `~` | Tilde (U+007E) | ASCII character | Permutation equivalence relation for `List`s, `Array`s, and `Vector`s; some special meaning for other types
 `≡` | Identical To (U+2261) | `\==` | `a ≡ b [MOD n]` means `Nat.ModEq n a b` and `a ≡ b [ZMOD n]` means `Int.ModEq n a b`. Some special meaning for other types
+
+## Default values in structure fields
+
+Users often assume that the use of `:=` in structure fields means "this field is defined
+to have this value". But this is not the case! Instead, this is the way to supply default
+values of structure fields. In particular, these values can be overridden.
+
+```
+structure foo : Type where
+  n : Nat := 37 -- I want n to always be 37...
+
+def X : foo where
+  n := 42 -- ...but that's not the way to do it
+
+#eval X.n -- 42
+
+def Y : foo where -- only if `n` is not supplied does the default value apply.
+
+#eval Y.n -- 37
+```
