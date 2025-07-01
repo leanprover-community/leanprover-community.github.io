@@ -888,7 +888,7 @@ def X : foo where
 
 #eval X.n -- 42
 
-def Y : foo where -- only if `n` is not supplied does the default value apply.
+def Y : foo where -- only if `n` is not supplied does the default value kick in.
 
 #eval Y.n -- 37
 ```
