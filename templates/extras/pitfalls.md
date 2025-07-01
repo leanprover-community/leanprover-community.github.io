@@ -66,7 +66,7 @@ theorem my_theorem : ∃ (a b : ℕ), a ≠ b := sorry
 example : False := Exists.elim (my_theorem (ℕ := False)) (fun f _ ↦ f)
 ```
 
-Automatic implicit parameters are enabled globally by default.
+Automatic implicit parameters are enabled globally by default, but they are disabled if you are working on Mathlib.
 If you are new to Lean, I recommend that you disable them and use the `variable`
 command instead.
 This can be done either by adding
