@@ -6,7 +6,7 @@ interacting with them via the cloud, which requires no local installation.
 
 ## Without a local installation
 
-If you only want to try Lean without installing it, you have a couple options.
+If you only want to try Lean without installing it, you have a couple of options.
 If you want to do a quick one-off experiment, you can use the [Online Lean editor](https://live.lean-lang.org/).
 If you want to work on a bigger project you can use GitHub Codespaces (or Gitpod, but that is deprecated as of April 2025).
 For instance, you can read
