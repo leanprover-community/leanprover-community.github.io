@@ -108,6 +108,10 @@ Click on the "labels" header to add or remove labels from the current project.
 - `-awaiting-author` will remove the **"awaiting-author"** label
 - `WIP` will add the **"WIP"** label
 - `-WIP` will remove the **"WIP"** label
+- `easy` will add the **"easy"** label
+- `-easy` will remove the **"easy"** label
+
+This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
 
 If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
 
