@@ -902,5 +902,5 @@ def foo.n : Nat := 37
 
 def X : foo where
 
-#eval X.n -- 42
+#eval X.n -- 37
 ```
