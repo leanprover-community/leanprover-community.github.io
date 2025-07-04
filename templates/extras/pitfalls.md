@@ -898,7 +898,7 @@ If you really want to have something like this, try the following instead:
 ```
 structure foo : Type where
 
-def foo.n : Nat := 42
+def foo.n : Nat := 37
 
 def X : foo where
 
