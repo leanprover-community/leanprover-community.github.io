@@ -892,3 +892,15 @@ def Y : foo where -- only if `n` is not supplied does the default value kick in.
 
 #eval Y.n -- 37
 ```
+
+If you really want to have something like this, try the following instead:
+
+```
+structure foo : Type where
+
+def foo.n : Nat := 42
+
+def X : foo where
+
+#eval X.n -- 42
+```
