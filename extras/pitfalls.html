@@ -82,6 +82,7 @@
 <li><a href="#non-terminal-simp">Non-terminal simp</a></li>
 <li><a href="#ignoring-warnings">Ignoring warnings</a></li>
 <li><a href="#ambiguous-unicode-characters">Ambiguous unicode characters</a></li>
+<li><a href="#default-values-in-structure-fields">Default values in structure fields</a></li>
 </ul>
 <h2 id="automatic-implicit-parameters" class="markdown-heading">Automatic implicit parameters <a class="hover-link" href="#automatic-implicit-parameters">#</a></h2>
 <p>By default, Lean's <a href="https://lean-lang.org/doc/reference/latest///Definitions/Headers-and-Signatures/#automatic-implicit-parameters">automatic implicit parameters</a> feature (<code>autoImplicit</code> for short) causes unbound variables to be converted to implicit parameters. For example, when this feature is enabled,</p>
@@ -254,7 +255,7 @@ Outside of expressions like <code>∀ ε &gt; 0, ∃ δ &gt; 0, _</code> where t
 <h2 id="confusing-prop-and-bool" class="markdown-heading">Confusing <code>Prop</code> and <code>Bool</code> <a class="hover-link" href="#confusing-prop-and-bool">#</a></h2>
 <p>The types <code>Prop</code> and <code>Bool</code> both capture the notion of something being true or false,
 but they behave very differently in Lean.
-<code>Prop</code> is the type of <em>propositions</em>, which are mathematical statements that have a truth value,
+<code>Prop</code> is the universe of <em>propositions</em>, which are mathematical statements that have a truth value,
 while <code>Bool</code> is the type of <em>booleans</em>; it consists of exactly two elements, <code>true</code> and <code>false</code>.
 Note that <code>True</code> and <code>False</code> are <em>propositions</em>, while <code>true</code> and <code>false</code> are <em>booleans</em>.</p>
 <p>Using booleans where propositions are expected or vice versa can lead to some counterintuitive errors. Additionally, because booleans can be implicitly coerced into propositions, the issues that arise might not be immediately apparent.
@@ -727,7 +728,7 @@ But computationally, <code>Float</code> follows the IEEE 754 <em>binary64</em> f
 (See <code>Float32</code> for 32-bit floating point numbers.)
 This means that to prove anything meaningful about <code>Float</code>, you have to use <code>native_decide</code>, which is a risky tactic (see the section in this document on <code>native_decide</code>).</p>
 <p>Additionally, because of the behavior of floating point numbers, <code>0.1 + 0.2 == 0.3</code> evaluates to <code>false</code>.
-(See https://0.30000000000000004.com/ for an explanation.)</p>
+(See [https://0.30000000000000004.com/] for an explanation.)</p>
 <p>So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid <code>Float</code> and use another numeric type such as <code>Rat</code> or <code>Real</code>.</p>
 <h2 id="native_decide" class="markdown-heading"><code>native_decide</code> <a class="hover-link" href="#native_decide">#</a></h2>
 <p><code>native_decide</code>, also written as <code>decide +native</code>, is similar to the <code>decide</code> tactic except it uses <code>#eval</code> to run the decision procedure instead of reducing it in the kernel.
@@ -1014,6 +1015,35 @@ If you are using VSCode with the Lean 4 extension, you can hover over unfamiliar
 </tr>
 </tbody>
 </table>
+<h2 id="default-values-in-structure-fields" class="markdown-heading">Default values in structure fields <a class="hover-link" href="#default-values-in-structure-fields">#</a></h2>
+<p>Users often assume that the use of <code>:=</code> in structure fields means &quot;this field is defined
+to have this value&quot;. But this is not the case! Instead, this is the way to supply default
+values of structure fields. In particular, these values can be overridden.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="c1">-- I want n to always be 37...</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">where</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="c1">-- ...but that&#39;s not the way to do it</span>
+
+<span class="k">#eval</span><span class="w"> </span><span class="n">X.n</span><span class="w"> </span><span class="c1">-- 42</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="c1">-- only if `n` is not supplied does the default value kick in.</span>
+
+<span class="k">#eval</span><span class="w"> </span><span class="n">Y.n</span><span class="w"> </span><span class="c1">-- 37</span>
+</code></pre></div>
+</div>
+
+<p>If you really want to have something like this, try the following instead:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">where</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">foo.n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">37</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">where</span>
+
+<span class="k">#eval</span><span class="w"> </span><span class="n">X.n</span><span class="w"> </span><span class="c1">-- 37</span>
+<span class="bp">```</span>
+</code></pre></div>
+</div>
 
   </main>
 
