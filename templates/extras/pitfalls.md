@@ -148,7 +148,7 @@ example (s : Finset Nat) : ∑ i ∈ s, (0 + i ^ 2) = ∑ i ∈ s, i ^ 2 := by
 ```
 This is because `∑ i ∈ s, (0 + i ^ 2)` is shorthand for `Finset.sum s (fun i ↦ 0 + i ^ 2)`, and `rw` sometimes fails to rewrite inside `fun` expressions because it cannot rewrite subexpressions like `0 + i ^ 2` that contain bound variables.
 
-In this case, you can use `simp_rw [Nat.zero_add]` to perform the rewrite, but in some cases you might have to make a precise rewrite using [conversion mode](https://leanprover.github.io/theorem_proving_in_lean4/conv.html):
+In this case, you can use `simp_rw [Nat.zero_add]` to perform the rewrite, but in some cases you might have to make a precise rewrite using [conversion mode](https://leanprover.github.io/theorem_proving_in_lean4/The-Conversion-Tactic-Mode/):
 ```lean
 example (s : Finset Nat) : ∑ i ∈ s, (0 + i ^ 2) = ∑ i ∈ s, i ^ 2 := by
   conv =>
