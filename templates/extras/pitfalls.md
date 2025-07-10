@@ -738,7 +738,7 @@ So, if you are not interested in using Lean as a programming language or otherwi
 ## `native_decide`
 
 `native_decide`, also written as `decide +native`, is similar to the `decide` tactic except it uses `#eval` to run the decision procedure instead of reducing it in the kernel.
-This has the potential to be much faster than `decide`, and it is the only way to prove properties about `Float` and some other opaque types, but it is risky because it trusts the Lean compiler, which is more more complicated and likely to contain a bug than the Lean kernel.
+This has the potential to be much faster than `decide`, and it is the only way to prove properties about `Float` and some other opaque types, but it is risky because it trusts the Lean compiler, which is much more complicated and likely to contain a bug than the Lean kernel.
 
 In particular, using `native_decide` makes your theorem depend on the `Lean.ofReduceBool` axiom, which states that the Lean compiler is trustworthy.
 You can check whether a proof relies on this axiom by using `#print axioms`.
