@@ -732,7 +732,7 @@ This means that to prove anything meaningful about <code>Float</code>, you have 
 <p>So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid <code>Float</code> and use another numeric type such as <code>Rat</code> or <code>Real</code>.</p>
 <h2 id="native_decide" class="markdown-heading"><code>native_decide</code> <a class="hover-link" href="#native_decide">#</a></h2>
 <p><code>native_decide</code>, also written as <code>decide +native</code>, is similar to the <code>decide</code> tactic except it uses <code>#eval</code> to run the decision procedure instead of reducing it in the kernel.
-This has the potential to be much faster than <code>decide</code>, and it is the only way to prove properties about <code>Float</code> and some other opaque types, but it is risky because it trusts the Lean compiler, which is more more complicated and likely to contain a bug than the Lean kernel.</p>
+This has the potential to be much faster than <code>decide</code>, and it is the only way to prove properties about <code>Float</code> and some other opaque types, but it is risky because it trusts the Lean compiler, which is much more complicated and likely to contain a bug than the Lean kernel.</p>
 <p>In particular, using <code>native_decide</code> makes your theorem depend on the <code>Lean.ofReduceBool</code> axiom, which states that the Lean compiler is trustworthy.
 You can check whether a proof relies on this axiom by using <code>#print axioms</code>.
 In addition to trusting the compiler, <code>Lean.ofReduceBool</code> also trusts all <code>@[extern]</code> and <code>@[implemented_by]</code> annotations as well as other extensions to the compiler.
@@ -1041,7 +1041,6 @@ values of structure fields. In particular, these values can be overridden.</p>
 <span class="kd">def</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="n">where</span>
 
 <span class="k">#eval</span><span class="w"> </span><span class="n">X.n</span><span class="w"> </span><span class="c1">-- 37</span>
-<span class="bp">```</span>
 </code></pre></div>
 </div>
 
