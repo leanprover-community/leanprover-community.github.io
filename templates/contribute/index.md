@@ -46,7 +46,7 @@ are essentially always welcome.
 
 Please also consider the possibility of creating a standalone repository, and adding `mathlib` as a dependency. 
 There are many Lean repositories on github, indexed by [reservoir](https://reservoir.lean-lang.org). 
-And [here](https://reservoir.lean-lang.org/@leanprover-community/mathlib/dependents) are the projects
+And [here](https://reservoir.lean-lang.org/@leanprover-community/mathlib/dependents) are those projects
 which have `mathlib` has a dependency. The solution of having a new project which depends on
 `mathlib` is a particularly good fit for projects in areas which do not align with the 
 expertise of the mathlib maintainers. One example of such a repository is the [combinatorial game
