@@ -13,7 +13,7 @@ to make the process of contributing as smooth as possible.
 ## What to contribute to mathlib
 
 Small fixes (for example fixes in docstrings) and single-lemma additions in already-existing theories
-are almost always welcome as contributions to mathlib. Longer PRs which extend existing theories is also almost
+are almost always welcome as contributions to mathlib. Longer PRs which extend existing theories are also almost
 always welcome. 
 
 But what about adding completely new theories to `mathlib`? Here, things can be more nuanced. The first question 
