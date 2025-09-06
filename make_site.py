@@ -2,6 +2,7 @@
 
 from enum import Enum, auto
 from pathlib import Path
+import shutil
 import sys
 import subprocess
 import pickle
@@ -504,18 +505,26 @@ for course in courses:
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
 
+# Cannot use %-d format code on windows
+def format_month_day(date_obj):
+    return f"{date_obj.strftime('%B')} {date_obj.day}"
+def format_month_day_year(date_obj):
+    return f"{date_obj.strftime('%B')} {date_obj.day}, {date_obj.year}"
+def format_day_year(date_obj):
+    return f"{date_obj.day}, {date_obj.year}"
+
 def format_date_range(event):
     if event.start_date and event.end_date:
         start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
         end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
         if start_date.year != end_date.year:
-            return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+            return f'{format_month_day_year(start_date)}–{format_month_day_year(end_date)}'
         elif start_date.month != end_date.month:
-            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+            return f'{format_month_day(start_date)}–{format_month_day_year(end_date)}'
         elif start_date.day != end_date.day:
-            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+            return f'{format_month_day(start_date)}–{format_day_year(end_date)}'
         else:
-            return start_date.strftime("%B %-d, %Y")
+            return format_month_day_year(start_date)
     else:
         return 'TBA'
 
@@ -796,9 +805,14 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     def clean_tex(src: str) -> str:
         return latexnodes2text.latex_to_text(src)
 
-    subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
-        '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
-        str(target/'lean.bib')])
+    try:
+        # use bibtool to strip nonstandard fields used just for display on this website
+        subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
+            '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
+            str(target/'lean.bib')], check=True)
+    except FileNotFoundError:
+        print("Warning: bibtool not found. Copying lean.bib without processing.")
+        shutil.copy2('lean.bib', target/'lean.bib')
 
     def read_md(src: str) -> str:
         return (DATA/src).read_text(encoding='utf-8')

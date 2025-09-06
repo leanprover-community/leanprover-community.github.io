@@ -54,7 +54,7 @@ and then press <kbd>TAB</kbd> to generate a skeleton of the copyright header.)
 
 Regarding the list of authors: use `Authors` even when there is only a single author.
 Don't end the line with a period, and use commas (`, `) to separate all author names
-(so don't use `and` between the penultimate and ultimate author.)
+(so don't use `and` between the penultimate and final author.)
 We don't have strict rules on what contributions qualify for inclusion there.
 The general idea is that the people listed there should be the ones we would
 reach out to if we had questions about the design or development of the Lean code.
@@ -80,7 +80,9 @@ two main concepts in the theory of xyzzyology.
 ## Main results
 
 - `exists_foo`: the main existence theorem of `foo`s.
-- `bar_of_foo`: a construction of a `bar`, given a `foo`.
+- `bar_of_foo_of_baz`: a construction of a `bar`, given a `foo` and a `baz`.
+  If this doc-string is longer than one line, subsequent lines should be indented by two spaces
+  (as required by markdown syntax).
 - `bar_eq`    : the main classification theorem of `bar`s.
 
 ## Notation
@@ -354,17 +356,17 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l))
-        = reverse (reverse l ++ [a]) := by rw [reverse_cons]
-      _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _ = reverse [a] ++ l := by rw [reverse_reverse l]
-      _ = a :: l := rfl
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l))
+      = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
 ```
 
-However, because the expressions and proofs are relatively short, the following style
-might be preferable in this situation.
+The following style has the substantial advantage of having all lines be interchangeable, which is
+particularly useful when editing the proof in eg VSCode:
 
 ```lean
 import Init.Data.List.Basic
@@ -372,12 +374,29 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
-      _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
-      _                          = a :: l                             := rfl
+  | []     => rfl
+  | a :: l => calc
+        reverse (reverse (a :: l))
+    _ = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
+```
+
+If the expressions and proofs are relatively short, the following style is also an option:
+
+```lean
+import Init.Data.List.Basic
+
+open List
+
+theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
+    _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
+    _                          = a :: l                             := rfl
 ```
 
 ### Tactic mode
@@ -532,6 +551,15 @@ For instance `rw [← add_comm a b]` or `simp [← and_or_left]`.
 (There should also be a space between the tactic name and its arguments, as in `rw [h]`.)
 This rule applies the `do` notation as well: `do return (← f) + (← g)`
 
+### Empty lines inside declarations
+
+Empty lines inside declarations are discouraged and there is a linter that enforces
+that they are not present. This helps maintaining a uniform code style throughout
+all of mathlib.
+
+You are however encouraged to add comments to your code: even a short sentence communicates
+*much* more than an empty line in the middle of a proof ever will!
+
 ### Normal forms
 
 Some statements are equivalent. For instance, there are several equivalent
@@ -553,7 +581,7 @@ on the direction we want) while the other conversion is more lengthy, we use `hn
 *conclusions* of theorems (as this is the more powerful result to use).
 A common usage of this rule is with naturals, where `⊥ = 0`.
 
-## Comments
+### Comments
 
 Use module doc delimiters `/-! -/` to provide section headers and
 separators since these get incorporated into the auto-generated docs,
@@ -562,6 +590,51 @@ implementation notes) or for comments in proofs.
 Use `--` for short or in-line comments.
 
 Documentation strings for declarations are delimited with `/-- -/`.
+When a documentation string for a declaration spans multiple lines, do not indent
+subsequent lines.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
+
+### Deprecation
+
+Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
+definitions to fail to compile.
+Any publicly exposed theorems and definitions that are being removed should be gracefully
+transitioned by keeping the old declaration with a `@[deprecated]` attribute.
+This warns downstream projects about the change and gives them the opportunity to adjust before the
+declarations are deleted.
+Renamed definitions should use a deprecated `alias` to the new name.
+Otherwise, when the deprecated definition does not have a direct replacement, the definition should
+be deprecated with a message, like so:
+
+```lean4
+theorem new_name : ... := ...
+@[deprecated (since := "YYYY-MM-DD")] alias old_name := new_name
+
+@[deprecated "This theorem is deprecated in favor of using ... with ..." (since := "YYYY-MM-DD")]
+theorem example_thm ...
+```
+
+The `@[deprecated]` attribute requires the deprecation date, and an alias to the new declaration
+or a string to explain how transition away from the old definition when a new version is no longer
+being provided.
+
+The [`deprecate to`](/mathlib4_docs/Mathlib/Tactic/DeprecateTo.html) command and
+`scripts/add_deprecations.sh` script can help generate alias definitions.
+
+Deprecations for declarations with the `to_additive` attribute should ensure the deprecation is
+also properly tagged with `to_additive`, like so:
+```lean4
+@[to_additive] theorem Group_bar {G} [Group G] {a : G} : a = a := rfl
+
+-- Two deprecations required to include the `deprecated` tag on both the additive
+-- and multiplicative versions
+@[deprecated (since := "YYYY-MM-DD")] alias AddGroup_foo := AddGroup_bar
+@[to_additive existing, deprecated (since := "YYYY-MM-DD")] alias Group_foo := Group_bar
+```
+
+We allow, but discourage, contributors from simultaneously renaming declarations X to Y and W to X.
+In this case, no deprecation attribute is required for X, but it is for W.
+
+Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.

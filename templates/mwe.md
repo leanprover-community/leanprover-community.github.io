@@ -78,7 +78,7 @@ You should *test* this by copy-pasting your code snippet into a new Lean file, o
 
 ## What if I'm asking about games like the [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4)?
 
-If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://adam.math.hhu.de/#/g/hhu-adam/NNG4/world/Addition/level/2) of the Natural Number Game and my proof script is _blah_", rather than "I am on Addition World Level 2 of the Natural Number Game and my proof script is _blah_".
+If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say "I am on [this level](https://adam.math.hhu.de/#/g/leanprover-community/nng4/world/Addition/level/2) of the Natural Number Game and my proof script is _blah_", rather than "I am on Addition World Level 2 of the Natural Number Game and my proof script is _blah_".
 
 If you post a code snippet on Zulip, please make sure it is surrounded in triple backticks.
 

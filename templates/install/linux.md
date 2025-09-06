@@ -1,5 +1,11 @@
 # Installing Lean 4 on Linux
 
+Note that these are legacy instructions provided by the community. The recommended
+way to install Lean and to create a project is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Legacy instructions
+
 This document explains how to get started with Lean and mathlib on a generic Linux distribution (there is a [specific page](debian.html) for Debian and derived distributions such as Ubuntu).
 
 All commands below should be typed inside a terminal.
@@ -12,7 +18,7 @@ All commands below should be typed inside a terminal.
   when a question is asked). It will live in `$HOME/.elan` and add a
   line to `$HOME/.profile`.
   ```bash
-  curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+  curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
   ```
 
 * You will also need a code editor that has a Lean plugin. The

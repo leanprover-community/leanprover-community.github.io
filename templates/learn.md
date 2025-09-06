@@ -24,7 +24,7 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   using Lean, and then independent topic files about elementary analysis,
   abstract topology and mathematical logic.
 
-* You can download the [tactic cheatsheet (pdf)](https://leanprover-community.github.io/papers/lean-tactics.pdf) for a reference of most common tactics.
+* You can download the [tactic cheatsheet (PDF)](https://leanprover-community.github.io/papers/lean-tactics.pdf) for a reference of most common tactics.
 
 * If you wish to learn directly from source, the
   [Lean API documentation](https://leanprover-community.github.io/mathlib4_docs/)
@@ -36,14 +36,14 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
 
 If you prefer reading a book (with exercises), there are a number of freely available Lean books
 that have proven to be useful to beginners.
-These are available as html or PDFs, but are usually meant to be read interactively in VSCode,
+These are available as HTML or PDFs, but are usually meant to be read interactively in VSCode,
 doing Lean exercises on the fly:
 
 * The standard mathematics-oriented reference is
   [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
-  You can [download it as a pdf](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
+  You can [download it as a PDF](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf),
   but see also the
-  [VSCode instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started)).
+  [VSCode instructions](https://leanprover-community.github.io/mathematics_in_lean/C01_Introduction.html#getting-started).
 
 * [The Mechanics of Proof](https://hrmacbeth.github.io/math2001/) is also mathematics-oriented.
   It has a gentler pace than *Mathematics in Lean* and is aimed at readers with less mathematical
@@ -63,8 +63,9 @@ can read the [reference manual](https://lean-lang.org/doc/reference/latest/) ([o
 
 * If you are interested in Lean as a programming language then you should read
   [Functional programming in Lean](https://lean-lang.org/functional_programming_in_lean/).
-
-* If you specifically want to do meta-programming and write tactics then you can read
+* If you specifically want to implement custom tactics then you can start with a beginner-friendly
+  [Tactic Programming Guide](https://github.com/mirefek/lean-tactic-programming-guide)
+* To learn tactics and metaprogramming on a deeper level, we recommend
   [Metaprogramming in Lean 4](https://github.com/arthurpaulino/lean4-metaprogramming-book)
   (after at least checking you are comfortable with the monad chapters of Functional programming in Lean).
 

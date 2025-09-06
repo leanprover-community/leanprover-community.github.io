@@ -115,7 +115,7 @@ More fully, a *typeclass* (or *type class*).
 
 A Lean [structure](#structure) whose [instances](#instance) can be retrieved via [typeclass inference](#typeclass-inference).
 
-Distinct from the use of *class* in object oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
+Distinct from the use of *class* in object-oriented languages -- the word usage in functional programming languages comes from the [typeclasses of Haskell](https://en.wikipedia.org/wiki/Type_class).
 
 ### code linter
 
@@ -215,7 +215,7 @@ For propositions, exhibiting a [term](#term) reduces equivalently to the aforeme
 
 An attempt or effort to make a particular working piece of code as short as possible; within the context of Lean, often it is a proof's length which is golfed or optimized.
 Golfed proofs often make use of [term mode](#term-mode), and in general prioritize terseness over readability.
-This obfuscation often is used intentionally or advantageously to signal to readers that a proof is mechanical or trivial.
+This obfuscation is often used intentionally or advantageously to signal to readers that a proof is mechanical or trivial.
 
 <a name="heavy-rfl"></a>
 
@@ -385,7 +385,7 @@ Further details can be found in the [`simp` documentation of mathlib](https://le
 
 A convention within [mathlib](#mathlib) for expressing propositions with multiple equivalent forms in a single conventional one.
 
-Examples and further detail can found on [the `simp` page](simp.html#simp-normal-form).
+Examples and further detail can be found on [the `simp` page](simp.html#simp-normal-form).
 
 ### style linter
 

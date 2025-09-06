@@ -1,5 +1,11 @@
 # Controlled installation of Lean 4 on MacOS
 
+Note that these are legacy instructions provided by the community. The recommended
+way to install Lean and to create a project is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Legacy instructions
+
 This document explains a more controlled installation procedure for Lean on MacOS. There is a quicker way described in the main
 [install page](macos.html) but it requires more trust.
 

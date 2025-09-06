@@ -1,5 +1,11 @@
 # Installing Lean 4 on Windows
 
+Note that these are legacy instructions provided by the community. The recommended
+way to install Lean and to create a project is to follow the instructions in
+[the official Lean documentation](https://docs.lean-lang.org/lean4/doc/quickstart.html).
+
+## Legacy instructions
+
 This document explains how to get started with Lean 4 and mathlib.
 
 If you get stuck, please come to [the chat room](https://leanprover.zulipchat.com/) to ask for
@@ -81,7 +87,7 @@ or to work with a new or existing project that depends on mathlib4.
 Open a command prompt (`cmd`) and execute the following commands:
 
 ```shell
-curl -O --location https://raw.githubusercontent.com/leanprover/elan/master/elan-init.ps1
+curl -O --location https://elan.lean-lang.org/elan-init.ps1
 powershell -ExecutionPolicy Bypass -f elan-init.ps1
 del elan-init.ps1
 ```
@@ -89,7 +95,7 @@ del elan-init.ps1
 Alternatively you can open a `git bash` window, and run
 
 ```shell
-curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
 ```
 
 In either case, it should take about a minute to install `elan`.

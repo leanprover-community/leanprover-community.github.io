@@ -5,6 +5,8 @@ to make the process of contributing as smooth as possible.
 
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
+* Create a GitHub account and add your GitHub username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
+We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
@@ -53,34 +55,25 @@ contributions to be reviewed and merged.
 ## Working on mathlib
 
 We use `git` to manage and version control `mathlib`.
+
+Please see [the Git Guide for Mathlib4 Contributors](git.html) for detailed instructions if you have not contributed to an open source project with git before.
+
 The `master` branch is the "production" version of mathlib.
 It is essential that everything in the master branch compiles without errors, and there are no `sorry`s.
 To ensure this, we only commit changes to `master` that have passed automated Continuous Integration ("CI") tests, and have been approved by mathlib maintainers.
 
 While you're working on a new contribution to `mathlib`, you should do this on a different branch.
-It's okay to do this in your own fork of the `mathlib` repository.
-
-Eventually, to make a pull request, you'll need to migrate your work to a branch of the main mathlib repository,
-as our CI works better this way.
-It's polite to prefix the branch name with your github username, so it's easier for us to clean up clutter.
-To work in the main repository, you can introduce yourself on Zulip and ask for write access to non-`master` branches of the mathlib repository.
-Either [make your own thread](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) to introduce yourself, or ask for access in
-[this topic](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission).
-Please include your GitHub username in your request (and add this username to your Zulip profile, using the personal settings panel).
-The maintainers strongly prefer that contributors to mathlib use their full real names on their Zulip profile.
-It's polite to prefix the branch name with your username, so it's easier for us to clean up clutter.
-(Once you're making a pull request, we'll ask you to do so from a branch of the mathlib repository,
-rather than from your own fork, as CI works better this way.) 
+You should do this in your own fork of the `mathlib` repository.
 
 Typical workflow:
 * To get started, you'll need a local copy of mathlib.
-* If you've asked for write access (recommended above), you can just use <https://github.com/leanprover-community/mathlib4>.
-  Otherwise, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
+* First, you'll need to go to https://github.com/leanprover-community/mathlib4 and click "Fork" in the top right,
   to make your own fork of the repository.
   Your fork is at [https://github.com/USER/mathlib4](https://github.com/USER/mathlib4).
-* Now make a local clone of the repository.
+* Now make a local clone of your fork and configure it properly.
+  See [the Git Guide for Mathlib4 Contributors](git.html) for detailed step-by-step instructions on setting up your fork correctly.
   ```
-  git clone https://github.com/leanprover-community/mathlib4.git
+  git clone https://github.com/YOUR_USERNAME/mathlib4.git
   cd mathlib4
   lake exe cache get
   ```
@@ -89,16 +82,11 @@ Typical workflow:
   ```
   git switch -c my_new_branch   # This creates a new branch and switches to it
   ```
-  If you've asked for write access you can push your new branch to mathlib which
-  comes with some advantages (see below).
-* Sometimes you may not want to create a new branch, but instead work on a branch
-  that someone else created, or you created from a different computer.
-  In that case you need to use `git switch their_new_branch` (note there is no `-c` here).
 * Make local changes, e.g. using Visual Studio Code using the Lean extension.
 * Commit your changes using `git commit -a` (or via the VS Code interface).
 * If you'd like to compile everything locally to check you didn't break anything, run
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
-It's also okay to let our central CI servers do this for you by pushing your changes.
+It's also okay to let our central CI servers do this for you by pushing your changes after you've opened a PR to the main repository.
 * If you created new files, run `lake exe mk_all`. This will update `Mathlib.lean` to ensure that all files are imported there.
 * In order to push your changes back to the repository on github, use
   ```
@@ -108,14 +96,11 @@ It's also okay to let our central CI servers do this for you by pushing your cha
   ```
   git push --set-upstream origin my_new_branch
   ```
-* If you're working on the main `mathlib` repository rather than your own fork,
+* Once you've opened a PR to the main `mathlib` repository (see below),
   continuous integration will automatically kick in at this point.
-  You can view the output by visiting
-  https://github.com/leanprover-community/mathlib4/tree/my_new_branch
-  (There will be a green tick on the line describing the most recent commit if everything works,
-  otherwise a yellow circle if CI is still working, or a red cross if something went wrong.
-  Click on the red cross to see details.)
-  You can also check CI status on the command line by installing [`hub`](https://hub.github.com/) and running `hub ci-status`.
+  You can view the CI status on your PR page on GitHub (there will be a green tick if everything works,
+  otherwise a yellow circle if CI is still working, or a red cross if something went wrong).
+  You can also check CI status using the GitHub CLI: `gh pr status`.
 * After CI finishes, you can run `lake exe cache get` to download compiled oleans.
 
 
@@ -123,10 +108,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
 
 Once you're happy with your local changes, it's time to make a pull request.
 
-* If you haven't already asked for write access to non-master branches of the mathlib repository,
-please come to https://leanprover.zulipchat.com/, introduce yourself, and ask for this permission.
-
-* Push your changes to a branch on the main repository, if they weren't already there.
+* If you haven't already, please come to https://leanprover.zulipchat.com/, introduce yourself, and mention your new PR.
 
 * If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
   This helps you get feedback as you go along, and it is much easier to review.
@@ -150,24 +132,48 @@ below the `---`.
 
 ## Lifecycle of a PR
 
-Many reviewers use the [review queue](../queue-redirect) to identify PRs that are ready for review.
+Many reviewers use the [review queue](../queueboard/review_dashboard.html) to identify PRs that are ready for review.
 The instructions below will ensure that your PR appears on that queue; if it doesn't appear there it may not receive much attention.
-Everyone is also invited to regularly look at the queue (it is linkified as `#queue` on Zulip), and write reviews of PRs within their expertise.
+Everyone is also invited to regularly look at the queue (it is linkified as `#queueboard` on Zulip), and write reviews of PRs within their expertise.
+You can check if your [PR is on the queue](../queueboard/on_the_queue.html), and if not, what is needed to get it on.
 
 The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-(Labels can only be edited by "GitHub collaborators", which is approximately the same as "people who have asked for write access".)
+Labels can only be edited directly by "GitHub collaborators", which is approximately the same as "people who have write access".
+However, anyone can add/remove the labels below by writing the following commands in a comment on the PR (each on its own line):
+- `awaiting-author` will add the **"awaiting-author"** label
+- `-awaiting-author` will remove the **"awaiting-author"** label
+- `WIP` will add the **"WIP"** label
+- `-WIP` will remove the **"WIP"** label
+- `easy` will add the **"easy"** label
+- `-easy` will remove the **"easy"** label
 
-If your PR builds (has a green checkmark), someone will probably "review" it within a few days (depending on the size of the PR; smaller PRs will get quicker responses). The reviewer will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
+This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
 
-After some iteration, a maintainer or reviewer will "approve" the PR. (If it's a reviewer, this will add a "maintainer-merge" label, and soon after a maintainer will give final approval). This will result in a **"ready-to-merge"** label being automatically applied to the PR.
+If your PR builds (has a green checkmark), someone will "review" it within a few weeks (depending on the size of the PR; smaller PRs will get quicker responses). They will probably leave comments and add the label **"awaiting-author"**. You should address each comment, clicking the "resolve conversation" button once the problem is resolved. Ideally each problem is resolved with a new commit, but there is no hard rule here. Once all requested changes are implemented, you should remove the **"awaiting-author"** label to start the process over again.
+
+There are different groups of people that can review your PR: anyone, [reviewers](../teams/reviewers.html) and [maintainers](../teams/maintainers.html).
+Anyone who has something useful to say can review your PR.
+If they think your PR is ready to move to the next stage, they might leave an "approving" review on GitHub.
+These reviews are taken into account by reviewers.
+If a reviewer considers your PR ready to be merged, they will add the **"maintainer-merge"** label to your PR.
+These are used by maintainers to prioritize their review.
+Maintainers are always the ones to give final approval.
+Maintainers have reviewer rights, but also further powers (such as merging PRs).
+Depending on availability, a maintainer could be the first reviewer to look at your PR: in this case,
+your PR could get merged without being "maintainer merge"d first.
+Review times can vary depending on availability of our volunteers.
+To speed up the process, you can look at the [review guidelines](pr-review.html) and try to make sure your PR adheres to them.
+If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
+
+If a maintainer has approved your PR, a **"ready-to-merge"** label is automatically applied to the PR.
 A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
 The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16).
 The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 
-In some cases, a reviewer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the reviewer trusts you to make these and send the PR to bors yourself, or that the reviewer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
+In some cases, a maintainer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the maintainer trusts you to make these and send the PR to bors yourself, or that the maintainer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
 
 Here are some other frequently-used labels:
 
