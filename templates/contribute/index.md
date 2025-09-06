@@ -47,7 +47,7 @@ There are many Lean repositories on github, indexed by [reservoir](https://reser
 This solution is a particularly good fit for projects in areas which do not align with the 
 expertise of the mathlib maintainers. One example of such a repository is the combinatorial game
 theory repository. It is also a good fit for projects which would like to move
-quickly; at the time of writing mathlib has over 1000 PRs and it may take time for mathlib
+quickly; at the time of writing mathlib just under 2000 PRs and it may take time for mathlib
 contributions to be reviewed and merged. 
 
 ## Working on mathlib
