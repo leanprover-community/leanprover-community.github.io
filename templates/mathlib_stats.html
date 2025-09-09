@@ -146,7 +146,6 @@
         }
       }
     }
-    console.log(result);
     return result;
   }
 
@@ -186,8 +185,11 @@
   - labels: array of x-coordinates of the data points (note that the "labels" in `by_labels_*` refers to commit labels, not these labels)
   - datasets: array of data objects (one for each label + mathlib3 / mathlib4 combination), with keys:
     - data: array of y-coordinates (padded, if necessary to align properly with `labels`)
-    - label: string containing commit label
+    - label: string containing "mathlib3: " or "mathlib4: " + commit type
     - stack: string containing 'mathlib3' or 'mathlib4'
+    - commit_type: nonstandard field containing string commit type
+
+  the commit types in `datasets` are sorted in descending order, by the greatest number of commits (across both mathlib3 and mathlib4)
   */
   function pad_labels_data(mathlib3_data, mathlib4_data) {
     // assume both mathlib3_data and mathlib4_data contain a nonempty 'chore' object:
@@ -210,10 +212,16 @@
 
     const datasets = [];
 
+    // total number of commits of each commit type
+    const totals = {};
+
     for ([commit_type, {data}] of Object.entries(mathlib3_data)) {
       const zeros = new Array(padding3).fill(0);
+      if (!totals[commit_type]) totals[commit_type] = 0;
+      totals[commit_type] += data.reduce((val, sum) => val + sum, 0);
       datasets.push({
         data: data.concat(zeros),
+        commit_type,
         label: 'mathlib3: ' + commit_type,
         stack: 'mathlib3'
       });
@@ -221,14 +229,18 @@
 
     for ([commit_type, {data}] of Object.entries(mathlib4_data)) {
       const zeros = new Array(padding4).fill(0);
+      if (!totals[commit_type]) totals[commit_type] = 0;
+      totals[commit_type] += data.reduce((val, sum) => val + sum, 0);
       datasets.push({
         data: zeros.concat(data),
+        commit_type,
         label: 'mathlib4: ' + commit_type,
         stack: 'mathlib4'
       });
     }
 
-    console.log({labels, datasets});
+    datasets.sort((d1, d2) => totals[d2.commit_type] - totals[d1.commit_type]);
+
     return {labels, datasets};
   }
 
