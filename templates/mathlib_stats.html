@@ -32,16 +32,11 @@
 
 <canvas id="by_year"></canvas>
 
-<details>
-
-  <summary>Temporal distribution of commits by type (<code>feat</code>, <code>chore</code>, etc.)
-  </summary>
+<h3>Temporal distribution of commits by type (<code>feat</code>, <code>chore</code>, etc.)</h3>
 
   <canvas id="by_labels_by_year_month"></canvas>
 
   <canvas id="by_labels_by_year"></canvas>
-
-</details>
 
 <h2>Dependency graph</h2>
 
@@ -78,6 +73,10 @@
   const color = Chart.helpers.color;
   const blue = '#377eb8';
   const red = '#ff0029';
+
+  // Optimal qualitative colour palettes: Normal, 12 colors from https://tsitsul.in/blog/coloropt/
+  const palette_array = ['#ebac23','#b80058','#008cf9','#006e00','#00bbad','#d163e6','#b24502','#ff9287','#5954d6','#00c6f8','#878500','#00a76c','#bdbdbd'];
+  let palette = {};
 
   /* Given `by_labels_by_year_month` or `by_labels_by_year` objects, return an object with cleaned
   commit labels as keys and datasets (objects containing `labels` and `data` arrays) as values.
@@ -241,6 +240,13 @@
 
     datasets.sort((d1, d2) => totals[d2.commit_type] - totals[d1.commit_type]);
 
+    let index = 0;
+    for (const {commit_type} of datasets) {
+      if (palette[commit_type]) continue;
+      palette[commit_type] = palette_array[index];
+      index++;
+    }
+
     return {labels, datasets};
   }
 
@@ -352,13 +358,12 @@
   function makeStackedBarChart(id, title, data, show_legend = true) {
     const barChartData = {
       labels: data.labels,
-      datasets: data.datasets.map(({data, label, stack}, i) => ({
+      datasets: data.datasets.map(({data, commit_type, label, stack}, i) => ({
         data,
         label,
         stack,
-        // TODO: distinct styles
-        backgroundColor: color(red).alpha(0.5).rgbString(),
-        borderColor: red,
+        backgroundColor: color(palette[commit_type]).alpha(0.5).rgbString(),
+        borderColor: color(palette[commit_type]),
         borderWidth: 1,
       }))
     };
