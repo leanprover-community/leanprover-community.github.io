@@ -80,8 +80,12 @@
   const red = '#ff0029';
 
   /* Given `by_labels_by_year_month` or `by_labels_by_year` objects, return an object with cleaned
-  `labels` as keys and datasets (objects containing `labels` and `data` arrays) as values.
-  Note that the initial format is the same, we just want to merge some of the raw labels together.
+  commit labels as keys and datasets (objects containing `labels` and `data` arrays) as values.
+  Note that the initial format is the same, we just want to merge some of the raw commit labels together.
+
+  There is an unfortunate clash of terminology here: the `labels` array correspond to the labels on the
+  x-coordinates of the charts (either 'MM-YYYY' or 'YYYY'strings), whereas the "labels" in "by_labels_by_*"
+  refers to the commit types.
   */
   function merge_commit_type_data(by_labels) {
     /*
@@ -101,43 +105,43 @@
     "other"
     */
     const result = {};
-    for (const commit_label in by_labels) {
-      if (commit_label === "feat: port" ||
-        commit_label === "fix" ||
-        commit_label === "doc" ||
-        commit_label === "style" ||
-        commit_label === "refactor" ||
-        commit_label === "test" ||
-        commit_label === "chore" ||
-        commit_label === "perf" ||
-        commit_label === "ci") {
-        result[commit_label] = {
+    for (const commit_type in by_labels) {
+      if (commit_type === "feat: port" ||
+        commit_type === "fix" ||
+        commit_type === "doc" ||
+        commit_type === "style" ||
+        commit_type === "refactor" ||
+        commit_type === "test" ||
+        commit_type === "chore" ||
+        commit_type === "perf" ||
+        commit_type === "ci") {
+        result[commit_type] = {
           // copy the data since we may modify in place later
-          labels: by_labels[commit_label]["labels"].slice(),
-          data: by_labels[commit_label]["data"].slice(),
+          labels: by_labels[commit_type]["labels"].slice(),
+          data: by_labels[commit_type]["data"].slice(),
         };
-      } else if (commit_label === "feat" || commit_label === "feature") {
+      } else if (commit_type === "feat" || commit_type === "feature") {
         // assume that for each of these, all the `labels` arrays are the same
         if (!result["feat"])
           result["feat"] = {
-            labels: by_labels[commit_label]["labels"].slice(),
-            data: by_labels[commit_label]["data"].slice(),
+            labels: by_labels[commit_type]["labels"].slice(),
+            data: by_labels[commit_type]["data"].slice(),
           };
         else {
           result["feat"]["data"] = result["feat"]["data"].map(
-            (val, i) => val += by_labels[commit_label]["data"][i]
+            (val, i) => val += by_labels[commit_type]["data"][i]
           );
         }
       } else { // we could do more merging of commit labels with typos, etc. but they seem to be quite rare
         // assume that for each of these, all the "labels" arrays are the same
         if (!result["other"])
           result["other"] = {
-            labels: by_labels[commit_label]["labels"].slice(),
-            data: by_labels[commit_label]["data"].slice(),
+            labels: by_labels[commit_type]["labels"].slice(),
+            data: by_labels[commit_type]["data"].slice(),
           };
         else {
           result["other"]["data"] = result["other"]["data"].map(
-            (val, i) => val += by_labels[commit_label]["data"][i]
+            (val, i) => val += by_labels[commit_type]["data"][i]
           );
         }
       }
@@ -179,14 +183,53 @@
 
   /* Given both mathlib3 and mathlib4 `by_labels_by_year_month` or `by_labels_by_year` objects,
   return an object with keys:
-  - labels: array of x-coordinates of the data points
-  - datasets: array of data objects (one for mathlib3 commits, one for mathlib4 commits), with keys:
-    - data: array of y-coordinates (padded, if necessary to align properly with labels)
-    - label: string containing mathlib3 / mathlib4 + commit label
-    - stack: string containing mathlib3 or mathlib4
+  - labels: array of x-coordinates of the data points (note that the "labels" in `by_labels_*` refers to commit labels, not these labels)
+  - datasets: array of data objects (one for each label + mathlib3 / mathlib4 combination), with keys:
+    - data: array of y-coordinates (padded, if necessary to align properly with `labels`)
+    - label: string containing commit label
+    - stack: string containing 'mathlib3' or 'mathlib4'
   */
   function pad_labels_data(mathlib3_data, mathlib4_data) {
+    // assume both mathlib3_data and mathlib4_data contain a nonempty 'chore' object:
+    const mathlib3_labels = mathlib3_data['chore'].labels.slice();
+    const mathlib4_labels = mathlib4_data['chore'].labels.slice();
+    const length3 = mathlib3_labels.length;
+    const length4 = mathlib4_labels.length;
+    const mathlib4_start = mathlib4_labels[0];
+    const mathlib3_end = mathlib3_labels[length3 - 1];
 
+    // labels in mathlib4_data that are not in mathlib3_data
+    const mathlib4_tail = mathlib4_labels.filter(label => label > mathlib3_end);
+
+    // number of zero entries to put at the end of mathlib3 data
+    const padding3 = mathlib4_tail.length;
+    // number of zero entries to put at the beginning of mathlib4 data
+    const padding4 = mathlib3_labels.filter(label => label < mathlib4_start).length;
+
+    const labels = mathlib3_labels.concat(mathlib4_tail);
+
+    const datasets = [];
+
+    for ([commit_type, {data}] of Object.entries(mathlib3_data)) {
+      const zeros = new Array(padding3).fill(0);
+      datasets.push({
+        data: data.concat(zeros),
+        label: 'mathlib3: ' + commit_type,
+        stack: 'mathlib3'
+      });
+    }
+
+    for ([commit_type, {data}] of Object.entries(mathlib4_data)) {
+      const zeros = new Array(padding4).fill(0);
+      datasets.push({
+        data: zeros.concat(data),
+        label: 'mathlib4: ' + commit_type,
+        stack: 'mathlib4'
+      });
+    }
+
+    console.log({labels, datasets});
+    return {labels, datasets};
   }
 
   function merge_timestamps_and_values(mathlib3_ts, mathlib3_vals, mathlib4_ts, mathlib4_vals) {
@@ -421,11 +464,11 @@
     const by_labels_by_year_merged = merge_commit_type_data(by_labels_by_year);
     const by_labels_by_year_merged4 = merge_commit_type_data(by_labels_by_year4);
 
-    const by_labels_by_year_month_padded = pad_labels_data(by_labels_by_year_merged, by_labels_by_year_merged4);
+    const by_labels_by_year_month_padded = pad_labels_data(by_labels_by_year_month_merged, by_labels_by_year_month_merged4);
     const by_labels_by_year_padded = pad_labels_data(by_labels_by_year_merged, by_labels_by_year_merged4);
 
-    makeStackedBarChart('by_labels_by_year_month', 'Commits by month', by_labels_by_year_padded);
     makeStackedBarChart('by_labels_by_year', 'Commits by year', by_labels_by_year_month_padded);
+    makeStackedBarChart('by_labels_by_year_month', 'Commits by month', by_labels_by_year_padded);
   };
 </script>
 {% endblock %}
