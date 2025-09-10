@@ -488,7 +488,6 @@ that a binary operation is left- or right-monotone.
 For example, `mul_left_monotone : Monotone (· * a)` proves left-monotonicity of multiplication
 and not monotonicity of left-multiplication.
 
-
 ### Prop-valued classes
 
 Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
