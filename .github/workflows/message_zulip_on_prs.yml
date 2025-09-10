@@ -11,18 +11,17 @@ jobs:
 
     steps:
     - name: Produce message
+      id: zulip_message
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      id: zulip_message
+        AUTHOR: ${{ github.event.pull_request.user.login }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
-        AUTHOR="${{ github.event.pull_request.user.login }}"
-        PR_NUMBER="${{ github.event.pull_request.number }}"
-        PR_TITLE="${{ github.event.pull_request.title }}"
-
-        printf $'message<<EOF\n' | tee -a "$GITHUB_OUTPUT"
-        printf '%s opened PR website#%s:\n' "${AUTHOR}" "${PR_NUMBER}" | tee -a "$GITHUB_OUTPUT"
-        printf '> %s\n' "${PR_TITLE}" | tee -a "$GITHUB_OUTPUT"
-        printf $'EOF\n' | tee -a "$GITHUB_OUTPUT"
+        printf $'message<<EOF\n' | tee -a "${GITHUB_OUTPUT}"
+        printf '%s opened PR website#%s:\n' "${AUTHOR}" "${PR_NUMBER}" | tee -a "${GITHUB_OUTPUT}"
+        printf '> %s\n' "${PR_TITLE}" | tee -a "${GITHUB_OUTPUT}"
+        printf $'EOF\n' | tee -a "${GITHUB_OUTPUT}"
 
     - name: Post message to Zulip
       uses: zulip/github-actions-zulip/send-message@e4c8f27c732ba9bd98ac6be0583096dea82feea5 # v1.0.2
