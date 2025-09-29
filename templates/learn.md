@@ -74,8 +74,8 @@ can read the [reference manual](https://lean-lang.org/doc/reference/latest/) ([o
 If you are interested in foundations of Lean, you can first read a
 very rough sketch
 [here](https://leanprover-community.github.io/lean-perfectoid-spaces/type_theory.html).
-If you want a bit more detail, you can read the first chapter
-of the [HoTT book](https://homotopytypetheory.org/book/), ignoring
+If you want a bit more detail, you can read part one of Rijke's [Introduction to Homotopy Type Theory](https://arxiv.org/pdf/2212.11082) or 
+the first chapter of the [HoTT book](https://homotopytypetheory.org/book/), ignoring
 anything where univalence is mentioned.
 
 If you're interested in the nuts and bolts of Lean's kernel, writing your own external type checker for Lean, or exporting proofs, you can read more in [Type Checking in Lean 4](https://ammkrn.github.io/type_checking_in_lean4/).
