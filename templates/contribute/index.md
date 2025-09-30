@@ -12,7 +12,47 @@ We also strongly encourage setting your display name on Zulip to be your real na
    - The explanation of [naming conventions](naming.html).
    - The [documentation guidelines](doc.html).
 
-Once you have code that you'd like to contribute, you should open a PR.
+## What to contribute to mathlib
+
+Small fixes (for example fixes in docstrings) and single-lemma additions in already-existing theories
+are almost always welcome as contributions to mathlib. Longer PRs which extend existing theories are also almost
+always welcome. 
+
+But what about adding completely new theories to `mathlib`? Here, things can be more nuanced. The first question 
+you will need to consider is whether the material you want to contribute is a good fit for `mathlib`. 
+Whilst there is currently no formal description of exactly what mathlib's remit is, here are some questions which you 
+can ask about your proposed contribution.
+
+* Is the material typically taught or studied in a mathematics department? Would it naturally be part 
+of an undergradute or graduate mathematics course, or research level mathematics study group? If not, then the material 
+may not be in scope for `mathlib`.
+
+* Is the topic of the material contained within the 
+[mathematical interests of the `mathlib` maintainers](https://github.com/leanprover-community/mathlib4?tab=readme-ov-file#maintainers)? 
+If not, then the maintainers might find your code hard to maintain as lean and `mathlib` evolve over time, 
+which again may make it not a good fit for `mathlib`.
+
+In particular the remit of mathlib should *not* be thought of as "all of mathematics and related areas". 
+As the number of open PRs increases, the maintainers will sometimes need to make some hard decisions.
+
+If you are not sure about whether your proposed topic is a good fit for mathlib, then please feel
+free to open a discussion in the [`#mathlib` channel](https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/) on the Lean Zulip.
+
+An issue related to the fact that the expertise of the maintainers may not cover all of mathematics: 
+you may want to think about *who* is going to review your potential PR. Contributors are encouraged 
+to seek out reviewers for their PRs. A PR reviewer does *not* have to be a maintainer! This seems
+to be a common misconception by the community. Reviews of PRs, especially from new reviewers, 
+are essentially always welcome. 
+
+Please also consider the possibility of creating a standalone repository, and adding `mathlib` as a dependency. 
+There are many Lean repositories on github, indexed by [reservoir](https://reservoir.lean-lang.org). 
+And [here](https://reservoir.lean-lang.org/@leanprover-community/mathlib/dependents) are those projects
+which have `mathlib` has a dependency. The solution of having a new project which depends on
+`mathlib` is a particularly good fit for projects in areas which do not align with the 
+expertise of the mathlib maintainers. One example of such a repository is the [combinatorial game
+theory repository](https://github.com/vihdzp/combinatorial-games). This solution is also a good fit
+for projects which would like to move quickly; at the time of writing (Sep 2025), mathlib has just under 2000 open PRs
+and it may take time for mathlib contributions to be reviewed and merged. 
 
 ## Working on mathlib
 
