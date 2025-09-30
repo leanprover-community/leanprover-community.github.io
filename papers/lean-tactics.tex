@@ -19,7 +19,8 @@
 \newcommand{\proposition}{\textit{prop}\xspace}
 \newcommand{\tactic}[1][]{\textit{tac#1}\xspace} % also used for tactic sequences
 \newcommand{\type}{\textit{type}\xspace}
-\newcommand{\hyp}{\textit{hyp}\xspace}
+\newcommand{\name}{\textit{name}\xspace}
+\newcommand{\pattern}{\textit{pattern}\xspace}
 \newcommand{\light}{\faLightbulbO\xspace}
 \newcommand{\nat}{\textit{n}\xspace}
 \newcommand{\internet}{\faGlobe\xspace}
@@ -82,9 +83,10 @@ If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of 
   \lean{have h :} \proposition\ \lean{:=} \expr & add a new hypothesis \lean{h} of type \proposition. \warning \textbf{Do not use for data!} \\
   \lean{have h :} \proposition\ \lean{:= by} \tactic & add hypothesis \lean{h} after proving it using tactics. \warning \textbf{Do not use for data!} \\
   \lean{set x :} \type\ \lean{:=} \expr & add an abbreviation \lean{x} with value \expr. \\
-  % let could be useful, but mostly superseded by set. let' allows underscores, but seems to niche to mention
+  % let could be useful, but mostly superseded by set. let' allows underscores, but seems too niche to mention
   \lean{clear h} & remove hypothesis \lean{h} from the context.\\
   \lean{rename\_i x h} & rename the last inaccessible names with the given names.\\
+  \lean{expose\_names} & make all inaccessible names accessible.\\
   \lean{show} \expr & replaces the goal by \expr, if they are equal by definition.\\
   \lean{generalize\_proofs} & add all proofs occurring in the goal to the local context.\\
   % rename, replace, revert
@@ -95,6 +97,7 @@ If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of 
   \lean{rw [←}\expr\lean{]} & $\ldots$ rewrites using \expr from right-to-left. \\
   \lean{rw [}\expr\lean{] at h} & $\ldots$ rewrite in hypothesis \lean{h}. \\
   \lean{nth\_rw} \nat\ \lean{[}\expr\lean{]} & rewrite only the \nat-th occurrence of the rewrite rule \expr.\\
+  \lean{grw} & Rewrite with inequalities or other relations. \\
   \lean{simp} & simplify the goal using all lemmas tagged \lean{@[simp]} and basic reductions. \\
   \lean{simp at h} & $\ldots$ simplify in hypothesis \lean{h}. \\
   \lean{simp [*, }\expr\lean{]} & $\ldots$ also simplify with all hypotheses and \expr. \\
@@ -104,6 +107,7 @@ If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of 
   \lean{simp\_all} & repeatedly simplify the goal and all hypothesis using all hypotheses.\\
   % dsimp left out
   \lean{norm\_num} & simplify numerical expressions by calculating. \\
+  \lean{push} \pattern\ / \lean{pull} \pattern & move the constant given by \pattern inwards / outwards.\\
   \lean{norm\_cast} & simplify the expression by moving casts ($\uparrow$) outwards.\\
   \lean{push\_cast} & push casts inwards.\\
   % apply_mod_cast, exact_mod_cast, rw_mod_cast, assumption_mod_cast left out
@@ -137,17 +141,18 @@ If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of 
   % mono obsoleted by gcongr?
   \lean{positivity} & prove goals of the form $0 < x$, $0 \le x$ and $x \ne 0$.\\
   \lean{bound} & prove inequalities based on the expression structure.\\
-  % (overlaps in scope with \lean{gcongr} and \lean{positivity})
-  \lean{omega} & solve linear arithmetic problems over $\mathbb{N}$ or $\mathbb{Z}$. \\
+    % (overlaps in scope with \lean{gcongr} and \lean{positivity})
+  \lean{order} & prove purely order-theoretic results.\\
+  \lean{omega} / \lean{cutsat} & solve linear arithmetic problems over $\mathbb{N}$ or $\mathbb{Z}$. \\
   \lean{linarith} & prove linear (in)equalities from the hypotheses. \\
   \lean{nlinarith} & stronger variant of \lean{linarith} that can solve some nonlinear inequalities. \\
   \hline
   &\textbf{Reasoning techniques}\\
   \lean{exfalso} & replace the current goal by \lean{False}. \\
-  \lean{by\_contra h} & proof by contradiction; adds the negation of the goal as hypothesis \lean{h}. \\
-  \lean{push\_neg} or \lean{push\_neg at h} & push negations into quantifiers and connectives in the goal (or in \lean{h}).
+  \lean{by\_contra h} & proof by contradiction; adds the negation of the goal as hypothesis \lean{h}.\\
+  % \lean{push\_neg} or \lean{push\_neg at h} & push negations into quantifiers and connectives in the goal (or in \lean{h}). % superseded by push/pull
   %; e.g.~change $\neg\;\forall$ \lean{x, P x} to $\exists$ \lean{x,} $\neg\;$\lean{P x}.
-  \\
+  % \\
   \lean{by\_cases h :} \proposition & case-split on \proposition. \\
   \makecell[lt]{\lean{induction n with }\\ \lean{| zero      =>} \tactic \\ \lean{| succ n ih =>} \tactic} &
   \makecell[lt]{prove a goal by induction on \lean{n}.\\ \\ \light after writing ``\lean{induction n}'' Lean can generate the cases for you.} \\
@@ -160,13 +165,14 @@ If a tactic is not recognized, write \lean{import Mathlib.Tactic} at the top of 
   &\textbf{Searching}\\
   \lean{exact?} & search for a single lemma that closes the goal using the current hypotheses. \\
   \lean{apply?} & gives a list of lemmas that can apply to the current goal. \\
+  \lean{rw??} & allows you to shift-click on subterms to get rewrite suggestions. \\
   \lean{rw?} & gives a list of lemmas that can be used to rewrite the current goal. \\
   \lean{have? using h1, h2} & try to find facts that can be concluded by using both \lean{h1} and \lean{h2}. \\
   \lean{hint} & run a few common tactics on the goal, reporting which one succeeded. \\
   \hline
   &\textbf{General automation}\\
-  % \lean{ext} & prove an equality between elements of a specific type. \\
-  \makecell[lt]{\lean{ring} / \lean{noncomm\_ring} / \lean{module} \\ \lean{field\_simp} / \lean{abel} / \lean{group}} & prove the goal by using the axioms of a commutative ring / ring / module / field / abelian group / group. \\
+  \lean{grind} & general-purpose automation tool with many features. \\
+  \makecell[lt]{\lean{ring} / \lean{noncomm\_ring} / \lean{module} \\ \lean{field} / \lean{abel} / \lean{group}} & prove the goal by using the axioms of a commutative ring / ring / module / field / abelian group / group. \\
   \lean{aesop} & simplify the goal, and use various techniques to prove the goal. \\
   \lean{tauto} & prove logical tautologies. \\
   \lean{decide} & run a decision procedure to prove the goal (if it is decidable). \\
@@ -222,6 +228,7 @@ This list is not complete, and various tactics are intentionally left out.
 \lean{\#lint} & run linters to find common mistakes in the code \emph{above} this command.\\
 \lean{\#where} & print current opened namespaces, universes, variables and options.\\
 \lean{\#min\_imports} & print the minimal imports needed for what you've done so far.\\
+\lean{\#find\_home} \name & find a file that imports all prerequisites of \name.\\
 \lean{\#help tactic} \tactic & find information about \tactic.\\
 \lean{\#help} \textit{category} & list all tactics/commands/attributes/options/notations.\\
 \end{longtable}
