@@ -51,7 +51,7 @@ which have `mathlib` has a dependency. The solution of having a new project whic
 `mathlib` is a particularly good fit for projects in areas which do not align with the 
 expertise of the mathlib maintainers. One example of such a repository is the [combinatorial game
 theory repository](https://github.com/vihdzp/combinatorial-games). This solution is also a good fit
-for projects which would like to move quickly; at the time of writing mathlib just under 2000 PRs
+for projects which would like to move quickly; at the time of writing (Sep 2025), mathlib has just under 2000 open PRs
 and it may take time for mathlib contributions to be reviewed and merged. 
 
 ## Working on mathlib
