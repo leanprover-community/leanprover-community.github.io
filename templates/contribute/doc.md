@@ -26,7 +26,7 @@ of the file.
 The other sections, with second level headers are (in this order):
 * *Main definitions* (optional, can be covered in the summary)
 * *Main statements* (optional, can be covered in the summary)
-* *Notations* (omitted only if no notation is introduced in this file)
+* *Notation* (omitted only if no notation is introduced in this file)
 * *Implementation notes* (description of important design decisions or interface features,
   including use of type classes and `simp` canonical form for new definitions)
 * *References* (references to textbooks or papers, or Wikipedia pages)
