@@ -83,7 +83,7 @@ These guidelines apply to the
 [Lean Zulip chat](https://leanprover.zulipchat.com/)
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
 
-To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, significant use of AI without attribution, DM spam, and ignoring moderator guidance. This list is not exhaustive and the maintainers retain broad discretion in user moderation.
+To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, significant use of AI without attribution, posting of "slop" AI-generated code accompanied by unjustified and incorrect claims about said code, and ignoring moderator guidance. This list is not exhaustive and the maintainers retain broad discretion in user moderation.
 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
 
