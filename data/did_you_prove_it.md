@@ -27,7 +27,7 @@ Lean is a fast-moving piece of software, with new
 releases every month. Lean's mathematics library `mathlib`
 typically merges many commits every day. At this point
 in time, the software is still in a ``move fast'' phase,
-with no guarantees of backward compatibility. This means
+with little guarantee of backward compatibility. This means
 in practice that a standalone piece of code in a Lean
 file in a random directory on your computer may compile
 on your machine, but not on anyone else's.
