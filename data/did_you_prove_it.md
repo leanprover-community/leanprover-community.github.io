@@ -87,24 +87,34 @@ indicate that your proof is incomplete.
 ## Does your work prove what you claim it proves?
 
 This is an important point, and more complex than it seems.
-Lean's syntax is incredibly flexible. It is very easy to
-define a complicated-looking statement and call it
+
+* It is possible for users to confuse the *statement* of a result
+and its *proof*. It is easy in Lean to define and name the
+*statement* that `2+2=5`; this does not constitute a *proof*
+that `2+2=5`!
+
+* It is very easy to define a complicated-looking statement and call it
 `TheRiemannHypothesis` which, despite the
 name, is not actually a statement of the Riemann Hypothesis.
 A proof of this statement is then, of course, not a proof
-of the actual Riemann Hypothesis. It is even possible to
+of the actual Riemann Hypothesis. 
+
+* Lean's syntax is incredibly flexible. It is possible to
 override Lean's standard definitions of the naturals or
 of basic operations on them and then claim that you have
 proved a statement which *looks* like Fermat's Last Theorem,
-but which is nothing of the kind. Lean's mathematics library
+but which is nothing of the kind. 
+
+Lean's mathematics library
 `Mathlib` provides statements of several famous mathematical
 theorems and conjectures such as [Fermat's Last Theorem](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/FLT/Basic.html#FermatLastTheorem)
 and the [Riemann Hypothesis](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/RiemannZeta.html#RiemannHypothesis).
 These statements have been checked by Mathlib's maintainer team
-to be correct translations into Lean's type theory of the
+to be correct translations into Lean's language of the
 corresponding mathematical statements. If you are claiming
 to have proved a theorem which is not stated in `Mathlib` then
 a necessary part of the verification process is that a Lean
 expert is able to confirm that the *statement* of what you
 have proved corresponds to the mathematical claim which
-you are making.
+you are making, and that you have *proved* the statement as well
+as stating it.
