@@ -111,7 +111,9 @@ theorems and conjectures such as [Fermat's Last Theorem](https://leanprover-comm
 and the [Riemann Hypothesis](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/RiemannZeta.html#RiemannHypothesis).
 These statements have been checked by Mathlib's maintainer team
 to be correct translations into Lean's language of the
-corresponding mathematical statements. If you are claiming
+corresponding mathematical statements. 
+
+If you are claiming
 to have proved a theorem which is not stated in `Mathlib` then
 a necessary part of the verification process is that a Lean
 expert is able to confirm that the *statement* of what you
