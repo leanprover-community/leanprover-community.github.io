@@ -30,7 +30,7 @@ in time, the software is still in a ``move fast'' phase,
 with little guarantee of backward compatibility. This means
 in practice that a standalone piece of code in a Lean
 file in a random directory on your computer may compile
-on your machine, but not on anyone else's.
+on your machine, but not on somebody else's (or even on yours at a later date).
 
 To solve this problem, Lean code needs to be part of
 a *repository*, also known as a *project*. For example,
