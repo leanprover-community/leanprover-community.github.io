@@ -43,7 +43,7 @@ version of Lean (and of other dependent libraries such as Mathlib)
 which your code uses, meaning that other people can
 independently compile your code.
 
-If you are using Lean within VS Code then the simplest way
+If you are using Lean within VS Code, the simplest way
 to create a new Lean project is to click on the `∀` symbol
 supplied by the Lean extension and to select "New Project".
 
