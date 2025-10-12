@@ -19,7 +19,7 @@ and then go through them in more detail.
   In other words, does `#print axioms my_proof` return a subset of `[propext, Classical.choice, Quot.sound]`?
 * Does your work prove what you claims it proved?
 
-We now go through some of these guidelines in more detail.
+We now go through these guidelines in more detail.
 
 ## Is your code in a repository?
 
