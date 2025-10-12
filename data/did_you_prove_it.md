@@ -74,11 +74,8 @@ be checking your proof.
 
 ## Does the proof use only the axioms of matheamtics?
 
-Lean uses a form of dependent type theory which, to cut
-a long story short, is of the same logical strength as
-ZFC set theory plus the assertion that there are `n`
-universes, for all natural numbers `n`. However it is
-possible to add other axioms (including inconsistent ones)
+Lean is a flexible piece of software. It is possible
+to add new axioms to the system (including false ones)
 with the `axiom` command, or to skip proofs with the `sorry` tactic.
 There are also other ways that the system can be abused.
 The bottom line is that after `#print axioms my_proof`
