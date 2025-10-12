@@ -67,7 +67,7 @@ theorem is in `Foobar/MainResult.lean` then the file
 `lake build` will then build `Foobar/MainResult.lean`,
 and this command needs to compile without errors.
 
-There are other more advanced ways to set up a repository
+There are other more advanced ways to set up a repository,
 but if you are aware of such things then you will also
 be well-aware of what it means for the build process to
 be checking your proof.
