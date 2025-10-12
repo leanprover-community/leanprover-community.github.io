@@ -88,7 +88,8 @@ indicate that your proof is incomplete.
 
 This is an important point, and more complex than it seems.
 Lean's syntax is incredibly flexible. It is very easy to
-define a statement `TheRiemannHypothesis` which, despite the
+define a complicated-looking statement and call it
+`TheRiemannHypothesis` which, despite the
 name, is not actually a statement of the Riemann Hypothesis.
 A proof of this statement is then, of course, not a proof
 of the actual Riemann Hypothesis. It is even possible to
