@@ -79,7 +79,7 @@ to add new axioms to the system (including false ones)
 with the `axiom` command, or to skip proofs with the `sorry` tactic.
 There are also other ways that the system can be abused.
 The bottom line is that after `#print axioms my_proof`
-the system needs to return `[propext, Classical.choice, Quot.sound]`
+the system should return `[propext, Classical.choice, Quot.sound]`
 (or some subset of these axioms). User-defined axioms,
 or `sorryAx` (indicating a proof which was omitted)
 indicate that your proof is incomplete.
