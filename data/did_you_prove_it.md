@@ -87,7 +87,11 @@ indicate that your proof is incomplete.
 ## Does your work prove what you claim it proves?
 
 This is an important point, and more complex than it seems.
-Lean's syntax is incredibly flexible. It is possible to
+Lean's syntax is incredibly flexible. It is very easy to
+define a statement `TheRiemannHypothesis` which, despite the
+name, is not actually a statement of the Riemann Hypothesis.
+A proof of this statement is then, of course, not a proof
+of the actual Riemann Hypothesis. It is even possible to
 override Lean's standard definitions of the naturals or
 of basic operations on them and then claim that you have
 proved a statement which *looks* like Fermat's Last Theorem,
