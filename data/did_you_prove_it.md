@@ -72,7 +72,7 @@ but if you are aware of such things then you will also
 be well-aware of what it means for the build process to
 be checking your proof.
 
-## Does the proof use only the axioms of matheamtics?
+## Does the proof use only the axioms of mathematics?
 
 Lean is a flexible piece of software. It is possible
 to add new axioms to the system (including false ones)
