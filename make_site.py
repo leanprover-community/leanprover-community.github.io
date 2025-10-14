@@ -312,6 +312,14 @@ class Course:
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
+@dataclass
+class DocumentationEntry:
+    title: str
+    url: str
+    accessed_at: str
+    category: str
+    tags: List[str] = field(default_factory=list)
+
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
     # header-data.json contains information for every single declaration in mathlib
@@ -524,6 +532,19 @@ for course in courses:
         elif isinstance(val, list):
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
+
+documentation_tags = set()
+documentation_lists = {
+        'tutorial': [],
+        'how-to': [],
+        'explanation': [],
+        'reference': [],
+}
+with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
+    for e in yaml.safe_load(file):
+        e = DocumentationEntry(**e)
+        documentation_lists[e.category].append(e)
+        documentation_tags.update(e.tags)
 
 # Cannot use %-d format code on windows
 def format_month_day(date_obj):
@@ -884,6 +905,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
+                ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': sorted(documentation_tags)}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
