@@ -26,7 +26,7 @@ ul.taglist li {
 
 .tag-selection {
   position: sticky;
-  bottom: 0px;
+  top: 0px;
   background: white;
   padding: 5px;
 }
@@ -90,6 +90,16 @@ function toggle_tag(id) {
       <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
       <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
 
+      <div class="tag-selection">
+        Filter by all tags:
+        {% for tag in documentation_tags %}
+        <span class="documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected">
+          <input type="checkbox" id="documentation-tag-{{ tag_id(tag) }}" class="tag-toggle" onclick="update_tag_showing()">
+          <label for="documentation-tag-{{ tag_id(tag) }}" class="tag-label">{{ tag }}</label>
+        </span>
+        {% endfor %}
+      </div>
+
       <h2 id="tutorials">Tutorials</h2>
       <dl>
       {% for entry in documentation_lists["tutorial"] %}
@@ -117,16 +127,6 @@ function toggle_tag(id) {
       {{ render_entry(entry) }}
       {% endfor %}
       </dl>
-
-      <div class="tag-selection">
-        Filter by all tags:
-        {% for tag in documentation_tags %}
-        <span class="documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected">
-          <input type="checkbox" id="documentation-tag-{{ tag_id(tag) }}" class="tag-toggle" onclick="update_tag_showing()">
-          <label for="documentation-tag-{{ tag_id(tag) }}" class="tag-label">{{ tag }}</label>
-        </span>
-        {% endfor %}
-      </div>
 
 {% endblock %}
 
