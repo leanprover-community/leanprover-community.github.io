@@ -1,0 +1,132 @@
+{% extends '_base.html' %}
+{% block title %}Mathlib documentation overview{% endblock %}
+{% block extracss %}
+<style type="text/css">
+ul.taglist {
+  display: inline;
+}
+ul.taglist li {
+  display: inline;
+}
+.tag-label {
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 2px;
+  cursor: pointer;
+}
+.tag-label input {
+  display: none;
+}
+.tag-label-unselected {
+  color: gray;
+}
+.tag-label-unselected:hover {
+  color: darkgray;
+}
+
+.tag-selection {
+  position: sticky;
+  bottom: 0px;
+  background: white;
+  padding: 5px;
+}
+</style>
+
+<script>
+function update_tag_showing() {
+  const checkboxes = document.getElementsByClassName("tag-toggle");
+  const entries = document.getElementsByClassName("documentation-entry");
+
+  const checked = [];
+  function enabled(tag) {
+    return checked.length == 0 || checked.some(cls => tag.classList.contains(cls));
+  }
+
+  for (const box of checkboxes) {
+    if (box.checked) {
+      checked.push(box.id);
+    }
+    for (const label of document.getElementsByClassName(box.id + "-label")) {
+      if (box.checked) {
+        label.classList.remove("tag-label-unselected");
+      } else {
+        label.classList.add("tag-label-unselected");
+      }
+    }
+  }
+  for (const entry of entries) {
+    entry.style.display = enabled(entry) ? null : "none";
+  }
+}
+
+function toggle_tag(id) {
+  const box = document.getElementById(id);
+  box.checked = !box.checked;
+  update_tag_showing();
+}
+</script>
+{% endblock %}
+
+{% macro tag_id(tag) %}{{ tag|replace(" ", "-") }}{% endmacro %}
+
+{% macro render_entry(entry) %}
+<dt class="documentation-entry {% for tag in entry.tags %}documentation-tag-{{ tag_id(tag) }} {% endfor %}"><a href="{{ entry.url }}">{{ entry.title }}</a></dt>
+<dd class="documentation-entry {% for tag in entry.tags %}documentation-tag-{{ tag_id(tag) }} {% endfor %}">
+  A brief summary of this piece of documentation.<br>
+  <ul class="taglist">
+    {% for tag in entry.tags %}
+    <li class="tag-label documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected" onclick="toggle_tag('documentation-tag-{{ tag_id(tag) }}')">{{ tag }}</li>
+    {% endfor %}
+  </ul>
+</dd>
+{% endmacro %}
+
+{% block content %}
+
+
+      <h1>Documentation overview</h1>
+      <p><a href="#tutorials">Tutorials</a> are lessons that take you by the hand through a series of steps to complete a project of some kind.</p>
+      <p><a href="#how-tos">How-to</a> guides take you through the steps required to solve a real-world problem.</p>
+      <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
+      <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
+
+      <h2 id="tutorials">Tutorials</h2>
+      <dl>
+      {% for entry in documentation_lists["tutorial"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="how-tos">How-to guides</h2>
+      <dl>
+      {% for entry in documentation_lists["how-to"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="references">Reference guides</h2>
+      <dl>
+      {% for entry in documentation_lists["reference"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="explanations">Explanations</h2>
+      <dl>
+      {% for entry in documentation_lists["explanation"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <div class="tag-selection">
+        Filter by all tags:
+        {% for tag in documentation_tags %}
+        <span class="documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected">
+          <input type="checkbox" id="documentation-tag-{{ tag_id(tag) }}" class="tag-toggle" onclick="update_tag_showing()">
+          <label for="documentation-tag-{{ tag_id(tag) }}" class="tag-label">{{ tag }}</label>
+        </span>
+        {% endfor %}
+      </div>
+
+{% endblock %}
+
