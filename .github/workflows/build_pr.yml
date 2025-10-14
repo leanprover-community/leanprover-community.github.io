@@ -1,13 +1,7 @@
-name: deploy site
+name: build site (pull request)
 
 on:
-  push:
-    branches-ignore:
-      - 'master'
-      - 'oldsite'
-  schedule:
-    - cron: '0 4 * * *'
-  workflow_dispatch:
+  pull_request:
 
 concurrency:
   # label each workflow run; only the latest with each label will run
@@ -37,13 +31,6 @@ jobs:
       - name: install Python dependencies
         run: python -m pip install --upgrade pip -r requirements.txt
 
-      - name: build and deploy
+      - name: build
         run:
-          ./deploy.sh
-        env:
-          git_hash: ${{ github.sha }}
-          DEPLOY_GITHUB_TOKEN: ${{ secrets.MASTER_DEPLOY }}
-          DEPLOY_GITHUB_USER: leanprover-community-bot
-          github_repo: ${{ github.repository }}
-          github_ref: ${{ github.ref  }}
-          ZULIP_KEY: ${{ secrets.ZULIP_KEY }}
+          ./make_site.py
