@@ -586,6 +586,24 @@ When a documentation string for a declaration spans multiple lines, do not inden
 subsequent lines.</p>
 <p>See our <a href="doc.html">documentation requirements</a> for more suggestions
 and examples.</p>
+<h3 id="expressions-in-error-or-trace-messages" class="markdown-heading">Expressions in error or trace messages <a class="hover-link" href="#expressions-in-error-or-trace-messages">#</a></h3>
+<p>Inside all printed messages (such as, in linters, custom elaborators or other metaprogrammes),
+names and interpolated data should either be</p>
+<ul>
+<li>inline and surrounded by backticks (e.g., <code>m!&quot;</code>{foo}<code>must have type</code>{bar}<code>&quot;</code>), or</li>
+<li>on their own line and indented (via e.g. <code>indentD</code>)</li>
+</ul>
+<p>The second style produces output like the following</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">Could</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">corners</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">domain</span>
+<span class="w">  </span><span class="n">src</span>
+<span class="n">nor</span><span class="w"> </span><span class="n">codomain</span>
+<span class="w">  </span><span class="n">tgt</span>
+<span class="n">of</span><span class="w"> </span><span class="n">function</span>
+<span class="w">  </span><span class="n">f</span>
+</code></pre></div>
+</div>
+
+<p>Not all of mathlib may comply with this rule yet; that is a bug (and PRs fixing this are welcome).</p>
 <h3 id="deprecation" class="markdown-heading">Deprecation <a class="hover-link" href="#deprecation">#</a></h3>
 <p>Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
 definitions to fail to compile.
