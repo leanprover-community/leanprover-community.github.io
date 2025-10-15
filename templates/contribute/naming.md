@@ -10,6 +10,8 @@ Such exceptions should be discussed on Zulip first.
 
 ## General conventions
 
+### Capitalization
+
 Unlike Lean 3, in which the convention was that all declarations used `snake_case`,
 in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` and
 `UpperCamelCase` according to the following naming scheme.
@@ -26,7 +28,7 @@ There are some rare exceptions: some fields of structures are currently wrongly 
 There are some rare exceptions to preserve local naming symmetry: e.g., we use `Ne` rather than `NE` to follow the example of `Eq`; `outParam` has a `Sort` output but is not `UpperCamelCase`. Some other exceptions include intervals (`Set.Icc`, `Set.Iic`, etc.), where the `I`
 is capitalized despite the fact that it should be `lowerCamelCase` according to the convention. Any such exceptions should be discussed on Zulip.
 
-### Examples
+#### Examples
 
 ```lean
 -- follows rule 2
@@ -70,6 +72,14 @@ theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
 -- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
 #align ne_zero_iff neZero_iff
 ```
+
+### Spelling
+
+Declaration names use American English spelling. So e.g. we use
+`factorization`, `Localization` and `FiberBundle` and not
+`factorisation`, `Localisation` or `FibreBundle`.
+Contrast this with the rule for [documentation](doc.html#language),
+which is allowed to use other common English spellings.
 
 ### Names of symbols
 

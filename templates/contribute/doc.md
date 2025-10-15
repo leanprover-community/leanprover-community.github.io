@@ -258,6 +258,16 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
 > We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
+## Language
+
+Documentation should be written in English.
+Any common spelling (e.g. British, American or Australian English) is acceptable.
+Pull requests should not be made that only change which of these spellings are used,
+but it is acceptable to change the spelling
+as part of a PR that substantially enhances the documentation.
+Contrast this with the rule for [declaration names](naming.html#spelling),
+which should use American English spelling.
+
 ## Examples
 
 The following files are maintained as examples of good documentation style:
