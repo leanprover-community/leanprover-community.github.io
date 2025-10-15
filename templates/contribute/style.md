@@ -596,6 +596,25 @@ subsequent lines.
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
 
+### Expressions in error or trace messages
+
+Inside all printed messages (such as, in linters, custom elaborators or other metaprogrammes),
+names and interpolated data should either be
+- inline and surrounded by backticks (e.g., `m!"`{foo}` must have type `{bar}`"`), or
+- on their own line and indented (via e.g. `indentD`)
+
+The second style produces output like the following
+```
+Could not find model with corners for domain
+  src
+nor codomain
+  tgt
+of function
+  f
+```
+
+Not all of mathlib may comply with this rule yet; that is a bug (and PRs fixing this are welcome).
+
 ### Deprecation
 
 Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
