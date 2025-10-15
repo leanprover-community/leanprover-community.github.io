@@ -601,7 +601,7 @@ and examples.
 Inside all printed messages (such as, in linters, custom elaborators or other metaprogrammes),
 names and interpolated data should either be
 - inline and surrounded by backticks (e.g., `m!"`{foo}` must have type `{bar}`"`), or
-- on their own line and indented (via e.g. `intendD`)
+- on their own line and indented (via e.g. `indentD`)
 
 The second style produces output like the following
 ```
