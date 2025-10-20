@@ -41,17 +41,17 @@ If you want to work on a new feature, there are several helpful tricks to know.
 First you will very quickly hit the GitHub API rate limit without
 authentication. You can
 [create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
-and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site --local` during
+and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site.py --local` during
 your experiments.
 
 You can also run the script once normally and then run
-`NODOWNLOAD=1 ./make_site --local` to build the website using the information
+`NODOWNLOAD=1 ./make_site.py --local` to build the website using the information
 previously downloaded. This information is stored into the `data_cache` folder.
 If you need the script to download something but not everything you can
 temporarily change the relevant `if DOWNLOAD:` into a `if not DOWNLOAD:`.
 
 You can also choose to render only certain templates using
-`./make_site --local --only my_template.html`.
+`./make_site.py --local --only my_template.html`.
 This argument can actually be a regular expression, but giving one template
 name is the most common use case.
 
