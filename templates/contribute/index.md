@@ -16,7 +16,7 @@ We also strongly encourage setting your display name on Zulip to be your real na
 
 Small fixes (for example fixes in docstrings) and single-lemma additions in already-existing theories
 are almost always welcome as contributions to mathlib. Longer PRs which extend existing theories are also almost
-always welcome.
+always welcome. 
 
 But what about adding completely new theories to `mathlib`? Here, things can be more nuanced. The first question 
 you will need to consider is whether the material you want to contribute is a good fit for `mathlib`. 
