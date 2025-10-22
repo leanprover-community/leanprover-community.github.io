@@ -16,7 +16,7 @@ We also strongly encourage setting your display name on Zulip to be your real na
 
 Small fixes (for example fixes in docstrings) and single-lemma additions in already-existing theories
 are almost always welcome as contributions to mathlib. Longer PRs which extend existing theories are also almost
-always welcome. 
+always welcome.
 
 But what about adding completely new theories to `mathlib`? Here, things can be more nuanced. The first question 
 you will need to consider is whether the material you want to contribute is a good fit for `mathlib`. 
@@ -52,7 +52,14 @@ which have `mathlib` has a dependency. The solution of having a new project whic
 expertise of the mathlib maintainers. One example of such a repository is the [combinatorial game
 theory repository](https://github.com/vihdzp/combinatorial-games). This solution is also a good fit
 for projects which would like to move quickly; at the time of writing (Sep 2025), mathlib has just under 2000 open PRs
-and it may take time for mathlib contributions to be reviewed and merged. 
+and it may take time for mathlib contributions to be reviewed and merged.
+
+### Style changes
+
+`mathlib` has a [style guide](https://leanprover-community.github.io/contribute/style.html) and PRs fixing
+style violations documented in this guide are welcome. Other stylistic PRs that don't have explicit
+approval by the authors of the affected files will be closed. We invite authors to instead discuss the proposed
+change on Zulip and, when significant consensus among reviewers is reached, to open a PR to the style guide.
 
 ## Working on mathlib
 
