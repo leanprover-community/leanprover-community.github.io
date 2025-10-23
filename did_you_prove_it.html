@@ -30,7 +30,7 @@
 		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 	</script>
 
-	<title>Minimal working examples</title>
+	<title>Did you prove it?</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
@@ -48,94 +48,118 @@
 
   <main>
     
-<h1 id="minimal-working-examples" class="markdown-heading">Minimal working examples <a class="hover-link" href="#minimal-working-examples">#</a></h1>
-<h2 id="tldr" class="markdown-heading">tl;dr <a class="hover-link" href="#tldr">#</a></h2>
-<p>When posting code on Zulip, please include all <code>import</code>s, <code>open</code>s, <code>universe</code>s, and <code>variable</code>s, so others can simply just copy-paste what you post, and see the same issue that you are seeing.</p>
-<p>The best way to ensure you have done this is to copy-paste the code snipped you are proposing to post into an empty Lean file, or into the <a href="https://live.lean-lang.org/">lean web editor</a>, and check it compiles.</p>
-<h2 id="examples" class="markdown-heading">Examples <a class="hover-link" href="#examples">#</a></h2>
-<h3 id="bad-example" class="markdown-heading">Bad example: <a class="hover-link" href="#bad-example">#</a></h3>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">univ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">X</span><span class="o">)</span>
-</code></pre></div>
-</div>
-
-<h3 id="good-example" class="markdown-heading">Good example: <a class="hover-link" href="#good-example">#</a></h3>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib</span>
-
-<span class="kd">universe</span><span class="w"> </span><span class="n">u</span>
-
-<span class="kd">variable</span><span class="w"> </span><span class="o">(</span><span class="n">X</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="n">u</span><span class="o">)</span>
-
-<span class="kn">open</span><span class="w"> </span><span class="n">Set</span>
-
-<span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">univ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">X</span><span class="o">)</span>
-</code></pre></div>
-</div>
-
-<h3 id="bad-example" class="markdown-heading">Bad example: <a class="hover-link" href="#bad-example">#</a></h3>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>Goal state:
-/-
-a b : blah,
-h : a.fst &lt; b.fst,
-h2 : a.fst &lt; b.snd
-⊢ false
--/
-</code></pre></div>
-</div>
-
-<h3 id="good-example" class="markdown-heading">Good example: <a class="hover-link" href="#good-example">#</a></h3>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">blah</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="bp">×</span><span class="w"> </span><span class="n">Nat</span>
-
-<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">blah</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a.fst</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b.fst</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a.fst</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b.snd</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">  </span><span class="c">/-</span>
-<span class="cm">  a b : blah,</span>
-<span class="cm">  h : a.fst &lt; b.fst,</span>
-<span class="cm">  h2 : a.fst &lt; b.snd</span>
-<span class="cm">  ⊢ False</span>
-<span class="cm">  -/</span>
-<span class="w">  </span><span class="n">done</span>
-</code></pre></div>
-</div>
-
-<p>Tip: If you are using <a href="https://github.com/leanprover-community/mathlib4">mathlib</a> (e.g. with <code>import Mathlib</code>), there's a tactic called <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/ExtractGoal.html"><code>extract_goal</code></a> that can help you format the current goal as a stand-alone example. You can remove extraneous variables and hypotheses from the output of <code>extract_goal</code> to further minimize your example.</p>
-<p>Note you still need to include the corresponding <code>import</code>s and <code>open</code>s and <code>universe</code>s and <code>variable</code>s as mentioned above.</p>
-<h2 id="formal-definition" class="markdown-heading">Formal Definition <a class="hover-link" href="#formal-definition">#</a></h2>
-<p>A <strong>minimal working example</strong> is a code snippet that can be copied-and-pasted into an empty Lean file and still have the same features (working) and that does not include unnecessary details (minimal).</p>
-<p><a href="https://stackoverflow.com/help/minimal-reproducible-example">Here</a> is the StackOverflow guide to making MWEs.</p>
-<p>Please make sure that your code snippet has:</p>
+<h1 id="did-you-prove-it" class="markdown-heading">Did you prove it? <a class="hover-link" href="#did-you-prove-it">#</a></h1>
+<p><a href="https://lean-lang.org/">Lean</a> is a computer program
+which is capable of verifying
+mathematical proofs at a superhuman level. But Lean is
+a complex program. A claim from someone that they
+have proved a theorem cannot simply be accompanied
+by a block of Lean code; this code has to conform to some
+basic guidelines. We briefly list the guidelines below,
+and then go through them in more detail.</p>
+<h2 id="guidelines-for-a-verified-lean-proof" class="markdown-heading">Guidelines for a verified Lean proof <a class="hover-link" href="#guidelines-for-a-verified-lean-proof">#</a></h2>
 <ul>
-<li>correct imports; and</li>
-<li>all the relevant definitions / theorems.</li>
+<li>Is your code in a correctly-formatted Lean repository? A standalone Lean file is not enough.</li>
+<li>Does the repository compile? In other words, does <code>lake build</code> return without errors?</li>
+<li>Is the proof being checked? In other words, is the file
+where the main theorem is proved being compiled by the build process?</li>
+<li>Does the proof use nothing more than Lean's standard axioms?
+In other words, does <code>#print axioms my_proof</code> return a subset of <code>[propext, Classical.choice, Quot.sound]</code>?</li>
+<li>Does your work prove what you claims it proved?</li>
 </ul>
-<p>It is fine for your example to throw compiler errors or warnings. In particular, it is fine for your code to contain the keyword <code>sorry</code> (and indeed, replacing irrelevant proofs with <code>sorry</code> is a good way of minimizing your example). The point of MWE is that your code should <em>throw the same errors in a blank file as it does for you</em>, that way people can help you with exactly the error you are confused about.</p>
-<h2 id="how-do-i-know-if-my-code-is-a-mwe" class="markdown-heading">How do I know if my code is a MWE? <a class="hover-link" href="#how-do-i-know-if-my-code-is-a-mwe">#</a></h2>
-<p>You should <em>test</em> this by copy-pasting your code snippet into a new Lean file, or the <a href="https://live.lean-lang.org/">lean web editor</a>, and seeing if you get the expected behavior. This is exactly what people who try to help you will do!</p>
-<h2 id="what-if-im-asking-about-games-like-the-natural-number-game" class="markdown-heading">What if I'm asking about games like the <a href="https://adam.math.hhu.de/#/g/hhu-adam/NNG4">Natural Number Game</a>? <a class="hover-link" href="#what-if-im-asking-about-games-like-the-natural-number-game">#</a></h2>
-<p>If your example comes from the Natural Number Game or any such browser-based Lean demo, then you can add a link to the webpage instead of finding the correct imports. So for example it would be much more useful to say &quot;I am on <a href="https://adam.math.hhu.de/#/g/leanprover-community/nng4/world/Addition/level/2">this level</a> of the Natural Number Game and my proof script is <em>blah</em>&quot;, rather than &quot;I am on Addition World Level 2 of the Natural Number Game and my proof script is <em>blah</em>&quot;.</p>
-<p>If you post a code snippet on Zulip, please make sure it is surrounded in triple backticks.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code>```
-def myNat : Nat := 5
-```
+<p>We now go through these guidelines in more detail.</p>
+<h2 id="is-your-code-in-a-repository" class="markdown-heading">Is your code in a repository? <a class="hover-link" href="#is-your-code-in-a-repository">#</a></h2>
+<p>Lean is a fast-moving piece of software, with new
+releases every month. Lean's mathematics library <code>mathlib</code>
+typically merges many commits every day. At this point
+in time, the software is still in a ``move fast'' phase,
+with little guarantee of backward compatibility. This means
+in practice that a standalone piece of code in a Lean
+file in a random directory on your computer may compile
+on your machine, but not on somebody else's (or even on yours
+at a later date) --- because a different version of Lean
+or <code>mathlib</code> is being used.</p>
+<p>To solve this problem, Lean code needs to be part of
+a <em>repository</em>, also known as a <em>project</em>. For example,
+<a href="https://github.com/leanprover-community/mathlib4">mathlib</a>
+is a Lean project stored on GitHub. A Lean project comes
+with various system files which determine precisely the
+version of Lean (and of other dependent libraries such as Mathlib)
+which your code uses, meaning that other people can
+independently compile your code.</p>
+<p>If you are using Lean within VS Code, the simplest way
+to create a new Lean project is to click on the <code>∀</code> symbol
+supplied by the Lean extension and to select &quot;New Project&quot;.</p>
+<p>Alternatively you can create a new Lean project on the
+command line. The command</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">lake</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">my_project</span><span class="w"> </span><span class="n">math</span>
 </code></pre></div>
 </div>
 
-<h2 id="tips-for-minimizing-code" class="markdown-heading">Tips for minimizing code <a class="hover-link" href="#tips-for-minimizing-code">#</a></h2>
+<p>creates a new project called <code>my_project</code>, with a dependency
+on Lean's mathematics library.</p>
+<h2 id="does-the-repository-compile-is-the-proof-being-checked" class="markdown-heading">Does the repository compile? Is the proof being checked? <a class="hover-link" href="#does-the-repository-compile-is-the-proof-being-checked">#</a></h2>
+<p>The typical set-up for a project called <code>Foobar</code> is
+that it will have a file <code>Foobar.lean</code> in the root
+directory of the project, which imports all the relevant
+files in the project. If the actual proof of your
+theorem is in <code>Foobar/MainResult.lean</code> then the file
+<code>Foobar.lean</code> should have a line in it saying
+<code>import Foobar.MainResult</code>. Under normal circumstances,
+<code>lake build</code> will then build <code>Foobar/MainResult.lean</code>,
+and this command needs to compile without errors.</p>
+<p>There are other more advanced ways to set up a repository,
+but if you are aware of such things then you will also
+be well-aware of what it means for the build process to
+be checking your proof.</p>
+<h2 id="does-the-proof-use-only-the-axioms-of-mathematics" class="markdown-heading">Does the proof use only the axioms of mathematics? <a class="hover-link" href="#does-the-proof-use-only-the-axioms-of-mathematics">#</a></h2>
+<p>Lean is a flexible piece of software. It is possible
+to add new axioms to the system (including false ones)
+with the <code>axiom</code> command, or to skip proofs with the <code>sorry</code> tactic.
+There are also other ways that the system can be abused.
+The bottom line is that after <code>#print axioms my_proof</code>
+the system should return <code>[propext, Classical.choice, Quot.sound]</code>
+(or some subset of these axioms). User-defined axioms,
+or <code>sorryAx</code> (indicating a proof which was omitted)
+indicate that your proof is incomplete.</p>
+<h2 id="does-your-work-prove-what-you-claim-it-proves" class="markdown-heading">Does your work prove what you claim it proves? <a class="hover-link" href="#does-your-work-prove-what-you-claim-it-proves">#</a></h2>
+<p>This is an important point, and more complex than it seems.</p>
 <ul>
 <li>
-<p>A simple <code>import Mathlib</code> is a perfectly fine import in a MWE.</p>
+<p>It is possible for users to confuse the <em>statement</em> of a result
+and its <em>proof</em>. It is easy in Lean to define and name the
+<em>statement</em> that <code>2+2=5</code>; this does not constitute a <em>proof</em>
+that <code>2+2=5</code>!</p>
 </li>
 <li>
-<p>For the purposes of making a MWE, you can replace all proofs of <code>theorem</code>s and <code>lemma</code>s (outside of the one you're working on) with <code>sorry</code>. Lean will give you extra warnings, but these are harmless.</p>
+<p>It is very easy to define a complicated-looking statement and call it
+<code>TheRiemannHypothesis</code> which, despite the
+name, is not actually a statement of the Riemann Hypothesis.
+A proof of this statement is then, of course, not a proof
+of the actual Riemann Hypothesis.</p>
 </li>
 <li>
-<p>Remove all declarations (<code>def</code>s, <code>theorem</code>s, <code>lemma</code>s, <code>example</code>s, etc.) that are irrelevant to the issue you're seeing. In general, if you can comment out some code without throwing errors, then it can be removed.</p>
-</li>
-<li>
-<p>After deleting some code, you can then delete all the declarations that were only referenced there. By repeating this process a few times, you may be able to shorten a long file to just a few lines.</p>
-</li>
-<li>
-<p>Finally, you can add a comment into the code like <code>-- HERE</code>, <code>-- TODO</code>, <code>-- ERROR: yada yada</code>, or similar to guide the attention to a certain part in your MWE.</p>
+<p>Lean's syntax is incredibly flexible. It is possible to
+override Lean's standard definitions of the naturals or
+of basic operations on them and then claim that you have
+proved a statement which <em>looks</em> like Fermat's Last Theorem,
+but which is nothing of the kind.</p>
 </li>
 </ul>
+<p>Lean's mathematics library
+<code>Mathlib</code> provides statements of several famous mathematical
+theorems and conjectures such as <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/FLT/Basic.html#FermatLastTheorem">Fermat's Last Theorem</a>
+and the <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/RiemannZeta.html#RiemannHypothesis">Riemann Hypothesis</a>.
+These statements have been checked by Mathlib's maintainer team
+to be correct translations into Lean's language of the
+corresponding mathematical statements.</p>
+<p>If you are claiming
+to have proved a theorem which is not stated in <code>Mathlib</code> then
+a necessary part of the verification process is that a Lean
+expert is able to confirm that the <em>statement</em> of what you
+have proved corresponds to the mathematical claim which
+you are making, and that you have <em>proved</em> the statement as well
+as stating it.</p>
 
   </main>
 
@@ -260,7 +284,7 @@ def myNat : Nat := 5
   <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/mwe.md">Suggest edits to this page on GitHub</a>
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/did_you_prove_it.md">Suggest edits to this page on GitHub</a>
     </li>
   </ul>
   </nav>
