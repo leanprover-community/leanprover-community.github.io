@@ -315,7 +315,7 @@ example : ∀ (n : ℕ), 0 ≤ n := Nat.zero_le
 ```
 
 Note that pattern-matching does not count as the proof starting by introducing variables.
-For example, the following is a valid use case of having an hypothesis right of the column:
+For example, the following is a valid use case of having a hypothesis right of the column:
 
 ```lean
 lemma zero_le : ∀ n : ℕ, 0 ≤ n
