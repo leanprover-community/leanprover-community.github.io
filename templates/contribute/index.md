@@ -56,7 +56,7 @@ and it may take time for mathlib contributions to be reviewed and merged.
 
 ### Style changes
 
-`mathlib` has a [style guide](contribute/style.html) and PRs fixing
+`mathlib` has a [style guide](style.html) and PRs fixing
 style violations documented in this guide are welcome. Other stylistic PRs that don't have explicit
 approval by the authors of the affected files may be closed. We invite authors to instead discuss the proposed
 change on Zulip and, when significant consensus among reviewers is reached, to open a PR to the style guide.
