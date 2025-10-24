@@ -52,7 +52,14 @@ which have `mathlib` has a dependency. The solution of having a new project whic
 expertise of the mathlib maintainers. One example of such a repository is the [combinatorial game
 theory repository](https://github.com/vihdzp/combinatorial-games). This solution is also a good fit
 for projects which would like to move quickly; at the time of writing (Sep 2025), mathlib has just under 2000 open PRs
-and it may take time for mathlib contributions to be reviewed and merged. 
+and it may take time for mathlib contributions to be reviewed and merged.
+
+### Style changes
+
+`mathlib` has a [style guide](contribute/style.html) and PRs fixing
+style violations documented in this guide are welcome. Other stylistic PRs that don't have explicit
+approval by the authors of the affected files may be closed. We invite authors to instead discuss the proposed
+change on Zulip and, when significant consensus among reviewers is reached, to open a PR to the style guide.
 
 ## Working on mathlib
 
