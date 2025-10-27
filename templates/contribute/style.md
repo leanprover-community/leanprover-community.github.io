@@ -305,7 +305,7 @@ example (n : ℝ) : 1 < n → 0 < n := fun h ↦ by linarith
 and
 
 ```lean
-example (n : ℕ) : 0 ≤ n := dec_trivial __Nat.zero_le n
+example (n : ℕ) : 0 ≤ n := Nat.zero_le n
 ```
 
 is preferred over
