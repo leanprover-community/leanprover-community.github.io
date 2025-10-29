@@ -34,7 +34,8 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   
 * If you wish to get your hands dirty and contribute to mathlib, but don't know a good project to
   start out, then there is a long list of easy issues on the [GitHub Issues](https://github.com/leanprover-community/mathlib4/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22).
-  If you are working on an issue, please post a reply on the GitHub issue stating that you're working on it, to minimize duplicate effort.
+  If you are working on an issue, please post a reply on the GitHub issue stating that you're working
+  on it, to minimize duplicate effort.
 
 ## Books
 
