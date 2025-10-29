@@ -10,6 +10,7 @@ import re
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional, Any, Callable, TypeVar, Union
 from datetime import datetime
+from functools import cached_property
 
 import yaml
 from staticjinja import Site
@@ -122,15 +123,32 @@ presentation = (DATA/'presentation.md').read_text(encoding='utf-8')
 
 what_is = (DATA/'what_is.md').read_text(encoding='utf-8')
 
+maybe_token = os.environ.get('GITHUB_TOKEN')
+if maybe_token is not None:
+    github_auth = Token(maybe_token)
+else:
+    github_auth = None
+github = Github(auth=github_auth)
+
 @dataclass
 class Formalization:
     title: str
     authors: str
     abstract: str
     url: str
+    organization: str
+    repo: str
+
+    @cached_property
+    def github_repo(self):
+        return github.get_repo(self.organization + '/' + self.repo)
+
+    @property
+    def stars(self):
+        return self.github_repo.stargazers_count
 
 with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
-    formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
+    formalizations = sorted([Formalization(**form) for form in yaml.safe_load(f_file)], key=lambda form: form.stars, reverse=True)
 
 @dataclass
 class People:
@@ -543,8 +561,6 @@ class Project:
     description: str
     maintainers: List[str]
     stars: int
-
-github = Github(os.environ.get('GITHUB_TOKEN', None))
 
 if DOWNLOAD:
     download(
