@@ -547,7 +547,12 @@ class Project:
     stars: int
     url: str
 
-github = Github(auth=Token(os.environ.get('GITHUB_TOKEN')))
+maybe_token = os.environ.get('GITHUB_TOKEN')
+if maybe_token is not None:
+    github_auth = Token(maybe_token)
+else:
+    github_auth = None
+github = Github(auth=github_auth)
 
 if DOWNLOAD:
     download(
