@@ -31,6 +31,9 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
   not only includes `Mathlib`, but also covers `Std`, `Batteries`, `Lake`, and the core compiler.
   As much of Lean is defined in terms of syntax extensions, this is the closest thing to a
   comprehensive reference manual that exists.
+  
+* If you wish to get your hands dirty and contribute to mathlib, but don't know a good project to
+  start out, then there is a long list of easy issues on the [github issue tracker](https://github.com/leanprover-community/mathlib4/issues?q=sort%3Aupdated-desc%20is%3Aissue%20is%3Aopen%20label%3A%22good%20first%20issue%22).
 
 ## Books
 
