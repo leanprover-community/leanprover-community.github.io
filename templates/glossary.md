@@ -287,8 +287,15 @@ Previous talks or presentations from the events have been [shared on the communi
 ### lint
 
 A *linter* is a small program that looks for hard-to-spot mistakes in code.
-[Mathlib](#Mathlib) includes [environment linters](#environment-linter), [syntax linters](#syntax-linter), and [style linters](#style-linter).
 Mathlib is linted on every [CI run](#continuous-integration) when pull requests are submitted.
+
+We have multiple mechanisms for linting different aspects of code:
+style and formatting, syntax of individual declarations, and the way declarations fit together in an environment.
+Using and defining linters works very differently for each of these cases.
+
+* [style linters](#style-linter) run by `lake exe lint-style`, they are defined in Mathlib and declared in a specific file in Mathlib, they take the `String` contents of a file as input, and they are silenced by adding exceptions to `scripts/style-exceptions.txt`.
+* [syntax linters](#syntax-linter) run automatically, they are defined in core Lean and declared with the `add_linter` command, they take the `Lean.Syntax` of a declaration as input, and they are silenced using the `set_option` command.
+* [environment linters](#environment-linter) run by `#lint` or `lake exe lintAll`, they are defined in Batteries and declared with the `@[env_linter]` attribute, they take a file's `Environment` as input, and they are silenced using the `@[nolint]` attribute
 
 ### Mathlib
 
