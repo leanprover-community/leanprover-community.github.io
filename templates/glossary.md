@@ -412,6 +412,20 @@ Ultimately, the result of a tactic mode block is a [term](#term), assembled via 
 
 * [The Mathlib tactics documentation](https://leanprover-community.github.io/mathlib-manual/html-multi/Tactics/), with a comprehensive list of tactics
 
+### term
+
+A *term* is a basic component of Lean's [type theory](#type-theory) denoting a (mathematical) object.
+
+The word *term* can also be used to draw a contrast with *type*: if we write `x : X`, `x` is the term and `X` is its type.
+In a [dependent type theory](#dependent-type-theory) like Lean's, types are themselves represented by terms.
+
+A *proof term* is a way to denote a mathematical proof.
+We also say such a proof is written in [term mode](#term-mode) (as opposed to [tactic mode](#tactic-mode)).
+
+##### See also
+
+* [Section 4 of the *Lean Language Reference*](https://lean-lang.org/doc/reference/latest/The-Type-System/#--tech-term-Terms)
+
 ### term mode
 
 A Lean [mode](#mode) which assembles a single [term](#term) through the use of functional subexpressions.
