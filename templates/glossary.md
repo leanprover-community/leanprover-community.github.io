@@ -224,11 +224,9 @@ In [Mathlib](#Mathlib), we have the *algebraic hierarchy* (`semiring`, `ring`, `
 
 *Homotopy Type Theory*, a [type theory](#type-theory) distinguished by the inclusion of an additional *univalence axiom*, which makes precise the notion that two disparate implementations of a type which would be thought of as equivalent are also in a mathematical sense equal.
 
-In Lean 2, there was native support within [core Lean](#core-lean) itself for a side-by-side [homotopy type theory-based library](https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md).
-
-Lean 3's [kernel](#kernel) introduced singleton elimination, which is inconsistent with HoTT's univalence axiom.
-As a result, since Lean 3 onward, Lean no longer ships with a HoTT library.
-A partial port of the Lean 2 HoTT library for Lean 3 was made in [an external project by Gabriel Ebner and fellow contributors](https://github.com/gebner/hott3).
+In Lean 2, the Lean [kernel](#kernel) could be instantiated to standard mode and HoTT mode.
+The standard library and the [homotopy type theory library](https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md) were developed side-by-side. These instantiations were not incompatible with each other, since singleton elimination (in standard mode) is inconsistent with HoTT's univalence axiom.
+Lean 3's [kernel](#kernel) dropped support for the HoTT mode. As a result, since Lean 3 onward, Lean no longer ships with a HoTT library.
 
 As an illustrative concrete example, there are many [definitions of the type of natural numbers](https://en.wikipedia.org/wiki/Natural_number#Formal_definitions) which can be viewed as constructing equivalent mathematical objects.
 Core Lean has a [Peano-esque implementation](https://leanprover-community.github.io/mathlib_docs/init/core.html#nat) of them, and [Mathlib](#Mathlib) has an additional [binary representation-based one](https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num) which is shown to be equivalent.
