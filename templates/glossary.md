@@ -381,7 +381,7 @@ A *syntax linter* is a [linter](#lint) which attempts to find unintentional mist
 There are also [environment linters](#environment-linter) (which run on whole environments) and [style linters](#style-linter) (which run on literal source text).
 New linters are occasionally introduced to detect additional classes of mistakes.
 Mathlib's [continuous integration](#continuous-integration) ensures that any new such code passes the defined linters.
-Code linting can be disabled for a particular piece of code by using the `set_option` command.
+Syntax linting can be disabled for a particular piece of code by using the `set_option` command.
 
 ### style linter
 
