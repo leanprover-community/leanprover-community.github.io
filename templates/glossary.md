@@ -127,7 +127,7 @@ Further detail can be found in the [Lean documentation](https://lean-lang.org/le
 ### defeq
 
 *Definitional equality*. Two [term](#term)s `a b : α` are definitionally equal if the kernel can automatically prove `rfl : a = b`.
-This is stronger than [definitional](#defeq) equality but not as strong as [syntactical](#syntactical-equality) equality.
+This is stronger than [propositional](#propeq) but not as strong as [syntactical](#syntactical-equality) equality.
 
 ##### See also
 
