@@ -262,7 +262,7 @@ As a concrete example, [Mathlib](#Mathlib) defines an instance of `linear_order`
 
 ### Lean 3
 
-A deprecated version of Lean, replaced by Lean 4. Mathlib was completely ported from Lean 3 to Lean 4 some years ago.
+A deprecated version of Lean, replaced by Lean 4. Mathlib was completely ported from Lean 3 to Lean 4 in 2022-2023.
 
 ### kernel
 
