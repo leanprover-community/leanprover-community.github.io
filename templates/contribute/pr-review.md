@@ -266,142 +266,123 @@ See the previous example, where a cross reference was requested for a related de
 
 #### Do complicated proofs have a sketch in comments interspersed throughout?
 
-In this example, we just show an existing example of how interspersed comments can 
-significantly add to the value of a proof in Lean. This is copied directly from the 
-source for [Gromov_Hausdorff.GH_space.topological_space.second_countable_topology](https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gromov_hausdorff.html#Gromov_Hausdorff.GH_space.topological_space.second_countable_topology).
+In this example, we just show an existing example of how interspersed comments can
+significantly add to the value of a proof in Lean. This is copied directly from the
+source for [GromovHausdorff.instSecondCountableTopologyGHSpace](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/MetricSpace/GromovHausdorff.html#GromovHausdorff.instSecondCountableTopologyGHSpace).
 
 Whenever a complicated proof isn't documented like this, please encourage the PR
-author to do so. You can point them to this code. Another suitable and less complicated
-example can be found in the source for
-[banach_steinhaus](https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/banach_steinhaus.html#banach_steinhaus).
+author to do so. You can point them to this code.
 
 ```
 /-- The Gromov-Hausdorff space is second countable. -/
-instance : second_countable_topology GH_space :=
-begin
-  refine second_countable_of_countable_discretization (λ δ δpos, _),
-  let ε := (2/5) * δ,
-  have εpos : 0 < ε := mul_pos (by norm_num) δpos,
-  have : ∀ p:GH_space, ∃ s : set p.rep, s.finite ∧ (univ ⊆ (⋃x∈s, ball x ε)) :=
-    λ p, by simpa only [subset_univ, exists_true_left]
-      using finite_cover_balls_of_compact is_compact_univ εpos,
+instance : SecondCountableTopology GHSpace := by
+  refine secondCountable_of_countable_discretization fun δ δpos => ?_
+  let ε := 2 / 5 * δ
+  have εpos : 0 < ε := mul_pos (by simp) δpos
+  have (p : GHSpace) : ∃ s : Set p.Rep, s.Finite ∧ univ ⊆ ⋃ x ∈ s, ball x ε := by
+    simpa only [subset_univ, true_and] using
+      finite_cover_balls_of_compact (X := p.Rep) isCompact_univ εpos
   -- for each `p`, `s p` is a finite `ε`-dense subset of `p` (or rather the metric space
-  -- `p.rep` representing `p`)
-  choose s hs using this,
-  have : ∀ p:GH_space, ∀ t:set p.rep, t.finite → ∃ n:ℕ, ∃ e:equiv t (fin n), true,
-  { assume p t ht,
-    letI : fintype t := finite.fintype ht,
-    exact ⟨fintype.card t, fintype.equiv_fin t, trivial⟩ },
-  choose N e hne using this,
-  -- cardinality of the nice finite subset `s p` of `p.rep`, called `N p`
-  let N := λ p:GH_space, N p (s p) (hs p).1,
-  -- equiv from `s p`, a nice finite subset of `p.rep`, to `fin (N p)`, called `E p`
-  let E := λ p:GH_space, e p (s p) (hs p).1,
-  -- A function `F` associating to `p : GH_space` the data of all distances between points
+  -- `p.Rep` representing `p`)
+  choose s hs using this
+  -- cardinality of the nice finite subset `s p` of `p.Rep`, called `N p`
+  let N := fun p : GHSpace => Nat.card (s p)
+  -- equiv from `s p`, a nice finite subset of `p.Rep`, to `Fin (N p)`, called `E p`
+  let E := fun p : GHSpace => (hs p).1.equivFin
+  -- A function `F` associating to `p : GHSpace` the data of all distances between points
   -- in the `ε`-dense set `s p`.
-  let F : GH_space → Σn:ℕ, (fin n → fin n → ℤ) :=
-    λp, ⟨N p, λa b, ⌊ε⁻¹ * dist ((E p).symm a) ((E p).symm b)⌋⟩,
-  refine ⟨Σ n, fin n → fin n → ℤ, by apply_instance, F, λp q hpq, _⟩,
+  let F : GHSpace → Σ n : ℕ, Fin n → Fin n → ℤ := fun p =>
+    ⟨N p, fun a b => ⌊ε⁻¹ * dist ((E p).symm a) ((E p).symm b)⌋⟩
+  refine ⟨Σ n, Fin n → Fin n → ℤ, inferInstance, F, fun p q hpq => ?_⟩
   /- As the target space of F is countable, it suffices to show that two points
   `p` and `q` with `F p = F q` are at distance `≤ δ`.
-  For this, we construct a map `Φ` from `s p ⊆ p.rep` (representing `p`)
-  to `q.rep` (representing `q`) which is almost an isometry on `s p`, and
-  with image `s q`. For this, we compose the identification of `s p` with `fin (N p)`
-  and the inverse of the identification of `s q` with `fin (N q)`. Together with
+  For this, we construct a map `Φ` from `s p ⊆ p.Rep` (representing `p`)
+  to `q.Rep` (representing `q`) which is almost an isometry on `s p`, and
+  with image `s q`. For this, we compose the identification of `s p` with `Fin (N p)`
+  and the inverse of the identification of `s q` with `Fin (N q)`. Together with
   the fact that `N p = N q`, this constructs `Ψ` between `s p` and `s q`, and then
   composing with the canonical inclusion we get `Φ`. -/
-  have Npq : N p = N q := (sigma.mk.inj_iff.1 hpq).1,
-  let Ψ : s p → s q := λ x, (E q).symm (fin.cast Npq ((E p) x)),
-  let Φ : s p → q.rep := λ x, Ψ x,
-  -- Use the almost isometry `Φ` to show that `p.rep` and `q.rep`
+  have Npq : N p = N q := (Sigma.mk.inj_iff.1 hpq).1
+  let Ψ : s p → s q := fun x => (E q).symm (Fin.cast Npq ((E p) x))
+  let Φ : s p → q.Rep := fun x => Ψ x
+  -- Use the almost isometry `Φ` to show that `p.Rep` and `q.Rep`
   -- are within controlled Gromov-Hausdorff distance.
-  have main : GH_dist p.rep q.rep ≤ ε + ε/2 + ε,
-  { refine GH_dist_le_of_approx_subsets Φ  _ _ _,
-    show ∀ x : p.rep, ∃ (y : p.rep) (H : y ∈ s p), dist x y ≤ ε,
-    { -- by construction, `s p` is `ε`-dense
-      assume x,
-      have : x ∈ ⋃y∈(s p), ball y ε := (hs p).2 (mem_univ _),
-      rcases mem_Union₂.1 this with ⟨y, ys, hy⟩,
-      exact ⟨y, ys, le_of_lt hy⟩ },
-    show ∀ x : q.rep, ∃ (z : s p), dist x (Φ z) ≤ ε,
-    { -- by construction, `s q` is `ε`-dense, and it is the range of `Φ`
-      assume x,
-      have : x ∈ ⋃y∈(s q), ball y ε := (hs q).2 (mem_univ _),
-      rcases mem_Union₂.1 this with ⟨y, ys, hy⟩,
-      let i : ℕ := E q ⟨y, ys⟩,
-      let hi := ((E q) ⟨y, ys⟩).is_lt,
-      have ihi_eq : (⟨i, hi⟩ : fin (N q)) = (E q) ⟨y, ys⟩, by rw [fin.ext_iff, fin.coe_mk],
-      have hiq : i < N q := hi,
-      have hip : i < N p, { rwa Npq.symm at hiq },
-      let z := (E p).symm ⟨i, hip⟩,
-      use z,
-      have C1 : (E p) z = ⟨i, hip⟩ := (E p).apply_symm_apply ⟨i, hip⟩,
-      have C2 : fin.cast Npq ⟨i, hip⟩ = ⟨i, hi⟩ := rfl,
-      have C3 : (E q).symm ⟨i, hi⟩ = ⟨y, ys⟩,
-      { rw ihi_eq, exact (E q).symm_apply_apply ⟨y, ys⟩ },
-      have : Φ z = y,
-      { simp only [Φ, Ψ], rw [C1, C2, C3], refl },
-      rw this,
-      exact le_of_lt hy },
-    show ∀ x y : s p, |dist x y - dist (Φ x) (Φ y)| ≤ ε,
-    { /- the distance between `x` and `y` is encoded in `F p`, and the distance between
+  have main : ghDist p.Rep q.Rep ≤ ε + ε / 2 + ε := by
+    refine ghDist_le_of_approx_subsets Φ ?_ ?_ ?_
+    · show ∀ x : p.Rep, ∃ y ∈ s p, dist x y ≤ ε
+      -- by construction, `s p` is `ε`-dense
+      intro x
+      have : x ∈ ⋃ y ∈ s p, ball y ε := (hs p).2 (mem_univ _)
+      obtain ⟨y, ys, hy⟩ := mem_iUnion₂.1 this
+      exact ⟨y, ys, hy.le⟩
+    · show ∀ x : q.Rep, ∃ z : s p, dist x (Φ z) ≤ ε
+      -- by construction, `s q` is `ε`-dense, and it is the range of `Φ`
+      intro x
+      have : x ∈ ⋃ y ∈ s q, ball y ε := (hs q).2 (mem_univ _)
+      obtain ⟨y, ys, hy⟩ := mem_iUnion₂.1 this
+      let i : ℕ := E q ⟨y, ys⟩
+      let hi := ((E q) ⟨y, ys⟩).is_lt
+      have ihi_eq : (⟨i, hi⟩ : Fin (N q)) = (E q) ⟨y, ys⟩ := by rw [Fin.ext_iff, Fin.val_mk]
+      have hiq : i < N q := hi
+      have hip : i < N p := by rwa [Npq.symm] at hiq
+      let z := (E p).symm ⟨i, hip⟩
+      use z
+      have C1 : (E p) z = ⟨i, hip⟩ := (E p).apply_symm_apply ⟨i, hip⟩
+      have C2 : Fin.cast Npq ⟨i, hip⟩ = ⟨i, hi⟩ := rfl
+      have C3 : (E q).symm ⟨i, hi⟩ = ⟨y, ys⟩ := by
+        rw [ihi_eq]; exact (E q).symm_apply_apply ⟨y, ys⟩
+      have : Φ z = y := by simp only [Φ, Ψ]; rw [C1, C2, C3]
+      rw [this]
+      exact hy.le
+    · show ∀ x y : s p, |dist x y - dist (Φ x) (Φ y)| ≤ ε
+      /- the distance between `x` and `y` is encoded in `F p`, and the distance between
       `Φ x` and `Φ y` (two points of `s q`) is encoded in `F q`, all this up to `ε`.
       As `F p = F q`, the distances are almost equal. -/
-      assume x y,
-      have : dist (Φ x) (Φ y) = dist (Ψ x) (Ψ y) := rfl,
-      rw this,
-      -- introduce `i`, that codes both `x` and `Φ x` in `fin (N p) = fin (N q)`
-      let i : ℕ := E p x,
-      have hip : i < N p := ((E p) x).2,
-      have hiq : i < N q, by rwa Npq at hip,
-      have i' : i = ((E q) (Ψ x)), by { simp only [equiv.apply_symm_apply, fin.coe_cast] },
-      -- introduce `j`, that codes both `y` and `Φ y` in `fin (N p) = fin (N q)`
-      let j : ℕ := E p y,
-      have hjp : j < N p := ((E p) y).2,
-      have hjq : j < N q, by rwa Npq at hjp,
-      have j' : j = ((E q) (Ψ y)).1,
-      { simp only [equiv.apply_symm_apply, fin.val_eq_coe, fin.coe_cast] },
+      intro x y
+      -- introduce `i`, that codes both `x` and `Φ x` in `Fin (N p) = Fin (N q)`
+      let i : ℕ := E p x
+      have hip : i < N p := ((E p) x).2
+      have hiq : i < N q := by rwa [Npq] at hip
+      have i' : i = (E q) (Ψ x) := by simp only [i, Ψ, Equiv.apply_symm_apply, Fin.coe_cast]
+      -- introduce `j`, that codes both `y` and `Φ y` in `Fin (N p) = Fin (N q)`
+      let j : ℕ := E p y
+      have hjp : j < N p := ((E p) y).2
+      have hjq : j < N q := by rwa [Npq] at hjp
+      have j' : j = ((E q) (Ψ y)).1 := by
+        simp only [j, Ψ, Equiv.apply_symm_apply, Fin.coe_cast]
       -- Express `dist x y` in terms of `F p`
-      have : (F p).2 ((E p) x) ((E p) y) = floor (ε⁻¹ * dist x y),
-        by simp only [F, (E p).symm_apply_apply],
-      have Ap : (F p).2 ⟨i, hip⟩ ⟨j, hjp⟩ = floor (ε⁻¹ * dist x y),
-        by { rw ← this, congr; apply fin.ext_iff.2; refl },
+      have : (F p).2 ((E p) x) ((E p) y) = ⌊ε⁻¹ * dist x y⌋ := by
+        simp only [F, (E p).symm_apply_apply]
+      have Ap : (F p).2 ⟨i, hip⟩ ⟨j, hjp⟩ = ⌊ε⁻¹ * dist x y⌋ := by rw [← this]
       -- Express `dist (Φ x) (Φ y)` in terms of `F q`
-      have : (F q).2 ((E q) (Ψ x)) ((E q) (Ψ y)) = floor (ε⁻¹ * dist (Ψ x) (Ψ y)),
-        by simp only [F, (E q).symm_apply_apply],
-      have Aq : (F q).2 ⟨i, hiq⟩ ⟨j, hjq⟩ = floor (ε⁻¹ * dist (Ψ x) (Ψ y)),
-        by { rw ← this, congr; apply fin.ext_iff.2; [exact i', exact j'] },
+      have : (F q).2 ((E q) (Ψ x)) ((E q) (Ψ y)) = ⌊ε⁻¹ * dist (Ψ x) (Ψ y)⌋ := by
+        simp only [F, (E q).symm_apply_apply]
+      have Aq : (F q).2 ⟨i, hiq⟩ ⟨j, hjq⟩ = ⌊ε⁻¹ * dist (Ψ x) (Ψ y)⌋ := by
+        simp [← this, *]
       -- use the equality between `F p` and `F q` to deduce that the distances have equal
       -- integer parts
-      have : (F p).2 ⟨i, hip⟩ ⟨j, hjp⟩ = (F q).2 ⟨i, hiq⟩ ⟨j, hjq⟩,
-      { -- we want to `subst hpq` where `hpq : F p = F q`, except that `subst` only works
-        -- with a constant, so replace `F q` (and everything that depends on it) by a constant `f`
-        -- then `subst`
-        revert hiq hjq,
-        change N q with (F q).1,
-        generalize_hyp : F q = f at hpq ⊢,
-        subst hpq,
-        intros,
-        refl },
-      rw [Ap, Aq] at this,
+      have : (F p).2 ⟨i, hip⟩ ⟨j, hjp⟩ = (F q).2 ⟨i, hiq⟩ ⟨j, hjq⟩ := by
+        have hpq' : (F p).snd ≍ (F q).snd := (Sigma.mk.inj_iff.1 hpq).2
+        rw [Fin.heq_fun₂_iff Npq Npq] at hpq'
+        rw [← hpq']
+      rw [Ap, Aq] at this
       -- deduce that the distances coincide up to `ε`, by a straightforward computation
       -- that should be automated
-      have I := calc
-        |ε⁻¹| * |dist x y - dist (Ψ x) (Ψ y)| =
-          |ε⁻¹ * (dist x y - dist (Ψ x) (Ψ y))| : (abs_mul _ _).symm
-        ... = |(ε⁻¹ * dist x y) - (ε⁻¹ * dist (Ψ x) (Ψ y))| : by { congr, ring }
-        ... ≤ 1 : le_of_lt (abs_sub_lt_one_of_floor_eq_floor this),
+      have I :=
+        calc
+          ε⁻¹ * |dist x y - dist (Ψ x) (Ψ y)| = |ε⁻¹ * (dist x y - dist (Ψ x) (Ψ y))| := by
+            rw [abs_mul, abs_of_nonneg (inv_pos.2 εpos).le]
+          _ = |ε⁻¹ * dist x y - ε⁻¹ * dist (Ψ x) (Ψ y)| := by congr; ring
+          _ ≤ 1 := le_of_lt (abs_sub_lt_one_of_floor_eq_floor this)
       calc
-        |dist x y - dist (Ψ x) (Ψ y)| = (ε * ε⁻¹) * |dist x y - dist (Ψ x) (Ψ y)| :
-          by rw [mul_inv_cancel (ne_of_gt εpos), one_mul]
-        ... = ε * (|ε⁻¹| * |dist x y - dist (Ψ x) (Ψ y)|) :
-          by rw [abs_of_nonneg (le_of_lt (inv_pos.2 εpos)), mul_assoc]
-        ... ≤ ε * 1 : mul_le_mul_of_nonneg_left I (le_of_lt εpos)
-        ... = ε : mul_one _ } },
-  calc dist p q = GH_dist p.rep (q.rep) : dist_GH_dist p q
-    ... ≤ ε + ε/2 + ε : main
-    ... = δ : by { simp only [ε], ring }
-end
+        |dist x y - dist (Ψ x) (Ψ y)|
+        _ = ε * (ε⁻¹ * |dist x y - dist (Ψ x) (Ψ y)|) := by grind
+        _ ≤ ε * 1 := by gcongr
+        _ = ε := mul_one _
+  calc
+    dist p q = ghDist p.Rep q.Rep := dist_ghDist p q
+    _ ≤ ε + ε / 2 + ε := main
+    _ = δ := by ring
 ```
 
 #### Are there warnings to the user when code should only be used in certain ways?
