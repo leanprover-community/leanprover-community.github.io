@@ -20,11 +20,13 @@ import pybtex.database
 from mistletoe import Document, block_token
 from mistletoe_renderer import CustomHTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
+from urllib.parse import urlparse
 import urllib.request
 import json
 import gzip
 import os
 from github import Github
+from github.Auth import Token
 from slugify import slugify
 
 import zulip
@@ -561,30 +563,56 @@ class Project:
     description: str
     maintainers: List[str]
     stars: int
+    url: str
 
 if DOWNLOAD:
     download(
         'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
-        DATA/'projects.yaml')
-    with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
-        oprojects = yaml.safe_load(h_file)
-    pkl_dump('oprojects', oprojects)
+        DATA/'projects_3.yaml')
+    with (DATA/'projects_3.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_3 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_3', oprojects_3)
 else:
-    oprojects = pkl_load('oprojects', [])
+    oprojects_3 = pkl_load('oprojects_3', [])
 
 
-projects = []
+projects_3 = []
 if DOWNLOAD:
-    for name, project in oprojects.items():
+    for name, project in oprojects_3.items():
         if project.get('display', True):
             github_repo = github.get_repo(project['organization'] + '/' + name)
             stars = github_repo.stargazers_count
             descr = render_markdown(project['description'])
-            projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
-            projects.sort(key = lambda p: p.stars, reverse=True)
-    pkl_dump('projects', projects)
+            projects_3.append(Project(name, project['organization'], descr, project['maintainers'], stars, github_repo.html_url))
+    projects_3.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_3', projects_3)
 else:
-    projects = pkl_load('projects', [])
+    projects_3 = pkl_load('projects_3', [])
+
+if DOWNLOAD:
+    download(
+        'https://raw.githubusercontent.com/leanprover-community/mathlib4/refs/heads/master/scripts/downstream_repos.yml',
+        DATA/'projects_4.yaml')
+    with (DATA/'projects_4.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_4 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_4', oprojects_4)
+else:
+    oprojects_4 = pkl_load('oprojects_4', [])
+
+
+projects_4 = []
+if DOWNLOAD:
+    for project in oprojects_4:
+        repo_path = urlparse(project['github']).path[1:] # Cut off first '/'
+        github_repo = github.get_repo(repo_path)
+        name = project['name']
+        stars = github_repo.stargazers_count
+        descr = render_markdown(github_repo.description) if github_repo.description is not None else None
+        projects_4.append(Project(name, github_repo.owner.login, descr, None, stars, github_repo.html_url))
+    projects_4.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_4', projects_4)
+else:
+    projects_4 = pkl_load('projects_4', [])
 
 if DOWNLOAD:
     # We used to use this count but it didn't include mathlib3 contributors
@@ -600,16 +628,6 @@ if DOWNLOAD:
     pkl_dump('num_contrib', num_contrib)
 else:
     num_contrib = pkl_load('num_contrib', 0)
-
-if DOWNLOAD:
-    download(
-        'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
-        DATA/'project_history.yaml')
-    with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
-        project_history = yaml.safe_load(h_file)
-    pkl_dump('project_history', project_history)
-else:
-    project_history = pkl_load('project_history', dict())
 
 
 bib = pybtex.database.parse_file('lean.bib')
@@ -862,7 +880,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
-                ('lean_projects.html', {'projects': projects}),
+                ('lean_projects.html', {'projects_3': projects_3, 'projects_4': projects_4}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
