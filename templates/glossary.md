@@ -394,7 +394,7 @@ Allowed style linting exceptions are stored in a [style exceptions file](https:/
 
 ### syntactical equality
 
-Two [term](#term)s `a b : α` are syntactically equal if they are made up of exactly the same syntax.
+Two [term](#term)s `a b : α` are syntactically equal if they are literally the same expression.
 This is stronger than [definitional](#defeq) and [syntactical](#syntactical-equality) equalities.
 
 ##### See also
