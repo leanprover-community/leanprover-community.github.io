@@ -385,9 +385,9 @@ Syntax linting can be disabled for a particular piece of code by using the `set_
 
 ### style linter
 
-A *style linter* is a [linter](#lint) which attempt to ensure uniform appearance or style of code within [Mathlib](#Mathlib), without affecting its working behavior.
+A *style linter* is a [linter](#lint) which attempts to ensure uniform appearance or style of code within [Mathlib](#Mathlib), without affecting its working behavior.
 There are also [environment linters](#environment-linter) (which run on whole environments) and [syntax linters](#syntax-linter) (which run on individual declarations).
-Concretely, Mathlib includes [short Lean programs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Linter/TextBased.html) which checks for instance that lines do not end with whitespace, et cetera.
+Concretely, Mathlib includes [short Lean programs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Linter/TextBased.html) which check for instance that lines do not end with whitespace, et cetera.
 There are also some style linters implemented in Python, which are being replaced with linters written in Lean.
 Mathlib's [continuous integration](#continuous-integration) ensures that new code passes the defined linters.
 Allowed style linting exceptions are stored in a [style exceptions file](https://github.com/leanprover-community/mathlib4/blob/master/scripts/style-exceptions.txt) within the repository.
