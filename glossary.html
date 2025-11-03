@@ -48,24 +48,6 @@
 
   <main>
     
-<div class="alert alert-info">
-<p>
-We are currently updating the Lean community website to describe working with Lean 4,
-but most of the information you will find here today still describes Lean 3.
-</p>
-<p>
-Pull requests updating this page for Lean 4 are very welcome.
-There is a link at the bottom of this page.
-</p>
-<p>
-Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-and ask for whatever help you need during this transitional period!
-</p>
-<p>
-The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-If you need to link to Lean 3 specific resources please link there.
-</p>
-</div>
 <h1 id="lean-glossary" class="markdown-heading">Lean Glossary <a class="hover-link" href="#lean-glossary">#</a></h1>
 <p>This document collects short explanations of terminology one may encounter within the Lean community.</p>
 <p>Whilst many of the entries below have precise technical definitions, preference is given to explanations of their conversational use, with additional references linked for further information.</p>
@@ -76,28 +58,22 @@ For some entries, there are additional easier-to-type anchors which can be found
 Authors of new glossary entries should consider adding these additional anchors if the entry title is long, contains backticks, or is otherwise hard to type.</p>
 <h3 id="attribute" class="markdown-heading">attribute <a class="hover-link" href="#attribute">#</a></h3>
 <p>One or more tags or markings which may be applied to a Lean <a href="#declaration">declaration</a>, and which may affect either its behavior or the behavior of other Lean objects which interact with it.
-Attributes may be defined either within <a href="#core-lean">core Lean</a>, within <a href="#mathlib">mathlib</a>, or within any Lean code.</p>
+Attributes may be defined either within <a href="#core-lean">core Lean</a>, within <a href="#Mathlib">Mathlib</a>, or within any Lean code.</p>
 <p>Applying an attribute is done either by prefixing a declaration command with <code>@[name-of-attribute]</code>, or afterwards by using the <code>attribute</code> command, as in <code>attribute [name-of-attribute] name-of-declaration</code>.</p>
 <p>The <code>@[simp]</code> attribute, for example, tags a declaration (typically a <code>lemma</code>, <code>theorem</code> or <code>def</code>) as being a <a href="#simp-lemma">simp lemma</a>.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
-<li>
-<p><a href="https://leanprover-community.github.io/mathlib_docs/attributes.html">The mathlib attributes documentation</a>, for a list of those defined and used throughout <a href="#mathlib">mathlib</a></p>
-</li>
-<li>
-<p><a href="https://lean-lang.org/reference/other_commands.html#attributes">Section 5.4 of <em>The Lean Reference Manual</em></a>, for a list of those defined within <a href="#core-lean">core lean</a></p>
-</li>
+<li><a href="https://lean-lang.org/doc/reference/latest/Attributes/#attributes">Section 5.4 of <em>The Lean Reference Manual</em></a>, for a list of those defined within <a href="#core-lean">core lean</a></li>
 </ul>
 <h3 id="beta-reduction" class="markdown-heading">beta reduction <a class="hover-link" href="#beta-reduction">#</a></h3>
 <p>A specific simplification operation in <a href="#dependent-type-theory">dependent type theory</a> (and Lean's implementation of it) which may be performed as part of deciding whether two <a href="#term">terms</a> are <a href="#defeq">definitionally equal</a>.</p>
 <p>More precisely, it is the process of simplifying an expression such as <code>(λ x, t) a</code> to <code>t[a/x]</code>, where appearances of the variable <code>x</code> in <code>t</code> have been replaced with <code>a</code>.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
-<li><a href="https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html#function-abstraction-and-evaluation">Section 2.3 of Theorem Proving in Lean</a></li>
+<li><a href="https://lean-lang.org/theorem_proving_in_lean4/Dependent-Type-Theory/#function-abstraction-and-evaluation">Section 2.3 of Theorem Proving in Lean</a></li>
 </ul>
 <h3 id="big-operators" class="markdown-heading">big operators <a class="hover-link" href="#big-operators">#</a></h3>
-<p>A <a href="#locale">locale</a> within <a href="#mathlib">mathlib</a>'s <a href="https://leanprover-community.github.io/mathlib_docs/algebra/big_operators/basic.html">algebra library</a>, enabled via <code>open_locale big_operators</code>.</p>
-<p>It defines notation for finite sums and products using the <code>∑</code> and <code>∏</code> characters.</p>
+<p>This refers to notation and sums and products using the <code>∑</code> and <code>∏</code> characters, such as <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/BigOperators/Group/Finset/Defs.html#Finset.sum">Finset.sum</a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/BigOperators/Group/Finset/Defs.html#Finset.prod">Finset.prod</a>.</p>
 <h3 id="binder" class="markdown-heading">binder <a class="hover-link" href="#binder">#</a></h3>
 <p>Expressions such as <code>(a : α)</code>, <code>[a : α]</code> or <code>{a : α}</code> for any identifier(s) <code>a</code> and type <code>α</code> which, as part of various Lean syntactical elements -- <a href="#declaration">declarations</a>, <code>fun</code>, quantifiers and others -- represent identifiers which will be bound within the body of the syntactic element or declaration.</p>
 <p>Each type of binder has different implications for whether it will be bound implicitly (without being passed by a caller), explicitly, or via <a href="#typeclass-inference">typeclass inference</a>.</p>
@@ -106,39 +82,33 @@ Attributes may be defined either within <a href="#core-lean">core Lean</a>, with
 <p>Given a mathematical object <code>O</code> with property <code>P</code>, bundling <code>P</code> refers to the creation of a Lean <a href="#structure">structure</a> containing a proof of <code>P</code> as one of its fields in addition to those needed to structurally define <code>O</code>.</p>
 <p>In contrast, an unbundled structure instead contains only the definition of <code>O</code>, and separately the creation of an <code>is_P</code> proposition which can be applied to terms of <code>O</code>.</p>
 <p>As a concrete example, a <a href="https://en.wikipedia.org/wiki/Group_homomorphism">group homomorphism</a> can be viewed as a map <code>φ: G → H</code> between groups, along with a proof <code>h : φ(a * b) = φ(a) * φ(b)</code>.
-A bundled group homomorphism would contain both <code>φ</code> and <code>h</code> as fields, whereas an unbundled one would instead consist only of <code>φ</code>, with a separate <code>is_group_homomorphism</code> <a href="#declaration">declaration</a> for the proof of <code>h</code>.</p>
+A bundled group homomorphism would contain both <code>φ</code> and <code>h</code> as fields, whereas an unbundled one would instead consist only of <code>φ</code>, with a separate <code>IsGroupHomomorphism</code> <a href="#declaration">declaration</a> for the proof of <code>h</code>.</p>
 <p>There are performance, stylistic or implementation-related reasons to prefer bundling or unbundling, as well as shades of grey which partially bundle some parts of a structure whilst leaving others unbundled.
-<a href="#class">Type classes</a> within <a href="#mathlib">mathlib</a> are primarily semi-bundled, generally unbundling only the <a href="#carrier">carrier</a> type itself.
-Morphisms within mathlib are more often fully bundled, though traces of both approaches are present and discussed in the resource below.</p>
+<a href="#class">Type classes</a> within <a href="#Mathlib">Mathlib</a> are primarily semi-bundled, generally unbundling only the <a href="#carrier">carrier</a> type itself.
+Morphisms within Mathlib are more often fully bundled, though traces of both approaches are present and discussed in the resource below.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
-<li>Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from <a href="https://arxiv.org/pdf/1910.09336.pdf">The Lean Mathematical Library</a> (PDF), a paper by the mathlib community describing many of <a href="#mathlib">mathlib</a>'s architecture and design choices.</li>
+<li>Section 4.1.1 (Bundled Type Classes) and 4.1.2 (Bundled Morphisms), from <a href="https://arxiv.org/pdf/1910.09336.pdf">The Lean Mathematical Library</a> (PDF), a paper by the Mathlib community describing many of <a href="#Mathlib">Mathlib</a>'s architecture and design choices.</li>
 </ul>
 <h3 id="cache" class="markdown-heading">cache <a class="hover-link" href="#cache">#</a></h3>
-<p>Normally, a reference to a shared pre-built set of <a href="#olean-file"><code>olean</code> files</a> built by <a href="#mathlib">mathlib</a>'s <a href="#continuous-integration">continuous integration</a> each time a commit is pushed to its repository.</p>
-<p>Its purpose is to alleviate the need for each <a href="#mathlib">mathlib</a> user to build (or rebuild) the same Lean files locally when doing so can take a significant amount of time (multiple hours on a modest computer).</p>
-<p>The cache is built within the aforementioned continuous integration, and normally users of mathlib retrieve its built files using <a href="#leanproject"><code>leanproject</code></a>.</p>
+<p>Normally, a reference to a shared pre-built set of <a href="#olean-file"><code>olean</code> files</a> built by <a href="#Mathlib">Mathlib</a>'s <a href="#continuous-integration">continuous integration</a> each time a pull request is merged or gets new commits.</p>
+<p>Its purpose is to alleviate the need for each <a href="#Mathlib">Mathlib</a> user to build (or rebuild) the same Lean files locally when doing so can take a significant amount of time (multiple hours on a modest computer).</p>
+<p>The cache is built within the aforementioned continuous integration, and normally users of Mathlib retrieve its built files using <code>lake exe cache get</code>.</p>
 <h3 id="calc-mode" class="markdown-heading"><code>calc</code> mode <a class="hover-link" href="#calc-mode">#</a></h3>
 <p>A <a href="#mode">mode</a> which consists of sequences of successive transformations of expressions involving a transitive relation such as <code>=</code>, <code>&lt;</code> or others tagged with <code>trans</code> <a href="#attribute">attributes</a>.
 It is entered via the <code>calc</code> keyword.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
+<li><a href="https://lean-lang.org/theorem_proving_in_lean4/Quantifiers-and-Equality/#calculational-proofs">Section 4.3 of <em>Theorem Proving in Lean</em></a></li>
 <li><a href="https://leanprover-community.github.io/extras/calc.html">The <code>calc</code> mode community documentation</a></li>
 </ul>
 <h3 id="carrier" class="markdown-heading">carrier <a class="hover-link" href="#carrier">#</a></h3>
-<p>For a Lean <a href="#structure">structure</a> which <a href="#bundled-vs-unbundled">bundles</a> a type <code>T</code> along with some additional mathematical structure represented as additional fields (e.g. <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Group/basic.html#Group"><code>Group</code></a>), it is the type <code>T</code> of underlying elements.</p>
-<p>For a Lean <a href="#structure">structure</a> which <a href="#bundled-vs-unbundled">bundles</a> a set <code>S</code> along with some additional properties represented as additional fields (e.g. <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/subgroup/basic.html#subgroup"><code>subgroup</code></a>), it is the underlying set <code>S</code>.</p>
+<p>For a Lean <a href="#structure">structure</a> which <a href="#bundled-vs-unbundled">bundles</a> a type <code>T</code> along with some additional mathematical structure represented as additional fields (e.g. <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Group"><code>Group</code></a>), it is the type <code>T</code> of underlying elements.</p>
+<p>For a Lean <a href="#structure">structure</a> which <a href="#bundled-vs-unbundled">bundles</a> a set <code>S</code> along with some additional properties represented as additional fields (e.g. <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Subgroup/Defs.html#Subgroup"><code>Subgroup</code></a>), it is the underlying set <code>S</code>.</p>
 <h3 id="class" class="markdown-heading">class <a class="hover-link" href="#class">#</a></h3>
 <p>More fully, a <em>typeclass</em> (or <em>type class</em>).</p>
 <p>A Lean <a href="#structure">structure</a> whose <a href="#instance">instances</a> can be retrieved via <a href="#typeclass-inference">typeclass inference</a>.</p>
 <p>Distinct from the use of <em>class</em> in object-oriented languages -- the word usage in functional programming languages comes from the <a href="https://en.wikipedia.org/wiki/Type_class">typeclasses of Haskell</a>.</p>
-<h3 id="code-linter" class="markdown-heading">code linter <a class="hover-link" href="#code-linter">#</a></h3>
-<p>A <em>code linter</em> is a <a href="#lint">linter</a> which attempts to find unintentional mistakes in Lean code within <a href="#mathlib">mathlib</a>.
-Concretely, mathlib includes <a href="https://leanprover-community.github.io/mathlib4_docs/Std/Tactic/Lint/Frontend.html">a collection of Lean programs</a> which check for a variety of potential issues which may be introduced in new mathlib code.
-New linters are occasionally introduced to detect additional classes of mistakes.
-Mathlib's <a href="#continuous-integration">continuous integration</a> ensures that any new such code passes the defined linters.
-Linting can be disabled for a particular piece of code by using the <code>nolint</code> <a href="#attribute">attribute</a>.
-Some linter failures that predate the CI code linters are indicated in an autogenerated <a href="https://github.com/leanprover-community/mathlib4/blob/master/scripts/nolints.json">nolint file</a>; the length of this file should tend to zero over time as these errors are fixed.</p>
 <h3 id="conv-mode" class="markdown-heading"><code>conv</code> mode <a class="hover-link" href="#conv-mode">#</a></h3>
 <p>A submode of <a href="#tactic-mode">tactic mode</a> which facilitates navigating within assumptions or <a href="#goal">goals</a>, in order to rewrite or simplify targeted portions of them.
 It is entered from tactic mode via the <code>conv</code> keyword.</p>
@@ -147,16 +117,20 @@ It is entered from tactic mode via the <code>conv</code> keyword.</p>
 <li><a href="https://leanprover-community.github.io/extras/conv.html">The <code>conv</code> mode community documentation</a></li>
 </ul>
 <h3 id="core-lean" class="markdown-heading">core Lean <a class="hover-link" href="#core-lean">#</a></h3>
-<p>As differentiated from <a href="#mathlib">mathlib</a> or other community-authored Lean code, core Lean (or the &quot;core library&quot;) refers to the portions of Lean which ship with the distribution of Lean itself.</p>
-<p>Historically, even the mathlib project itself was a part of core Lean, and was split off into its own separately maintained project afterwards to facilitate development speed.</p>
-<p>Some fundamental <a href="#declarations">declarations</a> remain part of core Lean even after the split.
-Occasionally additional lemmas and definitions are still removed or migrated from the core community Lean 3 repository and into mathlib, should they conflict with newly developed mathlib code.</p>
-<p>The current portions of core Lean 3 can be found in the <a href="https://github.com/leanprover-community/lean/tree/master/library">Lean 3 community repository</a>, and for Lean 4 <a href="https://github.com/leanprover/lean4/tree/master/src">similarly</a>.</p>
+<p>As differentiated from <a href="#Mathlib">Mathlib</a> or other community-authored Lean code, core Lean (or the &quot;core library&quot;) refers to the portions of Lean which ship with the distribution of Lean itself.</p>
+<p>Historically, even the Mathlib project itself was a part of core Lean, and was split off into its own separately maintained project afterwards to facilitate development speed.</p>
+<p>Some fundamental <a href="#declarations">declarations</a> remain part of core Lean even after the split.</p>
+<p>The current portions of core Lean can be found in the <a href="https://github.com/leanprover/lean4/tree/master/src">Lean 4 repository</a>.</p>
 <h3 id="declaration" class="markdown-heading">declaration <a class="hover-link" href="#declaration">#</a></h3>
 <p>A single Lean runtime object within a Lean environment.</p>
 <p>Or, ambiguously, any of a number of Lean commands which may define or declare such objects.</p>
-<p>Examples of such commands are the <code>def</code>, <code>theorem</code>, <code>constant</code> or <code>example</code> commands (and in Lean 3, the <code>lemma</code> command), amongst others.</p>
+<p>Examples of such commands are the <code>def</code>, <code>lemma</code>, <code>theorem</code>, <code>constant</code> or <code>example</code> commands, amongst others.</p>
 <p>Further detail can be found in the <a href="https://lean-lang.org/lean4/doc/declarations.html#basic-declarations">Lean documentation</a>.</p>
+<h3 id="defeq" class="markdown-heading">defeq <a class="hover-link" href="#defeq">#</a></h3>
+<p><em>Definitional equality</em>. Two <a href="#term">term</a>s <code>a b : α</code> are definitionally equal if the kernel can automatically prove <code>rfl : a = b</code>.
+This is stronger than <a href="#propeq">propositional</a> but not as strong as <a href="#syntactical-equality">syntactical</a> equality.</p>
+<h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
+<p><a href="https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/">Equality, specifications and implementations</a>, from the Xena Project</p>
 <h3 id="dependent-type-theory" class="markdown-heading">dependent type theory <a class="hover-link" href="#dependent-type-theory">#</a></h3>
 <p>A <a href="#type-theory">type theory</a> in which one additionally may have types which depend on a parameter, such as the type of &quot;days of a calendar month&quot;, whose specific values depend on the particular month, given that different months have different numbers of days.
 Further examples may be found in the resources below.
@@ -164,7 +138,7 @@ Lean's implementation of dependent type theory is based on what is known as the 
 <h5 id="see-also" class="markdown-heading">See Also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
 <li>
-<p><a href="https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html">Section 2 of Theorem Proving in Lean</a>, which discusses Lean's specific version of dependent type theory</p>
+<p><a href="https://lean-lang.org/theorem_proving_in_lean4/Dependent-Type-Theory/">Section 2 of <em>Theorem Proving in Lean</em></a>, which discusses Lean's specific version of dependent type theory</p>
 </li>
 <li>
 <p><a href="https://en.wikipedia.org/wiki/Calculus_of_constructions">Calculus of Constructions, from Wikipedia</a>, for a further overview of the calculus of constructions</p>
@@ -173,7 +147,7 @@ Lean's implementation of dependent type theory is based on what is known as the 
 <p><a href="https://ncatlab.org/nlab/show/dependent+type+theory">Dependent Type Theory from nLab</a>, for a general treatment of dependent type theories</p>
 </li>
 <li>
-<p><a href="https://golem.ph.utexas.edu/category/2010/03/in_praise_of_dependent_types.html">Mike Shulman's In Praise of Dependent Types</a></p>
+<p><a href="https://golem.ph.utexas.edu/category/2010/03/in_praise_of_dependent_types.html">Mike Shulman's <em>In Praise of Dependent Types</em></a></p>
 </li>
 <li>
 <p><a href="https://mathoverflow.net/a/376973">Andrej Bauer's answer to &quot;What makes dependent type theory more suitable than set theory for proof assistants?&quot;</a></p>
@@ -183,16 +157,16 @@ Lean's implementation of dependent type theory is based on what is known as the 
 <p>The existence of multiple conflicting <a href="#term">terms</a> of a <a href="#class">class</a> found within the typeclass <a href="#instance">instance</a> graph.
 A diamond is likely to cause issues during <a href="#typeclass-inference">typeclass inference</a>, which attempts to construct a single term of the class and may therefore be unable to do so.
 When unqualified, &quot;diamond&quot; refers most often to this undesirable case, where non-<a href="#defeq">defeq</a> terms in the diamond may cause errors, lead to <a href="#goal">goals</a> which are not provable via <code>refl</code>, or potentially ones not provably equal at all.
-Within <a href="#mathlib">mathlib</a>, diamonds are abundant because of its many <a href="#hierarchy">hierarchies</a>.
+Within <a href="#Mathlib">Mathlib</a>, diamonds are abundant because of its many <a href="#hierarchy">hierarchies</a>.
 Fixing or mitigating diamonds often involves refactoring the fields or instance priorities for the offending class.
-Diamonds which cross library boundaries -- such as ones in which part of the typeclass graph lives within mathlib and part within a library depending on mathlib which adds new instances or classes -- may be particularly hard to fix or avoid without modification.</p>
+Diamonds which cross library boundaries -- such as ones in which part of the typeclass graph lives within Mathlib and part within a library depending on Mathlib which adds new instances or classes -- may be particularly hard to fix or avoid without modification.</p>
 <h5 id="see-also" class="markdown-heading">See Also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
 <li>
-<p><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Design-note-on-AddMonoid-and-Monoid">mathlib's Design note on <code>AddMonoid</code> and <code>Monoid</code></a>, for a specific example of evading a diamond</p>
+<p><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Design-note-on-AddMonoid-and-Monoid">Mathlib's Design note on <code>AddMonoid</code> and <code>Monoid</code></a>, for a specific example of evading a diamond</p>
 </li>
 <li>
-<p><a href="https://leanprover-community.github.io/mathlib_docs/notes.html#forgetful%20inheritance">Forgetful Inheritance</a>, also from the mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of &quot;richer&quot; and poorer structures on a type</p>
+<p><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Mathlib.LibraryNote.%C2%ABforgetful%20inheritance%C2%BB">Forgetful Inheritance</a>, also from the Mathlib documentation, for a discussion on a general pattern for avoiding diamonds in the case of &quot;richer&quot; and poorer structures on a type</p>
 </li>
 </ul>
 <p><a name="dot-notation"></a></p>
@@ -200,6 +174,14 @@ Diamonds which cross library boundaries -- such as ones in which part of the typ
 <p>The syntax sugar allowing notations such as <code>((foo a b c).bar x.y).baz</code>.</p>
 <p>Lean provides two interpretations of the syntax <code>foo.bar</code>: it can mean the declaration <code>bar</code> in the <code>foo</code> namespace, or it can be generalized field notation. We expand here on the latter.</p>
 <p>Suppose <code>foo</code> has type <code>C x1 ... xn</code>, with <code>C</code> some constant and <code>x1 ... xn</code> arbitrary, and suppose that there is a declaration in the context named <code>C.bar</code> which takes an argument of type <code>C x1 ... xn</code>. Then <code>foo.bar</code> is sugar for <code>C.bar foo</code>. For calls of the form <code>foo.bar _ ... _</code> with (implicit or explicit) arguments, Lean is smart enough to expand to <code>C.bar _ ... foo _ ... _</code>, so that everything typechecks. In these previous examples, <code>foo</code> can also be a more complicated expression such as the function application in <code>(foo bar baz).quux</code>.</p>
+<h3 id="environment-linter" class="markdown-heading">environment linter <a class="hover-link" href="#environment-linter">#</a></h3>
+<p>An <em>environment linter</em> is a <a href="#lint">linter</a> which attempts to find unintentional mistakes in Lean declarations by analyzing the whole environment of imported and local declarations.
+There are also <a href="#syntax-linter">syntax linters</a> (which run on individual declarations) and <a href="#style-linter">style linters</a> (which run on literal source text).
+To run environment linters on the current file, use the <code>#lint</code> command.
+New linters are occasionally introduced to detect additional classes of mistakes.
+Mathlib's <a href="#continuous-integration">continuous integration</a> ensures that any new such code passes the defined linters.</p>
+<p>Environment linting can be disabled for a particular piece of code by using the <code>nolint</code> <a href="#attribute">attribute</a>.
+Some linter failures that predate the CI syntax linters are indicated in an autogenerated <a href="https://github.com/leanprover-community/mathlib4/blob/master/scripts/nolints.json">nolint file</a>; the length of this file should tend to zero over time as these errors are fixed.</p>
 <h3 id="equiv" class="markdown-heading"><code>equiv</code> <a class="hover-link" href="#equiv">#</a></h3>
 <p>As distinct from mathematical equality, <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Logic/Equiv/Defs.html"><code>equiv</code></a> allows for defining an equivalence or congruence of types.
 One important thing to note is that an <code>equiv</code> <a href="#bundled-vs-unbundled">holds data instead of being merely a proof</a>.</p>
@@ -218,26 +200,25 @@ A heavy <code>rfl</code> occurs when <code>rfl</code> is asked to perform many s
 <p><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl.20taking.2020.20seconds">This Zulip discussion</a> has a particularly slow example.</p>
 <h3 id="hierarchy" class="markdown-heading">hierarchy <a class="hover-link" href="#hierarchy">#</a></h3>
 <p>A collection of successively more constrained <a href="#class">typeclasses</a> within a related area of mathematics.
-In <a href="#mathlib">mathlib</a>, we have the <em>algebraic hierarchy</em> (<code>semiring</code>, <code>ring</code>, <code>field</code>, ...), the <em>order hierarchy</em> (<code>preorder</code>, <code>partial_order</code>, <code>linear_order</code>, ...), the <em>topological hierarchy</em> (<code>t1_space</code>, <code>t2_space</code>, <code>normal_space</code>, ...), the <em>categorical hierarchy</em> (<code>preadditive</code>, <code>abelian</code>, <code>monoidal</code>, ...) but also the <em>scalar hierarchy</em> (<code>mul_action</code>, <code>distrib_mul_action</code>, <code>module</code>, ...), the <em>norm hierarchy</em>, and intersections of previous ones like the <em>order-algebraic hierarchy</em>, the <em>topologico-algebraic hierarchy</em>, and others.</p>
+In <a href="#Mathlib">Mathlib</a>, we have the <em>algebraic hierarchy</em> (<code>semiring</code>, <code>ring</code>, <code>field</code>, ...), the <em>order hierarchy</em> (<code>preorder</code>, <code>partial_order</code>, <code>linear_order</code>, ...), the <em>topological hierarchy</em> (<code>t1_space</code>, <code>t2_space</code>, <code>normal_space</code>, ...), the <em>categorical hierarchy</em> (<code>preadditive</code>, <code>abelian</code>, <code>monoidal</code>, ...) but also the <em>scalar hierarchy</em> (<code>mul_action</code>, <code>distrib_mul_action</code>, <code>module</code>, ...), the <em>norm hierarchy</em>, and intersections of previous ones like the <em>order-algebraic hierarchy</em>, the <em>topologico-algebraic hierarchy</em>, and others.</p>
 <h3 id="hott" class="markdown-heading">HoTT <a class="hover-link" href="#hott">#</a></h3>
 <p><em>Homotopy Type Theory</em>, a <a href="#type-theory">type theory</a> distinguished by the inclusion of an additional <em>univalence axiom</em>, which makes precise the notion that two disparate implementations of a type which would be thought of as equivalent are also in a mathematical sense equal.</p>
-<p>In Lean 2, there was native support within <a href="#core-lean">core Lean</a> itself for a side-by-side <a href="https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md">homotopy type theory-based library</a>.</p>
-<p>Lean 3's <a href="kernel">kernel</a> introduced singleton elimination, which is inconsistent with HoTT's univalence axiom.
-As a result, core Lean 3 no longer shipped a HoTT library. Neither does Lean 4.
-A partial port of the Lean 2 HoTT library for Lean 3 was made in <a href="https://github.com/gebner/hott3">an external project by Gabriel Ebner and fellow contributors</a>.</p>
+<p>In Lean 2, the Lean <a href="#kernel">kernel</a> could be instantiated to standard mode and HoTT mode.
+The standard library and the <a href="https://github.com/leanprover/lean2/blob/8072fdf9a0b31abb9d43ab894d7a858639e20ed7/hott/hott.md">homotopy type theory library</a> were developed side-by-side. These instantiations were not incompatible with each other, since singleton elimination (in standard mode) is inconsistent with HoTT's univalence axiom.
+Lean 3's <a href="#kernel">kernel</a> dropped support for the HoTT mode. As a result, since Lean 3 onward, Lean no longer ships with a HoTT library.</p>
 <p>As an illustrative concrete example, there are many <a href="https://en.wikipedia.org/wiki/Natural_number#Formal_definitions">definitions of the type of natural numbers</a> which can be viewed as constructing equivalent mathematical objects.
-Core Lean has a <a href="https://leanprover-community.github.io/mathlib_docs/init/core.html#nat">Peano-esque implementation</a> of them, and <a href="#mathlib">mathlib</a> has an additional <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">binary representation-based one</a> which is shown to be equivalent.
+Core Lean has a <a href="https://leanprover-community.github.io/mathlib_docs/init/core.html#nat">Peano-esque implementation</a> of them, and <a href="#Mathlib">Mathlib</a> has an additional <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">binary representation-based one</a> which is shown to be equivalent.
 Given that Lean does <em>not</em> have the univalence axiom, these two types are equivalent, but they are not provably <em>equal</em> as types.
 A HoTT-based language (or library) would additionally call these types equal.</p>
 <p><a name="intervals"></a></p>
 <h3 id="icc-ico-ioc-ioo-ici-ioi-iic-iio" class="markdown-heading"><code>Icc</code>, <code>Ico</code>, <code>Ioc</code>, <code>Ioo</code>, <code>Ici</code>, <code>Ioi</code>, <code>Iic</code>, <code>Iio</code> <a class="hover-link" href="#icc-ico-ioc-ioo-ici-ioi-iic-iio">#</a></h3>
-<p>Shorthand notation used within <a href="#mathlib">mathlib</a> for referring to one of 8 kinds of mathematical intervals.
+<p>Shorthand notation used within <a href="#Mathlib">Mathlib</a> for referring to one of 8 kinds of mathematical intervals.
 There are <code>8</code> types of intervals, depending on whether the interval is <em>c</em>losed, <em>o</em>pen or runs to <em>i</em>nfinity at each end.
 Names have been made compact by calling each interval <code>I</code> + how it ends on the left + how it ends on the right.
 <code>Iii</code>, which in the naming convention would refer to an interval infinite at both ends, is not in use.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
-<li><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Data/Set/Intervals/UnorderedInterval.html">mathlib's <code>data.set.intervals.unordered_interval</code></a>, which builds unordered intervals (where the endpoints may be specified in either order) on top of these intervals.</li>
+<li><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Order/Interval/Set/UnorderedInterval.html"><code>Mathlib.Order.Interval.Set.UnorderedInterval</code></a>, which builds unordered intervals (where the endpoints may be specified in either order) on top of these intervals.</li>
 </ul>
 <h3 id="infoview" class="markdown-heading">infoview <a class="hover-link" href="#infoview">#</a></h3>
 <p>Within the context of interactively editing Lean files, a window or interface which displays incremental <a href="#goal">goal</a> state, diagnostics, errors and Lean <a href="#widget">widgets</a> output.</p>
@@ -246,19 +227,18 @@ Names have been made compact by calling each interval <code>I</code> + how it en
 <ul>
 <li>A <a href="#class">class</a> argument taken by a <code>def</code>, <code>lemma</code> or other <a href="#declaration">declaration</a> which is enclosed by square brackets (<code>[]</code>) such that it is resolved by the <a href="#typeclass-inference">typeclass inference</a> system when the declaration is used.</li>
 <li>A <a href="#declaration">declaration</a> created with the eponymous <code>instance</code> command, or equivalently one marked with the <code>instance</code> <a href="#attributes">attribute</a>, either of which register the declaration with the typeclass inference system for use in the above.
-As a concrete example, <a href="#mathlib">mathlib</a> defines an instance of <code>linear_order</code> for <code>ℝ</code>, enabling reals to be compared with <code>&lt;</code>.</li>
+As a concrete example, <a href="#Mathlib">Mathlib</a> defines an instance of <code>linear_order</code> for <code>ℝ</code>, enabling reals to be compared with <code>&lt;</code>.</li>
 </ul>
+<h3 id="lean-3" class="markdown-heading">Lean 3 <a class="hover-link" href="#lean-3">#</a></h3>
+<p>A deprecated version of Lean, replaced by Lean 4. Mathlib was completely ported from Lean 3 to Lean 4 in 2022-2023.</p>
 <h3 id="kernel" class="markdown-heading">kernel <a class="hover-link" href="#kernel">#</a></h3>
 <p>In the context of Lean's implementation (and proof assistants <a href="https://en.wikipedia.org/wiki/Proof_assistant#System_comparison">more generally</a>), the kernel is the central component which verifies the correctness of each proof.</p>
-<p>Lean's kernel implementation is relatively small compared to the size of Lean's <a href="#tactic">tactic</a> implementation code[1^], or certainly compared to <a href="#mathlib">mathlib</a>, allowing for greater confidence that proofs are free of mistakes without reliance on large or complex higher level constructs.</p>
+<p>Lean's kernel implementation is relatively small compared to the size of Lean's <a href="#tactic">tactic</a> implementation code[1^], or certainly compared to <a href="#Mathlib">Mathlib</a>, allowing for greater confidence that proofs are free of mistakes without reliance on large or complex higher level constructs.</p>
 <p>[1^]: this relative smallness, and ergo independent verifiability, is known as the <em>de Bruijn criterion</em> for a proof assistant's implementation</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
 <li>
-<p><a href="https://github.com/leanprover/lean4/tree/master/src/kernel">Lean 4's kernel implementation</a></p>
-</li>
-<li>
-<p><a href="https://github.com/leanprover-community/lean/tree/master/src/kernel">Lean 3's kernel implementation</a></p>
+<p><a href="https://github.com/leanprover/lean4/tree/master/src/kernel">Lean's kernel implementation</a></p>
 </li>
 <li>
 <p><a href="https://royalsocietypublishing.org/doi/full/10.1098/rsta.2005.1650">The challenge of computer mathematics, by Henk Barendregt and Freek Wiedijk (2005)</a></p>
@@ -268,23 +248,24 @@ As a concrete example, <a href="#mathlib">mathlib</a> defines an instance of <co
 </li>
 </ul>
 <h3 id="lean-together" class="markdown-heading">Lean Together <a class="hover-link" href="#lean-together">#</a></h3>
-<p>An <a href="https://leanprover-community.github.io/lt2021/">annual meeting</a> for the Lean user community, its <a href="#mathlib">mathlib</a> library users, as well as the broader theorem prover community.</p>
+<p>An <a href="https://leanprover-community.github.io/lt2026/">annual meeting</a> for the Lean user community, its <a href="#Mathlib">Mathlib</a> library users, as well as the broader theorem prover community.</p>
 <p>Previous talks or presentations from the events have been <a href="https://www.youtube.com/channel/UCWe5B7Ikr0AI9727doEUxPg">shared on the community YouTube channel</a>.</p>
 <h3 id="lint" class="markdown-heading">lint <a class="hover-link" href="#lint">#</a></h3>
 <p>A <em>linter</em> is a small program that looks for hard-to-spot mistakes in code.
-<a href="#mathlib">mathlib</a> defines both <a href="#style-linter">style linters</a> and <a href="#code-linter">code linters</a>.
 Mathlib is linted on every <a href="#continuous-integration">CI run</a> when pull requests are submitted.</p>
-<h3 id="mathlib" class="markdown-heading">mathlib <a class="hover-link" href="#mathlib">#</a></h3>
+<p>We have multiple mechanisms for linting different aspects of code:
+style and formatting, syntax of individual declarations, and the way declarations fit together in an environment.
+Using and defining linters works very differently for each of these cases.</p>
+<ul>
+<li><a href="#style-linter">style linters</a> run by <code>lake exe lint-style</code>, they are defined in Mathlib and declared in a specific file in Mathlib, they take the <code>String</code> contents of a file as input, and they are silenced by adding exceptions to <code>scripts/nolints-style.txt</code>.</li>
+<li><a href="#syntax-linter">syntax linters</a> run automatically, they are defined in core Lean and declared with the <code>add_linter</code> command, they take the <code>Lean.Syntax</code> of a declaration as input, and they are silenced using the <code>set_option</code> command.</li>
+<li><a href="#environment-linter">environment linters</a> run by <code>#lint</code> or <code>lake exe lintAll</code>, they are defined in Batteries and declared with the <code>@[env_linter]</code> attribute, they take a file's <code>Environment</code> as input, and they are silenced using the <code>@[nolint]</code> attribute</li>
+</ul>
+<h3 id="mathlib" class="markdown-heading">Mathlib <a class="hover-link" href="#mathlib">#</a></h3>
 <p>A <a href="https://github.com/leanprover-community/mathlib4">large, community maintained collection of mathematics</a> for Lean 4.</p>
-<h3 id="mathlib3" class="markdown-heading">mathlib3 <a class="hover-link" href="#mathlib3">#</a></h3>
-<p>A deprecated mathematics library for Lean 3.</p>
-<h3 id="mathport" class="markdown-heading">mathport <a class="hover-link" href="#mathport">#</a></h3>
-<p>A <a href="https://github.com/leanprover/mathport/">tool</a> for automated or semi-automated translation of Lean 3 code into Lean 4 code.
-It consists of both fully automated generation of Lean 4 <a href="#olean-file">olean files</a> from Lean 3 source files (<em>binport</em>), as well as best-effort source-to-source translation of Lean 3 to Lean 4 source code (<em>synport</em>).
-Learnings from both the mathport effort as well as from <a href="#mathlib4">mathlib4</a> often lead to backported changes to mathlib, to bring Lean 3 code into more future-compatible states.</p>
 <h3 id="mode" class="markdown-heading">mode <a class="hover-link" href="#mode">#</a></h3>
 <p>In the context of writing Lean code, a set of related syntactical elements or keywords which make a particular style of formal reasoning or construction of <a href="#proof-term">proof terms</a> efficient.
-Lean, especially as restricted to <a href="#mathlib">mathlib</a>, has a small number of such modes -- <a href="#tactic-mode">tactic mode</a>, <a href="#term-mode">term mode</a>, <a href="#calc-mode">calc mode</a> and <a href="#conv-mode">conv-mode</a>.
+Lean, especially as restricted to <a href="#Mathlib">Mathlib</a>, has a small number of such modes -- <a href="#tactic-mode">tactic mode</a>, <a href="#term-mode">term mode</a>, <a href="#calc-mode">calc mode</a> and <a href="#conv-mode">conv-mode</a>.
 A particular mode may make progress towards specific kinds of <a href="#goal">goals</a> easier.
 A proof may often, however, mix various modes in the course of constructing a <a href="#proof-term">proof term</a>.</p>
 <h3 id="module" class="markdown-heading">module <a class="hover-link" href="#module">#</a></h3>
@@ -298,20 +279,20 @@ We require that every file has one, but <a href="https://github.com/leanprover-c
 <p>Further information can be found on <a href="mwe.html">the MWE page</a>.</p>
 <h3 id="non-terminal-simp" class="markdown-heading">non-terminal <code>simp</code> <a class="hover-link" href="#non-terminal-simp">#</a></h3>
 <p>An invocation of the <code>simp</code> tactic which is not the last tactic invoked on a particular <a href="#goal">subgoal</a>, nor uses <code>simp only</code> to explicitly limit which <a href="#simp-lemma">simp lemmas</a> it considers.
-Non-terminal <code>simp</code>s are avoided because they are hard to maintain, given that their behavior or runtime will change as mathlib adds or modifies the set of <code>simp</code> lemmas over time.</p>
+Non-terminal <code>simp</code>s are avoided because they are hard to maintain, given that their behavior or runtime will change as Mathlib adds or modifies the set of <code>simp</code> lemmas over time.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
-<p>The <a href="https://leanprover-community.github.io/extras/simp.html#non-terminal-codesimpcodes">&quot;non-terminal <code>simp</code>&quot; section</a> of the <code>simp</code> documentation</p>
+<p>The <a href="https://leanprover-community.github.io/extras/simp.html#non-terminal-simps">&quot;non-terminal <code>simp</code>&quot; section</a> of the <code>simp</code> documentation</p>
 <h3 id="olean-file" class="markdown-heading">olean file <a class="hover-link" href="#olean-file">#</a></h3>
 <p>A cached, compiled binary file produced by Lean as part of building a Lean <a href="#module">module</a>.
-<code>olean</code> files are tied to the specific Lean version which built them, and their names match the module they correspond to (so a file named <code>foo.lean</code> will have a corresponding <code>foo.olean</code> file).
-Building an <code>olean</code> file can be done manually (via e.g. <code>lean --make foo.lean</code>), but for collaborative projects like <a href="#mathlib">mathlib</a> they are built via <a href="#continuous-integration">CI</a> as a shared <a href="#cache">olean cache</a>, and then can simply be retrieved by each mathlib user.</p>
+<code>olean</code> files are tied to the specific Lean version which built them, and their names match the module they correspond to (so a file named <code>Foo.lean</code> will have a corresponding <code>Foo.olean</code> file found in the <code>.lake</code> folder).
+Building an <code>olean</code> file can be done manually (via e.g. <code>lake build</code>), but for collaborative projects like <a href="#Mathlib">Mathlib</a> they are built via <a href="#continuous-integration">CI</a> as a shared <a href="#cache">olean cache</a>, and then can simply be retrieved by each Mathlib user.</p>
 <h3 id="orange-bar-of-hell" class="markdown-heading">orange bar of hell <a class="hover-link" href="#orange-bar-of-hell">#</a></h3>
 <p>Interactive editing of Lean in VSCode (or other editors) is typically fairly responsive.</p>
 <p><em>Orange bars of hell</em>, however, refer to occasional instances where orange bars in the sidebar alongside a Lean file do not disappear or update.
 Normally these bars indicate which parts of a file Lean is still evaluating, but if these bars persist, it indicates that progress isn't being made.
 Fixing these bars can often be done by closing any inactive editor tabs, followed by opening the VSCode Command Palette (<code>ctrl-shift-p</code> or <code>cmd-shift-p</code>) and running <code>Lean: Restart</code>.
-Another common reason this occurs is if Lean is having to (re)compile all imported <a href="#mathlib">mathlib</a> files due to a mismatched set of <a href="#cache">cached</a> <a href="#olean-file">olean files</a>.
-In these cases, ensuring that the mathlib cache is properly downloaded via <code>leanpkg configure &amp;&amp; leanproject get-mathlib-cache</code> should fix the issue.</p>
+Another common reason this occurs is if Lean is having to (re)compile all imported <a href="#Mathlib">Mathlib</a> files due to a mismatched set of <a href="#cache">cached</a> <a href="#olean-file">olean files</a>.
+In these cases, ensuring that the Mathlib cache is properly downloaded via <code>lake exe cache get</code> should fix the issue.</p>
 <h3 id="propeq" class="markdown-heading">propeq <a class="hover-link" href="#propeq">#</a></h3>
 <p><em>Propositional equality</em>. Two <a href="#term">term</a>s <code>a b : α</code> are propositionally equal if we can prove <code>a = b</code>.
 This is weaker than <a href="#defeq">definitional</a> and <a href="#syntactical-equality">syntactical</a> equalities.</p>
@@ -320,32 +301,59 @@ This is weaker than <a href="#defeq">definitional</a> and <a href="#syntactical-
 <h3 id="simp-lemma" class="markdown-heading"><code>simp</code> lemma <a class="hover-link" href="#simp-lemma">#</a></h3>
 <p>A lemma which has been tagged with an <a href="#attribute">attribute</a> which enables it for use with the <code>simp</code> tactic.</p>
 <p>Good <code>simp</code> lemmas guide the <code>simp</code> tactic towards reducing complex expressions into simpler ones, often to the point where the <code>simp</code> tactic is able to close many goals itself.</p>
-<p>Further details can be found in the <a href="https://leanprover-community.github.io/extras/simp.html#simp-lemmas"><code>simp</code> documentation of mathlib</a>.</p>
+<h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
+<ul>
+<li><a href="https://leanprover-community.github.io/extras/simp.html#simp-lemmas"><code>simp</code> documentation of Mathlib</a>.</li>
+<li><a href="https://lean-lang.org/theorem_proving_in_lean4/Tactics/#using-the-simplifier">Section 5.7 of <em>Theorem Proving in Lean</em></a>.</li>
+</ul>
 <h3 id="simp-normal-form" class="markdown-heading"><code>simp</code>-normal form <a class="hover-link" href="#simp-normal-form">#</a></h3>
-<p>A convention within <a href="#mathlib">mathlib</a> for expressing propositions with multiple equivalent forms in a single conventional one.</p>
+<p>A convention within <a href="#Mathlib">Mathlib</a> for expressing propositions with multiple equivalent forms in a single conventional one.</p>
 <p>Examples and further detail can be found on <a href="simp.html#simp-normal-form">the <code>simp</code> page</a>.</p>
+<h3 id="syntax-linter" class="markdown-heading">syntax linter <a class="hover-link" href="#syntax-linter">#</a></h3>
+<p>A <em>syntax linter</em> is a <a href="#lint">linter</a> which attempts to find unintentional mistakes in Lean declarations.
+There are also <a href="#environment-linter">environment linters</a> (which run on whole environments) and <a href="#style-linter">style linters</a> (which run on literal source text).
+New linters are occasionally introduced to detect additional classes of mistakes.
+Mathlib's <a href="#continuous-integration">continuous integration</a> ensures that any new such code passes the defined linters.
+Syntax linting can be disabled for a particular piece of code by using the <code>set_option</code> command.</p>
 <h3 id="style-linter" class="markdown-heading">style linter <a class="hover-link" href="#style-linter">#</a></h3>
-<p>A <em>style linter</em> is a <a href="#lint">linter</a> which attempt to ensure uniform appearance or style of code within <a href="#mathlib">mathlib</a>, without affecting its working behavior.
-Concretely, mathlib includes <a href="https://github.com/leanprover-community/mathlib4/blob/master/scripts/lint-style.py">a short Python program</a> which checks for instance that lines are less than 100 characters long, that every file has a <a href="#module-docstring">module docstring</a>, et cetera.
+<p>A <em>style linter</em> is a <a href="#lint">linter</a> which attempts to ensure uniform appearance or style of code within <a href="#Mathlib">Mathlib</a>, without affecting its working behavior.
+There are also <a href="#environment-linter">environment linters</a> (which run on whole environments) and <a href="#syntax-linter">syntax linters</a> (which run on individual declarations).
+Concretely, Mathlib includes <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Linter/TextBased.html">short Lean programs</a> which check for instance that lines do not end with whitespace, et cetera.
+There are also some style linters implemented in Python, which are being replaced with linters written in Lean.
 Mathlib's <a href="#continuous-integration">continuous integration</a> ensures that new code passes the defined linters.
 Allowed style linting exceptions are stored in a <a href="https://github.com/leanprover-community/mathlib4/blob/master/scripts/style-exceptions.txt">style exceptions file</a> within the repository.</p>
+<h3 id="syntactical-equality" class="markdown-heading">syntactical equality <a class="hover-link" href="#syntactical-equality">#</a></h3>
+<p>Two <a href="#term">term</a>s <code>a b : α</code> are syntactically equal if they are literally the same expression.
+This is stronger than <a href="#defeq">definitional</a> and <a href="#syntactical-equality">syntactical</a> equalities.</p>
+<h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
+<p><a href="https://xenaproject.wordpress.com/2020/07/03/equality-specifications-and-implementations/">Equality, specifications and implementations</a>, from the Xena Project</p>
 <h3 id="tactic-mode" class="markdown-heading">tactic mode <a class="hover-link" href="#tactic-mode">#</a></h3>
 <p>A Lean <a href="#mode">mode</a> characterized by its reliance on sequences of <a href="#tactic">tactics</a> which often facilitate proofs quite similar to paper-based reasoning, albeit often with the use of sophisticated tactics which automate tedious portions of a proof.
 There are various means to <a href="https://lean-lang.org/theorem_proving_in_lean/tactics.html#entering-tactic-mode">enter tactic mode</a>.
-It may be entered using the <code>by</code> keyword from <a href="#term-mode">term mode</a>, though in Lean 3 it is most often entered via a <code>begin...end</code> block whenever its body is made up of multiple commands.
+It may be entered using the <code>by</code> keyword from <a href="#term-mode">term mode</a>.
 Other modes can also be interspersed within it, often to collaboratively produce an understandable, efficient, short or readable overall proof.
 Ultimately, the result of a tactic mode block is a <a href="#term">term</a>, assembled via the tactics within it.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
 <li>
-<p><a href="https://lean-lang.org/theorem_proving_in_lean/tactics.html">Section 5 of Theorem Proving in Lean</a>, which discusses tactics, as well as moving into and out of tactic mode</p>
+<p><a href="https://lean-lang.org/theorem_proving_in_lean4/Tactics/#Theorem-Proving-in-Lean-4--Tactics">Section 5 of <em>Theorem Proving in Lean</em></a>, which discusses tactics, as well as moving into and out of tactic mode</p>
 </li>
 <li>
-<p><a href="https://leanprover-community.github.io/mathlib_docs/tactic/show_term.html">The <code>show_term</code> tactic</a> which can reveal the assembled <a href="#term">term</a></p>
+<p><a href="https://lean-lang.org/doc/reference/latest/Tactic-Proofs/Tactic-Reference/#show_term">The <code>show_term</code> tactic</a> which can reveal the assembled <a href="#term">term</a></p>
 </li>
 <li>
-<p><a href="https://leanprover-community.github.io/mathlib_docs/tactics.html">The mathlib tactics documentation</a>, with a comprehensive list of tactics</p>
+<p><a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Tactics/">The Mathlib tactics documentation</a>, with a comprehensive list of tactics</p>
 </li>
+</ul>
+<h3 id="term" class="markdown-heading">term <a class="hover-link" href="#term">#</a></h3>
+<p>A <em>term</em> is a basic component of Lean's <a href="#type-theory">type theory</a> denoting a (mathematical) object.</p>
+<p>The word <em>term</em> can also be used to draw a contrast with <em>type</em>: if we write <code>x : X</code>, <code>x</code> is the term and <code>X</code> is its type.
+In a <a href="#dependent-type-theory">dependent type theory</a> like Lean's, types are themselves represented by terms.</p>
+<p>A <em>proof term</em> is a way to denote a mathematical proof.
+We also say such a proof is written in <a href="#term-mode">term mode</a> (as opposed to <a href="#tactic-mode">tactic mode</a>).</p>
+<h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
+<ul>
+<li><a href="https://lean-lang.org/doc/reference/latest/The-Type-System/#--tech-term-Terms">Section 4 of the <em>Lean Language Reference</em></a></li>
 </ul>
 <h3 id="term-mode" class="markdown-heading">term mode <a class="hover-link" href="#term-mode">#</a></h3>
 <p>A Lean <a href="#mode">mode</a> which assembles a single <a href="#term">term</a> through the use of functional subexpressions.
@@ -355,8 +363,8 @@ The body of a <a href="#declaration">declaration</a> begins in term mode, or wit
 Efficient term mode proofs often contribute to <a href="#golfing">code golfing</a>.</p>
 <p>Commands such as <code>have</code>, <code>suffices</code>, and <code>show</code> can be used to write structured term mode proofs that are more legible than bare proof terms.</p>
 <h3 id="tpil" class="markdown-heading">TPIL <a class="hover-link" href="#tpil">#</a></h3>
-<p>&quot;<a href="https://lean-lang.org/theorem_proving_in_lean/index.html">Theorem Proving in Lean</a>&quot;, a free online textbook by Jeremy Avigad, Leonardo de Moura, and Soonho Kong, &quot;designed to teach you to develop and verify proofs in Lean&quot;.
-Starting with a simple introduction to the <a href="https://lean-lang.org/theorem_proving_in_lean/dependent_type_theory.html">type theory</a> used in Lean, the text proceeds to explain topics such as <a href="https://lean-lang.org/theorem_proving_in_lean/tactics.html">tactics</a>, <a href="https://lean-lang.org/theorem_proving_in_lean/inductive_types.html">inductive types</a>, and <a href="https://lean-lang.org/theorem_proving_in_lean/type_classes.html">type classes</a>.</p>
+<p>&quot;<a href="https://lean-lang.org/theorem_proving_in_lean4/">Theorem Proving in Lean</a>&quot;, a free online textbook by Jeremy Avigad, Leonardo de Moura, Soonho Kong and Sebastian Ullrich, with contributions from the Lean community, &quot;designed to teach you to develop and verify proofs in Lean&quot;.
+Starting with a simple introduction to the <a href="https://lean-lang.org/theorem_proving_in_lean4/Dependent-Type-Theory/#dependent-type-theory">type theory</a> used in Lean, the text proceeds to explain topics such as <a href="https://lean-lang.org/theorem_proving_in_lean4/Tactics/#Theorem-Proving-in-Lean-4--Tactics">tactics</a>, <a href="https://lean-lang.org/theorem_proving_in_lean4/Inductive-Types/#inductive-types">inductive types</a>, and <a href="https://lean-lang.org/theorem_proving_in_lean4/Type-Classes/#type-classes">type classes</a>.</p>
 <h3 id="type-theory" class="markdown-heading">type theory <a class="hover-link" href="#type-theory">#</a></h3>
 <p>A formal system with two fundamental kinds of objects, <a href="#term">terms</a> and types.
 It also may refer to the field of study of such languages, as there are nuances between various additional properties or features a specific type theory may contain.</p>
@@ -364,7 +372,7 @@ It also may refer to the field of study of such languages, as there are nuances 
 Foundationally in set theory, all objects are in a formal sense built out of a single kind of primitive object, sets. One reasons about whether constructed sets are or are not members of other sets.
 This membership notion may be asked about any two formal sets, which can allow statements to be formally meaningful even if they would be mathematically meaningless to a human -- such as asking whether the number 2 is a member of the number 37 (with numbers defined <a href="https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers">set theoretically</a>).
 By contrast, in type theory, each term has an associated type, as indeed do statements or propositions themselves.
-One has for instance the type of natural numbers (in <a href="#mathlib">mathlib</a>, <code>ℕ</code>), or the type of propositions (<code>Prop</code>), or the type of <em>proofs</em> of <code>2 + 2 = 4</code>, or of functions from <code>ℕ</code> to <code>Prop</code> (<code>ℕ → Prop</code>), and can construct terms of these types -- perhaps the terms <code>2</code>, <code>2 + 2 = 37</code>, <code>rfl</code>, and <code>λ n, true</code>, respectively.
+One has for instance the type of natural numbers (in <a href="#Mathlib">Mathlib</a>, <code>ℕ</code>), or the type of propositions (<code>Prop</code>), or the type of <em>proofs</em> of <code>2 + 2 = 4</code>, or of functions from <code>ℕ</code> to <code>Prop</code> (<code>ℕ → Prop</code>), and can construct terms of these types -- perhaps the terms <code>2</code>, <code>2 + 2 = 37</code>, <code>rfl</code>, and <code>λ n, true</code>, respectively.
 Not every term <em>is</em> a type however, so in contrast to the aforementioned set theoretic difficulties, one may not construct statements asking whether 37 is of <em>type</em> 2 if doing so is not meaningful.</p>
 <h3 id="unicode-abbreviation" class="markdown-heading">unicode abbreviation <a class="hover-link" href="#unicode-abbreviation">#</a></h3>
 <p>In the context of editing Lean files, an abbreviation is a way of entering a symbol not generally found on standard keyboard layouts using a descriptive shortcut.</p>
@@ -376,7 +384,6 @@ Informally, expressions in whnf have had their outermost parts evaluated, though
 <p>It also may refer to a command which reduces expressions to this form.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
-<li><a href="https://lean-lang.org/programming_in_lean/#08_Writing_Tactics.html">Section 8.4 of Programming in Lean</a>, which is still in progress, but will cover <code>whnf</code></li>
 <li><a href="https://stackoverflow.com/questions/6872898/what-is-weak-head-normal-form">What is weak head normal form? - Stack Overflow</a></li>
 <li><a href="https://wiki.haskell.org/Weak_head_normal_form">Weak head normal form - The Haskell wiki</a></li>
 </ul>
@@ -384,11 +391,10 @@ Informally, expressions in whnf have had their outermost parts evaluated, though
 <p>An extensible framework for defining interactive, componentized graphical elements via Lean code, which render in <a href="#infoview">infoviews</a> during interactive theorem proving.</p>
 <p>A widget may also refer to an individual graphical element being rendered by the aforementioned framework.</p>
 <p>Widgets provide a mechanism to show additional context or information which updates in the course of interactive theorem proving.</p>
-<p>Support is present both in Lean 3 and Lean 4, albeit with different out-of-the-box functionality.</p>
 <h5 id="see-also" class="markdown-heading">See also <a class="hover-link" href="#see-also">#</a></h5>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=8NUBQEZYuis">Lean Together 2021: Widgets, interactive output in VSCode</a>, a presentation by Edward Ayers from <a href="#lean-together">Lean Together 2021</a> which shows off some of the capabilities widgets enable</li>
-<li><a href="https://github.com/leanprover-community/lean/blob/master/doc/widget_server.md">The Lean 3 Widget Server Protocol</a>, a document intended for low-level protocol information more suitable for learning about widget implementation details</li>
+<li><a href="https://leanprover-community.github.io/mathlib4_docs/Lean/Widget/Types.html">Widget source code in core Lean</a></li>
 </ul>
 
   </main>
