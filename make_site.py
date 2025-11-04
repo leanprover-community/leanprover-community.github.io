@@ -316,6 +316,7 @@ class Course:
 class DocumentationEntry:
     title: str
     url: str
+    description: str
     accessed_at: str
     category: str
     tags: List[str] = field(default_factory=list)
@@ -547,6 +548,7 @@ with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
 
     for e in docu_data["documentation"]:
         e = DocumentationEntry(**e)
+        e.description = render_markdown(e.description)
         documentation_lists[e.category].append(e)
 
 # Cannot use %-d format code on windows
