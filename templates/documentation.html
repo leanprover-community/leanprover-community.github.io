@@ -75,7 +75,7 @@ function toggle_tag(id) {
   A brief summary of this piece of documentation.<br>
   <ul class="taglist">
     {% for tag in entry.tags %}
-    <li class="tag-label documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected" onclick="toggle_tag('documentation-tag-{{ tag_id(tag) }}')">{{ tag }}</li>
+    <li title="{{ documentation_tags[tag] }}" class="tag-label documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected" onclick="toggle_tag('documentation-tag-{{ tag_id(tag) }}')">{{ tag }}</li>
     {% endfor %}
   </ul>
 </dd>
@@ -117,8 +117,8 @@ function toggle_tag(id) {
 
       <div class="tag-selection">
         Filter by all tags:
-        {% for tag in documentation_tags %}
-        <span class="documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected">
+        {% for tag, description in documentation_tags.items() %}
+	<span class="documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected" title="{{ description }}">
           <input type="checkbox" id="documentation-tag-{{ tag_id(tag) }}" class="tag-toggle" onclick="update_tag_showing()">
           <label for="documentation-tag-{{ tag_id(tag) }}" class="tag-label">{{ tag }}</label>
         </span>
