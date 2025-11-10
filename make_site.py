@@ -321,6 +321,13 @@ class DocumentationEntry:
     category: str
     tags: List[str] = field(default_factory=list)
 
+@dataclass
+class DocumentationTag:
+    name: str
+    description: str
+    display: bool = True
+    count: int = 0 # Will be set when reading the documentation entries.
+
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
     # header-data.json contains information for every single declaration in mathlib
@@ -544,12 +551,14 @@ documentation_lists = {
 with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
     docu_data = yaml.safe_load(file)
     for e in docu_data["tags"]:
-        documentation_tags[e["name"]] = e["description"]
+        documentation_tags[e["name"]] = DocumentationTag(**e)
 
     for e in docu_data["documentation"]:
         e = DocumentationEntry(**e)
         e.description = render_markdown(e.description)
         documentation_lists[e.category].append(e)
+        for tag in e.tags:
+            documentation_tags[tag].count += 1
 
 # Cannot use %-d format code on windows
 def format_month_day(date_obj):
