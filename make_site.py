@@ -317,6 +317,7 @@ class DocumentationEntry:
     title: str
     url: str
     description: str
+    authors: str
     accessed_at: str
     category: str
     tags: List[str] = field(default_factory=list)
