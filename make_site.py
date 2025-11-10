@@ -320,6 +320,7 @@ class DocumentationEntry:
     accessed_at: str
     category: str
     tags: List[str] = field(default_factory=list)
+    display: bool = True # Set to False if it has a tag indicating it should be hidden.
 
 @dataclass
 class DocumentationTag:
@@ -559,6 +560,8 @@ with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
         documentation_lists[e.category].append(e)
         for tag in e.tags:
             documentation_tags[tag].count += 1
+            if not documentation_tags[tag].display:
+                e.display = False
 
 # Cannot use %-d format code on windows
 def format_month_day(date_obj):
