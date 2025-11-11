@@ -301,6 +301,7 @@ class Event:
     country: Optional[str] = None
     state: Optional[str] = None
     venue: Optional[str] = None
+    hybrid: bool = False
 
     def compute_location(self) -> str:
         """Compute location string from structured fields."""
@@ -327,6 +328,14 @@ class Event:
         else:
             return 'TBA'
 
+    def validate(self) -> None:
+        """Validate event data consistency."""
+        if self.hybrid:
+            if not self.city or not self.country:
+                raise ValueError(
+                    f"Hybrid event '{self.title}' must have both city and country fields"
+                )
+
 def generate_schema_org_json(event: Event) -> str:
     """Generate schema.org JSON-LD for an event."""
     try:
@@ -350,14 +359,43 @@ def generate_schema_org_json(event: Event) -> str:
         "endDate": end_date_iso,
     }
 
-    # Add location - determine if virtual or physical
-    if event.location.lower() in ['virtual', 'online']:
+    # Add location - determine if virtual, hybrid, or physical
+    if event.hybrid:
+        # Hybrid event: both physical and virtual attendance
+        schema_data["eventAttendanceMode"] = "https://schema.org/MixedEventAttendanceMode"
+
+        # Build physical location
+        address = {
+            "@type": "PostalAddress",
+            "addressLocality": event.city,
+            "addressCountry": event.country
+        }
+        if event.state:
+            address["addressRegion"] = event.state
+
+        place_name = event.venue if event.venue else event.city
+
+        # Location is an array with both Place and VirtualLocation
+        schema_data["location"] = [
+            {
+                "@type": "Place",
+                "name": place_name,
+                "address": address
+            },
+            {
+                "@type": "VirtualLocation",
+                "url": event.url
+            }
+        ]
+    elif event.location.lower() in ['virtual', 'online']:
+        # Purely virtual event
         schema_data["eventAttendanceMode"] = "https://schema.org/OnlineEventAttendanceMode"
         schema_data["location"] = {
             "@type": "VirtualLocation",
             "url": event.url
         }
     else:
+        # Physical event only
         schema_data["eventAttendanceMode"] = "https://schema.org/OfflineEventAttendanceMode"
 
         # Use structured address data if available, otherwise fall back to location string
@@ -651,6 +689,8 @@ for e in old_events + new_events:
     # Compute location from structured fields if not explicitly provided
     if not e.location or e.location == '':
         e.location = e.compute_location()
+    # Validate event data consistency
+    e.validate()
     e.date_range = format_date_range(e)
     e.schema_org_json = generate_schema_org_json(e)
 
