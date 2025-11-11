@@ -371,9 +371,12 @@ def generate_schema_org_json(event: Event) -> str:
             if event.state:
                 address["addressRegion"] = event.state
 
+            # Use venue as Place name if available, otherwise use city
+            place_name = event.venue if event.venue else event.city
+
             schema_data["location"] = {
                 "@type": "Place",
-                "name": event.location,
+                "name": place_name,
                 "address": address
             }
         else:
