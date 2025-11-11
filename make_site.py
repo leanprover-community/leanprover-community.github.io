@@ -143,10 +143,14 @@ class Formalization:
 
     @cached_property
     def github_repo(self):
-        return github.get_repo(self.organization + '/' + self.repo)
+        if DOWNLOAD:
+            return github.get_repo(self.organization + '/' + self.repo)
+        return None
 
     @property
     def stars(self):
+        if not DOWNLOAD or self.github_repo is None:
+            return 0
         return self.github_repo.stargazers_count
 
 with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
@@ -353,7 +357,6 @@ def generate_schema_org_json(event: Event) -> str:
         "@context": "https://schema.org",
         "@type": "Event",
         "name": event.title,
-        "description": event.title,
         "url": event.url,
         "startDate": start_date_iso,
         "endDate": end_date_iso,
