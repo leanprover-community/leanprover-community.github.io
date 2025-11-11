@@ -39,6 +39,23 @@ jobs:
         run: |
           ./make_site.py
 
+      - name: setup Node.js
+        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '24'
+
+      - name: install Node.js dependencies
+        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
+        run: npm ci
+
+      - name: validate semantic data in events.html
+        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
+        run: |
+          echo "Validating schema.org Event markup in events.html..."
+          npm run validate:events
+          echo "✓ Semantic data validation passed!"
+
       - name: Upload artifact
         id: upload-artifact
         if: ${{ !cancelled() && (steps.build.outcome == 'success') }}

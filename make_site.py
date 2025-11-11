@@ -290,12 +290,104 @@ class TheoremForWebpage:
 @dataclass
 class Event:
     title: str
-    location: str
     type: str
     url: str = 'TBA'
     start_date: str = ''
     end_date: str = ''
     date_range: str = 'TBA'
+    schema_org_json: str = ''
+    location: str = ''  # Computed from structured fields or explicitly provided
+    city: Optional[str] = None
+    country: Optional[str] = None
+    state: Optional[str] = None
+    venue: Optional[str] = None
+
+    def compute_location(self) -> str:
+        """Compute location string from structured fields."""
+        # For virtual events
+        if self.location.lower() in ['virtual', 'online']:
+            return self.location
+
+        # Build location from structured fields
+        parts = []
+        if self.venue:
+            parts.append(self.venue)
+        if self.city:
+            parts.append(self.city)
+        if self.state:
+            parts.append(self.state)
+        if self.country:
+            parts.append(self.country)
+
+        if parts:
+            return ', '.join(parts)
+        elif self.location:
+            # Fall back to explicit location if provided
+            return self.location
+        else:
+            return 'TBA'
+
+def generate_schema_org_json(event: Event) -> str:
+    """Generate schema.org JSON-LD for an event."""
+    try:
+        # Parse dates to ISO 8601 format
+        start_date_obj = datetime.strptime(event.start_date, '%B %d %Y')
+        start_date_iso = start_date_obj.strftime('%Y-%m-%d')
+        end_date_obj = datetime.strptime(event.end_date, '%B %d %Y')
+        end_date_iso = end_date_obj.strftime('%Y-%m-%d')
+    except (ValueError, TypeError, AttributeError):
+        # If we can't parse the dates, don't generate schema.org data
+        return ''
+
+    # Build the schema.org structure
+    schema_data = {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": event.title,
+        "description": event.title,
+        "url": event.url,
+        "startDate": start_date_iso,
+        "endDate": end_date_iso,
+    }
+
+    # Add location - determine if virtual or physical
+    if event.location.lower() in ['virtual', 'online']:
+        schema_data["eventAttendanceMode"] = "https://schema.org/OnlineEventAttendanceMode"
+        schema_data["location"] = {
+            "@type": "VirtualLocation",
+            "url": event.url
+        }
+    else:
+        schema_data["eventAttendanceMode"] = "https://schema.org/OfflineEventAttendanceMode"
+
+        # Use structured address data if available, otherwise fall back to location string
+        if event.city and event.country:
+            address = {
+                "@type": "PostalAddress",
+                "addressLocality": event.city,
+                "addressCountry": event.country
+            }
+            # Add state/region for US addresses if available
+            if event.state:
+                address["addressRegion"] = event.state
+
+            schema_data["location"] = {
+                "@type": "Place",
+                "name": event.location,
+                "address": address
+            }
+        else:
+            # Fall back to simple Place with just name
+            schema_data["location"] = {
+                "@type": "Place",
+                "name": event.location
+            }
+
+    # Add event status - assume scheduled for future events
+    schema_data["eventStatus"] = "https://schema.org/EventScheduled"
+
+    # Convert to pretty-printed JSON
+    return json.dumps(schema_data, indent=2)
 
 @dataclass
 class Course:
@@ -553,7 +645,11 @@ old_events = sorted((e for e in events if e.end_date and datetime.strptime(e.end
 new_events = sorted((e for e in events if (not e.end_date) or datetime.strptime(e.end_date, '%B %d %Y').date() >= present), key=lambda e: datetime.strptime(e.end_date, '%B %d %Y').date())
 
 for e in old_events + new_events:
+    # Compute location from structured fields if not explicitly provided
+    if not e.location or e.location == '':
+        e.location = e.compute_location()
     e.date_range = format_date_range(e)
+    e.schema_org_json = generate_schema_org_json(e)
 
 
 @dataclass
@@ -573,7 +669,7 @@ if DOWNLOAD:
         oprojects_3 = yaml.safe_load(h_file)
     pkl_dump('oprojects_3', oprojects_3)
 else:
-    oprojects_3 = pkl_load('oprojects_3', [])
+    oprojects_3 = {}  # Use empty dict when not downloading
 
 
 projects_3 = []
@@ -586,8 +682,7 @@ if DOWNLOAD:
             projects_3.append(Project(name, project['organization'], descr, project['maintainers'], stars, github_repo.html_url))
     projects_3.sort(key = lambda p: p.stars, reverse=True)
     pkl_dump('projects_3', projects_3)
-else:
-    projects_3 = pkl_load('projects_3', [])
+# else: projects_3 stays as empty list []
 
 if DOWNLOAD:
     download(
@@ -597,7 +692,7 @@ if DOWNLOAD:
         oprojects_4 = yaml.safe_load(h_file)
     pkl_dump('oprojects_4', oprojects_4)
 else:
-    oprojects_4 = pkl_load('oprojects_4', [])
+    oprojects_4 = []  # Use empty list when not downloading
 
 
 projects_4 = []
@@ -611,8 +706,7 @@ if DOWNLOAD:
         projects_4.append(Project(name, github_repo.owner.login, descr, None, stars, github_repo.html_url))
     projects_4.sort(key = lambda p: p.stars, reverse=True)
     pkl_dump('projects_4', projects_4)
-else:
-    projects_4 = pkl_load('projects_4', [])
+# else: projects_4 stays as empty list []
 
 if DOWNLOAD:
     # We used to use this count but it didn't include mathlib3 contributors
