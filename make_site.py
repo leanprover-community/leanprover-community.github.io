@@ -307,10 +307,14 @@ class Event:
     venue: Optional[str] = None
     hybrid: bool = False
 
+    def is_fully_remote(self) -> bool:
+        """Check if this is a fully remote/virtual event."""
+        return self.location.lower() in ['virtual', 'online']
+
     def compute_location(self) -> str:
         """Compute location string from structured fields."""
         # For virtual events
-        if self.location.lower() in ['virtual', 'online']:
+        if self.is_fully_remote():
             return self.location
 
         # Build location from structured fields
@@ -338,6 +342,12 @@ class Event:
             if not self.city or not self.country:
                 raise ValueError(
                     f"Hybrid event '{self.title}' must have both city and country fields"
+                )
+
+        if self.is_fully_remote():
+            if self.city or self.state or self.country:
+                raise ValueError(
+                    f"Fully remote event '{self.title}' should not have city, state, or country fields"
                 )
 
 def generate_schema_org_json(event: Event) -> str:
@@ -390,7 +400,7 @@ def generate_schema_org_json(event: Event) -> str:
                 "url": event.url
             }
         ]
-    elif event.location.lower() in ['virtual', 'online']:
+    elif event.is_fully_remote():
         # Purely virtual event
         schema_data["eventAttendanceMode"] = "https://schema.org/OnlineEventAttendanceMode"
         schema_data["location"] = {
