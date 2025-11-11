@@ -726,7 +726,7 @@ if DOWNLOAD:
         oprojects_3 = yaml.safe_load(h_file)
     pkl_dump('oprojects_3', oprojects_3)
 else:
-    oprojects_3 = {}  # Use empty dict when not downloading
+    oprojects_3 = pkl_load('oprojects_3', {})
 
 
 projects_3 = []
@@ -739,7 +739,8 @@ if DOWNLOAD:
             projects_3.append(Project(name, project['organization'], descr, project['maintainers'], stars, github_repo.html_url))
     projects_3.sort(key = lambda p: p.stars, reverse=True)
     pkl_dump('projects_3', projects_3)
-# else: projects_3 stays as empty list []
+else:
+    projects_3 = pkl_load('projects_3', [])
 
 if DOWNLOAD:
     download(
@@ -749,7 +750,7 @@ if DOWNLOAD:
         oprojects_4 = yaml.safe_load(h_file)
     pkl_dump('oprojects_4', oprojects_4)
 else:
-    oprojects_4 = []  # Use empty list when not downloading
+    oprojects_4 = pkl_load('oprojects_4', [])
 
 
 projects_4 = []
@@ -763,7 +764,8 @@ if DOWNLOAD:
         projects_4.append(Project(name, github_repo.owner.login, descr, None, stars, github_repo.html_url))
     projects_4.sort(key = lambda p: p.stars, reverse=True)
     pkl_dump('projects_4', projects_4)
-# else: projects_4 stays as empty list []
+else:
+    projects_4 = pkl_load('projects_4', [])
 
 if DOWNLOAD:
     # We used to use this count but it didn't include mathlib3 contributors
