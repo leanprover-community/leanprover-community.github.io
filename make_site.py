@@ -352,15 +352,16 @@ class Event:
 
 def generate_schema_org_json(event: Event) -> str:
     """Generate schema.org JSON-LD for an event."""
+    # Parse dates to ISO 8601 format
     try:
-        # Parse dates to ISO 8601 format
-        start_date_obj = datetime.strptime(event.start_date, '%B %d %Y')
-        start_date_iso = start_date_obj.strftime('%Y-%m-%d')
-        end_date_obj = datetime.strptime(event.end_date, '%B %d %Y')
-        end_date_iso = end_date_obj.strftime('%Y-%m-%d')
+        start_date_iso = datetime.strptime(event.start_date, '%B %d %Y').strftime('%Y-%m-%d')
     except (ValueError, TypeError, AttributeError):
-        # If we can't parse the dates, don't generate schema.org data
-        return ''
+        raise ValueError(f"Invalid start date for event '{event.title}': {event.start_date}")
+
+    try:
+        end_date_iso = datetime.strptime(event.end_date, '%B %d %Y').strftime('%Y-%m-%d')
+    except (ValueError, TypeError, AttributeError):
+        raise ValueError(f"Invalid end date for event '{event.title}': {event.end_date}")
 
     # Build the schema.org structure
     schema_data = {
