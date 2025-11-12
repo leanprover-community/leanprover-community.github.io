@@ -31,6 +31,11 @@ from slugify import slugify
 
 import zulip
 
+from pydantic2_schemaorg.Event import Event as SchemaOrgEvent
+from pydantic2_schemaorg.Place import Place
+from pydantic2_schemaorg.PostalAddress import PostalAddress
+from pydantic2_schemaorg.VirtualLocation import VirtualLocation
+
 FilePath = Union[str, Path]
 
 DOWNLOAD = not 'NODOWNLOAD' in os.environ
@@ -351,7 +356,7 @@ class Event:
                 )
 
 def generate_schema_org_json(event: Event) -> str:
-    """Generate schema.org JSON-LD for an event."""
+    """Generate schema.org JSON-LD for an event using pydantic2-schemaorg models."""
     # Parse dates to ISO 8601 format
     try:
         start_date_iso = datetime.strptime(event.start_date, '%B %d %Y').strftime('%Y-%m-%d')
@@ -363,86 +368,76 @@ def generate_schema_org_json(event: Event) -> str:
     except (ValueError, TypeError, AttributeError):
         raise ValueError(f"Invalid end date for event '{event.title}': {event.end_date}")
 
-    # Build the schema.org structure
-    schema_data = {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        "name": event.title,
-        "url": event.url,
-        "startDate": start_date_iso,
-        "endDate": end_date_iso,
-    }
+    # Build location - determine if virtual, hybrid, or physical
+    location = None
+    event_attendance_mode = None
 
-    # Add location - determine if virtual, hybrid, or physical
     if event.hybrid:
         # Hybrid event: both physical and virtual attendance
-        schema_data["eventAttendanceMode"] = "https://schema.org/MixedEventAttendanceMode"
+        event_attendance_mode = "https://schema.org/MixedEventAttendanceMode"
 
         # Build physical location
-        address = {
-            "@type": "PostalAddress",
+        address_kwargs = {
             "addressLocality": event.city,
             "addressCountry": event.country
         }
         if event.state:
-            address["addressRegion"] = event.state
+            address_kwargs["addressRegion"] = event.state
 
         place_name = event.venue if event.venue else event.city
 
         # Location is an array with both Place and VirtualLocation
-        schema_data["location"] = [
-            {
-                "@type": "Place",
-                "name": place_name,
-                "address": address
-            },
-            {
-                "@type": "VirtualLocation",
-                "url": event.url
-            }
+        location = [
+            Place(
+                name=place_name,
+                address=PostalAddress(**address_kwargs)
+            ),
+            VirtualLocation(url=event.url)
         ]
     elif event.is_fully_remote():
         # Purely virtual event
-        schema_data["eventAttendanceMode"] = "https://schema.org/OnlineEventAttendanceMode"
-        schema_data["location"] = {
-            "@type": "VirtualLocation",
-            "url": event.url
-        }
+        event_attendance_mode = "https://schema.org/OnlineEventAttendanceMode"
+        location = VirtualLocation(url=event.url)
     else:
         # Physical event only
-        schema_data["eventAttendanceMode"] = "https://schema.org/OfflineEventAttendanceMode"
+        event_attendance_mode = "https://schema.org/OfflineEventAttendanceMode"
 
         # Use structured address data if available, otherwise fall back to location string
         if event.city and event.country:
-            address = {
-                "@type": "PostalAddress",
+            address_kwargs = {
                 "addressLocality": event.city,
                 "addressCountry": event.country
             }
             # Add state/region for US addresses if available
             if event.state:
-                address["addressRegion"] = event.state
+                address_kwargs["addressRegion"] = event.state
 
             # Use venue as Place name if available, otherwise use city
             place_name = event.venue if event.venue else event.city
 
-            schema_data["location"] = {
-                "@type": "Place",
-                "name": place_name,
-                "address": address
-            }
+            location = Place(
+                name=place_name,
+                address=PostalAddress(**address_kwargs)
+            )
         else:
             # Fall back to simple Place with just name
-            schema_data["location"] = {
-                "@type": "Place",
-                "name": event.location
-            }
+            location = Place(name=event.location)
 
-    # Add event status - assume scheduled for future events
-    schema_data["eventStatus"] = "https://schema.org/EventScheduled"
+    # Create the schema.org Event model - Pydantic will validate it
+    schema_event = SchemaOrgEvent(
+        name=event.title,
+        url=event.url,
+        startDate=start_date_iso,
+        endDate=end_date_iso,
+        location=location,
+        eventAttendanceMode=event_attendance_mode,
+        eventStatus="https://schema.org/EventScheduled"
+    )
 
-    # Convert to pretty-printed JSON
-    return json.dumps(schema_data, indent=2)
+    # Convert to JSON-LD format with pretty printing and add @context
+    event_dict = json.loads(schema_event.json(exclude_none=True))
+    event_dict["@context"] = "https://schema.org"
+    return json.dumps(event_dict, indent=2)
 
 @dataclass
 class Course:

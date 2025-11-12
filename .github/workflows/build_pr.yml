@@ -39,20 +39,6 @@ jobs:
         run: |
           ./make_site.py
 
-      - name: setup Node.js
-        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-
-      - name: install Node.js dependencies
-        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
-        run: npm ci
-
-      - name: validate semantic data in events.html
-        if: ${{ !cancelled() && (steps.build.outcome == 'success') }}
-        run: npm run validate:events
-
       - name: Upload artifact
         id: upload-artifact
         if: ${{ !cancelled() && (steps.build.outcome == 'success') }}

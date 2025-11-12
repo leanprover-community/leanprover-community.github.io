@@ -32,11 +32,6 @@ jobs:
           # TODO: fix things so we can build with 3.12 and above
           python-version: 3.11
 
-      - name: setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-
       - name: install bibtool
         run: |
           sudo apt-get update --fix-missing
@@ -44,9 +39,6 @@ jobs:
 
       - name: install Python dependencies
         run: python -m pip install --upgrade pip -r requirements.txt
-
-      - name: install Node.js dependencies
-        run: npm ci
 
       - name: build and deploy
         id: build
@@ -59,9 +51,6 @@ jobs:
           github_repo: ${{ github.repository }}
           github_ref: ${{ github.ref  }}
           ZULIP_KEY: ${{ secrets.ZULIP_KEY }}
-
-      - name: validate semantic data in events.html
-        run: npm run validate:events
 
       - name: Upload artifact
         id: upload-artifact
