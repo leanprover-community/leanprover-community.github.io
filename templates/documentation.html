@@ -1,0 +1,168 @@
+{% extends '_base.html' %}
+{% block title %}Mathlib documentation overview{% endblock %}
+{% block extracss %}
+<style type="text/css">
+ul.taglist {
+  display: inline;
+}
+ul.taglist li {
+  display: inline;
+}
+.tag-label {
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 2px;
+  cursor: pointer;
+}
+.tag-label input {
+  display: none;
+}
+.tag-label-unselected {
+  color: gray;
+}
+.tag-label-unselected:hover {
+  color: darkgray;
+}
+
+.tag-selection {
+  position: sticky;
+  top: 0px;
+  background: white;
+  padding: 5px;
+}
+</style>
+
+<script>
+function update_tag_showing() {
+  const checkboxes = document.getElementsByClassName("tag-toggle");
+  const entries = document.getElementsByClassName("documentation-entry");
+
+  const checked = [];
+  function enabled(tag) {
+    return checked.length == 0 || checked.some(cls => tag.classList.contains(cls));
+  }
+
+  for (const box of checkboxes) {
+    if (box.checked) {
+      checked.push(box.id);
+    }
+    for (const label of document.getElementsByClassName(box.id + "-label")) {
+      if (box.checked) {
+        label.classList.remove("tag-label-unselected");
+      } else {
+        label.classList.add("tag-label-unselected");
+      }
+    }
+  }
+  for (const entry of entries) {
+    entry.style.display = enabled(entry) ? null : "none";
+  }
+}
+
+function toggle_tag(id) {
+  const box = document.getElementById(id);
+  box.checked = !box.checked;
+  update_tag_showing();
+}
+</script>
+{% endblock %}
+
+{% macro tag_id(tag) %}{{ tag|replace(" ", "-") }}{% endmacro %}
+
+{% macro render_entry(entry) %}
+{% if entry.display %}
+  <dt class="documentation-entry {% for tag in entry.tags %}documentation-tag-{{ tag_id(tag) }} {% endfor %}">
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+  </dt>
+  <dd class="documentation-entry {% for tag in entry.tags %}documentation-tag-{{ tag_id(tag) }} {% endfor %}">
+    by {{ entry.authors }}<br />
+    {{ entry.description }}
+    <ul class="taglist">
+      {% for tag in entry.tags %}
+      <li title="{{ documentation_tags[tag].description }}" class="tag-label documentation-tag-{{ tag_id(tag) }}-label tag-label-unselected" onclick="toggle_tag('documentation-tag-{{ tag_id(tag) }}')">{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </dd>
+{% endif %}
+{% endmacro %}
+
+{% block content %}
+      <h1>Documentation overview</h1>
+
+      <p>This page is intended to contain a complete overview of all documentation helpful for users of Mathlib and of Lean in general. We organize the documentation according to <a href="https://docs.divio.com/documentation-system/">the Divio documentation system</a> into four quadrants:</p>
+
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+
+        <a href="#tutorials">
+          <text x="180" y="100" style="text-anchor: end; fill: #004d99;" font-size: 16px;>Tutorial</text>
+          <text x="180" y="120" style="text-anchor: end; font-size: 12px;">Learning-oriented</text>
+        </a>
+        <a href="#how-tos">
+          <text x="220" y="100" style="text-anchor: start; fill: #004d99; font-size: 16px;">How-to guide</text>
+          <text x="220" y="120" style="text-anchor: start; font-size: 12px;">Problem-oriented</text>
+        </a>
+        <a href="#explanations">
+          <text x="180" y="200" style="text-anchor: end; fill: #004d99; font-size: 16px;">Explanation</text>
+          <text x="180" y="180" style="text-anchor: end; font-size: 12px;">Understanding-oriented</text>
+        </a>
+        <a href="#references">
+          <text x="220" y="200" style="text-anchor: start; fill: #004d99; font-size: 16px;">Reference</text>
+          <text x="220" y="180" style="text-anchor: start; font-size: 12px;">Information-oriented</text>
+        </a>
+
+      <text x="20" y="150" style="text-anchor: start; font-size: 8px;">most useful when we're studying</text>
+      <text x="380" y="150" style="text-anchor: end; font-size: 8px;">most useful when we're working</text>
+      <text transform="translate(200, 20) rotate(90)" style="text-anchor: start; font-size: 8px;">practical steps</text>
+      <text transform="translate(200, 280) rotate(90)" style="text-anchor: end; font-size: 8px;">theoretical knowledge</text>
+
+      </svg>
+
+      <p><a href="#tutorials">Tutorials</a> are lessons that take you by the hand through a series of steps to complete a project of some kind.</p>
+      <p><a href="#how-tos">How-to</a> guides take you through the steps required to solve a real-world problem.</p>
+      <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
+      <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
+
+      <p>If you have some documentation and it is missing from the list, you can add it <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/documentation.yaml">to documentation.yaml in the website repository</a>. If you are missing documentation, you can <a href="https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/topic/Mathlib.3A.20the.20Missing.20Manuals">request it on Zulip</a>.</p>
+
+      <details class="tag-selection">
+        <summary>Filter by all tags:</summary>
+        {% for tag in documentation_tags.values() %}
+          {% if tag.count > 0 and tag.display %}
+          <span class="documentation-tag-{{ tag_id(tag.name) }}-label tag-label-unselected" title="{{ tag.description }}">
+            <input type="checkbox" id="documentation-tag-{{ tag_id(tag.name) }}" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-{{ tag_id(tag.name) }}" class="tag-label">{{ tag.name }} ({{ tag.count }})</label>
+          </span>
+          {% endif %}
+        {% endfor %}
+      </details>
+
+      <h2 id="tutorials">Tutorials</h2>
+      <dl>
+      {% for entry in documentation_lists["tutorial"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="how-tos">How-to guides</h2>
+      <dl>
+      {% for entry in documentation_lists["how-to"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="references">Reference guides</h2>
+      <dl>
+      {% for entry in documentation_lists["reference"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+      <h2 id="explanations">Explanations</h2>
+      <dl>
+      {% for entry in documentation_lists["explanation"] %}
+      {{ render_entry(entry) }}
+      {% endfor %}
+      </dl>
+
+{% endblock %}
+

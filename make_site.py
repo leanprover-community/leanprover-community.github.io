@@ -312,6 +312,24 @@ class Course:
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
+@dataclass
+class DocumentationEntry:
+    title: str
+    url: str
+    description: str
+    authors: str
+    accessed_at: str
+    category: str
+    tags: List[str] = field(default_factory=list)
+    display: bool = True # Set to False if it has a tag indicating it should be hidden.
+
+@dataclass
+class DocumentationTag:
+    name: str
+    description: str
+    display: bool = True
+    count: int = 0 # Will be set when reading the documentation entries.
+
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
     # header-data.json contains information for every single declaration in mathlib
@@ -524,6 +542,27 @@ for course in courses:
         elif isinstance(val, list):
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
+
+documentation_tags = {}
+documentation_lists = {
+        'tutorial': [],
+        'how-to': [],
+        'explanation': [],
+        'reference': [],
+}
+with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
+    docu_data = yaml.safe_load(file)
+    for e in docu_data["tags"]:
+        documentation_tags[e["name"]] = DocumentationTag(**e)
+
+    for e in docu_data["documentation"]:
+        e = DocumentationEntry(**e)
+        e.description = render_markdown(e.description)
+        documentation_lists[e.category].append(e)
+        for tag in e.tags:
+            documentation_tags[tag].count += 1
+            if not documentation_tags[tag].display:
+                e.display = False
 
 # Cannot use %-d format code on windows
 def format_month_day(date_obj):
@@ -884,6 +923,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
+                ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': documentation_tags}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
