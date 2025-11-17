@@ -1,0 +1,2284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io//css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io//img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io//opensearch.xml">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+<style type="text/css">
+ul.taglist {
+  display: inline;
+}
+ul.taglist li {
+  display: inline;
+}
+.tag-label {
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 2px;
+  cursor: pointer;
+}
+.tag-label input {
+  display: none;
+}
+.tag-label-unselected {
+  color: gray;
+}
+.tag-label-unselected:hover {
+  color: darkgray;
+}
+
+.tag-selection {
+  position: sticky;
+  top: 0px;
+  background: white;
+  padding: 5px;
+}
+</style>
+
+<script>
+function update_tag_showing() {
+  const checkboxes = document.getElementsByClassName("tag-toggle");
+  const entries = document.getElementsByClassName("documentation-entry");
+
+  const checked = [];
+  function enabled(tag) {
+    return checked.length == 0 || checked.some(cls => tag.classList.contains(cls));
+  }
+
+  for (const box of checkboxes) {
+    if (box.checked) {
+      checked.push(box.id);
+    }
+    for (const label of document.getElementsByClassName(box.id + "-label")) {
+      if (box.checked) {
+        label.classList.remove("tag-label-unselected");
+      } else {
+        label.classList.add("tag-label-unselected");
+      }
+    }
+  }
+  for (const entry of entries) {
+    entry.style.display = enabled(entry) ? null : "none";
+  }
+}
+
+function toggle_tag(id) {
+  const box = document.getElementById(id);
+  box.checked = !box.checked;
+  update_tag_showing();
+}
+</script>
+
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Mathlib documentation overview</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+      <h1>Documentation overview</h1>
+
+      <p>This page is intended to contain a complete overview of all documentation helpful for users of Mathlib and of Lean in general. We organize the documentation according to <a href="https://docs.divio.com/documentation-system/">the Divio documentation system</a> into four quadrants:</p>
+
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+
+        <a href="#tutorials">
+          <text x="180" y="100" style="text-anchor: end; fill: #004d99;" font-size: 16px;>Tutorial</text>
+          <text x="180" y="120" style="text-anchor: end; font-size: 12px;">Learning-oriented</text>
+        </a>
+        <a href="#how-tos">
+          <text x="220" y="100" style="text-anchor: start; fill: #004d99; font-size: 16px;">How-to guide</text>
+          <text x="220" y="120" style="text-anchor: start; font-size: 12px;">Problem-oriented</text>
+        </a>
+        <a href="#explanations">
+          <text x="180" y="200" style="text-anchor: end; fill: #004d99; font-size: 16px;">Explanation</text>
+          <text x="180" y="180" style="text-anchor: end; font-size: 12px;">Understanding-oriented</text>
+        </a>
+        <a href="#references">
+          <text x="220" y="200" style="text-anchor: start; fill: #004d99; font-size: 16px;">Reference</text>
+          <text x="220" y="180" style="text-anchor: start; font-size: 12px;">Information-oriented</text>
+        </a>
+
+      <text x="20" y="150" style="text-anchor: start; font-size: 8px;">most useful when we're studying</text>
+      <text x="380" y="150" style="text-anchor: end; font-size: 8px;">most useful when we're working</text>
+      <text transform="translate(200, 20) rotate(90)" style="text-anchor: start; font-size: 8px;">practical steps</text>
+      <text transform="translate(200, 280) rotate(90)" style="text-anchor: end; font-size: 8px;">theoretical knowledge</text>
+
+      </svg>
+
+      <p><a href="#tutorials">Tutorials</a> are lessons that take you by the hand through a series of steps to complete a project of some kind.</p>
+      <p><a href="#how-tos">How-to</a> guides take you through the steps required to solve a real-world problem.</p>
+      <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
+      <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
+
+      <p>If you have some documentation and it is missing from the list, you can add it <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/documentation.yaml">to documentation.yaml in the website repository</a>. If you are missing documentation, you can <a href="https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/topic/Mathlib.3A.20the.20Missing.20Manuals">request it on Zulip</a>.</p>
+
+      <details class="tag-selection">
+        <summary>Filter by all tags:</summary>
+        
+          
+          <span class="documentation-tag-analysis-label tag-label-unselected" title="Mathematical analysis (including calculus)">
+            <input type="checkbox" id="documentation-tag-analysis" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-analysis" class="tag-label">analysis (4)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-category-theory-label tag-label-unselected" title="Category theory">
+            <input type="checkbox" id="documentation-tag-category-theory" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-category-theory" class="tag-label">category theory (3)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-differential-geometry-label tag-label-unselected" title="Differential geometry">
+            <input type="checkbox" id="documentation-tag-differential-geometry" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-differential-geometry" class="tag-label">differential geometry (2)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-elementary-label tag-label-unselected" title="Elementary mathematics: introductory logic, set theory, natural numbers and integers.">
+            <input type="checkbox" id="documentation-tag-elementary" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-elementary" class="tag-label">elementary (14)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-euclidean-geometry-label tag-label-unselected" title="Euclidean geometry">
+            <input type="checkbox" id="documentation-tag-euclidean-geometry" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-euclidean-geometry" class="tag-label">euclidean geometry (1)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-group-theory-label tag-label-unselected" title="Monoids and groups.">
+            <input type="checkbox" id="documentation-tag-group-theory" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-group-theory" class="tag-label">group theory (4)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-linear-algebra-label tag-label-unselected" title="Modules and vector spaces.">
+            <input type="checkbox" id="documentation-tag-linear-algebra" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-linear-algebra" class="tag-label">linear algebra (4)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-logic-label tag-label-unselected" title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory.">
+            <input type="checkbox" id="documentation-tag-logic" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-logic" class="tag-label">logic (12)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-measure-theory-label tag-label-unselected" title="Measure theory. See also: probability.">
+            <input type="checkbox" id="documentation-tag-measure-theory" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-measure-theory" class="tag-label">measure theory (2)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-probability-label tag-label-unselected" title="Probability theory. See also: measure theory.">
+            <input type="checkbox" id="documentation-tag-probability" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-probability" class="tag-label">probability (1)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-ring-theory-label tag-label-unselected" title="Rings and fields.">
+            <input type="checkbox" id="documentation-tag-ring-theory" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-ring-theory" class="tag-label">ring theory (5)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-topology-label tag-label-unselected" title="Topology and topological algebra.">
+            <input type="checkbox" id="documentation-tag-topology" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-topology" class="tag-label">topology (5)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-declarations-label tag-label-unselected" title="Describes declarations (`def`s, `theorem`s, ...) and their types.">
+            <input type="checkbox" id="documentation-tag-declarations" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-declarations" class="tag-label">declarations (20)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-development-label tag-label-unselected" title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration.">
+            <input type="checkbox" id="documentation-tag-development" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-development" class="tag-label">development (13)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-classes-label tag-label-unselected" title="Typeclasses, instances, and the instance hierarchy.">
+            <input type="checkbox" id="documentation-tag-classes" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-classes" class="tag-label">classes (18)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-linters-label tag-label-unselected" title="Existing linters and how to use them. See also: metaprogramming.">
+            <input type="checkbox" id="documentation-tag-linters" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-linters" class="tag-label">linters (2)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-metaprogramming-label tag-label-unselected" title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics.">
+            <input type="checkbox" id="documentation-tag-metaprogramming" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-metaprogramming" class="tag-label">metaprogramming (7)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-tactics-label tag-label-unselected" title="Existing tactics and how to use them. See also: metaprogramming.">
+            <input type="checkbox" id="documentation-tag-tactics" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-tactics" class="tag-label">tactics (15)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-programming-label tag-label-unselected" title="Using Lean as a (verified) programming language.">
+            <input type="checkbox" id="documentation-tag-programming" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-programming" class="tag-label">programming (2)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-teaching-label tag-label-unselected" title="Using Lean to teach mathematics students.">
+            <input type="checkbox" id="documentation-tag-teaching" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-teaching" class="tag-label">teaching (1)</label>
+          </span>
+          
+        
+          
+        
+          
+          <span class="documentation-tag-incomplete-label tag-label-unselected" title="Reference work that (intentionally) only includes a subset of the available information.">
+            <input type="checkbox" id="documentation-tag-incomplete" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-incomplete" class="tag-label">incomplete (1)</label>
+          </span>
+          
+        
+          
+        
+          
+          <span class="documentation-tag-nonmathlib-label tag-label-unselected" title="Does not aim to match Mathlib conventions: using different style, or using its own definitions rather than Mathlib's.">
+            <input type="checkbox" id="documentation-tag-nonmathlib" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-nonmathlib" class="tag-label">nonmathlib (2)</label>
+          </span>
+          
+        
+          
+          <span class="documentation-tag-normative-label tag-label-unselected" title="Defines standards for the Mathlib community to follow (rather than documenting standards set elsewhere).">
+            <input type="checkbox" id="documentation-tag-normative" class="tag-toggle" onclick="update_tag_showing()">
+            <label for="documentation-tag-normative" class="tag-label">normative (4)</label>
+          </span>
+          
+        
+      </details>
+
+      <h2 id="tutorials">Tutorials</h2>
+      <dl>
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
+    <a href="https://adam.math.hhu.de/#/g/hhu-adam/NNG4">Natural Numbers Game</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
+    by Kevin Buzzard, Jon Eugster, Mohammad Pedramfar, Alexander Bentkamp, Patrick Massot<br />
+    <p>An online tutorial for everyone who wants to try out Lean. Proving elementary properties on natural numbers.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Does not aim to match Mathlib conventions: using different style, or using its own definitions rather than Mathlib's." class="tag-label documentation-tag-nonmathlib-label tag-label-unselected" onclick="toggle_tag('documentation-tag-nonmathlib')">nonmathlib</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-analysis documentation-tag-category-theory documentation-tag-elementary documentation-tag-logic documentation-tag-measure-theory documentation-tag-probability documentation-tag-ring-theory ">
+    <a href="https://github.com/PatrickMassot/GlimpseOfLean">Glimpse of Lean</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-analysis documentation-tag-category-theory documentation-tag-elementary documentation-tag-logic documentation-tag-measure-theory documentation-tag-probability documentation-tag-ring-theory ">
+    by Patrick Massot<br />
+    <p>An introduction to theorem proving in Lean for the impatient. Get a feel for proving real theorems in Lean in a few hours.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical analysis (including calculus)" class="tag-label documentation-tag-analysis-label tag-label-unselected" onclick="toggle_tag('documentation-tag-analysis')">analysis</li>
+      
+      <li title="Category theory" class="tag-label documentation-tag-category-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-category-theory')">category theory</li>
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+      <li title="Measure theory. See also: probability." class="tag-label documentation-tag-measure-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-measure-theory')">measure theory</li>
+      
+      <li title="Probability theory. See also: measure theory." class="tag-label documentation-tag-probability-label tag-label-unselected" onclick="toggle_tag('documentation-tag-probability')">probability</li>
+      
+      <li title="Rings and fields." class="tag-label documentation-tag-ring-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-ring-theory')">ring theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-analysis documentation-tag-classes documentation-tag-elementary documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-measure-theory documentation-tag-ring-theory documentation-tag-topology ">
+    <a href="https://github.com/leanprover-community/mathematics_in_lean">Mathematics in Lean</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-analysis documentation-tag-classes documentation-tag-elementary documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-measure-theory documentation-tag-ring-theory documentation-tag-topology ">
+    by Jeremy Avigad, Patrick Massot<br />
+    <p>The standard textbook on getting started with formalizing maths in Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical analysis (including calculus)" class="tag-label documentation-tag-analysis-label tag-label-unselected" onclick="toggle_tag('documentation-tag-analysis')">analysis</li>
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Monoids and groups." class="tag-label documentation-tag-group-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-group-theory')">group theory</li>
+      
+      <li title="Modules and vector spaces." class="tag-label documentation-tag-linear-algebra-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linear-algebra')">linear algebra</li>
+      
+      <li title="Measure theory. See also: probability." class="tag-label documentation-tag-measure-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-measure-theory')">measure theory</li>
+      
+      <li title="Rings and fields." class="tag-label documentation-tag-ring-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-ring-theory')">ring theory</li>
+      
+      <li title="Topology and topological algebra." class="tag-label documentation-tag-topology-label tag-label-unselected" onclick="toggle_tag('documentation-tag-topology')">topology</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
+    <a href="https://hrmacbeth.github.io/math2001/">Mechanics of Proof</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
+    by Heather Macbeth<br />
+    <p>Textbook on writing careful, rigorous mathematical proof. Aimed at readers with less mathematical experience than Mathematics in Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Does not aim to match Mathlib conventions: using different style, or using its own definitions rather than Mathlib's." class="tag-label documentation-tag-nonmathlib-label tag-label-unselected" onclick="toggle_tag('documentation-tag-nonmathlib')">nonmathlib</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes documentation-tag-elementary documentation-tag-logic ">
+    <a href="https://lean-lang.org/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes documentation-tag-elementary documentation-tag-logic ">
+    by Jeremy Avigad, Leonardo de Moura, Soonho Kong, Sebastian Ullrich<br />
+    <p>Introductory textbook for Lean, more focussed on the foundations of type theory.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
+    <a href="https://github.com/blanchette/interactive_theorem_proving_2024/raw/main/hitchhikers_guide_2024_lmu_desktop.pdf">The Hitchhiker's Guide to Logical Verification</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
+    by Anne Baanen, Alexander Bentkamp, Jasmin Blanchette, Johannes Hölzl, Jannis Limperg<br />
+    <p>Textbook for computer science and program verification using Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+      <li title="Using Lean as a (verified) programming language." class="tag-label documentation-tag-programming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-programming')">programming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary documentation-tag-logic ">
+    <a href="https://leanprover-community.github.io/logic_and_proof/">Logic and Proof</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary documentation-tag-logic ">
+    by Jeremy Avigad, Joseph Hua, Robert Y. Lewis, Floris van Doorn<br />
+    <p>Textbook on mathematical logic using Lean and natural deduction.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">The equation compiler and WellFoundedRelation</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>A walkthrough on the use of well-founded recursion to show termination of the <code>gcd</code> algorithm.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-metaprogramming ">
+    <a href="https://github.com/mirefek/lean-tactic-programming-guide">Introduction to Tactic Writing in Lean</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-metaprogramming ">
+    by Mirek Olšák<br />
+    <p>Tutorials for tactic writing, in increasing level of difficulty.</p>
+
+    <ul class="taglist">
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      </dl>
+
+      <h2 id="how-tos">How-to guides</h2>
+      <dl>
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Shared-Mathlib-Installation/#Mathlib-Manual--Guides--Shared-Mathlib-Installation">Mathlib Manual: Guides: Shared Mathlib installation</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by Jon Eugster<br />
+    <p>A trick to not download different Mathlib installations for each of your Lean projects.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Follow-Stable-Dependencies/#Mathlib-Manual--Guides--Follow-Stable-Dependencies">Mathlib Manual: Guides: Follow Stable Dependencies</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by Jon Eugster<br />
+    <p>A trick to specify only stable releases of your dependencies in the Lakefile.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Using-local-dev-version-of-a-dependency/#Mathlib-Manual--Guides--Using-local-dev-version-of-a-dependency">Mathlib Manual: Guides: Using local dev version of a dependency</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by Jon Eugster<br />
+    <p>A trick to use local copies of a repository for development.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/calc.html">How to use calc</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>A guide to writing computational proofs using the <code>calc</code> environment.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/speedup.html">How to speed up a Mathlib file</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>Tips and tricks to fix a file that compiles slowly.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/contribute/index.html">How to contribute to Mathlib</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by the Mathlib community<br />
+    <p>How-to guide for contributors to Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by the Mathlib community<br />
+    <p>How-to guide for making effective use of Git, focussed on contributing to Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull Request Review Guide</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by the Mathlib community<br />
+    <p>How to write a good review for pull requests to Mathlib. For everyone, not just members of the maintainer team.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/Simps/Basic.lean#L835">library note [custom simps projection]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>How to register projections for the <code>@[simps]</code> attribute.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+
+      
+      
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-metaprogramming ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Metaprogramming-for-dummies">Metaprogramming for dummies</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-metaprogramming ">
+    by the Mathlib community<br />
+    <p>A basic introduction to metaprogramming in Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-metaprogramming ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Metaprogramming-gotchas">Metaprogramming gotchas</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-metaprogramming ">
+    by the Mathlib community<br />
+    <p>Lists common bugs in tactic writing for Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+
+      
+      
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development documentation-tag-linters ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Setting-up-linting-and-testing-for-your-Lean-project">Setting up linting and testing for your Lean project</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development documentation-tag-linters ">
+    by the Mathlib community<br />
+    <p>How to add a linting and testing framework to a math project in Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+      <li title="Existing linters and how to use them. See also: metaprogramming." class="tag-label documentation-tag-linters-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linters')">linters</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/well_formatted_code.html">Formalizing mathematics: How to format your code well</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by Bhavik Mehta<br />
+    <p>Guide to writing well-formatted Lean code according to the Mathlib style guidelines.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      </dl>
+
+      <h2 id="references">Reference guides</h2>
+      <dl>
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics documentation-tag-incomplete ">
+    <a href="https://leanprover-community.github.io/papers/lean-tactics.pdf">Lean 4 tactic cheatsheet</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics documentation-tag-incomplete ">
+    by the Mathlib community<br />
+    <p>Cheatsheet for the most common tactics.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+      <li title="Reference work that (intentionally) only includes a subset of the available information." class="tag-label documentation-tag-incomplete-label tag-label-unselected" onclick="toggle_tag('documentation-tag-incomplete')">incomplete</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://leanprover-community.github.io/mathlib4_docs/">Mathlib API documentation</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>A complete listing of all definitions and theorems included with Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic ">
+    <a href="https://leanprover-community.github.io/mathlib4_docs/foundational_types.html">Foundational types</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic ">
+    by the Mathlib community<br />
+    <p>Documents the types built into the foundations of Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
+    <a href="https://lean-lang.org/doc/reference/latest/">The Lean Language Reference</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
+    by the Lean developers<br />
+    <p>A complete description of the features included in core Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+      <li title="Using Lean as a (verified) programming language." class="tag-label documentation-tag-programming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-programming')">programming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes documentation-tag-declarations documentation-tag-development documentation-tag-linters documentation-tag-logic documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/glossary.html">Lean Glossary</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes documentation-tag-declarations documentation-tag-development documentation-tag-linters documentation-tag-logic documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>Explanations of terminology one might encounter in the Lean community.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+      <li title="Existing linters and how to use them. See also: metaprogramming." class="tag-label documentation-tag-linters-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linters')">linters</li>
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Tactics/#tactics">Mathlib Manual: Tactics</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>Documentation on tactics included with Mathlib, including a complete index.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://leanprover-community.github.io/mathlib-overview.html">A mathlib overview</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>A index of Mathlib organized by mathematical topic.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://leanprover-community.github.io/undergrad.html">Undergraduate mathematics in Mathlib</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>An index of undergraduate mathematical topics available in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://leanprover-community.github.io/100.html">100 theorems</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>Indexes which of Freek Wiedijk's 100 classical theorems have been formalized in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>Indexes further famous theorems with formalization in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://leanprover-community.github.io/theories/naturals.html">Maths in Lean: the natural numbers</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by the Mathlib community<br />
+    <p>Overview of the theory of natural numbers in Lean and Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-linear-algebra ">
+    <a href="https://leanprover-community.github.io/theories/linear_algebra.html">Maths in Lean: linear algebra</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-linear-algebra ">
+    by the Mathlib community<br />
+    <p>Overview of the theory of linear algebra in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Modules and vector spaces." class="tag-label documentation-tag-linear-algebra-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linear-algebra')">linear algebra</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://leanprover-community.github.io/theories/sets.html">Maths in Lean: Sets and set-like objects</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by the Mathlib community<br />
+    <p>Overview of the theory of sets, lists and more in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-topology ">
+    <a href="https://leanprover-community.github.io/theories/topology.html">Maths in Lean: Topological, uniform and metric spaces</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-topology ">
+    by the Mathlib community<br />
+    <p>Overview of the theory of topology in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Topology and topological algebra." class="tag-label documentation-tag-topology-label tag-label-unselected" onclick="toggle_tag('documentation-tag-topology')">topology</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-category-theory ">
+    <a href="https://leanprover-community.github.io/theories/category_theory.html">Maths in Lean: category theory</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-category-theory ">
+    by the Mathlib community<br />
+    <p>Overview of category theory in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Category theory" class="tag-label documentation-tag-category-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-category-theory')">category theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-normative ">
+    <a href="https://leanprover-community.github.io/contribute/naming.html">Mathlib naming conventions</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-normative ">
+    by the Mathlib community<br />
+    <p>Defines how Mathlib names declarations in a systematic way.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Defines standards for the Mathlib community to follow (rather than documenting standards set elsewhere)." class="tag-label documentation-tag-normative-label tag-label-unselected" onclick="toggle_tag('documentation-tag-normative')">normative</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    <a href="https://leanprover-community.github.io/contribute/style.html">Library style guidelines</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    by the Mathlib community<br />
+    <p>Defines how to format code to contribute to Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+      <li title="Defines standards for the Mathlib community to follow (rather than documenting standards set elsewhere)." class="tag-label documentation-tag-normative-label tag-label-unselected" onclick="toggle_tag('documentation-tag-normative')">normative</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    <a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style guidelines</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    by the Mathlib community<br />
+    <p>Defines how to write documentation for your contributions to Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+      <li title="Defines standards for the Mathlib community to follow (rather than documenting standards set elsewhere)." class="tag-label documentation-tag-normative-label tag-label-unselected" onclick="toggle_tag('documentation-tag-normative')">normative</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    <a href="https://leanprover-community.github.io/contribute/commit.html">Pull request title and description conventions</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development documentation-tag-normative ">
+    by the Mathlib community<br />
+    <p>Defines the writing style of text in a pull request for contributions to Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+      <li title="Defines standards for the Mathlib community to follow (rather than documenting standards set elsewhere)." class="tag-label documentation-tag-normative-label tag-label-unselected" onclick="toggle_tag('documentation-tag-normative')">normative</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-development ">
+    <a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">The Lean Github ecosystem</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-development ">
+    by the Mathlib community<br />
+    <p>Overview of the development flow for branches in the Lean ecosystem.</p>
+
+    <ul class="taglist">
+      
+      <li title="How to edit and build files on your computer, how to contribute your changes to Mathlib and how to run continuous integration." class="tag-label documentation-tag-development-label tag-label-unselected" onclick="toggle_tag('documentation-tag-development')">development</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-metaprogramming ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Monad-map">The monad map</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-metaprogramming ">
+    by the Mathlib community<br />
+    <p>Overview of the metaprogramming monads in Lean.</p>
+
+    <ul class="taglist">
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_2/Part_2.html">Formalizing mathematics: Tactics</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by Bhavik Mehta<br />
+    <p>Overview of the most important tactics made available by Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      </dl>
+
+      <h2 id="explanations">Explanations</h2>
+      <dl>
+      
+      
+
+  <dt class="documentation-entry documentation-tag-teaching ">
+    <a href="https://leanprover-community.github.io/teaching/practices.html">Tips and suggestions for teaching with Lean</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-teaching ">
+    by the Mathlib community<br />
+    <p>Strategies and approaches for teaching with Lean</p>
+
+    <ul class="taglist">
+      
+      <li title="Using Lean to teach mathematics students." class="tag-label documentation-tag-teaching-label tag-label-unselected" onclick="toggle_tag('documentation-tag-teaching')">teaching</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/conv.html">The conversion tactic mode</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>A guide to writing calculation proofs using the <code>conv</code> environment.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>Basic usage and pitfalls for the <code>simp</code> and <code>dsimp</code> tactics.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    <a href="https://leanprover-community.github.io/extras/pitfalls.html">Common Lean Pitfalls</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>How to avoid mistakes commonly made by Lean users.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://xenaproject.wordpress.com/2025/02/09/what-is-a-quotient/">What is a quotient?</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by Kevin Buzzard<br />
+    <p>How quotients work in Lean, compared to quotients in (naïve) set theory.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/">Division by zero in type theory: a FAQ</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by Kevin Buzzard<br />
+    <p>Explains why Lean chooses to define that <code>1 / 0 = 0</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/HierarchyDesign.lean#L21">library note [the algebraic hierarchy]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Explains the structure of the algebraic hierarchy and how to add new elements to it.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/HierarchyDesign.lean#L188">library note [reducible non-instances]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Definitions that cannot be instances should be made reducible.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/HierarchyDesign.lean#L205">library note [implicit instance arguments]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Some places prefer implicit <code>{}</code> brackets for typeclass arguments instead of typical instance <code>[]</code> brackets.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/HierarchyDesign.lean#L216">library note [lower instance priority]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>When creating an instance that always applies, give it a lower priority.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/HierarchyDesign.lean#L233">library note [instance argument order]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>A trick to speed up typeclass instance synthesis by putting more specific goals first.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary documentation-tag-tactics ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/SetLike.lean#L21">library note [SetLike Aesop ruleset]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>How to add rules about <code>SetLike</code> membership to Aesop.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Data/Nat/Cast/Defs.lean#L43">library note [no_index around OfNat.ofNat]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by the Mathlib community<br />
+    <p>Write <code>ofNat(n)</code> in lemmas instead of <code>OfNat.ofNat n</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-ring-theory ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Data/Nat/Cast/Defs.lean#L68">library note [coercion into rings]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-ring-theory ">
+    by the Mathlib community<br />
+    <p>How to set up coercions from a concrete structure like <code>ℕ</code> to an arbitrary ring <code>R</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Rings and fields." class="tag-label documentation-tag-ring-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-ring-theory')">ring theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-analysis documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Analysis/RCLike/Lemmas.lean#L49">library note [RCLike instance]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-analysis documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>An instance creating a goal <code>[RCLike ?m]</code> is okay since there are only two choices, <code>ℝ</code> or <code>ℂ</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical analysis (including calculus)" class="tag-label documentation-tag-analysis-label tag-label-unselected" onclick="toggle_tag('documentation-tag-analysis')">analysis</li>
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Logic/Basic.lean#L98">library note [fact non-instances]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>We do not declare any global instances of the <code>Fact</code> typeclass.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Logic/Basic.lean#L165">library note [decidable namespace]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>The <code>Decidable</code> namespace contains theorems that avoid the use of the Law of Excluded Middle by using <code>Decidable</code> instances instead.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Logic/Basic.lean#L174">library note [decidable arguments]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>If a <code>Decidable</code> hypothesis is not needed for the type signature of a theorem or lemma, use <code>classical</code> instead.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Conj.lean#L167">library note [slow-failing instance priority]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Instances that would be slow to fail to apply should have a lower priority.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Data/Nat/Init.lean#L33">library note [foundational algebra order theory]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by the Mathlib community<br />
+    <p>Batteries sets up the algebraic and order theoretic properties of <code>Nat</code> and <code>Int</code>; Mathlib replaces this with a typeclass-based system.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-topology ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Topology/Continuous.lean#L313">library note [continuity lemma statement]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-topology ">
+    by the Mathlib community<br />
+    <p>How to write more useful continuity lemmas.</p>
+
+    <ul class="taglist">
+      
+      <li title="Topology and topological algebra." class="tag-label documentation-tag-topology-label tag-label-unselected" onclick="toggle_tag('documentation-tag-topology')">topology</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-topology ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Topology/Continuous.lean#L410">library note [comp_of_eq lemmas]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-topology ">
+    by the Mathlib community<br />
+    <p>How to avoid elaboration problems when writing the continuity of a composition.</p>
+
+    <ul class="taglist">
+      
+      <li title="Topology and topological algebra." class="tag-label documentation-tag-topology-label tag-label-unselected" onclick="toggle_tag('documentation-tag-topology')">topology</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-euclidean-geometry ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Archive/Imo/Imo2019Q2.lean#L37">library note [IMO geometry formalization conventions]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-euclidean-geometry ">
+    by the Mathlib community<br />
+    <p>Conventions for formalizing geometry problems from the IMO as part of Mathlib's Archive.</p>
+
+    <ul class="taglist">
+      
+      <li title="Euclidean geometry" class="tag-label documentation-tag-euclidean-geometry-label tag-label-unselected" onclick="toggle_tag('documentation-tag-euclidean-geometry')">euclidean geometry</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Category/Ring/Limits.lean#L21">library note [change elaboration strategy with `by apply`]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>A trick to elaborate a term and its type in a different order.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-elementary ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Pointwise/Set/Scalar.lean#L52">library note [pointwise nat action]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-elementary ">
+    by the Mathlib community<br />
+    <p>The action of natural numbers or integers on sets takes precedence over pointwise actions.</p>
+
+    <ul class="taglist">
+      
+      <li title="Elementary mathematics: introductory logic, set theory, natural numbers and integers." class="tag-label documentation-tag-elementary-label tag-label-unselected" onclick="toggle_tag('documentation-tag-elementary')">elementary</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-differential-geometry ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Geometry/Manifold/Algebra/Monoid.lean#L21">library note [Design choices about smooth algebraic structures]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-differential-geometry ">
+    by the Mathlib community<br />
+    <p>Mathlib's design choices about smooth algebraic structures</p>
+
+    <ul class="taglist">
+      
+      <li title="Differential geometry" class="tag-label documentation-tag-differential-geometry-label tag-label-unselected" onclick="toggle_tag('documentation-tag-differential-geometry')">differential geometry</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-differential-geometry ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Geometry/Manifold/ChartedSpace.lean#L776">library note [Manifold type tags]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-differential-geometry ">
+    by the Mathlib community<br />
+    <p>Explains why <code>ModelProd</code> and <code>ModelPi</code> exist.</p>
+
+    <ul class="taglist">
+      
+      <li title="Differential geometry" class="tag-label documentation-tag-differential-geometry-label tag-label-unselected" onclick="toggle_tag('documentation-tag-differential-geometry')">differential geometry</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-topology ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean#L328">library note [non-Archimedean non-instances]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-topology ">
+    by the Mathlib community<br />
+    <p>Why non-Archimedean subgroup basis lemmas cannot be instances.</p>
+
+    <ul class="taglist">
+      
+      <li title="Topology and topological algebra." class="tag-label documentation-tag-topology-label tag-label-unselected" onclick="toggle_tag('documentation-tag-topology')">topology</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-ring-theory ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Submonoid/Operations.lean#L613">library note [range copy pattern]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-ring-theory ">
+    by the Mathlib community<br />
+    <p>The image of a morphism <code>f</code> is defined using <code>Set.range</code> if possible, not <code>map ⊤ f</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Monoids and groups." class="tag-label documentation-tag-group-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-group-theory')">group theory</li>
+      
+      <li title="Modules and vector spaces." class="tag-label documentation-tag-linear-algebra-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linear-algebra')">linear algebra</li>
+      
+      <li title="Rings and fields." class="tag-label documentation-tag-ring-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-ring-theory')">ring theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-analysis ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean#L17">library note [continuous functional calculus]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-analysis ">
+    by the Mathlib community<br />
+    <p>Design overview of the ontinuous functional calculus in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical analysis (including calculus)" class="tag-label documentation-tag-analysis-label tag-label-unselected" onclick="toggle_tag('documentation-tag-analysis')">analysis</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-tactics ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Data/NNRat/Defs.lean#L40">library note [specialised high priority simp lemma]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>When not to un-<code>@[simp]</code> a lemma in favour of a more powerful version.</p>
+
+    <ul class="taglist">
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Order/Hom/Basic.lean#L50">library note [out-param inheritance]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Limitations on the interaction of typeclass inheritance and <code>outParam</code>s.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Defs.lean#L267">library note [lower cancel priority]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Inheritance from cancellative algebraic structures gets a lower priority.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Action/Defs.lean#L378">library note [forgetful inheritance]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Design pattern for typeclass inheritance where we include all fields, even if they can be inferred.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-metaprogramming ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/NormNum/Basic.lean#L140">library note [norm_num lemma function equality]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-metaprogramming ">
+    by the Mathlib community<br />
+    <p>Why lemmas for the <code>norm_num</code> tactic use a parameter <code>f</code> and hypothesis <code>f = HAdd.add</code> instead of writing <code>+</code>.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Developing new metaprograms. Not about the use of existing linters and tactics. See also: linters, tactics." class="tag-label documentation-tag-metaprogramming-label tag-label-unselected" onclick="toggle_tag('documentation-tag-metaprogramming')">metaprogramming</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes documentation-tag-tactics ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Hom/Defs.lean#L196">library note [hom simp lemma priority]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes documentation-tag-tactics ">
+    by the Mathlib community<br />
+    <p>Widely applicable <code>@[simp]</code> lemmas should receive <code>mid</code> priority.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+      <li title="Existing tactics and how to use them. See also: metaprogramming." class="tag-label documentation-tag-tactics-label tag-label-unselected" onclick="toggle_tag('documentation-tag-tactics')">tactics</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-category-theory documentation-tag-declarations ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/CategoryTheory/Category/Basic.lean#L33">library note [CategoryTheory universes]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-category-theory documentation-tag-declarations ">
+    by the Mathlib community<br />
+    <p>Design patterns for ordering the universe levels in category theory declarations.</p>
+
+    <ul class="taglist">
+      
+      <li title="Category theory" class="tag-label documentation-tag-category-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-category-theory')">category theory</li>
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-group-theory ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean#L78">library note [operator precedence of big operators]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-group-theory ">
+    by the Mathlib community<br />
+    <p>The choice of operator precedence for <code>∏</code> and <code>∑</code> operators in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Monoids and groups." class="tag-label documentation-tag-group-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-group-theory')">group theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra ">
+    <a href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Algebra/Group/Action/Defs.lean#L127">library note [bundled maps over different rings]</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra ">
+    by the Mathlib community<br />
+    <p>A design trick for when bundled maps have stronger properties if certain typeclass assumptions are satisfied.</p>
+
+    <ul class="taglist">
+      
+      <li title="Monoids and groups." class="tag-label documentation-tag-group-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-group-theory')">group theory</li>
+      
+      <li title="Modules and vector spaces." class="tag-label documentation-tag-linear-algebra-label tag-label-unselected" onclick="toggle_tag('documentation-tag-linear-algebra')">linear algebra</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic documentation-tag-ring-theory ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Computation-models-for-polynomials-and-finitely-supported-functions">Computation models for polynomials and finitely supported functions</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic documentation-tag-ring-theory ">
+    by the Mathlib community<br />
+    <p>An overview of potential (re)implementations for computable polynomials in Mathlib.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+      <li title="Rings and fields." class="tag-label documentation-tag-ring-theory-label tag-label-unselected" onclick="toggle_tag('documentation-tag-ring-theory')">ring theory</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations documentation-tag-classes ">
+    <a href="https://github.com/leanprover-community/mathlib4/wiki/Tradeoffs-of-concrete-types-defined-as-subobjects">Tradeoffs of concrete types defined as subobjects</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations documentation-tag-classes ">
+    by the Mathlib community<br />
+    <p>Reasons to prefer defining something as a custom structure, a coercion to <code>Type</code>, or a subobject.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/typesandterms.html">Formalizing mathematics: Types and terms</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/equality.html">Formalizing mathematics: Equality</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/threekindsoftypes.html">Formalizing mathematics: The three kinds of types</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/brackets.html">Formalizing mathematics: Brackets in function inputs</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/precedence.html">Formalizing mathematics: Notation and precedence</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/structures.html">Formalizing mathematics: Structures</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-classes ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/classes.html">Formalizing mathematics: Classes</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-classes ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Typeclasses, instances, and the instance hierarchy." class="tag-label documentation-tag-classes-label tag-label-unselected" onclick="toggle_tag('documentation-tag-classes')">classes</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/dot_notation.html">Formalizing mathematics: Dot notation</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-declarations ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/coercions.html">Formalizing mathematics: Coercions</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-declarations ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Describes declarations (`def`s, `theorem`s, ...) and their types." class="tag-label documentation-tag-declarations-label tag-label-unselected" onclick="toggle_tag('documentation-tag-declarations')">declarations</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      
+
+  <dt class="documentation-entry documentation-tag-logic ">
+    <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/the_axiom_of_choice.html">Formalizing mathematics: The axiom of choice</a>
+  </dt>
+  <dd class="documentation-entry documentation-tag-logic ">
+    by Bhavik Mehta<br />
+    <p>Lecture notes for a course on formalizing mathematics, focussing more on the design choices made when formalizing.</p>
+
+    <ul class="taglist">
+      
+      <li title="Mathematical logic: foundations, classical and intuitionistic logic, set theory, type theory." class="tag-label documentation-tag-logic-label tag-label-unselected" onclick="toggle_tag('documentation-tag-logic')">logic</li>
+      
+    </ul>
+  </dd>
+
+
+      
+      </dl>
+
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html#community-guidelines">Community guidelines</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teaching/index.html">Teaching using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Use Lean</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://live.lean-lang.org/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://docs.lean-lang.org/lean4/doc/quickstart.html">Install Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">More options</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/documentation.html">Documentation overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://loogle.lean-lang.org/">Declaration search (Loogle)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean-lang.org/doc/reference/latest/">Language reference</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-manual/html-multi/">Tactic list</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/did_you_prove_it.html">Did you really prove it?</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">Pull request lifecycle</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/queueboard/">Mathlib review and triage dashboard</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">Tags and branches</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io//js/bootstrap.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
