@@ -464,7 +464,7 @@ In the context of editing Lean files, an abbreviation is a way of entering a sym
 
 For instance, the not-equal symbol "≠" can be entered using the sequence `\neq`.
 
-The full list of abbreviations (and their replacements) can be found [in the `vscode-lean4` repository](https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/src/abbreviation/abbreviations.json).
+The full list of abbreviations (and their replacements) can be found [in the `vscode-lean4` repository](https://github.com/leanprover/vscode-lean4/blob/master/lean4-unicode-input/src/abbreviations.json).
 
 ### whnf
 
