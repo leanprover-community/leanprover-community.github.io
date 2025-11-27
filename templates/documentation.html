@@ -54,8 +54,16 @@ function update_tag_showing() {
       }
     }
   }
+
   for (const entry of entries) {
     entry.style.display = enabled(entry) ? null : "none";
+  }
+
+  // If any tags are selected, open the corresponding categories.
+  if (checked.length > 0) {
+    for (const cat of document.getElementsByClassName("category")) {
+      cat.open = true;
+    }
   }
 }
 
@@ -117,11 +125,6 @@ function toggle_tag(id) {
 
       </svg>
 
-      <p><a href="#tutorials">Tutorials</a> are lessons that take you by the hand through a series of steps to complete a project of some kind.</p>
-      <p><a href="#how-tos">How-to</a> guides take you through the steps required to solve a real-world problem.</p>
-      <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
-      <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
-
       <p>If you have some documentation and it is missing from the list, you can add it <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/documentation.yaml">to documentation.yaml in the website repository</a>. If you are missing documentation, you can <a href="https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/topic/Mathlib.3A.20the.20Missing.20Manuals">request it on Zulip</a>.</p>
 
       <details class="tag-selection">
@@ -137,32 +140,44 @@ function toggle_tag(id) {
       </details>
 
       <h2 id="tutorials">Tutorials</h2>
-      <dl>
-      {% for entry in documentation_lists["tutorial"] %}
-      {{ render_entry(entry) }}
-      {% endfor %}
-      </dl>
+      <details class="category">
+        <summary>Tutorials are lessons that take you by the hand through a series of steps to complete a project of some kind.</summary>
+        <dl>
+          {% for entry in documentation_lists["tutorial"] %}
+          {{ render_entry(entry) }}
+          {% endfor %}
+        </dl>
+      </details>
 
       <h2 id="how-tos">How-to guides</h2>
-      <dl>
-      {% for entry in documentation_lists["how-to"] %}
-      {{ render_entry(entry) }}
-      {% endfor %}
-      </dl>
+      <details class="category">
+        <summary>How-to guides take you through the steps required to solve a real-world problem.</summary>
+        <dl>
+          {% for entry in documentation_lists["how-to"] %}
+          {{ render_entry(entry) }}
+          {% endfor %}
+        </dl>
+      </details>
 
       <h2 id="references">Reference guides</h2>
-      <dl>
-      {% for entry in documentation_lists["reference"] %}
-      {{ render_entry(entry) }}
-      {% endfor %}
-      </dl>
+      <details class="category">
+        <summary>Reference guides are complete technical descriptions of the machinery and how to operate it.</summary>
+        <dl>
+          {% for entry in documentation_lists["reference"] %}
+          {{ render_entry(entry) }}
+          {% endfor %}
+        </dl>
+      </details>
 
       <h2 id="explanations">Explanations</h2>
-      <dl>
-      {% for entry in documentation_lists["explanation"] %}
-      {{ render_entry(entry) }}
-      {% endfor %}
-      </dl>
+      <details class="category">
+        <summary>Explanations clarify and illuminate a particular topic.</summary>
+        <dl>
+          {% for entry in documentation_lists["explanation"] %}
+          {{ render_entry(entry) }}
+          {% endfor %}
+        </dl>
+      </details>
 
 {% endblock %}
 
