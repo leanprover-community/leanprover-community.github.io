@@ -63,8 +63,16 @@ function update_tag_showing() {
       }
     }
   }
+
   for (const entry of entries) {
     entry.style.display = enabled(entry) ? null : "none";
+  }
+
+  // If any tags are selected, open the corresponding categories.
+  if (checked.length > 0) {
+    for (const cat of document.getElementsByClassName("category")) {
+      cat.open = true;
+    }
   }
 }
 
@@ -142,11 +150,6 @@ function toggle_tag(id) {
       <text transform="translate(200, 280) rotate(90)" style="text-anchor: end; font-size: 8px;">theoretical knowledge</text>
 
       </svg>
-
-      <p><a href="#tutorials">Tutorials</a> are lessons that take you by the hand through a series of steps to complete a project of some kind.</p>
-      <p><a href="#how-tos">How-to</a> guides take you through the steps required to solve a real-world problem.</p>
-      <p><a href="#references">Reference</a> guides are complete technical descriptions of the machinery and how to operate it.</p>
-      <p><a href="#explanations">Explanations</a> clarify and illuminate a particular topic.</p>
 
       <p>If you have some documentation and it is missing from the list, you can add it <a href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/data/documentation.yaml">to documentation.yaml in the website repository</a>. If you are missing documentation, you can <a href="https://leanprover.zulipchat.com/#narrow/channel/287929-mathlib4/topic/Mathlib.3A.20the.20Missing.20Manuals">request it on Zulip</a>.</p>
 
@@ -321,9 +324,11 @@ function toggle_tag(id) {
       </details>
 
       <h2 id="tutorials">Tutorials</h2>
-      <dl>
-      
-      
+      <details class="category">
+        <summary>Tutorials are lessons that take you by the hand through a series of steps to complete a project of some kind.</summary>
+        <dl>
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
     <a href="https://adam.math.hhu.de/#/g/hhu-adam/NNG4">Natural Numbers Game</a>
@@ -342,8 +347,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-analysis documentation-tag-category-theory documentation-tag-elementary documentation-tag-logic documentation-tag-measure-theory documentation-tag-probability documentation-tag-ring-theory ">
     <a href="https://github.com/PatrickMassot/GlimpseOfLean">Glimpse of Lean</a>
@@ -372,8 +377,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-analysis documentation-tag-classes documentation-tag-elementary documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-measure-theory documentation-tag-ring-theory documentation-tag-topology ">
     <a href="https://github.com/leanprover-community/mathematics_in_lean">Mathematics in Lean</a>
@@ -404,8 +409,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary documentation-tag-nonmathlib ">
     <a href="https://hrmacbeth.github.io/math2001/">Mechanics of Proof</a>
@@ -424,8 +429,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes documentation-tag-elementary documentation-tag-logic ">
     <a href="https://lean-lang.org/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a>
@@ -446,8 +451,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
     <a href="https://github.com/blanchette/interactive_theorem_proving_2024/raw/main/hitchhikers_guide_2024_lmu_desktop.pdf">The Hitchhiker's Guide to Logical Verification</a>
@@ -470,8 +475,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary documentation-tag-logic ">
     <a href="https://leanprover-community.github.io/logic_and_proof/">Logic and Proof</a>
@@ -490,8 +495,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/well_founded_recursion.html">The equation compiler and WellFoundedRelation</a>
@@ -510,8 +515,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-metaprogramming ">
     <a href="https://github.com/mirefek/lean-tactic-programming-guide">Introduction to Tactic Writing in Lean</a>
@@ -528,13 +533,16 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      </dl>
+          
+        </dl>
+      </details>
 
       <h2 id="how-tos">How-to guides</h2>
-      <dl>
-      
-      
+      <details class="category">
+        <summary>How-to guides take you through the steps required to solve a real-world problem.</summary>
+        <dl>
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Shared-Mathlib-Installation/#Mathlib-Manual--Guides--Shared-Mathlib-Installation">Mathlib Manual: Guides: Shared Mathlib installation</a>
@@ -551,8 +559,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Follow-Stable-Dependencies/#Mathlib-Manual--Guides--Follow-Stable-Dependencies">Mathlib Manual: Guides: Follow Stable Dependencies</a>
@@ -569,8 +577,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Guides/Using-local-dev-version-of-a-dependency/#Mathlib-Manual--Guides--Using-local-dev-version-of-a-dependency">Mathlib Manual: Guides: Using local dev version of a dependency</a>
@@ -587,8 +595,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/calc.html">How to use calc</a>
@@ -605,8 +613,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/speedup.html">How to speed up a Mathlib file</a>
@@ -625,8 +633,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/contribute/index.html">How to contribute to Mathlib</a>
@@ -643,8 +651,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a>
@@ -661,8 +669,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull Request Review Guide</a>
@@ -679,8 +687,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«custom simps projection»#doc">library note [custom simps projection]</a>
@@ -697,16 +705,16 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
 
-      
-      
+          
+          
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-metaprogramming ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Metaprogramming-for-dummies">Metaprogramming for dummies</a>
@@ -723,8 +731,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-metaprogramming ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Metaprogramming-gotchas">Metaprogramming gotchas</a>
@@ -741,16 +749,16 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
 
-      
-      
+          
+          
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development documentation-tag-linters ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Setting-up-linting-and-testing-for-your-Lean-project">Setting up linting and testing for your Lean project</a>
@@ -769,8 +777,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/well_formatted_code.html">Formalizing mathematics: How to format your code well</a>
@@ -787,13 +795,16 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      </dl>
+          
+        </dl>
+      </details>
 
       <h2 id="references">Reference guides</h2>
-      <dl>
-      
-      
+      <details class="category">
+        <summary>Reference guides are complete technical descriptions of the machinery and how to operate it.</summary>
+        <dl>
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics documentation-tag-incomplete ">
     <a href="https://leanprover-community.github.io/papers/lean-tactics.pdf">Lean 4 tactic cheatsheet</a>
@@ -812,8 +823,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/">Mathlib API documentation</a>
@@ -830,8 +841,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://loogle.lean-lang.org/">Loogle</a>
@@ -848,8 +859,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/foundational_types.html">Foundational types</a>
@@ -866,8 +877,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic documentation-tag-metaprogramming documentation-tag-programming ">
     <a href="https://lean-lang.org/doc/reference/latest/">The Lean Language Reference</a>
@@ -888,8 +899,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes documentation-tag-declarations documentation-tag-development documentation-tag-linters documentation-tag-logic documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/glossary.html">Lean Glossary</a>
@@ -916,8 +927,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib-manual/html-multi/Tactics/#tactics">Mathlib Manual: Tactics</a>
@@ -934,8 +945,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/mathlib-overview.html">A mathlib overview</a>
@@ -952,8 +963,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/undergrad.html">Undergraduate mathematics in Mathlib</a>
@@ -970,8 +981,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/100.html">100 theorems</a>
@@ -988,8 +999,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a>
@@ -1006,8 +1017,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://leanprover-community.github.io/theories/naturals.html">Maths in Lean: the natural numbers</a>
@@ -1024,8 +1035,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-linear-algebra ">
     <a href="https://leanprover-community.github.io/theories/linear_algebra.html">Maths in Lean: linear algebra</a>
@@ -1042,8 +1053,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://leanprover-community.github.io/theories/sets.html">Maths in Lean: Sets and set-like objects</a>
@@ -1060,8 +1071,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-topology ">
     <a href="https://leanprover-community.github.io/theories/topology.html">Maths in Lean: Topological, uniform and metric spaces</a>
@@ -1078,8 +1089,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-category-theory ">
     <a href="https://leanprover-community.github.io/theories/category_theory.html">Maths in Lean: category theory</a>
@@ -1096,8 +1107,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-normative ">
     <a href="https://leanprover-community.github.io/contribute/naming.html">Mathlib naming conventions</a>
@@ -1116,8 +1127,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
     <a href="https://leanprover-community.github.io/contribute/style.html">Library style guidelines</a>
@@ -1136,8 +1147,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
     <a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style guidelines</a>
@@ -1156,8 +1167,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development documentation-tag-normative ">
     <a href="https://leanprover-community.github.io/contribute/commit.html">Pull request title and description conventions</a>
@@ -1176,8 +1187,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-development ">
     <a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">The Lean Github ecosystem</a>
@@ -1194,8 +1205,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-metaprogramming ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Monad-map">The monad map</a>
@@ -1212,8 +1223,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_2/Part_2.html">Formalizing mathematics: Tactics</a>
@@ -1230,13 +1241,16 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      </dl>
+          
+        </dl>
+      </details>
 
       <h2 id="explanations">Explanations</h2>
-      <dl>
-      
-      
+      <details class="category">
+        <summary>Explanations clarify and illuminate a particular topic.</summary>
+        <dl>
+          
+          
 
   <dt class="documentation-entry documentation-tag-teaching ">
     <a href="https://leanprover-community.github.io/teaching/practices.html">Tips and suggestions for teaching with Lean</a>
@@ -1253,8 +1267,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/conv.html">The conversion tactic mode</a>
@@ -1271,8 +1285,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/simp.html">Simplifier</a>
@@ -1289,8 +1303,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/extras/pitfalls.html">Common Lean Pitfalls</a>
@@ -1309,8 +1323,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://xenaproject.wordpress.com/2025/02/09/what-is-a-quotient/">What is a quotient?</a>
@@ -1327,8 +1341,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/">Division by zero in type theory: a FAQ</a>
@@ -1345,8 +1359,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«the algebraic hierarchy»#doc">library note [the algebraic hierarchy]</a>
@@ -1363,8 +1377,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«reducible non-instances»#doc">library note [reducible non-instances]</a>
@@ -1381,8 +1395,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«implicit instance arguments»#doc">library note [implicit instance arguments]</a>
@@ -1399,8 +1413,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«lower instance priority»#doc">library note [lower instance priority]</a>
@@ -1417,8 +1431,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«instance argument order»#doc">library note [instance argument order]</a>
@@ -1435,8 +1449,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«SetLike Aesop ruleset»#doc">library note [SetLike Aesop ruleset]</a>
@@ -1455,8 +1469,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«no_index around OfNat.ofNat»#doc">library note [no_index around OfNat.ofNat]</a>
@@ -1473,8 +1487,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-ring-theory ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«coercion into rings»#doc">library note [coercion into rings]</a>
@@ -1491,8 +1505,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-analysis documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«RCLike instance»#doc">library note [RCLike instance]</a>
@@ -1511,8 +1525,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«fact non-instances»#doc">library note [fact non-instances]</a>
@@ -1529,8 +1543,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«decidable namespace»#doc">library note [decidable namespace]</a>
@@ -1547,8 +1561,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«decidable arguments»#doc">library note [decidable arguments]</a>
@@ -1565,8 +1579,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«slow-failing instance priority»#doc">library note [slow-failing instance priority]</a>
@@ -1583,8 +1597,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«foundational algebra order theory»#doc">library note [foundational algebra order theory]</a>
@@ -1601,8 +1615,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-topology ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«continuity lemma statement»#doc">library note [continuity lemma statement]</a>
@@ -1619,8 +1633,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-topology ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«comp_of_eq lemmas»#doc">library note [comp_of_eq lemmas]</a>
@@ -1637,8 +1651,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-euclidean-geometry ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«IMO geometry formalization conventions»#doc">library note [IMO geometry formalization conventions]</a>
@@ -1655,8 +1669,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«change elaboration strategy with `by apply`»#doc">library note [change elaboration strategy with `by apply`]</a>
@@ -1673,8 +1687,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-elementary ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«pointwise nat action»#doc">library note [pointwise nat action]</a>
@@ -1691,8 +1705,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-differential-geometry ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«Design choices about smooth algebraic structures»#doc">library note [Design choices about smooth algebraic structures]</a>
@@ -1709,8 +1723,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-differential-geometry ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«Manifold type tags»#doc">library note [Manifold type tags]</a>
@@ -1727,8 +1741,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-topology ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«non-Archimedean non-instances»#doc">library note [non-Archimedean non-instances]</a>
@@ -1745,8 +1759,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra documentation-tag-ring-theory ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«range copy pattern»#doc">library note [range copy pattern]</a>
@@ -1767,8 +1781,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-analysis ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«continuous functional calculus»#doc">library note [continuous functional calculus]</a>
@@ -1785,8 +1799,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«specialised high priority simp lemma»#doc">library note [specialised high priority simp lemma]</a>
@@ -1803,8 +1817,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«out-param inheritance»#doc">library note [out-param inheritance]</a>
@@ -1821,8 +1835,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«lower cancel priority»#doc">library note [lower cancel priority]</a>
@@ -1839,8 +1853,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«forgetful inheritance»#doc">library note [forgetful inheritance]</a>
@@ -1857,8 +1871,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-metaprogramming ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«norm_num lemma function equality»#doc">library note [norm_num lemma function equality]</a>
@@ -1877,8 +1891,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes documentation-tag-tactics ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«hom simp lemma priority»#doc">library note [hom simp lemma priority]</a>
@@ -1897,8 +1911,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-category-theory documentation-tag-declarations ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«category theory universes»#doc">library note [category theory universes]</a>
@@ -1917,8 +1931,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-group-theory ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«operator precedence of big operators»#doc">library note [operator precedence of big operators]</a>
@@ -1935,8 +1949,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-group-theory documentation-tag-linear-algebra ">
     <a href="https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.LibraryNote.«bundled maps over different rings»#doc">library note [bundled maps over different rings]</a>
@@ -1955,8 +1969,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic documentation-tag-ring-theory ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Computation-models-for-polynomials-and-finitely-supported-functions">Computation models for polynomials and finitely supported functions</a>
@@ -1975,8 +1989,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations documentation-tag-classes ">
     <a href="https://github.com/leanprover-community/mathlib4/wiki/Tradeoffs-of-concrete-types-defined-as-subobjects">Tradeoffs of concrete types defined as subobjects</a>
@@ -1995,8 +2009,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/typesandterms.html">Formalizing mathematics: Types and terms</a>
@@ -2013,8 +2027,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/equality.html">Formalizing mathematics: Equality</a>
@@ -2031,8 +2045,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/threekindsoftypes.html">Formalizing mathematics: The three kinds of types</a>
@@ -2049,8 +2063,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/brackets.html">Formalizing mathematics: Brackets in function inputs</a>
@@ -2067,8 +2081,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/precedence.html">Formalizing mathematics: Notation and precedence</a>
@@ -2085,8 +2099,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/structures.html">Formalizing mathematics: Structures</a>
@@ -2103,8 +2117,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-classes ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/classes.html">Formalizing mathematics: Classes</a>
@@ -2121,8 +2135,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/dot_notation.html">Formalizing mathematics: Dot notation</a>
@@ -2139,8 +2153,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-declarations ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/coercions.html">Formalizing mathematics: Coercions</a>
@@ -2157,8 +2171,8 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      
+          
+          
 
   <dt class="documentation-entry documentation-tag-logic ">
     <a href="https://b-mehta.github.io/formalising-mathematics-notes/Part_1/the_axiom_of_choice.html">Formalizing mathematics: The axiom of choice</a>
@@ -2175,8 +2189,9 @@ function toggle_tag(id) {
   </dd>
 
 
-      
-      </dl>
+          
+        </dl>
+      </details>
 
 
   </main>
