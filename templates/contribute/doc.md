@@ -44,8 +44,10 @@ Copyright (c) 2018 Robert Y. Lewis. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Y. Lewis
 -/
-import Mathlib.Algebra.Order.Field.Power
-import Mathlib.NumberTheory.Padics.PadicVal
+module
+
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
 # p-adic norm
