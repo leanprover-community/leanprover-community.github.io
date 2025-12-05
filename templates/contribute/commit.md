@@ -77,7 +77,7 @@ This also changes the diagnostic message to be on the whole syntax `apply? using
 And an example where including `<scope>` does add value:
 
 ```markdown
-docs(CategoryTheory/EssentialImage): typo and punctuation
+doc(CategoryTheory/EssentialImage): typo and punctuation
 
 Fix a typo, add two periods.
 ```
