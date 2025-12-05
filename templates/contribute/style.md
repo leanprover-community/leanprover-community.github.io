@@ -305,13 +305,22 @@ example (n : ℝ) : 1 < n → 0 < n := fun h ↦ by linarith
 and
 
 ```lean
-example (n : ℕ) : 0 ≤ n := dec_trivial __Nat.zero_le n
+example (n : ℕ) : 0 ≤ n := Nat.zero_le n
 ```
 
 is preferred over
 
 ```lean
 example : ∀ (n : ℕ), 0 ≤ n := Nat.zero_le
+```
+
+Note that pattern-matching does not count as the proof starting by introducing variables.
+For example, the following is a valid use case of having a hypothesis right of the column:
+
+```lean
+lemma zero_le : ∀ n : ℕ, 0 ≤ n
+  | 0 => le_rfl
+  | n + 1 => add_nonneg (zero_le n) zero_le_one
 ```
 
 ### Binders
@@ -356,17 +365,17 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l))
-        = reverse (reverse l ++ [a]) := by rw [reverse_cons]
-      _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _ = reverse [a] ++ l := by rw [reverse_reverse l]
-      _ = a :: l := rfl
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l))
+      = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
 ```
 
-However, because the expressions and proofs are relatively short, the following style
-might be preferable in this situation.
+The following style has the substantial advantage of having all lines be interchangeable, which is
+particularly useful when editing the proof in eg VSCode:
 
 ```lean
 import Init.Data.List.Basic
@@ -374,12 +383,29 @@ import Init.Data.List.Basic
 open List
 
 theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
-  | []       => rfl
-  | (a :: l) => calc
-      reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
-      _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
-      _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
-      _                          = a :: l                             := rfl
+  | []     => rfl
+  | a :: l => calc
+        reverse (reverse (a :: l))
+    _ = reverse (reverse l ++ [a]) := by rw [reverse_cons]
+    _ = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _ = reverse [a] ++ l := by rw [reverse_reverse l]
+    _ = a :: l := rfl
+```
+
+If the expressions and proofs are relatively short, the following style is also an option:
+
+```lean
+import Init.Data.List.Basic
+
+open List
+
+theorem reverse_reverse : ∀ (l : List α), reverse (reverse l) = l
+  | []     => rfl
+  | a :: l => calc
+    reverse (reverse (a :: l)) = reverse (reverse l ++ [a])         := by rw [reverse_cons]
+    _                          = reverse [a] ++ reverse (reverse l) := reverse_append _ _
+    _                          = reverse [a] ++ l                   := by rw [reverse_reverse l]
+    _                          = a :: l                             := rfl
 ```
 
 ### Tactic mode
@@ -578,6 +604,25 @@ subsequent lines.
 
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
+
+### Expressions in error or trace messages
+
+Inside all printed messages (such as, in linters, custom elaborators or other metaprogrammes),
+names and interpolated data should either be
+- inline and surrounded by backticks (e.g., `m!"`{foo}` must have type `{bar}`"`), or
+- on their own line and indented (via e.g. `indentD`)
+
+The second style produces output like the following
+```
+Could not find model with corners for domain
+  src
+nor codomain
+  tgt
+of function
+  f
+```
+
+Not all of mathlib may comply with this rule yet; that is a bug (and PRs fixing this are welcome).
 
 ### Deprecation
 

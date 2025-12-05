@@ -2,6 +2,7 @@
 
 from enum import Enum, auto
 from pathlib import Path
+import shutil
 import sys
 import subprocess
 import pickle
@@ -9,6 +10,7 @@ import re
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional, Any, Callable, TypeVar, Union
 from datetime import datetime
+from functools import cached_property
 
 import yaml
 from staticjinja import Site
@@ -18,11 +20,13 @@ import pybtex.database
 from mistletoe import Document, block_token
 from mistletoe_renderer import CustomHTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
+from urllib.parse import urlparse
 import urllib.request
 import json
 import gzip
 import os
 from github import Github
+from github.Auth import Token
 from slugify import slugify
 
 import zulip
@@ -121,15 +125,32 @@ presentation = (DATA/'presentation.md').read_text(encoding='utf-8')
 
 what_is = (DATA/'what_is.md').read_text(encoding='utf-8')
 
+maybe_token = os.environ.get('GITHUB_TOKEN')
+if maybe_token is not None:
+    github_auth = Token(maybe_token)
+else:
+    github_auth = None
+github = Github(auth=github_auth)
+
 @dataclass
 class Formalization:
     title: str
     authors: str
     abstract: str
     url: str
+    organization: str
+    repo: str
+
+    @cached_property
+    def github_repo(self):
+        return github.get_repo(self.organization + '/' + self.repo)
+
+    @property
+    def stars(self):
+        return self.github_repo.stargazers_count
 
 with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
-    formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
+    formalizations = sorted([Formalization(**form) for form in yaml.safe_load(f_file)], key=lambda form: form.stars, reverse=True)
 
 @dataclass
 class People:
@@ -290,6 +311,24 @@ class Course:
     year: int = 2023
     summary : Optional[str] = None
     experiences : Optional[str] = None
+
+@dataclass
+class DocumentationEntry:
+    title: str
+    url: str
+    description: str
+    authors: str
+    accessed_at: str
+    category: str
+    tags: List[str] = field(default_factory=list)
+    display: bool = True # Set to False if it has a tag indicating it should be hidden.
+
+@dataclass
+class DocumentationTag:
+    name: str
+    description: str
+    display: bool = True
+    count: int = 0 # Will be set when reading the documentation entries.
 
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
@@ -504,18 +543,47 @@ for course in courses:
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
 
+documentation_tags = {}
+documentation_lists = {
+        'tutorial': [],
+        'how-to': [],
+        'explanation': [],
+        'reference': [],
+}
+with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
+    docu_data = yaml.safe_load(file)
+    for e in docu_data["tags"]:
+        documentation_tags[e["name"]] = DocumentationTag(**e)
+
+    for e in docu_data["documentation"]:
+        e = DocumentationEntry(**e)
+        e.description = render_markdown(e.description)
+        documentation_lists[e.category].append(e)
+        for tag in e.tags:
+            documentation_tags[tag].count += 1
+            if not documentation_tags[tag].display:
+                e.display = False
+
+# Cannot use %-d format code on windows
+def format_month_day(date_obj):
+    return f"{date_obj.strftime('%B')} {date_obj.day}"
+def format_month_day_year(date_obj):
+    return f"{date_obj.strftime('%B')} {date_obj.day}, {date_obj.year}"
+def format_day_year(date_obj):
+    return f"{date_obj.day}, {date_obj.year}"
+
 def format_date_range(event):
     if event.start_date and event.end_date:
         start_date = datetime.strptime(event.start_date, '%B %d %Y').date()
         end_date = datetime.strptime(event.end_date, '%B %d %Y').date()
         if start_date.year != end_date.year:
-            return f'{start_date.strftime("%B %-d, %Y")}–{end_date.strftime("%B %-d, %Y")}'
+            return f'{format_month_day_year(start_date)}–{format_month_day_year(end_date)}'
         elif start_date.month != end_date.month:
-            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%B %-d, %Y")}'
+            return f'{format_month_day(start_date)}–{format_month_day_year(end_date)}'
         elif start_date.day != end_date.day:
-            return f'{start_date.strftime("%B %-d")}–{end_date.strftime("%-d, %Y")}'
+            return f'{format_month_day(start_date)}–{format_day_year(end_date)}'
         else:
-            return start_date.strftime("%B %-d, %Y")
+            return format_month_day_year(start_date)
     else:
         return 'TBA'
 
@@ -534,32 +602,56 @@ class Project:
     description: str
     maintainers: List[str]
     stars: int
-
-github = Github(os.environ.get('GITHUB_TOKEN', None))
+    url: str
 
 if DOWNLOAD:
     download(
         'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
-        DATA/'projects.yaml')
-    with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
-        oprojects = yaml.safe_load(h_file)
-    pkl_dump('oprojects', oprojects)
+        DATA/'projects_3.yaml')
+    with (DATA/'projects_3.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_3 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_3', oprojects_3)
 else:
-    oprojects = pkl_load('oprojects', [])
+    oprojects_3 = pkl_load('oprojects_3', [])
 
 
-projects = []
+projects_3 = []
 if DOWNLOAD:
-    for name, project in oprojects.items():
+    for name, project in oprojects_3.items():
         if project.get('display', True):
             github_repo = github.get_repo(project['organization'] + '/' + name)
             stars = github_repo.stargazers_count
             descr = render_markdown(project['description'])
-            projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
-            projects.sort(key = lambda p: p.stars, reverse=True)
-    pkl_dump('projects', projects)
+            projects_3.append(Project(name, project['organization'], descr, project['maintainers'], stars, github_repo.html_url))
+    projects_3.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_3', projects_3)
 else:
-    projects = pkl_load('projects', [])
+    projects_3 = pkl_load('projects_3', [])
+
+if DOWNLOAD:
+    download(
+        'https://raw.githubusercontent.com/leanprover-community/mathlib4/refs/heads/master/scripts/downstream_repos.yml',
+        DATA/'projects_4.yaml')
+    with (DATA/'projects_4.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_4 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_4', oprojects_4)
+else:
+    oprojects_4 = pkl_load('oprojects_4', [])
+
+
+projects_4 = []
+if DOWNLOAD:
+    for project in oprojects_4:
+        repo_path = urlparse(project['github']).path[1:] # Cut off first '/'
+        github_repo = github.get_repo(repo_path)
+        name = project['name']
+        stars = github_repo.stargazers_count
+        descr = render_markdown(github_repo.description) if github_repo.description is not None else None
+        projects_4.append(Project(name, github_repo.owner.login, descr, None, stars, github_repo.html_url))
+    projects_4.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_4', projects_4)
+else:
+    projects_4 = pkl_load('projects_4', [])
 
 if DOWNLOAD:
     # We used to use this count but it didn't include mathlib3 contributors
@@ -575,16 +667,6 @@ if DOWNLOAD:
     pkl_dump('num_contrib', num_contrib)
 else:
     num_contrib = pkl_load('num_contrib', 0)
-
-if DOWNLOAD:
-    download(
-        'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
-        DATA/'project_history.yaml')
-    with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
-        project_history = yaml.safe_load(h_file)
-    pkl_dump('project_history', project_history)
-else:
-    project_history = pkl_load('project_history', dict())
 
 
 bib = pybtex.database.parse_file('lean.bib')
@@ -796,9 +878,14 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     def clean_tex(src: str) -> str:
         return latexnodes2text.latex_to_text(src)
 
-    subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
-        '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
-        str(target/'lean.bib')])
+    try:
+        # use bibtool to strip nonstandard fields used just for display on this website
+        subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
+            '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
+            str(target/'lean.bib')], check=True)
+    except FileNotFoundError:
+        print("Warning: bibtool not found. Copying lean.bib without processing.")
+        shutil.copy2('lean.bib', target/'lean.bib')
 
     def read_md(src: str) -> str:
         return (DATA/src).read_text(encoding='utf-8')
@@ -832,10 +919,11 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
-                ('lean_projects.html', {'projects': projects}),
+                ('lean_projects.html', {'projects_3': projects_3, 'projects_4': projects_4}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
+                ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': documentation_tags}),
                 ('.*.md', get_contents)
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },

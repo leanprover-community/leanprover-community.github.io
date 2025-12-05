@@ -10,6 +10,8 @@ Such exceptions should be discussed on Zulip first.
 
 ## General conventions
 
+### Capitalization
+
 Unlike Lean 3, in which the convention was that all declarations used `snake_case`,
 in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` and
 `UpperCamelCase` according to the following naming scheme.
@@ -26,7 +28,7 @@ There are some rare exceptions: some fields of structures are currently wrongly 
 There are some rare exceptions to preserve local naming symmetry: e.g., we use `Ne` rather than `NE` to follow the example of `Eq`; `outParam` has a `Sort` output but is not `UpperCamelCase`. Some other exceptions include intervals (`Set.Icc`, `Set.Iic`, etc.), where the `I`
 is capitalized despite the fact that it should be `lowerCamelCase` according to the convention. Any such exceptions should be discussed on Zulip.
 
-### Examples
+#### Examples
 
 ```lean
 -- follows rule 2
@@ -70,6 +72,14 @@ theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
 -- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
 #align ne_zero_iff neZero_iff
 ```
+
+### Spelling
+
+Declaration names use American English spelling. So e.g. we use
+`factorization`, `Localization` and `FiberBundle` and not
+`factorisation`, `Localisation` or `FibreBundle`.
+Contrast this with the rule for [documentation](doc.html#language),
+which is allowed to use other common English spellings.
 
 ### Names of symbols
 
@@ -457,7 +467,7 @@ argument that "changes". For example, a lemma with the statement
 ### Induction and recursion principles
 
 Induction/recursion principles are ways to construct data or proofs for all elements of some type `T`,
-by providing ways to construct this data or proof in more constrained specific contexts. 
+by providing ways to construct this data or proof in more constrained specific contexts.
 These principles should be phrased to accept a `motive` argument,
 which declares what property we are proving or what data we are constructing for all `T`.
 When the motive eliminates into `Prop`, it is an induction principle, and the name should contain
@@ -483,6 +493,11 @@ Some widely used predicates don't follow this rule. Those are the predicates tha
 * We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
 * We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_monotone` for `Monotone f`, `_antitone` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...
 
+Predicates as suffixes can be preceded by either `_left` or `_right` to signify
+that a binary operation is left- or right-monotone.
+For example, `mul_left_monotone : Monotone (· * a)` proves left-monotonicity of multiplication
+and not monotonicity of left-multiplication.
+
 ### Prop-valued classes
 
 Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
@@ -497,16 +512,16 @@ then its name does not need to begin with an `Is`. So for example `IsNormal` wou
 for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
 `H` is normal" in informal language. However `IsTopologicalRing` is
 preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
-topological" informally. 
+topological" informally.
 
 ### Unexpanded and expanded forms of functions
 
-The multiplication of two functions `f` and `g` can be denoted equivalently as 
+The multiplication of two functions `f` and `g` can be denoted equivalently as
 `f * g` or `fun x ↦ f x * g x`. These expressions are definitionally equal, but not syntactically (and they don't
-share the same key in indexing trees), which means that tools like `rw`, `fun_prop` or `apply?` 
+share the same key in indexing trees), which means that tools like `rw`, `fun_prop` or `apply?`
 will not use a theorem with one form on an expression with the other form. Therefore, it is
-sometimes convenient to have variants of the statements using the two forms. If one needs to 
-distinguish between them, statements involving the first unexpanded form are written using just `mul`, 
+sometimes convenient to have variants of the statements using the two forms. If one needs to
+distinguish between them, statements involving the first unexpanded form are written using just `mul`,
 while statements using the second expanded form should instead use `fun_mul`. If there is no need to
 disambiguate because a lemma is given using only the expanded form, the prefix `fun_` is not required.
 

@@ -28,6 +28,7 @@ Note: "Title:" and "Description:" do not actually appear
  - test (when adding missing tests)
  - chore (maintain)
  - perf (performance improvement, optimization, ...)
+ - ci (for changes to github workflows, other automation)
 
 `<optional-scope>` is a name of module or a directory which contains changed modules.
 This is not necessary to include, but may be useful if the `<subject>` is insufficient.

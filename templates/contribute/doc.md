@@ -26,7 +26,7 @@ of the file.
 The other sections, with second level headers are (in this order):
 * *Main definitions* (optional, can be covered in the summary)
 * *Main statements* (optional, can be covered in the summary)
-* *Notations* (omitted only if no notation is introduced in this file)
+* *Notation* (omitted only if no notation is introduced in this file)
 * *Implementation notes* (description of important design decisions or interface features,
   including use of type classes and `simp` canonical form for new definitions)
 * *References* (references to textbooks or papers, or Wikipedia pages)
@@ -43,14 +43,11 @@ The following code block is an example of a file header.
 Copyright (c) 2018 Robert Y. Lewis. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Y. Lewis
-
-! This file was ported from Lean 3 source module number_theory.padics.padic_norm
-! leanprover-community/mathlib commit 92ca63f0fb391a9ca5f22d2409a6080e786d99f7
-! Please do not edit these lines, except to modify the commit id
-! if you have ported upstream changes.
 -/
-import Mathlib.Algebra.Order.Field.Power
-import Mathlib.NumberTheory.Padics.PadicVal
+module
+
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
 # p-adic norm
@@ -257,6 +254,16 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 ```
 
 > We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
+
+## Language
+
+Documentation should be written in English.
+Any common spelling (e.g. British, American or Australian English) is acceptable.
+Pull requests should not be made that only change which of these spellings are used,
+but it is acceptable to change the spelling
+as part of a PR that substantially enhances the documentation.
+Contrast this with the rule for [declaration names](naming.html#spelling),
+which should use American English spelling.
 
 ## Examples
 
