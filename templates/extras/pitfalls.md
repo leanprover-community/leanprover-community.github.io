@@ -682,7 +682,7 @@ If you had instead tried to use the unprimed `induction` tactic, you would have 
 
 Note the presence of the `↑` in the tactic states. This represents a coercion, and it is one clue that the type of `n` might not be what you think it is.
 
-Becuase of these problems and others, if you have `(s : Set X)` as a parameter and you want to assume that `a` is an element of `s`, it is often better to add two parameters `(a : X) (ha : a ∈ S)` than to write `(a : s)`.
+Because of these problems and others, if you have `(s : Set X)` as a parameter and you want to assume that `a` is an element of `s`, it is often better to add two parameters `(a : X) (ha : a ∈ S)` than to write `(a : s)`.
 Similarly, if you want `t` to be a subset of `s`, you should declare `(t : Set X) (h : t ⊆ s)` rather than `(t : Set s)`.
 Using this coercion from `Set`s to types should usually be reserved for cases where you need to pass in a `Set` to another function that requires a type as input.
 
