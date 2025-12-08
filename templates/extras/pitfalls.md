@@ -199,7 +199,7 @@ For more information, please see https://b-mehta.github.io/formalising-mathemati
 
 Unfortunately, the line between syntactic and definitional equality is often blurred in Lean.
 The important thing to remember is that some tactics, such as `exact`, work up to definitional equality, but others such as `rw` and `simp` work up to syntactic equality.
-Even though Lean's core typechecker only cares about definitional equality, tactics are free to use to use the extra information about the syntax of terms to help them operate.
+Even though Lean's core typechecker only cares about definitional equality, tactics are free to use the extra information about the syntax of terms to help them operate.
 
 ## Using `b > a` instead of `a < b`
 
