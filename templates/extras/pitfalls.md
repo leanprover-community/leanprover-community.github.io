@@ -453,7 +453,7 @@ example : dist ![(1 : ℝ),0] ![0,1] = 1 := by
     fin_cases b <;> simp
 ```
 
-To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use instead use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
+To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
 ```lean
 example : dist !₂[(1 : ℝ),0] !₂[0,1] = √2 := by
   norm_num [EuclideanSpace.dist_eq]
