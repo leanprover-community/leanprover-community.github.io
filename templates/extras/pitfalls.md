@@ -401,7 +401,7 @@ Consider adding `Summable f` hypotheses to theorems that involve `∑' i, f i`.
 - `Nat.sqrt x` takes the floor of $\sqrt{x}$.
 - `Real.sqrt x` is `0` for negative inputs.
 - `Real.log x` actually means $\log_e |x|$ when $x \ne 0$ and is $0$ when $x = 0$.
-This gives nicer algebraic properties then setting it to be $0$ for negative all $x$.
+This gives nicer algebraic properties than setting it to be $0$ for all negative $x$.
 - `Real.sSup` and `Real.iSup` are 0 if the set is empty or not bounded above, and likewise `Real.sInf`, and `Real.iInf` are 0 if the set is empty or not bounded below.
 This interacts nicely with `Real.sqrt`: it means that $\sqrt{x} = \sup \{y \mid y^2 < x\}$ for all $x \in \mathbb{R}$, since when $x \le 0$ both sides are $0$.
 
