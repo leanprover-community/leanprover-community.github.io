@@ -472,7 +472,7 @@ and <code>Fin n → ℝ</code> is a special case of this.</p>
 </code></pre></div>
 </div>
 
-<p>To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use instead use <code>EuclideanSpace ℝ (Fin n)</code>, which is an abbreviation for <code>WithLp 2 (Fin n → ℝ)</code>. Vectors of this type can be written using the <code>!₂[x,y,z,...]</code> notation.</p>
+<p>To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use <code>EuclideanSpace ℝ (Fin n)</code>, which is an abbreviation for <code>WithLp 2 (Fin n → ℝ)</code>. Vectors of this type can be written using the <code>!₂[x,y,z,...]</code> notation.</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="bp">!₂</span><span class="o">[(</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="o">),</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="bp">!₂</span><span class="o">[</span><span class="mi">0</span><span class="o">,</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">√</span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">norm_num</span><span class="w"> </span><span class="o">[</span><span class="n">EuclideanSpace.dist_eq</span><span class="o">]</span>
 </code></pre></div>
@@ -684,7 +684,7 @@ You have to write <code>(n : ℕ)</code> to make the addition succeed.</p>
 <p>Here, the tactic did not perform induction on <code>n</code> as a natural number; instead, it deconstructed the two components of the <code>Subtype</code>.
 If you had instead tried to use the unprimed <code>induction</code> tactic, you would have gotten an &quot;invalid alternative name 'zero', expected 'mk'&quot; error message.</p>
 <p>Note the presence of the <code>↑</code> in the tactic states. This represents a coercion, and it is one clue that the type of <code>n</code> might not be what you think it is.</p>
-<p>Becuase of these problems and others, if you have <code>(s : Set X)</code> as a parameter and you want to assume that <code>a</code> is an element of <code>s</code>, it is often better to add two parameters <code>(a : X) (ha : a ∈ S)</code> than to write <code>(a : s)</code>.
+<p>Because of these problems and others, if you have <code>(s : Set X)</code> as a parameter and you want to assume that <code>a</code> is an element of <code>s</code>, it is often better to add two parameters <code>(a : X) (ha : a ∈ S)</code> than to write <code>(a : s)</code>.
 Similarly, if you want <code>t</code> to be a subset of <code>s</code>, you should declare <code>(t : Set X) (h : t ⊆ s)</code> rather than <code>(t : Set s)</code>.
 Using this coercion from <code>Set</code>s to types should usually be reserved for cases where you need to pass in a <code>Set</code> to another function that requires a type as input.</p>
 <p>Mathlib's algebra library has been designed with this in mind. For example,
