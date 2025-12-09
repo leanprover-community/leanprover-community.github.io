@@ -731,7 +731,7 @@ But computationally, `Float` follows the IEEE 754 *binary64* format, which is li
 This means that to prove anything meaningful about `Float`, you have to use `native_decide`, which is a risky tactic (see the section in this document on `native_decide`).
 
 Additionally, because of the behavior of floating point numbers, `0.1 + 0.2 == 0.3` evaluates to `false`.
-(See [https://0.30000000000000004.com/] for an explanation.)
+(See <https://0.30000000000000004.com/> for an explanation.)
 
 So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid `Float` and use another numeric type such as `Rat` or `Real`.
 
@@ -767,7 +767,7 @@ Code contributed to Mathlib is not allowed to use `native_decide`.
 ## Panic does not abort
 
 If you are using Lean as a programming language, note that the `panic!` macro does not trigger a crash by default; instead, it just just prints an error message and lets the code keep running.
-This applies to functions like `Option.get!` as well. `panic` behaves this way because it is is a safe function, and it is formally equivalent to `default`.
+This applies to functions like `Option.get!` as well. `panic` behaves this way because it is a safe function, and it is formally equivalent to `default`.
 
 This can be dangerous if you are using panic to guard potentially dangerous `IO` operations or prevent data corruption.
 You may want to consider setting the environment variable `LEAN_ABORT_ON_PANIC` to `1`, although this might not be sufficient for user facing applications where environment variables are hard to control.
@@ -806,7 +806,7 @@ In the less common cases where lemmas are removed from mathlib, both terminal `s
 
 To avoid non-terminal `simp`s, you can use a simp variant like `simpa` or `simp_rw` to combine `simp` with the tactics that come after it, or you can "squeeze" your simp calls by using `simp?`.
 Note that it is fine for `simp` to appear in the middle of a proof as long as it fully closes a goal.
-For example, then even though the `simp` in
+For example, even though the `simp` in
 ```lean
   induction n with
   | zero =>
