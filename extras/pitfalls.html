@@ -728,7 +728,7 @@ But computationally, <code>Float</code> follows the IEEE 754 <em>binary64</em> f
 (See <code>Float32</code> for 32-bit floating point numbers.)
 This means that to prove anything meaningful about <code>Float</code>, you have to use <code>native_decide</code>, which is a risky tactic (see the section in this document on <code>native_decide</code>).</p>
 <p>Additionally, because of the behavior of floating point numbers, <code>0.1 + 0.2 == 0.3</code> evaluates to <code>false</code>.
-(See [https://0.30000000000000004.com/] for an explanation.)</p>
+(See <a href="https://0.30000000000000004.com/">https://0.30000000000000004.com/</a> for an explanation.)</p>
 <p>So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid <code>Float</code> and use another numeric type such as <code>Rat</code> or <code>Real</code>.</p>
 <h2 id="native_decide" class="markdown-heading"><code>native_decide</code> <a class="hover-link" href="#native_decide">#</a></h2>
 <p><code>native_decide</code>, also written as <code>decide +native</code>, is similar to the <code>decide</code> tactic except it uses <code>#eval</code> to run the decision procedure instead of reducing it in the kernel.
@@ -758,7 +758,7 @@ It will also trust your <code>@[extern]</code> and <code>@[implemented_by]</code
 <p>Code contributed to Mathlib is not allowed to use <code>native_decide</code>.</p>
 <h2 id="panic-does-not-abort" class="markdown-heading">Panic does not abort <a class="hover-link" href="#panic-does-not-abort">#</a></h2>
 <p>If you are using Lean as a programming language, note that the <code>panic!</code> macro does not trigger a crash by default; instead, it just just prints an error message and lets the code keep running.
-This applies to functions like <code>Option.get!</code> as well. <code>panic</code> behaves this way because it is is a safe function, and it is formally equivalent to <code>default</code>.</p>
+This applies to functions like <code>Option.get!</code> as well. <code>panic</code> behaves this way because it is a safe function, and it is formally equivalent to <code>default</code>.</p>
 <p>This can be dangerous if you are using panic to guard potentially dangerous <code>IO</code> operations or prevent data corruption.
 You may want to consider setting the environment variable <code>LEAN_ABORT_ON_PANIC</code> to <code>1</code>, although this might not be sufficient for user facing applications where environment variables are hard to control.</p>
 <h2 id="lean-3-code" class="markdown-heading">Lean 3 code <a class="hover-link" href="#lean-3-code">#</a></h2>
@@ -792,7 +792,7 @@ In general, <code>simp</code> will become more powerful over time as more lemmas
 In the less common cases where lemmas are removed from mathlib, both terminal <code>simp</code>s and non-terminal <code>simp</code>s can break, but it is usually much easier to fix a terminal <code>simp</code> call.</p>
 <p>To avoid non-terminal <code>simp</code>s, you can use a simp variant like <code>simpa</code> or <code>simp_rw</code> to combine <code>simp</code> with the tactics that come after it, or you can &quot;squeeze&quot; your simp calls by using <code>simp?</code>.
 Note that it is fine for <code>simp</code> to appear in the middle of a proof as long as it fully closes a goal.
-For example, then even though the <code>simp</code> in</p>
+For example, even though the <code>simp</code> in</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="n">induction</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">with</span>
 <span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="bp">=&gt;</span>
 <span class="w">    </span><span class="n">simp</span>
