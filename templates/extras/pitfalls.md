@@ -731,7 +731,7 @@ But computationally, `Float` follows the IEEE 754 *binary64* format, which is li
 This means that to prove anything meaningful about `Float`, you have to use `native_decide`, which is a risky tactic (see the section in this document on `native_decide`).
 
 Additionally, because of the behavior of floating point numbers, `0.1 + 0.2 == 0.3` evaluates to `false`.
-(See [https://0.30000000000000004.com/](https://0.30000000000000004.com/) for an explanation.)
+(See <https://0.30000000000000004.com/> for an explanation.)
 
 So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid `Float` and use another numeric type such as `Rat` or `Real`.
 
