@@ -534,7 +534,7 @@ proactively.
 
 ### Transparency and API design
 
-Central to Lean being a practially performant proof assistant is avoiding
+Central to Lean being a practically performant proof assistant is avoiding
 checking of definitional equality for very large terms. In the elaborator (the
 component of the language that converts syntax to terms), the notion of
 transparency is the main mechanism to avoid unfolding large definitions when
