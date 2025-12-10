@@ -550,7 +550,7 @@ transparency:
     requests it.
 
 `def` by default create `semireducible` definitions and `abbrev` creates
-`reducible` (and `inlined`) definitions.
+`reducible` (and `@[inline]`) definitions.
 
 When designing definitions, an author should give thought to the transparency level of
 definitions. Consider how exposing the underlying term of your definition will
