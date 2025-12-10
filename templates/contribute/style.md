@@ -547,7 +547,7 @@ transparency:
     computation of keys for storing instances in the instance cache or simp
     lemmas in the simp cache.
 - `irreducible` definitions are never unfolded unless the user explicitly
-    requests it.
+    requests it (e.g using the `unfold` tactic, or by using the `unseal` command).
 
 `def` by default create `semireducible` definitions and `abbrev` creates
 `reducible` (and `@[inline]`) definitions.
