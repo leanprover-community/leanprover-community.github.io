@@ -541,7 +541,7 @@ transparency is the main mechanism to avoid unfolding large definitions when
 unnecessary. Excluding `opaque` definitions, there are three levels of
 transparency:
 - `reducible` definitions are always unfolded
-- `semireducible` definitions (the default) are usually not unfolding in main tactics like
+- `semireducible` definitions (the default) are usually not unfolded in main tactics like
     `rw` and `simp`, but can be unfolded with a little effort like explicitly
     calling `rfl` or `erw`. Semireducible definitions are also not unfolded during the
     computation of keys for storing instances in the instance cache or simp
