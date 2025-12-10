@@ -577,7 +577,7 @@ is the library convention in place of `irreducible` definitions. These are
 intended for types that are equivalent to an existing type but are clearly
 mathematically semantically distinct, e.g. `Option` and `WithTop`.
 
-The kernel does not have an analogous notion of transperency so its
+The kernel does not have an analogous notion of transparency so its
 rules for unfolding are different. There are situations where an author wants
 to block unfolding in the kernel as well. Mathlib provides a command
 `irreducible_def` for this. This should be used only when there is a
