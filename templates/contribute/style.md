@@ -552,7 +552,7 @@ transparency:
 `def` by default create `semireducible` definitions and `abbrev` creates
 `reducible` (and `inlined`) definitions.
 
-When designing definitions, an author should give thought the transparency level of
+When designing definitions, an author should give thought to the transparency level of
 definitions. Consider how exposing the underlying term of your definition will
 affect instance search and simplification. The default for mathlib is that definitions
 should be `semireducible` unless there is a good reason otherwise which should
