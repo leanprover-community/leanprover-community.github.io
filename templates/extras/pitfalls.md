@@ -199,7 +199,7 @@ For more information, please see https://b-mehta.github.io/formalising-mathemati
 
 Unfortunately, the line between syntactic and definitional equality is often blurred in Lean.
 The important thing to remember is that some tactics, such as `exact`, work up to definitional equality, but others such as `rw` and `simp` work up to syntactic equality.
-Even though Lean's core typechecker only cares about definitional equality, tactics are free to use to use the extra information about the syntax of terms to help them operate.
+Even though Lean's core typechecker only cares about definitional equality, tactics are free to use the extra information about the syntax of terms to help them operate.
 
 ## Using `b > a` instead of `a < b`
 
@@ -401,7 +401,7 @@ Consider adding `Summable f` hypotheses to theorems that involve `∑' i, f i`.
 - `Nat.sqrt x` takes the floor of $\sqrt{x}$.
 - `Real.sqrt x` is `0` for negative inputs.
 - `Real.log x` actually means $\log_e |x|$ when $x \ne 0$ and is $0$ when $x = 0$.
-This gives nicer algebraic properties then setting it to be $0$ for negative all $x$.
+This gives nicer algebraic properties than setting it to be $0$ for all negative $x$.
 - `Real.sSup` and `Real.iSup` are 0 if the set is empty or not bounded above, and likewise `Real.sInf`, and `Real.iInf` are 0 if the set is empty or not bounded below.
 This interacts nicely with `Real.sqrt`: it means that $\sqrt{x} = \sup \{y \mid y^2 < x\}$ for all $x \in \mathbb{R}$, since when $x \le 0$ both sides are $0$.
 
@@ -453,7 +453,7 @@ example : dist ![(1 : ℝ),0] ![0,1] = 1 := by
     fin_cases b <;> simp
 ```
 
-To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use instead use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
+To instead use the standard Euclidean metric (also called the $L^2$ metric), you must use `EuclideanSpace ℝ (Fin n)`, which is an abbreviation for `WithLp 2 (Fin n → ℝ)`. Vectors of this type can be written using the `!₂[x,y,z,...]` notation.
 ```lean
 example : dist !₂[(1 : ℝ),0] !₂[0,1] = √2 := by
   norm_num [EuclideanSpace.dist_eq]
@@ -682,7 +682,7 @@ If you had instead tried to use the unprimed `induction` tactic, you would have 
 
 Note the presence of the `↑` in the tactic states. This represents a coercion, and it is one clue that the type of `n` might not be what you think it is.
 
-Becuase of these problems and others, if you have `(s : Set X)` as a parameter and you want to assume that `a` is an element of `s`, it is often better to add two parameters `(a : X) (ha : a ∈ S)` than to write `(a : s)`.
+Because of these problems and others, if you have `(s : Set X)` as a parameter and you want to assume that `a` is an element of `s`, it is often better to add two parameters `(a : X) (ha : a ∈ S)` than to write `(a : s)`.
 Similarly, if you want `t` to be a subset of `s`, you should declare `(t : Set X) (h : t ⊆ s)` rather than `(t : Set s)`.
 Using this coercion from `Set`s to types should usually be reserved for cases where you need to pass in a `Set` to another function that requires a type as input.
 
@@ -731,7 +731,7 @@ But computationally, `Float` follows the IEEE 754 *binary64* format, which is li
 This means that to prove anything meaningful about `Float`, you have to use `native_decide`, which is a risky tactic (see the section in this document on `native_decide`).
 
 Additionally, because of the behavior of floating point numbers, `0.1 + 0.2 == 0.3` evaluates to `false`.
-(See [https://0.30000000000000004.com/] for an explanation.)
+(See <https://0.30000000000000004.com/> for an explanation.)
 
 So, if you are not interested in using Lean as a programming language or otherwise want to prove complicated properties about the numbers you work with, you should avoid `Float` and use another numeric type such as `Rat` or `Real`.
 
@@ -767,7 +767,7 @@ Code contributed to Mathlib is not allowed to use `native_decide`.
 ## Panic does not abort
 
 If you are using Lean as a programming language, note that the `panic!` macro does not trigger a crash by default; instead, it just just prints an error message and lets the code keep running.
-This applies to functions like `Option.get!` as well. `panic` behaves this way because it is is a safe function, and it is formally equivalent to `default`.
+This applies to functions like `Option.get!` as well. `panic` behaves this way because it is a safe function, and it is formally equivalent to `default`.
 
 This can be dangerous if you are using panic to guard potentially dangerous `IO` operations or prevent data corruption.
 You may want to consider setting the environment variable `LEAN_ABORT_ON_PANIC` to `1`, although this might not be sufficient for user facing applications where environment variables are hard to control.
@@ -806,7 +806,7 @@ In the less common cases where lemmas are removed from mathlib, both terminal `s
 
 To avoid non-terminal `simp`s, you can use a simp variant like `simpa` or `simp_rw` to combine `simp` with the tactics that come after it, or you can "squeeze" your simp calls by using `simp?`.
 Note that it is fine for `simp` to appear in the middle of a proof as long as it fully closes a goal.
-For example, then even though the `simp` in
+For example, even though the `simp` in
 ```lean
   induction n with
   | zero =>
