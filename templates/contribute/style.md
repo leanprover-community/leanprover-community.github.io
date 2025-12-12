@@ -573,7 +573,7 @@ the form
 structure myDef where
     underlying : underlyingTerm
 ```
-is the library convention in place of `irreducible` definitions. These are
+is the library convention in place of `irreducible` definitions. These structure wrappers are
 intended for types that are equivalent to an existing type but are clearly
 mathematically semantically distinct, e.g. `Option` and `WithTop`.
 
