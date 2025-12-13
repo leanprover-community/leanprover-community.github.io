@@ -520,6 +520,80 @@ There are two main reasons for this:
 2. A squeezed `simp` call refers to many lemmas by name, meaning that it will break when one such
   lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.
 
+### Profiling for performance
+
+When contributing to mathlib, authors should be aware of the performance impacts
+of their contributions. The Lean FRO maintains benchmarking infrastructure which
+can be accessed by commenting `!bench` on a PR.
+
+Authors should assure that their contributions do not cause significant
+performance regressions. In particular, if the PR touches significant components
+of the language like adding instances, adding `simp` lemmas, changing imports,
+or creating new definitions, then authors should benchmark their changes
+proactively.
+
+### Transparency and API design
+
+Central to Lean being a practically performant proof assistant is avoiding
+checking of definitional equality for very large terms. In the elaborator (the
+component of the language that converts syntax to terms), the notion of
+transparency is the main mechanism to avoid unfolding large definitions when
+unnecessary. Excluding `opaque` definitions, there are three levels of
+transparency:
+- `reducible` definitions are always unfolded
+- `semireducible` definitions (the default) are usually not unfolded in main tactics like
+    `rw` and `simp`, but can be unfolded with a little effort like explicitly
+    calling `rfl` or `erw`. Semireducible definitions are also not unfolded during the
+    computation of keys for storing instances in the instance cache or simp
+    lemmas in the simp cache.
+- `irreducible` definitions are never unfolded unless the user explicitly
+    requests it (e.g using the `unfold` tactic, or by using the `unseal` command).
+
+`def` by default creates `semireducible` definitions and `abbrev` creates
+`reducible` (and `@[inline]`) definitions.
+
+When designing definitions, an author should give thought to the transparency level of
+definitions. Consider how exposing the underlying term of your definition will
+affect instance search and simplification. The default for mathlib is that definitions
+should be `semireducible` unless there is a good reason otherwise which should
+be clearly articulated in the PR description. This imposes overhead on
+contributors who will need to declare new instances of the form
+```lean4
+instance : Foo myDef := inferInstanceAs (Foo underlyingTermOfMyDef)
+```
+and recycle API lemmas, especially for `simp` use, like
+```lean4
+@[simp] lemma myDef_bar_eq_bizz (x : X) : myDef.bar = bizz :=
+    underlyingTermOfMyDef_bar_eq_bizz
+```
+
+If the API boundary is meant to be completely sealed, using a type synonym of
+the form
+```lean4
+structure myDef where
+    underlying : underlyingTerm
+```
+is the library convention in place of `irreducible` definitions. These structure wrappers are
+intended for types that are equivalent to an existing type but are clearly
+mathematically semantically distinct, e.g. `Option` and `WithTop`.
+
+The kernel does not have an analogous notion of transparency so its
+rules for unfolding are different. There are situations where an author wants
+to block unfolding in the kernel as well. Mathlib provides a command
+`irreducible_def` for this. This should be used only when there is a
+documented necessity from profiling.
+
+Use of `erw` or `rfl` after tactics like `simp` or `rw` that operate at
+reducible transparency is an indication that there is missing API.
+Consider adding the necessary lemmas to the API to avoid this.
+
+The library has existing occurrences of definitional transparency abuse
+like `erw` and extra `rfl`. PRs removing these are very welcome but their PR
+description should clearly articulate how the removal is achieved addressing the
+change in the underlying terms in particular and must benchmark their changes.
+Please treat this an opportunity to improve the API design of the relevant
+components.
+
 ### Whitespace and delimiters
 
 Lean is whitespace-sensitive, and in general we opt for a style which avoids
