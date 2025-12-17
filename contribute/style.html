@@ -525,6 +525,74 @@ to close the goal in a sea of basic simp lemmas.</li>
 <li>A squeezed <code>simp</code> call refers to many lemmas by name, meaning that it will break when one such
 lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.</li>
 </ol>
+<h3 id="profiling-for-performance" class="markdown-heading">Profiling for performance <a class="hover-link" href="#profiling-for-performance">#</a></h3>
+<p>When contributing to mathlib, authors should be aware of the performance impacts
+of their contributions. The Lean FRO maintains benchmarking infrastructure which
+can be accessed by commenting <code>!bench</code> on a PR.</p>
+<p>Authors should assure that their contributions do not cause significant
+performance regressions. In particular, if the PR touches significant components
+of the language like adding instances, adding <code>simp</code> lemmas, changing imports,
+or creating new definitions, then authors should benchmark their changes
+proactively.</p>
+<h3 id="transparency-and-api-design" class="markdown-heading">Transparency and API design <a class="hover-link" href="#transparency-and-api-design">#</a></h3>
+<p>Central to Lean being a practically performant proof assistant is avoiding
+checking of definitional equality for very large terms. In the elaborator (the
+component of the language that converts syntax to terms), the notion of
+transparency is the main mechanism to avoid unfolding large definitions when
+unnecessary. Excluding <code>opaque</code> definitions, there are three levels of
+transparency:</p>
+<ul>
+<li><code>reducible</code> definitions are always unfolded</li>
+<li><code>semireducible</code> definitions (the default) are usually not unfolded in main tactics like
+<code>rw</code> and <code>simp</code>, but can be unfolded with a little effort like explicitly
+calling <code>rfl</code> or <code>erw</code>. Semireducible definitions are also not unfolded during the
+computation of keys for storing instances in the instance cache or simp
+lemmas in the simp cache.</li>
+<li><code>irreducible</code> definitions are never unfolded unless the user explicitly
+requests it (e.g using the <code>unfold</code> tactic, or by using the <code>unseal</code> command).</li>
+</ul>
+<p><code>def</code> by default creates <code>semireducible</code> definitions and <code>abbrev</code> creates
+<code>reducible</code> (and <code>@[inline]</code>) definitions.</p>
+<p>When designing definitions, an author should give thought to the transparency level of
+definitions. Consider how exposing the underlying term of your definition will
+affect instance search and simplification. The default for mathlib is that definitions
+should be <code>semireducible</code> unless there is a good reason otherwise which should
+be clearly articulated in the PR description. This imposes overhead on
+contributors who will need to declare new instances of the form</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">instance</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="n">myDef</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">inferInstanceAs</span><span class="w"> </span><span class="o">(</span><span class="n">Foo</span><span class="w"> </span><span class="n">underlyingTermOfMyDef</span><span class="o">)</span>
+</code></pre></div>
+</div>
+
+<p>and recycle API lemmas, especially for <code>simp</code> use, like</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kn">lemma</span><span class="w"> </span><span class="n">myDef_bar_eq_bizz</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">myDef</span><span class="bp">.</span><span class="n">bar</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">bizz</span><span class="w"> </span><span class="o">:=</span>
+<span class="w">    </span><span class="n">underlyingTermOfMyDef_bar_eq_bizz</span>
+</code></pre></div>
+</div>
+
+<p>If the API boundary is meant to be completely sealed, using a type synonym of
+the form</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">structure</span><span class="w"> </span><span class="n">myDef</span><span class="w"> </span><span class="kn">where</span>
+<span class="w">    </span><span class="n">underlying</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">underlyingTerm</span>
+</code></pre></div>
+</div>
+
+<p>is the library convention in place of <code>irreducible</code> definitions. These structure wrappers are
+intended for types that are equivalent to an existing type but are clearly
+mathematically semantically distinct, e.g. <code>Option</code> and <code>WithTop</code>.</p>
+<p>The kernel does not have an analogous notion of transparency so its
+rules for unfolding are different. There are situations where an author wants
+to block unfolding in the kernel as well. Mathlib provides a command
+<code>irreducible_def</code> for this. This should be used only when there is a
+documented necessity from profiling.</p>
+<p>Use of <code>erw</code> or <code>rfl</code> after tactics like <code>simp</code> or <code>rw</code> that operate at
+reducible transparency is an indication that there is missing API.
+Consider adding the necessary lemmas to the API to avoid this.</p>
+<p>The library has existing occurrences of definitional transparency abuse
+like <code>erw</code> and extra <code>rfl</code>. PRs removing these are very welcome but their PR
+description should clearly articulate how the removal is achieved addressing the
+change in the underlying terms in particular and must benchmark their changes.
+Please treat this an opportunity to improve the API design of the relevant
+components.</p>
 <h3 id="whitespace-and-delimiters" class="markdown-heading">Whitespace and delimiters <a class="hover-link" href="#whitespace-and-delimiters">#</a></h3>
 <p>Lean is whitespace-sensitive, and in general we opt for a style which avoids
 delimiting code. For instance, when writing tactics, it is possible to write
