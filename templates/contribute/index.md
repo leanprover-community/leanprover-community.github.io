@@ -61,6 +61,10 @@ style violations documented in this guide are welcome. Other stylistic PRs that 
 approval by the authors of the affected files may be closed. We invite authors to instead discuss the proposed
 change on Zulip and, when significant consensus among reviewers is reached, to open a PR to the style guide.
 
+## Use of AI
+
+If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like ChatGPT or using an agent like Codex, Claude or Gemini), please disclose so in the PR description. Explain which tool(s) you used and how you used it. This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors.
+
 ## Working on mathlib
 
 We use `git` to manage and version control `mathlib`.
