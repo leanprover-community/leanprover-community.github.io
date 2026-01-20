@@ -248,7 +248,7 @@ In mathlib, `Prop` and `Bool` may be assigned different instances for typeclasse
 
 ## Not checking for distinctness
 
-Consider the following statement of the pigeonhole principle, which states that if $f : A \to B$ is a function betwen finite sets and $|A| > |B|$, then there exists two distinct elements in $A$ which $f$ maps to the same element of $B$:
+Consider the following statement of the pigeonhole principle, which states that if $f : A \to B$ is a function between finite sets and $|A| > |B|$, then there exist two distinct elements in $A$ which $f$ maps to the same element of $B$:
 ```lean
 import Mathlib.Data.Fintype.Card
 
