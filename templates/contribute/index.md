@@ -158,6 +158,7 @@ However, anyone can add/remove the labels below by writing the following command
 - `-WIP` will remove the **"WIP"** label
 - `easy` will add the **"easy"** label
 - `-easy` will remove the **"easy"** label
+- Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **sphere-packing** and **toric** can also be added and removed in the same way.
 
 This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
 
