@@ -63,6 +63,8 @@ change on Zulip and, when significant consensus among reviewers is reached, to o
 
 ## Use of AI
 
+Using artificial intelligence tools to generate code is becoming more and more common. While this can be practical, their use also poses ethical, ecological, legal and social concerns. We recognise that there are strong differences in opinion on this topic, and do not enforce a strict ban. That said, while individual action alone will not address these concerns, we ask you to consider the effects of your AI use and if it is truly necessary.
+
 If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like ChatGPT or using an agent like Codex, Claude or Gemini), please explain this in the PR description. Explain which tool(s) you used and how you used it. This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors.
 
 It is essential that you can vouch for all the code submitted in a PR, and understand all the content written by an AI. If you don't, then it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
