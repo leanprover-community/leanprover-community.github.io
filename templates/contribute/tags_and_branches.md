@@ -1,6 +1,6 @@
 # The Lean Github ecosystem
 
-Documentation of the branches, tags, and CI workflows relevant for making pull requests to Lean, Std, and
+Documentation of the branches, tags, and CI workflows relevant for making pull requests to Lean, Batteries, and
 Mathlib.
 
 * [Things you need to know](#things-you-need-to-know) is relevant for everyone
@@ -36,23 +36,23 @@ Mathlib.
 * Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
   To use PR #NNNN in a project, your `lean-toolchain` file should contain
   `leanprover/lean4-pr-releases:pr-release-NNNN`.
-* For any PR that potentially affects Std or Mathlib, you should base your PR off the HEAD of the `nightly-with-mathlib` branch.
+* For any PR that potentially affects Batteries or Mathlib, you should base your PR off the HEAD of the `nightly-with-mathlib` branch.
   In that case, a `lean-pr-testing-NNNN` Mathlib branch is created, described in detail below, and results from this branch are
   reported via comments in the PR discussion.
 
-### `leanprover/std4` (aka 'Std')
+### `leanprover-community/batteries` (aka 'Batteries')
 
 * Development occurs on `main`.
-* Std uses the latest stable release or release candidate in its `lean-toolchain`.
+* Batteries uses the latest stable release or release candidate in its `lean-toolchain`.
   * Because we release `v4.X+1.0-rc1` immediately after releasing `v4.X.0`,
-    Std is only very briefly on stable releases.
+    Batteries is only very briefly on stable releases.
 * The first commit on `main` which uses a new toolchain is tagged with the version number of that
   toolchain (e.g. `v4.2.0`).
 * There is a branch `stable` which follows the `v4.X.0` tags.
-* Std has a branch `bump/v4.X.0` for the upcoming stable release of Lean,
+* Batteries has a branch `bump/v4.X.0` for the upcoming stable release of Lean,
   * which contains adaptations for breaking changes that have been approved by the maintainers
   * and which will be using a `leanprover-lean4:nightly-YYYY-MM-DD` toolchain.
-* Std has a branch `nightly-testing` which
+* Batteries has a branch `nightly-testing` which
   * uses a recent nightly release (this is updated automatically)
   * has all commits from `main` merged into it automatically
   * may have any changes from `bump/v4.X.0` merged into it manually
@@ -65,18 +65,18 @@ Mathlib.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
     * the `lean-toolchain` is `leanprover/lean4:nightly-YYYY-MM-DD`, and
     * CI succeeds.
-* When changes are required to Std to adapt to a breaking change in Lean,
+* When changes are required to Batteries to adapt to a breaking change in Lean,
   you will need to make a branch, and later open a PR from that branch.
   (Note that the steps below happen automatically at Mathlib,
-  but need to be done manually for Std.)
+  but need to be done manually for Batteries.)
   * If the change was made in `leanprover/lean4#NNNN`,
-    then the Std adaptation branch should be called `lean-pr-testing-NNNN`.
-  * The Std adaptation branch should be based off the tag `nightly-testing-YYYY-MM-DD`
+    then the Batteries adaptation branch should be called `lean-pr-testing-NNNN`.
+  * The Batteries adaptation branch should be based off the tag `nightly-testing-YYYY-MM-DD`
     where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off.
   * If the `nightly-testing-YYYY-MM-DD` tag does not yet exist, you will need to wait
     (and possibly move forward to a subsequent nightly).
     Contact @semorrison for assistance if needed.
-  * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Std repository;
+  * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Batteries repository;
     we can provide write access if needed.
   * The `lean-toolchain` on this branch must contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
   * You may open a PR from the `lean-pr-testing-NNNN` branch, either before or after
@@ -84,21 +84,21 @@ Mathlib.
   * When opening the PR, remember to set the base branch to `nightly-testing`.
   * Please label the PR with the `v4.X.0` and 'depends on core changes' labels.
     (Or ask for this to be done if you don't have write access.)
-  * Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
+  * Once the Lean PR has been merged and published in a nightly release, the Batteries adaptation PR
     * should have its `lean-toolchain` updated to `leanprover/lean4:nightly-YYYY-MM-DD`
     * its changes may be merged manually into `nightly-testing` as needed to keep `nightly-testing`
       working (do not change the base and merge the PR, we still need it).
-  * Once the Std adaptation PR has been approved,
+  * Once the Batteries adaptation PR has been approved,
     a maintainer will merge it into `bump/v4.X.0` (not `nightly-testing-YYYY-MM-DD`).
 * It is always allowed to merge `bump/v4.X.0` into `nightly-testing`, but not conversely.
   (Changes to `bump/v4.X.0` have been reviewed, but changes to `nightly-testing` may not have been.)
-* When it is time to update Std to a new Lean release,
+* When it is time to update Batteries to a new Lean release,
   *hopefully* all that is required is to make a new PR
   consisting of squash merging `bump/v4.X.0` to `main`.
 
 ### `leanprover-community/mathlib4` (aka 'Mathlib')
 
-* Everything said above about Std applies to Mathlib, except:
+* Everything said above about Batteries applies to Mathlib, except:
   * Development occurs on `master`.
   * All PRs to Mathlib should be made from branches of the Mathlib repository itself.
     * This is required for Mathlib's `.olean` caching mechanism.
@@ -106,12 +106,12 @@ Mathlib.
       Please write a sentence about your background and plans.
 * The `nightly-testing-*` tags and `bump/v4*` branches are write protected,
   so may only be modified via PRs, maintainers, or the relevant bots.
-* Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Std as required.
-* Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Std as required.
+* Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Batteries as required.
+* Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Batteries as required.
 * Branches `lean-pr-testing-NNNN` are automatically created for any Lean PR that passes CI,
-  and is based off a nightly release. (Unlike for Std, where they must be created manually.)
-* Mathlib adaptation PRs on `lean-pr-testing-NNNN` branches may need to change the Std dependency
-  to use a `lean-pr-testing-NNNN` branch of Std, if Std also experiences breakages.
+  and is based off a nightly release. (Unlike for Batteries, where they must be created manually.)
+* Mathlib adaptation PRs on `lean-pr-testing-NNNN` branches may need to change the Batteries dependency
+  to use a `lean-pr-testing-NNNN` branch of Batteries, if Batteries also experiences breakages.
 
 ### Mathlib nightly and bump branches
 
@@ -151,7 +151,7 @@ To make this process as smooth as possible, we follow the following procedure:
 * For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.
 * For this to work, you will need to rebase your PR onto the `nightly-with-mathlib` branch.
   The `nightly-with-mathlib` branch points to the latest nightly lean release which passes mathlib CI,
-  and for which a `nightly-testing-YYYY-MM-DD` tag exists on Mathlib (and possibly Std).
+  and for which a `nightly-testing-YYYY-MM-DD` tag exists on Mathlib (and possibly Batteries).
 * The bot will create a `lean-pr-testing-NNNN` branch at Mathlib from the `nightly-testing-YYYY-MM-DD` tag,
   or push an empty commit to it if it already exists.
 * Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
@@ -165,4 +165,4 @@ To make this process as smooth as possible, we follow the following procedure:
   to wait for `nightly-with-mathlib` to be updated and rebase onto that.
 
 
-<img src="img/tags_and_branches.png" alt="Overview of branches at Mathlib/Std" width="80%"/>
+<img src="img/tags_and_branches.png" alt="Overview of branches at Mathlib/Batteries" width="80%"/>
