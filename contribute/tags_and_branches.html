@@ -49,7 +49,7 @@
   <main>
     
 <h1 id="the-lean-github-ecosystem" class="markdown-heading">The Lean Github ecosystem <a class="hover-link" href="#the-lean-github-ecosystem">#</a></h1>
-<p>Documentation of the branches, tags, and CI workflows relevant for making pull requests to Lean, Std, and
+<p>Documentation of the branches, tags, and CI workflows relevant for making pull requests to Lean, Batteries, and
 Mathlib.</p>
 <ul>
 <li><a href="#things-you-need-to-know">Things you need to know</a> is relevant for everyone</li>
@@ -96,29 +96,29 @@ used to construct a nightly release.</li>
 <li>Every PR automatically receives a toolchain after it builds successfully. The PR will then have label <code>toolchain-available</code>.
 To use PR #NNNN in a project, your <code>lean-toolchain</code> file should contain
 <code>leanprover/lean4-pr-releases:pr-release-NNNN</code>.</li>
-<li>For any PR that potentially affects Std or Mathlib, you should base your PR off the HEAD of the <code>nightly-with-mathlib</code> branch.
+<li>For any PR that potentially affects Batteries or Mathlib, you should base your PR off the HEAD of the <code>nightly-with-mathlib</code> branch.
 In that case, a <code>lean-pr-testing-NNNN</code> Mathlib branch is created, described in detail below, and results from this branch are
 reported via comments in the PR discussion.</li>
 </ul>
-<h3 id="leanproverstd4-aka-std" class="markdown-heading"><code>leanprover/std4</code> (aka 'Std') <a class="hover-link" href="#leanproverstd4-aka-std">#</a></h3>
+<h3 id="leanprover-communitybatteries-aka-batteries" class="markdown-heading"><code>leanprover-community/batteries</code> (aka 'Batteries') <a class="hover-link" href="#leanprover-communitybatteries-aka-batteries">#</a></h3>
 <ul>
 <li>Development occurs on <code>main</code>.</li>
-<li>Std uses the latest stable release or release candidate in its <code>lean-toolchain</code>.
+<li>Batteries uses the latest stable release or release candidate in its <code>lean-toolchain</code>.
 <ul>
 <li>Because we release <code>v4.X+1.0-rc1</code> immediately after releasing <code>v4.X.0</code>,
-Std is only very briefly on stable releases.</li>
+Batteries is only very briefly on stable releases.</li>
 </ul>
 </li>
 <li>The first commit on <code>main</code> which uses a new toolchain is tagged with the version number of that
 toolchain (e.g. <code>v4.2.0</code>).</li>
 <li>There is a branch <code>stable</code> which follows the <code>v4.X.0</code> tags.</li>
-<li>Std has a branch <code>bump/v4.X.0</code> for the upcoming stable release of Lean,
+<li>Batteries has a branch <code>bump/v4.X.0</code> for the upcoming stable release of Lean,
 <ul>
 <li>which contains adaptations for breaking changes that have been approved by the maintainers</li>
 <li>and which will be using a <code>leanprover-lean4:nightly-YYYY-MM-DD</code> toolchain.</li>
 </ul>
 </li>
-<li>Std has a branch <code>nightly-testing</code> which
+<li>Batteries has a branch <code>nightly-testing</code> which
 <ul>
 <li>uses a recent nightly release (this is updated automatically)</li>
 <li>has all commits from <code>main</code> merged into it automatically</li>
@@ -140,19 +140,19 @@ branch working against recent nightly releases.</li>
 </li>
 </ul>
 </li>
-<li>When changes are required to Std to adapt to a breaking change in Lean,
+<li>When changes are required to Batteries to adapt to a breaking change in Lean,
 you will need to make a branch, and later open a PR from that branch.
 (Note that the steps below happen automatically at Mathlib,
-but need to be done manually for Std.)
+but need to be done manually for Batteries.)
 <ul>
 <li>If the change was made in <code>leanprover/lean4#NNNN</code>,
-then the Std adaptation branch should be called <code>lean-pr-testing-NNNN</code>.</li>
-<li>The Std adaptation branch should be based off the tag <code>nightly-testing-YYYY-MM-DD</code>
+then the Batteries adaptation branch should be called <code>lean-pr-testing-NNNN</code>.</li>
+<li>The Batteries adaptation branch should be based off the tag <code>nightly-testing-YYYY-MM-DD</code>
 where <code>YYYY-MM-DD</code> is the date of the nightly release that your Lean PR is based off.</li>
 <li>If the <code>nightly-testing-YYYY-MM-DD</code> tag does not yet exist, you will need to wait
 (and possibly move forward to a subsequent nightly).
 Contact @semorrison for assistance if needed.</li>
-<li>Ideally you will push the <code>lean-pr-testing-NNNN</code> branch to the main Std repository;
+<li>Ideally you will push the <code>lean-pr-testing-NNNN</code> branch to the main Batteries repository;
 we can provide write access if needed.</li>
 <li>The <code>lean-toolchain</code> on this branch must contain <code>leanprover/lean4-pr-releases:pr-release-NNNN</code>.</li>
 <li>You may open a PR from the <code>lean-pr-testing-NNNN</code> branch, either before or after
@@ -160,26 +160,26 @@ making the required adaptations.</li>
 <li>When opening the PR, remember to set the base branch to <code>nightly-testing</code>.</li>
 <li>Please label the PR with the <code>v4.X.0</code> and 'depends on core changes' labels.
 (Or ask for this to be done if you don't have write access.)</li>
-<li>Once the Lean PR has been merged and published in a nightly release, the Std adaptation PR
+<li>Once the Lean PR has been merged and published in a nightly release, the Batteries adaptation PR
 <ul>
 <li>should have its <code>lean-toolchain</code> updated to <code>leanprover/lean4:nightly-YYYY-MM-DD</code></li>
 <li>its changes may be merged manually into <code>nightly-testing</code> as needed to keep <code>nightly-testing</code>
 working (do not change the base and merge the PR, we still need it).</li>
 </ul>
 </li>
-<li>Once the Std adaptation PR has been approved,
+<li>Once the Batteries adaptation PR has been approved,
 a maintainer will merge it into <code>bump/v4.X.0</code> (not <code>nightly-testing-YYYY-MM-DD</code>).</li>
 </ul>
 </li>
 <li>It is always allowed to merge <code>bump/v4.X.0</code> into <code>nightly-testing</code>, but not conversely.
 (Changes to <code>bump/v4.X.0</code> have been reviewed, but changes to <code>nightly-testing</code> may not have been.)</li>
-<li>When it is time to update Std to a new Lean release,
+<li>When it is time to update Batteries to a new Lean release,
 <em>hopefully</em> all that is required is to make a new PR
 consisting of squash merging <code>bump/v4.X.0</code> to <code>main</code>.</li>
 </ul>
 <h3 id="leanprover-communitymathlib4-aka-mathlib" class="markdown-heading"><code>leanprover-community/mathlib4</code> (aka 'Mathlib') <a class="hover-link" href="#leanprover-communitymathlib4-aka-mathlib">#</a></h3>
 <ul>
-<li>Everything said above about Std applies to Mathlib, except:
+<li>Everything said above about Batteries applies to Mathlib, except:
 <ul>
 <li>Development occurs on <code>master</code>.</li>
 <li>All PRs to Mathlib should be made from branches of the Mathlib repository itself.
@@ -193,12 +193,12 @@ Please write a sentence about your background and plans.</li>
 </li>
 <li>The <code>nightly-testing-*</code> tags and <code>bump/v4*</code> branches are write protected,
 so may only be modified via PRs, maintainers, or the relevant bots.</li>
-<li>Note that the <code>nightly-testing</code> branch of Mathlib may use the <code>nightly-testing</code> branch of Std as required.</li>
-<li>Similarly a <code>bump/v4.X.0</code> branch of Mathlib may use the <code>bump/v4.X.0</code> branch of Std as required.</li>
+<li>Note that the <code>nightly-testing</code> branch of Mathlib may use the <code>nightly-testing</code> branch of Batteries as required.</li>
+<li>Similarly a <code>bump/v4.X.0</code> branch of Mathlib may use the <code>bump/v4.X.0</code> branch of Batteries as required.</li>
 <li>Branches <code>lean-pr-testing-NNNN</code> are automatically created for any Lean PR that passes CI,
-and is based off a nightly release. (Unlike for Std, where they must be created manually.)</li>
-<li>Mathlib adaptation PRs on <code>lean-pr-testing-NNNN</code> branches may need to change the Std dependency
-to use a <code>lean-pr-testing-NNNN</code> branch of Std, if Std also experiences breakages.</li>
+and is based off a nightly release. (Unlike for Batteries, where they must be created manually.)</li>
+<li>Mathlib adaptation PRs on <code>lean-pr-testing-NNNN</code> branches may need to change the Batteries dependency
+to use a <code>lean-pr-testing-NNNN</code> branch of Batteries, if Batteries also experiences breakages.</li>
 </ul>
 <h3 id="mathlib-nightly-and-bump-branches" class="markdown-heading">Mathlib nightly and bump branches <a class="hover-link" href="#mathlib-nightly-and-bump-branches">#</a></h3>
 <p>Every month there is a new Lean release,
@@ -249,7 +249,7 @@ This merge is essentially atomic, since the diff has already been reviewed via a
 <li>For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.</li>
 <li>For this to work, you will need to rebase your PR onto the <code>nightly-with-mathlib</code> branch.
 The <code>nightly-with-mathlib</code> branch points to the latest nightly lean release which passes mathlib CI,
-and for which a <code>nightly-testing-YYYY-MM-DD</code> tag exists on Mathlib (and possibly Std).</li>
+and for which a <code>nightly-testing-YYYY-MM-DD</code> tag exists on Mathlib (and possibly Batteries).</li>
 <li>The bot will create a <code>lean-pr-testing-NNNN</code> branch at Mathlib from the <code>nightly-testing-YYYY-MM-DD</code> tag,
 or push an empty commit to it if it already exists.</li>
 <li>Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
@@ -262,7 +262,7 @@ will commence as soon as that nightly release itself passes the Mathlib CI and y
 <li>It may be the case that that nightly release never passes the Mathlib CI. In that case you may have
 to wait for <code>nightly-with-mathlib</code> to be updated and rebase onto that.</li>
 </ul>
-<img src="https://leanprover-community.github.io//img/tags_and_branches.png" alt="Overview of branches at Mathlib/Std" width="80%"/>
+<img src="https://leanprover-community.github.io//img/tags_and_branches.png" alt="Overview of branches at Mathlib/Batteries" width="80%"/>
 
   </main>
 
