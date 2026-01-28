@@ -167,6 +167,7 @@ However, anyone can add/remove the labels below by writing the following command
 - `easy` will add the **"easy"** label
 - `-easy` will remove the **"easy"** label
 - Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **sphere-packing** and **toric** can also be added and removed in the same way.
+- Any topic label of the form `t-*` (e.g. `t-topology`) can also be added and removed in the same way. PRs are auto-labeled based on their contents, but sometimes the auto-labeling is incorrect or incomplete so this lets you manually override it. You can browse existing PRs to see the available topic labels.
 
 This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
 
