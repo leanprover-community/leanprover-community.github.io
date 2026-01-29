@@ -96,3 +96,121 @@ def myNat : Nat := 5
 
 - After deleting some code, you can then delete all the declarations that were only referenced there. By repeating this process a few times, you may be able to shorten a long file to just a few lines.
 - Finally, you can add a comment into the code like `-- HERE`, `-- TODO`, `-- ERROR: yada yada`, or similar to guide the attention to a certain part in your MWE.
+
+## Bug reports and feature requests for Lean
+
+*This section is aimed at experienced users filing bug reports or feature requests for Lean itself. If you are a beginner asking questions on Zulip, the advice above is sufficient—you don't need to worry about this section.*
+
+When reporting unexpected behavior in Lean (whether a bug or a feature request), it helps to make your example as precise and reproducible as possible. Two techniques are especially valuable:
+
+### Using `#guard_msgs` to capture expected output
+
+The `#guard_msgs` command lets you embed the expected compiler output directly in your code. This makes your example unambiguous: anyone running it will immediately see whether they can reproduce the issue.
+
+#### Basic usage
+
+The expected output goes in a **doc comment before** `#guard_msgs`, and must match exactly:
+
+```lean
+/-- info: Nat.add : Nat → Nat → Nat -/
+#guard_msgs in
+#check Nat.add
+```
+
+If the output doesn't match, `#guard_msgs` will show you a diff:
+
+```lean
+-- This fails because #check Nat.mul produces different output
+/-- info: Nat.add : Nat → Nat → Nat -/
+#guard_msgs in
+#check Nat.mul
+```
+
+#### Documenting errors
+
+```lean
+/--
+error: Application type mismatch: The argument
+  true
+has type
+  Bool
+but is expected to have type
+  Nat
+in the application
+  Nat.succ true
+---
+info: sorry.succ : Nat
+-/
+#guard_msgs in
+#check Nat.succ true
+```
+
+#### Using `drop` to ignore message categories
+
+Use `drop info` or `drop warning` to ignore entire categories of messages:
+
+```lean
+#guard_msgs (drop info) in
+#check Nat.add
+```
+
+#### Using `substring` for partial matching
+
+When you only care about part of the output, use `#guard_msgs (substring := true)`. The doc comment just needs to contain text that appears somewhere in the actual output:
+
+```lean
+/-- Nat.add -/
+#guard_msgs (substring := true) in
+#check Nat.add
+```
+
+This is particularly useful for:
+- **Timeout errors**: Match the key part without the variable heartbeat count
+- **Long error messages**: Focus on the key part you want to demonstrate
+- **Version-sensitive output**: Match only the stable portion
+
+#### Documenting timeouts
+
+For performance issues, combine `set_option maxHeartbeats` with `#guard_msgs (substring := true)`:
+
+```lean
+set_option maxHeartbeats 1 in
+/-- maximum number of heartbeats (1) has been reached -/
+#guard_msgs (substring := true) in
+example : True := by trivial
+```
+
+This precisely captures "this code times out with the given heartbeat limit."
+
+#### Stabilizing metavariable names with `pp.mvars`
+
+Error messages often include metavariable names like `?m.47` which change between runs. Use `set_option pp.mvars false` to replace them with stable `?_` placeholders:
+
+```lean
+set_option pp.mvars false in
+/--
+error: Type mismatch
+  rfl
+has type
+  ?_ = ?_
+but is expected to have type
+  1 + 1 = 3
+-/
+#guard_msgs in
+example : 1 + 1 = 3 := rfl
+```
+
+Without `pp.mvars false`, you'd have to match exact names like `?m.16 = ?m.16`, which break whenever the surrounding code changes.
+
+### Mathlib-free minimizations
+
+For bug reports to the Lean repository, examples that don't depend on Mathlib are much more actionable. A Mathlib-free example:
+
+- Can be tested against any Lean version without compatibility issues
+- Makes it easier to bisect which Lean commit introduced a regression
+- Removes the possibility that the bug is in Mathlib rather than Lean
+- Is faster to compile when developers are iterating on a fix
+
+Of course, producing a Mathlib-free example can be tedious. [**lean-minimizer**](https://github.com/kim-em/lean-minimizer) can help automate this. It works by repeatedly trying to remove or simplify parts of your code—including inlining and removing imports—while preserving the error you're trying to demonstrate. The process can take a while, but the result is often a tiny, self-contained example that makes the bug obvious.
+
+For Mathlib-dependent code, [**mathlib-minimizer**](https://github.com/kim-em/mathlib-minimizer) is a convenience project that bundles lean-minimizer with Mathlib as a dependency, so you can run the minimizer without setting up the dependencies yourself.
