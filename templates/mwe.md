@@ -203,7 +203,6 @@ but is expected to have type
 example : 1 + 1 = 3 := rfl
 ```
 
-Without `pp.mvars false`, you'd have to match exact names like `?m.16 = ?m.16`, which break whenever the surrounding code changes.
 
 ### Mathlib-free minimizations
 
