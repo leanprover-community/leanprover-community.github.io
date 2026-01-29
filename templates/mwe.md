@@ -182,7 +182,6 @@ set_option maxHeartbeats 1 in
 example : True := by trivial
 ```
 
-This precisely captures "this code times out with the given heartbeat limit."
 
 #### Stabilizing metavariable names with `pp.mvars`
 
