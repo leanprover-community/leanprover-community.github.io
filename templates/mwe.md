@@ -207,7 +207,6 @@ Without `pp.mvars false`, you'd have to match exact names like `?m.16 = ?m.16`, 
 
 For bug reports to the Lean repository, examples that don't depend on Mathlib are much more actionable. A Mathlib-free example:
 
-- Can be tested against any Lean version without compatibility issues
 - Makes it easier to bisect which Lean commit introduced a regression
 - Removes the possibility that the bug is in Mathlib rather than Lean
 - Is faster to compile when developers are iterating on a fix
