@@ -103,7 +103,7 @@ def myNat : Nat := 5
 
 *This section is aimed at experienced users filing bug reports or feature requests for Lean itself. If you are a beginner asking questions on Zulip, the advice above is sufficient—you don't need to worry about this section.*
 
-When reporting unexpected behavior in Lean (whether a bug or a feature request), it helps to make your example as precise and reproducible as possible. Two techniques are especially valuable:
+When reporting unexpected behavior in Lean (whether a bug or a feature request), it helps to make your example as precise and reproducible as possible. Two techniques are especially valuable: `#guard_msgs` and the `lean-minimizer` project.
 
 ### Using `#guard_msgs` to capture expected output
 
