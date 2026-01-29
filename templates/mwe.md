@@ -97,6 +97,8 @@ def myNat : Nat := 5
 - After deleting some code, you can then delete all the declarations that were only referenced there. By repeating this process a few times, you may be able to shorten a long file to just a few lines.
 - Finally, you can add a comment into the code like `-- HERE`, `-- TODO`, `-- ERROR: yada yada`, or similar to guide the attention to a certain part in your MWE.
 
+---
+
 ## Bug reports and feature requests for Lean
 
 *This section is aimed at experienced users filing bug reports or feature requests for Lean itself. If you are a beginner asking questions on Zulip, the advice above is sufficient—you don't need to worry about this section.*
