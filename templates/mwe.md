@@ -128,6 +128,8 @@ If the output doesn't match, `#guard_msgs` will show you a diff:
 #check Nat.mul
 ```
 
+`#guard_msgs` provides a code action which will add or update the doc comment if it doesn't match the output. (In particular, it is not necessary to manually copy and paste the text when setting it up!)
+
 #### Documenting errors
 
 ```lean
