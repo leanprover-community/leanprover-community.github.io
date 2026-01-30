@@ -740,3 +740,10 @@ We allow, but discourage, contributors from simultaneously renaming declarations
 In this case, no deprecation attribute is required for X, but it is for W.
 
 Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.
+
+### Avoid `nonrec`
+
+The `nonrec` keyword tells Lean to assume that apparently recursive calls in the declaration body
+are not actually recursive, and instead look for declarations in other namespaces with the same name.
+Avoid `nonrec` when the recursive call conflicts with another declaration *in a namespace*, because then adding the namespace to that declaration is more informative (to both Lean and the user). If it conflicts with a declaration in the root namespace, then both `nonrec` and `_root_.[...]` are acceptable. Sometimes avoiding `nonrec` requires forgoing the use of dot notation within the body of that declaration.
+(There are currently many places in Mathlib that break this rule.)
