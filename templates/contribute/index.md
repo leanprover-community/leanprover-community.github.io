@@ -162,12 +162,15 @@ Labels can only be edited directly by "GitHub collaborators", which is approxima
 However, anyone can add/remove the labels below by writing the following commands in a comment on the PR (each on its own line):
 - `awaiting-author` will add the **"awaiting-author"** label
 - `-awaiting-author` will remove the **"awaiting-author"** label
+- `awaiting-zulip` will add the **"awaiting-zulip"** label
+- `-awaiting-zulip` will remove the **"awaiting-zulip"** label. Use this once a decision has been reached and has been implemented.
 - `WIP` will add the **"WIP"** label
 - `-WIP` will remove the **"WIP"** label
 - `easy` will add the **"easy"** label
 - `-easy` will remove the **"easy"** label
-- Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **sphere-packing** and **toric** can also be added and removed in the same way.
-- Any topic label of the form `t-*` (e.g. `t-topology`) can also be added and removed in the same way. PRs are auto-labeled based on their contents, but sometimes the auto-labeling is incorrect or incomplete so this lets you manually override it. See [available topic labels](https://github.com/leanprover-community/mathlib4/labels?q=t-).
+- `help-wanted`, `-help-wanted`, `please-adopt`, `-please-adopt` can be used to mark a PR in need of external input.
+- Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **infinity-cosmos**, **sphere-packing** and **toric** can also be added and removed in the same way.
+- Any topic label of the form `t-*` (e.g. `t-topology`), as well as the labels `CI` and `IMO`,  can also be added and removed in the same way. PRs are auto-labeled based on their contents, but sometimes the auto-labeling is incorrect or incomplete so this lets you manually override it. See [available topic labels](https://github.com/leanprover-community/mathlib4/labels?q=t-).
 
 This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
 
