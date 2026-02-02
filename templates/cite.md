@@ -6,6 +6,7 @@ If you use mathlib in your work, please cite it using the following reference:
 
 ## BibTeX
 
+{% raw %}
 ```bibtex
 @inproceedings{mathlib2020,
   author = {{The mathlib Community}},
@@ -21,6 +22,7 @@ If you use mathlib in your work, please cite it using the following reference:
   url = {https://doi.org/10.1145/3372885.3373824}
 }
 ```
+{% endraw %}
 
 ## arXiv preprint
 
