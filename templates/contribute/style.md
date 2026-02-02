@@ -181,11 +181,16 @@ theorem mem_split {x : T} {l : List T} : x ∈ l → ∃ s t : List T, l = s ++ 
           have H4 : y  ::  l = (y :: s) ++ (x :: t) := by rw [H3]; rfl
           Exists.intro (y :: s) (Exists.intro t H4)))
 ```
-The type of all arguments of a declaration should be given,
+The type of all arguments of a declaration should be given explicitly,
 even if Lean can figure out this type information by itself.
 This makes it easier to understand the definition when seeing it on a webpage like GitHub.
 For the same reason, the return type of all declarations should also be given
 (Lean enforces this only for theorems).
+So you should follow the style of `GoodStatement` in this example:
+```lean
+def BadStatement (n) := ∃ k, n + k = 3
+def GoodStatement (n : ℕ) : Prop := ∃ k : ℕ, n + k = 3
+```
 
 A short declaration can be written on a single line:
 ```lean
