@@ -168,10 +168,6 @@ When you only care about part of the output, use `#guard_msgs (substring := true
 #check Nat.add
 ```
 
-This is particularly useful for:
-- **Timeout errors**: Match the key part without the variable heartbeat count
-- **Long error messages**: Focus on the key part you want to demonstrate
-- **Version-sensitive output**: Match only the stable portion
 
 #### Documenting timeouts
 
