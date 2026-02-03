@@ -183,7 +183,7 @@ example : True := by trivial
 
 #### Stabilizing metavariable names with `pp.mvars`
 
-Error messages often include metavariable names like `?m.47` which change between runs. Use `set_option pp.mvars false` to replace them with stable `?_` placeholders:
+Error messages often include metavariable names like `?m.47` which change between runs. Use `set_option pp.mvars.anonymous false` to replace them with stable `?_` placeholders:
 
 ```lean
 set_option pp.mvars false in
