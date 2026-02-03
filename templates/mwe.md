@@ -175,7 +175,7 @@ This is particularly useful for:
 
 #### Documenting timeouts
 
-For performance issues, combine `set_option maxHeartbeats` with `#guard_msgs (substring := true)`:
+Combine `set_option maxHeartbeats` with `#guard_msgs (substring := true)`:
 
 ```lean
 set_option maxHeartbeats 1 in
