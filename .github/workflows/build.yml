@@ -24,6 +24,12 @@ jobs:
     name: Build HTML
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        id: app-token
+        with:
+          app-id: ${{ secrets.LEANPROVER_COMMUNITY_WEBSITE_APP_ID }}
+          private-key: ${{ secrets.LEANPROVER_COMMUNITY_WEBSITE_PRIVATE_KEY }}
+
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: install Python
@@ -46,7 +52,7 @@ jobs:
           ./deploy.sh
         env:
           git_hash: ${{ github.sha }}
-          DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           DEPLOY_GITHUB_USER: leanprover-community-bot
           github_repo: ${{ github.repository }}
           github_ref: ${{ github.ref  }}
