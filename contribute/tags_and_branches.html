@@ -64,8 +64,7 @@ please rebase your PR onto the <code>nightly-with-mathlib</code> branch. This wi
 </li>
 <li>
 <p>If you are making a pull request to <code>leanprover-community/mathlib4</code>,
-please ask for &quot;write&quot; access to the repository via the <a href="https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission">zulip chat</a>, and push your branch to that repo.
-This will enable Mathlib's <code>.olean</code> cache to include your pull request.</p>
+please make it from a fork. Mathlib's <code>.olean</code> cache now works with PRs from forks.</p>
 </li>
 </ul>
 <h2 id="tags-and-branches" class="markdown-heading">Tags and branches <a class="hover-link" href="#tags-and-branches">#</a></h2>
@@ -182,17 +181,14 @@ consisting of squash merging <code>bump/v4.X.0</code> to <code>main</code>.</li>
 <li>Everything said above about Batteries applies to Mathlib, except:
 <ul>
 <li>Development occurs on <code>master</code>.</li>
-<li>All PRs to Mathlib should be made from branches of the Mathlib repository itself.
-<ul>
-<li>This is required for Mathlib's <code>.olean</code> caching mechanism.</li>
-<li>Please ask on the <a href="https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/github.20permission">zulip chat</a> for &quot;write&quot; permission to Mathlib.
-Please write a sentence about your background and plans.</li>
+<li>PRs to Mathlib should be made from forks. Mathlib's <code>.olean</code> cache now works with PRs from forks.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>The <code>nightly-testing-*</code> tags and <code>bump/v4*</code> branches are write protected,
-so may only be modified via PRs, maintainers, or the relevant bots.</li>
+<li>The <code>lean-pr-testing-NNNN</code>, <code>nightly-testing</code>, <code>nightly-testing-*</code> tags, and <code>bump/v4*</code> branches
+all live at <code>leanprover-community/mathlib4-nightly-testing</code>, which is a fork of mathlib4.
+If you will regularly need write access to these branches, you can ask in the
+<a href="https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing">nightly-testing channel</a>
+on Zulip to be added to the <code>nightly-testing</code> GitHub team.</li>
 <li>Note that the <code>nightly-testing</code> branch of Mathlib may use the <code>nightly-testing</code> branch of Batteries as required.</li>
 <li>Similarly a <code>bump/v4.X.0</code> branch of Mathlib may use the <code>bump/v4.X.0</code> branch of Batteries as required.</li>
 <li>Branches <code>lean-pr-testing-NNNN</code> are automatically created for any Lean PR that passes CI,
@@ -205,12 +201,12 @@ to use a <code>lean-pr-testing-NNNN</code> branch of Batteries, if Batteries als
 and Mathlib aims to migrate to the new Lean release as soon as possible.
 To make this process as smooth as possible, we follow the following procedure:</p>
 <ul>
-<li>The <code>nightly-testing</code> branch of Mathlib uses the nightly toolchain releases of Lean.
+<li>The <code>nightly-testing</code> branch lives at <code>leanprover-community/mathlib4-nightly-testing</code> and uses nightly toolchain releases of Lean.
 In other words, the <code>lean-toolchain</code> file on that branch contains something like <code>leanprover/lean4:nightly-2024-09-26</code>.
 <ul>
 <li>This branch is not guaranteed to build without errors.</li>
-<li>Change to this branch are not reviewed by the Mathlib maintainer team.</li>
-<li>This branch is not protected: anybody can push fixes to it.</li>
+<li>Changes to this branch are not reviewed by the Mathlib maintainer team.</li>
+<li>This branch is not protected: members of the <code>nightly-testing</code> GitHub team can push fixes to it.</li>
 <li>The purpose of this branch is to adapt Mathlib to changes in the nightly toolchain releases of Lean.</li>
 <li>Typically, a PR <code>#NNNN</code> to Lean core will be accompanied by adaptations to Mathlib in a branch <code>lean-pr-testing-NNNN</code>.
 Once the Lean core PR lands in a nightly toolchain, the Mathlib branch <code>lean-pr-testing-NNNN</code> can be merged into <code>nightly-testing</code>.
@@ -219,7 +215,7 @@ Often one needs to fix merge conflicts in <code>lean-toolchain</code>, <code>lak
 <li>If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)</li>
 </ul>
 </li>
-<li>The <code>bump/v4.X.Y</code> branches of Mathlib also use nightly toolchain releases of Lean.
+<li>The <code>bump/v4.X.Y</code> branches also live at <code>leanprover-community/mathlib4-nightly-testing</code> and use nightly toolchain releases of Lean.
 <ul>
 <li>This branch should always build without errors.</li>
 <li>Changes to this branch are reviewed by the Mathlib maintainer team.</li>
@@ -250,8 +246,8 @@ This merge is essentially atomic, since the diff has already been reviewed via a
 <li>For this to work, you will need to rebase your PR onto the <code>nightly-with-mathlib</code> branch.
 The <code>nightly-with-mathlib</code> branch points to the latest nightly lean release which passes mathlib CI,
 and for which a <code>nightly-testing-YYYY-MM-DD</code> tag exists on Mathlib (and possibly Batteries).</li>
-<li>The bot will create a <code>lean-pr-testing-NNNN</code> branch at Mathlib from the <code>nightly-testing-YYYY-MM-DD</code> tag,
-or push an empty commit to it if it already exists.</li>
+<li>The bot will create a <code>lean-pr-testing-NNNN</code> branch at <code>leanprover-community/mathlib4-nightly-testing</code>
+from the <code>nightly-testing-YYYY-MM-DD</code> tag, or push an empty commit to it if it already exists.</li>
 <li>Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
 in the form of comments.</li>
 <li>If your PR does not branch off a nightly release for which Mathlib builds, a bot will comment on your
