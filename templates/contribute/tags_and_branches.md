@@ -30,6 +30,12 @@ Mathlib.
 * We make a regular nightly release from `master`, which has a tag e.g. `nightly-2023-11-01` on the
   `leanprover/lean4-nightly` repository.
   * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`. (Note that it should not be `leanprover/lean4-nightly:nightly-2023-11-01`, because `elan` applies some magic wisdom here.)
+  * A nightly may be *revised* by manually triggering the release workflow. Revised nightlies
+    have tags of the form `nightly-YYYY-MM-DD-revK` (with K starting at 1) on `leanprover/lean4-nightly`.
+    To use a revised nightly in a project, your `lean-toolchain` file should contain e.g.
+    `leanprover/lean4:nightly-2023-11-01-rev1`.
+    Revised nightlies are ordered after the base nightly: base < rev1 < rev2 < next day's nightly.
+    The Mathlib nightly testing infrastructure handles revised nightlies automatically.
 * There is a `nightly` branch on `leanprover/lean4` which follows the most recent commit which was
   used to construct a nightly release.
 * Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
