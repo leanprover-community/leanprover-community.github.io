@@ -20,19 +20,3 @@ Note this requires you to create an account on GitHub.
 
 After you have followed these instructions, you'll probably want to [learn Lean](learn.html)!
 
-## Command line
-
-The community used to maintain its own installation instructions. These contain more
-low-level instructions on how to install Lean and to create projects. They may
-be out of date.
-
-### Legacy installation instructions
-
-* [Debian/Ubuntu](install/debian.html)
-* [Other Linux](install/linux.html)
-* [macOS](install/macos.html)
-* [Windows](install/windows.html)
-
-### Legacy project installation instructions
-
-* [Creating a project](install/project.html)
