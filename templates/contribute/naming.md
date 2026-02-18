@@ -69,7 +69,6 @@ class NeZero : Prop := sorry
 
 -- follows rules 1 and 5
 theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
-
 ```
 
 ### Spelling
