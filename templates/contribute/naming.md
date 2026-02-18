@@ -69,8 +69,7 @@ class NeZero : Prop := sorry
 
 -- follows rules 1 and 5
 theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align ne_zero_iff neZero_iff
+
 ```
 
 ### Spelling
@@ -373,6 +372,11 @@ Sometimes abbreviations or alternative descriptions are easier to work
 with. For example, we use `pos`, `neg`, `nonpos`, `nonneg` rather than
 `zero_lt`, `lt_zero`, `le_zero`, and `zero_le`.
 
+For a nonzero quantity, use `ne_zero` for `_ ≠ 0` or `zero_ne` for
+`0 ≠ _` respectively (although the former is generally the preferred
+form for theorems), rather than `nonzero`. Use `neZero` specifically
+to refer to `NeZero` instances.
+
 ```lean
 import Mathlib.Algebra.Order.Monoid.Lemmas
 import Mathlib.Algebra.Order.Ring.Lemmas
@@ -383,6 +387,8 @@ open Nat
 #check mul_nonpos_of_nonneg_of_nonpos
 #check add_lt_of_lt_of_nonpos
 #check add_lt_of_nonpos_of_lt
+#check pos_of_ne_zero
+#check FractionalIdeal.coe_inv_of_ne_zero 
 ```
 
 These conventions are not perfect. They cannot distinguish compound
