@@ -374,7 +374,7 @@ with. For example, we use `pos`, `neg`, `nonpos`, `nonneg` rather than
 For a nonzero quantity, use `ne_zero` for `_ ≠ 0` or `zero_ne` for
 `0 ≠ _` respectively (although the former is generally the preferred
 form for theorems), rather than `nonzero`. Use `neZero` specifically
-to refer to `NeZero` instances.
+to refer to the `NeZero` typeclass.
 
 ```lean
 import Mathlib.Algebra.Order.Monoid.Lemmas
