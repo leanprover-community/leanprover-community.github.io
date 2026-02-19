@@ -30,4 +30,4 @@ The arXiv preprint is available at [arxiv.org/abs/1910.09336](https://arxiv.org/
 
 ## GitHub citation
 
-The [mathlib4 repository](https://github.com/leanprover-community/mathlib4) also contains a `CITATION.cff` file, which GitHub recognizes. You can click the "Cite this repository" link on the repository page to get citation information in various formats.
+The [mathlib4 repository](https://github.com/leanprover-community/mathlib4) also contains a `CITATION.md` file, which GitHub recognizes. You can also click the "Cite this repository" link on the repository page to view the above BibTeX citation there.
