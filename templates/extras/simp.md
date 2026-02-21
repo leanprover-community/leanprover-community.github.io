@@ -105,7 +105,7 @@ and then starts again from the beginning. Note that `simp` starts on
 innermost terms, working outward: it first simplifies the arguments of
 a function before simplifying the function. Also, `simp` contains some
 amount of cleverness to be able to avoid considering *all* `simp`
-lemmas every time (there are over ten thousand of them currently in mathlib!).
+lemmas every time (there are over fourty thousand of them in mathlib as per February 2026).
 
 The simplifier applies `simp` lemmas in one direction only: if `A = B` is a `simp`
 lemma, then `simp` replaces `A`s with `B`s, but it doesn't replace
