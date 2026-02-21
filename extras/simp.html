@@ -78,7 +78,7 @@ Again, we aim to be close to confluent where possible.</p>
 <p>While this system is able to prove many simple statements completely
 automatically, proving all simple statements is not part of its job
 description, as disappointing as that might be.</p>
-<p>Here is an example (using <code>mathlib</code>).</p>
+<p>Here is an example (using mathlib).</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">Mathlib.Algebra.Group.Defs</span>
 
 <span class="kd">variable</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">)</span>
@@ -142,7 +142,7 @@ and then starts again from the beginning. Note that <code>simp</code> starts on
 innermost terms, working outward: it first simplifies the arguments of
 a function before simplifying the function. Also, <code>simp</code> contains some
 amount of cleverness to be able to avoid considering <em>all</em> <code>simp</code>
-lemmas every time (there are over ten thousand of them currently in <code>mathlib</code>!).</p>
+lemmas every time (there are over ten thousand of them currently in mathlib!).</p>
 <p>The simplifier applies <code>simp</code> lemmas in one direction only: if <code>A = B</code> is a <code>simp</code>
 lemma, then <code>simp</code> replaces <code>A</code>s with <code>B</code>s, but it doesn't replace
 <code>B</code>s with <code>A</code>s. Hence a <code>simp</code> lemma should have the property that its
@@ -177,7 +177,7 @@ automatically prove <code>(z + w).re = (w + z).re</code> through <code>z.re + w.
 <p>The Lean kernel itself is a rewrite system for lambda calculus, which has a definite
 notion of forward progress.  With this in mind, a useful family of
 <code>simp</code> lemmas are those that, in this sense, let <code>simp</code> partially evaluate an
-expression. For example, if you have a structure type <code>foo</code> and
+expression. For example, if you have a structure type <code>Foo</code> and
 define a structure <code>myFoo</code> with that type,</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">structure</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span>
 
@@ -251,14 +251,14 @@ simplifier is working on a term <code>T</code> and <code>A = B</code> is a <code
 then, unless a subterm <code>A'</code> of <code>T</code> is syntactically the same as <code>A</code>
 (approximately: they have literally the same textual representation), then <code>simp</code> won't
 in general notice the rule applies, so it won't
-be rewritten by <code>B</code>. Similarly, if nonzeroness of <code>n</code> (stated in
+be rewritten to <code>B</code>. Similarly, if nonzeroness of <code>n</code> (stated in
 one way) is a precondition in a <code>simp</code> lemma of the form <code>A = B</code>, and <code>h</code> is a proof
 of nonzeroness of <code>n</code> (stated in a different way), then <code>simp [h]</code> might
 not replace <code>A</code>'s with <code>B</code>'s.</p>
-<p>The way this issue is dealt with in <code>mathlib</code> is to fix once and for
+<p>The way this issue is dealt with in mathlib is to fix once and for
 all a <em><code>simp</code> normal form</em> for the way something is to be expressed
 (like <code>0 &lt; n</code> for nonzeroness) and then sticking to this variant when
-stating lemmas in Lean. This saves having to write duplicate lemmas
+stating lemmas. This saves having to write duplicate lemmas
 for every variant. To help the simplifier out, many times there are
 normalizing lemmas whose only purpose is to put expressions into
 <code>simp</code> normal form.</p>
@@ -268,13 +268,13 @@ lemma about a definition you made yourself, think about the normal
 forms for ideas that can be expressed in more than one way.</p>
 <p>An example of a <code>simp</code> normal form is a way of expressing nonemptiness
 of a subset of a type.  If <code>α : Type</code> and <code>s : Set α</code> then
-nonemptiness of <code>s</code> can be expressed as both <code>s.Nonempty</code> and <code>s ≠ ∅</code>.
+nonemptiness of <code>s</code> can be expressed both as <code>s.Nonempty</code> and <code>s ≠ ∅</code>.
 In mathlib an effort is made to stick to <code>s.Nonempty</code> as the normal
 form.</p>
 <p>Another example: every finite set <code>s : Finset α</code> can be coerced
 to <code>Set α</code>, so for <code>a : α</code> one can write both <code>a ∈ s</code> and
 <code>a ∈ (s : Set α)</code> to mean the same thing.  The simp normal form for
-membership in a finite set idea is <code>a ∈ s</code>, and moreover there is a
+membership in a finite set is <code>a ∈ s</code>, and moreover there is a
 normalizing <code>simp</code> lemma</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span><span class="w"> </span><span class="kd">lemma</span><span class="w"> </span><span class="n">mem_coe</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Finset</span><span class="w"> </span><span class="n">α</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="o">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">∈</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
 </code></pre></div>
@@ -329,8 +329,8 @@ changed, it can be difficult to fix a proof.</p>
 
 <p>and then later someone added the <code>@[simp]</code> attribute to <code>foo_eq_bar</code>,
 this rewrite would now fail.</p>
-<p>While it is fine using <code>simp</code> in the middle of a proof during initial development
-(&quot;non-terminal <code>simp</code>s&quot;), the rule of thumb is that it is
+<p>While it is fine using <code>simp</code> in the middle of a proof during initial development,
+the rule of thumb is that it is
 easier to maintain Lean code when every <code>simp</code> closes a goal
 completely.  When such a <code>simp</code> later breaks, this ensures that the
 intended goal is known.</p>
@@ -415,8 +415,8 @@ way to tidy up a goal: among other things, it does beta reduction for lambda exp
 <blockquote>
 <p><code>dsimp</code> (<code>?</code>)? (<code>!</code>)? (<code>(config :=</code> config <code>)</code>)? (<code>(disch :=</code> discharger <code>)</code>)? (<code>only</code>)? (<code>[</code>list of lemmas<code>]</code>)? (<code>at</code> locations)?</p>
 </blockquote>
-<p>where &quot;( ... )?&quot; means an optional part of the expression, and &quot;|&quot; gives mutually exclusive options.
-The list of lemmas is similar to that of <code>rw</code>, but additionally <code>-lemma_name</code> means a lemma is excluded from the set of <code>simp</code> lemmas.
+<p>where &quot;( ... )?&quot; means an optional part of the expression. The list of lemmas is similar to that of <code>rw</code>, but
+additionally <code>-lemma_name</code> means a lemma is excluded from the set of <code>simp</code> lemmas.
 Configuration options are described in a following section.</p>
 <p>If <code>!</code> is present, it adds <code>autoUnfold := true</code> to the configuration options.
 If <code>?</code> is present, it causes <code>simp</code> to suggest a set of <code>simp</code> lemmas that suffice.</p>
@@ -443,7 +443,7 @@ For example, <code>simp (config := { singlePass := true })</code> runs <code>sim
 One can use <code>singlePass</code> to avoid loops that might otherwise occur.</p>
 <p>The core Lean file <code>Init/MetaTypes.lean</code> reveals other configuration options in
 the <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config"><code>Lean.Meta.DSimp.Config</code></a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config"><code>Lean.Meta.Simp.Config</code></a> structures.
-Most of them not very relevant for the average user,
+Most of them are not very relevant for the average user,
 and some of them are not fully documented.  These are reproduced in the
 following table, where the default value for a configuration option
 for <code>simp</code> or <code>dsimp</code> is given in the respective column -- if no
