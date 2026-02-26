@@ -15,6 +15,7 @@ variable {n m : ℕ} (f : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin
   (x : EuclideanSpace ℝ (Fin n)) (i : Fin n)
 
 open EuclideanSpace
+
 -- ∂f/∂xᵢ at x
 #check fderiv ℝ f x (single i 1)
 ```
@@ -39,15 +40,16 @@ import Mathlib
 variable {m : ℕ} (f : ℝ → ℝ → EuclideanSpace ℝ (Fin m)) (x y : ℝ)
 
 open EuclideanSpace
+
 -- ∂f/∂x at (x,y)
-#check fderiv ℝ (fun x' => f x' y) x 1
+#check fderiv ℝ (f · y) x 1
 -- ∂f/∂y at (x,y)
-#check fderiv ℝ (fun y' => f x y') y 1
+#check fderiv ℝ (f x ·) y 1
 ```
 
 To actually prove anything about these derivatives you will need to state that `f` is differentiable in `x` and `y`. The ways to state differentiability of `f` in `(x,y)` are:
-  - `(hf : Differentiable ℝ (fun (x,y) => f x y))`
-  - `(hf : Differentiable ℝ (fun xy : ℝ×ℝ => f xy.1 xy.2)`
+  - `(hf : Differentiable ℝ (fun (x, y) ↦ f x y))`
+  - `(hf : Differentiable ℝ (fun xy : ℝ × ℝ ↦ f xy.1 xy.2)`
   - `(hf : Differentiable ℝ ↿f)`
 They are syntactic variants of the same thing. Pick one you prefer writing. The first one does not work with `variable` though.
 
@@ -58,10 +60,10 @@ import Mathlib
 variable {m : ℕ} (f : ℝ → ℝ → EuclideanSpace ℝ (Fin m)) (x y : ℝ)
 
 example (hf : Differentiable ℝ ↿f) :
-    Differentiable ℝ (fun x => f x y) := by fun_prop
+    Differentiable ℝ (f · y) := by fun_prop
 
-example (hf : Differentiable ℝ (fun (x,y) => f x y)) :
-    Differentiable ℝ (fun y => f x y) := by fun_prop
+example (hf : Differentiable ℝ (fun (x, y) ↦ f x y)) :
+    Differentiable ℝ (f x ·) := by fun_prop
 ```
 
 #### 3. Mixed Approach
@@ -75,10 +77,11 @@ variable {n m k : ℕ} (f : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (F
   (x y) (i : Fin n) (j : Fin m)
 
 open EuclideanSpace
+
 -- ∂f/∂xᵢ at (x,y)
-#check fderiv ℝ (fun x' => f x' y) x (single i 1)
+#check fderiv ℝ (f · y) x (single i 1)
 -- ∂f/∂yⱼ at (x,y)
-#check fderiv ℝ (fun y' => f x y') y (single j 1)
+#check fderiv ℝ (f x ·) y (single j 1)
 ```
 
 ### Special Cases
@@ -96,14 +99,16 @@ variable {n : ℕ}
   (x y : ℝ)
 
 open EuclideanSpace
+
 -- d f / d x at x
 #check deriv f x
 -- Equivalent to fderiv
 example : deriv f x = fderiv ℝ f x 1 := by rfl
+
 -- ∂ g / ∂ x at (x,y)
-#check deriv (fun x' => g x' y) x
+#check deriv (g · y) x
 -- ∂ g / ∂ y at (x,y)
-#check deriv (fun y' => g x y') y
+#check deriv (g x ·) y
 ```
 
 #### 2. When the Output is ℝ (`gradient`)
@@ -119,12 +124,15 @@ variable {n m : ℕ}
   (x y)
 
 open EuclideanSpace
+
 -- ∇ₓ f at x
 #check gradient f x
+
 -- ∇ₓ g at (x,y)
-#check gradient (fun x' => g x' y) x
+#check gradient (g · y) x
+
 -- ∇_y g at (x,y)
-#check gradient (fun y' => g x y') y
+#check gradient (g x ·) y
 ```
 
 
@@ -134,7 +142,7 @@ I hear you! You can define custom notation:
 ```lean
 import Mathlib
 
-macro "ℝ[" n:term "]" : term => `(EuclideanSpace ℝ (Fin $n))
+local macro:max "ℝ" noWs n:superscript(term) : term => `(EuclideanSpace ℝ (Fin $(⟨n.raw[0]⟩)))
 macro "∂[" i:term "]" : term => `(fun f x => fderiv ℝ f x (EuclideanSpace.single $i (1:ℝ)))
 
 variable {m n k : ℕ} (f : ℝ[n] → ℝ[m] → ℝ[k]) (x : ℝ[n]) (y : ℝ[m])
