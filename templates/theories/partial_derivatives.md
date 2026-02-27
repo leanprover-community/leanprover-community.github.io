@@ -145,7 +145,7 @@ import Mathlib
 local macro:max "ℝ" noWs n:superscript(term) : term => `(EuclideanSpace ℝ (Fin $(⟨n.raw[0]⟩)))
 macro "∂[" i:term "]" : term => `(fun f x => fderiv ℝ f x (EuclideanSpace.single $i (1:ℝ)))
 
-variable {m n k : ℕ} (f : ℝ[n] → ℝ[m] → ℝ[k]) (x : ℝ[n]) (y : ℝ[m])
+variable {m n k : ℕ} (f : ℝⁿ → ℝᵐ → ℝᵏ) (x : ℝⁿ) (y : ℝᵐ)
    (i : Fin n) (j : Fin m)
 
 -- `∂ f / ∂ xᵢ` at `(x,y)`
