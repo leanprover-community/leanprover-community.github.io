@@ -24,7 +24,6 @@ Both the mathlib library and this website are distributed under open-source lice
   url = {https://doi.org/10.1145/3372885.3373824}
 }
 ```
-{% endraw %}
 
 ## arXiv preprint
 
