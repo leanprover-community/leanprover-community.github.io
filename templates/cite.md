@@ -11,15 +11,15 @@ Both the mathlib library and this website are distributed under open-source lice
 
 ```bibtex
 @inproceedings{mathlib2020,
-  author = {{The mathlib Community}},
-  title = {The {L}ean Mathematical Library},
-  booktitle = {Proceedings of the 9th ACM SIGPLAN International
-               Conference on Certified Programs and Proofs},
-  series = {CPP '20},
+  author = {The mathlib {C}ommunity},
+  title = {The {L}ean {M}athematical {L}ibrary},
+  booktitle = {Proceedings of the 9th {ACM} {SIGPLAN} {I}nternational
+               {C}onference on {C}ertified {P}rograms and {P}roofs},
+  series = { {CPP} '20},
   year = {2020},
-  month = {January},
-  location = {New Orleans, LA, USA},
-  publisher = {ACM},
+  month = {{J}anuary},
+  location = {{N}ew {O}rleans, {LA}, {USA}},
+  publisher = { {ACM} },
   doi = {10.1145/3372885.3373824},
   url = {https://doi.org/10.1145/3372885.3373824}
 }
