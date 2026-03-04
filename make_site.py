@@ -408,8 +408,9 @@ def download_N_theorems(kind: NTheorems) -> dict:
                         except KeyError:
                             print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
-                        # note: the `header-data.json` data file uses doc-relative links
-                        header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
+                        # note: the `header-data.json` data file uses doc-relative links;
+                        # rewrite all of them to point into the mathlib4_docs subdirectory
+                        header = decl_info.header.replace('href="./', 'href="./mathlib4_docs/')
                         doc_decls.append(DocDecl(
                             name=decl,
                             decl_header_html = header,
