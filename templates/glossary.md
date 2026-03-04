@@ -373,7 +373,7 @@ Good `simp` lemmas guide the `simp` tactic towards reducing complex expressions 
 
 A convention within [Mathlib](#Mathlib) for expressing propositions with multiple equivalent forms in a single conventional one.
 
-Examples and further detail can be found on [the `simp` page](simp.html#simp-normal-form).
+Examples and further detail can be found on [the `simp` page](extras/simp.html#simp-normal-form).
 
 ### syntax linter
 
