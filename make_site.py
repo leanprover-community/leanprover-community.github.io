@@ -860,6 +860,8 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
                 base_url+'/img/')
+        src = re.sub(r'\{%-?\s*raw\s*-?%\}', '', src)
+        src = re.sub(r'\{%-?\s*endraw\s*-?%\}', '', src)
         doc = Document(src)
         content = render_markdown(src).strip()
         title = ''
