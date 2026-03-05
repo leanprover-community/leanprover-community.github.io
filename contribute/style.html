@@ -215,6 +215,17 @@ more generally whenever a term spans multiple lines.</p>
 </code></pre></div>
 </div>
 
+<p>The type of all arguments of a declaration should be given explicitly,
+even if Lean can figure out this type information by itself.
+This makes it easier to understand the definition when seeing it on a webpage like GitHub.
+For the same reason, the return type of all declarations should also be given
+(Lean enforces this only for theorems).
+So you should follow the style of <code>GoodStatement</code> in this example:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">def</span><span class="w"> </span><span class="n">BadStatement</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="n">k</span><span class="o">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="kd">def</span><span class="w"> </span><span class="n">GoodStatement</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Prop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">3</span>
+</code></pre></div>
+</div>
+
 <p>A short declaration can be written on a single line:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kn">open</span><span class="w"> </span><span class="n">Nat</span>
 <span class="kd">theorem</span><span class="w"> </span><span class="n">succ_pos</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">succ</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">zero_lt_succ</span>
@@ -348,8 +359,9 @@ For example, the following is a valid use case of having a hypothesis right of t
 </div>
 
 <h3 id="binders" class="markdown-heading">Binders <a class="hover-link" href="#binders">#</a></h3>
-<p>Use a space after binders:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">,</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">,</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="n">y</span><span class="o">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span>
+<p>Use a space after binders. Also, the binder type should generally be written explicitly,
+even if Lean doesn't need this information.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">,</span><span class="w"> </span><span class="bp">∀</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">,</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="k">fun</span><span class="w"> </span><span class="o">(</span><span class="n">α</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">α</span><span class="o">)</span><span class="w"> </span><span class="bp">↦</span><span class="w"> </span><span class="n">Exists.intro</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">rfl</span>
 </code></pre></div>
 </div>
@@ -531,7 +543,7 @@ of their contributions. The Lean FRO maintains benchmarking infrastructure which
 can be accessed by commenting <code>!bench</code> on a PR.</p>
 <p>Authors should assure that their contributions do not cause significant
 performance regressions. In particular, if the PR touches significant components
-of the language like adding instances, adding <code>simp</code> lemmas, changing imports,
+of the language like adding new classes, instances, or <code>simp</code> lemmas, changing imports,
 or creating new definitions, then authors should benchmark their changes
 proactively.</p>
 <h3 id="transparency-and-api-design" class="markdown-heading">Transparency and API design <a class="hover-link" href="#transparency-and-api-design">#</a></h3>
