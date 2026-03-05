@@ -9,7 +9,9 @@ Both the mathlib library and this website are distributed under open-source lice
 
 ## BibTeX
 
+
 {% raw %}
+
 ```bibtex
 @inproceedings{mathlib2020,
   author = {The mathlib {C}ommunity},
