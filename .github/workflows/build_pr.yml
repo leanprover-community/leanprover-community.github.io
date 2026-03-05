@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -38,6 +38,8 @@ jobs:
         id: build
         run: |
           ./make_site.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload artifact
         id: upload-artifact
