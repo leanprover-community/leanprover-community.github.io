@@ -109,8 +109,19 @@ def padicValRat (p : ℕ) (q : ℚ) : ℤ :=
   padicValInt p q.num - padicValNat p q.den
 ```
 
+### Tactic documentation
+
+Tactics should have a docstring that matches the [Lean documentation style guide](https://github.com/leanprover/lean4/blob/master/doc/style.md#tactics).
+Key points are: Be complete and self-contained but brief. The docstring should start with a full
+sentence that has the tactic as the subject. (Example: "`rewrite [e]` uses the expression `e` as a
+rewrite rule on the main goal.") All different options and forms of the tactic should appear in a
+bulleted list. The "Examples:" section, if any, should be a sequence of code blocks.
+
+### Linting
+
 The `docBlame` linter lists all definitions that do not have doc strings. The `docBlameThm`
-linter will lists theorems and lemmas that do not have doc strings.
+linter will lists theorems and lemmas that do not have doc strings. The `tacticDocs` linter lists
+all tactics that do not have docstrings.
 
 To run only the `docBlame` linter, add the following to the end of your lean file:
 ```
@@ -121,8 +132,8 @@ file:
 ```
 #lint only docBlame docBlameThm
 ```
-To run the all default linters, including `docBlame`, add the following to the end of your lean
-file:
+To run the all default linters, including `docBlame` and `tacticDocs`, add the following to the end
+of your lean file:
 ```
 #lint
 ```

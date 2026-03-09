@@ -551,7 +551,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
                         # note: the `header-data.json` data file uses doc-relative links
-                        header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
+                        header = decl_info.header.replace('href="./', 'href="./mathlib4_docs/')
                         doc_decls.append(DocDecl(
                             name=decl,
                             decl_header_html = header,
@@ -1008,6 +1008,8 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
                 base_url+'/img/')
+        src = re.sub(r'\{%-?\s*raw\s*-?%\}', '', src)
+        src = re.sub(r'\{%-?\s*endraw\s*-?%\}', '', src)
         doc = Document(src)
         content = render_markdown(src).strip()
         title = ''

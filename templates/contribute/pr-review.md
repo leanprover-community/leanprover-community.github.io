@@ -714,5 +714,5 @@ However, as some practical examples:
   class using the `FunLike` API.
 - Similarly, if a contributor is adding a new subobject, they should probably be using bundled
   subobjects and making use of the `SetLike` API. For reference, see the [relevant section 
-  in Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/C07_Hierarchies.html#sub-objects).
+  in Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/C08_Hierarchies.html#sub-objects).
 - Follow the advice of any existing library note.

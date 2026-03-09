@@ -46,8 +46,6 @@ theorem map_one [OneHomClass F M N] (f : F) : f 1 = 1 := sorry
 -- follows rules 1 and 5
 theorem MonoidHom.toOneHom_injective [MulOneClass M] [MulOneClass N] :
   Function.Injective (MonoidHom.toOneHom : (M →* N) → OneHom M N) := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align monoid_hom.to_one_hom_injective MonoidHom.toOneHom_injective
 
 -- follows rule 2
 class HPow (α : Type u) (β : Type v) (γ : Type w) where
@@ -69,8 +67,6 @@ class NeZero : Prop := sorry
 
 -- follows rules 1 and 5
 theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align ne_zero_iff neZero_iff
 ```
 
 ### Spelling
