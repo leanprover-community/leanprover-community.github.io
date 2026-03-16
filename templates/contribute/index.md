@@ -69,6 +69,8 @@ If you use artificial intelligence (such as, by using github's copilot mode, ask
 
 It is essential that you can vouch for all the code submitted in a PR, and understand all the content written by an AI. If you don't, then it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
 
+Be particularly careful when using AI to write new code: as of March 2026, mathlib intentionally has very high standards (on generality, integration with the remaining library and maintainability, including code style). AI-written code fails to meet that bar by a large margin. Getting code to mathlib's standards requires understanding and writing Lean code by hand. If you just want to help and not put in the learning effort, we are afraid that making a PR to mathlib is counterproductive: the effort required from the mathlib maintainers is larger than the benefit.
+
 ## Working on mathlib
 
 We use `git` to manage and version control `mathlib`.
