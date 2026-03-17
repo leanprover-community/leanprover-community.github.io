@@ -228,4 +228,4 @@ Once the conflict has been resolved, the **"merge-conflict"** label will automat
 
 (If you don't know what rebasing is, you may skip this section.)
 Mathlib PRs are squashed upon merge: in particular, the history of intermediate commits is not recorded outside of the PR.
-Once your PR has seen review activity, don't rebase or squash commits any more: doing so makes it harder for reviewers to spot what you changed.
+Once a PR has seen some review activity, it is strongly recommended not to rebase or squash anymore as this  confuscates the review history, making it harder to review new changes.
