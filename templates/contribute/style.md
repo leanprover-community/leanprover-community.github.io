@@ -40,7 +40,7 @@ a description of the contents.
 Put the `module` keyword on its own line right after the header, skip a line,
 then group all `public import`s together, skip another line,
 then group all `import`s together,
-Keep the imports alphabetical within each block of imports.
+Try to keep the imports alphabetical within each block of imports.
 
 ```lean
 /-
