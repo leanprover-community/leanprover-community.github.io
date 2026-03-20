@@ -36,8 +36,11 @@ will indicate a 100 character limit.
 
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
-a description of the contents. Do all `import`s right after the header,
-without a line break, on separate lines.
+a description of the contents.
+Put the `module` keyword on its own line right after the header, skip a line,
+then group all `public import`s together, skip another line,
+then group all `import`s together,
+Try to keep the imports alphabetical within each block of imports.
 
 ```lean
 /-
@@ -45,8 +48,12 @@ Copyright (c) 2024 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joe Cool
 -/
-import Mathlib.Data.Nat.Basic
+module
+
+public import Mathlib.Logic.Defs
+
 import Mathlib.Algebra.Group.Defs
+import Mathlib.Data.Nat.Basic
 ```
 
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
@@ -58,6 +65,10 @@ Don't end the line with a period, and use commas (`, `) to separate all author n
 We don't have strict rules on what contributions qualify for inclusion there.
 The general idea is that the people listed there should be the ones we would
 reach out to if we had questions about the design or development of the Lean code.
+
+Note that there are less common combinations of keywords such as `public meta import` or
+`import all`.
+Given their rarity, we do not yet prescribe their relative location within the import statements.
 
 ### Module docstrings
 
