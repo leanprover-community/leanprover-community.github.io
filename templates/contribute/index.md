@@ -225,3 +225,9 @@ should now merge the PR themselves once any final requested changes have been ma
 
 Due to the fact that multiple people work on mathlib in parallel, someone might have introduced a change on `master` that conflicts with a change that you're proposing on your PR. If it happens with your PR, a bot will automatically add the **"merge-conflict"** label, and your PR will not appear on the review queue. Check [this GitHub tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github) on how to resolve merge conflicts by using their online tool.
 Once the conflict has been resolved, the **"merge-conflict"** label will automatically be removed, and your PR will return to the review queue.
+
+### Merge, don't rebase
+
+(If you don't know what rebasing is, you may skip this section.)
+Mathlib PRs are squashed upon merge: in particular, the history of intermediate commits is not recorded outside of the PR.
+Once a PR has seen some review activity, it is strongly recommended not to rebase or squash anymore as this obfuscates the review history, making it harder to review new changes.
