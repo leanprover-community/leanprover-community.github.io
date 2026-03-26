@@ -552,7 +552,8 @@ Authors should assure that their contributions do not cause significant
 performance regressions. In particular, if the PR touches significant components
 of the language like adding new classes, instances, or `simp` lemmas, changing imports,
 or creating new definitions, then authors should benchmark their changes
-proactively.
+proactively. Nontrivial `refactor` PRs, in particular should be benchmarked
+and any significant negative results must be explained during the review process.
 
 ### Transparency and API design
 
