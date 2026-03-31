@@ -551,8 +551,9 @@ can be accessed by commenting `!bench` on a PR.
 Authors should assure that their contributions do not cause significant
 performance regressions. In particular, if the PR touches significant components
 of the language like adding new classes, instances, or `simp` lemmas, changing imports,
-or creating new definitions, then authors should benchmark their changes
-proactively.
+creating new definitions, or turning `def`s into `abbrev`s, then authors should benchmark their changes
+proactively. Nontrivial `refactor` PRs, in particular should be benchmarked
+and any significant negative results must be explained during the review process.
 
 ### Transparency and API design
 
