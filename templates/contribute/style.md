@@ -25,6 +25,16 @@ mathematical notation, often with an upper case letter
 This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.
 
+### Unicode usage
+
+Use special Unicode characters, especially [mathematical symbols](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode) where they help develop good notation and improve readability.
+Avoid the following:
+- characters which change text direction
+- invisible characters (except spaces and newlines)
+- characters which modify other characters
+
+Mathlib has a linter which checks all characters against an [allow-list](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/Linter/TextBased/UnicodeLinter.lean), to which new characters may be added as required.
+
 ### Line length
 
 Lines should not be longer than 100 characters. This makes files
