@@ -33,7 +33,7 @@ Avoid the following:
 - invisible characters (except spaces and newlines)
 - characters which modify other characters
 
-Mathlib has a linter which checks all characters against an allow-list, to which new characters may be added as required.
+Mathlib has a linter which checks all characters against an [allow-list](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/Linter/TextBased/UnicodeLinter.lean), to which new characters may be added as required.
 
 ### Line length
 
