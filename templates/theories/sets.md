@@ -80,7 +80,7 @@ Using `Classical.choose`, you can produce an object of type `Fintype s` from a p
 
 ### Cardinals
 
-There are three functions `Finset.card`, `Fintype.card` and `Multiset.card`, which refer to the sizes of finsets, multisets and finite types. For finite cardinals of sets, `Fintype.card` can be used, given a proof that the set is finite.
+There are three functions `Finset.card`, `Fintype.card` and `Multiset.card`, which refer to the sizes of finsets, finite types and multisets. For finite cardinals of sets, `Fintype.card` can be used, given a proof that the set is finite.
 
 ```lean
 example : ∀ n : ℕ, Fintype.card (Fin n) = n := Fintype.card_fin

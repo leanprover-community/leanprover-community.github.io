@@ -25,7 +25,7 @@ You can browse public discussions on the most popular “channels” without reg
 
 We welcome you to register for the Zulip chat,
 which will let you participate in the discussions.
-Registering with your real name is preferred, but not required.
+We strongly prefer that you use your real name as your display name.
 Starting by briefly introducing yourself in the
 [*new members* channel](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members)
 is also appreciated.
@@ -82,6 +82,14 @@ We adopt the [Contributor Covenant Code of Conduct](https://www.contributor-cove
 These guidelines apply to the
 [Lean Zulip chat](https://leanprover.zulipchat.com/)
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
+
+To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, DM spam, unsolicited mass DMs to users, significant use of AI without attribution, unrequested posting of "slop" AI-generated code, making unjustified and incorrect claims about AI-generated code, and ignoring moderator guidance.
+
+This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
+
+This list is not exhaustive and the maintainers retain broad discretion in user moderation.
+
+Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
 
 The [code of conduct team](/teams/coc.html) serves as first point of contact
 for reporting any concerns.

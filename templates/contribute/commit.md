@@ -28,6 +28,7 @@ Note: "Title:" and "Description:" do not actually appear
  - test (when adding missing tests)
  - chore (maintain)
  - perf (performance improvement, optimization, ...)
+ - ci (for changes to github workflows, other automation)
 
 `<optional-scope>` is a name of module or a directory which contains changed modules.
 This is not necessary to include, but may be useful if the `<subject>` is insufficient.
@@ -76,7 +77,7 @@ This also changes the diagnostic message to be on the whole syntax `apply? using
 And an example where including `<scope>` does add value:
 
 ```markdown
-docs(CategoryTheory/EssentialImage): typo and punctuation
+doc(CategoryTheory/EssentialImage): typo and punctuation
 
 Fix a typo, add two periods.
 ```

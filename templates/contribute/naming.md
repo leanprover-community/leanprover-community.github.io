@@ -2,7 +2,15 @@
 
 This guide is written for Lean 4.
 
+## File names
+
+`.lean` files in mathlib should generally be named in `UpperCamelCase`.
+A (very rare) exception are files named after some specifically lower-cased object, e.g. `lp.lean` for a file specifically about the space $\ell_p$ (and not $L^p$).
+Such exceptions should be discussed on Zulip first.
+
 ## General conventions
+
+### Capitalization
 
 Unlike Lean 3, in which the convention was that all declarations used `snake_case`,
 in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` and
@@ -20,7 +28,7 @@ There are some rare exceptions: some fields of structures are currently wrongly 
 There are some rare exceptions to preserve local naming symmetry: e.g., we use `Ne` rather than `NE` to follow the example of `Eq`; `outParam` has a `Sort` output but is not `UpperCamelCase`. Some other exceptions include intervals (`Set.Icc`, `Set.Iic`, etc.), where the `I`
 is capitalized despite the fact that it should be `lowerCamelCase` according to the convention. Any such exceptions should be discussed on Zulip.
 
-### Examples
+#### Examples
 
 ```lean
 -- follows rule 2
@@ -38,8 +46,6 @@ theorem map_one [OneHomClass F M N] (f : F) : f 1 = 1 := sorry
 -- follows rules 1 and 5
 theorem MonoidHom.toOneHom_injective [MulOneClass M] [MulOneClass N] :
   Function.Injective (MonoidHom.toOneHom : (M →* N) → OneHom M N) := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align monoid_hom.to_one_hom_injective MonoidHom.toOneHom_injective
 
 -- follows rule 2
 class HPow (α : Type u) (β : Type v) (γ : Type w) where
@@ -61,9 +67,15 @@ class NeZero : Prop := sorry
 
 -- follows rules 1 and 5
 theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align ne_zero_iff neZero_iff
 ```
+
+### Spelling
+
+Declaration names use American English spelling. So e.g. we use
+`factorization`, `Localization` and `FiberBundle` and not
+`factorisation`, `Localisation` or `FibreBundle`.
+Contrast this with the rule for [documentation](doc.html#language),
+which is allowed to use other common English spellings.
 
 ### Names of symbols
 
@@ -91,6 +103,7 @@ When translating the statements of theorems into words, the following dictionary
 | symbol                      | shortcut    | name                 | notes                                         |
 |-----------------------------|-------------|----------------------|-----------------------------------------------|
 | `∈`                         | `\in`       | `mem`                |                                               |
+| `∉`                         | `\notin`    | `notMem`             |                                               |
 | `∪`                         | `\cup`      | `union`              |                                               |
 | `∩`                         | `\cap`      | `inter`              |                                               |
 | `⋃`                         | `\bigcup`   | `iUnion` / `biUnion` | `i` for "indexed", `bi` for "bounded indexed" |
@@ -125,14 +138,41 @@ When translating the statements of theorems into words, the following dictionary
 
 | symbol | shortcut | name                       | notes                            |
 |--------|----------|----------------------------|----------------------------------|
-| `<`    |          | `lt`                       |                                  |
-| `≤`    | `\le`    | `le`                       |                                  |
+| `<`    |          | `lt` / `gt`                |                                  |
+| `≤`    | `\le`    | `le` / `ge`                |                                  |
 | `⊔`    | `\sup`   | `sup`                      | a binary operator                |
 | `⊓`    | `\inf`   | `inf`                      | a binary operator                |
 | `⨆`    | `\supr`  | `iSup` / `biSup` / `ciSup` | `c` for "conditionally complete" |
 | `⨅`    | `\infi`  | `iInf` / `biInf` / `ciInf` | `c` for "conditionally complete" |
 | `⊥`    | `\bot`   | `bot`                      |                                  |
 | `⊤`    | `\top`   | `top`                      |                                  |
+
+The symbols `≤` and `<` have a special naming convention.
+In mathlib, we almost always use `≤` and `<` instead of `≥` and `>`, so we can use both `le`/`lt` and `ge`/`gt` for naming `≤` and `<`.
+There are a few reasons to use `ge`/`gt`:
+
+1. We use `ge`/`gt` if the arguments to `≤` or `<` appear in different orders.
+  We use `le`/`lt` for the first occurrence of `≤`/`<` in the theorem name,
+  and then `ge`/`gt` indicates that the arguments are swapped.
+2. We use `ge`/`gt` to match the argument order of another relation, such as `=` or `≠`.
+3. We use `ge`/`gt` to describe the `≤` or `<` relation with its arguments swapped.
+4. We use `ge`/`gt` if the second argument to `≤` or `<` is 'more variable'.
+```lean
+-- follows rule 1
+theorem lt_iff_le_not_ge [Preorder α] {a b : α} : a < b ↔ a ≤ b ∧ ¬b ≤ a := sorry
+theorem not_le_of_gt [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
+theorem LT.lt.not_ge [Preorder α] {a b : α} (h : a < b) : ¬b ≤ a := sorry
+
+-- follows rule 2
+theorem Eq.ge [Preorder α] {a b : α} (h : a = b) : b ≤ a := sorry
+theorem ne_of_gt [Preorder α] {a b : α} (h : b < a) : a ≠ b := sorry
+
+-- follows rule 3
+theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := sorry
+
+-- follows rule 4
+theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
+```
 
 ### Dots
 
@@ -423,7 +463,7 @@ argument that "changes". For example, a lemma with the statement
 ### Induction and recursion principles
 
 Induction/recursion principles are ways to construct data or proofs for all elements of some type `T`,
-by providing ways to construct this data or proof in more constrained specific contexts. 
+by providing ways to construct this data or proof in more constrained specific contexts.
 These principles should be phrased to accept a `motive` argument,
 which declares what property we are proving or what data we are constructing for all `T`.
 When the motive eliminates into `Prop`, it is an induction principle, and the name should contain
@@ -448,3 +488,47 @@ Most predicates should be added as prefixes. Eg `IsClosed (Icc a b)` should be c
 Some widely used predicates don't follow this rule. Those are the predicates that are analogous to an atom already suffixed by the naming convention. Here is a non-exhaustive list:
 * We use `_inj` for `f a = f b ↔ a = b`, so we also use `_injective` for `Injective f`, `_surjective` for `Surjective f`, `_bijective` for `Bijective f`...
 * We use `_mono` for `a ≤ b → f a ≤ f b` and `_anti` for `a ≤ b → f b ≤ f a`, so we also use `_monotone` for `Monotone f`, `_antitone` for `Antitone f`, `_strictMono` for `StrictMono f`, `_strictAnti` for `StrictAnti f`, etc...
+
+Predicates as suffixes can be preceded by either `_left` or `_right` to signify
+that a binary operation is left- or right-monotone.
+For example, `mul_left_monotone : Monotone (· * a)` proves left-monotonicity of multiplication
+and not monotonicity of left-multiplication.
+
+### Prop-valued classes
+
+Mathlib has many `Prop`-valued classes and other definitions. For example "let $R$ be a
+topological ring" is written `variable (R : Type*) [Ring R] [TopologicalSpace R] [IsTopologicalRing R]`
+and "let $G$ be a group and let $H$ be a normal subgroup" is written
+`variable (G : Type*) [Group G] (H : Subgroup G) [Normal H]`. Here `IsTopologicalRing R`
+and `Normal H` are not extra data, but are extra assumptions on data we have already.
+
+Mathlib currently strives towards the following naming convention for these `Prop`-valued
+classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
+for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
+`H` is normal" in informal language. However `IsTopologicalRing` is
+preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
+topological" informally.
+
+### Unexpanded and expanded forms of functions
+
+The multiplication of two functions `f` and `g` can be denoted equivalently as
+`f * g` or `fun x ↦ f x * g x`. These expressions are definitionally equal, but not syntactically (and they don't
+share the same key in indexing trees), which means that tools like `rw`, `fun_prop` or `apply?`
+will not use a theorem with one form on an expression with the other form. Therefore, it is
+sometimes convenient to have variants of the statements using the two forms. If one needs to
+distinguish between them, statements involving the first unexpanded form are written using just `mul`,
+while statements using the second expanded form should instead use `fun_mul`. If there is no need to
+disambiguate because a lemma is given using only the expanded form, the prefix `fun_` is not required.
+
+For instance, the fact that the multiplication of two continuous functions is continuous is
+```lean
+theorem Continuous.fun_mul (hf : Continuous f) (hg : Continuous g) : Continuous fun x ↦ f x * g x
+```
+and
+```lean
+theorem Continuous.mul (hf : Continuous f) (hg : Continuous g) : Continuous (f * g)
+```
+Both theorems deserve tagging with the `fun_prop` attribute.
+
+The same goes for addition, subtraction, negation, powers and compositions of functions.

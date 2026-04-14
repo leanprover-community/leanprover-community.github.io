@@ -26,7 +26,7 @@ of the file.
 The other sections, with second level headers are (in this order):
 * *Main definitions* (optional, can be covered in the summary)
 * *Main statements* (optional, can be covered in the summary)
-* *Notations* (omitted only if no notation is introduced in this file)
+* *Notation* (omitted only if no notation is introduced in this file)
 * *Implementation notes* (description of important design decisions or interface features,
   including use of type classes and `simp` canonical form for new definitions)
 * *References* (references to textbooks or papers, or Wikipedia pages)
@@ -43,14 +43,11 @@ The following code block is an example of a file header.
 Copyright (c) 2018 Robert Y. Lewis. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Robert Y. Lewis
-
-! This file was ported from Lean 3 source module number_theory.padics.padic_norm
-! leanprover-community/mathlib commit 92ca63f0fb391a9ca5f22d2409a6080e786d99f7
-! Please do not edit these lines, except to modify the commit id
-! if you have ported upstream changes.
 -/
-import Mathlib.Algebra.Order.Field.Power
-import Mathlib.NumberTheory.Padics.PadicVal
+module
+
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!
 # p-adic norm
@@ -88,6 +85,7 @@ Every definition and major theorem is required to have a doc string.
 or might be useful in another file.)
 These are introduced using `/--` and closed by `-/` above the definition, with either newlines or
 single spaces between the markers and the text.
+Subsequent lines in a doc-string should not be indented.
 They can contain Markdown and LaTeX as well: see the next section. If a doc string is a complete
 sentence, then it should end in a period. Named theorems, such as the **mean value theorem** should be bold faced (i.e., with
 two asterisks before and after).
@@ -111,8 +109,19 @@ def padicValRat (p : ℕ) (q : ℚ) : ℤ :=
   padicValInt p q.num - padicValNat p q.den
 ```
 
+### Tactic documentation
+
+Tactics should have a docstring that matches the [Lean documentation style guide](https://github.com/leanprover/lean4/blob/master/doc/style.md#tactics).
+Key points are: Be complete and self-contained but brief. The docstring should start with a full
+sentence that has the tactic as the subject. (Example: "`rewrite [e]` uses the expression `e` as a
+rewrite rule on the main goal.") All different options and forms of the tactic should appear in a
+bulleted list. The "Examples:" section, if any, should be a sequence of code blocks.
+
+### Linting
+
 The `docBlame` linter lists all definitions that do not have doc strings. The `docBlameThm`
-linter will lists theorems and lemmas that do not have doc strings.
+linter will lists theorems and lemmas that do not have doc strings. The `tacticDocs` linter lists
+all tactics that do not have docstrings.
 
 To run only the `docBlame` linter, add the following to the end of your lean file:
 ```
@@ -123,8 +132,8 @@ file:
 ```
 #lint only docBlame docBlameThm
 ```
-To run the all default linters, including `docBlame`, add the following to the end of your lean
-file:
+To run the all default linters, including `docBlame` and `tacticDocs`, add the following to the end
+of your lean file:
 ```
 #lint
 ```
@@ -256,6 +265,16 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 ```
 
 > We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
+
+## Language
+
+Documentation should be written in English.
+Any common spelling (e.g. British, American or Australian English) is acceptable.
+Pull requests should not be made that only change which of these spellings are used,
+but it is acceptable to change the spelling
+as part of a PR that substantially enhances the documentation.
+Contrast this with the rule for [declaration names](naming.html#spelling),
+which should use American English spelling.
 
 ## Examples
 

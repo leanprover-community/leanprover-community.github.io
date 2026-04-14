@@ -1,13 +1,7 @@
-name: deploy site
+name: build site (pull request)
 
 on:
-  push:
-    branches-ignore:
-      - 'master'
-      - 'oldsite'
-  schedule:
-    - cron: '0 4 * * *'
-  workflow_dispatch:
+  pull_request:
 
 concurrency:
   # label each workflow run; only the latest with each label will run
@@ -17,19 +11,13 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     name: Build HTML
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
-        id: app-token
-        with:
-          app-id: ${{ secrets.LEANPROVER_COMMUNITY_WEBSITE_APP_ID }}
-          private-key: ${{ secrets.LEANPROVER_COMMUNITY_WEBSITE_PRIVATE_KEY }}
-
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: install Python
@@ -46,18 +34,12 @@ jobs:
       - name: install Python dependencies
         run: python -m pip install --upgrade pip -r requirements.txt
 
-      - name: build and deploy
+      - name: build
         id: build
         run: |
-          ./deploy.sh
+          ./make_site.py
         env:
-          git_hash: ${{ github.sha }}
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          DEPLOY_GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          DEPLOY_GITHUB_USER: leanprover-community-bot
-          github_repo: ${{ github.repository }}
-          github_ref: ${{ github.ref  }}
-          ZULIP_KEY: ${{ secrets.ZULIP_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload artifact
         id: upload-artifact

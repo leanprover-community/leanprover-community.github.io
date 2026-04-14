@@ -3,54 +3,48 @@
 
 {% block content %}
 
-    <div class="alert alert-info">
-      <p>
-      We are currently updating the Lean community website to describe working with Lean 4,
-      but most of the information you will find here today still describes Lean 3.
-      </p>
-      <p>
-      Pull requests updating this page for Lean 4 are very welcome.
-      There is a link at the bottom of this page.
-      </p>
-      <p>
-      Please visit <a href="https://leanprover.zulipchat.com">the leanprover zulip</a>
-      and ask for whatever help you need during this transitional period!
-      </p>
-      <p>
-      The website for Lean 3 has been <a href="https://leanprover-community.github.io/lean3/">archived</a>.
-      If you need to link to Lean 3 specific resources please link there.
-      </p>
-    </div>
-
-
     <h1>Lean projects</h1>
 
     <p>
-      While much Lean development takes place in the mathlib repository,
-      there are many other projects using Lean
-      that are developed and maintained by members of the community.
-      We list here a selection.
-      Many of these projects are designed to be imported as dependencies
-      in other developments.
-      At the bottom of this page,
-      you can see a summary of which projects are compatible with which Lean versions.
-      If two projects both support the same Lean version,
-      you can likely use them together.
+      <a href="https://reservoir.lean-lang.org/">Reservoir</a> is an up-to-date and thorough index of all public open-source Lean projects.
     </p>
 
     <p>
-      To add a project to this list,
-      please see the directions at the
-      <a href="https://github.com/leanprover-contrib/leanprover-contrib">leanprover-contrib</a> repository.
-    </p>
-
-    <p>
-      This list and the repository that manages it are both works in progress.
-      Please add your own project and report any problems in that repository.
+      On this page we list a representative sample of projects that depend on Mathlib.
+      To add a project to this list, you can add it to <a href="https://github.com/leanprover-community/mathlib4/blob/master/scripts/downstream_repos.yml">downstream-repos.yml</a> in Mathlib.
     </p>
 
   <div class="row row-cols-1 row-cols-md-2">
-    {% for project in projects %}
+    {% for project in projects_4 %}
+      <div class="col mb-4">
+      <div class="card h-100" >
+        <div class="card-body">
+          <h5 class="card-title">{{ project.name }}</h5>
+        {% if project.maintainers %}
+          <h6 class="card-subtitle mb-2 text-muted">maintained by
+            {% for maintainer in project.maintainers %}
+              <a href="https://github.com/{{ maintainer }}">@{{ maintainer }}</a>
+            {% endfor %}
+          </h6>
+        {% endif %}
+        <p class="card-text">{{ project.description }}</p>
+        </div>
+            <div class="card-footer text-right bg-white">
+              <small><a href="{{ project.url }}" class="card-link">View on GitHub</a> (★ {{ project.stars }})</small>
+            </div>
+      </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    <h1>Lean 3 projects</h1>
+
+    <p>
+      The projects listed below were made for the outdated Lean 3, and today are of historical interest only.
+    </p>
+
+  <div class="row row-cols-1 row-cols-md-2">
+    {% for project in projects_3 %}
       <div class="col mb-4">
       <div class="card h-100" >
         <div class="card-body">
@@ -63,73 +57,11 @@
         <p class="card-text">{{ project.description }}</p>
         </div>
             <div class="card-footer text-right bg-white">
-              <small><a href="https://github.com/{{ project.organization }}/{{ project.name }}" class="card-link">View on GitHub</a> (★ {{ project.stars }})</small>
+              <small><a href="{{ project.url }}" class="card-link">View on GitHub</a> (★ {{ project.stars }})</small>
             </div>
       </div>
       </div>
     {% endfor %}
     </div>
 
-
-
-
-      <h2>Projects by supported Lean versions</h2>
-
-      <p>
-        If you want to import multiple projects in your own,
-        you should choose a Lean version that is supported
-        by each of these dependencies.
-      </p>
-      <ul>
-        <li>
-          A ✓ in the <code>x.y.z</code> column
-          means that the project has a <code>lean-x.y.z</code> branch,
-          all of its dependencies have <code>lean-x.y.z</code> branches,
-          and the project builds successfully using the most recent commits
-          on all of these <code>lean-x.y.z</code> branches.
-        </li>
-        <li>
-          An × in the <code>x.y.z</code> column means that the project has an <code>lean-x.y.z</code> branch
-          but it fails to build.
-        </li>
-        <li>
-          No mark in the <code>x.y.z</code> column means that the project
-          does not have an <code>x.y.z</code> branch.
-        </li>
-      </ul>
-      <p>
-        Note that an × does not necessarily mean the project does not compile,
-        just that it does not compile with updated dependencies.
-      </p>
-
-      <div id="proj_table"></div>
-
-
-{% endblock %}
-
-{% block extrajs %}
-<script type="text/javascript" src="js/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<link href="https://unpkg.com/tabulator-tables@4.6.2/dist/css/tabulator.min.css" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
-<script type="text/javascript" src="https://leanprover-contrib.github.io/leanprover-contrib/projects.js"></script>
-
-<script>
-
-window.onload = function() {
-
-    var table = new Tabulator("#proj_table", {
-        data: projects, //set initial table data
-        layout:"fitColumns",
-        layoutColumnsOnNewData:true,
-        responsiveLayout:false,
-        columns: project_cols,
-        // height: "600px",
-    });
-    table.redraw(true);
-
-};
-
-
-</script>
 {% endblock %}

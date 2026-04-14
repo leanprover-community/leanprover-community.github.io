@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% from '_overview-macros.html' import flat_child %}
 {% block title %}Undergrad math in mathlib{% endblock %}
 {% block content %}
     <h1>Undergraduate mathematics in mathlib</h1>
@@ -18,17 +19,6 @@
       <a href="https://github.com/leanprover-community/mathlib4/edit/master/docs/undergrad.yaml">
         docs/undergrad.yaml</a> in the mathlib4 repository.
       </p>
-
-  {% macro flat_child(item) -%}
-    {%- if item.children -%}
-      {{ item.title }}(
-      {%- for inner_item in item.nonempty_children -%}
-        {{ flat_child(inner_item) }}{% if not loop.last %}, {% endif %}
-      {%- endfor -%})
-    {%- else -%}
-      <a href="{{ item.decl }}">{{ item.title }}</a>
-    {%- endif -%}
-  {%- endmacro -%}
 
   {% for area in overviews %}
     {% if area.is_nonempty %}
