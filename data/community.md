@@ -87,6 +87,8 @@ To clarify the above: actions that can result in suspension or banning from the 
 
 This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
 
+Please do not use an LLM when writing comments on github or Zulip. Don't worry if English is not your native language: this is true for most users; as long as you can be understood, you will be fine. Building community involves human connection; using an LLM to write for you removes this human element. Messages and comments that appear LLM-generated will be deleted, and can lead to suspension.
+
 This list is not exhaustive and the maintainers retain broad discretion in user moderation.
 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
