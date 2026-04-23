@@ -13,6 +13,8 @@ the `congr()` elaborator does this for you with less syntactical noise.
 Basic example usage:
 
 ```lean
+import Mathlib.Tactic.TermCongr
+
 example (a b : Nat) (h : a = b) : 4 * (37 + a) = 4 * (37 + b) :=
   congr(4 * (37 + $h))
 ```
