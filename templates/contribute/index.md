@@ -135,7 +135,7 @@ Once you're happy with your local changes, it's time to make a pull request.
   This helps you get feedback as you go along, and it is much easier to review.
   This is especially important for new contributors as it prevents wasted effort.
 
-* The title and description of the PR should follow our [commit conventions](commit.html).
+* The title and description of the PR should follow our [pull request conventions](commit.html).
 
 * If you are moving or deleting declarations, please include these lines at the bottom of the commit message
 (that is, before the `---`) using the following format:
