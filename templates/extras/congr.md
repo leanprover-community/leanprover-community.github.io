@@ -41,7 +41,7 @@ example (a b : Nat) (h : a = b) [NeZero a] [NeZero b] : (37 : Fin a) ≍ (37 : F
 ## Syntax
 
 Like other elaborators and macros, the parentheses are always attached to `congr()` without a space in between.
-`congr(...)` means something different from `congr (...)`: the first is the term elaborator we are discussing, while the second is the [`congr`](https://leanprover-community.github.io/mathlib4_docs/find/?pattern=congr#doc) lemma from the library applied to the arguent `(...)`.
+`congr(...)` means something different from `congr (...)`: the first is the term elaborator we are discussing, while the second is the [`congr`](https://leanprover-community.github.io/mathlib4_docs/find/?pattern=congr#doc) lemma from the library applied to the argument `(...)`.
 
 Inside the parentheses goes a [*quasiquoted*](https://lean-lang.org/doc/reference/latest/Notations-and-Macros/Macros/#quasiquotation) expression.
 In addition to the syntax of a typical expression, you can insert *antiquotations* which allow the content to vary.
@@ -185,6 +185,7 @@ example (a b : Nat) [NeZero a] [NeZero b] (x : Fin a) (y : Fin b) (h : x ≍ y) 
 We'd need to construct the proof of `a = b` ourselves and insert it into the expression in the right place to make `congr()` work:
 
 ```lean
+-- import Mathlib.Data.Fin.Embedding to make this work
 example (a b : Nat) [NeZero a] [NeZero b] (x : Fin a) (y : Fin b) (h : x ≍ y) :
     37 + x ≍ 37 + y :=
   have hab : a = b := Fin.equiv_iff_eq.mp ⟨type_eq_of_heq h ▸ Equiv.refl _⟩
