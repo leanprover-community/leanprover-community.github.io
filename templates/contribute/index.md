@@ -148,6 +148,8 @@ Deletions:
 - Nat.bit1_add_bit1
 - ...
 
+Moreover, add deprecation statements(manually or using `scripts/add_deprecations.sh`
+
 Any other comments you want to keep out of the PR commit should go
 below the `---`.
 
