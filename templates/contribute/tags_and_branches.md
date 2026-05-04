@@ -135,6 +135,8 @@ To make this process as smooth as possible, we follow the following procedure:
     Often one needs to fix merge conflicts in `lean-toolchain`, `lakefile.lean`, and/or `lake-manifest.json`.
   - If CI fails on this branch, then it posts a message to ["nightly-testing > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
   - If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)
+* The `nightly-testing-green` branch in `leanprover-community/mathlib4-nightly-testing` tracks the last commit of `nightly-testing` which built successfully.
+  Tooling for builds of `nightly-testing` is fetched from this branch.
 * The `bump/v4.X.Y` branches also live at `leanprover-community/mathlib4-nightly-testing` and use nightly toolchain releases of Lean.
   - This branch should always build without errors.
   - Changes to this branch are reviewed by the Mathlib maintainer team.
