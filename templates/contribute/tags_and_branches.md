@@ -53,7 +53,7 @@ Mathlib.
     Batteries is only very briefly on stable releases.
 * The first commit on `main` which uses a new toolchain is tagged with the version number of that
   toolchain (e.g. `v4.2.0`).
-* There is a branch `stable` which follows the `v4.X.0` tags.
+* There is a branch `stable` which follows the `v4.X.Y` tags.
 * Batteries has a branch `bump/v4.X.0` for the upcoming stable release of Lean,
   * which contains adaptations for breaking changes that have been approved by the maintainers
   * and which will be using a `leanprover-lean4:nightly-YYYY-MM-DD` toolchain.
