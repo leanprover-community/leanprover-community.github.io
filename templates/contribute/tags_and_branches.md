@@ -63,8 +63,7 @@ Mathlib.
   * may have any changes from `bump/v4.X.0` merged into it manually
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
     branch working against recent nightly releases.
-* Failures in CI on the `nightly-testing` are reported by a bot to zulip in the private
-  "Mathlib reviewers" channel.
+* Failures in CI on the `nightly-testing` branch are reported by a bot to zulip [in the `nightly-testing` channel](https://leanprover.zulipchat.com/#narrow/channel/428973-nightly-testing/topic/Batteries.20status.20updates/with/592700605).
 * Success in CI on the `nightly-testing` branch results in the creation of a tag
   `nightly-testing-YYYY-MM-DD` to match that commit, if this tag does not already exist.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
@@ -80,7 +79,7 @@ Mathlib.
     where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off.
   * If the `nightly-testing-YYYY-MM-DD` tag does not yet exist, you will need to wait
     (and possibly move forward to a subsequent nightly).
-    Contact @semorrison for assistance if needed.
+    Contact `@kim-em` for assistance if needed.
   * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Batteries repository;
     we can provide write access if needed.
   * The `lean-toolchain` on this branch must contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
@@ -105,6 +104,7 @@ Mathlib.
 
 * Everything said above about Batteries applies to Mathlib, except:
   * Development occurs on `master`.
+  * `nightly-testing` status updates are posted in [this thread](https://leanprover.zulipchat.com/#narrow/channel/428973-nightly-testing/topic/Mathlib.20status.20updates/with/592729346).
   * PRs to Mathlib should be made from forks. Mathlib's `.olean` cache now works with PRs from forks.
 * The `lean-pr-testing-NNNN`, `nightly-testing`, `nightly-testing-*` tags, and `bump/v4*` branches
   all live at `leanprover-community/mathlib4-nightly-testing`, which is a fork of mathlib4.
