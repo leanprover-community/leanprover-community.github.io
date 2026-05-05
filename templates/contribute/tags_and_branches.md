@@ -63,7 +63,7 @@ Mathlib.
   * may have any changes from `bump/v4.X.0` merged into it manually
   * may have any other commits, including unreviewed ones, required to keep the `nightly-testing`
     branch working against recent nightly releases.
-* Failures in CI on the `nightly-testing` branch are reported by a bot to zulip [in the `nightly-testing` channel](https://leanprover.zulipchat.com/#narrow/channel/428973-nightly-testing/topic/Batteries.20status.20updates/with/592700605).
+* Failures in CI on the `nightly-testing` branch are reported by a bot to zulip [in the `nightly-testing-batteries` channel](https://leanprover.zulipchat.com/#narrow/channel/595626-nightly-testing-batteries/topic/Batteries.20status.20updates/with/592700605).
 * Success in CI on the `nightly-testing` branch results in the creation of a tag
   `nightly-testing-YYYY-MM-DD` to match that commit, if this tag does not already exist.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
@@ -104,12 +104,12 @@ Mathlib.
 
 * Everything said above about Batteries applies to Mathlib, except:
   * Development occurs on `master`.
-  * `nightly-testing` status updates are posted in [this thread](https://leanprover.zulipchat.com/#narrow/channel/428973-nightly-testing/topic/Mathlib.20status.20updates/with/592729346).
+  * `nightly-testing` status updates are posted in [this thread](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib/topic/Mathlib.20status.20updates/with/592729346) in `#nightly-testing-mathlib`.
   * PRs to Mathlib should be made from forks. Mathlib's `.olean` cache now works with PRs from forks.
 * The `lean-pr-testing-NNNN`, `nightly-testing`, `nightly-testing-*` tags, and `bump/v4*` branches
   all live at `leanprover-community/mathlib4-nightly-testing`, which is a fork of mathlib4.
   If you will regularly need write access to these branches, you can ask in the
-  [nightly-testing channel](https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing)
+  [`nightly-testing-mathlib` channel](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib)
   on Zulip to be added to the `nightly-testing` GitHub team.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Batteries as required.
 * Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Batteries as required.
@@ -133,7 +133,7 @@ To make this process as smooth as possible, we follow the following procedure:
   - Typically, a PR `#NNNN` to Lean core will be accompanied by adaptations to Mathlib in a branch `lean-pr-testing-NNNN`.
     Once the Lean core PR lands in a nightly toolchain, the Mathlib branch `lean-pr-testing-NNNN` can be merged into `nightly-testing`.
     Often one needs to fix merge conflicts in `lean-toolchain`, `lakefile.lean`, and/or `lake-manifest.json`.
-  - If CI fails on this branch, then it posts a message to ["nightly-testing > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/stream/428973-nightly-testing/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
+  - If CI fails on this branch, then it posts a message to ["nightly-testing-mathlib > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
   - If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)
 * The `nightly-testing-green` branch in `leanprover-community/mathlib4-nightly-testing` tracks the last commit of `nightly-testing` which built successfully.
   Tooling for builds of `nightly-testing` is fetched from this branch.
