@@ -94,9 +94,13 @@ This list is not exhaustive and the maintainers retain broad discretion in user 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
 
 The [code of conduct team](/teams/coc.html) serves as first point of contact
-for reporting any concerns.
-We also provide an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
+for reporting any concerns. You can write to members of this team directly or 
+use an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
 to report incidents that violate the community guidelines.
+Specifically on Zulip, you can also report problematic messages to the whole
+moderation team (made of Mathlib and CSLib maintainers and some Lean FRO
+members), see the [relevant Zulip documentation](https://zulip.com/help/report-a-message).
+Only the moderators can see that you reported a message, and what you wrote in your report.
 
 We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,
