@@ -100,6 +100,7 @@ to report incidents that violate the community guidelines.
 Specifically on Zulip, you can also report problematic messages to the whole
 moderation team (made of Mathlib and CSLib maintainers and some Lean FRO
 members), see the [relevant Zulip documentation](https://zulip.com/help/report-a-message)
+Only the moderators can see that you reported a message, and what you wrote in your report.
 
 We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,
