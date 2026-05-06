@@ -24,7 +24,18 @@
       {% else %}
         <ul>
         {% for member in team.members %}
-          <li>{{ member.name }}</li>
+          <li>
+            {{- member.name -}}
+            {%- if reviewer_data is defined and member.github and member.github in reviewer_data -%}
+              {%- set rd = reviewer_data[member.github] -%}
+              {%- for label in rd.preferred_labels %}
+                <span class="badge badge-secondary ml-1">{{ label }}</span>
+              {%- endfor %}
+              {%- if rd.free_form %}
+                <br><small class="text-muted">{{ rd.free_form }}</small>
+              {%- endif %}
+            {%- endif %}
+          </li>
         {% endfor %}
         </ul>
       {% endif %}
