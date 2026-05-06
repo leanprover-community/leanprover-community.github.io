@@ -1,12 +1,4 @@
-# Mathlib's mission and values
-
-## The mission
-
-Mathlib's primary mission is to enable the computer formalisation of contemporary research mathematics. A metric for the success of this mission might be the proportion of recent papers in a journal like *Annals of Mathematics* or *Inventiones Mathematicae* for which the effort to formalise them in Lean is not substantially greater than the effort to write them in LaTeX. This is a hard metric to move. An important easier, but still hard metric, is the same task except that proofs can be omitted, so that only definitions and lemma statements are required.
-
-The extent to which Mathlib's mission is achievable is unknown and depends on both sociological and technological factors. Mathlib can be simultaneously regarded as an experiment, a research project in its own right, a software project, and an instance of mathematical literature.
-
-Here we take it for granted that our mission is a worthy endeavour. People interested in this question may wish to consult references like Avigad [1], Massot [2], and Zeilberger [3].
+# Mathlib's values
 
 ## Our values
 
@@ -127,9 +119,3 @@ During review we also check for minor points of style such as:
  * Proof golfing, but not overgolfing. Note that reducing character / line count is sometimes a side effect of a better proof but it is not a goal, and often a better proof can increase these values.
  * Whitespace.
  * Formatting of doc strings.
-
-## Citations
-
-1. Avigad, J. "Mathematics and the formal turn", Notices 2024.
-1. Massot, P. "Why formalize mathematics?", https://www.imo.universite-paris-saclay.fr/~patrick.massot/files/exposition/why_formalize.pdf, 2021.
-1. Zeilberger, D. "Using [...] Lean in Mathematical Research is a Step in the Wrong Direction [...]", https://sites.math.rutgers.edu/~zeilberg/Opinion184.html, 2022.
