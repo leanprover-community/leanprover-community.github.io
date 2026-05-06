@@ -163,7 +163,7 @@ with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
 
 reviewer_data: dict = {}
-_queueboard_url = os.environ.get('QUEUEBOARD_API_URL')
+_queueboard_url = os.environ.get('QUEUEBOARD_REVIEWER_INTERESTS_API_URL')
 if _queueboard_url:
     try:
         with urllib.request.urlopen(_queueboard_url) as _resp:
