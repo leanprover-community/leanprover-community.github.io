@@ -52,7 +52,7 @@ Partly for the sake of accessibility, we require human-readable comments (aka "d
 
 ## Implications for PR review
 
-Mathlib changes by merging PRs (pull requests) from contributors. It is largely during review of such PRs that mission alignment is assessed and values are enacted. We provide some comments on this code review process below. In many cases, more detail is available in the [style guide](https://leanprover-community.github.io/contribute/style.html).
+Mathlib changes by merging PRs (pull requests) from contributors. It is largely during review of such PRs that mission alignment is assessed and values are enacted. We provide some comments on this code review process below. In many cases, more detail is available in the [style guide](https://leanprover-community.github.io/contribute/style.html) and the [PR Review Guide](https://leanprover-community.github.io/contribute/pr-review.html).
 
 ### Please be courteous
 
