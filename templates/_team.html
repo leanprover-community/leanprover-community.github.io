@@ -25,14 +25,14 @@
         <ul>
         {% for member in team.members %}
           <li>
-            {{- member.name -}}
+            {{- member.name }} (<code>@{{ member.github }}</code>)
             {%- if reviewer_data is defined and member.github and member.github in reviewer_data -%}
               {%- set rd = reviewer_data[member.github] -%}
               {%- for label in rd.preferred_labels %}
                 <span class="badge badge-secondary ml-1">{{ label }}</span>
               {%- endfor %}
               {%- if rd.free_form %}
-                <br><small class="text-muted">{{ rd.free_form }}</small>
+                <div class="small text-muted reviewer-freeform">{{ rd.free_form | md }}</div>
               {%- endif %}
             {%- endif %}
           </li>
@@ -40,4 +40,3 @@
         </ul>
       {% endif %}
 {% endblock %}
-
