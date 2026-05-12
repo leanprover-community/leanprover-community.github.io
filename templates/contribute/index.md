@@ -176,6 +176,7 @@ However, anyone can add/remove the labels below by writing the following command
 - `easy` will add the **"easy"** label
 - `-easy` will remove the **"easy"** label
 - `help-wanted`, `-help-wanted`, `please-adopt`, `-please-adopt` can be used to mark a PR in need of external input.
+- `LLM-generated`, `-LLM-generated` can be used to mark a PR as containing LLM-generated code (remember to explain specifics in the description!).
 - Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **infinity-cosmos**, **sphere-packing** and **toric** can also be added and removed in the same way.
 - Any topic label of the form `t-*` (e.g. `t-topology`), as well as the labels `CI` and `IMO`,  can also be added and removed in the same way. PRs are auto-labeled based on their contents, but sometimes the auto-labeling is incorrect or incomplete so this lets you manually override it. See [available topic labels](https://github.com/leanprover-community/mathlib4/labels?q=t-).
 
