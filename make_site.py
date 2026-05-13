@@ -157,9 +157,19 @@ class People:
     name: str
     descr: str = ''
     img: str = ''
+    github: str = ''
 
 with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+reviewer_data: dict = {}
+_queueboard_url = os.environ.get('QUEUEBOARD_REVIEWER_INTERESTS_API_URL')
+if _queueboard_url:
+    try:
+        with urllib.request.urlopen(_queueboard_url) as _resp:
+            reviewer_data = {r['github_login']: r for r in json.loads(_resp.read())['reviewers']}
+    except Exception as e:
+        print(f'Warning: could not fetch reviewer data: {e}', file=sys.stderr)
 
 @dataclass
 class Team:
@@ -938,8 +948,9 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
     team_tpl = env.get_template('_team.html')
     for team in teams:
+        extra = {'reviewer_data': reviewer_data} if team.url == 'reviewers' else {}
         with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
-            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+            team_tpl.stream(team=team, menus=menus, base_url=base_url, **extra).dump(tgt_file)
 
 
     for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
