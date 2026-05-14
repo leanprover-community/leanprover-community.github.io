@@ -112,7 +112,7 @@ Typical workflow:
 `lake build`. This may take a long time if you modified files low down in the import hierarchy.
 It's also okay to let our central CI servers do this for you by pushing your changes after you've opened a PR to the main repository.
 * If you created new files, run `lake exe mk_all`. This will update `Mathlib.lean` to ensure that all files are imported there.
-* In order to push your changes back to the repository on github, use
+* In order to push your changes back to your repository on github, use
   ```
   git push
   ```
@@ -130,7 +130,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
 
 ## Making a Pull Request (PR)
 
-Once you're happy with your local changes, it's time to make a pull request.
+Once you're happy with your local changes, it's time to make a pull request to the `master` branch on the main `leanprover-community/mathlib4` repository: pay attention not to open this PR against the `master` branch on your own fork.
 
 * If you haven't already, please come to https://leanprover.zulipchat.com/, introduce yourself, and mention your new PR.
 
