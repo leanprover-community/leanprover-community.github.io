@@ -329,7 +329,7 @@ These can be replaced by `simpa using h`.
 ## `dsimp`
 
 `dsimp` is a variant of `simp` that only uses "definitional" `simp`
-lemmas.  These are `simp` lemmas whose proof is `rfl` or `Iff.rfl`,
+lemmas.  These are `simp` lemmas whose proof is `rfl`,
 that is, lemmas where the two sides are equal by definition.
 
 Like `simp` it is recommended that you do not use it in the middle of
