@@ -419,9 +419,11 @@ Instead, they should be included explicitly: `simp [new_attr]`. This can often r
 
 ### Configuration options
 
-Both `simp` and `dsimp` can take additional configuration options using record syntax.
-For example, `simp (config := { singlePass := true })` runs `simp` with the `singlePass` configuration option set to true.
+Both `simp` and `dsimp` can take additional configuration options.
+For example, `simp +singlePass` runs `simp` with the `singlePass` configuration option set to true; `simp -singlePass` would explicitly this option to false.
 One can use `singlePass` to avoid loops that might otherwise occur.
+For options which take a value, you can use named argument syntax, as in `simp (maxSteps := 37)`.
+This would set the maximum number of steps allowed before failing to 37.
 
 The core Lean file `Init/MetaTypes.lean` reveals other configuration options in
 the [`Lean.Meta.DSimp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config) and [`Lean.Meta.Simp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config) structures.
@@ -464,5 +466,5 @@ implication it temporarily adds the antecedent as a `simp` lemma. This
 is necessary for the following example:
 ```lean
 example {x y : ℕ} : x = 0 → y = 0 → x = y := by
-  simp (config := { contextual := true })
+  simp +contextual
 ```
