@@ -101,7 +101,7 @@ The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-Labels can only be edited directly by "GitHub collaborators" (which are experienced contributors).
+Labels can only be edited directly by "GitHub collaborators" (who are experienced contributors).
 However, anyone can add/remove the labels below by writing the following commands in a comment on the PR (each on its own line):
 - `awaiting-author` will add the **"awaiting-author"** label
 - `-awaiting-author` will remove the **"awaiting-author"** label
