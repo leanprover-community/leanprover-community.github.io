@@ -1,6 +1,6 @@
 # Contributing to mathlib
 
-We're glad you are interesting in contributing to mathlib. This is a joint project, which can use lots of help. On the other hand, it is also a large project: to usefully contribute, you need to follow a few principles.
+We're glad you are interested in contributing to mathlib. This project can use lots of help. On the other hand, it is also quite large: to usefully contribute, you need to follow a few principles.
 
 This page explains what and why to contribute to mathlib, covering:
 * what kind of contributions are welcome
