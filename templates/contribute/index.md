@@ -59,18 +59,19 @@ change on Zulip and, when significant consensus among reviewers is reached, to o
 
 ## Use of AI
 
-Note that using an LLM when writing comments on github or Zulip is not allowed: use your own words.
-
 Using artificial intelligence tools to generate code is becoming more and more common. While this can be practical, their use also poses ethical, ecological, legal and social concerns. We recognise that there are strong differences in opinion on this topic. That said, while individual action alone will not address these concerns, we ask you to consider the effects of your AI use. When reviewing PRs, we are particularly concerned that the pedagogical value of the reviewers work is wasted if there is not a human contributor actively learning.
 
+Using an LLM when writing comments on github or Zulip is not allowed: use your own words.
+
 Mathlib intentionally has very high standards (on generality, integration with the remaining library and maintainability, including code style). As of mid-2026, code written by an AI without the supervision of a Lean subject expert fails to meet that bar by a large margin. Members of the review team will summarily close without comment any low quality PR produced using LLMs, especially if the author has made little effort to directly engage in the community in a discussion about its merits before opening the PR.
-If we notice that you open several PRs without putting in this learning effort or without adhering to our community ethical standards, we will suspend (or permanently ban) you both from opening new PR's and from the Zulip chat.
+If we notice that you open several PRs without putting in this learning effort or without adhering to our community ethical standards, we will suspend (or permanently ban) you both from opening new PRs and from the Zulip chat.
 
 Getting code to mathlib's standards requires understanding and writing Lean code by hand. If you just want to help and not put in the learning effort, making a PR to mathlib is counterproductive: the effort required from the mathlib maintainers is larger than the benefit, because the time used to improve the quality of the code will not result in a better quality in future PRs.
 
-If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like [ChatGPT](https://chatgpt.com/) or using an agent like [Codex](https://openai.com/codex/), [Claude](https://claude.ai/), [Gemini](https://gemini.google.com/app), or even Lean-dedicated agents like [Aristotle](https://aristotle.harmonic.fun/)), please explain this in the PR description. Explain which tool(s) you used and how you used it. This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors. If your PR contains a substantial amount of LLM-generated code, add the `LLM-generated` label by adding the comment `LLM-generated`.
+If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like [ChatGPT](https://chatgpt.com/) or using an agent like [Codex](https://openai.com/codex/), [Claude](https://claude.ai/), [Gemini](https://gemini.google.com/app), or even Lean-dedicated agents like [Aristotle](https://aristotle.harmonic.fun/)), please explain this in the PR description. Explain which tool(s) you used and how you used it. Indicate the degree of AI involvement using [Visidata's AI level of contributions](https://www.visidata.org/blog/2026/ai/#self-assessed-ai-level-for-contributions) or equivalent.
+This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors. If your PR contains a substantial amount of LLM-generated code, add the `LLM-generated` label by adding the comment `LLM-generated`.
 
-It is essential that you can vouch for all the code submitted in a PR, and understand all the content written by an AI. If you don't, then it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
+It is essential that you understand all the content written by an AI. This includes any design decisions made for the formalisation and being able to justify each decision to reviewers. If you don't, it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
 
 ## How to contribute
 
