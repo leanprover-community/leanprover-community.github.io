@@ -177,7 +177,7 @@ This generates the lemma `@[simp] lemma myFoo_n : myFoo.n = 37`.
 
 * `simp at h` tries to simplify `h` using all `simp` lemmas.
 
-* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-` or `\vdash` in VS Code).
+* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-`, `\goal` or `\vdash` in VS Code).
 
 * `simp [*] at *` : tries to simplify both the goal and all hypotheses, using all hypotheses and all `simp` lemmas. Sometimes worth a try.
 
@@ -196,7 +196,7 @@ is a proof of hypothesis `P` and `P → A = B` is a `simp` lemma, then
 `simp` considers additional hypotheses is the reason it is called a
 *conditional* term rewriting system.
 
-## Simp-normal form
+## Simp normal form
 
 There are sometimes several ways to say the same thing. For example,
 if `n : ℕ` then the hypotheses `n ≠ 0`, `0 ≠ n`, `n > 0`, `0 < n`,
@@ -243,7 +243,7 @@ to replace occurrences of `a ∈ (s : Set α)` with the correct normal form.
 
 Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a `simp`
-lemma should have the arguments to the function on its left-hand side in simp-normal
+lemma should have the arguments to the function on its left-hand side in simp normal
 form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) = 0` will never be used.
 Batteries' `simpNF` [linter](https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html) checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
