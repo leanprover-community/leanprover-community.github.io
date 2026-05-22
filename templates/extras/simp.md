@@ -414,8 +414,8 @@ you can make your own `@[simp]`-like attribute, but with a key difference:
 lemmas tagged with `@[new_attr]` are _not_ in the default set of `simp` lemmas.
 Instead, they should be included explicitly: `simp [new_attr]`. This can often replace lengthy
 `simp only [...]` calls and facilitate easier-to-read code. Some examples of common usage are
-[`mfld_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.mfld_simps),
-and [`field_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.field_simps).
+[`enat_to_nat_top`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.enat_to_nat_top), and
+[`coassoc_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.coassoc_simps).
 
 ### Configuration options
 
