@@ -223,7 +223,7 @@ normalizing lemmas whose only purpose is to put expressions into
 In general, if you are writing a lemma, you should know the "normal
 form" way to express the ideas in the lemma. The `#simp` command can help
 you find out about it: writing `#simp e` for an expression `e` simplifies
-that expression using applicable `simp`'s lemma.
+that expression using applicable `simp` lemmas.
 If you are writing a lemma about a definition you made yourself,
 think about the normal forms for ideas that can be expressed in more than one way.
 
