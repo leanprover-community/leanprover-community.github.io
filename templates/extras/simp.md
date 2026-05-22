@@ -427,8 +427,7 @@ This would set the maximum number of steps allowed before failing to 37.
 
 The core Lean file `Init/MetaTypes.lean` reveals other configuration options in
 the [`Lean.Meta.DSimp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config) and [`Lean.Meta.Simp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config) structures.
-Most of them are not very relevant for the average user,
-and some of them are not fully documented.  These are reproduced in the
+Most of them are not very relevant for the average user.  These are reproduced in the
 following table, where the default value for a configuration option
 for `simp` or `dsimp` is given in the respective column -- if no
 default value is present, that option is unavailable.
