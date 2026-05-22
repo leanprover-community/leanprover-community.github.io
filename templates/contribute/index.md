@@ -68,3 +68,7 @@ We do not accept pull requests opened by new contributors where code is LLM-gene
 If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like [ChatGPT](https://chatgpt.com/) or using an agent like [Codex](https://openai.com/codex/), [Claude](https://claude.ai/), [Gemini](https://gemini.google.com/app), or even Lean-dedicated agents like [Aristotle](https://aristotle.harmonic.fun/)), please explain this in the PR description. Explain which tool(s) you used and how you used it. This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors.
 
 It is essential that you can vouch for all the code submitted in a PR, and understand all the content written by an AI. If you don't, then it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
+
+## How to contribute
+
+If you have read and understood the contribution guidelines above, you are ready to [learn how to contribute](/contribute/how-to-contribute.html).

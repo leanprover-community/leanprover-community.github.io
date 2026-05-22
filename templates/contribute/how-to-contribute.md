@@ -1,12 +1,12 @@
 # How to contribute to mathlib
 
-Here are some tips and tricks
-to make the process of contributing as smooth as possible.
+This page explains what to do and expect when making a contribution to mathlib.
+Even if you are an experienced Git user, please check the steps below because we explain the particular conventions for mathlib pull requests.
 
 * Use [Zulip](https://leanprover.zulipchat.com/) to
    discuss your contribution before and while you are working on it.
 * Create a GitHub account and add your GitHub username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
-We also strongly encourage setting your display name on Zulip to be your real name.
+  We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
    - The [style guide](style.html) for contributors.
    - The explanation of [naming conventions](naming.html).
@@ -101,7 +101,7 @@ The review queue is controlled by GitHub "labels".
 On the main page for a PR, on the right-hand side,
 there should be a sidebar with panels "reviewers", "assignees", "labels", etc.
 Click on the "labels" header to add or remove labels from the current project.
-Labels can only be edited directly by "GitHub collaborators", which is approximately the same as "people who have write access".
+Labels can only be edited directly by "GitHub collaborators" (which are experienced contributors).
 However, anyone can add/remove the labels below by writing the following commands in a comment on the PR (each on its own line):
 - `awaiting-author` will add the **"awaiting-author"** label
 - `-awaiting-author` will remove the **"awaiting-author"** label
@@ -112,7 +112,7 @@ However, anyone can add/remove the labels below by writing the following command
 - `easy` will add the **"easy"** label
 - `-easy` will remove the **"easy"** label
 - `help-wanted`, `-help-wanted`, `please-adopt`, `-please-adopt` can be used to mark a PR in need of external input.
-- Similarly, the labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **infinity-cosmos**, **sphere-packing** and **toric** can also be added and removed in the same way.
+- The labels for use by contributors upstreaming work from the downstream projects **brownian**, **carleson**, **CFT**, **FLT**, **infinity-cosmos**, **sphere-packing** and **toric** can be added and removed in the same way.
 - Any topic label of the form `t-*` (e.g. `t-topology`), as well as the labels `CI` and `IMO`,  can also be added and removed in the same way. PRs are auto-labeled based on their contents, but sometimes the auto-labeling is incorrect or incomplete so this lets you manually override it. See [available topic labels](https://github.com/leanprover-community/mathlib4/labels?q=t-).
 
 This list is exhaustive.  If you would like to add a different label, please, bring it up on Zulip!
