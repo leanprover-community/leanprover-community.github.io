@@ -177,7 +177,7 @@ This generates the lemma `@[simp] lemma myFoo_n : myFoo.n = 37`.
 
 * `simp at h` tries to simplify `h` using all `simp` lemmas.
 
-* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-` or `\vdash` in VS Code).
+* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-`, `\goal` or `\vdash` in VS Code).
 
 * `simp [*] at *` : tries to simplify both the goal and all hypotheses, using all hypotheses and all `simp` lemmas. Sometimes worth a try.
 
@@ -247,6 +247,13 @@ lemma should have the arguments to the function on its left-hand side in simp-no
 form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) = 0` will never be used.
 Batteries' `simpNF` [linter](https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html) checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
+
+## `simp_all`
+
+`simp_all` is a stronger version of `simp [*] at *` where the hypotheses and target
+are simplified multiple times until no simplification is applicable.
+Only non-dependent propositional hypotheses are considered.
+This can lead to unprovable goals if the local hypotheses were contradictory.
 
 ## `simpa`
 
@@ -398,6 +405,9 @@ If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffi
 This is the full syntax for the `simp` tactic:
 
 > `simp` (`?`)? (`!`)? (`(config :=` config `)`)? (`(disch :=` discharger `)`)? (`only`)? (`[`list of `*` and lemmas`]`)? (`at` locations)?
+
+This is the full syntax for the `simp_all` tactic:
+> `simp_all` config ( `disch := ` discharger `)`)? (&" only")? (`[`list of `*` and lemmas`]`)?
 
 This is the full syntax for the `simpa` tactic:
 
