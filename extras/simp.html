@@ -218,7 +218,7 @@ Lean at that time.</p>
 <p><code>simp at h</code> tries to simplify <code>h</code> using all <code>simp</code> lemmas.</p>
 </li>
 <li>
-<p><code>simp [h1] at h2 ⊢</code> tries to simplify both <code>h2</code> and the goal using <code>h1</code> and all <code>simp</code> lemmas (note: type <code>⊢</code> with <code>\|-</code> or <code>\vdash</code> in VS Code).</p>
+<p><code>simp [h1] at h2 ⊢</code> tries to simplify both <code>h2</code> and the goal using <code>h1</code> and all <code>simp</code> lemmas (note: type <code>⊢</code> with <code>\|-</code>, <code>\goal</code> or <code>\vdash</code> in VS Code).</p>
 </li>
 <li>
 <p><code>simp [*] at *</code> : tries to simplify both the goal and all hypotheses, using all hypotheses and all <code>simp</code> lemmas. Sometimes worth a try.</p>
@@ -241,7 +241,7 @@ is a proof of hypothesis <code>P</code> and <code>P → A = B</code> is a <code>
 <code>simp [h]</code> will replace <code>A</code>'s with <code>B</code>'s in the goal. The fact that
 <code>simp</code> considers additional hypotheses is the reason it is called a
 <em>conditional</em> term rewriting system.</p>
-<h2 id="simp-normal-form" class="markdown-heading">Simp-normal form <a class="hover-link" href="#simp-normal-form">#</a></h2>
+<h2 id="simp-normal-form" class="markdown-heading">Simp normal form <a class="hover-link" href="#simp-normal-form">#</a></h2>
 <p>There are sometimes several ways to say the same thing. For example,
 if <code>n : ℕ</code> then the hypotheses <code>n ≠ 0</code>, <code>0 ≠ n</code>, <code>n &gt; 0</code>, <code>0 &lt; n</code>,
 <code>1 ≤ n</code> and <code>n ≥ 1</code> are all logically equivalent. This can be
@@ -263,9 +263,11 @@ for every variant. To help the simplifier out, many times there are
 normalizing lemmas whose only purpose is to put expressions into
 <code>simp</code> normal form.</p>
 <p>In general, if you are writing a lemma, you should know the &quot;normal
-form&quot; way to express the ideas in the lemma. If you are writing a
-lemma about a definition you made yourself, think about the normal
-forms for ideas that can be expressed in more than one way.</p>
+form&quot; way to express the ideas in the lemma. The <code>#simp</code> command can help
+you find out about it: writing <code>#simp e</code> for an expression <code>e</code> simplifies
+that expression using applicable <code>simp</code> lemmas.
+If you are writing a lemma about a definition you made yourself,
+think about the normal forms for ideas that can be expressed in more than one way.</p>
 <p>An example of a <code>simp</code> normal form is a way of expressing nonemptiness
 of a subset of a type.  If <code>α : Type</code> and <code>s : Set α</code> then
 nonemptiness of <code>s</code> can be expressed both as <code>s.Nonempty</code> and <code>s ≠ ∅</code>.
@@ -283,7 +285,7 @@ normalizing <code>simp</code> lemma</p>
 <p>to replace occurrences of <code>a ∈ (s : Set α)</code> with the correct normal form.</p>
 <p>Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a <code>simp</code>
-lemma should have the arguments to the function on its left-hand side in simp-normal
+lemma should have the arguments to the function on its left-hand side in simp normal
 form. For example if <code>g 0</code> can be simplified, then <code>@[simp] lemma foo : f (g 0) = 0</code> will never be used.
 Batteries' <code>simpNF</code> <a href="https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html">linter</a> checks for this
 (you can run mathlib's linters for a module yourself by putting <code>#lint</code> at the end of the file).</p>
@@ -364,7 +366,7 @@ The explicit <code>P</code> in the source code helps in finding a fix.</p>
 These can be replaced by <code>simpa using h</code>.</p>
 <h2 id="dsimp" class="markdown-heading"><code>dsimp</code> <a class="hover-link" href="#dsimp">#</a></h2>
 <p><code>dsimp</code> is a variant of <code>simp</code> that only uses &quot;definitional&quot; <code>simp</code>
-lemmas.  These are <code>simp</code> lemmas whose proof is <code>rfl</code> or <code>Iff.rfl</code>,
+lemmas.  These are <code>simp</code> lemmas whose proof is <code>rfl</code>,
 that is, lemmas where the two sides are equal by definition.</p>
 <p>Like <code>simp</code> it is recommended that you do not use it in the middle of
 a proof.  However if <code>dsimp</code> turns your goal into <code>h</code> then <code>change h</code>
@@ -435,16 +437,17 @@ you can make your own <code>@[simp]</code>-like attribute, but with a key differ
 lemmas tagged with <code>@[new_attr]</code> are <em>not</em> in the default set of <code>simp</code> lemmas.
 Instead, they should be included explicitly: <code>simp [new_attr]</code>. This can often replace lengthy
 <code>simp only [...]</code> calls and facilitate easier-to-read code. Some examples of common usage are
-<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.mfld_simps"><code>mfld_simps</code></a>,
-and <a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.field_simps"><code>field_simps</code></a>.</p>
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.enat_to_nat_top"><code>enat_to_nat_top</code></a>, and
+<a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.coassoc_simps"><code>coassoc_simps</code></a>.</p>
 <h3 id="configuration-options" class="markdown-heading">Configuration options <a class="hover-link" href="#configuration-options">#</a></h3>
-<p>Both <code>simp</code> and <code>dsimp</code> can take additional configuration options using record syntax.
-For example, <code>simp (config := { singlePass := true })</code> runs <code>simp</code> with the <code>singlePass</code> configuration option set to true.
-One can use <code>singlePass</code> to avoid loops that might otherwise occur.</p>
+<p>Both <code>simp</code> and <code>dsimp</code> can take additional configuration options.
+For example, <code>simp +singlePass</code> runs <code>simp</code> with the <code>singlePass</code> configuration option set to true; <code>simp -singlePass</code> would explicitly this option to false.
+One can use <code>singlePass</code> to avoid loops that might otherwise occur.
+For options which take a value, you can use named argument syntax, as in <code>simp (maxSteps := 37)</code>.
+This would set the maximum number of steps allowed before failing to 37.</p>
 <p>The core Lean file <code>Init/MetaTypes.lean</code> reveals other configuration options in
 the <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config"><code>Lean.Meta.DSimp.Config</code></a> and <a href="https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config"><code>Lean.Meta.Simp.Config</code></a> structures.
-Most of them are not very relevant for the average user,
-and some of them are not fully documented.  These are reproduced in the
+Most of them are not very relevant for the average user.  These are reproduced in the
 following table, where the default value for a configuration option
 for <code>simp</code> or <code>dsimp</code> is given in the respective column -- if no
 default value is present, that option is unavailable.
@@ -583,7 +586,7 @@ surrounding context. For example, as it simplifies the consequent of an
 implication it temporarily adds the antecedent as a <code>simp</code> lemma. This
 is necessary for the following example:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℕ</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">(</span><span class="n">config</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contextual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="o">})</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="bp">+</span><span class="n">contextual</span>
 </code></pre></div>
 </div>
 
