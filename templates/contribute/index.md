@@ -71,7 +71,7 @@ Getting code to mathlib's standards requires understanding and writing Lean code
 If you use artificial intelligence (such as, by using github's copilot mode, asking an LLM like [ChatGPT](https://chatgpt.com/) or using an agent like [Codex](https://openai.com/codex/), [Claude](https://claude.ai/), [Gemini](https://gemini.google.com/app), or even Lean-dedicated agents like [Aristotle](https://aristotle.harmonic.fun/)), please explain this in the PR description. Explain which tool(s) you used and how you used it.
 This provides useful context for reviewers: tools make different mistakes than humans, so knowing this makes it easier to spot common errors. If your PR contains a substantial amount of LLM-generated code, add the `LLM-generated` label by adding the comment `LLM-generated`.
 
-It is essential that you understand all the content written by an AI. This includes any design decisions made for the formalisation and being able to justify each decision to reviewers. If you don't, it is possible that the PR actually has negative value to the community, and you are expecting others to do the real work for you!
+It is essential that you understand all the content written by an AI. This includes any design decisions made for the formalization and being able to justify each decision to reviewers. If you don't, it is likely that the PR actually has negative value to the community.
 
 ## How to contribute
 
