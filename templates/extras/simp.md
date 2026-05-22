@@ -221,9 +221,11 @@ normalizing lemmas whose only purpose is to put expressions into
 `simp` normal form.
 
 In general, if you are writing a lemma, you should know the "normal
-form" way to express the ideas in the lemma. If you are writing a
-lemma about a definition you made yourself, think about the normal
-forms for ideas that can be expressed in more than one way.
+form" way to express the ideas in the lemma. The `#simp` command can help
+you find out about it: writing `#simp e` for an expression `e` simplifies
+that expression using applicable `simp`'s lemma.
+If you are writing a lemma about a definition you made yourself,
+think about the normal forms for ideas that can be expressed in more than one way.
 
 An example of a `simp` normal form is a way of expressing nonemptiness
 of a subset of a type.  If `α : Type` and `s : Set α` then
