@@ -311,6 +311,12 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
+that respectively generate additive versions of algebraic multiplicative
+statements and dualised versions of order theoretic statements.
+Where applicable, these attributes should be used
+over writing the second statement by hand.
+
 ### Instances
 
 When providing terms of structures or instances of classes, the `where`
