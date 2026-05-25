@@ -311,6 +311,14 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+Declarations should be exposed sparingly.
+As such, tagging relevant `def`s with `@[expose]` is preferred over
+prefacing the whole file with `@[expose] public section`.
+In practice, most declarations in Mathlib are public API,
+and therefore we do not currently proscribe the use of `public section`.
+Note that a lot of files in Mathlib still contain
+`@[expose] public section` due to the switch to the module system.
+
 ### Instances
 
 When providing terms of structures or instances of classes, the `where`
