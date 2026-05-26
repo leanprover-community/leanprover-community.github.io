@@ -61,7 +61,7 @@ change on Zulip and, when significant consensus among reviewers is reached, to o
 
 Using artificial intelligence tools to generate code is becoming more and more common. While this can be practical, their use also poses ethical, ecological, legal and social concerns. We recognise that there are strong differences in opinion on this topic. That said, while individual action alone will not address these concerns, we ask you to consider the effects of your AI use. When reviewing PRs, we are particularly concerned that the pedagogical value of the reviewers work is wasted if there is not a human contributor actively learning.
 
-Using an LLM when writing comments on github or Zulip is not allowed: use your own words.
+Using an LLM when writing comments on GitHub or Zulip is not allowed: use your own words.
 
 Mathlib intentionally has very high standards (on generality, integration with the remaining library and maintainability, including code style). As of mid-2026, code written by an AI without the supervision of a Lean subject expert fails to meet that bar by a large margin. Members of the review team will summarily close without comment any low quality PR produced using LLMs, especially if the author has made little effort to directly engage in the community in a discussion about its merits before opening the PR.
 If we notice that you open several PRs without putting in this learning effort or without adhering to our community ethical standards, we will suspend (or permanently ban) you both from opening new PRs and from the Zulip chat.
