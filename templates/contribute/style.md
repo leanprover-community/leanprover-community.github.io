@@ -289,6 +289,19 @@ class Module (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] extends
   protected zero_smul : ∀ x : M, (0 : R) • x = 0
 ```
 
+Subsequent declarations should be separated by a single line break.
+Exception is made for groups of similar one-line declarations.
+```lean
+theorem foo : True :=
+  sorry
+
+theorem bar : False :=
+  sorry
+
+@[simp] theorem one_lt_two : 1 < 2 := sorry
+@[simp] theorem two_lt_three : 2 < 3 := sorry
+```
+
 When using a constructor taking several arguments in a definition,
 arguments line up, as in:
 
