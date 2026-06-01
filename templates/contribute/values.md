@@ -52,7 +52,7 @@ A large and growing number of projects depend on Mathlib. Such projects are sens
 
 We desire for Mathlib to be accessible to people who do not have experience with computer code beyond LaTeX. Moreover we wish to achieve such accessibility without compromising on the values above. This is a difficult task and much work remains to be done.
 
-Partly for the sake of accessibility, we require human-readable comments (aka "doc strings") on all definitions and we encourage thoughtful code comments in general, especially in longer proofs. Such code comments are often most useful when they use natural language or LaTeX rather than Lean code. We also believe that key to accessibility is the creation of independent artifacts (tutorials, phrasebooks, teaching courses, ...) which build on top of Mathlib and give side-by-side demonstrations of important concepts.
+Partly for the sake of accessibility, we require human-readable comments (aka "doc strings") on all definitions and we encourage thoughtful code comments in general, especially in longer proofs. Such code comments are often most useful when they use natural language or LaTeX rather than Lean code. We also believe that key to accessibility is the creation of independent artifacts (tutorials, phrasebooks, teaching courses, journal papers, ...) which build on top of Mathlib and give side-by-side demonstrations of important concepts.
 
 ## Implications for PR review
 
@@ -112,7 +112,7 @@ Any new data-bearing typeclass `instance`s are studied during review to increase
 
 ### Are automation annotations in place?
 
-Ensuring that annotations for automation like `simp`, `gcongr`, `fun_prop`, and `grind` are added is an important part of review. Similarly, use of code generators like `to_additive`, `to_dual` should also be checked during review.
+Ensuring that annotations for automation like [simp](https://lean-lang.org/doc/reference/latest/The-Simplifier/#the-simplifier), [gcongr](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/GCongr/Core.html), [fun_prop](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/FunProp.html), and [grind](https://lean-lang.org/doc/reference/latest/The--grind--tactic/) are added is an important part of review. Similarly, use of code generators like [to_additive](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Translate/ToAdditive.html), [to_dual](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Translate/ToDual.html) should also be checked during review.
 
 ### Is the code style good?
 
