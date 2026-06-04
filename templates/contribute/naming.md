@@ -174,6 +174,28 @@ theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := s
 theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
 ```
 
+### Coercions
+
+Coercions are named after the underlying function.
+```lean
+-- Named after `Subtype.val`
+theorem Subtype.val_injective {p : α → Prop} : ((↑) : {a : α // p a} → α).Injective := sorry
+
+-- Named after `ENNReal.ofNNReal`
+theorem ENNReal.ofNNReal_injective : ((↑) : ℝ≥0 → ℝ≥0∞).Injective := sorry
+
+-- Named after `DFunLike.coe`
+theorem DFunLike.coe_injective {F α : Sort*} {β : α → Sort*} [DFunLike F α β] :
+    ((↑) : F → ∀ a, β a).Injective := sorry
+
+-- Named after `SetLike.coe`
+theorem SetLike.coe_injective {α β : Type*} [SetLike α β] :
+    ((↑) : α → Set β).Injective := sorry
+```
+This helps disambiguating when types have several coercions going around,
+and is motivating by the fact that coercions are reducible in Lean 4.
+This wasn't the case in Lean 3, and therefore many names are wrong still.
+
 ### Dots
 
 Dots are used for namespaces, and also for automatically generated names
