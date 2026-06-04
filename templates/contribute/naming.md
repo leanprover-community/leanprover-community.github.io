@@ -192,8 +192,8 @@ theorem DFunLike.coe_injective {F α : Sort*} {β : α → Sort*} [DFunLike F α
 theorem SetLike.coe_injective {α β : Type*} [SetLike α β] :
     ((↑) : α → Set β).Injective := sorry
 ```
-This helps disambiguating when types have several coercions going around,
-and is motivating by the fact that coercions are reducible in Lean 4.
+This helps to disambiguate when types support several natural coercions,
+and is motivated by the fact that coercions are reducible.
 This wasn't the case in Lean 3, and therefore many names are wrong still.
 
 ### Dots
