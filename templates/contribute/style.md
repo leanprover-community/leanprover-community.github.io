@@ -311,6 +311,34 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+### Definitions with long proofs
+
+When defining objects that contain long definitions and proofs, it is preferred to use
+`where` and `finally`:
+
+```lean
+def restrictFst (a : E') : Sobolev (E × E') F s 2 →L[ℂ] Sobolev E F s' 2 :=
+  f.extendOfNorm e
+where
+  f := ..
+  e := ..
+finally
+  · ..
+  · ..
+```
+
+In the more common case that there only long proof terms, but the definition
+itself is short, `where` and `finally` should be written as
+
+```lean
+def restrictFst (a : E') : 𝓢(E × E', F) →L[𝕜] 𝓢(E, F) :=
+  compCLMOfAntilipschitz (g := fun x ↦ (x, a)) (K := 1) 𝕜 ?_ ?_
+where finally
+  · ..
+  · ..
+```
+
+
 ### Instances
 
 When providing terms of structures or instances of classes, the `where`
