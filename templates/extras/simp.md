@@ -177,7 +177,7 @@ This generates the lemma `@[simp] lemma myFoo_n : myFoo.n = 37`.
 
 * `simp at h` tries to simplify `h` using all `simp` lemmas.
 
-* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-` or `\vdash` in VS Code).
+* `simp [h1] at h2 ⊢` tries to simplify both `h2` and the goal using `h1` and all `simp` lemmas (note: type `⊢` with `\|-`, `\goal` or `\vdash` in VS Code).
 
 * `simp [*] at *` : tries to simplify both the goal and all hypotheses, using all hypotheses and all `simp` lemmas. Sometimes worth a try.
 
@@ -196,7 +196,7 @@ is a proof of hypothesis `P` and `P → A = B` is a `simp` lemma, then
 `simp` considers additional hypotheses is the reason it is called a
 *conditional* term rewriting system.
 
-## Simp-normal form
+## Simp normal form
 
 There are sometimes several ways to say the same thing. For example,
 if `n : ℕ` then the hypotheses `n ≠ 0`, `0 ≠ n`, `n > 0`, `0 < n`,
@@ -221,9 +221,11 @@ normalizing lemmas whose only purpose is to put expressions into
 `simp` normal form.
 
 In general, if you are writing a lemma, you should know the "normal
-form" way to express the ideas in the lemma. If you are writing a
-lemma about a definition you made yourself, think about the normal
-forms for ideas that can be expressed in more than one way.
+form" way to express the ideas in the lemma. The `#simp` command can help
+you find out about it: writing `#simp e` for an expression `e` simplifies
+that expression using applicable `simp` lemmas.
+If you are writing a lemma about a definition you made yourself,
+think about the normal forms for ideas that can be expressed in more than one way.
 
 An example of a `simp` normal form is a way of expressing nonemptiness
 of a subset of a type.  If `α : Type` and `s : Set α` then
@@ -243,7 +245,7 @@ to replace occurrences of `a ∈ (s : Set α)` with the correct normal form.
 
 Because the simplifier works from the inside out, simplifying
 arguments of a function before simplifying the function, a `simp`
-lemma should have the arguments to the function on its left-hand side in simp-normal
+lemma should have the arguments to the function on its left-hand side in simp normal
 form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) = 0` will never be used.
 Batteries' `simpNF` [linter](https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html) checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
@@ -327,7 +329,7 @@ These can be replaced by `simpa using h`.
 ## `dsimp`
 
 `dsimp` is a variant of `simp` that only uses "definitional" `simp`
-lemmas.  These are `simp` lemmas whose proof is `rfl` or `Iff.rfl`,
+lemmas.  These are `simp` lemmas whose proof is `rfl`,
 that is, lemmas where the two sides are equal by definition.
 
 Like `simp` it is recommended that you do not use it in the middle of
@@ -412,19 +414,20 @@ you can make your own `@[simp]`-like attribute, but with a key difference:
 lemmas tagged with `@[new_attr]` are _not_ in the default set of `simp` lemmas.
 Instead, they should be included explicitly: `simp [new_attr]`. This can often replace lengthy
 `simp only [...]` calls and facilitate easier-to-read code. Some examples of common usage are
-[`mfld_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.mfld_simps),
-and [`field_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.field_simps).
+[`enat_to_nat_top`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.enat_to_nat_top), and
+[`coassoc_simps`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/Attr/Register.html#Parser.Attr.coassoc_simps).
 
 ### Configuration options
 
-Both `simp` and `dsimp` can take additional configuration options using record syntax.
-For example, `simp (config := { singlePass := true })` runs `simp` with the `singlePass` configuration option set to true.
+Both `simp` and `dsimp` can take additional configuration options.
+For example, `simp +singlePass` runs `simp` with the `singlePass` configuration option set to true; `simp -singlePass` would explicitly this option to false.
 One can use `singlePass` to avoid loops that might otherwise occur.
+For options which take a value, you can use named argument syntax, as in `simp (maxSteps := 37)`.
+This would set the maximum number of steps allowed before failing to 37.
 
 The core Lean file `Init/MetaTypes.lean` reveals other configuration options in
 the [`Lean.Meta.DSimp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.DSimp.Config) and [`Lean.Meta.Simp.Config`](https://leanprover-community.github.io/mathlib4_docs/Init/MetaTypes.html#Lean.Meta.Simp.Config) structures.
-Most of them are not very relevant for the average user,
-and some of them are not fully documented.  These are reproduced in the
+Most of them are not very relevant for the average user.  These are reproduced in the
 following table, where the default value for a configuration option
 for `simp` or `dsimp` is given in the respective column -- if no
 default value is present, that option is unavailable.
@@ -462,5 +465,5 @@ implication it temporarily adds the antecedent as a `simp` lemma. This
 is necessary for the following example:
 ```lean
 example {x y : ℕ} : x = 0 → y = 0 → x = y := by
-  simp (config := { contextual := true })
+  simp +contextual
 ```

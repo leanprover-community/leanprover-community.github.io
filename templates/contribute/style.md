@@ -289,6 +289,19 @@ class Module (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] extends
   protected zero_smul : ∀ x : M, (0 : R) • x = 0
 ```
 
+Subsequent declarations should be separated by a single line break.
+Exception is made for groups of similar one-line declarations.
+```lean
+theorem foo : True :=
+  sorry
+
+theorem bar : False :=
+  sorry
+
+@[simp] theorem one_lt_two : 1 < 2 := sorry
+@[simp] theorem two_lt_three : 2 < 3 := sorry
+```
+
 When using a constructor taking several arguments in a definition,
 arguments line up, as in:
 
@@ -297,6 +310,20 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
   ⟨fun h => by simpa only [h, add_zero] using le_add_sub a b,
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
+
+The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
+that respectively generate additive versions of algebraic multiplicative
+statements and dualised versions of order/category theoretic statements.
+Where applicable, these attributes should be used
+over writing the second statement by hand.
+```lean
+@[to_additive] -- generates `add_rotate`
+theorem mul_rotate {G : Type*} (a b c : G) : a * b * c = b * c * a := sorry
+
+-- `to_additive` can't be used here because `ℝ` can't be additivised.
+theorem mul_rotate' (a b c : ℝ) : a * b * c = b * c * a := sorry
+```
+
 
 ### Instances
 
