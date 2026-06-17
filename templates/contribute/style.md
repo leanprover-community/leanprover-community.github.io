@@ -311,6 +311,20 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
+that respectively generate additive versions of algebraic multiplicative
+statements and dualised versions of order/category theoretic statements.
+Where applicable, these attributes should be used
+over writing the second statement by hand.
+```lean
+@[to_additive] -- generates `add_rotate`
+theorem mul_rotate {G : Type*} (a b c : G) : a * b * c = b * c * a := sorry
+
+-- `to_additive` can't be used here because `ℝ` can't be additivised.
+theorem mul_rotate' (a b c : ℝ) : a * b * c = b * c * a := sorry
+```
+
+
 ### Instances
 
 When providing terms of structures or instances of classes, the `where`
