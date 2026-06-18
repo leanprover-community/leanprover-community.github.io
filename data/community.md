@@ -76,4 +76,4 @@ If you want to contribute to our projects then you can read our
 
 By interacting on the [Lean Zulip chat](https://leanprover.zulipchat.com/)
 or any repository within the [leanprover-community GitHub organization](https://github.com/leanprover-community/),
-you agree to abide by the [community guidelines](community_guidelines.md).
+you agree to abide by the [community guidelines](community_guidelines.html).
