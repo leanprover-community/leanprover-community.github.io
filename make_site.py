@@ -936,7 +936,8 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
                 ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': documentation_tags}),
-                ('.*.md', get_contents)
+                ('community_guidelines.html', get_contents),
+                ('.*.md', get_contents),
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True,
