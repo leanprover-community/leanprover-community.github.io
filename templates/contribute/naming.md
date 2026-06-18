@@ -554,3 +554,13 @@ theorem Continuous.mul (hf : Continuous f) (hg : Continuous g) : Continuous (f *
 Both theorems deserve tagging with the `fun_prop` attribute.
 
 The same goes for addition, subtraction, negation, powers and compositions of functions.
+
+### Groups vs groups with zero
+
+Many lemmas about `MonoidWithZero`/`GroupWithZero` have an analogous `Monoid`/`Group` lemma.
+In cases where the former name doesn't mention `zero`, it will likely conflict with the latter name.
+To disambiguate, we suffix the former name with `₀`.
+```
+lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
+lemma inv_eq_self₀ {K : Type*} [DivisionRing K] {a : K} : a⁻¹ = a ↔ a = -1 ∨ a = 0 ∨ a = 1
+```
