@@ -85,7 +85,7 @@ Fix a typo, add two periods.
 An example with dependent PRs:
 
 ```markdown
-feat: The norm on `Unitization` is a C⋆-norm
+feat: the norm on `Unitization` is a C⋆-norm
 
 This shows that C⋆-algebras are always `RegularNormedAlgebra`s, so that their `Unitization` is equipped with a norm. Moreover, we show this norm is a C⋆-norm.
 
