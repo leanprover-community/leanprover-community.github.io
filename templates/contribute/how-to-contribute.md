@@ -76,17 +76,6 @@ Once you're happy with your local changes, it's time to make a pull request to t
 
 * The title and description of the PR should follow our [commit conventions](commit.html).
 
-* If you are moving or deleting declarations, please include these lines at the bottom of the commit message
-(that is, before the `---`) using the following format:
-
-Moves:
-- Vector.* -> Mathlib.Vector.*
-- ...
-
-Deletions:
-- Nat.bit1_add_bit1
-- ...
-
 Any other comments you want to keep out of the PR commit should go
 below the `---`.
 
