@@ -28,7 +28,7 @@ moderation team (made of Mathlib and CSLib maintainers and some Lean FRO
 members), see the [relevant Zulip documentation](https://zulip.com/help/report-a-message).
 Only the moderators can see that you reported a message, and what you wrote in your report.
 
-If you want to contact the moderation team, you can reach them by writing a direct message [via Zulip](https://leanprover.zulipchat.com/). Writing a direct message to the `leanprover-community mod bot` user starting with `to-mods` will send that message to the moderators' stream. Complaints about bans in-channel are not allowed; writing to a moderator individually may not be answered.
+If you want to contact the moderation team, you can reach them by writing a direct message [via Zulip](https://leanprover.zulipchat.com/). Writing a direct message to the `leanprover-community mod bot` user starting with `to-mods` will send that message to the moderators' stream. Complaints about bans in-channel are not allowed (and can lead to suspension); writing to a moderator individually may not be answered.
 
 We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,
