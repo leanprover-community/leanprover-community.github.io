@@ -525,12 +525,17 @@ and "let $G$ be a group and let $H$ be a normal subgroup" is written
 and `Normal H` are not extra data, but are extra assumptions on data we have already.
 
 Mathlib currently strives towards the following naming convention for these `Prop`-valued
-classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+classes. If the class is a noun (or noun phrase) then its name should begin with `Is`. If however is it an adjective
 then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
 for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
 `H` is normal" in informal language. However `IsTopologicalRing` is
 preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
 topological" informally.
+
+If the predicate is referring to data other than the explicit argument,
+then the prefix `Has` may be used instead of the prefix `Is`.
+Examples: `Filter.HasBasis`, `Function.HasLeftInverse`, `HasLimit` (for a functor in category theory),
+`HasCompactSupport` (`IsCompactlySupportedFunction` would also follow this naming scheme, but is very long).
 
 ### Unexpanded and expanded forms of functions
 
