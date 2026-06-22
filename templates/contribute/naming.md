@@ -533,7 +533,7 @@ preferred for the "topological ring" typeclass, as we do not say "assume the rin
 topological" informally.
 
 If the predicate is referring to data other than the explicit argument,
-then the prefix `Has` may be used instead of the prefix `Is`.
+then the prefix `Has` may be used instead of the prefix `Is`, if that sounds more natural.
 Examples: `Filter.HasBasis`, `Function.HasLeftInverse`, `HasLimit` (for a functor in category theory),
 `HasCompactSupport` (`IsCompactlySupportedFunction` would also follow this naming scheme, but is very long).
 
