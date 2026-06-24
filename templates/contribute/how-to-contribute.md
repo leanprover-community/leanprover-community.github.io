@@ -144,7 +144,7 @@ However, this is worth doing if you're reasonably sure that the PR will not buil
 
 Once your PR is on the merge queue, `bors` automatically manages a few labels that indicate the current status:
 - **"ready-to-merge"** means the PR is on the merge queue, in a batch that is either waiting or currently being built.
-- **"bors-staging"** means the PR is in the batch that `bors` is building right now. (PRs with this label also have the **"ready-to-merge"** label.) If there are other PRs in the batch then taking a **"bors-staging"** PR off the queue here will interrupt their build as well.
+- **"bors-staging"** means the PR is in the batch that `bors` is building right now. (PRs with this label also have the **"ready-to-merge"** label.) If there are other PRs in the batch, taking a **"bors-staging"** PR off the queue here will interrupt their build as well.
 - **"awaiting-requeue"** means the PR was on the merge queue but it was dropped, due to a failed build, or being manually taken off, so it needs to be sent to `bors` again.
 
 In some cases, a maintainer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label.
