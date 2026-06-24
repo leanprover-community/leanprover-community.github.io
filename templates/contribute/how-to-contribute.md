@@ -134,12 +134,24 @@ Review times can vary depending on availability of our volunteers.
 To speed up the process, you can look at the [review guidelines](pr-review.html) and try to make sure your PR adheres to them.
 If you want to explicitly ask for a review, please create a topic in the [PR reviews](https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/) stream on Zulip.
 
-If a maintainer has approved your PR, a **"ready-to-merge"** label is automatically applied to the PR.
-A bot called `bors` will take it from here. (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
+Once a maintainer has approved your PR (typically by commenting `bors merge` or `bors r+` on your PR),
+it is sent to a bot called `bors`, which will take it from here.
+(See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
 The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16).
 The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+Note that pushing a commit to a PR will take it off the merge queue and a maintainer will have to put it back on.
+However, this is worth doing if you're reasonably sure that the PR will not build when merged into `master` in its current state, as broken PRs in the merge queue may delay the merge process for other people's PRs.
 
-In some cases, a maintainer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label. This either means that there are a few final changes requested, but that the maintainer trusts you to make these and send the PR to bors yourself, or that the maintainer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
+Once your PR is on the merge queue, `bors` automatically manages a few labels that indicate the current status:
+- **"ready-to-merge"** means the PR is on the merge queue, in a batch that is either waiting or currently being built.
+- **"bors-staging"** means the PR is in the batch that `bors` is building right now. (PRs with this label also have the **"ready-to-merge"** label.) If there are other PRs in the batch, taking a **"bors-staging"** PR off the queue here will interrupt their build as well.
+- **"awaiting-requeue"** means the PR was on the merge queue but it was dropped, due to a failed build, or being manually taken off, so it needs to be sent to `bors` again.
+
+In some cases, a maintainer will "delegate" the PR. You'll see that your PR now has a **"delegated"** label.
+This either means that there are a few final changes requested, but that the maintainer trusts you to make these and send the PR to bors yourself, or that the maintainer wants to give you one final chance to look things over before the PR is merged.
+In either case, when you are ready, writing a comment containing the line "bors merge" will result in the PR being merged.
+Note that delegations expire after two weeks and also expire immediately if certain paths (mostly those outside the `Mathlib/` directory) are changed in commits after the delegation.
+Maintainers may also remove delegations with the `bors d-` command; for example if it turns out that more discussion is needed.
 
 Here are some other frequently-used labels:
 
@@ -161,7 +173,7 @@ In particular, a PR is generally *not* easy if the diff is more than 25 lines, i
 
 - The **delegated** label means that a maintainer has issued the "bors delegate" (or "bors d+") command. The author of the PR
 should now merge the PR themselves once any final requested changes have been made, and CI has succeeded. They can do this using
-"bors merge".
+"bors merge". The **delegated** label is removed when a delegation expires for any reason (see above); if this happens, ask a maintainer to delegate again.
 
 ### Dealing with merge conflicts
 
