@@ -189,11 +189,24 @@ your PR could get merged without being &quot;maintainer merge&quot;d first.
 Review times can vary depending on availability of our volunteers.
 To speed up the process, you can look at the <a href="pr-review.html">review guidelines</a> and try to make sure your PR adheres to them.
 If you want to explicitly ask for a review, please create a topic in the <a href="https://leanprover.zulipchat.com/#narrow/channel/144837-PR-reviews/">PR reviews</a> stream on Zulip.</p>
-<p>If a maintainer has approved your PR, a <strong>&quot;ready-to-merge&quot;</strong> label is automatically applied to the PR.
-A bot called <code>bors</code> will take it from here. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
+<p>Once a maintainer has approved your PR (typically by commenting <code>bors merge</code> or <code>bors r+</code> on your PR),
+it is sent to a bot called <code>bors</code>, which will take it from here.
+(See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md">here</a> for more detail about bors.)
 The PR will get added to the <a href="https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16">&quot;merge queue&quot;</a>.
-The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.</p>
-<p>In some cases, a maintainer will &quot;delegate&quot; the PR. You'll see that your PR now has a <strong>&quot;delegated&quot;</strong> label. This either means that there are a few final changes requested, but that the maintainer trusts you to make these and send the PR to bors yourself, or that the maintainer wants to give you one final chance to look things over before the PR is merged. In either case, when you are ready, writing a comment containing the line &quot;bors merge&quot; will result in the PR being merged.</p>
+The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
+Note that pushing a commit to a PR will take it off the merge queue and a maintainer will have to put it back on.
+However, this is worth doing if you're reasonably sure that the PR will not build when merged into <code>master</code> in its current state, as broken PRs in the merge queue may delay the merge process for other people's PRs.</p>
+<p>Once your PR is on the merge queue, <code>bors</code> automatically manages a few labels that indicate the current status:</p>
+<ul>
+<li><strong>&quot;ready-to-merge&quot;</strong> means the PR is on the merge queue, in a batch that is either waiting or currently being built.</li>
+<li><strong>&quot;bors-staging&quot;</strong> means the PR is in the batch that <code>bors</code> is building right now. (PRs with this label also have the <strong>&quot;ready-to-merge&quot;</strong> label.) If there are other PRs in the batch, taking a <strong>&quot;bors-staging&quot;</strong> PR off the queue here will interrupt their build as well.</li>
+<li><strong>&quot;awaiting-requeue&quot;</strong> means the PR was on the merge queue but it was dropped, due to a failed build, or being manually taken off, so it needs to be sent to <code>bors</code> again.</li>
+</ul>
+<p>In some cases, a maintainer will &quot;delegate&quot; the PR. You'll see that your PR now has a <strong>&quot;delegated&quot;</strong> label.
+This either means that there are a few final changes requested, but that the maintainer trusts you to make these and send the PR to bors yourself, or that the maintainer wants to give you one final chance to look things over before the PR is merged.
+In either case, when you are ready, writing a comment containing the line &quot;bors merge&quot; will result in the PR being merged.
+Note that delegations expire after two weeks and also expire immediately if certain paths (mostly those outside the <code>Mathlib/</code> directory) are changed in commits after the delegation.
+Maintainers may also remove delegations with the <code>bors d-</code> command; for example if it turns out that more discussion is needed.</p>
 <p>Here are some other frequently-used labels:</p>
 <ul>
 <li>
@@ -221,7 +234,7 @@ In particular, a PR is generally <em>not</em> easy if the diff is more than 25 l
 <li>
 <p>The <strong>delegated</strong> label means that a maintainer has issued the &quot;bors delegate&quot; (or &quot;bors d+&quot;) command. The author of the PR
 should now merge the PR themselves once any final requested changes have been made, and CI has succeeded. They can do this using
-&quot;bors merge&quot;.</p>
+&quot;bors merge&quot;. The <strong>delegated</strong> label is removed when a delegation expires for any reason (see above); if this happens, ask a maintainer to delegate again.</p>
 </li>
 </ul>
 <h3 id="dealing-with-merge-conflicts" class="markdown-heading">Dealing with merge conflicts <a class="hover-link" href="#dealing-with-merge-conflicts">#</a></h3>
