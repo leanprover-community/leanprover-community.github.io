@@ -421,9 +421,8 @@ example (hT : T) : U := ...
 example {i} (hV : V i) : W := ...
 ```
 
-Similarly, the return type of a lemma should not be a conjunction.
-One should instead prove two lemmas.
-It is acceptable to prove the two lemmas from a conjunction lemma if that reduces code duplication.
+Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
 
 Finally, an existential result can be turned, using choice, into a definition along with a lemma
 about that definition. Whether this is a sensible change to make depends highly on the situation.
