@@ -401,6 +401,26 @@ is also valid. In mathlib the pretty printer displays `↦`, and we slightly pre
 in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
 is disallowed in mathlib in favor of the `fun` keyword.
 
+### Conjunctions, disjunctions
+
+Hypotheses should typically not be conjoined nor disjoined:
+```lean
+-- Instead of...
+example (hPQ : P ∧ Q) : R := ...
+
+example (hST : S ∨ T) : U := ...
+
+example (hV : ∃ i, V i) : W := ...
+
+-- ...do
+example (hP : P) (hQ : Q) : R := ...
+
+example (hS : S) : U := ...
+example (hT : T) : U := ...
+
+example {i} (hV : V i) : W := ...
+```
+
 ### Calculations
 
 There is some flexibility in how you write calculational proofs, although there are some
