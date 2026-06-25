@@ -403,18 +403,21 @@ is disallowed in mathlib in favor of the `fun` keyword.
 
 ### Conjunctions, disjunctions
 
-Hypotheses should typically not be conjoined nor disjoined because it makes the lemma harder to use:
+Hypotheses should not be conjunctions, as this typically makes the lemma harder to use:
 ```lean
--- Instead of...
+-- Instead of
 example (hPQ : P ∧ Q) : R := ...
+-- do
+example (hP : P) (hQ : Q) : R := ...
+```
 
+In the majority of situations, hypotheses should not be disjunctions or existentials, for the same reason:
+```lean
+-- Instead of
 example (hST : S ∨ T) : U := ...
 
 example (hV : ∃ i, V i) : W := ...
-
--- ...do
-example (hP : P) (hQ : Q) : R := ...
-
+-- do
 example (hS : S) : U := ...
 example (hT : T) : U := ...
 
