@@ -403,7 +403,7 @@ is disallowed in mathlib in favor of the `fun` keyword.
 
 ### Conjunctions, disjunctions
 
-Hypotheses should typically not be conjoined nor disjoined:
+Hypotheses should typically not be conjoined nor disjoined because it makes the lemma harder to use:
 ```lean
 -- Instead of...
 example (hPQ : P ∧ Q) : R := ...
@@ -420,6 +420,13 @@ example (hT : T) : U := ...
 
 example {i} (hV : V i) : W := ...
 ```
+
+Similarly, the return type of a lemma should not be a conjunction.
+One should instead prove two lemmas.
+It is acceptable to prove the two lemmas from a conjunction lemma if that reduces code duplication.
+
+Finally, an existential result can be turned using choice into a definition along with a lemma
+about that definition. Whether this is a sensible change to make highly depends on the situation.
 
 ### Calculations
 
