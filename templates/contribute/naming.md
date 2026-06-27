@@ -557,9 +557,17 @@ The same goes for addition, subtraction, negation, powers and compositions of fu
 
 ### Groups vs groups with zero
 
-Many lemmas about `MonoidWithZero`/`GroupWithZero` have an analogous `Monoid`/`Group` lemma.
-In cases where the former name doesn't mention `zero`, it will likely conflict with the latter name.
-To disambiguate, we suffix the former name with `₀`.
+In Mathlib, we have three main series of lemmas about algebraic structures:
+1. Lemmas involving `*`, `1`, ... e.g. lemmas about multiplicative groups/monoids;
+2. Lemmas involving `+`, `0`, ... e.g. lemmas about additive groups/monoids,
+  which are usually obtained by additivising the former;
+3. Lemmas mixing both, e.g. lemmas about rings, fields, groups/monoids with zero.
+
+Series 2 and 3 are prone to clash for lemma names.
+In cases where the series 3 name doesn't mention `zero`
+(or a derived name atom, like `nonneg`, `pos`, `nonpos`, `neg`),
+it will likely conflict with the series 2 name.
+To disambiguate, we suffix the series 3 name with `₀`.
 ```
 lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
 lemma inv_eq_self₀ {K : Type*} [DivisionRing K] {a : K} : a⁻¹ = a ↔ a = -1 ∨ a = 0 ∨ a = 1
