@@ -412,7 +412,7 @@ example (hP : P) (hQ : Q) : R := ...
 ```
 
 Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
-It is acceptable to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+It is acceptable, however, to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
 ```lean
 -- Instead of
 example (hPQ : P) : Q ∧ R := ...
