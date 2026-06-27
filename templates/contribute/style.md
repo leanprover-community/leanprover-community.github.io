@@ -430,7 +430,7 @@ example (hS : S) : U := ...
 example (hT : T) : U := ...
 ```
 
-Exceptions can be made when abiding to this rule would result in many lemmas with similar function:
+Exceptions can be made when abiding to this rule would result in many very similar lemmas:
 ```lean
 -- This is acceptable because the alternative would be to write four very similar lemmas
 lemma ENNReal.inv_div {a b : ENNReal} (htop : b ≠ ⊤ ∨ a ≠ ⊤) (hzero : b ≠ 0 ∨ a ≠ 0) :
@@ -444,7 +444,8 @@ example (hV : ∃ i, V i) : W := ...
 -- one could do
 example {i} (hV : V i) : W := ...
 ```
-This is mostly discouraged as providing `i` explicitly can be harder than proving its existence.
+We do not enforce one way or the other because providing `i` explicitly
+can be harder than proving its existence.
 
 Finally, an existential result can be turned, using choice,
 into a definition along with a lemma about that definition.
