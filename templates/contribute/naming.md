@@ -563,10 +563,10 @@ In Mathlib, we have three main series of lemmas about algebraic structures:
   which are usually obtained by additivising the former;
 3. Lemmas mixing both, e.g. lemmas about rings, fields, groups/monoids with zero.
 
-Series 2 and 3 are prone to clash for lemma names.
+Series 1 and 3 are prone to clash for lemma names.
 In cases where the series 3 name doesn't mention `zero`
 (or a derived name atom, like `nonneg`, `pos`, `nonpos`, `neg`),
-it will likely conflict with the series 2 name.
+it will likely conflict with the series 1 name.
 To disambiguate, we suffix the series 3 name with `₀`.
 ```
 lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
