@@ -401,6 +401,57 @@ is also valid. In mathlib the pretty printer displays `↦`, and we slightly pre
 in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
 is disallowed in mathlib in favor of the `fun` keyword.
 
+### Conjunctions, disjunctions
+
+Hypotheses should not be conjunctions, as this typically makes the lemma harder to use:
+```lean
+-- Instead of
+example (hPQ : P ∧ Q) : R := ...
+-- do
+example (hP : P) (hQ : Q) : R := ...
+```
+
+Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable, however, to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+```lean
+-- Instead of
+example (hPQ : P) : Q ∧ R := ...
+-- do
+example (hP : P) : Q := ...
+example (hP : P) : R := ...
+```
+
+In the majority of situations, hypotheses should not be disjunctions, for the same reason:
+```lean
+-- Instead of
+example (hST : S ∨ T) : U := ...
+-- do
+example (hS : S) : U := ...
+example (hT : T) : U := ...
+```
+
+Exceptions can be made when abiding to this rule would result in many very similar lemmas:
+```lean
+-- This is acceptable because the alternative would be to write four very similar lemmas
+lemma ENNReal.inv_div {a b : ENNReal} (htop : b ≠ ⊤ ∨ a ≠ ⊤) (hzero : b ≠ 0 ∨ a ≠ 0) :
+    (a / b)⁻¹ = b / a := ...
+```
+
+A similar transformation could be made to existential hypotheses:
+```lean
+-- Instead of
+example (hV : ∃ i, V i) : W := ...
+-- one could do
+example {i} (hV : V i) : W := ...
+```
+We do not enforce one way or the other because providing `i` explicitly
+can be harder than proving its existence.
+
+Finally, an existential result can be turned, using choice,
+into a definition along with a lemma about that definition.
+Whether this is a sensible change to make depends on how "canonical" the witness is,
+and how much more can be proved about it.
+
 ### Calculations
 
 There is some flexibility in how you write calculational proofs, although there are some
