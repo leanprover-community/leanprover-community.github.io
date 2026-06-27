@@ -411,24 +411,45 @@ example (hPQ : P ∧ Q) : R := ...
 example (hP : P) (hQ : Q) : R := ...
 ```
 
-In the majority of situations, hypotheses should not be disjunctions or existentials, for the same reason:
+Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+```lean
+-- Instead of
+example (hPQ : P) : Q ∧ R := ...
+-- do
+example (hP : P) : Q := ...
+example (hP : P) : R := ...
+```
+
+In the majority of situations, hypotheses should not be disjunctions, for the same reason:
 ```lean
 -- Instead of
 example (hST : S ∨ T) : U := ...
-
-example (hV : ∃ i, V i) : W := ...
 -- do
 example (hS : S) : U := ...
 example (hT : T) : U := ...
-
-example {i} (hV : V i) : W := ...
 ```
 
-Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
-It is acceptable to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+Exceptions can be made when abiding to this rule would result in many lemmas with similar function:
+```lean
+-- This is acceptable because the alternative would be to write four very similar lemmas
+lemma ENNReal.inv_div {a b : ENNReal} (htop : b ≠ ⊤ ∨ a ≠ ⊤) (hzero : b ≠ 0 ∨ a ≠ 0) :
+    (a / b)⁻¹ = b / a := ...
+```
 
-Finally, an existential result can be turned, using choice, into a definition along with a lemma about that definition. 
-Whether this is a sensible change to make depends highly on the situation.
+A similar transformation could be made to existential hypotheses:
+```lean
+-- Instead of
+example (hV : ∃ i, V i) : W := ...
+-- one could do
+example {i} (hV : V i) : W := ...
+```
+This is mostly discouraged as providing `i` explicitly can be harder than proving its existence.
+
+Finally, an existential result can be turned, using choice,
+into a definition along with a lemma about that definition.
+Whether this is a sensible change to make depends on how "canonical" the witness is,
+and how much more can be proved about it.
 
 ### Calculations
 
