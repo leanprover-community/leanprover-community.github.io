@@ -559,9 +559,9 @@ The same goes for addition, subtraction, negation, powers and compositions of fu
 
 Function application `f x` is denoted in three ways in lemma names:
 1. The application is omitted when `f` is a concrete function/morphism
-  (i.e. a declaration, not a free variable) and `x` is a concrete argument,
-  or more generally if `f` is a concrete function in several arguments
-  and at least one of them is concrete.
+  (i.e. a named declaration, including one with notation such as `+`, not a free variable)
+  and `x` is a concrete argument, or more generally if `f` is a concrete function in several
+  arguments and at least one of them is concrete.
   This case makes up the overwhelming majority of all occurrences of function application:
   Remember that almost everything in Lean is a function applied to some argument!
 2. The application is denoted by the `_apply` suffix when `f` is a concrete function/morphism
