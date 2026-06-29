@@ -420,6 +420,55 @@ Lean default for this is <code>fun x =&gt; x * x</code>, but the <code>↦</code
 is also valid. In mathlib the pretty printer displays <code>↦</code>, and we slightly prefer this
 in the source as well.  The lambda notation <code>λ x ↦ x * x</code>, while syntactically valid,
 is disallowed in mathlib in favor of the <code>fun</code> keyword.</p>
+<h3 id="conjunctions-disjunctions" class="markdown-heading">Conjunctions, disjunctions <a class="hover-link" href="#conjunctions-disjunctions">#</a></h3>
+<p>Hypotheses should not be conjunctions, as this typically makes the lemma harder to use:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- Instead of</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hPQ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">∧</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="c1">-- do</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hP</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hQ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Q</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable, however, to prove the two lemmas from a private conjunction lemma if that reduces code duplication.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- Instead of</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hPQ</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="bp">∧</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="c1">-- do</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hP</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hP</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>In the majority of situations, hypotheses should not be disjunctions, for the same reason:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- Instead of</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hST</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">T</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="c1">-- do</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hS</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">S</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hT</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">T</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>Exceptions can be made when abiding to this rule would result in many very similar lemmas:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- This is acceptable because the alternative would be to write four very similar lemmas</span>
+<span class="kd">lemma</span><span class="w"> </span><span class="n">ENNReal.inv_div</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ENNReal</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">htop</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="bp">⊤</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="bp">⊤</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hzero</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">    </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>A similar transformation could be made to existential hypotheses:</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="c1">-- Instead of</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">hV</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">∃</span><span class="w"> </span><span class="n">i</span><span class="o">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">i</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+<span class="c1">-- one could do</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">i</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hV</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">i</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
+</code></pre></div>
+</div>
+
+<p>We do not enforce one way or the other because providing <code>i</code> explicitly
+can be harder than proving its existence.</p>
+<p>Finally, an existential result can be turned, using choice,
+into a definition along with a lemma about that definition.
+Whether this is a sensible change to make depends on how &quot;canonical&quot; the witness is,
+and how much more can be proved about it.</p>
 <h3 id="calculations" class="markdown-heading">Calculations <a class="hover-link" href="#calculations">#</a></h3>
 <p>There is some flexibility in how you write calculational proofs, although there are some
 rules enforced by the syntax requirements of <code>calc</code> itself. However, there are some general
