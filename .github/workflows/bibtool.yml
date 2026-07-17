@@ -29,22 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'leanprover-community/leanprover-community.github.io'
     steps:
-      # Debug (remove with this file): show which channels the bot is subscribed
-      # to, since the reconciler only sees private channels via subscriptions.
-      - name: List bot subscriptions
-        env:
-          ZULIP_API_KEY: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
-        run: |
-          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
-            https://leanprover.zulipchat.com/api/v1/users/me/subscriptions \
-          | python3 -c 'import json,sys; [print(s["name"], "| invite_only:", s["invite_only"], "| history_public_to_subscribers:", s.get("history_public_to_subscribers")) for s in json.load(sys.stdin).get("subscriptions", [])]'
-          # Can the bot see pre-subscription history in the reviewers channel?
-          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
-            -G https://leanprover.zulipchat.com/api/v1/messages \
-            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
-            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
-          | python3 -c 'import json,sys; d=json.load(sys.stdin); msgs=d.get("messages", []); print("result:", d.get("result"), d.get("msg", "")); print("visible messages:", len(msgs)); [print("-", m["subject"], "|", m["timestamp"]) for m in msgs]'
-
       - name: Check out this repo's config
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -60,3 +44,26 @@ jobs:
           dry-run: ${{ inputs.dry-run == true }}
           zulip-api-key: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
           github-token: ${{ github.token }}
+
+      # Debug (removed with this file): show the bot-visible tail of the
+      # reviewers channel with reactions, to verify what reconcile did. The
+      # channel has protected history, so only messages posted after the bot
+      # subscribed (2026-07-17) are visible.
+      - name: Show bot-visible messages and their reactions
+        if: always()
+        env:
+          ZULIP_API_KEY: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
+        run: |
+          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
+            -G https://leanprover.zulipchat.com/api/v1/messages \
+            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
+            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
+          | python3 -c '
+          import json, sys
+          d = json.load(sys.stdin)
+          print("result:", d.get("result"), d.get("msg", ""))
+          for m in d.get("messages", []):
+              reactions = ", ".join(r["emoji_name"] for r in m.get("reactions", [])) or "(none)"
+              print(f"- id={m[\"id\"]} topic={m[\"subject\"]!r} reactions: {reactions}")
+              print(f"  {m[\"content\"][:160]}")
+          '
