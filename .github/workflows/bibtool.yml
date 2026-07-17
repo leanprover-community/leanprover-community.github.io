@@ -54,16 +54,17 @@ jobs:
         env:
           ZULIP_API_KEY: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
         run: |
-          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
-            -G https://leanprover.zulipchat.com/api/v1/messages \
-            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
-            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
-          | python3 -c '
+          cat > /tmp/show_reactions.py <<'PY'
           import json, sys
           d = json.load(sys.stdin)
           print("result:", d.get("result"), d.get("msg", ""))
           for m in d.get("messages", []):
               reactions = ", ".join(r["emoji_name"] for r in m.get("reactions", [])) or "(none)"
-              print(f"- id={m[\"id\"]} topic={m[\"subject\"]!r} reactions: {reactions}")
-              print(f"  {m[\"content\"][:160]}")
-          '
+              print(f"- id={m['id']} topic={m['subject']!r} reactions: {reactions}")
+              print("  " + m["content"][:160].replace("\n", " "))
+          PY
+          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
+            -G https://leanprover.zulipchat.com/api/v1/messages \
+            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
+            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
+          | python3 /tmp/show_reactions.py
