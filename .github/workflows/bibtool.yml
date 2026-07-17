@@ -1,70 +1,33 @@
-# TEMPORARY on this branch only: workflow_dispatch resolves workflows by the
-# files registered on the default branch, so the new zulip_emoji_reconcile.yml
-# can't be dispatched until it lands on lean4. This borrows bibtool.yml's slot
-# (the least critical workflow: it only runs on PRs touching lean.bib) to test
-# the reconcile setup via
-#   gh workflow run bibtool.yml --ref zulip-emoji-reconcile [-f pr=N] [-f dry-run=false]
-# Restore the original 'check bib' workflow before merging.
-
-name: Zulip emoji reconcile (test)
+name: check bib
 
 on:
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: "PR number(s), space-separated; leave empty to sweep recent messages"
-        required: false
-        default: ""
-      dry-run:
-        description: "Log planned reaction changes without writing to Zulip"
-        type: boolean
-        default: true
-
-permissions:
-  contents: read
-  pull-requests: read
+  pull_request:
+    paths:
+      - lean.bib
 
 jobs:
-  reconcile:
+  build:
+    name: Run bibtool
     runs-on: ubuntu-latest
-    if: github.repository == 'leanprover-community/leanprover-community.github.io'
     steps:
-      - name: Check out this repo's config
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          sparse-checkout: .github/zulip-emoji-config.json
-          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Reconcile
-        uses: leanprover-community/mathlib-ci/.github/actions/zulip-emoji-reconcile@20a1db8d1e1017676558fe4f5bbea77ee9f0a257
-        with:
-          config: .github/zulip-emoji-config.json
-          pr: ${{ inputs.pr }}
-          sweep: ${{ !inputs.pr }}
-          dry-run: ${{ inputs.dry-run == true }}
-          zulip-api-key: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
-          github-token: ${{ github.token }}
-
-      # Debug (removed with this file): show the bot-visible tail of the
-      # reviewers channel with reactions, to verify what reconcile did. The
-      # channel has protected history, so only messages posted after the bot
-      # subscribed (2026-07-17) are visible.
-      - name: Show bot-visible messages and their reactions
-        if: always()
-        env:
-          ZULIP_API_KEY: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
+      - name: install bibtool
         run: |
-          cat > /tmp/show_reactions.py <<'PY'
-          import json, sys
-          d = json.load(sys.stdin)
-          print("result:", d.get("result"), d.get("msg", ""))
-          for m in d.get("messages", []):
-              reactions = ", ".join(r["emoji_name"] for r in m.get("reactions", [])) or "(none)"
-              print(f"- id={m['id']} topic={m['subject']!r} reactions: {reactions}")
-              print("  " + m["content"][:160].replace("\n", " "))
-          PY
-          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
-            -G https://leanprover.zulipchat.com/api/v1/messages \
-            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
-            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
-          | python3 /tmp/show_reactions.py
+          sudo apt-get update --fix-missing
+          sudo apt-get install -y bibtool
+
+      - name: produce normalized file
+        run: |
+          bibtool --preserve.key.case=on \
+                  --preserve.keys=on \
+                  --pass.comments=on \
+                  --print.use.tab=off \
+                  -s -i lean.bib -o lean2.bib
+      - name: check diff
+        run: |
+          diff lean.bib lean2.bib || {
+            echo "::error::lean.bib is not normalized."
+            echo "::error::run 'bibtool --preserve.key.case=on --preserve.keys=on --pass.comments=on --print.use.tab=off -s -i lean.bib -o lean.bib' to fix the issue."
+            exit 1
+          }
