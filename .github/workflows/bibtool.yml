@@ -37,7 +37,13 @@ jobs:
         run: |
           curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
             https://leanprover.zulipchat.com/api/v1/users/me/subscriptions \
-          | python3 -c 'import json,sys; [print(s["name"], "| invite_only:", s["invite_only"]) for s in json.load(sys.stdin).get("subscriptions", [])]'
+          | python3 -c 'import json,sys; [print(s["name"], "| invite_only:", s["invite_only"], "| history_public_to_subscribers:", s.get("history_public_to_subscribers")) for s in json.load(sys.stdin).get("subscriptions", [])]'
+          # Can the bot see pre-subscription history in the reviewers channel?
+          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
+            -G https://leanprover.zulipchat.com/api/v1/messages \
+            --data-urlencode 'anchor=newest' --data-urlencode 'num_before=5' --data-urlencode 'num_after=0' \
+            --data-urlencode 'narrow=[{"operator": "channel", "operand": "mathlib reviewers"}]' \
+          | python3 -c 'import json,sys; d=json.load(sys.stdin); msgs=d.get("messages", []); print("result:", d.get("result"), d.get("msg", "")); print("visible messages:", len(msgs)); [print("-", m["subject"], "|", m["timestamp"]) for m in msgs]'
 
       - name: Check out this repo's config
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
