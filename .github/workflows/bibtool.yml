@@ -29,6 +29,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'leanprover-community/leanprover-community.github.io'
     steps:
+      # Debug (remove with this file): show which channels the bot is subscribed
+      # to, since the reconciler only sees private channels via subscriptions.
+      - name: List bot subscriptions
+        env:
+          ZULIP_API_KEY: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
+        run: |
+          curl -sS -u "leanprover-community-repo-update-bot@leanprover.zulipchat.com:${ZULIP_API_KEY}" \
+            https://leanprover.zulipchat.com/api/v1/users/me/subscriptions \
+          | python3 -c 'import json,sys; [print(s["name"], "| invite_only:", s["invite_only"]) for s in json.load(sys.stdin).get("subscriptions", [])]'
+
       - name: Check out this repo's config
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
