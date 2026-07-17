@@ -1,14 +1,13 @@
-# TEMPORARY on this branch only: workflow_dispatch resolves workflows by the
-# files registered on the default branch, so the new zulip_emoji_reconcile.yml
-# can't be dispatched until it lands on lean4. This borrows bibtool.yml's slot
-# (the least critical workflow: it only runs on PRs touching lean.bib) to test
-# the reconcile setup via
-#   gh workflow run bibtool.yml --ref zulip-emoji-reconcile [-f pr=N] [-f dry-run=false]
-# Restore the original 'check bib' workflow before merging.
+name: Zulip emoji reconcile
 
-name: Zulip emoji reconcile (test)
+# Keeps the emoji reactions on Zulip messages about this repo's PRs in sync with
+# each PR's actual state (open/closed/merged, awaiting-author, CI result), via
+# mathlib-ci's zulip-emoji-reconcile action. Repo-specific behavior lives in
+# .github/zulip-emoji-config.json.
 
 on:
+  schedule:
+    - cron: "47 * * * *"   # hourly sweep as a self-healing safety net
   workflow_dispatch:
     inputs:
       pr:
@@ -40,7 +39,9 @@ jobs:
         with:
           config: .github/zulip-emoji-config.json
           pr: ${{ inputs.pr }}
+          # Scheduled runs (no inputs) and dispatches without a PR number sweep.
           sweep: ${{ !inputs.pr }}
+          # Scheduled sweeps always write; dispatches default to dry-run.
           dry-run: ${{ inputs.dry-run == true }}
           zulip-api-key: ${{ secrets.REPO_UPDATE_ZULIP_TOKEN }}
           github-token: ${{ github.token }}
