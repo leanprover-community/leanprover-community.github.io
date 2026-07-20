@@ -825,6 +825,23 @@ disambiguate because a lemma is given using only the expanded form, the prefix <
 
 <p>Both theorems deserve tagging with the <code>fun_prop</code> attribute.</p>
 <p>The same goes for addition, subtraction, negation, powers and compositions of functions.</p>
+<h3 id="groups-vs-groups-with-zero" class="markdown-heading">Groups vs groups with zero <a class="hover-link" href="#groups-vs-groups-with-zero">#</a></h3>
+<p>In Mathlib, we have three main series of lemmas about algebraic structures:</p>
+<ol>
+<li>Lemmas involving <code>*</code>, <code>1</code>, ... e.g. lemmas about multiplicative groups/monoids;</li>
+<li>Lemmas involving <code>+</code>, <code>0</code>, ... e.g. lemmas about additive groups/monoids,
+which are usually obtained by additivising the former;</li>
+<li>Lemmas mixing both, e.g. lemmas about rings, fields, groups/monoids with zero.</li>
+</ol>
+<p>Series 1 and 3 are prone to clash for lemma names.
+In cases where the series 3 name doesn't mention <code>zero</code>
+(or a derived name atom, like <code>nonneg</code>, <code>pos</code>, <code>nonpos</code>, <code>neg</code>),
+it will likely conflict with the series 1 name.
+To disambiguate, we suffix the series 3 name with <code>₀</code>.</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span><span class="w"> </span><span class="n">inv_eq_self</span><span class="w"> </span><span class="o">{</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">IsMulTorsionFree</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="kd">lemma</span><span class="w"> </span><span class="n">inv_eq_self₀</span><span class="w"> </span><span class="o">{</span><span class="n">K</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">DivisionRing</span><span class="w"> </span><span class="n">K</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">K</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="bp">⁻¹</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">↔</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="bp">-</span><span class="mi">1</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
+</div>
 
   </main>
 
