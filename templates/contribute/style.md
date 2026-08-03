@@ -311,6 +311,17 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
+When defining objects that contain long proofs, it is preferred to use
+`where finally`:
+```lean
+def restrictFst (a : E') : 𝓢(E × E', F) →L[𝕜] 𝓢(E, F) :=
+  compCLMOfAntilipschitz (g := fun x ↦ (x, a)) (K := 1) 𝕜 ?_ ?_
+where finally
+  · ..
+  · ..
+
+```
+
 The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
 that respectively generate additive versions of algebraic multiplicative
 statements and dualised versions of order/category theoretic statements.
