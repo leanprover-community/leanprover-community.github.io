@@ -289,6 +289,19 @@ class Module (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] extends
   protected zero_smul : ∀ x : M, (0 : R) • x = 0
 ```
 
+Subsequent declarations should be separated by a single line break.
+Exception is made for groups of similar one-line declarations.
+```lean
+theorem foo : True :=
+  sorry
+
+theorem bar : False :=
+  sorry
+
+@[simp] theorem one_lt_two : 1 < 2 := sorry
+@[simp] theorem two_lt_three : 2 < 3 := sorry
+```
+
 When using a constructor taking several arguments in a definition,
 arguments line up, as in:
 
@@ -298,31 +311,28 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
 
-### Definitions with long proofs
-
-When defining objects that contain long definitions and proofs, it is preferred to use
-`where` and `finally`:
-
-```lean
-def restrictFst (a : E') : Sobolev (E × E') F s 2 →L[ℂ] Sobolev E F s' 2 :=
-  f.extendOfNorm e
-where
-  f := ..
-  e := ..
-finally
-  · ..
-  · ..
-```
-
-In the more common case that there only long proof terms, but the definition
-itself is short, `where` and `finally` should be written as
-
+When defining objects that contain long proofs, it is preferred to use
+`where finally`:
 ```lean
 def restrictFst (a : E') : 𝓢(E × E', F) →L[𝕜] 𝓢(E, F) :=
   compCLMOfAntilipschitz (g := fun x ↦ (x, a)) (K := 1) 𝕜 ?_ ?_
 where finally
   · ..
   · ..
+
+```
+
+The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
+that respectively generate additive versions of algebraic multiplicative
+statements and dualised versions of order/category theoretic statements.
+Where applicable, these attributes should be used
+over writing the second statement by hand.
+```lean
+@[to_additive] -- generates `add_rotate`
+theorem mul_rotate {G : Type*} (a b c : G) : a * b * c = b * c * a := sorry
+
+-- `to_additive` can't be used here because `ℝ` can't be additivised.
+theorem mul_rotate' (a b c : ℝ) : a * b * c = b * c * a := sorry
 ```
 
 
@@ -401,6 +411,57 @@ Lean default for this is `fun x => x * x`, but the `↦` arrow (inserted with `\
 is also valid. In mathlib the pretty printer displays `↦`, and we slightly prefer this
 in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
 is disallowed in mathlib in favor of the `fun` keyword.
+
+### Conjunctions, disjunctions
+
+Hypotheses should not be conjunctions, as this typically makes the lemma harder to use:
+```lean
+-- Instead of
+example (hPQ : P ∧ Q) : R := ...
+-- do
+example (hP : P) (hQ : Q) : R := ...
+```
+
+Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable, however, to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+```lean
+-- Instead of
+example (hPQ : P) : Q ∧ R := ...
+-- do
+example (hP : P) : Q := ...
+example (hP : P) : R := ...
+```
+
+In the majority of situations, hypotheses should not be disjunctions, for the same reason:
+```lean
+-- Instead of
+example (hST : S ∨ T) : U := ...
+-- do
+example (hS : S) : U := ...
+example (hT : T) : U := ...
+```
+
+Exceptions can be made when abiding to this rule would result in many very similar lemmas:
+```lean
+-- This is acceptable because the alternative would be to write four very similar lemmas
+lemma ENNReal.inv_div {a b : ENNReal} (htop : b ≠ ⊤ ∨ a ≠ ⊤) (hzero : b ≠ 0 ∨ a ≠ 0) :
+    (a / b)⁻¹ = b / a := ...
+```
+
+A similar transformation could be made to existential hypotheses:
+```lean
+-- Instead of
+example (hV : ∃ i, V i) : W := ...
+-- one could do
+example {i} (hV : V i) : W := ...
+```
+We do not enforce one way or the other because providing `i` explicitly
+can be harder than proving its existence.
+
+Finally, an existential result can be turned, using choice,
+into a definition along with a lemma about that definition.
+Whether this is a sensible change to make depends on how "canonical" the witness is,
+and how much more can be proved about it.
 
 ### Calculations
 
