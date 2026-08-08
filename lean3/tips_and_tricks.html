@@ -47,15 +47,15 @@
 <div id="mainbox">
 
   <main>
-    <div class="alert alert-warning">
+    <div class="alert alert-danger" style="background: #b00020; color: white; position: sticky; top: 0;">
       <p>
-      This webpage is about Lean 3, which is <strong>effectively obsolete</strong>;
+      This webpage is about Lean 3, which is <u>effectively obsolete</u>;
       the community has migrated to Lean 4.
       </p>
       
       <p>
       Jump to the
-      <a href="https://leanprover-community.github.io/tips_and_tricks.html">corresponding page</a>
+      <a href="https://leanprover-community.github.io/tips_and_tricks.html" style="color: #88ccff;">corresponding page</a>
       on the main Lean 4 website.
       </p>
       
@@ -67,10 +67,10 @@
 It is currently focussed around Lean 3.</p>
 <h3 id="commenting-out-large-proofs-using-sorry" class="markdown-heading">Commenting out large proofs using <code>sorry</code> <a class="hover-link" href="#commenting-out-large-proofs-using-sorry">#</a></h3>
 <p>Sometimes skipping subportions of a proof is helpful (e.g. to disable a portion which is slow while working on the rest). The straightforward way to do so is to comment out the lines which constitute the subportion, but if a subgoal has been surrounded by braces, you can also temporarily skip it by prepending <code>sorry;</code></p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="gr">sorry</span><span class="bp">;</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">blah</span><span class="o">,</span>
-  <span class="bp">...</span>
-  <span class="n">HUGE</span> <span class="n">PROOF</span><span class="o">,</span>
-  <span class="bp">...</span> <span class="o">}</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="gr">sorry</span><span class="bp">;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="n">blah</span><span class="o">,</span>
+<span class="w">  </span><span class="bp">...</span>
+<span class="w">  </span><span class="n">HUGE</span><span class="w"> </span><span class="n">PROOF</span><span class="o">,</span>
+<span class="w">  </span><span class="bp">...</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 </div>
 
@@ -106,8 +106,8 @@ Commenting out subproofs (with the sorry trick above) you can isolate the slow p
 <h3 id="avoiding-many-nested-parentheses-with-" class="markdown-heading">Avoiding many nested parentheses with <code>$</code> <a class="hover-link" href="#avoiding-many-nested-parentheses-with-">#</a></h3>
 <p>Lean is a functional language that uses parentheses <code>(..)</code> as the basic tool for grouping terms together that should be evaluated first.
 In the following lemma we have to use 5 sets of nested parentheses in order to tell Lean we want to repeatedly apply <code>or.inl</code> and <code>or.inr</code>, each of these only take one argument so the bracketing starts to feel a bit excessive.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">many_ors</span> <span class="o">:</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span>
-<span class="n">or.inr</span> <span class="o">(</span><span class="n">or.inr</span> <span class="o">(</span><span class="n">or.inr</span> <span class="o">(</span><span class="n">or.inr</span> <span class="o">(</span><span class="n">or.inr</span> <span class="o">(</span><span class="n">or.inl</span> <span class="n">trivial</span><span class="o">)))))</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span><span class="w"> </span><span class="n">many_ors</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="o">:=</span>
+<span class="n">or.inr</span><span class="w"> </span><span class="o">(</span><span class="n">or.inr</span><span class="w"> </span><span class="o">(</span><span class="n">or.inr</span><span class="w"> </span><span class="o">(</span><span class="n">or.inr</span><span class="w"> </span><span class="o">(</span><span class="n">or.inr</span><span class="w"> </span><span class="o">(</span><span class="n">or.inl</span><span class="w"> </span><span class="n">trivial</span><span class="o">)))))</span>
 </code></pre></div>
 </div>
 
@@ -115,21 +115,21 @@ In the following lemma we have to use 5 sets of nested parentheses in order to t
 The <code>$</code> symbol may be used in this situation to give a cleaner looking proof.
 This symbol can be thought of as inserting a left parenthesis at the point of the <code>$</code> and then adding a closing right parenthesis as far right as possible.
 In this case its use looks like</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">many_ors</span> <span class="o">:</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span>
-<span class="n">or.inr</span> <span class="bp">$</span> <span class="n">or.inr</span> <span class="bp">$</span> <span class="n">or.inr</span> <span class="bp">$</span> <span class="n">or.inr</span> <span class="bp">$</span> <span class="n">or.inr</span> <span class="bp">$</span> <span class="n">or.inl</span> <span class="n">trivial</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span><span class="w"> </span><span class="n">many_ors</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="o">:=</span>
+<span class="n">or.inr</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">or.inr</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">or.inr</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">or.inr</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">or.inr</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">or.inl</span><span class="w"> </span><span class="n">trivial</span>
 </code></pre></div>
 </div>
 
 <p>By as far right as possible we mean that in the following example</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">some_function</span> <span class="o">(</span><span class="n">a</span> <span class="bp">$</span> <span class="n">really</span> <span class="bp">$</span> <span class="n">long</span> <span class="bp">$</span> <span class="n">chain</span> <span class="bp">$</span> <span class="n">of</span> <span class="bp">$</span> <span class="n">applications</span><span class="o">)</span> <span class="n">another_argument</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">some_function</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">really</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">long</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">chain</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="bp">$</span><span class="w"> </span><span class="n">applications</span><span class="o">)</span><span class="w"> </span><span class="n">another_argument</span>
 </code></pre></div>
 </div>
 
 <p>lean evaluates as <code>some_function (a (really (long (chain (of applications))))) another_argument</code> together as intended, as the outer set of brackets still limits the scope of the <code>$</code> symbol.
 If we were to remove the parentheses here, Lean would interpret <code>another_argument</code> as an argument to <code>applications</code> rather than to <code>some_function</code>.</p>
 <p>In the first example another even more succinct explicit term mode proof is possible via the use of dot notation.</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">many_ors</span> <span class="o">:</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">false</span> <span class="bp">∨</span> <span class="n">true</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">or.inl</span> <span class="n">trivial</span><span class="o">)</span><span class="bp">.</span><span class="n">inr.inr.inr.inr.inr</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span><span class="w"> </span><span class="n">many_ors</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">true</span><span class="w"> </span><span class="bp">∨</span><span class="w"> </span><span class="n">false</span><span class="w"> </span><span class="o">:=</span>
+<span class="o">(</span><span class="n">or.inl</span><span class="w"> </span><span class="n">trivial</span><span class="o">)</span><span class="bp">.</span><span class="n">inr.inr.inr.inr.inr</span>
 </code></pre></div>
 </div>
 
@@ -137,13 +137,13 @@ If we were to remove the parentheses here, Lean would interpret <code>another_ar
 All steps in this proof are nested <code>or</code>s therefore we can repeatedly use dot notation to write this proof.</p>
 <p>This style is used often in mathlib to write nested function applications when the namespaces allow for a lot of information to be inferred by Lean.
 For instance if we want to say that 7 times the square of a continuous real-valued function is continuous we can use dot notation to give a very short but still readable proof:</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span> <span class="n">a</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="mi">7</span> <span class="bp">•</span> <span class="n">f</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">hf.pow</span> <span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">nsmul</span> <span class="mi">7</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">lemma</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ℝ</span><span class="w"> </span><span class="bp">→</span><span class="w"> </span><span class="n">ℝ</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">continuous</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">continuous</span><span class="w"> </span><span class="o">(</span><span class="mi">7</span><span class="w"> </span><span class="bp">•</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
+<span class="o">(</span><span class="n">hf.pow</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">nsmul</span><span class="w"> </span><span class="mi">7</span>
 </code></pre></div>
 </div>
 
 <p>rather than</p>
-<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">continuous.nsmul</span> <span class="o">(</span><span class="n">continuous.pow</span> <span class="n">hf</span> <span class="mi">2</span><span class="o">)</span> <span class="mi">7</span>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">continuous.nsmul</span><span class="w"> </span><span class="o">(</span><span class="n">continuous.pow</span><span class="w"> </span><span class="n">hf</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="mi">7</span>
 </code></pre></div>
 </div>
 
