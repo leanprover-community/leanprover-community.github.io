@@ -250,6 +250,13 @@ form. For example if `g 0` can be simplified, then `@[simp] lemma foo : f (g 0) 
 Batteries' `simpNF` [linter](https://leanprover-community.github.io/mathlib4_docs/Batteries/Tactic/Lint/Frontend.html) checks for this
 (you can run mathlib's linters for a module yourself by putting `#lint` at the end of the file).
 
+## `simp_all`
+
+`simp_all` is a stronger version of `simp [*] at *` where the hypotheses and target
+are simplified multiple times until no simplification is applicable.
+Only non-dependent propositional hypotheses are considered.
+This can lead to unprovable goals if the local hypotheses were contradictory.
+
 ## `simpa`
 
 The `simpa` tactic is a variation on `simp` for finishing a proof -- as a "finishing" tactic, it will fail
@@ -400,6 +407,9 @@ If `?` is present, it causes `simp` to suggest a set of `simp` lemmas that suffi
 This is the full syntax for the `simp` tactic:
 
 > `simp` (`?`)? (`!`)? (`(config :=` config `)`)? (`(disch :=` discharger `)`)? (`only`)? (`[`list of `*` and lemmas`]`)? (`at` locations)?
+
+This is the full syntax for the `simp_all` tactic:
+> `simp_all` config ( `disch := ` discharger `)`)? (&" only")? (`[`list of `*` and lemmas`]`)?
 
 This is the full syntax for the `simpa` tactic:
 
