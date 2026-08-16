@@ -38,7 +38,8 @@ An issue related to the fact that the expertise of the maintainers may not cover
 you may want to think about *who* is going to review your potential PR. Contributors are encouraged 
 to seek out reviewers for their PRs. A PR reviewer does *not* have to be a maintainer! This seems
 to be a common misconception by the community. Reviews of PRs, especially from new reviewers, 
-are essentially always welcome. 
+are essentially always welcome.
+(To find useful pull requests to review, [mathlib's review queue](https://leanprover-community.github.io/queueboard/review_dashboard.html) is a good starting point.)
 
 Please also consider the possibility of creating a standalone repository, and adding `mathlib` as a dependency. 
 There are many Lean repositories on github, indexed by [reservoir](https://reservoir.lean-lang.org). 
