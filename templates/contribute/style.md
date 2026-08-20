@@ -52,7 +52,7 @@ then group all `public import`s together, skip another line,
 then group all `import`s together,
 Try to keep the imports alphabetical within each block of imports
 and avoid specifying imports which are already transitively imported by another import.
-We recommend using `#min_imports` at the end of the file which would output
+Using `#min_imports` at the end of the file would output
 imports satisfying these two condition.
 
 ```lean
