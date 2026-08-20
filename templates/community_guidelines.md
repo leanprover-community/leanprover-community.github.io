@@ -10,7 +10,6 @@ These guidelines apply to the
 and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
 
 To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, DM spam, unsolicited mass DMs to users, significant use of AI without attribution, unrequested posting of "slop" AI-generated code, making unjustified and incorrect claims about AI-generated code, and ignoring moderator guidance.
-Note that bans are typically accompanied by an explanation sent to the user's Zulip-registered email address.
 
 This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
 
@@ -19,6 +18,8 @@ Please do not use an LLM when writing comments on github or Zulip. Don't worry i
 This list is not exhaustive and the maintainers retain broad discretion in user moderation.
 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
+
+Suspensions and bans are accompanied by an explanation sent to the user's Zulip-registered email address.
 
 The [code of conduct team](/teams/coc.html) serves as first point of contact
 for reporting any concerns. You can write to members of this team directly or 
