@@ -42,7 +42,7 @@ For instance, it could be
 `<subject>` has the following constraints:
 
 - use imperative, present tense: "change" not "changed" nor "changes"
-- do not capitalize the first letter
+- do not capitalize the first letter, unless the subject starts with a proper noun (e.g. "Kan extensions")
 - no dot(.) at the end
 
 `<body>` has the following constraints:
