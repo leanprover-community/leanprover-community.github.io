@@ -3,8 +3,7 @@
 This page explains what to do and expect when making a contribution to mathlib.
 Even if you are an experienced Git user, please check the steps below because we explain the particular conventions for mathlib pull requests.
 
-* Use [Zulip](https://leanprover.zulipchat.com/) to
-   discuss your contribution before and while you are working on it.
+* Use [Zulip](https://leanprover.zulipchat.com/) when a contribution needs to be discussed in more detail
 * Create a GitHub account and add your GitHub username to your Zulip profile, using [the personal settings panel](https://leanprover.zulipchat.com/#settings/profile).
   We also strongly encourage setting your display name on Zulip to be your real name.
 * Adhere to the guidelines:
@@ -68,7 +67,7 @@ It's also okay to let our central CI servers do this for you by pushing your cha
 
 Once you're happy with your local changes, it's time to make a pull request to the `master` branch on the main `leanprover-community/mathlib4` repository: pay attention not to open this PR against the `master` branch on your own fork.
 
-* If you haven't already, please come to https://leanprover.zulipchat.com/, introduce yourself, and mention your new PR.
+* If you haven't already, please come to https://leanprover.zulipchat.com/ and join the community.
 
 * If you've made a lot of changes/additions, try to make many PRs containing small, self-contained pieces; in general, the smaller the better!
   This helps you get feedback as you go along, and it is much easier to review.
