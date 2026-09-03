@@ -266,6 +266,14 @@ We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
 > We follow [Euclid's *Elements* [Prop. 1]][heath1956a].
 
+## Cross-references to external mathematical databases
+
+Declarations that appear in an external database can be tagged with a cross-reference
+attribute, such as `@[stacks 0123]` or `@[wikidata Q12345]`, which is then rendered as a link to the database item in the declaration's auto-generated documentation entry. Attributes also accepts an optional comment, as in
+`@[stacks 0123 "only the first part is formalized"]`. See
+[the cross-reference attributes docs page](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Tactic/CrossRefAttribute.html#Cross-reference-attributes)
+for the databases currently supported and the identifier format each one expects. 
+
 ## Language
 
 Documentation should be written in English.
