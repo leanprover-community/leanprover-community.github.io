@@ -36,11 +36,11 @@ expects to be served from. All of them default to the values this repository
 deploys with, so a normal build needs none of them:
 
 * `SITE_TARGET`: output directory (default `build/`).
-* `SITE_BASE_URL`: the URL the site will be served from, with a trailing slash
+* `SITE_BASE_URL`: the URL the site will be served from
   (default `https://leanprover-community.github.io/`). Every internal link is
-  built by appending to it, so setting it relocates the whole site. It is
-  ignored when `--local` is passed, which derives a `file://` url from
-  `SITE_TARGET` instead.
+  built by appending to it, so setting it relocates the whole site; a trailing
+  slash is added if missing. It is ignored when `--local` is passed, which
+  derives a `file://` url from `SITE_TARGET` instead.
 * `SITE_EDIT_BASE`: prefix for the "Suggest edits to this page on GitHub"
   footer link, which points at the templates rather than at the built site
   (default the `templates/` directory of the `lean4` branch of this repo).

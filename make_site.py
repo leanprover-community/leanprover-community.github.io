@@ -863,6 +863,10 @@ class LeanSite(Site):
 
 def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
                 reloader=False, only: Optional[str] = None):
+    # Internal links are formed as base_url + path, where path never starts with
+    # a slash, so base_url must end with exactly one. Guarding here means a
+    # SITE_BASE_URL given without a trailing slash still produces valid links.
+    base_url = base_url.rstrip('/') + '/'
     default_context = lambda: {
             'base_url': base_url,
             'edit_base': edit_base,
@@ -880,7 +884,7 @@ def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
 
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
-                base_url+'/img/')
+                base_url+'img/')
         src = re.sub(r'\{%-?\s*raw\s*-?%\}', '', src)
         src = re.sub(r'\{%-?\s*endraw\s*-?%\}', '', src)
         doc = Document(src)
