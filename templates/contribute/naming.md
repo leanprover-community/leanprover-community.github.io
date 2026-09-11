@@ -529,11 +529,13 @@ The same goes for addition, subtraction, negation, powers and compositions of fu
 
 ## Tactics, elaborators, and other meta interfaces
 
-The following list refers to the naming of surface syntax the user will write (e.g. the tactic `norm_num`), not declarations per se.
+The following list refers to the naming of surface syntax the user will write (e.g. the tactic `norm_num`), not declarations per se. In general, `lower_snake_case` is the correct casing for new syntax.
 
 - Tactics should use `lower_snake_case`, e.g. `norm_num`.
 - Attributes should use `lower_snake_case`, e.g. `@[to_additive]`.
-- Commands should use `lower_snake_case`, e.g. `deprecated_module`, and prefixed by `#` if and only if they are temporary or test commands (i.e. not to be committed to mathlib) such as `#check`. (`#adaptation_note` is an exception to this, but is in some sense a "longer-term temporary command".)
-- Non-notation term elaborators should use `lower_snake_case`, and may often be followed by `%`, e.g. `fast_instance%`. Note that this convention does not necessarily apply to elaborators which attempt to "mimic" other declarations or functions while providing additional functionality, such as `MDiff[_]`.
+- Commands should use `lower_snake_case`, e.g. `deprecated_module`, and should be prefixed by `#` if and only if they are temporary or test commands (i.e. not to be committed to mathlib) such as `#check`.
+  - `#adaptation_note` is an exception to this, but is in some sense a "long-term temporary command".
+- Non-notation term elaborators should use `lower_snake_case`, and may often be followed by `%`, e.g. `fast_instance%`.
+  - This convention does not necessarily apply to elaborators which attempt to "mimic" other declarations or functions while providing additional elaboration-time functionality, such as `MDiffAt[_]`.
 
-Note that declaration names in meta code should follow the typical naming conventions.
+Declaration names in meta code should follow the typical naming conventions.
