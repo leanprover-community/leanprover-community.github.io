@@ -558,7 +558,7 @@ The same goes for addition, subtraction, negation, powers and compositions of fu
 ### Function application
 
 Function application `f x` is denoted in three ways in lemma names:
-1. The application is omitted when `f` is a concrete function/morphism
+1. Mention of the application is omitted when `f` is a concrete function/morphism
   (i.e. a named declaration, including one with notation such as `+`, not a free variable)
   and `x` is a concrete argument, or more generally if `f` is a concrete function in several
   arguments and at least one of them is concrete.
