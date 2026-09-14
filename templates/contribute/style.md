@@ -849,6 +849,8 @@ also properly tagged with `to_additive`, like so:
 
 We allow, but discourage, contributors from simultaneously renaming declarations X to Y and W to X.
 In this case, no deprecation attribute is required for X, but it is for W.
+Similarly, we discourage contributors from simultaneously renaming declarations from X to Y and "recycling" the name X for a new lemma.
+In both of these situations, the rename *must* be mentioned explicitly in the PR description, together with its motivation.
 
 Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.
 
