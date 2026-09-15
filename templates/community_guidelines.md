@@ -19,6 +19,8 @@ This list is not exhaustive and the maintainers retain broad discretion in user 
 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
 
+Suspensions and bans are accompanied by an explanation sent to the user's Zulip-registered email address.
+
 The [code of conduct team](/teams/coc.html) serves as first point of contact
 for reporting any concerns. You can write to members of this team directly or 
 use an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
@@ -27,6 +29,8 @@ Specifically on Zulip, you can also report problematic messages to the whole
 moderation team (made of Mathlib and CSLib maintainers and some Lean FRO
 members), see the [relevant Zulip documentation](https://zulip.com/help/report-a-message).
 Only the moderators can see that you reported a message, and what you wrote in your report.
+
+If you want to contact the moderation team, you can reach them by writing a direct message [via Zulip](https://leanprover.zulipchat.com/). Writing a direct message to the `leanprover-community mod bot` user starting with `to-mods` will send that message to the moderators' stream. Complaints about bans in-channel are not allowed (and can lead to suspension); writing to a moderator individually may not be answered.
 
 We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,

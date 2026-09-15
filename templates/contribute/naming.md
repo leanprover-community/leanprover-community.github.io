@@ -525,12 +525,17 @@ and "let $G$ be a group and let $H$ be a normal subgroup" is written
 and `Normal H` are not extra data, but are extra assumptions on data we have already.
 
 Mathlib currently strives towards the following naming convention for these `Prop`-valued
-classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+classes. If the class is a noun (or noun phrase) then its name should begin with `Is`. If however is it an adjective
 then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
 for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
 `H` is normal" in informal language. However `IsTopologicalRing` is
 preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
 topological" informally.
+
+If the predicate is referring to data other than the explicit argument,
+then the prefix `Has` may be used instead of the prefix `Is`, if that sounds more natural.
+Examples: `Filter.HasBasis`, `Function.HasLeftInverse`, `HasLimit` (for a functor in category theory),
+`HasCompactSupport` (`IsCompactlySupportedFunction` would also follow this naming scheme, but is very long).
 
 ### Unexpanded and expanded forms of functions
 
@@ -586,3 +591,20 @@ lemma AddEquiv.piUnique_apply {ι : Type*} (M : ι → Type*) [(j : ι) → Add 
 lemma map_add (f : Int →+ Int) (a b : Int) : f (a + b) = f a + f b := ...
 ```
 
+### Groups vs groups with zero
+
+In Mathlib, we have three main series of lemmas about algebraic structures:
+1. Lemmas involving `*`, `1`, ... e.g. lemmas about multiplicative groups/monoids;
+2. Lemmas involving `+`, `0`, ... e.g. lemmas about additive groups/monoids,
+  which are usually obtained by additivising the former;
+3. Lemmas mixing both, e.g. lemmas about rings, fields, groups/monoids with zero.
+
+Series 1 and 3 are prone to clash for lemma names.
+In cases where the series 3 name doesn't mention `zero`
+(or a derived name atom, like `nonneg`, `pos`, `nonpos`, `neg`),
+it will likely conflict with the series 1 name.
+To disambiguate, we suffix the series 3 name with `₀`.
+```
+lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
+lemma inv_eq_self₀ {K : Type*} [DivisionRing K] {a : K} : a⁻¹ = a ↔ a = -1 ∨ a = 0 ∨ a = 1
+```
