@@ -19,6 +19,7 @@
     <td>{{ num_contrib }}</td>
   </tr>
 </table>
+<p id="stats-updated-at" class="ml-5 text-muted"></p>
 
 <h2>Code growth</h2>
 
@@ -42,7 +43,7 @@
 
 <p>
   A visualization showing how the various topics in mathlib interact and their
-  relative sizes can be found <a href="{{ base_url }}/mathlib4_docs/mathlib.html">here</a>.
+  relative sizes can be found <a href="https://leanprover-community.github.io/mathlib4_docs/mathlib.html">here</a>.
 </p>
 
 {% endblock %}
@@ -55,9 +56,10 @@
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.2/dist/js/tabulator.min.js"></script>
 
 
-<script type="text/javascript" src="{{ base_url }}mathlib_stats/gitstats4.js"></script>
+<script type="text/javascript" src="https://leanprover-community.github.io/mathlib_stats/gitstats4.js"></script>
 <script>
   // because both gitstats files use the same variable names, rename the mathlib4 ones before importing the mathlib3 ones
+  const gen_date4 = gen_date;
   const by_year_month4 = by_year_month;
   const by_year4 = by_year;
   const by_labels_by_year_month4 = by_labels_by_year_month;
@@ -67,7 +69,7 @@
   const files_by_date4 = files_by_date;
   const lines_by_date4 = lines_by_date;
 </script>
-<script type="text/javascript" src="{{ base_url }}/mathlib_stats/gitstats.js"></script>
+<script type="text/javascript" src="https://leanprover-community.github.io/mathlib_stats/gitstats.js"></script>
 
 <script>
   const color = Chart.helpers.color;
@@ -77,6 +79,19 @@
   // Optimal qualitative colour palettes: Normal, 12 colors from https://tsitsul.in/blog/coloropt/
   const palette_array = ['#ebac23','#b80058','#008cf9','#006e00','#00bbad','#d163e6','#b24502','#ff9287','#5954d6','#00c6f8','#878500','#00a76c','#bdbdbd'];
   let palette = {};
+
+  // Use the generation timestamps embedded in the stats data files.
+  const genDate3 = moment.utc(gen_date, 'YYYY-MM-DD HH:mm:ss', true);
+  const genDate4 = moment.utc(gen_date4, 'YYYY-MM-DD HH:mm:ss', true);
+  const genDateLatest = moment.max(genDate3, genDate4);
+  const updatedAtEl = document.getElementById('stats-updated-at');
+  if (updatedAtEl) {
+    if (genDateLatest.isValid()) {
+      updatedAtEl.textContent = `Updated at: ${genDateLatest.format('YYYY-MM-DD HH:mm:ss')} UTC`;
+    } else {
+      updatedAtEl.textContent = 'Updated at: unavailable';
+    }
+  }
 
   /* Given `by_labels_by_year_month` or `by_labels_by_year` objects, return an object with cleaned
   commit labels as keys and datasets (objects containing `labels` and `data` arrays) as values.

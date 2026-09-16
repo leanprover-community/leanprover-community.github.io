@@ -25,6 +25,16 @@ mathematical notation, often with an upper case letter
 This convention is not followed in older files, where greek letters are used
 for all types. Pull requests renaming type variables in these files are welcome.
 
+### Unicode usage
+
+Use special Unicode characters, especially [mathematical symbols](https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode) where they help develop good notation and improve readability.
+Avoid the following:
+- characters which change text direction
+- invisible characters (except spaces and newlines)
+- characters which modify other characters
+
+Mathlib has a linter which checks all characters against an [allow-list](https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Tactic/Linter/TextBased/UnicodeLinter.lean), to which new characters may be added as required.
+
 ### Line length
 
 Lines should not be longer than 100 characters. This makes files
@@ -36,8 +46,11 @@ will indicate a 100 character limit.
 
 The file header should contain copyright information, a list of all
 the authors who have made significant contributions to the file, and
-a description of the contents. Do all `import`s right after the header,
-without a line break, on separate lines.
+a description of the contents.
+Put the `module` keyword on its own line right after the header, skip a line,
+then group all `public import`s together, skip another line,
+then group all `import`s together,
+Try to keep the imports alphabetical within each block of imports.
 
 ```lean
 /-
@@ -45,8 +58,12 @@ Copyright (c) 2024 Joe Cool. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Joe Cool
 -/
-import Mathlib.Data.Nat.Basic
+module
+
+public import Mathlib.Logic.Defs
+
 import Mathlib.Algebra.Group.Defs
+import Mathlib.Data.Nat.Basic
 ```
 
 (Tip: If you're editing mathlib in VS Code, you can write `copy`
@@ -58,6 +75,10 @@ Don't end the line with a period, and use commas (`, `) to separate all author n
 We don't have strict rules on what contributions qualify for inclusion there.
 The general idea is that the people listed there should be the ones we would
 reach out to if we had questions about the design or development of the Lean code.
+
+Note that there are less common combinations of keywords such as `public meta import` or
+`import all`.
+Given their rarity, we do not yet prescribe their relative location within the import statements.
 
 ### Module docstrings
 
@@ -181,6 +202,16 @@ theorem mem_split {x : T} {l : List T} : x ∈ l → ∃ s t : List T, l = s ++ 
           have H4 : y  ::  l = (y :: s) ++ (x :: t) := by rw [H3]; rfl
           Exists.intro (y :: s) (Exists.intro t H4)))
 ```
+The type of all arguments of a declaration should be given explicitly,
+even if Lean can figure out this type information by itself.
+This makes it easier to understand the definition when seeing it on a webpage like GitHub.
+For the same reason, the return type of all declarations should also be given
+(Lean enforces this only for theorems).
+So you should follow the style of `GoodStatement` in this example:
+```lean
+def BadStatement (n) := ∃ k, n + k = 3
+def GoodStatement (n : ℕ) : Prop := ∃ k : ℕ, n + k = 3
+```
 
 A short declaration can be written on a single line:
 ```lean
@@ -258,6 +289,19 @@ class Module (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] extends
   protected zero_smul : ∀ x : M, (0 : R) • x = 0
 ```
 
+Subsequent declarations should be separated by a single line break.
+Exception is made for groups of similar one-line declarations.
+```lean
+theorem foo : True :=
+  sorry
+
+theorem bar : False :=
+  sorry
+
+@[simp] theorem one_lt_two : 1 < 2 := sorry
+@[simp] theorem two_lt_three : 2 < 3 := sorry
+```
+
 When using a constructor taking several arguments in a definition,
 arguments line up, as in:
 
@@ -266,6 +310,20 @@ theorem Ordinal.sub_eq_zero_iff_le {a b : Ordinal} : a - b = 0 ↔ a ≤ b :=
   ⟨fun h => by simpa only [h, add_zero] using le_add_sub a b,
    fun h => by rwa [← Ordinal.le_zero, sub_le, add_zero]⟩
 ```
+
+The `@[to_additive]` and `@[to_dual]` attributes are pieces of automation
+that respectively generate additive versions of algebraic multiplicative
+statements and dualised versions of order/category theoretic statements.
+Where applicable, these attributes should be used
+over writing the second statement by hand.
+```lean
+@[to_additive] -- generates `add_rotate`
+theorem mul_rotate {G : Type*} (a b c : G) : a * b * c = b * c * a := sorry
+
+-- `to_additive` can't be used here because `ℝ` can't be additivised.
+theorem mul_rotate' (a b c : ℝ) : a * b * c = b * c * a := sorry
+```
+
 
 ### Instances
 
@@ -305,7 +363,7 @@ example (n : ℝ) : 1 < n → 0 < n := fun h ↦ by linarith
 and
 
 ```lean
-example (n : ℕ) : 0 ≤ n := dec_trivial __Nat.zero_le n
+example (n : ℕ) : 0 ≤ n := Nat.zero_le n
 ```
 
 is preferred over
@@ -314,11 +372,21 @@ is preferred over
 example : ∀ (n : ℕ), 0 ≤ n := Nat.zero_le
 ```
 
+Note that pattern-matching does not count as the proof starting by introducing variables.
+For example, the following is a valid use case of having a hypothesis right of the column:
+
+```lean
+lemma zero_le : ∀ n : ℕ, 0 ≤ n
+  | 0 => le_rfl
+  | n + 1 => add_nonneg (zero_le n) zero_le_one
+```
+
 ### Binders
 
-Use a space after binders:
+Use a space after binders. Also, the binder type should generally be written explicitly,
+even if Lean doesn't need this information.
 ```lean
-example : ∀ α : Type, ∀ x : α, ∃ y, y = x :=
+example : ∀ α : Type, ∀ x : α, ∃ y : α, y = x :=
   fun (α : Type) (x : α) ↦ Exists.intro x rfl
 ```
 
@@ -332,6 +400,57 @@ Lean default for this is `fun x => x * x`, but the `↦` arrow (inserted with `\
 is also valid. In mathlib the pretty printer displays `↦`, and we slightly prefer this
 in the source as well.  The lambda notation `λ x ↦ x * x`, while syntactically valid,
 is disallowed in mathlib in favor of the `fun` keyword.
+
+### Conjunctions, disjunctions
+
+Hypotheses should not be conjunctions, as this typically makes the lemma harder to use:
+```lean
+-- Instead of
+example (hPQ : P ∧ Q) : R := ...
+-- do
+example (hP : P) (hQ : Q) : R := ...
+```
+
+Similarly, the return type of a lemma should not be a conjunction, and one should instead prove two lemmas.
+It is acceptable, however, to prove the two lemmas from a private conjunction lemma if that reduces code duplication.
+```lean
+-- Instead of
+example (hPQ : P) : Q ∧ R := ...
+-- do
+example (hP : P) : Q := ...
+example (hP : P) : R := ...
+```
+
+In the majority of situations, hypotheses should not be disjunctions, for the same reason:
+```lean
+-- Instead of
+example (hST : S ∨ T) : U := ...
+-- do
+example (hS : S) : U := ...
+example (hT : T) : U := ...
+```
+
+Exceptions can be made when abiding to this rule would result in many very similar lemmas:
+```lean
+-- This is acceptable because the alternative would be to write four very similar lemmas
+lemma ENNReal.inv_div {a b : ENNReal} (htop : b ≠ ⊤ ∨ a ≠ ⊤) (hzero : b ≠ 0 ∨ a ≠ 0) :
+    (a / b)⁻¹ = b / a := ...
+```
+
+A similar transformation could be made to existential hypotheses:
+```lean
+-- Instead of
+example (hV : ∃ i, V i) : W := ...
+-- one could do
+example {i} (hV : V i) : W := ...
+```
+We do not enforce one way or the other because providing `i` explicitly
+can be harder than proving its existence.
+
+Finally, an existential result can be turned, using choice,
+into a definition along with a lemma about that definition.
+Whether this is a sensible change to make depends on how "canonical" the witness is,
+and how much more can be proved about it.
 
 ### Calculations
 
@@ -511,6 +630,81 @@ There are two main reasons for this:
 2. A squeezed `simp` call refers to many lemmas by name, meaning that it will break when one such
   lemma gets renamed. Lemma renamings happen often enough for this to matter on a maintenance level.
 
+### Profiling for performance
+
+When contributing to mathlib, authors should be aware of the performance impacts
+of their contributions. The Lean FRO maintains benchmarking infrastructure which
+can be accessed by commenting `!bench` on a PR.
+
+Authors should assure that their contributions do not cause significant
+performance regressions. In particular, if the PR touches significant components
+of the language like adding new classes, instances, or `simp` lemmas, changing imports,
+creating new definitions, or turning `def`s into `abbrev`s, then authors should benchmark their changes
+proactively. Nontrivial `refactor` PRs, in particular should be benchmarked
+and any significant negative results must be explained during the review process.
+
+### Transparency and API design
+
+Central to Lean being a practically performant proof assistant is avoiding
+checking of definitional equality for very large terms. In the elaborator (the
+component of the language that converts syntax to terms), the notion of
+transparency is the main mechanism to avoid unfolding large definitions when
+unnecessary. Excluding `opaque` definitions, there are three levels of
+transparency:
+- `reducible` definitions are always unfolded
+- `semireducible` definitions (the default) are usually not unfolded in main tactics like
+    `rw` and `simp`, but can be unfolded with a little effort like explicitly
+    calling `rfl` or `erw`. Semireducible definitions are also not unfolded during the
+    computation of keys for storing instances in the instance cache or simp
+    lemmas in the simp cache.
+- `irreducible` definitions are never unfolded unless the user explicitly
+    requests it (e.g using the `unfold` tactic, or by using the `unseal` command).
+
+`def` by default creates `semireducible` definitions and `abbrev` creates
+`reducible` (and `@[inline]`) definitions.
+
+When designing definitions, an author should give thought to the transparency level of
+definitions. Consider how exposing the underlying term of your definition will
+affect instance search and simplification. The default for mathlib is that definitions
+should be `semireducible` unless there is a good reason otherwise which should
+be clearly articulated in the PR description. This imposes overhead on
+contributors who will need to declare new instances of the form
+```lean4
+instance : Foo myDef := inferInstanceAs (Foo underlyingTermOfMyDef)
+```
+and recycle API lemmas, especially for `simp` use, like
+```lean4
+@[simp] lemma myDef_bar_eq_bizz (x : X) : myDef.bar = bizz :=
+    underlyingTermOfMyDef_bar_eq_bizz
+```
+
+If the API boundary is meant to be completely sealed, using a type synonym of
+the form
+```lean4
+structure myDef where
+    underlying : underlyingTerm
+```
+is the library convention in place of `irreducible` definitions. These structure wrappers are
+intended for types that are equivalent to an existing type but are clearly
+mathematically semantically distinct, e.g. `Option` and `WithTop`.
+
+The kernel does not have an analogous notion of transparency so its
+rules for unfolding are different. There are situations where an author wants
+to block unfolding in the kernel as well. Mathlib provides a command
+`irreducible_def` for this. This should be used only when there is a
+documented necessity from profiling.
+
+Use of `erw` or `rfl` after tactics like `simp` or `rw` that operate at
+reducible transparency is an indication that there is missing API.
+Consider adding the necessary lemmas to the API to avoid this.
+
+The library has existing occurrences of definitional transparency abuse
+like `erw` and extra `rfl`. PRs removing these are very welcome but their PR
+description should clearly articulate how the removal is achieved addressing the
+change in the underlying terms in particular and must benchmark their changes.
+Please treat this an opportunity to improve the API design of the relevant
+components.
+
 ### Whitespace and delimiters
 
 Lean is whitespace-sensitive, and in general we opt for a style which avoids
@@ -596,12 +790,36 @@ subsequent lines.
 See our [documentation requirements](doc.html) for more suggestions
 and examples.
 
+### Expressions in error or trace messages
+
+Inside all printed messages (such as, in linters, custom elaborators or other metaprogrammes),
+names and interpolated data should either be
+- inline and surrounded by backticks (e.g., `m!"`{foo}` must have type `{bar}`"`), or
+- on their own line and indented (via e.g. `indentD`)
+
+The second style produces output like the following
+```
+Could not find model with corners for domain
+  src
+nor codomain
+  tgt
+of function
+  f
+```
+
+Not all of mathlib may comply with this rule yet; that is a bug (and PRs fixing this are welcome).
+
 ### Deprecation
 
 Deleting, renaming, or changing declarations can cause downstreams projects that rely on these
 definitions to fail to compile.
 Any publicly exposed theorems and definitions that are being removed should be gracefully
 transitioned by keeping the old declaration with a `@[deprecated]` attribute.
+This includes renaming structure fields, and lemmas generated by the `simps` tactic.
+It does not include auto-generated declarations (such as those ending in `_match` or `congr_simp`).
+On each pull request to mathlib, a bot produces a summary of declarations added or removed from the environment:
+this can help finding missing deprecations.
+
 This warns downstream projects about the change and gives them the opportunity to adjust before the
 declarations are deleted.
 Renamed definitions should use a deprecated `alias` to the new name.
@@ -638,3 +856,10 @@ We allow, but discourage, contributors from simultaneously renaming declarations
 In this case, no deprecation attribute is required for X, but it is for W.
 
 Named instances do not require deprecations. Deprecated declarations can be deleted after 6 months.
+
+### Avoid `nonrec`
+
+The `nonrec` keyword tells Lean to assume that apparently recursive calls in the declaration body
+are not actually recursive, and instead look for declarations in other namespaces with the same name.
+Avoid `nonrec` when the recursive call conflicts with another declaration *in a namespace*, because then adding the namespace to that declaration is more informative (to both Lean and the user). If it conflicts with a declaration in the root namespace, then both `nonrec` and `_root_.[...]` are acceptable. Sometimes avoiding `nonrec` requires forgoing the use of dot notation within the body of that declaration.
+(There are currently many places in Mathlib that break this rule.)

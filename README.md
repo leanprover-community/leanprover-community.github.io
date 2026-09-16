@@ -31,6 +31,25 @@ The website relies on several components which are built in other repositories:
   Use option `--reload` to continuously build when templates are
   changed (this won't work for watching changes in `data/`).
 
+Three environment variables control where the site is built and where it
+expects to be served from. All of them default to the values this repository
+deploys with, so a normal build needs none of them:
+
+* `SITE_TARGET`: output directory (default `build/`).
+* `SITE_BASE_URL`: the URL the site will be served from
+  (default `https://leanprover-community.github.io/`). Every internal link is
+  built by appending to it, so setting it relocates the whole site; a trailing
+  slash is added if missing. It is ignored when `--local` is passed, which
+  derives a `file://` url from `SITE_TARGET` instead.
+* `SITE_EDIT_BASE`: prefix for the "Suggest edits to this page on GitHub"
+  footer link, which points at the templates rather than at the built site
+  (default the `templates/` directory of the `lean4` branch of this repo).
+
+Note that links to the other leanprover-community GitHub Pages sites
+(`mathlib4_docs`, `mathlib_stats`, `blog`, ...) are deliberately absolute:
+those are separate repositories that only happen to be served next to this
+site, so they must not move with `SITE_BASE_URL`.
+
 
 If you want to retrieve the list of Zulip users to get the users map, the
 environment variable `ZULIP_KEY` should be set with the Zulip API key of the
@@ -41,17 +60,17 @@ If you want to work on a new feature, there are several helpful tricks to know.
 First you will very quickly hit the GitHub API rate limit without
 authentication. You can
 [create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
-and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site --local` during
+and run `GITHUB_TOKEN=my_token_copied_from_github ./make_site.py --local` during
 your experiments.
 
 You can also run the script once normally and then run
-`NODOWNLOAD=1 ./make_site --local` to build the website using the information
+`NODOWNLOAD=1 ./make_site.py --local` to build the website using the information
 previously downloaded. This information is stored into the `data_cache` folder.
 If you need the script to download something but not everything you can
 temporarily change the relevant `if DOWNLOAD:` into a `if not DOWNLOAD:`.
 
 You can also choose to render only certain templates using
-`./make_site --local --only my_template.html`.
+`./make_site.py --local --only my_template.html`.
 This argument can actually be a regular expression, but giving one template
 name is the most common use case.
 

@@ -10,6 +10,8 @@ Such exceptions should be discussed on Zulip first.
 
 ## General conventions
 
+### Capitalization
+
 Unlike Lean 3, in which the convention was that all declarations used `snake_case`,
 in mathlib under Lean 4 we use a combination of `snake_case`, `lowerCamelCase` and
 `UpperCamelCase` according to the following naming scheme.
@@ -26,7 +28,7 @@ There are some rare exceptions: some fields of structures are currently wrongly 
 There are some rare exceptions to preserve local naming symmetry: e.g., we use `Ne` rather than `NE` to follow the example of `Eq`; `outParam` has a `Sort` output but is not `UpperCamelCase`. Some other exceptions include intervals (`Set.Icc`, `Set.Iic`, etc.), where the `I`
 is capitalized despite the fact that it should be `lowerCamelCase` according to the convention. Any such exceptions should be discussed on Zulip.
 
-### Examples
+#### Examples
 
 ```lean
 -- follows rule 2
@@ -44,8 +46,6 @@ theorem map_one [OneHomClass F M N] (f : F) : f 1 = 1 := sorry
 -- follows rules 1 and 5
 theorem MonoidHom.toOneHom_injective [MulOneClass M] [MulOneClass N] :
   Function.Injective (MonoidHom.toOneHom : (M →* N) → OneHom M N) := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align monoid_hom.to_one_hom_injective MonoidHom.toOneHom_injective
 
 -- follows rule 2
 class HPow (α : Type u) (β : Type v) (γ : Type w) where
@@ -67,9 +67,15 @@ class NeZero : Prop := sorry
 
 -- follows rules 1 and 5
 theorem neZero_iff {R : Type _} [Zero R] {n : R} : NeZero n ↔ n ≠ 0 := sorry
--- manual align is needed due to `lowerCamelCase` with several words inside `snake_case`
-#align ne_zero_iff neZero_iff
 ```
+
+### Spelling
+
+Declaration names use American English spelling. So e.g. we use
+`factorization`, `Localization` and `FiberBundle` and not
+`factorisation`, `Localisation` or `FibreBundle`.
+Contrast this with the rule for [documentation](doc.html#language),
+which is allowed to use other common English spellings.
 
 ### Names of symbols
 
@@ -167,6 +173,28 @@ theorem ge_trans [Preorder α] {a b : α} : b ≤ a → c ≤ b → c ≤ a := s
 -- follows rule 4
 theorem le_of_forall_gt [LinearOrder α] {a b : α} (H : ∀ (c : α), a < c → b < c) : b ≤ a := sorry
 ```
+
+### Coercions
+
+Coercions are named after the underlying function.
+```lean
+-- Named after `Subtype.val`
+theorem Subtype.val_injective {p : α → Prop} : ((↑) : {a : α // p a} → α).Injective := sorry
+
+-- Named after `ENNReal.ofNNReal`
+theorem ENNReal.ofNNReal_injective : ((↑) : ℝ≥0 → ℝ≥0∞).Injective := sorry
+
+-- Named after `DFunLike.coe`
+theorem DFunLike.coe_injective {F α : Sort*} {β : α → Sort*} [DFunLike F α β] :
+    ((↑) : F → ∀ a, β a).Injective := sorry
+
+-- Named after `SetLike.coe`
+theorem SetLike.coe_injective {α β : Type*} [SetLike α β] :
+    ((↑) : α → Set β).Injective := sorry
+```
+This helps to disambiguate when types support several natural coercions,
+and is motivated by the fact that coercions are reducible.
+This wasn't the case in Lean 3, and therefore many names are wrong still.
 
 ### Dots
 
@@ -497,12 +525,17 @@ and "let $G$ be a group and let $H$ be a normal subgroup" is written
 and `Normal H` are not extra data, but are extra assumptions on data we have already.
 
 Mathlib currently strives towards the following naming convention for these `Prop`-valued
-classes. If the class is a noun then its name should begin with `Is`. If however is it an adjective
+classes. If the class is a noun (or noun phrase) then its name should begin with `Is`. If however is it an adjective
 then its name does not need to begin with an `Is`. So for example `IsNormal` would be acceptable
 for the "normal subgroup" typeclass, but `Normal` is also fine; we might say "assume the subgroup
 `H` is normal" in informal language. However `IsTopologicalRing` is
 preferred for the "topological ring" typeclass, as we do not say "assume the ring `R` is
 topological" informally.
+
+If the predicate is referring to data other than the explicit argument,
+then the prefix `Has` may be used instead of the prefix `Is`, if that sounds more natural.
+Examples: `Filter.HasBasis`, `Function.HasLeftInverse`, `HasLimit` (for a functor in category theory),
+`HasCompactSupport` (`IsCompactlySupportedFunction` would also follow this naming scheme, but is very long).
 
 ### Unexpanded and expanded forms of functions
 
@@ -526,6 +559,55 @@ theorem Continuous.mul (hf : Continuous f) (hg : Continuous g) : Continuous (f *
 Both theorems deserve tagging with the `fun_prop` attribute.
 
 The same goes for addition, subtraction, negation, powers and compositions of functions.
+
+### Function application
+
+Function application `f x` is denoted in three ways in lemma names:
+1. Mention of the application is omitted when `f` is a concrete function/morphism
+  (i.e. a named declaration, including one with notation such as `+`, not a free variable)
+  and `x` is a concrete argument, or more generally if `f` is a concrete function in several
+  arguments and at least one of them is concrete.
+  This case makes up the overwhelming majority of all occurrences of function application:
+  Remember that almost everything in Lean is a function applied to some argument!
+2. The application is denoted by the `_apply` suffix when `f` is a concrete function/morphism
+  and `x` is a free variable. Many such lemmas are generated by `simps` on a concrete morphism.
+3. The application is denoted by the `map_` prefix when `f` is a free variable
+  or the coercion to function thereof, and `x` is a concrete argument.
+  Most lemmas of this form are about properties of a generic morphism.
+
+```lean
+-- A concrete function with a concrete argument
+lemma Rat.inv_zero : (0 : Rat)⁻¹ = 0 := ...
+
+-- A concrete binary function with one concrete argument
+lemma Int.mul_zero (a : Int) : a * 0 = 0 := ...
+lemma Int.zero_mul (a : Int) : 0 * a = 0 := ...
+
+-- A concrete morphism with a free argument
+lemma AddEquiv.piUnique_apply {ι : Type*} (M : ι → Type*) [(j : ι) → Add (M j)]
+    [Unique ι] (f : (i : ι) → M i) : piUnique M f = f default := ...
+
+-- A free morphism with a concrete argument
+lemma map_add (f : Int →+ Int) (a b : Int) : f (a + b) = f a + f b := ...
+```
+
+### Groups vs groups with zero
+
+In Mathlib, we have three main series of lemmas about algebraic structures:
+1. Lemmas involving `*`, `1`, ... e.g. lemmas about multiplicative groups/monoids;
+2. Lemmas involving `+`, `0`, ... e.g. lemmas about additive groups/monoids,
+  which are usually obtained by additivising the former;
+3. Lemmas mixing both, e.g. lemmas about rings, fields, groups/monoids with zero.
+
+Series 1 and 3 are prone to clash for lemma names.
+In cases where the series 3 name doesn't mention `zero`
+(or a derived name atom, like `nonneg`, `pos`, `nonpos`, `neg`),
+it will likely conflict with the series 1 name.
+To disambiguate, we suffix the series 3 name with `₀`.
+```
+lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
+lemma inv_eq_self₀ {K : Type*} [DivisionRing K] {a : K} : a⁻¹ = a ↔ a = -1 ∨ a = 0 ∨ a = 1
+```
 
 ## Tactics, elaborators, and other meta interfaces
 

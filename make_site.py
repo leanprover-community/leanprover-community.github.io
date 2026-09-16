@@ -10,6 +10,7 @@ import re
 from dataclasses import dataclass, field
 from typing import List, Mapping, Optional, Any, Callable, TypeVar, Union
 from datetime import datetime
+from functools import cached_property
 
 import yaml
 from staticjinja import Site
@@ -19,11 +20,13 @@ import pybtex.database
 from mistletoe import Document, block_token
 from mistletoe_renderer import CustomHTMLRenderer
 from pylatexenc.latex2text import LatexNodes2Text
+from urllib.parse import urlparse
 import urllib.request
 import json
 import gzip
 import os
 from github import Github
+from github.Auth import Token
 from slugify import slugify
 
 import zulip
@@ -95,6 +98,15 @@ ROOT = Path(__file__).parent
 DATA = ROOT/'data'
 TEMPLATE_SRC = str(ROOT/'templates')
 
+# Where the built site will be served from, and where the templates it is built
+# from live. These are overridable from the environment (SITE_TARGET,
+# SITE_BASE_URL, SITE_EDIT_BASE) so that this site can be built for somewhere
+# other than https://leanprover-community.github.io/ without patching the
+# script. All internal links are formed by appending to base_url, so pointing
+# it elsewhere relocates the whole site.
+DEFAULT_BASE_URL = 'https://leanprover-community.github.io/'
+DEFAULT_EDIT_BASE = 'https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/'
+
 @dataclass
 class MenuItem:
     title: str
@@ -122,24 +134,51 @@ presentation = (DATA/'presentation.md').read_text(encoding='utf-8')
 
 what_is = (DATA/'what_is.md').read_text(encoding='utf-8')
 
+maybe_token = os.environ.get('GITHUB_TOKEN')
+if maybe_token is not None:
+    github_auth = Token(maybe_token)
+else:
+    github_auth = None
+github = Github(auth=github_auth)
+
 @dataclass
 class Formalization:
     title: str
     authors: str
     abstract: str
     url: str
+    organization: str
+    repo: str
+
+    @cached_property
+    def github_repo(self):
+        return github.get_repo(self.organization + '/' + self.repo)
+
+    @property
+    def stars(self):
+        return self.github_repo.stargazers_count
 
 with (DATA/'formalizations.yaml').open('r', encoding='utf-8') as f_file:
-    formalizations = [Formalization(**form) for form in yaml.safe_load(f_file)]
+    formalizations = sorted([Formalization(**form) for form in yaml.safe_load(f_file)], key=lambda form: form.stars, reverse=True)
 
 @dataclass
 class People:
     name: str
     descr: str = ''
     img: str = ''
+    github: str = ''
 
 with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+reviewer_data: dict = {}
+_queueboard_url = os.environ.get('QUEUEBOARD_REVIEWER_INTERESTS_API_URL')
+if _queueboard_url:
+    try:
+        with urllib.request.urlopen(_queueboard_url) as _resp:
+            reviewer_data = {r['github_login']: r for r in json.loads(_resp.read())['reviewers']}
+    except Exception as e:
+        print(f'Warning: could not fetch reviewer data: {e}', file=sys.stderr)
 
 @dataclass
 class Team:
@@ -292,6 +331,24 @@ class Course:
     summary : Optional[str] = None
     experiences : Optional[str] = None
 
+@dataclass
+class DocumentationEntry:
+    title: str
+    url: str
+    description: str
+    authors: str
+    accessed_at: str
+    category: str
+    tags: List[str] = field(default_factory=list)
+    display: bool = True # Set to False if it has a tag indicating it should be hidden.
+
+@dataclass
+class DocumentationTag:
+    name: str
+    description: str
+    display: bool = True
+    count: int = 0 # Will be set when reading the documentation entries.
+
 if DOWNLOAD:
     print('Downloading header-data.json...') #  This is a slow operation, so let's inform readers.
     # header-data.json contains information for every single declaration in mathlib
@@ -371,7 +428,7 @@ def download_N_theorems(kind: NTheorems) -> dict:
                             print(f'Error: {thms} entry {id} refers to a nonexistent declaration {decl}')
                             continue
                         # note: the `header-data.json` data file uses doc-relative links
-                        header = decl_info.header.replace('href="./Mathlib/', 'href="./mathlib4_docs/Mathlib/')
+                        header = decl_info.header.replace('href="./', 'href="./mathlib4_docs/')
                         doc_decls.append(DocDecl(
                             name=decl,
                             decl_header_html = header,
@@ -505,6 +562,27 @@ for course in courses:
             setattr(course, field, render_markdown("\n".join(map(lambda v: "* " + v, val))))
 courses_tags = ['lean4', 'lean3'] + sorted(list(courses_tags))
 
+documentation_tags = {}
+documentation_lists = {
+        'tutorial': [],
+        'how-to': [],
+        'explanation': [],
+        'reference': [],
+}
+with (DATA/'documentation.yaml').open('r', encoding='utf-8') as file:
+    docu_data = yaml.safe_load(file)
+    for e in docu_data["tags"]:
+        documentation_tags[e["name"]] = DocumentationTag(**e)
+
+    for e in docu_data["documentation"]:
+        e = DocumentationEntry(**e)
+        e.description = render_markdown(e.description)
+        documentation_lists[e.category].append(e)
+        for tag in e.tags:
+            documentation_tags[tag].count += 1
+            if not documentation_tags[tag].display:
+                e.display = False
+
 # Cannot use %-d format code on windows
 def format_month_day(date_obj):
     return f"{date_obj.strftime('%B')} {date_obj.day}"
@@ -543,32 +621,56 @@ class Project:
     description: str
     maintainers: List[str]
     stars: int
-
-github = Github(os.environ.get('GITHUB_TOKEN', None))
+    url: str
 
 if DOWNLOAD:
     download(
         'https://leanprover-contrib.github.io/leanprover-contrib/projects/projects.yml',
-        DATA/'projects.yaml')
-    with (DATA/'projects.yaml').open('r', encoding='utf-8') as h_file:
-        oprojects = yaml.safe_load(h_file)
-    pkl_dump('oprojects', oprojects)
+        DATA/'projects_3.yaml')
+    with (DATA/'projects_3.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_3 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_3', oprojects_3)
 else:
-    oprojects = pkl_load('oprojects', [])
+    oprojects_3 = pkl_load('oprojects_3', [])
 
 
-projects = []
+projects_3 = []
 if DOWNLOAD:
-    for name, project in oprojects.items():
+    for name, project in oprojects_3.items():
         if project.get('display', True):
             github_repo = github.get_repo(project['organization'] + '/' + name)
             stars = github_repo.stargazers_count
             descr = render_markdown(project['description'])
-            projects.append(Project(name, project['organization'], descr, project['maintainers'], stars))
-            projects.sort(key = lambda p: p.stars, reverse=True)
-    pkl_dump('projects', projects)
+            projects_3.append(Project(name, project['organization'], descr, project['maintainers'], stars, github_repo.html_url))
+    projects_3.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_3', projects_3)
 else:
-    projects = pkl_load('projects', [])
+    projects_3 = pkl_load('projects_3', [])
+
+if DOWNLOAD:
+    download(
+        'https://raw.githubusercontent.com/leanprover-community/mathlib4/refs/heads/master/scripts/downstream_repos.yml',
+        DATA/'projects_4.yaml')
+    with (DATA/'projects_4.yaml').open('r', encoding='utf-8') as h_file:
+        oprojects_4 = yaml.safe_load(h_file)
+    pkl_dump('oprojects_4', oprojects_4)
+else:
+    oprojects_4 = pkl_load('oprojects_4', [])
+
+
+projects_4 = []
+if DOWNLOAD:
+    for project in oprojects_4:
+        repo_path = urlparse(project['github']).path[1:] # Cut off first '/'
+        github_repo = github.get_repo(repo_path)
+        name = project['name']
+        stars = github_repo.stargazers_count
+        descr = render_markdown(github_repo.description) if github_repo.description is not None else None
+        projects_4.append(Project(name, github_repo.owner.login, descr, None, stars, github_repo.html_url))
+    projects_4.sort(key = lambda p: p.stars, reverse=True)
+    pkl_dump('projects_4', projects_4)
+else:
+    projects_4 = pkl_load('projects_4', [])
 
 if DOWNLOAD:
     # We used to use this count but it didn't include mathlib3 contributors
@@ -584,16 +686,6 @@ if DOWNLOAD:
     pkl_dump('num_contrib', num_contrib)
 else:
     num_contrib = pkl_load('num_contrib', 0)
-
-if DOWNLOAD:
-    download(
-        'https://leanprover-contrib.github.io/leanprover-contrib/version_history.yml',
-        DATA/'project_history.yaml')
-    with (DATA/'project_history.yaml').open('r', encoding='utf-8') as h_file:
-        project_history = yaml.safe_load(h_file)
-    pkl_dump('project_history', project_history)
-else:
-    project_history = pkl_load('project_history', dict())
 
 
 bib = pybtex.database.parse_file('lean.bib')
@@ -769,9 +861,15 @@ class LeanSite(Site):
     def template_names(self) -> List[str]:
         return self.env.list_templates(filter_func=lambda s: self.is_template(s) and self.template_filter(s))
 
-def render_site(target: Path, base_url: str, reloader=False, only: Optional[str] = None):
+def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
+                reloader=False, only: Optional[str] = None):
+    # Internal links are formed as base_url + path, where path never starts with
+    # a slash, so base_url must end with exactly one. Guarding here means a
+    # SITE_BASE_URL given without a trailing slash still produces valid links.
+    base_url = base_url.rstrip('/') + '/'
     default_context = lambda: {
             'base_url': base_url,
+            'edit_base': edit_base,
             'menus': menus,
             }
     target.mkdir(parents=True, exist_ok=True)
@@ -786,7 +884,9 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
 
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
-                base_url+'/img/')
+                base_url+'img/')
+        src = re.sub(r'\{%-?\s*raw\s*-?%\}', '', src)
+        src = re.sub(r'\{%-?\s*endraw\s*-?%\}', '', src)
         doc = Document(src)
         content = render_markdown(src).strip()
         title = ''
@@ -846,11 +946,12 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('undergrad.html', {'overviews': undergrad_overviews}),
                 ('undergrad_todo.html', {'overviews': undergrad_overviews}),
                 ('mathlib_stats.html', {'num_defns': num_defns, 'num_thms': num_thms, 'num_contrib': num_contrib}),
-                ('lean_projects.html', {'projects': projects}),
+                ('lean_projects.html', {'projects_3': projects_3, 'projects_4': projects_4}),
                 ('events.html', {'old_events': old_events, 'new_events': new_events}),
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
-                ('.*.md', get_contents)
+                ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': documentation_tags}),
+                ('.*.md', get_contents),
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True,
@@ -862,8 +963,10 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
     team_tpl = env.get_template('_team.html')
     for team in teams:
+        extra = {'reviewer_data': reviewer_data} if team.url == 'reviewers' else {}
         with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
-            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+            team_tpl.stream(team=team, menus=menus, base_url=base_url,
+                            edit_base=edit_base, **extra).dump(tgt_file)
 
 
     for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
@@ -878,8 +981,10 @@ if __name__ == '__main__':
         only = sys.argv[sys.argv.index('--only')+1]
     except:
         only = None
+    target = Path(os.environ.get('SITE_TARGET') or ROOT/'build')
     if '--local' in sys.argv:
-        base_url = f"file://{(Path(__file__).parent/'build').absolute()}/"
+        base_url = f"file://{target.absolute()}/"
     else:
-        base_url = 'https://leanprover-community.github.io/'
-    render_site(ROOT/'build', base_url, reloader='--reload' in sys.argv, only=only)
+        base_url = os.environ.get('SITE_BASE_URL') or DEFAULT_BASE_URL
+    edit_base = os.environ.get('SITE_EDIT_BASE') or DEFAULT_EDIT_BASE
+    render_site(target, base_url, edit_base, reloader='--reload' in sys.argv, only=only)

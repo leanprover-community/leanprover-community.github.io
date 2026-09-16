@@ -74,25 +74,6 @@ If you want to contribute to our projects then you can read our
 
 ## Community guidelines
 
-We are devoted to developing an open and accepting community
-that welcomes participation from everyone.
-Behavior that is offensive, discriminatory, or aggressive
-will not be tolerated in any form.
-We adopt the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
-These guidelines apply to the
-[Lean Zulip chat](https://leanprover.zulipchat.com/)
-and the [leanprover-community GitHub organization](https://github.com/leanprover-community/).
-
-To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, DM spam, significant use of AI without attribution, posting of "slop" AI-generated code accompanied by unjustified and incorrect claims about said code, and ignoring moderator guidance. This list is not exhaustive and the maintainers retain broad discretion in user moderation.
-
-Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
-
-The [code of conduct team](/teams/coc.html) serves as first point of contact
-for reporting any concerns.
-We also provide an [anonymous form](https://docs.google.com/forms/d/e/1FAIpQLSdEjlFqJQV65F-yzRHl-lyWAt7TSUW1axPiQK3RyV67iu1h6Q/viewform)
-to report incidents that violate the community guidelines.
-
-We encourage a policy of de-escalation in the presence of unwelcome behavior.
-If you perceive someone acting in a way that violates our code of conduct,
-please do not respond in the same way; instead, take action to correct the behavior,
-such as reporting it to the moderators.
+By interacting on the [Lean Zulip chat](https://leanprover.zulipchat.com/)
+or any repository within the [leanprover-community GitHub organization](https://github.com/leanprover-community/),
+you agree to abide by the [community guidelines](community_guidelines.html).

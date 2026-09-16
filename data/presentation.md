@@ -3,11 +3,6 @@
 The [Lean theorem prover](https://lean-lang.org)
 is a proof assistant developed principally by Leonardo de Moura.
 
-The community recently switched from using Lean 3 to using Lean 4.
-This website is still being updated, and some pages have outdated information about Lean 3
-(these pages are marked with a prominent banner).
-The old Lean 3 community website has been [archived](lean3/).
-
 The Lean mathematical library, *mathlib*, is a community-driven effort
 to build a unified library of mathematics formalized in the
 Lean proof assistant. The library also contains definitions
@@ -20,7 +15,9 @@ recent additions on our [blog](blog).
 The design and community organization of mathlib are
 described in the 2020 article
 [The Lean mathematical library](https://arxiv.org/abs/1910.09336), although
-the library has grown by an order of magnitude since that article appeared.
+the library has grown by more than an order of magnitude since that article appeared.
+There is also [a paper](https://link.springer.com/chapter/10.1007/978-3-032-07021-0_4) ([arXiv version](https://arxiv.org/abs/2508.21593)) about the challenges with mathlib's growth, on a technical and social level.
+
 You can also have a look at our [repository statistics](mathlib_stats.html)
 to see how the library grows and who contributes to it.
 
