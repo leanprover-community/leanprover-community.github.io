@@ -608,3 +608,18 @@ To disambiguate, we suffix the series 3 name with `₀`.
 lemma inv_eq_self {G : Type*} [Group G] [IsMulTorsionFree G] {a : G} : a⁻¹ = a ↔ a = 1
 lemma inv_eq_self₀ {K : Type*} [DivisionRing K] {a : K} : a⁻¹ = a ↔ a = -1 ∨ a = 0 ∨ a = 1
 ```
+
+## Tactics, elaborators, and other meta interfaces
+
+The following list refers to the naming of surface syntax the user will write (e.g. the tactic `norm_num`), not declarations per se. In general, `lower_snake_case` is the correct casing for tokens in new syntax.
+
+- Tactics should use `lower_snake_case`, e.g. `norm_num`.
+- Attributes should use `lower_snake_case`, e.g. `@[to_additive]`.
+- Commands should use `lower_snake_case`, e.g. `deprecated_module`, and the first token should be prefixed by `#` if and only if it is a temporary or test commands (i.e. not to be committed to mathlib) such as `#check`.
+  - `#adaptation_note` is an exception to this, but is in some sense a "long-term temporary command".
+- Non-notation term elaborators should use `lower_snake_case`, and may often be followed by `%`, e.g. `fast_instance%`.
+  - This convention does not necessarily apply to elaborators which attempt to "mimic" other declarations or functions while providing additional elaboration-time functionality, such as `MDiffAt[_]`.
+
+All syntax is allowed to use multiple tokens separated by whitespace (e.g. `#whats_new in ...`); the conventions above only refer to casing within each token.
+
+Declaration names in meta code should follow the typical naming conventions.
