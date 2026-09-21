@@ -1,5 +1,19 @@
 # Quickstart: The Module System
 
+<style>
+main img.diagram {
+  /* Each module system svg is at the same absolute scale, so we scale them uniformly */
+  --mod-figure-zoom: 0.27489;
+  zoom: var(--mod-figure-zoom);
+  /* undo the application of the zoom to the margin */
+  margin-block: calc(1.5rem / var(--mod-figure-zoom));
+  margin-inline: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+</style>
+
 The module system provides a means of controlling how information may flow between modules.
 
 Within modules, we can decide if information is `public`, and is thus seen by downstream modules, or if it is `private`, meaning that downstream modules are freed from the burden of loading this information.
@@ -23,11 +37,11 @@ A file is a "module file", i.e. participating in the module system, if and only 
 
 Each module has a `public` scope and a `private` scope.
 
-<img src="img/module-system/vis-single-module-no-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A'." class="module-system-figure"/>
+<img src="img/module-system/vis-single-module-no-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A'." class="diagram"/>
 
 The information in the `private` scope can use any information from the `public` scope, but the reverse is not true.
 
-<img src="img/module-system/vis-single-module-with-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A', with an arrow reaching down from the 'public' dot to the 'private' dot." class="module-system-figure"/>
+<img src="img/module-system/vis-single-module-with-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A', with an arrow reaching down from the 'public' dot to the 'private' dot." class="diagram"/>
 
 `import A` puts the public scope of `A` into the _private_ scope of the current module.
 
@@ -35,21 +49,21 @@ The information in the `private` scope can use any information from the `public`
 
 This also means that downstream imports of the current module, in receiving the current module's public scope, will also necessarily receive the public scope of `A` along with it.
 
-<img src="img/module-system/vis-import-of-public-import.svg" alt="A diagram depicting an import following a public import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="module-system-figure"/>
+<img src="img/module-system/vis-import-of-public-import.svg" alt="A diagram depicting an import following a public import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
 (The arrows in these diagrams may be composed.)
 
 Note that a `(public) import` following an `import` forms a "broken chain". Observe that `C` loads no data at all from `A`. This is how `B` is able to use data from `A` privately without forcing it on downstream consumers such as `C`.
 
-<img src="img/module-system/vis-import-of-import.svg" alt="A diagram depicting an import following another import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="module-system-figure"/>
+<img src="img/module-system/vis-import-of-import.svg" alt="A diagram depicting an import following another import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
-<img src="img/module-system/vis-public-import-of-import.svg" alt="A diagram depicting a public import following an import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="module-system-figure"/>
+<img src="img/module-system/vis-public-import-of-import.svg" alt="A diagram depicting a public import following an import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
 
 Typical `import`s, `public` or not, only request the public scope from the upstream module. The upstream private scope stays inaccessible unless you write `import all`, which should generally be avoided. (Even then, the upstream private scope can only be imported into the private scope; private data can never be made public.)
 
 As an escape hatch, `import all A` will request the private scope of `A` as well as the public one, and put it in the target module's private scope. However, note that `public import all` is not allowed: the private scope of `A` cannot ever be lifted into the public scope. `public import A` and `import all A` (on separate lines) will import the public scope into the public scope and the private scope into the private scope.
 
-<img src="img/module-system/vis-table-with-composites.svg" alt="A table of pairs of module pill diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="module-system-figure"/>
+<img src="img/module-system/vis-table-with-composites.svg" alt="A table of pairs of module pill diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="diagram"/>
 
 ### Declarations
 
@@ -147,11 +161,11 @@ Presentability is only a property of meta code; we say all runtime code is just 
 
 A private `meta def`'s associated code may be presentable or unpresentable; a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, compilation errors, and warns about the import responsible for it being unpresentable.
 
-<img src="img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labelled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labelled 'runtime IR'." class="module-system-figure"/>
+<img src="img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labelled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labelled 'runtime IR'." class="diagram"/>
 
 Presentable code may be referenced by unpresentable code, but not vice-versa.
 
-<img src="img/module-system/phase-single-module-with-arrow.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labelled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labelled 'runtime IR'. A blue arrow goes down from the 'presentable meta IR' dot to the 'unpresentable meta IR' dot." class="module-system-figure"/>
+<img src="img/module-system/phase-single-module-with-arrow.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labelled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labelled 'runtime IR'. A blue arrow goes down from the 'presentable meta IR' dot to the 'unpresentable meta IR' dot." class="diagram"/>
 
 Presentability behaves analogously to visibility with respect to imports: `public (meta) import A` imports all of the presentable code from `A` as presentable code in the target module; a `(meta) import` imports all of the presentable code from A as unpresentable.
 
@@ -163,4 +177,4 @@ Code that is already intrinsically `meta` (i.e. marked meta in the source file) 
 
 In the following diagram, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s. (These arrows may be composed.)
 
-<img src="img/module-system/phase-table.svg" class="module-system-figure"/>
+<img src="img/module-system/phase-table.svg" class="diagram"/>
