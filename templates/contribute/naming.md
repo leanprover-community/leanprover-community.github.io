@@ -615,7 +615,7 @@ The following list refers to the naming of surface syntax the user will write (e
 
 - Tactics should use `lower_snake_case`, e.g. `norm_num`.
 - Attributes should use `lower_snake_case`, e.g. `@[to_additive]`.
-- Commands should use `lower_snake_case`, e.g. `deprecated_module`, and the first token should be prefixed by `#` if and only if it is a temporary or test commands (i.e. not to be committed to mathlib) such as `#check`.
+- Commands should use `lower_snake_case`, e.g. `deprecated_module`, and the first token should be prefixed by `#` if and only if it is a temporary or test command (i.e. not to be committed to mathlib) such as `#check`.
   - `#adaptation_note` is an exception to this, but is in some sense a "long-term temporary command".
 - Non-notation term elaborators should use `lower_snake_case`, and may often be followed by `%`, e.g. `fast_instance%`.
   - This convention does not necessarily apply to elaborators which attempt to "mimic" other declarations or functions while providing additional elaboration-time functionality, such as `MDiffAt[_]`.
