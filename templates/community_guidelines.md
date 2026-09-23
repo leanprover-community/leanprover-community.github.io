@@ -12,6 +12,7 @@ and the [leanprover-community GitHub organization](https://github.com/leanprover
 To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, DM spam, unsolicited mass DMs to users, significant use of AI without attribution, unrequested posting of "slop" AI-generated code, making unjustified and incorrect claims about AI-generated code, and ignoring moderator guidance.
 
 This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
+It is also not an appropriate venue for soliciting submission endorsements like those required for first-time arXiv contributors. These posts will be removed and treated as above.
 
 Please do not use an LLM when writing comments on github or Zulip. Don't worry if English is not your native language: this is true for most users; as long as you can be understood, you will be fine. Building community involves human connection; using an LLM to write for you removes this human element. Messages and comments that appear LLM-generated will be deleted, and can lead to suspension.
 
