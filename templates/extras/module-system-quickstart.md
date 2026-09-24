@@ -151,7 +151,7 @@ public meta def fooPublic := foo
 
 The above example succeeds if we instead publicly import the module of `bar`.
 
-We can conceptualize it this way: instead of saying that code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
+We can conceptualize it this way: instead of saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
 
 Instead of being declared like `public` or `private` is, presentability is _inferred_ on the basis of what the code references. Presentable code may only reference presentable code.
 
