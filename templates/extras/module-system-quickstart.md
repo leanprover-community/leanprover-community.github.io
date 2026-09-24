@@ -135,7 +135,7 @@ Because compilation erases proofs and types, this means that the phases of const
 
 Declarations in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR), which may then either be compiled further to machine code, or may be executed directly by the Lean interpreter. As such, each constant is also associated to _code_.
 
-A constant's code has a phase, i.e. may be either meta or runtime.
+A constant's code has a phase, i.e. may be either meta or runtime, as explained above.
 
 However, note that code has a complicated relationship to visibility. The meta code associated with a constant does _not_ behave similarly to the value of the constant, even though it comes from compiling the value. Instead, the `code` of a `public meta def` should be thought of as somehow "public" itself. (Recall that, in contrast, whether the actual `value` is public is controlled by `@[expose]`.) The code of a `public meta def` requires all of its transitive dependencies to be both meta and have publicly-imported modules.
 
