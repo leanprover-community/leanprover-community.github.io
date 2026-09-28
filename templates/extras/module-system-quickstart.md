@@ -125,7 +125,9 @@ Meta code cannot be used in runtime code, and vice versa.
 
 `public meta import A` does the same, but also provides the same meta-lifted runtime code to downstream modules of the current module.
 
-Note that any code from `A` which is _already_ intrinsically marked as meta will still be made available and remain meta under an ordinary import. For example, macros are intrinsically meta, and may be obtained by downstream modules via an ordinary non-meta `import`. I.e., intrinsically meta code is unaffected by `meta import`; the `meta` keyword on imports only lifts the phase of runtime code, and does nothing else.
+Note that any code from `A` which is _already_ intrinsically meta will still be made available under an ordinary import, and will remain `meta`. `meta def`s are intrinsically meta, and many meta commands like `syntax`, `macro`, and `elab` produce `meta def`s behind the scenes. As such, macros, for example, may be obtained and used by downstream modules via an ordinary non-meta `import`.
+
+This is to say that intrinsically meta code is *unaffected* by `(public) meta import`. A `meta` import only "lifts" the phase of runtime code to meta, and does nothing else. (It does not change whether any constant is intrinsically meta or not, which is determined at declaration time and kept track of separately.)
 
 The `meta` keyword _only_ affects the phase of executable code, and otherwise is ignored. So, a `public meta import` functions as a `public import` for the purpose of type-theoretic terms. As such, a `theorem` (which has no executable code) is totally insensitive to whether its dependencies are meta or runtime (both are accepted).
 
