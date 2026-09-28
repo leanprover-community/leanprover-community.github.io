@@ -51,7 +51,7 @@ This also means that downstream imports of the current module, in receiving the 
 
 <img src="img/module-system/vis-import-of-public-import.svg" alt="A diagram depicting an import following a public import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
-(The arrows in these diagrams may be composed.)
+Information flows through the arrows in these diagrams transitively, meaning we can chain arrows together to infer new, composite arrows. In other words, the arrows in these diagrams may be composed.
 
 Note that a `(public) import` following an `import` forms a "broken chain". Observe that `C` loads no data at all from `A`. This is how `B` is able to use data from `A` privately without forcing it on downstream consumers such as `C`.
 
