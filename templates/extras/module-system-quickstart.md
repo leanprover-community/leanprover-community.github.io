@@ -129,7 +129,7 @@ Note that any code from `A` which is _already_ intrinsically marked as meta will
 
 The `meta` keyword _only_ affects the phase of executable code, and otherwise is ignored. So, a `public meta import` functions as a `public import` for the purpose of type-theoretic terms. As such, a `theorem` (which has no executable code) is totally insensitive to whether its dependencies are meta or runtime (both are accepted).
 
-Because compilation erases proofs and types, this means that the phases of constants used by proofs and types even in definitions which _do_ produce compiled code are ignored when it comes to enforcing the phase distinction.
+Because computation ignores proofs and types, this means that the phases of constants used by proofs and types even in definitions which _do_ produce executable code are ignored when it comes to enforcing the phase distinction. Only dependencies which affect computation are checked for phase correctness.
 
 ### Code
 
