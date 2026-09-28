@@ -179,6 +179,12 @@ Note: if the same code is provided transitively in different ways from different
 
 Code that is already intrinsically meta (i.e. marked `meta` in the source file) is still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
 
-In the following diagram, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s. (These arrows may be composed.)
+In the following diagram, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.
+
+Note, however, that there is no arrow either way between runtime IR and meta IR in the same module, as neither may use the other, as per the runtime/meta phase separation.
+
+Moreover, though runtime IR can be raised to the meta phase, there is no arrow from meta IR that lowers it to runtime IR.
+
+(As before, these arrows may be composed.)
 
 <img src="img/module-system/phase-table.svg" class="diagram"/>
