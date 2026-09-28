@@ -90,7 +90,7 @@ The `type` of a constant always has the same visibility as the constant itself.
 
 The `value` of a constant cannot have a greater visibility than the constant itself (it makes no sense to have a public value for a private constant, for example), but it may have a _narrower_ visibility. Namely, the `type` of a constant may be public while the value is private.
 
-Having a private value is in fact the default situation for a `public def`, and the _only_ situation for a `public theorem`. (The `value` is the theorem's proof, and proofs are always private.)
+Having a private value is in fact the default situation for a `public def`, and the _only_ situation for a `public theorem`. (The `value` is the `theorem`'s proof, and `theorem` proofs are always private.)
 
 When importing a public constant with a private `value` in an ordinary fashion (i.e. without `import all`), the `value` data will simply not be loaded downstream, and thus will be completely inaccessible.
 
