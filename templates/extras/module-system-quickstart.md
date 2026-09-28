@@ -115,6 +115,8 @@ To recap:
     - `type`: same visibility as overall constant
     - `value` (i.e. proof): always private
 
+Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section.
+
 ## Phase (`meta` vs. runtime)
 
 The `meta` keyword controls what happens to executable code. Specifically, executable code may be either available for execution during the elaboration of the current module, in which case we call it _meta_ code, or not, in which case we call it _runtime_ code. This state ("meta" or "runtime") is called the _phase_ of the code.
