@@ -73,6 +73,10 @@ Once you're happy with your local changes, it's time to make a pull request to t
   This helps you get feedback as you go along, and it is much easier to review.
   This is especially important for new contributors as it prevents wasted effort.
 
+* Avoid making *breaking* changes, i.e. PRs that make downstream code go from _working_ to _giving an error_.
+  However, this kind of change is sometimes necessary for the growth of mathlib, but should be carefully considered.
+  In these situations, the change must be mentioned in the PR description, and a mitigation or fix provided there also.
+
 * The title and description of the PR should follow our [commit conventions](commit.html).
 
 * If you are moving or deleting declarations, please include these lines at the bottom of the commit message
