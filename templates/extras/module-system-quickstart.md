@@ -67,7 +67,7 @@ As an escape hatch, `import all A` will request the private scope of `A` as well
 
 ### Declarations
 
-An ordinary declaration has several pieces of data associated with it:
+An ordinary constant has several pieces of data associated with it:
 
 - `name : Name`
 - `type : Expr`
@@ -133,7 +133,7 @@ Because compilation erases proofs and types, this means that the phases of const
 
 ### Code
 
-Declarations in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR), which may then either be compiled further to machine code, or may be executed directly by the Lean interpreter. As such, each constant is also associated to _code_.
+Constants in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR), which may then either be compiled further to machine code, or may be executed directly by the Lean interpreter. As such, each constant is also associated to _code_.
 
 A constant's code has a phase, i.e. may be either meta or runtime, as explained above.
 
