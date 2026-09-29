@@ -7,3 +7,4 @@ The following document some theories spanning multiple files.
 * [Linear algebra](theories/linear_algebra.html)
 * [The natural numbers](theories/naturals.html)
 * [Topological, uniform and metric spaces](theories/topology.html)
+* [Partial Derivatives](theories/partial_derivatives.html)
