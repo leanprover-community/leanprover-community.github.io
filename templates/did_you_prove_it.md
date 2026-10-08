@@ -17,7 +17,7 @@ and then go through them in more detail.
   where the main theorem is proved being compiled by the build process?
 * Does the proof use nothing more than Lean's standard axioms?
   In other words, does `#print axioms my_proof` return a subset of `[propext, Classical.choice, Quot.sound]`?
-* Does your work prove what you claims it proved?
+* Does your work prove what you claim it proved?
 
 We now go through these guidelines in more detail.
 

@@ -98,6 +98,15 @@ ROOT = Path(__file__).parent
 DATA = ROOT/'data'
 TEMPLATE_SRC = str(ROOT/'templates')
 
+# Where the built site will be served from, and where the templates it is built
+# from live. These are overridable from the environment (SITE_TARGET,
+# SITE_BASE_URL, SITE_EDIT_BASE) so that this site can be built for somewhere
+# other than https://leanprover-community.github.io/ without patching the
+# script. All internal links are formed by appending to base_url, so pointing
+# it elsewhere relocates the whole site.
+DEFAULT_BASE_URL = 'https://leanprover-community.github.io/'
+DEFAULT_EDIT_BASE = 'https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/'
+
 @dataclass
 class MenuItem:
     title: str
@@ -157,9 +166,19 @@ class People:
     name: str
     descr: str = ''
     img: str = ''
+    github: str = ''
 
 with (DATA/'people.yaml').open('r', encoding='utf-8') as m_file:
     peoples = {mtr['name']: People(**mtr) for mtr in yaml.safe_load(m_file)}
+
+reviewer_data: dict = {}
+_queueboard_url = os.environ.get('QUEUEBOARD_REVIEWER_INTERESTS_API_URL')
+if _queueboard_url:
+    try:
+        with urllib.request.urlopen(_queueboard_url) as _resp:
+            reviewer_data = {r['github_login']: r for r in json.loads(_resp.read())['reviewers']}
+    except Exception as e:
+        print(f'Warning: could not fetch reviewer data: {e}', file=sys.stderr)
 
 @dataclass
 class Team:
@@ -842,9 +861,15 @@ class LeanSite(Site):
     def template_names(self) -> List[str]:
         return self.env.list_templates(filter_func=lambda s: self.is_template(s) and self.template_filter(s))
 
-def render_site(target: Path, base_url: str, reloader=False, only: Optional[str] = None):
+def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
+                reloader=False, only: Optional[str] = None):
+    # Internal links are formed as base_url + path, where path never starts with
+    # a slash, so base_url must end with exactly one. Guarding here means a
+    # SITE_BASE_URL given without a trailing slash still produces valid links.
+    base_url = base_url.rstrip('/') + '/'
     default_context = lambda: {
             'base_url': base_url,
+            'edit_base': edit_base,
             'menus': menus,
             }
     target.mkdir(parents=True, exist_ok=True)
@@ -859,7 +884,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
 
     def get_contents(template):
         src = Path(template.filename).read_text(encoding='utf-8').replace('img/',
-                base_url+'/img/')
+                base_url+'img/')
         src = re.sub(r'\{%-?\s*raw\s*-?%\}', '', src)
         src = re.sub(r'\{%-?\s*endraw\s*-?%\}', '', src)
         doc = Document(src)
@@ -926,7 +951,7 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
                 ('teaching/courses.html', {'courses': courses, 'tags': courses_tags}),
                 ('teams.html', {'introduction': read_md('teams_intro.md'), 'teams': teams}),
                 ('documentation.html', {'documentation_lists': documentation_lists, 'documentation_tags': documentation_tags}),
-                ('.*.md', get_contents)
+                ('.*.md', get_contents),
                 ],
             filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex },
             mergecontexts=True,
@@ -938,8 +963,10 @@ def render_site(target: Path, base_url: str, reloader=False, only: Optional[str]
     env.filters={ 'url': url, 'md': render_markdown, 'tex': clean_tex }
     team_tpl = env.get_template('_team.html')
     for team in teams:
+        extra = {'reviewer_data': reviewer_data} if team.url == 'reviewers' else {}
         with (target/'teams'/(team.url + '.html')).open('w') as tgt_file:
-            team_tpl.stream(team=team, menus=menus, base_url=base_url).dump(tgt_file)
+            team_tpl.stream(team=team, menus=menus, base_url=base_url,
+                            edit_base=edit_base, **extra).dump(tgt_file)
 
 
     for folder in ['css', 'js', 'img', 'papers', str(target/'teams')]:
@@ -954,8 +981,10 @@ if __name__ == '__main__':
         only = sys.argv[sys.argv.index('--only')+1]
     except:
         only = None
+    target = Path(os.environ.get('SITE_TARGET') or ROOT/'build')
     if '--local' in sys.argv:
-        base_url = f"file://{(Path(__file__).parent/'build').absolute()}/"
+        base_url = f"file://{target.absolute()}/"
     else:
-        base_url = 'https://leanprover-community.github.io/'
-    render_site(ROOT/'build', base_url, reloader='--reload' in sys.argv, only=only)
+        base_url = os.environ.get('SITE_BASE_URL') or DEFAULT_BASE_URL
+    edit_base = os.environ.get('SITE_EDIT_BASE') or DEFAULT_EDIT_BASE
+    render_site(target, base_url, edit_base, reloader='--reload' in sys.argv, only=only)
