@@ -136,7 +136,7 @@ If you want to explicitly ask for a review, please create a topic in the [PR rev
 Once a maintainer has approved your PR (typically by commenting `bors merge` or `bors r+` on your PR),
 it is sent to a bot called `bors`, which will take it from here.
 (See [here](https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/bors.md) for more detail about bors.)
-The PR will get added to the ["merge queue"](https://mathlib-bors-ca18eefec4cb.herokuapp.com/repositories/16).
+The PR will get added to the ["merge queue"](https://bors.mathlib.org/repositories/16).
 The merge queue is processed automatically, but this takes some finite amount of time as it requires building branches of mathlib.
 Note that pushing a commit to a PR will take it off the merge queue and a maintainer will have to put it back on.
 However, this is worth doing if you're reasonably sure that the PR will not build when merged into `master` in its current state, as broken PRs in the merge queue may delay the merge process for other people's PRs.
