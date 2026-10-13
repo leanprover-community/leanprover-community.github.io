@@ -119,31 +119,68 @@ Note that while `@[expose]` and `public` may be attached directly to the declara
 
 ## Phase (`meta` vs. runtime)
 
-The `meta` keyword controls what happens to executable code. Specifically, executable code may be either available for execution during the elaboration of the current module, in which case we call it _meta_ code, or not, in which case we call it _runtime_ code. This state ("meta" or "runtime") is called the _phase_ of the code.
+The `meta` keyword controls what happens to executable code associated with constants. Specifically, a constant's executable code may be either
 
-Meta code cannot be used in runtime code, and vice versa.
+1. available for execution during the elaboration of the current module, in which case we call it _meta_ code
+2. or not, in which case we call it _runtime_ code.
 
-`meta import A` _lifts_ all of the runtime code reachable from `A` to the meta phase. That is, we are now able to use runtime code from `A` in meta code we write in our current module. (Meta code from `A` stays meta.)
+This state ("meta" or "runtime") is called the _phase_ of the code.
 
-`public meta import A` does the same, but also provides the same meta-lifted runtime code to downstream modules of the current module.
+Meta code cannot be referenced from runtime code, and vice versa.
 
-Note that any code from `A` which is _already_ intrinsically meta will still be made available under an ordinary import, and will remain `meta`. `meta def`s are intrinsically meta, and many meta commands like `syntax`, `macro`, and `elab` produce `meta def`s behind the scenes. As such, macros, for example, may be obtained and used by downstream modules via an ordinary non-meta `import`.
+Like visibility, a constant's code has an *intrinsic* phase determined when the constant is created, and a *current* phase downstream determined by how it is imported.
 
-This is to say that intrinsically meta code is *unaffected* by `(public) meta import`. A `meta` import only "lifts" the phase of runtime code to meta, and does nothing else. (It does not change whether any constant is intrinsically meta or not, which is determined at declaration time and kept track of separately.)
+By default, a constant's code is intrinsically runtime, unless it is a `meta def`. Many meta-related commands like `syntax`, `macro`, and `elab` necessarily produce `meta def`s behind the scenes without manual intervention, since their code must be executable during elaboration.
 
-The `meta` keyword _only_ affects the phase of executable code, and otherwise is ignored. So, a `public meta import` functions as a `public import` for the purpose of type-theoretic terms. As such, a `theorem` (which has no executable code) is totally insensitive to whether its dependencies are meta or runtime (both are accepted).
+`meta import A` _lifts_ all of the runtime code reachable from `A` to the meta phase. That is, intrinsically runtime code from `A` is now in the meta phase in the importing module, and so we can use it in any meta code we write in our current module. Meta code from `A` is still imported, and stays meta.
 
-Because computation ignores proofs and types, this means that the phases of constants used by proofs and types even in definitions which _do_ produce executable code are ignored when it comes to enforcing the phase distinction. Only dependencies which affect computation are checked for phase correctness.
+`public meta import A` does the same, but also provides the same meta-lifted runtime code to downstream modules which import the current module.
+
+This is to say that intrinsically meta code is *unaffected* by `(public) meta import`. A `meta` modifier on an import only "lifts" the phase of runtime code to meta in the current module, and does nothing else.
+
+Non-meta imports preserve the phase of all constants. As such, note that any code from `A` which is _already_ intrinsically meta will still be imported under an ordinary import, and will remain `meta` and executable. Tactics and macros, for example, may be obtained and used by downstream modules via ordinary non-meta `import`s.
+
+The phase of an import *only* affects the phase of the imported code. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
 
 ### Code
 
-Constants in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR), which may then either be compiled further to machine code, or may be executed directly by the Lean interpreter. As such, each constant is also associated to _code_.
+As has been suggested, constants in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR). This code may then be compiled further to C code and then to machine code that runs natively. Or, instead, Lean IR may be executed directly by the Lean interpreter.
 
-A constant's code has a phase, i.e. may be either meta or runtime, as explained above.
+(Technical note: we conflate Lean IR and a prior intermediate representation called "LCNF" (Lean Compiler Normal Form) here and going forward, though in reality these are distinct.)
 
-However, note that code has a complicated relationship to visibility. The meta code associated with a constant does _not_ behave similarly to the value of the constant, even though it comes from compiling the value. Instead, the `code` of a `public meta def` should be thought of as somehow "public" itself. (Recall that, in contrast, whether the actual `value` is public is controlled by `@[expose]`.) The code of a `public meta def` requires all of its transitive dependencies to be both meta and have publicly-imported modules.
+It is the interpreter that drives elaboration by executing parsers, elaborators, tactics, and so on. Whenever a constant appears in some piece of code the interpreter is executing, the interpreter must look up the code associated with the constant, and then execute the code it finds. If it cannot find the code, it errors. *Meta code* is intended to be exactly that code which the interpreter can successfully locate. The laws and constraints around the meta phase ensure that any constant referenced by meta code will also, in turn, have locatable (meta) code, so that the interpreter never errors. Further, this must remain true downstream, whenever the code we write is imported.
 
-Though, due to a module being publicly available to itself, a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and have publicly-available originating modules. This leads to situations such as
+(Note: the interpreter knows how to prefer faster native-compiled code for a constant if it is available, though most user-defined metaprograms are executed by reading their Lean IR line by line. The distinction between native code and interpreted code is important for performance reasons, but is not relevant to understanding the laws of the meta phase except for having a complete picture of what is going on.)
+
+A code's phase is qualititatively a sort of "mark" on the code, which only determines when it is available, where it is stored, and (for the intrinsic phase) what constraints it must obey with respect to imports when created. The resulting Lean IR itself is not materially different depending on whether it is runtime or meta. This is what enables runtime Lean IR to be lifted to the meta phase by `meta import`s.
+
+By default, a constant's code is intrinsically runtime, and is only intrinsically meta if the constant has the `meta` keyword attached.
+
+Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.)
+
+In general, phase *only* pertains to executable code.
+
+As such, when writing a `def` which produces code, the `meta` keyword will only affect the phase of any executable code produced, and may impose constraints on that code's references and how they are imported (which we will understand shortly). The `meta` keyword is rejected on declarations that do not have executable code, as it would have no effect. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`.)
+
+When *using* a constant, the constant's phase only matters insofar as the constant is used in executable code. For example, the constants used by a `theorem` may be either meta or runtime, since a `theorem` has no executable code. Constants of both phases may be used in both its type and its proof.
+
+Conversely, because executable code does not contain proofs or types, this means that  the phases of constants used by proofs and types in definitions which _do_ produce executable code are ignored. Only dependencies which actually affect computation are checked for phase correctness.
+
+When a constant is used in executable code, it must have the same phase as the code it is used in. 
+
+#### `meta` visibility constraints
+
+By and large, runtime code does not interact with the source constant's visibility much. In contrast, any constant with intrinsically meta code has a complicated relationship to visibility which is different from that of runtime code.
+
+Recall that a constant has a `name` (the constant itself), `code` (if computable), and a type-theoretic `type` and `value`. The `code` is produced by compiling the `value`, which turns a term of the type theory into Lean IR.
+
+Despite this relationship between the `value` and `code`, the visibility rules surrounding a constant's meta code do _not_ behave similarly to those surrounding the `value` it was compiled from.
+
+Instead, the `code` of a `public meta def` should be thought of as somehow "public" *itself*. This is because the code of a `public meta def` requires all of its transitive dependencies to both be meta and to have publicly-imported modules. This is how we ensure the interpreter is always able to find any referenced constant's code in the future, since the `public` import will preserve the availability of the referenced code downstream.
+
+(Recall that, in contrast, whether the actual `value` is public is controlled by `@[expose]`, which has no effect on `code` whatsoever, meta or runtime. Code (both meta and runtime) also has an `@[expose]`\-like notion to enable `@[inline]` and similar compilation features that rely on the availability of the code downstream, but this is a little-seen technical detail whose behavior is subject to change in the future, and we do not cover it here.)
+
+Perhaps surprisingly (given our experience with visibility), a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and have publicly-available originating modules. This leads to situations such as
 
 ```lean4
 -- Succeeds
@@ -155,15 +192,13 @@ public meta def fooPublic := foo
 
 The above example succeeds if we instead publicly import the module of `bar`.
 
-We can conceptualize it this way: instead of saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
+As such, the framing of the code from `public meta def`s being "public" doesn't wuite work. Instead, we can conceptualize it this way: rather than saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
 
-Instead of being declared like `public` or `private` is, presentability is _inferred_ on the basis of what the code references. Presentable code may only reference presentable code.
+Instead of always being *declared* like `public` or `private` is, the presentability of code is _inferred_ on the basis of what the code references. By definition, we say that presentable code may only reference presentable code.
 
-Presentability is only a property of meta code; we say all runtime code is just runtime code.
+We also say that presentability is only a meaningful property of meta code. We consider all runtime code to just be runtime code.
 
-(Note: code (both meta and runtime) also has an `@[expose]`\-like notion for code bodies to enable `@[inline]` and similar compilation features, but this is a little-seen technical detail whose behavior is subject to change in the future, and we do not cover it here.)
-
-A private `meta def`'s associated code may be presentable or unpresentable; a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, compilation errors, and warns about the import responsible for it being unpresentable.
+A private `meta def`'s associated code may be presentable or unpresentable. However, a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, the compilation of that `public meta def` errors, and Lean will warn about the private import which is responsible for it being unpresentable (and recommend you make it a `public` or `public meta` import, as necessary).
 
 <img src="img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labelled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labelled 'runtime IR'." class="diagram"/>
 
@@ -175,15 +210,15 @@ Presentability behaves analogously to visibility with respect to imports: `publi
 
 Note: if the same code is provided transitively in different ways from different imports, it has the maximum presentability among all different ways it is provided. For example, if `foo` is imported as unpresentable code due to `import A'` and as presentable code due to `public import A''`, it is presentable.
 
-`(public) meta import A` lifts the runtime code from `A` (and its dependencies) to the meta phase, making it presentable or unpresentable depending on whether `public` is or isn't present, respectively.
+Observe that `(public) meta import A` lifts the runtime code from `A` (and its dependencies) to the meta phase, making it presentable or unpresentable depending on whether `public` is or isn't present, respectively. This is what we expect given our earlier discussion of `meta import`s.
 
-Code that is already intrinsically meta (i.e. marked `meta` in the source file) is still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
+Similarly, code that is already intrinsically meta (i.e. marked `meta` in the source file) is indeed still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
 
 In the following diagram, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.
 
-Note, however, that there is no arrow either way between runtime IR and meta IR in the same module, as neither may use the other, as per the runtime/meta phase separation.
+Note, however, that there is no arrow either way between runtime IR and meta IR in the same module, since neither may use the other, as per the runtime/meta phase separation.
 
-Moreover, though runtime IR can be raised to the meta phase, there is no arrow from meta IR that lowers it to runtime IR.
+Moreover, though runtime IR can be raised to the meta phase, there is no arrow from meta IR that can lower it to runtime IR. Code in the meta phase is stuck there forever.
 
 (As before, these arrows may be composed.)
 
