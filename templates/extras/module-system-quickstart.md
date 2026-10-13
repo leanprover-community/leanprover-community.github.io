@@ -140,7 +140,7 @@ This is to say that intrinsically meta code is *unaffected* by `(public) meta im
 
 Non-meta imports preserve the phase of all constants. As such, note that any code from `A` which is _already_ intrinsically meta will still be imported under an ordinary import, and will remain `meta` and executable. Tactics and macros, for example, may be obtained and used by downstream modules via ordinary non-meta `import`s.
 
-The phase of an import *only* affects the phase of the imported code. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
+The phase of an import *only* affects the phase of any code that is imported. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
 
 ### Code
 
