@@ -12,6 +12,15 @@ main img.diagram {
   max-width: 100%;
   height: auto;
 }
+main .diagram-group {
+  width: fit-content;   /* only as wide as the widest image */
+  max-width: 100%;
+  margin-inline: auto;  /* center the group */
+}
+main .diagram-group img.diagram {
+  margin-inline: 0;     /* left-align each image inside the group */
+}
+
 </style>
 
 The module system provides a means of controlling how information may flow between modules.
@@ -55,9 +64,10 @@ Note that both of these imports only access the public scope of `A`.
 
 Module `B` receiving `A`'s public scope in its own public scope means that downstream imports of `B` (public or not) will also necessarily receive the public scope of `A` along with the public scope of `B`.
 
+<div class="diagram-group">
 <img src="img/module-system/vis-public-import-then-import.svg" alt="A diagram depicting an import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
-
 <img src="img/module-system/vis-public-import-then-public-import.svg" alt="A diagram depicting a public import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+</div>
 
 Information flows through the arrows in these diagrams transitively, meaning we can chain arrows together to infer new, composite arrows. In other words, the arrows in these diagrams may be composed.
 
@@ -67,9 +77,10 @@ As such, chains of public imports form transitive chains of dependencies.
 
 But what if `B` does *not* want to provide `A` to its importers? A non-public `import` "breaks the chain". Observe that `C` loads no data at all from `A`, regardless of whether it uses `import B` or `public import B`. This is how `B` is able to use data from `A` privately without forcing it on downstream consumers such as `C`.
 
+<div class="diagram-group">
 <img src="img/module-system/vis-import-then-import.svg" alt="A diagram depicting an import following another import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
-
 <img src="img/module-system/vis-import-then-public-import.svg" alt="A diagram depicting a public import following an import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+</div>
 
 This also enables us to skip rebuilding of `C` when editing `A`. Since the resulting public scope of `B` will not be changed by any changes to `A`, the build of `C` will consider `C`'s dependencies to be up-to-date, and will thus skip building reuse the previous results of building `C`.
 
