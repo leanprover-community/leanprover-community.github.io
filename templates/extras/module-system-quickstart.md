@@ -124,26 +124,35 @@ Recall that ordinary imports (i.e. `import` or `public import`, without `import 
 
 #### `@[expose]`
 
-However, `public` definitions may, if we so choose, have public `value`s as well. We may raise the intrinsic visibility of a `public` definition's `value` to `public` by attaching `@[expose]` to the definition.
+However, `public` definitions may, if we so choose, have public `value`s as well. We may raise the intrinsic visibility of a `public` definition's `value` to `public` by attaching `@[expose]` to the definition. `@[expose]` is meaningless on a private constant, and Lean will reject it.
 
-Note that when the value of a constant is available at a given visibility, we also have a _rewrite rule_ that lets us _unfold_ the constant to its value during definitional equality checks. When exactly we are allowed to unfold an `@[expose]`d constant is controlled by the definition's transparency settings.
+The main utility for having a `value` available is that it effectively provides Lean with a _rewrite rule_ that lets us _unfold_ the constant to that value during definitional equality checks. E.g., if Lean knows the value of `foo` to be given by `foo := 37`, then Lean may unfold `foo` in order to unify `foo + 1` with `37 + 1`.
 
-As such, `@[expose]` is required for unfolding. Conversely, without `@[expose]`, unfolding is not possible downstream even in principle under ordinary imports (since the necessary private `value` data is not available). Transparency settings (`@[reducible]`, `@[implicit_reducible` , and so on) are thus _only_ meaningful downstream on `@[expose]`d definitions. Otherwise, they only affect unfolding in private locations in the same file.
+Whether this unfolding is possible even in principle depends on whether the `value` data is available at the working visibility of the definitional equality check. As an example, if the `value` data is present but is private (i.e. no `@[expose]`), then Lean could unify `foo + 1` with `37 + 1` within a `public theorem`'s proof (a private location, where it can access private data) but not its type (a public location).
 
-Note: even without `@[expose]`, the private `value` data of a definition is still available in the module in which it was created, but only in the private scope. This accordingly means that we may be able to unfold even a non-exposed definition in private locations in the module in which it was defined (such as proof bodies) without being able to unfold it at _any_ point downstream (unless we were to `import all`, which would give us exactly that private data; note, even then, we would still only be able to unfold it in private locations).
+Note how this yields a significant difference for non-`@[expose]`d constant between working in the same module it was defined vs. working in downstream modules: in the module in which a public non-`@[expose]`d constant is defined, the `value` data is present, but private. Even though it can't be used in public positions, we can still unfold the definition when proving public API theorems (since theorem proofs are private).
 
-`abbrev`s and `instance`s are definitions which are `@[expose]`d by default.
+However, (ordinary) downstream modules never import the private scope, meaning that they cannot unfold the constant at *any* point, even in principle. The data is simply not there.
+
+(The one exception is if the downstream modules use the discouraged `import all`, which would give them exactly that private data; note, even then, we would still only be able to unfold when working at the private visibility, since `import all` does not lift private data to the public scope.)
+
+As such, `@[expose]` is required for being able to unfold constants downstream.
+
+Note that `abbrev`s and `instance`s are definitions which are `@[expose]`d by default.
+
+It is worth noting that Lean further restricts the unfolding of constants via their *transparency settings*, e.g. `@[reducible]`, `@[implicit_reducible]` , and so on. Transparency settings are subordinate to the module system; thus they are _only_ meaningful when unfolding is already possible. In the typical case, this means they only matter on `@[expose]`d definitions or else when working at private visibilities in the same file.
+
+Technical note: typechecking down in the kernel always behaves as if it is at the private visibility. However, it still cannot unfold declarations whose values are not imported, as that data is not present.
 
 To recap:
 
-- `def`:
-    - `type`: same visibility as overall constant
-    - `value`: private by default, can be made public (when applicable) via `@[expose]`
-- `theorem`:
-    - `type`: same visibility as overall constant
-    - `value` (i.e. proof): always private
+- The `type` of any constant is the same as its intrinsic overall visibility.
+- The `value`'s visibility depends o nthe kind of declaration:
+    - `def`: always private by default, can be made public (only) when the constant is also public via `@[expose]`
+    - `theorem`: the `value` is its proof, and is always private
+    - `abbrev`, `instance`: always `@[expose]`d by default. (However, if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.)
 
-Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section.
+Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section. Within such sections these modifiers may also be individually negated with `@[no_expose]` and `private`.
 
 ## Phase (`meta` vs. runtime)
 
