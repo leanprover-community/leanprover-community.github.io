@@ -57,6 +57,8 @@ Module `B` receiving `A`'s public scope in its own public scope means that downs
 
 <img src="img/module-system/vis-public-import-then-import.svg" alt="A diagram depicting an import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
+<img src="img/module-system/vis-public-import-then-public-import.svg" alt="A diagram depicting a public import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+
 Information flows through the arrows in these diagrams transitively, meaning we can chain arrows together to infer new, composite arrows. In other words, the arrows in these diagrams may be composed.
 
 As such, chains of public imports form transitive chains of dependencies.
