@@ -37,33 +37,55 @@ A file is a "module file", i.e. participating in the module system, if and only 
 
 Each module has a `public` scope and a `private` scope.
 
-<img src="img/module-system/vis-single-module-no-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A'." class="diagram"/>
+<img src="img/module-system/vis-single-module-no-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a capsule-shape labeled 'A'." class="diagram"/>
 
-The information in the `private` scope can use any information from the `public` scope, but the reverse is not true.
+The information in the `private` scope can use any information from the `public` scope, but the reverse is not true. We use an arrow to show information flowing from one scope to another.
 
-<img src="img/module-system/vis-single-module-with-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a pill-shape labeled 'A', with an arrow reaching down from the 'public' dot to the 'private' dot." class="diagram"/>
+<img src="img/module-system/vis-single-module-with-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a capsule-shape labeled 'A', with an arrow reaching down from the 'public' dot to the 'private' dot." class="diagram"/>
 
-`import A` puts the public scope of `A` into the _private_ scope of the current module.
+`import A` puts the **public** scope of `A` into the **private** scope of the current module.
 
-`public import A` puts the public scope of `A` into the _public_ scope of the current module.
+<img src="img/module-system/vis-import.svg" alt="A diagram depicting an import by showing two module capsule diagrams A and B, with an arrow from A's public dot to B's private dot." class="diagram"/>
 
-This also means that downstream imports of the current module, in receiving the current module's public scope, will also necessarily receive the public scope of `A` along with it.
+`public import A` puts the **public** scope of `A` into the **public** scope of the current module.
 
-<img src="img/module-system/vis-import-of-public-import.svg" alt="A diagram depicting an import following a public import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
+<img src="img/module-system/vis-public-import.svg" alt="A diagram depicting a public import by showing two module capsule diagrams A and B, with an arrow from A's public dot to B's public dot." class="diagram"/>
+
+Note that both of these imports only access the public scope of `A`.
+
+Module `B` receiving `A`'s public scope in its own public scope means that downstream imports of `B` (public or not) will also necessarily receive the public scope of `A` along with the public scope of `B`.
+
+<img src="img/module-system/vis-public-import-then-import.svg" alt="A diagram depicting an import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
 Information flows through the arrows in these diagrams transitively, meaning we can chain arrows together to infer new, composite arrows. In other words, the arrows in these diagrams may be composed.
 
-Note that a `(public) import` following an `import` forms a "broken chain". Observe that `C` loads no data at all from `A`. This is how `B` is able to use data from `A` privately without forcing it on downstream consumers such as `C`.
+As such, chains of public imports form transitive chains of dependencies.
 
-<img src="img/module-system/vis-import-of-import.svg" alt="A diagram depicting an import following another import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
+<img src="img/module-system/vis-public-import-chain.svg" alt="A diagram depicting multiple public imports following each other, with arrows from the public dot of one module heading to the public dot of the next, forming a chain." class="diagram"/>
 
-<img src="img/module-system/vis-public-import-of-import.svg" alt="A diagram depicting a public import following an import by showing three module pill diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+But what if `B` does *not* want to provide `A` to its importers? A non-public `import` "breaks the chain". Observe that `C` loads no data at all from `A`, regardless of whether it uses `import B` or `public import B`. This is how `B` is able to use data from `A` privately without forcing it on downstream consumers such as `C`.
 
-Typical `import`s, `public` or not, only request the public scope from the upstream module. The upstream private scope stays inaccessible unless you write `import all`, which should generally be avoided. (Even then, the upstream private scope can only be imported into the private scope; private data can never be made public.)
+<img src="img/module-system/vis-import-then-import.svg" alt="A diagram depicting an import following another import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
 
-As an escape hatch, `import all A` will request the private scope of `A` as well as the public one, and put it in the target module's private scope. However, note that `public import all` is not allowed: the private scope of `A` cannot ever be lifted into the public scope. `public import A` and `import all A` (on separate lines) will import the public scope into the public scope and the private scope into the private scope.
+<img src="img/module-system/vis-import-then-public-import.svg" alt="A diagram depicting a public import following an import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
 
-<img src="img/module-system/vis-table-with-composites.svg" alt="A table of pairs of module pill diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="diagram"/>
+This also enables us to skip rebuilding of `C` when editing `A`. Since the resulting public scope of `B` will not be changed by any changes to `A`, the build of `C` will consider `C`'s dependencies to be up-to-date, and will thus skip building reuse the previous results of building `C`.
+
+It is therefore generally good practice to make imports non-`public` if possible, and to only use `public import` where necessary or to deliberately provide access to API.
+
+Both of these imports only provide the public scope, but what if you do need something from `A`'s private scope? As an escape hatch, `import all A` will request the private scope of `A` and put it in the target module's private scope.
+
+Because arrows can be followed transitively, this means that the public scope of `A` is *also* available in `B`'s private scope.
+
+<img src="img/module-system/vis-import.svg" alt="A diagram depicting an import all by showing two module capsule diagrams A and B, with an arrow from A's private dot to B's private dot." class="diagram"/>
+
+`import all` should be avoided if at all possible; the need for a private scope is generally a sign that either something is being done wrong, or that the public scope of `A` should be redesigned.
+
+Note that `public import all` is not allowed. The private scope of a module cannot ever be lifted into the public scope through imports.
+
+`public import A` and `import all A` (on separate lines) will import the public scope into the public scope and the private scope into the private scope.
+
+<img src="img/module-system/vis-table-flags.svg" alt="A table of pairs of module capsule diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="diagram"/>
 
 ### Declarations
 
