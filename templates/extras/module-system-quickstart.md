@@ -77,7 +77,7 @@ Both of these imports only provide the public scope, but what if you do need som
 
 Because arrows can be followed transitively, this means that the public scope of `A` is *also* available in `B`'s private scope.
 
-<img src="img/module-system/vis-import.svg" alt="A diagram depicting an import all by showing two module capsule diagrams A and B, with an arrow from A's private dot to B's private dot." class="diagram"/>
+<img src="img/module-system/vis-import-all.svg" alt="A diagram depicting an import all by showing two module capsule diagrams A and B, with an arrow from A's private dot to B's private dot." class="diagram"/>
 
 `import all` should be avoided if at all possible; the need for a private scope is generally a sign that either something is being done wrong, or that the public scope of `A` should be redesigned.
 
