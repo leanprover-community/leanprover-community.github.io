@@ -204,17 +204,13 @@ A code's phase is qualititatively a sort of "mark" on the code, which only deter
 
 By default, a constant's code is intrinsically runtime, and is only intrinsically meta if the constant has the `meta` keyword attached.
 
-Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.)
+Phase *only* pertains to executable code, and the `meta` keyword does not affect any aspects of a constant besides its code.
 
-In general, phase *only* pertains to executable code.
+When a constant is used in executable code, it must have the same phase as the code it is used in. However, because executable code does not contain proofs or types, this means that the phases of constants used in proofs and types are ignored. Only dependencies which actually affect computation are checked for phase correctness.
 
-As such, when writing a `def` which produces code, the `meta` keyword will only affect the phase of any executable code produced, and may impose constraints on that code's references and how they are imported (which we will understand shortly). The `meta` keyword is rejected on declarations that do not have executable code, as it would have no effect. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`.)
+Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem`  in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
-When *using* a constant, the constant's phase only matters insofar as the constant is used in executable code. For example, the constants used by a `theorem` may be either meta or runtime, since a `theorem` has no executable code. Constants of both phases may be used in both its type and its proof.
-
-Conversely, because executable code does not contain proofs or types, this means that  the phases of constants used by proofs and types in definitions which _do_ produce executable code are ignored. Only dependencies which actually affect computation are checked for phase correctness.
-
-When a constant is used in executable code, it must have the same phase as the code it is used in. 
+As such, the `meta` keyword is rejected on declarations that do not have executable code like `theorem`s, as it would have no effect. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`.)
 
 #### `meta` visibility constraints
 
