@@ -146,13 +146,11 @@ It is worth noting that Lean further restricts the unfolding of constants via th
 
 Technical note: typechecking down in the kernel always behaves as if it is at the private visibility. However, it still cannot unfold declarations whose values are not imported, as that data is not present.
 
-To recap:
+To recap, the `value`'s visibility depends on the kind of declaration:
 
-- The `type` of any constant is the same as its intrinsic overall visibility.
-- The `value`'s visibility depends o nthe kind of declaration:
-    - `def`: always private by default, can be made public (only) when the constant is also public via `@[expose]`
-    - `theorem`: the `value` is its proof, and is always private
-    - `abbrev`, `instance`: always `@[expose]`d by default. (However, if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.)
+- `def`: always private by default, can be made public (only) when the constant is also public via `@[expose]`
+- `theorem`: the `value` is its proof, and is always private
+- `abbrev`, `instance`: always `@[expose]`d by default. (However, if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.)
 
 Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section. Within such sections these modifiers may also be individually negated with `@[no_expose]` and `private`.
 
