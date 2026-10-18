@@ -245,18 +245,28 @@ Presentable code may be referenced by unpresentable code, but not vice-versa.
 
 Presentability behaves analogously to visibility with respect to imports: `public (meta) import A` imports all of the presentable code from `A` as presentable code in the target module; a `(meta) import` imports all of the presentable code from A as unpresentable.
 
+Note, however, that there is no arrow either way between runtime IR and meta IR in the same module, since neither may use the other, as per the runtime/meta phase separation. 
+
 Note: like visibility, if the same code is provided transitively in different ways from different imports, it has the maximum presentability among all different ways it is provided. For example, if `foo` is imported as unpresentable code due to `import A'` and as presentable code due to `public import A''`, it is presentable.
+
+If code is imported both as runtime code and as meta code, it is available for use in both phases.
+
+In the following diagrams, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.
+
+As before, these arrows may be composed, and we show composite arrows in a lighter shade.
+
+<img src="img/module-system/phase-table-flags.svg" alt="A table of four diagrams each depicting a pair of modules A and B with their meta and runtime IRs, for import, public import, meta import, and public meta import. In the non-meta import diagrams, a red arrow leads from A's runtime IR dot to B's runtime IR dot; in the meta import diagram, a blue arrow goes from A's runtime IR dot to B's unpresentable meta dot, whereas in the public meta import diagram, a blue arrow goes from A's runtime IR dot to B's presentable meta dot. In both the meta and non-meta the non-public imports, a blue line goes from the presentable meta IR dot in A to the unpresentable meta IR dot in B. In both the meta and non-meta the public imports, a blue line goes from the presentable meta IR dot in A to the presentable meta IR dot in B." class="diagram"/>
 
 Observe that `(public) meta import A` lifts the runtime code from `A` (and its dependencies) to the meta phase, making it presentable or unpresentable depending on whether `public` is or isn't present, respectively. This is what we expect given our earlier discussion of `meta import`s.
 
-Similarly, code that is already intrinsically meta (i.e. marked `meta` in the source file) is indeed still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
+However, even though runtime IR can be raised to the meta phase, importing can never lower meta IR down to runtime IR. Code in the meta phase is stuck there forever.
 
-In the following diagram, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.
+We also see that code which is already intrinsically meta (i.e. marked `meta` in the source file) is indeed still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
 
-Note, however, that there is no arrow either way between runtime IR and meta IR in the same module, since neither may use the other, as per the runtime/meta phase separation.
+We can now see that `public meta import`s indeed propagate the ability to *use* IR under non-meta downstream imports. This is why, if `B` in the diagram below defined tactics which used runtime code from `A`, it may be imported normally by `C` without breaking anything.
 
-Moreover, though runtime IR can be raised to the meta phase, there is no arrow from meta IR that can lower it to runtime IR. Code in the meta phase is stuck there forever.
+<img src="img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrow from A's presentable meta IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
 
-(As before, these arrows may be composed.)
+However, `meta import`s break the chain, and runtime IR from `A` privately `meta import`ed by `B` is not loaded as meta IR in `C`.
 
-<img src="img/module-system/phase-table.svg" class="diagram"/>
+<img src="img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrow from A's presentable meta IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
