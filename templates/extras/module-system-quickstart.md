@@ -116,7 +116,7 @@ The associated pieces of data may have different individual visibilities, and so
 
 Further, we may speak of working "at" a given visibility at different points in a module. This specifies which information we have available in the situation at hand (either just the public scope's information or both the public and private scopes' information).
 
-As such, the notion of some information being "in scope" is not generally well-formed, as whether something is "in scope" will change depending on whatever our current working visibility is.
+Note: be aware that the notion of some information being "in scope" is not generally well-formed, as whether something is "in scope" will change depending on whatever our current working visibility is.
 
 While a constant's current visibility depends on how it is imported (publicly or privately), it also has an _intrinsic_ visibility, namely which scope of its originating module it lives in. A constant may be made intrinsically public by using the `public` keyword (either on the declaration itself, e.g. `public def`, or via `public section`).
 
