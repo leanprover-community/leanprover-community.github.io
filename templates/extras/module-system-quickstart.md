@@ -209,11 +209,11 @@ However, note that the phases of constants used in proofs and types are ignored.
 
 Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem` in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
-Since it would have no effect, Lean rejects the `meta` keyword on declarations like `theorem`s which do not have executable code. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
+Since it would have no effect, Lean rejects the `meta` keyword on `theorems` and other declarations that do not produce executable code. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
 
 #### `meta` visibility constraints
 
-By and large, runtime code does not interact with the source constant's visibility much. In contrast, any constant with intrinsically meta code has a complicated relationship to visibility which is different from that of runtime code.
+By and large, runtime code does not interact with the source constant's visibility. In contrast, any constant with intrinsically meta code has a complicated relationship to visibility which is different from that of runtime code.
 
 Recall that a constant has a `name` (the constant itself), `code` (if computable), and a type-theoretic `type` and `value`. The `code` is produced by compiling the `value`, which turns a term of the type theory into Lean IR.
 
@@ -223,7 +223,7 @@ Instead, the `code` of a `public meta def` should be thought of as somehow "publ
 
 (Recall that, in contrast, whether the actual `value` is public is controlled by `@[expose]`, which has no effect on `code` whatsoever, meta or runtime. Code (both meta and runtime) also has an `@[expose]`-like notion to enable `@[inline]` and similar compilation features that rely on the availability of the code downstream, but this is a little-seen technical detail whose behavior is subject to change in the future, and we do not cover it here.)
 
-Perhaps surprisingly (given our experience with visibility), a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and come from publicly-imported modules. 
+Perhaps surprisingly (given our experience with visibility), a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and come from publicly-imported modules.
 
 This leads to situations such as
 
@@ -236,8 +236,6 @@ public meta def fooPublic := foo
 ```
 
 The above example succeeds if we instead publicly import the module of `bar`.
-
-(Technical note: to achieve this, the code from private `meta def`s is stored in the public `*.olean` behind the scenes, and their names are recorded in a special public location relevant only to the compiler and interpreter. Their types and values remain private as expected.)
 
 As such, the framing of the code from `public meta def`s being "public" doesn't quite work. Instead, we can conceptualize it this way: rather than saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
 
@@ -255,7 +253,9 @@ Presentable code may be referenced by unpresentable code, but not vice versa.
 
 Note that there is no arrow either way between runtime IR and meta IR in the same module, since neither may use the other, as per the runtime/meta phase separation. Phase can only be changed at import boundaries (and only to lift runtime IR to meta IR).
 
-Presentability behaves analogously to visibility with respect to imports: `public (meta) import A` imports all of the presentable code from `A` as presentable code in the target module; a `(meta) import` imports all of the presentable code from `A` as unpresentable.
+(Technical note: to allow `public meta def`s to use private `meta def`s, the code from private `meta def`s is stored in the public `*.olean` behind the scenes, and their names are recorded in a special public location relevant only to the compiler and interpreter. Their types and values remain private as expected.)
+
+Import visibility modifiers affect presentability analogously to the way they affect scopes: `public (meta) import A` imports all of the presentable code from `A` as presentable code in the target module; a `(meta) import` imports all of the presentable code from `A` as unpresentable.
 
 Note: like visibility, if the same code is provided transitively in different ways from different imports, it has the maximum presentability among all different ways it is provided. For example, if `foo` is imported as unpresentable code due to `import A'` and as presentable code due to `public import A''`, it is presentable.
 
@@ -273,10 +273,10 @@ However, even though runtime IR can be raised to the meta phase, importing can n
 
 We also see that code which is already intrinsically meta (i.e. marked `meta` in the source file) is indeed still brought in as meta code under ordinary imports, and is unaffected by the presence of `meta` on the `import`.
 
-We can now see that `public meta import`s indeed propagate the ability to *use* IR under non-meta downstream imports. This is why, if `B` in the diagram below defined tactics which used runtime code from `A`, it may be imported normally by `C` without breaking anything.
+We can now see that `public meta import`s indeed propagate the ability to interpret lifted runtime IR under non-meta downstream imports. This is why, if `B` in the diagram below defined tactics which used runtime code from `A`, it may be imported normally by `C` without breaking anything.
 
-<img src="img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
+<img src="img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable meta IR." class="diagram"/>
 
 However, `meta import`s break the chain, and runtime IR from `A` privately `meta import`ed by `B` is not loaded as meta IR in `C`.
 
-<img src="img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
+<img src="img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable meta IR." class="diagram"/>
