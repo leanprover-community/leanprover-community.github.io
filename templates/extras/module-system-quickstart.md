@@ -185,11 +185,13 @@ An ordinary, non-meta import preserves the phases of all code. Code which is alr
 
 <img src="img/module-system/phase-simple-non-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and a red arrow leads from A's runtime IR to B's runtime IR." class="diagram"/>
 
-`meta import A` _lifts_ all of the runtime code reachable from `A` to the meta phase. That is, intrinsically runtime code from `A` is now in the meta phase in the importing module, and so we can use it in any meta code we write in our current module. Meta code from `A` is still imported, and stays meta.
+`meta import A` _lifts_ all of the runtime code reachable from `A` to the meta phase. That is, intrinsically runtime code from `A` is now in the meta phase in the importing module, and so we can use it in any meta code we write in our current module. Meta code from `A` is still imported under `meta import`, and stays meta.
 
-This is to say that intrinsically meta code is *unaffected* by `meta import`. A `meta` modifier on an import only "lifts" the phase of runtime code to meta in the current module, and does nothing else.
+(Arrow coloration only shows, redundantly, where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.)
 
 <img src="img/module-system/phase-simple-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and another blue arrow leads from A's runtime IR to B's meta IR." class="diagram"/>
+
+In fact, having now seen both sorts of imports, we find that a `meta` modifier on an import only changes whether or not runtime IR is lifted to the meta phase, and does nothing else. Perhaps counterintuitively, its presence or absence does not change what happens to `meta` code from the imported module.
 
 `public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module.
 
@@ -236,7 +238,7 @@ This leads to situations such as
 ```lean4
 module
 
-meta import Bar -- privately imports `bar`
+meta import Bar -- privately meta imports `bar`
 
 -- Succeeds
 meta def foo := bar
@@ -245,7 +247,7 @@ meta def foo := bar
 public meta def fooPublic := foo
 ```
 
-The above example succeeds if we instead publicly import the module of `bar`.
+The above example succeeds if we instead publicly import `bar` via `public meta import Bar`.
 
 As such, the framing of the code from `public meta def`s being "public" doesn't quite work. Instead, we can conceptualize it this way: rather than saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
 
@@ -271,7 +273,7 @@ Note: like visibility, if the same code is provided transitively in different wa
 
 If code is imported both as runtime code and as meta code, it is available for use in both phases.
 
-In the following diagrams, the arrows mean "(transitively) referenceable in", and coloration only shows (redundantly) where the arrows end, to emphasize that runtime IR becomes available in the meta phase under `meta import`s.
+In the following diagrams, the arrows mean "(transitively) referenceable in".
 
 As before, these arrows may be composed, and we show composite arrows in a lighter shade.
 
