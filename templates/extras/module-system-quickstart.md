@@ -37,8 +37,7 @@ This provides various benefits:
 
 - API control: making certain data private allows us to insist that downstream users use the API we want, and do not rely on "accidental" facts of the implementation. Likewise, we do not need to force internal `import` dependencies on downstream files if we only use them privately.
 
-
-We also must manage what code is available to execute at compile time through the `meta` keyword. This affects `syntax`, `macro`s, tactics, elaborators, attributes, and other compile-time affordances.
+The module system also has us manage what code is available to execute at compile time through the `meta` keyword. This affects `syntax`, `macro`s, tactics, elaborators, attributes, and other compile-time affordances. Most code is not `meta`, and the guarantee that it will not be needed while compiling a file allows us to avoid costs associated with producing and loading the code.
 
 A file is a "module file", i.e. participating in the module system, if and only if it has the `module` keyword at the top. Non-module files are allowed to import module files, but at the cost of loading both public and private information and following all imports transitively, eliminating the benefits of the module system from that point forward. Module files cannot import non-module files.
 
