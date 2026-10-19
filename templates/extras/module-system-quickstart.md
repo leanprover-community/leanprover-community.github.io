@@ -193,7 +193,7 @@ An ordinary, non-meta import preserves the phases of all code. Code which is alr
 
 In fact, having now seen both sorts of imports, we find that a `meta` modifier on an import only changes whether or not runtime IR is lifted to the meta phase, and does nothing else. Perhaps counterintuitively, its presence or absence does not change what happens to `meta` code from the imported module.
 
-`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module.
+`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module. (We'll visualize this with a refined version of the diagram below.)
 
 The phase of an import *only* affects the phase of any code that is imported. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
 
@@ -256,6 +256,8 @@ However, rather than always being *declared* like `public` or `private` is, the 
 We also say that presentability is only a meaningful property of meta code. We consider all runtime code to just be runtime code.
 
 A private `meta def`'s associated code may be presentable or unpresentable. However, a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, the compilation of that `public meta def` will error, and the error message will point to the private import which must be upgraded to `public` or `public meta` to make the code presentable.
+
+We now refine our above diagram into the following final form so that we can visualize presentabilities.
 
 <img src="img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labeled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labeled 'runtime IR'." class="diagram"/>
 
