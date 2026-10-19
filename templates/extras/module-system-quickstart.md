@@ -228,6 +228,8 @@ Perhaps surprisingly (given our experience with visibility), a `public meta def`
 This leads to situations such as
 
 ```lean4
+module
+
 meta import Bar -- privately imports `bar`
 
 -- Succeeds
