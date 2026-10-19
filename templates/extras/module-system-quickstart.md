@@ -175,17 +175,23 @@ This state ("meta" or "runtime") is called the _phase_ of the code.
 
 Meta code cannot be referenced from runtime code, and vice versa.
 
-Like visibility, a constant's code has an *intrinsic* phase determined when the constant is created, and a *current* phase downstream determined by how it is imported.
+Analogously to visibility, a constant's code has an *intrinsic* phase determined when the constant is created, and a *current* phase downstream determined by how it is imported.
 
 By default, a constant's code is intrinsically runtime, unless it is a `meta def`. Many meta-related commands like `syntax`, `macro`, and `elab` necessarily produce `meta def`s behind the scenes without manual intervention, since their code must be executable during elaboration.
+
+An ordinary, non-meta import preserves the phases of all code. Code which is already meta will remain meta and executable. Tactics and macros, for example, may be obtained and used by downstream modules via ordinary non-meta `import`s.
+
+(In these diagrams, we use "IR" interchangeably with "code".)
+
+<img src="img/module-system/phase-simple-non-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and a red arrow leads from A's runtime IR to B's runtime IR." class="diagram"/>
 
 `meta import A` _lifts_ all of the runtime code reachable from `A` to the meta phase. That is, intrinsically runtime code from `A` is now in the meta phase in the importing module, and so we can use it in any meta code we write in our current module. Meta code from `A` is still imported, and stays meta.
 
 This is to say that intrinsically meta code is *unaffected* by `meta import`. A `meta` modifier on an import only "lifts" the phase of runtime code to meta in the current module, and does nothing else.
 
-`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module.
+<img src="img/module-system/phase-simple-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and another blue arrow leads from A's runtime IR to B's meta IR." class="diagram"/>
 
-Non-meta imports preserve the phase of all constants. As such, note that any code from `A` which is _already_ intrinsically meta will still be imported under an ordinary import, and will remain `meta` and executable. Tactics and macros, for example, may be obtained and used by downstream modules via ordinary non-meta `import`s.
+`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module.
 
 The phase of an import *only* affects the phase of any code that is imported. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
 
