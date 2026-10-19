@@ -190,23 +190,23 @@ Non-meta imports preserve the phase of all constants. As such, note that any cod
 
 The phase of an import *only* affects the phase of any code that is imported. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
 
-### Code
+### Constants
 
 As has been suggested, constants in Lean, separately from their role as terms in a type theory, are also _compiled_ into code (Lean IR). This code may then be compiled further to C code and then to machine code that runs natively. Or, instead, Lean IR may be executed directly by the Lean interpreter.
 
-(Technical note: we conflate Lean IR and a prior intermediate representation called "LCNF" (Lean Compiler Normal Form) here and going forward, though in reality these are distinct.)
+It is the interpreter that drives elaboration by executing parsers, elaborators, tactics, and so on. Whenever a constant appears in some piece of code the interpreter is executing, the interpreter must look up the code associated with the constant (preferring native machine code if available), and then execute the code it finds. If it cannot find the code, it errors.
 
-It is the interpreter that drives elaboration by executing parsers, elaborators, tactics, and so on. Whenever a constant appears in some piece of code the interpreter is executing, the interpreter must look up the code associated with the constant, and then execute the code it finds. If it cannot find the code, it errors. *Meta code* is intended to be exactly that code which the interpreter can successfully locate. The laws and constraints around the meta phase ensure that any constant referenced by meta code will also, in turn, have locatable (meta) code, so that the interpreter never errors. Further, this must remain true downstream, whenever the code we write is imported.
+**Meta code** is exactly code which the interpreter is able to successfully locate while compiling a Lean file.
 
-(Note: the interpreter knows how to prefer faster native-compiled code for a constant if it is available, though most user-defined metaprograms are executed by reading their Lean IR line by line. The distinction between native code and interpreted code is important for performance reasons, but is not relevant to understanding the laws of the meta phase except for having a complete picture of what is going on.)
+Since the phase of code determines when it must be available, this also affects where that code is stored behind the scenes (in order to be accessible downstream), and puts constraints on that code's references and how those references are imported.
 
-A code's phase is qualititatively a sort of "mark" on the code, which only determines when it is available, where it is stored, and (for the intrinsic phase) what constraints it must obey with respect to imports when created. The resulting Lean IR itself is not materially different depending on whether it is runtime or meta. This is what enables runtime Lean IR to be lifted to the meta phase by `meta import`s.
-
-By default, a constant's code is intrinsically runtime, and is only intrinsically meta if the constant has the `meta` keyword attached.
+Specifically, the laws and constraints around the meta phase must ensure that any constant referenced by meta code will also, in turn, have locatable code, so that the interpreter never errors. I.e., Lean ensures that meta code only ever references meta code. Further, this must remain true downstream, so (as we will see in more detail) any references must be propagated to importers through transitive chains of imports.
 
 Phase *only* pertains to executable code, and the `meta` keyword does not affect any aspects of a constant besides its code.
 
-When a constant is used in executable code, it must have the same phase as the code it is used in. However, because executable code does not contain proofs or types, this means that the phases of constants used in proofs and types are ignored. Only dependencies which actually affect computation are checked for phase correctness.
+When a constant is used in executable code, it must have the same phase as the code it is used in.
+
+However, note that because executable code does not contain proofs or types, this means that the phases of constants used in proofs and types are ignored. Only dependencies which actually affect computation are checked for phase correctness.
 
 Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem`  in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
