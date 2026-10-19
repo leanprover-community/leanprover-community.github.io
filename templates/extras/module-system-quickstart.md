@@ -228,8 +228,10 @@ Perhaps surprisingly (given our experience with visibility), a `public meta def`
 This leads to situations such as
 
 ```lean4
+meta import Bar -- privately imports `bar`
+
 -- Succeeds
-meta def foo := bar -- note: `bar` is privately `meta import`ed
+meta def foo := bar
 
 -- Fails, due to `bar` in `foo` not being publicly imported
 public meta def fooPublic := foo
