@@ -85,9 +85,9 @@ This also enables us to skip rebuilding `C` when editing `A`. Since the resultin
 
 It is therefore generally good practice to make imports non-`public` if possible, and to only use `public import` where necessary or to deliberately provide access to API.
 
-Both of `public import A` and `import A` provide only `A`'s public scope, but what if you do need something from `A`'s private scope? As an escape hatch, `import all A` will request the private scope of `A` and put it in the target module's private scope.
+Both `public import A` and `import A` provide only `A`'s public scope, but what if you do need something from `A`'s private scope? As an escape hatch, `import all A` will request the private scope of `A` and put it in the target module's private scope.
 
-Because arrows can be followed transitively in the following diagram, this means that the public scope of `A` is *also* available in `B`'s private scope.
+Because arrows in the following diagram can be followed transitively, the public scope of `A` is *also* available in `B`'s private scope.
 
 <img src="img/module-system/vis-import-all.svg" alt="A diagram depicting an import all by showing two module capsule diagrams A and B, with an arrow from A's private dot to B's private dot." class="diagram"/>
 
@@ -132,7 +132,7 @@ Different pieces of data associated with the constant behave differently with re
 
 In fact, having a private value is the default situation for a `public def`, and the _only_ situation for a `public theorem`. Note that the `value` of a `theorem` is just its proof, and `theorem` proofs are always private, since proof irrelevance means they will never be useful downstream (and so there is no reason to make downstream importers load them).
 
-Recall that ordinary imports (i.e. `import` or `public import`, without `import all`) only import the public scope. As such, this means that when importing a public constant with a private `value`, the `value` data will simply not be loaded downstream, and thus will be completely inaccessible.
+Recall that ordinary imports (i.e. `import` or `public import`, without `import all`) only import the public scope. As such, when importing a public constant with a private `value`, the `value` data will simply not be loaded downstream, and thus will be completely inaccessible.
 
 #### `@[expose]`
 
@@ -142,7 +142,7 @@ The main utility for having a `value` available is that it effectively provides 
 
 Whether this unfolding is possible even in principle depends on whether the `value` data is available at the working visibility of the definitional equality check. As an example, if the `value` data is present but is private (i.e. no `@[expose]`), then Lean could unify `foo + 1` with `37 + 1` within a `public theorem`'s proof (a private location, where it can access private data) but not its type (a public location).
 
-Note how, for non-`@[expose]`d constants, this yields a significant difference between working in the module it was defined in vs. working in downstream modules. In the module in which a public non-`@[expose]`d constant is defined, the `value` data is present, but private. Even though it can't be used in public positions, we can still unfold the definition when proving public API theorems (since theorem proofs are private).
+Note how, for a non-`@[expose]`d constant, this yields a significant difference between working in the module it was defined in and working in downstream modules. In the module in which a public non-`@[expose]`d constant is defined, the `value` data is present, but private. Even though it can't be used in public positions, we can still unfold the definition when proving public API theorems (since theorem proofs are private).
 
 However, (ordinary) downstream modules never import the private scope, meaning that they cannot unfold the constant at *any* point, even in principle. The data is simply not there.
 
@@ -158,9 +158,9 @@ Technical note: typechecking down in the kernel always behaves as if it is at th
 
 To recap, the visibility of a constant's `value` depends on the kind of declaration creating it:
 
-- `def`: the `value` is private by default, but can be made public (only) when the constant is also public via `@[expose]`
+- `def`: the `value` is private by default, but can be made public via `@[expose]` (only) when the constant is also public 
 - `theorem`: the `value` is its proof, and is always private
-- `abbrev`, `instance`: if public, the value is public by default (i.e., these commands attach `@[expose]`). Note: if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.
+- `abbrev`, `instance`: if public, the `value` is public by default (i.e., these commands attach `@[expose]`). Note: if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.
 
 Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section. Within such sections these modifiers may also be individually negated with `@[no_expose]` and `private`.
 
@@ -197,7 +197,7 @@ It is the interpreter that drives elaboration by executing parsers, elaborators,
 
 **Meta code** is exactly code which the interpreter is able to successfully locate while elaborating a Lean file.
 
-Since the phase of code determines when it must be available, this also affects where that code is stored behind the scenes (in order to be accessible downstream), and puts constraints on that code's references and how those references are imported.
+Since the phase of code specifies when that code must be available, the phase also determines where that code is stored behind the scenes (in order to be accessible downstream) and puts constraints on the phases of that code's references and how they are imported.
 
 Specifically, the laws and constraints around the meta phase must ensure that any constant referenced by meta code will also, in turn, have locatable code, so that the interpreter never errors. I.e., Lean ensures that meta code only ever references meta code. Further, this must remain true downstream, so (as we will see in more detail) any references must be propagated to importers through transitive chains of imports.
 
@@ -209,7 +209,7 @@ However, note that the phases of constants used in proofs and types are ignored.
 
 Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem` in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
-As such, the `meta` keyword is rejected on declarations that do not have executable code like `theorem`s, as it would have no effect. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
+Since it would have no effect, Lean rejects the `meta` keyword on declarations like `theorem`s which do not have executable code. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
 
 #### `meta` visibility constraints
 
@@ -219,11 +219,13 @@ Recall that a constant has a `name` (the constant itself), `code` (if computable
 
 Despite this relationship between the `value` and `code`, the visibility rules surrounding a constant's meta code do _not_ behave similarly to those surrounding the `value` it was compiled from.
 
-Instead, the `code` of a `public meta def` should be thought of as somehow "public" *itself*. This is because the code of a `public meta def` requires all of its transitive dependencies to both be in the meta phase and have publicly-imported modules. This is how we ensure the interpreter is always able to find any referenced constant's code in the future, since the `public` import will preserve the availability of the referenced code downstream.
+Instead, the `code` of a `public meta def` should be thought of as somehow "public" *itself*. This is because the code of a `public meta def` requires all of its transitive dependencies to both be in the meta phase and come from publicly-imported modules. This is how we ensure the interpreter is always able to find any referenced constant's code in the future, since the `public` import will preserve the availability of the referenced code downstream.
 
 (Recall that, in contrast, whether the actual `value` is public is controlled by `@[expose]`, which has no effect on `code` whatsoever, meta or runtime. Code (both meta and runtime) also has an `@[expose]`-like notion to enable `@[inline]` and similar compilation features that rely on the availability of the code downstream, but this is a little-seen technical detail whose behavior is subject to change in the future, and we do not cover it here.)
 
-Perhaps surprisingly (given our experience with visibility), a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and have publicly-available originating modules. This leads to situations such as
+Perhaps surprisingly (given our experience with visibility), a `public meta def` is allowed to use private `meta def`s from the same module—as long as _those_ `def`s, in turn, only have dependencies which are meta and come from publicly-imported modules. 
+
+This leads to situations such as
 
 ```lean4
 -- Succeeds
@@ -235,13 +237,15 @@ public meta def fooPublic := foo
 
 The above example succeeds if we instead publicly import the module of `bar`.
 
+(Technical note: to achieve this, the code from private `meta def`s is stored in the public `*.olean` behind the scenes, and their names are recorded in a special public location relevant only to the compiler and interpreter. Their types and values remain private as expected.)
+
 As such, the framing of the code from `public meta def`s being "public" doesn't quite work. Instead, we can conceptualize it this way: rather than saying that meta code is "public" or "private", we use the similar terms "presentable", meaning _valid to use downstream_, or "unpresentable".
 
 However, rather than always being *declared* like `public` or `private` is, the presentability of code is _inferred_ on the basis of what the code references. By definition, we say that presentable code may only reference presentable code.
 
 We also say that presentability is only a meaningful property of meta code. We consider all runtime code to just be runtime code.
 
-A private `meta def`'s associated code may be presentable or unpresentable. However, a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, the compilation of that `public meta def` errors, and Lean will warn about the private import which is responsible for it being unpresentable (and recommend you make it a `public` or `public meta` import, as necessary).
+A private `meta def`'s associated code may be presentable or unpresentable. However, a `public meta def`'s code is _required_ to be presentable. If a `public meta def` uses an unpresentable `meta def`, the compilation of that `public meta def` will error, and the error message will point to the private import which must be upgraded to `public` or `public meta` to make the code presentable.
 
 <img src="img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labeled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labeled 'runtime IR'." class="diagram"/>
 
@@ -261,7 +265,7 @@ In the following diagrams, the arrows mean "(transitively) referenceable in", an
 
 As before, these arrows may be composed, and we show composite arrows in a lighter shade.
 
-<img src="img/module-system/phase-table-flags.svg" alt="A table of four diagrams each depicting a pair of modules A and B with their meta and runtime IRs, for import, public import, meta import, and public meta import. In the non-meta import diagrams, a red arrow leads from A's runtime IR dot to B's runtime IR dot; in the meta import diagram, a blue arrow goes from A's runtime IR dot to B's unpresentable meta IR dot, whereas in the public meta import diagram, a blue arrow goes from A's runtime IR dot to B's presentable meta dot. In both the meta and non-meta the non-public imports, a blue arrow goes from the presentable meta IR dot in A to the unpresentable meta IR dot in B. In both the meta and non-meta public imports, a blue arrow goes from the presentable meta IR dot in A to the presentable meta IR dot in B." class="diagram"/>
+<img src="img/module-system/phase-table-flags.svg" alt="A table of four diagrams each depicting a pair of modules A and B with their meta and runtime IRs, for import, public import, meta import, and public meta import. In the non-meta import diagrams, a red arrow leads from A's runtime IR dot to B's runtime IR dot; in the meta import diagram, a blue arrow goes from A's runtime IR dot to B's unpresentable meta IR dot, whereas in the public meta import diagram, a blue arrow goes from A's runtime IR dot to B's presentable meta IR dot. In both the meta and non-meta non-public imports, a blue arrow goes from the presentable meta IR dot in A to the unpresentable meta IR dot in B. In both the meta and non-meta public imports, a blue arrow goes from the presentable meta IR dot in A to the presentable meta IR dot in B." class="diagram"/>
 
 Observe that `(public) meta import A` lifts the runtime code from `A` (and its dependencies) to the meta phase, making it presentable or unpresentable depending on whether `public` is or isn't present, respectively. This is what we expect given our earlier discussion of `meta import`s.
 
@@ -271,8 +275,8 @@ We also see that code which is already intrinsically meta (i.e. marked `meta` in
 
 We can now see that `public meta import`s indeed propagate the ability to *use* IR under non-meta downstream imports. This is why, if `B` in the diagram below defined tactics which used runtime code from `A`, it may be imported normally by `C` without breaking anything.
 
-<img src="img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrow from A's presentable meta IR and A's runtime IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
+<img src="img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
 
 However, `meta import`s break the chain, and runtime IR from `A` privately `meta import`ed by `B` is not loaded as meta IR in `C`.
 
-<img src="img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrow from A's presentable meta IR and A's runtime IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
+<img src="img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable IR." class="diagram"/>
