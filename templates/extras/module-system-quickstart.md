@@ -158,7 +158,7 @@ Technical note: typechecking down in the kernel always behaves as if it is at th
 
 To recap, the visibility of a constant's `value` depends on the kind of declaration creating it:
 
-- `def`: the `value` is private by default, but can be made public via `@[expose]` (only) when the constant is also public 
+- `def`: the `value` is private by default, but can be made public via `@[expose]` (only) when the constant is also public
 - `theorem`: the `value` is its proof, and is always private
 - `abbrev`, `instance`: if public, the `value` is public by default (i.e., these commands attach `@[expose]`). Note: if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.
 
@@ -209,7 +209,7 @@ However, note that the phases of constants used in proofs and types are ignored.
 
 Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem` in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
-Since it would have no effect, Lean rejects the `meta` keyword on `theorems` and other declarations that do not produce executable code. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
+Since it would have no effect, Lean rejects the `meta` keyword on `theorem`s and other declarations that do not produce executable code. (Technical note: certain "code-like" declarations still accept `meta`, such as `structure`, even though they do not have code.)
 
 #### `meta` visibility constraints
 
