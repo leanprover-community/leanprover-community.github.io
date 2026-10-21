@@ -195,7 +195,7 @@ In fact, having now seen both sorts of imports, we find that a `meta` modifier o
 
 `public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module. (We'll visualize this with a refined version of the diagram below.)
 
-The phase of an import *only* affects the phase of any code that is imported. `meta` import modifiers do not change which type-theoretic constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for the purpose of type-theoretic terms.
+The phase of an import *only* affects the phase of any code that is imported. From a type-theoretic point of view, `meta` import modifiers do not change which constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for type-theoretic purposes.
 
 ### Constants
 
