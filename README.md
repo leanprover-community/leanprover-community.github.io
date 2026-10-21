@@ -89,3 +89,25 @@ The files and history for the leanprover-community Lean 3 website can be found i
 
 The files and history for the old leanprover-community website can be found in the
 [`oldsite`](https://github.com/leanprover-community/leanprover-community.github.io/tree/oldsite) branch of this repo.
+
+## The 100 theorems catalogue
+
+Mathlib owns the numbered titles, internal declarations, and their credits in
+[`docs/100.yaml`](https://github.com/leanprover-community/mathlib4/blob/master/docs/100.yaml).
+External proof links, human/project credits, and provenance notes live in this
+repository's [`data/100-external.yaml`](data/100-external.yaml). Its keys are the
+same theorem numbers; entries contain `title`, `links`, and optionally `authors`,
+`date`, and `note`. AI provenance belongs in `note`, not `authors`.
+
+The website renders Mathlib proofs and external formalizations in separate
+sections of `100.html`. Overall counts and `100-missing.html` use the union, so
+an external alternative to a Mathlib proof is counted only once. Existing
+`100.html#N` links are preserved; external alternatives to Mathlib proofs use
+`100.html#external-N`. The checked-in external list is read even with
+`NODOWNLOAD=1`, and old documentation metadata cannot inflate Mathlib's count.
+
+Run the catalogue and rendering tests with:
+
+```sh
+python -m unittest discover -s tests -v
+```
