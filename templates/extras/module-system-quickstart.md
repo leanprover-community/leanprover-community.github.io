@@ -173,7 +173,7 @@ The `meta` keyword controls what happens to executable code associated with cons
 
 This state ("meta" or "runtime") is called the _phase_ of the code.
 
-Meta code cannot be referenced from runtime code, and vice versa.
+Meta code cannot be referenced from runtime code, and vice versa. Code is only allowed to reference code that has the same phase.
 
 Analogously to visibility, a constant's code has an *intrinsic* phase determined when the constant is created, and a *current* phase downstream determined by how it is imported.
 
@@ -211,9 +211,7 @@ Specifically, the laws and constraints around the meta phase must ensure that an
 
 Phase *only* pertains to executable code, and the `meta` keyword does not affect any aspects of a constant besides its code.
 
-When a constant is used in executable code, it must have the same phase as the code it is used in.
-
-However, note that the phases of constants used in proofs and types are ignored. This is because proofs and types are erased during compilation, and as such do not appear in the final executable code. Only dependencies which actually affect computation are checked for phase correctness.
+Note that the phases of constants used in proofs and types are ignored. This is because proofs and types are erased during compilation, and as such do not actually appear in the final executable code. Only dependencies which affect computation are checked for phase and visibility correctness.
 
 Not all constants have code; `theorem`s produce no code, and `noncomputable def`s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile `noncomputable def`s, and just silences failures.) As such, the phases of constants used by a `theorem` in both its type and its proof are ignored, and it may use both meta and runtime constants.
 
