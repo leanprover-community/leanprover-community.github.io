@@ -31,9 +31,9 @@ Similarly, between modules, we can control whether or not a module's imports wil
 
 This provides various benefits:
 
-- Cheaper builds: by refusing to load the private data of upstream modules (which would include e.g. large `theorem` proofs), and by pruning long chains of unnecessary transitive imports, we can load less data when building each module, saving on memory and other resources
+- Cheaper builds: by refusing to load the private data of upstream modules (which would include e.g. large `theorem` proofs), and by pruning long chains of unnecessary transitive imports, we can load less data when building each module, saving on memory and other resources.
 
-- Faster rebuilds: changes made exclusively to a module's private data do not trigger rebuilds of downstream modules which import that module, since downstream modules only depend on public data, allowing us to reuse previous builds
+- Faster rebuilds: changes made exclusively to a module's private data do not trigger rebuilds of downstream modules which import that module, since downstream modules only depend on public data, allowing us to reuse previous builds.
 
 - API control: making certain data private allows us to insist that downstream users use the API we want, and do not rely on "accidental" facts of the implementation. Likewise, we do not need to force internal `import` dependencies on downstream files if we only use them privately.
 
