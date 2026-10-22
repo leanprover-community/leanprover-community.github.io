@@ -195,7 +195,7 @@ An ordinary, non-meta import preserves the phases of all code. Code which is alr
 
 In fact, having now seen both sorts of imports, we find that a `meta` modifier on an import only changes whether or not runtime IR is lifted to the meta phase, and does nothing else. Perhaps counterintuitively, its presence or absence does not change what happens to `meta` code from the imported module.
 
-`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module. (We'll visualize this with a refined version of the diagram below.)
+`public meta import A` behaves like a `public import` with the same runtime-to-meta phase lifting behavior as a `meta import`, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module. (We'll visualize this with a refined version of the diagram above.)
 
 The phase of an import *only* affects the phase of any code that is imported. From a type-theoretic point of view, `meta` import modifiers do not change which constants are imported or at what visibility (the latter of which is still determined by `public`). So, a `public meta import` also functions as a `public import` for type-theoretic purposes.
 
