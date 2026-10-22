@@ -1,0 +1,10 @@
+{% macro entry(theorem, anchor) %}
+<h5 class="markdown-heading mt-5" id="{{ anchor }}">{{ theorem.id }}. {{ theorem.title }} <a class="hover-link" href="#{{ anchor }}">#</a></h5>
+{% if theorem.authors %}<p>Author{% if ' and ' in theorem.authors or ',' in theorem.authors or ';' in theorem.authors %}s{% endif %}: {{ theorem.authors }}</p>{% endif %}
+{% for doc in theorem.doc_decls|default([], true) %}
+<div class="doc-stmt">{{ doc.decl_header_html }}</div>
+<p><a href="{{ doc.docs_link }}">docs</a>, <a href="{{ doc.src_link }}">source</a></p>
+{% endfor %}
+{% for title, link in (theorem.links|default({}, true)).items() %}<p><a href="{{ link }}">{{ title }}</a></p>{% endfor %}
+{% if theorem.note %}<div>{{ theorem.note|md }}</div>{% endif %}
+{% endmacro %}
