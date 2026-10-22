@@ -97,6 +97,8 @@ Note that `public import all` is not allowed. The private scope of a module cann
 
 `public import A` and `import all A` (on separate lines) will import the public scope into the public scope and the private scope into the private scope.
 
+In the diagram below, gray arrows show the implicit connections produced by following the black arrows transitively.
+
 <img src="img/module-system/vis-table-flags.svg" alt="A table of pairs of module capsule diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="diagram"/>
 
 ### Declarations
