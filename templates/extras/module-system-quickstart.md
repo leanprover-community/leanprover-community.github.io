@@ -27,7 +27,7 @@ The module system provides a means of controlling how information may flow betwe
 
 Within modules, we can decide if information is `public`, and is thus seen by downstream modules, or if it is `private`, meaning that downstream modules are freed from the burden of loading this information.
 
-Similarly, between modules, we can control whether or not a module's imports will be picked up transitively by downstream imports, via `public import`.
+This distinction also applies to imported information, and we may control whether or not an import will be picked up transitively by downstream modules through the use of `public import` rather than `import`.
 
 This provides various benefits:
 
