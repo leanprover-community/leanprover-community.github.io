@@ -108,7 +108,7 @@ An ordinary constant has several pieces of data associated with it:
 - `name : Name`
 - `type : Lean.Expr`
 - (optional) `value : Lean.Expr`
-- (optional) `code : Lean.IR`
+- (optional) `code : IR`
 
 In some sense "the constant" is simply its name. Its type, value, and so on are merely data _associated_ with the constant.
 
