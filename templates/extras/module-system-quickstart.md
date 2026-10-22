@@ -31,7 +31,7 @@ Similarly, when importing information between modules, we can control whether a 
 
 This provides various benefits:
 
-- Cheaper builds: by refusing to load the private data of upstream modules (which would include e.g. large `theorem` proofs), and by pruning long chains of unnecessary transitive imports, we can load less data when building each module, saving on memory and other resources.
+- Cheaper builds: by refusing to load the private data of upstream modules (which would include e.g. large `theorem` proofs), and by pruning long chains of unnecessarily transitive imports, we can load less data when building each module, saving on memory and other resources.
 
 - Faster rebuilds: changes made exclusively to a module's private data do not trigger rebuilds of downstream modules which import that module, since downstream modules only depend on public data, allowing us to reuse previous builds.
 
