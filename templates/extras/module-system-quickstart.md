@@ -158,8 +158,8 @@ Technical note: typechecking down in the kernel always behaves as if it is at th
 
 To recap, the visibility of a constant's `value` depends on the kind of declaration creating it:
 
-- `def`: the `value` is private by default, but can be made public via `@[expose]` (only) when the constant is also public
-- `theorem`: the `value` is its proof, and is always private
+- `def`: the `value` is private by default, but can be made public via `@[expose]` (only) when the constant is also public.
+- `theorem`: the `value` is its proof, and is always private.
 - `abbrev`, `instance`: if public, the `value` is public by default (i.e., these commands attach `@[expose]`). Note: if Lean notices that a given `instance` has a `Prop` type, it will become a `theorem` with a private `value` behind the scenes.
 
 Note that while `@[expose]` and `public` may be attached directly to the declaration, they may also be attached to `section` (e.g. `@[expose] public section`), which simply applies the modifiers to every declaration in the section. Within such sections these modifiers may also be individually negated with `@[no_expose]` and `private`.
