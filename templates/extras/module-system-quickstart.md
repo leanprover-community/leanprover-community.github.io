@@ -168,8 +168,8 @@ Note that while `@[expose]` and `public` may be attached directly to the declara
 
 The `meta` keyword controls what happens to executable code associated with constants. Specifically, a constant's executable code may be either
 
-1. available for execution during the elaboration of the current module, in which case we call it _meta_ code
-2. or not, in which case we call it _runtime_ code.
+1. available for execution during the elaboration of the current module, in which case we call it _meta_ code...
+2. ...or not, in which case we call it _runtime_ code.
 
 This state ("meta" or "runtime") is called the _phase_ of the code.
 
