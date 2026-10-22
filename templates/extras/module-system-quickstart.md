@@ -35,7 +35,7 @@ This provides various benefits:
 
 - Faster rebuilds: changes made exclusively to a module's private data do not trigger rebuilds of downstream modules which import that module, since downstream modules only depend on public data, allowing us to reuse previous builds.
 
-- API control: making certain data private allows us to insist that downstream users use the API we want, and do not rely on "accidental" facts of the implementation. Likewise, we do not need to force internal non-public `import` dependencies on downstream files if we only use them privately.
+- API control: making certain data private allows us to insist that downstream users use the API we want, and do not rely on "accidental" facts of the implementation. Likewise, we do not need to force internal `import` dependencies on downstream files if we only use them privately.
 
 The module system also has us manage what code is available to execute at compile time through the `meta` keyword. This affects `syntax`, `macro`s, tactics, elaborators, attributes, and other compile-time affordances. Most code is not `meta`, and the guarantee that it will not be needed while compiling a file allows us to avoid costs associated with producing and loading the code.
 
