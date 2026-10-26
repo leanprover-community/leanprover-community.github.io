@@ -311,7 +311,7 @@ A proof may often, however, mix various modes in the course of constructing a [p
 
 A single file containing Lean source code.
 
-Note that files may be either "module files" which participate in Lean's module system (in which case they start with the `module` keyword) or older "non-module files". (Mathlib only uses module files.) Both kinds of Lean source files, however, are still called "modules".
+A file is either a "module file" which starts with the `module` keyword and .participates in Lean's module system, or a "non-module file". (The module system is encouraged, and Mathlib only uses module files.) Both kinds of Lean source files, however, are still called "modules".
 
 An introductory guide to Lean's module system may be found at [Quickstart: The Module System](https://leanprover-community.github.io/extras/module-system-quickstart.html).
 
