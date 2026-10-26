@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://leanprover-community.github.io/css/lean.css" >
+  <link rel="shortcut icon" href="https://leanprover-community.github.io/img/favicon.ico">
+  <link rel="search" type="application/opensearchdescription+xml" title="mathlib docs" href="https://leanprover-community.github.io/opensearch.xml">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+
+	<script>
+                function buildShortcutsForStructures(names) {
+                        const o = {}
+                        names.forEach(name => o[name] = `\\mathbb\{${name}\}`)
+                        return o
+                }
+		MathJax = {
+			  tex: {
+                                  macros: {
+                                          ...buildShortcutsForStructures(["R", "Q", "Z", "N", "C"]),
+                                  },
+				      inlineMath: [['$', '$'], ['\\(', '\\)']]
+				    },
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+	</script>
+
+	<title>Quickstart: The Module System</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient-light d-md-none">
+    <div class="d-flex flex-grow-1">
+		<a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community
+    </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+<div id="mainbox">
+
+  <main>
+    
+<h1 id="quickstart-the-module-system" class="markdown-heading">Quickstart: The Module System <a class="hover-link" href="#quickstart-the-module-system">#</a></h1>
+<style>
+main img.diagram {
+  /* Each module system svg is at the same absolute scale, so we scale them uniformly */
+  --mod-figure-zoom: 0.27489;
+  zoom: var(--mod-figure-zoom);
+  /* undo the application of the zoom to the margin */
+  margin-block: calc(1.5rem / var(--mod-figure-zoom));
+  margin-inline: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+main .diagram-group {
+  width: fit-content;   /* only as wide as the widest image */
+  max-width: 100%;
+  margin-inline: auto;  /* center the group */
+}
+main .diagram-group img.diagram {
+  margin-inline: 0;     /* left-align each image inside the group */
+}
+
+</style>
+<p>The module system provides a means of controlling how information may flow between modules.</p>
+<p>Within modules, we can decide if information is <code>public</code>, and is thus seen by downstream modules, or if it is <code>private</code>, meaning that downstream modules are freed from the burden of loading this information.</p>
+<p>Similarly, when importing information between modules, we can control whether a module's imports will be picked up transitively by downstream imports via <code>public import</code>.</p>
+<p>This provides various benefits:</p>
+<ul>
+<li>
+<p>Cheaper builds: by refusing to load the private data of upstream modules (which would include e.g. large <code>theorem</code> proofs), and by pruning long chains of unnecessarily transitive imports, we can load less data when building each module, saving on memory and other resources.</p>
+</li>
+<li>
+<p>Faster rebuilds: changes made exclusively to a module's private data do not trigger rebuilds of downstream modules which import that module, since downstream modules only depend on public data, allowing us to reuse previous builds.</p>
+</li>
+<li>
+<p>API control: making certain data private allows us to insist that downstream users use the API we want, and do not rely on &quot;accidental&quot; facts of the implementation. Likewise, we do not need to force internal import dependencies on downstream files if we only use them privately.</p>
+</li>
+</ul>
+<p>The module system also has us manage what code is available to execute at compile time through the <code>meta</code> keyword. This affects <code>syntax</code>, <code>macro</code>s, tactics, elaborators, attributes, and other compile-time affordances. Most code is not <code>meta</code>, and the guarantee that it will not be needed while compiling a file allows us to avoid costs associated with producing and loading the code.</p>
+<p>A file is a &quot;module file&quot;, i.e. participating in the module system, if and only if it has the <code>module</code> keyword at the top. Non-module files are allowed to import module files, but at the cost of loading both public and private information and following even non-public imports transitively, eliminating the benefits of the module system from that point forward. Module files cannot import non-module files.</p>
+<h2 id="visibility" class="markdown-heading">Visibility <a class="hover-link" href="#visibility">#</a></h2>
+<p>Each module has a <code>public</code> scope and a <code>private</code> scope.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-single-module-no-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a capsule-shape labeled 'A'." class="diagram"/>
+<p>The information in the <code>private</code> scope can use any information from the <code>public</code> scope, but the reverse is not true. We use an arrow to show information flowing from one scope to another.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-single-module-with-arrow.svg" alt="Two dots labeled 'public' and 'private' enclosed by a capsule-shape labeled 'A', with an arrow reaching down from the 'public' dot to the 'private' dot." class="diagram"/>
+<p><code>import A</code> puts the <strong>public</strong> scope of <code>A</code> into the <strong>private</strong> scope of the current module.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-import.svg" alt="A diagram depicting an import by showing two module capsule diagrams A and B, with an arrow from A's public dot to B's private dot." class="diagram"/>
+<p><code>public import A</code> puts the <strong>public</strong> scope of <code>A</code> into the <strong>public</strong> scope of the current module.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-public-import.svg" alt="A diagram depicting a public import by showing two module capsule diagrams A and B, with an arrow from A's public dot to B's public dot." class="diagram"/>
+<p>Note that both of these imports only access the public scope of <code>A</code>.</p>
+<p>Module <code>B</code> receiving <code>A</code>'s public scope in its own public scope means that downstream imports of <code>B</code> (public or not) will also necessarily receive the public scope of <code>A</code> along with the public scope of <code>B</code>.</p>
+<div class="diagram-group">
+<img src="https://leanprover-community.github.io/img/module-system/vis-public-import-then-import.svg" alt="A diagram depicting an import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
+<img src="https://leanprover-community.github.io/img/module-system/vis-public-import-then-public-import.svg" alt="A diagram depicting a public import following a public import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's public dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+</div>
+<p>Information flows through the arrows in these diagrams transitively, meaning we can chain arrows together to infer new, composite arrows. In other words, the arrows in these diagrams may be composed.</p>
+<p>As such, chains of public imports form transitive chains of dependencies.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-public-import-chain.svg" alt="A diagram depicting multiple public imports following each other, with arrows from the public dot of one module heading to the public dot of the next, forming a chain." class="diagram"/>
+<p>But what if <code>B</code> does <em>not</em> want to provide <code>A</code> to its importers? A non-public <code>import</code> &quot;breaks the chain&quot;. Observe that <code>C</code> loads no data at all from <code>A</code>, regardless of whether it uses <code>import B</code> or <code>public import B</code>. This is how <code>B</code> is able to use data from <code>A</code> privately without forcing it on downstream consumers such as <code>C</code>.</p>
+<div class="diagram-group">
+<img src="https://leanprover-community.github.io/img/module-system/vis-import-then-import.svg" alt="A diagram depicting an import following another import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's private dot." class="diagram"/>
+<img src="https://leanprover-community.github.io/img/module-system/vis-import-then-public-import.svg" alt="A diagram depicting a public import following an import by showing three module capsule diagrams in a row, with an arrow from A's public dot to B's private dot, and an arrow from B's public dot to C's public dot." class="diagram"/>
+</div>
+<p>This also enables us to skip rebuilding <code>C</code> when editing <code>A</code>. Since the resulting public scope of <code>B</code> will not be changed by any changes to <code>A</code>, the build of <code>C</code> will consider <code>C</code>'s dependencies to be up-to-date, and will thus skip building <code>C</code> and reuse the previous build results.</p>
+<p>It is therefore generally good practice to make imports non-<code>public</code> if possible, and to only use <code>public import</code> where necessary or to deliberately provide access to API.</p>
+<p>Both <code>public import A</code> and <code>import A</code> provide only <code>A</code>'s public scope, but what if you do need something from <code>A</code>'s private scope? As an escape hatch, <code>import all A</code> will request the private scope of <code>A</code> and put it in the target module's private scope.</p>
+<p>Because arrows in the following diagram can be followed transitively, the public scope of <code>A</code> is <em>also</em> available in <code>B</code>'s private scope.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-import-all.svg" alt="A diagram depicting an import all by showing two module capsule diagrams A and B, with an arrow from A's private dot to B's private dot." class="diagram"/>
+<p><code>import all</code> should be avoided if at all possible; the need for an imported module's private scope is generally a sign that either something is being done wrong in the current module, or that the public scope of the upstream module should be redesigned.</p>
+<p>Note that <code>public import all</code> is not allowed. The private scope of a module cannot ever be lifted into the public scope through imports.</p>
+<p><code>public import A</code> and <code>import all A</code> (on separate lines) will import the public scope into the public scope and the private scope into the private scope.</p>
+<p>In the diagram below, gray arrows show the implicit connections produced by following the black arrows transitively.</p>
+<img src="https://leanprover-community.github.io/img/module-system/vis-table-flags.svg" alt="A table of pairs of module capsule diagrams, showing an import (A's public dot connected to B's private dot); a public import (A's public dot connected to B's public dot); an import all (A's private dot connected to B's private dot); and a public import with an import all (A's public dot connected to B's public dot, and likewise for private dots)." class="diagram"/>
+<h3 id="declarations" class="markdown-heading">Declarations <a class="hover-link" href="#declarations">#</a></h3>
+<p>An ordinary constant has several pieces of data associated with it:</p>
+<ul>
+<li><code>name : Name</code></li>
+<li><code>type : Expr</code></li>
+<li>(optional) <code>value : Expr</code></li>
+<li>(optional) <code>code : IR</code></li>
+</ul>
+<p>In some sense &quot;the constant&quot; is simply its name. Its type, value, and so on are merely data <em>associated</em> with the constant.</p>
+<p>Each constant has a <em>visibility</em>, i.e. which scope it is in (public or private).</p>
+<p>The associated pieces of data may have different individual visibilities, and so may behave differently under imports. For example, if the constant is public but some data associated with it is private (say, its <code>value</code>), an <code>import</code> of the constant's module will only request the public data for the constant, thus completely forfeiting access to that private data.</p>
+<p>Further, we may speak of working &quot;at&quot; a given visibility at different points in a module. This specifies which information we have available in the situation at hand (either just the public scope's information or both the public and private scopes' information).</p>
+<p>Note: be aware that the notion of some information being &quot;in scope&quot; is not generally well-formed, as whether something is &quot;in scope&quot; will change depending on whatever our current working visibility is.</p>
+<p>While a constant's current visibility depends on how it is imported (publicly or privately), it also has an <em>intrinsic</em> visibility, namely which scope of its originating module it lives in. A constant may be made intrinsically public by using the <code>public</code> keyword (either on the declaration itself, e.g. <code>public def</code>, or via <code>public section</code>).</p>
+<p>Otherwise, declarations are private by default, which encourages being deliberate about designing the public scope. (The <code>private</code> keyword is only useful in negating an enclosing <code>public section</code>.)</p>
+<p>Different pieces of data associated with the constant behave differently with respect to visibility. (Note: we will defer the discussion of <code>code</code> visibility to a <a href="#meta-visibility-constraints">later section</a>.)</p>
+<p><strong><code>name</code></strong>: The intrinsic visibility is apparent in the <code>name</code>, since private constants are subject to mangling, and their name will have an autogenerated prefix like <code>_private.Foo.Bar.0.myFoo</code>, where <code>Foo.Bar</code> is the original module of a private <code>def myFoo</code>. Though the current visibility may be reduced from the intrinsic visibility depending on how the constant is imported, the name of a constant is immutable, and never changes no matter where or how it is imported.</p>
+<p><strong><code>type</code></strong>: The <code>type</code> of a constant always has the same visibility as the constant itself.</p>
+<p><strong><code>value</code></strong>: The <code>value</code> of a constant cannot have a greater visibility than the constant itself (it makes no sense to have a public value for a private constant, for example), but it may have a <em>lower</em> visibility. In particular, the <code>type</code> of a constant may be public while the value is private.</p>
+<p>In fact, having a private value is the default situation for a <code>public def</code>, and the <em>only</em> situation for a <code>public theorem</code>. Note that the <code>value</code> of a <code>theorem</code> is just its proof, and <code>theorem</code> proofs are always private, since proof irrelevance means they will never be useful downstream (and so there is no reason to make downstream importers load them).</p>
+<p>Recall that ordinary imports (i.e. <code>import</code> or <code>public import</code>, without <code>import all</code>) only import the public scope. As such, when importing a public constant with a private <code>value</code>, the <code>value</code> data will simply not be loaded downstream, and thus will be completely inaccessible.</p>
+<h4 id="expose" class="markdown-heading"><code>@[expose]</code> <a class="hover-link" href="#expose">#</a></h4>
+<p>However, <code>public</code> definitions may, if we so choose, have public <code>value</code>s as well. We may raise the intrinsic visibility of a <code>public</code> definition's <code>value</code> to <code>public</code> by attaching <code>@[expose]</code> to the definition. <code>@[expose]</code> is meaningless on a private constant, and Lean will reject it.</p>
+<p>The main utility for having a <code>value</code> available is that it effectively provides Lean with a <em>rewrite rule</em> that lets us <em>unfold</em> the constant to that value during definitional equality checks. E.g., if Lean knows the value of <code>foo</code> to be given by <code>foo := 37</code>, then Lean may unfold <code>foo</code> in order to unify <code>foo + 1</code> with <code>37 + 1</code>.</p>
+<p>Whether this unfolding is possible even in principle depends on whether the <code>value</code> data is available at the working visibility of the definitional equality check. As an example, if the <code>value</code> data is present but is private (i.e. no <code>@[expose]</code>), then Lean could unify <code>foo + 1</code> with <code>37 + 1</code> within a <code>public theorem</code>'s proof (a private location, where it can access private data) but not its type (a public location).</p>
+<p>Note how, for a non-<code>@[expose]</code>d constant, this yields a significant difference between working in the module it was defined in and working in downstream modules. In the module in which a public non-<code>@[expose]</code>d constant is defined, the <code>value</code> data is present, but private. Even though it can't be used in public positions, we can still unfold the definition when proving public API theorems (since theorem proofs are private).</p>
+<p>However, (ordinary) downstream modules never import the private scope, meaning that they cannot unfold the constant at <em>any</em> point, even in principle. The data is simply not there.</p>
+<p>(The one exception is if the downstream modules use the discouraged <code>import all</code>, which would give them exactly that private data; note, even then, we would still only be able to unfold when working at the private visibility, since <code>import all</code> does not lift private data to the public scope.)</p>
+<p>As such, <code>@[expose]</code> is required for being able to unfold constants downstream.</p>
+<p>Note that <code>abbrev</code>s and <code>instance</code>s are definitions which are <code>@[expose]</code>d by default.</p>
+<p>It is worth noting that Lean further restricts the unfolding of constants via their <em>transparency settings</em>, e.g. <code>@[reducible]</code>, <code>@[implicit_reducible]</code>, and so on. Transparency settings are subordinate to the module system; thus they are <em>only</em> meaningful when unfolding is already possible. In the typical case, this means they only matter on <code>@[expose]</code>d definitions or else when working at private visibilities in the same file.</p>
+<p>Technical note: typechecking down in the kernel always behaves as if it is at the private visibility. However, it still cannot unfold declarations whose values are not imported, as that data is not present.</p>
+<p>To recap, the visibility of a constant's <code>value</code> depends on the kind of declaration creating it:</p>
+<ul>
+<li><code>def</code>: the <code>value</code> is private by default, but can be made public via <code>@[expose]</code> (only) when the constant is also public.</li>
+<li><code>theorem</code>: the <code>value</code> is its proof, and is always private.</li>
+<li><code>abbrev</code>, <code>instance</code>: if public, the <code>value</code> is public by default (i.e., these commands attach <code>@[expose]</code>). Note: if Lean notices that a given <code>instance</code> has a <code>Prop</code> type, it will become a <code>theorem</code> with a private <code>value</code> behind the scenes.</li>
+</ul>
+<p>Note that while <code>@[expose]</code> and <code>public</code> may be attached directly to the declaration, they may also be attached to <code>section</code> (e.g. <code>@[expose] public section</code>), which simply applies the modifiers to every declaration in the section. Within such sections these modifiers may also be individually negated with <code>@[no_expose]</code> and <code>private</code>.</p>
+<h2 id="phase-meta-vs-runtime" class="markdown-heading">Phase (<code>meta</code> vs. runtime) <a class="hover-link" href="#phase-meta-vs-runtime">#</a></h2>
+<p>The <code>meta</code> keyword controls what happens to executable code associated with constants. Specifically, a constant's executable code may be either</p>
+<ol>
+<li>available for execution during the elaboration of the current module, in which case we call it <em>meta</em> code...</li>
+<li>...or not, in which case we call it <em>runtime</em> code.</li>
+</ol>
+<p>This state (&quot;meta&quot; or &quot;runtime&quot;) is called the <em>phase</em> of the code.</p>
+<p>Meta code cannot be referenced from runtime code, and vice versa. Code is only allowed to reference code that has the same phase.</p>
+<p>Analogously to visibility, a constant's code has an <em>intrinsic</em> phase determined when the constant is created, and a <em>current</em> phase downstream determined by how it is imported.</p>
+<p>By default, a constant's code is intrinsically runtime, unless it is a <code>meta def</code>. Many meta-related commands like <code>syntax</code>, <code>macro</code>, and <code>elab</code> necessarily produce <code>meta def</code>s behind the scenes without manual intervention, since their code must be executable during elaboration.</p>
+<p>An ordinary, non-meta import preserves the phases of all code. Code which is already meta will remain meta and executable. Tactics and macros, for example, may be obtained and used by downstream modules via ordinary non-meta <code>import</code>s.</p>
+<p>(In these diagrams, we use &quot;IR&quot; interchangeably with &quot;code&quot;.)</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-simple-non-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and a red arrow leads from A's runtime IR to B's runtime IR." class="diagram"/>
+<p><code>meta import A</code> <em>lifts</em> all of the runtime code reachable from <code>A</code> to the meta phase. That is, intrinsically runtime code from <code>A</code> is now in the meta phase in the importing module, and so we can use it in any meta code we write in our current module. Meta code from <code>A</code> is still imported under <code>meta import</code>, and stays meta.</p>
+<p>(Arrow coloration only shows, redundantly, where the arrows end, to emphasize that runtime IR becomes available in the meta phase under <code>meta import</code>s.)</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-simple-meta.svg" alt="A pair of modules A and B each with a blue cell labeled 'meta IR' and a red cell labeled 'runtime IR'. A blue arrow leads from A's meta IR to B's meta IR, and another blue arrow leads from A's runtime IR to B's meta IR." class="diagram"/>
+<p>In fact, having now seen both sorts of imports, we find that a <code>meta</code> modifier on an import only changes whether or not runtime IR is lifted to the meta phase, and does nothing else. Perhaps counterintuitively, its presence or absence does not change what happens to <code>meta</code> code from the imported module.</p>
+<p><code>public meta import A</code> behaves like a <code>public import</code> with the same runtime-to-meta phase lifting behavior as a <code>meta import</code>, but, due to how public imports chain transitively, will also provide that meta-lifted runtime code to downstream modules which import the current module. (We'll visualize this with a refined version of the diagram above.)</p>
+<p>The phase of an import <em>only</em> affects the phase of any code that is imported. From a type-theoretic point of view, <code>meta</code> import modifiers do not change which constants are imported or at what visibility (the latter of which is still determined by <code>public</code>). So, a <code>public meta import</code> also functions as a <code>public import</code> for type-theoretic purposes.</p>
+<h3 id="constants" class="markdown-heading">Constants <a class="hover-link" href="#constants">#</a></h3>
+<p>As has been suggested, constants in Lean, separately from their role as terms in a type theory, are also <em>compiled</em> into code (Lean IR). This code may then be compiled further to C code and then to machine code that runs natively. Or, instead, Lean IR may be executed directly by the Lean interpreter.</p>
+<p>It is the interpreter that drives elaboration by executing parsers, elaborators, tactics, and so on. Whenever a constant appears in some piece of code the interpreter is executing, the interpreter must look up the code associated with the constant (preferring native machine code if available), and then execute the code it finds. If it cannot find the code, it errors.</p>
+<p><strong>Meta code</strong> is exactly code which the interpreter is able to successfully locate while elaborating a Lean file.</p>
+<p>Since the phase of code specifies when that code must be available, the phase also determines where that code is stored behind the scenes (in order to be accessible downstream) and puts constraints on the phases of that code's references and how they are imported.</p>
+<p>Specifically, the laws and constraints around the meta phase must ensure that any constant referenced by meta code will also, in turn, have locatable code, so that the interpreter never errors. I.e., Lean ensures that meta code only ever references meta code. Further, this must remain true downstream, so (as we will see in more detail) any references must be propagated to importers through transitive chains of imports.</p>
+<p>Phase <em>only</em> pertains to executable code, and the <code>meta</code> keyword does not affect any aspects of a constant besides its code.</p>
+<p>Note that the phases of constants used in proofs and types are ignored. This is because proofs and types are erased during compilation, and as such do not actually appear in the final executable code. Only dependencies which affect computation are checked for phase correctness.</p>
+<p>Not all constants have code; <code>theorem</code>s produce no code, and <code>noncomputable def</code>s are permitted to not produce code. (Note: perhaps surprisingly, Lean does still attempt to compile <code>noncomputable def</code>s, and just silences failures.) As such, the phases of constants used by a <code>theorem</code> in both its type and its proof are ignored, and it may use both meta and runtime constants.</p>
+<p>Since it would have no effect, Lean rejects the <code>meta</code> keyword on <code>theorem</code>s and other declarations that do not produce executable code. (Technical note: certain &quot;code-like&quot; declarations still accept <code>meta</code>, such as <code>structure</code>, even though they do not have code.)</p>
+<h4 id="meta-visibility-constraints" class="markdown-heading"><code>meta</code> visibility constraints <a class="hover-link" href="#meta-visibility-constraints">#</a></h4>
+<p>By and large, runtime code does not interact with the source constant's visibility. In contrast, any constant with intrinsically meta code has a complicated relationship to visibility which is different from that of runtime code.</p>
+<p>Recall that a constant has a <code>name</code> (the constant itself), <code>code</code> (if computable), and a type-theoretic <code>type</code> and <code>value</code>. The <code>code</code> is produced by compiling the <code>value</code>, which turns a term of the type theory into Lean IR.</p>
+<p>Despite this relationship between the <code>value</code> and <code>code</code>, the visibility rules surrounding a constant's meta code do <em>not</em> behave similarly to those surrounding the <code>value</code> it was compiled from.</p>
+<p>Instead, the <code>code</code> of a <code>public meta def</code> should be thought of as somehow &quot;public&quot; <em>itself</em>. This is because the code of a <code>public meta def</code> requires all of its transitive dependencies to both be in the meta phase and come from publicly-imported modules. This is how we ensure the interpreter is always able to find any referenced constant's code in the future, since the <code>public</code> import will preserve the availability of the referenced code downstream.</p>
+<p>(Recall that, in contrast, whether the actual <code>value</code> is public is controlled by <code>@[expose]</code>, which has no effect on <code>code</code> whatsoever, meta or runtime. Code (both meta and runtime) also has an <code>@[expose]</code>-like notion to enable <code>@[inline]</code> and similar compilation features that rely on the availability of the code downstream, but this is a little-seen technical detail whose behavior is subject to change in the future, and we do not cover it here.)</p>
+<p>Perhaps surprisingly (given our experience with visibility), a <code>public meta def</code> is allowed to use private <code>meta def</code>s from the same module—as long as <em>those</em> <code>def</code>s, in turn, only have dependencies which are meta and come from publicly-imported modules.</p>
+<p>This leads to situations such as</p>
+<div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="n">module</span>
+
+<span class="n">meta</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Bar</span><span class="w"> </span><span class="c1">-- privately meta imports `bar`</span>
+
+<span class="c1">-- Succeeds</span>
+<span class="n">meta</span><span class="w"> </span><span class="kn">def</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">bar</span>
+
+<span class="c1">-- Fails, due to `bar` in `foo` not being publicly imported</span>
+<span class="n">public</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="kn">def</span><span class="w"> </span><span class="n">fooPublic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">foo</span>
+</code></pre></div>
+</div>
+
+<p>The above example succeeds if we instead publicly import <code>bar</code> via <code>public meta import Bar</code>.</p>
+<p>As such, framing the code produced by <code>public meta def</code>s as &quot;public&quot; doesn't quite work. Instead, we can conceptualize it this way: rather than saying that meta code is &quot;public&quot; or &quot;private&quot;, we use the similar terms &quot;presentable&quot;, meaning <em>valid to use downstream</em>, or &quot;unpresentable&quot;.</p>
+<p>However, rather than always being <em>declared</em> like <code>public</code> or <code>private</code> is, the presentability of code is <em>inferred</em> on the basis of what the code references. By definition, we say that presentable code may only reference presentable code.</p>
+<p>We also say that presentability is only a meaningful property of meta code. We consider all runtime code to just be runtime code.</p>
+<p>A private <code>meta def</code>'s associated code may be presentable or unpresentable. However, a <code>public meta def</code>'s code is <em>required</em> to be presentable. If a <code>public meta def</code> uses an unpresentable <code>meta def</code>, the compilation of that <code>public meta def</code> will error, and the error message will point to the private import which must be upgraded to <code>public</code> or <code>public meta</code> to make the code presentable.</p>
+<p>We now refine our above diagram into the following final form so that we can visualize presentabilities.</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-single-module-descr.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labeled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labeled 'runtime IR'." class="diagram"/>
+<p>Presentable code may be referenced by unpresentable code, but not vice versa.</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-single-module-with-arrow.svg" alt="A pair of blocks stacked vertically. The top one is blue and contains two blue dots labeled 'presentable meta IR' and 'unpresentable meta IR'. The bottom one is a red square containing a single red dot labeled 'runtime IR'. A blue arrow goes down from the 'presentable meta IR' dot to the 'unpresentable meta IR' dot." class="diagram"/>
+<p>Note that there is no arrow either way between runtime IR and meta IR in the same module, since neither may use the other, as per the runtime/meta phase separation. Phase can only be changed at import boundaries (and only to lift runtime IR to meta IR).</p>
+<p>(Technical note: to allow <code>public meta def</code>s to use private <code>meta def</code>s, the code from private <code>meta def</code>s is stored in the public <code>*.olean</code> behind the scenes, and their names are recorded in a special public location relevant only to the compiler and interpreter. Their types and values remain private as expected.)</p>
+<p>Import visibility modifiers affect presentability analogously to the way they affect scopes: <code>public (meta) import A</code> imports all of the presentable code from <code>A</code> as presentable code in the target module; a <code>(meta) import</code> imports all of the presentable code from <code>A</code> as unpresentable.</p>
+<p>Note: like visibility, if the same code is provided transitively in different ways from different imports, it has the maximum presentability among all different ways it is provided. For example, if <code>foo</code> is imported as unpresentable code due to <code>import A'</code> and as presentable code due to <code>public import A''</code>, it is presentable.</p>
+<p>If code is imported both as runtime code and as meta code, it is available for use in both phases.</p>
+<p>In the following diagrams, the arrows mean &quot;(transitively) referenceable in&quot;.</p>
+<p>As before, these arrows may be composed, and we show composite arrows in a lighter shade.</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-table-flags.svg" alt="A table of four diagrams each depicting a pair of modules A and B with their meta and runtime IRs, for import, public import, meta import, and public meta import. In the non-meta import diagrams, a red arrow leads from A's runtime IR dot to B's runtime IR dot; in the meta import diagram, a blue arrow goes from A's runtime IR dot to B's unpresentable meta IR dot, whereas in the public meta import diagram, a blue arrow goes from A's runtime IR dot to B's presentable meta IR dot. In both the meta and non-meta non-public imports, a blue arrow goes from the presentable meta IR dot in A to the unpresentable meta IR dot in B. In both the meta and non-meta public imports, a blue arrow goes from the presentable meta IR dot in A to the presentable meta IR dot in B." class="diagram"/>
+<p>Observe that <code>(public) meta import A</code> lifts the runtime code from <code>A</code> (and its dependencies) to the meta phase, making it presentable or unpresentable depending on whether <code>public</code> is or isn't present, respectively. This is what we expect given our earlier discussion of <code>meta import</code>s.</p>
+<p>However, even though runtime IR can be raised to the meta phase, importing can never lower meta IR down to runtime IR. Code in the meta phase is stuck there forever.</p>
+<p>We also see that code which is already intrinsically meta (i.e. marked <code>meta</code> in the source file) is indeed still brought in as meta code under ordinary imports, and is unaffected by the presence of <code>meta</code> on the <code>import</code>.</p>
+<p>We can now see that <code>public meta import</code>s indeed propagate the ability to interpret lifted runtime IR under non-meta downstream imports. This is why, if <code>B</code> in the diagram below defined tactics which used runtime code from <code>A</code>, it may be imported normally by <code>C</code> without breaking anything.</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-public-meta-import-then-import.svg" alt="A public meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's presentable meta IR may be chained with the arrow from B's presentable meta IR to C's unpresentable meta IR." class="diagram"/>
+<p>However, <code>meta import</code>s break the chain, and runtime IR from <code>A</code> privately <code>meta import</code>ed by <code>B</code> is not loaded as meta IR in <code>C</code>.</p>
+<img src="https://leanprover-community.github.io/img/module-system/phase-meta-import-then-import.svg" alt="A meta import followed by a regular import. We see that the arrows from A's presentable meta IR and A's runtime IR to B's unpresentable meta IR may not be chained with the arrow from B's presentable meta IR to C's unpresentable meta IR." class="diagram"/>
+
+  </main>
+
+    <nav id="navbar" class="d-md-block bg-light sidebar collapse navbar-light pb-4">
+      <div class="d-none d-md-block mt-4"><a class="navbar-brand" href="https://leanprover-community.github.io/index.html">Lean Community</a></div>
+      
+        <h6 class="sidebar-heading mt-4">Community</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover.zulipchat.com/">Zulip chat</a></li>
+        
+          <li class="nav-item col-12"><a href="https://github.com/leanprover-community/mathlib4">GitHub</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/blog">Blog</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/meet.html">Community information</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/community_guidelines.html">Community guidelines</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teams.html">Teams</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/papers.html">Papers about Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/cite.html">Citing mathlib</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/cite.html#Licence">Licence</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/lean_projects.html">Projects using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/teaching/index.html">Teaching using Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/events.html">Events</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Use Lean</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://live.lean-lang.org/">Online version (no installation)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://docs.lean-lang.org/lean4/doc/quickstart.html">Install Lean</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/get_started.html">More options</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Documentation</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/learn.html">Learning resources (start here)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/documentation.html">Documentation overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs">API documentation</a></li>
+        
+          <li class="nav-item col-12"><a href="https://loogle.lean-lang.org/">Declaration search (Loogle)</a></li>
+        
+          <li class="nav-item col-12"><a href="https://lean-lang.org/doc/reference/latest/">Language reference</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib4_docs/tactics.html">Tactic list</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/glossary.html">Glossary</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/did_you_prove_it.html">Did you really prove it?</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mwe.html">About MWEs</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Library overviews</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib-overview.html">Library overview</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/undergrad.html">Undergraduate maths</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/100.html">Wiedijk's 100 theorems</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/1000.html">1000+ theorems</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Theories</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/naturals.html">Natural Numbers</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/linear_algebra.html">Linear Algebra</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/sets.html">Sets and finite sets</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/topology.html">Topology</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/theories/category_theory.html">Category Theory</a></li>
+        </ul>
+      
+        <h6 class="sidebar-heading mt-4">Contributing</h6>
+        <ul class="nav">
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/index.html">What to contribute</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/how-to-contribute.html">How to contribute</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/values.html">Mathlib's Values</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/queueboard/">Mathlib review and triage dashboard</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/git.html">Git Guide for Mathlib4 Contributors</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/naming.html">Naming conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/style.html">Code style guideline</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/doc.html">Documentation style</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/commit.html">Commit conventions</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/pr-review.html">Pull request review guide</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/mathlib_stats.html">Contribution statistics</a></li>
+        
+          <li class="nav-item col-12"><a href="https://leanprover-community.github.io/contribute/tags_and_branches.html">Tags and branches</a></li>
+        </ul>
+      
+    </nav>
+
+</div>
+
+
+  <nav class="footer navbar navbar-expand-lg navbar-light bg-light justify-content-end">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/leanprover-community/leanprover-community.github.io/blob/lean4/templates/extras/module-system-quickstart.md">Suggest edits to this page on GitHub</a>
+    </li>
+  </ul>
+  </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"></script>
+    <script src="https://leanprover-community.github.io/js/bootstrap.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+  </body>
+</html>
