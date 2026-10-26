@@ -313,7 +313,7 @@ A single file containing Lean source code.
 
 Note that files may be either "module files" which participate in Lean's module system (in which case they start with the `module` keyword) or older "non-module files". (Mathlib only uses module files.) Both kinds of Lean source files, however, are still called "modules".
 
-An introductory guide to Lean's module system may be found at [Quickstart: The module system](https://leanprover-community.github.io/extras/module-system-quickstart.html).
+An introductory guide to Lean's module system may be found at [Quickstart: The Module System](https://leanprover-community.github.io/extras/module-system-quickstart.html).
 
 Not to be mistaken with a `Module` within mathematics, i.e. the generalization of a vector space.
 
