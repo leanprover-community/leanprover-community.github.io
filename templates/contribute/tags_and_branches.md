@@ -113,6 +113,8 @@ A dependency-only update remains a normal Mathlib PR.
 If no changes remain, or the Batteries PR closes without a merge, the bot closes the Mathlib PR.
 
 Use the Mathlib PR's checks for results.
+Mathlib also reports results on the Batteries PR through a status comment and the `builds-mathlib` / `breaks-mathlib` labels.
+With `awaiting-mathlib`, it posts a fresh comment and removes that label after success.
 The [Batteries contributor guide](https://github.com/leanprover-community/batteries#mathlib-adaptations)
 has the contributor steps and recovery instructions.
 The [workflow reference](https://github.com/leanprover-community/batteries/blob/main/docs/ci/mathlib-adaptations.md)
