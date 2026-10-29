@@ -101,12 +101,12 @@ Mathlib.
 
 After a Batteries PR to `main` passes CI, the bot opens a draft PR against Mathlib's `master`.
 The branch is `batteries-pr-testing-N` in the
-[`mathlib4-batteries-adaptations`](https://github.com/leanprover-community/mathlib4-batteries-adaptations) fork,
+[`mathlib4-adaptations`](https://github.com/leanprover-community/mathlib4-adaptations) fork,
 where `N` is the Batteries PR number.
 The bot pins Batteries to the commit that passed CI and updates it after subsequent successful runs.
 Mathlib's normal fork CI builds and tests the draft PR.
 
-Contributors can push adaptations to the shared branch. Ask a Batteries maintainer for push access.
+Contributors can push adaptations to the shared branch. Ask a Batteries maintainer for push access to the `batteries-*` branches.
 The bot preserves those commits when it updates the dependency.
 After the Batteries PR merges, it restores `batteries @ main`, updates the manifest, and marks the Mathlib PR ready for review.
 A dependency-only update remains a normal Mathlib PR.
