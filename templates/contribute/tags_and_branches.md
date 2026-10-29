@@ -115,8 +115,8 @@ If no changes remain, or the Batteries PR closes without a merge, the bot closes
 Use the Mathlib PR's checks for results.
 The [Batteries contributor guide](https://github.com/leanprover-community/batteries#mathlib-adaptations)
 has the contributor steps and recovery instructions.
-The [setup notes](https://github.com/leanprover-community/batteries/blob/main/docs/ci/mathlib-adaptations.md)
-cover fork permissions and migration.
+The [workflow reference](https://github.com/leanprover-community/batteries/blob/main/docs/ci/mathlib-adaptations.md)
+covers fork permissions and recovery procedures.
 
 ### Mathlib nightly and bump branches
 
