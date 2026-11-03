@@ -11,7 +11,7 @@ Some have Lean 3 versions, but there is no point learning Lean 3 at this stage.
 
 ## Hands-on approaches
 
-* Whatever your background, if you want to dive right away, you can play the
+* Whatever your background, if you want to dive in right away, you can play the
   [Natural Number Game](https://adam.math.hhu.de/#/g/hhu-adam/NNG4).
   This is an online interactive Lean tutorial
   focused on proving properties of the elementary operations on natural numbers.

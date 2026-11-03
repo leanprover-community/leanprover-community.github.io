@@ -12,12 +12,15 @@ and the [leanprover-community GitHub organization](https://github.com/leanprover
 To clarify the above: actions that can result in suspension or banning from the Lean community Zulip include harassment, discriminatory or disrespectful behavior, sustained off-topic or disruptive posts, repeated low effort posts, use of the community to complete coursework or work tasks, use of sock-puppet accounts, DM spam, unsolicited mass DMs to users, significant use of AI without attribution, unrequested posting of "slop" AI-generated code, making unjustified and incorrect claims about AI-generated code, and ignoring moderator guidance.
 
 This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
+It is also not an appropriate venue for soliciting submission endorsements like those required for first-time arXiv contributors. These posts will be removed and treated as above.
 
 Please do not use an LLM when writing comments on github or Zulip. Don't worry if English is not your native language: this is true for most users; as long as you can be understood, you will be fine. Building community involves human connection; using an LLM to write for you removes this human element. Messages and comments that appear LLM-generated will be deleted, and can lead to suspension.
 
 This list is not exhaustive and the maintainers retain broad discretion in user moderation.
 
 Repeated violations will result in temporary suspensions, which will increase in length if the behavior continues. Egregious individual incidents will result in bans.
+
+Suspensions and bans are accompanied by an explanation sent to the user's Zulip-registered email address.
 
 The [code of conduct team](/teams/coc.html) serves as first point of contact
 for reporting any concerns. You can write to members of this team directly or 
@@ -27,6 +30,8 @@ Specifically on Zulip, you can also report problematic messages to the whole
 moderation team (made of Mathlib and CSLib maintainers and some Lean FRO
 members), see the [relevant Zulip documentation](https://zulip.com/help/report-a-message).
 Only the moderators can see that you reported a message, and what you wrote in your report.
+
+If you want to contact the moderation team, you can reach them by writing a direct message [via Zulip](https://leanprover.zulipchat.com/). Writing a direct message to the `leanprover-community mod bot` user starting with `to-mods` will send that message to the moderators' stream. Complaints about bans in-channel are not allowed (and can lead to suspension); writing to a moderator individually may not be answered.
 
 We encourage a policy of de-escalation in the presence of unwelcome behavior.
 If you perceive someone acting in a way that violates our code of conduct,

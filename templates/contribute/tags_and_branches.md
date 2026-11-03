@@ -10,7 +10,8 @@ Mathlib.
 ## Things you need to know
 
 * If you are making a pull request to `leanprover/lean4` which may involve breaking changes,
-  please rebase your PR onto the `nightly-with-mathlib` branch. This will enable combined CI with Mathlib.
+  please rebase your PR onto `downstream-green` and label it `downstream`.
+  This will create an adaptation PR in `leanprover/downstream-lean4`.
 
 * If you are making a pull request to `leanprover-community/mathlib4`,
   please make it from a fork. Mathlib's `.olean` cache now works with PRs from forks.
@@ -22,28 +23,32 @@ Mathlib.
 * Development occurs on the `master` branch.
 * Stable releases and release candidates have tags, e.g. `v4.2.0` or `v4.3.0-rc1`.
   * To use one of these releases in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:v4.2.0`.
-* Stable releases arrive at the end of each month, and are identical to the last release candidate.
+* Stable releases usually arrive near the middle of the month, and are often identical to the last release candidate.
 * The first release candidate of the next version is released immediately after the stable release.
-* Each version has a `releases/v4.X.0` feature branch, which may contain
-  * additional commits for release notes
-  * cherry picked commits from `master` for critical fixes released via release candidates.
-* We make a regular nightly release from `master`, which has a tag e.g. `nightly-2023-11-01` on the
-  `leanprover/lean4-nightly` repository.
-  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`. (Note that it should not be `leanprover/lean4-nightly:nightly-2023-11-01`, because `elan` applies some magic wisdom here.)
+* Each version has a `releases/v4.X.0` feature branch, which may contain cherry-picked or backported commits from `master`.
+  Release candidates are cut from this branch.
+* We cut a regular nightly release from `master`, which has a tag like `nightly-2023-11-01` on the `leanprover/lean4-nightly` repository.
+  * To use a nightly release in a project, your `lean-toolchain` file should contain e.g. `leanprover/lean4:nightly-2023-11-01`.
+    (Note that it should not be `leanprover/lean4-nightly:nightly-2023-11-01`, because `elan` applies some magic wisdom here.)
   * A nightly may be *revised* by manually triggering the release workflow. Revised nightlies
     have tags of the form `nightly-YYYY-MM-DD-revK` (with K starting at 1) on `leanprover/lean4-nightly`.
     To use a revised nightly in a project, your `lean-toolchain` file should contain e.g.
     `leanprover/lean4:nightly-2023-11-01-rev1`.
     Revised nightlies are ordered after the base nightly: base < rev1 < rev2 < next day's nightly.
     The Mathlib nightly testing infrastructure handles revised nightlies automatically.
-* There is a `nightly` branch on `leanprover/lean4` which follows the most recent commit which was
-  used to construct a nightly release.
-* Every PR automatically receives a toolchain after it builds successfully. The PR will then have label `toolchain-available`.
-  To use PR #NNNN in a project, your `lean-toolchain` file should contain
-  `leanprover/lean4-pr-releases:pr-release-NNNN`.
-* For any PR that potentially affects Batteries or Mathlib, you should base your PR off the HEAD of the `nightly-with-mathlib` branch.
-  In that case, a `lean-pr-testing-NNNN` Mathlib branch is created, described in detail below, and results from this branch are
-  reported via comments in the PR discussion.
+* There is a `nightly` branch on `leanprover/lean4`
+  which follows the most recent commit which was used to construct a nightly release.
+* Every PR automatically receives a toolchain after it builds successfully.
+  The PR will then have label `toolchain-available`.
+  To use PR #NNNN in a project, your `lean-toolchain` file should contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
+* For any PR that potentially breaks packages like Batteries or Mathlib, use a `downstream-lean4` adaptation PR.
+  * Base your PR off of the `downstream-green` branch and label it `downstream`.
+    This creates an adaptation PR for your PR in `leanprover/downstream-lean4`
+    where you can check for and fix breakages before your PR is merged.
+  * If you have write access to `leanprover/downstream-lean4` but have insufficient permissions to edit labels in your original PR,
+    you can comment `downstream` on your original PR instead and CI will add the label.
+  * If you don't have write access to `leanprover/downstream-lean4`, you can request access on zulip in the
+    [`ecosystem infrastructure` channel](https://leanprover.zulipchat.com/#narrow/channel/536994-ecosystem-infrastructure).
 
 ### `leanprover-community/batteries` (aka 'Batteries')
 
@@ -69,34 +74,9 @@ Mathlib.
   * Thus if `nightly-testing-YYYY-MM-DD` exists, we know that on it:
     * the `lean-toolchain` is `leanprover/lean4:nightly-YYYY-MM-DD`, and
     * CI succeeds.
-* When changes are required to Batteries to adapt to a breaking change in Lean,
-  you will need to make a branch, and later open a PR from that branch.
-  (Note that the steps below happen automatically at Mathlib,
-  but need to be done manually for Batteries.)
-  * If the change was made in `leanprover/lean4#NNNN`,
-    then the Batteries adaptation branch should be called `lean-pr-testing-NNNN`.
-  * The Batteries adaptation branch should be based off the tag `nightly-testing-YYYY-MM-DD`
-    where `YYYY-MM-DD` is the date of the nightly release that your Lean PR is based off.
-  * If the `nightly-testing-YYYY-MM-DD` tag does not yet exist, you will need to wait
-    (and possibly move forward to a subsequent nightly).
-    Contact `@kim-em` for assistance if needed.
-  * Ideally you will push the `lean-pr-testing-NNNN` branch to the main Batteries repository;
-    we can provide write access if needed.
-  * The `lean-toolchain` on this branch must contain `leanprover/lean4-pr-releases:pr-release-NNNN`.
-  * You may open a PR from the `lean-pr-testing-NNNN` branch, either before or after
-    making the required adaptations.
-  * When opening the PR, remember to set the base branch to `nightly-testing`.
-  * Please label the PR with the `v4.X.0` and 'depends on core changes' labels.
-    (Or ask for this to be done if you don't have write access.)
-  * Once the Lean PR has been merged and published in a nightly release, the Batteries adaptation PR
-    * should have its `lean-toolchain` updated to `leanprover/lean4:nightly-YYYY-MM-DD`
-    * its changes may be merged manually into `nightly-testing` as needed to keep `nightly-testing`
-      working (do not change the base and merge the PR, we still need it).
-  * Once the Batteries adaptation PR has been approved,
-    a maintainer will merge it into `bump/v4.X.0` (not `nightly-testing-YYYY-MM-DD`).
 * It is always allowed to merge `bump/v4.X.0` into `nightly-testing`, but not conversely.
   (Changes to `bump/v4.X.0` have been reviewed, but changes to `nightly-testing` may not have been.)
-* When it is time to update Batteries to a new Lean release,
+* When it is time to update Batteries to a new Lean rc1,
   *hopefully* all that is required is to make a new PR
   consisting of squash merging `bump/v4.X.0` to `main`.
 
@@ -106,17 +86,13 @@ Mathlib.
   * Development occurs on `master`.
   * `nightly-testing` status updates are posted in [this thread](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib/topic/Mathlib.20status.20updates/with/592729346) in `#nightly-testing-mathlib`.
   * PRs to Mathlib should be made from forks. Mathlib's `.olean` cache now works with PRs from forks.
-* The `lean-pr-testing-NNNN`, `nightly-testing`, `nightly-testing-*` tags, and `bump/v4*` branches
+* The `nightly-testing`, `nightly-testing-*` tags, and `bump/v4*` branches
   all live at `leanprover-community/mathlib4-nightly-testing`, which is a fork of mathlib4.
   If you will regularly need write access to these branches, you can ask in the
   [`nightly-testing-mathlib` channel](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib)
   on Zulip to be added to the `nightly-testing` GitHub team.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Batteries as required.
 * Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Batteries as required.
-* Branches `lean-pr-testing-NNNN` are automatically created for any Lean PR that passes CI,
-  and is based off a nightly release. (Unlike for Batteries, where they must be created manually.)
-* Mathlib adaptation PRs on `lean-pr-testing-NNNN` branches may need to change the Batteries dependency
-  to use a `lean-pr-testing-NNNN` branch of Batteries, if Batteries also experiences breakages.
 
 ### Mathlib nightly and bump branches
 
@@ -130,9 +106,7 @@ To make this process as smooth as possible, we follow the following procedure:
   - Changes to this branch are not reviewed by the Mathlib maintainer team.
   - This branch is not protected: members of the `nightly-testing` GitHub team can push fixes to it.
   - The purpose of this branch is to adapt Mathlib to changes in the nightly toolchain releases of Lean.
-  - Typically, a PR `#NNNN` to Lean core will be accompanied by adaptations to Mathlib in a branch `lean-pr-testing-NNNN`.
-    Once the Lean core PR lands in a nightly toolchain, the Mathlib branch `lean-pr-testing-NNNN` can be merged into `nightly-testing`.
-    Often one needs to fix merge conflicts in `lean-toolchain`, `lakefile.lean`, and/or `lake-manifest.json`.
+  - Adaptations made in `leanprover/downstream-lean4` will automatically be pushed here.
   - If CI fails on this branch, then it posts a message to ["nightly-testing-mathlib > Mathlib status updates"](https://leanprover.zulipchat.com/#narrow/channel/595625-nightly-testing-mathlib/topic/Mathlib.20status.20updates) on Zulip, indicating the failure.
   - If CI passes on this branch, then a message is posted to the same thread, indicating success, and giving instructions to create a PR to review the adaptations. (See below.)
 * The `nightly-testing-green` branch in `leanprover-community/mathlib4-nightly-testing` tracks the last commit of `nightly-testing` which built successfully.
@@ -153,23 +127,8 @@ To make this process as smooth as possible, we follow the following procedure:
   - At the time of writing, this step is combined into the `scripts/create-adaptation-pr.sh` process.
   - Occasionally, merge conflicts occur. These ought to be reviewed by the Mathlib maintainer team, although that currently does not happen.
 
-### Combined CI between Lean and Mathlib
-
-* For every PR to Lean, we attempt to run Mathlib CI against the resulting toolchain.
-* For this to work, you will need to rebase your PR onto the `nightly-with-mathlib` branch.
-  The `nightly-with-mathlib` branch points to the latest nightly lean release which passes mathlib CI,
-  and for which a `nightly-testing-YYYY-MM-DD` tag exists on Mathlib (and possibly Batteries).
-* The bot will create a `lean-pr-testing-NNNN` branch at `leanprover-community/mathlib4-nightly-testing`
-  from the `nightly-testing-YYYY-MM-DD` tag, or push an empty commit to it if it already exists.
-* Subsequent CI results from that Mathlib branch will be reported back to the Lean PR
-  in the form of comments.
-* If your PR does not branch off a nightly release for which Mathlib builds, a bot will comment on your
-  PR.
-  It will try again whenever you push to your PR.
-* If `nightly-with-mathlib` is too old for your purposes, you can base off `nightly`, and mathlib CI
-  will commence as soon as that nightly release itself passes the Mathlib CI and you push to the PR.
-* It may be the case that that nightly release never passes the Mathlib CI. In that case you may have
-  to wait for `nightly-with-mathlib` to be updated and rebase onto that.
-
-
+The following image is slightly outdated as it still contains references to the now obsolete `lean-pr-testing-NNNN` branches.
+Their role has been replaced by the `leanprover/downstream-lean4` repository,
+which automatically pushes adaptations developed inside itself to the `nightly-testing` branch as plain commits
+(similar to any other contributor).
 <img src="img/tags_and_branches.png" alt="Overview of branches at Mathlib/Batteries" width="80%"/>

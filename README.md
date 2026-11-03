@@ -31,6 +31,25 @@ The website relies on several components which are built in other repositories:
   Use option `--reload` to continuously build when templates are
   changed (this won't work for watching changes in `data/`).
 
+Three environment variables control where the site is built and where it
+expects to be served from. All of them default to the values this repository
+deploys with, so a normal build needs none of them:
+
+* `SITE_TARGET`: output directory (default `build/`).
+* `SITE_BASE_URL`: the URL the site will be served from
+  (default `https://leanprover-community.github.io/`). Every internal link is
+  built by appending to it, so setting it relocates the whole site; a trailing
+  slash is added if missing. It is ignored when `--local` is passed, which
+  derives a `file://` url from `SITE_TARGET` instead.
+* `SITE_EDIT_BASE`: prefix for the "Suggest edits to this page on GitHub"
+  footer link, which points at the templates rather than at the built site
+  (default the `templates/` directory of the `lean4` branch of this repo).
+
+Note that links to the other leanprover-community GitHub Pages sites
+(`mathlib4_docs`, `mathlib_stats`, `blog`, ...) are deliberately absolute:
+those are separate repositories that only happen to be served next to this
+site, so they must not move with `SITE_BASE_URL`.
+
 
 If you want to retrieve the list of Zulip users to get the users map, the
 environment variable `ZULIP_KEY` should be set with the Zulip API key of the
