@@ -1,3 +1,5 @@
+<div class="alert alert-warning"><b>These pages are out of date.</b> See the <a href="https://github.com/leanprover-community/mathlib-phrasebook/">mathlib phrasebook</a> instead.</div>
+
 # Maths in Lean: category theory
 
 The `Category` typeclass is defined in [`Mathlib.CategoryTheory.Category.Basic`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Category/Basic.html).
