@@ -1,3 +1,5 @@
+<div class="alert alert-warning"><b>These pages are out of date.</b> See the <a href="https://github.com/leanprover-community/mathlib-phrasebook/">mathlib phrasebook</a> instead.</div>
+
 # Maths in Lean: linear algebra
 
 ### Semimodules, Modules and Vector Spaces

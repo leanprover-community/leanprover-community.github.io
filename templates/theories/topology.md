@@ -1,3 +1,5 @@
+<div class="alert alert-warning"><b>These pages are out of date.</b> See the <a href="https://github.com/leanprover-community/mathlib-phrasebook/">mathlib phrasebook</a> instead.</div>
+
 # Maths in Lean: Topological, uniform and metric spaces
 
 The `TopologicalSpace` typeclass is defined in mathlib,
