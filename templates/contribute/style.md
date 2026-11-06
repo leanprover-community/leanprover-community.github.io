@@ -50,7 +50,10 @@ a description of the contents.
 Put the `module` keyword on its own line right after the header, skip a line,
 then group all `public import`s together, skip another line,
 then group all `import`s together,
-Try to keep the imports alphabetical within each block of imports.
+Try to keep the imports alphabetical within each block of imports
+and avoid specifying imports which are already transitively imported by another import.
+Using `#min_imports` at the end of the file would output
+imports satisfying these two condition.
 
 ```lean
 /-
