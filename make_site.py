@@ -31,6 +31,8 @@ from slugify import slugify
 
 import zulip
 
+from hundred_theorems import HundredTheorem, hundred_context, load_external_hundred
+
 FilePath = Union[str, Path]
 
 DOWNLOAD = not 'NODOWNLOAD' in os.environ
@@ -216,30 +218,6 @@ class DocDecl:
     is simply a link to the right revision of the mathlib source code."""
 
 # keep in sync with scripts/yaml_check.py in the mathlib4 repo
-@dataclass
-class HundredTheorem:
-    """Data of an entry about a single theorem in Freek's 100 theorems list:
-    the webpages 100.html and 100-missing.html are generated automatically
-    using this data."""
-    # this theorem's number in Freek's 100 theorems list
-    number: str
-    # a human-readable title
-    title: str
-    # If a theorem is merely *stated* in mathlib, the name of the declaration
-    statement: Optional[str] = None
-    # if a theorem is formalized in mathlib, the archive or counterexamples,
-    # the name of the corresponding declaration (optional)
-    decl: Optional[str] = None
-    # like |decl|, but a list of declarations (if one theorem is split into multiple declarations) (optional)
-    decls: Optional[List[str]] = None
-    # name(s) of the author(s) of this formalization (optional)
-    authors: Optional[str] = None
-    # Date of the formalization, in the form `YYYY`, `YYYY-MM` or `YYYY-MM-DD` (optional)
-    date: Optional[str] = None
-    links: Optional[Mapping[str, str]] = None
-    note: Optional[str] = None
-
-# keep in sync with scripts/yaml_check.py in the mathlib4 repo
 # These field names match the names in the data files of the 1000+ theorems project upstream.
 # See https://github.com/1000-plus/1000-plus.github.io/blob/main/README.md#file-format
 # for the specification. Compared to the README,
@@ -398,10 +376,10 @@ class NTheorems(Enum):
 
 def download_N_theorems(kind: NTheorems) -> dict:
     if kind == NTheorems.Hundred:
-        (fname, Type, name) = ('100.yaml', HundredTheorem, 'hundred_theorems')
+        (fname, Type, name) = ('100.yaml', HundredTheorem, 'hundred_theorems_mathlib')
     else:
         (fname, Type, name) = ('1000.yaml', ThousandPlusTheorem, 'thousand_theorems')
-    if DOWNLOAD:
+    if DOWNLOAD or (kind == NTheorems.Hundred and (DATA/fname).exists()):
         download(f'https://leanprover-community.github.io/mathlib4_docs/{fname}', DATA/fname)
         with (DATA/fname).open('r', encoding='utf-8') as h_file:
             n_theorems = [Type(thm, **content) for (thm, content) in yaml.safe_load(h_file).items()]
@@ -411,13 +389,18 @@ def download_N_theorems(kind: NTheorems) -> dict:
                 assert not (h.statement and (h.decl or h.decls))
                 statement_formalized = False
                 if kind == NTheorems.Hundred:
-                    (id, links, thms, note) = (h.number, h.links, '100 theorems', h.note)
+                    (id, links, thms, note) = (h.number, None, '100 theorems', h.note)
                 else:
                     (id, links, thms, note) = (h.wikidata, {'url': h.url} if h.url else {}, '1000+ theorems', h.comment)
                     if h.statement:
                         statement_formalized = True
-                # A theorem's proof counts as formalized if the authors or `decl`(s) field is non-empty.
-                proof_formalized = bool(h.authors) or h.decls or h.decl
+                # For the 100-theorem catalogue only Mathlib declarations count here.
+                # Ignore external metadata still present in older deployed docs.
+                if kind == NTheorems.Hundred:
+                    proof_formalized = h.in_mathlib
+                    statement_formalized = bool(h.statement)
+                else:
+                    proof_formalized = bool(h.authors) or h.decls or h.decl
                 decls = h.decls or ([h.decl] if h.decl else []) or ([h.statement] if h.statement else [])
                 doc_decls = []
                 if decls:
@@ -442,6 +425,8 @@ def download_N_theorems(kind: NTheorems) -> dict:
         theorems = pkl_load(name, dict())
     return theorems
 hundred_theorems = download_N_theorems(NTheorems.Hundred)
+external_hundred_theorems = load_external_hundred(DATA/'100-external.yaml')
+hundred_page_context = hundred_context(hundred_theorems, external_hundred_theorems)
 thousand_theorems = download_N_theorems(NTheorems.ThousandPlus)
 
 def replace_link(name, id):
@@ -935,8 +920,8 @@ def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
                                 'what_is': what_is,
                                 'formalizations': formalizations}),
                 ('papers.html', {'paper_lists': paper_lists}),
-                ('100.html', {'hundred_theorems': hundred_theorems}),
-                ('100-missing.html', {'hundred_theorems': hundred_theorems}),
+                ('100.html', hundred_page_context),
+                ('100-missing.html', hundred_page_context),
                 ('1000.html', {'thousand_theorems': thousand_theorems}),
                 ('1000-missing.html', {'thousand_theorems': thousand_theorems}),
                 ('meet.html', {'users': users,
