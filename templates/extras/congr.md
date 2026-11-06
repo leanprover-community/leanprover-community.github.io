@@ -1,6 +1,6 @@
 # How to use congr()
 
-`congr()` is a term elaborator using *congruence* to build proofs of equality, `HEq` and `Iff`.
+[`congr()`](https://leanprover-community.github.io/mathlib4_docs/find/?pattern=Mathlib.Tactic.TermCongr.termCongr#doc) is a term elaborator using *congruence* to build proofs of equality, `HEq` and `Iff`.
 The prototypical congruence lemma is called [`congr`](https://leanprover-community.github.io/mathlib4_docs/find/?pattern=congr#doc),
 stating that two expressions are equal (here, two function applications) when the components are equal (here, the functions and their arguments).
 ```lean
