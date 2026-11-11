@@ -906,9 +906,12 @@ def render_site(target: Path, base_url: str, edit_base: str = DEFAULT_EDIT_BASE,
         return latexnodes2text.latex_to_text(src)
 
     try:
-        # use bibtool to strip nonstandard fields used just for display on this website
+        # use bibtool to strip nonstandard fields used just for display on this website.
+        # The `./` matters: bibtool looks a bare `lean.bib` up on TeX's search path, which only
+        # includes the current directory when texlive-base is installed. Without it, bibtool
+        # warns that the file is not found, writes an empty file and still exits 0.
         subprocess.run(['bibtool', '--preserve.key.case=on', '--preserve.keys=on',
-            '--delete.field={website}', '--delete.field={tags}', '-s', '-i', 'lean.bib', '-o',
+            '--delete.field={website}', '--delete.field={tags}', '-s', '-i', './lean.bib', '-o',
             str(target/'lean.bib')], check=True)
     except FileNotFoundError:
         print("Warning: bibtool not found. Copying lean.bib without processing.")
