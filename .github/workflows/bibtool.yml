@@ -15,19 +15,21 @@ jobs:
       - name: install bibtool
         run: |
           sudo apt-get update --fix-missing
-          sudo apt-get install -y bibtool
+          sudo apt-get install -y --no-install-recommends bibtool
 
       - name: produce normalized file
         run: |
+          # `./lean.bib`, not `lean.bib`: without texlive-base, bibtool does not find a bare
+          # `lean.bib` in the current directory (see the comment on bibtool in make_site.py)
           bibtool --preserve.key.case=on \
                   --preserve.keys=on \
                   --pass.comments=on \
                   --print.use.tab=off \
-                  -s -i lean.bib -o lean2.bib
+                  -s -i ./lean.bib -o lean2.bib
       - name: check diff
         run: |
           diff lean.bib lean2.bib || {
             echo "::error::lean.bib is not normalized."
-            echo "::error::run 'bibtool --preserve.key.case=on --preserve.keys=on --pass.comments=on --print.use.tab=off -s -i lean.bib -o lean.bib' to fix the issue."
+            echo "::error::run 'bibtool --preserve.key.case=on --preserve.keys=on --pass.comments=on --print.use.tab=off -s -i ./lean.bib -o lean.bib' to fix the issue."
             exit 1
           }
