@@ -250,6 +250,40 @@ instance : partial_order (topological_space α) :=
   le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
 ```
 
+### Numeric projections
+Most mathematical structures are implemented using lean's [`structure`s](https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section&name=structures) (or `class`es, which we treat as being analogous to `structure`s in the current discussion). Examples of such `structure`s are [`Iff`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Iff), [`And`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#And), [`Prod`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Prod) but also deeper mathematically concepts like [`Group`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Group) or [`Homeomorphism`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/Homeomorph/Defs.html#Homeomorph). 
+
+A peculiar feature of `structure`s is that their terms are tuples whose components are themselves terms of more elementary types. Therefore, each `structure` comes with projections to those more elementary types, that are the functions yielding the components of every term of the `structure`. For example, given two types `α` and `β`, their product `Prod α β`, denoted `α × β`, is the type whose terms are pairs `{fst := a, snd := b}` for `a : α` and `b : β`: here `Prod.fst` and `Prod.snd` are the names of the two fields of the structure `Prod` and the corresponding projections are
+```lean
+Prod.fst : α × β → α
+Prod.snd : α × β → β
+```
+Similarly, given a homeomorphism `φ : X ≃ₜ Y` between two topological spaces `X` and `Y`, there are four projections
+```lean
+φ.toFun : X → Y
+φ.invFun : Y → X
+φ.continuous_toFun : Continuous φ.toFun
+φ.continuous_invFun : Continuous φ.invFun
+```
+
+Technically, these projections can be referred to numerically, following their order: given `p : α × β`, one can write `p.1` for `p.fst : α` and, given a homeomorphism  `φ` as above, `φ.3` is a term of `Continuous φ.invFun` *i.e.* a proof that the inverse of `φ` (or, rather, of `φ.toFun`) is continuous. Yet, labelling these projections using numbers is discouraged in Mathlib, since in general such numbering conveys no mathematical meaning. Accordingly, there is a linter warning users who write `φ.3` to replace it with `φ.invFun`.
+
+We make an exception to this rule for several basic `structure`s: for example, although `p.fst` is perfectly accepted, we also accept `p.1` in the case of products. The list of `structure`s for which we accept numeric projections is
+* [`Prod`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Prod)
+* [`PProd`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#PProd)
+* [`Sigma`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Sigma)
+* [`PSigma`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#PSigma)
+* [`And`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#And)
+* [`Iff`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Iff)
+* [`Subtype`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Subtype)
+* [`Fin`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Fin)
+
+Users willing to define a new structure allowing its projections to be labelled numerically, hence disabling the linter for the structure at hand, can do so by adding the attribute `@[allow_numeric_proj]` to their definition, as in
+```lean
+@[allow_numeric_proj]
+structure MyStructure where ...
+```
+
 ### Hypotheses Left of Colon
 
 Generally, having arguments to the left of the colon is preferred
