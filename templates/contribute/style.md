@@ -251,6 +251,7 @@ instance : partial_order (topological_space α) :=
 ```
 
 ### Numeric projections
+
 Most mathematical structures are implemented using lean's [`structure`s](https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section&name=structures) (or `class`es, to which analogous rules apply). Examples of such `structure`s are [`Iff`](https://leanprover-community.github.io/mathlib4_docs/Init/Core.html#Iff), [`And`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#And), [`Prod`](https://leanprover-community.github.io/mathlib4_docs/Init/Prelude.html#Prod) but also deeper mathematically concepts like [`Group`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Group/Defs.html#Group) or [`Homeomorphism`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Topology/Homeomorph/Defs.html#Homeomorph). 
 
 A peculiar feature of `structure`s is that their terms are tuples whose components are themselves terms of more elementary types. Therefore, each `structure` comes with projections to those more elementary types, that are the functions yielding the components of every term of the `structure`. For example, given two types `α` and `β`, their product `Prod α β`, denoted `α × β`, is the type whose terms are pairs `{fst := a, snd := b}` for `a : α` and `b : β`: here `Prod.fst` and `Prod.snd` are the names of the two fields of the structure `Prod` and the corresponding projections are
