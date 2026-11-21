@@ -187,7 +187,7 @@ Note that it is important you use `let` and not `have` for `x`; see the section 
 That being said, it's worth understanding why this is even a problem in the first place.
 Recall that there are three main types of equality in Lean: propositional equality, definitional equality, and synctactic equality.
 Propositional equality is the normal notion of equality in traditional mathematics, and the proposition `a = b` in Lean refers to propositional equality.
-In constrast, definitional and syntactic equality are not things you can prove or disprove; two expressions are either definitionally equal or they aren't, and they are either syntactically equal or they aren't.
+In contrast, definitional and syntactic equality are not things you can prove or disprove; two expressions are either definitionally equal or they aren't, and they are either syntactically equal or they aren't.
 
 A rough way of thinking about this is that two terms are syntactically equal if they are written the same way in Lean, and two terms are definitionally equal if calling `#reduce` on both of them would result in the same expression.
 For example, when `n` is an unknown natural number:
@@ -204,7 +204,7 @@ Even though Lean's core typechecker only cares about definitional equality, tact
 ## Using `b > a` instead of `a < b`
 
 Most of the time, `a < b` and `b > a` are definitionally equal in Lean.
-But in light of the above discussion about not trusting tactics to unfold definitions, even if two terms are definitionally equal they still might not be interchangable in all circumstances.
+But in light of the above discussion about not trusting tactics to unfold definitions, even if two terms are definitionally equal they still might not be interchangeable in all circumstances.
 For example, this rewrite fails because the right hand side of `Nat.mod_eq_iff_lt` is `m < n`, not `n > m`:
 ```lean
 example {n m : Nat} (h₁ : m % n = m) (h₂ : n ≠ 0) : n > m := by
@@ -302,7 +302,7 @@ It is possible to instead define division like
 ```lean
 def div (a b : ℝ) (h : b ≠ 0) : ℝ := ...
 ```
-but in practice, providing a proof that the demoninator is nonzero every time we want to divide two numbers gets tedious very quickly.
+but in practice, providing a proof that the denominator is nonzero every time we want to divide two numbers gets tedious very quickly.
 In contrast, *theorems* involving division usually have a hypothesis stating that the denominator is nonzero.
 It is recommended to add hypotheses making sure your denominator is nonzero to your own theorems, unless you have carefully thought through the case where the denominator is zero.
 For more information, please see [this Xena project blog post](https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/).
@@ -364,7 +364,7 @@ As explained above in the integer division section, type annotations can affect 
 #eval 5 - 13 + 11 + (-0) -- 3
 ```
 
-Trucating subtraction is also known as [monus](https://en.wikipedia.org/wiki/Monus).
+Truncating subtraction is also known as [monus](https://en.wikipedia.org/wiki/Monus).
 
 One place where natural number subtraction might arise is if you have a predicate `P : Nat → Prop` and want to show that `P n` holds for all `n ≥ 1`.
 If you try to prove
@@ -567,7 +567,7 @@ Additionally, if you write code whose behavior depends on the value of `n`, then
 - If you need to depend on the *particular* value used in the proof of `∃ n : Nat, p n`, you should probably avoid the `Exists` type entirely and exhibit an element of `{n : Nat // p n}` instead.
 `∃ n : Nat, p n` and `{n : Nat // p n}` both consist of a `n : Nat` and a proof that `p n`; their only different is which universe the type lives in.
 - If you are working over `Nat`, and you have a `h : ∃ n : Nat, p n` where `p` is a `DecidablePred`, then you can use `Nat.find` and `Nat.find_spec` similar to `Classical.choose` and `Classical.choose_spec`.
-`Nat.find` is computable, although it may not be particularly efficent since evaluating `Nat.find h` will check every natural number in order starting at 0 until it finds the smallest one satisfying `p`.
+`Nat.find` is computable, although it may not be particularly efficient since evaluating `Nat.find h` will check every natural number in order starting at 0 until it finds the smallest one satisfying `p`.
 
 ## Working with equality of types
 
