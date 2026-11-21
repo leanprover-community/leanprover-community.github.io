@@ -226,7 +226,7 @@ Note that it is important you use <code>let</code> and not <code>have</code> for
 <p>That being said, it's worth understanding why this is even a problem in the first place.
 Recall that there are three main types of equality in Lean: propositional equality, definitional equality, and synctactic equality.
 Propositional equality is the normal notion of equality in traditional mathematics, and the proposition <code>a = b</code> in Lean refers to propositional equality.
-In constrast, definitional and syntactic equality are not things you can prove or disprove; two expressions are either definitionally equal or they aren't, and they are either syntactically equal or they aren't.</p>
+In contrast, definitional and syntactic equality are not things you can prove or disprove; two expressions are either definitionally equal or they aren't, and they are either syntactically equal or they aren't.</p>
 <p>A rough way of thinking about this is that two terms are syntactically equal if they are written the same way in Lean, and two terms are definitionally equal if calling <code>#reduce</code> on both of them would result in the same expression.
 For example, when <code>n</code> is an unknown natural number:</p>
 <ul>
@@ -240,7 +240,7 @@ The important thing to remember is that some tactics, such as <code>exact</code>
 Even though Lean's core typechecker only cares about definitional equality, tactics are free to use the extra information about the syntax of terms to help them operate.</p>
 <h2 id="using-b-gt-a-instead-of-a-lt-b" class="markdown-heading">Using <code>b &gt; a</code> instead of <code>a &lt; b</code> <a class="hover-link" href="#using-b-gt-a-instead-of-a-lt-b">#</a></h2>
 <p>Most of the time, <code>a &lt; b</code> and <code>b &gt; a</code> are definitionally equal in Lean.
-But in light of the above discussion about not trusting tactics to unfold definitions, even if two terms are definitionally equal they still might not be interchangable in all circumstances.
+But in light of the above discussion about not trusting tactics to unfold definitions, even if two terms are definitionally equal they still might not be interchangeable in all circumstances.
 For example, this rewrite fails because the right hand side of <code>Nat.mod_eq_iff_lt</code> is <code>m &lt; n</code>, not <code>n &gt; m</code>:</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h₁</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">m</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h₂</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">≠</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="bp">←</span><span class="n">Nat.mod_eq_iff_lt</span><span class="w"> </span><span class="n">h₂</span><span class="o">]</span>
@@ -327,7 +327,7 @@ The values of $g$ on $A \setminus \text{dom}(f)$ are arbitrary and are usually c
 </code></pre></div>
 </div>
 
-<p>but in practice, providing a proof that the demoninator is nonzero every time we want to divide two numbers gets tedious very quickly.
+<p>but in practice, providing a proof that the denominator is nonzero every time we want to divide two numbers gets tedious very quickly.
 In contrast, <em>theorems</em> involving division usually have a hypothesis stating that the denominator is nonzero.
 It is recommended to add hypotheses making sure your denominator is nonzero to your own theorems, unless you have carefully thought through the case where the denominator is zero.
 For more information, please see <a href="https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/">this Xena project blog post</a>.</p>
@@ -385,7 +385,7 @@ type (e.g. <code>ℕ</code>, <code>ℤ</code>, <code>ℚ</code>, <code>ℝ</code
 </code></pre></div>
 </div>
 
-<p>Trucating subtraction is also known as <a href="https://en.wikipedia.org/wiki/Monus">monus</a>.</p>
+<p>Truncating subtraction is also known as <a href="https://en.wikipedia.org/wiki/Monus">monus</a>.</p>
 <p>One place where natural number subtraction might arise is if you have a predicate <code>P : Nat → Prop</code> and want to show that <code>P n</code> holds for all <code>n ≥ 1</code>.
 If you try to prove</p>
 <div class="codehilite"><div class="codehilite"><pre><span></span><code><span class="kd">theorem</span><span class="w"> </span><span class="n">mythm</span><span class="w"> </span><span class="o">{</span><span class="n">n</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Nat</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hn</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">≤</span><span class="w"> </span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">...</span>
@@ -579,7 +579,7 @@ Additionally, if you write code whose behavior depends on the value of <code>n</
 <li>If you need to depend on the <em>particular</em> value used in the proof of <code>∃ n : Nat, p n</code>, you should probably avoid the <code>Exists</code> type entirely and exhibit an element of <code>{n : Nat // p n}</code> instead.
 <code>∃ n : Nat, p n</code> and <code>{n : Nat // p n}</code> both consist of a <code>n : Nat</code> and a proof that <code>p n</code>; their only different is which universe the type lives in.</li>
 <li>If you are working over <code>Nat</code>, and you have a <code>h : ∃ n : Nat, p n</code> where <code>p</code> is a <code>DecidablePred</code>, then you can use <code>Nat.find</code> and <code>Nat.find_spec</code> similar to <code>Classical.choose</code> and <code>Classical.choose_spec</code>.
-<code>Nat.find</code> is computable, although it may not be particularly efficent since evaluating <code>Nat.find h</code> will check every natural number in order starting at 0 until it finds the smallest one satisfying <code>p</code>.</li>
+<code>Nat.find</code> is computable, although it may not be particularly efficient since evaluating <code>Nat.find h</code> will check every natural number in order starting at 0 until it finds the smallest one satisfying <code>p</code>.</li>
 </ul>
 <h2 id="working-with-equality-of-types" class="markdown-heading">Working with equality of types <a class="hover-link" href="#working-with-equality-of-types">#</a></h2>
 <p>Equality of types is poorly behaved in Lean's type theory.
