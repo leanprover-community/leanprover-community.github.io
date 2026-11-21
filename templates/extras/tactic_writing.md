@@ -315,7 +315,7 @@ done traversing the list.
 Our next goal is to be able to use and create assumptions in the local context.
 We will write a tactic that produces a new assumption by adding two known
 equalities (or failing miserably if this operation doesn't make sense). At
-first the names of thoses two equalities will be stupidly hardwired in our
+first the names of those two equalities will be stupidly hardwired in our
 tactic. So we want a tactic performing the first line in the following proof.
 ```lean
 example (a b j k : ℤ) (h₁ : a = b) (h₂ : j = k) :
