@@ -14,7 +14,8 @@ To clarify the above: actions that can result in suspension or banning from the 
 This is not a free code review service. Posts that amount to 'look at my project' without a specific question or prior community involvement will be removed and the poster suspended.
 It is also not an appropriate venue for soliciting submission endorsements like those required for first-time arXiv contributors. These posts will be removed and treated as above.
 
-Please do not use an LLM when writing comments on github or Zulip. Don't worry if English is not your native language: this is true for most users; as long as you can be understood, you will be fine. Building community involves human connection; using an LLM to write for you removes this human element. Messages and comments that appear LLM-generated will be deleted, and can lead to suspension.
+Please do not use an LLM when writing comments on Zulip or on [leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4). Don't worry if English is not your native language: this is true for most users; as long as you can be understood, you will be fine. Building community involves human connection; using an LLM to write for you removes this human element. Messages and comments that appear LLM-generated will be deleted, and can lead to suspension.
+The other repositories in the leanprover-community GitHub organization may have their own rules on LLM use, but we strongly recommend that any LLM-generated text is clearly marked as such, ideally with a 🤖 emoji appearing before any LLM-generated text.
 
 This list is not exhaustive and the maintainers retain broad discretion in user moderation.
 
