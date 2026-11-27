@@ -16,6 +16,9 @@ Mathlib.
 * If you are making a pull request to `leanprover-community/mathlib4`,
   please make it from a fork. Mathlib's `.olean` cache now works with PRs from forks.
 
+* Batteries PRs get a draft Mathlib PR after Batteries CI passes.
+  See [Combined CI between Batteries and Mathlib](#combined-ci-between-batteries-and-mathlib) for adaptations.
+
 ## Tags and branches
 
 ### `leanprover/lean4`
@@ -93,6 +96,29 @@ Mathlib.
   on Zulip to be added to the `nightly-testing` GitHub team.
 * Note that the `nightly-testing` branch of Mathlib may use the `nightly-testing` branch of Batteries as required.
 * Similarly a `bump/v4.X.0` branch of Mathlib may use the `bump/v4.X.0` branch of Batteries as required.
+
+### Combined CI between Batteries and Mathlib
+
+After a Batteries PR to `main` passes CI, the bot opens a draft PR against Mathlib's `master`.
+The branch is `batteries-pr-testing-N` in the
+[`mathlib4-adaptations`](https://github.com/leanprover-community/mathlib4-adaptations) fork,
+where `N` is the Batteries PR number.
+The bot pins Batteries to the commit that passed CI and updates it after subsequent successful runs.
+Mathlib's normal fork CI builds and tests the draft PR.
+
+Contributors can push adaptations to the shared branch. Ask a Batteries maintainer for push access to the `batteries-*` branches.
+The bot preserves those commits when it updates the dependency.
+After the Batteries PR merges, it restores `batteries @ main`, updates the manifest, and marks the Mathlib PR ready for review.
+A dependency-only update remains a normal Mathlib PR.
+If no changes remain, or the Batteries PR closes without a merge, the bot closes the Mathlib PR.
+
+Use the Mathlib PR's checks for results.
+Mathlib also reports results on the Batteries PR through a status comment and the `builds-mathlib` / `breaks-mathlib` labels.
+With `awaiting-mathlib`, it posts a fresh comment and removes that label after success.
+The [Batteries contributor guide](https://github.com/leanprover-community/batteries#mathlib-adaptations)
+has the contributor steps and recovery instructions.
+The [workflow reference](https://github.com/leanprover-community/batteries/blob/main/docs/ci/mathlib-adaptations.md)
+covers fork permissions and recovery procedures.
 
 ### Mathlib nightly and bump branches
 
